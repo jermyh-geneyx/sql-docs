@@ -1,9 +1,9 @@
 ---
 title: "Query Store hints"
 description: "Learn about the Query Store hints feature, which can be used to shape query plans without changing application code."
-author: WilliamDAssafMSFT
-ms.author: wiassaf
-ms.date: 01/08/2024
+author: MikeRayMSFT
+ms.author: mikeray
+ms.date: 11/11/2024
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
@@ -111,7 +111,7 @@ When hints are applied, the following result set appears in the `StmtSimple` ele
 
 ### Query Store hints and availability groups
 
-For more information, see [Query Store for secondary replicas](query-store-for-secondary-replicas.md).
+Query Store hints have no effect on secondary replicas unless Query Store for secondary replicas is enabled. For more information, see [Query Store for secondary replicas](query-store-for-secondary-replicas.md).
 
 -   Prior to [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], Query Store hints can be applied against the primary replica of an availability group.
 -   Starting with [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], when Query Store for secondary replicas is enabled, Query Store hints are also replica-aware for secondary replicas in availability groups.
@@ -149,7 +149,7 @@ WHERE PostalCode = '98052' ORDER BY A.ModifiedDate DESC;
 
 Query Store doesn't immediately reflect query data to its system views.
 
-Identify the query in the query store system catalog views:
+Identify the query in the Query Store system catalog views:
 
 ```sql
 SELECT q.query_id, qt.query_sql_text

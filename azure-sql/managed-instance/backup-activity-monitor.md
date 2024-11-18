@@ -6,7 +6,7 @@ author: Stralle
 ms.author: strrodic
 ms.reviewer: mathoma, nvraparl
 ms.date: 11/16/2022
-ms.service: sql-managed-instance
+ms.service: azure-sql-managed-instance
 ms.subservice: backup-restore
 ms.topic: quickstart
 ms.custom: mode-other
@@ -120,7 +120,7 @@ SELECT * FROM b
 
 The following screenshot shows an example of the output of the above query: 
 
-![Screenshot of the xEvent output](./media/backup-activity-monitor/present-xevents-output.png)
+![Screenshot of the XEvent output](./media/backup-activity-monitor/present-xevents-output.png)
 
 In this example, five databases were automatically backed up over the course of 2 hours and 30 minutes, and there are 130 entries in the XEvent session. 
 

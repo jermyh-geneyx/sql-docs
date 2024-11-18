@@ -1,8 +1,8 @@
 ---
 title: Extensibility architecture
 description: This article describes the architecture of the extensibility framework for running an external Python or R script on SQL Server Machine Learning Services. The script executes in a language runtime environment as an extension to the core database engine.
-author: WilliamDAssafMSFT
-ms.author: wiassaf
+author: VanMSFT
+ms.author: vanto
 ms.date: 07/14/2020
 ms.service: sql
 ms.subservice: machine-learning-services
@@ -91,7 +91,7 @@ BxlServer uses SQL Satellite for these tasks:
 
 SQL Satellite uses a custom data format that is optimized for fast data transfer between SQL Server and external script languages. It performs type conversions and defines the schemas of the input and output datasets during communications between SQL Server and the external script runtime.
 
-The SQL Satellite can be monitored by using Windows extended events (xEvents). For more information, see [Extended Events for SQL Server Machine Learning Services](../../machine-learning/administration/extended-events.md).
+The SQL Satellite can be monitored by using Windows extended events (XEvents). For more information, see [Extended Events for SQL Server Machine Learning Services](../../machine-learning/administration/extended-events.md).
 
 ## Communication channels between components
 

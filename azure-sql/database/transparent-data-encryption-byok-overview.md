@@ -5,8 +5,8 @@ description: Bring Your Own Key (BYOK) support for transparent data encryption (
 author: GithubMirek
 ms.author: mireks
 ms.reviewer: wiassaf, vanto, mathoma, randolphwest
-ms.date: 05/28/2024
-ms.service: sql-db-mi
+ms.date: 10/22/2024
+ms.service: azure-sql
 ms.subservice: security
 ms.topic: conceptual
 ms.custom:
@@ -81,9 +81,9 @@ Auditors can use Azure Monitor to review key vault AuditEvent logs, if logging i
 
 - [Soft-delete](/azure/key-vault/general/soft-delete-overview) and [purge protection](/azure/key-vault/general/soft-delete-overview#purge-protection) features must be enabled on the key vault to protect from data loss due to accidental key (or key vault) deletion.
 - Grant the server or managed instance access to the key vault (*get*, *wrapKey*, *unwrapKey*) using its Microsoft Entra identity. The server identity can be a system-assigned managed identity or a user-assigned managed identity assigned to the server. When using the Azure portal, the Microsoft Entra identity gets automatically created when the server is created. When using PowerShell or Azure CLI, the Microsoft Entra identity must be explicitly created and should be verified. See [Configure TDE with BYOK](transparent-data-encryption-byok-configure.md) and [Configure TDE with BYOK for SQL Managed Instance](../managed-instance/scripts/transparent-data-encryption-byok-powershell.md) for detailed step-by-step instructions when using PowerShell.
-    - Depending on the permission model of the key vault (access policy or Azure RBAC), key vault access can be granted either by creating an access policy on the key vault, or by creating a new Azure RBAC role assignment with the role [Key Vault Crypto Service Encryption User](/azure/key-vault/general/rbac-guide#azure-built-in-roles-for-key-vault-data-plane-operations).
+  - Depending on the permission model of the key vault (access policy or Azure RBAC), key vault access can be granted either by creating an access policy on the key vault, or by creating a new Azure RBAC role assignment with the role [Key Vault Crypto Service Encryption User](/azure/key-vault/general/rbac-guide#azure-built-in-roles-for-key-vault-data-plane-operations).
 
-- When using a firewall with AKV, you must enable the option **Allow trusted Microsoft services to bypass the firewall**. For more information, see [Configure Azure Key Vault firewalls and virtual networks](/azure/key-vault/general/network-security).
+- When using a firewall with AKV, you must enable the option **Allow trusted Microsoft services to bypass the firewall**, unless you're using [private endpoints for the AKV](/azure/key-vault/general/private-link-service). For more information, see [Configure Azure Key Vault firewalls and virtual networks](/azure/key-vault/general/network-security).
 
 ### Enable soft-delete and purge protection for AKV
 
@@ -111,10 +111,8 @@ Auditors can use Azure Monitor to review key vault AuditEvent logs, if logging i
 - If you're importing existing key into the key vault, make sure to provide it in the supported file formats (`.pfx`, `.byok`, or `.backup`).
 
 > [!NOTE]  
-> Azure SQL now supports using a RSA key stored in a Managed HSM as TDE protector.  
-Azure Key Vault Managed HSM is a fully managed, highly available, single-tenant, standards-compliant cloud service that enables you to safeguard cryptographic keys for your cloud applications, using FIPS 140-2 Level 3 validated HSMs. Learn more about [Managed HSMs](/azure/key-vault/managed-hsm/index).
-
-> [!NOTE]  
+> Azure SQL and SQL Server on Azure VM support using an RSA key stored in a Managed HSM as TDE protector. Azure Key Vault Managed HSM is a fully managed, highly available, single-tenant, standards-compliant cloud service that enables you to safeguard cryptographic keys for your cloud applications, using FIPS 140-2 Level 3 validated HSMs. Learn more about [Managed HSMs](/azure/key-vault/managed-hsm/index) and the configuration or RBAC permissions needed for SQL Server through the article, [Set up SQL Server TDE Extensible Key Management by using Azure Key Vault](/sql/relational-databases/security/encryption/setup-steps-for-extensible-key-management-using-the-azure-key-vault).
+>
 > An issue with Thales CipherTrust Manager versions prior to v2.8.0 prevents keys newly imported into Azure Key Vault from being used with Azure SQL Database or Azure SQL Managed Instance for customer-managed TDE scenarios. More details about this issue can be found [here](https://thalesdocs.com/ctp/cm/2.6/release_notes/index.html#ciphertrust-cloud-key-manager_1). For such cases, please wait 24 hours after importing the key into key vault to begin using it as TDE protector for the server or managed instance. This issue has been resolved in Thales CipherTrust Manager [v2.8.0](https://thalesdocs.com/ctp/cm/2.8/release_notes/index.html#resolved-issues).
 
 ## Recommendations when configuring customer-managed TDE
@@ -255,11 +253,18 @@ Another consideration for log files: Backed up log files remain encrypted with t
 
 ## High availability with customer-managed TDE
 
-Even in cases when there's no configured geo-redundancy for server, it's highly recommended to configure the server to use two different key vaults in two different regions with the same key material. The key in the secondary key vault in the other region shouldn't be marked as TDE protector, and it's not even allowed. If there's an outage affecting the primary key vault, and only then, the system will automatically switch to the other linked key with the same thumbprint in the secondary key vault, if it exists. Note though that switch won't happen if TDE protector is inaccessible because of revoked access rights, or because key or key vault is deleted, as it might indicate that customer intentionally wanted to restrict server from accessing the key. Providing the same key material to two key vaults in different regions can be done by creating the key outside of the key vault, and importing them into both key vaults.
+With the AKV providing multiple layers of redundancy, TDEs using a customer managed key can take advantage of AKV availability and resilience, and rely fully on the AKV redundancy solution.
 
-Alternatively, it can be accomplished by generating key using the primary key vault in one region and cloning the key into a key vault in a different Azure region. Use the [Backup-AzKeyVaultKey](/powershell/module/az.keyvault/Backup-AzKeyVaultKey) cmdlet to retrieve the key in encrypted format from the primary key vault and then use the [Restore-AzKeyVaultKey](/powershell/module/az.keyvault/restore-azkeyvaultkey) cmdlet and specify a key vault in the second region to clone the key. Alternatively, use the Azure portal to back up and restore the key. Key backup/restore operation is only allowed between key vaults within the same Azure subscription and [Azure geography](https://azure.microsoft.com/global-infrastructure/geographies/).
+AKV's multiple redundancy layers ensure key access even if individual service components fail or Azure regions or availability zones are down. For more information, see [Azure Key Vault availability and redundancy](/azure/key-vault/general/disaster-recovery-guidance).
 
-:::image type="content" source="media/transparent-data-encryption-byok-overview/customer-managed-tde-with-ha.png" alt-text="Diagram showing Single-Server high availability." lightbox="media/transparent-data-encryption-byok-overview/customer-managed-tde-with-ha.png":::
+AKV offers the following components of availability and resilience that are provided automatically without user intervention:
+
+- [Data replication](/azure/key-vault/general/disaster-recovery-guidance#data-replication)
+- [Failover within a region](/azure/key-vault/general/disaster-recovery-guidance#failover-within-a-region)
+- [Failover across regions](/azure/key-vault/general/disaster-recovery-guidance#failover-within-a-region)
+
+> [!NOTE]
+> For all pair regions, AKV keys are replicated to both regions and there are Hardware Security Modules (HSM) in both regions that can operate on those keys. For more information, see [Data replication](/azure/key-vault/general/disaster-recovery-guidance#data-replication). This applies to both Standard and Premium Azure Key Vault service tiers, and software or hardware keys.
 
 ## Geo-DR and customer-managed TDE
 

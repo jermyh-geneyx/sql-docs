@@ -1,10 +1,9 @@
 ---
 title: List of bugs fixed
 description: This page contains a listing of bugs fixed in each release, starting with Microsoft ODBC Driver 17 for SQL Server.
-author: v-chojas
-ms.author: v-chojas
-ms.reviewer: v-davidengel
-ms.date: 04/09/2024
+author: David-Engel
+ms.author: davidengel
+ms.date: 07/31/2024
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
@@ -14,6 +13,16 @@ helpviewer_keywords:
 # List of bugs fixed
 
 This page contains a listing of bugs fixed in each release, starting with [!INCLUDE[msCoName](../../includes/msconame-md.md)] ODBC Driver 17 for [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)].
+
+### Bug fixes in the [!INCLUDE[msCoName](../../includes/msconame-md.md)] ODBC Driver 18.4.1.1 for [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]
+
+- Fix crashes when receiving invalid data from server
+- Fix sending of null data for fixed-length types using DAE
+- Fix 10-minute delay upon disconnection after timeout
+- Fix memory leak upon disconnection when an error occurs
+- Fix memory leak upon reconnection with Strict encryption
+- Fix intermittent crash when connecting with Strict encryption and TLS 1.3
+- Fix crashes under low-memory conditions
 
 ### Bug fixes in the [!INCLUDE[msCoName](../../includes/msconame-md.md)] ODBC Driver 18.3.3.1 for [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]
 

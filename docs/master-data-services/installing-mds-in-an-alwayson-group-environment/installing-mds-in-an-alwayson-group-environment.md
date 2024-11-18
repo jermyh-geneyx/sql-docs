@@ -17,7 +17,7 @@ This article describes a solution for Master Data Service (MDS) hosted on Always
 
 ## Introduction
 
-This article describes a solution for Master Data Service (MDS) hosted on an Always On Availability Group configuration. The article describes how to install and configure SQL 2016 MDS on an SQL 2016 Always On Availability group (AG). The main purpose of this solution is to improve high availability and disaster recovery of MDS backend data hosted on a SQL Server database.
+This article describes a solution for Master Data Service (MDS) hosted on an Always On Availability Group configuration. The article describes how to install and configure SQL 2016 MDS on a SQL 2016 Always On Availability group (AG). The main purpose of this solution is to improve high availability and disaster recovery of MDS backend data hosted on a SQL Server database.
 
 To implement the solution, you need to complete the following tasks
 covered in this article.
@@ -323,7 +323,7 @@ You should usually enable synchronous commit only when the two nodes are in the 
 
    ![Configure data synchronization](media/Fig19_AvailabilityGroupDataSync.png)
 
-   Figure 19 
+   Figure 19 
 
 10. On the **Validation** page, make sure all validations pass successfully, and correct any errors. Click **Next** to continue.
 
@@ -339,7 +339,7 @@ You should usually enable synchronous commit only when the two nodes are in the 
 
    ![View the dashboard](media/Fig20_ShowDashboard.png)
 
-   Figure 20 
+   Figure 20 
 
 3. Click **Failover** to do a failover to a synchronous replica and an asynchronous replica. This is to verify that failover happens correctly without issues.
 

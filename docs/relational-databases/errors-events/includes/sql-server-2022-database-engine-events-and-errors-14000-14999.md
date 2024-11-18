@@ -1,7 +1,7 @@
 ---
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 03/14/2024
+ms.date: 11/14/2024
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -80,6 +80,7 @@ ms.topic: include
 | 14076 | 16 | No | Could not grant replication login permission to '%s'. |
 | 14077 | 10 | No | The publication was updated successfully. |
 | 14078 | 16 | No | The parameter must be 'description', 'taskid', 'sync_method', 'status', 'repl_freq', 'restricted', 'retention', 'immediate_sync', 'enabled_for_internet', 'allow_push', 'allow_pull', 'allow_anonymous', or 'retention'. |
+| 14079 | 16 | No | Object '%ls' cannot be published because it was created by an internal SQL Server component. |
 | 14080 | 16 | No | The remote server "%s" does not exist, or has not been designated as a valid Publisher, or you may not have permission to see available Publishers. |
 | 14085 | 16 | No | The Subscriber information could not be obtained from the Distributor. |
 | 14088 | 16 | No | The table '%s' must have a primary key to be published using the transaction-based method. |
@@ -120,6 +121,8 @@ ms.topic: include
 | 14126 | 16 | No | You do not have the required permissions to complete the operation. |
 | 14128 | 16 | No | Invalid @subscription_type parameter value. Valid options are 'push' or 'pull'. |
 | 14129 | 16 | No | The @status parameter value must be NULL for 'automatic' sync_type when you add subscriptions to an immediate_sync publication. |
+| 14130 | 10 | No | WARNING: The database '%s' does not contain database master key. Create a database master key and then update all replication secrets in this database. |
+| 14131 | 16 | No | The database '%s' does not contain database master key. Create database master key and repeat the procedure. |
 | 14135 | 16 | No | There is no subscription on Publisher '%s', publisher database '%s', publication '%s'. |
 | 14136 | 16 | No | The keyword 'all' is reserved by replication stored procedures. |
 | 14137 | 16 | No | The @value parameter value must be either 'true' or 'false'. |

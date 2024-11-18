@@ -3,11 +3,12 @@ title: "Relational Query Designer User Interface (Report Builder)"
 description: Learn to use the graphical query designer to explore the metadata, interactively build a query, and view the results for your query.
 author: maggiesMSFT
 ms.author: maggies
-ms.date: 03/14/2017
+ms.date: 09/25/2024
 ms.service: reporting-services
 ms.subservice: report-data
 ms.topic: conceptual
-ms.custom: updatefrequency5
+ms.custom:
+  - updatefrequency5
 f1_keywords:
   - "10012"
 helpviewer_keywords:
@@ -155,7 +156,7 @@ helpviewer_keywords:
 -   **Join Fields** Lists the pairs of joined fields, if a relationship has multiple join conditions the pairs of joined fields are separated by commas (,).  
   
 ###  <a name="AppliedFilters"></a> Applied Filters Pane  
- The Applied Filters pane displays the criteria that are used to limit the number of rows of data that are retrieved at run time. Criteria specified in this pane are used to generate an SQL WHERE clause. When you select the parameter option, a report parameter is automatically created. Report parameters that are based on query parameters enable a user to specify values for the query to control the data in the report.  
+ The Applied Filters pane displays the criteria that are used to limit the number of rows of data that are retrieved at run time. Criteria specified in this pane are used to generate a SQL WHERE clause. When you select the parameter option, a report parameter is automatically created. Report parameters that are based on query parameters enable a user to specify values for the query to control the data in the report.  
   
  The following columns are displayed:  
   
@@ -189,6 +190,6 @@ helpviewer_keywords:
 ## Text-Based Query Designer  
  For the most control over your query, use the text-based query designer. To switch to the text-based query designer, in the toolbar, click **Edit As Text**. After you edit a query in the text-based query designer, you can no longer use the relational query designer. The query will then always open in the text-based query designer. For more information, see [Text-based Query Designer User Interface &#40;Report Builder&#41;](../../reporting-services/report-data/text-based-query-designer-user-interface-report-builder.md).  
   
-## See Also  
- [Query Design Tools &#40;SSRS&#41;](query-design-tools-ssrs.md)  
-  
+## Related content
+
+- [Query Design Tools &#40;SSRS&#41;](query-design-tools-ssrs.md)

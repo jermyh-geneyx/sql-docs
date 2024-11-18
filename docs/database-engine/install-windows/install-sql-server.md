@@ -52,7 +52,7 @@ The download location for [!INCLUDE[ssnoversion](../../includes/ssnoversion-md.m
 
 Other [!INCLUDE[ssnoversion](../../includes/ssnoversion-md.md)] components can be found here:
 
-- [All cumulative updates](https://sqlserverbuilds.blogspot.com/)
+- [Latest updates and version history for SQL Server](/troubleshoot/sql/releases/download-and-install-latest-updates)
 - [SQL Server Reporting Services](https://www.microsoft.com/download/details.aspx?id=104502).
 - [SQL Server Management Studio](https://aka.ms/ssmsfullsetup)
 - [Azure Data Studio](https://go.microsoft.com/fwlink/?linkid=2109256)
@@ -92,7 +92,7 @@ Other [!INCLUDE[ssnoversion](../../includes/ssnoversion-md.md)] components can b
 |[SQL Server Replication](install-sql-server-replication.md)|Install and configure [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Replication.|
 |[Distributed Replay](../../tools/distributed-replay/install-distributed-replay.md)<sup>1</sup>|Lists articles to install the Distributed Replay feature.|
 |[SQL Server Management Tools with SSMS](../../ssms/download-sql-server-management-studio-ssms.md)|Install and configure [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] management tools.|
-|[SQL Server PowerShell](install-sql-server-powershell.md)|Considerations for installing [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] PowerShell components.|
+|[SQL Server PowerShell](/powershell/sql-server/download-sql-server-ps-module)|Considerations for installing [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] PowerShell components.|
 
 <sup>1</sup> Distributed Replay is deprecated in [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)].
 

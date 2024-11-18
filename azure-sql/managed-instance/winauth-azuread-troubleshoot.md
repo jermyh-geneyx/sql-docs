@@ -6,7 +6,7 @@ author: sravanisaluru
 ms.author: srsaluru
 ms.reviewer: mathoma, bonova, urmilano, wiassaf, randolphwest
 ms.date: 09/27/2023
-ms.service: sql-managed-instance
+ms.service: azure-sql-managed-instance
 ms.subservice: deployment-configuration
 ms.topic: how-to
 ---
@@ -38,8 +38,8 @@ The following are some well-known error codes:
 
 - **0x51f** - This error is likely related to a conflict with the Fiddler tool. To mitigate the issue, follow these steps:
 
-  1. Run `netsh winhttp reset autoproxy`
-  2. Run `netsh winhttp reset proxy`
+  1. Run `netsh winhttp reset autoproxy`
+  2. Run `netsh winhttp reset proxy`
   3. In the Windows registry, find `Computer\HKEY_LOCAL_MACHINE\SYSTEM\ControlSet001\Services\iphlpsvc\Parameters\ProxyMgr` and delete any subentry that has a configuration with a port `:8888`
   4. Restart the machine and try again using Windows Authentication
 
@@ -54,7 +54,11 @@ When using Wireshark the following is expected:
 - AS-REQ: Client => on-premises KDC => returns on-premises TGT.
 - TGS-REQ: Client => on-premises KDC => returns referral to `kerberos.microsoftonline.com`.
 
-## Next steps
+## Connection pooling
+
+When connection pooling is enabled, the driver manages SQL connections by keeping them open in a pool for reuse, rather than closing them. This can lead to a scenario where a connection is reused after a *security cache* invalidation, causing the *Kerberos ticket* to be revalidated. If the connection has been in the pool for more than five minutes, the ticket is treated as expired, resulting in a connection failure. To prevent this, set the *connection lifetime* to less than five minutes in the connection string. This change ensures that connections older than the specified lifetime are not reused from the pool.
+
+## Related content
 
 Learn more about implementing Windows Authentication for Microsoft Entra principals on Azure SQL Managed Instance:
 

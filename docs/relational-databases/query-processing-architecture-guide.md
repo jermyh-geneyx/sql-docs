@@ -1,8 +1,8 @@
 ---
 title: "Query Processing Architecture Guide"
 description: "How SQL Server processes queries and optimizes query reuse through execution plan caching."
-author: WilliamDAssafMSFT
-ms.author: wiassaf
+author: MikeRayMSFT
+ms.author: mikeray
 ms.reviewer: maghan, randolphwest, derekw
 ms.date: 01/16/2024
 ms.service: sql
@@ -752,9 +752,9 @@ In [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] versions prior to 200
 
 Statement-level recompilation benefits performance because, in most cases, a small number of statements causes recompilations and their associated penalties, in terms of CPU time and locks. These penalties are therefore avoided for the other statements in the batch that don't have to be recompiled.
 
-The `sql_statement_recompile` extended event (xEvent) reports statement-level recompilations. This xEvent occurs when a statement-level recompilation is required by any kind of batch. This includes stored procedures, triggers, ad hoc batches and queries. Batches can be submitted through several interfaces, including `sp_executesql`, dynamic SQL, Prepare methods or Execute methods.
+The `sql_statement_recompile` extended event (XEvent) reports statement-level recompilations. This XEvent occurs when a statement-level recompilation is required by any kind of batch. This includes stored procedures, triggers, ad hoc batches and queries. Batches can be submitted through several interfaces, including `sp_executesql`, dynamic SQL, Prepare methods or Execute methods.
 
-The `recompile_cause` column of `sql_statement_recompile` xEvent contains an integer code that indicates the reason for the recompilation. The following table contains the possible reasons:
+The `recompile_cause` column of `sql_statement_recompile` XEvent contains an integer code that indicates the reason for the recompilation. The following table contains the possible reasons:
 
 :::row:::
     :::column:::
@@ -822,7 +822,7 @@ The `recompile_cause` column of `sql_statement_recompile` xEvent contains an int
 :::row-end:::
 
 > [!NOTE]  
-> In [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] versions where xEvents aren't available, then the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] Profiler [SP:Recompile](../relational-databases/event-classes/sp-recompile-event-class.md) trace event can be used for the same purpose of reporting statement-level recompilations.
+> In [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] versions where XEvents aren't available, then the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] Profiler [SP:Recompile](../relational-databases/event-classes/sp-recompile-event-class.md) trace event can be used for the same purpose of reporting statement-level recompilations.
 >
 > The trace event `SQL:StmtRecompile` also reports statement-level recompilations, and this trace event can also be used to track and debug recompilations.
 >
@@ -876,9 +876,9 @@ Separating constants from the [!INCLUDE [tsql](../includes/tsql-md.md)] statemen
 
   This method is recommended for [!INCLUDE [tsql](../includes/tsql-md.md)]  scripts, stored procedures, or triggers that generate SQL statements dynamically.
 
-- ADO, OLE DB, and ODBC use parameter markers. Parameter markers are question marks (?) that replace a constant in an SQL statement and are bound to a program variable. For example, you would do the following in an ODBC application:
+- ADO, OLE DB, and ODBC use parameter markers. Parameter markers are question marks (?) that replace a constant in a SQL statement and are bound to a program variable. For example, you would do the following in an ODBC application:
 
-  - Use `SQLBindParameter` to bind an integer variable to the first parameter marker in an SQL statement.
+  - Use `SQLBindParameter` to bind an integer variable to the first parameter marker in a SQL statement.
   - Put the integer value in the variable.
   - Execute the statement, specifying the parameter marker (?):
 

@@ -4,16 +4,16 @@ titleSuffix: Azure SQL Managed Instance
 description: Learn how to set up Windows authentication for Microsoft Entra ID with the incoming trust-based flow.
 author: sravanisaluru
 ms.author: srsaluru
-ms.reviewer: mathoma, bonova, urmilano, wiassaf
-ms.date: 09/27/2023
-ms.service: sql-managed-instance
+ms.reviewer: mathoma, bonova, urmilano, wiassaf, randolphwest
+ms.date: 11/04/2024
+ms.service: azure-sql-managed-instance
 ms.subservice: deployment-configuration
 ms.topic: how-to
 ---
 
 # How to set up Windows Authentication for Microsoft Entra ID with the incoming trust-based flow
 
-This article describes how to implement the incoming trust-based authentication flow to allow Active Directory (AD) joined clients running Windows 10, Windows Server 2012, or higher versions of Windows to authenticate to an Azure SQL Managed Instance using Windows Authentication. 
+This article describes how to implement the incoming trust-based authentication flow to allow Active Directory (AD) joined clients running Windows 10, Windows Server 2012, or higher versions of Windows to authenticate to an Azure SQL Managed Instance using Windows Authentication.
 
 This article also includes steps to rotate a Kerberos Key for your service account in Microsoft Entra ID ([formerly Azure Active Directory](/entra/fundamentals/new-name)) and Trusted Domain Object, and steps to remove a Trusted Domain Object and all Kerberos settings, if desired.
 
@@ -36,12 +36,12 @@ To implement the incoming trust-based authentication flow, first, ensure that th
 | --- | --- |
 | Client must run Windows 10, Windows Server 2012, or a higher version of Windows. | |
 | Clients must be joined to AD. The domain must have a functional level of Windows Server 2012 or higher. | You can determine if the client is joined to AD by running the [dsregcmd command](/azure/active-directory/devices/troubleshoot-device-dsregcmd): `dsregcmd.exe /status` |
-| Azure AD Hybrid Authentication Management Module. | This PowerShell module provides management features for on-premises setup. |
+| [Azure AD Hybrid Authentication Management Module](https://www.powershellgallery.com/packages/AzureADHybridAuthenticationManagement/2.0.55.0). | This PowerShell module provides management features for on-premises setup. |
 | Azure tenant. | |
 | Azure subscription under the same Microsoft Entra tenant you plan to use for authentication. | |
 | [Microsoft Entra Connect](/azure/active-directory/hybrid/whatis-azure-ad-connect) installed. | Hybrid environments where identities exist both in Microsoft Entra ID and AD. |
 
-<a name='create-and-configure-the-azure-ad-kerberos-trusted-domain-object'></a>
+<a id="create-and-configure-the-azure-ad-kerberos-trusted-domain-object"></a>
 
 ## Create and configure the Microsoft Entra Kerberos Trusted Domain Object
 
@@ -52,8 +52,6 @@ You'll then use the Azure AD Hybrid Authentication Management PowerShell module 
 ### Set up the Trusted Domain Object
 
 To set up the Trusted Domain Object, first install the Azure AD Hybrid Authentication Management PowerShell module.
-
-<a name='install-the-azure-ad-hybrid-authentication-management-powershell-module'></a>
 
 #### Install the Azure AD Hybrid Authentication Management PowerShell module
 
@@ -74,8 +72,9 @@ To set up the Trusted Domain Object, first install the Azure AD Hybrid Authentic
 
 Install-PackageProvider -Name NuGet -Force
 
-if (@(Get-PSRepository | ? {$_.Name -eq "PSGallery"}).Count -eq 0){
-    Register-PSRepository -DefaultSet-PSRepository -Name "PSGallery" -InstallationPolicy Trusted
+if (@(Get-PSRepository | Where-Object { $_.Name -eq "PSGallery" }).Count -eq -1) {
+    Register-PSRepository -Default
+    Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted
 }
 
 Install-Module -Name PowerShellGet -Force
@@ -87,20 +86,20 @@ Install-Module -Name AzureADHybridAuthenticationManagement -AllowClobber
 
 1. Start a Windows PowerShell session with the **Run as administrator** option.
 
-1. Set the common parameters. Customize the script below prior to running it.
+1. Set the common parameters. Customize the following script before running it.
 
     - Set the `$domain` parameter to your on-premises Active Directory domain name.
     - When prompted by `Get-Credential`, enter an on-premises Active Directory administrator username and password.
     - Set the `$cloudUserName` parameter to the username of a Global Administrator privileged account for Microsoft Entra cloud access.
 
     > [!NOTE]  
-    > If you wish to use your current Windows login account for your on-premises Active Directory access, you can skip the step where credentials are assigned to the `$domainCred` parameter. If you take this approach, do not include the `-DomainCredential` parameter in the PowerShell commands following this step.
+    > If you wish to use your current Windows login account for your on-premises Active Directory access, you can skip the step where credentials are assigned to the `$domainCred` parameter. If you take this approach, don't include the `-DomainCredential` parameter in the PowerShell commands following this step.
 
     ```powershell
     $domain = "your on-premesis domain name, for example contoso.com"
-    
+
     $domainCred = Get-Credential
-    
+
     $cloudUserName = "Azure AD user principal name, for example admin@contoso.onmicrosoft.com"
     ```
 
@@ -158,7 +157,7 @@ Install-Module -Name AzureADHybridAuthenticationManagement -AllowClobber
 
 1. Add the Trusted Domain Object.
 
-    Run the [Set-AzureAdKerberosServer PowerShell cmdlet](/azure/active-directory/authentication/howto-authentication-passwordless-security-key-on-premises#create-a-kerberos-server-object) to add the Trusted Domain Object. Be sure to include `-SetupCloudTrust` parameter. If there's no Microsoft Entra service account, this command creates a new Microsoft Entra service account. This command will only create the requested Trusted Domain object if there's a Microsoft Entra service account.
+    Run the [Set-AzureAdKerberosServer PowerShell cmdlet](/azure/active-directory/authentication/howto-authentication-passwordless-security-key-on-premises#create-a-kerberos-server-object) to add the Trusted Domain Object. Be sure to include `-SetupCloudTrust` parameter. If there's no Microsoft Entra service account, this command creates a new Microsoft Entra service account. This command only creates the requested Trusted Domain object if there's a Microsoft Entra service account.
 
     ```powershell
     Set-AzureADKerberosServer -Domain $domain -UserPrincipalName $cloudUserName -DomainCredential $domainCred -SetupCloudTrust
@@ -170,7 +169,7 @@ Install-Module -Name AzureADHybridAuthenticationManagement -AllowClobber
     > 1. Run the command on root domain (include `-SetupCloudTrust` parameter).
     > 1. Run the same command on the child domain without the `-SetupCloudTrust` parameter.
 
-    After creating the Trusted Domain Object, you can check the updated Kerberos Settings using the `Get-AzureAdKerberosServer` PowerShell cmdlet, as shown in the previous step. If the `Set-AzureAdKerberosServer` cmdlet has been run successfully with the `-SetupCloudTrust` parameter, the `CloudTrustDisplay` field should now return `Microsoft.AzureAD.Kdc.Service.TrustDisplay`, as in the following sample output:
+    After creating the Trusted Domain Object, you can check the updated Kerberos Settings using the `Get-AzureAdKerberosServer` PowerShell cmdlet, as shown in the previous step. If the `Set-AzureAdKerberosServer` cmdlet was run successfully with the `-SetupCloudTrust` parameter, the `CloudTrustDisplay` field should now return `Microsoft.AzureAD.Kdc.Service.TrustDisplay`, as in the following sample output:
 
     ```output
     ID                  : 25614
@@ -202,7 +201,7 @@ Install-Module -Name AzureADHybridAuthenticationManagement -AllowClobber
     1. Select **Enabled**.
     1. Under **Options**, select **Show...**. This opens the Show Contents dialog box.
 
-        :::image type="content" source="media/winauth-azuread/configure-policy-kdc-proxy.png" alt-text="Screenshot of dialog box to enable 'Specify KDC proxy servers for Kerberos clients'. The 'Show Contents' dialog allows input of a value name and the related value."  lightbox="media/winauth-azuread/configure-policy-kdc-proxy.png":::
+       :::image type="content" source="media/winauth-azuread/configure-policy-kdc-proxy.png" alt-text="Screenshot of dialog box to enable 'Specify KDC proxy servers for Kerberos clients'. The 'Show Contents' dialog allows input of a value name and the related value." lightbox="media/winauth-azuread/configure-policy-kdc-proxy.png":::
 
     1. Define the KDC proxy servers settings using mappings as follows. Substitute your Microsoft Entra tenant ID for the `your_Azure_AD_tenant_id` placeholder. Note the space following `https` and before the closing `/` in the value mapping.
 
@@ -217,7 +216,7 @@ Install-Module -Name AzureADHybridAuthenticationManagement -AllowClobber
 
 ## Rotate the Kerberos Key
 
-You may periodically rotate the Kerberos Key for the created Microsoft Entra service account and Trusted Domain Object for management purposes.
+You might periodically rotate the Kerberos Key for the created Microsoft Entra service account and Trusted Domain Object for management purposes.
 
 ```powershell
 Set-AzureAdKerberosServer -Domain $domain `
@@ -240,7 +239,7 @@ Set-AzureAdKerberosServer -Domain $domain `
 You can remove the added Trusted Domain Object using the following command:
 
 ```powershell
-Remove-AzureADKerberosTrustedDomainObject -Domain $domain `
+Remove-AzureADKerberosServerTrustedDomainObject -Domain $domain `
    -DomainCredential $domainCred `
    -UserPrincipalName $cloudUserName
 ```
@@ -257,9 +256,7 @@ Remove-AzureAdKerberosServer -Domain $domain `
    -UserPrincipalName $cloudUserName
 ```
 
-## Next steps
-
-Learn more about implementing Windows Authentication for Microsoft Entra principals on Azure SQL Managed Instance:
+## Related content
 
 - [Configure Azure SQL Managed Instance for Windows Authentication for Microsoft Entra ID](winauth-azuread-kerberos-managed-instance.md)
 - [What is Windows Authentication for Microsoft Entra principals on Azure SQL Managed Instance?](winauth-azuread-overview.md)

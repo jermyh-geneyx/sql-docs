@@ -1,7 +1,7 @@
 ---
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 03/14/2024
+ms.date: 11/14/2024
 ms.topic: include
 ---
 > [!NOTE]
@@ -540,7 +540,7 @@ ms.topic: include
 | 33533 | 16 | No | SHUTDOWN on failure option is not supported in this version of SQL Server. |
 | 33534 | 16 | Yes | Internal enclave error. Enclave loading failed: invalid path. For more information, contact Customer Support Services. |
 | 33535 | 16 | Yes | Internal enclave error: Enclave call failed for method '%s'. For more information, contact Customer Support Services. |
-| 33536 | 16 | No | VBS enclave attestation failed. Attestation status: '%ls', substatus: '%ls'. For more information, see 'https://go.microsoft.com/fwlink/?linkid=2099553'. |
+| 33536 | 16 | No | VBS enclave attestation failed. Attestation status: '%ls', substatus: '%ls'. For more information, see '[https://go.microsoft.com/fwlink/?linkid=2099553](https://go.microsoft.com/fwlink/?linkid=2099553)'. |
 | 33537 | 16 | Yes | Internal enclave error. Enclave attestation error: enclave platform returned unexpected output. For more information, contact Customer Support Services. |
 | 33538 | 16 | No | The credentials of blob storage container '%.\*ls' are invalid. |
 | 33539 | 16 | No | The blob storage '%.\*ls' was not found. Verify your storage account name. |
@@ -549,8 +549,8 @@ ms.topic: include
 | 33542 | 16 | No | Unsupported operation near line '%d'; operations on encrypted columns with string data types require a \*_BIN2 or a \*_UTF8 collation. However, the column or the variable uses the '%.\*ls' collation. |
 | 33543 | 16 | No | Cannot alter column '%.\*ls'. The statement attempts to encrypt, decrypt or re-encrypt the column in-place using a secure enclave, but the current and/or the target column encryption key for the column is not enclave-enabled. |
 | 33544 | 16 | No | Cannot alter column '%.\*ls'. The statement attempts to change the encryption scheme of the column and one or more of the following column properties: collation (to a different code page), data type. Such changes cannot be combined in a single statement. Try using multiple statements. |
-| 33545 | 16 | No | The statement requires a secure enclave, but the enclave is not available for the target database - see https://go.microsoft.com/fwlink/?linkid=2005337 for more details. |
-| 33546 | 16 | No | The statement triggers enclave computations, but a column encryption key, needed for the computations, has not been found inside the enclave. Check that: (1) column encryption and enclave computations are enabled on connection, (2) driver is enclave-enabled. For additional reasons see: https://go.microsoft.com/fwlink/?linkid=2086681. |
+| 33545 | 16 | No | The statement requires a secure enclave, but the enclave is not available for the target database - see [https://go.microsoft.com/fwlink/?linkid=2005337](https://go.microsoft.com/fwlink/?linkid=2005337) for more details. |
+| 33546 | 16 | No | The statement triggers enclave computations, but a column encryption key, needed for the computations, has not been found inside the enclave. Check that: (1) column encryption and enclave computations are enabled on connection, (2) driver is enclave-enabled. For additional reasons see: [https://go.microsoft.com/fwlink/?linkid=2086681](https://go.microsoft.com/fwlink/?linkid=2086681). |
 | 33547 | 16 | No | Enclave comparator cache failed to initialize during enclave load. |
 | 33548 | 16 | Yes | Internal enclave error: Enclave out of memory. For more information, contact Customer Support Services. |
 | 33549 | 16 | Yes | Internal enclave error: OSF Serialization error. For more information, contact Customer Support Services. |
@@ -1236,12 +1236,32 @@ ms.topic: include
 | 37538 | 16 | Yes | Internal error occurred while obtaining version information from IMDS endpoint. Return code: '0x%08x'. |
 | 37539 | 16 | No | Uploading ledger digest failed for database with id %d due to outbound firewall rules. |
 | 37540 | 16 | No | The provided ledger digest storage location is not in the list of Outbound Firewall Rules on the server. Please add this to the list of Outbound Firewall Rules on your server and retry the operation. |
-| 37541 | 16 | No | Provider '%ls' is no longer supported. Please use MSOLEDBSQL provider instead. (https://go.microsoft.com/fwlink/?linkid=2206241&clcid=0x409) |
+| 37541 | 16 | No | Provider '%ls' is no longer supported. Please use MSOLEDBSQL provider instead. ([https://go.microsoft.com/fwlink/?linkid=2206241&clcid=0x409](https://go.microsoft.com/fwlink/?linkid=2206241&clcid=0x409)) |
 | 37542 | 16 | Yes | The operation could not be completed because attempts to connect to Azure Key Vault (AKV) were denied by the configured Network Security Perimeter. Key vault uri: '%ls'. |
 | 37543 | 10 | No | The trust of the certificate imported could not be verified with the Certificate Authority (CA) or verified through the Internet. Most likely the host operating system where SQL Server is hosted is missing the latest root certificate updates, or access to the Internet. In case this certificate is used for authentication when partner server rotates the certificate, the authentication will fail unless the issue has been resolved on the host OS. Please ensure that the host OS has the latest root certificate updates, or access to the Internet to reach out to remote CA. Error code: 0x%lx. |
 | 37545 | 16 | No | '%ls' is not a valid object id for '%ls' or you do not have permission. |
 | 37546 | 16 | No | Can only specify object_id when creating user from external provider. |
+| 37549 | 16 | No | Cannot open session for %S_MSG '%.\*ls'. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
+| 37550 | 16 | No | Cannot initialize cryptographic provider. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
+| 37551 | 16 | No | Cannot create key '%.\*ls' in the provider. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
+| 37552 | 16 | No | Cannot export %S_MSG from the provider. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
+| 37553 | 16 | No | Invalid algorithm '%.\*ls'. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
+| 37554 | 16 | No | Key with %S_MSG '%.\*ls' does not exist in the provider or access is denied. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
+| 37555 | 16 | No | Invalid algorithm id: %d. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
+| 37556 | 16 | No | Key validation failed since an attempt to get algorithm info for that key failed. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
 | 37559 | 16 | No | Object_id is not a valid option |
+| 37563 | 16 | Yes | The primary managed identity is not selected for this server. Enable the primary managed identity for Microsoft Entra authentication for this server. For more information see (https://aka.ms/sql-server-managed-identity-doc). |
+| 37564 | 10 | Yes | The managed identity with Client_ID/Application_ID '%ls', is the primary identity assigned for this server. |
+| 37566 | 16 | No | Operations on customer managed key '%s' are not allowed because the key has been disabled in Azure Key Vault '%s'. Please enable the key. For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting. |
+| 37567 | 16 | No | Operations on customer managed key '%s' are not allowed in Azure Key Vault '%s'. Please allow the following operations on the key: "get", "wrapKey", "unwrapKey". For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting. |
+| 37568 | 16 | No | One of required operations on customer managed key '%s' is not allowed for currently chosen RBAC role of the managed instance '%s' identity on Azure Key Vault '%s'. Please change to a RBAC role permitting the following permissions on the key vault: "get", "wrapKey", "unwrapKey". For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting |
+| 37569 | 16 | No | Connection to Azure Key Vault '%s' was forbidden by Azure Key Vault firewall policy. Please review the Azure Key Vault firewall policy to enable connections from Managed Instance '%s'. For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting. |
+| 37570 | 16 | No | One of required operations on customer managed key '%s' on Azure Key Vault '%s' is not allowed for currently set key vault policy used by managed instance '%s' identity. Please use a policy permitting the following permissions on the key vault: "get", "wrapKey", "unwrapKey". For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting. |
+| 37571 | 16 | No | Azure Key Vault '%s' operation requested by Managed Instance '%s' failed due to insufficient permissions (inner error code: '%s'). For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting. |
+| 37572 | 16 | No | Customer managed key '%s' was not found in Azure Key Vault '%s'. If it was recently deleted, recovery could be possible if 'soft-delete' protection is enabled on the key vault. For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting. |
+| 37573 | 16 | No | Connection to Azure Key Vault '%s' could not be established. Please review network settings for Managed Instance '%s'. For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting. |
+| 37574 | 16 | No | Azure Key Vault URI '%s' could not be resolved. Please ensure the key vault URI is valid and that your network settings for Managed Instance '%s' are not blocking access to Azure Public DNS. For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting. |
+| 37576 | 16 | No | The current SQL Server Connector version for Microsoft Azure Key Vault does not support the managed identity (see https://aka.ms/sql-server-managed-identity-doc). Upgrade the SQL Server Connector to its latest version (see https://www.microsoft.com/en-us/download/details.aspx?id=45344&msockid=2aa7acc4c900647e098ebfb5c8ba6506). |
 | 38001 | 16 | No | Cannot find the file id %d in the database '%s'. |
 | 38002 | 16 | No | Only users having %s permission can execute this stored procedure. |
 | 39001 | 16 | No | Only SELECT statement is supported for input data query to 'sp_execute_external_script' stored procedure. |
@@ -1816,10 +1836,10 @@ ms.topic: include
 | 40825 | 16 | No | Unable to complete request now. Please try again later. |
 | 40827 | 16 | No | The operation is not supported for your subscription offer type. |
 | 40838 | 16 | No | Replication relationship limit reached. The database '%ls' cannot have more than one non-readable secondary. |
-| 40839 | 16 | No | Connection to a non-readable secondary database is not allowed. See 'http://go.microsoft.com/fwlink/?LinkID=402429&clcid=0x409' for more information. |
-| 40840 | 16 | No | Target region '%ls' is not a DR paired Azure region. See 'http://go.microsoft.com/fwlink/?LinkID=402430&clcid=0x409' for more information. |
+| 40839 | 16 | No | Connection to a non-readable secondary database is not allowed. See '[http://go.microsoft.com/fwlink/?LinkID=402429&clcid=0x409](https://go.microsoft.com/fwlink/?LinkID=402429&clcid=0x409)' for more information. |
+| 40840 | 16 | No | Target region '%ls' is not a DR paired Azure region. See '[http://go.microsoft.com/fwlink/?LinkID=402430&clcid=0x409](https://go.microsoft.com/fwlink/?LinkID=402430&clcid=0x409)' for more information. |
 | 40841 | 16 | No | Friendly termination of a non-readable replication relationship is not supported. |
-| 40842 | 16 | No | Termination of the non-readable replication relationship for database '%ls' is currently not allowed. See 'http://go.microsoft.com/fwlink/?LinkID=402431&clcid=0x409' for more information |
+| 40842 | 16 | No | Termination of the non-readable replication relationship for database '%ls' is currently not allowed. See '[http://go.microsoft.com/fwlink/?LinkID=402431&clcid=0x409](https://go.microsoft.com/fwlink/?LinkID=402431&clcid=0x409)' for more information |
 | 40843 | 16 | No | Non-readable secondary is not supported for database copy. |
 | 40844 | 16 | No | Database '%ls' on Server '%ls' is a '%ls' edition database in an elastic pool and cannot have a replication relationship. |
 | 40845 | 16 | No | Server DNS Alias name '%.\*ls' may only contain a single '@' when used to denote a SQL Server alias. |
@@ -1932,7 +1952,7 @@ ms.topic: include
 | 40952 | 16 | No | A Server DNS Alias cannot be created because server '%.\*ls' would exceed the allowed Server DNS Aliases quota of %d. |
 | 40953 | 16 | No | A Failover Group cannot be created because server '%.\*ls' would exceed the allowed Failover Groups quota of %d. |
 | 40954 | 16 | No | The Table Auditing feature cannot be turned on for a server that contains Server Dns Aliases. Please try Blob Auditing instead. |
-| 40955 | 16 | No | The operation cannot be performed due to insufficient file space in the elastic pool. The operation requires (%d) MBs file space and there are (%d) MBs file space available. Unused file space must be reclaimed before retrying the operation. Please refer to the following article for details on reclaiming unused file space: https://go.microsoft.com/fwlink/?linkid=864775. |
+| 40955 | 16 | No | The operation cannot be performed due to insufficient file space in the elastic pool. The operation requires (%d) MBs file space and there are (%d) MBs file space available. Unused file space must be reclaimed before retrying the operation. Please refer to the following article for details on reclaiming unused file space: [https://go.microsoft.com/fwlink/?linkid=864775](https://go.microsoft.com/fwlink/?linkid=864775). |
 | 40956 | 16 | No | The Server Disaster Recovery Configuration feature is deprecated. Please use Failover Group instead. |
 | 40957 | 16 | No | The DTU min per database must be at least (%d) for service tier '%.\*ls'. |
 | 40958 | 16 | No | The VCore max per database must be at least (%d) for service tier '%.\*ls'. |
@@ -2271,7 +2291,7 @@ ms.topic: include
 | 41376 | 16 | No | Only members of the fixed sysadmin role can execute the stored procedure '%ls'. |
 | 41377 | 16 | No | The natively compiled module with database ID %ld and object ID %ld has not been executed. Query execution statistics collection can only be enabled if the module has been executed at least once since creation or last database restart. |
 | 41378 | 16 | No | Both @database_id and @xtp_object_id should be specified to enable or retrieve status of query level statistics collection for a procedure. |
-| 41379 | 16 | No | Restore operation failed for database '%.\*ls' due to insufficient memory in the resource pool '%ls'. Close other applications to increase the available memory, ensure that both SQL Server memory configuration and resource pool memory limits are correct and try again. See 'http://go.microsoft.com/fwlink/?LinkID=507574' for more information. |
+| 41379 | 16 | No | Restore operation failed for database '%.\*ls' due to insufficient memory in the resource pool '%ls'. Close other applications to increase the available memory, ensure that both SQL Server memory configuration and resource pool memory limits are correct and try again. See '[http://go.microsoft.com/fwlink/?LinkID=507574](https://go.microsoft.com/fwlink/?LinkID=507574)' for more information. |
 | 41380 | 21 | No | Databases with a MEMORY_OPTIMIZED_DATA filegroup are only supported in 64-bit editions of SQL Server. |
 | 41381 | 21 | No | The database cannot be started in this edition of SQL Server because it contains a MEMORY_OPTIMIZED_DATA filegroup. See Books Online for more details on feature support in different SQL Server editions. |
 | 41382 | 16 | No | Failure adding a container to a MEMORY_OPTIMIZED_DATA filegroup. Possible causes include the server being out of memory and the container path being too long. |
@@ -2279,7 +2299,7 @@ ms.topic: include
 | 41384 | 16 | No | Database '%.\*ls' has exceeded the maximum number of XTP checkpoint files, and can no longer support write operations in durable memory-optimized tables. For more information, contact Customer Support Services. |
 | 41385 | 16 | No | A memory-optimized table cannot be enabled for Change Data Capture (CDC). |
 | 41386 | 16 | No | Filegroups with MEMORY_OPTIMIZED_DATA, memory-optimized tables and natively compiled modules are not supported when lightweight pooling is enabled. Disable lightweight pooling in order to use memory-optimized features. |
-| 41387 | 10 | No | Disallowing XTP page allocations for database '%.\*ls' due to insufficient memory in the resource pool '%ls'. See 'http://go.microsoft.com/fwlink/?LinkId=510837' for more information. |
+| 41387 | 10 | No | Disallowing XTP page allocations for database '%.\*ls' due to insufficient memory in the resource pool '%ls'. See '[http://go.microsoft.com/fwlink/?LinkId=510837](https://go.microsoft.com/fwlink/?LinkId=510837)' for more information. |
 | 41388 | 16 | No | An upgrade operation failed for database '%.\*ls'. Check the error log for additional details. |
 | 41389 | 16 | No | Failed to create a backup file collection snapshot necessary for backup of database '%.\*ls'. Check the error log for additional details. |
 | 41390 | 16 | No | Failed to get checkpoint file information necessary for backup of database '%.\*ls'. Check the error log for additional details. |

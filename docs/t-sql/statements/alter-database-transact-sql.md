@@ -4,11 +4,12 @@ description: ALTER DATABASE (Transact-SQL) syntax for SQL Server, Azure SQL Data
 author: markingmyname
 ms.author: maghan
 ms.reviewer: wiassaf
-ms.date: 08/10/2023
+ms.date: 08/26/2024
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
-ms.custom: references_regions
+ms.custom:
+  - references_regions
 f1_keywords:
   - "ALTER_DATABASE_TSQL"
   - "ALTER DATABASE"
@@ -25,7 +26,7 @@ helpviewer_keywords:
   - "database mirroring [SQL Server], Transact-SQL"
 dev_langs:
   - "TSQL"
-monikerRange: ">=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-current||=azuresqldb-mi-current||=azure-sqldw-latest||>=aps-pdw-2016"
+monikerRange: ">=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-current||=azuresqldb-mi-current||=azure-sqldw-latest||>=aps-pdw-2016||=fabric"
 ---
 # ALTER DATABASE (Transact-SQL)
 
@@ -55,6 +56,9 @@ For more information about the syntax conventions, see [Transact-SQL syntax conv
     :::column:::
         [Analytics Platform<br />System (PDW)](alter-database-transact-sql.md?view=aps-pdw-2016-au7&preserve-view=true)
     :::column-end:::
+    :::column:::
+        [Microsoft Fabric](alter-database-transact-sql.md?view=fabric&preserve-view=true)
+    :::column-end:::
 :::row-end:::
 
 &nbsp;
@@ -67,7 +71,7 @@ Because of its length, the `ALTER DATABASE` syntax is separated into the multipl
 
 | Article | Description |
 | --- | --- |
-| ALTER DATABASE | The current article provides the syntax and related information for changing the name and the collation of a database. |
+| `ALTER DATABASE` | The current article provides the syntax and related information for changing the name and the collation of a database. |
 | [ALTER DATABASE File and Filegroup Options](alter-database-transact-sql-file-and-filegroup-options.md) | Provides the syntax and related information for adding and removing files and filegroups from a database, and for changing the attributes of the files and filegroups. |
 | [ALTER DATABASE SET options](alter-database-transact-sql-set-options.md) | Provides the syntax and related information for changing the attributes of a database by using the SET options of ALTER DATABASE. |
 | [ALTER DATABASE Database Mirroring](alter-database-transact-sql-database-mirroring.md) | Provides the syntax and related information for the SET options of ALTER DATABASE that are related to database mirroring. |
@@ -170,7 +174,7 @@ To decrease the size of a database, use [DBCC SHRINKDATABASE](../database-consol
 
 The `ALTER DATABASE` statement must run in auto-commit mode (the default transaction management mode) and isn't allowed in an explicit or implicit transaction.
 
-The state of a database file (for example, online or offline), is maintained independently from the state of the database. For more information, see [File States](../../relational-databases/databases/file-states.md). The state of the files within a filegroup determines the availability of the whole filegroup. For a filegroup to be available, all files within the filegroup must be online. If a filegroup is offline, any attempt to access the filegroup by an SQL statement fails with an error. When you build query plans for SELECT statements, the query optimizer avoids nonclustered indexes and indexed views that reside in offline filegroups. This enables these statements to succeed. However, if the offline filegroup contains the heap or clustered index of the target table, the SELECT statements fail. Additionally, any `INSERT`, `UPDATE`, or `DELETE` statement that modifies a table with any index in an offline filegroup fails.
+The state of a database file (for example, online or offline), is maintained independently from the state of the database. For more information, see [File States](../../relational-databases/databases/file-states.md). The state of the files within a filegroup determines the availability of the whole filegroup. For a filegroup to be available, all files within the filegroup must be online. If a filegroup is offline, any attempt to access the filegroup by a SQL statement fails with an error. When you build query plans for SELECT statements, the query optimizer avoids nonclustered indexes and indexed views that reside in offline filegroups. This enables these statements to succeed. However, if the offline filegroup contains the heap or clustered index of the target table, the SELECT statements fail. Additionally, any `INSERT`, `UPDATE`, or `DELETE` statement that modifies a table with any index in an offline filegroup fails.
 
 When a database is in the RESTORING state, most `ALTER DATABASE` statements fail. The exception is setting database mirroring options. A database might be in the RESTORING state during an active restore operation or when a restore operation of a database or log file fails because of a corrupted backup file.
 
@@ -288,7 +292,7 @@ GO
 
 :::row:::
     :::column:::
-        [SQL Server](alter-database-transact-sql.md?view=sql-server-ver15&preserve-view=true)
+        [SQL Server](alter-database-transact-sql.md?view=sql-server-ver16&preserve-view=true)
     :::column-end:::
     :::column:::
         **_\* SQL Database \*_** &nbsp;
@@ -302,6 +306,9 @@ GO
     :::column:::
         [Analytics Platform<br />System (PDW)](alter-database-transact-sql.md?view=aps-pdw-2016-au7&preserve-view=true)
     :::column-end:::
+    :::column:::
+        [Microsoft Fabric](alter-database-transact-sql.md?view=fabric&preserve-view=true)
+    :::column-end:::    
 :::row-end:::
 
 &nbsp;
@@ -432,7 +439,7 @@ ALTER DATABASE current
 > [!IMPORTANT]
 > EDITION change fails if the MAXSIZE property for the database is set to a value outside the valid range supported by that edition.
 
-#### MODIFY (BACKUP_STORAGE_REDUNDANCY = ['LOCAL' | 'ZONE' | 'GEO'])
+#### MODIFY BACKUP_STORAGE_REDUNDANCY = ['LOCAL' | 'ZONE' | 'GEO']
 
 Changes the storage redundancy of point-in-time restore backups and long-term retention backups (if configured) of the database. The changes are applied to all the future backups taken. Existing backups continue to use the previous setting.
 
@@ -443,7 +450,7 @@ To enforce data residency when you're creating a database by using T-SQL, use `L
 Specifies the maximum size of the database. The maximum size must comply with the valid set of values for the EDITION property of the database. Changing the maximum size of the database can cause the database EDITION to be changed.
 
 > [!NOTE]
-> The **MAXSIZE** argument does not apply to single databases in the Hyperscale service tier. Hyperscale service tier databases grow as needed, up to 100 TB. The SQL Database service adds storage automatically - you do not need to set a maximum size.
+> The **MAXSIZE** argument does not apply to single databases in the Hyperscale service tier. Single Hyperscale service tier databases grow as needed, up to 128 TB. The SQL Database service adds storage automatically - you do not need to set a maximum size.
 
 **DTU model**
 
@@ -635,7 +642,7 @@ Creates a readable secondary database `db1` on server `secondaryserver` of the `
 ```sql
 ALTER DATABASE db1
 ADD SECONDARY ON SERVER secondaryserver
-WITH ( ALLOW_CONNECTIONS = ALL )
+WITH ( ALLOW_CONNECTIONS = ALL );
 ```
 
 ### D. Remove a Geo-Replication Secondary
@@ -644,7 +651,7 @@ Removes the secondary database `db1` on server `secondaryserver`.
 
 ```sql
 ALTER DATABASE db1
-REMOVE SECONDARY ON SERVER testsecondaryserver
+REMOVE SECONDARY ON SERVER testsecondaryserver;
 ```
 
 ### E. Failover to a Geo-Replication Secondary
@@ -652,7 +659,7 @@ REMOVE SECONDARY ON SERVER testsecondaryserver
 Promotes a secondary database `db1` on server `secondaryserver` to become the new primary database when executed on server `secondaryserver`.
 
 ```sql
-ALTER DATABASE db1 FAILOVER
+ALTER DATABASE db1 FAILOVER;
 ```
 
 > [!NOTE]
@@ -663,7 +670,7 @@ ALTER DATABASE db1 FAILOVER
 Forces a secondary database `db1` on server `secondaryserver` to become the new primary database when executed on server `secondaryserver`, in the event that the primary server becomes unavailable. This option can incur data loss.
 
 ```sql
-ALTER DATABASE db1 FORCE_FAILOVER_ALLOW_DATA_LOSS
+ALTER DATABASE db1 FORCE_FAILOVER_ALLOW_DATA_LOSS;
 ```
 
 ### G. Update a single database to service tier S0 (Standard edition, performance level 0)
@@ -679,7 +686,7 @@ ALTER DATABASE [db1] MODIFY (EDITION = 'Standard', MAXSIZE = 250 GB, SERVICE_OBJ
 Updates the backup storage redundancy of a database to zone-redundant. All future backups of this database use the new setting. This includes point-in-time restore backups and long-term retention backups (if configured).
 
 ```sql
-ALTER DATABASE db1 MODIFY BACKUP_STORAGE_REDUNDANCY = 'ZONE'
+ALTER DATABASE db1 MODIFY BACKUP_STORAGE_REDUNDANCY = 'ZONE';
 ```
 
 ## Related content
@@ -706,7 +713,7 @@ ALTER DATABASE db1 MODIFY BACKUP_STORAGE_REDUNDANCY = 'ZONE'
 
 :::row:::
     :::column:::
-        [SQL Server](alter-database-transact-sql.md?view=sql-server-ver15&preserve-view=true)
+        [SQL Server](alter-database-transact-sql.md?view=sql-server-ver16&preserve-view=true)
     :::column-end:::
     :::column:::
         [SQL Database](alter-database-transact-sql.md?view=azuresqldb-current&preserve-view=true)
@@ -720,6 +727,9 @@ ALTER DATABASE db1 MODIFY BACKUP_STORAGE_REDUNDANCY = 'ZONE'
     :::column:::
         [Analytics Platform<br />System (PDW)](alter-database-transact-sql.md?view=aps-pdw-2016-au7&preserve-view=true)
     :::column-end:::
+    :::column:::
+        [Microsoft Fabric](alter-database-transact-sql.md?view=fabric&preserve-view=true)
+    :::column-end:::    
 :::row-end:::
 
 
@@ -733,7 +743,7 @@ Because of its length, the `ALTER DATABASE` syntax is separated into the multipl
 
 | Article | Description |
 | --- | --- |
-| ALTER DATABASE   |
+| `ALTER DATABASE` |
 The current article provides the syntax and related information for setting file and filegroup options, for setting database options, and for setting the database compatibility level.| 
 | [ALTER DATABASE File and Filegroup Options](../../t-sql/statements/alter-database-transact-sql-file-and-filegroup-options.md?&tabs=sqldbmi)   |
 Provides the syntax and related information for adding and removing files and filegroups from a database, and for changing the attributes of the files and filegroups.  |
@@ -864,7 +874,7 @@ ALTER DATABASE WideWorldImporters
 
 :::row:::
     :::column:::
-        [SQL Server](alter-database-transact-sql.md?view=sql-server-ver15&preserve-view=true)
+        [SQL Server](alter-database-transact-sql.md?view=sql-server-ver16&preserve-view=true)
     :::column-end:::
     :::column:::
         [SQL Database](alter-database-transact-sql.md?view=azuresqldb-current&preserve-view=true)
@@ -877,6 +887,9 @@ ALTER DATABASE WideWorldImporters
     :::column-end:::
     :::column:::
         [Analytics Platform<br />System (PDW)](alter-database-transact-sql.md?view=aps-pdw-2016-au7&preserve-view=true)
+    :::column-end:::
+    :::column:::
+        [Microsoft Fabric](alter-database-transact-sql.md?view=fabric&preserve-view=true)
     :::column-end:::
 :::row-end:::
 
@@ -1049,7 +1062,7 @@ ALTER DATABASE dw1 MODIFY ( MAXSIZE=10240 GB, SERVICE_OBJECTIVE= 'DW1200' );
 
 :::row:::
     :::column:::
-        [SQL Server](alter-database-transact-sql.md?view=sql-server-ver15&preserve-view=true)
+        [SQL Server](alter-database-transact-sql.md?view=sql-server-ver16&preserve-view=true)
     :::column-end:::
     :::column:::
         [SQL Database](alter-database-transact-sql.md?view=azuresqldb-current&preserve-view=true)
@@ -1063,6 +1076,9 @@ ALTER DATABASE dw1 MODIFY ( MAXSIZE=10240 GB, SERVICE_OBJECTIVE= 'DW1200' );
     :::column:::
         **_\* Analytics<br />Platform System (PDW) \*_** &nbsp;
     :::column-end:::
+    :::column:::
+        [Microsoft Fabric](alter-database-transact-sql.md?view=fabric&preserve-view=true)
+    :::column-end:::    
 :::row-end:::
 
 &nbsp;
@@ -1287,5 +1303,48 @@ ALTER DATABASE
 
 - [CREATE DATABASE - Analytics Platform System](../../t-sql/statements/create-database-transact-sql.md?view=aps-pdw-2016-au7&preserve-view=true)
 - [DROP DATABASE](drop-database-transact-sql.md)
+
+::: moniker-end
+::: moniker range="=fabric"
+
+## Overview: Microsoft Fabric
+
+:::row:::
+    :::column:::
+        [SQL Server](alter-database-transact-sql.md?view=sql-server-ver16&preserve-view=true)
+    :::column-end:::
+    :::column:::
+        [SQL Database](alter-database-transact-sql.md?view=azuresqldb-current&preserve-view=true)
+    :::column-end:::
+    :::column:::
+        [SQL Managed Instance](alter-database-transact-sql.md?view=azuresqldb-mi-current&preserve-view=true)
+    :::column-end:::
+    :::column:::
+        [Azure Synapse<br />Analytics](alter-database-transact-sql.md?view=azure-sqldw-latest&preserve-view=true)
+    :::column-end:::
+    :::column:::
+        [Analytics Platform<br />System (PDW)](alter-database-transact-sql.md?view=aps-pdw-2016-au7&preserve-view=true)
+    :::column-end:::
+    :::column:::
+        ***Microsoft Fabric***
+    :::column-end:::
+:::row-end:::
+
+In [!INCLUDE [fabric](../../includes/fabric.md)] [!INCLUDE [fabric-dw](../../includes/fabric-dw.md)], this statement modifies a warehouse.
+
+Because of its length, the `ALTER DATABASE` syntax is separated into the multiple articles.
+
+| Article | Description |
+| --- | --- |
+| `ALTER DATABASE` | The current article provides the syntax and related information for changing the name and the collation of a database. |
+| [ALTER DATABASE SET options](alter-database-transact-sql-set-options.md) | Provides the syntax and related information for changing the attributes of a database by using the SET options of ALTER DATABASE. |
+
+## Remarks
+
+Currently, [pausing Delta Lake log publishing](/fabric/data-warehouse/query-delta-lake-logs#pausing-delta-lake-log-publishing) and [disabling V-Order behavior](/fabric/data-warehouse/disable-v-order) in a warehouse are the only uses for `ALTER DATABASE ... SET` in [!INCLUDE [fabric](../../includes/fabric.md)]. See [ALTER DATABASE SET options](alter-database-transact-sql-set-options.md).
+
+## Related content
+
+- [What is data warehousing in Microsoft Fabric?](/fabric/data-warehouse/data-warehousing)
 
 ::: moniker-end

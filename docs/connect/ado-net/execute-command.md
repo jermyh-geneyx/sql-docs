@@ -30,7 +30,7 @@ Each strongly typed command object also supports a <xref:System.Data.CommandType
 
 |CommandType|Description|
 |-----------------|-----------------|  
-|`Text`|An SQL command defining the statements to be executed at the data source.|  
+|`Text`|A SQL command defining the statements to be executed at the data source.|  
 |`StoredProcedure`|The name of the stored procedure. You can use the `Parameters` property of a command to access input and output parameters and return values, regardless of which `Execute` method is called.|  
 |`TableDirect`|The name of a table.|
 
@@ -45,7 +45,7 @@ The following code example demonstrates how to create a <xref:Microsoft.Data.Sql
 
 ### Troubleshooting commands
 
-The Microsoft SqlClient Data Provider for SQL Server adds **diagnostic counters** to enable you to detect intermittent problems related to failed command executions. For more information, see [Diagnostic counters in SqlClient](diagnostic-counters.md).
+The Microsoft SqlClient Data Provider for SQL Server adds **diagnostic counters** to enable you to detect intermittent problems related to failed command executions. For more information, see [Diagnostic counters in SqlClient](diagnostic-counters.md).
 
 ## See also
 

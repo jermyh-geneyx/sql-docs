@@ -5,7 +5,7 @@ author: bgavrilMS
 ms.author: bogavril
 ms.reviewer: mathoma, wiassaf
 ms.date: 12/18/2018
-ms.service: sql-database
+ms.service: azure-sql-database
 ms.subservice: scenario
 ms.topic: tutorial
 ms.custom: sqldbrb=1
@@ -15,9 +15,9 @@ ms.custom: sqldbrb=1
  
 In this tutorial, you walk through a complete analytics scenario for a single tenant implementation. The scenario demonstrates how analytics can enable businesses to make smart decisions. Using data extracted from each tenant database, you use analytics to gain insights into tenant behavior, including their use of the sample Wingtip Tickets SaaS application. This scenario involves three steps: 
 
-1.	**Extract** data from each tenant database and **Load** into an analytics store.
-2.	**Transform the extracted data** for analytics processing.
-3.	Use **business intelligence** tools to draw out useful insights, which can guide decision making. 
+1.    **Extract** data from each tenant database and **Load** into an analytics store.
+2.    **Transform the extracted data** for analytics processing.
+3.    Use **business intelligence** tools to draw out useful insights, which can guide decision making. 
 
 In this tutorial you learn how to:
 
@@ -25,8 +25,8 @@ In this tutorial you learn how to:
 > - Create the tenant analytics store to extract the data into.
 > - Use elastic jobs to extract data from each tenant database into the analytics store.
 > - Optimize the extracted data (reorganize into a star-schema).
-> -	Query the analytics database.
-> -	Use Power BI for data visualization to highlight trends in tenant data and make recommendation for improvements.
+> -    Query the analytics database.
+> -    Use Power BI for data visualization to highlight trends in tenant data and make recommendation for improvements.
 
 ![Diagram shows an overview of the architecture used for this article.](./media/saas-tenancy-tenant-analytics/architectureOverview.png)
 
@@ -36,7 +36,7 @@ Multi-tenant SaaS applications typically have a vast amount of tenant data store
 
 Accessing data for all tenants is simple when all the data is in just one multi-tenant database. But the access is more complex when distributed at scale across potentially thousands of databases. One way to tame the complexity and to minimize the impact of analytics queries on transactional data is to extract data into a purpose designed analytics database or data warehouse.
 
-This tutorial presents a complete analytics scenario for Wingtip Tickets SaaS application. First, *Elastic Jobs* is used to extract data from each tenant database and load it into staging tables in an analytics store. The analytics store could either be an SQL Database or a dedicated SQL pool. For large-scale data extraction, [Azure Data Factory](/azure/data-factory/introduction) is recommended.
+This tutorial presents a complete analytics scenario for Wingtip Tickets SaaS application. First, *Elastic Jobs* is used to extract data from each tenant database and load it into staging tables in an analytics store. The analytics store could either be a SQL Database or a dedicated SQL pool. For large-scale data extraction, [Azure Data Factory](/azure/data-factory/introduction) is recommended.
 
 Next, the aggregated data is transformed into a set of [star-schema](https://www.wikipedia.org/wiki/Star_schema) tables. The tables consist of a central fact table plus related dimension tables.  For Wingtip Tickets:
 
@@ -129,8 +129,6 @@ Each job extracts its data, and posts it into the analytics store. There a separ
 3. Modify @User at the top of the script, and replace `<User>` with the user name used when you deployed the Wingtip SaaS app 
 4. Press F5 to run the script that creates and runs the job that extracts tickets and customers data from each tenant database. The job saves the data into the analytics store.
 5. Query the TicketsRawData table in the tenantanalytics database, to ensure that the table is populated with tickets information from all tenants.
-
-![Screenshot shows the ExtractTickets database with the TicketsRawData d b o selected in Object Explorer.](./media/saas-tenancy-tenant-analytics/ticketExtracts.png)
 
 Repeat the preceding steps, except this time replace **\ExtractTickets.sql** with **\ExtractVenuesEvents.sql** in step 2.
 
@@ -225,8 +223,8 @@ In this tutorial, you learned how to:
 > - Deployed a tenant analytics database with pre-defined star schema tables
 > - Used elastic jobs to extract data from all the tenant database
 > - Merge the extracted data into tables in a star-schema designed for analytics
-> -	Query an analytics database 
-> -	Use Power BI for data visualization to observe trends in tenant data 
+> -    Query an analytics database 
+> -    Use Power BI for data visualization to observe trends in tenant data 
 
 Congratulations!
 

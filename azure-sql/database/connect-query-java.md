@@ -5,7 +5,7 @@ author: jdubois
 ms.author: judubois
 ms.reviewer: mathoma
 ms.date: 12/07/2023
-ms.service: sql-database
+ms.service: azure-sql-database
 ms.subservice: development
 ms.topic: quickstart
 ms.custom:
@@ -156,7 +156,7 @@ password=$AZ_SQL_SERVER_PASSWORD
 - Replace the two `$AZ_DATABASE_NAME` variables with the value that you configured at the beginning of this article.
 - Replace the `$AZ_SQL_SERVER_PASSWORD` variable with the value that you configured at the beginning of this article.
 
-### Create an SQL file to generate the database schema
+### Create a SQL file to generate the database schema
 
 We will use a *src/main/resources/`schema.sql`* file in order to create a database schema. Create that file, with the following content:
 

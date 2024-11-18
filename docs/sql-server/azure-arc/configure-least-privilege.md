@@ -1,17 +1,17 @@
 ---
-title: "Enable least privilege (preview)"
+title: "Enable least privilege"
 description: "Describes how to configure a service account for SQL Server enabled by Azure Arc to run with least privilege."
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: nikitatakru
 ms.topic: how-to
-ms.date: 01/17/2024
+ms.date: 07/11/2024
 
 # customer intent: As a system engineer, compliance mandates that I configure services to run with least privilege. 
 
 ---
 
-# Operate SQL Server enabled by Azure Arc with least privilege (preview) 
+# Operate SQL Server enabled by Azure Arc with least privilege 
 
 [!INCLUDE [sqlserver](../../includes/applies-to-version/sqlserver.md)]
 
@@ -23,10 +23,6 @@ To optionally configure the service to run with least privilege, follow the step
 
 > [!NOTE]
 > [!INCLUDE [least-privilege-default](includes/least-privilege-default.md)]
-
-Support for this configuration is currently available for preview.
-
-[!INCLUDE [azure-arc-sql-preview](includes/azure-arc-sql-preview.md)]
 
 After you configure the agent extension service to run with least privilege, it uses the `NT Service\SQLServerExtension` service account.
 
@@ -47,8 +43,31 @@ The configuration with least privilege requires:
 
 - [!INCLUDE [winserver2012-md](../../includes/winserver2012-md.md)] or later
 - SQL Server 2012 or later
+- The SQL Server service account must be a member of the `sysadmin` fixed server role
+- All databases must be online and updateable
 
 The configuration with least privilege is not currently supported on Linux.
+
+Other requirements, as listed in [Prerequisites - SQL Server enabled by Azure Arc](prerequisites.md) still apply.
+
+#### SQL Server service account
+
+By default, the SQL Server service account is a member of the `sysadmin` fixed server role.
+
+As listed in prerequisites, the SQL Server service account must be a member of the `sysadmin` fixed server role on each SQL Server instance. The Azure extension for SQL Server has a process called `Deployer.exe` that temporarily runs as `NT AUTHORITY\SYSTEM` when:
+
+- Features are enabled or disabled
+- SQL Server instances are added or removed
+
+`Deployer.exe` impersonates the SQL Server service account to connect to SQL Server and add or remove permissions in server and database roles depending on which features are enabled or disabled to ensure that the Azure extension for SQL Server uses the least privileges required. To modify these permissions, the SQL Server service account must be a member of the `sysadmin` server role. 
+
+If you want to manage this process with more control, such that the SQL Server service account is not a member of the sysadmin server role all the time, follow these steps:
+
+1. Temporarily add the SQL Server service account to the sysadmin server role.
+1. Allow `Deployer.exe` to run at least once so that the permissions are set.
+1. Remove the SQL Server service account from the sysadmin role.
+
+Repeat this procedure anytime features are enabled or disabled or SQL Server instances are added to allow `Deployer.exe` to grant the least privileges required.
 
 ### Tools
 
@@ -102,13 +121,18 @@ To complete the steps in this article, you need the following tools:
    az sql server-arc extension feature-flag set --name LeastPrivilege --enable true --resource-group myrg --machine-name myserver 
    ```
 
-## Validate configuration
+## Verify least privilege configuration
 
 To verify that your SQL Server enabled by Azure Arc is configured to run with least privilege:
 
 1. In the Windows services, locate **Microsoft SQL Server Extension Service** service. Verify that the service is running under the as the service account `NT Service\SqlServerExtension`.  
 
-1. Open task scheduler in the server and check that a scheduled task with name `SqlServerExtensionPermissionProvider` is created under `Microsoft\SqlServerExtension`. This task runs hourly to add or remove permissions as needed based on which features are enabled and disabled.
+1. Open task scheduler in the server and check that an event driven task with name `SqlServerExtensionPermissionProvider` is created under `Microsoft\SqlServerExtension`.
+
+   > [!NOTE]
+   > Prior to the July, 2024 release, `SqlServerExtensionPermissionProvider` is a scheduled task. It runs hourly.
+   >
+   > Open task scheduler in the server and check that a scheduled task with name `SqlServerExtensionPermissionProvider` is created under `Microsoft\SqlServerExtension`.
 
 1. Open SQL Server Management Studio and check the login named `NT Service\SqlServerExtension`. Verify that the account is assigned these permissions:
 
@@ -131,23 +155,9 @@ To verify that your SQL Server enabled by Azure Arc is configured to run with le
    EXECUTE AS LOGIN = 'NT Service\SqlServerExtension'  
    USE <database name>; 
    SELECT * FROM fn_my_permissions (NULL, 'database");
-   ```
-
-## Disable least privilege
-
-To disable least privilege, set the `LeastPrivilege` feature flag to `false`. To complete this task, run the following command with updated values for the `<resource-group>` and `<machine-name>`:
-
-```azurecli
-az sql server-arc extension feature-flag set --name LeastPrivilege --enable false --resource-group <resource-group> --machine-name <machine-name>
-```
-
-For example, the following command disables least privilege for a server named `myserver` in a resource group named `myrg`:
-
-```azurecli
-az sql server-arc extension feature-flag set --name LeastPrivilege --enable false --resource-group myrg --machine-name myserver 
-```
 
 ## Related content
 
 - [Configure advanced data security for your SQL Server instance](configure-advanced-data-security.md)
 - [Configure best practices assessment on a [!INCLUDE [ssazurearc](../../includes/ssazurearc.md)] instance](assess.md)
+- [Known issues: SQL Server enabled by Azure Arc](known-issues.md)

@@ -56,11 +56,12 @@ To assess SQL Server, the SQL Server instance needs to:
 
 - The server has connectivity to telemetry.{region}.arcdataservices.com (for more information, see [Network Requirements ](/azure/azure-arc/servers/network-requirements?tabs=azure-cloud))
 
-- To view the assessment reports in Azure portal, you must have Contributor access or higher to the SQL Server - Azure Arc resource.
+- To view the assessment reports in Azure portal, you must be assigned an Azure role with the action `Microsoft.AzureArcData/sqlServerInstances/getTelemetry/` assigned. For convenience, you can use the built-in role *Azure Hybrid Database Administrator - Read Only Service Role*, which includes this action. For more information, review [Learn more about Azure built-in roles](/azure/role-based-access-control/built-in-roles).
+
 
 ## Permissions
 
-The Azure SQL extension for SQL Server performs the assessment data collection by default under the service account, NT AUTHORITY\SYSTEM. However, you can [configure the agent extension service to run with an account that has the least privileges](configure-least-privilege.md).
+The Azure SQL extension for SQL Server performs the assessment data collection by default under the service account, NT AUTHORITY\SYSTEM. However, you can [configure the agent extension service to run with an account that least privilege](configure-least-privilege.md).
 
 ## View migration assessment results
 
@@ -68,7 +69,7 @@ The Azure SQL extension for SQL Server performs the assessment data collection b
 
 1. Open your SQL Server resource and select **Assessments (preview)** under **Migration** folder in the left pane.
 
-   :::image type="content" source="media/migration-assessment/assessment-main.png" alt-text="Screenshot showing how to get to the SQL Server migration assessment report an SQL Server resource.":::
+   :::image type="content" source="media/migration-assessment/assessment-main.png" alt-text="Screenshot showing how to get to the SQL Server migration assessment report a SQL Server resource.":::
 
 The *Last assessment time* indicates when the assessment was started. To trigger an assessment immediately, select **Run assessment**.
 

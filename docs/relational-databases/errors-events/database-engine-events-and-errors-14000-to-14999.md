@@ -3,7 +3,7 @@ title: "Database Engine events and errors (14000 to 14999)"
 description: "Consult this SQL Server error code list (between 14000 and 14999) to find explanations for error messages for SQL Server database engine events."
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 01/11/2024
+ms.date: 10/10/2024
 ms.service: sql
 ms.subservice: supportability
 ms.topic: reference
@@ -11,7 +11,7 @@ monikerRange: "=azuresql || =azuresql-db || =azuresql-mi || >=aps-pdw-2016-au7 |
 ---
 # Database Engine events and errors (14000 to 14999)
 
-This article contains error message numbers (between the range 14000 and 14999) and their description, which is the text of the error message from the `sys.messages` catalog view. Where applicable, the error number is a link to further information.
+This article contains error message numbers (between the range 14,000 and 14,999) and their description, which is the text of the error message from the `sys.messages` catalog view. Where applicable, the error number is a link to further information.
 
 For the full range of error numbers, see the list on [Database Engine events and errors](database-engine-events-and-errors.md#errors-and-events).
 
@@ -32,23 +32,23 @@ ORDER BY message_id;
 ## SQL Server version
 
 ::: moniker range="=sql-server-2016"
-This article shows events and errors (between the range 14000 and 14999) for [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)]. If you want to view events and errors for other versions of [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)], see:
+This article shows events and errors (between the range 14,000 and 14,999) for [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)]. If you want to view events and errors for other versions of [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)], see:
 
 - [SQL Server 2022](?view=sql-server-ver16&preserve-view=true)
 - [SQL Server 2019](?view=sql-server-ver15&preserve-view=true)
 - [SQL Server 2017](?view=sql-server-2017&preserve-view=true)
 :::moniker-end
 
-::: moniker range="=sql-server-2017||=sql-server-linux-2017"
-This article shows events and errors (between the range 14000 and 14999) for [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)]. If you want to view events and errors for other versions of [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)], see:
+::: moniker range="=sql-server-2017 || =sql-server-linux-2017"
+This article shows events and errors (between the range 14,000 and 14,999) for [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)]. If you want to view events and errors for other versions of [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)], see:
 
 - [SQL Server 2022](?view=sql-server-ver16&preserve-view=true)
 - [SQL Server 2019](?view=sql-server-ver15&preserve-view=true)
 - [SQL Server 2016](?view=sql-server-2016&preserve-view=true)
 :::moniker-end
 
-::: moniker range="=sql-server-ver15||=sql-server-linux-ver15"
-This article shows events and errors (between the range 14000 and 14999) for [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)]. If you want to view events and errors for other versions of [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)], see:
+::: moniker range="=sql-server-ver15 || =sql-server-linux-ver15"
+This article shows events and errors (between the range 14,000 and 14,999) for [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)]. If you want to view events and errors for other versions of [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)], see:
 
 - [SQL Server 2022](?view=sql-server-ver16&preserve-view=true)
 - [SQL Server 2017](?view=sql-server-2017&preserve-view=true)
@@ -56,7 +56,7 @@ This article shows events and errors (between the range 14000 and 14999) for [!I
 :::moniker-end
 
 ::: moniker range=">=sql-server-ver16 || >=sql-server-linux-ver16 || =azuresql || =azuresql-db || =azuresql-mi || >=aps-pdw-2016-au7"
-This article shows events and errors (between the range 14000 and 14999) for [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)]. If you want to view events and errors for other versions of [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)], see:
+This article shows events and errors (between the range 14,000 and 14,999) for [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)]. If you want to view events and errors for other versions of [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)], see:
 
 - [SQL Server 2019](?view=sql-server-ver15&preserve-view=true)
 - [SQL Server 2017](?view=sql-server-2017&preserve-view=true)
@@ -69,11 +69,11 @@ This article shows events and errors (between the range 14000 and 14999) for [!I
 [!INCLUDE [sql-server-2016-database-engine-events-and-errors-14000-14999](includes/sql-server-2016-database-engine-events-and-errors-14000-14999.md)]
 :::moniker-end
 
-::: moniker range="=sql-server-2017||=sql-server-linux-2017"
+::: moniker range="=sql-server-2017 || =sql-server-linux-2017"
 [!INCLUDE [sql-server-2017-database-engine-events-and-errors-14000-14999](includes/sql-server-2017-database-engine-events-and-errors-14000-14999.md)]
 :::moniker-end
 
-::: moniker range="=sql-server-ver15||=sql-server-linux-ver15"
+::: moniker range="=sql-server-ver15 || =sql-server-linux-ver15"
 [!INCLUDE [sql-server-2019-database-engine-events-and-errors-14000-14999](includes/sql-server-2019-database-engine-events-and-errors-14000-14999.md)]
 :::moniker-end
 
@@ -84,5 +84,5 @@ This article shows events and errors (between the range 14000 and 14999) for [!I
 ## Related content
 
 - [Database Engine events and errors](database-engine-events-and-errors.md)
-- [Understanding Database Engine Errors](../../relational-databases/errors-events/understanding-database-engine-errors.md)
-- [Cause and Resolution of Database Engine Errors](/previous-versions/sql/sql-server-2016/ms365262(v=sql.130))
+- [Understanding Database Engine errors](../../relational-databases/errors-events/understanding-database-engine-errors.md)
+- [Cause and resolution of Database Engine errors](/previous-versions/sql/sql-server-2016/ms365262(v=sql.130))

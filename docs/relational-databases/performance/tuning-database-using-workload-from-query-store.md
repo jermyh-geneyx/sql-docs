@@ -1,8 +1,8 @@
 ---
 title: "Tuning Database Using Workload from Query Store"
 description: The Database Engine Tuning Advisor supports the option to use the Query Store to automatically select an appropriate workload for tuning.
-author: WilliamDAssafMSFT
-ms.author: wiassaf
+author: MikeRayMSFT
+ms.author: mikeray
 ms.date: "03/07/2022"
 ms.service: sql
 ms.subservice: performance
@@ -23,7 +23,7 @@ This feature is available with [!INCLUDE[ssManStudioFull](../../includes/ssmanst
 ## How To Tune a Workload from Query Store in Database Engine Tuning Advisor GUI
 From the DTA GUI, select the radio button **Query Store** in the **General** pane to enable this feature (see figure below).
 
-![DTA workload from query store](../../relational-databases/performance/media/dta-workload-from-query-store.gif)
+![DTA workload from Query Store](../../relational-databases/performance/media/dta-workload-from-query-store.gif)
  
 ## How To Tune a Workload from Query Store in dta.exe command line Utility
 From the command line (dta.exe), choose the **-iq** option to select the workload from Query Store. 

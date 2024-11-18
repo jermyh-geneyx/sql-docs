@@ -3,11 +3,12 @@ title: "Security Architecture for Web Synchronization"
 description: "Security Architecture for Web Synchronization"
 author: "MashaMSFT"
 ms.author: "mathoma"
-ms.date: "03/14/2017"
+ms.date: 09/25/2024
 ms.service: sql
 ms.subservice: replication
 ms.topic: how-to
-ms.custom: updatefrequency5
+ms.custom:
+  - updatefrequency5
 helpviewer_keywords:
   - "Web synchronization, security architecture"
 ---
@@ -66,7 +67,7 @@ helpviewer_keywords:
   
 -   Pick up the HTTPS request that is described in the section "D. Connection to IIS".  
   
--   Make an SQL connection to the publication database and apply the uploaded changes to the publication database.  
+-   Make a SQL connection to the publication database and apply the uploaded changes to the publication database.  
   
 -   Extract the downloaded changes and send an HTTPS response back to the Merge Agent.  
   
@@ -128,7 +129,7 @@ helpviewer_keywords:
 |---------------------|------------------------------------|  
 |Any Windows user that has the required permissions.|Internet Information Services (IIS) Manager. |  
   
-## See Also  
- [Configure Web Synchronization](../../../relational-databases/replication/configure-web-synchronization.md)   
- [Replication Merge Agent](../../../relational-databases/replication/agents/replication-merge-agent.md)  
-  
+## Related content
+
+- [Configure Web Synchronization](../../../relational-databases/replication/configure-web-synchronization.md)
+- [Replication Merge Agent](../../../relational-databases/replication/agents/replication-merge-agent.md)

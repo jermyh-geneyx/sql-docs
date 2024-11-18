@@ -4,7 +4,7 @@ description: sys.dm_pdw_exec_requests holds information about all requests curre
 author: jacinda-eng
 ms.author: jacindaeng
 ms.reviewer: wiassaf, randolphwest
-ms.date: 04/23/2024
+ms.date: 10/14/2024
 ms.service: sql
 ms.subservice: data-warehouse
 ms.topic: "reference"
@@ -32,7 +32,7 @@ Holds information about all requests currently or recently active in Azure Synap
 | `end_time` | **datetime** | Time at which the request execution completed, failed, or was canceled. | `NULL` for queued or active requests; otherwise, a valid **datetime** smaller or equal to current time. |
 | `total_elapsed_time` | **int** | Time elapsed in execution since the request was started, in milliseconds. | Between 0 and the difference between `submit_time` and `end_time`.<br /><br />If `total_elapsed_time` exceeds the maximum value for an integer, `total_elapsed_time` continues to be the maximum value. This condition generates the warning "The maximum value has been exceeded."<br />The maximum value in milliseconds is the same as 24.8 days. |
 | `label` | **nvarchar(255)** | Optional label string associated with some `SELECT` query statements. | Any string containing `a-z`, `A-Z`,`0-9`,`_`. |
-| `error_id` | **nvarchar(36)** | Unique ID of the error associated with the request, if any. | |
+| `error_id` | **nvarchar(36)** | Unique ID of the error associated with this step, if any. | `NULL` if no error occurred. The `request_id` can be matched with the `request_id` in [sys.dm_pdw_errors](sys-dm-pdw-errors-transact-sql.md) to view all of the listed errors for that specific `request_id`. |
 | `database_id` | **int** | Identifier of database used by explicit context (for example, `USE DB_X`). | See `database_id` in [sys.databases](../system-catalog-views/sys-databases-transact-sql.md). |
 | `command` | **nvarchar(4000)** | Holds the full text of the request as submitted by the user. | Any valid query or request text. Queries that are longer than 4,000 bytes are truncated. |
 | `resource_class` | **nvarchar(20)** | The workload group used for this request. | Static Resource Classes<br />`staticrc10`<br />`staticrc20`<br />`staticrc30`<br />`staticrc40`<br />`staticrc50`<br />`staticrc60`<br />`staticrc70`<br />`staticrc80`<br /><br />Dynamic Resource Classes<br />`SmallRC`<br />`MediumRC`<br />`LargeRC`<br />`XLargeRC` |
@@ -66,14 +66,14 @@ The negative integer value in the `result_cache_hit` column is a bitmap value of
 
 ## Permissions
 
-Requires `VIEW SERVER STATE` permission.
+Requires `VIEW DATABASE STATE` permission.
 
 ## Security
 
-`sys.dm_pdw_exec_requests` doesn't filter query results according to database-specific permissions. Logins with `VIEW SERVER STATE` permission can obtain results query results for all databases.
+`sys.dm_pdw_exec_requests` doesn't filter query results according to database-specific permissions. Logins with `VIEW DATABASE STATE` permission can obtain results query results for all databases.
 
 > [!WARNING]  
-> An attacker can use `sys.dm_pdw_exec_requests` to retrieve information about specific database objects by simply having `VIEW SERVER STATE` permission and by not having database-specific permission.
+> An attacker can use `sys.dm_pdw_exec_requests` to retrieve information about specific database objects by simply having `VIEW DATABASE STATE` permission and by not having database-specific permission.
 
 ## Related content
 

@@ -5,7 +5,7 @@ author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: srinia, mathoma
 ms.date: 04/03/2024
-ms.service: sql-database
+ms.service: azure-sql-database
 ms.subservice: elastic-jobs
 ms.topic: tutorial
 ms.custom: devx-track-azurepowershell
@@ -48,7 +48,7 @@ Find-Package PowerShellGet | Install-Package -Force
 # Restart your powershell session with administrative access
 
 # Install and import the Az.Sql module, then confirm
-Install-Module -Name Az.Sql
+Install-Module -Name Az.Sql
 Import-Module Az.Sql
 Install-Module -Name SqlServer
 Import-Module SqlServer
@@ -268,7 +268,7 @@ $adminPassword = '<password>'
 
 $params = @{
   'database' = 'master'
-  'serverInstance' =  $targetServer.ServerName + '.database.windows.net'
+  'serverInstance' =  $targetServer + '.database.windows.net'
   'username' = $adminLogin
   'password' = $adminPassword
   'outputSqlErrors' = $true

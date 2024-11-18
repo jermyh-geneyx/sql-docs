@@ -1,17 +1,18 @@
 ---
-title: "Quickstart: Connect to Azure SQL Database with GitHub Actions"
-description: Use Azure SQL from a GitHub Actions workflow
+title: "Quickstart: Connect to database with GitHub Actions"
+description: Use Azure SQL Database from a GitHub Actions workflow
 author: juliakm
 ms.author: jukullam
 ms.reviewer: wiassaf, mathoma
 ms.date: 12/13/2023
-ms.service: sql-database
+ms.service: azure-sql-database
 ms.subservice: connect
 ms.topic: quickstart
 ms.custom: github-actions-azure, mode-other, devx-track-azurecli
 ---
 
 # Use GitHub Actions to connect to Azure SQL Database
+[!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
 Get started with [GitHub Actions](https://docs.github.com/en/actions) by using a workflow to deploy database updates to [Azure SQL Database](../azure-sql-iaas-vs-paas-what-is-overview.md). 
 
@@ -40,11 +41,7 @@ The file has two sections:
 
 ## Copy the SQL connection string
 
-In the Azure portal, go to your Azure SQL Database and open **Settings** > **Connection strings**. Copy the **ADO.NET** connection string. Replace the placeholder values for `your_database` and `your_password`. The connection string looks similar to this output. 
-
-```output
-Server=tcp:my-sql-server.database.windows.net,1433;Initial Catalog={your-database};Persist Security Info=False;User ID={admin-name};Password={your-password};MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;
-```
+In the Azure portal, go to your Azure SQL Database and open **Settings** > **Connection strings**. Copy the **ADO.NET** connection string. Replace the placeholder values for `your_database` and `your_password`. 
 
 You'll set the connection string as a GitHub secret, `AZURE_SQL_CONNECTION_STRING`.
 

@@ -5,7 +5,7 @@ author: amitkh-msft
 ms.author: amitkh
 ms.reviewer: vanto
 ms.date: 05/18/2022
-ms.service: virtual-machines-sql
+ms.service: azure-vm-sql-server
 ms.subservice: hadr
 ms.topic: tutorial
 ms.custom: kr2b-contr-experiment, linux-related-content
@@ -15,7 +15,7 @@ ms.custom: kr2b-contr-experiment, linux-related-content
 
 [!INCLUDE[appliesto-sqlvm](../../includes/appliesto-sqlvm.md)]
 
-This tutorial explains how to configure an SQL Server Always On availability group with DH2i DxEnterprise running on Linux-based Azure Virtual Machines (VMs).
+This tutorial explains how to configure a SQL Server Always On availability group with DH2i DxEnterprise running on Linux-based Azure Virtual Machines (VMs).
 
 For more information about DxEnterprise, see [DH2i DxEnterprise](https://dh2i.com/dxenterprise-high-availability/).
 
@@ -51,7 +51,7 @@ In this tutorial, you create a three node Linux-based cluster running the availa
 For this tutorial, don't install SQL Server on the Windows VM, because this node isn't going to be part of the cluster, and is used only to manage the cluster using DxAdmin.
 
 After you complete this step, you should have SQL Server and [SQL Server tools](/sql/linux/sql-server-linux-setup-tools) (optionally) installed on all three Linux-based VMs that participate in the availability group.
- 
+ 
 ## Install DxEnterprise on VMs and Configure the cluster
 
 In this step, install DH2i DxEnterprise for Linux on the three Linux VMs. The following table describes the role each server plays in the cluster:

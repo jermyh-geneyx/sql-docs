@@ -6,10 +6,10 @@ author: markjones-msft
 ms.author: markjon
 ms.reviewer: chadam, mathoma
 ms.date: 05/14/2021
-ms.service: virtual-machines-sql
+ms.service: azure-vm-sql-server
 ms.subservice: migration-guide
 ms.topic: how-to
-ms.custom:
+ms.collection:
   - sql-migration-content
 ---
 # Migration guide: IBM Db2 to SQL Server on Azure VM

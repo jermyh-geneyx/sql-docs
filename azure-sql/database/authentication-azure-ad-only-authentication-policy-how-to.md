@@ -2,11 +2,11 @@
 title: Using Azure Policy to enforce Microsoft Entra-only authentication
 titleSuffix: Azure SQL Database & Azure SQL Managed Instance
 description: This article guides you through using Azure Policy to enforce Microsoft Entra-only authentication with Azure SQL Database and Azure SQL Managed Instance
-author: nofield
-ms.author: nofield
+author: VanMSFT
+ms.author: vanto
 ms.reviewer: wiassaf, vanto, mathoma
 ms.date: 09/27/2023
-ms.service: sql-db-mi
+ms.service: azure-sql
 ms.subservice: security
 ms.topic: how-to
 monikerRange: "= azuresql || = azuresql-db || = azuresql-mi"

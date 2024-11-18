@@ -2,11 +2,11 @@
 title: Create and utilize Microsoft Entra server logins
 titleSuffix: Azure SQL Database & Azure SQL Managed Instance & Azure Synapse Analytics
 description: This article guides you through creating and utilizing Microsoft Entra logins in the virtual master database of Azure SQL
-author: nofield
-ms.author: nofield
+author: VanMSFT
+ms.author: vanto
 ms.reviewer: vanto, mathoma
 ms.date: 06/11/2024
-ms.service: sql-db-mi
+ms.service: azure-sql
 ms.subservice: security
 ms.topic: tutorial
 monikerRange: "=azuresql || =azuresql-db || =azuresql-mi"

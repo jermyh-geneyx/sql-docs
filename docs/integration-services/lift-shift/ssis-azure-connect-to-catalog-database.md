@@ -29,9 +29,7 @@ Before you start, make sure you have version 17.2 or later of SQL Server Managem
 ## Get the connection info from the Azure portal
 1. Log in to the [Azure portal](https://portal.azure.com/).
 2. In the Azure portal, select **SQL Databases** from the left-hand menu, and then select the `SSISDB` database on the **SQL databases** page. 
-3. On the **Overview** page for the `SSISDB` database, review the fully qualified server name as shown in the following image. Hover over the server name to bring up the **Click to copy** option.
-
-    ![Server connection information](media/ssis-azure-connect-to-catalog-database/server-name.png) 
+3. On the **Overview** page for the `SSISDB` database, find the fully qualified server name. Hover over the server name to bring up the **Click to copy** option.
 
 4. If you have forgotten the login information for the SQL Database server, navigate to the SQL Database server page. There you can view the server admin name and, if necessary, reset the password.
 
@@ -47,8 +45,6 @@ Before you start, make sure you have version 17.2 or later of SQL Server Managem
    | **Authentication** | SQL Server Authentication | |
    | **Login** | The server admin account | This is the account that you specified when you created the server. |
    | **Password** | The password for your server admin account | This is the password that you specified when you created the server. |
-
-    ![Connect to the server with SSMS](media/ssis-azure-connect-to-catalog-database/ssisdb-connect-1.png)
 
 3. **Connect to the SSISDB database**. Select **Options** to expand the **Connect to Server** dialog box. In the expanded **Connect to Server** dialog box, select the **Connection Properties** tab. In the **Connect to database** field, select or enter `SSISDB`.
 

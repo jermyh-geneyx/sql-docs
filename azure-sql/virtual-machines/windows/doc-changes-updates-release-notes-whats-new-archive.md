@@ -5,7 +5,7 @@ author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: wiassaf, mathoma
 ms.date: 03/01/2024
-ms.service: virtual-machines-sql
+ms.service: azure-vm-sql-server
 ms.subservice: service-overview
 ms.topic: whats-new
 ms.custom: references_regions
@@ -36,6 +36,7 @@ Return to [What's new in SQL Server on Azure VMs?](doc-changes-updates-release-n
 | **Removed extension management modes** | March | The architecture for the SQL IaaS Agent extension has been updated to remove management modes. All newly deployed SQL Server VMs are registered with the extension by using the same default configuration and least privileged security model. To learn more, review [Management modes](sql-server-iaas-agent-extension-automate-management.md#management-modes). |
 | **Enable Microsoft Entra for SQL Server** |February | We've published a guide to help you enable Microsoft Entra authentication for your SQL Server VM. Review [Configure Microsoft Entra](configure-azure-ad-authentication-for-sql-vm.md) to learn more. | 
 | **Extend your multi-subnet AG to multiple regions** | January | Extend an existing multi-subnet availability group, either on Azure virtual machines, or on-premises, to another region in Azure. To learn more, review [Multi-subnet availability group in multiple regions](availability-group-manually-configure-multi-subnet-multiple-regions.md). | 
+
 
 
 ## 2022

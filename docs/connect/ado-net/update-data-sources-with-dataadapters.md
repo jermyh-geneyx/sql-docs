@@ -26,7 +26,7 @@ These properties allow you to maximize the performance of your ADO.NET applicati
 > [!IMPORTANT]
 > If you are using SQL Server stored procedures to edit or delete data using a `DataAdapter`, make sure that you do not use `SET NOCOUNT ON` in the stored procedure definition. This causes the rows affected count returned to be zero, which the `DataAdapter` interprets as a concurrency conflict. In this event, a <xref:System.Data.DBConcurrencyException> will be thrown.
 
-Command parameters can be used to specify input and output values for an SQL statement or stored procedure for each modified row in a `DataSet`. For more information, see [DataAdapter parameters](dataadapter-parameters.md).
+Command parameters can be used to specify input and output values for a SQL statement or stored procedure for each modified row in a `DataSet`. For more information, see [DataAdapter parameters](dataadapter-parameters.md).
 
 > [!NOTE]
 > It is important to understand the difference between deleting a row in a <xref:System.Data.DataTable> and removing the row. When you call the `Remove` or `RemoveAt` method, the row is removed immediately. Any corresponding rows in the back end data source **will not be affected** if you then pass the `DataTable` or `DataSet` to a `DataAdapter` and call `Update`. When you use the `Delete` method, the row remains in the `DataTable` and is marked for deletion. If you then pass the `DataTable` or `DataSet` to a `DataAdapter` and call `Update`, the corresponding row in the back end data source **is deleted**.
@@ -67,7 +67,7 @@ The following examples demonstrate how to perform updates to modified rows by ex
 
 ## AutoIncrement columns
 
-If the tables from your data source have auto-incrementing columns, you can fill the columns in your `DataSet` either by returning the auto-increment value as an output parameter of a stored procedure and mapping that to a column in a table, by returning the auto-increment value in the first row of a result set returned by a stored procedure or SQL statement, or by using the `RowUpdated` event of the `DataAdapter` to execute an additional SELECT statement. For more information and an example, see [Retrieve identity or autonumber values](retrieve-identity-or-autonumber-values.md).
+If the tables from your data source have auto-incrementing columns, you can fill the columns in your `DataSet` either by returning the auto-increment value as an output parameter of a stored procedure and mapping that to a column in a table, by returning the auto-increment value in the first row of a result set returned by a stored procedure or SQL statement, or by using the `RowUpdated` event of the `DataAdapter` to execute an additional SELECT statement. For more information and an example, see [Retrieve identity or autonumber values](retrieve-identity-or-autonumber-values.md).
 
 ## Ordering of inserts, updates, and deletes
 
@@ -164,5 +164,5 @@ GO
 ## See also
 
 - [DataAdapters and DataReaders](dataadapters-datareaders.md)
-- [Retrieve identity or autonumber values](retrieve-identity-or-autonumber-values.md)
+- [Retrieve identity or autonumber values](retrieve-identity-or-autonumber-values.md)
 - [Microsoft ADO.NET for SQL Server](microsoft-ado-net-sql-server.md)
