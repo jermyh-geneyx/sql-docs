@@ -78,7 +78,7 @@ DROP DIAGNOSTICS SESSION diagnostics_name ;
 |CommandText|Text within a command processed.|  
 |OperationType|The operation type for the event.|  
 |Duration|The duration of the event.|  
-|SPID|The Service Process ID.|  
+|SPID|The Session ID.|  
   
 ## Remarks  
  Each user is allowed a maximum of 10 concurrent diagnostics sessions. See [sys.pdw_diag_sessions](../../relational-databases/system-catalog-views/sys-pdw-diag-sessions-transact-sql.md) for a list of your current sessions, and drop any unneeded sessions using `DROP DIAGNOSTICS SESSION`.  
