@@ -110,31 +110,55 @@ Select the newly created application, and on the left side menu, select **API Pe
 
    :::image type="content" source="../relational-databases/security/authentication-access/media/upload-certificate-to-application.png" alt-text="Screenshot of certificate and secrets menu in the Azure portal." lightbox="../relational-databases/security/authentication-access/media/upload-certificate-to-application.png":::
 
-1. In the Azure portal, navigate to the Azure Key Vault instance where the certificate is stored, and select **Access policies** from the navigation menu.
+1. In the Azure portal, obtain the object ID of the Azure Arc Machine.
 
-   1. Select **Create**.
-   1. For **Secret permissions**, select **Get** and **List**.
-   1. For **Certificate permissions**, select **Get** and **List**.
-   1. Select **Next**.
-   1. On the **Principal** page, search for the name of your Machine - Azure Arc instance, which is the hostname of the SQL Server host.
+   1. In Azure Arc, expand **Azure Arc Resources** and select **Machines**
+   1. Select the desired machine.
+   1. From **Overview**, find **JSON View** to the right.
+   1. Note the object ID as **principalId** under **"identity"**
 
-       :::image type="content" source="../relational-databases/security/authentication-access/media/machine-azure-arc-resource.png" alt-text="Screenshot of Azure Arc server resource in portal.":::
+      :::image type="content" source="../relational-databases/security/authentication-access/media/machine-azure-arc-json-view.png" alt-text="Screenshot of portal control of JSON view of    machine definition.":::
 
-   1. Skip the **Application (optional)** page by selecting **Next** twice, or selecting **Review + create**.
+1. In the Azure portal, navigate to the Azure Key Vault instance where the certificate is stored, and grant access to the Azure Machine resource(s). In your Azure Key Vault navigation menu, navigate to **Settings**, and **Access configuration**. Based on your Key Vault access configuration:
 
-      Verify that the "Object ID" of the **Principal** matches the **Principal ID** of the managed identity assigned to the instance.
+   1. Using **Azure role-based access control (recommended)**
 
-      :::image type="content" source="../relational-databases/security/authentication-access/media/customer-managed-akv-review-create.png" alt-text="Screenshot of Azure portal to review and create access policy."
+      1. The page [Assign Azure roles using the Azure portal](https://learn.microsoft.com/en-us/azure/role-based-access-control/role-assignments-portal) has the click sequence to add role assignments.
+      1. Add the following roles to your Resource.
 
-      To confirm, go to the resource page and select **JSON View** in the top right of the Essentials box on the Overview page. Under **identity** you'll find the **principalId**
+         1. Key Vault Certificate User
+         1. Key Vault Secrets User
 
-      :::image type="content" source="../relational-databases/security/authentication-access/media/machine-azure-arc-json-view.png" alt-text="Screenshot of portal control of JSON view of machine definition.":::
+      1. The result should look similar to this:
+      
+      :::image type="content" source="../relational-databases/security/authentication-access/media/add-rbac-roles-on-key-vault.png" alt-text="Screenshot of Azure Key Vault IAM role additions.   ":::
 
-   1. Select **Create**.
+   1. Using **Vault access policy**
 
-   You must select **Create** to ensure that the permissions are applied. To ensure permissions have been stored, refresh the browser window, and check that the row for your Azure Arc instance is still present.
-
-   :::image type="content" source="../relational-databases/security/authentication-access/media/add-access-policy-on-key-vault.png" alt-text="Screenshot of adding access policy to the key vault in the Azure portal.":::
+      1. select **Access policies** from the navigation menu.
+      1. Select **Create**.
+      1. For **Secret permissions**, select **Get** and **List**.
+      1. For **Certificate permissions**, select **Get** and **List**.
+      1. Select **Next**.
+      1. On the **Principal** page, search for the name of your Machine - Azure Arc instance, which is the hostname of the SQL Server host.
+   
+      :::image type="content" source="../relational-databases/security/authentication-access/media/machine-azure-arc-resource.png" alt-text="Screenshot of Azure Arc server resource in portal.   ":::
+   
+      1. Skip the **Application (optional)** page by selecting **Next** twice, or selecting **Review + create**.
+   
+         Verify that the "Object ID" of the **Principal** matches the **Principal ID** of the managed identity assigned to the instance.
+   
+         :::image type="content" source="../relational-databases/security/authentication-access/media/customer-managed-akv-review-create.png" alt-text="Screenshot of Azure portal to review and    create access policy."
+   
+         To confirm, go to the resource page and select **JSON View** in the top right of the Essentials box on the Overview page. Under **identity** you'll find the **principalId**
+   
+         
+   
+      1. Select **Create**.
+   
+      You must select **Create** to ensure that the permissions are applied. To ensure permissions have been stored, refresh the browser window, and check that the row for your Azure Arc instance    is still present.
+   
+      :::image type="content" source="../relational-databases/security/authentication-access/media/add-access-policy-on-key-vault.png" alt-text="Screenshot of adding access policy to the key vault    in the Azure portal.":::
 
 <a name='configure-azure-ad-authentication-for-sql-server-through-azure-portal'></a>
 
