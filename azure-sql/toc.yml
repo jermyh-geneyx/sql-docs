@@ -118,16 +118,6 @@
           href: ./database-watcher-faq.yml
       - name: SQL Analytics
         href: /azure/azure-monitor/insights/azure-sql?toc=/azure/azure-sql/toc.json
-      - name: SQL Insights (preview)
-        items:
-        - name: Overview
-          href: database/sql-insights-overview.md
-        - name: Enable
-          href: database/sql-insights-enable.md
-        - name: Alerts
-          href: database/sql-insights-alerts.md
-        - name: Troubleshoot
-          href: database/sql-insights-troubleshoot.md
       - name: Automatic tuning
         href: database/automatic-tuning-overview.md
       - name: Extended events
@@ -1617,6 +1607,8 @@
         href: virtual-machines/windows/sql-server-on-azure-vm-iaas-what-is-overview.md
       - name: SQL IaaS Agent extension
         href: virtual-machines/windows/sql-server-iaas-agent-extension-automate-management.md
+      - name: Modernization Advisor
+        href: virtual-machines/modernization-advisor.md
     - name: Quickstarts
       items:
       - name: Portal

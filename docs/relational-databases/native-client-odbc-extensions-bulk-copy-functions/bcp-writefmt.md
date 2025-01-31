@@ -10,7 +10,7 @@ ms.topic: "reference"
 helpviewer_keywords:
   - "bcp_writefmt function"
 apilocation: "sqlncli11.dll"
-apiname: "bcp_writefmt"
+apiname: ["bcp_writefmt", "bcp_writefmtA", "bcp_writefmtW"]
 apitype: "DLLExport"
 ---
 # bcp_writefmt

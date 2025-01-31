@@ -10,7 +10,7 @@ ms.topic: "reference"
 helpviewer_keywords:
   - "bcp_readfmt function"
 apilocation: "sqlncli11.dll"
-apiname: "bcp_readfmt"
+apiname: ["bcp_readfmt", "bcp_readfmtA", "bcp_readfmtW"]
 apitype: "DLLExport"
 ---
 # bcp_readfmt
@@ -43,7 +43,7 @@ Unicode and ANSI names:
  SUCCEED or FAIL.  
   
 ## Remarks  
- After **bcp_readfmt** reads the format values, it makes the appropriate calls to [bcp_columns](../../relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-columns.md) and [bcp_colfmt](../../relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-colfmt.md). There is no need for you to parse a format file and make these calls.  
+ After **bcp_readfmt** reads the format values, it makes the appropriate calls to [bcp_columns](../../relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-columns.md) and [bcp_colfmt](../../relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-colfmt.md). There's no need for you to parse a format file and make these calls.  
   
  To persist a format file, call [bcp_writefmt](../../relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-writefmt.md). Calls to **bcp_readfmt** can reference saved formats. For more information, see [bcp_init](../../relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-init.md).  
   
@@ -52,7 +52,7 @@ Unicode and ANSI names:
  The **BCPDELAYREADFMT** value of the *eOption* parameter of [bcp_control](../../relational-databases/native-client-odbc-extensions-bulk-copy-functions/bcp-control.md) modifies the behavior of bcp_readfmt.  
   
 > [!NOTE]  
->  The format file must have been produced by version 4.2 or later of the **bcp** utility.  
+>  The format file must be produced by version 4.2 or later of the **bcp** utility.  
   
 ## Example  
   
