@@ -73,7 +73,7 @@ The following table describes commonly used metrics in Azure SQL Database.
 
 #### Availability metric
 
-The Availability metric tracks availability at individual Azure SQL Database level. This feature is currently in preview.
+The Availability metric tracks availability at individual Azure SQL Database level.
 
 Availability is granular to one minute of connection outage. Availability is determined based on the database being operational for connections. A minute is considered as downtime or unavailable if all continuous attempts by users to establish connection to the database within the minute fail due to a service issue. If there is intermittent unavailability, the duration of continuous unavailability must cross the minute boundary to be considered as downtime. Typically, the latency to display availability is less than three minutes.
 
@@ -105,8 +105,8 @@ User errors include all connections that fail due to user configuration, workloa
 
 - Examples of errors caused by user management:
     - Scaling up or down the database or elastic pool
-    - Geo replication planned or unplanned failover
-    - Failover group planned or unplanned failover
+    - Geo replication planned or forced failover
+    - Failover group planned or forced failover
     - Geo secondary database in seeding state
     - Database that is in restoring state due to Point In Time Restore (PITR), Long Term Restore (LTR), or restore from a deleted database
     - Database that is not yet finished being copied (Database Copy)
