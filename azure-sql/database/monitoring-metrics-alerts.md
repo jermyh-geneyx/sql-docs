@@ -105,8 +105,8 @@ User errors include all connections that fail due to user configuration, workloa
 
 - Examples of errors caused by user management:
     - Scaling up or down the database or elastic pool
-    - Geo replication planned or unplanned failover
-    - Failover group planned or unplanned failover
+    - Geo replication planned or forced failover
+    - Failover group planned or forced failover
     - Geo secondary database in seeding state
     - Database that is in restoring state due to Point In Time Restore (PITR), Long Term Restore (LTR), or restore from a deleted database
     - Database that is not yet finished being copied (Database Copy)
