@@ -62,9 +62,16 @@ jobs:
 
                 $CheckFailed = $False
 
-                $ContentReviewLabelColor = "eeee88"
-                $ContentReviewLabelDescription = "The pull request requires a review from the content team."
-                $ContentReviewLabel = "content-team-review-needed"
+                $ContentReviewNeededLabelColor = "eeee88"
+                $ContentReviewNeededLabelDescription = "The pull request requires a review from the content team."
+                $ContentReviewNeededLabel = "needs-content-team-review"
+                $ContentReviewInProgressLabelColor = "33DDFF"
+                $ContentReviewInProgressLabelDescription = "The content team is reviewing the pull request."
+                $ContentReviewInProgressLabel = "content-team-reviewing"
+                $ContentReviewCompletedLabel = "2A8000"
+                $ContentReviewCompletedLabelDescription = "The content team approved the pull request."
+                $ContentReviewCompletedLabel = "content-team-reviewed"
+
 
                 Write-Host "Repo: $GitHubRepoName"
                 Write-Host "Sender: $GitHubSender"
@@ -361,25 +368,25 @@ jobs:
                                     Write-Host "One or more files in monitored folders and user $CommentUser has the permission level: $UserPermission. Fail check and add review label."
 
                                     # Check if label exists on the *REPO*.
-                                    $LabelExists = Test-RepoLabel -RepoUri $RepoLabelUrl -Name $ContentReviewLabel
+                                    $LabelExists = Test-RepoLabel -RepoUri $RepoLabelUrl -Name $ContentReviewNeededLabel
                                     
                                     If (!$LabelExists) {
 
                                         # Create label on the *REPO* if it doesn't exist.
-                                        New-RepoLabel -RepoUri $RepoLabelUrl -Name $ContentReviewLabel -Color $ContentReviewLabelColor -Description $ContentReviewLabelDescription
+                                        New-RepoLabel -RepoUri $RepoLabelUrl -Name $ContentReviewNeededLabel -Color $ContentReviewNeededLabelColor -Description $ContentReviewNeededLabelDescription
 
                                     }
 
                                     # Check to see if the label exists on the *PR*.
-                                    $LabelResultsArray = Test-Prlabel -LabelArray $ContentReviewLabel -IssueUrl $IssueUrl
+                                    $LabelResultsArray = Test-PrLabel -LabelArray $ContentReviewNeededLabel -IssueUrl $IssueUrl
 
                                     # Only add the label if it doesn't already exist on the *PR*
-                                    If (!$LabelResultsArray.$ContentReviewLabel) {
+                                    If (!$LabelResultsArray.$ContentReviewNeededLabel) {
 
-                                        Write-Host "Label $ContentReviewLabel doesn't exist on $IssueUrl. Adding label."
+                                        Write-Host "Label $ContentReviewNeededLabel doesn't exist on $IssueUrl. Adding label."
 
                                         # Add the label to the *PR*
-                                        Set-PrLabel -IssueUrl $IssueUrl -LabelName $ContentReviewLabel
+                                        Set-PrLabel -IssueUrl $IssueUrl -LabelName $ContentReviewNeededLabel
 
                                     }
 
