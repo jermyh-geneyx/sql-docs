@@ -1,21 +1,22 @@
 ---
-title: Plan for Azure maintenance events
+title: Plan for Azure Maintenance Events
 titleSuffix: Azure SQL Database & Azure SQL Managed Instance
 description: Learn how to prepare for planned maintenance events in Azure SQL Database and Azure SQL Managed Instance.
-author: aamalvea
-ms.author: aamalvea
-ms.reviewer: wiassaf, mathoma, urosmil
-ms.date: 06/19/2024
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: mathoma, urosmil
+ms.date: 02/13/2025
 ms.service: azure-sql
 ms.subservice: service-overview
 ms.topic: conceptual
 ms.custom:
   - sqldbrb=1
   - build-2024
-monikerRange: "=azuresql||=azuresql-db||=azuresql-mi"
+monikerRange: "=azuresql || =azuresql-db || =azuresql-mi"
 ---
 
 # Plan for Azure maintenance events in Azure SQL Database and Azure SQL Managed Instance
+
 [!INCLUDE [appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
 
 Learn how to prepare for planned maintenance events on your database in Azure SQL Database and Azure SQL Managed Instance.
@@ -28,12 +29,12 @@ During planned maintenance, members of the database quorum go offline one at a t
 
 When the primary replica needs to be brought offline, a reconfiguration process occurs.
 
-- For Business Critical and Premium databases, one of the secondary replicas will become the new primary replica. 
+- For Business Critical and Premium databases, one of the secondary replicas will become the new primary replica.
 - For General Purpose, Standard, and Basic databases the primary replica will move to another stateless compute node with sufficient free capacity.
 
 ## What to expect during a planned maintenance event
 
-Maintenance event can produce single or multiple reconfigurations, depending on the constellation of the primary and secondary replicas at the beginning of the maintenance event. On average, 1.7 reconfigurations occur per planned maintenance event. Reconfigurations generally finish within 30 seconds. The average is eight seconds. If already connected, your application must reconnect to the new primary replica of your database. 
+Maintenance event can produce single or multiple reconfigurations, depending on the constellation of the primary and secondary replicas at the beginning of the maintenance event. On average, 1.7 reconfigurations occur per planned maintenance event. Reconfigurations generally finish within 30 seconds. The average is eight seconds. If already connected, your application must reconnect to the new primary replica of your database.
 
 If a new connection is attempted while the database is undergoing a reconfiguration before the new primary replica is online, you get error 40613 (Database Unavailable): `Database '{databasename}' on server '{servername}' is not currently available. Please retry the connection later.` If your database has a long-running query, this query will be interrupted during a reconfiguration and will need to be restarted.
 
@@ -70,6 +71,7 @@ If your database is experiencing sign-in failures, check the [Resource Health](/
 
 ## Related content
 
-- Learn more about [Resource Health for Azure SQL Database](resource-health-to-troubleshoot-connectivity.md?view=azuresql-db&preserve-view=true) and [Resource Health for Azure SQL Managed Instance](../managed-instance/resource-health-to-troubleshoot-connectivity.md?view=azuresql-mi&preserve-view=true).
-- For more information about retry logic, see [Retry logic for transient errors](troubleshoot-common-connectivity-issues.md#retry-logic-for-transient-errors).
-- Configure maintenance window schedules with the [Maintenance window](maintenance-window.md) feature.
+- [Resource Health for Azure SQL Database](resource-health-to-troubleshoot-connectivity.md?view=azuresql-db&preserve-view=true)
+- [Resource Health for Azure SQL Managed Instance](../managed-instance/resource-health-to-troubleshoot-connectivity.md?view=azuresql-mi&preserve-view=true)
+- [Retry logic for transient errors](troubleshoot-common-connectivity-issues.md#retry-logic-for-transient-errors)
+- [Maintenance window](maintenance-window.md)
