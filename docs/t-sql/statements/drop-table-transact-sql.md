@@ -92,16 +92,16 @@ Multiple tables can be dropped in the same `DROP TABLE` statement. If both the r
 
 When a table is dropped, rules or defaults on the table lose their binding, and any constraints or triggers associated with the table are automatically dropped. If you re-create a table, you must rebind the appropriate rules and defaults, re-create any triggers, and add all required constraints.
 
-If you delete all rows in a table by using the `DELETE` statement or use the `TRUNCATE TABLE` statement, the table definition exists until it is dropped using `DROP TABLE`.
+If you delete all rows in a table by using the `DELETE` statement or use the `TRUNCATE TABLE` statement, the table definition exists until it's dropped using `DROP TABLE`.
 
 If you drop a table that contains a `varbinary(max)` column with the `FILESTREAM` attribute, any data stored in the file system isn't removed.
 
-When a ledger table is dropped, its dependent objects (the history table and the ledger view) are also dropped. A history table or a ledger view can't be dropped directly. The system enforces a *soft-delete* semantics when dropping ledger tables and its dependent objects – they aren't really dropped, but instead they are marked as dropped in system catalog views and renamed. For more information, see [Ledger considerations and limitations](../../relational-databases/security/ledger/ledger-limits.md).
+When a ledger table is dropped, its dependent objects (the history table and the ledger view) are also dropped. A history table or a ledger view can't be dropped directly. The system enforces a *soft-delete* semantics when dropping ledger tables and its dependent objects – they aren't actually dropped, but instead they're marked as dropped in system catalog views and renamed. For more information, see [Ledger considerations and limitations](../../relational-databases/security/ledger/ledger-limits.md).
 
 > [!IMPORTANT]
 > `DROP TABLE` and `CREATE TABLE` shouldn't be executed on the same table in the same batch. Otherwise an unexpected error may occur.
 
-In Fabric SQL database, dropping a table drops it both from the database, as well as from Fabric OneLake. All mirrored data for the dropped table is removed.
+In Fabric SQL database, dropping a table drops it both from the database and from Fabric OneLake. All mirrored data for the dropped table is removed.
 
 ### Deferred deallocation
 
