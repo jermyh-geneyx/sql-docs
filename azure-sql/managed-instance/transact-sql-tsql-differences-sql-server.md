@@ -4,7 +4,7 @@ description: This article discusses the Transact-SQL (T-SQL) differences between
 author: danimir
 ms.author: danil
 ms.reviewer: mathoma, bonova, danil, randolphwest
-ms.date: 11/27/2024
+ms.date: 02/17/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: service-overview
 ms.topic: reference
@@ -29,7 +29,7 @@ There are some PaaS limitations that are introduced in SQL Managed Instance and 
 - [Availability](#availability) includes the differences in [Always On Availability Groups](#always-on-availability-groups) and [backups](#backup).
 - [Security](#security) includes the differences in [auditing](#auditing), [certificates](#certificates), [credentials](#credential), [cryptographic providers](#cryptographic-providers), [logins and users](#logins-and-users), and the [service key and service master key](#service-key-and-service-master-key).
 - [Configuration](#configuration) includes the differences in [buffer pool extension](#buffer-pool-extension), [collation](#collation), [compatibility levels](#compatibility-levels), [database mirroring](#database-mirroring), [database options](#database-options), [SQL Server Agent](#sql-server-agent), and [table options](#tables).
-- [Functionalities](#functionalities) include [BULK INSERT/OPENROWSET](#bulk-insert--openrowset), [CLR](#clr), [DBCC](#dbcc), [distributed transactions](#distributed-transactions), [extended events](#extended-events), [external libraries](#external-libraries), [FILESTREAM and FileTable](#filestream-and-filetable), [full-text Semantic Search](#full-text-semantic-search), [linked servers](#linked-servers), [PolyBase](#polybase), [Replication](#replication), [RESTORE](#restore-statement), [Service Broker](#service-broker), [stored procedures, functions, and triggers](#stored-procedures-functions-and-triggers).
+- [Functionalities](#functionalities) include [BULK INSERT/OPENROWSET](#bulk-insert--openrowset), [CLR](#clr), [DBCC](#dbcc), [distributed transactions](#distributed-transactions), [extended events](#extended-events), [external libraries](#external-libraries), [FILESTREAM and FileTable](#filestream-and-filetable), [full-text Semantic Search](#full-text-semantic-search), [linked servers](#linked-servers), [PolyBase](#polybase), [Replication](#replication), [Resource governor](#resource-governor), [RESTORE](#restore-statement), [Service Broker](#service-broker), [stored procedures, functions, and triggers](#stored-procedures-functions-and-triggers).
 - [Environment settings](#Environment) such as VNets and subnet configurations.
 
 Most of these features are architectural constraints and represent service features.
@@ -417,6 +417,15 @@ For more information about configuring transactional replication, see the follow
 
 - [Tutorial: Configure replication between two managed instances](replication-between-two-instances-configure-tutorial.md)
 - [Tutorial: Configure transactional replication between Azure SQL Managed Instance and SQL Server](replication-two-instances-and-sql-server-configure-tutorial.md)
+
+### Resource governor
+
+Resource governor is supported. However, there are several behavior differences:
+
+- To modify resource governor configuration in SQL Managed Instance, you must be in the context of the `master` database on the primary replica.
+- Resource governor configuration changes made on the primary replica propagate to all secondary replicas. However, changes to the currently effective configuration on a secondary replica might not be immediate. To make the changes made on the primary replica become effective on a secondary replica, [connect](../database/read-scale-out.md#connect-to-a-read-only-replica) to the replica and execute `ALTER RESOURCE GOVERNOR RECONFIGURE`.
+- In SQL Server, if the `REQUEST_MAX_CPU_TIME_SEC` setting is configured for a workload group and a batch request exceeds the configured CPU time, the `cpu_threshold_exceeded` event fires but the request is not terminated unless a trace flag is enabled. In SQL Managed Instance, the same event fires and the request is always terminated. For more information, see [REQUEST_MAX_CPU_TIME_SEC](/sql/t-sql/statements/create-workload-group-transact-sql#request_max_cpu_time_sec--value).
+- The maximum number of resource pools you can create is 40.
 
 ### RESTORE statement
 
