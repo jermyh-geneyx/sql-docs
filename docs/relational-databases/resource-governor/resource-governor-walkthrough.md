@@ -4,7 +4,7 @@ description: Use examples to learn how to create and validate resource governor 
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: dfurman
-ms.date: 01/02/2025
+ms.date: 02/17/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: tutorial
@@ -27,7 +27,7 @@ The article also includes examples of resource governor [monitoring queries](#mo
 All examples assume that initially, resource governor is disabled and uses default settings, and that no user-defined resource pools, workload groups, and classifier functions exist.
 
 > [!NOTE]
-> For Azure SQL Managed Instance, you must be in the context of the `master` database to modify resource governor configuration.
+> To modify resource governor configuration in [!INCLUDE[ssazuremi-md.md](../../includes/ssazuremi-md.md)], you must be in the context of the `master` database on the primary replica.
 
 ## Modify the default group
 

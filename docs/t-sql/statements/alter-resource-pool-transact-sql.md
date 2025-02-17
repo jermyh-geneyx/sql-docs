@@ -4,7 +4,7 @@ description: ALTER RESOURCE POOL (Transact-SQL)
 author: markingmyname
 ms.author: maghan
 ms.reviewer: dfurman
-ms.date: 12/31/2024
+ms.date: 02/17/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -24,7 +24,7 @@ dev_langs:
 Changes an existing [resource governor](../../relational-databases/resource-governor/resource-governor.md) resource pool configuration for a [!INCLUDE[ssDE](../../includes/ssde-md.md)] instance.
 
 > [!NOTE]
-> For Azure SQL Managed Instance, you must be in the context of the `master` database to modify resource governor configuration.
+> To modify resource governor configuration in [!INCLUDE[ssazuremi-md.md](../../includes/ssazuremi-md.md)], you must be in the context of the `master` database on the primary replica.
 
 :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md)
 
