@@ -629,7 +629,7 @@ go
 
 ### F. Call an Azure OpenAI using Managed Identity
 
-The following example calls an Azure OpenAI using the [Managed Idendity assigned to Azure SQL server](/azure/azure-sql/database/authentication-azure-ad-user-assigned-managed-identity?view=azuresql). Replace `<my-azure-openai-endpoint>` and `<model-deployment-name>` with your Azure OpenAI endpoint and model name respectively, and make sure you have given the Managed Identity the "[Cognitive Services OpenAI User](/dotnet/ai/azure-ai-services-authentication#assign-roles-to-your-identity)" role in Azure OpenAI service.
+The following example calls an Azure OpenAI model using the [Managed Idendity assigned to Azure SQL server](/azure/azure-sql/database/authentication-azure-ad-user-assigned-managed-identity?view=azuresql). Replace `<my-azure-openai-endpoint>` and `<model-deployment-name>` with your Azure OpenAI endpoint and model name respectively, and make sure you have given the Managed Identity the "[Cognitive Services OpenAI User](/dotnet/ai/azure-ai-services-authentication#assign-roles-to-your-identity)" role in Azure OpenAI service.
 
 ```sql
 create database scoped credential [https://<my-azure-openai-endpoint>.openai.azure.com]
