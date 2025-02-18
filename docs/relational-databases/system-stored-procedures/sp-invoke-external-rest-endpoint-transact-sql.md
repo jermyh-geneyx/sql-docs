@@ -645,7 +645,7 @@ exec sp_invoke_external_rest_endpoint
     @payload = @payload,
     @response = @response output;
 
-select json_query(@response, '$.result.data[0].embedding');
+select json_query(@response, '$.result.data[0].embedding'); -- Assuming the called model is an embedding model
 go
 
 ```
