@@ -627,6 +627,29 @@ select cast(@response as xml)
 go
 ```
 
+### F. Call an Azure OpenAI using Managed Identity
+
+The following example calls an Azure OpenAI model using the [Managed Idendity assigned to Azure SQL server](/azure/azure-sql/database/authentication-azure-ad-user-assigned-managed-identity). Replace `<my-azure-openai-endpoint>` and `<model-deployment-name>` with your Azure OpenAI endpoint and model name respectively, and make sure you have given the Managed Identity the "[Cognitive Services OpenAI User](/dotnet/ai/azure-ai-services-authentication#assign-roles-to-your-identity)" role in Azure OpenAI service.
+
+```sql
+create database scoped credential [https://<my-azure-openai-endpoint>.openai.azure.com]
+with identity = 'Managed Identity', secret = '{"resourceid":"https://cognitiveservices.azure.com"}';
+go
+
+declare @response nvarchar(max)
+declare @payload nvarchar(max) = json_object('input': 'hello world');
+exec sp_invoke_external_rest_endpoint
+    @url = 'https://<my-azure-openai-endpoint>.openai.azure.com/openai/deployments/<model-deployment-name>/embeddings?api-version=2024-08-01-preview',
+    @method = 'POST',
+    @credential = [https://<my-azure-openai-endpoint>.openai.azure.com],
+    @payload = @payload,
+    @response = @response output;
+
+select json_query(@response, '$.result.data[0].embedding'); -- Assuming the called model is an embedding model
+go
+
+```
+
 ## Related content
 
 - [Resource management in Azure SQL Database](/azure/azure-sql/database/resource-limits-logical-server)
