@@ -4,7 +4,7 @@ description: "VECTOR_DISTANCE calculates the distance between two vectors using 
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: damauri, pookam
-ms.date: 09/11/2024
+ms.date: 02/18/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -48,11 +48,11 @@ A string with the name of the distance metric to use to calculate the distance b
 
 ### vector1
 
-An expression that evaluates to a *vector* in binary format.
+An expression that evaluates to **vector** data type.
 
 ### vector2
 
-An expression that evaluates to a vector in binary format.
+An expression that evaluates to **vector** data type.
 
 ## Distance Metrics
 
@@ -66,7 +66,7 @@ An expression that evaluates to a vector in binary format.
 
 The function returns a scalar **float** value that represents the distance between the two vectors using the specified distance metric.
 
-An error is returned if *distance_metric* isn't a valid metric and if the provided binary values don't represent valid vectors.
+An error is returned if *distance_metric* isn't a valid metric and if the provided vectors are not of the [vector data type](../../t-sql/data-types/vector-data-type.md).
 
 ## Examples  
 
@@ -130,3 +130,4 @@ ORDER BY
 
 - [Overview of vectors in the SQL Database Engine](../../relational-databases/vectors/vectors-sql-server.md)  
 - [Azure SQL Database Vector Search Samples](https://github.com/Azure-Samples/azure-sql-db-vector-search)
+- [Vector data type](../../t-sql/data-types/vector-data-type.md)

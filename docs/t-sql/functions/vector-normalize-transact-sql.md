@@ -4,7 +4,7 @@ description: "VECTOR_NORMALIZE takes a vector as an input and returns the normal
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: damauri, pookam
-ms.date: 09/11/2024
+ms.date: 02/18/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -34,12 +34,12 @@ While Azure OpenAI's models provide normalized vectors, there are other models a
 
 Users often need to normalize the vectors manually or use specific functions provided by the library to ensure that the vectors are of unit length.
 
-In general, when working with machine learning models or vector embeddings, it's important to check the documentation or the output of the model to determine whether the vectors are normalized. If normalization is required for your application, you may need to implement it as a separate step if the model does not provide normalized vectors by default.
+In general, with machine learning models or vector embeddings, it's important to check the documentation or the output of the model to determine whether the vectors are normalized. If normalization is required for your application, you might need to implement it as a separate step if the model does not provide normalized vectors by default.
 
 For example, if you want a normalized vector using the Euclidean norm (which is the most common norm type), you can use:
 
 ```sql
-SELECT VECTOR_NORMALIZE ( vector_column, 'norm2' )
+SELECT VECTOR_NORMALIZE ( vector, 'norm2' )
 FROM ...
 ```
 
@@ -48,21 +48,21 @@ FROM ...
 :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md)  
 
 ```syntaxsql
-VECTOR_NORMALIZE ( vector_column, norm_type )
+VECTOR_NORMALIZE ( vector, norm_type )
 ```
 
 ## Arguments
 
-### vector_column
+### vector
 
-An expression that evaluates to a vector. This column must be of the [vector](../../t-sql/data-types/vector-data-type.md) data type.
+An expression that evaluates to *vector* data type.
 
 ### norm_type
 
 A string with the name of the norm type to use to calculate the norm of the given vector. The following norm types are supported:
 
-- `norm1` - The 1-norm, which is the sum of the absolute values of the vector components.
-- `norm2` - The 2-norm, also known as the Euclidean Norm which is the square root of the sum of the squares of the vector components.
+- `norm1` - The `1-norm`, which is the sum of the absolute values of the vector components.
+- `norm2` - The `2-norm`, also known as the Euclidean Norm which is the square root of the sum of the squares of the vector components.
 - `norminf` - The infinity norm, which is the maximum of the absolute values of the vector components.
 
 ## Return value
@@ -71,7 +71,7 @@ The result is a vector with the same direction as the input vector but with a le
 
 If the input is `NULL`, the returned result will also be `NULL`.
 
-An error is returned if *norm_type* isn't a valid norm type and if the *vector_column* is not of the [vector](../../t-sql/data-types/vector-data-type.md) data type.
+An error is returned if *norm_type* isn't a valid norm type and if the *vector* is not of the [vector](../../t-sql/data-types/vector-data-type.md) data type.
 
 ## Examples
 
