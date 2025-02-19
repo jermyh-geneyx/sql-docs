@@ -21,7 +21,7 @@ This section contains articles that describe the three components of the [!INCLU
 - SAP BW destination
 
 > [!IMPORTANT]
-> Microsoft doesn't anticipate providing an updated version of the Connector for SAP BW. Microsoft doesn't own the source code for the SAP BW components, which were developed by a third-party, and as a result can't update them. Consider purchasing the latest SAP connectivity components from a Microsoft ISV partner such as [Theobald Software](https://helpcenter.theobald-software.com/xtract-is/. Microsoft's ISV partners have adapted their SAP connectivity components for SSIS for installation in Azure.
+> Microsoft doesn't anticipate providing an updated version of the Connector for SAP BW. Microsoft doesn't own the source code for the SAP BW components, which were developed by a third-party, and as a result can't update them. Consider purchasing the latest SAP connectivity components from a Microsoft ISV partner such as [Theobald Software](https://helpcenter.theobald-software.com/xtract-is/). Microsoft's ISV partners have adapted their SAP connectivity components for SSIS for installation in Azure.
 
 > [!IMPORTANT]  
 >  The documentation for the Microsoft Connector 1.1 for SAP BW assumes familiarity with the SAP Netweaver BW environment. For more information about SAP Netweaver BW, or for information about how to configure SAP Netweaver BW objects and processes, see your SAP documentation.  
