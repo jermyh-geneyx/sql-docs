@@ -280,7 +280,7 @@ Column names can't be repeated in the `INCLUDE` list and can't be used simultane
 
 All data types are allowed except **text**, **ntext**, and **image**. Starting with [!INCLUDE[ssSQL11](../../includes/sssql11-md.md)], in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and in [!INCLUDE [ssazuremi-md.md](../../includes/ssazuremi-md.md)], if any one of the specified non-key columns are **varchar(max)**, **nvarchar(max)**, or **varbinary(max)** data types, the index can be built or rebuilt using the `ONLINE` option.
 
-Computed columns that are deterministic and either precise or imprecise can be included columns. Computed columns derived from **image**, **ntext**, **text**, **varchar(max)**, **nvarchar(max)**, **varbinary(max)**, and **xml** data types can be included in included columns as long as the computed column data type is allowable as an included column. For more information, see [Indexes on computed columns](../../relational-databases/indexes/indexes-on-computed-columns.md).
+Computed columns that are deterministic and either precise or imprecise can be included columns. Computed columns derived from **image**, **ntext**, **text**, **varchar(max)**, **nvarchar(max)**, **varbinary(max)**, and **xml** data types can be included as long as the computed column data type is allowable as an included column. For more information, see [Indexes on computed columns](../../relational-databases/indexes/indexes-on-computed-columns.md).
 
 For information on creating an XML index, see [CREATE XML INDEX](../../t-sql/statements/create-xml-index-transact-sql.md).
 
@@ -835,7 +835,7 @@ For more information, see [Perform index operations online](../../relational-dat
 
 ### <a name="resumable-indexes"></a>Resumable index operations
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE[sql-server-2019](../../includes/sssql19-md.md)]), [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and [!INCLUDE [ssazuremi-md.md](../../includes/ssazuremi-md.md).
+**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE[sql-server-2019](../../includes/sssql19-md.md)]), [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and [!INCLUDE [ssazuremi-md.md](../../includes/ssazuremi-md.md)]
 
 You can make an online index create operation resumable. That means that the index build can be stopped and later restarted from the point where it stopped. To run an index build as resumable, specify the `RESUMABLE = ON` option.
 
@@ -845,7 +845,7 @@ The following guidelines apply to resumable index operations:
 - The `RESUMABLE` option isn't persisted in the metadata for a given index and applies only to the duration of the current DDL statement. Therefore, the `RESUMABLE = ON` clause must be specified explicitly to enable resumability.
 - The `MAX_DURATION` option can be specified in two contexts:
   - `MAX_DURATION` for the `RESUMABLE` option specifies the time interval for an index being rebuilt. After this time elapses, and if the index rebuild is still running, it is paused. You decide when the rebuild for a paused index can be resumed. The **time** in minutes for `MAX_DURATION` must be greater than 0 minutes and less than or equal to one week (7 \* 24 \* 60 = 10080 minutes). A long pause in an index operation might noticeably impact the DML performance on a specific table as well as the database disk capacity since both the original index and the newly created index require disk space and need to be updated by DML operations. If `MAX_DURATION` option is omitted, the index operation continues until completion or until a failure occurs.
-  - `MAX_DURATION` for the `WAIT_AT_LOW_PRIORITY` option specifies the time to wait using low priority locks if the index operation is blocked, before taking action. For more information, see [WAIT_AT_LOW_PRIORITY with online index operations](#wait_at_low_priority-with-online-index-operations).
+  - `MAX_DURATION` for the `WAIT_AT_LOW_PRIORITY` option specifies the time to wait using low priority locks if the index operation is blocked, before taking action. For more information, see [WAIT_AT_LOW_PRIORITY with online index operations](#wait-at-low-priority).
 - To pause the index operation immediately, you can execute the `ALTER INDEX PAUSE` command, or execute the `KILL <session_id>` command.
 - Re-executing the original `CREATE INDEX` statement with the same parameters resumes a paused index build operation. You can also resume a paused index build operation by executing the `ALTER INDEX RESUME` statement.
 - The `ABORT` command kills the session that is running an index build and cancels the index operation. You cannot resume an index operation that has been aborted.
@@ -885,9 +885,9 @@ Resumable index create operations have the following limitations:
 
 **Applies to**: This syntax for `CREATE INDEX` currently applies to [!INCLUDE[sssql22-md](../../includes/sssql22-md.md)], [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and [!INCLUDE[ssazuremi-md](../../includes/ssazuremi-md.md)] only. For `ALTER INDEX`, this syntax applies to [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE[ssSQL14](../../includes/sssql14-md.md)]), [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and [!INCLUDE[ssazuremi-md](../../includes/ssazuremi-md.md)]. For more information, see [ALTER INDEX](alter-index-transact-sql.md).
 
-When you don't use the `WAIT_AT_LOW_PRIORITY` option, all active blocking transactions holding locks on the table or index must complete for the index create operation to start and to complete. When the online index operation starts and before it completes, it needs to acquire a shared (`S`) or a schema modification (`Sch-M`) lock on the table and hold it for a short time. Even though the lock is held for a short time only, it might significantly affect workload throughput, increase query latency, or cause execution timeouts.
+When you don't use the `WAIT_AT_LOW_PRIORITY` option, all active blocking transactions holding locks on the table or index must complete for the index create operation to start and to complete. When the online index operation starts and before it completes, it needs to acquire a shared (`S`) or a schema modification (`Sch-M`) lock on the table and hold it for a short time. Even though the lock is held for a short time only, it might significantly affect workload throughput, increase query latency, or cause execution time-outs.
 
-To avoid these problems, the `WAIT_AT_LOW_PRIORITY` option allows you to manage the behavior of `S` or `Sch-M` locks required for an online index operation to start and complete, selecting from three options. In all cases, if during the wait time specified by `MAX_DURATION = n [minutes]` there is no blocking that involves the index operation, the index opeation proceeds immediately.
+To avoid these problems, the `WAIT_AT_LOW_PRIORITY` option allows you to manage the behavior of `S` or `Sch-M` locks required for an online index operation to start and complete, selecting from three options. In all cases, if during the wait time specified by `MAX_DURATION = n [minutes]` there is no blocking that involves the index operation, the index operation proceeds immediately.
 
 `WAIT_AT_LOW_PRIORITY` makes the online index operation wait using low priority locks, allowing other operations using normal priority locks to proceed in the meantime. Omitting the `WAIT_AT_LOW_PRIORITY` option is equivalent to `WAIT_AT_LOW_PRIORITY (MAX_DURATION = 0 minutes, ABORT_AFTER_WAIT = NONE)`.
 

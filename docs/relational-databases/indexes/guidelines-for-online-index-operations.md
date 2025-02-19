@@ -75,7 +75,7 @@ Because both the source and target structures are maintained during the online i
 
 Although we recommend online operations, you should evaluate your environment and specific requirements. It might be optimal to run index operations offline. In doing so, user access to the data is restricted during the operation, but the operation finishes faster and uses fewer resources.
 
-On multiprocessor computers that are running [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later, index operations can use paralelism to perform the scan and sort operations associated with the index statement. You can use the `MAXDOP` index option to control the degree of parallelism of the online index operation. In this way, you can balance the resources that are used by index operation with resources of the concurrent users. For more information, see [Configure parallel index operations](configure-parallel-index-operations.md). For more information about the editions of [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] that support parallel index operations, see [Editions and supported features of SQL Server 2022](../../sql-server/editions-and-components-of-sql-server-2022.md).
+On multiprocessor computers that are running [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later, index operations can use parallelism to perform the scan and sort operations associated with the index statement. You can use the `MAXDOP` index option to control the degree of parallelism of the online index operation. In this way, you can balance the resources that are used by index operation with resources of the concurrent users. For more information, see [Configure parallel index operations](configure-parallel-index-operations.md). For more information about the editions of [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] that support parallel index operations, see [Editions and supported features of SQL Server 2022](../../sql-server/editions-and-components-of-sql-server-2022.md).
 
 Because a schema stability (`Sch-S`) lock or a schema modification (`Sch-M`) lock is held in the final phase of the index operation, be careful when you run an online index operation inside an explicit user transaction, such as `BEGIN TRANSACTION ... COMMIT` block. Doing this causes the locks to be held until the end of the transaction, potentially blocking other workloads.
 
@@ -91,7 +91,7 @@ Online index operations don't cause high transaction log growth if [accelerated 
 
 ## Persistent version store considerations
 
-If ADR is enabled, creating or rebuilding a large index online can subtantially increase the size of persistent version store (PVS) while the index operation is in progress. Ensure that the database has sufficient free space for PVS to grow. For more information, see [Monitor and troubleshoot accelerated database recovery](../accelerated-database-recovery-troubleshoot.md).
+If ADR is enabled, creating or rebuilding a large index online can substantially increase the size of persistent version store (PVS) while the index operation is in progress. Ensure that the database has sufficient free space for PVS to grow. For more information, see [Monitor and troubleshoot accelerated database recovery](../accelerated-database-recovery-troubleshoot.md).
 
 ## Resumable index considerations
 
@@ -100,7 +100,7 @@ The `RESUMABLE` index option for `CREATE INDEX` and `ALTER INDEX` applies to [!I
 To use the `RESUMABLE` option, you must also use the `ONLINE` option. When you perform resumable index create or rebuild, the following guidelines apply:
 
 - You have better control over managing, planning, and extending index maintenance windows. You can pause and restart an index create or rebuild operation multiple times to fit your maintenance windows.
-- You can recovering from index create or rebuild failures (such as database failovers or running out of disk space) without having to restart the index operation from the beginning.
+- You can recover from index create or rebuild failures (such as database failovers or running out of disk space) without having to restart the index operation from the beginning.
 - When an index operation is paused, both the original index and the newly created one require disk space and need to be updated during DML operations.
 - The `SORT_IN_TEMPDB=ON` option isn't supported.
 - Disabled indexes aren't supported.
@@ -108,7 +108,7 @@ To use the `RESUMABLE` option, you must also use the `ONLINE` option. When you p
 > [!TIP]
 > Resumable index operations don't require a large transaction, allowing frequent log truncation during this operation and avoiding large log growth. The data required to resume and complete an index operation is stored in the data files of a database.
 
-Generally, there's no performance difference between resumable and nonresumable online index operations. For resumable `CREATE INDEX`, there's a constant overhead that might cause a noticeably slower operations for smaller tables.
+Generally, there's no performance difference between resumable and nonresumable online index operations. For resumable `CREATE INDEX`, there's a constant overhead that might cause noticeably slower operations for smaller tables.
 
 When a resumable index operation is paused:
 
