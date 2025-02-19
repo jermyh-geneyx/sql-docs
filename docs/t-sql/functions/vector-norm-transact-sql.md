@@ -4,7 +4,7 @@ description: "VECTOR_NORM takes a vector as an input and returns the norm of the
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: damauri, pookam
-ms.date: 09/02/2024
+ms.date: 02/18/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -31,7 +31,7 @@ The function `VECTOR_NORM` takes a vector as an input and returns the norm of th
 For example, if you want to calculate the Euclidean norm (which is the most common norm type), you can use:
 
 ```sql
-SELECT VECTOR_NORM ( vector_column, 'norm2' )
+SELECT VECTOR_NORM ( vector, 'norm2' )
 FROM ...
 ```
   
@@ -40,14 +40,14 @@ FROM ...
 :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md)  
 
 ```syntaxsql  
-VECTOR_NORM ( vector_column, norm_type )
+VECTOR_NORM ( vector, norm_type )
 ```
 
 ## Arguments
 
-### vector_column
+### vector
 
-An expression that evaluates to a vector. This column must be of the new [vector](../../t-sql/data-types/vector-data-type.md) data type
+An expression that evaluates to **vector** data type.
 
 ### norm_type
 
@@ -61,7 +61,7 @@ A string with the name of the norm type to use to calculate the norm of the give
 
 The function returns a **float** value that represents the norm of the vector using the specified norm type.
 
-An error is returned if *norm_type* isn't a valid norm type and if the *vector_column* is not of the [vector](../../t-sql/data-types/vector-data-type.md) type.
+An error is returned if *norm_type* isn't a valid norm type and if the vector is not of the [vector data type](../../t-sql/data-types/vector-data-type.md).
 
 ## Examples
 

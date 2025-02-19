@@ -58,7 +58,7 @@ The numeric expression that specifies the number of rows to be returned. *expres
 
 #### PERCENT
 
-Indicates that the query returns only the first *expression* percent of rows from the result set. Fractional values are rounded up to the next integer value.
+Indicates that the query returns only the first *expression* percent of rows from the result set. If the calculated number of rows is a fraction, it's rounded up to the next whole number.
 
 #### WITH TIES
 

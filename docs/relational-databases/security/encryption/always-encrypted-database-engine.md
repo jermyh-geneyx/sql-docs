@@ -138,7 +138,7 @@ The following limitations apply to queries on encrypted columns:
   - Columns captured/tracked using [change data capture](../../track-changes/about-change-data-capture-sql-server.md).
   - Primary key columns on tables that have [change tracking](../../track-changes/about-change-tracking-sql-server.md).
   - Columns that are masked (using [Dynamic data masking](../dynamic-data-masking.md)).
-  - Columns that are used in [Natively Compiled Stored Procedures](../../in-memory-oltp/creating-natively-compiled-stored-procedures.md).
+  - Columns that rely on [Natively Compiled Stored Procedures](../../in-memory-oltp/creating-natively-compiled-stored-procedures.md), encryption cannot be applied to any of the columns within that table.
   - Columns in [stretch database tables](/previous-versions/sql/sql-server/stretch-database/stretch-database). (Tables with columns encrypted with Always Encrypted can be enabled for Stretch.)
 
   > [!IMPORTANT]  

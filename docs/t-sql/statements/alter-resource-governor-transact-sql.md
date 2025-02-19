@@ -4,7 +4,7 @@ description: ALTER RESOURCE GOVERNOR (Transact-SQL)
 author: markingmyname
 ms.author: maghan
 ms.reviewer: dfurman
-ms.date: 12/31/2024
+ms.date: 02/17/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -31,6 +31,9 @@ This statement performs the following resource governor actions:
 - Configure classification for incoming sessions.
 - Reset workload group and resource pool statistics.
 - Set the maximum queued I/O operations per disk volume.
+
+> [!NOTE]
+> To modify resource governor configuration in [!INCLUDE[ssazuremi-md.md](../../includes/ssazuremi-md.md)], you must be in the context of the `master` database on the primary replica.
 
 :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md)
 
