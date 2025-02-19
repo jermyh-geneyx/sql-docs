@@ -34,7 +34,7 @@ While Azure OpenAI's models provide normalized vectors, there are other models a
 
 Users often need to normalize the vectors manually or use specific functions provided by the library to ensure that the vectors are of unit length.
 
-In general, when working with machine learning models or vector embeddings, it's important to check the documentation or the output of the model to determine whether the vectors are normalized. If normalization is required for your application, you may need to implement it as a separate step if the model does not provide normalized vectors by default.
+In general, with machine learning models or vector embeddings, it's important to check the documentation or the output of the model to determine whether the vectors are normalized. If normalization is required for your application, you might need to implement it as a separate step if the model does not provide normalized vectors by default.
 
 For example, if you want a normalized vector using the Euclidean norm (which is the most common norm type), you can use:
 
@@ -61,8 +61,8 @@ An expression that evaluates to *vector* data type.
 
 A string with the name of the norm type to use to calculate the norm of the given vector. The following norm types are supported:
 
-- `norm1` - The 1-norm, which is the sum of the absolute values of the vector components.
-- `norm2` - The 2-norm, also known as the Euclidean Norm which is the square root of the sum of the squares of the vector components.
+- `norm1` - The `1-norm`, which is the sum of the absolute values of the vector components.
+- `norm2` - The `2-norm`, also known as the Euclidean Norm which is the square root of the sum of the squares of the vector components.
 - `norminf` - The infinity norm, which is the maximum of the absolute values of the vector components.
 
 ## Return value
