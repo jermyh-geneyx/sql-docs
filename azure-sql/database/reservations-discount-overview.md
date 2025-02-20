@@ -112,7 +112,7 @@ You can cancel, exchange, or refund reservations with certain limitations. For m
 
 ## vCore size flexibility
 
-vCore size flexibility helps you scale up or down within a performance tier and region, without losing the reservation benefit. Reservations also provides you with the flexibility to temporarily move your hot databases in and out of elastic pools (within the same region and performance tier) as part of your normal operations without losing the reservation benefit. By keeping an unapplied buffer in your reservation, you can effectively manage the performance spikes without exceeding your budget.
+vCore size flexibility helps you scale up or down within a performance tier and region, without losing the reservation benefit. Reservations also provide you with the flexibility to temporarily move your hot databases in and out of elastic pools (within the same region and performance tier) as part of your normal operations without losing the reservation benefit. By keeping an unapplied buffer in your reservation, you can effectively manage the performance spikes without exceeding your budget.
 
 ## Limitation
 
