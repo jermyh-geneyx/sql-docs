@@ -9308,6 +9308,8 @@ items:
             href: sql-server/azure-arc/connect-at-scale-script.md
           - name: Connect machines using Configuration Manager custom task sequence
             href: sql-server/azure-arc/onboard-configuration-manager-custom-task.md
+          - name: Configure with private path
+            href: sql-server/azure-arc/configure-private-path.md
       - name: Manage
         items:
         - name: Assess
