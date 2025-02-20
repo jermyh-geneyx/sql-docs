@@ -4,7 +4,7 @@ description: CREATE RESOURCE POOL (Transact-SQL)
 author: markingmyname
 ms.author: maghan
 ms.reviewer: dfurman
-ms.date: 12/31/2024
+ms.date: 02/17/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -23,12 +23,12 @@ dev_langs:
 
 [!INCLUDE [SQL Server](../../includes/applies-to-version/sql-asdbmi.md)]
 
-Creates a [resource governor](../../relational-databases/resource-governor/resource-governor.md) resource pool. A resource pool represents a subset of the physical resources (CPU, memory, and IO) of a [!INCLUDE[ssDE](../../includes/ssde-md.md)] instance. Resource governor enables you to reserve or limit server resources among resource pools, up to a maximum of 64 pools.
+Creates a [resource governor](../../relational-databases/resource-governor/resource-governor.md) resource pool. A resource pool represents a subset of the physical resources (CPU, memory, and IO) of a [!INCLUDE[ssDE](../../includes/ssde-md.md)] instance. Resource governor enables you to reserve or limit server resources among resource pools, up to a maximum of 64 pools for [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] or 40 for [!INCLUDE[ssazuremi-md.md](../../includes/ssazuremi-md.md)].
 
 Resource governor isn't available in every edition of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For a list of features that are supported by the editions of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], see [Editions and supported features of SQL Server 2022](~/sql-server/editions-and-components-of-sql-server-2022.md).
 
 > [!NOTE]
-> For Azure SQL Managed Instance, you must be in the context of the `master` database to modify resource governor configuration.
+> To modify resource governor configuration in [!INCLUDE[ssazuremi-md.md](../../includes/ssazuremi-md.md)], you must be in the context of the `master` database on the primary replica.
 
 :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md)
 
@@ -69,11 +69,11 @@ Is the user-defined name for the resource pool. *pool_name* is alphanumeric, can
 
 #### MIN_CPU_PERCENT = *value*
 
-Specifies the guaranteed average CPU bandwidth for all requests in the resource pool when there is CPU contention. *value* is an integer with a default setting of 0. The allowed range for *value* is from 0 through 100.
+Specifies the guaranteed average CPU bandwidth for all requests in the resource pool when there's CPU contention. *value* is an integer with a default setting of 0. The allowed range for *value* is from 0 through 100.
 
 #### MAX_CPU_PERCENT = *value*
 
-Specifies the maximum average CPU bandwidth that all requests in resource pool receive when there is CPU contention. *value* is an integer with a default setting of 100. The allowed range for *value* is from 1 through 100.
+Specifies the maximum average CPU bandwidth that all requests in resource pool receive when there's CPU contention. *value* is an integer with a default setting of 100. The allowed range for *value* is from 1 through 100.
 
 #### CAP_CPU_PERCENT = *value*
 
@@ -135,7 +135,7 @@ The sum of `MIN_CPU_PERCENT` or `MIN_MEMORY_PERCENT` for all resource pools can'
 
 The values for `MAX_CPU_PERCENT` and `MAX_MEMORY_PERCENT` must be greater than or equal to the values for `MIN_CPU_PERCENT` and `MIN_MEMORY_PERCENT`, respectively.
 
-`CAP_CPU_PERCENT` differs from `MAX_CPU_PERCENT` in that workloads associated with the pool can use CPU capacity above the value of `MAX_CPU_PERCENT` if it is available, but not above the value of `CAP_CPU_PERCENT`. Although there might be short spikes higher than `CAP_CPU_PERCENT`, workloads can't exceed `CAP_CPU_PERCENT` for extended periods of time, even when additional CPU capacity is available.
+`CAP_CPU_PERCENT` differs from `MAX_CPU_PERCENT` in that workloads associated with the pool can use CPU capacity above the value of `MAX_CPU_PERCENT` if it's available, but not above the value of `CAP_CPU_PERCENT`. Although there might be short spikes higher than `CAP_CPU_PERCENT`, workloads can't exceed `CAP_CPU_PERCENT` for extended periods of time, even when additional CPU capacity is available.
 
 The total CPU percentage for each affinitized component (scheduler(s) or NUMA node(s)) can't exceed 100 percent.
 

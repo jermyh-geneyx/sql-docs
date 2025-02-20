@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: dfurman
-ms.date: 01/13/2025
+ms.date: 02/17/2025
 ms.service: sql
 ms.topic: include
 ---
@@ -10,7 +10,7 @@ ms.topic: include
 Changes an existing resource governor workload group configuration, and optionally assigns it to a different resource governor resource pool.
 
 > [!NOTE]
-> For Azure SQL Managed Instance, you must be in the context of the `master` database to modify resource governor configuration.
+> To modify resource governor configuration in [!INCLUDE[ssazuremi-md.md](../../includes/ssazuremi-md.md)], you must be in the context of the `master` database on the primary replica.
 
 :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../language-elements/transact-sql-syntax-conventions-transact-sql.md).
 
