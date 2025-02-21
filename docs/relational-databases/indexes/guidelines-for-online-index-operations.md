@@ -37,7 +37,7 @@ When you perform online index operations, the following guidelines apply:
 The following table shows the index operations that can be performed online, the indexes that are excluded from these online operations, and resumable index restrictions. Additional restrictions are also included.
 
 | Online index operation | Excluded indexes | Other restrictions |
-|:--|:--|:--|
+| --- | --- | --- |
 | `ALTER INDEX REBUILD` | Disabled clustered index or disabled indexed view<br /><br />XML index<br /><br />Index on a local temp table | Specifying the keyword `ALL` can cause the operation to fail when the table contains an excluded index.<br /><br />Additional restrictions on rebuilding disabled indexes apply. For more information, see [Disable Indexes and Constraints](disable-indexes-and-constraints.md). |
 | `CREATE INDEX` | XML index<br /><br />Initial unique clustered index on a view<br /><br />Index on a local temp table | |
 | `CREATE INDEX WITH DROP_EXISTING` | Disabled clustered index or disabled indexed view<br /><br />Index on a local temp table<br /><br />XML index | |

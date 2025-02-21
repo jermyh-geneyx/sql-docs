@@ -182,7 +182,7 @@ The name of the index. Index names must be unique within a table or view but don
 Specifies all indexes associated with the table or view regardless of the index type. Specifying `ALL` causes the statement to fail if one or more indexes are in an offline or read-only filegroup or the specified operation isn't allowed on one or more index types. The following table lists the index operations and disallowed index types.
 
 | Using the keyword `ALL` with this operation | Fails if the table has one or more |
-|:--|:--|
+| --- | --- |
 | `REBUILD WITH ONLINE = ON` | XML index<br /><br />Spatial index<br /><br />Columnstore index in [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] and older versions only. Later versions support online rebuild of columnstore indexes. |
 | `REBUILD PARTITION = <partition_number>` | Nonpartitioned index, XML index, spatial index, or disabled index |
 | `REORGANIZE` | Indexes with `ALLOW_PAGE_LOCKS` set to `OFF` |
@@ -207,7 +207,7 @@ The name of the schema to which the table or view belongs.
 
 The name of the table or view associated with the index. To view index details for a table or view, use the [sys.indexes](../../relational-databases/system-catalog-views/sys-indexes-transact-sql.md) catalog view.
 
-[!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] supports the three-part name format `database_name.schema_name.object_name` when `database_name` is the current database name, or `database_name` is `tempdb` and `object_name` starts with `#` or `##`. If the schema name is `dbo`, `schema_name` can be omitted.
+[!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] supports the three-part name format `<database_name>.<schema_name>.<object_name>` when `<database_name>` is the current database name, or `<database_name>` is `tempdb` and `<object_name>` starts with `#` or `##`.  If the schema name is `dbo`, `<schema_name>` can be omitted.
 
 #### REBUILD [ WITH ( \<rebuild_index_option> [ ,... *n* ] ) ]
 
@@ -267,17 +267,17 @@ For more information, see [Optimize index maintenance to improve query performan
 
 Applies to rowstore indexes.
 
-`LOB_COMPACTION = ON`
+- ON
 
-- Specifies to compact all pages that contain data of these large object (LOB) data types: **image**, **text**, **ntext**, **varchar(max)**, **nvarchar(max)**, **varbinary(max)**, and **xml**. Compacting this data can reduce the data size on disk.
-- For a clustered index, this compacts all LOB columns that are contained in the table.
-- For a nonclustered index, this compacts all LOB columns that are nonkey (included) columns in the index.
-- `REORGANIZE ALL` performs LOB compaction on all indexes. For each index, this compacts all LOB columns in the clustered index, underlying table, or included columns in a nonclustered index.
+  - Specifies to compact all pages that contain data of these large object (LOB) data types: **image**, **text**, **ntext**, **varchar(max)**, **nvarchar(max)**, **varbinary(max)**, and **xml**. Compacting this data can reduce the data size on disk.
+  - For a clustered index, this compacts all LOB columns that are contained in the table.
+  - For a nonclustered index, this compacts all LOB columns that are nonkey (included) columns in the index.
+  - `REORGANIZE ALL` performs LOB compaction on all indexes. For each index, this compacts all LOB columns in the clustered index, underlying table, or included columns in a nonclustered index.
 
-`LOB_COMPACTION = OFF`
+- OFF
 
-- Pages that contain large object data aren't compacted.
-- `OFF` has no effect on a heap.
+  - Pages that contain large object data aren't compacted.
+  - OFF has no effect on a heap.
 
 #### REORGANIZE a columnstore index
 
@@ -304,8 +304,13 @@ Applies to columnstore indexes.
 
 `COMPRESS_ALL_ROW_GROUPS` provides a way to force open or closed delta rowgroups into the columnstore. With this option, it isn't necessary to rebuild the columnstore index to empty the delta rowgroups. Combined with the other remove and merge defragmentation features, this makes it no longer necessary to rebuild a columnstore index in most situations.
 
-- `ON` forces all rowgroups into the columnstore, regardless of size and state (closed or open).
-- `OFF` forces all closed rowgroups into the columnstore.
+- ON
+
+  Forces all rowgroups into the columnstore, regardless of size and state (closed or open).
+
+- OFF
+
+  Forces all closed rowgroups into the columnstore.
 
 For more information, see [Optimize index maintenance to improve query performance and reduce resource consumption](../../relational-databases/indexes/reorganize-and-rebuild-indexes.md).
 
@@ -317,13 +322,13 @@ Modifies index options without rebuilding or reorganizing the index. `SET` can't
 
 Specifies index padding. The default is `OFF`.
 
-- `ON`
+- ON
 
   The percentage of free space that is specified by fill factor is applied to the intermediate-level pages of the index. If `FILLFACTOR` isn't specified at the same time `PAD_INDEX` is set to `ON`, the fill factor value in [sys.indexes](../../relational-databases/system-catalog-views/sys-indexes-transact-sql.md) is used.
 
-- `OFF` or `FILLFACTOR` isn't specified when `PAD_INDEX` is set to `ON`
+- OFF
 
-  The intermediate-level pages are filled to near capacity. This leaves sufficient space for at least one row of the maximum size that the index can have, based on the set of keys on the intermediate pages.
+  The intermediate-level pages are filled to near capacity, leaving sufficient space for at least one row of the maximum size the index can have, considering the set of keys on the intermediate pages. This also occurs if `PAD_INDEX` is set to `ON` but fill factor isn't specified.
 
 For more information, see [CREATE INDEX](create-index-transact-sql.md#pad_index---on--off-).
 
@@ -342,11 +347,11 @@ To view the fill factor setting, use `fill_factor` in `sys.indexes`.
 
 Specifies whether to store temporary sort results in `tempdb`. The default is `OFF` except for Azure SQL Database Hyperscale. For all index build operations in Hyperscale, `SORT_IN_TEMPDB` is always `ON` unless a resumable index build is used. For resumable index builds, `SORT_IN_TEMPDB` is always `OFF`.
 
-- `ON`
+- ON
 
   The intermediate sort results that are used to build the index are stored in `tempdb`. This might reduce the time required to create an index. However, this increases the amount of disk space that is used during the index build.
 
-- `OFF`
+- OFF
 
   The intermediate sort results are stored in the same database as the index.
 
@@ -358,11 +363,11 @@ For more information, see [SORT_IN_TEMPDB option for indexes](../../relational-d
 
 Specifies the error response when an insert operation attempts to insert duplicate key values into a unique index. The `IGNORE_DUP_KEY` option applies only to insert operations after the index is created or rebuilt. The default is `OFF`.
 
-- `ON`
+- ON
 
   A warning message occurs when duplicate key values are inserted into a unique index. Only the rows violating the uniqueness constraint aren't inserted.
 
-- `OFF`
+- OFF
 
   An error message occurs when duplicate key values are inserted into a unique index. The entire `INSERT` operation is rolled back.
 
@@ -376,11 +381,11 @@ In backward compatible syntax, `WITH IGNORE_DUP_KEY` is equivalent to `WITH IGNO
 
 Disable or enable the automatic statistics update option, `AUTO_STATISTICS_UPDATE`, for the statistics on the index. The default is `OFF`.
 
-- `ON`
+- ON
 
   Automatic statistics updates are disabled after the index is rebuilt.
 
-- `OFF`
+- OFF
 
   Automatic statistics updates are enabled after the index is rebuilt.
 
@@ -416,14 +421,14 @@ For an XML index or spatial index, only `ONLINE = OFF` is supported, and if `ONL
 > [!IMPORTANT]  
 > Online index operations aren't available in every edition of [!INCLUDE [msCoName](../../includes/msconame-md.md)] [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. For a list of features that are supported by the editions of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], see [Editions and supported features of SQL Server 2022](../../sql-server/editions-and-components-of-sql-server-2022.md).
 
-- `ON`
+- ON
 
   Long-term table locks are not held for the duration of the index operation. During the main phase of the index operation, only an intent shared (`IS`) lock is held on the source table. This enables queries or updates to the underlying table and indexes to proceed. At the start of the operation, a shared (`S`) lock is held on the source object for a short period of time. At the end of the operation, for a short period of time, a shared (`S`) lock is acquired on the object if a nonclustered index is being created. A schema modification (`Sch-M`) lock is acquired when a clustered index is created or dropped online and when a clustered or nonclustered index is being rebuilt. `ONLINE` can't be set to `ON` when an index is being created on a local temporary table.
 
   > [!NOTE]  
   > You can use the `WAIT_AT_LOW_PRIORITY` option to reduce or avoid blocking during online index operations. For more information, see [WAIT_AT_LOW_PRIORITY with online index operations](#wait-at-low-priority).
 
-- `OFF`
+- OFF
 
   Table locks are applied for the duration of the index operation. An offline index operation that creates, rebuilds, or drops a clustered, spatial, or XML index, or rebuilds or drops a nonclustered index, acquires a schema modification (`Sch-M`) lock on the table. This prevents all user access to the underlying table for the duration of the operation. An offline index operation that creates a nonclustered index initially acquires a shared (`S`) lock on the table. This prevents modifications of the underlying table definition, but allows reading and modifying the data in the table while the index build is in progress.
 
@@ -448,11 +453,11 @@ For more information, see [How online index operations work](../../relational-da
 
 Specifies whether an online index operation is resumable.
 
-- `ON`
+- ON
 
   Index operation is resumable.
 
-- `OFF`
+- OFF
 
   Index operation isn't resumable.
 
@@ -466,11 +471,11 @@ Specifies for how long, in integer minutes, a resumable index operation is execu
 
 Specifies whether row locks are allowed. The default is `ON`.
 
-- `ON`
+- ON
 
   Row locks are allowed when accessing the index. The [!INCLUDE [ssDE](../../includes/ssde-md.md)] determines when row locks are used.
 
-- `OFF`
+- OFF
 
   Row locks aren't used.
 
@@ -478,11 +483,11 @@ Specifies whether row locks are allowed. The default is `ON`.
 
 Specifies whether page locks are allowed. The default is `ON`.
 
-- `ON`
+- ON
 
   Page locks are allowed when you access the index. The [!INCLUDE [ssDE](../../includes/ssde-md.md)] determines when page locks are used.
 
-- `OFF`
+- OFF
 
   Page locks aren't used.
 
@@ -500,9 +505,17 @@ Although the `MAXDOP` option is syntactically supported for all XML indexes and 
 
 *max_degree_of_parallelism* can be:
 
-- `1`: Suppresses parallel plan generation.
-- `>1`: Restricts the maximum degree of parallelism used in a parallel index operation to the specified number or less based on the current system workload.
-- `0` (default): Uses the degree of parallelism specified at the server, database, or workload group level, unless reduced based on the current system workload.
+- 1
+
+  Suppresses parallel plan generation.
+
+- \>1
+
+  Restricts the maximum degree of parallelism used in a parallel index operation to the specified number or less based on the current system workload.
+
+- 0 (default)
+
+  Uses the degree of parallelism specified at the server, database, or workload group level, unless reduced based on the current system workload.
 
 For more information, see [Configure parallel index operations](../../relational-databases/indexes/configure-parallel-index-operations.md).
 
@@ -523,25 +536,25 @@ For recommendations on when to use `COMPRESSION_DELAY`, see [Get started with co
 
 Specifies the data compression option for the specified index, partition number, or range of partitions. The options are as follows:
 
-- `NONE`
+- NONE
 
   Index or specified partitions aren't compressed. This doesn't apply to columnstore indexes.
 
-- `ROW`
+- ROW
 
   Index or specified partitions are compressed by using row compression. This doesn't apply to columnstore indexes.
 
-- `PAGE`
+- PAGE
 
   Index or specified partitions are compressed by using page compression. This doesn't apply to columnstore indexes.
 
-- `COLUMNSTORE`
+- COLUMNSTORE
 
   **Applies to**: [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)] and later versions, [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and [!INCLUDE [ssazuremi-md.md](../../includes/ssazuremi-md.md)]
 
   Applies only to columnstore indexes, including both nonclustered columnstore and clustered columnstore indexes. Specifying `COLUMNSTORE` removes all other data compression including `COLUMNSTORE_ARCHIVE`.
 
-- `COLUMNSTORE_ARCHIVE`
+- COLUMNSTORE_ARCHIVE
 
   **Applies to**: [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)] and later versions, [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and [!INCLUDE [ssazuremi-md.md](../../includes/ssazuremi-md.md)]
 
@@ -555,11 +568,11 @@ For more information about compression, see [Data compression](../../relational-
 
 Specifies the XML compression option for the specified index that contains one or more **xml** data type columns. The options are as follows:
 
-- `ON`
+- ON
 
   Index or specified partitions are compressed by using XML compression.
 
-- `OFF`
+- OFF
 
   Index or specified partitions aren't compressed.
 
@@ -603,11 +616,11 @@ XML_COMPRESSION = OFF ON PARTITIONS (3, 5)
 
 Resumes an index operation that is paused manually, because the maximum duration is reached, or because of a failure.
 
-- `MAX_DURATION`
+- MAX_DURATION
 
   Specifies for how long, in integer minutes, a resumable index operation is executed after being resumed before it's paused again.
 
-- `WAIT_AT_LOW_PRIORITY`
+- WAIT_AT_LOW_PRIORITY
 
   Resuming an index build operation after a pause has to acquire the necessary locks. `WAIT_AT_LOW_PRIORITY` indicates that the index build operation acquires low priority locks, which allow other operations to proceed while the index build operation is waiting. Omitting the `WAIT_AT_LOW_PRIORITY` option is equivalent to `WAIT_AT_LOW_PRIORITY (MAX_DURATION = 0 minutes, ABORT_AFTER_WAIT = NONE)`. For more information, see [WAIT_AT_LOW_PRIORITY](alter-index-transact-sql.md#wait-at-low-priority).
 
@@ -675,7 +688,7 @@ When `ALLOW_ROW_LOCKS = OFF` and `ALLOW_PAGE_LOCK = OFF`, only a table-level loc
 If `ALL` is specified when the row or page lock options are set, the settings are applied to all indexes. When the underlying table is a heap, the settings are applied in the following ways:
 
 | Option | Applies to |
-|:--|:--|
+| --- | --- |
 | `ALLOW_ROW_LOCKS = ON` or `OFF` | The heap and all associated nonclustered indexes. |
 | `ALLOW_PAGE_LOCKS = ON` | The heap and all associated nonclustered indexes. |
 | `ALLOW_PAGE_LOCKS = OFF` | The nonclustered indexes, where all page locks aren't allowed. For the heap, only the shared (`S`), update (`U`) and exclusive (`X`) page locks aren't allowed. The [!INCLUDE [ssDE](../../includes/ssde-md.md)] can still acquire intent page locks (`IS`, `IU`, or `IX`) for internal purposes. |

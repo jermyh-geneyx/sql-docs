@@ -363,7 +363,7 @@ To create an index on a view, the view must be defined with `SCHEMABINDING`. A u
 
 Starting with [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)], the object can be a table stored with a clustered columnstore index.
 
-[!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] supports the three-part name format `database_name.schema_name.object_name` when `database_name` is the current database name, or `database_name` is `tempdb` and `object_name` starts with `#` or `##`.  If the schema name is `dbo`, `schema_name` can be omitted.
+[!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] supports the three-part name format `<database_name>.<schema_name>.<object_name>` when `<database_name>` is the current database name, or `<database_name>` is `tempdb` and `<object_name>` starts with `#` or `##`.  If the schema name is `dbo`, `<schema_name>` can be omitted.
 
 #### \<relational_index_option>::=
 
@@ -373,13 +373,13 @@ Specifies the options to use when you create the index.
 
 Specifies index padding. The default is `OFF`.
 
-- `ON`
+- ON
 
-  The percentage of free space that is specified by fill factor is applied to the intermediate-level pages of the index.
+  The percentage of free space that is specified by fill factor is applied to the intermediate-level pages of the index. If `FILLFACTOR` isn't specified at the same time `PAD_INDEX` is set to `ON`, the fill factor value in [sys.indexes](../../relational-databases/system-catalog-views/sys-indexes-transact-sql.md) is used.
 
-- `OFF` or fill factor isn't specified when `PAD_INDEX` is set to `ON`
+- OFF
 
-  The intermediate-level pages are filled to near capacity, leaving sufficient space for at least one row of the maximum size the index can have, considering the set of keys on the intermediate pages.
+  The intermediate-level pages are filled to near capacity, leaving sufficient space for at least one row of the maximum size the index can have, considering the set of keys on the intermediate pages. This also occurs if `PAD_INDEX` is set to `ON` but fill factor isn't specified.
 
 The `PAD_INDEX` option is useful only when `FILLFACTOR` is specified, because `PAD_INDEX` uses the percentage specified by `FILLFACTOR`. If the percentage specified for `FILLFACTOR` isn't large enough to allow for one row, the [!INCLUDE[ssDE](../../includes/ssde-md.md)] internally overrides the percentage to allow for the minimum. The number of rows on an intermediate index page is never less than two, regardless of how low the value of `FILLFACTOR`.
 
@@ -402,11 +402,11 @@ For more information, see [Specify fill factor for an index](../../relational-da
 
 Specifies whether to store temporary sort results in `tempdb`. The default is `OFF` except for Azure SQL Database Hyperscale. For all index build operations in Hyperscale, `SORT_IN_TEMPDB` is always `ON` unless a resumable index build is used. For resumable index builds, `SORT_IN_TEMPDB` is always `OFF`.
 
-- `ON`
+- ON
 
   The intermediate sort results that are used to build the index are stored in `tempdb`. This might reduce the time required to create an index. However, this increases the amount of disk space that is used during the index build.
 
-- `OFF`
+- OFF
 
   The intermediate sort results are stored in the same database as the index.
 
@@ -418,11 +418,11 @@ In backward compatible syntax, `WITH SORT_IN_TEMPDB` is equivalent to `WITH SORT
 
 Specifies the error response when an insert operation attempts to insert duplicate key values into a unique index. The `IGNORE_DUP_KEY` option applies only to insert operations after the index is created or rebuilt. The option has no effect when executing [CREATE INDEX](../../t-sql/statements/create-index-transact-sql.md), [ALTER INDEX](../../t-sql/statements/alter-index-transact-sql.md), or [UPDATE](../../t-sql/queries/update-transact-sql.md). The default is `OFF`.
 
-- `ON`
+- ON
 
   A warning message occurs when duplicate key values are inserted into a unique index. Only the rows violating the uniqueness constraint aren't inserted.
 
-- `OFF`
+- OFF
   
   An error message occurs when duplicate key values are inserted into a unique index. The entire `INSERT` statement is rolled back.
 
@@ -436,11 +436,11 @@ In backward compatible syntax, `WITH IGNORE_DUP_KEY` is equivalent to `WITH IGNO
 
 Specifies whether statistics are recomputed. The default is `OFF`.
 
-- `ON`
+- ON
 
   Out-of-date statistics are not automatically recomputed.
 
-- `OFF`
+- OFF
 
   Automatic statistics updating are enabled.
 
@@ -473,11 +473,11 @@ If per partition statistics are not supported the option is ignored and a warnin
 
 Is an option to drop and rebuild the existing clustered or nonclustered index with modified column specifications, and keep the same name for the index. The default is `OFF`.
 
-- `ON`
+- ON
 
   Specifies to drop and rebuild the existing index, which must have the same name as the parameter *index_name*.
 
-- `OFF`
+- OFF
 
   Specifies not to drop and rebuild the existing index. SQL Server displays an error if the specified index name already exists.
 
@@ -499,14 +499,14 @@ Specifies whether underlying tables and associated indexes are available for que
 > [!IMPORTANT]  
 > Online index operations are not available in every edition of [!INCLUDE[msCoName](../../includes/msconame-md.md)] [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For a list of features that are supported by the editions of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], see [Editions and supported features of SQL Server 2022](../../sql-server/editions-and-components-of-sql-server-2022.md).
 
-- `ON`
+- ON
 
   Long-term table locks are not held for the duration of the index operation. During the main phase of the index operation, only an intent shared (`IS`) lock is held on the source table. This enables queries or updates to the underlying table and indexes to proceed. At the start of the operation, a shared (`S`) lock is held on the source object for a short period of time. At the end of the operation, for a short period of time, a shared (`S`) lock is acquired on the object if a nonclustered index is being created. A schema modification (`Sch-M`) lock is acquired when a clustered index is created or dropped online and when a clustered or nonclustered index is being rebuilt. `ONLINE` can't be set to `ON` when an index is being created on a local temporary table.
 
   > [!NOTE]  
   > You can use the `WAIT_AT_LOW_PRIORITY` option to reduce or avoid blocking during online index operations. For more information, see [WAIT_AT_LOW_PRIORITY with online index operations](#wait-at-low-priority).
 
-- `OFF`
+- OFF
 
   Table locks are applied for the duration of the index operation. An offline index operation that creates, rebuilds, or drops a clustered, spatial, or XML index, or rebuilds or drops a nonclustered index, acquires a schema modification (`Sch-M`) lock on the table. This prevents all user access to the underlying table for the duration of the operation. An offline index operation that creates a nonclustered index initially acquires a shared (`S`) lock on the table. This prevents modifications of the underlying table definition, but allows reading and modifying the data in the table while the index build is in progress.
 
@@ -518,8 +518,8 @@ Indexes, including indexes on global temp tables, can be created online except f
 - Index on a local temp table
 - Initial unique clustered index on a view
 - Disabled clustered indexes
-- Clustered columnstore indexes in [!INCLUDE[ssSQL17](../../includes/sssql17-md.md)]) and older
-- Nonclustered columnstore indexes in [!INCLUDE[ssSQL16](../../includes/sssql16-md.md)]) and older
+- Clustered columnstore indexes in [!INCLUDE[ssSQL17](../../includes/sssql17-md.md)]) and older versions
+- Nonclustered columnstore indexes in [!INCLUDE[ssSQL16](../../includes/sssql16-md.md)]) and older versions
 - Clustered index, if the underlying table contains LOB data types (**image**, **ntext**, **text**) and spatial data types
 - **varchar(max)** and **varbinary(max)** columns can't be part of an index key. In [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] (starting with [!INCLUDE[ssSQL11](../../includes/sssql11-md.md)]), in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] and in [!INCLUDE [ssazuremi-md.md](../../includes/ssazuremi-md.md)], when a table contains **varchar(max)** or **varbinary(max)** columns, a clustered index containing other columns can be built or rebuilt using the `ONLINE` option.
 - Nonclustered indexes on a table with a clustered columnstore index
@@ -532,11 +532,11 @@ For more information, see [How online index operations work](../../relational-da
 
 Specifies whether an online index operation is resumable.
 
-- `ON`
+- ON
 
   Index operation is resumable.
 
-- `OFF`
+- OFF
 
   Index operation isn't resumable.
 
@@ -550,11 +550,11 @@ Specifies for how long, in minutes, a resumable index operation is executed befo
 
 Specifies whether row locks are allowed. The default is `ON`.
 
-- `ON`
+- ON
 
   Row locks are allowed when accessing the index. The [!INCLUDE[ssDE](../../includes/ssde-md.md)] determines when row locks are used.
 
-- `OFF`
+- OFF
 
   Row locks are not used.
 
@@ -562,11 +562,11 @@ Specifies whether row locks are allowed. The default is `ON`.
 
 Specifies whether page locks are allowed. The default is `ON`.
 
-- `ON`
+- ON
 
   Page locks are allowed when accessing the index. The [!INCLUDE[ssDE](../../includes/ssde-md.md)] determines when page locks are used.
 
-- `OFF`
+- OFF
 
   Page locks are not used.
 
@@ -582,9 +582,17 @@ Overrides the **max degree of parallelism** configuration option for the index o
 
 *max_degree_of_parallelism* can be:
 
-- `1`: Suppresses parallel plan generation.
-- `>1`: Restricts the maximum degree of parallelism used in a parallel index operation to the specified number or less based on the current system workload.
-- `0` (default): Uses the degree of parallelism specified at the server, database, or workload group level, unless reduced based on the current system workload.
+- 1
+
+  Suppresses parallel plan generation.
+
+- \>1
+
+  Restricts the maximum degree of parallelism used in a parallel index operation to the specified number or less based on the current system workload.
+
+- 0 (default)
+
+  Uses the degree of parallelism specified at the server, database, or workload group level, unless reduced based on the current system workload.
 
 For more information, see [Configure parallel index operations](../../relational-databases/indexes/configure-parallel-index-operations.md).
 
@@ -595,25 +603,25 @@ For more information, see [Configure parallel index operations](../../relational
 
 Specifies the data compression option for the specified index, partition number, or range of partitions. The options are as follows:
 
-- `NONE`
+- NONE
 
   Index or specified partitions aren't compressed. This doesn't apply to columnstore indexes.
 
-- `ROW`
+- ROW
 
   Index or specified partitions are compressed by using row compression. This doesn't apply to columnstore indexes.
 
-- `PAGE`
+- PAGE
 
   Index or specified partitions are compressed by using page compression. This doesn't apply to columnstore indexes.
 
-- `COLUMNSTORE`
+- COLUMNSTORE
 
   **Applies to**: [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)] and later versions, [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and [!INCLUDE [ssazuremi-md.md](../../includes/ssazuremi-md.md)]
 
   Applies only to columnstore indexes, including both nonclustered columnstore and clustered columnstore indexes.
 
-- `COLUMNSTORE_ARCHIVE`
+- COLUMNSTORE_ARCHIVE
 
   **Applies to**: [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)] and later versions, [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and [!INCLUDE [ssazuremi-md.md](../../includes/ssazuremi-md.md)]
 
@@ -627,11 +635,11 @@ For more information about compression, see [Data compression](../../relational-
 
 Specifies the XML compression option for the specified index that contains one or more **xml** data type columns. The options are as follows:
 
-- `ON`
+- ON
 
   Index or specified partitions are compressed by using XML compression.
 
-- `OFF`
+- OFF
 
   Index or specified partitions are not compressed using XML compression.
 
@@ -725,7 +733,7 @@ The `SET` options in the **Required value** column are required whenever any of 
 - The filtered index is used by the query optimizer to produce the query plan.
 
     | `SET` option | Required value | Default server value | Default OLE DB and ODBC value | Default DB-Library value |
-    |:--|:--|:--|:--|:--|
+    | -- | --- | --- | --- | --- |
     | `ANSI_NULLS` | `ON` | `ON` | `ON` | `OFF` |
     | `ANSI_PADDING` | `ON` | `ON` | `ON` | `OFF` |
     | `ANSI_WARNINGS`<sup>1</sup> | `ON` | `ON` | `ON` | `OFF` |

@@ -60,7 +60,7 @@ You can use the `progress_report_online_index_operation` extended event to monit
 The following table lists the activities involving the source structures during each phase of the index operation and the corresponding locking strategy.
 
 | Phase | Source activity | Source locks |
-|:--|:--|:--|
+| --- | --- | --- |
 | **Preparation**<br /><br />Short phase | System metadata preparation to create the new empty index structure.<br /><br />A snapshot of the table is defined. That is, row versioning is used to provide transaction-level read consistency.<br /><br />Concurrent user write operations on the source are blocked for a short period.<br /><br />No concurrent DDL operations are allowed except creating multiple nonclustered indexes. | Shared (`S`) on the table<sup>1</sup><br /><br />Intent shared (`IS`)<br /><br />`INDEX_OPERATION`<sup>2</sup> |
 | **Build**<br /><br />Main phase | The data is scanned, sorted, merged, and inserted into the target using bulk load operations.<br /><br />Concurrent user `INSERT`, `UPDATE`, `DELETE`, and `MERGE` operations are applied to both the preexisting indexes and any new indexes being built. | Intent shared (`IS`)<br /><br />`INDEX_OPERATION`<sup>2</sup> |
 | **Final**<br /><br />Short phase | All uncommitted write transactions must complete before this phase starts. Depending on the acquired lock, all new user read or write transactions are blocked for a short period until this phase completes.<br /><br />System metadata is updated to replace the source with the target.<br /><br />The source is dropped if required, for example after rebuilding or dropping a clustered index. | `INDEX_OPERATION`<sup>2</sup><br /><br /> Shared (`S`) on the table if creating a nonclustered index.<sup>1</sup><br /><br />Schema modification (`Sch-M`) if any source structure (index or table) is dropped.<sup>1</sup> |
@@ -78,7 +78,7 @@ For more information about how locks are used and how you can manage them, see [
 The following table lists the activities that involve the target structure during each phase of the index operation and the corresponding locking strategy.
 
 | Phase | Target activity | Target locks |
-|:--|:--|:--|
+| --- | --- | --- |
 | **Preparation** | New index is created and set to write-only. | Intent shared (`IS`) |
 | **Build** | Data is inserted from source.<br /><br />User modifications (inserts, updates, deletes) applied to the source are also applied to target.<br /><br />This activity is transparent to the user.| Intent shared (`IS`) |
 | **Final** | Index metadata is updated.<br /><br />Index is set to the read/write status.| Shared (`S`) or schema modification (`Sch-M`) |
