@@ -164,7 +164,7 @@ This section describes the datasets available for each SQL target type, includin
 | Connectivity | `sqldb_database_connectivity` | `00:00:30` | Each row represents a connectivity probe (a login and a query) for a database. |
 | Geo-replicas | `sqldb_database_geo_replicas` | `00:00:30` | Each row represents a primary or a secondary geo-replica, including geo-replication metadata and statistics. |
 | Index metadata | `sqldb_database_index_metadata` | `00:30:00` | Each row represents an index partition and includes index definition, properties, and operational statistics. |
-| Memory utilization | `sqldb_database_memory_utilization` | `00:00:10` | Each row represents a memory clerk and includes memory consumption by the clerk on the database engine instance. |
+| Memory utilization | `sqldb_database_memory_utilization` | `00:00:30` | Each row represents a memory clerk and includes memory consumption by the clerk on the database engine instance. |
 | Missing indexes | `sqldb_database_missing_indexes` | `00:15:00` | Each row represents an index that might improve query performance if created. |
 | Out-of-memory events | `sqldb_database_oom_events` | `00:01:00` | Each row represents an out-of-memory event in the database engine. |
 | Performance counters (common) | `sqldb_database_performance_counters_common` | `00:00:10` | Each row represents a performance counter of the database engine instance. This dataset includes commonly used counters. |
@@ -172,13 +172,13 @@ This section describes the datasets available for each SQL target type, includin
 | Properties | `sqldb_database_properties` | `00:05:00` | Each row represents a database and includes database options, resource governance limits, and other database metadata. |
 | Query runtime statistics | `sqldb_database_query_runtime_stats` | `00:15:00` | Each row represents a Query Store runtime interval and includes query execution statistics. |
 | Query wait statistics | `sqldb_database_query_wait_stats` | `00:15:00` | Each row represents a Query Store runtime interval and includes wait category statistics. |
-| Replicas | `sqldb_database_replicas` | `00:00:10` | Each row represents a database replica, including replication metadata and statistics. Includes the primary replica and geo-replicas when collected on the primary, and secondary replicas when collected on a secondary. |
+| Replicas | `sqldb_database_replicas` | `00:00:30` | Each row represents a database replica, including replication metadata and statistics. Includes the primary replica and geo-replicas when collected on the primary, and secondary replicas when collected on a secondary. |
 | Resource utilization | `sqldb_database_resource_utilization` | `00:00:15` | Each row represents CPU, Data IO, Log IO, and other resource consumption statistics for a database in a time interval. |
 | Session statistics | `sqldb_database_session_stats` | `00:01:00` | Each row represents a summary of session statistics for a database, aggregated by non-additive session attributes such as login name, host name, application name, etc. |
 | SOS schedulers | `sqldb_database_sos_schedulers` | `00:01:00` | Each row represents a SOS scheduler and includes statistics for the scheduler, CPU node, and memory node. |
 | Storage IO | `sqldb_database_storage_io` | `00:00:10` | Each row represents a database file and includes cumulative IOPS, throughput, and latency statistics for the file. |
 | Storage utilization | `sqldb_database_storage_utilization` | `00:01:00` | Each row represents a database and includes its storage usage, including `tempdb`, Query Store, and Persistent Version Store. |
-| Table metadata | `sqldb_database_table_metadata` | `00:30:00` | Each row represents a table or an indexed view, and includes metadata such as row count, space usage, data compression, columns, and constraints.  |
+| Table metadata | `sqldb_database_table_metadata` | `00:30:00` | Each row represents a table or an indexed view, and includes metadata such as row count, space usage, data compression, columns, and constraints. Collected when the number of tables and indexed views in the database is 100 or less. |
 | Wait statistics | `sqldb_database_wait_stats` | `00:00:10` | Each row represents a wait type and includes cumulative wait statistics of the database engine instance. For databases in an elastic pool, only database-scoped wait statistics are collected. |
 
 > [!NOTE]
@@ -190,7 +190,7 @@ This section describes the datasets available for each SQL target type, includin
 
 | Dataset name | Table name | Collection frequency (hh:mm:ss) | Description |
 |:--|:--|--:|:--|
-| Memory utilization | `sqldb_elastic_pool_memory_utilization` | `00:00:10` | Each row represents a memory clerk and includes memory consumption by the clerk on the database engine instance. |
+| Memory utilization | `sqldb_elastic_pool_memory_utilization` | `00:00:30` | Each row represents a memory clerk and includes memory consumption by the clerk on the database engine instance. |
 | Out-of-memory events | `sqldb_elastic_pool_oom_events` | `00:01:00` | Each row represents an out-of-memory event in the database engine. |
 | Performance counters (common) | `sqldb_elastic_pool_performance_counters_common` | `00:00:10` | Each row represents a performance counter of the database engine instance. This dataset includes commonly used counters, including workload group resource usage statistics for each database in the elastic pool. |
 | Performance counters (detailed) | `sqldb_elastic_pool_performance_counters_detailed` | `00:01:00` | Each row represents a performance counter of the database engine instance. This dataset includes counters that might be needed for detailed monitoring and troubleshooting. |
@@ -216,7 +216,7 @@ This section describes the datasets available for each SQL target type, includin
 | Database storage utilization | `sqlmi_database_storage_utilization` | `00:05:00` | Each row represents a database and includes its storage usage, including Query Store and Persistent Version Store. |
 | Index metadata | `sqlmi_index_metadata` | `00:30:00` | Each row represents an index partition and includes index definition, properties, and operational statistics. |
 | Instance properties | `sqlmi_instance_properties` | `00:05:00` | Each row represents a SQL managed instance and includes its properties and other instance metadata. |
-| Memory utilization | `sqlmi_memory_utilization` | `00:00:10` | Each row represents a memory clerk and includes memory consumption by the clerk. |
+| Memory utilization | `sqlmi_memory_utilization` | `00:00:30` | Each row represents a memory clerk and includes memory consumption by the clerk. |
 | Missing indexes | `sqlmi_missing_indexes` | `00:15:00` | Each row represents an index that might improve query performance if created. |
 | Out-of-memory events | `sqlmi_oom_events` | `00:01:00` | Each row represents an out-of-memory event in the database engine. |
 | Performance counters (common) | `sqlmi_performance_counters_common` | `00:00:10` | Each row represents a performance counter. This dataset includes commonly used counters. |
@@ -229,7 +229,7 @@ This section describes the datasets available for each SQL target type, includin
 | SQL Agent job history | `sqlmi_sqlagent_job_history` | `00:01:00` | Each row represents a SQL Agent job history entry. |
 | SQL Agent job state | `sqlmi_sqlagent_job_state` | `00:00:20` | Each row represents the state of a SQL Agent job at a point in time. |
 | Storage IO | `sqlmi_storage_io` | `00:00:10` | Each row represents a database file and includes cumulative IOPS, throughput, and latency statistics for the file. |
-| Table metadata | `sqlmi_table_metadata` | `01:00:00` | Each row represents a table or an indexed view, and includes metadata such as row count, space usage, data compression, columns, and constraints. |
+| Table metadata | `sqlmi_table_metadata` | `01:00:00` | Each row represents a table or an indexed view, and includes metadata such as row count, space usage, data compression, columns, and constraints. Collected for up to 20 databases on the instance, and when the number of tables and indexed views in the database is 100 or less. |
 | Wait statistics | `sqlmi_wait_stats` | `00:00:10` | Each row represents a wait type and includes cumulative wait statistics of the database engine instance. |
 
 ---
