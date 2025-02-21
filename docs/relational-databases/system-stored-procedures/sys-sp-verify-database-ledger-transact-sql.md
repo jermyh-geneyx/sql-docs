@@ -4,7 +4,7 @@ description: "Verifies the database ledger and the table ledgers."
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -40,6 +40,8 @@ sp_verify_database_ledger
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @digests = ] '*digests*'
 

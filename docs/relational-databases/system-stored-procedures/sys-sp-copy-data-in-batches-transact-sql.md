@@ -4,7 +4,7 @@ description: "Copies data from the source table to the target table after verify
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -31,6 +31,8 @@ sp_copy_data_in_batches
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @source_table_name = ] N'*source_table_name*'
 

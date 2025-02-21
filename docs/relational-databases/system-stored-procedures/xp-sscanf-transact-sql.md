@@ -4,7 +4,7 @@ description: "Reads data from the string into the argument locations specified b
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/26/2023
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -31,6 +31,8 @@ xp_sscanf { 'string' OUTPUT , 'format' } [ , 'argument' [ , ...n ] ]
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### '*string*' OUTPUT
 

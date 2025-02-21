@@ -4,7 +4,7 @@ description: sp_bindsession binds or unbinds a session to other sessions in the 
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/04/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -34,6 +34,8 @@ sp_bindsession { 'bind_token' | NULL }
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### '*bind_token*'
 

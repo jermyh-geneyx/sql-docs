@@ -4,7 +4,7 @@ description: "Logs a user-defined message in the SQL Server log file and in the 
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 05/26/2023
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -31,6 +31,8 @@ xp_logevent { error_number , 'message' } [ , 'severity' ]
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### *error_number*
 

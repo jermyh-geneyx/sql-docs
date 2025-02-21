@@ -4,7 +4,7 @@ description: sp_getbindtoken returns a unique identifier for the transaction.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 07/16/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -35,6 +35,8 @@ sp_getbindtoken [ @out_token = ] 'out_token' OUTPUT
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @out_token = ] '*out_token*'
 

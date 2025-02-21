@@ -4,7 +4,7 @@ description: "Reports the login security configuration of an instance of SQL Ser
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 05/26/2023
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -34,6 +34,8 @@ xp_loginconfig [ 'config_name' ]
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### '*config_name*'
 

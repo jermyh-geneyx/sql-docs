@@ -4,7 +4,7 @@ description: "Clears all queued (non-persisted) Query Store messages pending for
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -32,6 +32,10 @@ Clears all queued (non-persisted) Query Store messages pending for the replica a
 sp_query_store_clear_message_queues
 [ ; ]
 ```
+
+## Arguments
+
+None.
 
 ## Return code values
 

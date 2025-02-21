@@ -4,7 +4,7 @@ description: "Spawns a Windows command shell and passes in a string for executio
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -31,6 +31,8 @@ xp_cmdshell { 'command_string' } [ , NO_OUTPUT ]
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### '*command_string*'
 

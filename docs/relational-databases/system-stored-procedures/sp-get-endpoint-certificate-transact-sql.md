@@ -4,7 +4,7 @@ description: Returns a public key of the certificate used for authentication on 
 author: MladjoA
 ms.author: mlandzic
 ms.reviewer: randolphwest
-ms.date: 07/16/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"
@@ -32,6 +32,8 @@ sp_get_endpoint_certificate [ @endpoint_type = ] endpoint_type
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @endpoint_type = ] *endpoint_type*
 

@@ -4,7 +4,7 @@ description: "Flushes the in-memory portion of the Query Store data to disk."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -34,6 +34,10 @@ Flushes the in-memory portion of the Query Store data to disk.
 sp_query_store_flush_db
 [ ; ]
 ```
+
+## Arguments
+
+None.
 
 ## Return code values
 

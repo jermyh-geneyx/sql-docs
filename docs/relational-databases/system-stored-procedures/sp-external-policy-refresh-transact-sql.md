@@ -4,7 +4,7 @@ description: Reference documentation to explain sp_external_policy_refresh (Tran
 author: srdan-bozovic-msft
 ms.author: srbozovi
 ms.reviewer: randolphwest
-ms.date: 08/23/2023
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -33,6 +33,8 @@ sp_external_policy_refresh [ @type = ] 'type'
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @type = ] '*type*'
 

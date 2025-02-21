@@ -4,7 +4,7 @@ description: "Provides a list of local Microsoft Windows groups or a list of glo
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/31/2023
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -31,6 +31,8 @@ xp_enumgroups [ 'domain_name' ]
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### '*domain_name*'
 

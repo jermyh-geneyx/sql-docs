@@ -4,7 +4,7 @@ description: "Deletes a specified backup snapshot from the specified database."
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 05/24/2023
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -28,6 +28,8 @@ sys.sp_delete_backup_file_snapshot
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @db_name = ] N'*database_name*'
 

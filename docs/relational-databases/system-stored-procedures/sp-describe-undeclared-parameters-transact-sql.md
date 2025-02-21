@@ -1,10 +1,10 @@
 ---
-title: sp_describe_undeclared_parameters (Transact-SQL)
+title: "sp_describe_undeclared_parameters (Transact-SQL)"
 description: Returns a result set that contains metadata about undeclared parameters in a Transact-SQL batch.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -36,6 +36,8 @@ sp_describe_undeclared_parameters
 > To use this stored procedure in Azure Synapse Analytics in a dedicated SQL pool, set the database compatibility level to `20` or higher. To opt out, change the database compatibility level to `10`.
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @tsql = ] '*tsql*'
 

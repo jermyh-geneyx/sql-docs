@@ -4,7 +4,7 @@ description: "Formats and stores a series of characters and values in the string
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/26/2023
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -32,6 +32,8 @@ xp_sprintf { 'string' OUTPUT , 'format' }
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### '*string*' OUTPUT
 
