@@ -915,6 +915,7 @@ The following table lists the wait types encountered by tasks.
 | <a id="soshost_sleep"></a> `SOSHOST_SLEEP` | Occurs when a hosted task sleeps while waiting for a generic event to occur. Hosted tasks are used by hosted components such as CLR. |
 | <a id="soshost_tracelock"></a> `SOSHOST_TRACELOCK` | Occurs during synchronization of access to trace streams. |
 | <a id="soshost_waitfordone"></a> `SOSHOST_WAITFORDONE` | Occurs when a hosted component, such as CLR, waits for a task to complete. |
+| <a id="sos_work_dispatcher"></a> `SOS_WORK_DISPATCHER` | Internal use only.<br /><br />**Applies to**: [!INCLUDE [ssSQL19-md](../../includes/sssql19-md.md)] and later versions. |
 | <a id="sp_preemptive_server_diagnostics_sleep"></a> `SP_PREEMPTIVE_SERVER_DIAGNOSTICS_SLEEP` | Internal use only.<br /><br />**Applies to**: [!INCLUDE [ssSQL11-md](../../includes/sssql11-md.md)] and later versions. |
 | <a id="sp_server_diagnostics_buffer_access"></a> `SP_SERVER_DIAGNOSTICS_BUFFER_ACCESS` | Internal use only.<br /><br />**Applies to**: [!INCLUDE [ssSQL11-md](../../includes/sssql11-md.md)] and later versions. |
 | <a id="sp_server_diagnostics_init_mutex"></a> `SP_SERVER_DIAGNOSTICS_INIT_MUTEX` | Internal use only.<br /><br />**Applies to**: [!INCLUDE [ssSQL11-md](../../includes/sssql11-md.md)] and later versions. |
