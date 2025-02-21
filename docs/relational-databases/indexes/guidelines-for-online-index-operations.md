@@ -38,7 +38,7 @@ The following table shows the index operations that can be performed online, the
 
 | Online index operation | Excluded indexes | Other restrictions |
 |:--|:--|:--|
-| `ALTER INDEX REBUILD` | Disabled clustered index or disabled indexed view<br /><br />XML index<br /><br />Columnstore index<br /><br />Index on a local temp table | Specifying the keyword `ALL` can cause the operation to fail when the table contains an excluded index.<br /><br />Additional restrictions on rebuilding disabled indexes apply. For more information, see [Disable Indexes and Constraints](disable-indexes-and-constraints.md). |
+| `ALTER INDEX REBUILD` | Disabled clustered index or disabled indexed view<br /><br />XML index<br /><br />Index on a local temp table | Specifying the keyword `ALL` can cause the operation to fail when the table contains an excluded index.<br /><br />Additional restrictions on rebuilding disabled indexes apply. For more information, see [Disable Indexes and Constraints](disable-indexes-and-constraints.md). |
 | `CREATE INDEX` | XML index<br /><br />Initial unique clustered index on a view<br /><br />Index on a local temp table | |
 | `CREATE INDEX WITH DROP_EXISTING` | Disabled clustered index or disabled indexed view<br /><br />Index on a local temp table<br /><br />XML index | |
 | `DROP INDEX` | Disabled index<br /><br />XML index<br /><br />Nonclustered index<br /><br />Index on a local temp table | Multiple indexes can't be specified within a single statement. |
