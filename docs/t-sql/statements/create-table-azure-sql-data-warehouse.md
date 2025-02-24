@@ -4,7 +4,7 @@ description: "CREATE TABLE creates a new table in Azure Synapse Analytics, Analy
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: vanto, xiaoyul, mariyaali, maghan
-ms.date: 11/01/2024
+ms.date: 02/24/2025
 ms.service: sql
 ms.topic: reference
 ms.custom:
@@ -22,7 +22,7 @@ monikerRange: ">=aps-pdw-2016 || =azure-sqldw-latest || =fabric"
 
 ## CREATE TABLE (Azure Synapse Analytics)
 
- Creates a new table in [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] or [!INCLUDE [ssPDW](../../includes/sspdw-md.md)].  
+ Creates a new table in [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] or [!INCLUDE [ssPDW](../../includes/sspdw-md.md)]. 
 
  To understand tables and how to use them, see [Tables in [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)]](/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-overview).
 
@@ -107,10 +107,10 @@ CREATE TABLE { database_name.schema_name.table_name | schema_name.table_name | t
 ## Arguments
 
 #### *database_name*
- The name of the database that will contain the new table. The default is the current database.  
+ The name of the database that will contain the new table. The default is the current database. 
   
 #### *schema_name*
- The schema for the table. Specifying *schema* is optional. If blank, the default schema is used.  
+ The schema for the table. Specifying *schema* is optional. If blank, the default schema is used. 
   
 #### *table_name*
  The name of the new table. To create a local temporary table, precede the table name with `#`. For explanations and guidance on temporary tables, see [Temporary tables in dedicated SQL pool in Azure Synapse Analytics](/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-temporary). 
@@ -123,13 +123,13 @@ CREATE TABLE { database_name.schema_name.table_name | schema_name.table_name | t
 ### Column options
 
  `COLLATE` *Windows_collation_name*  
- Specifies the collation for the expression. The collation must be one of the Windows collations supported by [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. For a list of Windows collations supported by [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], see [Windows collation name (Transact-SQL)](windows-collation-name-transact-sql.md)).  
+ Specifies the collation for the expression. The collation must be one of the Windows collations supported by [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. For a list of Windows collations supported by [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], see [Windows collation name (Transact-SQL)](windows-collation-name-transact-sql.md)). 
   
  `NULL` | `NOT NULL`  
- Specifies whether `NULL` values are allowed in the column. The default is `NULL`.  
+ Specifies whether `NULL` values are allowed in the column. The default is `NULL`. 
   
  [ `CONSTRAINT` *constraint_name* ] `DEFAULT` *constant_expression*  
- Specifies the default column value.  
+ Specifies the default column value. 
   
  | Argument | Explanation |
  | -------- | ----------- |
@@ -147,13 +147,13 @@ For guidance on choosing the type of table, see [Indexing tables in [!INCLUDE [s
 Stores the table as a clustered columnstore index. The clustered columnstore index applies to all of the table data. This behavior is the default for [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)].
  
  `HEAP`
-  Stores the table as a heap. This behavior is the default for [!INCLUDE [ssPDW](../../includes/sspdw-md.md)].  
+  Stores the table as a heap. This behavior is the default for [!INCLUDE [ssPDW](../../includes/sspdw-md.md)]. 
   
  `CLUSTERED INDEX` ( *index_column_name* [ ,...*n* ] )  
  Stores the table as a clustered index with one or more key columns. This behavior stores the data by row. Use *index_column_name* to specify the name of one or more key columns in the index. For more information, see [Rowstore Tables](#rowstore-table-heap-or-clustered-index).
 
  `LOCATION = USER_DB`
- This option is deprecated. It's syntactically accepted, but no longer required and no longer affects behavior.
+ This option is deprecated. It's valid syntax but no longer required and no longer affects behavior.
   
 <a id="TableDistributionOptions"></a>
 
@@ -171,10 +171,10 @@ Distributes the rows based on the hash values of up to eight columns, allowing f
 
 > [!NOTE]
 > - To enable the multi-column distribution (MCD) feature, change the database's compatibility level to 50 with this command. For more information on setting the database compatibility level, see [ALTER DATABASE SCOPED CONFIGURATION](alter-database-scoped-configuration-transact-sql.md). For example: `ALTER DATABASE SCOPED CONFIGURATION SET DW_COMPATIBILITY_LEVEL = 50;`
-> - To disable the Multi-Column distribution (MCD) feature, run this command to change the database's compatibility level to AUTO. For example: `ALTER DATABASE SCOPED CONFIGURATION SET DW_COMPATIBILITY_LEVEL = AUTO;` Existing MCD tables will stay but become unreadable. Queries over MCD tables will return this error: `Related table/view is not readable because it distributes data on multiple columns and multi-column distribution is not supported by this product version or this feature is disabled.`
+> - To disable the multi-column distribution (MCD) feature, run this command to change the database's compatibility level to AUTO. For example: `ALTER DATABASE SCOPED CONFIGURATION SET DW_COMPATIBILITY_LEVEL = AUTO;` Existing MCD tables will stay but become unreadable. Queries over MCD tables will return this error: `Related table/view is not readable because it distributes data on multiple columns and multi-column distribution is not supported by this product version or this feature is disabled.`
 >   - To regain access to MCD tables, enable the feature again.
->   - To load data into a MCD table, use CTAS statement and the data source needs be Synapse SQL tables.  
-> - [Generate scripts](../../ssms/scripting/generate-scripts-sql-server-management-studio.md) to create MCD tables is currently supported SSMS version 19 and later versions.
+>   - To load data into an MCD table, use `CREATE TABLE AS SELECT` (CTAS) statement and the data source needs be Synapse SQL tables. 
+> - [Generate scripts](../../ssms/scripting/generate-scripts-sql-server-management-studio.md) to create MCD tables is currently supported SQL Server Management Studio (SSMS) version 19 and later versions.
 
 `DISTRIBUTION = ROUND_ROBIN`
 Distributes the rows evenly across all the distributions in a round-robin fashion. This behavior is the default for [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)].
@@ -188,24 +188,24 @@ Stores one copy of the table on each Compute node. For [!INCLUDE [ssazuresynapse
 For guidance on using table partitions, see [Partitioning tables in dedicated SQL pool](/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-partition).
 
 `PARTITION` ( *partition_column_name* `RANGE` [ `LEFT` | `RIGHT` ] `FOR VALUES` ( [ *boundary_value* [,...*n*] ] ))   
-Creates one or more table partitions. These partitions are horizontal table slices that allow you to apply operations to subsets of rows regardless of whether the table is stored as a heap, clustered index, or clustered columnstore index. Unlike the distribution column, table partitions don't determine the distribution where each row is stored. Instead, table partitions determine how the rows are grouped and stored within each distribution.  
+Creates one or more table partitions. These partitions are horizontal table slices that allow you to apply operations to subsets of rows regardless of whether the table is stored as a heap, clustered index, or clustered columnstore index. Unlike the distribution column, table partitions don't determine the distribution where each row is stored. Instead, table partitions determine how the rows are grouped and stored within each distribution. 
 
 | Argument | Explanation |
 | -------- | ----------- |
 |*partition_column_name*| Specifies the column that [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] uses to partition the rows. This column can be any data type. [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] sorts the partition column values in ascending order. The low-to-high ordering goes from `LEFT` to `RIGHT` in the `RANGE` specification. |  
 | `RANGE LEFT` | Specifies the boundary value belongs to the partition on the left (lower values). The default is LEFT. |
 | `RANGE RIGHT` | Specifies the boundary value belongs to the partition on the right (higher values). | 
-| `FOR VALUES` ( *boundary_value* [,...*n*] ) | Specifies the boundary values for the partition. *boundary_value* is a constant expression. It can't be NULL. It must either match or be implicitly convertible to the data type of *partition_column_name*. It can't be truncated during implicit conversion so that the size and scale of the value don't match the data type of *partition_column_name*<br></br><br></br>If you specify the `PARTITION` clause, but don't specify a boundary value, [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] creates a partitioned table with one partition. If applicable, you can split the table into two partitions at a later time.<br></br><br></br>If you specify one boundary value, the resulting table has two partitions; one for the values lower than the boundary value and one for the values higher than the boundary value. If you move a partition into a non-partitioned table, the non-partitioned table receives the data, but won't have the partition boundaries in its metadata.|
+| `FOR VALUES` ( *boundary_value* [,...*n*] ) | Specifies the boundary values for the partition. *boundary_value* is a constant expression. It can't be NULL. It must either match or be implicitly convertible to the data type of *partition_column_name*. It can't be truncated during implicit conversion so that the size and scale of the value don't match the data type of *partition_column_name*<br></br><br></br>If you specify one boundary value, the resulting table has two partitions; one for the values lower than the boundary value and one for the values higher than the boundary value. If you move a partition into a nonpartitioned table, the nonpartitioned table receives the data, but won't have the partition boundaries in its metadata.|
 
 For an example, see [Create a partitioned table](#PartitionedTable).
 
 ### Ordered clustered columnstore index option
 
-Clustered columnstore index (CCI) is the default for creating tables in [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)]. Data in a CCI is not sorted before being compressed into columnstore segments. When creating a CCI with ORDER, data is sorted before being added to index segments and query performance can be improved. For more information on ordered clustered columnstore indexes in Azure Synapse Analytics, see [Performance Tuning with Ordered Clustered Columnstore Index](/azure/sql-data-warehouse/performance-tuning-ordered-cci?view=azure-sqldw-latest&preserve-view=true).  
+Clustered columnstore index (CCI) is the default for creating tables in [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)]. Data in a CCI is not sorted before being compressed into columnstore segments. When creating a CCI with ORDER, data is sorted before being added to index segments and query performance can be improved. For more information on ordered clustered columnstore indexes in Azure Synapse Analytics, see [Performance Tuning with Ordered Clustered Columnstore Index](/azure/sql-data-warehouse/performance-tuning-ordered-cci?view=azure-sqldw-latest&preserve-view=true). 
 
-An ordered CCI can be created on columns of any data types supported in [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] except for string columns.  
+An ordered CCI can be created on columns of any data types supported in [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] except for string columns. 
 
-Users can query `column_store_order_ordinal` column in `sys.index_columns` for the column or columns a table is ordered on, and the sequence in the ordering.  
+Users can query `column_store_order_ordinal` column in `sys.index_columns` for the column or columns a table is ordered on, and the sequence in the ordering. 
 
 Check [Performance tuning with ordered clustered columnstore index](/azure/sql-data-warehouse/performance-tuning-ordered-cci) for details.
 
@@ -216,17 +216,17 @@ Check [Performance tuning with ordered clustered columnstore index](/azure/sql-d
 [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] supports the most commonly used data types. To better understand data types and how to use them, see [Data types for tables in [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)]](/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-data-types).
 
 >[!NOTE]
->Similar to SQL Server, there is an 8060 byte per row limit. This might become a blocking issue for tables that have many columns, or columns with large data types, such as **nvarchar(max)** or **varbinary(max)**. Inserts or updates that violate the 8060 byte limit will result in error codes 511 or 611. For more information, see [Pages and Extents Architecture Guide](../../relational-databases/pages-and-extents-architecture-guide.md?view=azure-sqldw-latest&preserve-view=true#row-overflow-considerations).
+>Similar to SQL Server, there is an 8,060 byte per row limit. This might become a blocking issue for tables that have many columns, or columns with large data types, such as **nvarchar(max)** or **varbinary(max)**. Inserts or updates that violate the 8,060 byte limit will result in error codes 511 or 611. For more information, see [Pages and Extents Architecture Guide](../../relational-databases/pages-and-extents-architecture-guide.md?view=azure-sqldw-latest&preserve-view=true#row-overflow-considerations).
 
 For a table of data type conversions, see the Implicit Conversions section of [CAST and CONVERT (Transact-SQL)](../functions/cast-and-convert-transact-sql.md). For more information, see [Date and time data types and functions (Transact-SQL)](../functions/date-and-time-data-types-and-functions-transact-sql.md).
 
 The following list of supported data types includes their details and storage bytes:
 
 `datetimeoffset` [ ( *n* ) ]  
- The default value for *n* is 7.  
+ The default value for *n* is 7. 
   
  `datetime2` [ ( *n* ) ]  
-Same as `datetime`, except that you can specify the number of fractional seconds. The default value for *n* is `7`.  
+Same as `datetime`, except that you can specify the number of fractional seconds. The default value for *n* is `7`. 
   
 |*n* value|Precision|Scale|  
 |--:|--:|-:|  
@@ -240,40 +240,40 @@ Same as `datetime`, except that you can specify the number of fractional seconds
 | `7` |27|7|  
   
  `datetime`  
- Stores date and time of day with 19 to 23 characters according to the Gregorian calendar. The date can contain year, month, and day. The time contains hour, minutes, seconds. As an option, you can display three digits for fractional seconds. The storage size is 8 bytes.  
+ Stores date and time of day with 19 to 23 characters according to the Gregorian calendar. The date can contain year, month, and day. The time contains hour, minutes, seconds. As an option, you can display three digits for fractional seconds. The storage size is 8 bytes. 
   
  `smalldatetime`  
- Stores a date and a time. Storage size is 4 bytes.  
+ Stores a date and a time. Storage size is 4 bytes. 
   
  `date`  
- Stores a date using a maximum of 10 characters for year, month, and day according to the Gregorian calendar. The storage size is 3 bytes. Date is stored as an integer.  
+ Stores a date using a maximum of 10 characters for year, month, and day according to the Gregorian calendar. The storage size is 3 bytes. Date is stored as an integer. 
   
  `time` [ ( *n* ) ]  
- The default value for *n* is `7`.  
+ The default value for *n* is `7`. 
   
  `float` [ ( *n* ) ]  
- Approximate number data type for use with floating point numeric data. Floating point data is approximate, which means that not all values in the data type range can be represented exactly. *n* specifies the number of bits used to store the mantissa of the `float` in scientific notation. *n* dictates the precision and storage size. If *n* is specified, it must be a value between `1` and `53`. The default value of *n* is `53`.  
+ Approximate number data type for use with floating point numeric data. Floating point data is approximate, which means that not all values in the data type range can be represented exactly. *n* specifies the number of bits used to store the mantissa of the `float` in scientific notation. *n* dictates the precision and storage size. If *n* is specified, it must be a value between `1` and `53`. The default value of *n* is `53`. 
   
 | *n* value | Precision | Storage size |  
 | --------: | --------: | -----------: |  
 | 1-24   | 7 digits  | 4 bytes      |  
 | 25-53  | 15 digits | 8 bytes      |  
   
- [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] treats *n* as one of two possible values. If `1`<= *n* <= `24`, *n* is treated as `24`. If `25` <= *n* <= `53`, *n* is treated as `53`.  
+ [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] treats *n* as one of two possible values. If `1`<= *n* <= `24`, *n* is treated as `24`. If `25` <= *n* <= `53`, *n* is treated as `53`. 
   
- The [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] **float** data type complies with the ISO standard for all values of *n* from `1` through `53`. The synonym for double precision is **float(53)**.  
+ The [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] **float** data type complies with the ISO standard for all values of *n* from `1` through `53`. The synonym for double precision is **float(53)**. 
   
  `real` [ ( *n* ) ]  
- The definition of real is the same as float. The ISO synonym for **real** is **float(24)**.  
+ The definition of real is the same as float. The ISO synonym for **real** is **float(24)**. 
   
  `decimal` [ ( *precision* [ *, scale* ] ) ] | `numeric` [ ( *precision* [ *, scale* ] ) ]  
- Stores fixed precision and scale numbers.  
+ Stores fixed precision and scale numbers. 
   
  *precision*  
- The maximum total number of decimal digits that can be stored, on either side of the decimal point. The precision must be a value from `1` through the maximum precision of `38`. The default precision is `18`.  
+ The maximum total number of decimal digits that can be stored, on either side of the decimal point. The precision must be a value from `1` through the maximum precision of `38`. The default precision is `18`. 
   
  *scale*  
- The maximum number of decimal digits that can be stored to the right of the decimal point. *Scale* must be a value from `0` through *precision*. You can only specify *scale* if *precision* is specified. The default scale is `0` and so `0` <= *scale* <= *precision*. Maximum storage sizes vary, based on the precision.  
+ The maximum number of decimal digits that can be stored to the right of the decimal point. *Scale* must be a value from `0` through *precision*. You can only specify *scale* if *precision* is specified. The default scale is `0` and so `0` <= *scale* <= *precision*. Maximum storage sizes vary, based on the precision. 
   
 | Precision | Storage bytes  |  
 | ---------: |-------------: |  
@@ -283,7 +283,7 @@ Same as `datetime`, except that you can specify the number of fractional seconds
 | 29-38      |            17 |  
   
  `money` | `smallmoney`  
- Data types that represent currency values.  
+ Data types that represent currency values. 
   
 | Data Type | Storage bytes |  
 | --------- | ------------: |  
@@ -291,7 +291,7 @@ Same as `datetime`, except that you can specify the number of fractional seconds
 | `smallmoney` |4|  
   
  `bigint` \| `int` \| `smallint` \| `tinyint`  
- Exact-number data types that use integer data. The storage is shown in the following table.  
+ Exact-number data types that use integer data. The storage is shown in the following table. 
   
 | Data Type | Storage bytes |  
 | --------- | ------------: |  
@@ -301,28 +301,28 @@ Same as `datetime`, except that you can specify the number of fractional seconds
 | `tinyint` |1|  
   
  `bit`  
- An integer data type that can take the value of `1`, `0`, or `NULL. [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] optimizes storage of bit columns. If there are 8 or fewer bit columns in a table, the columns are stored as 1 byte. If there are from 9-16 bit columns, the columns are stored as 2 bytes, and so on.  
+ An integer data type that can take the value of `1`, `0`, or `NULL. [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] optimizes storage of bit columns. If there are 8 or fewer bit columns in a table, the columns are stored as 1 byte. If there are from 9-16 bit columns, the columns are stored as 2 bytes, and so on. 
   
  `nvarchar` [ ( *n* | `max` ) ]
- Variable-length Unicode character data. *n* can be a value from 1 through 4000. `max` indicates that the maximum storage size is 2^31-1 bytes (2 GB). Storage size in bytes is two times the number of characters entered + 2 bytes. The data entered can be zero characters in length. The `max` length applies only to [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)].  
+ Variable-length Unicode character data. *n* can be a value from 1 through 4000. `max` indicates that the maximum storage size is 2^31-1 bytes (2 GB). Storage size in bytes is two times the number of characters entered + 2 bytes. The data entered can be zero characters in length. The `max` length applies only to [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)]. 
   
  `nchar` [ ( *n* ) ]  
- Fixed-length Unicode character data with a length of *n* characters. *n* must be a value from `1` through `4000`. The storage size is two times *n* bytes.  
+ Fixed-length Unicode character data with a length of *n* characters. *n* must be a value from `1` through `4000`. The storage size is two times *n* bytes. 
   
  `varchar` [ ( *n*  | `max` ) ]
  Variable-length, non-Unicode character data with a length of *n* bytes. *n* must be a value from `1` to `8000`. `max` indicates that the maximum storage size is 2^31-1 bytes (2 GB). The storage size is the actual length of data entered + 2 bytes. The `max` length applies only to [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)].
   
  `char` [ ( *n* ) ]  
- Fixed-length, non-Unicode character data with a length of *n* bytes. *n* must be a value from `1` to `8000`. The storage size is *n* bytes. The default for *n* is `1`.  
+ Fixed-length, non-Unicode character data with a length of *n* bytes. *n* must be a value from `1` to `8000`. The storage size is *n* bytes. The default for *n* is `1`. 
   
  `varbinary` [ ( *n*  | `max` ) ]
  Variable-length binary data. *n* can be a value from `1` to `8000`. `max` indicates that the maximum storage size is 2^31-1 bytes (2 GB). The storage size is the actual length of data entered + 2 bytes. The default value for *n* is 7. The `max` length applies only to [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)].
   
  `binary` [ ( *n* ) ]  
- Fixed-length binary data with a length of *n* bytes. *n* can be a value from `1` to `8000`. The storage size is *n* bytes. The default value for *n* is `7`.  
+ Fixed-length binary data with a length of *n* bytes. *n* can be a value from `1` to `8000`. The storage size is *n* bytes. The default value for *n* is `7`. 
   
  `uniqueidentifier`  
- Is a 16-byte GUID.  
+ Is a 16-byte GUID. 
 
 ## Permissions
 
@@ -335,7 +335,7 @@ Creating a partitioned table requires permission in the `db_ddladmin` fixed data
 
 - `ALTER ANY DATASPACE` permission
   
- The login that creates a local temporary table receives `CONTROL`, `INSERT`, `SELECT`, and `UPDATE` permissions on the table.  
+ The login that creates a local temporary table receives `CONTROL`, `INSERT`, `SELECT`, and `UPDATE` permissions on the table. 
  
 <a id="GeneralRemarks"></a>
 
@@ -347,7 +347,7 @@ For minimum and maximum limits in Azure Synapse Analytics, see [[!INCLUDE [ssazu
 
 Each user-defined table is divided into multiple smaller tables that are stored in separate locations called distributions. [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] uses 60 distributions. In [!INCLUDE [ssPDW](../../includes/sspdw-md.md)], the number of distributions depends on the number of Compute nodes.
  
-Each distribution contains all table partitions. For example, if there are 60 distributions and four table partitions plus one empty partition, there will be 300 partitions (5 x 60= 300). If the table is a clustered columnstore index, there will be one columnstore index per partition, which means you will have 300 columnstore indexes.
+Each distribution contains all table partitions. For example, if there are 60 distributions and four table partitions plus one empty partition, there will be 300 partitions (5 x 60= 300). If the table is a clustered columnstore index, there will be one columnstore index per partition, which means you'll have 300 columnstore indexes.
 
 We recommend using fewer table partitions to ensure each columnstore index has enough rows to take advantage of the benefits of columnstore indexes. For more information in Azure Synapse Analytics, see [Partitioning tables in dedicated SQL pool](/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-partition) and [Indexes on dedicated SQL pool tables in Azure Synapse Analytics](/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-index).
 
@@ -370,9 +370,9 @@ For more information, see these articles:
 
 ## Limitations
 
-- You can't define a DEFAULT constraint on a distribution column.  
-- Table Name cannot be greater than 128 characters.
-- Column Name cannot be greater than 128 characters.
+- You can't define a `DEFAULT` constraint on a distribution column. 
+- Table name cannot be greater than 128 characters.
+- Column name cannot be greater than 128 characters.
   
 ### Partitions
 
@@ -386,21 +386,21 @@ CREATE TABLE t1 ( c1 varchar(20) COLLATE Divehi_90_CI_AS_KS_WS) WITH (PARTITION 
 
 ### Temporary tables
 
- Global temporary tables that begin with `##` aren't supported.  
+ Global temporary tables that begin with `##` aren't supported. 
   
  Local temporary tables have the following limitations and restrictions:  
   
--   They're visible only to the current session. [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] drops them automatically at the end of the session. To drop them explicitly, use the DROP TABLE statement.   
+-   They're visible only to the current session. [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] drops them automatically at the end of the session. To drop them explicitly, use the `DROP TABLE` statement. 
 -   They can't be renamed. 
--   They can't have partitions or views.  
--   Their permissions can't be changed. `GRANT`, `DENY`, and `REVOKE` statements can't be used with local temporary tables.   
--   Database console commands are blocked for temporary tables.   
--   If more than one local temporary table is used within a batch, each must have a unique name. If multiple sessions are running the same batch and creating the same local temporary table, [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] internally appends a numeric suffix to the local temporary table name to maintain a unique name for each local temporary table.  
+-   They can't have partitions or views. 
+-   Their permissions can't be changed. `GRANT`, `DENY`, and `REVOKE` statements can't be used with local temporary tables. 
+-   Database console commands are blocked for temporary tables. 
+-   If more than one local temporary table is used within a batch, each must have a unique name. If multiple sessions are running the same batch and creating the same local temporary table, [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] internally appends a numeric suffix to the local temporary table name to maintain a unique name for each local temporary table. 
 
 <a id="LockingBehavior"></a>
 
 ## Locking behavior
- Takes an exclusive lock on the table. Takes a shared lock on the DATABASE, SCHEMA, and SCHEMARESOLUTION objects.  
+ Takes an exclusive lock on the table. Takes a shared lock on the DATABASE, SCHEMA, and SCHEMARESOLUTION objects. 
 
 <a id="ExamplesColumn"></a>
 
@@ -409,7 +409,7 @@ CREATE TABLE t1 ( c1 varchar(20) COLLATE Divehi_90_CI_AS_KS_WS) WITH (PARTITION 
 <a id="ColumnCollation"></a>
 
 ### A. Specify a column collation
- In the following example, the table `MyTable` is created with two different column collations. By default, the column, `mycolumn1`, has the default collation Latin1_General_100_CI_AS_KS_WS. The column, `mycolumn2` has the collation Frisian_100_CS_AS.  
+ In the following example, the table `MyTable` is created with two different column collations. By default, the column `mycolumn1` has the default collation `Latin1_General_100_CI_AS_KS_WS`. The column, `mycolumn2` has the collation `Frisian_100_CS_AS`. 
   
 ```sql
 CREATE TABLE MyTable   
@@ -424,7 +424,7 @@ WITH ( CLUSTERED COLUMNSTORE INDEX )
 
 ### B. Specify a DEFAULT constraint for a column
 
- The following example shows the syntax to specify a default value for a column. The colA column has a default constraint named constraint_colA  and a default value of 0.  
+ The following example shows the syntax to specify a default value for a column. The `colA` column has a default constraint named `constraint_colA` and a default value of `0`. 
   
 ```sql
 CREATE TABLE MyTable
@@ -467,9 +467,9 @@ WITH
 <a id="ClusteredColumnstoreIndex"></a>
 
 ### D. Create a table with a clustered columnstore index
- The following example creates a distributed table with a clustered columnstore index. Each distribution is stored as a columnstore.  
+ The following example creates a distributed table with a clustered columnstore index. Each distribution is stored as a columnstore. 
   
- The clustered columnstore index doesn't affect how the data is distributed; data is always distributed by row. The clustered columnstore index affects how the data is stored within each distribution.  
+ The clustered columnstore index doesn't affect how the data is distributed; data is always distributed by row. The clustered columnstore index affects how the data is stored within each distribution. 
   
 ```sql
   CREATE TABLE MyTable
@@ -505,7 +505,7 @@ SELECT * FROM ext_Lineitem
 <a id="RoundRobin"></a>
 
 ### F. Create a ROUND_ROBIN table
- The following example creates a ROUND_ROBIN table with three columns and without partitions. The data is spread across all distributions. The table is created with a CLUSTERED COLUMNSTORE INDEX, which gives better performance and data compression than a heap or rowstore clustered index.  
+ The following example creates a ROUND_ROBIN table with three columns and without partitions. The data is spread across all distributions. The table is created with a CLUSTERED COLUMNSTORE INDEX, which gives better performance and data compression than a heap or rowstore clustered index. 
   
 ```sql
 CREATE TABLE myTable
@@ -521,7 +521,7 @@ WITH ( CLUSTERED COLUMNSTORE INDEX );
 
 ### G. Create a table that's hash-distributed on multiple columns (preview)
 
-The following example creates the same table as the previous example. However, for this table, rows are distributed (on `id` and `zipCode` columns). The table is created with a clustered columnstore index, which gives better performance and data compression than a heap or rowstore clustered index.  
+The following example creates the same table as the previous example. However, for this table, rows are distributed (on `id` and `zipCode` columns). The table is created with a clustered columnstore index, which gives better performance and data compression than a heap or rowstore clustered index. 
   
 ```sql
 CREATE TABLE myTable
@@ -540,7 +540,7 @@ WITH
 <a id="Replicated"></a>
 
 ### H. Create a replicated table
- The following example creates a replicated table similar to the previous examples. Replicated tables are copied in full to each Compute node. With this copy on each Compute node, data movement is reduced for queries. This example is created with a CLUSTERED INDEX, which gives better data compression than a heap. A heap might not contain enough rows to achieve good CLUSTERED COLUMNSTORE INDEX compression.  
+ The following example creates a replicated table similar to the previous examples. Replicated tables are copied in full to each Compute node. With this copy on each Compute node, data movement is reduced for queries. This example is created with a CLUSTERED INDEX, which gives better data compression than a heap. A heap might not contain enough rows to achieve good CLUSTERED COLUMNSTORE INDEX compression. 
   
 ```sql
 CREATE TABLE myTable
@@ -564,7 +564,7 @@ WITH
 
 ### I. Create a partitioned table
 
- The following example creates the same table as shown in example A, with the addition of `RANGE LEFT` partitioning on the `id` column. It specifies four partition boundary values, which results in five partitions.  
+ The following example creates the same table as shown in example A, with the addition of `RANGE LEFT` partitioning on the `id` column. It specifies four partition boundary values, which results in five partitions. 
   
 ```sql
 CREATE TABLE myTable
@@ -580,7 +580,7 @@ WITH
   );  
 ```  
   
- In this example, data will be sorted into the following partitions:  
+ In this example, data is sorted into the following partitions:  
   
 - Partition 1: col <= 10
 - Partition 2: 10 < col <= 20
@@ -588,7 +588,7 @@ WITH
 - Partition 4: 30 < col <= 40
 - Partition 5: 40 < col  
   
- If this same table was partitioned RANGE RIGHT instead of RANGE LEFT (default), the data will be sorted into the following partitions:  
+ If this same table was partitioned RANGE RIGHT instead of RANGE LEFT (default), the data is sorted into the following partitions:  
   
 - Partition 1: col < 10  
 - Partition 2: 10 <= col < 20
@@ -600,7 +600,7 @@ WITH
 
 ### J. Create a partitioned table with one partition
 
- The following example creates a partitioned table with one partition. It doesn't specify any boundary value, which results in one partition.  
+ The following example creates a partitioned table with one partition. It doesn't specify any boundary value, which results in one partition. 
   
 ```sql
 CREATE TABLE myTable (  
@@ -619,7 +619,7 @@ WITH
 
 ### K. Create a table with date partitioning
 
- The following example creates a new table named `myTable`, with partitioning on a `date` column. By using RANGE RIGHT and dates for the boundary values, it puts a month of data in each partition.  
+ The following example creates a new table named `myTable`, with partitioning on a `date` column. By using `RANGE RIGHT` and dates for the boundary values, it puts a month of data in each partition. 
   
 ```sql
 CREATE TABLE myTable (  
@@ -718,10 +718,10 @@ CREATE TABLE { database_name.schema_name.table_name | schema_name.table_name | t
 ## Arguments
 
 #### *database_name*
- The name of the database that will contain the new table. The default is the current database.  
+ The name of the database that will contain the new table. The default is the current database. 
   
 #### *schema_name*
- The schema for the table. Specifying *schema* is optional. If blank, the default schema is used.  
+ The schema for the table. Specifying *schema* is optional. If blank, the default schema is used. 
   
 #### *table_name*
  The name of the new table. 
@@ -734,7 +734,7 @@ CREATE TABLE { database_name.schema_name.table_name | schema_name.table_name | t
 ### Column options
 
  `NULL` | `NOT NULL`  
- Specifies whether `NULL` values are allowed in the column. The default is `NULL`.  
+ Specifies whether `NULL` values are allowed in the column. The default is `NULL`. 
   
 <a id="DataTypesFabric"></a>
 
@@ -743,7 +743,7 @@ CREATE TABLE { database_name.schema_name.table_name | schema_name.table_name | t
 [!INCLUDE [fabric](../../includes/fabric.md)] supports the most commonly used data types. For more information, see [Data types in Microsoft Fabric](/fabric/data-warehouse/data-types).
 
 > [!NOTE]
-> Similar to SQL Server, there is an 8060 byte per row limit. This might become a blocking issue for tables that have many columns, or columns with large data types, such as `varchar(8000)` or `varbinary(8000)`. Inserts or updates that violate the 8060 byte limit will result in error codes 511 or 611. For more information, see [Pages and Extents Architecture Guide](../../relational-databases/pages-and-extents-architecture-guide.md?view=azure-sqldw-latest&preserve-view=true#row-overflow-considerations).
+> Similar to SQL Server, there's an 8,060 byte per row limit. This might become a blocking issue for tables that have many columns, or columns with large data types, such as `varchar(8000)` or `varbinary(8000)`. Inserts or updates that violate the 8,060 byte limit result in error codes 511 or 611. For more information, see [Pages and Extents Architecture Guide](../../relational-databases/pages-and-extents-architecture-guide.md?view=azure-sqldw-latest&preserve-view=true#row-overflow-considerations).
 
 For a table of data type conversions, see the Implicit Conversions section of [CAST and CONVERT (Transact-SQL)](../functions/cast-and-convert-transact-sql.md). For more information, see [Date and time data types and functions (Transact-SQL)](../functions/date-and-time-data-types-and-functions-transact-sql.md).
 
@@ -753,7 +753,7 @@ The following list of supported data types includes their details and storage by
 Stores date and time of day with 19 to 26 characters according to the Gregorian calendar. The date can contain year, month, and day. The time contains hour, minutes, seconds. As an option, you can store and display zero to six digits for fractional seconds based on the *n* parameter. The storage size is 8 bytes. *n* must be a value from `0` to `6`.
 
 > [!NOTE]
-> There is no default precision like other SQL platforms.  You must provide the value for precision from `0` to `6`.
+> There's no default precision like other SQL platforms. You must provide the value for precision from `0` to `6`.
 
   
 |*n* value|Precision|Scale|  
@@ -767,16 +767,16 @@ Stores date and time of day with 19 to 26 characters according to the Gregorian 
 | `6` |26|6|  
   
  `date`  
- Stores a date using a maximum of 10 characters for year, month, and day according to the Gregorian calendar. The storage size is 3 bytes. Date is stored as an integer.  
+ Stores a date using a maximum of 10 characters for year, month, and day according to the Gregorian calendar. The storage size is 3 bytes. Date is stored as an **integer**. 
   
  `time` ( *n* )   
  *n* must be a value from `0` to `6`.
   
  `float` [ ( *n* ) ]  
- Approximate number data type for use with floating point numeric data. Floating point data is approximate, which means that not all values in the data type range can be represented exactly. *n* specifies the number of bits used to store the mantissa of the **float** in scientific notation. *n* dictates the precision and storage size. If *n* is specified, it must be a value between `1` and `53`. The default value of *n* is `53`.  
+ Approximate number data type for use with floating point numeric data. Floating point data is approximate, which means that not all values in the data type range can be represented exactly. *n* specifies the number of bits used to store the mantissa of the **float** in scientific notation. *n* dictates the precision and storage size. If *n* is specified, it must be a value between `1` and `53`. The default value of *n* is `53`.
   
 > [!NOTE]
-> There is no default precision like other SQL platforms.  You must provide the value for precision from `0` to `6`.
+> There is no default precision like other SQL platforms. You must provide the value for precision from `0` to `6`.
 
 
 | *n* value | Precision | Storage size |  
@@ -784,21 +784,21 @@ Stores date and time of day with 19 to 26 characters according to the Gregorian 
 | 1-24   | 7 digits  | 4 bytes      |  
 | 25-53  | 15 digits | 8 bytes      |  
   
- [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] treats *n* as one of two possible values. If `1`<= *n* <= `24`, *n* is treated as `24`. If `25` <= *n* <= `53`, *n* is treated as `53`.  
+ [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] treats *n* as one of two possible values. If `1`<= *n* <= `24`, *n* is treated as `24`. If `25` <= *n* <= `53`, *n* is treated as `53`. 
   
- The [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] **float** data type complies with the ISO standard for all values of *n* from `1` through `53`. The synonym for double precision is **float(53)**.  
+ The [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] **float** data type complies with the ISO standard for all values of *n* from `1` through `53`. The synonym for double precision is **float(53)**. 
   
  `real` [ ( *n* ) ]  
- The definition of real is the same as float. The ISO synonym for **real** is **float(24)**.  
+ The definition of real is the same as float. The ISO synonym for **real** is **float(24)**. 
   
  `decimal` [ ( *precision* [ *, scale* ] ) ] | `numeric` [ ( *precision* [ *, scale* ] ) ]  
- Stores fixed precision and scale numbers.  
+ Stores fixed precision and scale numbers. 
   
  *precision*  
- The maximum total number of decimal digits that can be stored, on either side of the decimal point. The precision must be a value from `1` through the maximum precision of `38`. The default precision is `18`.  
+ The maximum total number of decimal digits that can be stored, on either side of the decimal point. The precision must be a value from `1` through the maximum precision of `38`. The default precision is `18`. 
   
  *scale*  
- The maximum number of decimal digits that can be stored to the right of the decimal point. *Scale* must be a value from `0` through *precision*. You can only specify *scale* if *precision* is specified. The default scale is `0` and so `0` <= *scale* <= *precision*. Maximum storage sizes vary, based on the precision.  
+ The maximum number of decimal digits that can be stored to the right of the decimal point. *Scale* must be a value from `0` through *precision*. You can only specify *scale* if *precision* is specified. The default scale is `0` and so `0` <= *scale* <= *precision*. Maximum storage sizes vary, based on the precision. 
   
 | Precision | Storage bytes  |  
 | ---------: |-------------: |  
@@ -808,7 +808,7 @@ Stores date and time of day with 19 to 26 characters according to the Gregorian 
 | 29-38      |            17 |  
   
  `bigint` \| `int` \| `smallint`  
- Exact-number data types that use integer data. The storage is shown in the following table.  
+ Exact-number data types that use integer data. The storage is shown in the following table. 
   
 | Data Type | Storage bytes |  
 | --------- | ------------: |  
@@ -817,7 +817,7 @@ Stores date and time of day with 19 to 26 characters according to the Gregorian 
 | `smallint` |2|  
   
  `bit`  
- An integer data type that can take the value of `1`, `0`, or `NULL. [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] optimizes storage of bit columns. If there are 8 or fewer bit columns in a table, the columns are stored as 1 byte. If there are from 9-16 bit columns, the columns are stored as 2 bytes, and so on.  
+ An integer data type that can take the value of `1`, `0`, or `NULL. [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] optimizes storage of bit columns. If there are 8 or fewer bit columns in a table, the columns are stored as 1 byte. If there are from 9-16 bit columns, the columns are stored as 2 bytes, and so on. 
   
  `varchar` [ ( *n* | `MAX` ) ]
  Variable-length, Unicode character data with a length of *n* bytes. *n* must be a value from `1` to `8000`. The storage size is the actual length of data entered + 2 bytes. The default for *n* is `1`. The `varchar(MAX)` column can store up to 1 MB of text in [!INCLUDE [fabricdw](../../includes/fabric-dw.md)].
@@ -826,10 +826,10 @@ Stores date and time of day with 19 to 26 characters according to the Gregorian 
 > `varchar(MAX)` is in preview in [!INCLUDE [fabricdw](../../includes/fabric-dw.md)]. For more information, see [Data types in Microsoft Fabric](/fabric/data-warehouse/data-types).
 
  `char` [ ( *n* ) ]  
- Fixed-length, Unicode character data with a length of *n* bytes. *n* must be a value from `1` to `8000`. The storage size is *n* bytes. The default for *n* is `1`.  
+ Fixed-length, Unicode character data with a length of *n* bytes. *n* must be a value from `1` to `8000`. The storage size is *n* bytes. The default for *n* is `1`. 
   
  `varbinary` [ ( *n*  | `MAX` ) ] 
- Variable-length binary data. *n* can be a value from `1` to `8000`. The storage size is the actual length of data entered + 2 bytes. The default value for *n* is 7.  
+ Variable-length binary data. *n* can be a value from `1` to `8000`. The storage size is the actual length of data entered + 2 bytes. The default value for *n* is 7. 
  The `varbinary(MAX)` column can store up to 1 MB of data in [!INCLUDE [fabricdw](../../includes/fabric-dw.md)].
 
 > [!NOTE]
@@ -852,16 +852,16 @@ The user needs to be a member of the Admin, Member, or Contributor roles in the 
 - Table names in [!INCLUDE [fabricdw](../../includes/fabric-dw.md)] in [!INCLUDE [fabric](../../includes/fabric.md)] cannot include the characters `/` or `\` or end with a `.`.
 - Column names can't be greater than 128 characters.
 - Tables have a maximum of 1,024 columns per table.
-- The default collation supported in [!INCLUDE [fabricdw](../../includes/fabric-dw.md)] is `Latin1_General_100_BIN2_UTF8`.  You can also [create warehouses with case-insensitive (CI) collation - Latin1_General_100_CI_AS_KS_WS_SC_UTF8](/fabric/data-warehouse/collation).
+- The default collation supported in [!INCLUDE [fabricdw](../../includes/fabric-dw.md)] is `Latin1_General_100_BIN2_UTF8`. You can also [create warehouses with case-insensitive (CI) collation - Latin1_General_100_CI_AS_KS_WS_SC_UTF8](/fabric/data-warehouse/collation).
 
 ## Remarks
 
-There is limited Transact-SQL functionality in [!INCLUDE [fabricdw](../../includes/fabric-dw.md)]. For more information, see [TSQL Surface Area in [!INCLUDE [fabric](../../includes/fabric.md)]](/fabric/data-warehouse/tsql-surface-area).
+There is limited Transact-SQL functionality in [!INCLUDE [fabricdw](../../includes/fabric-dw.md)]. For more information, see [T-SQL Surface Area in [!INCLUDE [fabric](../../includes/fabric.md)]](/fabric/data-warehouse/tsql-surface-area).
 
 <a id="LockingBehavior"></a>
 
 ## Locking behavior
- Takes a Schema-Modification lock on the table, a shared lock on the DATABASE, and a Schema-Stability lock on the SCHEMA.  
+ Takes a Schema-Modification lock on the table, a shared lock on the DATABASE, and a Schema-Stability lock on the SCHEMA. 
 
 ## Related content
 
