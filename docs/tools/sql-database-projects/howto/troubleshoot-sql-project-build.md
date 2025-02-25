@@ -42,7 +42,7 @@ The full set of switches can be found at the [MSBuild Command-Line Reference](/v
 
 ### Build errors
 
-When the build error indicates invalid syntax, the output also specifies which file contains the erroneous code. If you're using syntax that has been recently added, you may need to update your project SDK version.​
+When the build error indicates invalid syntax, the output also specifies which file contains the erroneous code. If you're using syntax that was recently added, you may need to update your project SDK version.​
 
 Build errors from a database project should have `SQLxxxxx` error code​, where `xxxxx` is a 5-digit number. A number of issues can cause the error for an unresolved reference (`SQL71501`/`SQL71502`)​:
 
