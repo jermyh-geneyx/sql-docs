@@ -44,7 +44,7 @@ The full set of switches can be found at the [MSBuild Command-Line Reference](/v
 
 When the build error indicates invalid syntax, the output also specifies which file contains the erroneous code. If you're using syntax that was recently added, you may need to update your project SDK version.​
 
-Build errors from a database project should have `SQLxxxxx` error code​, where `xxxxx` is a 5-digit number. A number of issues can cause the error for an unresolved reference (`SQL71501`/`SQL71502`)​:
+Build errors from a database project should have `SQLxxxxx` error code​, where `xxxxx` is a five-digit number. Some issues that cause the error for an unresolved reference (`SQL71501`/`SQL71502`)​ are:
 
 - Ambiguous object names​. Recommendations:
   - Use fully resolved names (`[schema].[table].[column]`)​
@@ -57,7 +57,7 @@ Build errors from a database project should have `SQLxxxxx` error code​, where
 
 ### Other failures
 
-For an error that occurs during restore, it's recommended to try a clean build after deleting the `/bin` and `/obj` folders in the project.
+For an error that occurs during restore, first run a clean build after deleting the `/bin` and `/obj` folders in the project.
 
 If the error includes `SDK 'Microsoft.Build.Sql' specified could not be found​`, begin by verifying NuGet package feeds are valid. The base command to view current feeds is:
 
