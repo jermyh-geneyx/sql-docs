@@ -44,7 +44,7 @@ The full set of switches can be found at the [MSBuild Command-Line Reference](/v
 
 When the build error indicates invalid syntax, the output also specifies which file contains the erroneous code. If you're using syntax that has been recently added, you may need to update your project SDK version.​
 
-Build errors from a SQL database project should have SQL xxxxx error code​, where xxxxx is a 5-digit number. A number of issues can cause the error for an unresolved reference (SQL71501/71502)​:
+Build errors from a database project should have `SQLxxxxx` error code​, where `xxxxx` is a 5-digit number. A number of issues can cause the error for an unresolved reference (`SQL71501`/`SQL71502`)​:
 
 - Ambiguous object names​. Recommendations:
   - Use fully resolved names (`[schema].[table].[column]`)​
@@ -57,7 +57,7 @@ Build errors from a SQL database project should have SQL xxxxx error code​, wh
 
 ### Other failures
 
-For an error that occurs during restore, it is recommended to try a clean build after deleting the `/bin` and `/obj` folders in the project.
+For an error that occurs during restore, it's recommended to try a clean build after deleting the `/bin` and `/obj` folders in the project.
 
 If the error includes `SDK 'Microsoft.Build.Sql' specified could not be found​`, begin by verifying NuGet package feeds are valid. The base command to view current feeds is:
 
@@ -71,7 +71,7 @@ The public NuGet feed is:
     dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org​
 ```
 
-If your environment requires private feeds, ensure they are valid and accessible. You may be required to authenticate with package feeds. Enabling authentication during project build can be done with:
+If your environment requires private feeds, ensure they're valid and accessible. You may be required to authenticate with package feeds. Enabling authentication during project build can be done with:
 
 ```bash
     dotnet build --interactive or msbuild /p:nugetInteractive=true​
