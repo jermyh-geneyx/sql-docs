@@ -1181,7 +1181,7 @@ ALTER TABLE cannot be part of an explicit transaction.
 
 ### XEvents for partition switch
 
- The following XEvents are related to `ALTER TABLE ... SWITCH PARTITION` and [online index rebuilds](alter-index-transact-sql.md#online---on--off--as-applies-to-rebuild_index_option).
+ The following XEvents are related to `ALTER TABLE ... SWITCH PARTITION` and [online index rebuilds](alter-index-transact-sql.md#online---on--off-).
   
 -   lock_request_priority_state
 -   process_killed_by_abort_blockers  
