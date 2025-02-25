@@ -988,7 +988,7 @@ ALTER INDEX cci_FactInternetSales2 ON FactInternetSales2 REORGANIZE;
 
 ### E. Rebuild a clustered columnstore index offline
 
-Applies to: [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] (starting with [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)]), [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and [!INCLUDE[ssazuremi-md](../../includes/ssazuremi-md.md)]
+Applies to: [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and [!INCLUDE[ssazuremi-md](../../includes/ssazuremi-md.md)]
 
 > [!TIP]  
 > Starting with [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], we recommend using `ALTER INDEX REORGANIZE` instead of `ALTER INDEX REBUILD` for columnstore indexes.
