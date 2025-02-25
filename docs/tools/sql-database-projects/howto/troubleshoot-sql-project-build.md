@@ -62,19 +62,19 @@ For an error that occurs during restore, first run a clean build after deleting 
 If the error includes `SDK 'Microsoft.Build.Sql' specified could not be found​`, begin by verifying NuGet package feeds are valid. The base command to view current feeds is:
 
 ```bash
-    dotnet nuget list source​
+dotnet nuget list source​
 ```
 
 The public NuGet feed is:
 
 ```bash
-    dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org​
+dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org​
 ```
 
 If your environment requires private feeds, ensure they're valid and accessible. You may be required to authenticate with package feeds. Enabling authentication during project build can be done with:
 
 ```bash
-    dotnet build --interactive or msbuild /p:nugetInteractive=true​
+dotnet build --interactive or msbuild /p:nugetInteractive=true​
 ```
 
 For other non-SQL error codes, refer to the following resources:
