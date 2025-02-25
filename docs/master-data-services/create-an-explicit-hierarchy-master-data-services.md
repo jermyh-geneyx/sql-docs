@@ -6,7 +6,7 @@ ms.author: jiwang6
 ms.date: "04/01/2016"
 ms.service: sql
 ms.subservice: master-data-services
-ms.topic: conceptual
+ms.topic: how-to
 helpviewer_keywords:
   - "creating explicit hierarchies [Master Data Services]"
   - "explicit hierarchies, creating"

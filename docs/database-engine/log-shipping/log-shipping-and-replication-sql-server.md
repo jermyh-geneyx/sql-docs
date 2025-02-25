@@ -6,7 +6,7 @@ ms.author: mikeray
 ms.date: "04/11/2023"
 ms.service: sql
 ms.subservice: log-shipping
-ms.topic: conceptual
+ms.topic: how-to
 helpviewer_keywords:
   - "replication [SQL Server], log shipping and"
   - "log shipping [SQL Server], replication and"

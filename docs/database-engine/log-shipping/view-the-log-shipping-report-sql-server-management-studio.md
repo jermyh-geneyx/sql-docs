@@ -6,7 +6,7 @@ ms.author: mikeray
 ms.date: "03/04/2017"
 ms.service: sql
 ms.subservice: log-shipping
-ms.topic: conceptual
+ms.topic: how-to
 helpviewer_keywords:
   - "viewing log shipping reports"
   - "displaying log shipping reports"

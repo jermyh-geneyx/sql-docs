@@ -6,7 +6,7 @@ ms.author: jiwang6
 ms.date: "07/25/2017"
 ms.service: sql
 ms.subservice: master-data-services
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: microsoft-excel-add-in
 ---
 # Create a Domain-based Attribute (MDS Add-in for Excel)

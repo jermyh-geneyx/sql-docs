@@ -6,7 +6,7 @@ ms.author: jiwang6
 ms.date: "03/20/2017"
 ms.service: sql
 ms.subservice: master-data-services
-ms.topic: conceptual
+ms.topic: upgrade-and-migration-article
 ---
 # Upgrade Database Wizard (Master Data Services Configuration Manager)
 

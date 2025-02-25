@@ -8,7 +8,7 @@ ms.reviewer: wiassaf
 ms.date: 09/09/2022
 ms.service: sql
 ms.subservice: machine-learning-bdc
-ms.topic: conceptual
+ms.topic: how-to
 ---
 
 # Run Python and R scripts with Machine Learning Services on SQL Server 2019 Big Data Clusters
