@@ -246,7 +246,7 @@ In some cases creating a clustered index can enable previously disabled indexes.
 
 #### NONCLUSTERED
 
-Creates an index that specifies the physical order for a subset of columns that is different from the physical order of the table.
+Creates an index that specifies the order for a subset of columns that is different from the physical order of the table.
 
 Each table can have up to 999 nonclustered indexes, regardless of how the indexes are created: either implicitly with the `PRIMARY KEY` and `UNIQUE` constraints, or explicitly with `CREATE INDEX`.
 
