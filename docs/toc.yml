@@ -8681,6 +8681,8 @@ items:
         href: tools/sql-database-projects/howto/convert-original-sql-project.md
       - name: Author custom code analysis rules
         href: tools/sql-database-projects/howto/author-custom-code-analysis-rules.md
+      - name: Troubleshoot SQL project Build
+        href: tools/sql-database-projects/howto/troubleshoot-sql-project-build.md
     - name: Concepts
       items:
       - name: Project properties
