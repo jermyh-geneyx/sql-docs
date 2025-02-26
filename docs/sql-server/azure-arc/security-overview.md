@@ -57,6 +57,8 @@ The following diagram illustrates the architecture of Azure Arc-enabled SQL Serv
 
 :::image type="content" source="media/security-overview/architecture.png" alt-text="Logical diagram of SQL Server enabled by Azure Arc." lightbox="media/security-overview/architecture.png":::
 
+[!INCLUDE [get-jumpstart-image](includes/get-jumpstart-image.md)]
+
 ## Components
 
 An instance of SQL Server enabled by Azure Arc has integrated components and services that run on your server and help connect to Azure. In addition to the [Agent services](/azure/azure-arc/servers/security-overview#agent-services), an instance enabled has the components listed in this section.
