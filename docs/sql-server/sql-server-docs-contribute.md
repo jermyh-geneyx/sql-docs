@@ -7,7 +7,7 @@ ms.reviewer: randolphwest
 ms.date: 01/04/2024
 ms.service: sql
 ms.subservice: release-landing
-ms.topic: conceptual
+ms.topic: how-to
 monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017"
 ---
 
