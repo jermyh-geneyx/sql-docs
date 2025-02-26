@@ -7,7 +7,7 @@ ms.reviewer:
 ms.date: "09/23/2018"
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 ---
 # Connect to the SSIS Catalog (SSISDB) in Azure
 

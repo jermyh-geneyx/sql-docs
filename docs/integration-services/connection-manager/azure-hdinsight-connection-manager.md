@@ -6,7 +6,7 @@ ms.author: "lingxl"
 ms.date: "02/28/2017"
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 f1_keywords:
   - "SQL13.DTS.DESIGNER.AFPHDICM.F1"
   - "SQL14.DTS.DESIGNER.AFPHDICM.F1"

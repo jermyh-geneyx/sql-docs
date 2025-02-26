@@ -7,7 +7,7 @@ ms.reviewer: randolphwest
 ms.date: 11/03/2022
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 ---
 
 # Validate SQL Server Integration Services (SSIS) packages deployed to Azure

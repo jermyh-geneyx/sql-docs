@@ -7,7 +7,7 @@ ms.reviewer:
 ms.date: "12/13/2017"
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: performance
 f1_keywords:
   - "sql13.ssis.ssms.ispackageexecuteinscaleout.f1"

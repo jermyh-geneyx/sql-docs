@@ -6,7 +6,7 @@ ms.author: chugu
 ms.date: "06/29/2018"
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 ---
 # Import data from Excel or export data to Excel with SQL Server Integration Services (SSIS)
 

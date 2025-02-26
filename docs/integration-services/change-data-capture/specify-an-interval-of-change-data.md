@@ -6,7 +6,7 @@ ms.author: chugu
 ms.date: "03/13/2017"
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 helpviewer_keywords:
   - "incremental load [Integration Services],specifying interval"
 ---

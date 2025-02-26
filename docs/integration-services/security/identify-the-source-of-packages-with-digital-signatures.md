@@ -6,7 +6,7 @@ ms.author: chugu
 ms.date: "08/24/2016"
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: security
 f1_keywords:
   - "sql13.dts.digitalsigning.f1"

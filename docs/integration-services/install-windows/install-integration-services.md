@@ -7,7 +7,7 @@ ms.reviewer: mikeray
 ms.date: 09/17/2024
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: install-set-up-deploy
 ms.custom:
   - intro-installation
 helpviewer_keywords:
