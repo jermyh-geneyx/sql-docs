@@ -6,7 +6,7 @@ ms.author: jiwang6
 ms.date: "03/14/2017"
 ms.service: sql
 ms.subservice: master-data-services
-ms.topic: conceptual
+ms.topic: how-to
 ---
 # Change the Entity Transaction Log Type (Master Data Services)
 

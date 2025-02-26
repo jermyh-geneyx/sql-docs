@@ -7,7 +7,7 @@ ms.reviewer:
 ms.date: 05/30/2024
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 ---
 
 # Connect to a PostgreSQL Data Source (SQL Server Import and Export Wizard)

@@ -6,7 +6,7 @@ ms.author: jiwang6
 ms.date: "03/17/2017"
 ms.service: sql
 ms.subservice: master-data-services
-ms.topic: conceptual
+ms.topic: how-to
 ---
 # Associate a Master Data Services Database and Web Application
 

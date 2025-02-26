@@ -6,7 +6,7 @@ ms.author: jiwang6
 ms.date: "07/08/2016"
 ms.service: sql
 ms.subservice: master-data-services
-ms.topic: conceptual
+ms.topic: whats-new
 monikerRange: ">=sql-server-ver16"
 ---
 # What's New in Master Data Services (MDS)

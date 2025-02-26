@@ -6,7 +6,7 @@ ms.author: jiwang6
 ms.date: "07/01/2019"
 ms.service: sql
 ms.subservice: master-data-services
-ms.topic: conceptual
+ms.topic: how-to
 monikerRange: ">=sql-server-ver15"
 ---
 # Host an MDS database on a managed instance

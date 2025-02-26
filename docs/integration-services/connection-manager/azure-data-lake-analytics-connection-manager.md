@@ -7,7 +7,7 @@ ms.reviewer:
 ms.date: "05/18/2018"
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 f1_keywords:
   - "SQL13.DTS.DESIGNER.AFPADLSCM.F1"
   - "sql14.dts.designer.afpadlscm.f1"

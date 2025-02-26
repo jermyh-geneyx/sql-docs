@@ -6,7 +6,7 @@ ms.author: mikeray
 ms.date: "02/01/2016"
 ms.service: sql
 ms.subservice: log-shipping
-ms.topic: conceptual
+ms.topic: upgrade-and-migration-article
 helpviewer_keywords:
   - "log shipping [SQL Server], upgrading"
 ---

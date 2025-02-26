@@ -6,7 +6,7 @@ ms.author: chugu
 ms.date: "03/17/2017"
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: troubleshooting-general
 helpviewer_keywords:
   - "SQL Server Integration Services packages, troubleshooting"
   - "SSIS packages, troubleshooting"

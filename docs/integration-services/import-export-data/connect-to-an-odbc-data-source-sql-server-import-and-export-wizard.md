@@ -7,7 +7,7 @@ ms.reviewer: vanto
 ms.date: 09/12/2024
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 ---
 # Connect to an ODBC Data Source (SQL Server Import and Export Wizard)
 

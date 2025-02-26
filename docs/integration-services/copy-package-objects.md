@@ -6,7 +6,7 @@ ms.author: chugu
 ms.date: "03/01/2017"
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 helpviewer_keywords:
   - "control flow [Integration Services], copying objects"
   - "copying package objects [Integration Services]"

@@ -6,7 +6,7 @@ ms.author: chugu
 ms.date: "03/01/2017"
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: article
 ---
 # Change Data Capture Service for Oracle by Attunity How to Guide
 

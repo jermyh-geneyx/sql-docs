@@ -6,7 +6,7 @@ ms.author: chugu
 ms.date: "12/24/2019"
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 f1_keywords:
   - "SQL13.SSIS.AZURE.F1"
   - "SQL14.SSIS.AZURE.F1"

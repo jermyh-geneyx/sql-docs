@@ -7,7 +7,7 @@ ms.reviewer:
 ms.date: "05/29/2018"
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 ---
 # Run SQL Server Integration Services (SSIS) packages deployed in Azure
 

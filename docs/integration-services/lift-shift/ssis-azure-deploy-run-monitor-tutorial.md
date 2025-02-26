@@ -7,7 +7,7 @@ ms.reviewer:
 ms.date: 05/22/2018
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: tutorial
 ms.custom: intro-deployment
 ---
 # Tutorial: Deploy and run a SQL Server Integration Services (SSIS) package in Azure

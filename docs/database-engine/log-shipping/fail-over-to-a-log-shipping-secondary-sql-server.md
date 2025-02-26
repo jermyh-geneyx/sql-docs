@@ -6,7 +6,7 @@ ms.author: mikeray
 ms.date: "03/07/2017"
 ms.service: sql
 ms.subservice: log-shipping
-ms.topic: conceptual
+ms.topic: how-to
 helpviewer_keywords:
   - "primary databases [SQL Server]"
   - "secondary data files [SQL Server], manual fail over"

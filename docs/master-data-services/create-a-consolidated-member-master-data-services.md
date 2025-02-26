@@ -6,7 +6,7 @@ ms.author: jiwang6
 ms.date: "04/01/2016"
 ms.service: sql
 ms.subservice: master-data-services
-ms.topic: conceptual
+ms.topic: how-to
 helpviewer_keywords:
   - "creating consolidated members [Master Data Services]"
   - "members [Master Data Services], creating consolidated members"

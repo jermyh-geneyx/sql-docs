@@ -6,7 +6,7 @@ ms.author: chugu
 ms.date: "04/10/2020"
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: upgrade-and-migration-article
 ms.custom: intro-migration
 ---
 

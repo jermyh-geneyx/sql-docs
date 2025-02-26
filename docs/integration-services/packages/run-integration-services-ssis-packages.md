@@ -6,7 +6,7 @@ ms.author: chugu
 ms.date: 06/04/2018
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 f1_keywords:
   - "sql13.ssis.ssms.ispackageexecute.f1"
   - "sql13.ssis.ssms.executepackage.f1"

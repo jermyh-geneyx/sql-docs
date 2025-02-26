@@ -6,7 +6,7 @@ ms.author: jiwang6
 ms.date: "02/14/2017"
 ms.service: sql
 ms.subservice: master-data-services
-ms.topic: conceptual
+ms.topic: concept-article
 f1_keywords:
   - "sql13.mds.configmanager.srvconnect.f1"
   - "sql13.mds.configmanager.dbmailprofileacct.f1"

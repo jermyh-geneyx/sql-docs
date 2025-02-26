@@ -6,7 +6,7 @@ ms.author: randolphwest
 ms.date: "07/21/2017"
 ms.service: sql
 ms.subservice: master-data-services
-ms.topic: conceptual
+ms.topic: upgrade-and-migration-article
 monikerRange: ">=sql-server-2016"
 ---
 # Upgrade Master Data Services

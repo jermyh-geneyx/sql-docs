@@ -7,7 +7,7 @@ ms.reviewer: "wiassaf"
 ms.date: "07/26/2021"
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 helpviewer_keywords:
   - "incremental load [Integration Services],creating function"
 ---
