@@ -90,6 +90,8 @@ SELECT DATABASEPROPERTYEX(DB_NAME(), 'Updateability');
 
 ## Monitor and troubleshoot read-only replicas
 
+You have a variety of ways to monitor read-only replicas, including: DMVs, extended events, and [database watcher (preview)](../database-watcher-overview.md).
+
 When connected to a read-only replica, Dynamic Management Views (DMVs) reflect the state of the replica, and can be queried for monitoring and troubleshooting purposes. The database engine provides multiple views to expose a wide variety of monitoring data.
 
 The following views are commonly used for replica monitoring and troubleshooting:
