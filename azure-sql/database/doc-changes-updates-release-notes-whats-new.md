@@ -5,7 +5,7 @@ description: Learn about the new features and documentation improvements for Azu
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: mathoma, randolphwest
-ms.date: 02/12/2025
+ms.date: 02/20/2025
 ms.service: azure-sql-database
 ms.subservice: service-overview
 ms.topic: whats-new
@@ -39,7 +39,6 @@ The following table lists the features of Azure SQL Database that are currently 
 
 | Feature | Details |
 | --- | --- |
-| **Availability metric**| Availability is now a metric in the Azure Monitor metrics. Driven by a variety of user connection failures, you can [monitor and configure alerts on Azure SQL Database Availability](monitoring-metrics-alerts.md#availability-metric). |
 | **Copilot skills in Azure SQL Database** | Microsoft Copilot skills in Azure SQL Database include two Azure portal experiences: [Natural language to SQL](../copilot/query-editor-natural-language-to-sql-copilot.md) within the [Azure portal query editor](query-editor.md), and [Azure Copilot integration](../copilot/copilot-azure-sql-overview.md#microsoft-copilot-in-azure-enhanced-scenarios). |
 | **Database watcher for Azure SQL** |[Database watcher](../database-watcher-overview.md) is a managed monitoring solution for database services in the Azure SQL family. Database watcher collects in-depth workload monitoring data to give you a detailed view of database performance, configuration, and health. Learn more about [database watcher](https://aka.ms/dbwatcher-preview-announcement). |
 | **Degrees of Parallelism (DOP) feedback** | [DOP Feedback](/sql/relational-databases/performance/intelligent-query-processing-degree-parallelism-feedback?view=azuresqldb-current&preserve-view=true) is currently available as a limited preview. For more information and how to apply for the preview, see [Announcing Degree of Parallelism Feedback Limited Preview](https://techcommunity.microsoft.com/t5/azure-sql-blog/announcing-degree-of-parallelism-feedback-limited-preview/ba-p/3806924). |
@@ -65,6 +64,7 @@ The following table lists features of Azure SQL Database that have been made gen
 
 | Feature | GA Month | Details |
 | --- | --- | --- |
+| **Availability metric**| February 2025 | Availability is presented as a metric in the Azure Monitor metrics. Driven by a variety of user connection failures, you can [monitor and configure alerts on Azure SQL Database Availability](monitoring-metrics-alerts.md#availability-metric). |
 | **sys.dm_database_backups** | February 2025 | The [sys.dm_database_backups](/sql/relational-databases/system-dynamic-management-views/sys-dm-database-backups-azure-sql-database?view=azuresqldb-current&preserve-view=true) DMV returns information about the [automated backups of a database](automated-backups-overview.md). | 
 | **Free Azure SQL Database** | January 2025 | Use [Azure SQL Database for free](free-offer.md), for the life of your subscription. This free offer provides up to ten free General Purpose databases, each with 100,000 vCore seconds of compute, every month. For more information, see [Blog: General availability of Azure SQL Database free offer](https://aka.ms/azuresqlfreedb).|
 | **Hyperscale support for database and file shrink**  | January 2025 | [Database and file shrink commands](file-space-manage.md) are now generally available for Azure SQL Database Hyperscale. For more information, see the [Shrink in Hyperscale Generally Available blog post](https://aka.ms/hs-shrink-ga).|
@@ -93,6 +93,7 @@ Learn about significant changes to the Azure SQL Database documentation. For pre
 
 | Changes | Details |
 | --- | --- |
+| **Availability metric**| Availability is presented as a metric in the Azure Monitor metrics. Driven by a variety of user connection failures, you can [monitor and configure alerts on Azure SQL Database Availability](monitoring-metrics-alerts.md#availability-metric). |
 | **sys.dm_database_backups** | The [sys.dm_database_backups](/sql/relational-databases/system-dynamic-management-views/sys-dm-database-backups-azure-sql-database?view=azuresqldb-current&preserve-view=true) dynamic management view returns information about the [automated backups of a database](automated-backups-overview.md). This DMV is now generally available. | 
 | **Manually initiate cutover for conversion to Hyperscale** | When converting an Azure SQL Database to the Hyperscale service tier, [you have a new option to manually initiate the cutover](https://aka.ms/hs-conversion-v2-preview). For more information, see [Convert an existing database to Hyperscale](convert-to-hyperscale.md). This feature is currently in preview.|
 | **Import bacpac file size increase** | The limit for an imported bacpac file size has been increased from 4 GB to 150 GB. For more information on importing a bacpac file generated from SqlPackage, see [Quickstart: Import a bacpac file to a database in Azure SQL Database](database-import.md).|
