@@ -704,6 +704,9 @@ Within this directory, there's a folder created based on the time of load submis
 
 If ERRORFILE has the full path of the storage account defined, then the ERRORFILE_CREDENTIAL is used to connect to that storage. Otherwise, the value mentioned for CREDENTIAL is used. When the same credential that is used for the source data is used for ERRORFILE, restrictions that apply to ERRORFILE_CREDENTIAL also apply.
 
+> [!NOTE]
+>When using a Firewall Protected Storage Account, the error file will be created in the same container specified in the storage account path. When considering using the *ERRORFILES* option, it is also required to specify the *MAXERROR* parameter.
+
 #### *ERRORFILE_CREDENTIAL = (IDENTITY= '', SECRET = '')*
 
 *ERRORFILE_CREDENTIAL* only applies to CSV files.  On [!INCLUDE [fabricdw](../../includes/fabric-dw.md)] in [!INCLUDE [fabric](../../includes/fabric.md)], the only supported authentication mechanism is Shared Access Signature (SAS).
@@ -819,6 +822,9 @@ GO
 GRANT INSERT to [mike@contoso.com];
 GO
 ```
+
+> [!NOTE]  
+> When using the *ErrorFile* option, the user must have the minimal permission of Blob Storage Contributor on the Storage Account container.
 
 ## Remarks
 
