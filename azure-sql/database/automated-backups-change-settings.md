@@ -161,7 +161,7 @@ To configure backup storage redundancy when you're creating a new database, you 
 
 By default, all databases in Azure SQL Database use geo-redundant storage for backups. Geo-restore is disabled if a database is created or updated with locally redundant or zone-redundant backup storage.
 
-This example creates a database in the [General Purpose](service-tier-general-purpose.md) service tier with local backup redundancy:
+This example creates a database in the [General Purpose](service-tiers-sql-database-vcore.md#general-purpose) service tier with local backup redundancy:
 
 ```azurecli
 az sql db create \
@@ -222,7 +222,7 @@ For syntax details, see [az sql db copy](/cli/azure/sql/db#az-sql-db-copy). For 
 
 To configure backup storage redundancy when you're creating a new database, you can specify the `-BackupStorageRedundancy` parameter with the `New-AzSqlDatabase` cmdlet. Possible values are `Geo`, `Zone`, and `Local`. By default, all databases in Azure SQL Database use geo-redundant storage for backups. Geo-restore is disabled if a database is created with locally redundant or zone-redundant backup storage.
 
-This example creates a database in the [General Purpose](service-tier-general-purpose.md) service tier with local backup redundancy:
+This example creates a database in the [General Purpose](service-tiers-sql-database-vcore.md#general-purpose) service tier with local backup redundancy:
 
 ```powershell
 # Create a new database with geo-redundant backup storage.  
@@ -244,7 +244,7 @@ For details, see [Set-AzSqlDatabase](/powershell/module/az.sql/set-azsqldatabase
 
 Carefully consider the configuration option for `--backup-storage-redundancy` when you're creating a Hyperscale database. You can specify storage redundancy only during the database creation process for Hyperscale databases. The selected storage redundancy option will be used for the lifetime of the database for both data storage redundancy and backup storage redundancy. Learn more in [Hyperscale backups and storage redundancy](hyperscale-automated-backups-overview.md#data-and-backup-storage-redundancy).
 
-Existing databases can migrate to different storage redundancy through [database copy](database-copy.md) or point-in-time restore. This example creates a database in the [Hyperscale](service-tier-general-purpose.md) service tier with zone redundancy:
+Existing databases can migrate to different storage redundancy through [database copy](database-copy.md) or point-in-time restore. This example creates a database in the [Hyperscale](service-tiers-sql-database-vcore.md#general-purpose) service tier with zone redundancy:
 
 ```powershell
 # Create a new database with geo-redundant backup storage.  

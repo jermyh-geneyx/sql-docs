@@ -24,7 +24,7 @@ Azure SQL Database is based on SQL Server Database Engine architecture that is a
 
 The Hyperscale service tier is suitable for all workload types. Its cloud-native architecture provides independently scalable compute and storage to support the widest variety of traditional and modern applications. Compute and storage resources in Hyperscale substantially exceed the resources available in the General Purpose and Business Critical tiers.
 
-For details on the General Purpose and Business Critical service tiers in the vCore-based purchasing model, see [General Purpose](service-tier-general-purpose.md) and [Business Critical](service-tier-business-critical.md) service tiers. For a comparison of the vCore-based purchasing model with the DTU-based purchasing model, see [Compare vCore and DTU-based purchasing models of Azure SQL Database](purchasing-models.md).
+For details on the General Purpose and Business Critical service tiers in the vCore-based purchasing model, see [General Purpose](service-tiers-sql-database-vcore.md#general-purpose) and [Business Critical](service-tiers-sql-database-vcore.md#business-critical) service tiers. For a comparison of the vCore-based purchasing model with the DTU-based purchasing model, see [Compare vCore and DTU-based purchasing models of Azure SQL Database](purchasing-models.md).
 
 The Hyperscale service tier is currently only available for Azure SQL Database, and not for Azure SQL Managed Instance.
 
@@ -126,8 +126,7 @@ vCore resource limits are listed in the following articles, please be sure to up
 /database/resource-limits-vcore-single-databases.md
 /database/resource-limits-vcore-elastic-pools.md
 /database/resource-limits-logical-server.md
-/database/service-tier-general-purpose.md
-/database/service-tier-business-critical.md
+/database/service-tiers-sql-database-vcore.md
 /database/service-tier-hyperscale.md
 /managed-instance/resource-limits.md
 --->

@@ -102,6 +102,8 @@ The following diagram illustrates the architecture of [!INCLUDE [ssazurearc](../
 
 :::image type="content" source="media/overview/architecture.png" alt-text="Diagram of the architecture for [!INCLUDE [ssazurearc](../../includes/ssazurearc.md)]" lightbox="media/overview/architecture.png":::
 
+[!INCLUDE [get-jumpstart-image](includes/get-jumpstart-image.md)]
+
 ## <a id="feature-differentiation"></a> Feature availability depending on license type
 
 [!INCLUDE [license-types](includes/license-types.md)]

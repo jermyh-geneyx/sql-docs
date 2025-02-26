@@ -23,7 +23,7 @@ ms.custom:
 This article provides an overview of the technical characteristics and resource limits for Azure SQL Managed Instance, and provides information about how to request an increase to these limits.
 
 > [!NOTE]
-> For differences in supported features and T-SQL statements see [Feature differences](../database/features-comparison.md) and [T-SQL statement support](transact-sql-tsql-differences-sql-server.md). For general differences between service tiers for Azure SQL Database and SQL Managed Instance review [General Purpose](../database/service-tier-general-purpose.md) and [Business Critical](../database/service-tier-business-critical.md) service tiers.
+> For differences in supported features and T-SQL statements see [Feature differences](../database/features-comparison.md) and [T-SQL statement support](transact-sql-tsql-differences-sql-server.md). For general differences between service tiers for Azure SQL Database and SQL Managed Instance review [General Purpose](../database/service-tiers-sql-database-vcore.md#general-purpose) and [Business Critical](../database/service-tiers-sql-database-vcore.md#business-critical) service tiers.
 
 ## Hardware configuration characteristics
 
@@ -62,7 +62,7 @@ Supports for the memory-optimized premium-series hardware and the premium-series
 
 ### In-memory OLTP available space
 
-The amount of In-memory OLTP space in [Business Critical](../database/service-tier-business-critical.md) service tier depends on the number of vCores and hardware configuration. The following table lists the limits of memory that can be used for In-memory OLTP objects.
+The amount of In-memory OLTP space in [Business Critical](../database/service-tiers-sql-database-vcore.md#business-critical) service tier depends on the number of vCores and hardware configuration. The following table lists the limits of memory that can be used for In-memory OLTP objects.
 
 | vCores | Standard-series (Gen5) | Premium-series | Memory optimized premium-series |
 | --- | --- | --- | --- |

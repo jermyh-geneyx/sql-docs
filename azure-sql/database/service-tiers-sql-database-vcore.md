@@ -4,7 +4,7 @@ description: The vCore purchasing model lets you independently scale compute and
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: sashan, moslake, mathoma, dfurman, srinia
-ms.date: 09/12/2024
+ms.date: 02/26/2025
 ms.service: azure-sql-database
 ms.subservice: performance
 ms.topic: conceptual
@@ -137,7 +137,9 @@ In the architectural model for the General Purpose service tier, there are two l
 
 Whenever the database engine or operating system is upgraded, some part of underlying infrastructure fails, or if some critical issue is detected in the `sqlservr.exe` process, Azure Service Fabric moves the stateless process to another stateless compute node. There's a set of spare nodes that is waiting to run new compute service if a failover of the primary node happens in order to minimize failover time. Data in Azure storage layer isn't affected, and data/log files are attached to newly initialized process. This process guarantees 99.99% availability by default and 99.995% availability when [zone redundancy](high-availability-sla-local-zone-redundancy.md#zone-redundant-availability) is enabled. There might be some performance impacts to heavy workloads that are in-flight due to transition time and the fact the new node starts with cold cache.
 
-### When to choose this service tier
+<a id="when-to-choose-this-service-tier"></a>
+
+#### When to choose the General Purpose service tier
 
 The General Purpose service tier is the default service tier in Azure SQL Database designed for most of generic workloads. If you need a fully managed database engine with a default SLA and storage latency between 5 ms and 10 ms, the General Purpose tier is the option for you.
 
@@ -153,7 +155,9 @@ Both the database engine process and underlying .mdf/.ldf files are placed on th
 
 In addition, the Business Critical cluster has a built-in [Read Scale-Out](read-scale-out.md) capability that provides a free-of charge read-only replica used to run read-only queries (such as reports) that won't affect the performance of the workload on your primary replica.
 
-#### When to choose this service tier
+<a id="when-to-choose-this-service-tier-1"></a>
+
+#### When to choose the Business Critical service tier
 
 The Business Critical service tier is designed for applications that require low-latency responses from the underlying SSD storage (1-2 ms in average), faster recovery if the underlying infrastructure fails, or need to off-load reports, analytics, and read-only queries to the free of charge readable secondary replica of the primary database.
 
@@ -172,7 +176,9 @@ The Hyperscale service tier is suitable for all workload types. Its cloud native
 
 To learn more, review [Hyperscale service tier for Azure SQL Database](service-tier-hyperscale.md).
 
-### When to choose this service tier
+<a id="when-to-choose-this-service-tier-2"></a>
+
+#### When to choose the Hyperscale service tier
 
 The Hyperscale service tier removes many of the practical limits traditionally seen in cloud databases. Where most other databases are limited by the resources available in a single node, databases in the Hyperscale service tier have no such limits. With its flexible storage architecture, a Hyperscale database grows as needed - and you're billed only for the storage capacity you use.
 

@@ -320,8 +320,6 @@ sections:
     questions:
       - question: What are the current inbound/outbound NSG constraints on the managed instance subnet?
         answer: |
-          ### What are the current inbound/outbound NSG constraints on the managed instance subnet?
-          
           The required NSG and UDR rules are documented in [subnet service-aided configuration](subnet-service-aided-configuration-enable.md#mandatory-security-rules-and-routes), and automatically set by the service.
           Please keep in mind that these rules are just the ones we need for maintaining the service. To connect to managed instance and use different features you will need to set additional, feature specific rules, that you need to maintain.
           
@@ -591,6 +589,11 @@ sections:
         answer: |
           See [Plan for Azure maintenance events in SQL Managed Instance](../database/planned-maintenance.md).
 
+      - question: I can no longer see the November 2022 feature wave in the Azure portal. Why?
+        answer: |
+          Changes and capabilities that were introduced in the November 2022 feature wave are now available to all instances by default. Since taking separate action to enroll an instance is no longer necessary, options that mention the November 2022 feature wave have been removed from the Azure portal.
+
+
   - name: Azure feedback and support
     questions:
       - question: Where can I leave my ideas for SQL Managed Instance improvements?
@@ -600,16 +603,6 @@ sections:
       - question: How can I create Azure support request?
         answer: |
           To learn how to create Azure support request, see [How to create Azure support request](/azure/azure-portal/supportability/how-to-create-azure-support-request).
-
-  - name: November 2022 feature wave
-    questions:
-      - question: I can no longer see the November 2022 feature wave in the Azure portal. Why?
-        answer: |
-          Changes and capabilities that were introduced in the November 2022 feature wave have been integrated to majority of instances and are now available by default. Since taking separate action to enroll an instance is no longer necessary, options that mention the November 2022 feature wave have been removed from the Azure portal.
-
-      - question: My instance isn't able to use features introduced by the November 2022 feature wave. Why?
-        answer: |
-          The feature wave is available to instances in [eligible subnets](doc-changes-updates-release-notes-whats-new.md#november-2022-feature-wave). If you don't see new features, it's likely the subnet that contains your SQL managed instance isn't eligible as it's still in the enrollment process. Instances in subnets not enrolled in the wave continue to see the Feature Wave page in the Azure portal.
 
   - name: Next-gen General Purpose service tier upgrade
     questions:

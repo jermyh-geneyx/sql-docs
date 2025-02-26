@@ -43,14 +43,14 @@ SQL Database offers the following purchasing models:
 
 ## Service tiers
 
-The [vCore-based purchasing model](service-tiers-vcore.md) offers three service tiers: 
-- The [General Purpose](service-tier-general-purpose.md) service tier is designed for common workloads. It offers budget-oriented balanced compute and storage options.
-- The [Business Critical](service-tier-business-critical.md) service tier is designed for OLTP applications with high transaction rates and low latency I/O requirements. It offers the highest resilience to failures by using several isolated replicas.
+The [vCore-based purchasing model](service-tiers-sql-database-vcore.md) offers three service tiers: 
+- The [General Purpose](service-tiers-sql-database-vcore.md#general-purpose) service tier is designed for common workloads. It offers budget-oriented balanced compute and storage options.
+- The [Business Critical](service-tiers-sql-database-vcore.md#business-critical) service tier is designed for OLTP applications with high transaction rates and low latency I/O requirements. It offers the highest resilience to failures by using several isolated replicas.
 - The [Hyperscale](service-tier-hyperscale.md) service tier is designed for most business workloads. Hyperscale provides great flexibility and high performance with independently scalable compute and storage resources. It offers higher resilience to failures by allowing configuration of more than one isolated database replica.
 
 The [DTU-based purchasing model](service-tiers-dtu.md) offers two service tiers: 
-- The [Standard](service-tier-general-purpose.md) service tier is designed for common workloads. It offers budget-oriented balanced compute and storage options.
-- The [Premium](service-tier-business-critical.md) service tier is designed for OLTP applications with high transaction rates and low latency I/O requirements. It offers the highest resilience to failures by using several isolated replicas.
+- The Standard service tier is designed for common workloads. It offers budget-oriented balanced compute and storage options.
+- The Premium service tier is designed for OLTP applications with high transaction rates and low latency I/O requirements. It offers the highest resilience to failures by using several isolated replicas.
 
 ## Compute tiers
 
@@ -78,7 +78,7 @@ You can define the amount of resources assigned.
 - With single databases, each database is isolated from others and is portable. Each has its own guaranteed amount of compute, memory, and storage resources. The amount of the resources assigned to the database is dedicated to that database, and isn't shared with other databases in Azure. You can dynamically [scale single database resources](single-database-scale.md) up and down. The single database option provides different compute, memory, and storage resources for different needs. For example, you can get 1 to 128 vCores, or 32 GB to 4 TB. The [Hyperscale service tier](service-tier-hyperscale.md) enables you to scale up to 128 TB, with fast backup and restore capabilities.
 - With elastic pools, you can assign resources that are shared by all databases in the pool. You can create a new database, or move the existing single databases into a resource pool to maximize the use of resources and save money. This option also gives you the ability to dynamically [scale elastic pool resources](elastic-pool-scale.md) up and down.
 
-You can build your first app on a small, single database at a low cost per month in the [General Purpose](service-tier-general-purpose.md) service tier. You can then change its service tier manually or programmatically at any time to the [Business Critical](service-tier-business-critical.md) or [Hyperscale](service-tier-hyperscale.md) service tier, to meet the needs of your solution. You can adjust performance without downtime to your app or to your customers. Dynamic scaling enables your database to transparently respond to rapidly changing resource requirements. You pay for only the resources that you need when you need them.
+You can build your first app on a small, single database at a low cost per month in the [General Purpose](service-tiers-sql-database-vcore.md#general-purpose) service tier. You can then change its service tier manually or programmatically at any time to the [Business Critical](service-tiers-sql-database-vcore.md#business-critical) or [Hyperscale](service-tier-hyperscale.md) service tier, to meet the needs of your solution. You can adjust performance without downtime to your app or to your customers. Dynamic scaling enables your database to transparently respond to rapidly changing resource requirements. You pay for only the resources that you need when you need them.
 
 *Dynamic scaling* is different from *autoscaling*. Autoscaling is when a service scales automatically based on criteria, whereas dynamic scaling allows for manual scaling without downtime. The single database option supports manual dynamic scaling, but not autoscale. For a more automatic experience, consider these alternatives: 
 

@@ -1,31 +1,29 @@
 ---
-title: Migrate TDE certificate - managed instance
-description: Migrate a certificate protecting the database encryption key of a database with Transparent Data Encryption to Azure SQL Managed Instance
+title: Migrate TDE certificate from SQL Server
+description: Learn how to migrate a SQL Server TDE certificate when you're migrating your SQL Server database to Azure SQL Managed Instance. 
 author: MladjoA
 ms.author: mlandzic
 ms.reviewer: mathoma, jovanpop
-ms.date: 04/06/2023
+ms.date: 02/27/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: security
 ms.topic: how-to
 ms.custom: sqldbrb=1, devx-track-azurepowershell
 ---
 
-# Migrate a certificate of a TDE-protected database to Azure SQL Managed Instance
+# Migrate a SQL Server TDE certificate to Azure SQL Managed Instance
 [!INCLUDE[appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
 
-When you're migrating a database protected by [Transparent Data Encryption (TDE)](/sql/relational-databases/security/encryption/transparent-data-encryption) to Azure SQL Managed Instance using the native restore option, the corresponding certificate from the SQL Server instance needs to be migrated before database restore. This article walks you through the process of manual migration of the certificate to Azure SQL Managed Instance:
+In this article, learn how to migrate the certificate before you migrate your TDE-protected SQL Server database to Azure SQL Managed Instance by using the native restore option. 
 
-> [!div class="checklist"]
->
-> * Export the certificate to a Personal Information Exchange (.pfx) file
-> * Extract the certificate from a file to a base-64 string
-> * Upload it using a PowerShell cmdlet
+When you migrate a database protected by [Transparent Data Encryption (TDE)](/sql/relational-databases/security/encryption/transparent-data-encryption) from SQL Server to Azure SQL Managed Instance using the _native restore option_, you must first migrate the corresponding certificate before you restore the database to SQL managed instance. 
 
-For an alternative option using a fully managed service for seamless migration of both a TDE-protected database and a corresponding certificate, see [How to migrate your on-premises database to Azure SQL Managed Instance using Azure Database Migration Service](/azure/dms/tutorial-sql-server-to-managed-instance).
+Alternatively, you can use the fully managed [Azure Database Migration Service](/data-migration/sql-server/managed-instance/database-migration-service) to seamlessly migrate both a TDE-protected database and the corresponding certificate.
 
-> [!IMPORTANT]
-> A migrated certificate is used for restore of the TDE-protected database only. Soon after restore is done, the migrated certificate gets replaced by a different protector, either a service-managed certificate or an asymmetric key from the key vault, depending on the type of the TDE you set on the instance.
+This article focuses on migrating databases from SQL Server to Azure SQL Managed Instance. To move databases between SQL managed instances, review: 
+- [Copy-only backups](/sql/relational-databases/backup-restore/copy-only-backups-sql-server)
+- [Point-in-time restore](point-in-time-restore.md)
+- [Copy or move a database](database-copy-move-how-to.md)
 
 ## Prerequisites
 
@@ -41,10 +39,6 @@ Make sure you have the following:
 * Azure PowerShell module [installed and updated](/powershell/azure/install-az-ps).
 * [Az.Sql module](https://www.powershellgallery.com/packages/Az.Sql).
 
-[!INCLUDE [updated-for-az](../includes/updated-for-az.md)]
-
-> [!IMPORTANT]
-> The PowerShell Azure Resource Manager (AzureRM) module was deprecated on February 29, 2024. All future development should use the Az.Sql module. Users are advised to migrate from AzureRM to the Az PowerShell module to ensure continued support and updates. The AzureRM module is no longer maintained or supported. The arguments for the commands in the Az PowerShell module and in the AzureRM modules are substantially identical. For more about their compatibility, see [Introducing the new Az PowerShell module](/powershell/azure/new-azureps-module-az).
 
 Run the following commands in PowerShell to install/update the module:
 
@@ -79,7 +73,7 @@ Use the following steps to export the certificate with SQL Server Management Stu
    WHERE dek.encryption_state = 3
    ```
 
-   ![List of TDE certificates](./media/tde-certificate-migrate/onprem-certificate-list.png)
+   ![Screenshot in SSMS showing a List of TDE certificates.](./media/tde-certificate-migrate/onprem-certificate-list.png)
 
 1. Execute the following script to export the certificate to a pair of files (.cer and .pvk), keeping the public and private key information:
 
@@ -94,7 +88,7 @@ Use the following steps to export the certificate with SQL Server Management Stu
    )
    ```
 
-   ![Backup TDE certificate](./media/tde-certificate-migrate/backup-onprem-certificate.png)
+   ![Screenshot in SSMS that shows the backed up TDE certificate.](./media/tde-certificate-migrate/backup-onprem-certificate.png)
 
 1. Use the PowerShell console to copy certificate information from a pair of newly created files to a .pfx file, using the Pvk2Pfx tool:
 
@@ -119,6 +113,9 @@ If the certificate is kept in the SQL Server local machine certificate store, it
 4. Follow the wizard to export the certificate and private key to a .pfx format.
 
 ## Upload the certificate to Azure SQL Managed Instance using an Azure PowerShell cmdlet
+
+> [!IMPORTANT]
+> A migrated certificate is only used to restore the TDE-protected database. Shortly after the restore completes, the migrated certificate is replaced by a different protector, either a service-managed certificate or an asymmetric key from the key vault, depending on the type of TDE you set on the instance.
 
 # [PowerShell](#tab/azure-powershell)
 

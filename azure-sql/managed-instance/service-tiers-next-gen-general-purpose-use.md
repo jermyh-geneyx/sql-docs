@@ -43,7 +43,7 @@ To upgrade an existing instance to the Next-gen General Purpose service tier in 
 You can use the Next-gen General Purpose tier upgrade for new instances when you deploy them in the Azure portal.  To do so, follow these steps:
 
 1. Go to the [Create Azure SQL Managed Instance](https://portal.azure.com/#create/Microsoft.SQLManagedInstance) pane in the Azure portal. 
-1. On the **Networking** tab, under **Virtual network / subnet**, select a subnet from the dropdown that is **Ready for November 2022 feature wave**. 
+1. On the **Networking** tab, under **Virtual network / subnet**, select a subnet from the dropdown. 
 1. On the **Basics** tab, select **Configure Managed Instance** under **Compute + storage** to open the **Compute + storage** pane: 
 
    :::image type="content" source="media/service-tiers-next-gen-general-purpose-use/new-instance-configure.png" alt-text="Screenshot of the Create Azure SQL Managed Instance page in the Azure portal, with Configure Managed Instance selected.":::

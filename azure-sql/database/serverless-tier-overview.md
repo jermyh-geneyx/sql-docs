@@ -17,7 +17,7 @@ ms.custom:
 # Serverless compute tier for Azure SQL Database
 [!INCLUDE [appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
-Serverless is a [compute tier](service-tiers-sql-database-vcore.md#compute) for single databases in Azure SQL Database that automatically scales compute based on workload demand and bills for the amount of compute used per second. The serverless compute tier also automatically pauses databases during inactive periods when only storage is billed and automatically resumes databases when activity returns. The serverless compute tier is available in the [General Purpose](service-tier-general-purpose.md) service tier and the [Hyperscale](service-tier-hyperscale.md) service tier.
+Serverless is a [compute tier](service-tiers-sql-database-vcore.md#compute) for single databases in Azure SQL Database that automatically scales compute based on workload demand and bills for the amount of compute used per second. The serverless compute tier also automatically pauses databases during inactive periods when only storage is billed and automatically resumes databases when activity returns. The serverless compute tier is available in the [General Purpose](service-tiers-sql-database-vcore.md#general-purpose) service tier and the [Hyperscale](service-tier-hyperscale.md) service tier.
 
 > [!NOTE]
 > Auto-pause and auto-resume are currently only supported in the General Purpose service tier.
@@ -78,7 +78,7 @@ The following table describes serverless support based on purchasing model, serv
 | **Category** | **Supported** | **Not supported**|
 |:---|:---|:---|
 | **Purchasing model** | [vCore](service-tiers-vcore.md) | [DTU](service-tiers-dtu.md) |
-| **Service tier** | [General Purpose](service-tier-general-purpose.md) <br/> [Hyperscale](service-tier-hyperscale.md) | Business Critical| 
+| **Service tier** | [General Purpose](service-tiers-sql-database-vcore.md#general-purpose) <br/> [Hyperscale](service-tier-hyperscale.md) | Business Critical| 
 | **Hardware** | Standard-series (Gen5) | All other hardware |  
 
 ## Autoscaling
@@ -718,4 +718,4 @@ Currently, 80 maximum vCores with availability zone support in serverless for th
 ## Related content
 
 - To get started, see [Quickstart: Create a single database - Azure SQL Database](single-database-create-quickstart.md).
-- For serverless service tier choices, see [General Purpose](service-tier-general-purpose.md) and [Hyperscale](service-tier-hyperscale.md).
+- For serverless service tier choices, see [General Purpose](service-tiers-sql-database-vcore.md#general-purpose) and [Hyperscale](service-tier-hyperscale.md).
