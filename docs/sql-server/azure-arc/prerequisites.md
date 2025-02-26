@@ -107,6 +107,10 @@ If a proxy server is used, set the `NO_PROXY` environment variable to exclude pr
 - `localhost`
 - `127.0.0.1`
 
+> [!NOTE]
+> Beginning with extension version `1.1.2971.246`, users can set `NO_PROXY` environment variable to bypass proxy for URLs.
+> With this addition, users wanting to use private endpoints for Azure Key Vault requests and use proxy for all other requests from extension is possible.
+
 ### Connect to Azure Arc data processing service
 
 [!INCLUDE [data-processing-service-permission](includes/data-processing-service-permission.md)]
