@@ -5,7 +5,7 @@ description: Learn about the new authentication metadata modes that allow you to
 author: sravanisaluru
 ms.author: srsaluru
 ms.reviewer: mathoma, vanto, wiassaf
-ms.date: 09/03/2024
+ms.date: 02/26/2024
 ms.service: azure-sql-managed-instance
 ms.subservice: security
 ms.topic: conceptual
@@ -15,7 +15,7 @@ ms.topic: conceptual
 
 [!INCLUDE[appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
 
-The **Windows** authentication metadata mode is a new mode that allows users to use Windows authentication or Microsoft Entra authentication (using a Windows principal metadata) with Azure SQL Managed Instance. This mode is available for SQL Managed Instance only. The **Windows** authentication metadata mode isn't available for Azure SQL Database.
+The **Windows** authentication metadata mode allows users to use Windows authentication or Microsoft Entra authentication (using a Windows principal metadata) with Azure SQL Managed Instance. This mode is available for SQL Managed Instance only. The **Windows** authentication metadata mode isn't available for Azure SQL Database.
 
 When your environment is synchronized between Active Directory (AD) and Microsoft Entra ID, Windows user accounts in AD are synchronized to the Microsoft Entra user accounts in Microsoft Entra ID.
 
@@ -23,9 +23,6 @@ The authentication for SQL Managed Instance and SQL Server is based on metadata 
 
 For a video explaining native Windows principals, you can also refer to this Data Exposed episode.
 > [!VIDEO https://learn-video.azurefd.net/vod/player?show=data-exposed&ep=native-windows-principals-for-sql-managed-instance-data-exposed]
-
-> [!NOTE]
-> Using native Windows principals with **Windows** authentication metadata mode in SQL Managed Instance is currently in preview.
 
 ## Authentication metadata modes
 

@@ -3,7 +3,7 @@ title: "Upgrade or Patch Replicated Databases"
 description: SQL Server supports upgrading replicated databases from previous versions of SQL Server without stopping activity on other nodes.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 01/28/2025
+ms.date: 02/26/2025
 ms.service: sql
 ms.subservice: install
 ms.topic: conceptual
@@ -28,6 +28,8 @@ Ensure that you adhere to the rules regarding which versions are supported in a 
 - A Distributor can be any version as long as it's greater than or equal to the Publisher version (in many cases the Distributor is the same instance as the Publisher).
 
 - A Publisher can be any version as long as it less than or equal to the Distributor version.
+
+- The Publisher and Distributor must be the same product. Either both are SQL Server, or both are Azure SQL Managed Instance.
 
 - Subscriber version depends on the type of publication:
 
@@ -55,7 +57,13 @@ When you have a distribution database in a failover cluster instance, make sure 
 
 ## Replication matrix
 
-[!INCLUDE [replication-compat-matrix](../../includes/replication-compat-matrix.md)]
+### Transactional and snapshot replication compatibility matrix
+
+[!INCLUDE [replication-compat-matrix-transactional](../../includes/replication-compat-matrix-transactional.md)]
+
+### Merge replication compatibility matrix   
+
+[!INCLUDE [replication-compat-matrix-merge](../../includes/replication-compat-matrix-merge.md)]
 
 ## Upgrade considerations
 

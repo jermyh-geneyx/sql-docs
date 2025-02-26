@@ -25,7 +25,6 @@ By using a zone-redundant configuration, you can make your Business Critical or 
 Consider the following when using zone redundancy for SQL Managed Instance:
 
 - Zone redundancy is available in [select regions](#supported-regions).
-- Zone redundancy is only available to instances that have enabled the [November 2022 feature wave](november-2022-feature-wave-enroll.md).
 - Zone redundancy is currently in public preview for the General Purpose service tier and not currently available for the Next-gen General Purpose service tier.
 - Zone redundancy can be enabled, and disabled. The operation to enable or disable zone redundancy is a fully online [scaling operation](../database/scale-resources.md) executed in the background.
 - To enable zone redundancy, your SQL managed instance **Backup storage redundancy** must use _Zone-redundant_ or _Geo-zone-redundant_ storage.
