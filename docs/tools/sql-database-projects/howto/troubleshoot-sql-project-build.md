@@ -21,19 +21,19 @@ To further troubleshoot build issues for SQL projects, you can use command line 
 - **Binary logger**: This option generates a binary log file (`msbuild.binlog`) that can be viewed using the [MSBuild Log Viewer](https://msbuildlog.com/). This viewer is helpful for diagnosing dependency issues and optimizing the build process. The command to generate this log is:
 
     ```bash
-    dotnet build --bl
+    dotnet build -bl
     ```
 
 - **File logger**: This option generates a text log file that contains the most verbose logging from the build. The command to generate this log is:
 
     ```bash
-    dotnet build --flp:v=diag
+    dotnet build -flp:v=diag
     ```
 
 To recap, the combined command to generate both logs is:
 
 ```bash
-dotnet build --bl --flp:v=diag
+dotnet build -bl -flp:v=diag
 ```
 
 The full set of switches can be found at the [MSBuild Command-Line Reference](/visualstudio/msbuild/msbuild-command-line-reference#switches-for-loggers).
@@ -74,7 +74,13 @@ dotnet nuget add source https://api.nuget.org/v3/index.json -n nuget.org​
 If your environment requires private feeds, ensure they're valid and accessible. You may be required to authenticate with package feeds. Enabling authentication during project build can be done with:
 
 ```bash
-dotnet build --interactive or msbuild /p:nugetInteractive=true​
+dotnet build --interactive
+```
+
+For MSBuild, the equivalent command is:
+
+```bash
+msbuild /p:nugetInteractive=true​
 ```
 
 For other non-SQL error codes, refer to the following resources:
