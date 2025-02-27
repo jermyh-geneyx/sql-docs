@@ -33,7 +33,7 @@ To complete the conversion carefully, we will:
 4. Build a `.dacpac` file from the modified project for comparison.
 5. Verify that the `.dacpac` files are the same.
 
-SDK-style projects aren't supported by SQL Server Data Tools (SSDT) in Visual Studio. Once converted, you must use one of the following to build or edit the project:
+SDK-style projects aren't supported in SQL Server Data Tools (SSDT) in Visual Studio. Once converted, you must use one of the following to build or edit the project:
 
 - the command line
 - the SQL Database Projects extension in Visual Studio Code
@@ -171,7 +171,7 @@ Lines that should be removed from the project file, for example:
   <Build Include="SalesLT/CategoriesProductCount.sql" />
 ```
 
-You should not remove `<PreDeploy Include="..." />` or `<PostDeploy Include="..." />` items, because these dictate specific behavior for those files. You should also not remove `<Build Include="..." />` items for files that are not in the SQL project folder tree.
+You shouldn't remove `<PreDeploy Include="..." />` or `<PostDeploy Include="..." />` items, because these nodes dictate [specific behavior](../concepts/pre-post-deployment-scripts.md) for those files. You also shouldn't remove `<Build Include="..." />` items for files that aren't in the SQL project folder tree.
 
 ### Optional: Remove SSDT references
 
