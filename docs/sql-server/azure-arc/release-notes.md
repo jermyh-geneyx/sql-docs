@@ -5,7 +5,7 @@ author: anosov1960
 ms.author: sashan
 ms.reviewer: mikeray, randolphwest
 ms.date: 01/30/2025
-ms.topic: conceptual
+ms.topic: release-notes
 ms.custom:
   - ignite-2023
 ---

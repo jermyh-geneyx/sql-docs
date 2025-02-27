@@ -7,7 +7,7 @@ ms.reviewer: wiassaf
 ms.date: 10/23/2024
 ms.service: sql
 ms.subservice: table-view-index
-ms.topic: conceptual
+ms.topic: whats-new
 ms.custom:
   - intro-whats-new
   - ignite-2024
