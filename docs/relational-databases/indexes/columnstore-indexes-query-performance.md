@@ -27,11 +27,11 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 
 - **Carefully choose insert order.** In common case in traditional data warehouse, the data is indeed inserted in time order and analytics is done in time dimension. For example, analyzing sales by quarter. For this kind of workload, the rowgroup elimination happens automatically. In [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)], you can find out number rowgroups skipped as part of query processing.
 
-- **Use a rowstore clustered index.** If the common query predicate is on a column (for example, `C1`) unrelated to the insert order, create a rowstore clustered index on column `C1`. Then, drop the rowstore clustered index and create a clustered columnstore index. If you create the clustered columnstore index explicitly using `MAXDOP = 1`, the resulting clustered columnstore index is perfectly ordered on column `C1`. If you specify `MAXDOP = 8`, then you see overlap of values across eight rowgroups. For a nonclustered columnstore index (NCCI), if the table has a rowstore clustered index, the rows are already ordered by the clustered index key. In this case, the nonclustered columnstore index is also automatically ordered. A columnstore index does not inherently maintain the order of rows. As new rows are inserted or older rows are updated, you might need to repeat the process as the analytics query performance might deteriorate.
+- **Use a rowstore clustered index.** If the common query predicate is on a column (for example, `C1`) unrelated to the insert order, create a rowstore clustered index on column `C1`. Then, drop the rowstore clustered index and create a clustered columnstore index. If you create the clustered columnstore index explicitly using `MAXDOP = 1`, the resulting clustered columnstore index is perfectly ordered on column `C1`. If you specify `MAXDOP = 8`, then you see overlap of values across eight rowgroups. For a nonclustered columnstore index (NCCI), if the table has a rowstore clustered index, the rows are already ordered by the clustered index key. In this case, the nonclustered columnstore index is also automatically ordered. A columnstore index doesn't inherently maintain the order of rows. As new rows are inserted or older rows are updated, you might need to repeat the process as the analytics query performance might deteriorate.
 
-- **Implement table partitioning.** You can partition the columnstore index, then use partition elimination to reduce number of rowgroups to scan. For example, a fact table stores purchases made by customers. A common query pattern is to find quarterly purchases by `customer`. In this case, combine the insert order column with partitioning on `customer` column. Each partition contains rows for each `customer`, ordered upon insertion. Also, consider using table partitioning if there's a need to remove older data from the columnstore. Switching out and truncating partitions that are not needed is an efficient strategy to delete data without generating fragmentation.
+- **Implement table partitioning.** You can partition the columnstore index, then use partition elimination to reduce number of rowgroups to scan. For example, a fact table stores purchases made by customers. A common query pattern is to find quarterly purchases by `customer`. In this case, combine the insert order column with partitioning on `customer` column. Each partition contains rows for each `customer`, ordered upon insertion. Also, consider using table partitioning if there's a need to remove older data from the columnstore. Switching out and truncating partitions that aren't needed is an efficient strategy to delete data without generating fragmentation.
 
-- **Avoid deleting large amounts of data**. Removing compressed rows from a rowgroup is not a synchronous operation. It would be expensive to decompress a rowgroup, delete the row, and then recompress it. Therefore, when you delete data from compressed rowgroups these rowgroups are still scanned, even though they return fewer rows. If the number of deleted rows for several rowgroups is large enough to be merged into fewer rowgroups, reorganizing the columnstore increases the quality of the index and query performance improves. If your data deletion process usually empties entire rowgroups, consider using table partitioning. Switch out partitions that are not needed anymore and truncate them, instead of deleting rows.
+- **Avoid deleting large amounts of data**. Removing compressed rows from a rowgroup isn't a synchronous operation. It would be expensive to decompress a rowgroup, delete the row, and then recompress it. Therefore, when you delete data from compressed rowgroups these rowgroups are still scanned, even though they return fewer rows. If the number of deleted rows for several rowgroups is large enough to be merged into fewer rowgroups, reorganizing the columnstore increases the quality of the index and query performance improves. If your data deletion process usually empties entire rowgroups, consider using table partitioning. Switch out partitions that aren't needed anymore and truncate them, instead of deleting rows.
 
     > [!NOTE]  
     > Starting with [!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)], the tuple-mover is helped by a background merge task. This task automatically compresses smaller OPEN delta rowgroups that have existed for some time, as determined by an internal threshold, or merges COMPRESSED rowgroups from where a large number of rows has been deleted. This improves the columnstore index quality over time.
@@ -44,7 +44,7 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 
  The memory required for creating a columnstore index depends on the number of columns, the number of string columns, the degree of parallelism (DOP), and the characteristics of the data. For example, if your table has fewer than one million rows, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] uses only one thread to create the columnstore index.
 
- If your table has more than one million rows, but [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] cannot get a large enough memory grant to create the index using MAXDOP, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] automatically decreases `MAXDOP` as needed. In some cases, DOP must be decreased to one in order to build the index under constrained memory in the available memory grant.
+ If your table has more than one million rows, but [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] can't get a large enough memory grant to create the index using MAXDOP, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] automatically decreases `MAXDOP` as needed. In some cases, DOP must be decreased to one in order to build the index under constrained memory in the available memory grant.
 
  Since [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)], the query always operates in batch mode. In previous releases, batch execution is only used when DOP is greater than one.
 
@@ -64,19 +64,19 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 
 - Columnstore indexes compress data by columns instead of by rows, achieving high compression rates and reducing the size of the data stored on disk. Each column is compressed and stored independently. Data within a column always has the same data type, and tends to have similar values. Columnstore data compression techniques are great at achieving higher compression rates when values are similar.
 
-For example, a fact table stores customer addresses and has a column for `country-region`. The total number of possible values is fewer than 200. Some of those values are repeated many times. If the fact table has 100 million rows, the `country-region` column compresses easily and requires little storage. Row-by-row compression is not able to capitalize on the similarity of column values in this way, and must use more bytes to compress the values in the `country-region` column.
+For example, a fact table stores customer addresses and has a column for `country-region`. The total number of possible values is fewer than 200. Some of those values are repeated many times. If the fact table has 100 million rows, the `country-region` column compresses easily and requires little storage. Row-by-row compression isn't able to capitalize on the similarity of column values in this way, and must use more bytes to compress the values in the `country-region` column.
 
 ### Column elimination
 
- Columnstore indexes skip reading in columns that are not required for the query result. Column elimination further reduces I/O for query execution and therefore improves query performance.
+ Columnstore indexes skip reading in columns that aren't required for the query result. Column elimination further reduces I/O for query execution and therefore improves query performance.
 
-- Column elimination is possible because the data is organized and compressed column by column. In contrast, when data is stored row-by-row, the column values in each row are physically stored together and cannot be easily separated. The Query Processor needs to read in an entire row to retrieve specific column values, increasing I/O because extra data is unnecessarily read into memory.
+- Column elimination is possible because the data is organized and compressed column by column. In contrast, when data is stored row-by-row, the column values in each row are physically stored together and can't be easily separated. The Query Processor needs to read in an entire row to retrieve specific column values, increasing I/O because extra data is unnecessarily read into memory.
 
-For example, if a table has 50 columns and the query only uses 5 of those columns, the columnstore index only fetches the 5 columns from disk. It skips reading in the other 45 columns, reducing I/O by another 90%, assuming all columns are of similar size. If the same data are stored in a rowstore, the query processor needs to read the remaining 45 columns.
+For example, if a table has 50 columns and the query only uses five of those columns, the columnstore index only fetches the five columns from disk. It skips reading in the other 45 columns, reducing I/O by another 90%, assuming all columns are of similar size. If the same data are stored in a rowstore, the query processor needs to read the remaining 45 columns.
 
 ### Rowgroup elimination
 
- For full table scans, a large percentage of the data usually does not match the query predicate criteria. By using metadata, the columnstore index is able to skip reading in the rowgroups that do not contain data required for the query result, all without actual I/O. This ability, called rowgroup elimination, reduces I/O for full table scans and therefore improves query performance.
+ For full table scans, a large percentage of the data usually doesn't match the query predicate criteria. By using metadata, the columnstore index is able to skip reading in the rowgroups that don't contain data required for the query result, all without actual I/O. This ability, called rowgroup elimination, reduces I/O for full table scans and therefore improves query performance.
 
  **When does a columnstore index need to perform a full table scan?**
 
@@ -84,11 +84,11 @@ For example, if a table has 50 columns and the query only uses 5 of those column
 
  **When does an analytics query benefit from rowgroup elimination for a full-table scan?**
 
- For example, a retail business models their sales data using a fact table with clustered columnstore index. Each new sale stores various attributes of the transaction, including the date a product is sold. Interestingly, even though columnstore indexes do not guarantee a sorted order, rows in this table are loaded in a date-sorted order. Over time this table grows. Although the retail business might keep sales data for the last 10 years, an analytics query might only need to compute an aggregate for last quarter. Columnstore indexes can eliminate accessing the data for the previous 39 quarters by just looking at the metadata for the date column. This is a 97% reduction in the amount of data that is read into memory and processed.
+ For example, a retail business models their sales data using a fact table with clustered columnstore index. Each new sale stores various attributes of the transaction, including the date a product is sold. Interestingly, even though columnstore indexes don't guarantee a sorted order, rows in this table are loaded in a date-sorted order. Over time this table grows. Although the retail business might keep sales data for the last 10 years, an analytics query might only need to compute an aggregate for last quarter. Columnstore indexes can eliminate accessing the data for the previous 39 quarters by just looking at the metadata for the date column. This is a 97% reduction in the amount of data that is read into memory and processed.
 
  **Which rowgroups are skipped in a full table scan?**
 
- To determine which rows groups to eliminate, the columnstore index uses metadata to store the minimum and maximum values of each column segment for each rowgroup. When none of the column segment ranges meet the query predicate criteria, the entire rowgroup is skipped without doing any actual I/O. This works because the data is usually loaded in a sorted order. Although row sorting is not guaranteed, similar data values are often located within the same rowgroup or a neighboring rowgroup.
+ To determine which rows groups to eliminate, the columnstore index uses metadata to store the minimum and maximum values of each column segment for each rowgroup. When none of the column segment ranges meet the query predicate criteria, the entire rowgroup is skipped without doing any actual I/O. This works because the data is usually loaded in a sorted order. Although row sorting isn't guaranteed, similar data values are often located within the same rowgroup or a neighboring rowgroup.
 
  For more information about rowgroups, see [Columnstore Index Design Guidelines](../../relational-databases/sql-server-index-design-guide.md#columnstore_index).
 
@@ -101,7 +101,7 @@ For example, if a table has 50 columns and the query only uses 5 of those column
 
 |Batch Mode Operators|When used|[!INCLUDE [ssSQL11](../../includes/sssql11-md.md)]|[!INCLUDE [ssSQL14](../../includes/sssql14-md.md)]|[!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and [!INCLUDE [ssSDS](../../includes/sssds-md.md)]<sup>1</sup>|Comments|
 |---------------------------|------------------------|---------------------|---------------------|---------------------------------------|--------------|
-|DML operations (insert, delete, update, merge)||no|no|no|DML is not a batch mode operation because it is not parallel. Even when we enable serial mode batch processing, we don't see significant gains by allowing DML to be processed in batch mode.|
+|DML operations (insert, delete, update, merge)||no|no|no|DML isn't a batch mode operation because it isn't parallel. Even when we enable serial mode batch processing, we don't see significant gains by allowing DML to be processed in batch mode.|
 |columnstore index scan|SCAN|Not available|yes|yes|For columnstore indexes, we can push the predicate to the SCAN node.|
 |columnstore index Scan (nonclustered)|SCAN|yes|yes|yes|yes|
 |index seek||Not available|Not available|no|We perform a seek operation through a nonclustered B-tree index in row mode.|
@@ -128,9 +128,9 @@ For more information, see the [Query Processing Architecture Guide](../../relati
 
 - The aggregates are `MIN`, `MAX`, `SUM`, `COUNT` and `COUNT(*)`. 
 - Aggregate operator must be on top of SCAN node or SCAN node with `GROUP BY`.
-- This aggregate is not a distinct aggregate.
-- The aggregate column is not a string column.
-- The aggregate column is not a virtual column. 
+- This aggregate isn't a distinct aggregate.
+- The aggregate column isn't a string column.
+- The aggregate column isn't a virtual column. 
 - The input and output data type must be one of the following and must fit within 64 bits:
     - **tinyint**, **int**, **bigint**, **smallint**, **bit**
     - **smallmoney**, **money**, **decimal** and **numeric** with precision <= 18
@@ -166,7 +166,7 @@ String predicate pushdown leverages the primary/secondary dictionary created for
 - The number of string comparisons are reduced. In this example, only 100 string comparisons are required as against 1 million comparisons. There are some limitations:
     -   No string predicate pushdown for delta rowgroups. There is no dictionary for columns in delta rowgroups.
     -   No string predicate pushdown if dictionary exceeds 64-KB entries.
-    -   Expression evaluating nulls are not supported.
+    -   Expression evaluating nulls aren't supported.
 
 ## Segment elimination
 
@@ -174,13 +174,13 @@ Data type choices might have a significant impact on query performance based com
 
 In columnstore data, row groups are made up of column segments. There is metadata with each segment to allow for fast elimination of segments without reading them. This segment elimination applies to numeric, date, and time data types, and the **datetimeoffset** data type with scale less than or equal to two. Beginning in [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], segment elimination capabilities extend to string, binary, guid data types, and the **datetimeoffset** data type for scale greater than two.
 
-After upgrading to a version of SQL Server that supports string min/max segment elimination ([!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later), the columnstore index will not benefit this feature until it is rebuilt using a `REBUILD` or `DROP`/`CREATE`.
+After upgrading to a version of SQL Server that supports string min/max segment elimination ([!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later), the columnstore index doesn't benefit from this feature until it is rebuilt using a `ALTER INDEX REBUILD` or `CREATE INDEX WITH (DROP_EXISTING = ON)`.
 
-Segment elimination does not apply to LOB data types, such as the (max) data type lengths.
+Segment elimination doesn't apply to LOB data types, such as the (max) data type lengths.
 
-Currently, only [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later supports clustered columnstore rowgroup elimination for the prefix of `LIKE` predicates, for example `column LIKE 'string%'`. Segment elimination is not supported for non-prefix use of `LIKE`, such as `column LIKE '%string'`.
+Currently, only [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later supports clustered columnstore rowgroup elimination for the prefix of `LIKE` predicates, for example `column LIKE 'string%'`. Segment elimination isn't supported for non-prefix use of `LIKE`, such as `column LIKE '%string'`.
 
-[Ordered clustered columnstore indexes](columnstore-indexes-overview.md#ordered-columnstore-indexes) also benefit from segment elimination, especially for string columns. In ordered clustered columnstore indexes, segment elimination on the first column in the index key is most effective, because it is sorted. Performance gains due to segment elimination on other columns in the table will be less predictable. For more on ordered clustered columnstore indexes, see [Use an ordered clustered columnstore index for large data warehouse tables](columnstore-indexes-design-guidance.md#use-an-ordered-clustered-columnstore-index-for-large-data-warehouse-tables). For ordered columnstore index availability, see [Ordered column index availability](columnstore-indexes-overview.md#ordered-columnstore-index-availability).
+[Ordered columnstore indexes](columnstore-indexes-overview.md#ordered-columnstore-indexes) also benefit from segment elimination, especially for string columns. In ordered columnstore indexes, segment elimination on the first column in the index key is most effective, because it is sorted. Performance gains due to segment elimination on other columns in the table is less predictable. For more on ordered columnstore indexes, see [Use an ordered columnstore index for large data warehouse tables](columnstore-indexes-design-guidance.md#use-an-ordered-columnstore-index-for-large-data-warehouse-tables). For ordered columnstore index availability, see [Ordered column index availability](columnstore-indexes-overview.md#ordered-columnstore-index-availability).
 
 Using the query connection option [SET STATISTICS IO](../../t-sql/statements/set-statistics-io-transact-sql.md), you can view segment elimination in action. Look for output such as the following to indicate that segment elimination has occurred. Row groups are made up of column segments, so this might indicate segment elimination. The following `SET STATISTICS IO` output example of a query, roughly 83% data was skipped by the query:
 
