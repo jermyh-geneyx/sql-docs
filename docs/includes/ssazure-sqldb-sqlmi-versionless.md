@@ -1,0 +1,8 @@
+---
+author: dimitri-furman
+ms.author: dfurman
+ms.date: 02/28/2025
+ms.service: sql
+ms.topic: include
+---
+ Azure SQL Database and Azure SQL Managed Instance with the always-up-to-date update policy 

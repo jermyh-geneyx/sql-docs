@@ -4,7 +4,7 @@ description: Modifies an existing table or view index (rowstore, columnstore, or
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: wiassaf, randolphwest, dfurman
-ms.date: 02/20/2025
+ms.date: 02/28/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -663,7 +663,7 @@ When `ALL` is specified, relational indexes, both clustered and nonclustered, an
 For more information, see [Optimize index maintenance to improve query performance and reduce resource consumption](../../relational-databases/indexes/reorganize-and-rebuild-indexes.md).
 
 > [!NOTE]  
-> For an [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] table with an ordered clustered columnstore index, `ALTER INDEX REORGANIZE` doesn't re-sort the data. To resort the data use `ALTER INDEX REBUILD`.
+> For a table with an ordered columnstore index, `ALTER INDEX REORGANIZE` doesn't re-sort the data. To resort the data use `ALTER INDEX REBUILD`.
 
 ## <a id="disabling-indexes"></a> Disable indexes
 
