@@ -4,7 +4,7 @@ description: Explore how SQL Server can be deployed on Linux containers and lear
 author: amitkh-msft
 ms.author: amitkh
 ms.reviewer: vanto, randolphwest
-ms.date: 01/21/2025
+ms.date: 02/28/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: install-set-up-deploy
@@ -149,7 +149,7 @@ If you want to know the version of SQL Server in a running container, run the fo
 ::: zone pivot="cs1-bash"
 
 ```bash
-docker exec -it <Container ID or name> /opt/mssql-tools/bin/sqlcmd \
+docker exec -it <Container ID or name> /opt/mssql-tools18/bin/sqlcmd \
 -S localhost -U sa -P '<password>' \
 -Q 'SELECT @@VERSION'
 ```
@@ -162,7 +162,7 @@ docker exec -it <Container ID or name> /opt/mssql-tools/bin/sqlcmd \
 ::: zone pivot="cs1-powershell"
 
 ```powershell
-docker exec -it <Container ID or name> /opt/mssql-tools/bin/sqlcmd `
+docker exec -it <Container ID or name> /opt/mssql-tools18/bin/sqlcmd `
 -S localhost -U sa -P "<password>" `
 -Q "SELECT @@VERSION"
 ```
@@ -175,7 +175,7 @@ docker exec -it <Container ID or name> /opt/mssql-tools/bin/sqlcmd `
 ::: zone pivot="cs1-cmd"
 
 ```cmd
-docker exec -it <Container ID or name> /opt/mssql-tools/bin/sqlcmd ^
+docker exec -it <Container ID or name> /opt/mssql-tools18/bin/sqlcmd ^
 -S localhost -U sa -P "<password>" ^
 -Q "SELECT @@VERSION"
 ```
