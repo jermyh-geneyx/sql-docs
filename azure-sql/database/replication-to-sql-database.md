@@ -4,7 +4,7 @@ description: You can configure a database in Azure SQL Database as the push subs
 author: ferno-ms
 ms.author: ferno
 ms.reviewer: wiassaf, mathoma
-ms.date: 11/01/2024
+ms.date: 03/03/2024
 ms.service: azure-sql-database
 ms.subservice: replication
 ms.topic: conceptual
@@ -34,16 +34,20 @@ You can configure Azure SQL Database or Fabric SQL database as the push subscrib
 
 To successfully replicate to a database in Azure SQL Database, SQL Server publishers and distributors must be using (at least) one of the following versions:
 
-Publishing to any Azure SQL Database from a SQL Server database is supported by the following versions of SQL Server:
+> [!NOTE]
+> Attempting to configure replication using an unsupported version can result in error number MSSQL_REPL20084 (The process could not connect to Subscriber.) and MSSQL_REPL40532 (Cannot open server \<name> requested by the login. The login failed.).  
+
+To use all the features of Azure SQL Database, you must be using the latest versions of [SQL Server Management Studio (SSMS)](/sql/ssms/download-sql-server-management-studio-ssms) and [SQL Server Data Tools](/sql/ssdt/download-sql-server-data-tools-ssdt).  
+
+Publishing to any **Azure SQL Database** from a SQL Server database is supported by the following versions of SQL Server:
 
 - SQL Server 2016 and greater
 - SQL Server 2014 [RTM CU10 (12.0.4427.24)](https://support.microsoft.com/help/3094220/cumulative-update-10-for-sql-server-2014) or [SP1 CU3 (12.0.2556.4)](https://support.microsoft.com/help/3094221/cumulative-update-3-for-sql-server-2014-service-pack-1)
 - SQL Server 2012 [SP2 CU8 (11.0.5634.1)](https://support.microsoft.com/help/3082561/cumulative-update-8-for-sql-server-2012-sp2) or [SP3 (11.0.6020.0)](https://www.microsoft.com/download/details.aspx?id=49996)
 
-> [!NOTE]
-> Attempting to configure replication using an unsupported version can result in error number MSSQL_REPL20084 (The process could not connect to Subscriber.) and MSSQL_REPL40532 (Cannot open server \<name> requested by the login. The login failed.).  
+Publishing to **Fabric SQL database** from a SQL Server database is supported by the following versions of SQL Server:
 
-To use all the features of Azure SQL Database, you must be using the latest versions of [SQL Server Management Studio (SSMS)](/sql/ssms/download-sql-server-management-studio-ssms) and [SQL Server Data Tools](/sql/ssdt/download-sql-server-data-tools-ssdt).  
+- SQL Server 2022 [RTM CU12](https://learn.microsoft.com/en-us/troubleshoot/sql/releases/sqlserver-2022/cumulativeupdate12) and greater
 
 ### Types of replication
 
@@ -64,8 +68,9 @@ There are different [types of replication](/sql/relational-databases/replication
 - Only push subscriptions to Azure SQL Database are supported.  
 - Replication can be configured by using [SQL Server Management Studio](/sql/ssms/download-sql-server-management-studio-ssms) or by executing Transact-SQL statements on the publisher. You cannot configure replication by using the Azure portal.  
 - To authenticate:
+    - [Azure-Arc enabled SQL Servers}(/sql/sql-server/azure-arc/overview?view=sql-server-ver16) allow replication to use [Microsoft Entra ID authentication](/sql/relational-databases/replication/configure-replication-with-azure-ad-authentication).
+    - Replication can use Microsoft Entra ID authentication with a [service principal](/entra/identity-platform/app-objects-and-service-principals) to connect to Fabric SQL database.
     - Replication can only use SQL Server authentication logins to connect to Azure SQL Database.
-    - Replication can only use Microsoft Entra ID authentication with a [service principal](/entra/identity-platform/app-objects-and-service-principals)to connect to Fabric SQL database.
 - Replicated tables must have a primary key.  
 - You must have an existing Azure subscription.  
 - The Azure SQL Database subscriber can be in any region.  
