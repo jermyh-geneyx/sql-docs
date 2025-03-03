@@ -6,7 +6,7 @@ ms.author: jiwang6
 ms.date: "03/01/2017"
 ms.service: sql
 ms.subservice: master-data-services
-ms.topic: conceptual
+ms.topic: how-to
 helpviewer_keywords:
   - "creating collections [Master Data Services]"
   - "collections [Master Data Services], creating"

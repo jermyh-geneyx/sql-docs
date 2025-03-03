@@ -8,7 +8,7 @@ ms.reviewer: wiassaf, mathoma, randolphwest
 ms.date: 11/28/2023
 ms.service: azure-sql
 ms.subservice: scale-out
-ms.topic: conceptual
+ms.topic: concept-article 
 ms.custom:
   - sqldbrb=1
   - devx-track-azurepowershell
@@ -89,6 +89,8 @@ SELECT DATABASEPROPERTYEX(DB_NAME(), 'Updateability');
 > In Premium and Business Critical service tiers, only one of the read-only replicas is accessible at any given time. Hyperscale supports multiple read-only replicas.
 
 ## Monitor and troubleshoot read-only replicas
+
+You have a variety of ways to monitor read-only replicas, including: DMVs, extended events, and [database watcher (preview)](../database-watcher-overview.md).
 
 When connected to a read-only replica, Dynamic Management Views (DMVs) reflect the state of the replica, and can be queried for monitoring and troubleshooting purposes. The database engine provides multiple views to expose a wide variety of monitoring data.
 

@@ -23,7 +23,7 @@ You can use transactional replication to push changes made in an Azure SQL manag
 
 - A SQL Server database (on-premises or on an Azure Virtual Machine)
 - A database in Azure SQL Database
-- An instance database in Azure SQL Managed Instance
+- A database in Azure SQL Managed Instance
 
 > [!NOTE]  
 > To use all the features of Azure SQL Managed Instance, you must use the latest versions of [SQL Server Management Studio (SSMS)](/sql/ssms/download-sql-server-management-studio-ssms) and [SQL Server Data Tools (SSDT)](/sql/ssdt/download-sql-server-data-tools-ssdt).
@@ -73,17 +73,10 @@ There are different [types of replication](/sql/relational-databases/replication
 
 ### Supportability matrix
 
-The transactional replication supportability matrix for Azure SQL Managed Instance is the same as the one for SQL Server.
+The transactional and snapshot replication supportability matrix for Azure SQL Managed Instance is the same as the one for SQL Server: 
 
-| **Publisher** | **Distributor** | **Subscriber** |
-| :--- | :--- | :--- |
-| SQL Server 2022 | SQL Server 2022 | SQL Server 2022<br />SQL Server 2019<br />SQL Server 2017 |
-| SQL Server 2019 | SQL Server 2022<br />SQL Server 2019 | SQL Server 2022<br />SQL Server 2019<br />SQL Server 2017<br />SQL Server 2016 |
-| SQL Server 2017 | SQL Server 2022<br />SQL Server 2019<br />SQL Server 2017 | SQL Server 2022<br />SQL Server 2019<br />SQL Server 2017<br />SQL Server 2016<br />SQL Server 2014 |
-| SQL Server 2016 | SQL Server 2022<br />SQL Server 2019<br />SQL Server 2017<br />SQL Server 2016 | SQL Server 2019<br />SQL Server 2017<br />SQL Server 2016<br />SQL Server 2014<br />SQL Server 2012 |
-| SQL Server 2014 | SQL Server 2022<br />SQL Server 2019<br />SQL Server 2017<br />SQL Server 2016<br />SQL Server 2014 | SQL Server 2017<br />SQL Server 2016<br />SQL Server 2014<br />SQL Server 2012<br />SQL Server 2008 R2<br />SQL Server 2008 |
-| SQL Server 2012 | SQL Server 2022<br />SQL Server 2019<br />SQL Server 2017<br />SQL Server 2016<br />SQL Server 2014<br />SQL Server 2012 | SQL Server 2016<br />SQL Server 2014<br />SQL Server 2012<br />SQL Server 2008 R2<br />SQL Server 2008 |
-| SQL Server 2008 R2<br />SQL Server 2008 | SQL Server 2022<br />SQL Server 2019<br />SQL Server 2017<br />SQL Server 2016<br />SQL Server 2014<br />SQL Server 2012<br />SQL Server 2008 R2<br />SQL Server 2008 | SQL Server 2014<br />SQL Server 2012<br />SQL Server 2008 R2<br />SQL Server 2008 |
+[!INCLUDE [replication-compat-matrix](../../docs/includes/replication-compat-matrix-transactional.md)]
+
 
 ## When to use
 

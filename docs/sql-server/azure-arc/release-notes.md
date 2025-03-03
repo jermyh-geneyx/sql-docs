@@ -5,7 +5,7 @@ author: anosov1960
 ms.author: sashan
 ms.reviewer: mikeray, randolphwest
 ms.date: 01/30/2025
-ms.topic: conceptual
+ms.topic: release-notes
 ms.custom:
   - ignite-2023
 ---
@@ -27,7 +27,7 @@ Extension versions are cumulative. Higher extension versions include all of the 
 
 **Extension version**: `1.1.2914.231`
 
-Minor bug fixes. This release does not enable or introduce new features.## November 12, 2024
+Minor bug fixes. This release does not enable or introduce new features.
 
 ## November 12, 2024
 

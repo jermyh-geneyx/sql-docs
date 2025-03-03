@@ -6,7 +6,7 @@ ms.author: chugu
 ms.date: "09/28/2017"
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: whats-new
 ms.custom: intro-whats-new
 ---
 # What's New in Integration Services in SQL Server 2017

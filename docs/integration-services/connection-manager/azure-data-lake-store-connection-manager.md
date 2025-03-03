@@ -3,11 +3,11 @@ title: "Azure Data Lake Store Connection Manager"
 description: "Azure Data Lake Store Connection Manager"
 author: "Lingxi-Li"
 ms.author: "lingxl"
-ms.reviewer: maghan
+ms.reviewer: 
 ms.date: "03/02/2017"
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 f1_keywords:
   - "SQL13.DTS.DESIGNER.AFPADLSCM.F1"
   - "sql14.dts.designer.afpadlscm.f1"

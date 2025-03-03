@@ -8,7 +8,7 @@ ms.reviewer: mathoma
 ms.date: 09/27/2024
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 helpviewer_keywords:
   - "SQL Server Import and Export Wizard"
   - "starting SQL Server Import and Export Wizard"

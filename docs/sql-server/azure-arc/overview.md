@@ -5,7 +5,7 @@ author: anosov1960
 ms.author: sashan
 ms.reviewer: mikeray, randolphwest
 ms.date: 02/16/2024
-ms.topic: conceptual
+ms.topic: concept-article
 ms.custom: references_regions
 ---
 
@@ -101,6 +101,8 @@ Some of the services provided by [!INCLUDE [ssazurearc](../../includes/ssazurear
 The following diagram illustrates the architecture of [!INCLUDE [ssazurearc](../../includes/ssazurearc.md)].
 
 :::image type="content" source="media/overview/architecture.png" alt-text="Diagram of the architecture for [!INCLUDE [ssazurearc](../../includes/ssazurearc.md)]" lightbox="media/overview/architecture.png":::
+
+[!INCLUDE [get-jumpstart-image](includes/get-jumpstart-image.md)]
 
 ## <a id="feature-differentiation"></a> Feature availability depending on license type
 

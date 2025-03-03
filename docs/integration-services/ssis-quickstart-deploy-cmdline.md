@@ -6,7 +6,7 @@ ms.author: chugu
 ms.date: "05/21/2018"
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: intro-deployment
 ---
 # Deploy an SSIS project from the command prompt with ISDeploymentWizard.exe

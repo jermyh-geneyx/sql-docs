@@ -4,10 +4,10 @@ description: This overview introduces SQL Data Sync for Azure, which allows you 
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: mathoma, hudequei
-ms.date: 09/23/2024
+ms.date: 02/27/2025
 ms.service: azure-sql-database
 ms.subservice: sql-data-sync
-ms.topic: conceptual
+ms.topic: concept-article
 ms.custom:
   - data sync
   - sqldbrb=1
@@ -159,24 +159,25 @@ Provisioning and deprovisioning during sync group creation, update, and deletion
 - Truncating tables isn't an operation supported by Data Sync (changes won't be tracked).
 - Using an Azure SQL Hyperscale database as a Hub or Sync Metadata database isn't supported. However, a Hyperscale database can be a member database in a Data Sync topology.
 - Memory-optimized tables aren't supported.
-- Schema changes aren't automatically replicated. A custom solution can be created to [automate the replication of schema changes](sql-data-sync-update-sync-schema.md).
+- Schema changes aren't automatically replicated.
 - Data Sync supports only the following two index properties: Unique, Clustered/Non-Clustered. Other properties of an index, like `IGNORE_DUP_KEY` or the `WHERE` filter predicate, aren't supported and the destination index is provisioned without these properties even if the source Index has these properties set.
 - An Azure Elastic jobs database can't be used as the SQL Data Sync Metadata database, and vice versa.
 - SQL Data Sync isn't supported for [ledger databases](/sql/relational-databases/security/ledger/ledger-database-ledger).
+- Data Sync is not a disaster recovery or high availability tool and does not synchronize its own Sync Group information. There is no automatic disaster recovery for Data Sync.
 
 #### Unsupported data types
 
 - FileStream
 - SQL/CLR UDT
 - XMLSchemaCollection (XML supported)
-- Cursor, RowVersion, Timestamp, Hierarchyid
+- Cursor, **RowVersion**, **Timestamp**, **Hierarchyid**
 
 #### Unsupported column types
 
 Data Sync can't sync read-only or system-generated columns. For example:
 
-- Computed columns.
-- System-generated columns for temporal tables.
+- Computed columns
+- System-generated columns for temporal tables
 
 #### Limitations on service and database dimensions
 
@@ -273,16 +274,9 @@ The Dynamics 365 bring your own database feature lets administrators export data
 
 ### How do I create Data Sync in Failover group to support Disaster Recovery?
 
-- To ensure data sync operations in failover region are at par with Primary region, after failover you have to manually re-create the Sync Group in failover region with same settings as primary region.
+SQL Data Sync offers no automatic failover or disaster recovery capabilities. In case of database failover to another region, Sync Group will stop working. Manually re-create the Sync Group in failover region with same settings as primary region.
 
 ## Related content
-
-### Update the schema of a synced database
-
-Do you have to update the schema of a database in a sync group? Schema changes aren't automatically replicated. For some solutions, see the following articles:
-
-- [Automate the replication of schema changes with SQL Data Sync in Azure](./sql-data-sync-update-sync-schema.md)
-- [Use PowerShell to update the sync schema in an existing sync group](scripts/update-sync-schema-in-sync-group.md)
 
 ### Monitor and troubleshoot
 

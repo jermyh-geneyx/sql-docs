@@ -1074,13 +1074,10 @@ if ($arcInstance.Setting.AdditionalProperties.AzureAD)
     {
         $aadSettings += $instanceSettings
     }
-
-    $arcInstance.Setting.AdditionalProperties.AzureAD = $aadSettings
 }
 else
 {
     $aadSettings = , $instanceSettings
-    $arcInstance.Setting.AdditionalProperties | Add-Member -Name 'AzureAD' -Value $aadSettings -MemberType NoteProperty
 }
 
 
@@ -1090,7 +1087,24 @@ Write-Host "Writing Microsoft Entra setting to SQL Server Arc Extension. This ma
 #
 try
 {
-    Update-AzConnectedMachineExtension -MachineName $machineName -Name "WindowsAgent.SqlServer" -ResourceGroupName $resourceGroupName -Setting $arcInstance.Setting
+
+    #set the Entra ID / AzureAD setting in the hash table
+    $SettingsToConfigure = @{
+        AzureAD = $aadSettings
+    }
+
+    #add any non-AzureAD key value pairs back to the hashtable
+    $keys = $arcInstance.Setting.Keys | where-object {$_ -notin ("AzureAD")}
+    foreach ($key in $keys) {
+        $SettingsToConfigure.$key = $arcInstance.Setting["$key"]
+    }
+
+    #Issue the update of the updated settings
+    Update-AzConnectedMachineExtension `
+        -MachineName $machineName `
+        -Name "WindowsAgent.SqlServer" `
+        -ResourceGroupName $resourceGroupName `
+        -Setting $SettingsToConfigure
 }
 catch
 {
@@ -1202,12 +1216,10 @@ if ($arcInstance.Setting.AdditionalProperties.AzureAD)
         $aadSettings += $instanceSettings
     }
 
-    $arcInstance.Setting.AdditionalProperties.AzureAD = $aadSettings
 }
 else
 {
     $aadSettings = , $instanceSettings
-    $arcInstance.Setting.AdditionalProperties | Add-Member -Name 'AzureAD' -Value $aadSettings -MemberType NoteProperty
 }
 
 
@@ -1217,7 +1229,24 @@ Write-Host "Writing Microsoft Entra setting to SQL Server Arc Extension. This ma
 #
 try
 {
-    Update-AzConnectedMachineExtension -MachineName $machineName -Name "WindowsAgent.SqlServer" -ResourceGroupName $resourceGroupName -Setting $arcInstance.Setting
+    #set the Entra ID / AzureAD setting in the hash table
+    $SettingsToConfigure = @{
+        AzureAD = $aadSettings
+    }
+
+    #add any non-AzureAD key value pairs back to the hashtable
+    $keys = $arcInstance.Setting.Keys | where-object {$_ -notin ("AzureAD")}
+    foreach ($key in $keys) {
+        $SettingsToConfigure.$key = $arcInstance.Setting["$key"]
+    }
+
+    #Issue the update of the updated settings
+    Update-AzConnectedMachineExtension `
+        -MachineName $machineName `
+        -Name "WindowsAgent.SqlServer" `
+        -ResourceGroupName $resourceGroupName `
+        -Setting $SettingsToConfigure
+
 }
 catch
 {

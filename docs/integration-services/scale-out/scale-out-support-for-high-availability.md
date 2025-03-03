@@ -6,7 +6,7 @@ ms.author: "haoqian"
 ms.date: "05/23/2018"
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: performance
 ---
 # Scale Out support for high availability

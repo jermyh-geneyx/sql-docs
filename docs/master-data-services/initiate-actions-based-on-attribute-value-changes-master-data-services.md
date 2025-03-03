@@ -6,7 +6,7 @@ ms.author: jiwang6
 ms.date: "03/01/2017"
 ms.service: sql
 ms.subservice: master-data-services
-ms.topic: conceptual
+ms.topic: how-to
 helpviewer_keywords:
   - "business rules [Master Data Services], tracking attribute changes"
   - "change tracking groups [Master Data Services], initiating actions"

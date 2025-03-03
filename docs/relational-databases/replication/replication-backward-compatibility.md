@@ -4,7 +4,7 @@ description: Review these resources for backward compatibility in replication be
 author: "MashaMSFT"
 ms.author: "mathoma"
 ms.reviewer: randolphwest
-ms.date: 09/25/2024
+ms.date: 02/26/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: conceptual
@@ -30,13 +30,23 @@ The general rules are:
 
 - A Distributor can be any version as long as it is greater than or equal to the Publisher version (in many cases the Distributor is the same instance as the Publisher).
 - A Publisher can be any version as long as it less than or equal to the Distributor version.
+- The Publisher and Distributor are always the same product:
+   -  If the Publisher is SQL Server, the Distributor is SQL Server.
+   -  If the Publisher is [Azure SQL Managed Instance](/azure/azure-sql/managed-instance/replication-transactional-overview), the Distributor is Azure SQL Managed Instance.
 - Subscriber version depends on the type of publication:
   - A Subscriber to a transactional publication can be any version within two versions of the Publisher version. For example: a SQL Server 2012 (11.x) Publisher can have SQL Server 2014 (12.x) and SQL Server 2016 (13.x) Subscribers; and a SQL Server 2016 (13.x) Publisher can have SQL Server 2014 (12.x) and SQL Server 2012 (11.x) Subscribers.
   - A Subscriber to a merge publication can be any version equal to or lower than the Publisher version, which is supported as per the versions life cycle support cycle.
+  - The Subscriber can be either SQL Server or Azure SQL Managed Instance, regardless of what product the Distributor is, as long as it's within two versions of the Publisher - except configuring Azure SQL Managed Instance as a pull Subscriber to a SQL Server Distributor isn't supported. 
 
 ## Replication matrix
 
-[!INCLUDE[repl matrix](../../includes/replication-compat-matrix.md)]
+### Transactional and snapshot replication compatibility matrix
+
+[!INCLUDE [replication-compat-matrix-transactional](../../includes/replication-compat-matrix-transactional.md)]
+
+### Merge replication compatibility matrix   
+
+[!INCLUDE [replication-compat-matrix-merge](../../includes/replication-compat-matrix-merge.md)]
 
 ## Related content
 

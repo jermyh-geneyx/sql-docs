@@ -6,7 +6,7 @@ ms.author: "haoqian"
 ms.date: 01/09/2019
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: troubleshooting-general
 ms.custom: performance
 ---
 # Troubleshoot Scale Out

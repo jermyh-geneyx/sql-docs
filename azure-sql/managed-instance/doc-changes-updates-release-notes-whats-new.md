@@ -5,7 +5,7 @@ description: Learn about the new features and documentation improvements for Azu
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: wiassaf, mathoma
-ms.date: 01/28/2025
+ms.date: 02/26/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: service-overview
 ms.topic: whats-new
@@ -43,10 +43,10 @@ The following table lists the features of Azure SQL Managed Instance that are cu
 |[JSON aggregate functions](/sql/relational-databases/json/json-data-sql-server#json-data-from-aggregates) | Two new **JSON** aggregate functions `JSON_OBJECTAGG` and `JSON_ARRAYAGG` enable construction of JSON objects or arrays based on an aggregate from SQL data. Your SQL managed instance must be configured with the [Always-up-to-date update policy](update-policy.md#always-up-to-date-update-policy). For more information, see [JSON Type and aggregates preview](https://aka.ms/json-type-aggregates-public-preview). |
 |[Microsoft Entra nonunique name support](../database/authentication-microsoft-entra-create-users-with-nonunique-names.md) |  The [CREATE USER](/sql/t-sql/statements/create-user-transact-sql) Transact-SQL (T-SQL) syntax has been extended to include `WITH OBJECT_ID` to support creating Microsoft Entra logins and users in Azure SQL Managed Instance that have nonunique names. |
 |[Modernization Advisor](../virtual-machines/modernization-advisor.md) | Use the Modernization Advisor in the Azure portal to help you determine if migrating to Azure SQL Managed Instance from a SQL Server VM saves you money or optimizes performance. |
-|[Native Windows principals](native-windows-principals.md) | Use the new **Windows** authentication metadata mode to allow Windows authentication or Microsoft Entra authentication (using a Windows principal metadata) with Azure SQL Managed Instance. |
 |[Next-gen General Purpose](service-tiers-next-gen-general-purpose-use.md) | An architectural upgrade of the General Purpose service tier that uses managed disks for greater resource flexibility, and improved performance while maintaining the same baseline cost as the General Purpose service tier.  |
 |[SDK-style SQL project](/sql/azure-data-studio/extensions/sql-database-project-extension-sdk-style-projects) | Use [Microsoft.Build.Sql](https://www.nuget.org/packages/Microsoft.Build.Sql) for SDK-style SQL projects in the SQL Database Projects extension in Azure Data Studio or Visual Studio Code. SDK-style SQL projects are especially advantageous for applications shipped through pipelines or built in cross-platform environments.|
 |[Service Broker](/sql/database-engine/configure-windows/sql-server-service-broker) | Support for cross-instance message exchange using Service Broker between instances of Azure SQL Managed Instance, and between SQL Server and Azure SQL Managed Instance. |
+|[Invoke an HTTPS REST endpoint SP](/sql/relational-databases/system-stored-procedures/sp-invoke-external-rest-endpoint-transact-sql) | Use the `sp_invoke_external_rest_endpoint` stored procedure to invoke an HTTPS REST endpoint provided as an input argument to the procedure. | 
 |[Threat detection](threat-detection-configure.md) | Threat detection notifies you of security threats detected to your database. |
 |[Zone redundancy for General Purpose](high-availability-sla-local-zone-redundancy.md#zone-redundant-availability) |  Deploy your General Purpose SQL Managed Instance to multiple availability zones to improve the availability of your instance in the event of a disaster. | 
 
@@ -56,6 +56,7 @@ The following table lists features of Azure SQL Managed Instance that have been 
 
 | Feature | GA Month | Details |
 | ---| --- |--- |
+|[Native Windows principals](native-windows-principals.md) | February 2025 | Use the new **Windows** authentication metadata mode to allow Windows authentication or Microsoft Entra authentication (using a Windows principal metadata) with Azure SQL Managed Instance. |
 |[Instance pools](instance-pools-overview.md) | November 2024 | Save on costs and share resources between multiple instances in a pool within a single virtual machine. A convenient and cost-efficient way to migrate smaller SQL Server instances to the cloud, and the only way to deploy a 2-vCore managed instance. |
 | [Microsoft Entra nonunique name support](../database/authentication-microsoft-entra-create-users-with-nonunique-names.md) | November 2024 | The [CREATE USER](/sql/t-sql/statements/create-user-transact-sql) Transact-SQL (T-SQL) syntax has been extended to include `WITH OBJECT_ID` to [support creating Microsoft Entra logins and users in Azure SQL Managed Instance](../database/authentication-microsoft-entra-create-users-with-nonunique-names.md) that have nonunique names. |
 |[Fail over a link with T-SQL](managed-instance-link-failover-how-to.md?tabs=tsql#fail-over-a-database) | October 2024 | You can now fail over a [Managed Instance link](managed-instance-link-feature-overview.md) by using Transact-SQL (T-SQL) commands. |
@@ -66,34 +67,17 @@ The following table lists features of Azure SQL Managed Instance that have been 
 |[Update policy](update-policy.md) | May 2024 | Use the update policy to control your internal database format alignment and access to the latest SQL Database Engine features. You can choose to either limit the feature set to features that are available in SQL Server 2022, or ensure your instance takes advantage of all the latest features of Azure SQL Managed Instance.| 
 |[Azure SQL triggers for Azure Functions](/azure/azure-functions/functions-bindings-azure-sql) | March 2024 | Azure Functions supports function triggers for Azure SQL Managed Instance. | 
 
-
-## November 2022 feature wave
-
-Changes and capabilities that were introduced in the November 2022 feature wave have been integrated to the majority of instances and are now available by default. Since taking separate action to enroll an instance is no longer necessary, options that mention the November 2022 feature wave have been removed from the Azure portal for instances that have enrolled in the feature wave. The last remaining instances are currently in the enrollment process. 
-
-All new instances on production subscriptions are enrolled in the feature wave by default if they're created in eligible subnets. The following subnet types are eligible:
-
-- Newly created subnet (default)
-- Existing subnets that are empty
-- Existing subnets that already have the feature wave enabled, and contain only instances **with** the feature wave enabled
-- Existing subnets that don't have the feature wave enabled, and contain only instances **without** the feature wave
-
-The benefits in the feature wave include:
-
-- [**Fast instance provisioning**](management-operations-overview.md#fast-provisioning) -  It takes less time to deploy an instance.
-- [**Improved network security**](connectivity-architecture-overview.md) - Internal service traffic is now isolated and secured by Microsoft. 
-- [**Enhanced virtual cluster**](virtual-cluster-architecture.md) -  The functionality of the underlying virtual cluster is enhanced.
-
-The features available in the wave are:
-
-- [Instance stop/start](instance-stop-start-how-to.md): You can start and stop your instance at your discretion to save on billing costs for vCores and SQL Server licensing.
-- [Zone redundancy for Business Critical tier](..//managed-instance/high-availability-sla.md): You can deploy your Business Critical tier managed instance across multiple availability zones to improve the availability of your service.
-- [Managed DTC](distributed-transaction-coordinator-dtc.md): Run distributed transactions in mixed environments.
-
-
 ## Documentation changes
 
 Learn about significant changes to the Azure SQL Managed Instance documentation. For previous years, see the [What's new archive](doc-changes-updates-release-notes-whats-new-archive.md).
+
+### February 2025
+
+| Changes | Details |
+| --- | --- |
+|**Invoke an HTTPS REST endpoint SP preview** | Use the [sp_invoke_external_rest_endpoint](/sql/relational-databases/system-stored-procedures/sp-invoke-external-rest-endpoint-transact-sql) stored procedure to invoke an HTTPS REST endpoint provided as an input argument to the procedure. This stored procedure is currently in preview for Azure SQL Managed Instance.  | 
+|**Native Windows principals GA** |  Use the  **Windows** authentication metadata mode to allow Windows authentication or Microsoft Entra authentication (using a Windows principal metadata) with Azure SQL Managed Instance. This feature is now generally available (GA). Review [Native Windows principals](native-windows-principals.md) to learn more. |
+
 
 ### January 2025
 

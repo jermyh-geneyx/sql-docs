@@ -114,6 +114,8 @@
           href: ./database-watcher-data.md
         - name: Analyze monitoring data
           href: ./database-watcher-analyze.md
+        - name: Alerts
+          href: ./database-watcher-alerts.md
         - name: FAQ
           href: ./database-watcher-faq.yml
       - name: SQL Analytics
@@ -673,8 +675,6 @@
         href: database/elastic-pool-manage.md
       - name: Resource management in dense elastic pools
         href: database/elastic-pool-resource-management.md
-      - name: Manage Hyperscale databases
-        href: database/manage-hyperscale-database.md
       - name: Hyperscale performance diagnostics
         href: database/hyperscale-performance-diagnostics.md
       - name: Block T-SQL CRUD
@@ -713,6 +713,8 @@
         href: database/standby-replica-how-to-configure.md
       - name: Migrate to availability zone
         href: /azure/reliability/migrate-sql-database?toc=/azure/azure-sql/toc.json&bc=/azure/bread/toc.json
+      - name: Deleted server restore
+        href: database/deleted-logical-server-restore.md
     - name: Monitor & Tune
       items:
         - name: Monitor SQL Database
@@ -727,6 +729,10 @@
       items:
       - name: Manage Hyperscale databases
         href: database/manage-hyperscale-database.md
+      - name: Convert to Hyperscale
+        href: database/convert-to-hyperscale.md
+      - name: Reverse migrate from Hyperscale
+        href: database/reverse-migrate-from-hyperscale.md
       - name: Create zone-redundant database
         href: database/hyperscale-create-zone-redundant-database.md
       - name: Hyperscale performance diagnostics
@@ -845,8 +851,6 @@
         href: database/database-copy.md
       - name: Replicate to SQL Database
         href: database/replication-to-sql-database.md
-      - name: Replicate schema changes (Data sync)
-        href: database/sql-data-sync-update-sync-schema.md
       - name: Change data capture (CDC)
         href: database/change-data-capture-overview.md
     - name: Database sharding
@@ -1053,8 +1057,6 @@
             href: database/scripts/sql-data-sync-sync-data-between-sql-databases.md
           - name: Sync data from on-premises
             href: database/scripts/sql-data-sync-sync-data-between-azure-onprem.md
-          - name: Update sync schema
-            href: database/scripts/update-sync-schema-in-sync-group.md
     - name: Azure Resource Manager
       href: database/arm-templates-content-guide.md
     - name: Code samples
@@ -1435,8 +1437,6 @@
     - name: Distributed transactions with DTC
       displayName: distributed transaction coordinator
       href: managed-instance/distributed-transaction-coordinator-dtc.md
-    - name: Enroll in November 2022 feature wave
-      href: managed-instance/november-2022-feature-wave-enroll.md
     - name: Use Next-gen General Purpose tier
       href: managed-instance/service-tiers-next-gen-general-purpose-use.md
 

@@ -158,7 +158,7 @@ Azure uses the following settings to create the storage pool on SQL Server VMs.
 <sup>1</sup> After the storage pool is created, you can't alter the number of columns in the storage pool.
 
 > [!NOTE]
-> Use [Optimize-StoragePoo](/powershell/module/storage/optimize-storagepool) and [Optimize-Volume](/powershell/module/storage/optimize-volume) to rebalance space allocation in a pool and optimize performance for workload types that have random deeply queued I/O patterns. 
+> Use [Optimize-StoragePool](/powershell/module/storage/optimize-storagepool) and [Optimize-Volume](/powershell/module/storage/optimize-volume) to rebalance space allocation in a pool and optimize performance for workload types that have random deeply queued I/O patterns. 
 
 ## Enable caching
 

@@ -6,7 +6,7 @@ ms.author: chugu
 ms.date: 06/29/2020
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 ---
 # Steps in the SQL Server Import and Export Wizard
 

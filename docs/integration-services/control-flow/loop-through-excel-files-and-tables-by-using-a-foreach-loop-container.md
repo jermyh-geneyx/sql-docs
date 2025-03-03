@@ -6,7 +6,7 @@ ms.author: chugu
 ms.date: "05/15/2018"
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 helpviewer_keywords:
   - "connections [Integration Services], Excel"
   - "Excel [Integration Services]"

@@ -6,7 +6,7 @@ ms.author: jiwang6
 ms.date: "03/01/2017"
 ms.service: sql
 ms.subservice: master-data-services
-ms.topic: conceptual
+ms.topic: how-to
 helpviewer_keywords:
   - "deleting model object permissions [Master Data Services]"
   - "permissions [Master Data Services], deleting model object permissions"

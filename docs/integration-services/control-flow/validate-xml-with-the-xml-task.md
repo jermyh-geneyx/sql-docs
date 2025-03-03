@@ -6,7 +6,7 @@ ms.author: chugu
 ms.date: "09/08/2020"
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 helpviewer_keywords:
   - "XML validation"
   - "XML, validating"

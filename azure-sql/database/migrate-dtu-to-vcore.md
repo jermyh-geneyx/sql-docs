@@ -7,7 +7,7 @@ ms.reviewer: wiassaf, mathoma, moslake, randolphwest
 ms.date: 07/22/2024
 ms.service: azure-sql-database
 ms.subservice: service-overview
-ms.topic: conceptual
+ms.topic: upgrade-and-migration-article
 ---
 # Migrate Azure SQL Database from the DTU-based model to the vCore-based model
 
@@ -67,7 +67,7 @@ ALTER DATABASE <database name> MODIFY (EDITION = '<service tier, such as Hypersc
 
 ## Choose the vCore service tier and service objective
 
-For most DTU to vCore migration scenarios, databases and elastic pools in the Basic and Standard service tiers map to the [General Purpose](service-tier-general-purpose.md) service tier. Databases and elastic pools in the Premium service tier map to the [Business Critical](service-tier-business-critical.md) service tier. Depending on application scenario and requirements, the [Hyperscale](service-tier-hyperscale.md) service tier can often be used as the migration target for databases and elastic pools in all DTU service tiers.
+For most DTU to vCore migration scenarios, databases and elastic pools in the Basic and Standard service tiers map to the [General Purpose](service-tiers-sql-database-vcore.md#general-purpose) service tier. Databases and elastic pools in the Premium service tier map to the [Business Critical](service-tiers-sql-database-vcore.md#business-critical) service tier. Depending on application scenario and requirements, the [Hyperscale](service-tier-hyperscale.md) service tier can often be used as the migration target for databases and elastic pools in all DTU service tiers.
 
 To choose the service objective, or compute size, for the migrated database in the vCore model, you can use a basic but approximate rule of thumb: every 100 DTUs in the Basic or Standard tiers require *at least* 1 vCore, and every 125 DTUs in the Premium tier require *at least* 1 vCore.
 
@@ -217,7 +217,7 @@ Migrating from the DTU-based model to the vCore-based purchasing model is simila
 - When upgrading, you must upgrade the secondary database first, and then upgrade the primary.
 - When downgrading, reverse the order: you must downgrade the primary database first, and then downgrade the secondary.
 
-To migrate to the Hyperscale service tier, geo-replication should be temporarily removed. For more information, see [Migrate an existing database to Hyperscale](manage-hyperscale-database.md#migrate-an-existing-database-to-hyperscale).
+To convert a database to the Hyperscale service tier, geo-replication should be temporarily removed. For more information, see [Convert an existing database to Hyperscale](convert-to-hyperscale.md).
 
 When you use geo-replication between two elastic pools, we recommend that you designate one pool as the primary and the other as the secondary. In that case, when you migrate elastic pools you should use the same sequencing guidance. However, if you have elastic pools that contain both primary and secondary databases, treat the pool with the higher utilization as the primary and follow the sequencing rules accordingly.
 

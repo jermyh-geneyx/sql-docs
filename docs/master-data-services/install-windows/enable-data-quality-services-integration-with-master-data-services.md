@@ -6,7 +6,7 @@ ms.author: jiwang6
 ms.date: "12/13/2019"
 ms.service: sql
 ms.subservice: master-data-services
-ms.topic: conceptual
+ms.topic: how-to
 ---
 # Enable Data Quality Services Integration with Master Data Services
 

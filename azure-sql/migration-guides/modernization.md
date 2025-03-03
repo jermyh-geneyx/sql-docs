@@ -216,7 +216,7 @@ You can use the [Azure SQL Migration extension](/azure-data-studio/extensions/az
 
 #### How do I determine the appropriate SQL Managed Instance target for a particular SQL Server on-premises workload: SQL Managed Instance General Purpose or Business Critical tier?
 
-SQL Managed Instance tier choice is guided by availability, performance (for example, throughput, IOPS, latency), and feature (for example, in-memory OLTP) requirements. The [General Purpose tier](../database/service-tier-general-purpose.md) is suitable for most generic workloads, as it already provides HA architecture and a fully managed database engine with a storage latency between 5 ms and 10 ms. The [Business Critical tier](../database/service-tier-business-critical.md) is designed for applications that require low-latency (1-2 ms) responses from the storage layer, fast recovery, strict availability requirements, and the ability to off-load analytics workloads.
+SQL Managed Instance tier choice is guided by availability, performance (for example, throughput, IOPS, latency), and feature (for example, in-memory OLTP) requirements. The [General Purpose tier](../database/service-tiers-sql-database-vcore.md#general-purpose) is suitable for most generic workloads, as it already provides HA architecture and a fully managed database engine with a storage latency between 5 ms and 10 ms. The [Business Critical tier](../database/service-tiers-sql-database-vcore.md#business-critical) is designed for applications that require low-latency (1-2 ms) responses from the storage layer, fast recovery, strict availability requirements, and the ability to off-load analytics workloads.
 
 #### How can I move a highly automated SQL Server to SQL Managed Instance?
 

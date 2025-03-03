@@ -6,7 +6,7 @@ ms.author: chugu
 ms.date: "03/03/2017"
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 f1_keywords:
   - "sql13.ssis.designer.parameter.f1"
   - "sql13.dts.designer.parameterwindow.f1"

@@ -4,7 +4,7 @@ description: This article provides details about the configuration and use of th
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest, dfurman
-ms.date: 02/10/2025
+ms.date: 02/26/2025
 ms.service: sql
 ms.topic: conceptual
 ms.custom:
@@ -155,6 +155,8 @@ To learn more about `tempdb` sizes in Azure SQL Database, review:
 
 - vCore purchasing model: [single databases](/azure/azure-sql/database/resource-limits-vcore-single-databases), [pooled databases](/azure/azure-sql/database/resource-limits-vcore-elastic-pools)
 - DTU purchasing model: [single databases](/azure/azure-sql/database/resource-limits-dtu-single-databases#tempdb-sizes), [pooled databases](/azure/azure-sql/database/resource-limits-dtu-elastic-pools#tempdb-sizes)
+
+[Accelerated database recovery](../accelerated-database-recovery-concepts.md) is always enabled for `tempdb` in Azure SQL Database. For more information, see [Improving Azure SQL Database reliability with accelerated database recovery in tempdb](https://techcommunity.microsoft.com/blog/azuresqlblog/improving-azure-sql-database-reliability-with-accelerated-database-recovery-in-t/4386823).
 
 ## tempdb in SQL Managed Instance
 

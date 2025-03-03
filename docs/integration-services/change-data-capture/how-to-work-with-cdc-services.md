@@ -6,7 +6,7 @@ ms.author: chugu
 ms.date: "03/20/2017"
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 ---
 # How to Work with CDC Services
 

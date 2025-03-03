@@ -6,7 +6,7 @@ ms.author: jiwang6
 ms.date: "03/01/2017"
 ms.service: sql
 ms.subservice: master-data-services
-ms.topic: conceptual
+ms.topic: install-set-up-deploy
 ms.custom: intro-deployment
 helpviewer_keywords:
   - "deployment packages [Master Data Services], about deployment packages"

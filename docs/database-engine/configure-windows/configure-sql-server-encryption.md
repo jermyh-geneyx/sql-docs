@@ -7,7 +7,7 @@ ms.reviewer: sureshka, randolphwest
 ms.date: 10/11/2024
 ms.service: sql
 ms.subservice: configuration
-ms.topic: conceptual
+ms.topic: how-to
 ---
 # Configure SQL Server Database Engine for encrypting connections
 
@@ -131,7 +131,7 @@ The following code snippet can be used to create a self-signed certificate on a 
 $certificateParams = @{
     Type = "SSLServerAuthentication"
     Subject = "CN=$env:COMPUTERNAME"
-    DnsName = @("{0}" -f [System.Net.Dns]::GetHostByName($env:computerName).HostName, 'localhost')
+    DnsName = @("$($env:COMPUTERNAME)", $([System.Net.Dns]::GetHostEntry('').HostName), 'localhost')
     KeyAlgorithm = "RSA"
     KeyLength = 2048
     HashAlgorithm = "SHA256"

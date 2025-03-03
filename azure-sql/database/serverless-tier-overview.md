@@ -1,10 +1,10 @@
 ---
 title: Serverless compute tier
 description: This article describes the new serverless compute tier and compares it with the existing provisioned compute tier for Azure SQL Database.
-author: oslake
-ms.author: moslake
-ms.reviewer: wiassaf, mathoma
-ms.date: 10/11/2024
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: moslake, mathoma, dfurman, blakhani
+ms.date: 02/10/2025
 ms.service: azure-sql-database
 ms.subservice: service-overview
 ms.topic: conceptual
@@ -17,10 +17,10 @@ ms.custom:
 # Serverless compute tier for Azure SQL Database
 [!INCLUDE [appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
-Serverless is a [compute tier](service-tiers-sql-database-vcore.md#compute) for single databases in Azure SQL Database that automatically scales compute based on workload demand and bills for the amount of compute used per second. The serverless compute tier also automatically pauses databases during inactive periods when only storage is billed and automatically resumes databases when activity returns. The serverless compute tier is available in the [General Purpose](service-tier-general-purpose.md) service tier and the [Hyperscale](service-tier-hyperscale.md) service tier.
+Serverless is a [compute tier](service-tiers-sql-database-vcore.md#compute) for single databases in Azure SQL Database that automatically scales compute based on workload demand and bills for the amount of compute used per second. The serverless compute tier also automatically pauses databases during inactive periods when only storage is billed and automatically resumes databases when activity returns. The serverless compute tier is available in the [General Purpose](service-tiers-sql-database-vcore.md#general-purpose) service tier and the [Hyperscale](service-tier-hyperscale.md) service tier.
 
 > [!NOTE]
-> Auto-pausing and auto-resuming is currently only supported in the General Purpose service tier.
+> Auto-pause and auto-resume are currently only supported in the General Purpose service tier.
 
 ## Overview
 
@@ -35,11 +35,11 @@ A compute autoscaling range and an auto-pause delay are important parameters for
 
 ### Cost
 
-- The cost for a serverless database is the summation of the compute cost and storage cost.
+The cost for a serverless database is the summation of the compute cost and storage cost. The storage cost is determined in the same way as in the provisioned compute tier.
+
 - When compute usage is between the minimum and maximum limits configured, the compute cost is based on vCore and memory used.
 - When compute usage is below the minimum limits configured, the compute cost is based on the minimum vCores and minimum memory configured.
 - When the database is paused, the compute cost is zero and only storage costs are incurred.
-- The storage cost is determined in the same way as in the provisioned compute tier.
 
 For more cost details, see [Billing](serverless-tier-overview.md#billing).
 
@@ -78,7 +78,7 @@ The following table describes serverless support based on purchasing model, serv
 | **Category** | **Supported** | **Not supported**|
 |:---|:---|:---|
 | **Purchasing model** | [vCore](service-tiers-vcore.md) | [DTU](service-tiers-dtu.md) |
-| **Service tier** | [General Purpose](service-tier-general-purpose.md) <br/> [Hyperscale](service-tier-hyperscale.md) | Business Critical| 
+| **Service tier** | [General Purpose](service-tiers-sql-database-vcore.md#general-purpose) <br/> [Hyperscale](service-tier-hyperscale.md) | Business Critical| 
 | **Hardware** | Standard-series (Gen5) | All other hardware |  
 
 ## Autoscaling
@@ -138,7 +138,7 @@ The following features do not support auto-pausing, but do support auto-scaling.
 - [Long-term backup retention](long-term-retention-overview.md) (LTR).
 - The sync database used in [SQL Data Sync](sql-data-sync-data-sql-server-sql-database.md). Unlike sync databases, hub and member databases support auto-pausing.
 - [DNS alias](dns-alias-overview.md) created for the logical server containing a serverless database.
-- [Elastic Jobs](elastic-jobs-overview.md), Auto-pause enabled serverless database is not supported as a *Job Database*. Serverless databases targeted by elastic jobs do support auto-pausing. Job connections will resume a database.
+- [Elastic Jobs](elastic-jobs-overview.md), Auto-pause enabled serverless database is not supported as a *Job Database*. Serverless databases targeted by elastic jobs do support auto-pausing. Job connections resume a database.
 
 Auto-pausing is temporarily prevented during the deployment of some service updates, which require the database be online. In such cases, auto-pausing becomes allowed again once the service update completes.
 
@@ -175,7 +175,7 @@ WHERE s.session_id <> @@SPID
 ```
 
 > [!TIP]
-> After running the query, make sure to disconnect from the database. Otherwise, the open session used by the query will prevent auto-pausing.
+> After running the query, make sure to disconnect from the database. Otherwise, the open session used by the query prevents auto-pausing.
 
 - If the result set is nonempty, it indicates that there are sessions currently preventing auto-pausing.
 - If the result set is empty, it is still possible that sessions were open, possibly for a short time, at some point earlier during the auto-pause delay period. To check for activity during the delay period, you can use [Auditing for Azure SQL Database and Azure Synapse Analytics](auditing-overview.md) and examine audit data for the relevant period.
@@ -197,7 +197,7 @@ Auto-resuming is triggered if any of the following conditions are true at any ti
 |Auditing|Viewing auditing records.<br>Updating or viewing auditing policy.|
 |Data masking|Adding, modifying, deleting, or viewing data masking rules|
 |Transparent data encryption|Viewing state or status of transparent data encryption|
-|Vulnerability assessment|Ad hoc scans and periodic scans if enabled|
+|Vulnerability assessment|Manually initiated scans and periodic scans if enabled|
 |Query (performance) data store|Modifying or viewing Query Store settings|
 |Performance recommendations|Viewing or applying performance recommendations|
 |Auto-tuning|Application and verification of auto-tuning recommendations such as auto-indexing|
@@ -210,7 +210,7 @@ Monitoring, management, or other solutions performing any of these operations tr
 
 ### Connectivity
 
-If a serverless database is paused, the first connection attempt resumes the database and returns an error stating that the database is unavailable with error code 40613. Once the database is resumed, the login can be retried to establish connectivity. Database clients following [connection retry logic recommendations](/azure/architecture/patterns/retry) should not need to be modified. For connection retry logic options and recommendations, see:
+If a serverless database is paused, the first connection attempt resumes the database and returns an error stating that the database is unavailable with error code 40613. Once the database is resumed, re-try the sign-in to establish connectivity. Database clients following [connection retry logic recommendations](/azure/architecture/patterns/retry) should not need to be modified. For connection retry logic options and recommendations, see:
 
 - [Connection retry logic in SqlClient](/sql/connect/ado-net/configurable-retry-logic)
 - [Connection retry logic in SQL Database using Entity Framework Core](/azure/architecture/best-practices/retry-service-specific#sql-database-using-entity-framework-core)
@@ -352,7 +352,7 @@ CREATE DATABASE testdb
 
 A database can be moved between the provisioned compute tier and serverless compute tier.
 
-A serverless database can also be moved from the General Purpose service tier to the Hyperscale service tier. Review [Manage Hyperscale databases](manage-hyperscale-database.md#migrate-an-existing-database-to-hyperscale) to learn more. 
+A serverless database can also be moved from the General Purpose service tier to the Hyperscale service tier. Review [Manage Hyperscale databases](convert-to-hyperscale.md) to learn more. 
 
 When moving a database between compute tiers, specify the **compute model** parameter as either `Serverless` or `Provisioned` when using PowerShell or Azure CLI, or the **SERVICE_OBJECTIVE** when using T-SQL. Review [resource limits](resource-limits-vcore-single-databases.md) to identify the appropriate service objective. 
 
@@ -718,4 +718,4 @@ Currently, 80 maximum vCores with availability zone support in serverless for th
 ## Related content
 
 - To get started, see [Quickstart: Create a single database - Azure SQL Database](single-database-create-quickstart.md).
-- For serverless service tier choices, see [General Purpose](service-tier-general-purpose.md) and [Hyperscale](service-tier-hyperscale.md).
+- For serverless service tier choices, see [General Purpose](service-tiers-sql-database-vcore.md#general-purpose) and [Hyperscale](service-tier-hyperscale.md).

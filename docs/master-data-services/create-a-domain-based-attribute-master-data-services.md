@@ -6,7 +6,7 @@ ms.author: jiwang6
 ms.date: "07/25/2017"
 ms.service: sql
 ms.subservice: master-data-services
-ms.topic: conceptual
+ms.topic: how-to
 helpviewer_keywords:
   - "domain-based attributes [Master Data Services], creating"
   - "creating domain-based attributes [Master Data Services]"

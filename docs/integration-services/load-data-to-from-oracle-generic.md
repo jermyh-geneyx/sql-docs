@@ -6,7 +6,7 @@ ms.author: chugu
 ms.date: 01/06/2025
 ms.service: sql
 ms.subservice: integration-services
-ms.topic: conceptual
+ms.topic: how-to
 ms.custom: intro-deployment
 ---
 

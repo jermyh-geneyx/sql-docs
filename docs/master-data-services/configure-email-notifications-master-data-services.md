@@ -6,7 +6,7 @@ ms.author: jiwang6
 ms.date: "03/07/2017"
 ms.service: sql
 ms.subservice: master-data-services
-ms.topic: conceptual
+ms.topic: how-to
 helpviewer_keywords:
   - "e-mail [Master Data Services], configuring"
   - "notifications [Master Data Services], configuring notifications"
