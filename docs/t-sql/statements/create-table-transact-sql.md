@@ -567,7 +567,7 @@ Specifies to create an index on the table. This can be a clustered index, or a n
 
 Specifies to store the entire table in columnar format with a clustered columnstore index. This always includes all columns in the table. The data isn't sorted in alphabetical or numeric order since the rows are organized to gain columnstore compression benefits.
 
-In [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)], [!INCLUDE [ssPDW](../../includes/sspdw-md.md)], [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions, and in [!INCLUDE [ssazure-sqldb-sqlmi-versionless](../../includes/ssazure-sqldb-sqlmi-versionless.md)] you can define an order for a columnstore index. For more information, see [Use an ordered columnstore index for large data warehouse tables](../../relational-databases/indexes/columnstore-indexes-design-guidance.md#use-an-ordered-columnstore-index-for-large-data-warehouse-tables).
+In [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)], [!INCLUDE [ssPDW](../../includes/sspdw-md.md)], [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions, in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and in [!INCLUDE [ssazure-sqlmi-autd](../../includes/ssazure-sqlmi-autd.md)] you can define an order for a columnstore index. For more information, see [Use an ordered columnstore index for large data warehouse tables](../../relational-databases/indexes/columnstore-indexes-design-guidance.md#use-an-ordered-columnstore-index-for-large-data-warehouse-tables).
 
 #### INDEX *index_name* [ NONCLUSTERED ] COLUMNSTORE ( *column_name* [ ,... *n* ] )
 
