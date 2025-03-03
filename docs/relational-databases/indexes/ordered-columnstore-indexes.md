@@ -80,6 +80,7 @@ For example, the output from this query for a fully sorted columnstore index mig
 
 ```output
 schema_name table_name column_name index_id row_count data_compression_desc segment_id column_id min_data_id max_data_id
+----------- ---------- ----------- -------- --------- --------------------- ---------- --------- ----------- -----------
 dbo         Table1     Column1     1        479779    COLUMNSTORE           0          1         -17         1469515
 dbo         Table1     Column1     1        887658    COLUMNSTORE           1          1         1469516     2188146
 dbo         Table1     Column1     1        930144    COLUMNSTORE           2          1         2188147     11072928

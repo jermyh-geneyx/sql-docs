@@ -24,7 +24,7 @@ Learn about which columnstore features available for each version of [!INCLUDE [
 
 This table summarizes key features for columnstore indexes and the products in which they are available.
 
-|Columnstore Index Feature|[!INCLUDE [ssSQL11](../../includes/sssql11-md.md)]|[!INCLUDE [ssSQL14](../../includes/sssql14-md.md)]|[!INCLUDE [sssql16-md](../../includes/sssql16-md.md)]<sup>1</sup>|[!INCLUDE [ssSQL17](../../includes/sssql17-md.md)]|[!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)]|[!INCLUDE [sql-server-2022](../../includes/sssql22-md.md)]|[!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] and [!INCLUDE [ssazure-sqlmi-autd](../../includes/ssazure-sqlmi-autd.md)]<sup>1</sup>|[!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] dedicated SQL pool|
+|Columnstore Index Feature|[!INCLUDE [ssSQL11](../../includes/sssql11-md.md)]|[!INCLUDE [ssSQL14](../../includes/sssql14-md.md)]|[!INCLUDE [sssql16-md](../../includes/sssql16-md.md)]<sup>1</sup>|[!INCLUDE [ssSQL17](../../includes/sssql17-md.md)]|[!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)]|[!INCLUDE [sql-server-2022](../../includes/sssql22-md.md)]|[!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)]<sup>1</sup> and [!INCLUDE [ssazure-sqlmi-autd](../../includes/ssazure-sqlmi-autd.md)]|[!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] dedicated SQL pool|
 |*----|---|---|---|---|---|---|---|---|
 |Batch mode execution for multi-threaded queries<sup>2</sup>|yes|yes|yes|yes|yes|yes|yes|yes|
 |Batch mode execution for single-threaded queries|||yes|yes|yes|yes|yes|yes|
