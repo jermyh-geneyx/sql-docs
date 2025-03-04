@@ -123,13 +123,16 @@ CREATE TABLE { database_name.schema_name.table_name | schema_name.table_name | t
 ### Column options
 
  `COLLATE` *Windows_collation_name*  
- Specifies the collation for the expression. The collation must be one of the Windows collations supported by [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. For a list of Windows collations supported by [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], see [Windows collation name (Transact-SQL)](windows-collation-name-transact-sql.md)). 
+
+ Specifies the collation for the expression. The collation must be one of the Windows collations supported by [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. For a list of Windows collations supported by [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], see [Windows collation name (Transact-SQL)](windows-collation-name-transact-sql.md)).  
   
  `NULL` | `NOT NULL`  
- Specifies whether `NULL` values are allowed in the column. The default is `NULL`. 
+
+ Specifies whether `NULL` values are allowed in the column. The default is `NULL`.  
   
  [ `CONSTRAINT` *constraint_name* ] `DEFAULT` *constant_expression*  
- Specifies the default column value. 
+
+ Specifies the default column value.  
   
  | Argument | Explanation |
  | -------- | ----------- |
@@ -696,6 +699,7 @@ CREATE TABLE { database_name.schema_name.table_name | schema_name.table_name | t
 
 <column_options> ::=
     [ NULL | NOT NULL ] -- default is NULL
+    [ COLLATE Windows_collation_name ]
 
 <data type> ::=
       datetime2 ( n )   
@@ -731,10 +735,18 @@ CREATE TABLE { database_name.schema_name.table_name | schema_name.table_name | t
 
 <a id="ColumnOptions"></a>
 
+
 ### Column options
 
  `NULL` | `NOT NULL`  
- Specifies whether `NULL` values are allowed in the column. The default is `NULL`. 
+
+ Specifies whether `NULL` values are allowed in the column. The default is `NULL`.  
+
+ `COLLATE` *Windows_collation_name*  
+
+ Specifies the collation for the expression. 
+ 
+ For more information on supported collations, see [COLLATE](collations.md).
   
 <a id="DataTypesFabric"></a>
 
