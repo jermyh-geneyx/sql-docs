@@ -4,7 +4,7 @@ description: CREATE COLUMNSTORE INDEX converts a rowstore table to a clustered c
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 02/28/2025
+ms.date: 03/04/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -48,7 +48,7 @@ Follow [What's new in columnstore indexes](../../relational-databases/indexes/co
 
 ## Syntax
 
-Syntax for Azure SQL Database and Azure SQL Managed Instance:
+Syntax for Azure SQL Database and [!INCLUDE [ssazure-sqlmi-autd](../../includes/ssazure-sqlmi-autd.md)]:
 
 ```syntaxsql
 -- Create a clustered columnstore index on disk-based table.
