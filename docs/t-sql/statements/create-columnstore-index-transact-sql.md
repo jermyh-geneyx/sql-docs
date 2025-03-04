@@ -87,13 +87,14 @@ CREATE [ NONCLUSTERED ]  COLUMNSTORE INDEX index_name
     | column_name { IS | IS NOT | = | <> | != | > | >= | !> | < | <= | !< } constant )
 ```
 
-Synax for SQL Server:
+Syntax for SQL Server:
 
 ```syntaxsql
 -- Create a clustered columnstore index on disk-based table.
 CREATE CLUSTERED COLUMNSTORE INDEX index_name
     ON { database_name.schema_name.table_name | schema_name.table_name | table_name }
     [ WITH ( <with_option> [ , ...n ] ) ]
+    [ ORDER (column [ , ...n ] ) ]
     [ ON <on_option> ]
 [ ; ]
 
@@ -144,6 +145,7 @@ Some of the options aren't available in all database engine versions. The follow
 | DATA_COMPRESSION | [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] | [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] |
 | ONLINE | [!INCLUDE [ssSQLv15_md](../../includes/sssql19-md.md)] | [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] |
 | WHERE clause | N/A | [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] |
+| ORDER clause | [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] | N/A |
 
 All options are available in Azure SQL Database and [!INCLUDE [ssazure-sqlmi-autd](../../includes/ssazure-sqlmi-autd.md)].
 
@@ -481,7 +483,8 @@ Columns that use any of the following data types can't be included in a columnst
 - Can't include a sparse column.
 - Can't be changed by using the ALTER INDEX statement. To change the nonclustered index, you must drop and re-create the columnstore index instead. You can use ALTER INDEX to disable and rebuild a columnstore index.
 - Can't be created by using the INCLUDE keyword.
-- Can't include the ASC or DESC keywords in the list of index columns. Columnstore indexes are ordered according to the compression algorithms. Sorting would eliminate many of the performance benefits. In in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and in [!INCLUDE [ssazure-sqlmi-autd](../../includes/ssazure-sqlmi-autd.md)] you can specify an order for the data in a nonclustered columnstore index. For more information, see [Performance tuning with ordered columnstore indexes](../../relational-databases/indexes/ordered-columnstore-indexes.md).
+- Can specify the `ASC` or `DESC` keywords in the list of index columns for a nonclustered columnstore index in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)], and [!INCLUDE [ssazure-sqlmi-autd](../../includes/ssazure-sqlmi-autd.md)]. For more information, see [Performance tuning with ordered columnstore indexes](../../relational-databases/indexes/ordered-columnstore-indexes.md).
+   - Can't include the `ASC` or `DESC` keywords in the list of index columns in other products. Columnstore indexes are ordered according to the compression algorithms. 
 - Can't include LOB columns of type **nvarchar(max)**, **varchar(max)**, and **varbinary(max)** in nonclustered columnstore indexes. Only clustered columnstore indexes support LOB types, beginning in the [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] version, Azure SQL Database (configured at Premium tier, Standard tier (S3 and above), and all vCore offerings tiers). Prior versions don't support LOB types in clustered and nonclustered columnstore indexes.
 - Starting with [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)], you can create a nonclustered columnstore index on an indexed view.
 
