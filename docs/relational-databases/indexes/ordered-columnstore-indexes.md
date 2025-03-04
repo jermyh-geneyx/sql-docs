@@ -33,13 +33,13 @@ When a columnstore index is not ordered, the index builder doesn't sort the data
 
 When you create an ordered columnstore index, the [!INCLUDE [ssDE](../../includes/ssde-md.md)] sorts the existing data by the order keys you specify before the index builder compresses them into segments. With sorted data, segment overlapping is reduced or eliminated, allowing queries to have a more efficient segment elimination and thus faster performance because there are fewer segments to read from disk.
 
-Depending on the available memory, the data size, the degree of parallelism, the index type (clustered vs. nonclustered), and the type of index build (offline vs. online), the sort might be full (no segment overlap) or partial (some segment overlap). For example, partial sort occurs when the available memory is insufficient for a full sort. Queries using an ordered columnstore index often execute faster than with a non-ordered index even if the index was built using a partial sort.
+Depending on the available memory, the data size, the degree of parallelism, the index type (clustered vs. nonclustered), and the type of index build (offline vs. online), the sort for ordered columnstore indexes might be full (no segment overlap) or partial (some segment overlap). For example, partial sort occurs when the available memory is insufficient for a full sort. Queries using an ordered columnstore index often execute faster than with a non-ordered index even if the ordered index was built using a partial sort.
 
-Full sort is provided for clustered columnstore indexes created or rebuilt with both `ONLINE = ON` and `MAXDOP = 1` options. In this case, the sort is not limited by the available memory because it uses the `tempdb` database to spill the data that doesn't fit in memory. This can make the index build process slower due to the additional `tempdb` I/O. However, with an online index rebuild, queries can continue using the existing index while the new index is being rebuilt.
+Full sort is provided for ordered clustered columnstore indexes created or rebuilt with both `ONLINE = ON` and `MAXDOP = 1` options. In this case, the sort is not limited by the available memory because it uses the `tempdb` database to spill the data that doesn't fit in memory. This can make the index build process slower due to the additional `tempdb` I/O. However, with an online index rebuild, queries can continue using the existing index while the new ordered index is being rebuilt.
 
-Full sort might also be provided for clustered and nonclustered columnstore indexes created or rebuilt with both `ONLINE = OFF` and `MAXDOP = 1` options if the amount of data to be sorted is sufficiently small to fully fit in available memory.
+Full sort might also be provided for ordered clustered and nonclustered columnstore indexes created or rebuilt with both `ONLINE = OFF` and `MAXDOP = 1` options if the amount of data to be sorted is sufficiently small to fully fit in available memory.
 
-In all other cases, the sort is partial.
+In all other cases, the sort in ordered columnstore indexes is partial.
 
 > [!NOTE]
 > Currently, ordered columnstore indexes can be created or rebuilt online only in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] and in [!INCLUDE [ssazure-sqlmi-autd](../../includes/ssazure-sqlmi-autd.md)].
@@ -89,7 +89,7 @@ dbo         Table1     Column1     1        930144    COLUMNSTORE           2   
 > [!NOTE]
 > In an ordered columnstore index, the new data resulting from the same batch of DML or data loading operations is sorted within that batch only. There's no global sorting that includes existing data in the table.
 >
->To sort data in the index after inserting new data or updating existing data, rebuild the index.
+> To sort data in the index after inserting new data or updating existing data, rebuild the index.
 
 For an offline rebuild of a partitioned columnstore index, rebuild is done one partition at a time. Data in the partition that is being rebuilt is unavailable until the rebuild is complete for that partition.
 
