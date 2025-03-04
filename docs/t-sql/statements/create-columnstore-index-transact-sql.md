@@ -48,7 +48,7 @@ Follow [What's new in columnstore indexes](../../relational-databases/indexes/co
 
 ## Syntax
 
-Syntax for SQL Server and Azure SQL Database:
+Syntax for Azure SQL Database and Azure SQL Managed Instance:
 
 ```syntaxsql
 -- Create a clustered columnstore index on disk-based table.
@@ -87,7 +87,44 @@ CREATE [ NONCLUSTERED ]  COLUMNSTORE INDEX index_name
     | column_name { IS | IS NOT | = | <> | != | > | >= | !> | < | <= | !< } constant )
 ```
 
-Syntax for Azure Synapse Analytics, Parallel Data Warehouse, [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions:
+Synax for SQL Server:
+
+```syntaxsql
+-- Create a clustered columnstore index on disk-based table.
+CREATE CLUSTERED COLUMNSTORE INDEX index_name
+    ON { database_name.schema_name.table_name | schema_name.table_name | table_name }
+    [ WITH ( <with_option> [ , ...n ] ) ]
+    [ ON <on_option> ]
+[ ; ]
+
+-- Create a nonclustered columnstore index on a disk-based table.
+CREATE [ NONCLUSTERED ]  COLUMNSTORE INDEX index_name
+    ON { database_name.schema_name.table_name | schema_name.table_name | table_name }
+        ( column  [ , ...n ] )
+    [ WHERE <filter_expression> [ AND <filter_expression> ] ]
+    [ WITH ( <with_option> [ , ...n ] ) ]
+    [ ON <on_option> ]
+[ ; ]
+
+<with_option> ::=
+      DROP_EXISTING = { ON | OFF } -- default is OFF
+    | MAXDOP = max_degree_of_parallelism
+    | ONLINE = { ON | OFF }
+    | COMPRESSION_DELAY  = { 0 | delay [ MINUTES ] }
+    | DATA_COMPRESSION = { COLUMNSTORE | COLUMNSTORE_ARCHIVE }
+      [ ON PARTITIONS ( { partition_number_expression | range } [ , ...n ] ) ]
+
+<on_option>::=
+      partition_scheme_name ( column_name )
+    | filegroup_name
+    | "default"
+
+<filter_expression> ::=
+      column_name IN ( constant [ , ...n ]
+    | column_name { IS | IS NOT | = | <> | != | > | >= | !> | < | <= | !< } constant )
+```
+
+Syntax for Azure Synapse Analytics and Analytics Platform System (Parallel Data Warehouse):
 
 ```syntaxsql
 CREATE CLUSTERED COLUMNSTORE INDEX index_name
@@ -97,7 +134,7 @@ CREATE CLUSTERED COLUMNSTORE INDEX index_name
 [;]
 ```
 
-## Arguments
+## Version availability
 
 Some of the options aren't available in all database engine versions. The following table shows the versions when the options are introduced in CLUSTERED COLUMNSTORE and NONCLUSTERED COLUMNSTORE indexes:
 
@@ -108,7 +145,9 @@ Some of the options aren't available in all database engine versions. The follow
 | ONLINE | [!INCLUDE [ssSQLv15_md](../../includes/sssql19-md.md)] | [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] |
 | WHERE clause | N/A | [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] |
 
-All options are available in Azure SQL Database.
+All options are available in Azure SQL Database and [!INCLUDE [ssazure-sqlmi-autd](../../includes/ssazure-sqlmi-autd.md)].
+
+## Arguments
 
 ### CREATE CLUSTERED COLUMNSTORE INDEX
 
