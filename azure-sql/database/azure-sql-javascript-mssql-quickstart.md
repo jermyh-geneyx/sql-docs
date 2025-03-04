@@ -5,7 +5,7 @@ author: diberry
 ms.author: diberry
 ms.reviewer: mathoma
 ms.custom: passwordless-js
-ms.date: 10/03/2024
+ms.date: 03/04/2025
 ms.service: azure-sql-database
 ms.subservice: security
 ms.topic: quickstart
@@ -105,6 +105,11 @@ To create the Express.js OpenAPI application, you'll create several files:
 1. Create an **openapi.js** route file and add the following code for the OpenAPI UI explorer:
 
     :::code language="javascript" source="~/../azure-typescript-e2e-apps/quickstarts/azure-sql/connect-and-query/js/openapi.js":::
+
+1. Create an **openApiSchema.yml** file and add the following code so the OpenAPI UI explorer knows what APIs and models to display:
+
+    :::code language="yml" source="~/../azure-typescript-e2e-apps/quickstarts/azure-sql/connect-and-query/ts/src/openApiSchema.yml":::
+
 
 ## Configure the mssql connection object
 

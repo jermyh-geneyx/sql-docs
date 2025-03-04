@@ -595,7 +595,7 @@ ALTER COLUMN can't have a collation change if one or more of the following condi
 - If any index, statistics, or full-text index are created on the column. Statistics created automatically on the column changed are dropped if the column collation is changed.
 - If a schema-bound view or function references the column.
 
-For more information, see [COLLATE](~/t-sql/statements/collations.md).
+For more information on supported collations, see [COLLATE](collations.md).
 
 #### NULL | NOT NULL
 
@@ -623,7 +623,7 @@ If you add a column with a user-defined data type, be sure to define the column 
 
 Specifies that the ROWGUIDCOL property is added to or dropped from the specified column. ROWGUIDCOL indicates that the column is a row GUID column. You can set only one **uniqueidentifier** column per table as the ROWGUIDCOL column. And, you can only assign the ROWGUIDCOL property to a **uniqueidentifier** column. You can't assign ROWGUIDCOL to a column of a user-defined data type.
 
-ROWGUIDCOL doesn't enforce uniqueness of the values stored in the column and doesn't automatically generate values for new rows that are inserted into the table. To generate unique values for each column, either use the NEWID or NEWSEQUENTIALID function on INSERT statements. Or, specify the NEWID or NEWSEQUENTIALID function as the default for the column.
+ROWGUIDCOL doesn't enforce uniqueness of the values stored in the column and doesn't automatically generate values for new rows that are inserted into the table. To generate unique values for each column, either use the `NEWID()` or `NEWSEQUENTIALID()` function in `INSERT` statements. Or, specify the `NEWID()` or `NEWSEQUENTIALID()` function as the default for the column. 
 
 #### [ {ADD | DROP} PERSISTED ]
 
