@@ -3,7 +3,8 @@ title: "Columnstore indexes: Overview"
 description: "An overview on columnstore indexes. Columnstore indexes are the standard for storing and querying large data warehousing fact tables."
 author: MikeRayMSFT
 ms.author: mikeray
-ms.date: 11/01/2024
+ms.reviewer: dfurman
+ms.date: 02/28/2025
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: concept-article
@@ -147,7 +148,7 @@ Rowstore indexes perform best on queries that seek into the data, when searching
 
 Columnstore indexes give high performance gains for analytic queries that scan large amounts of data, especially on large tables. Use columnstore indexes on data warehousing and analytics workloads, especially on fact tables, because they tend to require full table scans rather than table seeks.
 
-Ordered clustered columnstore indexes improve performance for queries based on ordered column predicates. Ordered columnstore indexes can improve row-group elimination, which can deliver performance improvements by skipping row groups altogether. For more information, see [Performance tuning with ordered clustered columnstore indexes](ordered-columnstore-indexes.md). For ordered columnstore index availability, see [Ordered column index availability](columnstore-indexes-overview.md#ordered-columnstore-index-availability).
+Ordered clustered columnstore indexes improve performance for queries based on ordered column predicates. Ordered columnstore indexes can improve row-group elimination, which can deliver performance improvements by skipping row groups altogether. For more information, see [Performance tuning with ordered columnstore indexes](ordered-columnstore-indexes.md). For ordered columnstore index availability, see [Ordered column index availability](columnstore-indexes-overview.md#ordered-columnstore-index-availability).
 
 ### Can I combine rowstore and columnstore on the same table?
 
@@ -157,24 +158,28 @@ Beginning with [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)], you can ha
 
 ## Ordered columnstore indexes
 
-By enabling efficient segment elimination, ordered clustered columnstore indexes (CCI) provide much faster performance by skipping large amounts of ordered data that don't match the query predicate. Loading data into an ordered CCI table can take longer than a non-ordered CCI table because of the data sorting operation, however queries can run faster afterwards with ordered CCI.
+By enabling efficient segment elimination, ordered columnstore indexes provide faster performance by skipping large amounts of ordered data that don't match the query predicate. Loading data into an ordered columnstore index can take longer than in a non-ordered index because of the data sorting operation, however with ordered columnstore indexes queries can run faster afterwards.
 
-- For more information on performance tuning data warehousing workloads in the SQL Database Engine with ordered clustered columnstore indexes, see [Performance tuning with ordered clustered columnstore indexes](ordered-columnstore-indexes.md).
+- For more information on performance tuning data warehousing workloads in the SQL Database Engine with ordered columnstore indexes, see [Performance tuning with ordered columnstore indexes](ordered-columnstore-indexes.md).
 - For more information on when to use which type of columnstore index, see [Choose the best columnstore index for your needs](columnstore-indexes-design-guidance.md#choose-the-best-columnstore-index-for-your-needs).
 
 ### Ordered columnstore index availability
 
-First introduced with [!INCLUDE [_ss2022](../../includes/applies-to-version/_ss2022.md)], ordered columnstore indexes are available in the following platforms.
+First introduced with [!INCLUDE [_ss2022](../../includes/applies-to-version/_ss2022.md)], ordered columnstore indexes are available in the following platforms:
 
 |Platform|Ordered *clustered* columnstore indexes|Ordered *nonclustered* columnstore indexes|
 |:--|:--|:--|
 |[!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] | Yes | Yes |
-|[!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)] | Yes\* | Yes |
+|[!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)]<sup>AUTD</sup>|Yes|Yes|
+|[!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)]<sup>2022</sup>|Yes|No|
+|[!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)] | Yes<sup>1</sup> | Yes |
 |[!INCLUDE [sssql22-md](../../includes/sssql22-md.md)]|Yes|No|
-|[!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)]|Yes|Yes|
 |[!INCLUDE [sss-dedicated-pool-md](../../includes/sss-dedicated-pool-md.md)] in [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)]|[Yes](/azure/synapse-analytics/sql-data-warehouse/performance-tuning-ordered-cci)|No|
 
-\* In Fabric SQL database, tables with clustered columnstore indexes are not [mirrored to Fabric OneLake](/fabric/database/sql/mirroring-overview).
+<sup>AUTD</sup> Applies to Azure SQL Managed Instance configured with the [Always-up-to-date update policy](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy).   
+<sup>2022</sup> Applies to Azure SQL Managed Instance configured with the [SQL Server 2022 update policy](/azure/azure-sql/managed-instance/update-policy#sql-server-2022-update-policy).   
+<sup>1</sup>In Fabric SQL database, tables with clustered columnstore indexes are not [mirrored to Fabric OneLake](/fabric/database/sql/mirroring-overview).
+
 
 ## Metadata
 

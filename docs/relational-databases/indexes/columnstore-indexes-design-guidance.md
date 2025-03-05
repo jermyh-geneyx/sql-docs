@@ -3,7 +3,7 @@ title: "Columnstore indexes - Design guidance"
 description: "High-level recommendations for designing columnstore indexes."
 author: MikeRayMSFT
 ms.author: mikeray
-ms.date: 10/23/2024
+ms.date: 02/28/2025
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: conceptual
@@ -42,7 +42,7 @@ Here is a summary of the options and recommendations.
 | Columnstore option | Recommendations for when to use | Compression |
 | :----------------- | :------------------- | :---------- |
 | [Clustered columnstore index](#use-a-clustered-columnstore-index-for-large-data-warehouse-tables) | Use for:<br /><br />1) Traditional data warehouse workload with a star or snowflake schema<br /><br />2) Internet of Things (IOT) workloads that insert large volumes of data with minimal updates and deletes. | Average of 10x |
-| [Ordered clustered columnstore index](#use-an-ordered-clustered-columnstore-index-for-large-data-warehouse-tables) | Use when a clustered columnstore index is queried via a single ordered predicate column or column set. This guidance is similar to choosing the key column(s) for a rowstore clustered index, though the compressed underlying rowgroups behave differently. For more information, see [CREATE COLUMNSTORE INDEX](../../t-sql/statements/create-columnstore-index-transact-sql.md#order-for-clustered-columnstore) and [Performance tuning with ordered clustered columnstore indexes](ordered-columnstore-indexes.md). | Average of 10x |
+| [Ordered columnstore index](#use-an-ordered-columnstore-index-for-large-data-warehouse-tables) | Use when a clustered columnstore index is queried via a single ordered predicate column or column set. This guidance is similar to choosing the key columns for a rowstore clustered index, though the compressed underlying rowgroups behave differently. For more information, see [CREATE COLUMNSTORE INDEX](../../t-sql/statements/create-columnstore-index-transact-sql.md#order-for-clustered-columnstore) and [Performance tuning with ordered columnstore indexes](ordered-columnstore-indexes.md). | Average of 10x |
 | [Nonclustered B-tree indexes on a clustered columnstore index](#add-b-tree-nonclustered-indexes-for-efficient-table-seeks) | Use to:<br /><br />   1. Enforce primary key and foreign key constraints on a clustered columnstore index.<br /><br />   2. Speed up queries that search for specific values or small ranges of values.<br /><br />   3. Speed up updates and deletes of specific rows.| 10x on average plus some additional storage for the NCIs.|
 | [Nonclustered columnstore index on a disk-based heap or B-tree index](#add-b-tree-nonclustered-indexes-for-efficient-table-seeks) | Use for:<br /><br />1) An OLTP workload that has some analytics queries. You can drop B-tree indexes created for analytics and replace them with one nonclustered columnstore index.<br /><br />2) Many traditional OLTP workloads that perform Extract Transform and Load (ETL) operations to move data to a separate data warehouse. You can eliminate ETL and a separate data warehouse by creating a nonclustered columnstore index on some of the OLTP tables. | NCCI is an additional index that requires 10% more storage on average.|
 | [Columnstore index on an in-memory table](#use-a-nonclustered-columnstore-index-for-real-time-analytics) | Same recommendations as nonclustered columnstore index on a disk-based table, except the base table is an in-memory table. | Columnstore index is an additional index.|
@@ -53,7 +53,7 @@ The clustered columnstore index is more than an index, it is the primary table s
 
 Consider using a clustered columnstore index when:
 
-- Each partition has at least a million rows. Columnstore indexes have rowgroups within each partition. If the table is too small to fill a rowgroup within each partition, you won't get the benefits of columnstore compression and query performance.
+- Each partition has at least a million rows. Columnstore indexes have rowgroups within each partition. If the table is too small to fill a rowgroup within each partition, you might not get the benefits of columnstore compression and query performance.
 - Queries primarily perform analytics on ranges of values. For example, to find the average value of a column, the query needs to scan all the column values. It then aggregates the values by summing them to determine the average.
 - Most of the inserts are on large volumes of data with minimal updates and deletes. Many workloads such as Internet of Things (IOT) insert large volumes of data with minimal updates and deletes. These workloads can benefit from the compression and query performance gains that come from using a clustered columnstore index.
 
@@ -62,32 +62,32 @@ Don't use a clustered columnstore index when:
 - The table requires **varchar(max)**, **nvarchar(max)**, or **varbinary(max)** data types. Or, design the columnstore index so that it doesn't include these columns (Applies to: [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and previous versions).
 - The table data is not permanent. Consider using a heap or temporary table when you need to store and delete the data quickly.
 - The table has less than one million rows per partition. 
-- More than 10% of the operations on the table are updates and deletes. Large numbers of updates and deletes cause fragmentation. The fragmentation affects compression rates and query performance until you run an operation called reorganize that forces all data into the columnstore and removes fragmentation. For more information, see [Minimizing index fragmentation in columnstore index](/archive/blogs/sqlserverstorageengine/columnstore-index-defragmentation-using-reorganize-command).
+- More than 10% of the operations on the table are updates and deletes. Large numbers of updates and deletes cause fragmentation. The fragmentation affects compression rates and query performance until you run an operation called reorganize, which forces all data into the columnstore and removes fragmentation. For more information, see [Minimizing index fragmentation in columnstore index](/archive/blogs/sqlserverstorageengine/columnstore-index-defragmentation-using-reorganize-command).
 
 For more information, see [Columnstore indexes in data warehousing](columnstore-indexes-data-warehouse.md).
 
-## Use an ordered clustered columnstore index for large data warehouse tables
+## Use an ordered columnstore index for large data warehouse tables
 
 For ordered columnstore index availability, see [Columnstore indexes: Overview](columnstore-indexes-overview.md#ordered-columnstore-index-availability).
 
-Consider using an ordered clustered columnstore index in the following scenarios:
+Consider using an ordered columnstore index in the following scenarios:
 
-- When data is relatively static (without frequently writes and deletes) and the ordered clustered columnstore index key is static, ordered clustered columnstore indexes can provide significant performance advantages over non-ordered clustered columnstore indexes or rowstore clustered indexes for analytical workloads.
-- The more distinct values in the first column of the ordered clustered columnstore index key, the better the performance gains might be for ordered clustered columnstore indexes. This is due to improved segment elimination for string data. For more information, see [segment elimination](columnstore-indexes-query-performance.md#segment-elimination).
-- Choose an ordered clustered columnstore index key that will be frequently queried and can benefit from segment elimination, especially the first column of the key. Performance gains due to segment elimination on other columns in the table will be less predictable.
-- Use cases where only the most recent analytical data must be queried, for example, the last 15 seconds, ordered clustered columnstore indexes can provide segment elimination for older data. The first column in the key of the ordered clustered columnstore data must be the date/time data, such as an inserted or created date/time. The segment elimination would be more effective in an ordered clustered columnstore index than in an unordered clustered columnstore index.
-- Consider ordered clustered columnstore indexes on tables containing keys with GUID data, where the uniqueidentifier data type can now be used for [segment elimination](columnstore-indexes-query-performance.md#segment-elimination).
+- When data is relatively static (without frequently writes and deletes) and the ordered columnstore index key is static, ordered columnstore indexes can provide significant performance advantages over non-ordered columnstore indexes or rowstore indexes for analytical workloads.
+- The more distinct values in the first column of the ordered columnstore index key, the better the performance gains might be. This is due to improved segment elimination for string data. For more information, see [segment elimination](columnstore-indexes-query-performance.md#segment-elimination).
+- Choose an ordered columnstore index key that is frequently queried and can benefit from segment elimination, especially the first column of the key. Performance gains due to segment elimination on other columns in the table are less predictable.
+- Use cases where only the most recent analytical data must be queried, for example, the last 15 seconds, ordered columnstore indexes can provide segment elimination for older data. The first column in the key of the ordered columnstore data must be the date/time data, such as an inserted or created date/time. The segment elimination would be more effective in an ordered columnstore index than in an unordered columnstore index.
+- Consider ordered columnstore indexes on tables containing keys with GUID data, where the uniqueidentifier data type can now be used for [segment elimination](columnstore-indexes-query-performance.md#segment-elimination).
 
-A ordered clustered columnstore index might not be as effective in these scenarios:
+An ordered columnstore index might not be as effective in these scenarios:
 
 - Similar to other columnstore indexes, a high rate of insert activity could create excessive storage I/O.
-- For workloads where there are a lot of write operations, the quality of segment elimination will be reduced over time because of rowgroup maintenance by the tuple mover. This can be mitigated by regular maintenance of the columnstore index with ALTER INDEX REORGANIZE.
+- For workloads where there are a lot of write operations, the quality of segment elimination will be reduced over time because of rowgroup maintenance by the tuple mover. This can be mitigated by regular maintenance of the columnstore index with `ALTER INDEX REORGANIZE`.
 
 ## Add B-tree nonclustered indexes for efficient table seeks
 
 Beginning with [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)], you can create nonclustered B-tree or rowstore indexes as secondary indexes on a clustered columnstore index. The nonclustered B-tree index is updated as changes occur to the columnstore index. This is a powerful feature that you can use to your advantage.
 
-By using the secondary B-tree index, you can efficiently search for specific rows without scanning through all the rows.  Other options become available too. For example, you can enforce a primary or foreign key constraint by using a UNIQUE constraint on the B-tree index. Since a non-unique value will fail to insert into the B-tree index, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] cannot insert the value into the columnstore.
+By using the secondary B-tree index, you can efficiently search for specific rows without scanning through all the rows.  Other options become available too. For example, you can enforce a primary or foreign key constraint by using a UNIQUE constraint on the B-tree index. Since a non-unique value fails to insert into the B-tree index, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] cannot insert the value into the columnstore.
 
 Consider using a B-tree index on a columnstore index to:
 
@@ -108,7 +108,7 @@ Since a columnstore index achieves 10x better data compression than a rowstore i
 
 - Eliminate the need for a separate data warehouse. Traditionally, companies run transactions on a rowstore table and then load the data into a separate data warehouse to run analytics. For many workloads, you can eliminate the loading process and the separate data warehouse by creating a nonclustered columnstore index on transactional tables.
 
-[!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] offers several strategies to make this scenario performant. It's very easy to try it since you can enable a nonclustered columnstore index with no changes to your OLTP application.
+[!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] offers several strategies to make this scenario performant. It's easy to try it since you can enable a nonclustered columnstore index with no changes to your OLTP application.
 
 To add additional processing resources, you can run the analytics on a readable secondary. Using a readable secondary separates the processing of the transactional workload and the analytics workload.
 
@@ -126,13 +126,13 @@ For large tables, the only practical way to manage ranges of data is by using pa
 
 For example, both rowstore and columnstore tables use partitions to:
 
-- Control the size of incremental backups. You can back up partitions to separate filegroups and then mark them as read-only. By doing this, future backups will skip the read-only filegroups. 
+- Control the size of incremental backups. You can back up partitions to separate filegroups and then mark them as read-only. By doing this, future backups skip the read-only filegroups. 
 - Save storage costs by moving an older partition to less expensive storage. For example, you could use partition switching to move a partition to a less expensive storage location.
 - Perform operations efficiently by limiting the operations to a partition. For example, you can target only the fragmented partitions for index maintenance.
 
 Additionally, with a columnstore index, you use partitioning to:
 
-- Save an additional 30% in storage costs. You can compress older partitions with the `COLUMNSTORE_ARCHIVE` compression options. The data will be slower for query performance, which is acceptable if the partition is queried infrequently.
+- Save an additional 30% in storage costs. You can compress older partitions with the `COLUMNSTORE_ARCHIVE` compression options. Query performance might be slower, which could be acceptable if the partition is queried infrequently.
 
 ### Use partitions to improve query performance
 
@@ -140,12 +140,12 @@ By using partitions, you can limit your queries to scan only specific partitions
 
 ### Use fewer partitions for a columnstore index
 
-Unless you have a large enough data size, a columnstore index performs best with fewer partitions than what you might use for a rowstore index. If you don't have at least one million rows per partition, most of your rows might go to the deltastore where they don't receive the performance benefit of columnstore compression. For example, if you load one million rows into a table with 10 partitions and each partition receives 100,000 rows, all of the rows will go to delta rowgroups.
+Unless you have a large enough data size, a columnstore index performs best with fewer partitions than what you might use for a rowstore index. If you don't have at least one million rows per partition, most of your rows might go to the deltastore where they don't receive the performance benefit of columnstore compression. For example, if you load one million rows into a table with 10 partitions and each partition receives 100,000 rows, all of the rows go to the delta rowgroups.
 
 Example:
 
 - Load 1,000,000 rows into one partition or a non-partitioned table. You get one compressed rowgroup with 1,000,000 rows. This is great for high data compression and fast query performance.
-- Load 1,000,000 rows evenly into 10 partitions. Each partition gets 100,000 rows, which is less than the minimum threshold for columnstore compression. As a result the columnstore index could have 10 delta rowgroups with 100,000 rows in each. There are ways to force the delta rowgroups into the columnstore. However, if these are the only rows in the columnstore index, the compressed rowgroups will be too small for best compression and query performance.
+- Load 1,000,000 rows evenly into 10 partitions. Each partition gets 100,000 rows, which is less than the minimum threshold for columnstore compression. As a result the columnstore index could have 10 delta rowgroups with 100,000 rows in each. There are ways to force the delta rowgroups into the columnstore. However, if these are the only rows in the columnstore index, the compressed rowgroups are too small for best compression and query performance.
 
 For more information about partitioning, see Sunil Agarwal's blog post, [Should I partition my columnstore index?](/archive/blogs/sqlserverstorageengine/columnstore-index-should-i-partition-my-columnstore-index).
 
@@ -169,7 +169,7 @@ If your data is already in a rowstore table, you can use [CREATE COLUMNSTORE IND
 
 You can configure the maximum number of processors for converting a heap or clustered B-tree index to a columnstore index. To configure the processors, use the maximum degree of parallelism option (MAXDOP).
 
-If you have large amounts of data, MAXDOP `1` will likely be too slow.  Increasing MAXDOP to `4` works fine. If this results in a few rowgroups that do not have the optimal number of rows, you can run [ALTER INDEX REORGANIZE](../../t-sql/statements/alter-index-transact-sql.md) to merge them together in the background.
+If you have large amounts of data, MAXDOP `1` might be too slow.  Increasing MAXDOP to `4` works fine. If this results in a few rowgroups that do not have the optimal number of rows, you can run [ALTER INDEX REORGANIZE](../../t-sql/statements/alter-index-transact-sql.md) to merge them together in the background.
 
 ### Keep the sorted order of a B-tree index
 
@@ -179,7 +179,7 @@ The columnstore index does not sort the data, but it does use metadata to track 
 
 To preserve the sorted order during conversion:
 
-- Use [CREATE COLUMNSTORE INDEX](../../t-sql/statements/create-columnstore-index-transact-sql.md) with the DROP_EXISTING clause. This also preserves the name of the index. If you have scripts that already use the name of the rowstore index you won't need to update them.
+- Use [CREATE COLUMNSTORE INDEX](../../t-sql/statements/create-columnstore-index-transact-sql.md) with the DROP_EXISTING clause. This also preserves the name of the index. If you have scripts that already use the name of the rowstore index you don't need to update them.
 
     This example converts a clustered rowstore index on a table named `MyFactTable` to a clustered columnstore index. The index name, `ClusteredIndex_d473567f7ea04d7aafcac5364c241e09`, stays the same.
 
@@ -209,7 +209,7 @@ These are tasks for creating and maintaining columnstore indexes.
 |Create performant indexes for operational analytics.|[Get started with Columnstore for real-time operational analytics](get-started-with-columnstore-for-real-time-operational-analytics.md)|Describes how to create complementary columnstore and B-tree indexes so that OLTP queries use B-tree indexes and analytics queries use columnstore indexes.|
 |Create performant columnstore indexes for data warehousing.|[Columnstore indexes in data warehousing](columnstore-indexes-data-warehouse.md)|Describes how to use B-tree indexes on columnstore tables to create performant data warehousing queries.|
 |Use a B-tree index to enforce a primary key constraint on a columnstore index.|[Columnstore indexes in data warehousing](columnstore-indexes-data-warehouse.md)|Shows how to combine B-tree and columnstore indexes to enforce primary key constraints on the columnstore index.|
-|Drop a columnstore index|[DROP INDEX (Transact-SQL)](../../t-sql/statements/drop-index-transact-sql.md)|Dropping a columnstore index uses the standard DROP INDEX syntax that B-tree indexes use. Dropping a clustered columnstore index will convert the columnstore table to a heap.|
+|Drop a columnstore index|[DROP INDEX (Transact-SQL)](../../t-sql/statements/drop-index-transact-sql.md)|Dropping a columnstore index uses the standard DROP INDEX syntax that B-tree indexes use. Dropping a clustered columnstore index converts the columnstore table to a heap.|
 |Delete a row from a columnstore index|[DELETE (Transact-SQL)](../../t-sql/statements/delete-transact-sql.md)|Use [DELETE (Transact-SQL)](../../t-sql/statements/delete-transact-sql.md) to delete a row.<br /><br />**columnstore** row: [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] marks the row as logically deleted but does not reclaim the physical storage for the row until the index is rebuilt.<br /><br />**deltastore** row: [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] logically and physically deletes the row.|
 |Update a row in the columnstore index|[UPDATE (Transact-SQL)](../../t-sql/queries/update-transact-sql.md)|Use [UPDATE (Transact-SQL)](../../t-sql/queries/update-transact-sql.md) to update a row.<br /><br />**columnstore** row:  [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] marks the row as logically deleted, and then inserts the updated row into the deltastore.<br /><br />**deltastore** row: [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] updates the row in the deltastore.|
 |Force all rows in the deltastore to go into the columnstore.|[ALTER INDEX (Transact-SQL)](../../t-sql/statements/alter-index-transact-sql.md) ... REBUILD<br /><br />[Optimize index maintenance to improve query performance and reduce resource consumption](reorganize-and-rebuild-indexes.md)|`ALTER INDEX` with the `REBUILD` option forces all rows to go into the columnstore.|

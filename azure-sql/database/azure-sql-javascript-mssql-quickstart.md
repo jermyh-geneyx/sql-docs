@@ -66,7 +66,7 @@ The steps in this section create a Node.js REST API.
     code .
     ```
 
-1. Open the **package.json** file and add the following property and value after the _name_ property to configure the project for ESM modules. 
+1. Open the `package.json` file and add the following property and value after the _name_ property to configure the project for ESM modules. 
 
     ```json
     "type": "module",
@@ -78,20 +78,20 @@ To create the Express.js OpenAPI application, you'll create several files:
 
 |File|Description|
 |--|--|
-|.env.development|Local development-only environment file.|
-|index.js|Main application file, which starts the Express.js app on port 3000.|
-|person.js|Express.js **/person** route API file to handle CRUD operations.|
-|openapi.js|Express.js **/api-docs** route for OpenAPI explorer UI. Root redirects to this route.|
-|openApiSchema.yml|OpenAPI 3.0 schema file defining Person API.|
-|config.js|Configuration file to read environment variables and construct appropriate mssql connection object.|
-|database.js|Database class to handle Azure SQL CRUD operations using the **mssql** npm package.|
-|./vscode/settings.json|Ignore files by glob pattern during deployment.|
+|`.env.development`|Local development-only environment file.|
+|`index.js`|Main application file, which starts the Express.js app on port 3000.|
+|`person.js`|Express.js **/person** route API file to handle CRUD operations.|
+|`openapi.js`|Express.js **/api-docs** route for OpenAPI explorer UI. Root redirects to this route.|
+|`openApiSchema.yml`|OpenAPI 3.0 schema file defining Person API.|
+|`config.js`|Configuration file to read environment variables and construct appropriate mssql connection object.|
+|`database.js`|Database class to handle Azure SQL CRUD operations using the **mssql** npm package.|
+|`./vscode/settings.json`|Ignore files by glob pattern during deployment.|
 
-1. Create an **index.js** file and add the following code:
+1. Create an `index.js` file and add the following code:
 
     :::code language="javascript" source="~/../azure-typescript-e2e-apps/quickstarts/azure-sql/connect-and-query/js/index.js":::
 
-1. Create a **person.js** route file and add the following code:
+1. Create a `person.js` route file and add the following code:
 
     :::code language="javascript" source="~/../azure-typescript-e2e-apps/quickstarts/azure-sql/connect-and-query/js/person.js" :::
 
@@ -102,11 +102,11 @@ To create the Express.js OpenAPI application, you'll create several files:
     ```
     
 
-1. Create an **openapi.js** route file and add the following code for the OpenAPI UI explorer:
+1. Create an `openapi.js` route file and add the following code for the OpenAPI UI explorer:
 
     :::code language="javascript" source="~/../azure-typescript-e2e-apps/quickstarts/azure-sql/connect-and-query/js/openapi.js":::
 
-1. Create an **openApiSchema.yml** file and add the following code so the OpenAPI UI explorer knows what APIs and models to display:
+1. Create an `openApiSchema.yml` file and add the following code so the OpenAPI UI explorer knows what APIs and models to display:
 
     :::code language="yml" source="~/../azure-typescript-e2e-apps/quickstarts/azure-sql/connect-and-query/ts/src/openApiSchema.yml":::
 
@@ -115,13 +115,13 @@ To create the Express.js OpenAPI application, you'll create several files:
 
 The **mssql** package implements the connection to Azure SQL Database by providing a configuration setting for an authentication type. 
 
-1. In Visual Studio Code, create a **config.js** file and add the following mssql configuration code to authenticate to Azure SQL Database.
+1. In Visual Studio Code, create a `config.js` file and add the following mssql configuration code to authenticate to Azure SQL Database.
 
     :::code language="javascript" source="~/../azure-typescript-e2e-apps/quickstarts/azure-sql/connect-and-query/js/config.js":::
 
 ## Create a local environment variable file
 
-Create a **.env.development** file for your local environment variables
+Create a `.env.development` file for your local environment variables
 
 ## [Passwordless (recommended)](#tab/passwordless)
 
@@ -156,7 +156,7 @@ Create a **.env.development** file for your local environment variables
 
 ## Add the code to connect to Azure SQL Database
 
-1. Create a **database.js** file and add the following code:
+1. Create a `database.js` file and add the following code:
 
     :::code language="javascript" source="~/../azure-typescript-e2e-apps/quickstarts/azure-sql/connect-and-query/js/database.js":::
 
@@ -183,7 +183,7 @@ The app is ready to be tested locally. Make sure you're signed in to the Azure C
 
 ## Configure project for zip deployment
 
-1. Create a `.vscode` folder and create a **settings.json** file in the folder.
+1. Create a `.vscode` folder and create a `settings.json` file in the folder.
 2. Add the following to ignore environment variables and dependencies during the zip deployment.
 
     ```json

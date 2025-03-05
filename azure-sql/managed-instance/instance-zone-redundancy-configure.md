@@ -151,7 +151,7 @@ Zone redundancy for SQL Managed Instance is supported in the following regions:
 | East US | North Europe | UAE North | Japan East |
 | East US 2 | Norway East | | Japan West |
 | Mexico Central | Poland Central | | Korea Central |
-| West Central US | Spain Central | | New Zealand North |
+| Spain Central | | New Zealand North |
 | West US 2 | Sweden Central | | Southeast Asia |
 | West US 3 | Switzerland North | | |
 | | UK South | | |
