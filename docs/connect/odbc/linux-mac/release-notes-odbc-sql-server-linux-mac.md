@@ -28,6 +28,14 @@ Thank you.
 GeneMi.  2019/04/03.
 -->
 
+## 18.5.1, March 2025
+
+| New item | Details |
+| :------- | :------ |
+| New distributions supported. | macOS 14, macOS 15, Azure Linux 3.0, Alpine Linux 3.20, Oracle Linux 9 |
+| Packet Size option. | Expose the Packet Size as a connection string option. |
+| Bug fixes. | [Bug fixes](../bug-fixes.md). |
+
 ## 18.4.1, July 2024
 
 | New item | Details |

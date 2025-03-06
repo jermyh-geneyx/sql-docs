@@ -14,6 +14,12 @@ helpviewer_keywords:
 
 This page contains a listing of bugs fixed in each release, starting with [!INCLUDE[msCoName](../../includes/msconame-md.md)] ODBC Driver 17 for [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)].
 
+### Bug fixes in the [!INCLUDE[msCoName](../../includes/msconame-md.md)] ODBC Driver 18.5.1.1 for [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]
+
+- Fix connection recovery to obtain the active primary node when a server moves
+- Fix crashes under low-memory conditions
+- Fix some error messages
+
 ### Bug fixes in the [!INCLUDE[msCoName](../../includes/msconame-md.md)] ODBC Driver 18.4.1.1 for [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]
 
 - Fix crashes when receiving invalid data from server
