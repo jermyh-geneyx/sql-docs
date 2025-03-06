@@ -7,7 +7,7 @@ ms.author: erinstellato
 ms.reviewer: drskwier, maghan, randolphwest
 ms.date: 08/29/2024
 ms.service: sql
-ms.subservice: ssms
+ms.subservice: ssdt
 ms.topic: how-to
 ---
 

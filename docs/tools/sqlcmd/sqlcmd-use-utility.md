@@ -6,7 +6,7 @@ ms.author: dlevy
 ms.reviewer: maghan, randolphwest, mikeray
 ms.date: 09/19/2024
 ms.service: sql
-ms.subservice: ssms
+ms.subservice: tools-other
 ms.topic: how-to
 ms.custom:
   - ignite-2024

@@ -5,7 +5,7 @@ description: This article describes the Managed Instance link, which you can use
 author: djordje-jeremic
 ms.author: djjeremi
 ms.reviewer: mathoma, randolphwest
-ms.date: 02/04/2024
+ms.date: 03/06/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: data-movement
 ms.topic: concept-article
@@ -30,7 +30,7 @@ Though the link supports replication of one database per link, it's possible to 
 
 The link feature currently offers the following functionality:
 
-- **One-way replication from SQL Server versions 2016 and 2019**: Use the link feature to replicate data one way from SQL instance to Azure SQL Managed Instance. Although you can manually fail over to your managed instance if there's a disaster, doing so breaks the link, and failing back isn't supported. 
+- **One-way replication from SQL Server versions 2016, 2017 and 2019**: Use the link feature to replicate data one way from SQL instance to Azure SQL Managed Instance. Although you can manually fail over to your managed instance if there's a disaster, doing so breaks the link, and failing back isn't supported. 
 - **Disaster recovery (SQL Server 2022)**: Use the link feature to replicate data between SQL Server 2022 and SQL Managed Instance, manually fail over to your secondary during a disaster, and fail back to your primary after you've mitigated the disaster. Either SQL Server or SQL Managed Instance can be the initial primary. 
 
 You can keep running the link for as long as you need it, for months and even years at a time. And for your modernization journey, if or when you're ready to migrate to Azure, the link enables a considerably improved migration experience. Migration through the link offers minimal downtime compared to all other available migrations options, providing a true online migration to your SQL Managed Instance.
@@ -45,7 +45,9 @@ Databases that are replicated through the link between SQL Server and Azure SQL 
 
 :::image type="content" source="./media/managed-instance-link-feature-overview/mi-link-main-scenario.svg" alt-text="Diagram that illustrates the main Managed Instance link scenario." lightbox="./media/managed-instance-link-feature-overview/mi-link-main-scenario.svg":::
 
-## <a id="prerequisites"></a>Version supportability
+<a id="prerequisites"></a>
+
+## Version supportability
 
 The Managed Instance link is supported on both the General Purpose and Business Critical service tier of Azure SQL Managed Instance. The link feature works with the Enterprise, Developer, and Standard editions of SQL Server. 
 
@@ -56,11 +58,12 @@ The following table lists the functionality of the link feature and the minimum 
 | Azure SQL Managed Instance | Windows Server and Linux | Generally available |  [Bi-directional](#disaster-recovery) |  - [SQL Server 2022 CU10 (KB5031778)](/troubleshoot/sql/releases/sqlserver-2022/cumulativeupdate10): Creating a link from Azure SQL Managed Instance to SQL Server 2022 <sup>1</sup> <br /> - [SQL Server 2022 CU13 (KB5036432)](/troubleshoot/sql/releases/sqlserver-2022/cumulativeupdate13): Failing over the link using [Transact-SQL](managed-instance-link-failover-how-to.md?tabs=tsql#fail-over-a-database) <br /> - Configuring a link from Azure SQL Managed Instance to SQL Server 2022 is only supported by instances configured with the [**SQL Server 2022 update policy**](update-policy.md#sql-server-2022-update-policy) | 
 | SQL Server 2022 (16.x) | Windows Server and Linux |  Generally available |  [Bi-directional](#disaster-recovery) |  - SQL Server 2022 RTM: Creating a link from SQL Server 2022 to Azure SQL Managed Instance <br /> - [SQL Server 2022 CU13 (KB5036432)](/troubleshoot/sql/releases/sqlserver-2022/cumulativeupdate13): Failing over the link using [Transact-SQL](managed-instance-link-failover-how-to.md?tabs=tsql#fail-over-a-database) | 
 | SQL Server 2019 (15.x) | Windows Server only | Generally available | From SQL Server to SQL MI only | [SQL Server 2019 CU20 (KB5024276)](https://support.microsoft.com/topic/kb5024276-cumulative-update-20-for-sql-server-2019-4b282be9-b559-46ac-9b6a-badbd44785d2) |
-| SQL Server 2017 (14.x) | N/A | N/A | N/A| SQL Server 2017 is not currently supported. | 
+| SQL Server 2017 (14.x)<sup>2</sup> | Windows Server only | Generally available | From SQL Server to SQL MI only | The most recent [SQL Server 2017 CU31](/troubleshoot/sql/releases/sqlserver-2017/cumulativeupdate31) build and the matching [SQL Server 2017 Azure Connect pack](/troubleshoot/sql/releases/sqlserver-2017/azureconnect) build | 
 | SQL Server 2016 (13.x) | Windows Server only | Generally available | From SQL Server to SQL MI only| The most recent [SQL Server 2016 SP3](/troubleshoot/sql/releases/sqlserver-2016/build-versions#sql-server-2016-service-pack-3-sp3-cumulative-update-cu-builds) build and the matching [SQL Server 2016 Azure Connect pack](/troubleshoot/sql/releases/sqlserver-2016/build-versions#sql-server-2016-service-pack-3-sp3-azure-connect-pack-builds) build |
 | SQL Server 2014 (12.x)  and below | N/A | N/A | N/A | Versions before SQL Server 2016 aren't supported.|
 
-<sup>1</sup> While creating a link with SQL Server 2022 as the initial primary is supported starting with the RTM version of SQL Server 2022, creating a link with Azure SQL Managed Instance as the initial primary is supported only starting with SQL Server 2022 CU10. If you create the link from a SQL Managed Instance initial primary, downgrading SQL Server below CU10 isn't supported while the link is active as it can cause issues after failing over in either direction.
+<sup>1</sup> While creating a link with SQL Server 2022 as the initial primary is supported starting with the RTM version of SQL Server 2022, creating a link with Azure SQL Managed Instance as the initial primary is supported only starting with SQL Server 2022 CU10. If you create the link from a SQL Managed Instance initial primary, downgrading SQL Server below CU10 isn't supported while the link is active as it can cause issues after failing over in either direction.   
+<sup>2</sup> Creating a link with SQL Server 2017 is currently only supported with Azure SQL Managed Instance with the [SQL Server 2022](update-policy.md#sql-server-2022-update-policy) update policy. 
 
 SQL Server versions prior to SQL Server 2016 (SQL Server 2008 - 2014) aren't supported because the link feature relies on distributed availability group technology, which was introduced in SQL Server 2016. 
 
@@ -109,7 +112,7 @@ After the link is created, follow best practices to maintain the link:
 
 The Managed Instance link enables [disaster recovery](managed-instance-link-disaster-recovery.md), where, in the event of a disaster, you can manually fail over your workload from your primary to your secondary. To get started, review [Disaster recovery with Managed Instance link](managed-instance-link-disaster-recovery.md). 
 
-With SQL Server 2016, and SQL Server 2019, the primary is always SQL Server and failover to the secondary managed instance is one-directional. Failing back to SQL Server isn't supported. However, it's possible to recover your data to SQL Server using data movement options such as [transactional replication](replication-transactional-overview.md) or [exporting a bacpac](../database/database-export.md). 
+With SQL Server 2016 to Server 2019, the primary is always SQL Server and failover to the secondary managed instance is one-directional. Failing back to SQL Server isn't supported. However, it's possible to recover your data to SQL Server using data movement options such as [transactional replication](replication-transactional-overview.md) or [exporting a bacpac](../database/database-export.md). 
 
 With SQL Server 2022, either SQL Server or SQL Managed Instance can be the initial primary and you can establish the link from either SQL Server or SQL Managed Instance. You can fail back your workloads between the primary and secondary, achieving true two-way disaster recovery. 
 
@@ -185,7 +188,7 @@ Data replication limitations include:
 
 - Only user databases can be replicated. Replication of system databases isn't supported.
 - The solution doesn't replicate server-level objects, agent jobs, or user logins from SQL Server to SQL Managed Instance.
-- For SQL Server versions 2016 and 2019, replication of user databases from SQL Server instances to SQL Managed Instance deployments is one way. User databases from SQL Managed Instance deployments can't be replicated back to SQL Server instances. Two-way replication with failback to a SQL Server instance is available only for SQL Server 2022.
+- For SQL Server versions 2016, 2017 and 2019, replication of user databases from SQL Server instances to SQL Managed Instance deployments is one way. User databases from SQL Managed Instance deployments can't be replicated back to SQL Server instances via the link. Two-way replication with failback to a SQL Server instance is available only for SQL Server 2022.
 - Configuring a link from SQL Managed Instance to SQL Server on a database is unsupported for SQL Managed Instance databases that are already linked. 
 
 Configuration limitations include: 
@@ -198,6 +201,7 @@ Configuration limitations include:
   - Only [VNet-local endpoint](connectivity-architecture-overview.md#vnet-local-endpoint) is supported to establish a link with SQL Managed Instance. 
   - You can't use public endpoint or private endpoints to establish the link with the managed instance.
   - Databases with multiple log files can't be replicated, because SQL Managed Instance doesn't support multiple log files.
+  - Creating a link with SQL Server 2017 is currently only supported with Azure SQL Managed Instance with the [SQL Server 2022](update-policy.md#sql-server-2022-update-policy) update policy. 
 
 Feature limitations include:
 
@@ -212,7 +216,7 @@ Feature limitations include:
     - Databases that use In-Memory OLTP can be replicated only to SQL Managed Instance in the*Business Critical* service tier, because the *General Purpose* service tier doesn't support In-Memory OLTP. Databases with multiple In-Memory OLTP files are not supported by SQL Managed Instance and can't be replicated.
 
 Trying to add an unsupported functionality to a replicated database in: 
-   - SQL Server 2019 and 2022 fails with an error. 
+   - SQL Server 2017, 2019 and 2022 fails with an error. 
    - SQL Server 2016 results in breaking the link, which will then need to be deleted and recreated. 
 
 For the full list of differences between SQL Server and SQL Managed Instance, see [T-SQL differences between SQL Server and Azure SQL Managed Instance](./transact-sql-tsql-differences-sql-server.md).

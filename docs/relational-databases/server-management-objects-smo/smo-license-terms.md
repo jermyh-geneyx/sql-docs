@@ -5,7 +5,7 @@ author: "markingmyname"
 ms.author: "maghan"
 ms.date: 12/15/2019
 ms.service: sql
-ms.subservice: ssms
+ms.subservice: tools-other
 ms.topic: conceptual
 ms.custom:
   - ignite-2024

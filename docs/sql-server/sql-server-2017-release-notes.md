@@ -4,7 +4,7 @@ description: This article describes limitations and issues with SQL Server 2017 
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest
-ms.date: 02/03/2025
+ms.date: 03/06/2025
 ms.service: sql
 ms.subservice: release-landing
 ms.topic: release-notes
@@ -28,6 +28,12 @@ This article describes limitations and issues with SQL Server 2017. For related 
 
 > [!NOTE]  
 > [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] is available. For more information, see [What's new in SQL Server 2022](what-s-new-in-sql-server-2022.md).
+
+## Azure Connect Pack for SQL Server 2017 (March 2025)
+
+Adds support for the [link feature](/azure/azure-sql/managed-instance/managed-instance-link-feature-overview) for Azure SQL Managed Instance, which enables database replication from SQL Server to [Azure SQL Managed Instance](/azure/azure-sql/managed-instance/sql-managed-instance-paas-overview).
+
+For more information, see [Azure Connect Pack for SQL Server 2017](/troubleshoot/sql/releases/sqlserver-2017/azureconnect).
 
 ## General availability release (October 2017)
 
