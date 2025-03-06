@@ -5,7 +5,7 @@ description: Learn how to use the Managed Instance link to recover your SQL Serv
 author: djordje-jeremic
 ms.author: djjeremi
 ms.reviewer: mathoma
-ms.date: 10/09/2024
+ms.date: 03/06/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: data-movement
 ms.custom: ignite-2023, build-2024
@@ -29,7 +29,7 @@ When failing back to SQL Server 2022, you can choose to fail back:
 
 :::image type="content" source="media/managed-instance-link-feature-overview/disaster-recovery-scenario.png" alt-text="Diagram showing the disaster recovery scenario.":::
 
-With SQL Server 2016, and SQL Server 2019, the primary is always SQL Server and failover to the secondary managed instance is one-directional. Reversing roles by failing back to SQL Server and making SQL Managed Instance primary isn't supported. However, it's possible to recover your data to SQL Server using data movement options such as [transactional replication](replication-transactional-overview.md) or [exporting a bacpac](../database/database-export.md). 
+With SQL Server 2016, 2017 and 2019, the primary is always SQL Server and failover to the secondary managed instance is one-directional. Reversing roles by failing back to SQL Server and making SQL Managed Instance primary isn't supported. However, it's possible to recover your data to SQL Server using data movement options such as [transactional replication](replication-transactional-overview.md) or [exporting a bacpac](../database/database-export.md). 
 
 > [!IMPORTANT]
 > After successful fail over to SQL Managed Instance, manually repoint your application(s) connection string to the SQL managed instance FQDN to complete the fail over process and continue running in Azure.
@@ -63,7 +63,7 @@ For Azure SQL Managed Instance, you should be a member of the [SQL Managed Insta
 
 ## One-way failover (SQL Server 2016 - 2022)
 
-For SQL Server 2016 and SQL Server 2019, failover to Azure SQL Managed Instance from SQL Server is one way. Failing back, or restoring your database to SQL Server isn't possible. However, you can recover your data back to SQL Server by using data movement options such as [transactional replication](replication-transactional-overview.md) or [exporting a bacpac](../database/database-export.md). Failing over to Azure SQL Managed Instance breaks the link and drops the distributed availability group. 
+For SQL Server 2016 to SQL Server 2019, failover to Azure SQL Managed Instance from SQL Server is one way. Failing back, or restoring your database to SQL Server isn't possible. However, you can recover your data back to SQL Server by using data movement options such as [transactional replication](replication-transactional-overview.md) or [exporting a bacpac](../database/database-export.md). Failing over to Azure SQL Managed Instance breaks the link and drops the distributed availability group. 
 
 With SQL Server 2022, you can choose to perform a one-way failover, such as for migration, by breaking the link in the process of failover. Be sure to choose the appropriate option for your business when you fail over your SQL Server 2022 database. 
 
