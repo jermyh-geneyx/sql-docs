@@ -4,7 +4,7 @@ description: This article contains the release notes and supported features for 
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: amitkh, vanto
-ms.date: 11/12/2024
+ms.date: 03/06/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: release-notes
@@ -34,14 +34,14 @@ Most existing client tools that target [!INCLUDE [ssNoVersion](../includes/ssnov
 
 ## Latest versions for all packages
 
-This section lists the latest versions of each package per distribution, for [!INCLUDE [ssSQL17](../includes/sssql17-md.md)]. The following table shows the most recent release, which is **CU 31 GDR 6**. For full release history, see [Release history for [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] 2017](/troubleshoot/sql/linux/release-history-2017).
+This section lists the latest versions of each package per distribution, for [!INCLUDE [ssSQL17](../includes/sssql17-md.md)]. The following table shows the most recent release, which is **AzureConnectFeaturePack**. For full release history, see [Release history for [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] 2017](/troubleshoot/sql/linux/release-history-2017).
 
 | Version | Release | Date | Build | KB article |
 | --- | --- | --- | --- | --- |
-| [!INCLUDE [ssSQL17](../includes/sssql17-md.md)] | CU 31 GDR 6 | 2024-11-12 | 14.0.3485.1 | [KB 5046858](https://support.microsoft.com/help/5046858) |
+| [!INCLUDE [ssSQL17](../includes/sssql17-md.md)] | AzureConnectFeaturePack | 2025-03-06 | 14.0.3490.10 | [Support article](/troubleshoot/sql/releases/sqlserver-2017/azureconnect) |
 
 > [!IMPORTANT]  
-> This is the final cumulative update for [!INCLUDE [ssSQL17](../includes/sssql17-md.md)].
+> This is the Azure Connect Pack, which includes CU 31 for [!INCLUDE [ssSQL17](../includes/sssql17-md.md)].
 
 - As of CU 4, [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] Agent is no longer installed as a separate package. It's installed with the Database Engine package and must be enabled to use.
 - The **mssql-server-is** package isn't supported on SUSE in this release. For more information, see [SQL Server on Linux: Known issues](sql-server-linux-known-issues.md#sql-server-integration-services-ssis).
@@ -49,18 +49,18 @@ This section lists the latest versions of each package per distribution, for [!I
 | Distribution | Package name | Package version | Download |
 | --- | --- | --- | --- |
 | **Red Hat Enterprise Linux** | | | |
-| RHEL 8 | Database Engine | 14.0.3485.1-1 | [Database Engine RPM package](https://packages.microsoft.com/rhel/8/mssql-server-2017/Packages/m/mssql-server-14.0.3485.1-1.x86_64.rpm) |
-| RHEL 8 | Full-Text Search | 14.0.3485.1-1 | [Full-Text Search RPM package](https://packages.microsoft.com/rhel/8/mssql-server-2017/Packages/m/mssql-server-fts-14.0.3485.1-1.x86_64.rpm) |
-| RHEL 8 | High Availability | 14.0.3485.1-1 | [High Availability RPM package](https://packages.microsoft.com/rhel/8/mssql-server-2017/Packages/m/mssql-server-ha-14.0.3485.1-1.x86_64.rpm) |
+| RHEL 8 | Database Engine | 14.0.3490.10-4 | [Database Engine RPM package](https://packages.microsoft.com/rhel/8/mssql-server-2017/Packages/m/mssql-server-14.0.3490.10-4.x86_64.rpm) |
+| RHEL 8 | Full-Text Search | 14.0.3490.10-4 | [Full-Text Search RPM package](https://packages.microsoft.com/rhel/8/mssql-server-2017/Packages/m/mssql-server-fts-14.0.3490.10-4.x86_64.rpm) |
+| RHEL 8 | High Availability | 14.0.3490.10-4 | [High Availability RPM package](https://packages.microsoft.com/rhel/8/mssql-server-2017/Packages/m/mssql-server-ha-14.0.3490.10-4.x86_64.rpm) |
 | RHEL 7 | SSIS | 14.0.3015.40-1 | [SSIS RPM package](https://packages.microsoft.com/rhel/7/mssql-server-2017/Packages/m/mssql-server-is-14.0.3015.40-1.x86_64.rpm) |
 | **SUSE Linux Enterprise Server** | | | |
-| SLES 12 | Database Engine | 14.0.3485.1-1 | [Database Engine RPM package](https://packages.microsoft.com/sles/12/mssql-server-2017/Packages/m/mssql-server-14.0.3485.1-1.x86_64.rpm) |
-| SLES 12 | Full-Text Search | 14.0.3485.1-1 | [Full-Text Search RPM package](https://packages.microsoft.com/sles/12/mssql-server-2017/Packages/m/mssql-server-fts-14.0.3485.1-1.x86_64.rpm) |
-| SLES 12 | High Availability | 14.0.3485.1-1 | [High Availability RPM package](https://packages.microsoft.com/sles/12/mssql-server-2017/Packages/m/mssql-server-ha-14.0.3485.1-1.x86_64.rpm) |
+| SLES 12 | Database Engine | 14.0.3490.10-4 | [Database Engine RPM package](https://packages.microsoft.com/sles/12/mssql-server-2017/Packages/m/mssql-server-14.0.3490.10-4.x86_64.rpm) |
+| SLES 12 | Full-Text Search | 14.0.3490.10-4 | [Full-Text Search RPM package](https://packages.microsoft.com/sles/12/mssql-server-2017/Packages/m/mssql-server-fts-14.0.3490.10-4.x86_64.rpm) |
+| SLES 12 | High Availability | 14.0.3490.10-4 | [High Availability RPM package](https://packages.microsoft.com/sles/12/mssql-server-2017/Packages/m/mssql-server-ha-14.0.3490.10-4.x86_64.rpm) |
 | **Ubuntu** | | | |
-| Ubuntu 18.04 | Database Engine | 14.0.3485.1-1 | [Database Engine Debian package](https://packages.microsoft.com/ubuntu/18.04/mssql-server-2017/pool/main/m/mssql-server/mssql-server_14.0.3485.1-1_amd64.deb) |
-| Ubuntu 18.04 | Full-Text Search | 14.0.3485.1-1 | [Full-Text Search Debian package](https://packages.microsoft.com/ubuntu/18.04/mssql-server-2017/pool/main/m/mssql-server-fts/mssql-server-fts_14.0.3485.1-1_amd64.deb) |
-| Ubuntu 18.04 | High Availability | 14.0.3485.1-1 | [High Availability Debian package](https://packages.microsoft.com/ubuntu/18.04/mssql-server-2017/pool/main/m/mssql-server-ha/mssql-server-ha_14.0.3485.1-1_amd64.deb) |
+| Ubuntu 18.04 | Database Engine | 14.0.3490.10-4 | [Database Engine Debian package](https://packages.microsoft.com/ubuntu/18.04/mssql-server-2017/pool/main/m/mssql-server/mssql-server_14.0.3490.10-4_amd64.deb) |
+| Ubuntu 18.04 | Full-Text Search | 14.0.3490.10-4 | [Full-Text Search Debian package](https://packages.microsoft.com/ubuntu/18.04/mssql-server-2017/pool/main/m/mssql-server-fts/mssql-server-fts_14.0.3490.10-4_amd64.deb) |
+| Ubuntu 18.04 | High Availability | 14.0.3490.10-4 | [High Availability Debian package](https://packages.microsoft.com/ubuntu/18.04/mssql-server-2017/pool/main/m/mssql-server-ha/mssql-server-ha_14.0.3490.10-4_amd64.deb) |
 | Ubuntu 16.04 | SSIS | 14.0.3015.40-1 | [SSIS Debian package](https://packages.microsoft.com/ubuntu/16.04/mssql-server-2017/pool/main/m/mssql-server-is/mssql-server-is_14.0.3015.40-1_amd64.deb) |
 
 ## <a id="cuinstall"></a> How to install updates
@@ -83,6 +83,7 @@ The following table lists the release history for [!INCLUDE [ssSQL17](../include
 
 | Release                                                                  | Version       | Release date |
 | ------------------------------------------------------------------------ | ------------- | ------------ |
+| [AzureConnectFeaturePack](/troubleshoot/sql/linux/release-history-2017#AzureConnectFeaturePack) | 14.0.3490.10  | 2025-03-06   |
 | [CU 31 GDR 6](/troubleshoot/sql/linux/release-history-2017#CU31-GDR6)    | 14.0.3485.1   | 2024-11-12   |
 | [CU 31 GDR 5](/troubleshoot/sql/linux/release-history-2017#CU31-GDR5)    | 14.0.3480.1   | 2024-10-08   |
 | [CU 31 GDR 4](/troubleshoot/sql/linux/release-history-2017#CU31-GDR4)    | 14.0.3475.1   | 2024-09-10   |
