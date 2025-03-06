@@ -32,7 +32,7 @@ GeneMi.  2019/04/03.
 
 | New item | Details |
 | :------- | :------ |
-| New distributions supported. | macOS 14, macOS 15, Azure Linux 3.0, Alpine Linux 3.20, Oracle Linux 9 |
+| New distributions supported. | macOS 14, macOS 15, Azure Linux 3.0, Alpine Linux 3.20, Oracle Linux 9, Ubuntu 24.10 |
 | Packet Size option. | Expose the Packet Size as a connection string option. |
 | Bug fixes. | [Bug fixes](../bug-fixes.md). |
 
