@@ -4,7 +4,7 @@ description: This Release Notes document describes known issues that you should 
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest
-ms.date: 02/03/2025
+ms.date: 03/06/2025
 ms.service: sql
 ms.subservice: release-landing
 ms.topic: release-notes
@@ -24,9 +24,15 @@ This article describes limitations and issues with [!INCLUDE [sssql16-md](../inc
 :::image type="icon" source="../includes/media/azure-vm.svg" border="false"::: **[Spin up a Virtual Machine with SQL Server already installed](https://azuremarketplace.microsoft.com/marketplace/apps/microsoftsqlserver.sql2022-ws2022?tab=Overview)**  
 :::image type="icon" source="../includes/media/download.svg" border="false"::: **[Download SQL Server Management Studio (SSMS)](../ssms/download-sql-server-management-studio-ssms.md)**
 
+## Azure Connect Pack for SQL Server 2016 (May 2022)
+
+Adds support for the [link feature](/azure/azure-sql/managed-instance/managed-instance-link-feature-overview) for Azure SQL Managed Instance, which enables database replication from SQL Server to [Azure SQL Managed Instance](/azure/azure-sql/managed-instance/sql-managed-instance-paas-overview).
+
+For more information, see [Azure Connect Pack for SQL Server 2016 Service Pack 3](/troubleshoot/sql/releases/sqlserver-2016/servicepack3-azureconnect).
+
 <a id="bkmk_2016sp3"></a>
 
-## SQL Server 2016 Service Pack 3 (SP3)
+## SQL Server 2016 Service Pack 3 (SP3) (September 2021)
 
 [!INCLUDE [sssql16-md](../includes/sssql16-md.md)] SP3 includes all cumulative updates released after [!INCLUDE [sssql16-md](../includes/sssql16-md.md)] SP2, up to and including CU17.
 
