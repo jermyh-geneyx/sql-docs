@@ -415,6 +415,9 @@
         ],
         "ado/**/*.md": [
           "sql-server-ver15"
+        ],
+        "dea/**/*.md": [
+          "sql-server-ver16"
         ]
       }
     },

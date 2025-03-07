@@ -1,6 +1,70 @@
 {
   "redirections": [
     {
+      "source_path": "docs/dea/database-experimentation-assistant-capture-trace.md",
+      "redirect_url": "/previous-versions/sql/dea/database-experimentation-assistant-capture-trace",
+      "redirect_document_id": false,
+      "monikers": [
+        "sql-server-ver16"
+      ]
+    },
+    {
+      "source_path": "docs/dea/database-experimentation-assistant-configure-replay.md",
+      "redirect_url": "/previous-versions/sql/dea/database-experimentation-assistant-configure-replay",
+      "redirect_document_id": false,
+      "monikers": [
+        "sql-server-ver16"
+      ]
+    },
+    {
+      "source_path": "docs/dea/database-experimentation-assistant-create-report.md",
+      "redirect_url": "/previous-versions/sql/dea/database-experimentation-assistant-create-report",
+      "redirect_document_id": false,
+      "monikers": [
+        "sql-server-ver16"
+      ]
+    },
+    {
+      "source_path": "docs/dea/database-experimentation-assistant-get-started.md",
+      "redirect_url": "/previous-versions/sql/dea/database-experimentation-assistant-get-started",
+      "redirect_document_id": false,
+      "monikers": [
+        "sql-server-ver16"
+      ]
+    },
+    {
+      "source_path": "docs/dea/database-experimentation-assistant-overview.md",
+      "redirect_url": "/previous-versions/sql/dea/database-experimentation-assistant-overview",
+      "redirect_document_id": false,
+      "monikers": [
+        "sql-server-ver16"
+      ]
+    },
+    {
+      "source_path": "docs/dea/database-experimentation-assistant-replay-trace.md",
+      "redirect_url": "/previous-versions/sql/dea/database-experimentation-assistant-replay-trace",
+      "redirect_document_id": false,
+      "monikers": [
+        "sql-server-ver16"
+      ]
+    },
+    {
+      "source_path": "docs/dea/database-experimentation-assistant-run-command-prompt.md",
+      "redirect_url": "/previous-versions/sql/dea/database-experimentation-assistant-run-command-prompt",
+      "redirect_document_id": false,
+      "monikers": [
+        "sql-server-ver16"
+      ]
+    },
+    {
+      "source_path": "docs/dea/database-experimentation-assistant-view-report.md",
+      "redirect_url": "/previous-versions/sql/dea/database-experimentation-assistant-view-report",
+      "redirect_document_id": false,
+      "monikers": [
+        "sql-server-ver16"
+      ]
+    },
+    {
       "source_path": "docs/ado/ado-glossary.md",
       "redirect_url": "/previous-versions/sql/ado/ado-glossary",
       "redirect_document_id": false,
