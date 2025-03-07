@@ -216,10 +216,12 @@ The following table compares compute resources in different hardware configurati
 |Hardware configuration  |CPU  |Memory  |
 |:---------|:---------|:---------|
 |Standard-series (Gen5) |**Provisioned compute**<br>- Intel&reg; E5-2673 v4 (Broadwell) 2.3 GHz, Intel&reg; SP-8160 (Skylake)\*, Intel&reg; 8272CL (Cascade Lake) 2.5 GHz\*, Intel&reg; Xeon&reg; Platinum 8370C (Ice Lake)\*, AMD EPYC 7763v (Milan) processors<br>- Provision up to 128 vCores (hyper-threaded)<br><br>**Serverless compute**<br>- Intel&reg; E5-2673 v4 (Broadwell) 2.3 GHz, Intel&reg; SP-8160 (Skylake)\*, Intel&reg; 8272CL (Cascade Lake) 2.5 GHz\*, Intel&reg; Xeon&reg; Platinum 8370C (Ice Lake)\*, AMD EPYC 7763v (Milan) processors<br>- Autoscale up to 80 vCores (hyper-threaded)<br>- The memory-to-vCore ratio dynamically adapts to memory and CPU usage based on workload demand and can be as high as 24 GB per vCore.  For example, at a given point in time a workload might use and be billed for 240-GB memory and only 10 vCores.|**Provisioned compute**<br>- 5.1 GB per vCore<br>- Provision up to 625 GB<br><br>**Serverless compute**<br>- Autoscale up to 24 GB per vCore<br>- Autoscale up to 240 GB max|
-|Fsv2-series     |- Intel&reg; 8168 (Skylake) processors<br>- Featuring a sustained all core turbo clock speed of 3.4 GHz and a maximum single core turbo clock speed of 3.7 GHz.<br>- Provision up to 72 vCores (hyper-threaded)|- 1.9 GB per vCore<br>- Provision up to 136 GB|
+|Fsv2-series\*\*     |- Intel&reg; 8168 (Skylake) processors<br>- Featuring a sustained all core turbo clock speed of 3.4 GHz and a maximum single core turbo clock speed of 3.7 GHz.<br>- Provision up to 72 vCores (hyper-threaded)|- 1.9 GB per vCore<br>- Provision up to 136 GB|
 |DC-series     | - Intel&reg; Xeon&reg; E-2288G processors<br>- Featuring Intel Software Guard Extension (Intel SGX)<br>- Provision up to 8 vCores (physical) | 4.5 GB per vCore |
 
 \* In the [sys.dm_user_db_resource_governance](/sql/relational-databases/system-dynamic-management-views/sys-dm-user-db-resource-governor-azure-sql-database) dynamic management view, hardware generation for databases using Intel&reg; SP-8160 (Skylake) processors appears as Gen6, hardware generation for databases using Intel&reg; 8272CL (Cascade Lake) appears as Gen7, and hardware generation for databases using Intel&reg; Xeon&reg; Platinum 8370C (Ice Lake) or AMD&reg; EPYC&reg; 7763v (Milan) appear as Gen8. For a given compute size and hardware configuration, resource limits are the same regardless of CPU type (Intel Broadwell, Skylake, Ice Lake, Cascade Lake, or AMD Milan).
+
+\*\* Fsv2-series hardware will be retired October 1, 2026.
 
 For more information, see resource limits for [single databases](resource-limits-vcore-single-databases.md) and [elastic pools](resource-limits-vcore-elastic-pools.md).
 
@@ -242,14 +244,6 @@ For more information, see the [Hyperscale premium series blog announcement](http
  
 For regions available, see [Hyperscale premium-series availability](#hyperscale-premium-series-availability).
 
-### Fsv2-series
-
-- Fsv2-series is a compute optimized hardware configuration delivering low CPU latency and high clock speed for the most CPU demanding workloads. Similar to [Hyperscale premium-series](#hyperscale-premium-series) hardware configurations, Fsv2-series is powered by the latest CPU and memory technology from Intel and AMD, allowing customers to take advantage of the latest hardware while using databases and elastic pools in the General Purpose service tier.
-- Depending on the workload, Fsv2-series can deliver more CPU performance per vCore than other types of hardware. For example, the 72 vCore Fsv2 compute size can provide more CPU performance than 80 vCores on Standard-series (Gen5), at lower cost.
-- Fsv2 provides less memory and `tempdb` per vCore than other hardware, so workloads sensitive to those limits might perform better on standard-series (Gen5).
-
-Fsv2-series in only supported in the General Purpose tier. For regions where Fsv2-series is available, see [Fsv2-series availability](#fsv2-series-1).
-
 ### DC-series
 
 - DC-series hardware uses Intel processors with Software Guard Extensions (Intel SGX) technology.
@@ -257,7 +251,7 @@ Fsv2-series in only supported in the General Purpose tier. For regions where Fsv
 - DC-series is designed for workloads that process sensitive data and demand confidential query processing capabilities, provided by Always Encrypted with secure enclaves.
 - DC-series hardware provides balanced compute and memory resources.
 
-DC-series is only supported for Provisioned compute (Serverless isn't supported) and doesn't support zone redundancy. For regions where DC-series is available, see [DC-series availability](#dc-series-1).
+DC-series is only supported for Provisioned compute (Serverless isn't supported) and doesn't support zone redundancy. For regions where DC-series is available, see [DC-series availability](#dc-series-regional-availability).
 
 #### Azure offer types supported by DC-series
 
@@ -297,11 +291,11 @@ For information on previous generation hardware, see [Previous generation hardwa
 
 <a id="gen4gen5-1"></a> <a id="gen5"></a>
 
-#### Standard-series (Gen5)
+#### Standard-series (Gen5) regional availability
 
 Standard-series (Gen5) hardware is available in all public regions worldwide.
 
-#### <a id="hyperscale-premium-series-availability"></a> Hyperscale premium-series
+#### <a id="hyperscale-premium-series-availability"></a> Hyperscale premium-series regional availability
  
 Hyperscale service tier premium-series and premium-series memory optimized hardware is available for single databases and elastic pools in the following regions:
 
@@ -338,7 +332,7 @@ Hyperscale service tier premium-series and premium-series memory optimized hardw
 
 \*\* Includes support for [zone redundancy](high-availability-sla-local-zone-redundancy.md#zone-redundant-availability).
 
-#### Fsv2-series
+#### Fsv2-series regional availability
 
 Fsv2-series is available in the following regions:
 
@@ -362,7 +356,7 @@ Fsv2-series is available in the following regions:
 - US East
 - US West 2
 
-#### DC-series
+#### DC-series regional availability
 
 DC-series is available in the following regions:
 
@@ -387,6 +381,16 @@ If you need DC-series in a currently unsupported region, [submit a support reque
 :::image type="content" source="media/service-tiers-sql-database-vcore/request-dc-series.png" alt-text="Screenshot of the Azure portal form to request DC-series in a new region." lightbox="media/service-tiers-sql-database-vcore/request-dc-series.png":::
 
 ## Previous generation hardware
+
+### Fsv2-series
+
+Fsv2-series hardware for Azure SQL Database will be retired October 1, 2026. To minimize service disruption and maintain price-performance, transition to Hyperscale premium-series or Standard-series (Gen5) hardware. 
+
+For most databases and workloads, Hyperscale premium-series or Standard-series (Gen5) hardware provide similar or better price performance than Fsv2. To make sure, please validate this with your specific database and workloads.
+
+- Similar to [Hyperscale premium-series](#hyperscale-premium-series) hardware configurations, Fsv2-series is powered by the latest CPU and memory technology from Intel and AMD, allowing customers to take advantage of the latest hardware while using databases and elastic pools in the General Purpose service tier.
+- Fsv2 provides less memory and `tempdb` per vCore than other hardware, so workloads sensitive to those limits might perform better on standard-series (Gen5).
+- Fsv2-series is only supported in the General Purpose tier.
 
 ### Gen4
 
