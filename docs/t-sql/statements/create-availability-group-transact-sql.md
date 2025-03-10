@@ -76,7 +76,7 @@ CREATE AVAILABILITY GROUP group_name
      | PRIMARY_ROLE ( {   
             [ ALLOW_CONNECTIONS = { READ_WRITE | ALL } ]   
         [,] [ READ_ONLY_ROUTING_LIST = { ( '<server_instance>' [ ,...n ] ) | NONE } ]  
-        [,] [ READ_WRITE_ROUTING_URL = { ( '<server_instance>' ) ] 
+        [,] [ READ_WRITE_ROUTING_URL = 'TCP://system-address:port' ]
      } )  
      | SESSION_TIMEOUT = integer  
   
@@ -118,22 +118,22 @@ Specifies a preference about how a backup job should evaluate the primary replic
   
 The supported values are as follows:  
   
-##### PRIMARY  
+#### PRIMARY  
 
 Specifies that the backups should always occur on the primary replica. This option is useful if you need backup features, such as creating differential backups, that aren't supported when backup is run on a secondary replica.  
   
 > [!IMPORTANT]  
 >  If you plan to use log shipping to prepare any secondary databases for an availability group, set the automated backup preference to **Primary** until all the secondary databases have been prepared and joined to the availability group.  
   
-##### SECONDARY_ONLY  
+#### SECONDARY_ONLY  
 
 Specifies that backups should never be performed on the primary replica. If the primary replica is the only replica online, the backup should not occur.  
   
-##### SECONDARY
+#### SECONDARY
 
 Specifies that backups should occur on a secondary replica except when the primary replica is the only replica online. In that case, the backup should occur on the primary replica. This is the default behavior.  
   
-##### NONE
+#### NONE
 
 Specifies that you prefer that backup jobs ignore the role of the availability replicas when choosing the replica to perform backups. Note backup jobs might evaluate other factors such as backup priority of each availability replica in combination with its operational state and  connected state.  
   
@@ -430,7 +430,7 @@ Beginning with [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)], you can loa
 
 Specifies that when this availability replica is the primary replica, read-only routing isn't supported. This is the default behavior.  
 
-#### READ_WRITE_ROUTING_URL = { ('_server_instance_') }
+#### READ_WRITE_ROUTING_URL **='**TCP**://**_system-address_**:**_port_**'**  
 
 **Applies to:** [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE[sssql19-md](../../includes/sssql19-md.md)]) 
 

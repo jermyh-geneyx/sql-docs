@@ -5,7 +5,7 @@ description: Use the update policy setting in Azure SQL Managed Instance to cont
 author: MladjoA
 ms.author: mlandzic
 ms.reviewer: mathoma
-ms.date: 12/09/2024
+ms.date: 03/12/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: deployment-configuration
 ms.topic: how-to
@@ -41,7 +41,6 @@ When using the SQL Server 2022 update policy, consider the following:
 - You might not have access to some of the latest SQL engine features and benefits available to Azure SQL Managed Instance with the **Always-up-to-date** update policy. 
 - The **SQL Server 2022** update policy is available until the [end of mainstream support of SQL Server 2022](/lifecycle/products/sql-server-2022), at which point, the update policy for instances using the **SQL Server 2022** update policy are automatically updated to the update policy that corresponds to the latest SQL Server major release available at that time. 
 
-
 ## Always-up-to-date update policy 
 
 The **Always-up-to-date** update policy configures your instance to receive all the latest features and updates available to Azure SQL Managed Instance. 
@@ -56,11 +55,9 @@ When using the **Always-up-to-date** update policy, consider the following:
 
 The following table lists all the features that are only available to instances with the designated update policy:
 
-
 |SQL Server 2022 update policy  |Always-up-to-date update policy  |
 |---------|---------|
-|- [Restore database to SQL Server 2022](restore-database-to-sql-server.md)  <br /> - [Link with bidirectional failover and disaster recovery](managed-instance-link-disaster-recovery.md)   | [JSON data type](/sql/t-sql/data-types/json-data-type) |
-
+|- [Restore database to SQL Server 2022](restore-database-to-sql-server.md)  <br /> - [Link with bidirectional failover and disaster recovery](managed-instance-link-disaster-recovery.md)   | [JSON data type](/sql/t-sql/data-types/json-data-type) <br />  [Invoke an HTTPS REST endpoint SP](/sql/relational-databases/system-stored-procedures/sp-invoke-external-rest-endpoint-transact-sql)|
 
 The following features are impacted by the configured update policy: 
 
@@ -68,6 +65,16 @@ The following features are impacted by the configured update policy:
 - [Managed Instance link](managed-instance-link-feature-overview.md#limitations): Establishing a link from SQL Managed Instance to SQL Server 2022, or failing back from SQL Server 2022 to SQL Managed Instance is only available to instances with the **SQL Server 2022** update policy. 
 - [Database copy and move](database-copy-move-how-to.md#limitations): A database from an instance configured with the **Always-up-to-date** update policy can't be copied or moved to an instance configured with the **SQL Server 2022** update policy. 
 - [Failover groups](failover-group-configure-sql-mi.md#change-update-policy): Instances in a failover group must have matching update policies. 
+
+## Which update policy to choose?
+
+Unless you're relying on a specific feature that requires the **SQL Server 2022** update policy, we recommend using the **Always-up-to-date** update policy. The **Always-up-to-date** update policy provides you with the latest features and benefits available to Azure SQL Managed Instance. While the latest features may not be directly relevant to you, there are still oftentimes improvements to performance, security, and reliability that can benefit your workload.
+
+If you're using the **SQL Server 2022** update policy to copy databases from SQL Managed Instance to SQL Server for regulatory compliance, contractual obligations, or other reasons important to your business, you can often accomplish the same goals by using other features like database export/import, or transactional replication, or services like Azure Data Factory. Using one of these alternative methods allows you to use the **Always-up-to-date** update policy with SQL Managed Instance while still meeting your business requirements.
+
+If you are not yet sure what requirements your solution will need, then take your time and start with the **SQL Server 2022** update policy. You can always switch to the **Always-up-to-date** update policy later.
+
+You can also use different update policies for different environments. For example, you can use the **Always-up-to-date** update policy in your development environment to take advantage of the latest features, while using the **SQL Server 2022** update policy in your production environment to ensure compatibility with SQL Server 2022 for failover scenarios.
 
 ## Existing instances
 
@@ -152,7 +159,6 @@ select serverproperty('ProductUpdateType')
 The following values for `ProductUpdateType` indicate the update policy for the current instance: 
 - `CU`: Updates are deployed via cumulative updates (CUs) for the corresponding major SQL Server release (**SQL Server 2022** update policy)
 - `Continuous`: New features are brought to Azure SQL Managed Instance as soon as they're available, independent of the SQL Server release cadence (**Always-up-to-date** update policy)
-
 
 ## Related content
 
