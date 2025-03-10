@@ -4,7 +4,7 @@ description: sp_OAStop stops the server-wide OLE Automation stored procedure exe
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -30,6 +30,10 @@ Stops the server-wide OLE Automation stored procedure execution environment.
 sp_OAStop
 [ ; ]
 ```
+
+## Arguments
+
+None.
 
 ## Return code values
 

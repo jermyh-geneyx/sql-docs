@@ -4,7 +4,7 @@ description: "Removes the internal representation of the XML document specified 
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 06/26/2023
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -34,6 +34,8 @@ sp_xml_removedocument hdoc
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### *hdoc*
 

@@ -4,7 +4,7 @@ description: sp_configure_automatic_tuning changes the automatic tuning for a gi
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest, derekw
-ms.date: 09/18/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: reference
@@ -52,6 +52,8 @@ sp_configure_automatic_tuning
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @option = ] '*option*'
 

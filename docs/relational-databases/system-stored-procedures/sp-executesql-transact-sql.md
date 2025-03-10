@@ -4,7 +4,7 @@ description: sp_executesql executes a Transact-SQL statement or batch that can b
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 10/31/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -44,6 +44,8 @@ sp_executesql [ @stmt = ] N'statement'
 [!INCLUDE [article-uses-adventureworks](../../includes/article-uses-adventureworks.md)]
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @stmt = ] N'*statement*'
 

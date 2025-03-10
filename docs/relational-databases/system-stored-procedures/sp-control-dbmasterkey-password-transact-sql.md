@@ -4,7 +4,7 @@ description: sp_control_dbmasterkey_password adds or drops a credential containi
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 07/05/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -33,6 +33,8 @@ sp_control_dbmasterkey_password @db_name = 'db_name'
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### @db_name = N'*db_name*'
 

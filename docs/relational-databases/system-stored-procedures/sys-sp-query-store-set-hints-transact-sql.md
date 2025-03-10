@@ -3,7 +3,7 @@ title: "sys.sp_query_store_set_hints (Transact-SQL)"
 description: "Creates or updates Query Store hints for a given query, allowing you to influence queries without changing application code or database objects."
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 08/21/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: reference
@@ -38,6 +38,8 @@ sp_query_store_set_hints
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @query_id = ] *query_id*
 

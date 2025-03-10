@@ -4,7 +4,7 @@ description: "For Azure SQL Database, instruct the change data capture (CDC) sch
 author: abhimantiwari
 ms.author: abhtiwar
 ms.reviewer: randolphwest
-ms.date: 06/13/2023
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -17,7 +17,7 @@ helpviewer_keywords:
   - "sp_cdc_set_scheduler_job"
 dev_langs:
   - "TSQL"
-monikerRange: "= azuresqldb-current"
+monikerRange: "=azuresqldb-current"
 ---
 # sys.sp_cdc_set_scheduler_job (Transact-SQL)
 
@@ -40,6 +40,8 @@ sys.sp_cdc_set_scheduler_job
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @jobType = ] N'*JobType*'
 

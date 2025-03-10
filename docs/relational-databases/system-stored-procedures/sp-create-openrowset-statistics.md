@@ -4,7 +4,7 @@ description: sp_create_openrowset_statistics creates column statistics for a col
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest
-ms.date: 07/05/2024
+ms.date: 03/07/2025
 ms.service: azure-synapse-analytics
 ms.topic: "reference"
 f1_keywords:
@@ -31,6 +31,8 @@ sys.sp_create_openrowset_statistics [ @stmt = ] N'statement_text'
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @stmt = ] N'*stmt*'
 

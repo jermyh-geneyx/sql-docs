@@ -4,7 +4,7 @@ description: "sp_query_store_remove_query (Transact-SQL)"
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -36,6 +36,8 @@ sp_query_store_remove_query [ @query_id = ] query_id
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @query_id = ] *query_id*
 

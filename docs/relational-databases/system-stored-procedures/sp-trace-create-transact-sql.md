@@ -4,7 +4,7 @@ description: "Creates a trace definition. The new trace is in a stopped state."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -41,6 +41,8 @@ sp_trace_create
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @traceid = ] *traceid* OUTPUT
 

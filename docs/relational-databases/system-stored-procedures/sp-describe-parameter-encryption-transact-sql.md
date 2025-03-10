@@ -4,7 +4,7 @@ description: sp_describe_parameter_encryption analyzes the specified Transact-SQ
 author: jaszymas
 ms.author: jaszymas
 ms.reviewer: vanto, randolphwest
-ms.date: 08/21/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -35,6 +35,8 @@ sp_describe_parameter_encryption
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @tsql = ] '*tsql*'
 

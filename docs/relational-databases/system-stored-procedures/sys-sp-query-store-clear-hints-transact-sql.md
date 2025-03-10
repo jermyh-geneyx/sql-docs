@@ -3,7 +3,7 @@ title: "sp_query_store_clear_hints (Transact-SQL)"
 description: "Removes all Query Store hints for a given query."
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 08/21/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: reference
@@ -36,6 +36,8 @@ sp_query_store_clear_hints
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @query_id = ] *query_id*
 

@@ -4,7 +4,7 @@ description: sp_set_session_context sets a key-value pair in the session context
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -38,6 +38,8 @@ sp_set_session_context
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @key = ] N'*key*'
 

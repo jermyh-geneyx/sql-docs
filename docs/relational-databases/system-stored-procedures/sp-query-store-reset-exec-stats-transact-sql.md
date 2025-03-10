@@ -4,7 +4,7 @@ description: "Clears the runtime stats for a specific query plan from the Query 
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -36,6 +36,8 @@ sp_query_store_reset_exec_stats [ @plan_id = ] plan_id
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @plan_id = ] *plan_id*
 
