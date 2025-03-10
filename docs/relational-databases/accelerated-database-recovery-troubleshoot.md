@@ -4,7 +4,7 @@ description: "Monitor and troubleshoot accelerated database recovery and persist
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: derekw, dfurman, randolphwest
-ms.date: 02/03/2025
+ms.date: 03/10/2025
 ms.service: sql
 ms.subservice: backup-restore
 ms.topic: troubleshooting-general
@@ -285,6 +285,8 @@ For example:
 ```sql
 EXEC sys.sp_persistent_version_cleanup [WideWorldImporters];
 ```
+
+An active transaction might prevent the PVS cleanup process from starting. If this occurs, the session running the `sys.sp_persistent_version_cleanup` stored procedure waits with the [PVS_CLEANUP_LOCK](./system-dynamic-management-views/sys-dm-os-wait-stats-transact-sql.md#pvs_cleanup_lock) wait type. You can wait for the transaction to complete, or you can consider killing the blocker session with an active transaction, if possible.
 
 ## Capture cleanup failures
 

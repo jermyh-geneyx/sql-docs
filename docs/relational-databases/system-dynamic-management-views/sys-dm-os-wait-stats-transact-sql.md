@@ -3,7 +3,7 @@ title: "sys.dm_os_wait_stats (Transact-SQL)"
 description: Returns information about all the waits encountered by threads that executed.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 10/03/2024
+ms.date: 03/10/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -744,6 +744,7 @@ The following table lists the wait types encountered by tasks.
 | <a id="preemptive_xetesting"></a> `PREEMPTIVE_XETESTING` | Identified for informational purposes only. Not supported. Future compatibility isn't guaranteed. |
 | <a id="print_rollback_progress"></a> `PRINT_ROLLBACK_PROGRESS` | Used to wait while user processes are ended in a database that has been transitioned by using the ALTER DATABASE termination clause. For more information, see ALTER DATABASE (Transact-SQL). |
 | <a id="pru_rollback_deferred"></a> `PRU_ROLLBACK_DEFERRED` | Internal use only.<br /><br />**Applies to**: [!INCLUDE [ssSQL11-md](../../includes/sssql11-md.md)] and later versions. |
+| <a id="pvs_cleanup_lock"></a> `PVS_CLEANUP_LOCK` | Occurs when the persistent version store (PVS) cleanup process is waiting for a lock required to start the cleanup. Might occur when an active transaction is preventing PVS cleanup initiated internally or using the `sys.sp_persistent_version_cleanup` system stored procedure. For more information, see [Monitor and troubleshoot accelerated database recovery](../accelerated-database-recovery-troubleshoot.md).<br /><br />**Applies to**: [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and later versions. |
 | <a id="pwait_all_components_initialized"></a> `PWAIT_ALL_COMPONENTS_INITIALIZED` | Internal use only.<br /><br />**Applies to**: [!INCLUDE [ssSQL11-md](../../includes/sssql11-md.md)] and later versions. |
 | <a id="pwait_coop_scan"></a> `PWAIT_COOP_SCAN` | Internal use only.<br /><br />**Applies to**: [!INCLUDE [ssSQL11-md](../../includes/sssql11-md.md)] and later versions. |
 | <a id="pwait_directlogconsumer_getnext"></a> `PWAIT_DIRECTLOGCONSUMER_GETNEXT` | Internal use only.<br /><br />**Applies to**: [!INCLUDE [ssSQL16-md](../../includes/sssql16-md.md)] and later versions. |
