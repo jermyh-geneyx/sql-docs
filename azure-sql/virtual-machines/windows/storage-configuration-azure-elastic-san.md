@@ -129,7 +129,7 @@ mpclaim -L -M 2
 
 Finally, run the PowerShell script you saved earlier from the **Connect to targets** step in the Azure portal to connect the volumes to the virtual machine.
 
-After the script completes, you can use [Disk Management](/windows-server/storage/disk-management/overview-of-disk-management) (for Windows) or  to format the volumes and bring them online. 
+After the script completes, you can use [Disk Management](/windows-server/storage/disk-management/overview-of-disk-management) (for Windows) to format the volumes and bring them online. 
 
 ## Install SQL Server
 
