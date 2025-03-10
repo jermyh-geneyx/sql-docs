@@ -4,7 +4,7 @@ description: "Monitor and troubleshoot accelerated database recovery and persist
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: derekw, dfurman, randolphwest
-ms.date: 03/09/2025
+ms.date: 03/10/2025
 ms.service: sql
 ms.subservice: backup-restore
 ms.topic: troubleshooting-general

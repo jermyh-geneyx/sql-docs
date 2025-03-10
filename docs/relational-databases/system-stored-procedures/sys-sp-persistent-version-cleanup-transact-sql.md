@@ -4,7 +4,7 @@ description: "Manually starts persistent version store (PVS) cleanup process, a 
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: dfurman
-ms.date: 03/09/2025
+ms.date: 03/10/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
