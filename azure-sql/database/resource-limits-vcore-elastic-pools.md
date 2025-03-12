@@ -8,8 +8,6 @@ ms.date: 01/09/2025
 ms.service: azure-sql-database
 ms.subservice: elastic-pools
 ms.topic: reference
-ms.custom:
-  - references_regions
 ---
 # Resource limits for elastic pools using the vCore purchasing model
 [!INCLUDE [appliesto-sqldb](../includes/appliesto-sqldb.md)]
@@ -569,7 +567,7 @@ The following table covers these SLOs: `BC_DC_14`, `BC_DC_16`, `BC_DC_18`, `BC_D
 
 ## Hyperscale - provisioned compute - standard-series (Gen5)
 
-Although the published Hyperscale resource limits for standard-series and premium-series are the same, premium-series offers faster CPU performance compared to standard-series, and scales up to 128 vCores, compared to 80 vCores for standard-series. Resources using premium-series are guaranteed to run on hardware with newer CPUs. Standard-series does not provide this guarantee and, depending on availability, resources might be placed on older hardware. There is no price difference between the two, but premium-series might not be available in all regions.
+Although the published Hyperscale resource limits for standard-series and premium-series are the same, premium-series offers faster CPU performance compared to standard-series, and scales up to 128 vCores, compared to 80 vCores for standard-series. Resources using premium-series are guaranteed to run on hardware with newer CPUs. Standard-series does not provide this guarantee and, depending on availability, resources might be placed on older hardware. There is no price difference between the two, but [premium-series is available in certain regions](region-availability.md#hyperscale-premium-series-availability).
 
 ### Hyperscale - standard-series (Gen5) (part 1 of 2)
 

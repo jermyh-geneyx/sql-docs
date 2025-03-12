@@ -10,7 +10,6 @@ ms.service: azure-sql
 ms.subservice: monitoring
 ms.topic: conceptual
 ms.custom: 
-  - references_regions
   - sqldbrb=2
 monikerRange: "=azuresql||=azuresql-db||=azuresql-mi"
 ---

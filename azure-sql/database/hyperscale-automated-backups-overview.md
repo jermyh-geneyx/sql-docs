@@ -4,13 +4,12 @@ titleSuffix: Azure SQL Database
 description: Learn about automated backups for Hyperscale databases in Azure SQL Database.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: dinethi, mathoma, danil, randolphwest, 
+ms.reviewer: dinethi, mathoma, danil, randolphwest
 ms.date: 02/03/2025
 ms.service: azure-sql-database
 ms.subservice: backup-restore
 ms.topic: conceptual
 ms.custom:
-  - references_regions
   - azure-sql-split
 monikerRange: "=azuresql || =azuresql-db"
 ---
@@ -121,7 +120,7 @@ The following screenshot shows an example cost analysis.
 
 Hyperscale supports configurable storage redundancy. When you're creating a Hyperscale database, you can choose your preferred storage type:  read-access geo-zone-redundant storage (RA-GZRS), read-access geo-redundant storage (RA-GRS), zone-redundant storage (ZRS), or locally redundant storage (LRS).
 
-- **Geo-zone-redundant storage**: Copies your backups synchronously across three Azure availability zones in the primary region. similar to zone-redundant storage(ZRS). In addition, it copies your data asynchronously to a single physical location in the [paired](/azure/reliability/cross-region-replication-azure#azure-cross-region-replication-pairings-for-all-geographies) secondary region. It's currently available in only [certain regions](/azure/storage/common/storage-redundancy#geo-zone-redundant-storage).
+- **Geo-zone-redundant storage**: Copies your backups synchronously across three Azure availability zones in the primary region. similar to zone-redundant storage(ZRS). In addition, it copies your data asynchronously to a single physical location in the [paired secondary region](/azure/reliability/cross-region-replication-azure#azure-cross-region-replication-pairings-for-all-geographies). It's currently available in only [certain regions](/azure/storage/common/storage-redundancy#geo-zone-redundant-storage).
 
 For more information about how the backups are replicated for other storage types, see [backup storage redundancy](automated-backups-overview.md#backup-storage-redundancy).
 
