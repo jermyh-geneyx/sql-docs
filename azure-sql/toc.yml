@@ -380,6 +380,8 @@
       href: database/serverless-tier-overview.md
     - name: T-SQL differences from SQL Server
       href: database/transact-sql-tsql-differences-sql-server.md
+    - name: Feature availability by region
+      href: database/region-availability.md
     - name: In-memory technologies in Azure SQL Database
       items:
       - name: In-memory technology overview

@@ -8,7 +8,6 @@ ms.date: 03/29/2022
 ms.service: azure-sql-database
 ms.subservice: service-overview
 ms.topic: conceptual
-ms.custom: references_regions
 ---
 # DTU benchmark 
 [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
