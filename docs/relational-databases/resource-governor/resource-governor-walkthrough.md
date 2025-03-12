@@ -152,8 +152,12 @@ For more information about configuring the maximum degree of parallelism, see [S
         Microsoft SQL Server Management Studio - Query      default                 0
         ```
 
-1. To revert to the initial configuration of this example, disconnect all sessions using the `limit_dop` workload group, and execute the following T-SQL script:
-
+1. To revert to the initial configuration of this example, disconnect all sessions using the `limit_dop` workload group, and execute the following T-SQL script. The script includes the following steps:
+   1. Disable resource governor so that the classifier function can be dropped.
+   1. Drop the workload group. This requires that no sessions are using this workload group.
+   1. Reconfigure resource governor to reload the effective configuration without the classifier function and the workload group. This enables resource governor.
+   1. Disable resource governor to revert to the initial configuration.
+   
     ```sql
     /* Disable resource governor so that the classifier function can be dropped. */
     ALTER RESOURCE GOVERNOR DISABLE;
@@ -340,8 +344,13 @@ This example uses resource governor to classify sessions from an order processin
     order_processing    peak_hours_group        0                       peak_hours_pool         20                  100
     ```
 
-1. To revert to the initial configuration of this example, disconnect all sessions using the `peak_hours_group` and `off_hours_group` workload groups, and execute the following T-SQL script:
-
+1. To revert to the initial configuration of this example, disconnect all sessions using the `peak_hours_group` and `off_hours_group` workload groups, and execute the following T-SQL script. The script includes the following steps:
+   1. Disable resource governor so that the classifier function can be dropped.
+   1. Drop the workload groups. This requires that no sessions are using these workload groups.
+   1. Once the workload groups are dropped, drop the resource pools.
+   1. Reconfigure resource governor to reload the effective configuration without the classifier function and user-defined workload groups and resource pools. This enables resource governor.
+   1. Disable resource governor to revert to the initial configuration.
+   
     ```sql
     /* Disable resource governor so that the classifier function can be dropped. */
     ALTER RESOURCE GOVERNOR DISABLE;
