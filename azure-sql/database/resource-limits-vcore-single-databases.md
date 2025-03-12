@@ -10,7 +10,6 @@ ms.subservice: service-overview
 ms.topic: reference
 ms.custom:
   - sqldbrb=1
-  - references_regions
 ---
 # Resource limits for single databases using the vCore purchasing model
 [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
@@ -168,7 +167,7 @@ The following table covers these SLOs: `GP_S_Gen5_20`, `GP_S_Gen5_24`, `GP_S_Gen
 
 <sup>2</sup> The maximum value for IO sizes ranging between 8 KB and 64 KB. Actual IOPS are workload-dependent. For details, see [Data IO Governance](resource-limits-logical-server.md#resource-governance).
 
-<sup>3</sup> For specific regions where 80 vCores in serverless is available, see [Available regions](serverless-tier-overview.md#available-regions).
+<sup>3</sup> For specific regions where 80 vCores in serverless is available, see [Serverless availability by region for Azure SQL Database](region-availability.md#serverless-region-availability).
 
 <sup>4</sup> For more information on what counts as an external connection, see [External Connections](resource-limits-logical-server.md#external-connections).
 
@@ -246,7 +245,7 @@ The following table covers these SLOs: `HS_S_Gen5_16`, `HS_S_Gen5_18`, `HS_S_Gen
 
 <sup>3</sup> Latency numbers are approximate and representative for typical workloads at steady state, but aren't guaranteed.
 
-<sup>4</sup> For specific regions where 80 vCores in serverless is available, see [Available regions](serverless-tier-overview.md#available-regions).
+<sup>4</sup> For specific regions where 80 vCores in serverless is available, see [Serverless availability by region for Azure SQL Database](region-availability.md#serverless-region-availability).
 
 ## <a id="hyperscale---provisioned-compute---gen5"></a>Hyperscale - provisioned compute - standard-series (Gen5)
 
