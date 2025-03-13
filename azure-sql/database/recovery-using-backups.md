@@ -5,7 +5,7 @@ description: Learn about point-in-time restore, which enables you to roll back a
 author: dnethi
 ms.author: dinethi
 ms.reviewer: wiassaf, mathoma, danil
-ms.date: 02/03/2025
+ms.date: 03/13/2025
 ms.service: azure-sql-database
 ms.subservice: backup-restore
 ms.topic: how-to
@@ -52,12 +52,12 @@ Several factors affect the recovery time to restore a database through automated
 
 - The size of the database
 - The compute size of the database
-- The number of transaction logs involved
+- The size of the transaction log backups involved
 - The amount of activity that needs to be replayed to recover to the restore point
 - The network bandwidth if the restore is to a different region
 - The number of concurrent restore requests that are processed in the target region
 
-For a large or very active database, the restore might take several hours. A prolonged outage in a region might cause a high number of geo-restore requests for disaster recovery. When there are many requests, the recovery time for individual databases can increase. For information on recovery times, see [RTO and RPO](business-continuity-high-availability-disaster-recover-hadr-overview.md?view=azuresql-db&preserve-view=true#rto-and-rpo).
+For a large or very active database in the service tiers other than [Hyperscale](service-tier-hyperscale.md), the restore might take several hours. A prolonged outage in a region might cause a high number of geo-restore requests for disaster recovery. When there are many requests, the recovery time for individual databases can increase. For information on recovery times, see [RTO and RPO](business-continuity-high-availability-disaster-recover-hadr-overview.md?view=azuresql-db&preserve-view=true#rto-and-rpo).
 
 For a single subscription, you have the following limitations on the number of concurrent restore requests. These limitations apply to any combination of point-in-time restores, geo-restores, and restores from long-term retention backup.
 
@@ -90,6 +90,7 @@ You generally restore a database to an earlier point for recovery purposes. You 
 > - You can't perform a point-in-time restore on a geo-secondary database. You can do so only on a primary database.
 > - The `BackupFrequency` parameter isn't supported for Hyperscale databases.  
 > - Database restore operations are resource-intensive and might require a service tier of S3 or greater for the restoring (target) database. Once restore completes, the database or elastic pool might be scaled down, if required.
+> - If you created any [In-Memory OLTP](in-memory-oltp-overview.md#in-memory-oltp) objects in a database in the Business Critical or Premium service tiers, then you must use the Business Critical or Premium service tiers for the restored database. For more information, see [Restore a database with In-Memory OLTP objects](in-memory-oltp-overview.md#restore-a-database-with-in-memory-oltp-objects).
 
 - **Database replacement**
 
