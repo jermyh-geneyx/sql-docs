@@ -1,7 +1,7 @@
 ---
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 03/14/2024
+ms.date: 03/13/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -95,6 +95,7 @@ ms.topic: include
 | 21091 | 16 | No | Global subscribers with priority 0 are not allowed to create merge publications. |
 | 21092 | 10 | No | The Change Tracking manual cleanup procedure for database %s has been executed |
 | 21093 | 16 | No | Only members of the sysadmin fixed server role or db_owner fixed database role or user with control db permission can perform this operation. Contact an administrator with sufficient permissions to perform this operation. |
+| 21094 | 16 | No | Distribution agent profile with id %d does not exist on this instance. If this instance is in an Availability group, sp_add_agent_profile should be executed on all instances in that Availability Group. |
 | 21101 | 10 | No | The custom command name %s specified for parameter %s will be ignored. A system generated name will be used instead. The publication allows %s and command names need not be specified. |
 | 21105 | 16 | No | This edition of SQL Server cannot act as a Publisher or Distributor for replication. |
 | 21106 | 16 | No | This edition of SQL Server does not support publications. |
