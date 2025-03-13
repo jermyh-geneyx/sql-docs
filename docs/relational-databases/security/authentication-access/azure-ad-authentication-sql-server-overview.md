@@ -1,8 +1,8 @@
 ---
 title: "Microsoft Entra authentication for SQL Server overview"
 description: Learn about Microsoft Entra authentication support for SQL Server
-author: GithubMirek
-ms.author: mireks
+author: PratimDasgupta
+ms.author: prdasgu
 ms.reviewer: vanto, randolphwest
 ms.date: 02/21/2024
 ms.service: sql

@@ -1,8 +1,8 @@
 ---
 title: "sys.dm_external_provider_certificate_info (Transact-SQL)"
 description: sys.dm_external_provider_certificate_info (Transact-SQL)
-author: GithubMirek
-ms.author: mireks
+author: PratimDasgupta
+ms.author: prdasgu
 ms.date: "02/15/2023"
 ms.service: sql
 ms.subservice: system-objects
