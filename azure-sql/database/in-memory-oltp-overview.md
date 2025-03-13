@@ -114,9 +114,9 @@ With elastic pools, the In-Memory OLTP storage is shared across all databases in
 - Configure a `Max eDTU` or `Max vCore` for databases that is lower than the eDTU or vCore count for the pool as a whole. This maximum also caps the In-Memory OLTP storage utilization in any database in the pool proportionally.
 - Configure a `Min eDTU` or `Min vCore` that is greater than 0. This minimum guarantees that each database in the pool has the amount of available In-Memory OLTP storage that corresponds to the configured `Min eDTU` or `Min vCore`.
 
-#### Point-in-time restore for databases with In-Memory OLTP objects
+#### Restore a database with In-Memory OLTP objects
 
-If you created any [In-Memory OLTP](in-memory-oltp-overview.md#in-memory-oltp) objects in a database and want to [restore the database to a point in time](recovery-using-backups.md#point-in-time-restore), you must use the Business Critical or Premium service tiers for the restored database. This applies even if you deleted all In-Memory OLTP objects before the restore point-in-time.
+If you created any [In-Memory OLTP](in-memory-oltp-overview.md#in-memory-oltp) objects in a database and want to [restore the database](recovery-using-backups.md), you must use the Business Critical or Premium service tiers for the restored database. This applies even if you deleted all In-Memory OLTP objects before the restore point-in-time.
 
 To make future automatic backups of the database restorable in other service tiers, follow this procedure:
 
