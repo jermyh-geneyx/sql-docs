@@ -48,11 +48,11 @@ This section lists the latest versions of each package per distribution, for [!I
 | Distribution | Package name | Package version | Download |
 | --- | --- | --- | --- |
 | **Red Hat Enterprise Linux** | | | |
-| RHEL 9 | Database Engine | 16.0.4185.3-3 | [Database Engine RPM package](https://packages.microsoft.com/rhel/9/mssql-server-2022/Packages/m/mssql-server-16.0.4185.3-3.x86_64.rpm) |
-| RHEL 9 | Extensibility | 16.0.4185.3-3 | [Extensibility RPM package](https://packages.microsoft.com/rhel/9/mssql-server-2022/Packages/m/mssql-server-extensibility-16.0.4185.3-3.x86_64.rpm) |
-| RHEL 9 | Full-Text Search | 16.0.4185.3-3 | [Full-Text Search RPM package](https://packages.microsoft.com/rhel/9/mssql-server-2022/Packages/m/mssql-server-fts-16.0.4185.3-3.x86_64.rpm) |
-| RHEL 9 | High Availability | 16.0.4185.3-3 | [High Availability RPM package](https://packages.microsoft.com/rhel/9/mssql-server-2022/Packages/m/mssql-server-ha-16.0.4185.3-3.x86_64.rpm) |
-| RHEL 9 | PolyBase | 16.0.4185.3-3 | [PolyBase RPM package](https://packages.microsoft.com/rhel/9/mssql-server-2022/Packages/m/mssql-server-polybase-16.0.4185.3-3.x86_64.rpm) |
+| RHEL 9 | Database Engine | 16.0.4185.3-3 | [Database Engine RPM package](https://packages.microsoft.com/rhel/9.0/mssql-server-2022/Packages/m/mssql-server-16.0.4185.3-3.x86_64.rpm) |
+| RHEL 9 | Extensibility | 16.0.4185.3-3 | [Extensibility RPM package](https://packages.microsoft.com/rhel/9.0/mssql-server-2022/Packages/m/mssql-server-extensibility-16.0.4185.3-3.x86_64.rpm) |
+| RHEL 9 | Full-Text Search | 16.0.4185.3-3 | [Full-Text Search RPM package](https://packages.microsoft.com/rhel/9.0/mssql-server-2022/Packages/m/mssql-server-fts-16.0.4185.3-3.x86_64.rpm) |
+| RHEL 9 | High Availability | 16.0.4185.3-3 | [High Availability RPM package](https://packages.microsoft.com/rhel/9.0/mssql-server-2022/Packages/m/mssql-server-ha-16.0.4185.3-3.x86_64.rpm) |
+| RHEL 9 | PolyBase | 16.0.4185.3-3 | [PolyBase RPM package](https://packages.microsoft.com/rhel/9.0/mssql-server-2022/Packages/m/mssql-server-polybase-16.0.4185.3-3.x86_64.rpm) |
 | RHEL 8 | SSIS | 16.0.4003.1-1 | [SSIS RPM package](https://packages.microsoft.com/rhel/8/mssql-server-2022/Packages/m/mssql-server-is-16.0.4003.1-1.x86_64.rpm) |
 | **SUSE Linux Enterprise Server** | | | |
 | SLES 15 | Database Engine | 16.0.4185.3-3 | [Database Engine RPM package](https://packages.microsoft.com/sles/15/mssql-server-2022/Packages/m/mssql-server-16.0.4185.3-3.x86_64.rpm) |
