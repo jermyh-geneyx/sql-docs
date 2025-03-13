@@ -1,8 +1,8 @@
 ---
 title: "Quickstart: Create Azure SQL Managed Instance"
 description: Create Azure SQL Managed Instance by using the Azure portal, PowerShell, and the Azure CLI. 
-author: urosran
-ms.author: urandjelovic
+author: vladai78
+ms.author: vladiv
 ms.reviewer: mathoma
 ms.date: 08/16/2024
 ms.service: azure-sql-managed-instance
