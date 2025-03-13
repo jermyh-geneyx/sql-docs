@@ -1,8 +1,8 @@
 ---
 title: "Set up Microsoft Entra authentication for SQL Server"
 description: Tutorial on how to set up Microsoft Entra authentication for SQL Server
-author: GithubMirek
-ms.author: mireks
+author: PratimDasgupta
+ms.author: prdasgu
 ms.reviewer: vanto, randolphwest
 ms.date: 01/29/2025
 ms.service: sql
