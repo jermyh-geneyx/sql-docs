@@ -1,7 +1,7 @@
 ---
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 01/11/2024
+ms.date: 03/13/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -400,6 +400,7 @@ ms.topic: include
 | 10935 | 16 | No | External resource pool does not allow more than one processor group. |
 | 10936 | 16 | No | Resource ID : %d. The %ls limit for the elastic pool is %d and has been reached. See '[https://learn.microsoft.com/azure/azure-sql/database/resource-limits-logical-server](/azure/azure-sql/database/resource-limits-logical-server)' for assistance. |
 | 10937 | 16 | No | Default workload group does not allow to alter attribute '%.\*ls'. |
+| 10938 | 16 | No | Contained Availability Group connections do not support Resource Governor DDL. Please retry using the instance connection. |
 | 10961 | 16 | No | The request has been aborted because its CPU usage exceeds the maximum configured limit for the workload group. |
 | 10981 | 10 | No | Resource governor reconfiguration succeeded. |
 | 10982 | 16 | Yes | Failed to run resource governor classifier user-defined function '%.\*ls'. Last error %u, state %u. See previous errors in SQL Server error log from session ID %ld for details. Classifier elapsed time: %I64u ms. |
