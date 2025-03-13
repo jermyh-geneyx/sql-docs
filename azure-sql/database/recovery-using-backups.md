@@ -90,10 +90,7 @@ You generally restore a database to an earlier point for recovery purposes. You 
 > - You can't perform a point-in-time restore on a geo-secondary database. You can do so only on a primary database.
 > - The `BackupFrequency` parameter isn't supported for Hyperscale databases.  
 > - Database restore operations are resource-intensive and might require a service tier of S3 or greater for the restoring (target) database. Once restore completes, the database or elastic pool might be scaled down, if required.
-> - If you created any [In-Memory OLTP](in-memory-oltp-overview.md#in-memory-oltp) objects in a database in the Business Critical or Premium service tiers, then you must use the Business Critical or Premium service tiers for the restored database. This applies even if you deleted all In-Memory OLTP objects before the restore point-in-time. To make future automatic backups of the database restorable in other service tiers, follow this procedure:
->   1. Restore the database using the Business Critical or Premium service tier.
->   1. Scale the database to the General Purpose, Standard, or Basic service tier.
->   1. If required, scale the database back to the Business Critical or Premium service tier, or to the Hyperscale service tier.
+> - If you created any [In-Memory OLTP](in-memory-oltp-overview.md#in-memory-oltp) objects in a database in the Business Critical or Premium service tiers, then you must use the Business Critical or Premium service tiers for the restored database. For more information, see [Point-in-time restore for databases with In-Memory OLTP objects](in-memory-oltp-overview.md#point-in-time-restore-for-databases-with-in-memory-oltp-objects).
 
 - **Database replacement**
 
