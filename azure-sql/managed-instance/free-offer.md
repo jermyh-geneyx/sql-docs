@@ -1,8 +1,8 @@
 ---
 title: Try for free (preview)
 description: Learn how to deploy a free Azure SQL Managed Instance.
-author: Urosran
-ms.author: urandjelovic
+author: vladai78
+ms.author: vladiv
 ms.reviewer: mathoma, randolphwest
 ms.date: 11/19/2024
 ms.service: azure-sql-managed-instance
