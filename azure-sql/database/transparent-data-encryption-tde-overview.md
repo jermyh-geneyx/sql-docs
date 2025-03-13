@@ -2,8 +2,8 @@
 title: Transparent data encryption
 titleSuffix: Azure SQL Database & Azure SQL Managed Instance & Azure Synapse Analytics
 description: An overview of transparent data encryption for Azure SQL Database, Azure SQL Managed Instance, and Azure Synapse Analytics. The document covers its benefits and the options for configuration, which includes service-managed transparent data encryption and Bring Your Own Key.
-author: GithubMirek
-ms.author: mireks
+author: Pietervanhove
+ms.author: pivanho
 ms.reviewer: wiassaf, vanto, mathoma
 ms.date: 05/02/2024
 ms.service: azure-sql
