@@ -154,6 +154,14 @@ For a sample PowerShell script that shows how to restore a deleted instance data
 
 ---
 
+### Restoring a database from deleted SQL managed instance
+
+If you need to restore an unintentionally deleted SQL managed instance, contact Microsoft support team within 5 days of the delete operation. Consider the following:
+- You need an existing instance with a matching service tier, and equal or higher SLO, as the deleted instance. Be ready to provide support with target instance details.
+- Encrypted databases protected by a customer-managed key (CMK) can only be restored to instances that have access to the same key.
+- Only user-created databases can be restored. System databases can't be restored.
+- Restore is possible only to the last point-in-time backup taken just before the instance was deleted, using the final tail-log backup taken before the delete operation.
+
 ## Geo-restore
 
 > [!IMPORTANT]
