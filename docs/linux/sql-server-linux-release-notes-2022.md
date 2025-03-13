@@ -34,14 +34,11 @@ Most existing client tools that target [!INCLUDE [ssNoVersion](../includes/ssnov
 
 ## Latest versions for all packages
 
-This section lists the latest versions of each package per distribution, for [!INCLUDE [ssSQL22](../includes/sssql22-md.md)]. The following table shows the most recent release, which is **CU 17**. For full release history, see [Release history for [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] 2022](/troubleshoot/sql/linux/release-history-2022).
+This section lists the latest versions of each package per distribution, for [!INCLUDE [ssSQL22](../includes/sssql22-md.md)]. The following table shows the most recent release, which is **CU 18**. For full release history, see [Release history for [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] 2022](/troubleshoot/sql/linux/release-history-2022).
 
 | Version | Release | Date | Build | KB article |
 | --- | --- | --- | --- | --- |
-| [!INCLUDE [ssSQL22](../includes/sssql22-md.md)] | CU 17 | 2025-01-16 | 16.0.4175.1 | [Support article](/troubleshoot/sql/releases/sqlserver-2022/cumulativeupdate17) |
-
-> [!IMPORTANT]  
-> The Microsoft Entra managed identity feature for SQL Server on Azure VM isn't supported on Linux. For more information, see [Improvement: Microsoft Entra managed identity support for backup and restore database operations and for EKM with AKV in SQL Server on Azure VMs](/troubleshoot/sql/releases/sqlserver-2022/microsoft-entra-managed-identity-support-for-backup-restore-database-ekm-akv).
+| [!INCLUDE [ssSQL22](../includes/sssql22-md.md)] | CU 18 | 2025-03-13 | 16.0.4185.3 | [Support article](/troubleshoot/sql/releases/sqlserver-2022/cumulativeupdate18) |
 
 - The **mssql-server-is** package isn't supported on SUSE in this release. For more information, see [SQL Server on Linux: Known issues](sql-server-linux-known-issues.md#sql-server-integration-services-ssis).
 
@@ -90,6 +87,7 @@ The following table lists the release history for [!INCLUDE [ssSQL22](../include
 
 | Release                                                                  | Version       | Release date |
 | ------------------------------------------------------------------------ | ------------- | ------------ |
+| [CU 18](/troubleshoot/sql/linux/release-history-2022#CU18)               | 16.0.4185.3   | 2025-03-13   |
 | [CU 17](/troubleshoot/sql/linux/release-history-2022#CU17)               | 16.0.4175.1   | 2025-01-16   |
 | [CU 16](/troubleshoot/sql/linux/release-history-2022#CU16)               | 16.0.4165.4   | 2024-11-14   |
 | [CU 15 GDR 2](/troubleshoot/sql/linux/release-history-2022#CU15-GDR2)    | 16.0.4155.4   | 2024-11-12   |
