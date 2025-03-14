@@ -128,6 +128,7 @@ The following table is for databases that are not [zone-redundant](high-availabi
 | France South | | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] |
 | Germany West Central | | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] |
 | South Africa North | | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] |
+| Sweden Central | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] |
 | Switzerland North | | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] |
 | UAE North | | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] |
 | UK South | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] |
@@ -168,6 +169,7 @@ The following table is for [zone-redundant](high-availability-sla-local-zone-red
 | North Europe | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] |
 | West Europe | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] |
 | France Central | | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] |
+| Sweden Central | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] |
 | UAE North | | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] |
 | UK South | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] |
 
@@ -329,7 +331,7 @@ Standard-series (Gen5) hardware is available in [all public regions worldwide wh
 | Europe North | [!INCLUDE [yes](../includes/yes.md)]  | [!INCLUDE [yes](../includes/yes.md)]  | [!INCLUDE [yes](../includes/yes.md)]  |
 | Europe West | [!INCLUDE [yes](../includes/yes.md)]  | [!INCLUDE [yes](../includes/yes.md)]  | [!INCLUDE [yes](../includes/yes.md)]  |
 | France Central | [!INCLUDE [yes](../includes/yes.md)]  | [!INCLUDE [yes](../includes/yes.md)]  |  |
-| Germany West Central | [!INCLUDE [yes](../includes/yes.md)]  | [!INCLUDE [yes](../includes/yes.md)]  |  |
+| Germany West Central | [!INCLUDE [yes](../includes/yes.md)]  | [!INCLUDE [yes](../includes/yes.md)]  | [!INCLUDE [yes](../includes/yes.md)]  |
 | Sweden Central | [!INCLUDE [yes](../includes/yes.md)]  |  | [!INCLUDE [yes](../includes/yes.md)]  |
 | Switzerland North | [!INCLUDE [yes](../includes/yes.md)]  | [!INCLUDE [yes](../includes/yes.md)]  | |
 | UK South | [!INCLUDE [yes](../includes/yes.md)]  | [!INCLUDE [yes](../includes/yes.md)]  | [!INCLUDE [yes](../includes/yes.md)]  |
