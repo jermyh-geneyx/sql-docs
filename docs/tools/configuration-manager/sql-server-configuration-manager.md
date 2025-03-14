@@ -6,7 +6,7 @@ ms.author: "maghan"
 ms.reviewer: randolphwest, vanto
 ms.date: 03/14/2025
 ms.service: sql
-ms.topic: conceptual
+ms.topic: concept-article
 helpviewer_keywords:
   - "protocols [SQL Server], managing"
   - "network protocols [SQL Server], managing"
