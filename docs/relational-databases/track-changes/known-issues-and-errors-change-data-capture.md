@@ -4,7 +4,7 @@ description: "Known issues and errors with change data capture (CDC) in SQL Serv
 author: croblesm
 ms.author: roblescarlos
 ms.reviewer: mathoma, randolphwest
-ms.date: 12/04/2024
+ms.date: 03/14/2025
 ms.service: sql
 ms.topic: troubleshooting
 helpviewer_keywords:
@@ -64,7 +64,9 @@ CREATE TABLE T1(
 
 ## Accelerated database recovery (ADR) and change data capture (CDC)
 
-Currently, enabling both change data capture (CDC) and accelerated database recovery (ADR) isn't supported in [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)].
+Enabling both change data capture (CDC) and accelerated database recovery (ADR) isn't supported in [!INCLUDE[sssql19-md](../../includes/sssql19-md.md)].
+
+Enabling both change data capture (CDC) and accelerated database recovery (ADR) is supported in [!INCLUDE[sssql22-md](../../includes/sssql22-md.md)] starting with Cumulative Update 18.
 
 When you enable CDC, the aggressive log truncation feature of ADR is disabled. This is because the CDC scan accesses the database transaction log. Active transactions continue to hold the transaction log truncation until the transaction commits and CDC scan catches up, or the transaction aborts. If you enable CDC on a database where ADR is enabled, you might observe higher transaction log utilization. Ensure that sufficient transaction log space is available for the needs of all your workloads.
 
