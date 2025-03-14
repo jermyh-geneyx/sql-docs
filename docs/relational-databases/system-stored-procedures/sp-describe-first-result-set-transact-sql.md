@@ -4,7 +4,7 @@ description: Returns the metadata for the first possible result set of the Trans
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -35,6 +35,8 @@ sp_describe_first_result_set [ @tsql = ] N'tsql'
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @tsql = ] '*tsql*'
 

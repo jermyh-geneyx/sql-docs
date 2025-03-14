@@ -4,7 +4,7 @@ description: Learn how to set database options such as Automatic tuning, encrypt
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 02/03/2025
+ms.date: 03/11/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -866,7 +866,7 @@ Controls whether the database can create initial pages using a mixed extent for 
 
   The database can create initial pages using mixed extents.
 
-This setting is ON for all system databases. The `tempdb` system database is the only system database that supports OFF.
+This setting is always ON for all system databases except `tempdb` where it is always OFF. The setting can't be changed for system databases.
 
 #### \<PARAMETERIZATION_option> ::=
 

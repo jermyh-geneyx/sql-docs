@@ -380,6 +380,8 @@
       href: database/serverless-tier-overview.md
     - name: T-SQL differences from SQL Server
       href: database/transact-sql-tsql-differences-sql-server.md
+    - name: Feature availability by region
+      href: database/region-availability.md
     - name: In-memory technologies in Azure SQL Database
       items:
       - name: In-memory technology overview
@@ -1509,8 +1511,6 @@
         href: managed-instance/log-replay-service-migrate.md
       - name: TDE certificate
         href: managed-instance/tde-certificate-migrate.md
-      - name: To availability zone support
-        href: /azure/reliability/migrate-sql-managed-instance?toc=/azure/azure-sql/toc.json&bc=/azure/bread/toc.json
     - name: Managed Instance link
       items:
       - name: Prepare environment for link

@@ -4,7 +4,7 @@ description: "Adds a SQL Server instance as a compute node to a PolyBase group f
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: conceptual
@@ -37,6 +37,8 @@ sp_polybase_join_group (
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### @head_node_address = N'*head_node_address*'
 

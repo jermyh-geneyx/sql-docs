@@ -4,7 +4,7 @@ description: "sp_reset_dtc_log (Transact-SQL)"
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 06/13/2023
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -27,7 +27,7 @@ sp_reset_dtc_log
 
 ## Arguments
 
-There are no arguments for this stored procedure.
+None.
 
 ## Return code values
 

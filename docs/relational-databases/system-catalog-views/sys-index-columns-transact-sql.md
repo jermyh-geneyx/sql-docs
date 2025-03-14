@@ -3,7 +3,7 @@ title: "sys.index_columns (Transact-SQL)"
 description: "sys.index_columns contains one row per column that is part of an index or unordered table (heap)."
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 10/14/2022
+ms.date: 02/28/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -32,11 +32,11 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 |**index_id**|**int**|ID of the index in which the column is defined.|
 |**index_column_id**|**int**|ID of the index column. `index_column_id` is unique only within `index_id`.|
 |**column_id**|**int**|ID of the column in `object_id`.<br /><br />`0` = Row Identifier (RID) in a nonclustered index.<br /><br />`column_id` is unique only within `object_id`.|
-|**key_ordinal**|**tinyint**|Ordinal (1-based) within set of key-columns.<br /><br />0 = Not a key column, or is an XML index, a columnstore index, or a spatial index.<br /><br />Note: An XML or spatial index cannot be a key because the underlying columns are not comparable, meaning that their values cannot be ordered.|
+|**key_ordinal**|**tinyint**|Ordinal (1-based) within set of key-columns.<br /><br />0 = Not a key column, or is an XML index, a columnstore index, or a spatial index.<br /><br />Note: An XML or spatial index can't be a key because the underlying columns aren't comparable, meaning that their values can't be ordered.|
 |**partition_ordinal**|**tinyint**|Ordinal (1-based) within set of partitioning columns. A clustered columnstore index can have at most one partitioning column.<br /><br />0 = Not a partitioning column.|
 |**is_descending_key**|**bit**|`1` = Index key column has a descending sort direction.<br /><br />`0` = Index key column has an ascending sort direction, or the column is part of a columnstore or hash index.|
-|**is_included_column**|**bit**|`1` = Column is a non-key column added to the index by using the CREATE INDEX INCLUDE clause, or the column is part of a columnstore index.<br /><br />`0` = Column is not an included column.<br /><br />Columns implicitly added because they're part of the clustering key are not listed in `sys.index_columns`.<br /><br />Columns implicitly added because they're a partitioning column are returned as `0`.|
-|**column_store_order_ordinal**|**tinyint**|Applies to: [!INCLUDE[ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] and [!INCLUDE[sssql22-md](../../includes/sssql22-md.md)]<br />Ordinal (1-based) within set of order columns in an ordered clustered columnstore index. For more on ordered clustered columnstore indexes, see [Columnstore index design guidance](../indexes/columnstore-indexes-design-guidance.md).|
+|**is_included_column**|**bit**|`1` = Column is a nonkey column added to the index by using the CREATE INDEX INCLUDE clause, or the column is part of a columnstore index.<br /><br />`0` = Column isn't an included column.<br /><br />Columns implicitly added because they're part of the clustering key aren't listed in `sys.index_columns`.<br /><br />Columns implicitly added because they're a partitioning column are returned as `0`.|
+|**column_store_order_ordinal**|**tinyint**|**Applies to**: [!INCLUDE[ssazuresynapse-md](../../includes/ssazuresynapse-md.md)], [!INCLUDE[sssql22-md](../../includes/sssql22-md.md)], [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and [!INCLUDE [ssazure-sqlmi-autd](../../includes/ssazure-sqlmi-autd.md)]<br /><br />Ordinal (1-based) within set of order columns in an ordered columnstore index. For more on ordered columnstore indexes, see [Performance tuning with ordered columnstore indexes](../indexes/ordered-columnstore-indexes.md).|
 
 ## Permissions
 

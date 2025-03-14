@@ -4,7 +4,7 @@ description: sp_testlinkedserver tests the connection to a linked server.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 04/08/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -32,6 +32,8 @@ sp_testlinkedserver [ @servername ] = servername
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @servername = ] N'*servername*'
 

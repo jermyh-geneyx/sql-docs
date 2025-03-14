@@ -1,10 +1,10 @@
 ---
-title: sp_cursorprepare (Transact-SQL)
+title: "sp_cursorprepare (Transact-SQL)"
 description: sp_cursorprepare compiles the cursor statement or batch into an execution plan, but doesn't create the cursor.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 07/05/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -33,6 +33,8 @@ sp_cursorprepare prepared_handle OUTPUT , params , stmt , options
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### *prepared_handle*
 

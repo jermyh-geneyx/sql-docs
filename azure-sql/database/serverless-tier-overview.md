@@ -12,7 +12,6 @@ ms.custom:
   - "test sqldbrb=1"
   - "devx-track-azurecli"
   - "devx-track-azurepowershell"
-  - "references-regions"
 ---
 # Serverless compute tier for Azure SQL Database
 [!INCLUDE [appliesto-sqldb](../includes/appliesto-sqldb.md)]
@@ -606,114 +605,13 @@ Therefore, the total compute bill for all three replicas of the database is arou
 
 ---
 
-
 ## Azure Hybrid Benefit and reservations
 
 Azure Hybrid Benefit (AHB) and Azure Reservations discounts do not apply to the serverless compute tier.
 
 ## Available regions
 
-Serverless for General Purpose and Hyperscale tiers with support up to 40 maximum vCores is available worldwide except the following regions: 
-
- - China East
- - China North
- - Germany Central
- - Germany Northeast
- - US Gov Central (Iowa)
-
-### Regions supporting 80 maximum vCores without availability zones for General Purpose and Hyperscale
-
-Currently, 80 maximum vCores in serverless for General Purpose and Hyperscale tiers is currently supported in the following regions:
-
- - Australia Central 1
- - Australia Central 2
- - Australia East
- - Australia Southeast
- - Brazil South
- - Brazil Southeast
- - Canada Central
- - Canada East
- - Central US
- - China East 2
- - China East 3
- - China North 2
- - China North 3
- - East Asia
- - East US
- - East US 2
- - France Central
- - France South
- - Germany North
- - Germany West Central
- - India Central
- - India South
- - Israel Central
- - Italy North
- - Japan East
- - Japan West
- - Jio India Central
- - Jio India West
- - Korea Central
- - Korea South
- - Malaysia South
- - Mexico Central
- - North Central US
- - North Europe
- - Norway East
- - Norway West
- - Poland Central
- - Qatar Central
- - South Africa North
- - South Africa West
- - South Central US
- - Southeast Asia
- - Spain Central
- - Sweden Central
- - Sweden South
- - Switzerland North
- - Switzerland West
- - Taiwan North
- - Taiwan Northwest
- - UAE Central
- - UAE North
- - UK South
- - UK West
- - US Gov East
- - US Gov South central
- - US Gov Southwest
- - West Europe
- - West Central US
- - West US
- - West US 2
- - West US 3
-
-### Regions supporting 80 maximum vCores with availability zones for General Purpose and Hyperscale
-
-Currently, 80 maximum vCores with availability zone support in serverless for the General Purpose and Hyperscale tiers is provided in the following regions with more regions planned:
-
- - Australia East
- - Brazil South
- - Canada Central
- - Central US
- - East Asia
- - East US
- - East US 2
- - France Central
- - Germany West Central
- - India Central
- - Japan East
- - Korea Central
- - North Europe
- - South Africa North
- - South Central US
- - Southeast Asia
- - Sweden Central
- - UAE North
- - UK South
- - US Gov East
- - West Europe
- - West US 2
- - West US 3
+For regional availability, see [Serverless availability by region for Azure SQL Database](region-availability.md#serverless-region-availability).
 
 ## Related content
 

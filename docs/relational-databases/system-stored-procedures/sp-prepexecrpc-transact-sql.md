@@ -4,7 +4,7 @@ description: sp_prepexecrpc prepares and executes a parameterized stored procedu
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -33,6 +33,8 @@ sp_prepexecrpc handle OUTPUT , RPCCall
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### *handle*
 

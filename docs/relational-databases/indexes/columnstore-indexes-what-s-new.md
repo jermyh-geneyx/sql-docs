@@ -3,8 +3,8 @@ title: "What's new in columnstore indexes"
 description: "This article explains features by version and the latest new features of SQL Server columnstore indexes."
 author: MikeRayMSFT
 ms.author: mikeray
-ms.reviewer: wiassaf
-ms.date: 10/23/2024
+ms.reviewer: wiassaf, dfurman
+ms.date: 02/28/2025
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: whats-new
@@ -18,15 +18,15 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 
 [!INCLUDE [SQL Server Azure SQL Database Synapse Analytics PDW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
-  Learn about which columnstore features available for each version of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], and the latest releases of [!INCLUDE [ssSDS](../../includes/sssds-md.md)], [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)], and [!INCLUDE [ssPDW](../../includes/sspdw-md.md)].
+Learn about which columnstore features available for each version of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], and the latest releases of [!INCLUDE [ssSDS](../../includes/sssds-md.md)], [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)], and [!INCLUDE [ssPDW](../../includes/sspdw-md.md)].
 
 ## Feature summary for product releases
 
- This table summarizes key features for columnstore indexes and the products in which they are available.
+This table summarizes key features for columnstore indexes and the products in which they are available.
 
-|Columnstore Index Feature|[!INCLUDE [ssSQL11](../../includes/sssql11-md.md)]|[!INCLUDE [ssSQL14](../../includes/sssql14-md.md)]|[!INCLUDE [sssql16-md](../../includes/sssql16-md.md)]<sup>1</sup>|[!INCLUDE [ssSQL17](../../includes/sssql17-md.md)]|[!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)]|[!INCLUDE [sql-server-2022](../../includes/sssql22-md.md)]|[!INCLUDE [sssds](../../includes/sssds-md.md)]<sup>1</sup>|[!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] dedicated SQL pool|
+|Columnstore Index Feature|[!INCLUDE [ssSQL11](../../includes/sssql11-md.md)]|[!INCLUDE [ssSQL14](../../includes/sssql14-md.md)]|[!INCLUDE [sssql16-md](../../includes/sssql16-md.md)]<sup>1</sup>|[!INCLUDE [ssSQL17](../../includes/sssql17-md.md)]|[!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)]|[!INCLUDE [sql-server-2022](../../includes/sssql22-md.md)]|[!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)]<sup>2</sup> and [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)]<sup>[AUTD](#updatepolicy)</sup>|[!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] dedicated SQL pool|
 |*----|---|---|---|---|---|---|---|---|
-|Batch mode execution for multi-threaded queries<sup>2</sup>|yes|yes|yes|yes|yes|yes|yes|yes|
+|Batch mode execution for multi-threaded queries<sup>3</sup>|yes|yes|yes|yes|yes|yes|yes|yes|
 |Batch mode execution for single-threaded queries|||yes|yes|yes|yes|yes|yes|
 |Archival compression option||yes|yes|yes|yes|yes|yes|yes|
 |Snapshot isolation and read-committed snapshot isolation|||yes|yes|yes|yes|yes|yes|
@@ -34,7 +34,7 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 |Always On supports columnstore indexes|yes|yes|yes|yes|yes|yes|yes|yes|
 |Always On readable secondary supports read-only nonclustered columnstore index|yes|yes|yes|yes|yes|yes|yes|yes|
 |Always On readable secondary supports updateable columnstore indexes|||yes|yes|yes|yes|||
-|Read-only nonclustered columnstore index on heap or B-tree|yes|yes|yes <sup>3</sup>|yes <sup>3</sup>|yes <sup>3</sup>|yes <sup>3</sup>|yes <sup>3</sup>|yes <sup>3</sup>|
+|Read-only nonclustered columnstore index on heap or B-tree|yes|yes|yes <sup>4</sup>|yes <sup>4</sup>|yes <sup>4</sup>|yes <sup>4</sup>|yes <sup>4</sup>|yes <sup>4</sup>|
 |Updateable nonclustered columnstore index on heap or B-tree|||yes|yes|yes|yes|yes|yes|
 |Additional B-tree indexes allowed on a heap or B-tree that has a nonclustered columnstore index|yes|yes|yes|yes|yes|yes|yes|yes|
 |Updateable clustered columnstore index||yes|yes|yes|yes|yes|yes|yes|
@@ -42,28 +42,30 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 |Columnstore index on a memory-optimized table|||yes|yes|yes|yes|yes|yes|
 |Nonclustered columnstore index definition supports using a filtered condition|||yes|yes|yes|yes|yes|yes|
 |Compression delay option for columnstore indexes in `CREATE TABLE` and `ALTER TABLE`|||yes|yes|yes|yes|yes|yes|
-|Support for nvarchar(max) type||||yes|yes|yes|yes|no <sup>4</sup>|
+|Support for nvarchar(max) type||||yes|yes|yes|yes|no <sup>5</sup>|
 |Columnstore index can have a non-persisted computed column||||yes|yes|yes|||
 |Tuple mover background merge support|||||yes|yes|yes|yes|
 |Ordered clustered columnstore indexes||||||yes|yes|yes|
 |Ordered non-clustered columnstore indexes|||||||yes||
+|Online columnstore index create and rebuild||||||yes|yes||
+|Online ordered columnstore index create and rebuild|||||||yes||
 
- <sup>1</sup> For [!INCLUDE [ssSDS](../../includes/sssds-md.md)], columnstore indexes are available in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] DTU Premium tiers, DTU Standard tiers - S3 and above, and all vCore tiers. For [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] SP1 and later versions, columnstore indexes are available in all editions. For [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] (before SP1) and earlier versions, columnstore indexes are only available in Enterprise Edition.
+<a id="updatepolicy"></a>
+<sup>1</sup> For [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] SP1 and later versions, columnstore indexes are available in all editions. For [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] (before SP1) and earlier versions, columnstore indexes are only available in the Enterprise Edition.   
+<sup>2</sup> For [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], columnstore indexes are available in the DTU Premium tiers, DTU Standard tiers - S3 and above, and all vCore tiers.
+<sup>3</sup> The degree of parallelism (DOP) for [batch mode](../../relational-databases/query-processing-architecture-guide.md#batch-mode-execution) operations is limited to 2 for [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Standard Edition and 1 for [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Web and Express Editions. This limitation refers to columnstore indexes created over disk-based tables and memory-optimized tables.   
+<sup>4</sup> To create a read-only nonclustered columnstore index, store the index on a read-only filegroup.   
+<sup>5</sup> Not supported in dedicated SQL pools but is supported in serverless SQL pool.   
+<sup>AUTD</sup> Applies to Azure SQL Managed Instance configured with the [Always-up-to-date update policy](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy).
 
- <sup>2</sup> The degree of parallelism (DOP) for [batch mode](../../relational-databases/query-processing-architecture-guide.md#batch-mode-execution) operations is limited to 2 for [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Standard Edition and 1 for [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Web and Express Editions. This limitation refers to columnstore indexes created over disk-based tables and memory-optimized tables.
-
- <sup>3</sup> To create a read-only nonclustered columnstore index, store the index on a read-only filegroup.
-
- <sup>4</sup> Not supported in dedicated SQL pools but is supported in serverless SQL pool.
 
 ## SQL Server 2022 (16.x)
 
-[!INCLUDE [sql-server-2022](../../includes/sssql22-md.md)] added these features.
+[!INCLUDE [sql-server-2022](../../includes/sssql22-md.md)] added these features:
 
-- Ordered clustered columnstore indexes improve performance for queries based on ordered column predicates. Ordered columnstore indexes can improve performance by skipping segments of data altogether. This can drastically reduce IO needed to complete queries on columnstore data. For more information, see [segment elimination](columnstore-indexes-query-performance.md#segment-elimination). Ordered cluster columnstore indexes are available in [!INCLUDE [sql-server-2022](../../includes/sssql22-md.md)]. For more information, see [CREATE COLUMNSTORE INDEX](../../t-sql/statements/create-columnstore-index-transact-sql.md#order-for-clustered-columnstore) and [Performance tuning with ordered clustered columnstore indexes](ordered-columnstore-indexes.md).
-
-- Predicate pushdown with clustered columnstore rowgroup elimination of strings uses boundary values to optimize string searches. All columnstore indexes benefit from enhanced segment elimination by data type. Starting with [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], these segment elimination capabilities extend to string, binary, and guid data types, and the datetimeoffset data type for scale greater than two. Previously, columnstore segment elimination applied only to numeric, date, and time data types, and the datetimeoffset data type with scale less than or equal to two. After upgrading to a version of SQL Server that supports string min/max segment elimination ([!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions), the columnstore index will not benefit this feature until it is rebuilt using a REBUILD or DROP/CREATE.
-
+- Ordered clustered columnstore indexes improve performance for queries based on ordered column predicates. Ordered columnstore indexes can improve performance by skipping segments of data altogether. This can drastically reduce IO needed to complete queries on columnstore data. For more information, see [segment elimination](columnstore-indexes-query-performance.md#segment-elimination). For more information, see [CREATE COLUMNSTORE INDEX](../../t-sql/statements/create-columnstore-index-transact-sql.md#order-for-clustered-columnstore) and [Performance tuning with ordered columnstore indexes](ordered-columnstore-indexes.md).
+- Predicate pushdown with clustered columnstore rowgroup elimination of strings uses boundary values to optimize string searches. All columnstore indexes benefit from enhanced segment elimination by data type. Starting with [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], these segment elimination capabilities extend to string, binary, and GUID data types, and the **datetimeoffset** data type for scale greater than two. Previously, columnstore segment elimination applied only to numeric, date, and time data types, and the **datetimeoffset** data type with scale less than or equal to two. After upgrading to a version of SQL Server that supports string min/max segment elimination ([!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions), the columnstore index doesn't benefit from this feature until it is rebuilt using `ALTER INDEX REBUILD` or `CREATE INDEX WITH (DROP_EXISTING = ON)`.
+- Columnstore rowgroup elimination for the prefix of `LIKE` predicates, for example `column LIKE 'string%'`. Segment elimination isn't supported for non-prefix use of `LIKE` such as `column LIKE '%string'`.
 - For more information on added features, see [What's new in SQL Server 2022](../../sql-server/what-s-new-in-sql-server-2022.md).
 
 ## SQL Server 2019 (15.x)
@@ -199,13 +201,13 @@ These in-memory OLTP-based DMVs contain updates for columnstore:
 ### Limitations
 
 - For in-memory tables, a columnstore index must include all the columns; the columnstore index cannot have a filtered condition.
-- For in-memory tables, queries on columnstore indexes run only in InterOP mode, and not in the in-memory native mode. Parallel execution is supported.
+- For in-memory tables, queries on columnstore indexes run only in interop mode, and not in the native compilation mode. Parallel execution is supported.
 
 ### Known issues
 
-**Applies to:** [!INCLUDE [sql-server](../../includes/ssnoversion-md.md)], [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)], [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] dedicated SQL pool
+**Applies to:** [!INCLUDE [sql-server](../../includes/ssnoversion-md.md)], [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)]
 
-- Currently, LOB columns (varbinary(max), varchar(max), and nvarchar(max)) in compressed columnstore segments are not affected by DBCC SHRINKDATABASE and DBCC SHRINKFILE.
+- Currently, LOB columns (varbinary(max), varchar(max), and nvarchar(max)) in compressed columnstore segments are not affected by `DBCC SHRINKDATABASE` and `DBCC SHRINKFILE`.
 
 ## SQL Server 2014 (12.x)
 

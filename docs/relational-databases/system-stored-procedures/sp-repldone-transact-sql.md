@@ -4,7 +4,7 @@ description: sp_repldone updates the record that identifies the last distributed
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"
@@ -39,6 +39,8 @@ sp_repldone [ @xactid = ] xactid
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @xactid = ] *xactid*
 

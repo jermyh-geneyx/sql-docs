@@ -4,7 +4,7 @@ description: CREATE TABLE creates a new table in the database.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 01/22/2025
+ms.date: 02/28/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -567,15 +567,17 @@ Specifies to create an index on the table. This can be a clustered index, or a n
 
 Specifies to store the entire table in columnar format with a clustered columnstore index. This always includes all columns in the table. The data isn't sorted in alphabetical or numeric order since the rows are organized to gain columnstore compression benefits.
 
-In [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)], [!INCLUDE [ssPDW](../../includes/sspdw-md.md)], and [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions, you can determine the order of the columns for a clustered columnstore index. For more information, see [Use an ordered clustered columnstore index for large data warehouse tables](../../relational-databases/indexes/columnstore-indexes-design-guidance.md#use-an-ordered-clustered-columnstore-index-for-large-data-warehouse-tables).
+You can specify an order for the data in a clustered columnstore index starting with [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], in [!INCLUDE [ssazure-sqlmi-autd](../../includes/ssazure-sqlmi-autd.md)], and in [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)]. For more information, see [Performance tuning with ordered columnstore indexes](../../relational-databases/indexes/ordered-columnstore-indexes.md).
 
 #### INDEX *index_name* [ NONCLUSTERED ] COLUMNSTORE ( *column_name* [ ,... *n* ] )
 
-**Applies to**: [!INCLUDE[ssSQL14](../../includes/sssql14-md.md)] and later, and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE[ssSQL14](../../includes/sssql14-md.md)] and later versions, [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)].
 
 Specifies to create a nonclustered columnstore index on the table. The underlying table can be a rowstore heap or clustered index, or it can be a clustered columnstore index. In all cases, creating a nonclustered columnstore index on a table stores a second copy of the data for the columns in the index.
 
 The nonclustered columnstore index is stored and managed as a clustered columnstore index. It is called a nonclustered columnstore index to because the columns can be limited and it exists as a secondary index on a table.
+
+You can specify an order for the data in a nonclustered columnstore index in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] and in [!INCLUDE [ssazure-sqlmi-autd](../../includes/ssazure-sqlmi-autd.md)]. For more information, see [Performance tuning with ordered columnstore indexes](../../relational-databases/indexes/ordered-columnstore-indexes.md).
 
 #### ON *partition_scheme_name* ( *column_name* )
 

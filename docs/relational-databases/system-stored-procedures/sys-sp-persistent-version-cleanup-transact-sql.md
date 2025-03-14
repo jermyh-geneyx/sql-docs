@@ -4,7 +4,7 @@ description: "Manually starts persistent version store (PVS) cleanup process, a 
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: dfurman
-ms.date: 02/03/2025
+ms.date: 03/10/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -88,6 +88,8 @@ SELECT *
 FROM sys.dm_exec_requests
 WHERE command LIKE '%PERSISTED_VERSION_CLEANER%';
 ```
+
+An active transaction might prevent the PVS cleanup process from starting. If this occurs, the session running the `sys.sp_persistent_version_cleanup` stored procedure waits with the [PVS_CLEANUP_LOCK](../system-dynamic-management-views/sys-dm-os-wait-stats-transact-sql.md#pvs_cleanup_lock) wait type. You can wait for the transaction to complete, or you can consider killing the blocker session with an active transaction, if possible.
 
 If ADR is disabled, run `sys.sp_persistent_version_cleanup` to clean up previous versions still in the PVS.
 

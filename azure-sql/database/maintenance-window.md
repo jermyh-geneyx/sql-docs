@@ -5,12 +5,11 @@ description: Understand how the Azure SQL Database maintenance window can be con
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: urosmil, scottkim, mathoma
-ms.date: 08/06/2024
+ms.date: 02/18/2025
 ms.service: azure-sql-database
 ms.subservice: service-overview
 ms.topic: conceptual
 ms.custom:
-  - references_regions
   - ignite-2023
   - azure-sql-split
 monikerRange: "=azuresql||=azuresql-db"
@@ -90,75 +89,14 @@ Choosing a maintenance window other than the default is available on all SLOs, *
 
 Other scenarios:
 
-- Maintenance window for Hyperscale elastic pools is in preview and is available in specific regions and configurations. For more information, see [Blog: Maintenance window support for Azure SQL Database Hyperscale elastic pools](https://aka.ms/hsep-fmw).
+- Maintenance window for Hyperscale elastic pools is in preview and is available in specific regions and configurations. For more information, see [Blog: Maintenance window support for Azure SQL Database Hyperscale elastic pools](https://aka.ms/hsep-fmw) and [Feature Availability by Region for Azure SQL Database](region-availability.md#maintenance-window-availability).
 - Maintenance window is supported for named replicas.
 
 <!-- Check Known limitations in azure-sql/database/service-tier-hyperscale.md as well -->
 
 ### Azure SQL Database region support for maintenance windows
 
-Choosing a maintenance window for Azure SQL Database other than the default is currently available in the following regions, organized by purchasing model.
-
-The following table is for databases that are not [zone-redundant](high-availability-sla-local-zone-redundancy.md#zone-redundant-availability). For databases in an [Azure Availability Zone](high-availability-sla-local-zone-redundancy.md#zone-redundant-availability), see [the table for zone-redundant databases.](#ZR-maintenance-window-availability)
-
-| Azure Region | Hyperscale premium-series and premium-series memory optimized | Hyperscale standard-series | All other Azure SQL Database purchasing models and tiers |
-|:---|:---|:---|:---|
-| Australia East | Yes | Yes | Yes |
-| Australia Southeast | | Yes | Yes |
-| Brazil South | | Yes | Yes |
-| Brazil Southeast | | Yes | Yes |
-| Canada Central  | Yes | Yes | Yes |
-| Canada East  | | Yes | Yes |
-| Central India | | Yes | Yes |
-| Central US | Yes | Yes | Yes |
-| China East 2 | | Yes | Yes |
-| China North 2 | | Yes | Yes |
-| East US 1 | Yes | Yes | Yes |
-| East US 2  | Yes | Yes | Yes |
-| East Asia  | | Yes | Yes |
-| France Central  | | Yes | Yes |
-| France South  | | Yes | Yes |
-| Germany West Central | | Yes | Yes |
-| Japan East | Yes | Yes | Yes |
-| Japan West | | Yes | Yes |
-| North Central US | | Yes | Yes |
-| North Europe | Yes | Yes | Yes |
-| South Africa North | | Yes | Yes |
-| South Central US | Yes | Yes | Yes |
-| South India | | Yes | Yes |
-| Southeast Asia | Yes | Yes | Yes |
-| Switzerland North | | Yes | Yes |
-| UAE North | | Yes | Yes |
-| UK South | Yes | Yes | Yes |
-| UK West | | Yes | Yes |
-| US Gov Texas | | Yes | Yes |
-| US Gov Virginia | | Yes | Yes |
-| West Central US | | Yes | Yes |
-| West Europe | Yes | Yes | Yes |
-| West US | Yes | Yes | Yes |
-| West US 2 | Yes | Yes | Yes |
-| West US 3 | Yes | Yes | Yes |
-
-<a id="ZR-maintenance-window-availability"></a>
-
-The following table is for [zone-redundant](high-availability-sla-local-zone-redundancy.md#zone-redundant-availability) databases.
-
-| Azure Region  | Hyperscale premium-series and premium-series memory optimized | Hyperscale standard-series | All other Azure SQL Database purchasing models and tiers in an [Azure Availability Zone](high-availability-sla-local-zone-redundancy.md#zone-redundant-availability) |
-|:---|:---|:---|:---|
-| Australia East | Yes | Yes | Yes |
-| Canada Central  |  Yes | Yes | Yes |
-| Central US |  Yes | Yes | Yes |
-| East US 1  |  Yes | Yes | Yes |
-| East US 2  | | | Yes |
-| France Central | | Yes | Yes |
-| Japan East | | | Yes |
-| North Europe |  Yes | Yes | Yes |
-| South Central US  | | | Yes |
-| Southeast Asia | Yes | Yes |  Yes |
-| UK South | Yes | Yes | Yes |
-| West Europe |  Yes | Yes | Yes |
-| West US 2 | | | Yes |
-| West US 3 | Yes | Yes | Yes |
+For more information, see [Feature Availability by Region for Azure SQL Database](region-availability.md#maintenance-window-availability).
 
 ## Gateway maintenance
 

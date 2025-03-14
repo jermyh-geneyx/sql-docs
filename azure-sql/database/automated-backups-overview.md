@@ -5,12 +5,11 @@ description: Learn how Azure SQL Database automatically backs up all databases a
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: mathoma, danil, dinethi
-ms.date: 02/03/2025
+ms.date: 03/03/2025
 ms.service: azure-sql-database
 ms.subservice: backup-restore
 ms.topic: conceptual
 ms.custom:
-  - references_regions
   - azure-sql-split
   - build-2024
   - ignite-2024
@@ -77,7 +76,7 @@ You can choose one of the following storage redundancies for backups:
 
    :::image type="content" source="media/automated-backups-overview/multi-paired-zrs.svg" alt-text="Diagram showing the zone-redundant storage (ZRS) option.":::
 
-- **Geo-redundant storage (GRS)**: Copies your backups synchronously three times within a single physical location in the primary region by using LRS. Then it copies your data asynchronously three times to a single physical location in the [paired](/azure/reliability/cross-region-replication-azure#azure-cross-region-replication-pairings-for-all-geographies) secondary region. 
+- **Geo-redundant storage (GRS)**: Copies your backups synchronously three times within a single physical location in the primary region by using LRS. Then it copies your data asynchronously three times to a single physical location in the [paired secondary region](/azure/reliability/cross-region-replication-azure#azure-cross-region-replication-pairings-for-all-geographies). 
 
   The result is:
   
@@ -86,7 +85,7 @@ You can choose one of the following storage redundancies for backups:
 
    :::image type="content" source="media/automated-backups-overview/multi-paired-grs.svg" alt-text="Diagram showing the geo-redundant storage (GRS) option.":::
 
-- **Geo-Zone redundant storage (GZRS)**: Geo-zone-redundant storage (GZRS) combines the high availability provided by redundancy across availability zones (ZRS) with protection from regional outages provided by geo-replication (GRS). Copies your backups synchronously across three Azure availability zones in the primary region, and asynchronously three times to a single physical location in the [paired secondary region](/azure/reliability/cross-region-replication-azure#azure-cross-region-replication-pairings-for-all-geographies).
+- **Geo-Zone redundant storage (GZRS)** (preview): Geo-zone-redundant storage (GZRS) combines the high availability provided by redundancy across availability zones (ZRS) with protection from regional outages provided by geo-replication (GRS). Copies your backups synchronously across three Azure availability zones in the primary region, and asynchronously three times to a single physical location in the [paired secondary region](/azure/reliability/cross-region-replication-azure#azure-cross-region-replication-pairings-for-all-geographies). This feature is currently in preview.
 
    Microsoft recommends using GZRS for applications requiring maximum consistency, durability, and availability, excellent performance, and resilience for disaster recovery.
 
@@ -132,7 +131,7 @@ Automatic backups on secondary replicas:
 - Bring improved performance and predictability to the Business Critical service tier.
 
 > [!NOTE]
-> - Create a Microsoft support ticket to disable the feature for your instance. 
+> Create a Microsoft support ticket to disable the feature for your instance. 
 
 ## <a id="restore-capabilities"></a> Restore capabilities and features
 

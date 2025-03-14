@@ -4,7 +4,7 @@ description: "The sp_drop_openrowset_statistics system stored procedure removes 
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest
-ms.date: 11/28/2023
+ms.date: 03/07/2025
 ms.service: azure-synapse-analytics
 ms.topic: "reference"
 f1_keywords:
@@ -34,6 +34,8 @@ sys.sp_drop_openrowset_statistics
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @stmt = ] N'*stmt*'
 

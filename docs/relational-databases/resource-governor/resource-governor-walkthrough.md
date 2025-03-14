@@ -4,7 +4,7 @@ description: Use examples to learn how to create and validate resource governor 
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: dfurman
-ms.date: 02/17/2025
+ms.date: 03/12/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: tutorial
@@ -58,8 +58,9 @@ You might need to limit the size of memory grants if queries are waiting for mem
     ```
 1. To revert to the initial configuration, execute the following script:
     ```sql
-    ALTER RESOURCE GOVERNOR DISABLE;
     ALTER WORKLOAD GROUP [default] WITH (REQUEST_MAX_MEMORY_GRANT_PERCENT = 25);
+    ALTER RESOURCE GOVERNOR RECONFIGURE;
+    ALTER RESOURCE GOVERNOR DISABLE;
     ```
 
 ## Use a user-defined workload group
@@ -151,13 +152,26 @@ For more information about configuring the maximum degree of parallelism, see [S
         Microsoft SQL Server Management Studio - Query      default                 0
         ```
 
-1. To revert to the initial configuration of this sample, execute the following T-SQL script:
-
+1. To revert to the initial configuration of this example, disconnect all sessions using the `limit_dop` workload group, and execute the following T-SQL script. The script includes the following steps:
+   1. Disable resource governor so that the classifier function can be dropped.
+   1. Drop the workload group. This requires that no sessions are using this workload group.
+   1. Reconfigure resource governor to reload the effective configuration without the classifier function and the workload group. This enables resource governor.
+   1. Disable resource governor to revert to the initial configuration.
+   
     ```sql
+    /* Disable resource governor so that the classifier function can be dropped. */
     ALTER RESOURCE GOVERNOR DISABLE;
     ALTER RESOURCE GOVERNOR WITH (CLASSIFIER_FUNCTION = NULL);
     DROP FUNCTION IF EXISTS dbo.rg_classifier;
+
+    /* Drop the workload group. This requires that no sessions are using this workload group. */
     DROP WORKLOAD GROUP limit_dop;
+
+    /* Reconfigure resource governor to reload the effective configuration without the classifier function and the workload group. This enables resource governor. */
+    ALTER RESOURCE GOVERNOR RECONFIGURE;
+
+    /* Disable resource governor to revert to the initial configuration. */
+    ALTER RESOURCE GOVERNOR DISABLE;
     ```
 
 ## Use multiple resource pools and workload groups
@@ -330,17 +344,33 @@ This example uses resource governor to classify sessions from an order processin
     order_processing    peak_hours_group        0                       peak_hours_pool         20                  100
     ```
 
-1. To revert to the initial configuration, execute the following T-SQL script:
-
+1. To revert to the initial configuration of this example, disconnect all sessions using the `peak_hours_group` and `off_hours_group` workload groups, and execute the following T-SQL script. The script includes the following steps:
+   1. Disable resource governor so that the classifier function can be dropped.
+   1. Drop the workload groups. This requires that no sessions are using these workload groups.
+   1. Once the workload groups are dropped, drop the resource pools.
+   1. Reconfigure resource governor to reload the effective configuration without the classifier function and user-defined workload groups and resource pools. This enables resource governor.
+   1. Disable resource governor to revert to the initial configuration.
+   
     ```sql
+    /* Disable resource governor so that the classifier function can be dropped. */
     ALTER RESOURCE GOVERNOR DISABLE;
     ALTER RESOURCE GOVERNOR WITH (CLASSIFIER_FUNCTION = NULL);
     DROP FUNCTION IF EXISTS dbo.rg_classifier;
     DROP TABLE IF EXISTS dbo.workload_interval;
+
+    /* Drop the workload groups. This requires that no sessions are using these workload groups. */
     DROP WORKLOAD GROUP peak_hours_group;
     DROP WORKLOAD GROUP off_hours_group;
+
+    /* Once the workload groups are dropped, drop the resource pools. */
     DROP RESOURCE POOL peak_hours_pool;
     DROP RESOURCE POOL off_hours_pool;
+
+    /* Reconfigure resource governor to reload the effective configuration without the classifier function and user-defined workload groups and resource pools. This enables resource governor. */
+    ALTER RESOURCE GOVERNOR RECONFIGURE;
+
+    /* Disable resource governor to revert to the initial configuration. */
+    ALTER RESOURCE GOVERNOR DISABLE;
     ```
 
 ## Monitor resource governor using system views

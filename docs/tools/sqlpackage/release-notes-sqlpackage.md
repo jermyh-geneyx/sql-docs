@@ -4,7 +4,7 @@ description: Release notes for Microsoft SqlPackage.
 author: dzsquared
 ms.author: drskwier
 ms.reviewer: "llali"
-ms.date: 09/18/2024
+ms.date: 02/28/2025
 ms.service: sql
 ms.topic: release-notes
 ms.custom: tools|sos
@@ -357,7 +357,7 @@ dotnet tool install -g microsoft.sqlpackage --version 162.1.172
 | :------ | :------ |
 |Deployment|Adds the ability for the `GenerateSmartDefaults` property on publish to populate values from a default constraint when set to `true`. [GitHub issue](https://github.com/microsoft/DacFx/issues/38)|
 |Azure Synapse Analytics|Adds support for [serverless SQL pools](./sqlpackage-for-azure-synapse-analytics.md#support-for-serverless-sql-pools) in Extract and Publish operations.|
-|SQL Server 2022|Adds support for [ordered clustered columnstore indexes](../../relational-databases/indexes/columnstore-indexes-design-guidance.md#use-an-ordered-clustered-columnstore-index-for-large-data-warehouse-tables).|
+|SQL Server 2022|Adds support for [ordered clustered columnstore indexes](../../relational-databases/indexes/columnstore-indexes-design-guidance.md#use-an-ordered-columnstore-index-for-large-data-warehouse-tables).|
 
 
 ### Fixes

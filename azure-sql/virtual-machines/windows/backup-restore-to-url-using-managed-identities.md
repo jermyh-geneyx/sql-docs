@@ -1,8 +1,8 @@
 ---
 title: Backup and restore to URL using managed identities
 description: Learn how to back up and restore SQL Server databases to Azure Blob storage using managed identities for SQL Server on Azure VMs.
-author: GithubMirek
-ms.author: mireks
+author: PratimDasgupta
+ms.author: prdasgu
 ms.reviewer: vanto, mathoma
 ms.date: 02/16/2025
 ms.service: azure-vm-sql-server
@@ -22,7 +22,6 @@ Starting with SQL Server 2022 Cumulative Update 17 (CU17), you can use managed i
 Using managed identities in the credentials for the `BACKUP TO URL` and `RESTORE FROM URL` T-SQL operations is only supported by SQL Server on Azure VMs. Using managed identities with SQL Server on-premises to `BACKUP TO URL` and `RESTORE FROM URL` isn't supported.
 
 ## Prerequisites
-
 
 - A SQL Server on Azure VM with SQL Server 2022 CU17 or later [registered with the SQL IaaS Agent extension](sql-agent-extension-manually-register-single-vm.md).
 - The SQL Server instance that is backing up to, or restoring from, URL must be [configured with Microsoft Entra authentication](configure-azure-ad-authentication-for-sql-vm.md), whether or not it's the instance registered with the extension.

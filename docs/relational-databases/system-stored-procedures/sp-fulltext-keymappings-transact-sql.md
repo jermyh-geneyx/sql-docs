@@ -4,7 +4,7 @@ description: Returns mappings between document identifiers (DocIds) and full-tex
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -35,6 +35,8 @@ sp_fulltext_keymappings { table_id | table_id , docId | table_id , NULL , key }
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### *table_id*
 

@@ -330,75 +330,67 @@ resources
 | extend status = tostring(properties.status)
 | where status =~ 'Connected'
 | extend machineID = tolower(id)
-| extend VMbyManufacturer = toboolean(iff(properties.detectedProperties.manufacturer in (
-        "VMware",
-        "QEMU",
-        "Amazon EC2",
-        "OpenStack",
-        "Hetzner",
-        "Mission Critical Cloud",
-        "DigitalOcean",
-        "UpCloud",
-        "oVirt",
-        "Alibaba",
-        "KubeVirt",
-        "Parallels",
-        "XEN"
-    ), 1, 0))
-| extend VMbyModel = toboolean(iff(properties.detectedProperties.model in (
-        "OpenStack",
-        "Droplet",
-        "oVirt",
-        "Hypervisor",
-        "Virtual",
-        "BHYVE",
-        "KVM"
-    ), 1, 0))
-| extend GoogleVM = toboolean(iff((properties.detectedProperties.manufacturer =~ "Google") and (properties.detectedProperties.model =~ "Google Compute Engine"), 1, 0))
-| extend NutanixVM = toboolean(iff((properties.detectedProperties.manufacturer =~ "Nutanix") and (properties.detectedProperties.model =~ "AHV"), 1, 0))
-| extend MicrosoftVM = toboolean(iff((properties.detectedProperties.manufacturer =~ "Microsoft Corporation") and (properties.detectedProperties.model =~ "Virtual Machine"), 1, 0))
-| extend billableCores = iff(VMbyManufacturer or VMbyModel or GoogleVM or NutanixVM or MicrosoftVM, properties.detectedProperties.logicalCoreCount, properties.detectedProperties.coreCount)
-| join kind = leftouter // Join the extension
-        (
-        resources
-        | where type =~ 'Microsoft.HybridCompute/machines/extensions'
-        | where name == 'WindowsAgent.SqlServer' or name == 'LinuxAgent.SqlServer'
-        | extend extMachineID = substring(id, 0, indexof(id, '/extensions'))
-        | extend extensionId = id
-        )
-        on $left.id == $right.extMachineID
-        | join kind = inner       // Join SQL Server instances
-            (
-            resources
-            | where type =~ 'microsoft.azurearcdata/sqlserverinstances'
-            | extend sqlVersion = tostring(properties.version)
-            | extend sqlEdition = tostring(properties.edition)
-            | extend is_Enterprise = toint(iff(sqlEdition == "Enterprise", 1, 0))
-            | extend sqlStatus = tostring(properties.status)
-            | extend licenseType = tostring(properties.licenseType)
-            | where sqlEdition in ('Enterprise', 'Standard')
-            | where licenseType !~ 'HADR'
-            | extend ArcServer = tolower(tostring(properties.containerResourceId))
-            | order by sqlEdition
-            )
-            on $left.machineID == $right.ArcServer
-            | where isnotnull(extensionId)
-            | summarize Edition = iff(sum(is_Enterprise) > 0, "Enterprise", "Standard") by machineID
-            , name
-            , resourceGroup
-            , subscriptionId
-            , Status = tostring(properties.status)
-            , Model = tostring(properties.detectedProperties.model)
-            , Manufacturer = tostring(properties.detectedProperties.manufacturer)
-            , License_Type = tostring(properties1.settings.LicenseType)
-            , ESU = iff(notnull(properties1.settings.enableExtendedSecurityUpdates), iff(properties1.settings.enableExtendedSecurityUpdates == true,"enabled","not enabled"), "not enabled")
-            , OS = tostring(properties.osName)
-            , Uses_UV = tostring(properties1.settings.UsePhysicalCoreLicense.IsApplied)
-            , Cores = tostring(billableCores)
-            , Version = sqlVersion
-            | summarize by name, subscriptionId, resourceGroup, Model, Manufacturer, License_Type, ESU, OS, Cores, Status
-            | project Name = name, Model, Manufacturer, OperatingSystem = OS, Status, HostLicenseType = License_Type, ESU, BillableCores = Cores, SubscriptionID = subscriptionId, ResourceGroup = resourceGroup
-            | order by Name asc
+| extend VMbyManufacturer = toboolean(iff(
+    properties.detectedProperties.manufacturer contains_cs "VMware" or
+    properties.detectedProperties.manufacturer contains_cs "QEMU" or
+    properties.detectedProperties.manufacturer contains_cs "Amazon EC2" or
+    properties.detectedProperties.manufacturer contains_cs "OpenStack" or
+    properties.detectedProperties.manufacturer contains_cs "Hetzner" or
+    properties.detectedProperties.manufacturer contains_cs "Mission Critical Cloud" or
+    properties.detectedProperties.manufacturer contains_cs "DigitalOcean" or
+    properties.detectedProperties.manufacturer contains_cs "UpCloud" or
+    properties.detectedProperties.manufacturer contains_cs "oVirt" or
+    properties.detectedProperties.manufacturer contains_cs "Alibaba" or
+    properties.detectedProperties.manufacturer contains_cs "KubeVirt" or
+    properties.detectedProperties.manufacturer contains_cs "Parallels" or
+    properties.detectedProperties.manufacturer contains_cs "Bochs" or
+    properties.detectedProperties.manufacturer contains_cs "XEN", 1, 0))
+| extend VMbyModel = toboolean(iff(
+    properties.detectedProperties.model contains_cs "OpenStack" or
+    properties.detectedProperties.model contains_cs "Droplet" or
+    properties.detectedProperties.model contains_cs "oVirt" or
+    properties.detectedProperties.model contains_cs "Hypervisor" or
+    properties.detectedProperties.model contains_cs "Virtual" or
+    properties.detectedProperties.model contains_cs "BHYVE" or
+    properties.detectedProperties.model contains_cs "KVM", 1, 0))
+| extend GoogleVM = toboolean(iff(
+    properties.detectedProperties.manufacturer contains_cs "Google" and
+    properties.detectedProperties.model contains_cs "Google Compute Engine", 1, 0))
+| extend NutanixVM = toboolean(iff(
+    properties.detectedProperties.manufacturer contains_cs "Nutanix" and
+    properties.detectedProperties.model contains_cs "AHV", 1, 0))
+| extend MicrosoftVM = toboolean(iff(
+    properties.detectedProperties.manufacturer contains_cs "Microsoft Corporation" and
+    properties.detectedProperties.model contains_cs "Virtual Machine", 1, 0))
+| extend billableCores = iff(
+    VMbyManufacturer or VMbyModel or GoogleVM or NutanixVM or MicrosoftVM,
+    properties.detectedProperties.logicalCoreCount,
+    properties.detectedProperties.coreCount)
+| join kind=leftouter (
+    resources
+    | where type =~ 'Microsoft.HybridCompute/machines/extensions'
+    | where name == 'WindowsAgent.SqlServer' or name == 'LinuxAgent.SqlServer'
+    | extend extMachineID = substring(id, 0, indexof(id, '/extensions'))
+    | extend extensionId = id
+) on $left.id == $right.extMachineID
+| join kind=inner (
+    resources
+    | where type =~ 'microsoft.azurearcdata/sqlserverinstances'
+    | extend sqlVersion = tostring(properties.version)
+    | extend sqlEdition = tostring(properties.edition)
+    | extend is_Enterprise = toint(iff(sqlEdition == "Enterprise", 1, 0))
+    | extend sqlStatus = tostring(properties.status)
+    | extend licenseType = tostring(properties.licenseType)
+    | where sqlEdition in ('Enterprise', 'Standard')
+    | where licenseType !~ 'HADR'
+    | extend ArcServer = tolower(tostring(properties.containerResourceId))
+    | order by sqlEdition
+) on $left.machineID == $right.ArcServer
+| where isnotnull(extensionId)
+| summarize Edition = iff(sum(is_Enterprise) > 0, "Enterprise", "Standard") by machineID, name, resourceGroup, subscriptionId, Status = tostring(properties.status), Model = tostring(properties.detectedProperties.model), Manufacturer = tostring(properties.detectedProperties.manufacturer), License_Type = tostring(properties1.settings.LicenseType), ESU = iff(notnull(properties1.settings.enableExtendedSecurityUpdates), iff(properties1.settings.enableExtendedSecurityUpdates == true, "enabled", "not enabled"), "not enabled"), OS = tostring(properties.osName), Uses_UV = tostring(properties1.settings.UsePhysicalCoreLicense.IsApplied), Cores = tostring(billableCores), Version = sqlVersion, HostType = iff(VMbyManufacturer or VMbyModel or GoogleVM or NutanixVM or MicrosoftVM, "VM", "Physical")
+| summarize by name, subscriptionId, resourceGroup, Model, Manufacturer, HostType, License_Type, ESU, OS, Cores, Status
+| project Name = name, Model, Manufacturer, HostType, OperatingSystem = OS, Status, HostLicenseType = License_Type, ESU, BillableCores = Cores, SubscriptionID = subscriptionId, ResourceGroup = resourceGroup
+| order by Name asc
 ```
 
 ## <a id="manage-pcore-license"></a> Manage the unlimited virtualization benefit for SQL Server

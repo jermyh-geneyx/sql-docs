@@ -16,7 +16,7 @@ ms.custom:
 
 [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Linux currently has the following limitations:
 
-- A standard password policy is provided. `MUST_CHANGE` is the only option you might configure. The `CHECK_POLICY` option isn't supported.
+- A standard password policy is provided. `MUST_CHANGE` is the only option you can configure. When the `CHECK_POLICY` option is enabled, it enforces only the default policy provided by [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], and doesn't apply the Windows password policies defined in the Active Directory group policies.
 - Extensible Key Management isn't supported in [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] CU 11 and earlier versions. Extensible Key Management is only supported through Azure Key Vault (AKV).
 - [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] authentication mode can't be disabled.
 - Password expiration is hard-coded to 90 days if you use [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] authentication.

@@ -4,7 +4,7 @@ description: Removes a SQL Server instance from a PolyBase group for scale-out c
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: polybase
 ms.topic: conceptual
@@ -31,6 +31,10 @@ The SQL Server instance must have the [PolyBase](../polybase/polybase-guide.md) 
 ```syntaxsql
 sp_polybase_leave_group;
 ```
+
+## Arguments
+
+None.
 
 ## Return code values
 

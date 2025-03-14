@@ -75,7 +75,7 @@ When you start an instance of [!INCLUDE [ssNoVersion](../includes/ssnoversion-md
 
 ## Connect to the SQL Server instance
 
-1. Use **sqlcmd** to connect to the SQL Server instance:
+1. Use **sqlcmd** to connect to the SQL Server instance. After finishing the steps described in the [Start SQL Server in single-user mode](#start-sql-server-in-single-user-mode) section, you can see that [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] is running in *interactive* mode. Thus, you need to open a new terminal session to launch **sqlcmd** as follows.
 
    ```bash
    /opt/mssql-tools/bin/sqlcmd -S <ServerName> -U sa -P <password>

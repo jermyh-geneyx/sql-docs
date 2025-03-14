@@ -53,12 +53,14 @@ Hardware generations have different characteristics, as described in the followi
 Support for the premium-series hardware with 16-TB storage has the same availability as support for the memory optimized premium-series hardware.
 Supports for the memory-optimized premium-series hardware and the premium-series hardware with 16-TB storage are currently available only in these specific regions:
 
-| Geography | Regions supporting memory optimized premium-series HW and premium-series hardware with 16 TB Storage |
+| Geography | Regions supporting memory optimized premium-series hardware and premium-series hardware with 16 TB Storage |
 | --- | --- |
 | Europe | France Central, Germany West Central, Italy North, North Europe, Poland Central, Sweden Central, Switzerland North, UK South, West Europe |
 | Middle East, Africa | Qatar Central |
 | Americas | Brazil South, Canada Central, Canada East, Central US, East US 2, North Central US, South Central US, West US, West Central US, West US 2 |
-| Asia Pacific | Australia East, Australia Southeast, China North 3, India Central, East Asia, Japan East, Southeast Asia |
+| Asia Pacific | Australia East, Australia Southeast, China North 3, India Central, East Asia<sup>1</sup>, Japan East, Southeast Asia |
+
+<sup>1</sup> The creation of new instances and modification of existing instances may be temporarily disabled due to limited hardware capacity in this region. To proceed with these actions, please select a different hardware generation. 
 
 ### In-memory OLTP available space
 

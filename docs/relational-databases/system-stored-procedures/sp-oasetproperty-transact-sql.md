@@ -4,7 +4,7 @@ description: sp_OASetProperty sets a property of an OLE object to a new value.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -35,6 +35,8 @@ sp_OASetProperty objecttoken
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### *objecttoken*
 

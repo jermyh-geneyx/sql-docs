@@ -4,7 +4,7 @@ description: sp_cursor performs operations on one or more rows within a cursor's
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 07/05/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -33,6 +33,8 @@ sp_cursor cursor , optype , rownum , table
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### *cursor*
 

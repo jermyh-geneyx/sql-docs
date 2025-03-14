@@ -5,7 +5,7 @@ description: Learn about the new features and documentation improvements for Azu
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: wiassaf, mathoma
-ms.date: 02/26/2025
+ms.date: 03/06/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: service-overview
 ms.topic: whats-new
@@ -56,6 +56,7 @@ The following table lists features of Azure SQL Managed Instance that have been 
 
 | Feature | GA Month | Details |
 | ---| --- |--- |
+|[MI link from SQL Server 2017](managed-instance-link-feature-overview.md#prerequisites) | March 2025 | Configure a link from SQL Server 2017 to Azure SQL Managed Instance. |
 |[Native Windows principals](native-windows-principals.md) | February 2025 | Use the new **Windows** authentication metadata mode to allow Windows authentication or Microsoft Entra authentication (using a Windows principal metadata) with Azure SQL Managed Instance. |
 |[Instance pools](instance-pools-overview.md) | November 2024 | Save on costs and share resources between multiple instances in a pool within a single virtual machine. A convenient and cost-efficient way to migrate smaller SQL Server instances to the cloud, and the only way to deploy a 2-vCore managed instance. |
 | [Microsoft Entra nonunique name support](../database/authentication-microsoft-entra-create-users-with-nonunique-names.md) | November 2024 | The [CREATE USER](/sql/t-sql/statements/create-user-transact-sql) Transact-SQL (T-SQL) syntax has been extended to include `WITH OBJECT_ID` to [support creating Microsoft Entra logins and users in Azure SQL Managed Instance](../database/authentication-microsoft-entra-create-users-with-nonunique-names.md) that have nonunique names. |
@@ -71,6 +72,13 @@ The following table lists features of Azure SQL Managed Instance that have been 
 
 Learn about significant changes to the Azure SQL Managed Instance documentation. For previous years, see the [What's new archive](doc-changes-updates-release-notes-whats-new-archive.md).
 
+### March 2025
+
+| Changes | Details |
+| --- | --- |
+|**MI link from SQL Server 2017 GA** | Configure a link from SQL Server 2017 to Azure SQL Managed Instance. This feature is generally available. Review [Managed Instance link from SQL Server 2017](managed-instance-link-feature-overview.md#) to learn more. |
+
+
 ### February 2025
 
 | Changes | Details |
@@ -85,6 +93,7 @@ Learn about significant changes to the Azure SQL Managed Instance documentation.
 | --- | --- |
 | **SQL Insights retired** | SQL Insights has been retired and is no longer available. Use [database watcher](../database-watcher-overview.md) or another monitoring solution to monitor Azure SQL Managed Instance. |
 | **Modernization Advisor preview** | Use the **Modernization Advisor** in the Azure portal for your SQL Server on Azure VM to determine if you can save on cost or optimize your performance by migrating your workload to Azure SQL Managed Instance. This feature is currently in preview. Review [Modernization Advisor](../virtual-machines/modernization-advisor.md) to learn more. |
+
 
 
 ### November 2024

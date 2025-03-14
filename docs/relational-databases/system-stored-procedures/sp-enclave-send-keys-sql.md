@@ -4,7 +4,7 @@ description: "sp_enclave_send_keys (Transact-SQL)"
 author: jaszymas
 ms.author: jaszymas
 ms.reviewer: vanto, randolphwest
-ms.date: 06/13/2023
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -17,7 +17,7 @@ helpviewer_keywords:
   - "sp_enclave_send_keys"
 dev_langs:
   - "TSQL"
-monikerRange: ">= sql-server-ver15"
+monikerRange: ">=sql-server-ver15"
 ---
 # sp_enclave_send_keys (Transact-SQL)
 
@@ -46,7 +46,7 @@ sp_enclave_send_keys
 
 ## Arguments
 
-This stored procedure has no arguments.
+None.
 
 ## Return value
 

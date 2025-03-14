@@ -3,7 +3,7 @@ title: "Columnstore indexes in data warehousing"
 description: Learn more about how to benefit from columnstore indexes in data warehousing with the SQL Database Engine.
 author: MikeRayMSFT
 ms.author: mikeray
-ms.date: 10/23/2024
+ms.date: 02/28/2025
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: conceptual
@@ -30,7 +30,7 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || >=sql-server-2016 || >=s
 -   Aggregate Pushdown for efficient processing of aggregates. This is supported on all database compatibility levels.  
 -   String predicate pushdown for efficient processing of string predicates. This is supported on all database compatibility levels.  
 -   Snapshot isolation for database compatibility level 130 and higher.  
--   Ordered cluster columnstore indexes were introduced with [!INCLUDE [sql-server-2022](../../includes/sssql22-md.md)]. For more information, see [CREATE COLUMNSTORE INDEX](../../t-sql/statements/create-columnstore-index-transact-sql.md#order-for-clustered-columnstore) and [Performance tuning with ordered clustered columnstore indexes](ordered-columnstore-indexes.md). For ordered columnstore index availability, see [Ordered column index availability](columnstore-indexes-overview.md#ordered-columnstore-index-availability).
+-   Ordered clustered columnstore indexes were introduced with [!INCLUDE [sql-server-2022](../../includes/sssql22-md.md)]. For more information, see [CREATE COLUMNSTORE INDEX](../../t-sql/statements/create-columnstore-index-transact-sql.md#order-for-clustered-columnstore) and [Performance tuning with ordered columnstore indexes](ordered-columnstore-indexes.md). For ordered columnstore index availability, see [Ordered column index availability](columnstore-indexes-overview.md#ordered-columnstore-index-availability).
 
 For more information about new features in versions and platforms of SQL Server and Azure SQL, see [What's new in columnstore indexes](columnstore-indexes-what-s-new.md).
   
@@ -122,9 +122,9 @@ BEGIN TRAN
 COMMIT TRAN  
 ```  
   
-### Snapshot isolation and read-committed snapshot isolations
+### Snapshot isolation and read-committed snapshot isolation
 
- Use snapshot isolation (SI) to guarantee transactional consistency, and read-committed snapshot isolations (RCSI) to guarantee statement level consistency for queries on columnstore indexes. This allows the queries to run without blocking data writers. This non-blocking behavior also significantly reduces the likelihood of deadlocks for complex transactions. For more information, see [Snapshot Isolation in SQL Server](../../t-sql/statements/set-transaction-isolation-level-transact-sql.md#arguments).
+ Use snapshot isolation (SI) to guarantee transactional consistency, and read-committed snapshot isolation (RCSI) to guarantee statement level consistency for queries on columnstore indexes. This allows the queries to run without blocking data writers. This non-blocking behavior also significantly reduces the likelihood of deadlocks for complex transactions. For more information, see [Snapshot Isolation in SQL Server](../../t-sql/statements/set-transaction-isolation-level-transact-sql.md#arguments).
 
 ## Related content
 

@@ -4,7 +4,7 @@ description: sp_manage_distributed_transaction commits, aborts, or forgets a spe
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 07/06/2023
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -28,6 +28,8 @@ sp_manage_distributed_transaction
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### @transaction_uow = '*transaction_id*'
 

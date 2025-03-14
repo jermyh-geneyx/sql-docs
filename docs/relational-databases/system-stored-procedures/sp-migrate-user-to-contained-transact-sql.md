@@ -4,7 +4,7 @@ description: sp_migrate_user_to_contained converts a database user that is mappe
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 03/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -37,6 +37,8 @@ sp_migrate_user_to_contained [ @username = ] N'user' ,
 ```
 
 ## Arguments
+
+[!INCLUDE [extended-stored-procedures](includes/extended-stored-procedures.md)]
 
 #### [ @username = ] N'*username*'
 

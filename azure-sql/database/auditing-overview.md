@@ -5,7 +5,7 @@ description: SQL Auditing for Azure SQL Database and Azure Synapse Analytics tra
 author: sravanisaluru
 ms.author: srsaluru
 ms.reviewer: wiassaf, vanto, mathoma
-ms.date: 09/16/2024
+ms.date: 03/12/2025
 ms.service: azure-sql-database
 ms.subservice: security
 ms.topic: conceptual
@@ -17,7 +17,7 @@ ms.custom:
 
 [!INCLUDE [appliesto-sqldb-asa](../includes/appliesto-sqldb-asa.md)]
 
-Auditing for [What is Azure SQL Database?](sql-database-paas-overview.md) and [Azure Synapse Analytics](/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-overview-what-is) tracks database events and writes them to an audit log in your Azure storage account, Log Analytics workspace, or Event Hubs.
+Auditing for [Azure SQL Database](sql-database-paas-overview.md) and [Azure Synapse Analytics](/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-overview-what-is) tracks database events and writes them to an audit log in your Azure storage account, Log Analytics workspace, or Event Hubs.
 
 Auditing also:
 
@@ -39,11 +39,27 @@ You can use SQL Database auditing to:
 > [!IMPORTANT]  
 > Auditing for Azure SQL Database, Azure Synapse Analytics SQL pools, and Azure SQL Managed Instance is optimized for availability and performance of the database or instance being audited. During periods of very high activity or high network load, the auditing feature might allow transactions to proceed without recording all of the events marked for auditing.
 
+## Enhancements to performance, availability, and reliability in server auditing for Azure SQL Database (March 2025)
+
+- Re-architected major portions of SQL Auditing resulting in increased availability and reliability of server audits. As an added benefit, there's closer feature alignment with SQL Server and Azure SQL Managed Instance. Database auditing remains unchanged. 
+- The previous design of auditing triggers a database level audit and executes one audit session for each database in the server. The new architecture of auditing creates one extended event session at the server level that captures audit events for all databases.
+- The new auditing design optimizes memory and CPU, and is consistent with how auditing works in SQL Server and Azure SQL Managed Instance.
+
+### Changes from the re-architecture of server auditing 
+
+- Folder structure change for storage account:
+  - One of the primary changes involves a folder structure change for audit logs stored in storage account containers. Previously, server audit logs were written to separate folders; one for each database, with the database name serving as the folder name. With the new update, all server audit logs will be consolidated into a single folder labeled `master`. This behavior is the same as Azure SQL Managed Instance and SQL Server.
+- Folder structure change for read-only replicas:
+  - Read-only database replicas previously had their logs stored in a read-only folder. Those logs will now be written into the `master` folder. You can retrieve these logs by filtering on the new column `is_secondary_replica_true`.
+- Permissions required to view Audit logs :
+  - **Control Server** permission is required to view audit logs stored in the `master` folder
+
 ## Auditing limitations
 
 - Enabling auditing on a paused **Azure Synapse SQL pool** isn't supported. To enable auditing, resume the **Synapse SQL pool**.
 - Enabling auditing by using User Assigned Managed Identity (UAMI) isn't supported on **Azure Synapse**.
 - Currently, managed identities aren't supported for Azure Synapse, unless the storage account is behind a virtual network or firewall.
+- Due to performance constraints, we don't audit the **tempdb** and **temporary tables**. While the batch completed action group captures statements against temporary tables, it might not correctly populate the object names. However, the source table is always audited, ensuring that all inserts from the source table to temporary tables are recorded.
 - Auditing for **Azure Synapse SQL pools** supports default audit action groups **only**.
 - When you configure auditing for a [logical server in Azure](logical-servers.md) or Azure SQL Database with the log destination as a storage account, the authentication mode must match the configuration for that storage account. If using storage access keys as the authentication type, the target storage account must be enabled with access to the storage account keys. If the storage account is configured to only use authentication with Microsoft Entra ID ([formerly Azure Active Directory](/entra/fundamentals/new-name)), auditing can be configured to use managed identities for authentication.
 
@@ -64,7 +80,7 @@ You can use SQL Database auditing to:
 
 ## Related content
 
-- [What's New in Azure SQL Auditing](/Shows/Data-Exposed/Whats-New-in-Azure-SQL-Auditing)
+- [What's New in Azure SQL Auditing](/shows/data-exposed/server-audit-redesign-for-azure-sql-database-data-exposed)
 - [Get started with Azure SQL Managed Instance auditing](../managed-instance/auditing-configure.md)
 - [Auditing for SQL Server](/sql/relational-databases/security/auditing/sql-server-audit-database-engine)
 - [Set up Auditing for Azure SQL Database and Azure Synapse Analytics](auditing-setup.md)
