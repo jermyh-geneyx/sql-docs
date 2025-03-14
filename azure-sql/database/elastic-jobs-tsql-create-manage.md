@@ -69,8 +69,8 @@ CREATE USER [job-agent-UMI] FROM EXTERNAL PROVIDER;
 CREATE USER [job-agent-UMI] FROM LOGIN [job-agent-UMI];
 
 -- Grant permissions as necessary to execute your jobs. For example, ALTER and CREATE TABLE:
-GRANT ALTER ON SCHEMA::dbo TO jobuser;
-GRANT CREATE TABLE TO jobuser;
+GRANT ALTER ON SCHEMA::dbo TO job-agent-UMI;
+GRANT CREATE TABLE TO job-agent-UMI;
 ```
 
 - To create a contained database user if a login is not needed on the logical server:
@@ -80,8 +80,8 @@ GRANT CREATE TABLE TO jobuser;
 CREATE USER [job-agent-UMI] FROM EXTERNAL PROVIDER; 
 
 -- Grant permissions as necessary to execute your jobs. For example, ALTER and CREATE TABLE:
-GRANT ALTER ON SCHEMA::dbo TO jobuser;
-GRANT CREATE TABLE TO jobuser;
+GRANT ALTER ON SCHEMA::dbo TO job-agent-UMI;
+GRANT CREATE TABLE TO job-agent-UMI;
 ```
 
 ### Use a database-scoped credential for job execution
