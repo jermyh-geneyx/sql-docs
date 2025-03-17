@@ -22,7 +22,7 @@ Version 12.10 is the latest general availability (GA) version. It supports Java 
 ### Version information
 
 - Release number: 12.10.0
-- Released: March 07, 2025
+- Released: March 17, 2025
 
 When you download the driver, there are multiple JAR files. The JAR file with `jre8` supports Java 8 and the JAR file with `jre11` supports Java 11 and up.
 
