@@ -55,7 +55,7 @@ In each of the target server(s)/database(s), create a contained user mapped to t
 
 ```sql
 -- Connect to the master database of the Azure SQL logical instance of job agent
--- Use universal with MFA authentication type
+-- To run these T-SQL scripts, use Microsoft Entra authentication for your database connection.
 
 -- Create a login on the master database mapped to a user-assigned managed identity (UMI)
 CREATE LOGIN [job-agent-UMI] FROM EXTERNAL PROVIDER;
