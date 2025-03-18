@@ -173,7 +173,7 @@ You can also [create charts and pin them to dashboards](/azure/governance/resour
 
 ## Known issues
 
-Resources deleted on-premises might not be immediately deleted in Azure. There's no impact on how database CRUD (create, read, update, delete) operations happen on-premises. For example, if you delete a database, the image of the database on Azure remains until the server resource synchronizes.
+Resources deleted on-premises might not be immediately deleted in Azure. For example, if you delete a database, the image of the database on Azure remains until the server resource synchronizes.
 
 ## Related content
 
