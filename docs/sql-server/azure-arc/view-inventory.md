@@ -16,10 +16,6 @@ ms.custom:
 
 When SQL Server engine instances or associated services are enabled by Azure Arc, you can use Azure to manage your inventory.
 
-## Capabilities by service
-
-[!INCLUDE [features-service-type](includes/features-service-type.md)]
-
 ## Prerequisites
 
 Verify that the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] service is
@@ -177,5 +173,6 @@ Resources deleted on-premises might not be immediately deleted in Azure. For exa
 
 ## Related content
 
+- [Feature availability by service type](overview.md#feature-availability-by-service-type)
 - [Protect SQL Server with Microsoft Defender for Cloud](configure-advanced-data-security.md)
 - [Configure best practices assessment for SQL Server enabled by Azure Arc](assess.md)
