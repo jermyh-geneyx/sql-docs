@@ -94,6 +94,8 @@ We strongly encourage customers to move away from relying on **any individual Ga
 > - Use the individual Gateway IP addresses and Gateway IP address subnets in this section if you're using a Proxy connection policy to connect to Azure SQL Database. 
 > - If you're using the Redirect connection policy, refer to the [Azure IP Ranges and Service Tags - Public Cloud](https://www.microsoft.com/download/details.aspx?id=56519) for a list of your region's IP addresses to allow.
 
+<!-- matches azure-docs\articles\synapse-analytics\security\gateway-ip-addresses.md -->
+
 | Region name          | Gateway IP addresses | Gateway IP address subnets |
 | --- | --- | --- |
 | Australia Central    | 20.36.104.6, 20.36.104.7 | 20.36.105.32/29, 20.53.48.96/27|
