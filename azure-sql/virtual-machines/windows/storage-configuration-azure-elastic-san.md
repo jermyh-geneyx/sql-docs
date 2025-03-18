@@ -27,7 +27,7 @@ When considering VM sizing and performance for Azure Elastic SAN, it's important
 Determine your network and storage requirements before deploying your SQL Server VM with an Azure Elastic SAN, and then carefully monitor network and storage utilization to confirm the chosen VM can accommodate the workload. To learn more, review [VM performance with Elastic SAN volumes](/azure/storage/elastic-san/elastic-san-performance) and [Elastic SAN metrics](/azure/storage/elastic-san/elastic-san-metrics). 
 
 > [!CAUTION]
-> - VM sizing with Elastic SAN must accommodate production (VM to VM) network throughput requirements in addition to storage throughput. When using Elastic SAN, VM sizes that optimize for IO throughput might not be as cost-effective as VM sizes that optimize for network bandwidth. 
+> VM sizing with Elastic SAN must accommodate production (VM to VM) network throughput requirements in addition to storage throughput. When using Elastic SAN, VM sizes that optimize for IO throughput might not be as cost-effective as VM sizes that optimize for network bandwidth. 
 
 Consider placing SQL Server workloads on Elastic SAN for better cost efficiency because: 
 
@@ -42,7 +42,7 @@ Azure Elastic SAN is designed to simplify the deployment, scaling, and managemen
 
 - **Volume groups**: management constructs that allow you to manage volumes at scale. Any settings or configurations applied to a volume group, such as virtual network rules, are inherited by all volumes associated with that volume group. 
 This is similar to how resource groups work in Azure, providing a way to apply configurations and policies across multiple volumes.
-- **Volumes**: individual storage units where data is stored. Each volume can be mounted to clients using the iSCSI protocol, and they support mounting on Windows, Linux, Azure VMWare Solution (AVS) and Azure Kubernetes Service (AKS).
+- **Volumes**: individual storage units where data is stored. Each volume can be mounted to clients using the iSCSI protocol, and they support mounting on Windows, Linux, Azure VMware Solution (AVS) and Azure Kubernetes Service (AKS).
 
 For a SQL DBA concerned about separating SQL Server data files on to separate logical drives: 
 - **Create a volume group**: This volume group acts as a container for your volumes and inherits any configurations you apply to it.

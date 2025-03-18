@@ -68,7 +68,6 @@ Learn about significant changes to the SQL Server on Azure VMs documentation. Fo
 
 | Changes | Details |
 | --- | --- |
-
 | **Enable Microsoft Entra authentication for unregistered instances** | It's now possible to enable Microsoft Entra authentication for unregistered instances SQL Server installed to your Azure VMs, such as when you have multiple instances on the same VM. Review [Microsoft Entra authentication](configure-azure-ad-authentication-for-sql-vm.md#enable-microsoft-entra-authentication-for-unregistered-instances) to learn more. |
 
 ### January 2025
