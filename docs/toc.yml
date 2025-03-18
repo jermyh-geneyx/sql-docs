@@ -4679,6 +4679,8 @@ items:
         href: database-engine/configure-windows/start-sql-server-with-minimal-configuration.md
       - name: SQL Server Configuration Manager services
         items:
+        - name: SQL Server Services
+          href: tools\configuration-manager\sql-server-services.md
         - name: Connect to another computer
           href: database-engine/configure-windows/scm-services-connect-to-another-computer.md
         - name: Set an instance to start automatically
@@ -8276,7 +8278,7 @@ items:
       - name: Cancel Option
         href: tools/distributed-replay/cancel-option-distributed-replay-administration-tool.md
   - name: SQL Server Configuration Manager
-    href: tools/configuration-manager/sql-server-services.md
+    href: tools\configuration-manager\sql-server-configuration-manager.md
     items:
     - name: Help
       href: tools/configuration-manager/sql-server-configuration-manager-help.md
