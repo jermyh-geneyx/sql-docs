@@ -4,7 +4,7 @@ description: "Use Azure shared disks to create a failover cluster instance (FCI)
 author: AbdullahMSFT
 ms.author: amamun
 ms.reviewer: mathoma
-ms.date: 06/18/2024
+ms.date: 03/17/2025
 ms.service: azure-vm-sql-server
 ms.subservice: hadr
 ms.topic: how-to
@@ -38,7 +38,10 @@ Before you complete the instructions in this article, you should already have:
 
 ## Add Azure shared disk
 
-[Deploy a managed Premium SSD disk with the shared disk feature enabled](/azure/virtual-machines/disks-shared-enable#deploy-a-premium-ssd-as-a-shared-disk). Set `maxShares` to **align with the number of cluster nodes** to make the disk shareable across all FCI nodes.
+[Deploy a managed with the shared disk feature enabled](/azure/virtual-machines/disks-shared-enable#deploy-shared-disks). Set `maxShares` to **align with the number of cluster nodes** to make the disk shareable across all FCI nodes.
+Premium SSD, Premium SSDv2 and Ultra Disk are supported disk types to use with a SQL Server failover cluster instance. 
+
+Use zone-redundant storage (ZRS) whenever possible. 
 
 ## Attach shared disk to VMs
 
