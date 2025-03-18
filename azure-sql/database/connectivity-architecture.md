@@ -1,11 +1,11 @@
 ---
-title: Azure SQL Database connectivity architecture
-titleSuffix: Azure SQL Database and Azure Synapse Analytics
-description: This article explains the Azure SQL Database connectivity architecture for database connections from within Azure or from outside of Azure.
+title: Connectivity architecture
+titleSuffix: Azure SQL Database and SQL database in Fabric
+description: This article explains the connectivity architecture for database connections from within Azure or from outside of Azure for Azure SQL Database, SQL database in Fabric
 author: VanMSFT
 ms.author: vanto
-ms.reviewer: wiassaf, mathoma, vanto
-ms.date: 05/10/2024
+ms.reviewer: wiassaf, mathoma
+ms.date: 03/18/2025
 ms.service: azure-sql-database
 ms.subservice: connect
 ms.topic: conceptual
@@ -13,17 +13,20 @@ ms.custom:
   - fasttrack-edit
   - sqldbrb=1
   - references_regions
+monikerRange: "=azuresql || =azuresql-db"
 ---
-# Azure SQL Database and Azure Synapse Analytics connectivity architecture
+# Connectivity architecture
 
-[!INCLUDE [appliesto-sqldb-asa-formerly-sqldw](../includes/appliesto-sqldb-asa-formerly-sqldw.md)]
+[!INCLUDE [appliesto-sqldb-fabricsqldb](../includes/appliesto-sqldb-fabricsqldb.md)]
 
-This article explains architecture of various components that direct network traffic to a server in Azure SQL Database or dedicated SQL pools in Azure Synapse Analytics. It also explains different connection policies and how it impacts clients connecting from within Azure and clients connecting from outside of Azure.
+This article explains architecture of various components that direct network traffic to a server in Azure SQL Database and SQL database in Microsoft Fabric. It also explains different connection policies and how it impacts clients connecting from within Azure and clients connecting from outside of Azure.
 
 - For connection strings to Azure SQL Database, see [Connect and query to Azure SQL Database](connect-query-content-reference-guide.md).
-- For connection strings to Azure Synapse Analytics pools, see [Connect to Synapse SQL](/azure/synapse-analytics/sql/connect-overview).
-- For settings that control connectivity to the [logical server](logical-servers.md) for Azure SQL Database and dedicated SQL pools in Azure Synapse Analytics, see [connectivity settings](connectivity-settings.md).
+- For settings that control connectivity to the [logical server](logical-servers.md) for Azure SQL Database, see [connectivity settings](connectivity-settings.md).
 - This article does *not* apply to **Azure SQL Managed Instance**. Refer to [Connectivity architecture for Azure SQL Managed Instance](../managed-instance/connectivity-architecture-overview.md).
+- This article does *not* apply to decicated SQL pools in Azure Synapse Analytics. 
+    - For settings that control connectivity to dedicated SQL pools in Azure Synapse Analytics, see [Azure Synapse Analytics connectivity settings](/azure/synapse-analytics/security/connectivity-settings.md).
+    - For connection strings to Azure Synapse Analytics pools, see [Connect to Synapse SQL](/azure/synapse-analytics/sql/connect-overview).
 
 ## Connectivity architecture
 
@@ -39,18 +42,21 @@ The following steps describe how a connection is established to Azure SQL Databa
 
 ## Connection policy
 
-Servers in SQL Database and dedicated SQL pools (formerly SQL DW) in Azure Synapse support the following three options for the server's connection policy setting. 
-
-> [!NOTE]
-> The connection policy for dedicated SQL pools (formerly SQL DW) in Azure Synapse Analytics is set to **Default**. You cannot change this for dedicated SQL pools in Synapse workspaces.
+Logical servers in Azure SQL Database support the following three options for the server's connection policy setting. 
 
 - **Redirect (recommended):** Clients establish connections directly to the node hosting the database, leading to reduced latency and improved throughput. For connections to use this mode, clients need to:
-  - Allow outbound communication from the client to all Azure SQL IP addresses in the region on ports in the range of 11000 to 11999. Use the Service Tags for SQL to make this easier to manage. If you are using Private Link, see [Use Redirect connection policy with private endpoints](private-endpoint-overview.md#use-redirect-connection-policy-with-private-endpoints) for the port ranges to allow.
-  - Allow outbound communication from the client to Azure SQL Database gateway IP addresses on port 1433.
-  - When using the Redirect connection policy, refer to the [Azure IP Ranges and Service Tags – Public Cloud](https://www.microsoft.com/download/details.aspx?id=56519) for a list of your region's IP addresses to allow.
+   - Allow outbound communication from the client to all Azure SQL IP addresses in the region on ports in the range of 11000 to 11999. Use the Service Tags for SQL to make this easier to manage. If you are using Private Link, see [Use Redirect connection policy with private endpoints](private-endpoint-overview.md#use-redirect-connection-policy-with-private-endpoints) for the port ranges to allow.
+   - Allow outbound communication from the client to Azure SQL Database gateway IP addresses on port 1433.
+   - When using the Redirect connection policy, refer to the [Azure IP Ranges and Service Tags – Public Cloud](https://www.microsoft.com/download/details.aspx?id=56519) for a list of your region's IP addresses to allow.
+
+   > [!NOTE]
+   > Currently, the connection policy for [SQL database in Microsoft Fabric](/fabric/databases/sql/) is **redirect** and cannot be changed.
+
 - **Proxy:** In this mode, all connections are proxied via the Azure SQL Database gateways, leading to increased latency and reduced throughput. For connections to use this mode, clients need to allow outbound communication from the client to Azure SQL Database gateway IP addresses on port 1433.
-  - When using the Proxy connection policy, refer to the [Gateway IP addresses](#gateway-ip-addresses) list later in this article for your region's IP addresses to allow.
-- **Default:** This is the connection policy in effect on all servers after creation unless you explicitly alter the connection policy to either `Proxy` or `Redirect`. The default policy is `Redirect` for all client connections originating inside of Azure (for example, from an Azure Virtual Machine) and `Proxy` for all client connections originating outside (for example, connections from your local workstation).
+   - When using the Proxy connection policy, refer to the [Gateway IP addresses](#gateway-ip-addresses) list later in this article for your region's IP addresses to allow.
+- **Default:** This is the connection policy in effect on all servers after creation unless you explicitly alter the connection policy to either `Proxy` or `Redirect`. The default policy is:
+   - `Redirect` for all client connections originating inside of Azure (for example, from an Azure Virtual Machine). 
+   - `Proxy` for all client connections originating outside (for example, connections from your local workstation).
 
 We highly recommend the `Redirect` connection policy over the `Proxy` connection policy for the lowest latency and highest throughput. However, you need to meet the extra requirements for allowing network traffic for outbound communication:
 
@@ -83,9 +89,10 @@ Periodically, Microsoft retires individual **Gateway IP addresses** and migrates
 We strongly encourage customers to move away from relying on **any individual Gateway IP address** (since these will be retired in the future). Instead allow network traffic to reach **both** the individual Gateway IP addresses and Gateway IP address subnets in a region.
 
 > [!IMPORTANT]  
-> - Logins for SQL Database or dedicated SQL pools (formerly SQL DW) in Azure Synapse can land on **any of the individual Gateway IP addresses or Gateway IP address subnets in a region**. For consistent connectivity to SQL Database or dedicated SQL pools (formerly SQL DW) in Azure Synapse, allow network traffic to and from **all the individual Gateway IP addresses and Gateway IP address subnets** in a region.
+> - Logins for SQL Database can land on **any of the individual Gateway IP addresses or Gateway IP address subnets in a region**. For consistent connectivity to SQL Database, allow network traffic to and from **all the individual Gateway IP addresses and Gateway IP address subnets** in a region.
 >
-> - Use the individual Gateway IP addresses and Gateway IP address subnets in this section if you're using a Proxy connection policy to connect to Azure SQL Database. If you're using the Redirect connection policy, refer to the [Azure IP Ranges and Service Tags - Public Cloud](https://www.microsoft.com/download/details.aspx?id=56519) for a list of your region's IP addresses to allow.
+> - Use the individual Gateway IP addresses and Gateway IP address subnets in this section if you're using a Proxy connection policy to connect to Azure SQL Database. 
+> - If you're using the Redirect connection policy, refer to the [Azure IP Ranges and Service Tags - Public Cloud](https://www.microsoft.com/download/details.aspx?id=56519) for a list of your region's IP addresses to allow.
 
 | Region name          | Gateway IP addresses | Gateway IP address subnets |
 | --- | --- | --- |
@@ -150,6 +157,4 @@ We strongly encourage customers to move away from relying on **any individual Ga
 - For information on how to change the Azure SQL Database connection policy for a server, see [conn-policy](/cli/azure/sql/server/conn-policy).
 - For information about Azure SQL Database connection behavior for clients that use ADO.NET 4.5 or a later version, see [Ports beyond 1433 for ADO.NET 4.5](adonet-v12-develop-direct-route-ports.md).
 - For general application development overview information, see [SQL Database Application Development Overview](develop-overview.md).
-- Refer to [Azure IP Ranges and Service Tags – Public Cloud](https://www.microsoft.com/download/details.aspx?id=56519)
-- [What is a logical SQL server in Azure SQL Database and Azure Synapse?](logical-servers.md)
-- [What's the difference between Azure Synapse (formerly SQL DW) and Azure Synapse Analytics Workspace](https://aka.ms/dedicatedSQLpooldiff)
+- Refer to [Azure IP Ranges and Service Tags – Public Cloud](https://www.microsoft.com/download/details.aspx?id=56519).
