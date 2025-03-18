@@ -9314,7 +9314,7 @@ items:
       items:
       - name: Assess
         href: sql-server/azure-arc/assess.md
-      - name: View databases
+      - name: View inventory
         href: sql-server/azure-arc/view-databases.md
       - name: Configure SQL Server
         href: sql-server/azure-arc/manage-configuration.md
