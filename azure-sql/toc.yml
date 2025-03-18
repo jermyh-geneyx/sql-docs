@@ -1690,8 +1690,10 @@
           href: virtual-machines/windows/change-sql-server-edition.md
         - name: Change version
           href: virtual-machines/windows/change-sql-server-version.md
-        - name: Storage configuration
+        - name: Premium SSD storage
           href: virtual-machines/windows/storage-configuration.md
+        - name: Azure Elastic SAN Storage
+          href: virtual-machines/windows/storage-configuration-azure-elastic-san.md
 
         - name: Microsoft Entra authentication
           href: virtual-machines/windows/configure-azure-ad-authentication-for-sql-vm.md
