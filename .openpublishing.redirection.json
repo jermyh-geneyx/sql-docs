@@ -49402,6 +49402,11 @@
       "redirect_document_id": false
     },
     {
+      "source_path": "docs/sql-server/azure-arc/view-databases.md",
+      "redirect_url": "/sql/sql-server/azure-arc/view-inventory",
+      "redirect_document_id": false
+    },
+    {
       "source_path": "docs/sql-server/azure-arc/connect-at-scale-policy.md",
       "redirect_url": "/sql/sql-server/azure-arc/automatically-connect",
       "redirect_document_id": false
