@@ -670,7 +670,7 @@ The following example assumes that the following tables and table-valued functio
 | Employees | EmpID, EmpLastName, EmpFirstName, EmpSalary |
 | GetReports(MgrID) | EmpID, EmpLastName, EmpSalary |
 
-The `GetReports` table-valued function, returns the list of all employees that report directly or indirectly to the specified `MgrID`.
+The `GetReports` table-valued function returns the list of all employees that report directly or indirectly to the specified `MgrID`.
 
 The example uses `APPLY` to return all departments and all employees in that department. If a particular department doesn't have any employees, there won't be any rows returned for that department.
 
