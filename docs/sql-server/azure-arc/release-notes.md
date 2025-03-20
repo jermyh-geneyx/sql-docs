@@ -261,7 +261,7 @@ For a complete list of regions, see [Supported Azure regions](overview.md#suppor
 
 For information about server monitoring capabilities, review [Automatically connect your SQL Server to Azure Arc](automatically-connect.md).
 
-For information about database status and inventory capabilities, review [View Azure Arc-enabled SQL Server databases](view-databases.md).
+For information about database status and inventory capabilities, review [View Azure Arc-enabled inventory](view-inventory.md).
 
 Creates a server role and a database role, maps logins, and grants permissions. For details, see [Roles created by Azure extension for SQL Server installation](permissions-granted-agent-extension.md).
 
@@ -414,7 +414,7 @@ With SQL Server enabled by Azure Arc, you can run the agent extension service wi
 ### Azure extension for SQL Server
 
 - [Configure best practices assessment for SQL Server enabled by Azure Arc](assess.md) (BPA) on Arc-enabled SQL Server requires Software Assurance or [Configure SQL Server enabled by Azure Arc](manage-configuration.md).
-- [View Azure Arc-enabled SQL Server databases](view-databases.md) on Arc-enabled SQL Server requires Software Assurance or [Configure SQL Server enabled by Azure Arc](manage-configuration.md).
+- [View Azure Arc-enabled inventory](view-inventory.md) on Arc-enabled SQL Server requires Software Assurance or [Configure SQL Server enabled by Azure Arc](manage-configuration.md).
 
 ## January 17, 2023
 
@@ -441,5 +441,5 @@ With SQL Server enabled by Azure Arc, you can run the agent extension service wi
 
 ### Azure extension for SQL Server
 
-- Support to view databases as a resource added for [!INCLUDE [sssql14-md](../../includes/sssql14-md.md)], and [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)]. Review [View Azure Arc-enabled SQL Server databases](view-databases.md).
+- Support to view databases as a resource added for [!INCLUDE [sssql14-md](../../includes/sssql14-md.md)], and [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)]. Review [View Azure Arc-enabled inventory](view-inventory.md).
 - Support for Web and Express editions.
