@@ -114,7 +114,9 @@ If more than 10 concurrent full database backups are scheduled, a warning is iss
 
 > [!NOTE]  
 > SQL Server managed backup isn't supported with proxy servers.
->
+
+> [!NOTE]  
+> It is not possible to use Managed Backup to Microsoft Azure in SQL Server Web Edition, since all backups are made using the COMPRESSION option and this is not supported by Web Edition.
 
 ## <a id="support_limits"></a> Supportability
 
