@@ -54,7 +54,7 @@ This setup allows you to manage and configure your storage resources efficiently
 
 To configure an Azure Elastic SAN for your SQL Server VM, you need the following prerequisites:
 
-- An Azure subscription. If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/?WT.mc_id=A261C142F) before you begin.
+- An Azure subscription. If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?icid=azurefreeaccount?WT.mc_id=A261C142F) before you begin.
 - An [Azure virtual machine](/azure/virtual-machines/windows/quick-create-portal) appropriately [sized for your SQL Server workload](performance-guidelines-best-practices-vm-size.md). 
 - Access to [SQL Server installation media](https://www.microsoft.com/evalcenter/evaluate-sql-server-2022) and a [product key](https://www.microsoft.com/en-us/sql-server/sql-server-2022-pricing?msockid=3c7688a9da0a67f905079ca8db5d66c6) for the desired version and edition of SQL Server. 
 
@@ -129,7 +129,7 @@ mpclaim -L -M 2
 
 Finally, run the PowerShell script you saved earlier from the **Connect to targets** step in the Azure portal to connect the volumes to the virtual machine.
 
-After the script completes, you can use [Disk Management](/windows-server/storage/disk-management/overview-of-disk-management) (for Windows) or  to format the volumes and bring them online. 
+After the script completes, you can use [Disk Management](/windows-server/storage/disk-management/overview-of-disk-management) (for Windows) to format the volumes and bring them online. 
 
 ## Install SQL Server
 

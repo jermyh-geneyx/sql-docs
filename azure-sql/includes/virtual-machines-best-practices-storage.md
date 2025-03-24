@@ -1,7 +1,7 @@
 ---
 author: MashaMSFT
 ms.author: mathoma
-ms.date: 03/17/2024
+ms.date: 03/20/2025
 ms.service: virtual-machines
 ms.topic: include
 ---
@@ -9,6 +9,7 @@ ms.topic: include
 - If available, configure the `tempdb` [data and log files on the D: local SSD volume](../virtual-machines/windows/storage-configuration.md#new-vms). The SQL IaaS Agent extension handles the folder and permissions needed upon re-provisioning.
 - To optimize storage performance, plan for highest uncached IOPS available and use data caching as a performance feature for data reads while avoiding [virtual machine and disks capping](/azure/virtual-machines/premium-storage-performance#throttling).
 - When using the [Ebdsv5 or Ebsv5](/azure/virtual-machines/ebdsv5-ebsv5-series) series SQL Server VMs, use [Premium SSD v2](../virtual-machines/windows/storage-configuration-premium-ssd-v2.md) for the best price performance. You can deploy your SQL Server VM with Premium SSD v2 by using the Azure portal (currently in preview). 
+- If your workload requires more than 160,000 IOPS, use [Premium SSD v2](../virtual-machines/windows/performance-guidelines-best-practices-storage.md#premium-ssd-v2) or [Azure Ultra Disks](../virtual-machines/windows/performance-guidelines-best-practices-storage.md#azure-ultra-disk).
 - Place data, log, and `tempdb` files on separate drives.  
   - For the data drive, use [premium P30 and P40 or smaller disks](/azure/virtual-machines/disks-types#premium-ssds) to ensure the availability of cache support. When using the [Ebdsv5 VM series](/azure/virtual-machines/ebdsv5-ebsv5-series), use [Premium SSD v2](../virtual-machines/windows/storage-configuration-premium-ssd-v2.md) which provides better price-performance for workloads that require high IOPS and I/O throughput.
   - For the log drive plan for capacity and test performance versus cost while evaluating either [Premium SSD v2](/azure/virtual-machines/disks-types#premium-ssd-v2) or Premium SSD [P30 - P80 disks](/azure/virtual-machines/disks-types#premium-ssds)
