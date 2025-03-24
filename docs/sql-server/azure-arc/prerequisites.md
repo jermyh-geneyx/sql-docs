@@ -121,7 +121,9 @@ If a proxy server is used, set the `NO_PROXY` environment variable to exclude pr
 > [!NOTE]
 > You can't use Azure Private Link connections to the Azure Arc data processing service. See [Unsupported configurations](#unsupported-configurations).
 
-### Prerequisites for enabling Entra ID authentication
+### Network requirements for enabling Entra ID authentication
+
+[!INCLUDE [entra-id-authentication-prerequisites]](includes/entra-id-authentication-prerequisites.md)
 
 ## Supported SQL Server versions and environments
 
