@@ -123,7 +123,7 @@ If a proxy server is used, set the `NO_PROXY` environment variable to exclude pr
 
 ### Network requirements for enabling Entra ID authentication
 
-[!INCLUDE [entra-id-authentication-prerequisites]](includes/entra-id-authentication-prerequisites.md)
+[!INCLUDE [entra-id-authentication-prerequisites](includes/entra-id-authentication-prerequisites.md)]
 
 ## Supported SQL Server versions and environments
 
