@@ -583,37 +583,37 @@
     {
       "source_path": "docs/relational-databases/scripting/bookmarks-f1-help.md",
       "redirect_url": "/ssms/scripting/bookmarks-f1-help",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/change-font-color-size-and-style.md",
       "redirect_url": "/ssms/scripting/change-font-color-size-and-style",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/code-outlining.md",
       "redirect_url": "/ssms/scripting/code-outlining",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/color-coding-in-query-editors.md",
       "redirect_url": "/ssms/scripting/color-coding-in-query-editors",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/complete-transact-sql-snippets.md",
       "redirect_url": "/ssms/scripting/complete-transact-sql-snippets",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/complete-word-intellisense.md",
       "redirect_url": "/ssms/scripting/complete-word-intellisense",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/configure-editors-sql-server-management-studio.md",
       "redirect_url": "/ssms/scripting/configure-editors-sql-server-management-studio",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/ssms/tutorials/lesson-2-1-connecting-with-query-editor.md",
@@ -1383,7 +1383,7 @@
     {
       "source_path": "docs/relational-databases/scripting/automatic-matching-of-syntax-pairs.md",
       "redirect_url": "/ssms/scripting/automatic-matching-of-syntax-pairs",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/2014/ssms/visual-db-tools/create-queries-visual-database-tools.md",
@@ -1848,12 +1848,12 @@
     {
       "source_path": "docs/relational-databases/scripting/associate-file-extensions-to-a-code-editor.md",
       "redirect_url": "/ssms/scripting/associate-file-extensions-to-a-code-editor",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/add-transact-sql-snippets.md",
       "redirect_url": "/ssms/scripting/add-transact-sql-snippets",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/ssms/scripting/search-text-with-wildcards.md",
@@ -2178,12 +2178,12 @@
     {
       "source_path": "docs/relational-databases/scripting/transact-sql-debugger-call-stack-window.md",
       "redirect_url": "/ssms/scripting/transact-sql-debugger-call-stack-window",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/transact-sql-debugger-command-window.md",
       "redirect_url": "/ssms/scripting/transact-sql-debugger-command-window",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/ssms/visual-db-tools/partition-column-list-dialog-box-visual-database-tools.md",
@@ -2313,7 +2313,7 @@
     {
       "source_path": "docs/relational-databases/scripting/transact-sql-debugger-error-list-windowXX.md",
       "redirect_url": "/ssms/scripting/transact-sql-debugger-error-list-window",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/ssms/object/name-not-found-dialog-box.md",
@@ -2783,12 +2783,12 @@
     {
       "source_path": "docs/relational-databases/scripting/transact-sql-debugger-information.md",
       "redirect_url": "/ssms/scripting/transact-sql-debugger-information",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/transact-sql-debugger-output-window.md",
       "redirect_url": "/ssms/scripting/transact-sql-debugger-output-window",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/ssms/scripting/transact-sql-debugger-watch-window.md",
@@ -3023,42 +3023,42 @@
     {
       "source_path": "docs/relational-databases/scripting/insert-transact-sql-snippets.md",
       "redirect_url": "/ssms/scripting/insert-transact-sql-snippets",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/intellisense-sql-server-management-studio.md",
       "redirect_url": "/ssms/scripting/intellisense-sql-server-management-studio",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/manage-bookmarks.md",
       "redirect_url": "/ssms/scripting/manage-bookmarks",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/manage-code-formatting.md",
       "redirect_url": "/ssms/scripting/manage-code-formatting",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/manage-the-editor-and-view-mode.md",
       "redirect_url": "/ssms/scripting/manage-the-editor-and-view-mode",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/navigate-code-and-text.md",
       "redirect_url": "/ssms/scripting/navigate-code-and-text",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/Xobjects-supported-by-the-generate-scripts-wizardX.md",
       "redirect_url": "/ssms/scripting/objects-supported-by-the-generate-scripts-wizard",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/index.md",
       "redirect_url": "/ssms/scripting/index",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/database-engine-query-editor-sql-server-management-studio.md",
@@ -3073,7 +3073,7 @@
     {
       "source_path": "docs/relational-databases/scripting/configure-firewall-rules-before-running-the-tsql-debugger.md",
       "redirect_url": "/ssms/scripting/configure-firewall-rules-before-running-the-tsql-debugger",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/ssms/tutorials/lesson-2-4-using-comments.md",
@@ -3118,12 +3118,12 @@
     {
       "source_path": "docs/relational-databases/scripting/insert-surround-with-transact-sql-snippets.md",
       "redirect_url": "/ssms/scripting/insert-surround-with-transact-sql-snippets",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/generate-scripts-sql-server-management-studio.md",
       "redirect_url": "/ssms/scripting/generate-scripts-sql-server-management-studio",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/database-engine-scripting.md",
@@ -3133,7 +3133,7 @@
     {
       "source_path": "docs/relational-databases/scripting/generate-and-publish-scripts-wizard.md",
       "redirect_url": "/ssms/scripting/generate-and-publish-scripts-wizard",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/tools/sql-server-management-studio/lesson-1-basic-navigation-in-sql-server-management-studio.md",
@@ -3228,22 +3228,22 @@
     {
       "source_path": "docs/relational-databases/scripting/find-in-files.md",
       "redirect_url": "/ssms/scripting/find-in-files",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/find-results-windows.md",
       "redirect_url": "/ssms/scripting/find-results-windows",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/parameter-info-intellisense.md",
       "redirect_url": "/ssms/scripting/parameter-info-intellisense",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/transact-sql-debugger-locals-window.md",
       "redirect_url": "/ssms/scripting/transact-sql-debugger-locals-window",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/ssms/visual-database-tools/open-table-designer-visual-database-tools.md",
@@ -3258,7 +3258,7 @@
     {
       "source_path": "docs/relational-databases/scripting/search-text-with-regular-expressions.md",
       "redirect_url": "/ssms/scripting/search-text-with-regular-expressions",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/search-text-with-wildcards.md",
@@ -3268,52 +3268,52 @@
     {
       "source_path": "docs/relational-databases/scripting/spatial-results-window.md",
       "redirect_url": "/ssms/scripting/spatial-results-window",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/specify-a-hit-count.md",
       "redirect_url": "/ssms/scripting/specify-a-hit-count",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/sqlcmd-connect-to-the-database-engine.md",
       "redirect_url": "/ssms/scripting/sqlcmd-connect-to-the-database-engine",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/sqlcmd-run-transact-sql-script-files.md",
       "redirect_url": "/ssms/scripting/sqlcmd-run-transact-sql-script-files",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/sqlcmd-start-the-utility.md",
       "redirect_url": "/ssms/scripting/sqlcmd-start-the-utility",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/sqlcmd-use-the-utility.md",
       "redirect_url": "/ssms/scripting/sqlcmd-use-the-utility",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/sqlcmd-use-with-scripting-variables.md",
       "redirect_url": "/ssms/scripting/sqlcmd-use-with-scripting-variables",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/status-bar-database-engine-query-editor.md",
       "redirect_url": "/ssms/scripting/status-bar-database-engine-query-editor",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/step-through-transact-sql-code.md",
       "redirect_url": "/ssms/scripting/step-through-transact-sql-code",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/toggle-a-breakpoint.md",
       "redirect_url": "/ssms/scripting/toggle-a-breakpoint",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/2014/ssms/index.md",
@@ -3323,7 +3323,7 @@
     {
       "source_path": "docs/relational-databases/scripting/query-and-text-editors-sql-server-management-studio.md",
       "redirect_url": "/ssms/scripting/query-and-text-editors-sql-server-management-studio",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/2014/ssms/menu-help/index.md",
@@ -3353,7 +3353,7 @@
     {
       "source_path": "docs/relational-databases/scripting/search-documents-using-results-lists.md",
       "redirect_url": "/ssms/scripting/search-documents-using-results-lists",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/manage/enroll-an-instance-of-sql-server-sql-server-utility.md",
@@ -3363,62 +3363,62 @@
     {
       "source_path": "docs/relational-databases/scripting/search-documents-interactively.md",
       "redirect_url": "/ssms/scripting/search-documents-interactively",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/search-an-active-document-incrementally.md",
       "redirect_url": "/ssms/scripting/search-an-active-document-incrementally",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/transact-sql-debugger-quickwatch-dialog-box.md",
       "redirect_url": "/ssms/scripting/transact-sql-debugger-quickwatch-dialog-box",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/transact-sql-debugger-threads-window.md",
       "redirect_url": "/ssms/scripting/transact-sql-debugger-threads-window",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/transact-sql-debugger-breakpoints-window.md",
       "redirect_url": "/ssms/scripting/transact-sql-debugger-breakpoints-window",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/transact-sql-debugger-watch-window.md",
       "redirect_url": "/ssms/scripting/transact-sql-debugger-watch-window",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/troubleshooting-intellisense.md",
       "redirect_url": "/ssms/scripting/troubleshooting-intellisense",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/use-the-properties-window-in-management-studio.md",
       "redirect_url": "/ssms/scripting/use-the-properties-window-in-management-studio",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/view-spatial-data-in-object-explorer.md",
       "redirect_url": "/ssms/scripting/view-spatial-data-in-object-explorer",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/xml-editor-sql-server-management-studio.md",
       "redirect_url": "/ssms/scripting/xml-editor-sql-server-management-studio",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/ssms/introduction-to-sql-server-management-studio-for-business-intelligence.md",
       "redirect_url": "/ssms/sql-server-management-studio-ssms",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/ssms/tutorials/templates-ssms.md",
       "redirect_url": "/ssms/template/templates-ssms",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/ssms/tutorials/tutorial-sql-server-management-studio.md",
@@ -3433,42 +3433,42 @@
     {
       "source_path": "docs/relational-databases/scripting/transact-sql-syntax-supported-by-intellisense.md",
       "redirect_url": "/ssms/scripting/transact-sql-syntax-supported-by-intellisense",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/transact-sql-debugger.md",
       "redirect_url": "/ssms/scripting/transact-sql-debugger",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/transact-sql-code-snippets.md",
       "redirect_url": "/ssms/scripting/transact-sql-code-snippets",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/transact-sql-breakpoints.md",
       "redirect_url": "/ssms/scripting/transact-sql-breakpoints",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/quick-info-intellisense.md",
       "redirect_url": "/ssms/scripting/quick-info-intellisense",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/replace-in-files.md",
       "redirect_url": "/ssms/scripting/replace-in-files",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/run-the-transact-sql-debugger.md",
       "redirect_url": "/ssms/scripting/run-the-transact-sql-debugger",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/search-and-replace.md",
       "redirect_url": "/ssms/scripting/search-and-replace",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/manage/monitor-instances-of-sql-server-in-the-sql-server-utility.md",
@@ -3508,7 +3508,7 @@
     {
       "source_path": "docs/ssms/scripting/database-engine-query-editor-sql-server-management-studio.md",
       "redirect_url": "/ssms/f1-help/database-engine-query-editor-sql-server-management-studio",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/ssms/scripting/query-and-text-editors-sql-server-management-studio.md",
@@ -3548,12 +3548,12 @@
     {
       "source_path": "docs/relational-databases/scripting/print-code-and-results.md",
       "redirect_url": "/ssms/scripting/print-code-and-results",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/scripting/open-an-editor-sql-server-management-studio.md",
       "redirect_url": "/ssms/scripting/open-an-editor-sql-server-management-studio",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/tools/sql-server-management-studio/tutorial-sql-server-management-studio.md",
@@ -3598,7 +3598,7 @@
     {
       "source_path": "docs/ssms/output-window.md",
       "redirect_url": "/ssms/menu-help/options-output-window-page",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/manage/modify-a-resource-health-policy-definition-sql-server-utility.md",
@@ -3643,7 +3643,7 @@
     {
       "source_path": "docs/ssms/object/options-sql-server-object-explorer-commands.md",
       "redirect_url": "/ssms/menu-help/options-sql-server-object-explorer-commands",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/ssms/sql-server-management-studio-release-notes.md",
@@ -3653,7 +3653,7 @@
     {
       "source_path": "docs/ssms/object/options-sql-server-object-explorer-scripting-page.md",
       "redirect_url": "/ssms/menu-help/options-sql-server-object-explorer-scripting",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/relational-databases/manage/configure-your-utility-control-point-data-warehouse-sql-server-utility.md",
@@ -3683,7 +3683,7 @@
     {
       "source_path": "docs/ssms/agent/autostart-sql-server-agent-sql-server-management-studio.md",
       "redirect_url": "/ssms/agent/autorestart-sql-server-agent-sql-server-management-studio",
-      "redirect_document_id": true
+      "redirect_document_id": false
     },
     {
       "source_path": "docs/ssms/f1-help/index.md",
