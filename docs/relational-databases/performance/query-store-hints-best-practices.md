@@ -3,7 +3,7 @@ title: "Query Store hints best practices"
 description: "Best practices for the Query Store hints feature, which helps you to shape query plans without changing application code."
 author: MikeRayMSFT
 ms.author: mikeray
-ms.date: 08/01/2022
+ms.date: 03/26/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: best-practice
@@ -13,7 +13,9 @@ dev_langs:
   - "TSQL"
 monikerRange: "=azuresqldb-current || =azuresqldb-mi-current || >=sql-server-ver16 || >=sql-server-linux-ver16 || =fabric"
 ---
+
 # Query Store hints best practices
+
 [!INCLUDE [SQL Server 2022 Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sqlserver2022-asdb-asmi-fabricsqldb.md)]
 
 This article details best practices for using [Query Store hints](query-store-hints.md). Query Store hints enable shaping query plan shapes without modifying application code.
@@ -71,6 +73,42 @@ For a complete tutorial, see [Query Store hints Examples](query-store-hints.md#e
 Another case where Query Store hints can help is where queries cannot be modified directly after a SQL Server instance migration or upgrade. Use Query Store hints to apply a prior compatibility level for a query until it can be rewritten or otherwise addressed to perform well in the latest compatibility level. Identify outlier queries that have regressed in a higher compatibility level using the [Query Store's regressed queries report](monitoring-performance-by-using-the-query-store.md#Regressed), using the [Query Tuning Advisor](upgrade-dbcompat-using-qta.md) tool during a migration, or other query-level application telemetry. For more information on the differences between compatibility levels, review the [Differences between compatibility levels](../../t-sql/statements/alter-database-transact-sql-compatibility-level.md#differences-between-compatibility-levels).
 
 After performance testing the new compatibility level and deploying Query Store hints in this way, you can upgrade the entire database's compatibility level while keeping key problematic queries on the prior compatibility level, without any code changes.
+
+### Block future execution of problematic queries
+
+You can use the `ABORT_QUERY_EXECUTION` query hint to block future execution of known problematic queries, for example non-essential queries causing high resource consumption and impacting critical application workloads.
+
+> [!NOTE]
+> At this time, the `ABORT_QUERY_EXECUTION` query hint is in preview in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] only.
+
+For example, to block future execution of query ID 39, execute the following statement:
+
+```sql
+EXEC sys.sp_query_store_set_hints @query_id= 39, @query_hints = N'OPTION (USE HINT (''ABORT_QUERY_EXECUTION''))';
+```
+
+For more information, see [examples](query-store-hints.md#examples) of using Query Store hints.
+
+The following considerations apply:
+
+- When you specify this hint for a query using [sys.sp_query_store_set_hints](../system-stored-procedures/sys-sp-query-store-set-hints-transact-sql.md), an attempt to execute the query fails with error 8778, severity 16, *Query execution has been aborted because the ABORT_QUERY_EXECUTION hint was specified.*
+- To unblock a query, you can clear the hint by passing the same query ID value to the [sys.sp_query_store_clear_hints](../system-stored-procedures/sys-sp-query-store-clear-hints-transact-sql.md) stored procedure.
+- At least one query execution must be recorded in Query Store to use this hint. This execution doesn't have to be successful. This means that future execution of timed out or canceled queries can be blocked.
+- If a query is already executing when you block it, its execution continues. You can use the [KILL](../../t-sql/language-elements/kill-transact-sql.md) statement to abort the query.
+    - Execution of killed queries isn't recorded in Query Store. If the query isn't yet in Query Store, you need to let the query complete or time out so that its future execution can be blocked.
+- As with all Query Store hints, you need to have the `ALTER` permission on the database to set and clear the `ABORT_QUERY_EXECUTION` hint.
+- You can use the following example query to find all queries in Query Store that have been blocked:
+    ```sql
+    SELECT qsh.query_id,
+          q.query_hash,
+          qt.query_sql_text
+    FROM sys.query_store_query_hints AS qsh
+    INNER JOIN sys.query_store_query AS q
+    ON qsh.query_id = q.query_id
+    INNER JOIN sys.query_store_query_text AS qt
+    ON q.query_text_id = qt.query_text_id
+    WHERE UPPER(qsh.query_hint_text) LIKE '%ABORT[_]QUERY[_]EXECUTION%'
+    ```
 
 ## Query Store hints considerations
 
