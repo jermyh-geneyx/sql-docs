@@ -4,7 +4,7 @@ description: "OPENROWSET includes all connection information that is required to
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest, hudequei, wiassaf, nzagorac, jovanpop
-ms.date: 02/12/2025
+ms.date: 03/26/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
