@@ -68,7 +68,7 @@ OPENROWSET( BULK 'data_file' ,
    -- bulk_options related to input file format
    [ , CODEPAGE = { 'ACP' | 'OEM' | 'RAW' | 'code_page' } ]
    [ , FORMAT = { 'CSV' | 'PARQUET' | 'DELTA' } ]
-   [ , FIELDQUOTE = 'quote_characters' ]
+   [ , FIELDQUOTE = 'quote_character' ]
    [ , FORMATFILE = 'format_file_path' ]
    [ , FORMATFILE_DATA_SOURCE = 'data_source_name' ]
 
@@ -313,7 +313,7 @@ Beginning with [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)], the format
 
 #### FIELDQUOTE = '*field_quote*'
 
-Beginning with [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)], this argument specifies a character that is used as the quote character in the CSV file. If not specified, the quote character (`"`) is used as the quote character as defined in the [RFC 4180](https://datatracker.ietf.org/doc/html/rfc4180) standard.
+Beginning with [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)], this argument specifies a character that is used as the quote character in the CSV file. If not specified, the quote character (`"`) is used as the quote character as defined in the [RFC 4180](https://datatracker.ietf.org/doc/html/rfc4180) standard. Only a single character can be specified as the value for this option.
 
 ## Remarks
 
