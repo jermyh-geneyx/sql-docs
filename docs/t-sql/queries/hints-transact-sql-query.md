@@ -54,6 +54,7 @@ helpviewer_keywords:
   - "EXTERNALPUSHDOWN query hint"
   - "USE HINT query hint"
   - "QUERY_PLAN_PROFILE query hint"
+  - "ABORT_QUERY_EXECUTIONquery hint"
 dev_langs:
   - "TSQL"
 monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
