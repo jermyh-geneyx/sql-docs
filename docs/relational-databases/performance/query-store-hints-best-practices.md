@@ -22,6 +22,7 @@ This article details best practices for using [Query Store hints](query-store-hi
 
 - For more information on configuring and administering with the Query Store, see [Monitoring performance by using the Query Store](monitoring-performance-by-using-the-query-store.md).
 - For information on discovering actionable information and tune performance with the Query Store, see [Tuning performance by using the Query Store](tune-performance-with-the-query-store.md).
+- For general best practices on the Query Store, see [Best practices with Query Store](best-practice-with-the-query-store.md).
 
 ## Use cases for Query Store hints
 
@@ -81,7 +82,7 @@ You can use the `ABORT_QUERY_EXECUTION` query hint to block future execution of 
 > [!NOTE]
 > At this time, the `ABORT_QUERY_EXECUTION` query hint is available **in preview** in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] only.
 
-For example, to block future execution of query ID 39, execute the following statement:
+For example, to block future execution of `query_id` 39, execute the following statement:
 
 ```sql
 EXEC sys.sp_query_store_set_hints
@@ -94,8 +95,8 @@ For more information, see Query Store hint [examples](query-store-hints.md#examp
 The following considerations apply:
 
 - When you specify this hint for a query, an attempt to execute the query fails with error 8778, severity 16, *Query execution has been aborted because the ABORT_QUERY_EXECUTION hint was specified.*
-- To unblock a query, you can clear the hint by passing the query ID value to the [sys.sp_query_store_clear_hints](../system-stored-procedures/sys-sp-query-store-clear-hints-transact-sql.md) stored procedure.
-- You can use the following example query to find all queries in Query Store that are blocked:
+- To unblock a query, you can clear the hint by passing the `query_id` value to the [sys.sp_query_store_clear_hints](../system-stored-procedures/sys-sp-query-store-clear-hints-transact-sql.md) stored procedure.
+- You can use the following example query to find all queries in Query Store that are blocked with system views, starting with the [sys.query_store_query_hints (Transact-SQL)](../system-catalog-views/sys-query-store-query-hints-transact-sql.md) system view:
     ```sql
     SELECT qsh.query_id,
            q.query_hash,
@@ -107,9 +108,9 @@ The following considerations apply:
     ON q.query_text_id = qt.query_text_id
     WHERE UPPER(qsh.query_hint_text) LIKE '%ABORT[_]QUERY[_]EXECUTION%'
     ```
-- To get the query ID value, at least one query execution must be recorded in Query Store. This execution doesn't have to be successful. This means that future execution of timed out or canceled queries can be blocked.
+- To get the `query_id` value, at least one query execution must be recorded in Query Store. This execution doesn't have to be successful. This means that future execution of timed out or canceled queries can be blocked.
 - If a query is already executing when you block it, its execution continues. You can use the [KILL](../../t-sql/language-elements/kill-transact-sql.md) statement to abort the query.
-    - Execution of killed queries isn't recorded in Query Store. If the query isn't yet in Query Store, you need to let the query complete or time out to get a query ID that you can block.
+    - Execution of killed queries isn't recorded in Query Store. If the query isn't yet in Query Store, you need to let the query complete or time out to get a `query_id` that you can block.
 - When a query is blocked by the `ABORT_QUERY_EXECUTION` hint, the `execution_type` and `execution_type_desc` columns in the [sys.query_store_runtime_stats](../system-catalog-views/sys-query-store-runtime-stats-transact-sql.md) view are set to 4 and **Exception** respectively.
 - As with all Query Store hints, you need to have the `ALTER` permission on the database to set and clear the `ABORT_QUERY_EXECUTION` hint.
 
@@ -144,19 +145,8 @@ The `RECOMPILE` hint is not compatible with forced parameterization set at the d
 
 For information on which query hints can be applied, see [Supported query hints](../system-stored-procedures/sys-sp-query-store-set-hints-transact-sql.md#supported-query-hints).
 
-## See also
+## Related content
 
-- [Query Store hints](query-store-hints.md)
-- [sys.query_store_query_hints (Transact-SQL)](../system-catalog-views/sys-query-store-query-hints-transact-sql.md)   
-- [sys.sp_query_store_set_hints (Transact-SQL)](../system-stored-procedures/sys-sp-query-store-set-hints-transact-sql.md)   
-- [sys.sp_query_store_clear_hints (Transact-SQL)](../system-stored-procedures/sys-sp-query-store-clear-hints-transact-sql.md)   
 - [Save an Execution Plan in XML Format](save-an-execution-plan-in-xml-format.md)
 - [Display and Save Execution Plans](display-and-save-execution-plans.md)
-- [Hints (Transact-SQL) - Query](../../t-sql/queries/hints-transact-sql-query.md)  
-
-## Next steps
-
-- [Best practices with Query Store](best-practice-with-the-query-store.md)
-- [Monitor performance by using Query Store](../../relational-databases/performance/monitoring-performance-by-using-the-query-store.md)
 - [Configure the max degree of parallelism (MAXDOP) in Azure SQL Database](/azure/azure-sql/database/configure-max-degree-of-parallelism)
-- [Tune performance with the Query Store](tune-performance-with-the-query-store.md)
