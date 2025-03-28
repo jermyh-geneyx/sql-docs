@@ -4,7 +4,7 @@ description: Learn about the Always Encrypted with secure enclaves feature for S
 author: Pietervanhove
 ms.author: pivanho
 ms.reviewer: vanto
-ms.date: 02/03/2025
+ms.date: 03/28/2025
 ms.service: sql
 ms.subservice: security
 ms.topic: conceptual
@@ -143,7 +143,7 @@ The operations supported inside the secure enclaves are:
 | [SELECT - GROUP BY- Transact-SQL](../../../t-sql/queries/select-group-by-transact-sql.md) | Supported | Supported | Not supported |
 
 > [!NOTE]  
-> The above operations inside secure enclaves require randomized encryption. Deterministic encryption is not supported. Equality comparison remains the operation available for columns using deterministic encryption.
+> The above operations inside secure enclaves require randomized encryption. Deterministic encryption isn't supported. Equality comparison remains the operation available for columns using deterministic encryption.
 >
 > The [compatibility level](../../../t-sql/statements/alter-database-transact-sql-compatibility-level.md) of the database should be set to SQL Server 2022 (160) or higher.
 >
