@@ -158,6 +158,7 @@ Release Candidate 0 (RC0)
 
 - Fixed issue with custom branding package 
 - Fixed issue with exporting to Excel file format
+- Apply button on subscription page disabled until parameters load 
 - Upgraded version of Angular to 17.0 
 - Security improvements
 - Accessibility improvements
