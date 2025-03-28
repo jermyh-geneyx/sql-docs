@@ -294,7 +294,7 @@ For information on current generation hardware availability, see [Feature Availa
 
 #### Fsv2-series
 
-Fsv2-series hardware for Azure SQL Database will be retired October 1, 2026. To minimize service disruption and maintain price-performance, transition to Hyperscale premium-series or Standard-series (Gen5) hardware. For more information, see [Retirement Notice: Azure SQL Database FSV2-series offer]( https://azure.microsoft.com/updates?id=485030). For most databases and workloads, Hyperscale premium-series or Standard-series (Gen5) hardware provide similar or better price performance than Fsv2. To make sure, please validate this with your specific database and workloads.
+Fsv2-series hardware for Azure SQL Database will be retired October 1, 2026. To minimize service disruption and maintain price-performance, transition to Hyperscale premium-series or Standard-series (Gen5) hardware. For more information, see [Retirement Notice: Azure SQL Database FSV2-series offer](https://azure.microsoft.com/updates?id=485030). For most databases and workloads, Hyperscale premium-series or Standard-series (Gen5) hardware provide similar or better price performance than Fsv2. To make sure, please validate this with your specific database and workloads.
 
 - Fsv2 provides less memory and `tempdb` per vCore than other hardware, so workloads sensitive to those limits might perform better on standard-series (Gen5).
 - Fsv2-series is only supported in the General Purpose tier.
