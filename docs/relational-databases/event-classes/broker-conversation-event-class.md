@@ -39,7 +39,7 @@ monikerRange: ">=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-curren
 |**RoleName**|**nvarchar**|The role of the conversation handle. This is either **initiator** or **target**.|38|No|  
 |**ServerName**|**nvarchar**|The name of the instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] that is being traced.|26|No|  
 |**Severity**|**int**|The [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] error severity, if this event reports an error.|29|No|  
-|**SPID**|**int**|The server process ID that is assigned by [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] to the process that is associated with the client.|12|Yes|  
+|**SPID**|**int**|The session ID that is assigned by [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] to the process that is associated with the client.|12|Yes|  
 |**StartTime**|**datetime**|The time when the event started, when available.|14|Yes|  
 |**TextData**|**ntext**|The current state of the conversation. Can have one of the following values:|1|Yes|  
 |||**SO**. Started outbound. [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] processed a BEGIN CONVERSATION for this conversation, but no messages have been sent.|||  
