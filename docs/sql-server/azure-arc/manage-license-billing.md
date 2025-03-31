@@ -216,8 +216,8 @@ For information, see:
 ### To qualify as passive instance for an availability group (AG)
 
 - All replicas present in the operating system environment (OSE) must be secondary.
-- No user database outside of an AG, irrespective of [database state](../../relational-databases/databases/database-states.md#database-state-definitions)).
-- No active connection to any user database.
+- No standalone database outside of an AG irrespective of [database state](../../relational-databases/databases/database-states.md#database-state-definitions).
+- No active connections to any database except master, msdb, tempdb, or model databases.
 
 If there are multiple SQL Server instances on the OSE, all instances and replicas must meet the conditions above.
 
