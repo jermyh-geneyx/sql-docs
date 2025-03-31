@@ -1,6 +1,6 @@
 ---
 title: SQL Server Connection Summary
-description: Learn how you can see a summary of client connections to an instance of SQL Server enabled by Azure Arc using the SQL Server Connections view. 
+description: Learn how you can view client connections to an instance of SQL Server enabled by Azure Arc. 
 author: ajithkr-ms
 ms.author: ajithkr
 ms.reviewer: nhebbar, randolphwest
@@ -29,6 +29,7 @@ To view a summary of all client connections to the SQL Server instance, follow t
 :::image type="content" source="media/sql-connection-summary/sql-connection-summary.png" alt-text="Screenshot of the SQL Client Connections view for SQL Server enabled by Azure Arc." lightbox="media/sql-connection-summary/sql-connection-summary.png":::
 
 ### Review the summarized data in the view:
+
 | Column name | Description and version-specific information |
 | --- | --- |
 | Program Name | Name of client program that initiated the session.|
