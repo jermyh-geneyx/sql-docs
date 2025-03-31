@@ -206,7 +206,7 @@ You can specify your backup storage redundancy option for STR when you create yo
 If you delete a database, the system keeps backups in the same way that it would for an online database with its specific retention period. However, for a deleted database, the retention period is updated from 1-35 days to 0-35 days, making it possible to delete backups manually. If you need to keep backups for longer than the maximum short-term retention period of 35 days, you can enable [long-term retention](../database/long-term-retention-overview.md).
 
 > [!IMPORTANT]
-> If you delete a managed instance, all databases on that managed instance are also deleted and can't be recovered. You can't restore a deleted managed instance. But if you've configured long-term retention for a managed instance, LTR backups are not deleted. You can then use those backups to restore databases to a different managed instance in the same subscription, to a point in time when an LTR backup was taken. To learn more, review [Restore long-term backup](long-term-backup-retention-configure.md#view-backups-and-restore-from-a-backup).
+> If you need to restore databases from an unintentionally deleted SQL managed instance, [contact Microsoft support team within 5 days of the delete operation](recovery-using-backups.md#restoring-a-database-from-deleted-sql-managed-instance).
 
 ### Long-term retention (LTR)
 

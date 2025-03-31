@@ -158,6 +158,7 @@ If you need to restore an unintentionally deleted SQL managed instance, contact 
 - Encrypted databases protected by a customer-managed key (CMK) can only be restored to instances that have access to the same key.
 - Only user-created databases can be restored. System databases can't be restored.
 - Restore is possible only to the last point-in-time backup taken just before the instance was deleted, using the final tail-log backup taken before the delete operation.
+- Restoring databases from a deleted instance is only possible from a paid version of SQL managed instance. Restoring databases from a deleted free instance isn't supported. 
 
 ## Geo-restore
 
