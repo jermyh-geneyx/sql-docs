@@ -56,7 +56,7 @@ Some example scenarios for the **Microsoft Copilot in Azure**:
 - When you're working with a slow Azure SQL Database, you could provide the prompt```copilot-prompt
 My database is slow
 
-  Microsoft Copilot in Azure (preview) starts looking at your database based on your context in the Azure portal. After the check, Copilot will detail specific areas that might be contributing to the issue. In this example, there was a specific query driving high CPU utilization:
+  Microsoft Copilot in Azure starts looking at your database based on your context in the Azure portal. After the check, Copilot will detail specific areas that might be contributing to the issue. In this example, there was a specific query driving high CPU utilization:
 
   :::image type="content" source="media/copilot-azure-sql-overview/slow-database.png" alt-text="Screenshot showing the query prompt and generated sample query about high CPU utilization." lightbox="media/copilot-azure-sql-overview/slow-database.png":::
 
@@ -86,7 +86,7 @@ For a list of more prompts, visit [Microsoft Copilot in Azure SQL Database list 
 
 ## Responsible AI
 
-For more information on how Microsoft implements responsible AI tools in [Microsoft Copilot in Azure](/azure/copilot/overview), see [Responsible AI FAQ for Microsoft Copilot in Azure (preview)](/azure/copilot/responsible-ai-faq).
+For more information on how Microsoft implements responsible AI tools in [Microsoft Copilot in Azure](/azure/copilot/overview), see [Responsible AI FAQ for Microsoft Copilot in Azure](/azure/copilot/responsible-ai-faq).
 
 ## Related content
 
