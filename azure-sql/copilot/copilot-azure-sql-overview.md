@@ -51,21 +51,31 @@ You can ask and receive helpful, context-rich suggestions from [Microsoft Copilo
 
 Microsoft Copilot in Azure is a set of experiences that are powered by large language models (LLMs). Output produced by Copilot might contain inaccuracies, biases, or other unintended content. As with any generative AI model, humans should review the output produced by Copilot before use.
 
-Some example scenarios for the **Microsoft Copilot in Azure**:
+Some example scenarios for using Copilot in Azure SQL Database include:
 
-- When you're working with a slow Azure SQL Database, you could provide the prompt```copilot-prompt
-My database is slow
+- When you want to know the **current active connections** to your database, you could provide the prompt:
+
+  ```copilot-prompt
+  Who are currently actively connected to the database?
+  ```
+
+  Copilot in Azure returns a list of active connections to your database.
+
+- When you're working with a slow Azure SQL Database, you could provide the prompt:
+
+  ```copilot-prompt
+  My database is slow
+  ```
 
   Microsoft Copilot in Azure starts looking at your database based on your context in the Azure portal. After the check, Copilot will detail specific areas that might be contributing to the issue. In this example, there was a specific query driving high CPU utilization:
 
-  :::image type="content" source="media/copilot-azure-sql-overview/slow-database.png" alt-text="Screenshot showing the query prompt and generated sample query about high CPU utilization." lightbox="media/copilot-azure-sql-overview/slow-database.png":::
+- You can continue the conversation and investigation with the prompt:
 
-- You can continue the conversation and investigation with a prompt of```copilot-prompt
-How can I tune that high CPU query?
-
+  ```copilot-prompt
+  How can I tune that high CPU query?
+  ```
+  
   Copilot understands that this prompt refers to the query identified earlier, and provides a new index suggestion:
-
-  :::image type="content" source="media/copilot-azure-sql-overview/high-cpu-query.png" alt-text="Screenshot showing a second query prompt in the conversation and generated sample query about high CPU utilization." lightbox="media/copilot-azure-sql-overview/high-cpu-query.png":::
 
 ## Example prompts
 
