@@ -13,14 +13,14 @@ monikerRange: "=azuresql || =azuresql-db"
 
 # Microsoft Copilot in Azure SQL Database list of sample prompts
 
-Below is a list of sample prompts that you can use with Microsoft Copilot in Azure SQL Database. These prompts are designed to help you interact with your database and get relevant information quickly.
+Here is a list of sample prompts that you can use with Microsoft Copilot in Azure SQL Database. These prompts are designed to help you interact with your database and get relevant information quickly.
 
 [!INCLUDE [appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
 | Skill Name | Skill Description | Example prompt |
 | --- | --- | --- |
 | Active User Connections | Shows active user connections to the database. | `Who are currently actively connected to the database?` |
-| Antipattern Query Analysis | Identifies queries with anti-patterns and their potential impact on performance. | `Show me all the queries in my workload that have anti-patterns in them.` |
+| Antipattern Query Analysis | Identifies queries with anti-patterns and their potential effect on performance. | `Show me all the queries in my workload that have anti-patterns in them.` |
 | Automatic Tuning Analysis | Investigates automatic tuning failures and potential solutions. | `Why is automatic plan correction failing?` |
 | Basic Database Information | Retrieves basic information about the database. | `What is the name of the logical server for this database?` |
 | Blocking Session Analysis | Identifies and analyzes blocking sessions. | `Check top blocking sessions.` |
@@ -33,7 +33,7 @@ Below is a list of sample prompts that you can use with Microsoft Copilot in Azu
 | Database Permission Listing | Lists database permissions and access levels for users. | `Which users have access to `master` database?` |
 | Deadlock Analysis | Investigates deadlocks and suggests solutions. | `Why am I getting deadlock errors? How can I fix it?` |
 | Dropped Connections Analysis | Investigates instances of dropped database connections. | `Show me all the instances where my database had a dropped connection.` |
-| Fragmented Index Analysis | Identifies fragmented indexes and their impact on performance. | `Help me find fragmented indexes.` |
+| Fragmented Index Analysis | Identifies fragmented indexes and their effect on performance. | `Help me find fragmented indexes.` |
 | General Antipattern Information | Provides general information about common SQL anti-patterns. | `What are the most common SQL antipatterns?` |
 | Get Database Names for Server | Lists all databases on a specific server. | `List all the databases on this server.` |
 | High CPU Consuming Query Analysis | Identifies and analyzes queries with high CPU usage. | `Why is the CPU usage high on this database?` |
@@ -67,9 +67,9 @@ Below is a list of sample prompts that you can use with Microsoft Copilot in Azu
 | Troubleshoot error 40615 | Helps with SQL error 40615. | `Help me with SQL error 40615` |
 | Troubleshoot Connection Errors | Checks for causes of connection timeouts. | `Check for causes of connection timeouts in my database` |
 | Troubleshoot Login Failures | Diagnoses login failure issues. | `Why can't I login to my database?` |
-| Troubleshoot Query Timeout | Addresses query timeout issues. | `Help me with query timeout issues` |
+| Troubleshoot Query timeout | Addresses query timeout issues. | `Help me with query timeout issues` |
 | Wait Statistics Analysis | Analyzes wait statistics and potential performance bottlenecks. | `What do the wait statistics look like for my database?` |
-| Workload Increase and Scaling Analysis | Assesses workload increases and potential need for scaling. | `Has increased workload or traffic caused performance issues?` |
+| Workloads Increase and Scaling Analysis | Assesses workload increases and potential need for scaling. | `Has increased workload or traffic caused performance issues?` |
 
 ## Related content
 
