@@ -261,7 +261,10 @@ Examples:
 
 `STRING_DELIMITER = *string_delimiter*`
 
-Specifies the field terminator for data of type string in the text-delimited file. The string delimiter is one or more characters in length and is enclosed with single quotes. The default is the empty string "". For guaranteed support, we recommend using one or more ASCII characters.
+Specifies a character that encloses the textual values in the text-delimited file. The default is the empty string "". The value of `STRING_DELIMITER` is functionally equivalent to the [FIELDQUOTE](../functions/openrowset-transact-sql.md#fieldquote--field_quote) option in the `OPENROWSET` function.
+
+> [!NOTE] 
+> Hadoop tables in Synapse dedicated SQL pools enable you to specify one or more characters in STRING_DELIMITER. In serverless SQL pool you can use only one character.
 
 Examples:
 
@@ -273,7 +276,7 @@ Examples:
 
 - `STRING_DELIMITER = ꞌ,ꞌ`
 
-- `STRING_DELIMITER = '0x7E0x7E'` (Two tildes, for example, `~~`)
+- `STRING_DELIMITER = '0x7E0x7E'` (Two tildes, for example, `~~`) - supported in dedicated SQL pool.
 
 #### FIRST_ROW = *first_row_int*
 
