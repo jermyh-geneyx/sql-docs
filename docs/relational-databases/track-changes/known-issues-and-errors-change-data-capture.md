@@ -4,7 +4,7 @@ description: "Known issues and errors with change data capture (CDC) in SQL Serv
 author: croblesm
 ms.author: roblescarlos
 ms.reviewer: mathoma, randolphwest
-ms.date: 03/14/2025
+ms.date: 03/31/2025
 ms.service: sql
 ms.topic: troubleshooting
 helpviewer_keywords:
@@ -185,11 +185,17 @@ These are the different troubleshooting categories included in this section:
 
 ### CDC limitation
 
-#### Error 2628 - string or binary data would be truncated in table
+#### Error 241 - Conversion failed when converting date and/or time from character string
 
-* **Cause**: Changing the size of columns of a CDC-enabled table using DDL statements can cause issues with the subsequent CDC capture process. The 'sys.dm_cdc_errors' Dynamic Management View (DMV) is a useful for checking any CDC for any reported issues, like errors number 2628 and 8115.
+* **Cause**: This error occurs when the [ALTER COLUMN](../../t-sql/statements/alter-table-transact-sql.md#alter-column) is performed on a **DATE** data type and the table has CDC enabled. For example, if a table has an **nvarchar** column and you change the data type to **DATE** (ALTER TABLE table_name ALTER COLUMN [column_name] DATE NULL), you might see this error in the [sys.dm_cdc_errors](../system-dynamic-management-views/change-data-capture-sys-dm-cdc-errors.md) table due to an unsupported data conversion, even though the ALTER command succeeds. 
 
-* **Recommendation**: Before making any changes to column size, you must assess whether the alteration is compatible with the existing data in CDC change tables. To address this problem, you need to disable and re-enable CDC for your database. For more information about enabling CDC for a database or a table, see [Enable CDC for a database](enable-and-disable-change-data-capture-sql-server.md#enable-for-a-database) and [Enable CDC for a table](enable-and-disable-change-data-capture-sql-server.md#enable-for-a-table).
+* **Recommendation**: To resolve this issue, disable and re-enable CDC for your table after altering the column. Alternatively, disable CDC before altering the column, and then reenable CDC after the ALTER COLUMN change. 
+
+#### Error 245 - Conversion failed when converting the value 
+
+* **Cause**: This error occurs when the [ALTER COLUMN](../../t-sql/statements/alter-table-transact-sql.md#alter-column) command is issued to change the data type of a column when table has CDC enabled. For example, if a table has an **nvarchar** column and you change the data type to **INT** (ALTER TABLE table_name ALTER COLUMN [column_name] INT NULL), you might see this error in the [sys.dm_cdc_errors](../system-dynamic-management-views/change-data-capture-sys-dm-cdc-errors.md) table due to an unsupported data conversion, even though the ALTER command succeeds. 
+
+* **Recommendation**: To resolve this issue, disable and re-enable CDC for your table after altering the column. Alternatively, disable CDC before altering the column, and then reenable CDC after the ALTER COLUMN change. 
 
 #### Error 913 - CDC capture job fails when processing changes for a table with system CLR datatype
 
@@ -197,6 +203,18 @@ These are the different troubleshooting categories included in this section:
 
 * **Recommendation**: The recommended steps are to quiesce DML to the table, run a capture job to process changes, run DDL for the table, run a capture job to process DDL changes, and then re-enable DML processing. For more information, see [CDC capture job fails](/troubleshoot/sql/database-engine/replication/cdc-capture-job-fails-processing-changes-table) when processing changes for a table with system CLR datatype (geometry, geography, or hierarchyid).
 
+#### Error 2628 - string or binary data would be truncated in table
+
+* **Cause**: Changing the size of columns of a CDC-enabled table using DDL statements can cause issues with the subsequent CDC capture process. The 'sys.dm_cdc_errors' Dynamic Management View (DMV) is a useful for checking any CDC for any reported issues, like errors number 2628 and 8115.
+
+* **Recommendation**: Before making any changes to column size, you must assess whether the alteration is compatible with the existing data in CDC change tables. To address this problem, you need to disable and re-enable CDC for your database. For more information about enabling CDC for a database or a table, see [Enable CDC for a database](enable-and-disable-change-data-capture-sql-server.md#enable-for-a-database) and [Enable CDC for a table](enable-and-disable-change-data-capture-sql-server.md#enable-for-a-table).
+
+
+#### Error 8115 - Arithmetic overflow error converting data type
+
+* **Cause**:  This error occurs when an [ALTER COLUMN](../../t-sql/statements/alter-table-transact-sql.md#alter-column) DDL is executed on a CDC-enabled table that results in a decrease in the precision of the column (such as changing the data type of the column from **bigint** to **int**). The decreased precision column is unable to hold the values present in the change table.
+
+* **Recommendation**: To resolve this issue, disable and re-enable CDC for your table after altering the column. Alternatively, disable CDC before altering the column, and then reenable CDC after the ALTER COLUMN change. 
 
 ## Create user and assign role
 

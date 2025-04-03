@@ -173,6 +173,9 @@ Databases that use TDE rely on certificates in the `master` database to decrypt 
 
 To transfer the DMK from the `master` database of the instance, to the contained `master` database, see [Move a TDE protected database to another SQL Server](../../../relational-databases/security/encryption/move-a-tde-protected-database-to-another-sql-server.md), primarily focusing on the portions where the DMK is transferred from the old server to the new one.
 
+> [!NOTE]
+> Encrypting any database on a SQL Server instance also [encrypts the `tempdb` system database](../../../relational-databases/security/encryption/transparent-data-encryption.md#tde-and-the-tempdb-system-database). 
+
 ### SSIS packages & maintenance plans
 
 Using SSIS packages, including maintenance plans, is not supported with contained availability groups.

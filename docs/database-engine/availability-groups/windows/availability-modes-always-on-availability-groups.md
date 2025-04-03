@@ -105,7 +105,7 @@ helpviewer_keywords:
 4.  On receiving the confirmation from the secondary replica, the primary replica finishes the commit processing and sends a confirmation message to the client.  
   
     > [!NOTE]  
-    >  If a synchronous-commit secondary replica times out without confirming that it has hardened the log, the primary marks that secondary replica as failed. The connected state of the secondary replica changes to DISCONNECTED, and the primary replica stops waiting for confirmation from the secondary replica. This behavior ensures that a failed synchronous-commit secondary replica does not prevent hardening of the transaction log on the primary replica.  
+    >  If a synchronous-commit secondary replica times out without confirming that it has hardened the log, the primary marks that secondary replica as failed. The secondary replica state changes to DISCONNECTED, and the primary stops waiting for confirmation, marking the synchronization state as NOT SYNCHRONIZING and the replica state as NOT_HEALTHY. This behaviour ensures that a failed synchronous-commit secondary replica does not prevent log hardening on the primary replica. When the secondary is back online, the secondary replica state changes to CONNECTED, and it processes the primary replica's log send queue. The synchronization state transitions to SYNCHRONIZING, and the replica health to PARTIALLY_HEALTHY. Once the log send queue is processed, the synchronization state becomes SYNCHRONIZED, and the replica health becomes HEALTHY.  
   
  Synchronous-commit mode protects your data by requiring the data to be synchronized between two places, at the cost of somewhat increasing the latency of the transaction.  
   

@@ -176,6 +176,8 @@ By default, only members of the **sysadmin** fixed server role can execute `sp_a
 
 ## Examples
 
+### Example 1 - Add an alert for a job 
+
 The following example adds an alert (Test Alert) that runs the `Back up the AdventureWorks2022 Database` job when fired.
 
 > [!NOTE]  
@@ -193,6 +195,23 @@ EXEC dbo.sp_add_alert
     @job_name = N'Back up the AdventureWorks2022 Database';
 GO
 ```
+
+### Example 2 - Add an alert for a replication threshold
+
+The following example adds an alert to let you know when a replication transaction has exceeded the latency threshold: 
+
+```sql
+EXEC msdb.dbo.sp_add_alert @name=N'Replication Warning: Transactional replication latency (Threshold: latency)',
+@message_id=14161,
+@severity=0,
+@enabled=1,
+@delay_between_responses=30,
+@include_event_description_in=5,
+@category_name=N'Replication',
+@job_id=N'00000000-0000-0000-0000-000000000000'
+GO
+```
+
 
 ## Related content
 
