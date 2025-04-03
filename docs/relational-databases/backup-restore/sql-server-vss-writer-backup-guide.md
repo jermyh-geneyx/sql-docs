@@ -491,7 +491,7 @@ The client should restore the files based on the partial file specification. The
 
 Database file add/drop/growth/shrink/logical-rename/physical-rename again makes interesting troubleshooting cases at restore time.
 
-#### If a database file had been added after the full base was taken
+#### If a database file has been added after the full base was taken
 
 Such files must have been precreated by SQL Server during the restore preparation phase. They should have been extended to the right size and zeroed out. The client only needs to lay down the data as per partial specification (the partial specification includes all allocated extents).
 
