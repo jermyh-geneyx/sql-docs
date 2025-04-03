@@ -33,6 +33,8 @@ dev_langs:
 |**command_id**|**int**|The command ID of the failed execution batch. Used only by the Distribution Agents, this is the command ID of the first command in the failed execution batch.|  
 |**session_id**|**int**|The ID of the agent session in which the error occurred.|  
   
+For more information about specific errors, check the job history table for an article on the subscriber. 
+
 ## See Also  
  [Replication Tables &#40;Transact-SQL&#41;](../../relational-databases/system-tables/replication-tables-transact-sql.md)   
  [Replication Views &#40;Transact-SQL&#41;](../../relational-databases/system-views/replication-views-transact-sql.md)  

@@ -46,6 +46,11 @@ Returns data type **bit**: `1` if the database on the current instance is on the
 
 For databases that aren't part of an availability group, this function always returns `1`.
 
+If the specified database doesn't exist, the function returns a different value based on the version of SQL Server: 
+- Starting with SQL Server 2019 [CU20](/troubleshoot/sql/releases/sqlserver-2019/cumulativeupdate20), and SQL Server 2022 [CU2](/troubleshoot/sql/releases/sqlserver-2022/cumulativeupdate2), the function returns `0`.
+- In earlier versions, the function returns `1`.
+
+
 ## Remarks
 
 Use this function in a backup script to determine if the current database is on the replica that is preferred for backups. You can run a script on every availability replica. Each of these jobs looks at the same data to determine which job should run, so only one of the scheduled jobs actually proceeds to the backup stage. Sample code could be similar to the following.

@@ -5,7 +5,7 @@ description: Learn about the currently known issues with Azure SQL Managed Insta
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest, mathoma
-ms.date: 03/14/2025
+ms.date: 04/03/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: service-overview
 ms.topic: troubleshooting-known-issue
@@ -24,6 +24,7 @@ This article lists the currently known issues with [Azure SQL Managed Instance](
 
 | Issue | Date discovered | Status | Date resolved |
 | --- | --- | --- | --- |
+| [Interim guidance on 2024 time zone updates for Paraguay](#interim-guidance-on-2024-time-zone-updates-for-paraguay) | March 2025 | Has workaround| |
 | [Error 8992 when running DBCC CHECKDB on a SQL Server database that originated from SQL Managed Instance](#error-8992-when-running-dbcc-checkdb-on-a-sql-server-database-that-originated-from-sql-managed-instance) | March 2025 | Has workaround| |
 | [Differential backups aren't taken when an instance is linked to SQL Server](#differential-backups-arent-taken-when-an-instance-is-linked-to-sql-server) | Sept 2024 | By design | |
 | [List of long-term backups in Azure portal shows backup files for active and deleted databases with the same name](#list-of-long-term-backups-in-azure-portal-shows-backup-files-for-active-and-deleted-databases-with-the-same-name) | Mar 2024 | Has Workaround | |
@@ -69,6 +70,12 @@ This article lists the currently known issues with [Azure SQL Managed Instance](
 | Contained databases not supported in SQL Managed Instance | | Resolved | Aug 2019 |
 
 ## Has workaround
+
+### Interim guidance on 2024 time zone updates for Paraguay
+
+On October 14, 2024, the Paraguayan government announced a permanent change to the country’s time zone policy. Paraguay will remain on Daylight Saving Time (DST) year-round, effectively adopting UTC-3 as its standard time. As a result, clocks will not advance by 60 minutes at 12:00 a.m. on March 23, 2025, as previously scheduled. This change affects the Paraguay Standard Time time-zone. Microsoft has released related [Windows updates in February and March 2025](https://techcommunity.microsoft.com/blog/dstblog/paraguay-2025-time-zone-update-now-available/4386720). Azure SQL Managed Instance currently does not reflect this update. Instances using affected time zone will not reflect the changes until Azure SQL Managed Instance service absorbs the update on the OS level. 
+
+**Workaround**: If you need to alter affected time zones for your managed instances, be aware of the [limitations](timezones-overview.md#limitations) and follow the guidance from the documentation.
 
 ### Error 8992 when running DBCC CHECKDB on a SQL Server database that originated from SQL Managed Instance
 
