@@ -19,7 +19,7 @@ monikerRange: "=azuresql || =azuresql-db"
 
 [!INCLUDE [appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
-[Microsoft Copilot in Azure](/azure/copilot/overview) with Azure SQL Database is a [capability](/azure/copilot/capabilities#perform-tasks) of the Microsoft Azure Copilot   experience that enhances the management and operation of Azure services, providing robust capabilities for SQL-dependent applications. It provides a conversational interface for users to interact with their databases, allowing them to ask questions and receive relevant answers based on the context of their database. It improves productivity in the Azure portal by offering self-help for database administration. This makes it easier for developers and database administrators to manage their databases, troubleshoot issues, and optimize performance.troubleshoot issues, and optimize performance.
+[Microsoft Copilot in Azure](/azure/copilot/overview) with Azure SQL Database is a [capability](/azure/copilot/capabilities#perform-tasks) of the Microsoft Azure Copilot experience that enhances the management and operation of Azure services, providing robust capabilities for SQL-dependent applications. It provides a conversational interface for users to interact with their databases, allowing them to ask questions and receive relevant answers based on the context of their database. It improves productivity in the Azure portal by offering self-help for database administration. This makes it easier for developers and database administrators to manage their databases, troubleshoot issues, and optimize performance.troubleshoot issues, and optimize performance.
 
 This article provides an overview of Microsoft Copilot in Azure with Azure SQL Database, including its features, how it works, and best practices for effective use.
 
@@ -83,23 +83,25 @@ The following example prompts are clear, specific, and tailored to the propertie
 
 You can provide prompts for the **Microsoft Copilot in Azure** around different capability areas.
 
-```copilot-prompt
- - Who are currently actively connected to the database?
- - Show me all the queries in my workload that have anti-patterns in them.
- - Which connection string should I use to connect to my DB?
-```
+  ```copilot-prompt
+    - Who are currently actively connected to the database?
+    - Show me all the queries in my workload that have anti-patterns in them.
+    - Which connection string should I use to connect to my DB?
+  ```
 
 For a list of more prompts, visit [List of sample prompts](copilot-prompts-list.md).
 
-> [!NOTE]  
+> [!NOTE]
 > AI powers Copilot, so surprises and mistakes are possible.
 
-## Responsible AI
+## Responsible AI in Microsoft Copilot in Azure
+
+Microsoft is committed to responsible AI. We are continuously working to improve the quality and safety of our AI systems. Microsoft Copilot in Azure is designed to help you be more productive, but it is important to remember that it is not a replacement for human judgment. Always review the output produced by Copilot before using it in production.
 
 For more information on how Microsoft implements responsible AI tools in [Microsoft Copilot in Azure](/azure/copilot/overview), see [Responsible AI FAQ for Microsoft Copilot in Azure](/azure/copilot/responsible-ai-faq).
 
 ## Related content
 
-- [Microsoft Copilot in Azure overview](/azure/copilot/overview)
+- [Microsoft Copilot in Azure](/azure/copilot/overview)
 - [Frequently asked questions](copilot-azure-sql-faq.yml)
 - [Intelligent applications with Azure SQL Database](../database/ai-artificial-intelligence-intelligent-applications.md)
