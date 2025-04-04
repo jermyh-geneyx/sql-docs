@@ -123,13 +123,8 @@ You can probe connectivity to all regions with the [test-connectivity.ps1](https
 
 ## Check TLS version compatibility
 
-The data processing service endpoint supports the following TLS versions: TLS 1.2 and 1.3. Supported TLS versions by operating system for Windows Server 2012/R2 are listed below.
+The data processing service endpoint supports the following TLS versions: TLS 1.2 and 1.3. Windows Server 2012 and older versions aren't supported.
 
-|Cipher Suite|WS 2012|WS 2012 R2|
-| -------- | -------- | -------- |
-|`TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (0xCCA8)`| Not Supported| Not Supported|
-|`TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (0xC02F)`| Not Supported| Supported|
-|`TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (0xC030)`| Not Supported| Supported|
 
 For telemetry endpoints, Windows Server 2012 R2 and older are not supported.
 
