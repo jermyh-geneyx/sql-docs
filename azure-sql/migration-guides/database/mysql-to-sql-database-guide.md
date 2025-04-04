@@ -9,7 +9,10 @@ ms.service: azure-sql-database
 ms.subservice: migration-guide
 ms.topic: how-to
 ms.collection:
-  - sql-migration-content
+ - sql-migration-content
+ - migration
+ - aws-to-azure
+ - gcp-to-azure
 ---
 
 # Migration guide: MySQL to Azure SQL Database
