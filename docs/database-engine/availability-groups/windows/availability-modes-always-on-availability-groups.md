@@ -72,7 +72,7 @@ If the current primary is configured for asynchronous commit availability mode, 
   
 ##  <a name="SyncCommitAvMode"></a> Synchronous-Commit Availability Mode
 
-Under synchronous-commit availability mode (*synchronous-commit mode*), after being joined to an availability group, a secondary database catches up to the corresponding primary database and enters the SYNCHRONIZED state. The secondary database remains SYNCHRONIZED as long as data synchronization continues. This guarantees that every transaction that is committed on a given primary database, has also been committed on the corresponding secondary database. When every secondary database on a given secondary replica is synchronized, the synchronization-health state of the secondary replica as a whole is HEALTHY.
+Under synchronous-commit availability mode (*synchronous-commit mode*), after being joined to an availability group, a secondary database catches up to the corresponding primary database and enters the SYNCHRONIZED state. The secondary database remains SYNCHRONIZED as long as data synchronization continues. This guarantees that every transaction committed on a given primary database is committed on the corresponding secondary database. When every secondary database on a given secondary replica is synchronized, the synchronization-health state of the secondary replica as a whole is HEALTHY.
 
   
  **In This Section:**  
@@ -88,7 +88,7 @@ Under synchronous-commit availability mode (*synchronous-commit mode*), after be
 ###  <a name="DisruptSync"></a> Factors That Disrupt Data Synchronization  
  Once all of its databases are synchronized, a secondary replica enters the HEALTHY state. The synchronized secondary replica will remain healthy unless one of the following occurs:  
   
--   A network or computer delay or glitch causes the session between the secondary replica and primary replica to timeout.
+-   A network or computer delay or glitch causes the session between the secondary replica and primary replica to time out.
 
   
     > [!NOTE]  
