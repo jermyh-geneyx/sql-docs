@@ -237,19 +237,14 @@ This can happen because Azure resources are not allowed to access your server. T
 
 Only the following versions of SQL Server on-premises can be part of a sync group:
 
-- SQL Server 2008.
+- SQL Server 2008
+- SQL Server 2008 R2
+- SQL Server 2012
+- SQL Server 2016
+- SQL Server 2017 on Windows
+- SQL Server 2019 on Windows
+- SQL Server 2022 on Windows
 
-- SQL Server 2008 R2.
-
-- SQL Server 2012.
-
-- SQL Server 2016.
-
-- SQL Server 2017 on Windows.
-
-- SQL Server 2019 on Windows.
-
-- SQL Server 2022 on Windows.
 ## Related content
 
 - [What is SQL Data Sync for Azure?](sql-data-sync-data-sql-server-sql-database.md)
