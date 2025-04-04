@@ -26,23 +26,24 @@ If the primary replica is configured for *asynchronous-commit mode*, it does not
 >  If primary's session-timeout period is exceeded by a secondary replica, the primary replica temporarily shifts into asynchronous-commit mode for that secondary replica. When the secondary replica reconnects with the primary replica, they resume synchronous-commit mode.
 
   
-##  <a name="SupportedAvModes"></a> Supported Availability Modes  
- [!INCLUDE[ssHADR](../../../includes/sshadr-md.md)] supports three availability modes-asynchronous-commit mode, synchronous-commit mode, and configuration only mode as follows:  
-  
--   *Asynchronous-commit mode* is a disaster-recovery solution that works well when the availability replicas are distributed over considerable distances. If every secondary replica is running under asynchronous-commit mode, the primary replica does not wait for any of the secondary replicas to harden the log. Rather, immediately after writing the log record to the local log file, the primary replica sends the transaction confirmation to the client. The primary replica runs with minimum transaction latency in relation to a secondary replica that is configured for asynchronous-commit mode.
+##  <a name="SupportedAvModes"></a> Supported Availability Modes
+
+[!INCLUDE[ssHADR](../../../includes/sshadr-md.md)] supports three availability modes:
+
+- Asynchronous-commit mode
+- Synchronous-commit mode
+- Configuration only mode
+
+*Asynchronous-commit mode* is a disaster-recovery solution that works well when the availability replicas are distributed over considerable distances. If every secondary replica is running under asynchronous-commit mode, the primary replica does not wait for any of the secondary replicas to harden the log. Rather, immediately after writing the log record to the local log file, the primary replica sends the transaction confirmation to the client. The primary replica runs with minimum transaction latency in relation to a secondary replica that is configured for asynchronous-commit mode.
 If the current primary is configured for asynchronous commit availability mode, it commits transactions asynchronously for all secondary replicas regardless of their individual availability mode settings.
 
-  
-     For more information, see [Asynchronous-Commit Availability Mode](#AsyncCommitAvMode), later in this topic.
+For more information, see [Asynchronous-Commit Availability Mode](#AsyncCommitAvMode), later in this topic.
 
-  
--   *Synchronous-commit mode* emphasizes high availability over performance, at the cost of increased transaction latency. Under synchronous-commit mode, transactions wait to send the transaction confirmation to the client until the secondary replica has hardened the log to disk. When data synchronization begins on a secondary database, the secondary replica begins applying incoming log records from the corresponding primary database. As soon as every log record has been hardened, the secondary database enters the SYNCHRONIZED state. Thereafter, every new transaction is hardened by the secondary replica before the log record is written to the local log file. When all the secondary databases of a given secondary replica are synchronized, synchronous-commit mode supports manual failover and, optionally, automatic failover.
+*Synchronous-commit mode* emphasizes high availability over performance, at the cost of increased transaction latency. Under synchronous-commit mode, transactions wait to send the transaction confirmation to the client until the secondary replica has hardened the log to disk. When data synchronization begins on a secondary database, the secondary replica begins applying incoming log records from the corresponding primary database. As soon as every log record has been hardened, the secondary database enters the SYNCHRONIZED state. Thereafter, every new transaction is hardened by the secondary replica before the log record is written to the local log file. When all the secondary databases of a given secondary replica are synchronized, synchronous-commit mode supports manual failover and, optionally, automatic failover.
 
-  
-     For more information, see [Synchronous-Commit Availability Mode](#SyncCommitAvMode), later in this topic.
+For more information, see [Synchronous-Commit Availability Mode](#SyncCommitAvMode), later in this topic.
 
-
--   *Configuration only mode* applies to availability groups that are not on a Windows Server Failover Cluster. A replica in configuration only mode does not contain user data. In configuration only mode, the replica master database stores availability group configuration metadata. For more information see [Availability group with configuration only replica](../../../linux/sql-server-linux-availability-group-ha.md).
+*Configuration only mode* applies to availability groups that are not on a Windows Server Failover Cluster. A replica in configuration only mode does not contain user data. In configuration only mode, the replica master database stores availability group configuration metadata. For more information see [Availability group with configuration only replica](../../../linux/sql-server-linux-availability-group-ha.md).
   
  The following illustration shows an availability group with five availability replicas. The primary replica and one secondary replica are configured for synchronous-commit mode with automatic failover. Another secondary replica is configured for synchronous-commit mode with only planned manual failover, and two secondary replicas are configured for asynchronous-commit mode, which supports only forced manual failover (typically called *forced failover*).
 
