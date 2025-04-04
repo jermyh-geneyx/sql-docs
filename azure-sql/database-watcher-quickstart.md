@@ -2,9 +2,9 @@
 title: Create a database watcher to monitor Azure SQL
 titleSuffix: Azure SQL Database & SQL Managed Instance
 description: Learn how to create a new database watcher to monitor an Azure SQL database, elastic pool, or SQL managed instance using Microsoft Entra authentication and private connectivity.
-author: dimitri-furman
-ms.author: dfurman
-ms.reviewer: wiassaf
+author: lcwright
+ms.author: lancewright
+ms.reviewer: wiassaf, dfurman
 ms.date: 02/07/2025
 ms.service: azure-sql
 ms.subservice: monitoring

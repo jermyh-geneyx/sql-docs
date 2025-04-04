@@ -4,7 +4,7 @@ description: Learn how to restart an instance by manually failing over primary a
 author: danimir
 ms.author: danil
 ms.reviewer: mathoma
-ms.date: 09/27/2024
+ms.date: 03/27/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: high-availability
 ms.topic: how-to
@@ -16,21 +16,21 @@ ms.custom:
 # Restart an instance with a user-initiated manual failover - Azure SQL Managed Instance 
 [!INCLUDE[appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
 
-This article explains how to restart [Azure SQL Managed Instance](sql-managed-instance-paas-overview.md) by performing a manual user-initiated failover to a secondary compute node by using PowerShell, the Azure CLI or REST API. 
+This article explains how to restart [Azure SQL Managed Instance](sql-managed-instance-paas-overview.md) by performing a manual user-initiated failover by using PowerShell, the Azure CLI or REST API. 
 
 It's possible to fail over a primary node in the General Purpose (GP) and Business Critical (BC) service tiers, and to manually fail over a secondary read-only replica node in the BC service tier.
 
 > [!NOTE]
-> Failover in this article refers starting the SQL Server database engine process on a secondary node, and is not related to the cross-region failover of a [failover groups](failover-group-sql-mi.md).
+> Failover in this article refers to restarting the SQL Server database engine process, and is not related to the cross-region failover of a [failover groups](failover-group-sql-mi.md).
 
 
 ## When to use manual failover
 
-[Availability](high-availability-sla-local-zone-redundancy.md), a fundamental part of the SQL Managed Instance platform, works transparently for your database applications by providing local standby compute nodes to host the SQL Server database engine process. A failover occurs when the SQL Server database engine process is taken offline on the primary compute node and is brought online on a secondary compute node. Typically, failovers between SQL managed instance compute nodes are automatic and managed by the platform when a fault is detected, a node has degraded, or during regular monthly software updates. 
+[Availability](high-availability-sla-local-zone-redundancy.md), a fundamental part of the SQL Managed Instance platform, works transparently for your database applications by providing local standby compute nodes to host the SQL Server database engine process. A failover occurs when the SQL Server database engine process is taken offline and is brought online on the same or another compute node. Typically, failovers are automatic and managed by the Azure platform when a fault is detected, a node has degraded, or during service updates. 
 
-The entire failover operation consists of bringing the SQL Server database engine process online on a secondary node, validating the database state, and then finally redirecting the client connections to the new primary node. Client connections only fail for a short period of time, typically under a minute, during the final step of the failover operation.
+The entire failover operation consists of bringing the SQL Server database engine process online, validating the database state, and then finally redirecting the client connections to the new SQL process. Client connections only fail for a short period of time, typically under a minute, during the final step of the failover operation.
 
-You might execute a manual failover to restart the engine process on a different node for the following reasons:
+You might execute a manual failover to restart the engine process for the following reasons:
 
 - Failed logins, or slowness due to performance issues.
 - Testing application for failover resiliency before deploying to production.
@@ -47,9 +47,9 @@ The following table describes the expected behavior of the SQL Managed Instance 
 | Service tier | Availability model | Expected failover behavior | Potential failover behavior (exceptions) | 
 | --- | --- | --- | --- |
 | General Purpose | [Local redundancy](high-availability-sla-local-zone-redundancy.md#general-purpose-service-tier)  <br /> (Single availability zone) | SQL process restarts on the same VM. | SQL process restarts on a different VM. | 
-| General Purpose | [Zone redundancy (preview)](high-availability-sla-local-zone-redundancy.md#general-purpose-service-tier-1) <br /> (Multiple availability zones) | SQL process restarts on the same VM. | SQL process restarts on a different VM. | 
-| Business Critical | [Local redundancy](high-availability-sla-local-zone-redundancy.md#business-critical-service-tier) <br /> (Single availability zone) | Random secondary replica is promoted to primary. | N/A | 
-| Business Critical | [Zone redundancy](high-availability-sla-local-zone-redundancy.md#business-critical-service-tier-1) <br /> (Multiple availability zones) | Random secondary replica is promoted to primary, either in the same or different availability zone. | N/A | 
+| General Purpose | [Zone redundancy](high-availability-sla-local-zone-redundancy.md#general-purpose-service-tier-1) <br /> (Multiple availability zones) | SQL process restarts on the same VM. | SQL process restarts on a different VM. | 
+| Business Critical | [Local redundancy](high-availability-sla-local-zone-redundancy.md#business-critical-service-tier) <br /> (Single availability zone) | SQL proces restarts on the primary replica, or random secondary replica is promoted to primary. | N/A | 
+| Business Critical | [Zone redundancy](high-availability-sla-local-zone-redundancy.md#business-critical-service-tier-1) <br /> (Multiple availability zones) | SQL proces restarts on the primary replica, or random secondary replica is promoted to primary, either in the same or different availability zone. | N/A | 
 
 ## Permissions
 
@@ -162,7 +162,7 @@ The following T-SQL example shows the uptime for the SQL process on the node for
 ```sql
 SELECT sqlserver_start_time, sqlserver_start_time_ms_ticks FROM sys.dm_os_sys_info
 ```
-The SQL process start time is the time when the SQL Server database engine process was started on the node. The time restarts after failover completes. Run this query before and after you initiate a failover of an instance in the General Purpose service tier to monitor progress of the failover operation.
+The SQL process start time is the time when the SQL Server database engine process was started on the node, which updates after each failover. Run this query before and after you initiate a failover of an instance in the General Purpose service tier to monitor progress of the failover operation.
 
 ### Business Critical service tier
 
@@ -189,8 +189,8 @@ Consider the following functional limitations of user-initiated manual failovers
    - Until the first full backup for a new database is completed by automated backup systems.
    - if there's database restore in progress.
 - For instances in the Business Critical service tier: 
-   - There must exist quorum of replicas for the failover request to be accepted.
-   - It is not possible to specify which readable secondary replica to initiate the failover on.
+   - Replicas must have a quorum before a failover request is accepted. 
+   - The `Invoke-AzSqlInstanceFailover` command fails over the primary replica unless `-ReadableSecondary` is specified, in which case the readable secondary replica fails over. The non-readable secondary replicas do not fail over when this command is issued. 
 
 
 ## Related content

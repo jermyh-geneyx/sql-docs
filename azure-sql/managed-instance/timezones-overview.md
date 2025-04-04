@@ -4,7 +4,7 @@ description: Learn about the time zone specifics of Azure SQL Managed Instance
 author: MladjoA
 ms.author: mlandzic
 ms.reviewer: mathoma
-ms.date: 07/13/2023
+ms.date: 04/03/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: service-overview
 ms.topic: reference
@@ -32,7 +32,7 @@ A set of supported time zones is inherited from the underlying operating system 
 A list with names of the supported time zones is exposed through the [sys.time_zone_info](/sql/relational-databases/system-catalog-views/sys-time-zone-info-transact-sql) system view.
 
 > [!NOTE]
-> On August 8, 2022, the Chilean government made an official announcement about a Daylight-Saving Time (DST) [time zone change](https://techcommunity.microsoft.com/t5/daylight-saving-time-time-zone/interim-guidance-on-2022-time-zone-updates-for-chile/ba-p/3598290). Starting at 12:00 a.m. Saturday, September 10, 2022, until 12:00 a.m. Saturday, April 1, 2023, the official time will advance 60 minutes. The change affects the following three time zones: **Pacific SA Standard Time**, **Easter Island Standard Time** and **Magallanes Standard Time**. Azure SQL Managed Instances using affected time zones will not reflect the changes [until Microsoft releases an OS update](https://techcommunity.microsoft.com/t5/daylight-saving-time-time-zone/interim-guidance-on-2022-time-zone-updates-for-chile/ba-p/3598290) to support this and Azure SQL Managed Instance service absorbs the update on the OS level. If you need to alter affected time zones for your managed instances, please be aware of the [limitations](#limitations) and follow the guidance from the documentation.
+> On October 14, 2024, the Paraguayan government announced a permanent change to the country’s time zone policy. Paraguay will remain on Daylight Saving Time (DST) year-round, effectively adopting UTC-3 as its standard time. As a result, clocks will not advance by 60 minutes at 12:00 a.m. on March 23, 2025, as previously scheduled. This change affects the Paraguay Standard time zone. Microsoft has released related [Windows updates in February and March 2025](https://techcommunity.microsoft.com/blog/dstblog/paraguay-2025-time-zone-update-now-available/4386720). Azure SQL Managed Instance currently does not reflect this update. Instances using affected time zone will not reflect the changes until Azure SQL Managed Instance service absorbs the update on the OS level. If you need to alter affected time zones for you managed instances, please be aware of the [limitations](#limitations) and follow the guidance from the documentation. 
 
 ## Set a time zone
 

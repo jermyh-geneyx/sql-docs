@@ -45,6 +45,9 @@ You can also run backups on a **default** schedule:
 - Differential backups: every 24 hours
 - Transaction log backups: every 5 minutes
 
+> [!WARNING]  
+> Dropping a database immediately deletes the automated backups for that database, irrespective of the retention period.
+
 ## Backup schedule level
 
 You can schedule backups at
@@ -321,5 +324,5 @@ When the built-in automated backups are enabled on an instance of [!INCLUDE [ssn
 ## Related tasks
 
 - [Restore to a point-in-time](point-in-time-restore.md)
-- [View SQL Server databases - Azure Arc](view-databases.md)
+- [View SQL Azure Arc inventory](view-inventory.md)
 - [Recovery Models (SQL Server)](../../relational-databases/backup-restore/recovery-models-sql-server.md)

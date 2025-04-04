@@ -5,7 +5,7 @@ description: Learn about point-in-time restore, which enables you to roll back a
 author: Stralle
 ms.author: strrodic
 ms.reviewer: wiassaf, mathoma, danil
-ms.date: 12/27/2023
+ms.date: 03/18/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: backup-restore
 ms.topic: how-to
@@ -132,9 +132,6 @@ To restore a database in SQL Managed Instance, see [Restore-AzSqlInstanceDatabas
 
 You can restore a deleted database to the deletion time, or an earlier point in time, to the same instance, or a different instance than the source instance. The target instance can be in the same subscription or in a different subscription than the source instance. You restore a deleted database by creating a new database from the backup.
 
-> [!IMPORTANT]
-> You can't restore a deleted managed instance. If you delete a managed instance, all its databases are also deleted and can't be restored to the deletion time, or an earlier point in time. If you configured [long-term retention (LTR)](../database/long-term-retention-overview.md), you can still restore a database from deleted instance to another instance and to point in time when LTR backup was taken.
-
 ### [Azure portal](#tab/azure-portal)
 
 To recover a database by using the Azure portal, open the managed instance's overview page and select **Backups**. Choose to show **Deleted** backups, and then select **Restore** next to the deleted backup you want to recover to open the **Create Azure SQL Managed Database** page. Provide target managed instance details on the **Basics** tab, and source managed instance details on the **Data source** tab. Configure retention settings on the **Additional settings** tab. 
@@ -161,6 +158,7 @@ If you need to restore an unintentionally deleted SQL managed instance, contact 
 - Encrypted databases protected by a customer-managed key (CMK) can only be restored to instances that have access to the same key.
 - Only user-created databases can be restored. System databases can't be restored.
 - Restore is possible only to the last point-in-time backup taken just before the instance was deleted, using the final tail-log backup taken before the delete operation.
+- Restoring databases from a deleted instance is only possible from a paid version of SQL managed instance. Restoring databases from a deleted free instance isn't supported. 
 
 ## Geo-restore
 

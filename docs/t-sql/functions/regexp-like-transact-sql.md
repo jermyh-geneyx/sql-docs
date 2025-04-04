@@ -29,14 +29,13 @@ REGEXP_LIKE
      )
 ```
 
-> [!NOTE]
-> **REGEXP_LIKE** is available only under compatibility level 170 and above. If your database compatibility level is lower than 170, SQL Server can't find and run **REGEXP_LIKE**. Other regular expression scalar functions are available at all compatibility levels.
->
-> You can check compatibility level in the `sys.databases` view or in database properties. You can change the compatibility level of a database with the following command:
->
-> ```sql
-> ALTER DATABASE [DatabaseName] SET COMPATIBILITY_LEVEL = 170;
-> ```
+**REGEXP_LIKE** requires database compatibility level 170 and above. If the database compatibility level is lower than 170, **REGEXP_LIKE** is not available. Other [regular expression scalar functions](regular-expressions-functions-transact-sql.md) are available at all compatibility levels.
+
+You can check compatibility level in the `sys.databases` view or in database properties. You can change the compatibility level of a database with the following command:
+
+```sql
+ALTER DATABASE [DatabaseName] SET COMPATIBILITY_LEVEL = 170;
+```
 
 ## Arguments
 
