@@ -3,7 +3,7 @@ title: "Columnstore indexes - Query performance"
 description: "Columnstore index query performance recommendations for achieving the fast query performance."
 author: MikeRayMSFT
 ms.author: mikeray
-ms.date: 10/23/2024
+ms.date: 04/04/2025
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: conceptual
@@ -11,17 +11,18 @@ ms.custom:
   - ignite-2024
 monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
-# Columnstore indexes - Query performance
+
+# Columnstore indexes - query performance
 
 [!INCLUDE [SQL Server Azure SQL Database Synapse Analytics PDW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
- This article includes recommendations for achieving the fast query performance with columnstore indexes.
+This article includes recommendations for achieving the fast query performance with columnstore indexes.
 
- Columnstore indexes can achieve up to 100 times better performance on analytics and data warehousing workloads, and up to 10 times better data compression than traditional rowstore indexes. These recommendations help your queries achieve the fast query performance that columnstore indexes are designed to provide.
+Columnstore indexes can achieve up to 100 times better performance on analytics and data warehousing workloads, and up to 10 times better data compression than traditional rowstore indexes. These recommendations help your queries achieve the fast query performance that columnstore indexes are designed to provide.
 
 ## Recommendations for improving query performance
 
- Here are some recommendations for achieving the high-performance columnstore indexes are designed to provide.
+Here are some recommendations for achieving the high-performance columnstore indexes are designed to provide.
 
 ### 1. Organize data to eliminate more rowgroups from a full table scan
 
@@ -36,27 +37,27 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
     > [!NOTE]  
     > Starting with [!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)], the tuple-mover is helped by a background merge task. This task automatically compresses smaller OPEN delta rowgroups that have existed for some time, as determined by an internal threshold, or merges COMPRESSED rowgroups from where a large number of rows has been deleted. This improves the columnstore index quality over time.
     > If deleting large amounts of data from the columnstore index is required, consider splitting that operation into smaller delete batches over time. Batching allows the background merge task to handle the task of merging smaller rowgroups, and improves index quality. Then, there's no need to schedule index reorganization maintenance windows after data deletion.
-    > For more information about columnstore terms and concepts, see [Columnstore indexes: Overview](columnstore-indexes-overview.md).
+    > For more information about columnstore terms and concepts, see [Columnstore indexes: overview](columnstore-indexes-overview.md).
 
 ### 2. Plan for enough memory to create columnstore indexes in parallel
 
- Creating a columnstore index is by default a parallel operation unless memory is constrained. Creating the index in parallel requires more memory than creating the index serially. When there is ample memory, creating a columnstore index takes on the order of 1.5 times as long as building a B-tree on the same columns.
+Creating a columnstore index is by default a parallel operation unless memory is constrained. Creating the index in parallel requires more memory than creating the index serially. When there is ample memory, creating a columnstore index takes on the order of 1.5 times as long as building a B-tree on the same columns.
 
- The memory required for creating a columnstore index depends on the number of columns, the number of string columns, the degree of parallelism (DOP), and the characteristics of the data. For example, if your table has fewer than one million rows, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] uses only one thread to create the columnstore index.
+The memory required for creating a columnstore index depends on the number of columns, the number of string columns, the degree of parallelism (DOP), and the characteristics of the data. For example, if your table has fewer than one million rows, [!INCLUDE [ssDE](../../includes/ssde-md.md)] uses only one thread to create the columnstore index.
 
- If your table has more than one million rows, but [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] can't get a large enough memory grant to create the index using MAXDOP, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] automatically decreases `MAXDOP` as needed. In some cases, DOP must be decreased to one in order to build the index under constrained memory in the available memory grant.
+If your table has more than one million rows, but [!INCLUDE [ssDE](../../includes/ssde-md.md)] can't get a large enough memory grant to create the index using MAXDOP, [!INCLUDE [ssDE](../../includes/ssde-md.md)] automatically decreases `MAXDOP` as needed. In some cases, DOP must be decreased to one in order to build the index under constrained memory in the available memory grant.
 
- Since [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)], the query always operates in batch mode. In previous releases, batch execution is only used when DOP is greater than one.
+Since [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)], the query always operates in batch mode. In previous releases, batch execution is only used when DOP is greater than one.
 
-## Columnstore Performance Explained
+## Columnstore performance explained
 
- Columnstore indexes achieve high query performance by combining high-speed in-memory batch mode processing with techniques that greatly reduce I/O requirements. Since analytics queries scan large numbers of rows, they are typically I/O-bound, and therefore reducing I/O during query execution is critical to the design of columnstore indexes. Once data is read into memory, it is critical to reduce the number of in-memory operations.
+Columnstore indexes achieve high query performance by combining high-speed in-memory batch mode processing with techniques that greatly reduce I/O requirements. Since analytics queries scan large numbers of rows, they are typically I/O-bound, and therefore reducing I/O during query execution is critical to the design of columnstore indexes. Once data is read into memory, it is critical to reduce the number of in-memory operations.
 
- Columnstore indexes reduce I/O and optimize in-memory operations through high data compression, columnstore elimination, rowgroup elimination, and batch processing.
+Columnstore indexes reduce I/O and optimize in-memory operations through high data compression, columnstore elimination, rowgroup elimination, and batch processing.
 
 ### Data compression
 
- Columnstore indexes achieve up to 10 times greater data compression than rowstore indexes. This greatly reduces the I/O required to execute analytics queries and therefore improves query performance.
+Columnstore indexes achieve up to 10 times greater data compression than rowstore indexes. This greatly reduces the I/O required to execute analytics queries and therefore improves query performance.
 
 - Columnstore indexes read compressed data from disk, which means fewer bytes of data need to be read into memory.
 
@@ -68,7 +69,7 @@ For example, a fact table stores customer addresses and has a column for `countr
 
 ### Column elimination
 
- Columnstore indexes skip reading in columns that aren't required for the query result. Column elimination further reduces I/O for query execution and therefore improves query performance.
+Columnstore indexes skip reading in columns that aren't referenced by the query. Column elimination further reduces I/O for query execution and therefore improves query performance.
 
 - Column elimination is possible because the data is organized and compressed column by column. In contrast, when data is stored row-by-row, the column values in each row are physically stored together and can't be easily separated. The Query Processor needs to read in an entire row to retrieve specific column values, increasing I/O because extra data is unnecessarily read into memory.
 
@@ -76,32 +77,31 @@ For example, if a table has 50 columns and the query only uses five of those col
 
 ### Rowgroup elimination
 
- For full table scans, a large percentage of the data usually doesn't match the query predicate criteria. By using metadata, the columnstore index is able to skip reading in the rowgroups that don't contain data required for the query result, all without actual I/O. This ability, called rowgroup elimination, reduces I/O for full table scans and therefore improves query performance.
+For full table scans, a large percentage of the data usually doesn't match the query predicate criteria. By using metadata, the columnstore index is able to skip reading in the rowgroups that don't contain data required for the query result, all without actual I/O. This ability, called rowgroup elimination, reduces I/O for full table scans and therefore improves query performance.
 
- **When does a columnstore index need to perform a full table scan?**
+**When does a columnstore index need to perform a full table scan?**
 
- Starting with [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)], you can create one or more regular nonclustered rowstore, or B-tree, indexes on a clustered columnstore index. The nonclustered B-tree indexes can speed up a query that has an equality predicate or a predicate with a small range of values. For more complicated predicates, the query optimizer might choose a full table scan. Without the ability to skip rowgroups, a full table scan can be time-consuming, especially for large tables.
+Starting with [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)], you can create one or more regular nonclustered rowstore, or B-tree, indexes on a clustered columnstore index. The nonclustered B-tree indexes can speed up a query that has an equality predicate or a predicate with a small range of values. For more complicated predicates, the query optimizer might choose a full table scan. Without the ability to skip rowgroups, a full table scan can be time-consuming, especially for large tables.
 
- **When does an analytics query benefit from rowgroup elimination for a full-table scan?**
+**When does an analytics query benefit from rowgroup elimination for a full-table scan?**
 
- For example, a retail business models their sales data using a fact table with clustered columnstore index. Each new sale stores various attributes of the transaction, including the date a product is sold. Interestingly, even though columnstore indexes don't guarantee a sorted order, rows in this table are loaded in a date-sorted order. Over time this table grows. Although the retail business might keep sales data for the last 10 years, an analytics query might only need to compute an aggregate for last quarter. Columnstore indexes can eliminate accessing the data for the previous 39 quarters by just looking at the metadata for the date column. This is a 97% reduction in the amount of data that is read into memory and processed.
+For example, a retail business models their sales data using a fact table with clustered columnstore index. Each new sale stores various attributes of the transaction, including the date a product is sold. Interestingly, even though columnstore indexes don't guarantee a sorted order, rows in this table are loaded in a date-sorted order. Over time this table grows. Although the retail business might keep sales data for the last 10 years, an analytics query might only need to compute an aggregate for last quarter. Columnstore indexes can eliminate accessing the data for the previous 39 quarters by just looking at the metadata for the date column. This is a 97% reduction in the amount of data that is read into memory and processed.
 
- **Which rowgroups are skipped in a full table scan?**
+**Which rowgroups are skipped in a full table scan?**
 
- To determine which rows groups to eliminate, the columnstore index uses metadata to store the minimum and maximum values of each column segment for each rowgroup. When none of the column segment ranges meet the query predicate criteria, the entire rowgroup is skipped without doing any actual I/O. This works because the data is usually loaded in a sorted order. Although row sorting isn't guaranteed, similar data values are often located within the same rowgroup or a neighboring rowgroup.
+To determine which rows groups to eliminate, the columnstore index uses metadata to store the minimum and maximum values of each column segment for each rowgroup. When none of the column segment ranges meet the query predicate criteria, the entire rowgroup is skipped without doing any actual I/O. This works because the data is usually loaded in a sorted order. Although row sorting isn't guaranteed, similar data values are often located within the same rowgroup or a neighboring rowgroup.
 
- For more information about rowgroups, see [Columnstore Index Design Guidelines](../../relational-databases/sql-server-index-design-guide.md#columnstore_index).
+For more information about rowgroups, see [Columnstore index design guidelines](../../relational-databases/sql-server-index-design-guide.md#columnstore_index).
 
 ### Batch mode execution
 
 [Batch mode execution](../../relational-databases/query-processing-architecture-guide.md#batch-mode-execution) processes rows in groups, usually up to 900 at a time, to improve efficiency. For example, the query `SELECT SUM(Sales) FROM SalesData` calculates the total sales from the `SalesData` table. In batch mode, the query engine processes the data in groups of 900 rows. This approach reduces the metadata access cost and other types of overhead by spreading them across all rows in a batch, rather than incurring the overhead for each row. Additionally, batch mode works with compressed data when possible and removes some of the exchange operators used in row mode, significantly speeding up analytical queries.
 
-
- Not all query execution operators can be executed in batch mode. For example, data manipulation language (DML) operations such as insert, delete, or update are executed one row at a time. Batch mode operator such as Scan, Join, Aggregate, Sort, and others can improve query performance. Since the columnstore index was introduced in [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)], there is a sustained effort to expand the operators that can be executed in the batch mode. The following table shows the operators that run in batch mode according to the product version.
+Not all query execution operators can be executed in batch mode. For example, data manipulation language (DML) operations such as insert, delete, or update are executed one row at a time. Batch mode operator such as Scan, Join, Aggregate, Sort, and others can improve query performance. Since the columnstore index was introduced in [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)], there is a sustained effort to expand the operators that can be executed in the batch mode. The following table shows the operators that run in batch mode according to the product version.
 
 |Batch Mode Operators|When used|[!INCLUDE [ssSQL11](../../includes/sssql11-md.md)]|[!INCLUDE [ssSQL14](../../includes/sssql14-md.md)]|[!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and [!INCLUDE [ssSDS](../../includes/sssds-md.md)]<sup>1</sup>|Comments|
 |---------------------------|------------------------|---------------------|---------------------|---------------------------------------|--------------|
-|DML operations (insert, delete, update, merge)||no|no|no|DML isn't a batch mode operation because it isn't parallel. Even when we enable serial mode batch processing, we don't see significant gains by allowing DML to be processed in batch mode.|
+|DML operations (insert, delete, update, merge)||no|no|no|Performance gains from using batch mode with DML aren't significant.|
 |columnstore index scan|SCAN|Not available|yes|yes|For columnstore indexes, we can push the predicate to the SCAN node.|
 |columnstore index Scan (nonclustered)|SCAN|yes|yes|yes|yes|
 |index seek||Not available|Not available|no|We perform a seek operation through a nonclustered B-tree index in row mode.|

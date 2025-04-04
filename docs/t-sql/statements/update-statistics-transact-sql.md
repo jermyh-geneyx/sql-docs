@@ -4,7 +4,7 @@ description: UPDATE STATISTICS updates query optimization statistics on a table 
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: derekw, randolphwest
-ms.date: 02/28/2025
+ms.date: 04/04/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -246,7 +246,9 @@ For more information about when to use `UPDATE STATISTICS`, see [When to update 
 ### Limitations
 
 - Updating statistics isn't supported on external tables. To update statistics on an external table, drop and re-create the statistics.
-- Updating the statistics created automatically on each columnstore index isn't supported. Attempting this results in error 35337: `UPDATE STATISTICS failed because statistics cannot be updated on a columnstore index. UPDATE STATISTICS is valid only when used with the STATS_STREAM option.`
+- Updating the statistics created automatically on a columnstore index isn't supported. Attempting this results in error 35337: `UPDATE STATISTICS failed because statistics cannot be updated on a columnstore index. UPDATE STATISTICS is valid only when used with the STATS_STREAM option.` For more information, see [Index statistics](create-index-transact-sql.md#index-statistics).
+
+    Updating statistics on individual columns, or sets of columns of a columnstore index is supported.
 - The `MAXDOP` option isn't compatible with `STATS_STREAM`, `ROWCOUNT` and `PAGECOUNT` options.
 - The `MAXDOP` option is limited by the Resource Governor workload group `MAX_DOP` setting, if used.
 

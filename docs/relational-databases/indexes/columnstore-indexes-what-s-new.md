@@ -4,7 +4,7 @@ description: "This article explains features by version and the latest new featu
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: wiassaf, dfurman
-ms.date: 02/28/2025
+ms.date: 04/04/2025
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: whats-new
@@ -51,11 +51,17 @@ This table summarizes key features for columnstore indexes and the products in w
 |Online ordered columnstore index create and rebuild|||||||yes||
 
 <a id="updatepolicy"></a>
-<sup>1</sup> For [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] SP1 and later versions, columnstore indexes are available in all editions. For [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] (before SP1) and earlier versions, columnstore indexes are only available in the Enterprise Edition.   
+
+<sup>1</sup> For [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] SP1 and later versions, columnstore indexes are available in all editions. For [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] (before SP1) and earlier versions, columnstore indexes are only available in the Enterprise Edition.
+
 <sup>2</sup> For [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], columnstore indexes are available in the DTU Premium tiers, DTU Standard tiers - S3 and above, and all vCore tiers.
-<sup>3</sup> The degree of parallelism (DOP) for [batch mode](../../relational-databases/query-processing-architecture-guide.md#batch-mode-execution) operations is limited to 2 for [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Standard Edition and 1 for [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Web and Express Editions. This limitation refers to columnstore indexes created over disk-based tables and memory-optimized tables.   
-<sup>4</sup> To create a read-only nonclustered columnstore index, store the index on a read-only filegroup.   
-<sup>5</sup> Not supported in dedicated SQL pools but is supported in serverless SQL pool.   
+
+<sup>3</sup> The degree of parallelism (DOP) for [batch mode](../../relational-databases/query-processing-architecture-guide.md#batch-mode-execution) operations is limited to 2 for [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Standard Edition and 1 for [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Web and Express Editions. This limitation refers to columnstore indexes created over disk-based tables and memory-optimized tables.
+
+<sup>4</sup> To create a read-only nonclustered columnstore index, store the index on a read-only filegroup.
+
+<sup>5</sup> Not supported in dedicated SQL pools but is supported in serverless SQL pool.
+
 <sup>AUTD</sup> Applies to Azure SQL Managed Instance configured with the [Always-up-to-date update policy](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy).
 
 
