@@ -3,7 +3,7 @@ title: Copilot in Azure SQL Database List of Sample Prompts
 description: "Explore a list of sample prompts to use with Microsoft Copilot in Azure SQL Database."
 author: markingmyname
 ms.author: maghan
-ms.date: 04/01/2025
+ms.date: 04/08/2025
 ms.service: azure-sql-database
 ms.subservice: sql-ai-copilot
 ms.topic: concept-article
@@ -12,7 +12,9 @@ ms.collection:
 monikerRange: "=azuresql || =azuresql-db"
 ---
 
-# Microsoft Copilot in Azure SQL Database list of sample prompts
+# Microsoft Copilot sample prompts to use with Azure SQL Database
+
+[!INCLUDE [appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
 Here is a list of sample prompts that you can use with Microsoft Copilot in Azure SQL Database. These prompts are designed to help you interact with your database and get relevant information quickly.
 
@@ -74,5 +76,6 @@ Here is a list of sample prompts that you can use with Microsoft Copilot in Azur
 
 ## Related content
 
-- [What is Copilot in Azure SQL Database?](copilot-azure-sql-overview.md)
+- [Microsoft Copilot in Azure with Azure SQL Database](copilot-azure-sql-overview.md)
+- [Microsoft Copilot in Azure](/azure/copilot/overview)
 - [Frequently asked questions](copilot-azure-sql-faq.yml)
