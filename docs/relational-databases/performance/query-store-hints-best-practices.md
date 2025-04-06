@@ -3,7 +3,7 @@ title: "Query Store hints best practices"
 description: "Best practices for the Query Store hints feature, which helps you to shape query plans without changing application code."
 author: MikeRayMSFT
 ms.author: mikeray
-ms.date: 03/26/2025
+ms.date: 04/04/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: best-practice
@@ -95,8 +95,8 @@ For more information, see Query Store hint [examples](query-store-hints.md#examp
 The following considerations apply:
 
 - When you specify this hint for a query, an attempt to execute the query fails with error 8778, severity 16, *Query execution has been aborted because the ABORT_QUERY_EXECUTION hint was specified.*
-- To unblock a query, you can clear the hint by passing the `query_id` value to the [sys.sp_query_store_clear_hints](../system-stored-procedures/sys-sp-query-store-clear-hints-transact-sql.md) stored procedure.
-- You can use the following example query to find all queries in Query Store that are blocked with system views, starting with the [sys.query_store_query_hints (Transact-SQL)](../system-catalog-views/sys-query-store-query-hints-transact-sql.md) system view:
+- To unblock a query, you can clear the hint by passing the `query_id` value to the `@query_id` parameter in the [sys.sp_query_store_clear_hints](../system-stored-procedures/sys-sp-query-store-clear-hints-transact-sql.md) stored procedure.
+- You can use system views to find queries in Query Store that are blocked, as in the following example query:
     ```sql
     SELECT qsh.query_id,
            q.query_hash,
