@@ -11,6 +11,9 @@ ms.topic: include
 
 [!INCLUDE [sssql11-md](../../../includes/sssql11-md.md)] and later versions.
 
+> [!NOTE]
+> Only 64-bit SQL Server versions are supported.
+ 
 ### Operating systems
 
 - Windows 10 and 11
