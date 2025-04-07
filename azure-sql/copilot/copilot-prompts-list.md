@@ -16,7 +16,7 @@ monikerRange: "=azuresql || =azuresql-db"
 
 [!INCLUDE [appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
-Here is a list of sample prompts that you can use with Microsoft Copilot in Azure SQL Database. These prompts are designed to help you interact with your database and get relevant information quickly.
+Here's a list of sample prompts that you can use with Microsoft Copilot in Azure SQL Database. These prompts are designed to help you interact with your database and get relevant information quickly.
 
 [!INCLUDE [appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
@@ -69,7 +69,7 @@ Here is a list of sample prompts that you can use with Microsoft Copilot in Azur
 | Troubleshoot error 18456 | Helps with SQL error 18456. | `Help me with SQL error 18456` |
 | Troubleshoot error 40615 | Helps with SQL error 40615. | `Help me with SQL error 40615` |
 | Troubleshoot Connection Errors | Checks for causes of connection timeouts. | `Check for causes of connection timeouts in my database` |
-| Troubleshoot Login Failures | Diagnoses login failure issues. | `Why can't I login to my database?` |
+| Troubleshoot sign in Failures | Diagnoses sign in failure issues. | `Why can't I login to my database?` |
 | Troubleshoot Query timeout | Addresses query timeout issues. | `Help me with query timeout issues` |
 | Wait Statistics Analysis | Analyzes wait statistics and potential performance bottlenecks. | `What do the wait statistics look like for my database?` |
 | Workloads Increase and Scaling Analysis | Assesses workload increases and potential need for scaling. | `Has increased workload or traffic caused performance issues?` |
