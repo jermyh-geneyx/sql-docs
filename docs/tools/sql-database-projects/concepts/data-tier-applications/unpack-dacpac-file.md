@@ -8,6 +8,8 @@ ms.date: 03/11/2025
 ms.service: sql
 ms.subservice: sql-database-projects
 ms.topic: how-to
+ms.collection:
+  - data-tools
 helpviewer_keywords:
   - "wizard [DAC], unpack"
   - "data-tier application [SQL Server], unpack"

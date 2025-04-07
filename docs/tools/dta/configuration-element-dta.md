@@ -1,12 +1,14 @@
 ---
 title: "Configuration Element (DTA)"
 description: In the dta utility, the Configuration element specifies a user-specified configuration consisting of existing and hypothetical physical design structures.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: 03/01/2017
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: reference
+ms.collection:
+  - data-tools
 helpviewer_keywords:
   - "Configuration element"
 dev_langs:

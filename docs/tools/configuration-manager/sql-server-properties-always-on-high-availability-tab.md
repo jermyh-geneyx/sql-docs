@@ -1,12 +1,14 @@
 ---
 title: "SQL Server Properties (Always On High Availability Tab)"
 description: To use availability groups as a high-availability and disaster-recovery solution, turn on the Always On Availability Groups feature in SQL Server.
-author: "MikeRayMSFT"
-ms.author: "mikeray"
+author: MikeRayMSFT
+ms.author: mikeray
 ms.date: "03/14/2017"
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 monikerRange: ">=sql-server-2016"
 ---
 # SQL Server Properties (Always On High Availability Tab)

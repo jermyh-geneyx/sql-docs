@@ -2,12 +2,14 @@
 title: Open a Trace Table
 titleSuffix: SQL Server Profiler
 description: Discover how to use SQL Server Profiler to open a table in a SQL Server database that contains trace results.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: 03/01/2017
 ms.service: sql
 ms.subservice: profiler
 ms.topic: how-to
+ms.collection:
+  - data-tools
 ---
 
 # Open a Trace Table (SQL Server Profiler)

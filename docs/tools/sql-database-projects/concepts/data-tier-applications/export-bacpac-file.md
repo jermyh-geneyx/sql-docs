@@ -1,13 +1,15 @@
 ---
 title: "Export a BACPAC File"
 description: "Export a BACPAC file from a database."
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.reviewer: drskwier, randolphwest
 ms.date: 03/11/2025
 ms.service: sql
 ms.subservice: sql-database-projects
 ms.topic: concept-article
+ms.collection:
+  - data-tools
 ms.custom:
   - ignite-2024
 f1_keywords:

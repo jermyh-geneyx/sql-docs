@@ -2,12 +2,14 @@
 title: Derive a Template from a Running Trace
 titleSuffix: SQL Server Profiler
 description: Discover how to create a template from an existing trace in SQL Server Profiler while the trace is running.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: 03/01/2017
 ms.service: sql
 ms.subservice: profiler
 ms.topic: how-to
+ms.collection:
+  - data-tools
 ---
 
 # Derive a Template from a Running Trace (SQL Server Profiler)

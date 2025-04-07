@@ -1,5 +1,5 @@
 ---
-title: SQL projects extensibility
+title: SQL Projects Extensibility
 description: "Customize SQL project deployments with deployment contributors."
 author: dzsquared
 ms.author: drskwier
@@ -8,6 +8,8 @@ ms.date: 08/30/2024
 ms.service: sql
 ms.subservice: sql-database-projects
 ms.topic: concept-article
+ms.collection:
+  - data-tools
 ---
 
 # Extensibility for SQL projects
