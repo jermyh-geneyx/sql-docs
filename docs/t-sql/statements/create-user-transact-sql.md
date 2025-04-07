@@ -121,8 +121,10 @@ CREATE USER user_name
       DEFAULT_SCHEMA = schema_name  
     | DEFAULT_LANGUAGE = { NONE | lcid | language name | language alias }  
     | SID = sid   
-    | ALLOW_ENCRYPTED_VALUE_MODIFICATIONS = [ ON | OFF ] ]  
-  
+    | ALLOW_ENCRYPTED_VALUE_MODIFICATIONS = [ ON | OFF ] ]
+-- Syntax for users based on Microsoft Entra logins for Azure SQL Database
+    | TYPE = { X | E }
+
 <limited_options_list> ::=  
       DEFAULT_SCHEMA = schema_name ]   
     | ALLOW_ENCRYPTED_VALUE_MODIFICATIONS = [ ON | OFF ] ]  
@@ -160,7 +162,7 @@ CREATE USER Microsoft_Entra_principal FROM EXTERNAL PROVIDER
 [;]
 ```
 
-Syntax for [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)]
+Syntax for [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)] and Azure SQL Database
 
 ```syntaxsql 
 CREATE USER   
@@ -274,7 +276,7 @@ CREATE USER user_name
 In SQL database in Microsoft Fabric, `sid` should be a valid ID of the specified Microsoft Entra principal. If the principal is a user or a group, the ID should be a Microsoft Entra object ID of the user/group. If the Microsoft Entra principal is a service principal (an application or a managed identity), the ID should be an application ID (or a client ID). The specified ID must be a `binary(16)` value. The [!INCLUDE[ssDE](../../includes/ssde-md.md)] doesn't validate the specified ID in Microsoft Entra. The `SID` argument must be used together with `TYPE`.
 
 #### TYPE = [ E | X ]
- **Applies to**: SQL database in Microsoft Fabric. 
+ **Applies to**: SQL database in Microsoft Fabric and Azure SQL Database. 
 
 Specifies the type of a Microsoft Entra principal. `E` indicates the principal is a user or a service principal (an application or a managed identity). `X` indicates the principal is a group.
   
@@ -577,7 +579,7 @@ GO
 
 ### K. Create a contained database user from a Microsoft Entra principal without validation
 
- **Applies to**: [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)]
+ **Applies to**: [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)] and Azure SQL Database
 
 The examples in this section create database users for Microsoft Entra principals, without validating principal names in Microsoft Entra.
 
