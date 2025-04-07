@@ -741,7 +741,7 @@ For more examples that show using `INSERT...SELECT * FROM OPENROWSET(BULK...)`, 
 
 ::: moniker range="=fabric"
 
-[!INCLUDE [FabricDW](../../includes/applies-to-version/fabric-dw.md)]
+[!INCLUDE [fabric-se-and-dw](../../includes/applies-to-version/fabric-se-and-dw.md)]
 
 The T-SQL `OPENROWSET` function reads a content of a file in Azure Data Lake storage. You can read text/CSV or Parquet file formats.
 
