@@ -4,7 +4,7 @@ description: "Get an introduction to SQL Database: technical details and capabil
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: mathoma
-ms.date: 09/12/2024
+ms.date: 04/04/2025
 ms.service: azure-sql-database
 ms.subservice: service-overview
 ms.topic: overview
@@ -239,6 +239,10 @@ The [maintenance window feature](maintenance-window.md) allows you to configure 
 ### How do I plan for maintenance events?
 
 Patching is generally not noticeable if you [employ retry logic](develop-overview.md#resiliency) in your app. For more information, see [Planning for Azure maintenance events in Azure SQL Database](planned-maintenance.md).
+
+### Can I access my backups?
+
+Azure SQL Database backups are managed automatically. No one has direct access to the backups. The backups are deleted once the configured retention period expires. For more information, see [Automated backups in Azure SQL Database](automated-backups-overview.md) and [Long-term retention](long-term-retention-overview.md).
 
 ## Engage with the SQL Server engineering team
 
