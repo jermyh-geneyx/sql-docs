@@ -215,15 +215,14 @@ The default value of `COMPRESSION_DELAY` option should work for most customers.
 For advanced users, we recommend running the following query and collect % of deleted rows over the last seven days.
 
 ```sql
-SELECT row_group_id,cast(deleted_rows as float)/cast(total_rows as float)*100 as [% fragmented], created_time
+SELECT row_group_id,
+       CAST(deleted_rows AS float)/CAST(total_rows AS float)*100 AS [% fragmented],
+       created_time
 FROM sys.dm_db_column_store_row_group_physical_stats
-WHERE object_id = object_id('FactOnlineSales2')
-      AND
-      state_desc='COMPRESSED'
-      AND
-      deleted_rows > 0
-      AND
-      created_time > GETDATE() - 7
+WHERE object_id = OBJECT_ID('FactOnlineSales2')
+      AND state_desc = 'COMPRESSED'
+      AND deleted_rows > 0
+      AND created_time > DATEADD(day, -7, GETDATE())
 ORDER BY created_time DESC;
 ```
 
