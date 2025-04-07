@@ -1,13 +1,15 @@
 ---
-title: Troubleshooting issues and performance with SqlPackage
+title: Troubleshooting Issues and Performance with SqlPackage
 description: Learn how to troubleshoot with SqlPackage.
-author: "dzsquared"
-ms.author: "drskwier"
-ms.reviewer: "maghan"
+author: dzsquared
+ms.author: drskwier
+ms.reviewer: maghan
 ms.date: 02/07/2025
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: troubleshooting-general
+ms.collection:
+  - data-tools
 ---
 
 # Troubleshoot issues and performance with SqlPackage

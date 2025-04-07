@@ -7,6 +7,8 @@ ms.date: 03/14/2017
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 helpviewer_keywords:
   - "command prompt utilities [SQL Server]"
   - "command prompt utilities [SQL Server], about command prompt utilities"

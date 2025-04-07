@@ -1,12 +1,14 @@
 ---
 title: "Profiler Utility"
 description: The profiler utility launches the SQL Server Profiler tool. Optional arguments allow you to control how the application starts.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: "03/14/2017"
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 helpviewer_keywords:
   - "command prompt utilities [SQL Server], profiler90 utility"
   - "profiler90 utility"

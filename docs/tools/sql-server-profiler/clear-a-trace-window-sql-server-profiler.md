@@ -2,12 +2,14 @@
 title: Clear a Trace Window
 titleSuffix: SQL Server Profiler
 description: Find out how to clear the trace window that captures event data in SQL Server Profiler without clearing any trace files or tables.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: 03/01/2017
 ms.service: sql
 ms.subservice: profiler
 ms.topic: how-to
+ms.collection:
+  - data-tools
 ---
 
 # Clear a Trace Window (SQL Server Profiler)

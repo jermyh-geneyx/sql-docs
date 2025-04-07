@@ -1,12 +1,14 @@
 ---
 title: "sqlservr Application"
 description: The sqlservr application starts, stops, pauses, and continues an instance of SQL Server from a command prompt.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: 10/07/2021
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 helpviewer_keywords:
   - "command prompt utilities [SQL Server], sqlservr"
   - "command prompt [SQL Server], pausing/resuming instance of SQL Server"

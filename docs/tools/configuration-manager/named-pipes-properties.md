@@ -1,12 +1,14 @@
 ---
 title: "Named Pipes Properties"
 description: Use the Protocol page on the Named Pipes Properties dialog box to view or change the named pipe that SQL Server listens to when using the Named Pipes protocol.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: "03/14/2017"
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 helpviewer_keywords:
   - "pipes [SQL Server]"
   - "listening [SQL Server], pipes"

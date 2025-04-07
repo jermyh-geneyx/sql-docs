@@ -2,12 +2,14 @@
 title: Templates
 titleSuffix: SQL Server Profiler
 description: Learn about the predefined templates SQL Server Profiler provides and how to use them. See how to create user-defined templates and change the default template.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: 03/14/2017
 ms.service: sql
 ms.subservice: profiler
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 ---
 
 # SQL Server Profiler Templates

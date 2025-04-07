@@ -1,13 +1,15 @@
 ---
-title: ssbdiagnose utility (Service Broker)
+title: "ssbdiagnose Utility (Service Broker)"
 description: The ssbdiagnose utility reports issues in Service Broker conversations or the configuration of Service Broker services.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.reviewer: randolphwest
 ms.date: 09/25/2024
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 helpviewer_keywords:
   - "Service Broker, runtime reports"
   - "Service Broker, command prompt utilities"

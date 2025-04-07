@@ -1,5 +1,5 @@
 ---
-title: Add existing files to a SQL project
+title: Add Existing Files to a SQL Project
 description: "How to add the contents of a dacpac or SQL scripts to a project."
 author: dzsquared
 ms.author: drskwier
@@ -8,6 +8,8 @@ ms.date: 09/10/2024
 ms.service: sql
 ms.subservice: sql-database-projects
 ms.topic: how-to
+ms.collection:
+  - data-tools
 ms.custom:
   - ignite-2024
 f1_keywords:

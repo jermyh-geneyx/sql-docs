@@ -1,5 +1,5 @@
 ---
-title: SQLCMD variables in SQL projects
+title: SQLCMD Variables in SQL Projects
 description: "Dynamically set values in a SQL project at deployment."
 author: dzsquared
 ms.author: drskwier
@@ -8,6 +8,8 @@ ms.date: 08/30/2024
 ms.service: sql
 ms.subservice: sql-database-projects
 ms.topic: concept-article
+ms.collection:
+  - data-tools
 ms.custom:
   - ignite-2024
 zone_pivot_groups: sq1-sql-projects-tools

@@ -8,6 +8,8 @@ ms.date: 03/10/2025
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 ms.custom:
   - linux-related-content
   - ignite-2024
