@@ -1,7 +1,7 @@
 ### YamlMime:FAQ
 metadata:
-  title: "Frequently asked questions about Microsoft Copilot in Azure SQL Database"
-  description: "Frequently asked questions about Microsoft Copilot in Azure SQL Database."
+  title: "Frequently asked questions about Microsoft Copilot in Azure with Azure SQL Database"
+  description: "Frequently asked questions about Microsoft Copilot in Azure with Azure SQL Database."
   author: markingmyname
   ms.author: maghan
   ms.reviewer: wiassaf, kendalv
@@ -13,7 +13,7 @@ metadata:
   ms.topic: faq
   ms.date: 04/08/2025
   monikerRange: "= azuresql || = azuresql-db"
-title: "Frequently asked questions about Microsoft Copilot in Azure SQL Database"
+title: "Frequently asked questions about Microsoft Copilot in Azure with Azure SQL Database"
 summary: |
   Frequently asked questions about Microsoft Copilot capabilities in Azure SQL. 
 

@@ -1,6 +1,6 @@
 ---
-title: Copilot in Azure SQL Database List of Sample Prompts
-description: "Explore a list of sample prompts to use with Microsoft Copilot in Azure SQL Database."
+title: Copilot in Azure with Azure SQL Database List of Sample Prompts
+description: "Explore a list of sample prompts to use with Microsoft Copilot in Azure with Azure SQL Database."
 author: markingmyname
 ms.author: maghan
 ms.date: 04/08/2025
@@ -22,7 +22,7 @@ Here's a list of sample prompts that you can use with Microsoft Copilot in Azure
 
 | Skill Name | Skill Description | Example prompt |
 | --- | --- | --- |
-| Active User Connections | Shows active user connections to the database. | `Who are currently actively connected to the database?` |
+| Active User Connections | Shows active user connections to the database. | `Who is currently actively connected to the database?` |
 | Antipattern Query Analysis | Identifies queries with anti-patterns and their potential effect on performance. | `Show me all the queries in my workload that have anti-patterns in them.` |
 | Automatic Tuning Analysis | Investigates automatic tuning failures and potential solutions. | `Why is automatic plan correction failing?` |
 | Basic Database Information | Retrieves basic information about the database. | `What is the name of the logical server for this database?` |
