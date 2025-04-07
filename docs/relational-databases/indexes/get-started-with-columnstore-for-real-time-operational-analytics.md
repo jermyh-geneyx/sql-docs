@@ -114,9 +114,9 @@ The Data Exposed video series into more details on some of the capabilities and 
 
 Running real-time operational analytics can impact the performance of the OLTP workload. This impact should be minimal. [Example A](#example-a-access-hot-data-from-b-tree-index-warm-data-from-columnstore-index) shows how to use filtered indexes to minimize impact of nonclustered columnstore index on transactional workload while still delivering analytics in real time.
 
-To minimize the overhead  of maintaining a nonclustered columnstore index  on an operational workload, you can use a filtered condition to create a nonclustered columnstore index only on the *warm* or slowly changing data. For example, in an order management application, you can create a nonclustered columnstore index on the orders that have already been shipped. Once the order has shipped, it rarely changes and therefore can be considered warm data. With a filtered index, the data in nonclustered columnstore index requires fewer updates thereby lowering the impact on transactional workload.
+To minimize the overhead of maintaining a nonclustered columnstore index on an operational workload, you can use a filtered condition to create a nonclustered columnstore index only on the *warm* or slowly changing data. For example, in an order management application, you can create a nonclustered columnstore index on the orders that have already been shipped. Once the order has shipped, it rarely changes and therefore can be considered warm data. With a filtered index, the data in nonclustered columnstore index requires fewer updates thereby lowering the impact on transactional workload.
 
-Analytics queries transparently access both warm and hot data as needed to provide real-time analytics. If a significant part of the operational workload is touching the 'hot' data, those operations don't require additional maintenance of the columnstore index. A best practice is to have a rowstore clustered index on the column(s) used in the filtered index definition. [!INCLUDE [ssDE-md](../../includes/ssde-md.md)] uses the clustered index to quickly scan the rows that did not meet the filtered condition. Without this clustered index, a full table scan of the rowstore table is required to find these rows, which can negatively impact the performance of analytical queries. In the absence of clustered index, you could create a complementary filtered nonclustered B-tree index to identify such rows but it is not recommended because accessing large range of rows through nonclustered B-tree indexes is expensive.
+Analytics queries transparently access both warm and hot data as needed to provide real-time analytics. If a significant part of the operational workload is touching the 'hot' data, those operations don't require additional maintenance of the columnstore index. A best practice is to have a rowstore clustered index on the column(s) used in the filtered index definition. The [!INCLUDE [ssDE-md](../../includes/ssde-md.md)] uses the clustered index to quickly scan the rows that did not meet the filtered condition. Without this clustered index, a full table scan of the rowstore table is required to find these rows, which can negatively impact the performance of analytical queries. In the absence of clustered index, you could create a complementary filtered nonclustered B-tree index to identify such rows but it is not recommended because accessing large range of rows through nonclustered B-tree indexes is expensive.
 
 > [!NOTE]  
 > A filtered nonclustered columnstore index is only supported on disk-based tables. It is not supported on memory-optimized tables.
@@ -193,8 +193,9 @@ accounttype nvarchar(50),
 accountCodeAlternatekey int
 );
 
--- Creating nonclustered columnstore index with COMPRESSION_DELAY. The columnstore index will keep the rows in closed delta rowgroup for 100 minutes
--- after it has been marked closed.
+-- Creating nonclustered columnstore index with COMPRESSION_DELAY. 
+-- The columnstore index will keep the rows in closed delta rowgroup 
+-- for 100 minutes after it has been marked closed.
 CREATE NONCLUSTERED COLUMNSTORE INDEX t_colstor_cci ON t_colstor
 (accountkey, accountdescription, accounttype)
 WITH (DATA_COMPRESSION = COLUMNSTORE, COMPRESSION_DELAY = 100);
@@ -205,7 +206,7 @@ For more information, see  [Blog: Compression delay](/archive/blogs/sqlserversto
 Here are the recommended best practices:
 
 - **Insert/Query workload:** If your workload is primarily inserting data and querying it, the default `COMPRESSION_DELAY` of 0 is the recommended option. The newly inserted rows will get compressed once 1 million rows have been inserted into a single delta rowgroup.
-    Some examples of such workload are (a) traditional DW workload (b) select-stream analysis when you need to analyze the select pattern in a web application.
+    Some examples of such workloads are a traditional DW workload or a select-stream analysis when you need to analyze the select pattern in a web application.
 
 - **OLTP workload:** If the workload is DML heavy (that is, heavy mix of Update, Delete and Insert), you might see columnstore index fragmentation by examining the DMV `sys.dm_db_column_store_row_group_physical_stats`. If you see that > 10% rows are marked deleted in recently compressed rowgroups, you can use `COMPRESSION_DELAY` option to add time delay when rows become eligible for compression. For example, if for your workload, the newly inserted stays 'hot' (that is, gets updated multiple times) for say 60 minutes, you should choose `COMPRESSION_DELAY` to be 60.
 
@@ -226,7 +227,7 @@ WHERE object_id = object_id('FactOnlineSales2')
 ORDER BY created_time DESC;
 ```
 
-If the number of deleted rows in compressed rowgroups > 20%, plateauing in older rowgroups with < 5% variation (referred to as cold rowgroups) set `COMPRESSION_DELAY` = (youngest_rowgroup_created_time - current_time). This approach works best with a stable and relatively homogeneous workload.
+If the number of deleted rows in compressed rowgroups > 20%, plateauing in older rowgroups with < 5% variation (referred to as cold rowgroups), then set `COMPRESSION_DELAY` = (youngest_rowgroup_created_time - current_time). This approach works best with a stable and relatively homogeneous workload.
 
 ## Related content
 

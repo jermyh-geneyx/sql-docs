@@ -125,7 +125,7 @@ ALTER INDEX [<index-name>] on [<table-name>] REORGANIZE with (COMPRESS_ALL_ROW_G
 
 ## How loading into a partitioned table works
 
-For partitioned data, [!INCLUDE [ssDE](../../includes/ssde-md.md)] first assigns each row to a partition, and then performs columnstore operations on the data within the partition. Each partition has its own rowgroups and at least one delta rowgroup.
+For partitioned data, the [!INCLUDE [ssDE](../../includes/ssde-md.md)] first assigns each row to a partition, and then performs columnstore operations on the data within the partition. Each partition has its own rowgroups and at least one delta rowgroup.
 
 ## Related content
 

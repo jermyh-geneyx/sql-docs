@@ -22,7 +22,7 @@ Columnstore indexes, in conjunction with partitioning, are essential for buildin
 
 [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] introduced these features for columnstore performance enhancements:
 
-- Always On supports querying a columnstore index on a readable secondary replica.
+- Always On availability groups support querying a columnstore index on a readable secondary replica.
 - Multiple Active Result Sets (MARS) supports columnstore indexes.
 - A new dynamic management view [sys.dm_db_column_store_row_group_physical_stats (Transact-SQL)](../system-dynamic-management-views/sys-dm-db-column-store-row-group-physical-stats-transact-sql.md) provides performance troubleshooting information at the row group level.
 - Serial queries on columnstore indexes can run in batch mode. Previously, only parallel queries could run in batch mode.
@@ -66,7 +66,7 @@ CREATE UNIQUE INDEX taccount_nc1 ON t_account (AccountKey);
 
 By design, a columnstore table doesn't allow a clustered primary key constraint. Now you can use a nonclustered index on a columnstore table to enforce uniqueness. A primary key is equivalent to a `UNIQUE` constraint on a non-NULL column, and [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] implements a `UNIQUE` constraint as a nonclustered index. Combining these facts, the following example defines a `UNIQUE` constraint on the non-NULL column `AccountKey`. The result is a nonclustered index that enforces uniquness on a non-NULL column.
 
-Next, the table is converted to a clustered columnstore index. During the conversion, the nonclustered index persists. The result is a clustered columnstore index with a nonclustered index that enforces uniqueness. Since any update or insert on the columnstore table also affects the nonclustered index, all operations that violate the unique constraint and the non-NULL constraint cause the entire operation to fail.
+Next, the table is converted to a clustered columnstore index. During the conversion, the nonclustered index persists. The result is a clustered columnstore index with a nonclustered index that enforces uniqueness. Since any update or insert on the columnstore table also affects the nonclustered index, all operations that violate the unique constraint and the non-`NULL` constraint cause the entire operation to fail.
 
 The result is a columnstore index with a nonclustered index that enforces uniqueness on both indexes.
 
