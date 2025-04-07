@@ -29,8 +29,8 @@ Migrate your data using your chosen [migration method](overview.md#compare-migra
 
 - Managed instance link
 - Log Replay Service (LRS)
-- Azure SQL migration extension for Azure Data Studio - migration with near-zero downtime.
 - Native `RESTORE DATABASE FROM URL` - uses native backups from SQL Server and requires some downtime.
+- Azure SQL migration extension for Azure Data Studio - migration with near-zero downtime.
 
 SQL Managed Instance targets user scenarios requiring mass database migration from on-premises or Azure VM database implementations. These are the optimal choice when you need to lift and shift the back end of the applications that regularly use instance level and/or cross-database functionalities. If this is your scenario, you can move an entire instance to a corresponding environment in Azure without the need to rearchitect your applications.
 
@@ -40,27 +40,6 @@ To move SQL instances, you need to plan carefully:
 - The migration of instance-level objects that your application depends on, including logins, credentials, SQL Agent jobs and operators, and server-level triggers.
 
 SQL Managed Instance is a managed service that allows you to delegate some of the regular DBA activities to the platform as they're built in. Therefore, some instance-level data doesn't need to be migrated, such as maintenance jobs for regular backups or Always On configuration, as [high availability](/azure/azure-sql/database/high-availability-sla-local-zone-redundancy) is built in.
-
-### Azure Data Studio
-
-This section provides high-level steps to migrate from SQL Server to Azure SQL Managed Instance with minimal downtime by using the Azure SQL migration extension in Azure Data Studio. For detailed instructions, see [Tutorial: Migrate SQL Server to Azure SQL Managed Instance online in Azure Data Studio](/azure/dms/tutorial-sql-server-managed-instance-online-ads).
-
-To migrate with Azure Data Studio, follow these steps:
-
-1. [Download and install Azure Data Studio](/azure-data-studio/download-azure-data-studio) and the [Azure SQL migration extension for Azure Data Studio](/azure-data-studio/extensions/azure-sql-migration-extension).
-1. Launch the **Migrate to Azure SQL Migration** wizard in the extension in Azure Data Studio.
-1. Select databases for assessment and view migration readiness or issues (if any). Additionally, collect performance data and get right-sized Azure recommendation.
-1. Select your Azure account and your target Azure SQL Managed Instance from your subscription.
-1. Select the location of your database backups. Your database backups can either be located on an on-premises network share or in Azure Blob Storage container.
-1. Create a new Azure Database Migration Service using the wizard in Azure Data Studio. If you previously created an Azure Database Migration Service using Azure Data Studio, you can reuse the same if desired.
-1. *Optional*: If your backups are on an on-premises network share, download and install [self-hosted integration runtime](https://www.microsoft.com/download/details.aspx?id=39717) on a machine that can connect to the source SQL Server, and the location containing the backup files.
-1. Start the database migration and monitor the progress in Azure Data Studio. You can also monitor the progress under the Azure Database Migration Service resource in Azure portal.
-1. Complete the cutover.
-   1. Stop all incoming transactions to the source database.
-   1. Make application configuration changes to point to the target database in Azure SQL Managed Instance.
-   1. Take any tail log backups for the source database in the backup location specified.
-   1. Ensure all database backups have the status Restored in the monitoring details page.
-   1. Select Complete cutover in the monitoring details page.
 
 ### Managed Instance link
 
@@ -141,6 +120,28 @@ To learn more about this migration option, see [Quickstart: Restore a database t
 
 > [!NOTE]  
 > A database restore operation is asynchronous and can be retried. You might get an error in SQL Server Management Studio if the connection breaks or a time-out expires. Azure SQL Database will keep trying to restore database in the background, and you can track the progress of the restore using the [sys.dm_exec_requests](/sql/relational-databases/system-dynamic-management-views/sys-dm-exec-requests-transact-sql) and [sys.dm_operation_status](/sql/relational-databases/system-dynamic-management-views/sys-dm-operation-status-azure-sql-database) views.
+
+### Azure Data Studio
+
+This section provides high-level steps to migrate from SQL Server to Azure SQL Managed Instance with minimal downtime by using the Azure SQL migration extension in Azure Data Studio. For detailed instructions, see [Tutorial: Migrate SQL Server to Azure SQL Managed Instance online in Azure Data Studio](/azure/dms/tutorial-sql-server-managed-instance-online-ads).
+
+To migrate with Azure Data Studio, follow these steps:
+
+1. [Download and install Azure Data Studio](/azure-data-studio/download-azure-data-studio) and the [Azure SQL migration extension for Azure Data Studio](/azure-data-studio/extensions/azure-sql-migration-extension).
+1. Launch the **Migrate to Azure SQL Migration** wizard in the extension in Azure Data Studio.
+1. Select databases for assessment and view migration readiness or issues (if any). Additionally, collect performance data and get right-sized Azure recommendation.
+1. Select your Azure account and your target Azure SQL Managed Instance from your subscription.
+1. Select the location of your database backups. Your database backups can either be located on an on-premises network share or in Azure Blob Storage container.
+1. Create a new Azure Database Migration Service using the wizard in Azure Data Studio. If you previously created an Azure Database Migration Service using Azure Data Studio, you can reuse the same if desired.
+1. *Optional*: If your backups are on an on-premises network share, download and install [self-hosted integration runtime](https://www.microsoft.com/download/details.aspx?id=39717) on a machine that can connect to the source SQL Server, and the location containing the backup files.
+1. Start the database migration and monitor the progress in Azure Data Studio. You can also monitor the progress under the Azure Database Migration Service resource in Azure portal.
+1. Complete the cutover.
+   1. Stop all incoming transactions to the source database.
+   1. Make application configuration changes to point to the target database in Azure SQL Managed Instance.
+   1. Take any tail log backups for the source database in the backup location specified.
+   1. Ensure all database backups have the status Restored in the monitoring details page.
+   1. Select Complete cutover in the monitoring details page.
+
 
 ## Data sync and cutover
 
