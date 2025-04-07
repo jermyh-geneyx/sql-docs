@@ -1,9 +1,10 @@
 ---
-title: SQL Command Prompt Utilities (Database Engine)
-description: Command prompt utilities enable you to script SQL Server operations. This article lists many command prompt utilities that ship with SQL Server.
-author: markingmyname
-ms.author: maghan
-ms.date: 03/14/2017
+title: "SQL Command-Line Utilities (Database Engine)"
+description: Command prompt utilities enable you to script SQL Server operations. This article lists many command-line utilities that ship with SQL Server.
+author: rwestMSFT
+ms.author: randolphwest
+ms.reviewer: maghan
+ms.date: 04/07/2025
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
@@ -13,53 +14,58 @@ helpviewer_keywords:
   - "command prompt [SQL Server]"
   - "utilities [SQL Server], command prompt"
   - "command prompt [SQL Server], utilities"
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017"
+  - "command-line utilities [SQL Server]"
+  - "command-line utilities [SQL Server], about command-line utilities"
+  - "command-line [SQL Server]"
+  - "utilities [SQL Server], command-line"
+  - "command-line [SQL Server], utilities"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017"
 ---
 
-# SQL Command Prompt Utilities (Database Engine)
+# SQL command-line utilities (Database Engine)
 
-[!INCLUDE[SQL Server Azure SQL Database Synapse Analytics PDW](../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Synapse Analytics PDW](../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw.md)]
 
-Command prompt utilities enable you to script [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)] operations. The following table contains a list of many command prompt utilities that ship with [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)].
+Command-line utilities enable you to script [!INCLUDE [ssdenoversion-md](../includes/ssdenoversion-md.md)] operations. The following table contains a list of several command-line utilities that ship with [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)].
 
-For information on the *main* SQL gui and command-line tools, see [SQL Tools Overview](overview-sql-tools.md).
+For information on the *main* SQL graphical and command-line tools, see [SQL tools overview](overview-sql-tools.md).
 
-|**Utility**|**Description**|**Installed in**|  
-|-----------------|---------------------|----------------------|  
-|[bcp Utility](../tools/bcp-utility.md)|Used to copy data between an instance of [!INCLUDE[msCoName](../includes/msconame-md.md)] [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)] and a data file in a user-specified format.|\<*drive*:>\Program Files\\[!INCLUDE[msCoName](../includes/msconame-md.md)] [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)]\Client SDK\ODBC\110\Tools\Binn|  
-|[dta Utility](../tools/dta/dta-utility.md)|Used to analyze a workload and recommend physical design structures to optimize server performance for that workload.|[!INCLUDE[ssInstallPathVar](../includes/ssinstallpathvar-md.md)]Tools\Binn|  
-|[dtexec Utility](../integration-services/packages/dtexec-utility.md)|Used to configure and execute an [!INCLUDE[ssISnoversion](../includes/ssisnoversion-md.md)] package. A user interface version of this command prompt utility is called **DTExecUI**, which brings up the Execute Package Utility.|[!INCLUDE[ssInstallPathVar](../includes/ssinstallpathvar-md.md)]DTS\Binn|  
-|[dtutil Utility](../integration-services/dtutil-utility.md)|Used to manage SSIS packages.|[!INCLUDE[ssInstallPathVar](../includes/ssinstallpathvar-md.md)]DTS\Binn|  
-|[Deploy Model Solutions with the Deployment Utility](/analysis-services/multidimensional-models/deploy-model-solutions-with-the-deployment-utility)|Used to deploy [!INCLUDE[ssASnoversion](../includes/ssasnoversion-md.md)] projects to instances of [!INCLUDE[ssASnoversion](../includes/ssasnoversion-md.md)].|[!INCLUDE[ssInstallPathVar](../includes/ssinstallpathvar-md.md)]Tools\Binn\VShell\Common7\IDE|   
-|[osql Utility](../tools/osql-utility.md)|Allows you to enter [!INCLUDE[tsql](../includes/tsql-md.md)] statements, system procedures, and script files at the command prompt.|[!INCLUDE[ssInstallPathVar](../includes/ssinstallpathvar-md.md)]Tools\Binn|  
-|[Profiler Utility](../tools/profiler-utility.md)|Used to start [!INCLUDE[ssSqlProfiler](../includes/sssqlprofiler-md.md)] from a command prompt.|[!INCLUDE[ssInstallPathVar](../includes/ssinstallpathvar-md.md)]Tools\Binn|  
-|[RS.exe Utility &#40;SSRS&#41;](../reporting-services/tools/rs-exe-utility-ssrs.md)|Used to run scripts designed for managing [!INCLUDE[ssRSnoversion](../includes/ssrsnoversion-md.md)] report servers.|[!INCLUDE[ssInstallPathVar](../includes/ssinstallpathvar-md.md)]Tools\Binn|  
-|[rsconfig Utility &#40;SSRS&#41;](../reporting-services/tools/rsconfig-utility-ssrs.md)|Used to configure a report server connection.|[!INCLUDE[ssInstallPathVar](../includes/ssinstallpathvar-md.md)]Tools\Binn|  
-|[rskeymgmt Utility &#40;SSRS&#41;](../reporting-services/tools/rskeymgmt-utility-ssrs.md)|Used to manage encryption keys on a report server.|[!INCLUDE[ssInstallPathVar](../includes/ssinstallpathvar-md.md)]Tools\Binn|  
-|[sqlagent90 Application](../tools/sqlagent90-application.md)|Used to start [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)] Agent from a command prompt.|\<drive>:\Program Files\Microsoft SQL Server\\<*instance_name*>\MSSQL\Binn|  
-|[sqlcmd Utility](./sqlcmd/sqlcmd-utility.md)|Allows you to enter [!INCLUDE[tsql](../includes/tsql-md.md)] statements, system procedures, and script files at the command prompt.|\<*drive*:>\Program Files\\[!INCLUDE[msCoName](../includes/msconame-md.md)] [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)]\Client SDK\ODBC\110\Tools\Binn|  
-|[SQLdiag Utility](../tools/sqldiag-utility.md)|Used to collect diagnostic information for [!INCLUDE[msCoName](../includes/msconame-md.md)] Customer Service and Support.|[!INCLUDE[ssInstallPathVar](../includes/ssinstallpathvar-md.md)]Tools\Binn|  
-|[sqllogship Application](../tools/sqllogship-application.md)|Used by applications to perform backup, copy, and restore operations and associated clean-up tasks for a log shipping configuration without running the backup, copy, and restore jobs.|[!INCLUDE[ssInstallPathVar](../includes/ssinstallpathvar-md.md)]Tools\Binn|  
-|[SqlLocalDB Utility](../tools/sqllocaldb-utility.md)|An execution mode of [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)] targeted to program developers.|[!INCLUDE[ssInstallPathVar](../includes/ssinstallpathvar-md.md)]Tools\Binn|  
-|[sqlmaint Utility](../tools/sqlmaint-utility.md)|Used to execute database maintenance plans created in previous versions of [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)].|\<drive>:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\Binn|  
-|[sqlps Utility](../tools/sqlps-utility.md)|Used to run PowerShell commands and scripts. Loads and registers the [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)] PowerShell provider and cmdlets.|[!INCLUDE[ssInstallPathVar](../includes/ssinstallpathvar-md.md)]Tools\Binn|  
-|[sqlservr Application](../tools/sqlservr-application.md)|Used to start and stop an instance of [!INCLUDE[ssDE](../includes/ssde-md.md)] from the command prompt for troubleshooting.|\<drive>:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\Binn|  
-|[Ssms Utility](../ssms/ssms-utility.md)|Used to start [!INCLUDE[ssManStudioFull](../includes/ssmanstudiofull-md.md)] from a command prompt.|[!INCLUDE[ssInstallPathVar](../includes/ssinstallpathvar-md.md)]Tools\Binn\VSShell\Common7\IDE|  
-|[tablediff Utility](../tools/tablediff-utility.md)|Used to compare the data in two tables for non-convergence, which is useful when troubleshooting a replication topology.|[!INCLUDE[ssInstallPathVar](../includes/ssinstallpathvar-md.md)]COM|  
+| Utility | Description | Installed in |
+| --- | --- | --- |
+| [bcp](bcp-utility.md) | Used to copy data between an instance of [!INCLUDE [msCoName](../includes/msconame-md.md)] [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] and a data file in a user-specified format. | \<*drive*:>\Program Files\\[!INCLUDE [msCoName](../includes/msconame-md.md)] [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)]\Client SDK\ODBC\110\Tools\Binn |
+| [dta](dta/dta-utility.md) | Used to analyze a workload and recommend physical design structures to optimize server performance for that workload. | [!INCLUDE [ssinstallpath-md](../includes/ssinstallpath-md.md)]Tools\Binn |
+| [dtexec](../integration-services/packages/dtexec-utility.md) | Used to configure and execute an [!INCLUDE [ssISnoversion](../includes/ssisnoversion-md.md)] package. A user interface version of this command-line utility is called **DTExecUI**, which brings up the Execute Package Utility. | [!INCLUDE [ssinstallpath-md](../includes/ssinstallpath-md.md)]DTS\Binn |
+| [dtutil](../integration-services/dtutil-utility.md) | Used to manage SQL Server Integration Services (SSIS) packages. | [!INCLUDE [ssinstallpath-md](../includes/ssinstallpath-md.md)]DTS\Binn |
+| [Deploy Model Solutions with the Deployment](/analysis-services/multidimensional-models/deploy-model-solutions-with-the-deployment-utility) | Used to deploy [!INCLUDE [ssASnoversion](../includes/ssasnoversion-md.md)] projects to instances of [!INCLUDE [ssASnoversion](../includes/ssasnoversion-md.md)]. | [!INCLUDE [ssinstallpath-md](../includes/ssinstallpath-md.md)]Tools\Binn\VShell\Common7\IDE |
+| [osql](osql-utility.md) | Allows you to enter [!INCLUDE [tsql](../includes/tsql-md.md)] statements, system procedures, and script files at the command prompt. | [!INCLUDE [ssinstallpath-md](../includes/ssinstallpath-md.md)]Tools\Binn |
+| [Profiler](profiler-utility.md) | Used to start [!INCLUDE [ssSqlProfiler](../includes/sssqlprofiler-md.md)] from a command prompt. | [!INCLUDE [ssinstallpath-md](../includes/ssinstallpath-md.md)]Tools\Binn |
+| [RS.exe (SSRS)](../reporting-services/tools/rs-exe-utility-ssrs.md) | Used to run scripts designed for managing [!INCLUDE [ssRSnoversion](../includes/ssrsnoversion-md.md)] report servers. | [!INCLUDE [ssinstallpath-md](../includes/ssinstallpath-md.md)]Tools\Binn |
+| [rsconfig (SSRS)](../reporting-services/tools/rsconfig-utility-ssrs.md) | Used to configure a report server connection. | [!INCLUDE [ssinstallpath-md](../includes/ssinstallpath-md.md)]Tools\Binn |
+| [rskeymgmt (SSRS)](../reporting-services/tools/rskeymgmt-utility-ssrs.md) | Used to manage encryption keys on a report server. | [!INCLUDE [ssinstallpath-md](../includes/ssinstallpath-md.md)]Tools\Binn |
+| [sqlagent90 application](sqlagent90-application.md) | Used to start [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] Agent from a command prompt. | \<*drive*>:\Program Files\Microsoft SQL Server\\<*instance_name*>\MSSQL\Binn |
+| [sqlcmd](sqlcmd/sqlcmd-utility.md) | Allows you to enter [!INCLUDE [tsql](../includes/tsql-md.md)] statements, system procedures, and script files at the command prompt. | \<*drive*:>\Program Files\\[!INCLUDE [msCoName](../includes/msconame-md.md)] [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)]\Client SDK\ODBC\110\Tools\Binn |
+| [SQLdiag](sqldiag-utility.md) | Used to collect diagnostic information for [!INCLUDE [msCoName](../includes/msconame-md.md)] Customer Service and Support. | [!INCLUDE [ssinstallpath-md](../includes/ssinstallpath-md.md)]Tools\Binn |
+| [sqllogship](sqllogship-application.md) | Used by applications to perform backup, copy, and restore operations and associated clean-up tasks for a log shipping configuration without running the backup, copy, and restore jobs. | [!INCLUDE [ssinstallpath-md](../includes/ssinstallpath-md.md)]Tools\Binn |
+| [SqlLocalDB](sqllocaldb-utility.md) | An execution mode of [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] targeted to program developers. | [!INCLUDE [ssinstallpath-md](../includes/ssinstallpath-md.md)]Tools\Binn |
+| [sqlmaint](sqlmaint-utility.md) | Used to execute database maintenance plans created in previous versions of [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)]. | [!INCLUDE [ssinstallpath-md](../includes/ssinstallpath-md.md)]\MSSQL\Binn |
+| [sqlps](sqlps-utility.md) | Used to run PowerShell commands and scripts. Loads and registers the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] PowerShell provider and cmdlets. | [!INCLUDE [ssinstallpath-md](../includes/ssinstallpath-md.md)]Tools\Binn |
+| [sqlservr](sqlservr-application.md) | Used to start and stop an instance of [!INCLUDE [ssDE](../includes/ssde-md.md)] from the command prompt for troubleshooting. | \<*drive*>:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Binn |
+| [ssms](../ssms/ssms-utility.md) | Used to start [!INCLUDE [ssManStudioFull](../includes/ssmanstudiofull-md.md)] from a command prompt. | [!INCLUDE [ssinstallpath-md](../includes/ssinstallpath-md.md)]Tools\Binn\VSShell\Common7\IDE |
+| [tablediff](tablediff-utility.md) | Used to compare the data in two tables for nonconvergence, which is useful when troubleshooting a replication topology. | [!INCLUDE [ssinstallpath-md](../includes/ssinstallpath-md.md)]COM |
 
-## Command Prompt Utilities Syntax Conventions  
-  
-|**Convention**|**Used for**|  
-|--------------------|------------------|  
-|UPPERCASE|Statements and terms used at the operating system level.|  
-|`monospace`|Sample commands and program code.|  
-|*italic*|User-supplied parameters.|  
-|**bold**|Commands, parameters, and other syntax that must be typed exactly as shown.|  
+## Command-line utilities syntax conventions
 
-## See Also
+| Convention | Used for |
+| --- | --- |
+| UPPERCASE | Statements and terms used at the operating system level. |
+| `monospace` | Sample commands and program code. |
+| *italic* | User-supplied parameters. |
+| **bold** | Commands, parameters, and other syntax that must be typed exactly as shown. |
 
-* [Replication Distribution Agent](../relational-databases/replication/agents/replication-distribution-agent.md)
-* [Replication Log Reader Agent](../relational-databases/replication/agents/replication-log-reader-agent.md)
-* [Replication Merge Agent](../relational-databases/replication/agents/replication-merge-agent.md)
-* [Replication Queue Reader Agent](../relational-databases/replication/agents/replication-queue-reader-agent.md)
-* [Replication Snapshot Agent](../relational-databases/replication/agents/replication-snapshot-agent.md)
+## Related content
+
+- [Replication Distribution Agent](../relational-databases/replication/agents/replication-distribution-agent.md)
+- [Replication Log Reader Agent](../relational-databases/replication/agents/replication-log-reader-agent.md)
+- [Replication Merge Agent](../relational-databases/replication/agents/replication-merge-agent.md)
+- [Replication Queue Reader Agent](../relational-databases/replication/agents/replication-queue-reader-agent.md)
+- [Replication Snapshot Agent](../relational-databases/replication/agents/replication-snapshot-agent.md)

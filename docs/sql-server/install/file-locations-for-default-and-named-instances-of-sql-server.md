@@ -1,20 +1,20 @@
 ---
-title: "File Locations"
+title: File Locations for SQL Server Instances
 description: A SQL Server instance has its own program and data files. It can share common files with other instances of SQL Server. This article includes file locations.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: mathoma
-ms.date: 09/27/2024
+ms.date: 04/07/2025
 ms.service: sql
 ms.subservice: install
 ms.topic: conceptual
 ---
 
-# File Locations for default and named instances of SQL Server
+# File locations for default and named instances of SQL Server
 
 [!INCLUDE [SQL Server -Windows Only](../../includes/applies-to-version/sql-windows-only.md)]
 
-This article describes the file locations for installed components of SQL Server. 
+This article describes the file locations for installed components of SQL Server.
 
 ## Overview
 
@@ -24,22 +24,25 @@ For an instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] th
 
 To isolate install locations for each component, unique instance IDs are generated for each component within a given instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
 
-> [!IMPORTANT]  
-> Program files and data files cannot be installed on a removable disk drive, cannot be installed on a file system that uses compression, cannot be installed to a directory where system files are located, and cannot be installed on shared drives on a failover cluster instance.  
->  
-> You might need to configure scanning software, such as antivirus and antispyware applications, to exclude SQL Server folders and file types. Review this support article for more information: [Antivirus software on computers running SQL Server](/troubleshoot/sql/database-engine/security/antivirus-and-sql-server).
->  
-> System databases (master, model, `msdb`, and `tempdb`), and [!INCLUDE [ssDE](../../includes/ssde-md.md)] user databases can be installed with Server Message Block (SMB) file server as a storage option. This applies to both [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] stand-alone and [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] failover cluster installations (FCI). For more information, see [Install SQL Server with SMB Fileshare as a Storage Option](../../database-engine/install-windows/install-sql-server-with-smb-fileshare-as-a-storage-option.md).  
->  
-> Do not delete any of the following directories or their contents: Binn, Data, Ftdata, HTML, or 1033. You can delete other directories, if necessary; however, you might not be able to retrieve any lost functionality or data without uninstalling and then reinstalling [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. Do not delete or modify any of the .htm files in the HTML directory. They are required for [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] tools to function properly.
+## Limitations
 
-## Shared Files for All Instances of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]
+Program files and data files can't be installed on a removable disk drive, can't be installed on a file system that uses compression, can't be installed to a directory where system files are located, and can't be installed on shared drives on a failover cluster instance.
 
-Common files used by all instances on a single computer are installed in the folder [!INCLUDE [ssInstallPathVar](../../includes/ssinstallpathvar-md.md)]. \<*drive*> is the drive letter where components are installed. The default is usually drive C. _nnn_ identifies the version. 
+You might need to configure scanning software, such as antivirus and antispyware applications, to exclude SQL Server folders and file types. Review this support article for more information: [Configure antivirus software to work with SQL Server](/troubleshoot/sql/database-engine/security/antivirus-and-sql-server).
 
-The following table describes  versions for the paths. \{nn} is the version value used in the instance ID, and registry path.
+System databases (`master`, `model`, `msdb`, and `tempdb`), and [!INCLUDE [ssDE](../../includes/ssde-md.md)] user databases can be installed with Server Message Block (SMB) file server as a storage option. This applies to both [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] stand-alone and [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] failover cluster installations (FCI). For more information, see [Install SQL Server with SMB fileshare storage](../../database-engine/install-windows/install-sql-server-with-smb-fileshare-as-a-storage-option.md).
 
-| Version | \*nnn* | {nn} |
+Don't delete any of the following directories or their contents: `Binn`, `Data`, `Ftdata`, `HTML`, or `1033`. You can delete other directories, if necessary. However, you might not be able to retrieve any lost functionality or data without uninstalling and then reinstalling [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. Don't delete or modify any of the `.htm` files in the HTML directory. They are required for [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] tools to function properly.
+
+<a id="shared-files-for-all-instances-of-"></a>
+
+## Shared files for all instances of SQL Server
+
+Common files used by all instances on a single computer are installed in the folder [!INCLUDE [ssinstallpath-md](../../includes/ssinstallpath-md.md)]. \<*drive*> is the drive letter where components are installed. The default is usually drive C. *nnn* identifies the version.
+
+The following table describes versions for the paths. \{nn} is the version value used in the instance ID, and registry path.
+
+| Version | *nnn* | {nn} |
 | --- | --- | --- |
 | [!INCLUDE [ssqlv22](../../includes/sssql22-md.md)] | 160 | 16 |
 | [!INCLUDE [ssqlv15](../../includes/sssql19-md.md)] | 150 | 15 |
@@ -48,7 +51,7 @@ The following table describes  versions for the paths. \{nn} is the version valu
 | [!INCLUDE [ssqlv12](../../includes/sssql14-md.md)] | 120 | 12 |
 | [!INCLUDE [sssql11](../../includes/sssql11-md.md)] | 110 | 11 |
 
-## File Locations and Registry Mapping
+## File locations and registry mapping
 
 During [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Setup, an instance ID is generated for each server component. The server components in this [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] release are the [!INCLUDE [ssDE](../../includes/ssde-md.md)], [!INCLUDE [ssASnoversion](../../includes/ssasnoversion-md.md)], and [!INCLUDE [ssRSnoversion](../../includes/ssrsnoversion-md.md)].
 
@@ -76,10 +79,10 @@ The directory structure for a [!INCLUDE [ssnoversion](../../includes/ssnoversion
 
 You can specify any value for the instance ID, but avoid special characters and reserved keywords.
 
-You can specify a non-default instance ID during [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Setup. Instead of \\{Program Files}\\[!INCLUDE [msCoName](../../includes/msconame-md.md)] [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], a \<custom path>\\[!INCLUDE [msCoName](../../includes/msconame-md.md)] [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] is used if the user chooses to change the default installation directory. Instance IDs that begin with an underscore (_) or that contain the number sign (#) or the dollar sign ($) are not supported.
+You can specify a non-default instance ID during [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Setup. Instead of \\{Program Files}\\[!INCLUDE [msCoName](../../includes/msconame-md.md)] [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], a \<custom path>\\[!INCLUDE [msCoName](../../includes/msconame-md.md)] [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] is used if the user chooses to change the default installation directory. Instance IDs that begin with an underscore (_) or that contain the number sign (#) or the dollar sign ($) aren't supported.
 
 > [!NOTE]  
-> [!INCLUDE [ssISnoversion](../../includes/ssisnoversion-md.md)] and client components are not instance aware and, therefore are not assigned an instance ID. By default, non-instance-aware components are installed to a single directory: [!INCLUDE [ssInstallPathVar](../../includes/ssinstallpathvar-md.md)]. Changing the installation path for one shared component also changes it for the other shared components. Subsequent installations install non-instance-aware components to the same directory as the original installation.
+> [!INCLUDE [ssISnoversion](../../includes/ssisnoversion-md.md)] and client components aren't instance aware and, therefore aren't assigned an instance ID. By default, non-instance-aware components are installed to a single directory: [!INCLUDE [ssinstallpath-md](../../includes/ssinstallpath-md.md)]. Changing the installation path for one shared component also changes it for the other shared components. Subsequent installations install non-instance-aware components to the same directory as the original installation.
 
 [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] [!INCLUDE [ssASnoversion](../../includes/ssasnoversion-md.md)] is the only [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] component that supports instance renaming after installation. If an instance of [!INCLUDE [ssASnoversion](../../includes/ssasnoversion-md.md)] is renamed, the instance ID will not change. After instance renaming is complete, directories and registry keys will continue to use the instance ID created during installation.
 
@@ -99,13 +102,15 @@ The registry also maintains a mapping of instance ID to instance name. Instance 
 
 - [HKEY_LOCAL_MACHINE\Software\\[!INCLUDE [msCoName](../../includes/msconame-md.md)]\\[!INCLUDE [msCoName](../../includes/msconame-md.md)] [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]\Instance Names\RS] "\<InstanceName>"="MSRS\{nn}"
 
-## Specifying File Paths
+<a id="specifying-file-paths"></a>
+
+## Specify file paths
 
 During Setup, you can change the installation path for the following features:
 
 The installation path is displayed in Setup only for features with a user-configurable destination folder:
 
-| Component | Default path | Configurable or Fixed Path |
+| Component | Default path | Configurable or fixed path |
 | --- | --- | --- |
 | [!INCLUDE [ssDE](../../includes/ssde-md.md)] server components | \Program Files\\[!INCLUDE [msCoName](../../includes/msconame-md.md)] [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]\MSSQL\{nn}.\<InstanceID>\ | Configurable |
 | [!INCLUDE [ssDE](../../includes/ssde-md.md)] data files | \Program Files\\[!INCLUDE [msCoName](../../includes/msconame-md.md)] [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]\MSSQL\{nn}.\<InstanceID>\ | Configurable |
@@ -114,14 +119,14 @@ The installation path is displayed in Setup only for features with a user-config
 | [!INCLUDE [ssRSnoversion](../../includes/ssrsnoversion-md.md)] report server | \Program Files\\[!INCLUDE [msCoName](../../includes/msconame-md.md)] [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]\MSRS\{nn}.\<InstanceID>\Reporting Services\ReportServer\Bin\ | Configurable |
 | [!INCLUDE [ssRSnoversion](../../includes/ssrsnoversion-md.md)] report manager | \Program Files\\[!INCLUDE [msCoName](../../includes/msconame-md.md)] [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]\MSRS\{nn}.\<InstanceID>\Reporting Services\ReportManager\ | Fixed path |
 | [!INCLUDE [ssISnoversion](../../includes/ssisnoversion-md.md)] | \<Install Directory>\nnn\DTS\\ <sup>1</sup> | Configurable |
-| Client Components (except bcp.exe and sqlcmd.exe) | \<Install Directory>\nnn\Tools\\ <sup>1</sup> | Configurable |
-| Client Components (bcp.exe and sqlcmd.exe) | \<Install Directory>\Client SDK\ODBC\nnn\Tools\Binn | Fixed path |
-| Replication and server-side COM objects | [!INCLUDE [ssInstallPathVar](../../includes/ssinstallpathvar-md.md)]COM\\ <sup>2</sup> | Fixed path |
-| [!INCLUDE [ssISnoversion](../../includes/ssisnoversion-md.md)] component DLLs for the Data Transformation Run-time engine, the Data Transformation Pipeline engine, and the **dtexec** command prompt utility | [!INCLUDE [ssInstallPathVar](../../includes/ssinstallpathvar-md.md)]DTS\Binn | Fixed path |
-| DLLs that provide managed connection support for [!INCLUDE [ssISnoversion](../../includes/ssisnoversion-md.md)] | [!INCLUDE [ssInstallPathVar](../../includes/ssinstallpathvar-md.md)]DTS\Connections | Fixed path |
-| DLLs for each type of enumerator that [!INCLUDE [ssISnoversion](../../includes/ssisnoversion-md.md)] supports | [!INCLUDE [ssInstallPathVar](../../includes/ssinstallpathvar-md.md)]DTS\ForEachEnumerators | Fixed path |
-| [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Browser Service, WMI providers | [!INCLUDE [ssInstallPathVar](../../includes/ssinstallpathvar-md.md)]Shared\\ | Fixed path |
-| Components that are shared between all instances of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] | [!INCLUDE [ssInstallPathVar](../../includes/ssinstallpathvar-md.md)]Shared\\ | Fixed path |
+| Client components (except `bcp.exe` and `sqlcmd.exe`) | \<Install Directory>\nnn\Tools\\ <sup>1</sup> | Configurable |
+| Client components (`bcp.exe` and `sqlcmd.exe`) | \<Install Directory>\Client SDK\ODBC\nnn\Tools\Binn | Fixed path |
+| Replication and server-side COM objects | [!INCLUDE [ssinstallpath-md](../../includes/ssinstallpath-md.md)]COM\\ <sup>2</sup> | Fixed path |
+| [!INCLUDE [ssISnoversion](../../includes/ssisnoversion-md.md)] component DLLs for the Data Transformation Run-time engine, the Data Transformation Pipeline engine, and the **dtexec** command prompt utility | [!INCLUDE [ssinstallpath-md](../../includes/ssinstallpath-md.md)]DTS\Binn | Fixed path |
+| DLLs that provide managed connection support for [!INCLUDE [ssISnoversion](../../includes/ssisnoversion-md.md)] | [!INCLUDE [ssinstallpath-md](../../includes/ssinstallpath-md.md)]DTS\Connections | Fixed path |
+| DLLs for each type of enumerator that [!INCLUDE [ssISnoversion](../../includes/ssisnoversion-md.md)] supports | [!INCLUDE [ssinstallpath-md](../../includes/ssinstallpath-md.md)]DTS\ForEachEnumerators | Fixed path |
+| [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Browser Service, WMI providers | [!INCLUDE [ssinstallpath-md](../../includes/ssinstallpath-md.md)]Shared\\ | Fixed path |
+| Components that are shared between all instances of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] | [!INCLUDE [ssinstallpath-md](../../includes/ssinstallpath-md.md)]Shared\\ | Fixed path |
 
 > [!WARNING]  
 > Ensure that the \Program Files\\[!INCLUDE [msCoName](../../includes/msconame-md.md)] [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]\ folder is protected with limited permissions.
@@ -130,12 +135,12 @@ The default drive for file locations is *systemdrive*, normally drive C. Install
 
 <sup>1</sup> A single installation path is shared between [!INCLUDE [ssISnoversion](../../includes/ssisnoversion-md.md)] and client components. Changing the installation path for one component also changes it for other components. Subsequent installations install components to the same location as the original installation.
 
-<sup>2</sup> This directory is used by all instances of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] on a computer. If you apply an update to any of the instances on the computer, any changes to files in this folder will affect all instances on the computer. When you add features to an existing installation, you cannot change the location of a previously installed feature, nor can you specify the location for a new feature. You must either install additional features to the directories already established by Setup, or uninstall and reinstall the product.
+<sup>2</sup> This directory is used by all instances of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] on a computer. If you apply an update to any of the instances on the computer, any changes to files in this folder will affect all instances on the computer. When you add features to an existing installation, you can't change the location of a previously installed feature, nor can you specify the location for a new feature. You must either install additional features to the directories already established by Setup, or uninstall and reinstall the product.
 
 > [!NOTE]  
 > For clustered configurations, you must select a local drive that is available on every node of the cluster.
 
-When you specify an installation path during Setup for the server components or data files, the Setup program uses the instance ID in addition to the specified location for program and data files. Setup does not use the instance ID for tools and other shared files. Setup also does not use any instance ID for the [!INCLUDE [ssASnoversion](../../includes/ssasnoversion-md.md)] program and data files, although it does use the instance ID for the [!INCLUDE [ssASnoversion](../../includes/ssasnoversion-md.md)] repository.
+When you specify an installation path during Setup for the server components or data files, the Setup program uses the instance ID in addition to the specified location for program and data files. Setup doesn't use the instance ID for tools and other shared files. Setup also doesn't use any instance ID for the [!INCLUDE [ssASnoversion](../../includes/ssasnoversion-md.md)] program and data files, although it does use the instance ID for the [!INCLUDE [ssASnoversion](../../includes/ssasnoversion-md.md)] repository.
 
 If you set an installation path for the [!INCLUDE [ssDE](../../includes/ssde-md.md)] feature, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Setup uses that path as the root directory for all instance-specific folders for that installation, including SQL Data Files. In this case, if you set the root to "C:\Program Files\\[!INCLUDE [msCoName](../../includes/msconame-md.md)] [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]\MSSQL\{nn}.\<InstanceName>\MSSQL\\", instance-specific directories are added to the end of that path.
 
