@@ -119,6 +119,19 @@ For more information about tools available to use for the *discover* phase, see 
 
 If your assessment encounters multiple blockers, consider migrating to one of the Azure SQL targets as an alternative, such as Azure SQL Managed Instance or SQL Server on Azure Virtual Machines. 
 
+### Assess with SQL Server enabled by Arc
+
+To assess your SQL Server instances for migration to Azure, use SQL Server enabled by Azure Arc. This feature, currently in preview, automatically produces an assessment for migration to Azure, simplifying the discovery process and readiness assessment for migration. 
+
+To assess your instances using SQL Server enabled by Azure Arc, follow these steps:
+
+1. [Automatically connect SQL Server machines to Azure Arc](/sql/sql-server/azure-arc/automatically-connect). 
+1. [Verify](/azure/azure-arc/servers/manage-vm-extensions-portal#list-extensions-installed) your Azure Extension for SQL Server (WindowsAgent.SqlServer)  version is 1.1.2594.118 or later.
+1. Go your SQL Server enabled by Azure Arc resource in the Azure portal.
+1. Under **Migration**, select **Assessments (Preview)** to open the Assessments page and review results. 
+
+For details, see [Assess instances for migration with SQL Server enabled by Azure arc](/sql/sql-server/azure-arc/migration-assessment).
+
 ### Assess with Azure Data Studio 
 
 The [Azure SQL Migration extension for Azure Data Studio](/azure/dms/migration-using-azure-data-studio) provides a seamless wizard-based experience to assess, get Azure recommendations and migrate your SQL Server databases on-premises to Azure. Besides highlighting any migration blockers or warnings, the extension also includes an option for Azure recommendations to collect your databases' performance data and [ recommends a right-sized Azure SQL target](/azure/dms/ads-sku-recommend) to meet the performance needs of your workload (with the lowest price).
@@ -158,19 +171,6 @@ For specific Azure SQL migration target tutorials, see:
 - [Tutorial: Migrate SQL Server to Azure SQL Managed Instance with DMS](managed-instance/database-migration-service.md)
 - [Tutorial: Migrate SQL Server to Azure SQL Database (offline)](database/database-migration-service.md)
 
-
-### Assess with SQL Server enabled by Arc
-
-To assess your SQL Server instances for migration to Azure, use SQL Server enabled by Azure Arc. This feature, currently in preview, automatically produces an assessment for migration to Azure, simplifying the discovery process and readiness assessment for migration. 
-
-To assess your instances using SQL Server enabled by Azure Arc, follow these steps:
-
-1. [Automatically connect SQL Server machines to Azure Arc](/sql/sql-server/azure-arc/automatically-connect). 
-1. [Verify](/azure/azure-arc/servers/manage-vm-extensions-portal#list-extensions-installed) your Azure Extension for SQL Server (WindowsAgent.SqlServer)  version is 1.1.2594.118 or later.
-1. Go your SQL Server enabled by Azure Arc resource in the Azure portal.
-1. Under **Migration**, select **Assessments (Preview)** to open the Assessments page and review results. 
-
-For details, see [Assess instances for migration with SQL Server enabled by Azure arc](/sql/sql-server/azure-arc/migration-assessment).
 
 ### Scaled assessments and analysis
 
