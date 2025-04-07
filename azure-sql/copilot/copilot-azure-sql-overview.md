@@ -50,9 +50,9 @@ For information on enabling Microsoft Copilot, visit [What is Microsoft Copilot 
 
 You can ask and receive helpful, context-rich suggestions from [Microsoft Copilot in Azure](/azure/copilot/overview) within the Azure portal.
 
-Consider the Azure SQL database you are working with and the context of your question. The more specific you are, the better the responses can be. For example, if you ask about a specific database, Copilot provides information relevant to that database.
+Consider the Azure SQL database you're working with and the context of your question. The more specific you are, the better the responses can be. For example, if you ask about a specific database, Copilot provides information relevant to that database.
 
-Additionally, if you are asking Copilot a question about a different database from the database service or page you are on, the result is not clear and is more likely to give you a bad output.
+Additionally, if you're asking Copilot a question about a different database from the database service or page you are on, the result isn't clear and is more likely to give you a bad output.
 
 ## Example prompts
 
@@ -73,7 +73,7 @@ For a list of more prompts, visit [List of sample prompts](copilot-prompts-list.
 
 ## Responsible AI in Microsoft Copilot in Azure
 
-Microsoft is committed to responsible AI. We are continuously working to improve the quality and safety of our AI systems. Microsoft Copilot in Azure is designed to help you be more productive, but it is important to remember that it is not a replacement for human judgment. Always review the output produced by Copilot before using it in production.
+Microsoft is committed to responsible AI. We're continuously working to improve the quality and safety of our AI systems. Microsoft Copilot in Azure is designed to help you be more productive, but it's important to remember that it isn't a replacement for human judgment. Always review the output produced by Copilot before using it in production.
 
 For more information on how Microsoft implements responsible AI tools in [Microsoft Copilot in Azure](/azure/copilot/overview), see [Responsible AI FAQ for Microsoft Copilot in Azure](/azure/copilot/responsible-ai-faq).
 
