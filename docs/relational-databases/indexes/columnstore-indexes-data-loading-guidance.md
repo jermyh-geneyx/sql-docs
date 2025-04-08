@@ -4,7 +4,7 @@ description: Data loading options and recommendations for loading data into a co
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest
-ms.date: 09/14/2023
+ms.date: 04/04/2025
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: conceptual
@@ -12,7 +12,8 @@ ms.custom:
   - ignite-2024
 monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
-# Columnstore indexes - Data loading guidance
+
+# Columnstore indexes - data loading guidance
 
 [!INCLUDE [SQL Server Azure SQL Database Synapse Analytics PDW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
@@ -31,7 +32,7 @@ To perform a bulk load, you can use [bcp Utility](../../tools/bcp-utility.md), [
 As the diagram suggests, a bulk load:
 
 - Doesn't presort the data. Data is inserted into rowgroups in the order it's received.
-- If the batch size is >= 102400, the rows are directly loaded into the compressed rowgroups. You should choose a batch size >=102400 for efficient bulk import, because you can avoid moving data rows to delta rowgroups before the rows are eventually moved to compressed rowgroups by a background thread, Tuple mover (TM).
+- If the batch size is >= 102400, the rows are directly loaded into the compressed rowgroups. You should choose a batch size >=102400 for efficient bulk import, because you can avoid moving data rows to delta rowgroups before the rows are eventually moved to compressed rowgroups by a background thread, tuple mover (TM).
 - If the batch size < 102,400 or if the remaining rows are < 102,400, the rows are loaded into delta rowgroups.
 
 > [!NOTE]  
@@ -41,15 +42,13 @@ Bulk loading has these built-in performance optimizations:
 
 - **Parallel loads:** You can have multiple concurrent bulk loads (**bcp** or bulk insert) that are each loading a separate data file. Unlike rowstore bulk loads into [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], you don't need to specify `TABLOCK` because each bulk import thread loads data exclusively into separate rowgroups (compressed or delta rowgroups) with exclusive lock on it.
 
-- **Reduced logging:** The data that is directly loaded into compressed row groups, leads to significant reduction in the size of the log. For example, if data was compressed 10x, the corresponding transaction log is roughly 10x smaller without requiring TABLOCK or Bulk-logged/Simple recovery model. Any data that goes to a delta rowgroup is fully logged. This includes any batch sizes that are less than 102,400 rows. Best practice is to use batchsize >= 102400. Since there's no TABLOCK required, you can load the data in parallel.
+- **Reduced logging:** The data that is directly loaded into compressed row groups, leads to significant reduction in the size of the log. For example, if data was compressed 10x, the corresponding transaction log is roughly 10x smaller without requiring `TABLOCK` or Bulk-logged/Simple recovery model. Any data that goes to a delta rowgroup is fully logged. This includes any batch sizes that are less than 102,400 rows. Best practice is to use batchsize >= 102400. Since there's no `TABLOCK` required, you can load the data in parallel.
 
-- **Minimal logging:** You can get further reduction in logging if you follow the prerequisites for [minimal logging](../import-export/prerequisites-for-minimal-logging-in-bulk-import.md). However, unlike loading data into a rowstore, TABLOCK leads to an X lock on the table rather than a BU (Bulk Update) lock and therefore parallel data load can't be done. For more information on locking, see [Locking and row versioning](../sql-server-transaction-locking-and-row-versioning-guide.md).
+- **Minimal logging:** You can get further reduction in logging if you follow the prerequisites for [minimal logging](../import-export/prerequisites-for-minimal-logging-in-bulk-import.md). However, unlike loading data into a rowstore, `TABLOCK` leads to an `X` (exclusive) lock on the table rather than a `BU` (bulk update) lock and therefore parallel data load can't be done. For more information on locking, see [Locking and row versioning](../sql-server-transaction-locking-and-row-versioning-guide.md).
 
-- **Locking optimization:** The X lock on a row group is automatically acquired when loading data into a compressed row group. However, when bulk loading into a delta rowgroup, an X lock is acquired at rowgroup but [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] still locks the PAGE/EXTENT because X rowgroup lock isn't part of locking hierarchy.
+- **Locking optimization:** The `X` lock on a row group is automatically acquired when loading data into a compressed row group. However, when bulk loading into a delta rowgroup, an `X` lock is acquired for the rowgroup but [!INCLUDE [ssDE](../../includes/ssde-md.md)] still acquires page and extent locks because the `X` rowgroup lock isn't a part of the lock hierarchy.
 
 If you have a nonclustered B-tree index on a columnstore index, there's no locking or logging optimization for the index itself but the optimizations on clustered columnstore index as described previously are applicable.
-
-Data modification (insert, delete, update) isn't a batch mode operation because it's not parallel.
 
 ## Plan bulk load sizes to minimize delta rowgroups
 
@@ -96,8 +95,8 @@ FROM [<Staging Table>]
 
 There are following optimizations available when loading into a clustered columnstore index from staging table:
 
-- **Log Optimization:** Reduced logging when the data is loaded into a compressed rowgroup.
-- **Locking Optimization:** When loading data into a compressed rowgroup, the X lock on rowgroup is acquired. However, with delta rowgroup, an X lock is acquired at rowgroup but [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] still locks the locks PAGE/EXTENT because X rowgroup lock isn't part of locking hierarchy.
+- **Log optimization:** Reduced logging when the data is loaded into a compressed rowgroup.
+- **Locking optimization:** When loading data into a compressed rowgroup, the `X` lock on rowgroup is acquired. However, when bulk loading into a delta rowgroup, an `X` lock is acquired for the rowgroup but [!INCLUDE [ssDE](../../includes/ssde-md.md)] still acquires page and extent locks because the `X` rowgroup lock isn't a part of the lock hierarchy.
 
 If you have one or more nonclustered indexes, there's no locking or logging optimization for the index itself, but the optimizations on the clustered columnstore index as described previously are still there.
 
@@ -112,7 +111,7 @@ INSERT INTO [<table-name>] VALUES ('some value' /*replace with actual set of val
 > [!NOTE]  
 > Concurrent threads using INSERT INTO to insert values into a clustered columnstore index can insert rows into the same deltastore rowgroup.
 
-Once the rowgroup contains 1,048,576 rows, the delta rowgroup us marked closed but it's still available for queries and update/delete operations, but the newly inserted rows go into an existing or newly created deltastore rowgroup. There's a background thread *Tuple Mover (TM)* that compresses the closed delta rowgroups periodically every 5 minutes or so. You can explicitly invoke the following command to compress the closed delta rowgroup.
+Once the rowgroup contains 1,048,576 rows, the delta rowgroup us marked closed but it's still available for queries and update/delete operations, but the newly inserted rows go into an existing or newly created deltastore rowgroup. There's a background thread called *tuple mover (TM)* that compresses the closed delta rowgroups periodically every 5 minutes or so. You can explicitly invoke the following command to compress the closed delta rowgroup.
 
 ```sql
 ALTER INDEX [<index-name>] on [<table-name>] REORGANIZE
@@ -126,8 +125,8 @@ ALTER INDEX [<index-name>] on [<table-name>] REORGANIZE with (COMPRESS_ALL_ROW_G
 
 ## How loading into a partitioned table works
 
-For partitioned data, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] first assigns each row to a partition, and then performs columnstore operations on the data within the partition. Each partition has its own rowgroups and at least one delta rowgroup.
+For partitioned data, the [!INCLUDE [ssDE](../../includes/ssde-md.md)] first assigns each row to a partition, and then performs columnstore operations on the data within the partition. Each partition has its own rowgroups and at least one delta rowgroup.
 
-## Next steps
+## Related content
 
-- [Data Loading performance considerations with Clustered Columnstore indexes](https://techcommunity.microsoft.com/t5/DataCAT/Data-Loading-performance-considerations-with-Clustered/ba-p/305223)
+- [Data Loading performance considerations with clustered columnstore indexes](https://techcommunity.microsoft.com/t5/DataCAT/Data-Loading-performance-considerations-with-Clustered/ba-p/305223)
