@@ -4,7 +4,7 @@ description: CREATE USER (Transact-SQL)
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: wiassaf, jaszymas
-ms.date: 11/20/2024
+ms.date: 04/08/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -122,8 +122,6 @@ CREATE USER user_name
     | DEFAULT_LANGUAGE = { NONE | lcid | language name | language alias }  
     | SID = sid   
     | ALLOW_ENCRYPTED_VALUE_MODIFICATIONS = [ ON | OFF ] ]
--- Syntax for users based on Microsoft Entra logins for Azure SQL Database
-    | TYPE = { X | E }
 
 <limited_options_list> ::=  
       DEFAULT_SCHEMA = schema_name ]   
