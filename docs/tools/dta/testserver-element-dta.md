@@ -1,12 +1,14 @@
 ---
 title: "TestServer Element (DTA)"
 description: In the dta utility, the TestServer element specifies the test server to use when tuning a production server.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: 03/01/2017
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: reference
+ms.collection:
+  - data-tools
 helpviewer_keywords:
   - "TestServer element"
 dev_langs:

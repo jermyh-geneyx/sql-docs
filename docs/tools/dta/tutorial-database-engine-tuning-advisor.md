@@ -1,12 +1,14 @@
 ---
 title: "Tutorial: Database Engine Tuning Advisor"
 description: Database Engine Tuning Advisor examines how queries are processed and recommends how to improve query processing performance by modifying database structures.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: 05/11/2021
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: reference
+ms.collection:
+  - data-tools
 helpviewer_keywords:
   - "Database Engine Tuning Advisor [SQL Server], tutorials"
   - "tutorials [Database Engine Tuning Advisor]"

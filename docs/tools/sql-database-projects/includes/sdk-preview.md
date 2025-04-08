@@ -5,6 +5,8 @@ ms.reviewer: maghan, randolphwest
 ms.date: 08/30/2024
 ms.service: sql
 ms.topic: include
+ms.collection:
+  - data-tools
 ---
 
 > [!NOTE]  

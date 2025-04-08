@@ -8,6 +8,8 @@ ms.date: 09/19/2024
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: overview
+ms.collection:
+  - data-tools
 ms.custom:
   - ignite-2024
 monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =fabric"

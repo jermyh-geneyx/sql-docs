@@ -1,13 +1,15 @@
 ---
-title: Start a Trace Automatically after Connecting to a Server
+title: Start a Trace Automatically After Connecting to a Server
 titleSuffix: SQL Server Profiler
 description: Learn how to start tracing event data automatically in SQL Server Profiler after connecting to an instance of SQL Server.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: 03/14/2017
 ms.service: sql
 ms.subservice: profiler
 ms.topic: how-to
+ms.collection:
+  - data-tools
 ---
 
 # Start a Trace Automatically after Connecting to a Server (SQL Server Profiler)

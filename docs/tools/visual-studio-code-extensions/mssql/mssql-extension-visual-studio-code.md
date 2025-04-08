@@ -8,6 +8,8 @@ ms.date: 11/20/2024
 ms.service: sql
 ms.subservice: vs-code-sql-extensions
 ms.topic: overview
+ms.collection:
+  - data-tools
 ---
 
 # What is the MSSQL extension for Visual Studio Code?

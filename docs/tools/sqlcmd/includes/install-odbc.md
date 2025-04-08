@@ -4,6 +4,8 @@ ms.author: randolphwest
 ms.date: 03/06/2024
 ms.service: sql
 ms.topic: include
+ms.collection:
+  - data-tools
 ---
 **sqlcmd** (ODBC) can be installed cross-platform, on Microsoft Windows, macOS, and Linux.
 

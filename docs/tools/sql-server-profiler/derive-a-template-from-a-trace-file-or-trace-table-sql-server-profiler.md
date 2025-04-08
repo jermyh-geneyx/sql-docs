@@ -2,12 +2,14 @@
 title: Derive a Template from a Trace File or Trace Table
 titleSuffix: SQL Server Profiler
 description: Discover how to use SQL Server Profiler to create a trace template from an existing trace file or from a trace table stored in a database.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: 03/01/2017
 ms.service: sql
 ms.subservice: profiler
 ms.topic: how-to
+ms.collection:
+  - data-tools
 ---
 
 # Derive a Template from a Trace File or Trace Table (SQL Server Profiler)

@@ -1,5 +1,5 @@
 ---
-title: "T-SQL naming issues"
+title: "T-SQL Naming Issues"
 description: "Naming issue rules included with SQL code analysis."
 author: dzsquared
 ms.author: drskwier
@@ -7,6 +7,8 @@ ms.reviewer: maghan, randolphwest
 ms.date: 08/30/2024
 ms.service: sql
 ms.topic: concept-article
+ms.collection:
+  - data-tools
 ms.custom:
   - ignite-2024
 ---

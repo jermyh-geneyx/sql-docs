@@ -1,12 +1,14 @@
 ---
 title: "Client Protocols Properties (Order Tab)"
 description: Discover how to enable or disable client protocols. See how to rearrange the order in which protocols are used when clients try to connect to SQL Server.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: "03/14/2017"
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 helpviewer_keywords:
   - "client protocols [SQL Server]"
 monikerRange: ">=sql-server-2016"

@@ -2,12 +2,14 @@
 title: Replay Options
 titleSuffix: SQL Server Profiler
 description: Explore the settings that SQL Server Profiler uses when replaying a captured trace. Learn how to use the Replay Configuration dialog box to adjust the settings.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: 03/14/2017
 ms.service: sql
 ms.subservice: profiler
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 ---
 
 # Replay Options (SQL Server Profiler)

@@ -2,12 +2,14 @@
 title: Replay to a Cursor
 titleSuffix: SQL Server Profiler
 description: Discover how to use a cursor in SQL Server Profiler to pause a trace replay at a specific point. Make debugging easier by replaying to a cursor.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: 03/01/2017
 ms.service: sql
 ms.subservice: profiler
 ms.topic: how-to
+ms.collection:
+  - data-tools
 ---
 
 # Replay to a Cursor (SQL Server Profiler)

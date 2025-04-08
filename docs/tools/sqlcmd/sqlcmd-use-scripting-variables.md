@@ -1,5 +1,5 @@
 ---
-title: sqlcmd utility - Use scripting variables
+title: sqlcmd Utility - Use Scripting Variables
 description: Learn how to use scripting variables to make a script that that can be used in multiple scenarios.
 author: dlevy-msft
 ms.author: dlevy
@@ -8,6 +8,8 @@ ms.date: 08/15/2023
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 ms.custom:
   - ignite-2024
 helpviewer_keywords:

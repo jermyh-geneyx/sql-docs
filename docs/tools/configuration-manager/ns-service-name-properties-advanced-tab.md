@@ -1,12 +1,14 @@
 ---
 title: "NS$&lt;service name&gt; Properties (Advanced Tab)"
 description: View values of custom properties by using the Advanced tab in the Notification Services Properties dialog box in SQL Server.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: "03/01/2017"
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 monikerRange: ">=sql-server-2016"
 ---
 # NS$&lt;service name&gt; Properties (Advanced Tab)

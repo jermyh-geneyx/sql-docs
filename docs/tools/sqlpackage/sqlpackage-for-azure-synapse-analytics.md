@@ -3,11 +3,14 @@ title: SqlPackage for Azure Synapse Analytics
 description: Tips for using SqlPackage in Azure Synapse Analytics scenarios
 author: dzsquared
 ms.author: drskwier
-ms.reviewer: "llali"
+ms.reviewer: llali
 ms.date: 2/13/2023
 ms.service: sql
 ms.topic: conceptual
-ms.custom: tools|sos
+ms.collection:
+  - data-tools
+ms.custom:
+  - tools|sos
 ---
 # SqlPackage for Azure Synapse Analytics
 

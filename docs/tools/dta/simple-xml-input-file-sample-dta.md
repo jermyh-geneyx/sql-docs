@@ -1,12 +1,14 @@
 ---
 title: "Simple XML Input File Sample (DTA)"
 description: This article contains a sample XML input file to use for tuning workloads to use with Database Engine Tuning Advisor.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: 03/01/2017
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: reference
+ms.collection:
+  - data-tools
 helpviewer_keywords:
   - "sample applications [DTA]"
 dev_langs:
