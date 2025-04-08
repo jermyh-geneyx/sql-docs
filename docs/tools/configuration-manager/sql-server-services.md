@@ -1,13 +1,15 @@
 ---
 title: "SQL Server Services"
 description: Get acquainted with the SQL Server Services dialog boxes in Microsoft SQL Server Configuration Manager.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.reviewer: randolphwest
 ms.date: 07/26/2024
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 monikerRange: ">=sql-server-2016"
 ---
 

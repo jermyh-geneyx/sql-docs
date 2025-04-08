@@ -1,13 +1,15 @@
 ---
 title: SqlPackage
 description: Learn how to automate database development tasks with SqlPackage. View examples and available parameters, properties, and SQLCMD variables.
-author: "dzsquared"
-ms.author: "drskwier"
-ms.reviewer: "maghan"
+author: dzsquared
+ms.author: drskwier
+ms.reviewer: maghan
 ms.date: 3/2/2025
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 ---
 
 # SqlPackage

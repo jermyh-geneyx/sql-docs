@@ -1,12 +1,14 @@
 ---
 title: "TuningOptions Element (DTA)"
 description: In the dta utility, the TuningOptions element contains the tuning options for a specific tuning session.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: 03/01/2017
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: reference
+ms.collection:
+  - data-tools
 helpviewer_keywords:
   - "TuningOptions element"
 dev_langs:

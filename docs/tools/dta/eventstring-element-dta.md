@@ -1,12 +1,14 @@
 ---
 title: "EventString Element (DTA)"
 description: In the dta utility, the EventString element specifies a Transact-SQL script workload directly in the XML input file.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: 03/14/2017
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: reference
+ms.collection:
+  - data-tools
 helpviewer_keywords:
   - "EventString element"
 dev_langs:

@@ -1,15 +1,17 @@
 ---
-title: Review the replay results
+title: Review the Replay Results
 titleSuffix: SQL Server Distributed Replay
 description: After the SQL Server Distributed Replay feature completes a distributed replay, replay activity for each client can be saved in trace files on each client.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.reviewer: mikeray
 ms.date: 06/20/2022
 ms.service: sql
 ms.subservice: distributed-replay
 ms.topic: conceptual
-monikerRange: ">= sql-server-2016 || >= sql-server-linux-2017"
+ms.collection:
+  - data-tools
+monikerRange: ">=sql-server-2016 || >=sql-server-linux-2017"
 ---
 
 # Review the Replay Results

@@ -8,6 +8,8 @@ ms.date: 03/11/2025
 ms.service: sql
 ms.subservice: sql-database-projects
 ms.topic: concept-article
+ms.collection:
+  - data-tools
 ms.custom:
   - ignite-2024
 zone_pivot_groups: sq1-sql-projects-tools
