@@ -149,6 +149,28 @@ The Azure portal displays the system-assigned managed identity (SMI) ID in the *
 
 :::image type="content" source="media/authentication-azure-ad-user-assigned-managed-identity/get-system-assigned-managed-identity-azure-sql-server-azure-portal.png" alt-text="Screenshot of the Azure portal page for an Azure SQL Database logical server. In the Properties menu, the System Assigned Managed Identity is highlighted.":::
 
+## Permissions
+
+The same Graph applications are needed for the SMI, but these permissions can be eliminated for Azure SQL Database using an SMI. The `CREATE USER` TSQL syntax would need the 'sid + type' syntax, as described here: [https://learn.microsoft.com/en-us/sql/t-sql/statements/create-user-transact-sql?view=sql-server-ver16#syntax]
+
+```syntaxsql 
+CREATE USER   
+    {  
+    Microsoft_Entra_principal FROM EXTERNAL PROVIDER [ WITH <limited_options_list> [ ,... ] ]    
+    | Microsoft_Entra_principal WITH <options_list> [ ,... ] 
+    }  
+ [ ; ]  
+  
+<limited_options_list> ::=  
+      DEFAULT_SCHEMA = schema_name  
+    | OBJECT_ID = 'objectid'
+<options_list> ::=  
+      DEFAULT_SCHEMA = schema_name  
+    | SID = sid  
+    | TYPE = { X | E }
+```
+This syntax allows creation of Entra users without validation. For this to work, the `Object Id` of the Entra principal would have to be supplied and used as `SID` in the TSQL, as explained here. [https://learn.microsoft.com/en-us/sql/t-sql/statements/create-user-transact-sql?view=sql-server-ver16#k-create-a-contained-database-user-from-a-microsoft-entra-principal-without-validation]
+
 - To retrieve the UMI(s) for Azure SQL Managed Instance or Azure SQL Database, use the following PowerShell or Azure CLI examples.
 - To retrieve the SMI for Azure SQL Managed Instance, use the following PowerShell or Azure CLI examples.
 
