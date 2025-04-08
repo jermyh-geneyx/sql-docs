@@ -12,13 +12,11 @@ ms.collection:
 monikerRange: "=azuresql || =azuresql-db"
 ---
 
-# Microsoft Copilot sample prompts to use with Azure SQL Database
+# Copilot sample prompts to use with Azure SQL Database
 
 [!INCLUDE [appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
 Here's a list of sample prompts that you can use with Microsoft Copilot in Azure SQL Database. These prompts are designed to help you interact with your database and get relevant information quickly.
-
-[!INCLUDE [appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
 | Skill Name | Skill Description | Example prompt |
 | --- | --- | --- |
