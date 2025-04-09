@@ -3,7 +3,7 @@ title: Microsoft Copilot in Azure with Azure SQL Database Overview
 description: "Learn more about the possibilities of Microsoft Copilot in Azure with Azure SQL Database for administrators and developers."
 author: markingmyname
 ms.author: maghan
-ms.reviewer: kendalv, jenhayes, wiassaf
+ms.reviewer: kendalv, jenhayes
 ms.date: 04/08/2025
 ms.service: azure-sql-database
 ms.subservice: sql-ai-copilot
