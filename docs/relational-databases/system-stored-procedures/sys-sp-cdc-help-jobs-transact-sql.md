@@ -43,6 +43,7 @@ sys.sp_cdc_help_jobs
 | --- | --- | --- |
 | `job_id` | **uniqueidentifier** | The ID of the job. |
 | `job_type` | **nvarchar(20)** | The type of job. |
+| `job_name` | **sysname** | The name of the job. |
 | `maxtrans` | **int** | The maximum number of transactions to process in each scan cycle.<br /><br />`maxtrans` is valid only for capture jobs. |
 | `maxscans` | **int** | The maximum number of scan cycles to execute in order to extract all rows from the log.<br /><br />`maxscans` is valid only for capture jobs. |
 | `continuous` | **bit** | A flag indicating whether the capture job is to run continuously (`1`), or run in one-time mode (`0`). For more information, see [sys.sp_cdc_add_job](sys-sp-cdc-add-job-transact-sql.md).<br /><br />`continuous` is valid only for capture jobs. |
