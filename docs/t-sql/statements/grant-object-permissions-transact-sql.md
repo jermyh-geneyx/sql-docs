@@ -3,7 +3,7 @@ title: "GRANT object permissions (Transact-SQL)"
 description: GRANT grants permissions on a database objects.
 author: VanMSFT
 ms.author: vanto
-ms.date: 04/06/2025
+ms.date: 04/09/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -133,9 +133,7 @@ GRANT <permission> [ ,...n ] ON
 |`VIEW CHANGE TRACKING`|`CONTROL`|`VIEW CHANGE TRACKING`|
 |`VIEW DEFINITION`|`CONTROL`|`VIEW DEFINITION`|
 
-> [!NOTE] 
-> Schemabinding is unsupported in Azure Synapse Analytics, which could lead to unexpected behavior when underlying objects are modified and permissions have been granted to a view. For additional information see [Create Views (Transact-SQL)](../../t-sql/statements/create-view-transact-sql.md).
-
+Schema binding is unsupported in Azure Synapse Analytics, which could lead to unexpected behavior when underlying objects are modified and permissions have been granted to a view. For more information, see [T-SQL views with dedicated SQL pool and serverless SQL pool in Azure Synapse Analytics](/azure/synapse-analytics/sql/develop-views#limitations).
   
 ## Permissions
 
