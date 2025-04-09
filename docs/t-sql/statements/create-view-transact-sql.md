@@ -128,13 +128,13 @@ CREATE [ OR ALTER ] VIEW [ schema_name . ] view_name [  ( column_name [ ,...n ] 
 
  *select_statement*  
 
- Is the `SELECT` statement that defines the view. The statement can use more than one table and other views. Appropriate permissions are required to select from the objects referenced in the `SELECT` clause of the view that is created.  
+ The `SELECT` statement that defines the view. The statement can use more than one table and other views. Appropriate permissions are required to select from the objects referenced in the `SELECT` clause of the view that is created.  
 
- A view does not have to be a simple subset of the rows and columns of one particular table. A view can be created that uses more than one table or other views with a `SELECT` clause of any complexity.  
+ A view does not have to be a subset of the rows and columns of one particular table. A view can be created that uses more than one table or other views with a `SELECT` clause of any complexity.  
 
  In an indexed view definition, the `SELECT` statement must be a single table statement or a multitable `JOIN` with optional aggregation.  
 
- The `SELECT` clauses in a view definition cannot include the following:  
+ The `SELECT` clauses in a view definition cannot include:  
 
  - An `ORDER BY` clause, unless there is also a `TOP` clause in the select list of the `SELECT` statement
 
@@ -188,11 +188,11 @@ CREATE [ OR ALTER ] VIEW [ schema_name . ] view_name [  ( column_name [ ,...n ] 
 
  If a view is not created with the `SCHEMABINDING` clause, run [sp_refreshview](../../relational-databases/system-stored-procedures/sp-refreshview-transact-sql.md) when changes are made to the objects underlying the view that affect the definition of the view. Otherwise, the view might produce unexpected results when it is queried.  
 
- When a view is created, information about the view is stored in the following catalog views: [sys.views](../../relational-databases/system-catalog-views/sys-views-transact-sql.md), [sys.columns](../../relational-databases/system-catalog-views/sys-columns-transact-sql.md), and [sys.sql_expression_dependencies](../../relational-databases/system-catalog-views/sys-sql-expression-dependencies-transact-sql.md). The text of the CREATE VIEW statement is stored in the [sys.sql_modules](../../relational-databases/system-catalog-views/sys-sql-modules-transact-sql.md) catalog view.  
+ When a view is created, information about the view is stored in the following catalog views: [sys.views](../../relational-databases/system-catalog-views/sys-views-transact-sql.md), [sys.columns](../../relational-databases/system-catalog-views/sys-columns-transact-sql.md), and [sys.sql_expression_dependencies](../../relational-databases/system-catalog-views/sys-sql-expression-dependencies-transact-sql.md). The text of the `CREATE VIEW` statement is stored in the [sys.sql_modules](../../relational-databases/system-catalog-views/sys-sql-modules-transact-sql.md) catalog view.  
 
- A query that uses an index on a view defined with **numeric** or **float** expressions might have a result that is different from a similar query that does not use the index on the view. This difference can be caused by rounding errors during INSERT, DELETE, or UPDATE actions on underlying tables.  
+ A query that uses an index on a view defined with **numeric** or **float** expressions might have a result that is different from a similar query that does not use the index on the view. This difference can be caused by rounding errors during `INSERT`, `DELETE`, or `UPDATE` actions on underlying tables.  
 
- The [!INCLUDE[ssDE](../../includes/ssde-md.md)] saves the settings of SET QUOTED_IDENTIFIER and SET ANSI_NULLS when a view is created. These original settings are used to parse the view when the view is used. Therefore, any client-session settings for SET QUOTED_IDENTIFIER and SET ANSI_NULLS do not affect the view definition when the view is accessed.  
+ The [!INCLUDE[ssDE](../../includes/ssde-md.md)] saves the settings of `SET QUOTED_IDENTIFIER` and `SET ANSI_NULLS` when a view is created. These original settings are used to parse the view when the view is used. Therefore, any client-session settings for `SET QUOTED_IDENTIFIER` and `SET ANSI_NULLS` do not affect the view definition when the view is accessed.  
 
  In Azure Synapse Analytics, views do not support schema binding. Therefore, if changes are made to the underlying objects, you should drop and recreate the view to refresh the underlying metadata. For more information, see [T-SQL views with dedicated SQL pool and serverless SQL pool in Azure Synapse Analytics](/azure/synapse-analytics/sql/develop-views#limitations).
 
@@ -206,17 +206,17 @@ CREATE [ OR ALTER ] VIEW [ schema_name . ] view_name [  ( column_name [ ,...n ] 
 
 You can modify the data of an underlying base table through a view, as long as the following conditions are true:  
 
- - Any modifications, including UPDATE, INSERT, and DELETE statements, must reference columns from only one base table.  
+ - Any modifications, including `UPDATE`, `INSERT`, and `DELETE` statements, must reference columns from only one base table.  
 
  - The columns being modified in the view must directly reference the underlying data in the table columns. The columns cannot be derived in any other way, such as through the following:  
 
-     - An aggregate function: AVG, COUNT, SUM, MIN, MAX, GROUPING, STDEV, STDEVP, VAR, and VARP.  
+     - An aggregate function: `AVG`, `COUNT`, `SUM`, `MIN`, `MAX`, `GROUPING`, `STDEV`, `STDEVP`, `VAR`, and `VARP`.  
 
      - A computation. The column cannot be computed from an expression that uses other columns. Columns that are formed by using the set operators UNION, UNION ALL, CROSSJOIN, EXCEPT, and INTERSECT amount to a computation and are also not updatable.  
 
- - The columns being modified are not affected by GROUP BY, HAVING, or DISTINCT clauses.  
+ - The columns being modified are not affected by `GROUP BY`, `HAVING`, or `DISTINCT` clauses.  
 
- - TOP is not used anywhere in the *select_statement* of the view together with the WITH CHECK OPTION clause.  
+ - TOP is not used anywhere in the *select_statement* of the view together with the `WITH CHECK OPTION` clause.  
 
  The previous restrictions apply to any subqueries in the FROM clause of the view, just as they apply to the view itself. Generally, the [!INCLUDE[ssDE](../../includes/ssde-md.md)] must be able to unambiguously trace modifications from the view definition to one base table. For more information, see [Modify Data Through a View](../../relational-databases/views/modify-data-through-a-view.md).  
 
@@ -224,11 +224,11 @@ You can modify the data of an underlying base table through a view, as long as t
 
  - **INSTEAD OF triggers**
 
-     INSTEAD OF triggers can be created on a view to make a view updatable. The INSTEAD OF trigger is executed instead of the data modification statement on which the trigger is defined. This trigger lets the user specify the set of actions that must happen to process the data modification statement. Therefore, if an INSTEAD OF trigger exists for a view on a specific data modification statement (INSERT, UPDATE, or DELETE), the corresponding view is updatable through that statement. For more information about INSTEAD OF triggers, see [DML Triggers](../../relational-databases/triggers/dml-triggers.md).  
+   `INSTEAD OF` triggers can be created on a view to make a view updatable. The `INSTEAD OF` trigger is executed instead of the data modification statement on which the trigger is defined. This trigger lets the user specify the set of actions that must happen to process the data modification statement. Therefore, if an `INSTEAD OF` trigger exists for a view on a specific data modification statement (`INSERT`, `UPDATE`, or `DELETE`), the corresponding view is updatable through that statement. For more information about `INSTEAD OF` triggers, see [DML Triggers](../../relational-databases/triggers/dml-triggers.md).  
 
  - **Partitioned views**
 
-     If the view is a partitioned view, the view is updatable, subject to certain restrictions. When it is needed, the [!INCLUDE[ssDE](../../includes/ssde-md.md)] distinguishes local partitioned views as the views in which all participating tables and the view are on the same instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], and distributed partitioned views as the views in which at least one of the tables in the view resides on a different or remote server.  
+   If the view is a partitioned view, the view is updatable, subject to certain restrictions. When it is needed, the [!INCLUDE[ssDE](../../includes/ssde-md.md)] distinguishes local partitioned views as the views in which all participating tables and the view are on the same instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], and distributed partitioned views as the views in which at least one of the tables in the view resides on a different or remote server.  
 
 ## Partitioned views
 
@@ -237,7 +237,7 @@ You can modify the data of an underlying base table through a view, as long as t
 > [!NOTE]  
 >  The preferred method for partitioning data local to one server is through partitioned tables. For more information, see [Partitioned Tables and Indexes](../../relational-databases/partitions/partitioned-tables-and-indexes.md).  
 
- In designing a partitioning scheme, it must be clear what data belongs to each partition. For example, the data for the `Customers` table is distributed in three member tables in three server locations: `Customers_33` on `Server1`, `Customers_66` on `Server2`, and `Customers_99` on `Server3`.  
+ When you design a partitioning scheme, it must be clear what data belongs to each partition. For example, the data for the `Customers` table is distributed in three member tables in three server locations: `Customers_33` on `Server1`, `Customers_66` on `Server2`, and `Customers_99` on `Server3`.  
 
  A partitioned view on `Server1` is defined in the following way:  
 
@@ -321,7 +321,7 @@ FROM Tn;
 
          If one or more of the member tables are remote, the view is called distributed partitioned view, and additional conditions apply. They are described later in this section.  
 
-     - The same table cannot appear two times in the set of tables that are being combined with the UNION ALL statement.  
+     - The same table cannot appear two times in the set of tables that are being combined with the `UNION ALL` statement.  
 
      - The member tables cannot have indexes created on computed columns in the table.  
 
@@ -335,9 +335,9 @@ FROM Tn;
 
  - The `INSERT` statement supplies values for all the columns in the view, even if the underlying member tables have a `DEFAULT` constraint for those columns or if they allow for `NULL` values. For those member table columns that have `DEFAULT` definitions, the statements cannot explicitly use the keyword `DEFAULT`.  
 
- - The value being inserted into the partitioning column satisfies at least one of the underlying constraints; otherwise, the insert action will fail with a constraint violation.  
+ - The value being inserted into the partitioning column satisfies at least one of the underlying constraints; otherwise, the insert action fails with a constraint violation.  
 
- - `UPDATE` statements cannot specify the `DEFAULT` keyword as a value in the SET clause, even if the column has a `DEFAULT` value defined in the corresponding member table.  
+ - `UPDATE` statements cannot specify the `DEFAULT` keyword as a value in the `SET` clause, even if the column has a `DEFAULT` value defined in the corresponding member table.  
 
  - Columns in the view that are an identity column in one or more of the member tables cannot be modified by using an `INSERT` or `UPDATE` statement.  
 
@@ -356,7 +356,7 @@ FROM Tn;
 
  For distributed partitioned views (when one or more member tables are remote), the following additional conditions apply:  
 
- - A distributed transaction will be started to guarantee atomicity across all nodes affected by the update.  
+ - A distributed transaction is started to guarantee atomicity across all nodes affected by the update.  
 
  - Set the `XACT_ABORT` `SET`option to `ON` for `INSERT`, `UPDATE`, or `DELETE` statements to work.  
 
@@ -390,15 +390,15 @@ The following examples use the [!INCLUDE [sssampledbobject-md](../../includes/ss
 
 <a id="a-using-a-simple-create-view"></a>
 
-### A. Use a simple CREATE VIEW
+### A. Use CREATE VIEW to create a view
 
- The following example creates a view by using a simple `SELECT` statement. A simple view is helpful when a combination of columns is queried frequently. The data from this view comes from the `HumanResources.Employee` and `Person.Person` tables of the [!INCLUDE[ssSampleDBnormal](../../includes/sssampledbnormal-md.md)] database. The data provides name and hire date information for the employees of [!INCLUDE[ssSampleDBCoFull](../../includes/sssampledbcofull-md.md)]. The view could be created for the person in charge of tracking work anniversaries but without giving this person access to all the data in these tables.  
+ The following example creates a view by using a `SELECT` statement. A simple view is helpful when a combination of columns is queried frequently. The data from this view comes from the `HumanResources.Employee` and `Person.Person` tables of the [!INCLUDE[ssSampleDBnormal](../../includes/sssampledbnormal-md.md)] database. The data provides name and hire date information for the employees of [!INCLUDE[ssSampleDBCoFull](../../includes/sssampledbcofull-md.md)]. The view could be created for the person in charge of tracking work anniversaries but without giving this person access to all the data in these tables.  
 
 ```sql
 CREATE VIEW hiredate_view  
-AS   
+AS
 SELECT p.FirstName, p.LastName, e.BusinessEntityID, e.HireDate  
-FROM HumanResources.Employee e   
+FROM HumanResources.Employee AS e   
 JOIN Person.Person AS p ON e.BusinessEntityID = p.BusinessEntityID ;  
 GO  
 ```  
@@ -427,7 +427,7 @@ GO
 
 ### C. Use WITH CHECK OPTION
 
- The following example shows a view named `SeattleOnly` that references five tables and allows for data modifications to apply only to employees who live in Seattle.  
+ The following example shows a view named `dbo.SeattleOnly` that references five tables and allows for data modifications to apply only to employees who live in Seattle.  
 
 ```sql
 CREATE VIEW dbo.SeattleOnly  
@@ -467,7 +467,7 @@ GO
 
 ### E. Use partitioned data
 
- The following example uses tables named `SUPPLY1`, `SUPPLY2`, `SUPPLY3`, and `SUPPLY4`. These tables correspond to the supplier tables from four offices, located in different countries/regions.  
+ The following example uses tables named `SUPPLY1`, `SUPPLY2`, `SUPPLY3`, and `SUPPLY4`. These tables correspond to the supplier tables from four offices, located in different regions.  
 
 ```sql
 --Create the tables and insert the values.  
@@ -515,17 +515,9 @@ GO
 
 <a id="f-creating-a-simple-view"></a>
 
-### F. Create a simple view
+<a id="#g-create-a-view-by-joining-two-tables"></a>
 
- The following example creates a view by selecting only some of the columns from the source table.  
-
-```sql
-CREATE VIEW DimEmployeeBirthDates AS  
-SELECT FirstName, LastName, BirthDate   
-FROM DimEmployee;  
-```  
-
-### G. Create a view by joining two tables
+### F. Create a view by joining two tables
 
  The following example creates a view by using a `SELECT` statement with an `OUTER JOIN`. The results of the join query populate the view.  
 
