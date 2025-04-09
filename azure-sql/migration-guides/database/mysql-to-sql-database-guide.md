@@ -11,8 +11,6 @@ ms.topic: how-to
 ms.collection:
  - sql-migration-content
  - migration
- - aws-to-azure
- - gcp-to-azure
 ---
 
 # Migration guide: MySQL to Azure SQL Database
