@@ -26,10 +26,6 @@ sections:
         answer: |
           The Copilot capabilities in Azure SQL Database include Copilot in the Azure portal experience: [Azure Copilot integration](copilot-azure-sql-overview.md)
       - question: |
-          How do I enable Microsoft Copilot in Azure for my Azure tenant?
-        answer: |
-          Review the steps in [Enable Microsoft Copilot in Azure for your Azure tenant](copilot-azure-sql-overview.md#enable-copilot-in-your-azure-tenant). Microsoft Copilot skills in Azure SQL Database are currently in preview for a limited number of early adopters. To sign up for this program, visit [Request Access to Copilot in Azure SQL Database: Preview](https://aka.ms/sqlcopilot-signup).
-      - question: |
           How does Copilot use data from my Azure SQL Database environment?
         answer: |
           Copilot generates responses grounded in your Azure SQL Database environment. Copilot only has access to resources that you have access to and can only perform analysis and actions that you have the permissions to perform. Copilot respects all existing access management and protections.
