@@ -2,12 +2,14 @@
 title: Start a Trace
 titleSuffix: SQL Server Profiler
 description: Learn how to start a trace and locate its data after you have defined a new trace or created a template in SQL Server Profiler.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: 03/14/2017
 ms.service: sql
 ms.subservice: profiler
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 ---
 
 # Start a Trace

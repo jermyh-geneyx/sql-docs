@@ -1,12 +1,14 @@
 ---
 title: "Notification Services (SQL Server Configuration Manager)"
 description: In SQL Server Configuration Manager, learn how to view the properties of the Notification Services framework.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: "03/01/2017"
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 monikerRange: ">=sql-server-2016"
 ---
 # Notification Services (SQL Server Configuration Manager)

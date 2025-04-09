@@ -2,12 +2,14 @@
 title: Considerations for Replaying Traces
 titleSuffix: SQL Server Profiler
 description: Find out which operations, stored procedures, templates, and log activities prevent SQL Server Profiler from replaying traces.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: 03/06/2017
 ms.service: sql
 ms.subservice: profiler
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 ---
 
 # Considerations for Replaying Traces (SQL Server Profiler)

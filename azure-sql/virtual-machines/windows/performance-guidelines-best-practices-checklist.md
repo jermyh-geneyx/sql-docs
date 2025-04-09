@@ -49,12 +49,16 @@ If you plan to manually install SQL Server on an Azure VM, consider the followin
 - If they don't already exist, create the folders for your SQL Server installation and data files prior to launching the installation media. 
 - Copy the installation media to a local drive instead of installing directly from the mounted ISO. 
 - After installation, register your SQL Server VM with the [SQL Server IaaS Agent Extension](sql-server-iaas-agent-extension-automate-management.md) to automate management tasks.
+- Place the `tempdb` database on the [local SSD ephemeral storage](tempdb-ephemeral-storage.md) when possible. 
 
 ## VM size
 
 The checklist in this section covers the [VM size best practices](performance-guidelines-best-practices-vm-size.md) for SQL Server on Azure VMs.
 
 [!INCLUDE [vm size best practices](../../includes/virtual-machines-best-practices-vm-size.md)]
+
+> [!CAUTION]
+> SQL Server isn't supported on VM sizes that deploy with an uninitialized ephemeral disk. To learn more, review [VM deployment and SQL Server failures](/troubleshoot/sql/azure-sql/sql-deployment-fails-drive-not-ready). 
 
 ## Storage
 

@@ -1,12 +1,14 @@
 ---
 title: "NS$&lt;service name&gt; Properties (Service Tab)"
 description: Learn about the options on the Service tab in the Notification Services Properties dialog box, such as the binary path, the host name, and the start mode.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: "03/14/2017"
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 monikerRange: ">=sql-server-2016"
 ---
 # NS$&lt;service name&gt; Properties (Service Tab)

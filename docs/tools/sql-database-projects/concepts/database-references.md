@@ -1,5 +1,5 @@
 ---
-title: Database references overview
+title: Database References Overview
 description: "Extend a SQL project with references to additional database components."
 author: dzsquared
 ms.author: drskwier
@@ -8,6 +8,8 @@ ms.date: 08/30/2024
 ms.service: sql
 ms.subservice: sql-database-projects
 ms.topic: concept-article
+ms.collection:
+  - data-tools
 ms.custom:
   - ignite-2024
 f1_keywords:

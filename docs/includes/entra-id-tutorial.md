@@ -1,7 +1,7 @@
 ---
 author: MikeRayMSFT
 ms.author: mikeray
-ms.date: 04/11/2024
+ms.date: 04/04/2025
 ms.service: sql
 ms.topic: include
 ---
@@ -45,6 +45,18 @@ In this tutorial, you learn how to:
 
 > [!WARNING]  
 > Connections authenticated by Microsoft Entra ID are always encrypted. If SQL Server is using a self-signed certificate, you must add `trust server cert = true` in the connection string. SQL Server and Windows authenticated connections don't require encryption, but it is strongly recommended.
+>
+> SQL Server connects directly to Microsoft Entra ID for authentication. Either [explicit firewall URLs](../sql-server/azure-arc/prerequisites.md#network-requirements-for-enabling-entra-id-authentication) need to be opened for direct access, or use a proxy server. Microsoft Entra ID does not use the Arc Connected Machine Agent proxy for authentication. If the machine requires using a proxy server, Microsoft Entra ID requires that the machine-level WinHTTP proxy is set using the following commands (replace `<http://proxyserver:port>` with the appropriate value):
+>
+> ```console
+> netsh winhttp set proxy proxy-server="<http://proxyserver:port>"
+> ```
+>
+> Microsoft Entra ID authentication does not utililze the Arc agent proxy setting. The Arc Agent proxy can be set using the following commands (replace `<http://proxyserver:port>` with the appropriate value):
+>
+> ```console
+> azcmagent config set proxy.url "<http://proxyserver:port>"
+> ```
 
 <a name='create-and-register-an-azure-ad-application'></a>
 

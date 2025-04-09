@@ -1,12 +1,14 @@
 ---
-title: "SQL Full-text Filter Daemon Launcher (Service Tab)"
+title: "SQL Full-Text Filter Daemon Launcher (Service Tab)"
 description: Find out about the SQL Full-text Filter Daemon Launcher, which SQL Server full-text search uses. Learn about the Service tab of its Properties dialog box.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: "03/14/2017"
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 monikerRange: ">=sql-server-2016"
 ---
 # SQL Full-text Filter Daemon Launcher (Service Tab)

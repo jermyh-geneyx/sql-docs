@@ -1,5 +1,5 @@
 ---
-title: Schema comparison overview
+title: Schema Comparison Overview
 description: "Visualize the difference in database models with schema compare."
 author: dzsquared
 ms.author: drskwier
@@ -8,6 +8,8 @@ ms.date: 08/30/2024
 ms.service: sql
 ms.subservice: sql-database-projects
 ms.topic: overview
+ms.collection:
+  - data-tools
 ms.custom:
   - ignite-2024
 f1_keywords:

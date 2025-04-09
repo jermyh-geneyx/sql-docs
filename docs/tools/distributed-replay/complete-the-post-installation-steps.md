@@ -1,15 +1,17 @@
 ---
-title: Complete the post-installation steps
+title: Complete the Post-Installation Steps
 titleSuffix: SQL Server Distributed Replay
 description: After you install Distributed Replay, you must modify the Distributed Replay controller and client services accounts.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.reviewer: mikeray
 ms.date: 06/20/2022
 ms.service: sql
 ms.subservice: distributed-replay
 ms.topic: how-to
-monikerRange: ">= sql-server-2016 || >= sql-server-linux-2017"
+ms.collection:
+  - data-tools
+monikerRange: ">=sql-server-2016 || >=sql-server-linux-2017"
 ---
 
 # Complete the Post-Installation Steps

@@ -2,12 +2,14 @@
 title: Save Traces and Trace Templates
 titleSuffix: SQL Server Profiler
 description: Discover how to save captured event data to a trace file or a database table in SQL Server Profiler and how to save user-defined trace templates.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: 03/14/2017
 ms.service: sql
 ms.subservice: profiler
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 ---
 
 # Save Traces and Trace Templates

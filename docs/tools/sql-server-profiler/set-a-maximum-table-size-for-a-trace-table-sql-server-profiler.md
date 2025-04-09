@@ -2,12 +2,14 @@
 title: Set a Maximum Table Size for a Trace Table
 titleSuffix: SQL Server Profiler
 description: Find out how to limit the size of a trace table. Use SQL Server Profiler to specify the maximum number of rows the table can have.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: 03/01/2017
 ms.service: sql
 ms.subservice: profiler
 ms.topic: how-to
+ms.collection:
+  - data-tools
 ---
 
 # Set a Maximum Table Size for a Trace Table (SQL Server Profiler)

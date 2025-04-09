@@ -26,32 +26,21 @@ After you complete the steps for the [pre-migration stage](../pre-migration.md
 
 The following sections provide options for performing a migration in order of preference:
 
-- [migrate using the Azure SQL migration extension for Azure Data Studio with minimal downtime](#migrate-using-the-azure-sql-migration-extension-for-azure-data-studio-minimal-downtime)
 - [backup and restore](#backup-and-restore)
 - [detach and attach from a URL](#detach-and-attach-from-a-url)
 - [convert to a VM, upload to a URL, and deploy as a new VM](#convert-vm)
 - [log shipping](#log-shipping)
 - [ship a hard drive](#ship-a-hard-drive)
+- [migrate using the Azure SQL migration extension for Azure Data Studio with minimal downtime](#migrate-using-the-azure-sql-migration-extension-for-azure-data-studio-minimal-downtime)
 - [migrate objects outside user databases](#migrate-objects-outside-user-databases)
 
-### Migrate using the Azure SQL migration extension for Azure Data Studio (minimal downtime)
+### Detach and attach from a URL
 
-To perform a minimal downtime migration using Azure Data Studio, follow the high level steps below. For a detailed step-by-step tutorial, see [Tutorial: Migrate SQL Server to SQL Server on Azure Virtual Machines with DMS](database-migration-service.md):
+Detach your database and log files and transfer them to [Azure Blob storage](/sql/relational-databases/databases/sql-server-data-files-in-microsoft-azure). Then attach the database from the URL on your Azure VM. Use this method if you want the physical database files to reside in Blob storage, which might be useful for very large databases. Use the following general steps to migrate a user database using this manual method:
 
-1. Download and install [Azure Data Studio](/azure-data-studio/download-azure-data-studio) and the [Azure SQL migration extension](/azure-data-studio/extensions/azure-sql-migration-extension).
-1. Launch the Migrate to Azure SQL wizard in the extension in Azure Data Studio.
-1. Select databases for assessment and view migration readiness or issues (if any). Additionally, collect performance data and get right-sized Azure recommendation.
-1. Select your Azure account and your target SQL Server on Azure Machine from your subscription.
-1. Select the location of your database backups. Your database backups can either be located on an on-premises network share or in an Azure Blob Storage container.
-1. Create a new Azure Database Migration Service using the wizard in Azure Data Studio. If you have previously created an Azure Database Migration Service using Azure Data Studio, you can reuse the same if desired.
-1. *Optional*: If your backups are on an on-premises network share, download and install [self-hosted integration runtime](https://www.microsoft.com/download/details.aspx?id=39717) on a machine that can connect to source SQL Server and the location containing the backup files.
-1. Start the database migration and monitor the progress in Azure Data Studio. You can also monitor the progress under the Azure Database Migration Service resource in Azure portal.
-1. Complete the cutover.
-   1. Stop all incoming transactions to the source database.
-   1. Make application configuration changes to point to the target database in SQL Server on Azure Virtual Machine.
-   1. Take any tail log backups for the source database in the backup location specified.
-   1. Ensure all database backups have the status Restored in the monitoring details page.
-   1. Select **Complete cutover** in the monitoring details page.
+1. Detach the database files from the on-premises database instance.
+1. Copy the detached database files into Azure Blob storage using the [AzCopy command-line utility](/azure/storage/common/storage-use-azcopy-v10).
+1. Attach the database files from the Azure URL to the SQL Server instance in the Azure VM.
 
 ### Backup and restore
 
@@ -63,14 +52,6 @@ To perform a standard migration by using backup and restore:
 1. Perform a full database backup to an on-premises location.
 1. Copy your on-premises backup files to your VM by using a remote desktop, [Azure Data Explorer](/azure/data-explorer/data-explorer-overview), or the [AzCopy command-line utility](/azure/storage/common/storage-use-azcopy-v10). (Greater than 2-TB backups are recommended.)
 1. Restore full database backups to the SQL Server on Azure Virtual Machines.
-
-### Detach and attach from a URL
-
-Detach your database and log files and transfer them to [Azure Blob storage](/sql/relational-databases/databases/sql-server-data-files-in-microsoft-azure). Then attach the database from the URL on your Azure VM. Use this method if you want the physical database files to reside in Blob storage, which might be useful for very large databases. Use the following general steps to migrate a user database using this manual method:
-
-1. Detach the database files from the on-premises database instance.
-1. Copy the detached database files into Azure Blob storage using the [AzCopy command-line utility](/azure/storage/common/storage-use-azcopy-v10).
-1. Attach the database files from the Azure URL to the SQL Server instance in the Azure VM.
 
 ### <a id="convert-vm"></a> Convert to a VM, upload to a URL, and deploy as a new VM
 
@@ -92,6 +73,25 @@ For more information, see [Log Shipping Tables and Stored Procedures](/sql/datab
 ### Ship a hard drive
 
 Use the [Windows Import/Export Service method](/azure/import-export/storage-import-export-service) to transfer large amounts of file data to Azure Blob storage in situations where uploading over the network is prohibitively expensive or not feasible. With this service, you send one or more hard drives containing that data to an Azure data center where your data will be uploaded to your storage account.
+
+### Migrate using the Azure SQL migration extension for Azure Data Studio (minimal downtime)
+
+To perform a minimal downtime migration using Azure Data Studio, follow the high level steps below. For a detailed step-by-step tutorial, see [Tutorial: Migrate SQL Server to SQL Server on Azure Virtual Machines with DMS](database-migration-service.md):
+
+1. Download and install [Azure Data Studio](/azure-data-studio/download-azure-data-studio) and the [Azure SQL migration extension](/azure-data-studio/extensions/azure-sql-migration-extension).
+1. Launch the Migrate to Azure SQL wizard in the extension in Azure Data Studio.
+1. Select databases for assessment and view migration readiness or issues (if any). Additionally, collect performance data and get right-sized Azure recommendation.
+1. Select your Azure account and your target SQL Server on Azure Machine from your subscription.
+1. Select the location of your database backups. Your database backups can either be located on an on-premises network share or in an Azure Blob Storage container.
+1. Create a new Azure Database Migration Service using the wizard in Azure Data Studio. If you have previously created an Azure Database Migration Service using Azure Data Studio, you can reuse the same if desired.
+1. *Optional*: If your backups are on an on-premises network share, download and install [self-hosted integration runtime](https://www.microsoft.com/download/details.aspx?id=39717) on a machine that can connect to source SQL Server and the location containing the backup files.
+1. Start the database migration and monitor the progress in Azure Data Studio. You can also monitor the progress under the Azure Database Migration Service resource in Azure portal.
+1. Complete the cutover.
+   1. Stop all incoming transactions to the source database.
+   1. Make application configuration changes to point to the target database in SQL Server on Azure Virtual Machine.
+   1. Take any tail log backups for the source database in the backup location specified.
+   1. Ensure all database backups have the status Restored in the monitoring details page.
+   1. Select **Complete cutover** in the monitoring details page.
 
 ### Migrate objects outside user databases
 

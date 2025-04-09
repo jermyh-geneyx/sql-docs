@@ -1,5 +1,5 @@
 ---
-title: Compare a database and a project
+title: Compare a Database and a Project
 description: "Compare a project and a database and with different approaches."
 author: dzsquared
 ms.author: drskwier
@@ -8,6 +8,8 @@ ms.date: 08/30/2024
 ms.service: sql
 ms.subservice: sql-database-projects
 ms.topic: how-to
+ms.collection:
+  - data-tools
 ms.custom:
   - ignite-2024
 zone_pivot_groups: sq1-sql-projects-tools

@@ -1,12 +1,14 @@
 ---
 title: "Analysis Server Properties (Log On Tab)"
 description: Learn about the Log On tab of the Analysis Server Properties dialog box. See how to use it to specify the SSAS service account and start or stop the service.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: "03/14/2017"
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 monikerRange: ">=sql-server-2016"
 ---
 # Analysis Server Properties (Log On Tab)

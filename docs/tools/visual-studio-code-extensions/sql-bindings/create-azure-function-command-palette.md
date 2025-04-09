@@ -1,5 +1,5 @@
 ---
-title: Create Azure Functions With the SQL Bindings Extension for Visual Studio Code Through Command Palette
+title: Create Azure Functions with the SQL Bindings Extension for Visual Studio Code Through Command Palette
 description: Use the Visual Studio Code command palette to create Azure functions with SQL Bindings.
 author: VasuBhog
 ms.author: vabhog
@@ -8,6 +8,8 @@ ms.date: 11/18/2024
 ms.service: sql
 ms.subservice: vs-code-sql-extensions
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 ---
 
 # Create Azure Functions with the SQL Bindings extension for Visual Studio Code through the Command Palette

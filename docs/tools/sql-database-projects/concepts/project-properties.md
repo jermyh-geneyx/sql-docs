@@ -8,6 +8,8 @@ ms.date: 02/19/2025
 ms.service: sql
 ms.subservice: sql-database-projects
 ms.topic: concept-article
+ms.collection:
+  - data-tools
 ---
 
 # SQL projects properties

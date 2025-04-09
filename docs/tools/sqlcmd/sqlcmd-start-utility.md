@@ -1,5 +1,5 @@
 ---
-title: Start the sqlcmd utility
+title: Start the sqlcmd Utility
 description: Learn how to start the sqlcmd utility, which lets you enter Transact-SQL statements, system procedures, and script files, in SQLCMD mode or in scripts and jobs.
 author: dlevy-msft
 ms.author: dlevy
@@ -8,6 +8,8 @@ ms.date: 07/29/2024
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: how-to
+ms.collection:
+  - data-tools
 ms.custom:
   - ignite-2024
 monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"

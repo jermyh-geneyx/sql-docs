@@ -1,5 +1,5 @@
 ---
-title: "Quickstart: Create a local copy of a database in a container using sqlcmd"
+title: "Quickstart: Create a Local Copy of a Database in a Container Using sqlcmd"
 description: A quickstart that walks through using creating a new container and restoring a database
 author: dlevy-msft
 ms.author: dlevy
@@ -7,8 +7,11 @@ ms.reviewer: maghan, randolphwest
 ms.date: 12/06/2023
 ms.service: sql
 ms.subservice: tools-other
-ms.custom: linux-related-content
 ms.topic: quickstart
+ms.collection:
+  - data-tools
+ms.custom:
+  - linux-related-content
 monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017"
 ---
 

@@ -278,10 +278,12 @@
       href: database/free-offer.md
     - name: Azure SQL Database free offer FAQ
       href: database/free-offer-faq.yml
-    - name: Copilot in SQL Database
+    - name: Copilot in Azure with Azure SQL Database
       href: copilot/copilot-azure-sql-overview.md
-    - name: Copilot in SQL Database FAQ
+    - name: Copilot in Azure with Azure SQL Database FAQ
       href: copilot/copilot-azure-sql-faq.yml
+    - name: Copilot sample prompts
+      href: copilot/copilot-prompts-list.md
     - name: Intelligent applications and AI
       href: database/ai-artificial-intelligence-intelligent-applications.md
   - name: Quickstarts
@@ -1673,7 +1675,6 @@
           href: virtual-machines/windows/create-sql-vm-powershell.md
         - name: on Azure confidential VMs
           href: virtual-machines/windows/sql-vm-create-confidential-vm-how-to.md
-
       - name: Manage
         items:
         - name: With the Azure portal
@@ -1686,49 +1687,56 @@
           href: virtual-machines/windows/change-sql-server-edition.md
         - name: Change version
           href: virtual-machines/windows/change-sql-server-version.md
-        - name: Premium SSD storage
-          href: virtual-machines/windows/storage-configuration.md
-        - name: Azure Elastic SAN Storage
-          href: virtual-machines/windows/storage-configuration-azure-elastic-san.md
-
-        - name: Microsoft Entra authentication
-          href: virtual-machines/windows/configure-azure-ad-authentication-for-sql-vm.md
+      - name: SQL IaaS Agent extension
+        displayName: resource provider, registration, sql vm rp
+        items:
+        - name: Automatic registration
+          href: virtual-machines/windows/sql-agent-extension-automatic-registration-all-vms.md
+        - name: Register single VM
+          href: virtual-machines/windows/sql-agent-extension-manually-register-single-vm.md
+        - name: Bulk register multiple VMs
+          href: virtual-machines/windows/sql-agent-extension-manually-register-vms-bulk.md
+        - name: Known issues and troubleshooting
+          href: virtual-machines/windows/sql-agent-extension-troubleshoot-known-issues.md
+      - name: Patching
+        items: 
         - name: Azure Update Manager
           href: virtual-machines/azure-update-manager-sql-vm.md
-        - name: Automated Patching
+        - name: Automated patching
           href: virtual-machines/windows/automated-patching.md
+      - name: Storage
+        items:
+        - name: Premium SSD storage
+          href: virtual-machines/windows/storage-configuration.md
+        - name: Premium SSD v2 (preview)
+          href: virtual-machines/windows/storage-configuration-premium-ssd-v2.md
+        - name: Azure Elastic SAN Storage
+          href: virtual-machines/windows/storage-configuration-azure-elastic-san.md
+        - name: Place tempdb to ephemeral disk
+          href: virtual-machines/windows/tempdb-ephemeral-storage.md
 
-        - name: Azure Key Vault Integration
-          href: virtual-machines/windows/azure-key-vault-integration-configure.md
-        - name: Migrate storage to Ultradisk
-          href: virtual-machines/windows/storage-migrate-to-ultradisk.md
-        - name: Backup and restore using managed identities
-          href: virtual-machines/windows/backup-restore-to-url-using-managed-identities.md
-        - name: EKM with AKV using managed identities
-          href: virtual-machines/windows/managed-identity-extensible-key-management.md
-        - name: SQL IaaS Agent extension
-          displayName: resource provider, registration, sql vm rp
-          items:
-          - name: Automatic registration
-            href: virtual-machines/windows/sql-agent-extension-automatic-registration-all-vms.md
-          - name: Register single VM
-            href: virtual-machines/windows/sql-agent-extension-manually-register-single-vm.md
-          - name: Bulk register multiple VMs
-            href: virtual-machines/windows/sql-agent-extension-manually-register-vms-bulk.md
-          - name: Known issues and troubleshooting
-            href: virtual-machines/windows/sql-agent-extension-troubleshoot-known-issues.md
       - name: Optimize performance
         items:
         - name: SQL best practices assessment
           href: virtual-machines/windows/sql-assessment-for-sql-vm.md
         - name: Analyze I/O performance
           href: virtual-machines/windows/storage-performance-analysis.md
-        - name: Premium SSD v2 (preview)
-          href: virtual-machines/windows/storage-configuration-premium-ssd-v2.md
+
+      - name: Security
+        items: 
+        - name: Microsoft Entra authentication
+          href: virtual-machines/windows/configure-azure-ad-authentication-for-sql-vm.md
+        - name: EKM with AKV using managed identities
+          href: virtual-machines/windows/managed-identity-extensible-key-management.md
+        - name: Azure Key Vault Integration
+          href: virtual-machines/windows/azure-key-vault-integration-configure.md
       - name: Migrate
         items:
         - name: VM to a new region
           href: virtual-machines/windows/move-sql-vm-different-region.md
+        - name: Migrate storage to Ultradisk
+          href: virtual-machines/windows/storage-migrate-to-ultradisk.md
+
       - name: Business continuity
         items:
         - name: Configure cluster quorum
@@ -1741,6 +1749,8 @@
             href: virtual-machines/windows/automated-backup.md
           - name: Automated backup (SQL 2014)
             href: virtual-machines/windows/automated-backup-sql-2014.md
+          - name: Backup and restore using managed identities
+            href: virtual-machines/windows/backup-restore-to-url-using-managed-identities.md
         - name: Availability group (AG)
           displayName: Always On, alwayson, availability group
           items:

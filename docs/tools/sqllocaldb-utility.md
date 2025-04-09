@@ -1,13 +1,15 @@
 ---
 title: "SqlLocalDB Utility"
 description: The SqlLocalDB utility command line tool allows users and developers to create and manage an instance of SQL Server Express LocalDB.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.reviewer: randolphwest
 ms.date: 12/29/2022
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 helpviewer_keywords:
   - "SqlLocalDB utility [SQL Server]"
   - "local database runtime utility"

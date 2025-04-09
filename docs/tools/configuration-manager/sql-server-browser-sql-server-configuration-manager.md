@@ -1,12 +1,14 @@
 ---
 title: "SQL Server Browser (SQL Server Configuration Manager)"
 description: Discover how to use SQL Server Configuration Manager to view the properties of the SQL Server Browser service.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: "03/14/2017"
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 monikerRange: ">=sql-server-2016"
 ---
 # SQL Server Browser (SQL Server Configuration Manager)

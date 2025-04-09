@@ -3,7 +3,7 @@ title: "Columnstore indexes - Design guidance"
 description: "High-level recommendations for designing columnstore indexes."
 author: MikeRayMSFT
 ms.author: mikeray
-ms.date: 02/28/2025
+ms.date: 04/04/2025
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: conceptual
@@ -11,7 +11,8 @@ ms.custom:
   - ignite-2024
 monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
-# Columnstore indexes - Design guidance
+
+# Columnstore indexes - design guidance
 
 [!INCLUDE [SQL Server Azure SQL Database Synapse Analytics PDW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
@@ -195,35 +196,11 @@ Each rowgroup contains one column segment for every column in the table. Each co
 
 There is metadata with each segment to allow for fast elimination of segments without reading them. Data type choices might have a significant impact on query performance based common filter predicates for queries on the columnstore index. For more information, see [segment elimination](columnstore-indexes-query-performance.md#segment-elimination).
 
-## Related Tasks
+## Related tasks
 
-These are tasks for creating and maintaining columnstore indexes.
-
-|Task|Reference articles|Notes|
-|----------|----------------------|-----------|
-|Create a table as a columnstore.|[CREATE TABLE (Transact-SQL)](../../t-sql/statements/create-table-transact-sql.md)|Beginning with [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)], you can create the table as a clustered columnstore index. You do not have to first create a rowstore table and then convert it to columnstore.|
-|Create a memory table with a columnstore index.|[CREATE TABLE (Transact-SQL)](../../t-sql/statements/create-table-transact-sql.md)|Beginning with [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)], you can create a memory-optimized table with a columnstore index. The columnstore index can also be added after the table is created, using the ALTER TABLE ADD INDEX syntax.|
-|Convert a rowstore table to a columnstore.|[CREATE COLUMNSTORE INDEX (Transact-SQL)](../../t-sql/statements/create-columnstore-index-transact-sql.md)|Convert an existing heap or B-tree to a columnstore. Examples show how to handle existing indexes and also the name of the index when performing this conversion.|
-|Convert a columnstore table to a rowstore.|[CREATE CLUSTERED INDEX (Transact-SQL)](../../t-sql/statements/create-columnstore-index-transact-sql.md#d-convert-a-columnstore-table-to-a-rowstore-table-with-a-clustered-index) or [Convert a columnstore table back to a rowstore heap](../../t-sql/statements/create-columnstore-index-transact-sql.md#e-convert-a-columnstore-table-back-to-a-rowstore-heap) |Usually this conversion isn't necessary, but there can be times when you need to convert. Examples show how to convert a columnstore to a heap or clustered index.|
-|Create a columnstore index on a rowstore table.|[CREATE COLUMNSTORE INDEX (Transact-SQL)](../../t-sql/statements/create-columnstore-index-transact-sql.md)|A rowstore table can have one columnstore index.  Beginning with [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)], the columnstore index can have a filtered condition. Examples show the basic syntax.|
-|Create performant indexes for operational analytics.|[Get started with Columnstore for real-time operational analytics](get-started-with-columnstore-for-real-time-operational-analytics.md)|Describes how to create complementary columnstore and B-tree indexes so that OLTP queries use B-tree indexes and analytics queries use columnstore indexes.|
-|Create performant columnstore indexes for data warehousing.|[Columnstore indexes in data warehousing](columnstore-indexes-data-warehouse.md)|Describes how to use B-tree indexes on columnstore tables to create performant data warehousing queries.|
-|Use a B-tree index to enforce a primary key constraint on a columnstore index.|[Columnstore indexes in data warehousing](columnstore-indexes-data-warehouse.md)|Shows how to combine B-tree and columnstore indexes to enforce primary key constraints on the columnstore index.|
-|Drop a columnstore index|[DROP INDEX (Transact-SQL)](../../t-sql/statements/drop-index-transact-sql.md)|Dropping a columnstore index uses the standard DROP INDEX syntax that B-tree indexes use. Dropping a clustered columnstore index converts the columnstore table to a heap.|
-|Delete a row from a columnstore index|[DELETE (Transact-SQL)](../../t-sql/statements/delete-transact-sql.md)|Use [DELETE (Transact-SQL)](../../t-sql/statements/delete-transact-sql.md) to delete a row.<br /><br />**columnstore** row: [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] marks the row as logically deleted but does not reclaim the physical storage for the row until the index is rebuilt.<br /><br />**deltastore** row: [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] logically and physically deletes the row.|
-|Update a row in the columnstore index|[UPDATE (Transact-SQL)](../../t-sql/queries/update-transact-sql.md)|Use [UPDATE (Transact-SQL)](../../t-sql/queries/update-transact-sql.md) to update a row.<br /><br />**columnstore** row:  [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] marks the row as logically deleted, and then inserts the updated row into the deltastore.<br /><br />**deltastore** row: [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] updates the row in the deltastore.|
-|Force all rows in the deltastore to go into the columnstore.|[ALTER INDEX (Transact-SQL)](../../t-sql/statements/alter-index-transact-sql.md) ... REBUILD<br /><br />[Optimize index maintenance to improve query performance and reduce resource consumption](reorganize-and-rebuild-indexes.md)|`ALTER INDEX` with the `REBUILD` option forces all rows to go into the columnstore.|
-|Defragment a columnstore index|[ALTER INDEX (Transact-SQL)](../../t-sql/statements/alter-index-transact-sql.md)|`ALTER INDEX ... REORGANIZE` defragments columnstore indexes online.|
-|Merge tables with columnstore indexes.|[MERGE (Transact-SQL)](../../t-sql/statements/merge-transact-sql.md)|
+For a summary of common tasks for creating and maintaining columnstore indexes, see [Related tasks](columnstore-indexes-overview.md#related-tasks).
 
 ## Related content
-
-To create an empty columnstore index for:
-
-- [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] or [!INCLUDE[ssSDS](../../includes/sssds-md.md)], refer to [CREATE TABLE (Transact-SQL)](../../t-sql/statements/create-table-transact-sql.md).
-- [!INCLUDE[ssazuresynapse-md](../../includes/ssazuresynapse-md.md)], refer to [CREATE TABLE (Azure Synapse Analytics)](../../t-sql/statements/create-table-as-select-azure-sql-data-warehouse.md).
-
-For more information on how to convert an existing rowstore heap or B-tree index into a clustered columnstore index, or to create a nonclustered columnstore index, refer to [CREATE COLUMNSTORE INDEX (Transact-SQL)](../../t-sql/statements/create-columnstore-index-transact-sql.md).
 
 - [What's new in columnstore indexes](columnstore-indexes-what-s-new.md)
 - [Columnstore indexes in data warehousing](columnstore-indexes-data-warehouse.md)

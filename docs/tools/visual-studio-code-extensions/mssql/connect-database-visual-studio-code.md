@@ -1,5 +1,5 @@
 ---
-title: "Quickstart: Connect To and Query a Database With the MSSQL Extension for Visual Studio Code"
+title: "Quickstart: Connect to and Query a Database with the MSSQL Extension for Visual Studio Code"
 description: Learn how to connect to a database using the MSSQL extension for Visual Studio Code, and execute Transact-SQL (T-SQL) statements to interact with your database.
 author: croblesm
 ms.author: roblescarlos
@@ -8,6 +8,8 @@ ms.date: 11/20/2024
 ms.service: sql
 ms.subservice: vs-code-sql-extensions
 ms.topic: quickstart
+ms.collection:
+  - data-tools
 ---
 
 # Quickstart: Connect to and query a database with the MSSQL extension for Visual Studio Code

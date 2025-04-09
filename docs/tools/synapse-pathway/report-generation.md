@@ -7,7 +7,10 @@ ms.date: 09/09/2021
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: tutorial
-ms.custom: template-tutorial
+ms.collection:
+  - data-tools
+ms.custom:
+  - template-tutorial
 monikerRange: "=azure-sqldw-latest"
 ---
 

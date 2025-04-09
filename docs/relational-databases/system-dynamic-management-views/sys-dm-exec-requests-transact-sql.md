@@ -4,7 +4,7 @@ description: sys.dm_exec_requests returns information about each request that is
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: mikeray, randolphwest, derekw
-ms.date: 10/04/2023
+ms.date: 04/06/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -23,10 +23,10 @@ monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-20
 
 [!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw.md)]
 
-Returns information about each request that is executing in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. For more information about requests, see the [Thread and Task Architecture Guide](../thread-and-task-architecture-guide.md).
+Returns information about each request that is executing in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. For more information about requests, see the [Thread and task architecture guide](../thread-and-task-architecture-guide.md).
 
 > [!NOTE]  
-> To call this from dedicated SQL pool in [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] or [!INCLUDE [ssPDW](../../includes/sspdw-md.md)], see [sys.dm_pdw_exec_requests (Transact-SQL)](sys-dm-pdw-exec-requests-transact-sql.md). For serverless SQL pool or [!INCLUDE [fabric](../../includes/fabric.md)] use `sys.dm_exec_requests`.
+> To call this from dedicated SQL pool in [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] or [!INCLUDE [ssPDW](../../includes/sspdw-md.md)], see [sys.dm_pdw_exec_requests](sys-dm-pdw-exec-requests-transact-sql.md). For serverless SQL pool or [!INCLUDE [fabric](../../includes/fabric.md)], use `sys.dm_exec_requests`.
 
 | Column name | Data type | Description |
 | --- | --- | --- |
@@ -35,15 +35,15 @@ Returns information about each request that is executing in [!INCLUDE [ssNoVersi
 | `start_time` | **datetime** | Timestamp when the request arrived. Not nullable. |
 | `status` | **nvarchar(30)** | Status of the request. Can be one of the following values:<br /><br />background<br />rollback<br />running<br />runnable<br />sleeping<br />suspended<br /><br />Not nullable. |
 | `command` | **nvarchar(32)** | Identifies the current type of command that is being processed. Common command types include the following values:<br /><br />SELECT<br />INSERT<br />UPDATE<br />DELETE<br />BACKUP LOG<br />BACKUP DATABASE<br />DBCC<br />FOR<br /><br />The text of the request can be retrieved by using `sys.dm_exec_sql_text` with the corresponding `sql_handle` for the request. Internal system processes set the command based on the type of task they perform. Tasks can include the following values:<br /><br />LOCK MONITOR<br />CHECKPOINTLAZY<br />WRITER<br /><br />Not nullable. |
-| `sql_handle` | **varbinary(64)** | Is a token that uniquely identifies the batch or stored procedure that the query is part of. Nullable. |
+| `sql_handle` | **varbinary(64)** | A token that uniquely identifies the batch or stored procedure that the query is part of. Nullable. |
 | `statement_start_offset` | **int** | Indicates, in bytes, beginning with 0, the starting position of the currently executing statement for the currently executing batch or persisted object. Can be used together with the `sql_handle`, the `statement_end_offset`, and the `sys.dm_exec_sql_text` dynamic management function to retrieve the currently executing statement for the request. Nullable. |
 | `statement_end_offset` | **int** | Indicates, in bytes, starting with 0, the ending position of the currently executing statement for the currently executing batch or persisted object. Can be used together with the `sql_handle`, the `statement_start_offset`, and the `sys.dm_exec_sql_text` dynamic management function to retrieve the currently executing statement for the request. Nullable. |
-| `plan_handle` | **varbinary(64)** | Is a token that uniquely identifies a query execution plan for a batch that is currently executing. Nullable. |
+| `plan_handle` | **varbinary(64)** | A token that uniquely identifies a query execution plan for a batch that is currently executing. Nullable. |
 | `database_id` | **smallint** | ID of the database the request is executing against. Not nullable.<br /><br />In [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], the values are unique within a single database or an elastic pool, but not within a logical server. |
 | `user_id` | **int** | ID of the user who submitted the request. Not nullable. |
 | `connection_id` | **uniqueidentifier** | ID of the connection on which the request arrived. Nullable. |
-| `blocking_session_id` | **smallint** | ID of the session that is blocking the request. If this column is `NULL` or `0`, the request isn't blocked, or the session information of the blocking session isn't available (or can't be identified). For more information, see [Understand and resolve SQL Server blocking problems](/troubleshoot/sql/performance/understand-resolve-blocking).<br /><br />-2 = The blocking resource is owned by an orphaned distributed transaction.<br /><br />-3 = The blocking resource is owned by a deferred recovery transaction.<br /><br />-4 = `session_id` of the blocking latch owner couldn't be determined at this time because of internal latch state transitions.<br /><br />`-5` = `session_id` of the blocking latch owner couldn't be determined because it isn't tracked for this latch type (for example, for an SH latch).<br /><br />By itself, `blocking_session_id` `-5` doesn't indicate a performance problem. `-5` is an indication that the session is waiting on an asynchronous action to complete. Before `-5` was introduced, the same session would have shown `blocking_session_id` `0`, even though it was still in a wait state.<br /><br />Depending on workload, observing `blocking_session_id = -5` may be a common occurrence. |
-| `wait_type` | **nvarchar(60)** | If the request is currently blocked, this column returns the type of wait. Nullable.<br /><br />For information about types of waits, see [sys.dm_os_wait_stats (Transact-SQL)](sys-dm-os-wait-stats-transact-sql.md). |
+| `blocking_session_id` | **smallint** | ID of the session that is blocking the request. If this column is `NULL` or `0`, the request isn't blocked, or the session information of the blocking session isn't available (or can't be identified). For more information, see [Understand and resolve SQL Server blocking problems](/troubleshoot/sql/performance/understand-resolve-blocking).<br /><br />-2 = The blocking resource is owned by an orphaned distributed transaction.<br /><br />-3 = The blocking resource is owned by a deferred recovery transaction.<br /><br />-4 = `session_id` of the blocking latch owner couldn't be determined at this time because of internal latch state transitions.<br /><br />`-5` = `session_id` of the blocking latch owner couldn't be determined because it isn't tracked for this latch type (for example, for an SH latch).<br /><br />By itself, `blocking_session_id` `-5` doesn't indicate a performance problem. `-5` is an indication that the session is waiting on an asynchronous action to complete. Before `-5` was introduced, the same session would have shown `blocking_session_id` `0`, even though it was still in a wait state.<br /><br />Depending on workload, observing `blocking_session_id = -5` might be a common occurrence. |
+| `wait_type` | **nvarchar(60)** | If the request is currently blocked, this column returns the type of wait. Nullable.<br /><br />For information about types of waits, see [sys.dm_os_wait_stats](sys-dm-os-wait-stats-transact-sql.md). |
 | `wait_time` | **int** | If the request is currently blocked, this column returns the duration in milliseconds, of the current wait. Not nullable. |
 | `last_wait_type` | **nvarchar(60)** | If this request has previously been blocked, this column returns the type of the last wait. Not nullable. |
 | `wait_resource` | **nvarchar(256)** | If the request is currently blocked, this column returns the resource for which the request is currently waiting. Not nullable. |
@@ -83,8 +83,8 @@ Returns information about each request that is executing in [!INCLUDE [ssNoVersi
 | `group_id` | **int** | ID of the workload group to which this query belongs. Not nullable. |
 | `query_hash` | **binary(8)** | Binary hash value calculated on the query and used to identify queries with similar logic. You can use the query hash to determine the aggregate resource usage for queries that differ only by literal values. |
 | `query_plan_hash` | **binary(8)** | Binary hash value calculated on the query execution plan and used to identify similar query execution plans. You can use query plan hash to find the cumulative cost of queries with similar execution plans. |
-| `statement_sql_handle` | **varbinary(64)** | **Applies to**: [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)] and later.<br /><br />`sql_handle` of the individual query.<br /><br />This column is NULL if Query Store isn't enabled for the database. |
-| `statement_context_id` | **bigint** | **Applies to**: [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)] and later.<br /><br />The optional foreign key to `sys.query_context_settings`.<br /><br />This column is NULL if Query Store isn't enabled for the database. |
+| `statement_sql_handle` | **varbinary(64)** | **Applies to**: [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)] and later.<br /><br />`sql_handle` of the individual query.<br /><br />This column is `NULL` if Query Store isn't enabled for the database. |
+| `statement_context_id` | **bigint** | **Applies to**: [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)] and later.<br /><br />The optional foreign key to `sys.query_context_settings`.<br /><br />This column is `NULL` if Query Store isn't enabled for the database. |
 | `dop` | **int** | **Applies to**: [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later.<br /><br />The degree of parallelism of the query. |
 | `parallel_worker_count` | **int** | **Applies to**: [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later.<br /><br />The number of reserved parallel workers if this is a parallel query. |
 | `external_script_request_id` | **uniqueidentifier** | **Applies to**: [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later.<br /><br />The external script request ID associated with the current request. |
@@ -97,9 +97,9 @@ Returns information about each request that is executing in [!INCLUDE [ssNoVersi
 
 To execute code that is outside [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] (for example, extended stored procedures and distributed queries), a thread has to execute outside the control of the non-preemptive scheduler. To do this, a worker switches to preemptive mode. Time values returned by this dynamic management view don't include time spent in preemptive mode.
 
-When executing parallel requests in [row mode](../query-processing-architecture-guide.md#row-mode-execution), [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] assigns a worker thread to coordinate the worker threads responsible for completing tasks assigned to them. In this DMV, only the coordinator thread is visible for the request. The columns `reads`, `writes`, `logical_reads`, and `row_count` are **not updated** for the coordinator thread. The columns `wait_type`, `wait_time`, `last_wait_type`, `wait_resource`, and `granted_query_memory` are **only updated** for the coordinator thread. For more information, see the [Thread and Task Architecture Guide](../thread-and-task-architecture-guide.md).
+When executing parallel requests in [row mode](../query-processing-architecture-guide.md#row-mode-execution), [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] assigns a worker thread to coordinate the worker threads responsible for completing tasks assigned to them. In this DMV, only the coordinator thread is visible for the request. The columns `reads`, `writes`, `logical_reads`, and `row_count` are **not updated** for the coordinator thread. The columns `wait_type`, `wait_time`, `last_wait_type`, `wait_resource`, and `granted_query_memory` are **only updated** for the coordinator thread. For more information, see the [Thread and task architecture guide](../thread-and-task-architecture-guide.md).
 
-The `wait_resource` column contains similar information to `resource_description` in [sys.dm_tran_locks (Transact-SQL)](sys-dm-tran-locks-transact-sql.md) but is formatted differently.
+The `wait_resource` column contains similar information to `resource_description` in [sys.dm_tran_locks](sys-dm-tran-locks-transact-sql.md) but is formatted differently.
 
 ## Permissions
 
@@ -127,7 +127,33 @@ SELECT * FROM sys.dm_exec_sql_text(< copied sql_handle >);
 GO
 ```
 
-### B. Find all locks that a running batch is holding
+### B. Show active requests
+
+This following example shows all currently running queries in your SQL Server data warehouse, excluding your own session (`@@SPID`). It uses `CROSS APPLY` with `sys.dm_exec_sql_text` to retrieve the full query text for each request, and joins with `sys.dm_exec_sessions` to include user any host info. The `session_id <> @@SPID` filter ensures that you don't see your own query in the results.
+
+```sql
+SELECT r.session_id,
+       r.status,
+       r.command,
+       r.start_time,
+       r.total_elapsed_time / 1000.00 AS elapsed_seconds,
+       r.cpu_time / 1000.00 AS cpu_seconds,
+       r.reads,
+       r.writes,
+       r.logical_reads,
+       r.row_count,
+       s.login_name,
+       s.host_name,
+       t.text AS query_text
+FROM sys.dm_exec_requests AS r
+     INNER JOIN sys.dm_exec_sessions AS s
+         ON r.session_id = s.session_id
+CROSS APPLY sys.dm_exec_sql_text(r.sql_handle) AS t
+WHERE r.session_id <> @@SPID
+ORDER BY r.start_time DESC;
+```
+
+### C. Find all locks that a running batch is holding
 
 The following example queries `sys.dm_exec_requests` to find the interesting batch and copy its `transaction_id` from the output.
 
@@ -145,28 +171,27 @@ WHERE request_owner_type = N'TRANSACTION'
 GO
 ```
 
-### C. Find all currently blocked requests
+### D. Find all currently blocked requests
 
 The following example queries `sys.dm_exec_requests` to find information about blocked requests.
 
 ```sql
 SELECT session_id,
-    status,
-    blocking_session_id,
-    wait_type,
-    wait_time,
-    wait_resource,
-    transaction_id
+       status,
+       blocking_session_id,
+       wait_type,
+       wait_time,
+       wait_resource,
+       transaction_id
 FROM sys.dm_exec_requests
 WHERE status = N'suspended';
 GO
 ```
 
-### D. Order existing requests by CPU
+### E. Order existing requests by CPU
 
 ```sql
-SELECT
-    [req].[session_id],
+SELECT [req].[session_id],
     [req].[start_time],
     [req].[cpu_time] AS [cpu_time_ms],
     OBJECT_NAME([ST].[objectid], [ST].[dbid]) AS [ObjectName],

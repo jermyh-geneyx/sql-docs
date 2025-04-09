@@ -1,14 +1,16 @@
 ---
-title: Distributed Replay security
+title: Distributed Replay Security
 description: This article describes security configuration steps for SQL Server Distributed Replay and important considerations for data protection and removal steps.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.reviewer: mikeray
 ms.date: 06/20/2022
 ms.service: sql
 ms.subservice: distributed-replay
 ms.topic: conceptual
-monikerRange: ">= sql-server-2016 || >= sql-server-linux-2017"
+ms.collection:
+  - data-tools
+monikerRange: ">=sql-server-2016 || >=sql-server-linux-2017"
 ---
 
 # Distributed Replay Security

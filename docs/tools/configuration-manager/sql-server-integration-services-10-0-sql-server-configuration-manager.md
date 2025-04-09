@@ -1,12 +1,14 @@
 ---
 title: "SQL Server Integration Services 10.0 (SQL Server Configuration Manager)"
 description: Discover how to use SQL Server Configuration Manager to view the properties of the SQL Server Integration Services (SSIS) platform.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: "03/01/2017"
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 monikerRange: ">=sql-server-2016"
 ---
 # SQL Server Integration Services 10.0 (SQL Server Configuration Manager)
