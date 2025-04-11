@@ -4,7 +4,7 @@ description: Learn how to enable resource governor using either SQL Server Manag
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: dfurman
-ms.date: 01/02/2025
+ms.date: 04/09/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: how-to
@@ -18,6 +18,8 @@ monikerRange: ">= sql-server-2016 || >= sql-server-linux-2017 || = azuresqldb-mi
 [!INCLUDE [SQL Server SQL MI](../../includes/applies-to-version/sql-asdbmi.md)]
 
 Resource governor is turned off by default. You can enable resource governor using either [!INCLUDE[ssManStudioFull](../../includes/ssmanstudiofull-md.md)] or [!INCLUDE[tsql](../../includes/tsql-md.md)].
+
+For configuration and monitoring examples and to learn resource governor best practices, see [Tutorial: Resource governor configuration examples and best practices](resource-governor-walkthrough.md).
 
 Enabling resource governor has the following results:
 
