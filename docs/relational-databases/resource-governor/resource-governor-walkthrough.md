@@ -4,7 +4,7 @@ description: Use examples to learn how to create and validate resource governor 
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: dfurman
-ms.date: 03/12/2025
+ms.date: 04/09/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: tutorial
@@ -506,6 +506,9 @@ GROUP BY wg.name,
 - Avoid using a frequently modified table in the classifier. That increases the risk of blocking that can delay logins and cause connection timeouts. The following workarounds can mitigate the risk, however they have downsides, including the risk of incorrect classification:
     - Consider using the `NOLOCK` table hint, or the equivalent `READUNCOMMITTED` hint. For more information, see [READUNCOMMITTED](../../t-sql/queries/hints-transact-sql-table.md#readuncommitted).
     - Consider using the `LOCK_TIMEOUT` setting at the start of the classifier function, setting it to a low value such as 1,000 milliseconds. For more information, see [SET LOCK_TIMEOUT](../../t-sql/statements/set-lock-timeout-transact-sql.md).
+- If you execute `ALTER RESOURCE GOVERNOR RECONFIGURE` after deleting an unused resource pool on a machine with a large amount of memory, the command might take a long time. If a classifier function is in effect before reconfiguration starts, new connection attempts made during that time might time out.
+
+    If you delete an unused resource pool, we recommend that you reconfigure resource governor during a maintenance window or a period of low activity.
 - You can't modify a classifier function while it is referenced in the resource governor configuration. However, you can modify the configuration to use a different classifier function. If you want to make changes to the classifier, consider creating a pair of classifier functions. For example, you might create `dbo.rg_classifier_A()` and `dbo.rg_classifier_B()`. When a change to the classifier logic is needed, follow these steps:
     1. Use the [ALTER FUNCTION](../../t-sql/statements/alter-function-transact-sql.md) statement to make the changes in the function *not* currently used in the resource governor configuration.
     1. Use the [ALTER RESOURCE GOVERNOR](../../t-sql/statements/alter-resource-governor-transact-sql.md) statement to make the modified classifier active, and then reconfigure resource governor. For example:

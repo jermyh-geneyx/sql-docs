@@ -51,7 +51,7 @@ Multiple files can be executed as part of a pre- or post-deployment script by us
 :r .\scripts\script2.sql
 ```
 
-Those files should be excluded from the database model build by setting the `Build Action` property to `None` in the file properties in Visual Studio or by adding an entry for the file in the `.sqlproj` file with the `Build` attribute set to `None`.
+Those files should be excluded from the database model build by setting the `Build Action` property to `Remove` in the file properties in Visual Studio or by adding an entry for the file in the `.sqlproj` file with the `Build` attribute set to `Remove`. When the SQL project is built, the additional files are combined into their referencing pre-deployment or post-deployment script in the `.dacpac` by the Microsoft.Build.Sql project SDK.
 
 ```xml
 ...
@@ -61,6 +61,9 @@ Those files should be excluded from the database model build by setting the `Bui
   </ItemGroup>
 </Project>
 ```
+
+> [!TIP]
+> You can validate the pre-deployment and post-deployment scripts after project build, by changing the `.dacpac` file extension to `.zip` and unarchiving the `.zip` to a folder. A single `.sql` file is present for pre-deployment and post-deployment scripts, and should contain the entire Transact-SQL contents of all referenced files in the originating SQL project.
 
 ## Add pre- and post-deployment scripts
 

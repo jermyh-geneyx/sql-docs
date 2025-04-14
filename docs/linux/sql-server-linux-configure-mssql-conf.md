@@ -3,7 +3,7 @@ title: Configure SQL Server Settings on Linux
 description: This article describes how to use the mssql-conf tool to configure SQL Server settings on Linux.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 11/18/2024
+ms.date: 04/09/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: install-set-up-deploy
@@ -232,6 +232,13 @@ The following options are used by Microsoft Entra authentication for an instance
 
 > [!WARNING]  
 > Microsoft Entra ID parameters are configured by the Azure extension for [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], and shouldn't be reconfigured manually. They are listed here for informational purposes.
+
+[!INCLUDE [sssql22-md](../includes/sssql22-md.md)] CU 19 introduces an option to set the IPv6 records limit for Microsoft Entra authentication endpoints. If IPv6 is enabled on Linux, and the IPv6 addresses of the Microsoft Entra authentication endpoints aren't reachable, you can set the [network.ipv6dnsrecordslimit](#ipv6dnsrecordslimit) option for Microsoft Entra authentication to work. Setting this option to any value between `0` and `5` guarantees that at least one IPv4 address is tried to reach the Microsoft Entra endpoints.
+
+A value of `0` means that no IPv6 endpoint addresses are tried. A value of `5` means that five AAAA addresses are tried.
+
+> [!NOTE]  
+> This `network.ipv6dnsrecordslimit` setting is configured at the server level, and can affect other services that use IPv6.
 
 | Option | Description |
 | --- | --- |
@@ -870,6 +877,7 @@ The following options are additional network settings configurable using **mssql
 | `network.ipaddress` | IP address for incoming connections. |
 | `network.kerberoscredupdatefrequency` | Time in seconds between checks for kerberos credentials that need to be updated. Value is an integer. |
 | `network.privilegedadaccount` | Privileged Active Directory user to use for Active Directory authentication. Value is `<username>`. For more information, see [Tutorial: Use Active Directory authentication with SQL Server on Linux](sql-server-linux-active-directory-authentication.md#spn) |
+| <a id="ipv6dnsrecordslimit"></a>`network.ipv6dnsrecordslimit` | Set a configurable limit to the number of AAAA records returned by DNS requests. Value is a positive integer between `0` and `5`. This option is guarantees that WinHTTP requests with the default number of retries (6) attempt at least one IPv4 address. |
 | `uncmapping` | Maps UNC path to a local path. For example, `sudo /opt/mssql/bin/mssql-conf set uncmapping //servername/sharename /tmp/folder`. |
 | `ldaphostcanon` | Set whether OpenLDAP should canonicalize hostnames during the bind step. Values can be `true` or `false`. |
 
