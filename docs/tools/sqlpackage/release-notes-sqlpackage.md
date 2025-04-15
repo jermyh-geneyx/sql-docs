@@ -4,7 +4,7 @@ description: Release notes for Microsoft SqlPackage.
 author: dzsquared
 ms.author: drskwier
 ms.reviewer: llali
-ms.date: 02/28/2025
+ms.date: 04/15/2025
 ms.service: sql
 ms.topic: release-notes
 ms.collection:
@@ -17,6 +17,52 @@ ms.custom:
 **[Download the latest version](sqlpackage-download.md)**
 
 This article lists the features and fixes delivered by the released versions of SqlPackage.
+
+## 170.0.94 SqlPackage
+
+**Release date:** April 15, 2025
+
+```bash
+dotnet tool install -g microsoft.sqlpackage --version 170.0.94
+```
+
+|Platform|Download|
+|:---|:---|
+|Windows .NET 8 |[.zip file](https://go.microsoft.com/fwlink/?linkid=2316204)|
+|Windows|[.msi file](https://go.microsoft.com/fwlink/?linkid=2316310)|
+|macOS .NET 8 |[.zip file](https://go.microsoft.com/fwlink/?linkid=2316113)|
+|Linux .NET 8 |[.zip file](https://go.microsoft.com/fwlink/?linkid=2316311)|
+
+### Features
+
+|Feature|Details|
+|:---|:---|
+| DacpacVerify | Support for verifying the contents of two `.dacpac` files is added in the preview tool [Microsoft.DacpacVerify](https://www.nuget.org/packages/Microsoft.dacpacverify). |
+| Extract | Adds support for unpacking a `.dacpac` file to a folder. The `/Action:Extract` command is used with `/SourceFile:` and `/TargetFile:` parameters. The target file must be a folder and when a source file (`.dacpac`) is specified no database connection properties are valid. The property `/p:ExtractTarget=SchemaObjectType` is required for extracting from a `.dacpac` file instead of a source database. The executable Dacunpack.exe is removed from the DacFx.msi installer. |
+| Parquet | Adds support for the data types timestamp, rowversion, uniqueidentifier, text, ntext, image, json, xml, and vector when using Parquet files in Azure Blob Storage with SqlPackage extract and publish operations. |
+| Parquet | Adds support for exporting and importing table data to bcp files when the table contains an unsupported data type while using Parquet files in Azure Blob Storage for the remaining data with SqlPackage extract and publish operations. An example data type is SQL_VARIANT, and a table containing a column of that type would be written to bcp in the `.dacpac` while the remaining tables would be written to Parquet files in Azure Blob Storage. |
+| Platform | Updated SqlPackage for .NET Framework version to .NET Framework 4.7.2. |
+| Platform | Removed support for .NET 6. |
+| ScriptDom | Updated ScriptDom to version 170.18.0. |
+| SQL projects | The default compatibility level for Azure SQL Database and SQL database in Fabric is now set to 170. |
+| Vector | Vector data type is now supported in the target platform `Azure SQL Database` for import, export, extract, deployment, and SQL project build. |
+
+
+### Fixes
+
+|Feature|Details|
+|:---|:---|
+| Deployment | Fixes an issue where deploying a change to an external table would cause all external tables to be dropped and recreated if the modified table contained no values for REJECT_VALUE or REJECT_SAMPLE_VALUE. |
+| Deployment | Fixes an issue where altering a column to expand its length results in an incorrect data loss warning if the column's collation is specified and matches the database default collation. [GitHub](https://github.com/microsoft/DacFx/issues/453) |
+| Deployment | Fixes an issue where sensitivity classification changes on a table would cause indexes to be recreated. [GitHub](https://github.com/microsoft/DacFx/issues/567) |
+| Export | Optimizes the use of table size estimation during export operations. |
+| Extract | Fixes an issue where extracting a `.dacpac` with a database reference fails. [GitHub](https://github.com/microsoft/DacFx/issues/343) |
+| Fabric Data Warehouse | Fixes an issue where the sp_refreshsqlmodule system stored procedure would be called during a publish operation. Fabric Data Warehouse does not support sp_refreshsqlmodule and this would cause the deployment to fail. |
+| Fabric Data Warehouse | Fixes an issue where table constraints would be included in a `.dacpac` but not `.sql` files when a database was extracted from a Fabric Data Warehouse. [GitHub](https://github.com/microsoft/DacFx/issues/589) |
+| SQL projects | Fixes an issue where building without SSDT installed in Visual Studio results in incorrect build behavior. [GitHub](https://github.com/microsoft/DacFx/issues/99) |
+| SQL projects | Fixes an issue where build warnings are duplicated in output when code analysis is enabled. [GitHub](https://github.com/microsoft/DacFx/issues/481) |
+| SQL projects | Fixes an issue where [service broker](../../database-engine/configure-windows/sql-server-service-broker.md) parameters set to variables results in false warnings. [GitHub](https://github.com/microsoft/DacFx/issues/326) |
+
 
 ## 162.5.57 SqlPackage
 

@@ -63,7 +63,9 @@ These permissions should be granted before you provision a logical server or man
 
 ### Permissions for SMI
 
-The same Microsoft Graph applications are needed for the SMI, but the UMI permissions can be eliminated for Azure SQL Database using an SMI. The `CREATE USER` T-SQL syntax would need the `SID` and `TYPE` syntax, as described in the article, [CREATE USER (Transact-SQL)](/sql/t-sql/statements/create-user-transact-sql#syntax).
+The same Microsoft Graph applications permissions are needed with the SMI.
+
+Applies only to **Azure SQL Database**: Using an SMI gives an opportunity to not explicitly provision the Microsoft Graph permissions. The Microsoft Entra users can still be created without the needed Microsoft Graph permission by using the `CREATE USER` T-SQL syntax. This would require the `SID` and `TYPE` syntax, as described in the article, [CREATE USER (Transact-SQL)](/sql/t-sql/statements/create-user-transact-sql#syntax).
 
 ```syntaxsql 
 CREATE USER   
@@ -82,7 +84,9 @@ CREATE USER
     | TYPE = { X | E }
 ```
 
-The above syntax allows creation of Microsoft Entra users without validation. For this to work, the `Object Id` of the Microsoft Entra principal would have to be supplied and used as an `SID` in the T-SQL statement, as explained in [Create a contained database user from a Microsoft Entra principal without validation](/sql/t-sql/statements/create-user-transact-sql#k-create-a-contained-database-user-from-a-microsoft-entra-principal-without-validation).
+The above syntax allows creation of Microsoft Entra users *without validation.* For this to work, the `Object Id` of the Microsoft Entra principal would have to be supplied and used as an `SID` in the T-SQL statement, as explained in [Create a contained database user from a Microsoft Entra principal without validation](/sql/t-sql/statements/create-user-transact-sql#k-create-a-contained-database-user-from-a-microsoft-entra-principal-without-validation).  
+
+The validity check of the **Object Id** is the responsibility of the user running the T-SQL statement.
 
 ### Grant permissions
 

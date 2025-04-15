@@ -4,7 +4,7 @@ description: "Query hints specify that the indicated hints are used in the scope
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: wiassaf
-ms.date: 03/26/2025
+ms.date: 04/15/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -106,7 +106,7 @@ Query hints specify that the indicated hints are used in the scope of a query. T
   | QUERYTRACEON <integer_value>
   | RECOMPILE
   | ROBUST PLAN
-  | USE HINT ( <use_hint_name> [ , ...n ] )
+  | USE HINT ( 'hint_name' [ , ...n ] )
   | USE PLAN N'<xml_plan>'
   | TABLE HINT ( <exposed_object_name> [ , <table_hint> [ [ , ] ...n ] ] )
   | FOR TIMESTAMP AS OF '<point_in_time>'
@@ -134,29 +134,6 @@ Query hints specify that the indicated hints are used in the scope of a query. T
   | TABLOCKX
   | UPDLOCK
   | XLOCK
-}
-
-<use_hint_name> ::=
-{ 'ASSUME_JOIN_PREDICATE_DEPENDS_ON_FILTERS'
-  | 'ASSUME_MIN_SELECTIVITY_FOR_FILTER_ESTIMATES'
-  | 'ASSUME_FULL_INDEPENDENCE_FOR_FILTER_ESTIMATES'
-  | 'ASSUME_PARTIAL_CORRELATION_FOR_FILTER_ESTIMATES'
-  | 'DISABLE_BATCH_MODE_ADAPTIVE_JOINS'
-  | 'DISABLE_BATCH_MODE_MEMORY_GRANT_FEEDBACK'
-  | 'DISABLE_DEFERRED_COMPILATION_TV'
-  | 'DISABLE_INTERLEAVED_EXECUTION_TVF'
-  | 'DISABLE_OPTIMIZED_NESTED_LOOP'
-  | 'DISABLE_OPTIMIZER_ROWGOAL'
-  | 'DISABLE_PARAMETER_SNIFFING'
-  | 'DISABLE_ROW_MODE_MEMORY_GRANT_FEEDBACK'
-  | 'DISABLE_TSQL_SCALAR_UDF_INLINING'
-  | 'DISALLOW_BATCH_MODE'
-  | 'ENABLE_HIST_AMENDMENT_FOR_ASC_KEYS'
-  | 'ENABLE_QUERY_OPTIMIZER_HOTFIXES'
-  | 'FORCE_DEFAULT_CARDINALITY_ESTIMATION'
-  | 'FORCE_LEGACY_CARDINALITY_ESTIMATION'
-  | 'QUERY_OPTIMIZER_COMPATIBILITY_LEVEL_n'
-  | 'QUERY_PLAN_PROFILE'
 }
 ```
 
@@ -344,7 +321,7 @@ If such a plan isn't possible, the Query Optimizer returns an error instead of d
 
 **Applies to**: [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] (starting with [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] SP1), [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)].
 
-Provides one or more extra hints to the query processor. The extra hints are specified with a hint name *inside single quotation marks*.
+Provides one or more extra hints to the query processor. The extra hints are specified with the hint name *inside single quotation marks*.
 
 > [!TIP]  
 > Hint names are case-insensitive.
