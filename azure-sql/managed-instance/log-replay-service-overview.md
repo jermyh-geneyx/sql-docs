@@ -25,9 +25,6 @@ To start your migration with LRS, review [Migrate databases by using Log Replay 
 > [!IMPORTANT]
 > Before you migrate databases to the **Business Critical** service tier, consider [these limitations](log-replay-service-migrate.md#limitations-when-migrating-to-the-business-critical-service-tier), which don't apply to the **General Purpose** service tier.
 
-
-
-
 ## When to use Log Replay Service
 
 [Azure Database Migration Service](/azure/dms/tutorial-sql-server-managed-instance-online), the [Azure SQL migration extension for Azure Data Studio](/azure-data-studio/extensions/azure-sql-migration-extension), and LRS all use the same underlying migration technology and APIs. LRS further enables complex custom migrations and hybrid architectures between on-premises SQL Server instances and SQL Managed Instance deployments. 
@@ -158,11 +155,11 @@ Plan to finish a single LRS migration job within a maximum of 30 days. When this
 
 For information, review [limitations](log-replay-service-migrate.md#limitations) when using LRS. 
 
-## Next steps
+## Related content
 
-- For more information, see [Migrate databases from SQL Server to SQL Managed Instance by using Log Replay Service](log-replay-service-migrate.md). 
-
-- Learn more about [migrating databases to SQL Managed Instance by using the link feature](managed-instance-link-feature-overview.md).
-- Learn more about [migrating databases from SQL Server to SQL Managed Instance](../migration-guides/managed-instance/sql-server-to-managed-instance-guide.md).
+- [Migrate databases from SQL Server to SQL Managed Instance by using Log Replay Service](log-replay-service-migrate.md). 
+- [Migrate databases to SQL Managed Instance by using the link feature](managed-instance-link-feature-overview.md).
+- [Compare LRS with the Managed Instance link for migration](log-replay-service-compare-mi-link.md)
+- [Migrate databases from SQL Server to SQL Managed Instance](../migration-guides/managed-instance/sql-server-to-managed-instance-guide.md).
 - Learn more about the [differences between SQL Server and SQL Managed Instance](transact-sql-tsql-differences-sql-server.md).
 - Learn more about [best practices to cost and size workloads that are migrated to Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/migrate-best-practices-costs).
