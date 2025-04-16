@@ -30,9 +30,17 @@ Returns part of a character, binary, text, or image expression in [!INCLUDE[ssNo
  :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md)  
   
 ## Syntax  
+
+Syntax for SQL Server, through [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)].
   
 ```syntaxsql
-SUBSTRING ( expression, start, length )  
+SUBSTRING ( expression , start , length )  
+```  
+
+Syntax for [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)], [!INCLUDE [fabric-se](../../includes/fabric-se.md)], and [!INCLUDE [fabric](../../includes/fabric.md)].
+
+```syntaxsql
+SUBSTRING ( expression , start [, length ] ) 
 ```  
   
 ## Arguments
@@ -44,6 +52,8 @@ SUBSTRING ( expression, start, length )
   
  *length*  
  Is a positive integer or **bigint** expression that specifies how many characters of the *expression* will be returned. If *length* is negative, an error is generated and the statement is terminated. If the sum of *start* and *length* is greater than the number of characters in *expression*, the whole value expression beginning at *start* is returned.  
+
+ In [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)], [!INCLUDE [fabric-se](../../includes/fabric-se.md)], and [!INCLUDE [fabric](../../includes/fabric.md)], *length* is optional. Defaults to expression length.
   
 ## Return Types  
  Returns character data if *expression* is one of the supported character data types. Returns binary data if *expression* is one of the supported **binary** data types. The returned string is the same type as the specified expression with the exceptions shown in the table.  
