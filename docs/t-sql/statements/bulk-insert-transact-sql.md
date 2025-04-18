@@ -4,7 +4,7 @@ description: Transact-SQL reference for the BULK INSERT statement.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest, wiassaf
-ms.date: 02/12/2025
+ms.date: 04/17/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -28,7 +28,7 @@ monikerRange: "=azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 |
 ---
 # BULK INSERT (Transact-SQL)
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi-fabricdw.md)]
 
 Imports a data file into a database table or view in a user-specified format in [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)].
 
@@ -91,9 +91,6 @@ The `BULK INSERT` statement has different arguments and options in different pla
 | Unsupported options | `*` wildcards in path | `*` wildcards in path | `DATA_SOURCE`, `FORMATFILE_DATA_SOURCE`, `ERRORFILE`, `ERRORFILE_DATA_SOURCE` |
 | Enabled options but without effect | | | `KEEPIDENTITY`, `FIRE_TRIGGERS`, `CHECK_CONSTRAINTS`, `TABLOCK`, `ORDER`, `ROWS_PER_BATCH`, `KILOBYTES_PER_BATCH`, and `BATCHSIZE` are not applicable. They will not throw a syntax error, but they will not have any effect | 
 
-> [!NOTE]
-> The BULK INSERT statement is in [preview in Fabric Data Warehouse](https://blog.fabric.microsoft.com/blog/bulk-insert-statement-in-fabric-datawarehouse).
-
 #### *database_name*
 
 The database name in which the specified table or view resides. If not specified, *database_name* is the current database.
@@ -135,8 +132,11 @@ Fabric Warehouse supports `*` wildcards that can match any character in the URI,
 
 ```sql
 BULK INSERT bing_covid_19_data
-FROM 'https://pandemicdatalake.blob.core.windows.net/public/curated/covid-19/bing_covid-19_data/latest/*.csv';
+FROM 'https://<data-lake>.blob.core.windows.net/public/curated/covid-19/bing_covid-19_data/latest/*.csv';
 ```
+
+> [!NOTE]  
+> Replace `<data-lake>.blob.core.windows.net` with an appropriate URL.
 
 #### BATCHSIZE = *batch_size*
 
@@ -159,6 +159,15 @@ A situation in which you might want constraints disabled (the default behavior) 
 
 Specifies the code page of the data in the data file. CODEPAGE is relevant only if the data contains **char**, **varchar**, or **text** columns with character values greater than **127** or less than **32**. For an example, see [Specify a code page](#d-specify-a-code-page).
 
+```sql
+BULK INSERT bing_covid_19_data
+FROM 'https://<data-lake>.blob.core.windows.net/public/curated/covid-19/bing_covid-19_data/latest/bing_covid-19_data.csv'
+WITH (CODEPAGE = '65001', FIRSTROW=2);
+```
+
+> [!NOTE]  
+> Replace `<data-lake>.blob.core.windows.net` with an appropriate URL.
+
 CODEPAGE isn't a supported option on Linux for [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)]. For [!INCLUDE[sssql19-md](../../includes/sssql19-md.md)], only the **'RAW'** option is allowed for CODEPAGE.
 
 You should specify a collation name for each column in a [format file](../../relational-databases/import-export/use-a-format-file-to-bulk-import-data-sql-server.md).
@@ -174,6 +183,15 @@ You should specify a collation name for each column in a [format file](../../rel
 
 Specifies that BULK INSERT performs the import operation using the specified data-file type value.
 
+```sql
+BULK INSERT bing_covid_19_data
+FROM 'https://<data-lake>.blob.core.windows.net/public/curated/covid-19/bing_covid-19_data/latest/bing_covid-19_data.csv'
+WITH (DATAFILETYPE = 'char', FIRSTROW=2);
+```
+
+> [!NOTE]  
+> Replace `<data-lake>.blob.core.windows.net` with an appropriate URL.
+
 |DATAFILETYPE value|All data represented in:|
 |------------------------|------------------------------|
 |**char** (default)|Character format.<br /><br />For more information, see [Use Character Format to Import or Export Data &#40;SQL Server&#41;](../../relational-databases/import-export/use-character-format-to-import-or-export-data-sql-server.md).|
@@ -187,13 +205,16 @@ Specifies that BULK INSERT performs the import operation using the specified dat
 
 Specifies a named external data source pointing to the Azure Blob Storage location of the file that will be imported. The external data source must be created using the `TYPE = BLOB_STORAGE` option added in [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)]. For more information, see [CREATE EXTERNAL DATA SOURCE](../../t-sql/statements/create-external-data-source-transact-sql.md). For an example, see [Import data from a file in Azure Blob Storage](#f-import-data-from-a-file-in-azure-blob-storage).
 
+> [!NOTE]  
+> Replace `<data-lake>.blob.core.windows.net` with an appropriate URL.
+
 ```sql
 CREATE EXTERNAL DATA SOURCE pandemicdatalake
-WITH (LOCATION='https://pandemicdatalake.blob.core.windows.net/public/',TYPE=BLOB_STORAGE)
+WITH (LOCATION='https://<data-lake>.blob.core.windows.net/public/',TYPE=BLOB_STORAGE)
 GO
 BULK INSERT bing_covid_19_data
 FROM 'curated/covid-19/bing_covid-19_data/latest/bing_covid-19_data.csv'
-WITH (DATA_SOURCE='pandemicdatalake',FIRSTROW = 2,LASTROW = 100,FIELDTERMINATOR = ',');
+WITH (DATA_SOURCE='<data-lake>',FIRSTROW = 2,LASTROW = 100,FIELDTERMINATOR = ',');
 ```
 
 #### ERRORFILE = '*error_file_path*'
@@ -213,6 +234,15 @@ Specifies a named external data source pointing to the Azure Blob Storage locati
 #### FIRSTROW = *first_row*
 
 Specifies the number of the first row to load. The default is the first row in the specified data file. FIRSTROW is 1-based.
+
+```sql
+BULK INSERT bing_covid_19_data
+FROM 'https://<data-lake>.blob.core.windows.net/public/curated/covid-19/bing_covid-19_data/latest/bing_covid-19_data.csv'
+WITH (FIRSTROW=2);
+```
+
+> [!NOTE]  
+> Replace `<data-lake>.blob.core.windows.net` with an appropriate URL.
 
 The FIRSTROW attribute isn't intended to skip column headers. Skipping headers isn't supported by the BULK INSERT statement. If you choose to skip rows, the [!INCLUDE[ssDEnoversion](../../includes/ssdenoversion-md.md)] looks only at the field terminators, and doesn't validate the data in the fields of skipped rows.
 
@@ -304,6 +334,15 @@ Beginning with [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)], and in Azu
 #### FIELDTERMINATOR = '*field_terminator*'
 
 Specifies the field terminator to be used for **char** and **widechar** data files. The default field terminator is `\t` (tab character). For more information, see [Specify Field and Row Terminators &#40;SQL Server&#41;](../../relational-databases/import-export/specify-field-and-row-terminators-sql-server.md).
+
+```sql
+BULK INSERT bing_covid_19_data
+FROM 'https://<data-lake>.blob.core.windows.net/public/curated/covid-19/bing_covid-19_data/latest/bing_covid-19_data.csv'
+WITH (FIELDTERMINATOR = ',', FIRSTROW=2);
+```
+
+> [!NOTE]  
+> Replace `<data-lake>.blob.core.windows.net` with an appropriate URL.
 
 #### ROWTERMINATOR = '*row_terminator*'
 
