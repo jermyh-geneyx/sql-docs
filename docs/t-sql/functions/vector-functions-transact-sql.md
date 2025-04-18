@@ -4,7 +4,7 @@ description: "Vector functions perform operations on vector type allowing applic
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: damauri, pookam
-ms.date: 10/10/2024
+ms.date: 04/18/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -12,18 +12,19 @@ helpviewer_keywords:
   - "vector search, system functions"
 dev_langs:
   - "TSQL"
-monikerRange: "= azuresqldb-current"
+monikerRange: "=azuresqldb-current||=azuresqldb-mi-current"
 ms.collection: ce-skilling-ai-copilot
 ---
 
 # Vector functions (preview)
 
-[!INCLUDE [Azure SQL Database](../../includes/applies-to-version/asdb.md)]
+[!INCLUDE [Azure SQL Database, SQL MI, FabricSQLDB](../../includes/applies-to-version/asdb-asmi-fabricsqldb.md)]
 
 The following scalar functions perform operations on [vectors](../../relational-databases/vectors/vectors-sql-server.md) in binary format, allowing applications to store and manipulate vectors in the SQL Database Engine.
 
 > [!NOTE]
-> Vector features are in preview and are subject to change. Make sure to read preview usage terms in the [Service Level Agreements (SLA) for Online Services](https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services) document.
+> - Vector features are in preview and are subject to change. Make sure to read preview usage terms in the [Service Level Agreements (SLA) for Online Services](https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services) document.
+> - Vector features are available in Azure SQL Managed Instance configured with the [Always-up-to-date](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy) policy. 
 
 All Vector functions support the [**vector** data type](../../t-sql/data-types/vector-data-type.md).
 

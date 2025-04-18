@@ -4,7 +4,7 @@ description: How to create, manage, and search vectors in the SQL Database Engin
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: damauri, pookam, jovanpop, randolphwest
-ms.date: 10/22/2024
+ms.date: 04/18/2025
 ms.service: sql
 ms.topic: language-reference
 ms.custom:
@@ -13,11 +13,11 @@ ms.collection: ce-skilling-ai-copilot
 helpviewer_keywords:
   - "Vectors"
   - "Vectors, built-in support"
-monikerRange: "=azuresqldb-current"
+monikerRange: "=azuresqldb-current||=azuresqldb-mi-current"
 ---
 # Overview of vectors in the SQL Database Engine
 
-[!INCLUDE [Azure SQL Database](../../includes/applies-to-version/asdb.md)]
+[!INCLUDE [Azure SQL Database, SQL MI, FabricSQLDB](../../includes/applies-to-version/asdb-asmi-fabricsqldb.md)]
 
 Vectors are ordered arrays of numbers (typically floats) that can represent information about some data. For example, an image can be represented as a vector of pixel values, or a string of text can be represented as a vector or ASCII values. The process to turn data into a vector is called vectorization.
 
