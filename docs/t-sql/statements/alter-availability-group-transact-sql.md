@@ -159,7 +159,7 @@ Specifies the name of the new availability group. *group_name* must be a valid [
 #### AUTOMATED_BACKUP_PREFERENCE = { PRIMARY | SECONDARY_ONLY| SECONDARY | NONE }
 Specifies a preference about how a backup job should evaluate the primary replica when choosing where to perform backups. You can script a given backup job to take the automated backup preference into account. It's important to understand that the preference isn't enforced by [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], so it has no impact on ad hoc backups.
   
-Supported only on the primary replica.
+Supported only on the primary replica. 
   
 The values are as follows:
   
