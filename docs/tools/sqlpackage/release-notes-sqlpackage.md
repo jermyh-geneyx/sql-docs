@@ -44,7 +44,7 @@ dotnet tool install -g microsoft.sqlpackage --version 170.0.94
 | Platform | Updated SqlPackage for .NET Framework version to .NET Framework 4.7.2. |
 | Platform | Removed support for .NET 6. |
 | ScriptDom | Updated ScriptDom to version 170.18.0. |
-| SQL projects | The default compatibility level for Azure SQL Database and SQL database in Fabric is now set to 170. |
+| SQL projects | The default compatibility level for Azure SQL Database and SQL database in Fabric is now set to 170. For more information, see [Database compatibility level 170 in Azure SQL Database and SQL database in Microsoft Fabric](https://techcommunity.microsoft.com/blog/azuresqlblog/database-compatibility-level-170-in-azure-sql-database-and-sql-database-in-micro/4405102). |
 | Vector | Vector data type is now supported in the target platform `Azure SQL Database` for import, export, extract, deployment, and SQL project build. |
 
 
