@@ -3,7 +3,7 @@ title: "Compatibility Certification"
 description: Compatibility certification eliminates risks of application compatibility, which allows you to upgrade a SQL Server database on-premises and in the cloud.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 06/03/2025
+ms.date: 06/16/2025
 ms.service: sql
 ms.subservice: install
 ms.topic: conceptual
@@ -96,12 +96,12 @@ To determine the current compatibility level, query the `compatibility_level` co
 
 To upgrade the [!INCLUDE [ssDE-md](../../includes/ssde-md.md)] to the latest version, while maintaining the database compatibility level that existed before the upgrade and its supportability status, you should perform **static functional surface area validation** of the application code **in the database** (programmability objects such as stored procedures, functions, triggers, and others) and **in the application** (using a workload trace that captures the dynamic code sent by the application).
 
-This can be easily done by using the [Microsoft Data Migration Assistant](https://www.microsoft.com/download/details.aspx?id=53595) tool (DMA). The absence of errors in the DMA tool output, about missing or incompatible functionality, protects application from any functional regressions on the new target version. If changes are required to ensure your database works in the new version, then DMA allows you to pinpoint where changes are needed, and what workarounds are available. For more information, see [Overview of Data Migration Assistant](../../dma/dma-overview.md).
+This can be easily done by using the [SQL Server migration component in SQL Server Management Studio](/ssms/migrate-sql-server-component). The absence of errors in the report output, about missing or incompatible functionality, protects application from any functional regressions on the new target version. If changes are required to ensure your database will work in the new version, then the tool allows you to pinpoint where changes are needed, and what workarounds are available.
 
 This functional validation is especially important when moving a database from a legacy version (such as [!INCLUDE [sql2008r2](../../includes/sql2008r2-md.md)] or [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)]) into a new version of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] or [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], because your application code might be using discontinued [!INCLUDE [tsql](../../includes/tsql-md.md)] that isn't protected by database compatibility level. But when moving from a more recent version (such as [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)]) to [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] or [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], there's no discontinued [!INCLUDE [tsql](../../includes/tsql-md.md)] to worry about. For more information about discontinued [!INCLUDE [tsql](../../includes/tsql-md.md)], see [Using compatibility level for backward compatibility](../../t-sql/statements/alter-database-transact-sql-compatibility-level.md#backwardCompat).
 
 > [!NOTE]  
-> DMA supports database compatibility level 100 and above. [!INCLUDE [ssVersion2005](../../includes/ssversion2005-md.md)] as source version is excluded.
+> The SQL Server migration component supports database compatibility level 100 and above. [!INCLUDE[ssVersion2005](../../includes/ssversion2005-md.md)] as source version is excluded.
 
 We recommend that you perform some minimal testing to validate the success of an upgrade, while maintaining the previous database compatibility level. You should determine what minimal testing means for your own application and scenario.
 

@@ -1,15 +1,15 @@
 ---
-title: "SQL Server to Azure SQL Database: Migration guide"
+title: "SQL Server to Azure SQL Database: Migration Guide"
 description: Follow this guide to migrate your SQL Server databases to Azure SQL Database.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 01/08/2025
+ms.date: 06/16/2025
 ms.service: azure-sql-database
 ms.subservice: migration-guide
 ms.topic: how-to
 ms.collection:
- - sql-migration-content
- - migration
+  - sql-migration-content
+  - migration
 ---
 # Migration guide: SQL Server to Azure SQL Database
 
@@ -141,7 +141,7 @@ You might encounter a wide variety of compatibility issues, depending both on th
 ## Related content
 
 - [Services and tools available for data migration scenarios](/azure/dms/dms-tools-matrix)
-- [Migrate databases with Azure SQL Migration extension for Azure Data Studio](/azure/dms/dms-overview#migrate-databases-with-azure-sql-migration-extension-for-azure-data-studio)
+- [Migrate databases with Azure SQL migration extension for Azure Data Studio](/azure/dms/dms-overview#migrate-databases-with-azure-sql-migration-extension-for-azure-data-studio)
 - [Tutorial: Migrate SQL Server to Azure SQL Database (offline)](database-migration-service.md)
 - [About Azure Migrate](/azure/migrate/migrate-services-overview)
 - [What is Azure SQL Database?](/azure/azure-sql/database/sql-database-paas-overview)

@@ -3,8 +3,8 @@ title: Single Database Quickstart Content Reference
 description: "Find a content reference of all the quickstarts that help you quickly get started with Azure SQL Database."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: mathoma
-ms.date: 06/13/2025
+ms.reviewer: mathoma, randolphwest
+ms.date: 06/16/2025
 ms.service: azure-sql-database
 ms.subservice: service-overview
 ms.topic: get-started
@@ -24,9 +24,6 @@ In this section, you'll see an overview of available articles that can help you 
 
 - [Create a single database using the Azure portal](single-database-create-quickstart.md).
 - After creating the database, you would need to [secure your database by configuring firewall rules](firewall-create-server-level-portal-quickstart.md).
-- If you have an existing database on SQL Server that you want to migrate to Azure SQL Database, you should install [Data Migration Assistant (DMA)](https://www.microsoft.com/download/details.aspx?id=53595) that will analyze your databases on SQL Server and find any issue that could block migration. If you don't find any issue, you can export your database as `.bacpac` file and [import it using the Azure portal or SqlPackage](database-import.md).
-
-<a id="automating-management-operations"></a>
 
 ## Automate management operations
 
@@ -51,9 +48,10 @@ The following free Learn modules help you learn about Azure SQL Database.
 
 ## Related content
 
-- Find a [high-level list of supported features in Azure SQL Database](features-comparison.md).
-- Learn how to make your [database more secure](secure-database-tutorial.md).
-- Find more advanced how-to's in [how to use a single database in Azure SQL Database](how-to-content-reference-guide.md).
-- Find more sample scripts written in [PowerShell](powershell-script-content-guide.md) and [the Azure CLI](az-cli-script-samples-content-guide.md).
-- Learn more about the [management API](single-database-manage.md) that you can use to configure your databases.
-- [Identify the right Azure SQL Database or Azure SQL Managed Instance SKU for your on-premises database](/sql/dma/dma-sku-recommend-sql-db/).
+- [Features comparison: Azure SQL Database and Azure SQL Managed Instance](features-comparison.md)
+- [Tutorial: Secure a database in Azure SQL Database](secure-database-tutorial.md)
+- [Configure and manage content reference - Azure SQL Database](how-to-content-reference-guide.md)
+- [Azure PowerShell samples for Azure SQL Database](powershell-script-content-guide.md)
+- [the Azure CLI](az-cli-script-samples-content-guide.md)
+- [Create and manage servers and single databases in Azure SQL Database](single-database-manage.md)
+- [Azure SQL migration extension for Azure Data Studio](/azure/dms/migration-using-azure-data-studio)

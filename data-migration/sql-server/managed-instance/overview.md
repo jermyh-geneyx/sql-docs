@@ -4,7 +4,7 @@ description: Learn about the tools and options available to migrate your SQL Ser
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: mathoma, danil
-ms.date: 01/08/2025
+ms.date: 06/16/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: migration-guide
 ms.topic: how-to
@@ -101,7 +101,7 @@ The following table lists alternative migration tools:
 | [Bulk copy](/sql/relational-databases/import-export/import-and-export-bulk-data-by-using-the-bcp-utility-sql-server) | The [bulk copy program (bcp) tool](/sql/tools/bcp-utility) copies data from an instance of SQL Server into a data file. Use the tool to export the data from your source and import the data file into the target SQL managed instance.<br /><br />For high-speed bulk copy operations to move data to Azure SQL Managed Instance, you can use the [Smart Bulk Copy tool](/samples/azure-samples/smartbulkcopy/smart-bulk-copy/) to maximize transfer speed by taking advantage of parallel copy tasks. |
 | [Import Export Wizard/BACPAC](/azure/azure-sql/database/database-import?tabs=azure-powershell) | [BACPAC](/sql/relational-databases/data-tier-applications/data-tier-applications#bacpac) is a Windows file with a .bacpac extension that encapsulates a database's schema and data. You can use BACPAC to both export data from a SQL Server source and import the data back into Azure SQL Managed Instance. |
 | [Azure Data Factory](/azure/data-factory/connector-azure-sql-managed-instance) | The [Copy activity](/azure/data-factory/copy-activity-overview) in Azure Data Factory migrates data from source SQL Server databases to SQL Managed Instance by using built-in connectors and an [integration runtime](/azure/data-factory/concepts-integration-runtime).<br /><br />Data Factory supports a wide range of [connectors](/azure/data-factory/connector-overview) to move data from SQL Server sources to SQL Managed Instance. |
-| [Azure SQL Migration extension for Azure Data Studio](/azure/dms/migration-using-azure-data-studio) | Powered by the [Azure Database Migration service](/azure/dms/dms-overview), the Azure SQL Migration extension for Azure Data Studio helps you to assess your database requirements to understand your migration readiness, get the right-sized SKU recommendations for Azure resources, and migrate your SQL Server database to Azure. You can migrate single databases or at scale using [PowerShell and Azure CLI](/azure/dms/migration-dms-powershell-cli).  | 
+| [Azure SQL migration extension for Azure Data Studio](/azure/dms/migration-using-azure-data-studio) | Powered by the [Azure Database Migration service](/azure/dms/dms-overview), the Azure SQL migration extension for Azure Data Studio helps you to assess your database requirements to understand your migration readiness, get the right-sized SKU recommendations for Azure resources, and migrate your SQL Server database to Azure. You can migrate single databases or at scale using [PowerShell and Azure CLI](/azure/dms/migration-dms-powershell-cli).  | 
 
 ## Compare migration options
 

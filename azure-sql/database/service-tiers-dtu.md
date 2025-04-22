@@ -1,10 +1,10 @@
 ---
-title: DTU-based purchasing model
+title: DTU-Based Purchasing Model
 description: Learn about the DTU-based purchasing model for Azure SQL Database and compare compute and storage sizes based on service tiers.
 author: dimitri-furman
 ms.author: dfurman
-ms.reviewer: wiassaf, mathoma
-ms.date: 09/27/2024
+ms.reviewer: wiassaf, mathoma, randolphwest
+ms.date: 06/16/2025
 ms.service: azure-sql-database
 ms.subservice: service-overview
 ms.topic: concept-article
@@ -59,7 +59,7 @@ Pools are well suited for databases with a low resource-utilization average and 
 
 ## Determine the number of DTUs needed by a workload
 
-If you want to migrate an existing on-premises or SQL Server virtual machine workload to SQL Database, see [SKU recommendations](/sql/dma/dma-sku-recommend-sql-db) to approximate the number of DTUs needed. For an existing SQL Database workload, use [query-performance insights](query-performance-insight-use.md) to understand your database-resource consumption (DTUs) and gain deeper insights for optimizing your workload. The [sys.dm_db_resource_stats](/sql/relational-databases/system-dynamic-management-views/sys-dm-db-resource-stats-azure-sql-database) dynamic management view (DMV) lets you view resource consumption for the last hour. The [sys.resource_stats](/sql/relational-databases/system-catalog-views/sys-resource-stats-azure-sql-database) catalog view displays resource consumption for the last 14 days, but at a lower fidelity of five-minute averages.
+If you want to migrate an existing on-premises or SQL Server virtual machine workload to SQL Database, use the [Azure SQL migration extension for Azure Data Studio](/azure/dms/migration-using-azure-data-studio) to get an approximate number of DTUs needed. For an existing SQL Database workload, use [query-performance insights](query-performance-insight-use.md) to understand your database-resource consumption (DTUs) and gain deeper insights for optimizing your workload. The [sys.dm_db_resource_stats](/sql/relational-databases/system-dynamic-management-views/sys-dm-db-resource-stats-azure-sql-database) dynamic management view (DMV) lets you view resource consumption for the last hour. The [sys.resource_stats](/sql/relational-databases/system-catalog-views/sys-resource-stats-azure-sql-database) catalog view displays resource consumption for the last 14 days, but at a lower fidelity of five-minute averages.
 
 ## Determine DTU utilization
 

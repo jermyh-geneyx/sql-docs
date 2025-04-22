@@ -3,7 +3,7 @@ title: "Plan and Test the Database Engine Upgrade Plan"
 description: This article describes planning before you begin your SQL Server upgrade, including a planning checklist and developing and testing an upgrade plan.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 06/03/2025
+ms.date: 06/16/2025
 ms.service: sql
 ms.subservice: install
 ms.topic: upgrade-and-migration-article
@@ -59,9 +59,7 @@ Before upgrading the [!INCLUDE [ssDE](../../includes/ssde-md.md)], review the fo
 
 - **Backward compatibility:** Review the [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)] database engine backward compatibility article to review changes in behavior between [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)] and the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] version from which you upgrade. See [Discontinued Database Engine functionality in SQL Server](../discontinued-database-engine-functionality-in-sql-server.md).
 
-- **Data Migration Assistant:** Run the Data Migration Assistant to help diagnose issues that might either block the upgrade process or require modification to existing scripts or applications due to a breaking change.
-
-  You can download the Data Migration Assistant [here](https://aka.ms/get-dma).
+- **SQL Server migration component:** Use the [SQL Server migration component in SQL Server Management Studio](/ssms/migrate-sql-server-component) to help diagnose issues that might either block the upgrade process or require modification to existing scripts or applications due to a breaking change.
 
 - **System configuration checker:** Run the [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)] System Configuration Checker (SCC) to determine if the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] setup program detects any blocking issues before you schedule the upgrade. For more information, see [Check parameters for the System Configuration Checker](check-parameters-for-the-system-configuration-checker.md).
 

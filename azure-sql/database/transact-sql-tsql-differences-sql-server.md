@@ -4,7 +4,7 @@ description: This article discusses the Transact-SQL (T-SQL) differences between
 author: croblesm
 ms.author: roblescarlos
 ms.reviewer: wiassaf, mathoma, randolphwest
-ms.date: 03/25/2025
+ms.date: 06/16/2025
 ms.service: azure-sql-database
 ms.subservice: migration
 ms.topic: reference
@@ -88,4 +88,3 @@ In some cases, the general subject of an article can be used in a product, but t
 ## Related content
 
 - [Features comparison: Azure SQL Database and Azure SQL Managed Instance](features-comparison.md)
-- [Overview of Data Migration Assistant](/sql/dma/dma-overview)

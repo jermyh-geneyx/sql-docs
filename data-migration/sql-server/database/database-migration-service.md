@@ -1,11 +1,11 @@
 ---
-title: "Tutorial: Migrate SQL Server to Azure SQL Database (offline)"
+title: "Tutorial: Migrate SQL Server to Azure SQL Database (Offline)"
 titleSuffix: Azure Database Migration Service
 description: Learn how to migrate on-premises SQL Server to Azure SQL Database offline by using Azure Database Migration Service.
 author: abhims14
 ms.author: abhishekum
 ms.reviewer: randolphwest
-ms.date: 06/26/2024
+ms.date: 06/16/2025
 ms.service: azure-database-migration-service
 ms.topic: tutorial
 ms.collection:
@@ -14,7 +14,7 @@ ms.collection:
 
 # Tutorial: Migrate SQL Server to Azure SQL Database (offline)
 
-You can use Azure Database Migration Service via the Azure SQL Migration extension for Azure Data Studio, or the Azure portal, to migrate databases from an on-premises instance of SQL Server to Azure SQL Database (offline).
+You can use Azure Database Migration Service via the Azure SQL migration extension for Azure Data Studio, or the Azure portal, to migrate databases from an on-premises instance of SQL Server to Azure SQL Database (offline).
 
 In this tutorial, learn how to migrate the sample `AdventureWorks2022` database from an on-premises instance of SQL Server to an instance of Azure SQL Database, by using Database Migration Service. This tutorial uses offline migration mode, which considers an acceptable downtime during the migration process.
 
@@ -35,16 +35,16 @@ In this tutorial, you learn how to:
 
 ## Migration options
 
-The following section describes how to use Azure Database Migration Service with the Azure SQL Migration extension, or in the Azure portal.
+The following section describes how to use Azure Database Migration Service with the Azure SQL migration extension, or in the Azure portal.
 
-## [Migrate using Azure SQL Migration extension](#tab/azure-data-studio)
+## [Migrate using Azure SQL migration extension](#tab/azure-data-studio)
 
 ### Prerequisites
 
 Before you begin the tutorial:
 
 - [Download and install Azure Data Studio](/azure-data-studio/download-azure-data-studio).
-- [Install the Azure SQL Migration extension](/azure-data-studio/extensions/azure-sql-migration-extension) from Azure Data Studio Marketplace.
+- [Install the Azure SQL migration extension](/azure-data-studio/extensions/azure-sql-migration-extension) from Azure Data Studio Marketplace.
 - Have an Azure account that's assigned to one of the following built-in roles:
 
   - Contributor for the target instance of Azure SQL Database

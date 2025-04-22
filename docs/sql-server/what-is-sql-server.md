@@ -3,7 +3,7 @@ title: What Is SQL Server?
 description: An overview of the relational database engine and components of SQL Server
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 05/19/2025
+ms.date: 06/16/2025
 ms.service: sql
 ms.subservice: release-landing
 ms.topic: overview
@@ -116,7 +116,7 @@ You can use Azure services and management capabilities, introduce DevOps practic
 ### Migrate to SQL Server
 
 - [Migrate databases and structured data to SQL Server on Linux](../linux/sql-server-linux-migrate-overview.md) <sup>1</sup>
-- [Data Migration Assistant](../dma/dma-overview.md)
+- [SQL Server migration component in SQL Server Management Studio](/ssms/migrate-sql-server-component)
 - [Import data from Excel to SQL Server or Azure SQL Database](../relational-databases/import-export/import-data-from-excel-to-sql.md)
 - [SQL Server Migration Assistant](../ssma/sql-server-migration-assistant.md)
 

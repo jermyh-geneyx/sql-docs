@@ -1,14 +1,15 @@
 ---
-title: Analyze I/O performance
+title: Analyze I/O Performance
 description: "Identify I/O performance issues associated with VM and data disk throttling for your SQL Server on Azure VM workloads."
 author: dplessMSFT
 ms.author: dpless
-ms.reviewer: mathoma
-ms.date: 04/09/2025
+ms.reviewer: mathoma, randolphwest
+ms.date: 06/16/2025
 ms.service: azure-vm-sql-server
 ms.topic: how-to
 ---
-# I/O Performance Analysis -  SQL Server on Azure VMs 
+# I/O Performance Analysis -  SQL Server on Azure VMs
+
 [!INCLUDE[appliesto-sqlvm](../../includes/appliesto-sqlvm.md)]
 
 This article teaches you to analyze I/O performance for SQL Server on Azure Virtual Machines (VMs) to find issues that result from exceeding virtual machines and data disks limits.  
@@ -64,7 +65,7 @@ Azure Virtual Machines are cloud-based computing resources that come in differen
 
 The size of the VM determines the number of vCPUs, memory, and storage available for the SQL Server instance. Compared to storage, it's relatively easy for customers to resize their virtual machines and scale their VM up and down based on application resource needs. Since it's possible for IOPS and throughput to be throttled at the VM level, choose an appropriate VM size based on performance needs and cost of the workload. 
 
-If you're migrating to Azure, you can use tools such as the [Data Migration Assistant](/sql/dma/dma-overview) and [SKU Recommendations](/azure/dms/ads-sku-recommend), to analyze your current SQL Server configuration and usage and suggest the best VM size for your workload in Azure.
+If you're migrating to Azure, you can use the [SKU recommendations](/azure/dms/ads-sku-recommend) tool, to analyze your current SQL Server configuration and usage and suggest the best VM size for your workload in Azure.
 
 The following Azure metrics are used to determine the workload is throttled from exceeding limits imposed by the VM:   
 - VM Cached IOPS Consumed Percentage 
@@ -148,7 +149,7 @@ Consider the following steps to avoid exceeding the data disk bandwidth limit:
 
 ## Latency without throttling
 
-Latency without throttling refers to delays in data access or processing that occur even when the storage system is not hitting its maximum IOPS or throughput limits. Latency in Azure VMs can arise from various sources, including the operating system’s I/O stack, SQL Server processing, network overhead, or hypervisor scheduling. Identifying the cause of the latency is important to optimizing SQL Server performance on Azure VMs.
+Latency without throttling refers to delays in data access or processing that occur even when the storage system is not hitting its maximum IOPS or throughput limits. Latency in Azure VMs can arise from various sources, including the operating system's I/O stack, SQL Server processing, network overhead, or hypervisor scheduling. Identifying the cause of the latency is important to optimizing SQL Server performance on Azure VMs.
 
 You will see the following warning on the **I/O Analysis** tab of the **Storage** pane if latency is detected without throttling:
 `Warning: High disk latency detected without throttling`. 

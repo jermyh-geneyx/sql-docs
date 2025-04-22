@@ -1,9 +1,9 @@
 ---
-title: "End of support options"
+title: "End of Support Options"
 description: Learn about the different options available for SQL Server products that reach end of support, including SQL Server 2012 and 2014.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 01/02/2025
+ms.date: 06/16/2025
 ms.service: sql
 ms.subservice: install
 ms.topic: conceptual
@@ -107,7 +107,7 @@ Supported version and edition upgrades:
 
 Tools:
 
-- [Data Migration Assistant](../../dma/dma-overview.md) can help detect compatibility issues that can affect database functionality in your new version of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
+- The [SQL Server migration component in SQL Server Management Studio](/ssms/migrate-sql-server-component) can help detect compatibility issues that can affect database functionality in your new version of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
 - [Query Tuning Assistant](../../relational-databases/performance/upgrade-dbcompat-using-qta.md) can help to tune workloads that can experience adverse effects when upgrading the database compatibility.
 
 For more information about new features in [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], see [SQL Server 2022 comparison](https://www.microsoft.com/sql-server/sql-server-2022-comparison).
@@ -148,7 +148,7 @@ If you'd like to take advantage of offloading maintenance and cost, but find the
 
 Tools:
 
-- [Data Migration Assistant](../../dma/dma-overview.md)
+- [SQL Server migration component in SQL Server Management Studio](/ssms/migrate-sql-server-component)
 - [Database Migration Service](/azure/dms/dms-overview)
 
 ## Extend support
@@ -218,7 +218,7 @@ Another option is to migrate your workload to an [Azure Virtual Machine running 
 
 ## Azure VMware Solution
 
-Azure VMware Solution allows you to run your VMware environment in Azure with familiar tooling and a quick migration path. 
+Azure VMware Solution allows you to run your VMware environment in Azure with familiar tooling and a quick migration path.
 
 Running SQL Server in VMs in this environment provides you with the free ESU benefits extended to running in Azure. For information on how to configure ESUs in Azure VMware Solution review: [ESUs for SQL Server and Windows Server in Azure VMware Solution VMs](/azure/azure-vmware/extended-security-updates-windows-sql-server).
 
@@ -260,7 +260,7 @@ If you want to offload maintenance, reduce costs, and eliminate the need to upgr
 
 Tools:
 
-- [Data Migration Assistant](../../dma/dma-overview.md)
+- [SQL Server migration component in SQL Server Management Studio](/ssms/migrate-sql-server-component)
 - [Database Migration Service](/azure/dms/dms-overview)
 
 ## Lifecycle dates

@@ -4,11 +4,12 @@ description: Learn how to use Data Migration Assistant to migrate SQL Server dat
 author: ajithkr-ms
 ms.author: ajithkr
 ms.reviewer: randolphwest
-ms.date: 09/25/2024
+ms.date: 06/16/2025
 ms.service: sql
 ms.subservice: dma
 ms.topic: overview
-ms.collection: sql-migration-content
+ms.collection:
+  - sql-migration-content
 ms.custom:
   - UpdateFrequency5
 helpviewer_keywords:
@@ -29,7 +30,7 @@ DMA recommends performance and reliability improvements for your target environm
 
 For SQL Server large migrations (in terms of number and size of databases) to Azure, we recommend that you use the [Azure Database Migration Service](/azure/dms/dms-overview), which can migrate databases at scale.
 
-DMA doesn't support database migrations to [Azure SQL Managed Instance](/azure/azure-sql/managed-instance/sql-managed-instance-paas-overview). Use the [Azure SQL Migration extension for Azure Data Studio](/azure/dms/migration-using-azure-data-studio) instead, which supports both online and offline database migrations to Azure SQL Managed Instance.
+DMA doesn't support database migrations to [Azure SQL Managed Instance](/azure/azure-sql/managed-instance/sql-managed-instance-paas-overview). Use the [Azure SQL migration extension for Azure Data Studio](/azure/dms/migration-using-azure-data-studio) instead, which supports both online and offline database migrations to Azure SQL Managed Instance.
 
 ## Get Data Migration Assistant
 
@@ -122,7 +123,7 @@ DMA replaces all previous versions of SQL Server Upgrade Advisor and should be u
 
 ## Related content
 
-- [Assess your SQL Server Migration](dma-assesssqlonprem.md)
-- [Data Migration Assistant: Configuration settings](dma-configurationsettings.md)
-- [Migrate on-premises SQL Server using Data Migration Assistant](dma-migrateonpremsql.md)
-- [Data Migration Assistant: Best Practices](dma-bestpractices.md)
+- [Perform a SQL Server migration assessment with Data Migration Assistant](dma-assesssqlonprem.md)
+- [Configure settings for Data Migration Assistant](dma-configurationsettings.md)
+- [Upgrade SQL Server using the Data Migration Assistant](dma-migrateonpremsql.md)
+- [Best practices for running Data Migration Assistant](dma-bestpractices.md)

@@ -3,7 +3,8 @@ title: "Use the Copy Database Wizard"
 description: "Use the Copy Database Wizard"
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.date: 07/19/2024
+ms.reviewer: randolphwest
+ms.date: 06/16/2025
 ms.service: sql
 ms.topic: how-to
 f1_keywords:
@@ -39,7 +40,6 @@ The Copy Database Wizard moves or copies databases and certain server objects ea
 > Considering a migration to Azure SQL? Review the following tools instead of the Copy Database Wizard:
 > - [Migrate to Azure SQL guides](/azure/azure-sql/migration-guides/)
 > - [Azure Database Migration Service](/azure/dms/)
-> - [Azure Data Migration Assistant](../../dma/dma-migrateonpremsqltosqldb.md)
 > - [Azure Migrate Service](/azure/migrate/migrate-services-overview)
 
 ## <a id="Restrictions"></a> Limitations

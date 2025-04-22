@@ -1,11 +1,11 @@
 ---
-title: Compare SQL database engine features
+title: Compare SQL Database Engine Features
 titleSuffix: Azure SQL Database & Azure SQL Managed Instance
 description: This article compares the database engine features of Azure SQL Database and Azure SQL Managed Instance
 author: danimir
 ms.author: danil
-ms.reviewer: wiassaf, bonova, mathoma, danil
-ms.date: 03/13/2025
+ms.reviewer: wiassaf, bonova, mathoma, danil, randolphwest
+ms.date: 06/16/2025
 ms.service: azure-sql
 ms.subservice: service-overview
 ms.topic: conceptual
@@ -143,7 +143,6 @@ The Azure platform provides a number of PaaS capabilities that are added as an a
 | [Azure Resource Health](/azure/service-health/resource-health-overview) | Yes | Yes |
 | **Short-term backup retention** | Yes, see [short-term retention](automated-backups-overview.md?view=azuresql-db&preserve-view=true#short-term-retention). 7 days default, max 35 days. | Yes, see [short-term retention](../managed-instance/automated-backups-overview.md?view=azuresql-mi&preserve-view=true#short-term-retention). 1-35 days, 7 days default.  |
 | [Azure Database Migration Service (DMS)](/azure/dms/dms-overview) | Yes | Yes |
-| [Data Migration Service (DMA)](/sql/dma/dma-overview) | Yes | No |
 | **Elastic jobs** | Yes, see [Elastic jobs](elastic-jobs-overview.md?view=azuresql-db&preserve-view=true) | No. Use [SQL Agent](../managed-instance/transact-sql-tsql-differences-sql-server.md?view=azuresql-mi&preserve-view=true#sql-server-agent) or [Azure Automation](../managed-instance/automation-manage.md). |
 | **Failover groups**| Yes, see [failover groups](failover-group-sql-db.md?view=azuresql-db&preserve-view=true) - all service tiers. | Yes, see [failover groups](../managed-instance/failover-group-sql-mi.md?view=azuresql-mi&preserve-view=true).|
 | **File system access** | No. Use [BULK INSERT](/sql/t-sql/statements/bulk-insert-transact-sql?view=azuresqldb-current&preserve-view=true#f-importing-data-from-a-file-in-azure-blob-storage) or [OPENROWSET](/sql/t-sql/functions/openrowset-transact-sql?view=azuresqldb-current&preserve-view=true#i-accessing-data-from-a-file-stored-on-azure-blob-storage) to access and load data from Azure Blob Storage as an alternative. | No. Use [BULK INSERT](/sql/t-sql/statements/bulk-insert-transact-sql?view=azuresqldb-mi-current&preserve-view=true#f-importing-data-from-a-file-in-azure-blob-storage) or [OPENROWSET](/sql/t-sql/functions/openrowset-transact-sql?view=azuresqldb-mi-current&preserve-view=true#i-accessing-data-from-a-file-stored-on-azure-blob-storage) to access and load data from Azure Blob Storage as an alternative. |

@@ -1,10 +1,10 @@
 ---
-title: Migrate databases by using Log Replay Service
+title: Migrate Databases by Using Log Replay Service
 description: Learn how to migrate databases from a SQL Server to Azure SQL Managed Instance by using Log Replay Service.
 author: danimir
 ms.author: danil
-ms.reviewer: mathoma
-ms.date: 12/16/2024
+ms.reviewer: mathoma, randolphwest
+ms.date: 06/16/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: migration
 ms.topic: how-to
@@ -16,7 +16,7 @@ ms.custom:
   - ignite-2024
 ---
 
-# Migrate databases from SQL Server by using Log Replay Service - Azure SQL Managed Instance 
+# Migrate databases from SQL Server by using Log Replay Service - Azure SQL Managed Instance
 
 [!INCLUDE[appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
 
@@ -75,7 +75,6 @@ Running LRS through the provided clients requires one of the following Azure rol
 
 When you're using LRS, consider the following best practices: 
 
-- Run [Data Migration Assistant](/sql/dma/dma-overview) to validate that your databases are ready to be migrated to SQL Managed Instance. 
 - Split full and differential backups into multiple files, instead of using a single file.
 - Enable backup compression to help the network transfer speeds.
 - Use Cloud Shell to run PowerShell or CLI scripts, because it will always be updated to use the latest released cmdlets.

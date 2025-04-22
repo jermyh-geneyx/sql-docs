@@ -1,11 +1,11 @@
 ---
-title: Getting started content reference
+title: Getting Started Content Reference
 titleSuffix: Azure SQL Managed Instance
 description: "A reference for content that helps you get started with Azure SQL Managed Instance. "
 author: MashaMSFT
 ms.author: mathoma
-ms.reviewer: vanto, mlandzic
-ms.date: 07/11/2019
+ms.reviewer: vanto, mlandzic, randolphwest
+ms.date: 06/16/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: deployment-configuration
 ms.topic: quickstart
@@ -43,7 +43,7 @@ As an alternative to manual creation of SQL Managed Instance, you can use [Power
 
 ### Migrate your databases
 
-After you create a SQL Managed Instance and configure access, you can start migrating your SQL Server databases. Migration can fail if you have some unsupported features in the source database that you want to migrate. To avoid failures and check compatibility, you can use [Data Migration Assistant (DMA)](https://www.microsoft.com/download/details.aspx?id=53595) to analyze your databases on SQL Server and find any issue that could block migration to a SQL Managed Instance, such as existence of [FileStream](/sql/relational-databases/blob/filestream-sql-server) or multiple log files. If you resolve these issues, your databases are ready to migrate to SQL Managed Instance.
+After you create a SQL Managed Instance and configure access, you can start migrating your SQL Server databases. Migration can fail if you have some unsupported features in the source database that you want to migrate. To avoid failures, you should find any issues that could block migration to a SQL Managed Instance, such as existence of [FileStream](/sql/relational-databases/blob/filestream-sql-server) or multiple log files. If you resolve these issues, your databases are ready to migrate to SQL Managed Instance.
 
 Once you are sure that you can migrate your database to a SQL Managed Instance, you can use the native SQL Server restore capabilities to restore a database into a SQL Managed Instance from a `.bak` file. You can use this method to migrate databases from SQL Server database engine installed on-premises or Azure Virtual Machines. For a quickstart, see [Restore from backup to a SQL Managed Instance](restore-sample-database-quickstart.md). In this quickstart, you restore from a `.bak` file stored in Azure Blob storage using the `RESTORE` Transact-SQL command.
 
@@ -71,9 +71,10 @@ However, in order to migrate your production database or even dev/test databases
 
 Learn more about the [recommended migration process](../migration-guides/managed-instance/sql-server-to-managed-instance-guide.md).
 
-## Next steps
+## Related content
 
-- Find a [high-level list of supported features in SQL Managed Instance here](../database/features-comparison.md) and [details and known issues here](transact-sql-tsql-differences-sql-server.md).
-- Learn about [technical characteristics of SQL Managed Instance](resource-limits.md#service-tier-characteristics).
-- Find more advanced how-to's in [how to use a SQL Managed Instance](how-to-content-reference-guide.md).
-- [Identify the right Azure SQL Managed Instance SKU for your on-premises database](/sql/dma/dma-sku-recommend-sql-db/).
+- [Features comparison: Azure SQL Database and Azure SQL Managed Instance](../database/features-comparison.md)
+- [details and known issues here](transact-sql-tsql-differences-sql-server.md)
+- [Technical characteristics of SQL Managed Instance](resource-limits.md#service-tier-characteristics)
+- [Azure SQL Managed Instance content reference](how-to-content-reference-guide.md)
+- [Azure SQL migration extension for Azure Data Studio](/azure/dms/migration-using-azure-data-studio)

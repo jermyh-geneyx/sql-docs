@@ -1,11 +1,11 @@
 ---
-title: "Tutorial: Migrate SQL Server to SQL Server on Azure Virtual Machine using Azure Data Studio"
+title: "Tutorial: Migrate SQL Server to SQL Server on Azure Virtual Machine Using Azure Data Studio"
 titleSuffix: Azure Database Migration Service
 description: Learn how to migrate on-premises SQL Server to SQL Server on Azure Virtual Machines online by using Azure Data Studio and Azure Database Migration Service.
 author: abhims14
 ms.author: abhishekum
 ms.reviewer: cawrites, randolphwest
-ms.date: 06/26/2024
+ms.date: 06/16/2025
 ms.service: azure-database-migration-service
 ms.topic: tutorial
 ms.collection:
@@ -14,7 +14,7 @@ ms.collection:
 
 # Tutorial: Migrate SQL Server to SQL Server on Azure Virtual Machines with DMS
 
-You can use Azure Database Migration Service and the Azure SQL Migration extension in Azure Data Studio to migrate databases from an on-premises instance of SQL Server to [SQL Server on Azure Virtual Machines (SQL Server 2016 and later)](/azure/azure-sql/virtual-machines/windows/sql-server-on-azure-vm-iaas-what-is-overview) with minimal downtime.
+You can use Azure Database Migration Service and the Azure SQL migration extension in Azure Data Studio to migrate databases from an on-premises instance of SQL Server to [SQL Server on Azure Virtual Machines (SQL Server 2016 and later)](/azure/azure-sql/virtual-machines/windows/sql-server-on-azure-vm-iaas-what-is-overview) with minimal downtime.
 
 For database migration methods that might require some manual configuration, see [SQL Server instance migration to SQL Server on Azure Virtual Machines](/azure/azure-sql/migration-guides/virtual-machines/sql-server-to-sql-on-azure-vm-migration-overview).
 
@@ -38,7 +38,7 @@ In this tutorial, you learn how to:
 Before you begin the tutorial:
 
 - [Download and install Azure Data Studio](/azure-data-studio/download-azure-data-studio).
-- [Install the Azure SQL Migration extension](/azure-data-studio/extensions/azure-sql-migration-extension) from Azure Data Studio Marketplace.
+- [Install the Azure SQL migration extension](/azure-data-studio/extensions/azure-sql-migration-extension) from Azure Data Studio Marketplace.
 - Have an Azure account that's assigned to one of the following built-in roles:
 
   - Contributor for the target instance of SQL Server on Azure Virtual Machines, and for the storage account where you upload your database backup files from a Server Message Block (SMB) network share
@@ -61,7 +61,7 @@ Before you begin the tutorial:
 
 - Provide an SMB network share, Azure storage account file share, or Azure storage account blob container that contains your full database backup files and subsequent transaction log backup files. Database Migration Service uses the backup location during database migration.
 
-  - The Azure SQL Migration extension for Azure Data Studio doesn't take database backups, and doesn't initiate any database backups on your behalf. Instead, the service uses existing database backup files for the migration.
+  - The Azure SQL migration extension for Azure Data Studio doesn't take database backups, and doesn't initiate any database backups on your behalf. Instead, the service uses existing database backup files for the migration.
 
   - If your database backup files are in an SMB network share, [create an Azure storage account](/azure/storage/common/storage-account-create) that Database Migration Service can use to upload database backup files to and to migrate databases. Make sure you create the Azure storage account in the same region where you create your instance of Database Migration Service.
 
