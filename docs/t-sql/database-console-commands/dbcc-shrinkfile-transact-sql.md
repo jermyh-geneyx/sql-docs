@@ -4,7 +4,7 @@ description: "DBCC SHRINKFILE shrinks the size of a database file."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: umajay, dpless, randolphwest
-ms.date: 01/21/2025
+ms.date: 04/22/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -89,6 +89,8 @@ This option isn't supported for FILESTREAM filegroup containers.
 
 If specified, `DBCC SHRINKFILE` tries to shrink the file to *target_size*. Used pages in the file's area to be freed are moved to free space in the file's kept areas. For example, with a 10-MB data file, a `DBCC SHRINKFILE` operation with an `8` *target_size* moves all used pages in the file's last 2 MB into any unallocated pages in the file's first 8 MB. `DBCC SHRINKFILE` doesn't shrink a file past the needed stored data size. For example, if 7 MB of a 10-MB data file is used, a `DBCC SHRINKFILE` statement with a *target_size* of 6 shrinks the file to only 7 MB, not 6 MB.
 
+If *target_size* is specified with `TRUNCATEONLY`, free space at the end of the file might not be released.
+
 #### EMPTYFILE
 
 Migrates all data from the specified file to other files in the *same filegroup*. In other words, `EMPTYFILE` migrates data from a specified file to other files in the same filegroup. `EMPTYFILE` assures you that no new data gets added to the file, despite this file not being read-only. You can use the [ALTER DATABASE](../../t-sql/statements/alter-database-transact-sql.md) statement to remove a file. If you use the [ALTER DATABASE](../../t-sql/statements/alter-database-transact-sql.md) statement to change file size, the read-only flag is reset, and data can be added.
@@ -109,7 +111,7 @@ This option isn't supported for FILESTREAM filegroup containers.
 
 Releases all free space at the file's end to the operating system but doesn't perform any page movement inside the file. The data file is shrunk only to the last allocated extent.
 
-*target_size* is ignored if specified with `TRUNCATEONLY`.
+If *target_size* is specified with `TRUNCATEONLY`, free space at the end of the file might not be released.
 
 The `TRUNCATEONLY` option doesn't move information in the log, but does remove inactive VLFs from the end of the log file. This option isn't supported for FILESTREAM filegroup containers.
 
