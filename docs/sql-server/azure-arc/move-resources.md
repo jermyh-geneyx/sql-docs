@@ -17,7 +17,11 @@ This article describes how you can move resources to a new resource group or sub
 
 ## Requirements
 
-To complete this task, make sure that the *Machine - Azure Arc* resource and all SQL Server instances are in the same resource group.
+To complete this task, make sure that:
+
+- The *Machine - Azure Arc* resource and all SQL Server instances are in the same resource group.
+
+- The new subscription or resource group needs to meet all [prerequisites](/sql/sql-server/azure-arc/prerequisites).
 
 In addition:
 
