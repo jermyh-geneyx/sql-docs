@@ -83,6 +83,7 @@ Here's the logic used for calculating Availability for every one-minute interval
 - If all connections fail due to user errors, availability is 100%.
 - If there are no connection attempts, availability is 100%.
 - If all connections fail due to system errors, availability is 0%.
+- Currently, the availability metric data isn't supported for the serverless compute tier, and displays 100%.
 
 Availability metric is therefore a composite metric derived from following existing metrics:
 
@@ -101,7 +102,6 @@ User errors include all connections that fail due to user configuration, workloa
 
 - Examples of errors caused by user workload:
     - [Connection failure due to resource governance](troubleshoot-common-errors-issues.md?view=azuresql-db&preserve-view=true#resource-governance-errors)
-    - Connection attempts to a serverless database that is in a paused state
     
 - Examples of errors caused by user management:
     - Scaling up or down the database or elastic pool
