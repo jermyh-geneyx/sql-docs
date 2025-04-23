@@ -192,7 +192,7 @@ Using the same time zone across a primary and secondary instance in a failover g
 | India Standard Time | (UTC+05:30) Chennai, Kolkata, Mumbai, New Delhi |
 | Sri Lanka Standard Time | (UTC+05:30) Sri Jayawardenepura |
 | Nepal Standard Time | (UTC+05:45) Kathmandu |
-| Central Asia Standard Time | (UTC+06:00) Nur-Sultan |
+| Central Asia Standard Time | (UTC+06:00) Astana |
 | Bangladesh Standard Time | (UTC+06:00) Dhaka |
 | Omsk Standard Time | (UTC+06:00) Omsk |
 | Myanmar Standard Time | (UTC+06:30) Yangon (Rangoon) |
