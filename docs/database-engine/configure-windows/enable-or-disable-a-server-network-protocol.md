@@ -62,7 +62,7 @@ All network protocols are installed during installation, by [!INCLUDE[ssNoVersio
    You can run this script from any machine, with or without SQL Server installed. Make sure you have the **SqlServer** module installed.
 
    ```powershell
-   #requires the SqlServer module
+   # This script requires the SqlServer module
    Import-Module SQLServer
 
    $wmi = New-Object Microsoft.SqlServer.Management.Smo.Wmi.ManagedComputer <#computer_name#>
@@ -76,7 +76,7 @@ All network protocols are installed during installation, by [!INCLUDE[ssNoVersio
    $Tcp.IsEnabled = $true
    $Tcp.Alter()
    $Tcp
- 
+
    # Enable the named pipes protocol for the default instance.
    $uri = "ManagedComputer[@Name='<#computer_name#>']/ServerInstance[@Name='MSSQLSERVER']/ServerProtocol[@Name='Np']"
    $Np = $wmi.GetSmoObject($uri)
@@ -99,22 +99,31 @@ After you enable or disable protocols, you must stop and restart the [!INCLUDE[s
 
 ```powershell
 # Get a reference to the ManagedComputer class.
-CD SQLSERVER:\SQL\<computer_name>
+Set-Location SQLSERVER:\SQL\<computer_name>
 $Wmi = (get-item .).ManagedComputer
+
 # Get a reference to the default instance of the Database Engine.
 $DfltInstance = $Wmi.Services['MSSQLSERVER']
+
 # Display the state of the service.
 $DfltInstance
+
 # Stop the service.
 $DfltInstance.Stop();
+
 # Wait until the service has time to stop.
+
 # Refresh the cache.
 $DfltInstance.Refresh();
+
 # Display the state of the service.
 $DfltInstance
+
 # Start the service again.
 $DfltInstance.Start();
+
 # Wait until the service has time to start.
+
 # Refresh the cache and display the state of the service.
 $DfltInstance.Refresh();
 $DfltInstance

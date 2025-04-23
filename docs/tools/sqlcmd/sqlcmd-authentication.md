@@ -4,7 +4,7 @@ description: Authenticating with Microsoft Entra ID in the new standalone sqlcmd
 author: dlevy-msft
 ms.author: dlevy
 ms.reviewer: randolphwest
-ms.date: 12/13/2023
+ms.date: 04/18/2025
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: how-to
@@ -68,18 +68,22 @@ Use this method when running **sqlcmd** (Go) on an Azure VM that has either a sy
 This example shows how to connect using a Service Assigned Managed Identity (SAMI):
 
 ```console
--S testsrv.database.windows.net -d Target_DB_or_DW --authentication-method ActiveDirectoryManagedIdentity
+sqlcmd -S testsrv.database.windows.net -d Target_DB_or_DW --authentication-method ActiveDirectoryManagedIdentity
 ```
 
 This example shows how to connect with a User Assigned Managed Identity (UAMI) by adding the Client Id of the user assigned managed identity:
 
 ```console
--S testsrv.database.windows.net -d Target_DB_or_DW --authentication-method ActiveDirectoryManagedIdentity -U <user-assigned-managed-identity-client-id>
+sqlcmd -S testsrv.database.windows.net -d Target_DB_or_DW --authentication-method ActiveDirectoryManagedIdentity -U <user-assigned-managed-identity-client-id>
 ```
 
 #### ActiveDirectoryServicePrincipal
 
-This method authenticates the provided user name as a service principal ID and the password as the client secret for the service principal. Provide a user name in the form `<service principal id>@<tenant id>`. Set `SQLCMDPASSWORD` variable to the client secret. If using a certificate instead of a client secret, set `AZURE_CLIENT_CERTIFICATE_PATH` environment variable to the path of the certificate file.
+This method authenticates the provided user name as a service principal ID and the password as the client secret for the service principal. Provide a user name in the form `<application (client) ID>`. Set `SQLCMDPASSWORD` variable to the client secret. If using a certificate instead of a client secret, set `AZURE_CLIENT_CERTIFICATE_PATH` environment variable to the path of the certificate file.
+
+```console
+sqlcmd -S testsrv.database.windows.net -d Target_DB_or_DW --authentication-method ActiveDirectoryServicePrincipal -U <Application (client) ID> -P <client secret>
+```
 
 ### Environment variables for Microsoft Entra authentication
 

@@ -4,7 +4,7 @@ description: The vector data type stores vector data optimized for machine learn
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: damauri, pookam
-ms.date: 01/21/2025
+ms.date: 04/18/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: quickstart
@@ -17,16 +17,17 @@ helpviewer_keywords:
 dev_langs:
   - "TSQL"
 ms.collection: ce-skilling-ai-copilot
-monikerRange: "=azuresqldb-current||=fabric"
+monikerRange: "=azuresqldb-current||=fabric||=azuresqldb-mi-current"
 ---
 # Vector data type (preview)
 
-[!INCLUDE [Azure SQL Database FabricSQLDB](../../includes/applies-to-version/asdb-fabricsqldb.md)]
+[!INCLUDE [Azure SQL Database, SQL MI, FabricSQLDB](../../includes/applies-to-version/asdb-asmi-fabricsqldb.md)]
 
 The **vector** data type is designed to store vector data optimized for operations such as similarity search and machine learning applications. Vectors are stored in an optimized binary format but are exposed as JSON arrays for convenience. Each element of the vector is stored as a single-precision (4-byte) floating-point value.
 
 > [!NOTE]
-> This data type is in preview and is subject to change. Make sure to read preview usage terms in the [Service Level Agreements (SLA) for Online Services](https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services) document. For limitations of the current preview, see [Limitations](#limitations) and [Known issues](#known-issues).
+> - This data type is in preview and is subject to change. Make sure to read preview usage terms in the [Service Level Agreements (SLA) for Online Services](https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services) document. For limitations of the current preview, see [Limitations](#limitations) and [Known issues](#known-issues).
+> - Vector features are available in Azure SQL Managed Instance configured with the [Always-up-to-date](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy) policy. 
 
 For more information on working with vector data, see:
 

@@ -98,6 +98,8 @@ CREATE ASYMMETRIC KEY asym_key_name
  Five algorithms can be provided; RSA_4096, RSA_3072, RSA_2048, RSA_1024, and RSA_512.  
   
  RSA_1024 and RSA_512 are deprecated. To use RSA_1024 or RSA_512 (not recommended) you must set the database to database compatibility level 120 or lower.  
+
+ Starting in SQL Server 2022 (16.x), RSA-HSM_2048 and RSA-HSM_3072 are supported.
   
  PROVIDER_KEY_NAME = '*key_name_in_provider*'  
  Specifies the key name from the external provider.  

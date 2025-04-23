@@ -105,7 +105,10 @@ The following table lists alternative migration tools:
 
 ## Compare migration options
 
-Compare migration options to choose the path that's appropriate to your business needs.
+Compare migration options to choose the path that's appropriate to your business needs. 
+
+> [!NOTE]
+> For an in-depth migration comparison, see [Compare LRS with the Managed Instance link](/azure/azure-sql/managed-instance/log-replay-service-compare-mi-link).
 
 The following table compares the recommended migration options:
 
