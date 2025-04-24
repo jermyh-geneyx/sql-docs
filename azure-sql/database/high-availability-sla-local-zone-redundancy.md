@@ -96,9 +96,7 @@ As an extra benefit, the local storage availability model includes the ability t
 
 ### Hyperscale service tier
 
-The Hyperscale service tier architecture is described in [Distributed functions architecture](./service-tier-hyperscale.md#distributed-functions-architecture). 
-
-:::image type="content" source="media/service-tier-hyperscale/hyperscale-architecture.png" alt-text="Diagram showing Hyperscale functional architecture." lightbox="media/service-tier-hyperscale/hyperscale-architecture.png":::
+The Hyperscale service tier architecture is described in [Distributed functions architecture](./service-tier-hyperscale.md#distributed-functions-architecture), which has a detailed diagram. 
 
 The availability model in Hyperscale includes four layers:
 

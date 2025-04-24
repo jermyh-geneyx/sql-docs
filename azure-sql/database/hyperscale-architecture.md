@@ -4,7 +4,7 @@ description: Learn how Hyperscale databases are architected to scale out storage
 author: dimitri-furman
 ms.author: dfurman
 ms.reviewer: wiassaf, mathoma, randolphwest
-ms.date: 02/22/2024
+ms.date: 04/27/2025
 ms.service: azure-sql-database
 ms.subservice: service-overview
 ms.topic: conceptual
@@ -27,19 +27,25 @@ The [Hyperscale service tier](service-tier-hyperscale.md) utilizes an architectu
 
 Traditional database engines centralize data management functions in a single process: even so-called distributed databases in production today have multiple copies of a monolithic data engine.
 
-Hyperscale databases follow a different approach. Hyperscale separates the query processing engine, where the semantics of various data engines diverge, from the components that provide long-term storage and durability for the data. In this way, storage capacity can be smoothly scaled out as far as needed, up to 128 TB for a single Hyperscale database.
+Hyperscale databases follow a different approach. Hyperscale separates the query processing engine, where the semantics of various data engines diverge, from the components that provide long-term storage and durability for the data. In this way, storage capacity can be smoothly scaled out as far as needed, up to 128 TB for a single Hyperscale database. 
 
-All network communication among Hyperscale components uses Azure network infrastructure with built-in redundancy.
+A Hyperscale database contains the following types of components: compute nodes, page servers, the log service, and Azure storage. All network communication among Hyperscale components uses Azure network infrastructure with built-in redundancy.
 
 High-availability secondary replicas and named replicas are optional compute nodes that can be added on demand. Both share the same storage components, so no data copy is required to spin up a new replica. A geo-secondary replica can be added on demand in the same or a different Azure region. For data protection and redundancy, geo-secondary replicas have storage components that are separate from those used by the primary replica.
 
-The following diagram illustrates the functional Hyperscale architecture:
+The following diagram illustrates the functional Hyperscale architecture:   
 
 :::image type="complex" source="media/service-tier-hyperscale/hyperscale-architecture.png" alt-text="Diagram showing Hyperscale's compute tier." lightbox="media/service-tier-Hyperscale/Hyperscale-architecture.png":::
 Diagram that shows that Hyperscale's compute tier consists of a primary compute note and secondary compute nodes, each with RBPEX data cache. The log service communicates both with compute notes and page servers. Page servers exist in their own tier and also have RBPEX data cache.
 :::image-end:::
 
-A Hyperscale database contains the following types of components: compute nodes, page servers, the log service, and Azure storage.
+The diagram shows the following components:   
+**a. [Compute](#compute)**: Hyperscale separates the main database engine, referred to as Compute, from the transaction logging and data storage components.   
+**b. [Storage](#azure-storage)**: Components that provide long-term storage and durability for data are separated from the main database engine. Data files are stored in separate Azure storage blobs. Data in Azure storage provides redundancy to recover a page server from failure.  
+**c. [Page servers](#page-server)**: Page servers retrieve data from data files in the storage layer, store it in a local SSD cache, and provide the data to the main engine. The local SSD cache is allocated based on compute size to retain the active/hot data pages. Page servers grow as the database size increases. Each page server manages up to 128 GB of data.   
+**d. [Log service](#log-service)**: A Hyperscale database uses log service to coordinate transaction log propagation to replicas and page servers.  
+**e. [Named replicas](service-tier-hyperscale-replicas.md#named-replica)**: Named replicas have their own compute but use the same log service. You can have up to 30 named replicas. Each named replica can have up to 4 high availability replicas.   
+**f. [High availability replicas](service-tier-hyperscale-replicas.md#hyperscale-secondary-replicas)**: High-availability replicas are optional standby copies of a primary, geo, or named replica, ready for failover and available for read-only workloads. Each primary replica and named replica can have up to 4 high availability replicas.  
 
 ## Compute
 
