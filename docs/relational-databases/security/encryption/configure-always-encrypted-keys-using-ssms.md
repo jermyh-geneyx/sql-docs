@@ -53,7 +53,7 @@ The **New Column Master Key** dialog allows you to generate a column master key 
 1. Pick an existing key in your key store, or click the **Generate Key** or **Generate Certificate** button, to create a key in the key store. 
 
     > [!NOTE]
-    >  We do not verify the validity of the keys or certificates used for generating the column master key.
+    >  We do not verify the validity of the keys or certificates used to generate the column master key. 
     
 1. Click **OK** and the new key appears in the list.
 

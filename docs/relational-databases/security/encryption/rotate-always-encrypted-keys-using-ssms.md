@@ -35,7 +35,7 @@ The rotation of a column master key is the process of replacing an existing colu
 Follow the steps in [Provision Column Master Keys with the New Column Master Key Dialog](configure-always-encrypted-keys-using-ssms.md#provision-column-master-keys-with-the-new-column-master-key-dialog).
 
 > [!NOTE]
-> When using Azure Key Vault as the key store, multi-tenant customer managed key rotation is not supported. Ensure that the new customer managed key is in the same tenant as the existing one.
+> When using Azure Key Vault as the key store, multitenant customer managed key rotation is not supported. Ensure that the new customer managed key is in the same tenant as the existing one.
 
 ### Step 2: Encrypt column encryption keys with the new column master key
 
