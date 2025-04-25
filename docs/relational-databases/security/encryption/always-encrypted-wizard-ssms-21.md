@@ -130,6 +130,22 @@ Use the online approach:
 
 - To minimize the downtime/unavailability of the database to your applications.
 
+## Post migration
+
+Clear the plan cache for all batches and stored procedures that access the table to refresh parameters encryption information. 
+
+   ```sql
+   ALTER DATABASE SCOPED CONFIGURATION CLEAR PROCEDURE_CACHE;
+   ```
+
+   > [!NOTE]
+   > If you don't remove the plan for the impacted query from the cache, the first execution of the query after encryption might fail.
+   >
+   > Use `ALTER DATABASE SCOPED CONFIGURATION CLEAR PROCEDURE_CACHE` or `DBCC FREEPROCCACHE` to clear the plan cache carefully, as it can result in temporary query performance degradation. To minimize the negative impact of clearing the cache, you can selectively remove the plans for only the impacted queries.
+
+Call [sp_refresh_parameter_encryption](../../system-stored-procedures/sp-refresh-parameter-encryption-transact-sql.md) to update the metadata for the parameters of each module (stored procedure, function, view, trigger) that are persisted in [sys.parameters](../..//system-catalog-views/sys-parameters-transact-sql.md) and may have been invalidated by encrypting the columns.
+
+
 ## Related content
 
 - [Always Encrypted](../../../relational-databases/security/encryption/always-encrypted-database-engine.md)
