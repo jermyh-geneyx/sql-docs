@@ -43,4 +43,4 @@ This section of the dashboard provides you with an overview of the migration ass
 - [Assessment rules for SQL Server to Azure SQL Database migration](/azure/azure-sql/migration-guides/database/sql-server-to-sql-database-assessment-rules)
 - [Migrate SQL Server to Azure SQL](/azure/dms/dms-overview)
 - [SQL Server enabled by Azure Arc](overview.md)
-- [Automatically connect SQL Server machines to Azure Arc](automatically-connect.md)
+- [Deployment options for SQL Server enabled by Azure Arc](deployment-options.md)

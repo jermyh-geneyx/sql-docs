@@ -54,7 +54,7 @@ For more information, see [Extension management with Azure Arc](/azure/azure-arc
 1. Click on the **Microsoft Defender for Cloud** tile. If Enablement Status shows **Disabled at the subscription-level**, follow the steps documented in [Enable Microsoft Defender for SQL servers on machines](/azure/defender-for-cloud/defender-for-sql-usage#step-3-enable-the-optional-plan-in-defender-for-clouds-environment-settings-page).
 
 > [!NOTE]
-> The first scan to generate the vulnerability assessment happens within 24 hours after enabling Microsoft Defender for Cloud. After that, auto scans are be performed every week on Sunday.
+> The first scan to generate the vulnerability assessment happens within 24 hours after enabling Microsoft Defender for Cloud. Successive scans run automatically every Sunday.
 
 ## Explore
 
@@ -77,5 +77,5 @@ Explore security anomalies and threats in Azure Security Center.
    :::image type="content" source="media/configure-advanced-data-security/brute-force-alert-mitigation.png" alt-text="Screenshot showing alert mitigation.":::
 
 ## Next steps
-- [Automatically connect your SQL Server to Azure Arc](automatically-connect.md)
+- [SQL Server enabled by Azure Arc deployment options](deployment-options.md)
 - You can further investigate the security alerts and attacks using [Azure Sentinel](/azure/sentinel/overview). For details, see [on-board Azure Sentinel](/azure/sentinel/connect-data-sources).

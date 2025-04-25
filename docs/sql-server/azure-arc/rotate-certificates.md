@@ -83,5 +83,5 @@ If the new version of the certificate is created and installed on the server, bu
 
 ## Next steps
 
-- [Automatically connect your SQL Server to Azure Arc](automatically-connect.md)
+- [SQL Server enabled by Azure Arc deployment options](deployment-options.md)
 - You can further investigate the security alerts and attacks using [Azure Sentinel](/azure/sentinel/overview). For details, see [on-board Azure Sentinel](/azure/sentinel/connect-data-sources).

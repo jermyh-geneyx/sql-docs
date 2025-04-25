@@ -49402,6 +49402,26 @@
       "redirect_document_id": false
     },
     {
+      "source_path": "docs/sql-server/azure-arc/connect-at-scale-script.md",
+      "redirect_url": "/sql/sql-server/azure-arc/deployment-options",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "docs/sql-server/azure-arc/connect-with-installer.md",
+      "redirect_url": "/sql/sql-server/azure-arc/deployment-options",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "docs/sql-server/azure-arc/onboard-configuration-manager-custom-task.md",
+      "redirect_url": "/sql/sql-server/azure-arc/deployment-options",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "docs/sql-server/azure-arc/automatically-connect.md",
+      "redirect_url": "/sql/sql-server/azure-arc/deployment-options",
+      "redirect_document_id": false
+    },
+    {
       "source_path": "docs/sql-server/azure-arc/view-databases.md",
       "redirect_url": "/sql/sql-server/azure-arc/view-inventory",
       "redirect_document_id": false

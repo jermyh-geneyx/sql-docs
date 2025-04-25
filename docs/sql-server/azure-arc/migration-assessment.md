@@ -48,7 +48,7 @@ The assessment is available for any instance of SQL Server enabled by Azure Arc.
 
 To assess SQL Server, the SQL Server instance needs to:
 
-- Run on Windows-based SQL Server instance is connected to Azure. Follow the instructions at [Automatically connect SQL Server machines to Azure Arc.](automatically-connect.md)
+- Run on Windows-based SQL Server instance is connected to Azure. Follow the instructions at [Deployment options for SQL Server enabled by Azure Arc](deployment-options.md).
 
 - Have Azure Extension for SQL Server (`WindowsAgent.SqlServer`) version **1.1.2594.118** or later. 
 
@@ -159,4 +159,4 @@ Contact [Microsoft support](/azure/azure-portal/supportability/how-to-create-azu
 - [Assessment rules for SQL Server to Azure SQL Database migration](/azure/azure-sql/migration-guides/database/sql-server-to-sql-database-assessment-rules)
 - [Migrate SQL Server to Azure SQL](/azure/dms/dms-overview)
 - [SQL Server enabled by Azure Arc](overview.md)
-- [Automatically connect SQL Server machines to Azure Arc](automatically-connect.md)
+- [Deployment options for SQL Server enabled by Azure Arc](deployment-options.md)

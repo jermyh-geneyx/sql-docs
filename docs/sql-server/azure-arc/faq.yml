@@ -97,6 +97,6 @@ additionalContent: |
      ## Related content
 
      - [SQL Server enabled by Azure Arc - Overview](overview.md)
-     - [Automatically connect your SQL Server to Azure Arc](automatically-connect.md)
+     - [SQL Server enabled by Azure Arc deployment options](deployment-options.md)
      - [Azure Arc-enabled data services FAQ](/azure/azure-arc/data/faq)
 
