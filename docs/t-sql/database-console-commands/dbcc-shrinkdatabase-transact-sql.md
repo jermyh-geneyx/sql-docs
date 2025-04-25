@@ -4,7 +4,7 @@ description: DBCC SHRINKDATABASE shrinks the size of the data and log files in t
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: umajay, KevinConanMSFT, dplessMSFT, randolphwest
-ms.date: 01/21/2025
+ms.date: 04/22/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -89,6 +89,8 @@ The database name or ID to be shrunk. 0 specifies that the current database is u
 
 The percentage of free space that you want left in the database file after the shrink operation completes.
 
+If *target_percent* is specified with `TRUNCATEONLY`, free space at the end of the file might not be released.
+
 #### NOTRUNCATE
 
 Moves assigned pages from the file's end to unassigned pages in the front of the file. This action compacts the data within the file. *target_percent* is optional. [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] doesn't support this option.
@@ -99,9 +101,9 @@ The free space at the end of the file isn't returned to the operating system, an
 
 #### TRUNCATEONLY
 
-Releases all free space at the end of the file to the operating system. Doesn't move any pages inside the file. The data file shrinks only to the last assigned extent. Ignores *target_percent* if specified with `TRUNCATEONLY`. [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] doesn't support this option.
+Releases all free space at the end of the file to the operating system. Doesn't move any pages inside the file. The data file shrinks only to the last assigned extent. [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] doesn't support this option.
 
-`DBCC SHRINKDATABASE` with the `TRUNCATEONLY` option affects the database transaction log file only. To truncate the data file, use `DBCC SHRINKFILE` instead. For more information, see [DBCC SHRINKFILE](dbcc-shrinkfile-transact-sql.md).
+If *target_percent* is specified with `TRUNCATEONLY`, free space at the end of the file might not be released.
 
 #### WITH NO_INFOMSGS
 

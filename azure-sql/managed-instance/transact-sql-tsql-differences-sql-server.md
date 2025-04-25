@@ -4,7 +4,7 @@ description: This article discusses the Transact-SQL (T-SQL) differences between
 author: danimir
 ms.author: danil
 ms.reviewer: mathoma, bonova, danil, randolphwest
-ms.date: 02/17/2025
+ms.date: 04/23/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: service-overview
 ms.topic: reference
@@ -423,7 +423,7 @@ For more information about configuring transactional replication, see the follow
 Resource governor is supported. However, there are several behavior differences:
 
 - To modify resource governor configuration in SQL Managed Instance, you must be in the context of the `master` database on the primary replica.
-- Resource governor configuration changes made on the primary replica propagate to all secondary replicas. However, changes to the currently effective configuration on a secondary replica might not be immediate. To make the changes effective on a secondary replica, [connect](../database/read-scale-out.md#connect-to-a-read-only-replica) to the replica and execute `ALTER RESOURCE GOVERNOR RECONFIGURE`.
+- Resource governor configuration changes made on the primary replica propagate to all secondary replicas. However, changes to the currently effective configuration on a secondary replica might not be immediate. To make the changes effective on a secondary replica, [connect](../database/read-scale-out.md#connect-to-a-read-only-replica) to the `master` database on a secondary replica and execute `ALTER RESOURCE GOVERNOR RECONFIGURE`.
 - In SQL Server, if the `REQUEST_MAX_CPU_TIME_SEC` setting is configured for a workload group and a batch request exceeds the configured CPU time, the `cpu_threshold_exceeded` event fires but the request is not terminated unless a trace flag is enabled. In SQL Managed Instance, the same event fires and the request is always terminated. For more information, see [REQUEST_MAX_CPU_TIME_SEC](/sql/t-sql/statements/create-workload-group-transact-sql#request_max_cpu_time_sec--value).
 - The maximum number of resource pools you can create is 40.
 

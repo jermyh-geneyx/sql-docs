@@ -129,7 +129,7 @@ Database actions fail if they cause audited events. Actions, which don't cause a
 
 #### AUDIT_GUID = *uniqueidentifier*
 
-To support scenarios such as database mirroring, an audit needs a specific GUID that matches the GUID found in the mirrored database. The GUID can't be modified after the audit is created.
+To support scenarios such as database mirroring or databases participating in an Always On availability group, an audit needs a specific GUID that matches the GUID found in the mirrored database. The GUID can't be modified after the audit is created.
 
 #### OPERATOR_AUDIT
 
