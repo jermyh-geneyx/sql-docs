@@ -91,7 +91,7 @@ If you have configured a secure enclave in your database and you're using enclav
 
 For more information about enclave attestation, see [Configure attestation for Always Encrypted using Azure Attestation](/azure/azure-sql/database/always-encrypted-enclaves-configure-attestation) 
 
-## Post Encryption
+## Post encryption
 
 Clear the plan cache for all batches and stored procedures that access the table to refresh parameters encryption information. 
 
