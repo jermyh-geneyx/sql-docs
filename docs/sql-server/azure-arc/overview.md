@@ -139,7 +139,7 @@ The following diagram illustrates the architecture of [!INCLUDE [ssazurearc](../
 The [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] Setup Installation Wizard doesn't support installation of the Azure extension for SQL Server. You can install this component from the command line, or by connecting the server to Azure Arc.
 
 - [Install Azure extension for SQL Server from the command line](../../database-engine/install-windows/install-sql-server-from-the-command-prompt.md#install-and-connect-to-azure)
-- [Automatically connect your SQL Server to Azure Arc](automatically-connect.md)
+- [SQL Server enabled by Azure Arc deployment options](deployment-options.md)
 
 For VMware clusters, review [Support on VMware](#support-on-vmware).
 
@@ -150,6 +150,6 @@ For VMware clusters, review [Support on VMware](#support-on-vmware).
 ## Related content
 
 - [Learn about the prerequisites to connect your SQL Server to Azure Arc](prerequisites.md)
-- [Automatically connect your SQL Server to Azure Arc](automatically-connect.md)
+- [SQL Server enabled by Azure Arc deployment options](deployment-options.md)
 - [Learn more about Microsoft Defender for Cloud](/azure/defender-for-cloud/defender-for-sql-usage)
 - [Lean more about Microsoft Purview](/azure/purview/register-scan-azure-arc-enabled-sql-server)

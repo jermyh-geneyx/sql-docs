@@ -176,7 +176,7 @@ Before configuring your [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md
 
 The [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] Setup Installation Wizard doesn't support installation of the Azure extension for SQL Server. There are two ways to install this component. Do one of the following:
 
-- [Automatically connect your SQL Server to Azure Arc](automatically-connect.md)
+- [SQL Server enabled by Azure Arc deployment options](deployment-options.md)
 - [Install Azure extension for SQL Server from the command line](../../database-engine/install-windows/install-sql-server-from-the-command-prompt.md#install-and-connect-to-azure)
 
 For VMware clusters, review [Support on VMware](#support-on-vmware).

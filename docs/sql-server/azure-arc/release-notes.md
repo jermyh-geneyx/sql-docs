@@ -268,7 +268,7 @@ For a complete list of regions, see [Supported Azure regions](overview.md#suppor
 - Track the provision state and (extension service) status of Azure extension for SQL Server - general availability.
   - Beginning with this release, you can track the provisioning status of Azure Arc extension for SQL Server and Azure Arc guest agent in the properties tab for Arc enabled SQL Server.
 
-For information about server monitoring capabilities, review [Automatically connect your SQL Server to Azure Arc](automatically-connect.md).
+For information about server monitoring capabilities, review [SQL Server enabled by Azure Arc deployment options](deployment-options.md).
 
 For information about database status and inventory capabilities, review [View Azure Arc-enabled inventory](view-inventory.md).
 
