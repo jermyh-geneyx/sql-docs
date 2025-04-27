@@ -1,10 +1,10 @@
 ---
 title: "CREATE DATABASE (Transact-SQL)"
-description: Create database syntax for SQL Server, Azure SQL Database, Azure Synapse Analytics, and Analytics Platform System
+description: Create database syntax for SQL Server and all SQL Database Engine platforms.
 author: markingmyname
 ms.author: maghan
-ms.reviewer: wiassaf
-ms.date: 12/12/2024
+ms.reviewer: wiassaf, dnethi
+ms.date: 04/27/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -35,7 +35,7 @@ helpviewer_keywords:
   - "attaching databases [SQL Server], CREATE DATABASE...FOR ATTACH"
 dev_langs:
   - "TSQL"
-monikerRange: ">=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-current||=azuresqldb-mi-current||=azure-sqldw-latest||>=aps-pdw-2016"
+monikerRange: ">=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-current || =azuresqldb-mi-current || =azure-sqldw-latest || >=aps-pdw-2016"
 ---
 
 # CREATE DATABASE
@@ -234,7 +234,7 @@ A windows-compatible directory name. This name should be unique among all the Da
 
 <BR><BR>
 
-The following options are allowable only when CONTAINMENT has been set to PARTIAL. If CONTAINMENT is set to NONE, errors will occur.
+The following options are allowable only when CONTAINMENT has been set to PARTIAL. If CONTAINMENT is set to NONE, errors occur.
 
 #### DEFAULT_FULLTEXT_LANGUAGE = \<lcid> | \<language name> | \<language alias>
 
@@ -299,7 +299,7 @@ When set to `ON`, it creates a ledger database, in which the integrity of all us
 
 Specifies that the database is created by [attaching](../../relational-databases/databases/database-detach-and-attach-sql-server.md) an existing set of operating system files. There must be a \<filespec> entry that specifies the primary file. The only other \<filespec> entries required are those for any files that have a different path from when the database was first created or last attached. A \<filespec> entry must be specified for these files.
 
-FOR ATTACH requires the following:
+FOR ATTACH requires:
 
 - All data files (MDF and NDF) must be available.
 - If multiple log files exist, they must all be available.
@@ -309,9 +309,9 @@ If a read/write database has a single log file that is currently unavailable, an
 > [!NOTE]
 > A database created by a more recent version of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] cannot be attached in earlier versions.
 
-In [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], any full-text files that are part of the database that is being attached will be attached with the database. To specify a new path of the full-text catalog, specify the new location without the full-text operating system file name. For more information, see the Examples section.
+In [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], any full-text files that are part of the database that is being attached will be attached with the database. To specify a new path of the full-text catalog, specify the new location without the full-text operating system file name. For more information, see [Examples](#examples).
 
-Attaching a database that contains a FILESTREAM option of "Directory name", into a [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] instance will prompt [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] to verify that the Database_Directory name is unique. If it is not, the `ATTACH` operation fails with the error, `FILESTREAM Database_Directory name is not unique in this SQL Server instance`. To avoid this error, the optional parameter, *directory_name*, should be passed in to this operation.
+Attaching a database that contains a FILESTREAM option of "Directory name" prompts [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] to verify that the `Database_Directory` name is unique. If it is not, the `ATTACH` operation fails with the error, `FILESTREAM Database_Directory name is not unique in this SQL Server instance`. To avoid this error, the optional parameter, *directory_name*, should be passed in to this operation.
 
 FOR ATTACH cannot be specified on a database snapshot.
 
@@ -365,7 +365,7 @@ FOR ATTACH_REBUILD_LOG requires the following conditions:
 - All data files (MDF and NDF) must be available.
 
 > [!IMPORTANT]
-> This operation breaks the log backup chain. We recommend that a full database backup be performed after the operation is completed. For more information, see [BACKUP](../../t-sql/statements/backup-transact-sql.md).
+> This operation breaks the log backup chain. We recommend that you take a full database backup immediately after the operation is completed. For more information, see [BACKUP](../../t-sql/statements/backup-transact-sql.md).
 
 Typically, FOR ATTACH_REBUILD_LOG is used when you copy a read/write database with a large log to another server where the copy will be used mostly, or only, for read operations, and therefore requires less log space than the original database.
 
@@ -491,7 +491,7 @@ Is the name of the new database snapshot. Database snapshot names must be unique
 
 #### ON ( NAME =_logical_file_name_, FILENAME ='_os_file_name_') [ ,... *n* ]
 
-For creating a database snapshot, specifies a list of files in the source database. For the snapshot to work, all the data files must be specified individually. However, log files are not allowed for database snapshots. FILESTREAM filegroups are not supported by database snapshots. If a FILESTREAM data file is included in a CREATE DATABASE ON clause, the statement will fail and an error will be raised.
+For creating a database snapshot, specifies a list of files in the source database. For the snapshot to work, all the data files must be specified individually. However, log files are not allowed for database snapshots. FILESTREAM filegroups are not supported by database snapshots. If a FILESTREAM data file is included in a `CREATE DATABASE` `ON` clause, the statement fails and an error will be raised.
 
 For descriptions of NAME and FILENAME and their values, see the descriptions of the equivalent \<filespec> values.
 
@@ -739,7 +739,7 @@ GO
 
 ### E. Attach a database
 
-The following example detaches the database `Archive` created in example D, and then attaches it by using the `FOR ATTACH` clause. `Archive` was defined to have multiple data and log files. However, because the location of the files has not changed since they were created, only the primary file has to be specified in the `FOR ATTACH` clause. Beginning with [!INCLUDE[ssVersion2005](../../includes/ssversion2005-md.md)], any full-text files that are part of the database that is being attached will be attached with the database.
+The following example detaches the database `Archive` created in example D, and then attaches it by using the `FOR ATTACH` clause. `Archive` was defined to have multiple data and log files. However, because the location of the files has not changed since they were created, only the primary file has to be specified in the `FOR ATTACH` clause. Beginning with [!INCLUDE[ssVersion2005](../../includes/ssversion2005-md.md)], any full-text files that are part of the database that is being attached are attached with the database.
 
 ```sql
 USE master;
@@ -1027,7 +1027,7 @@ CREATE DATABASE database_name
       | 'HS_MOPRMS_n'
       | { ELASTIC_POOL(name = <elastic_pool_name>) } })
    ]
-   [ WITH ( BACKUP_STORAGE_REDUNDANCY = { 'LOCAL' | 'ZONE' | 'GEO' } ) ]
+   [ WITH ( BACKUP_STORAGE_REDUNDANCY = { 'LOCAL' | 'ZONE' | 'GEO' | 'GEOZONE' } ) ]
 [;]
 ```
 
@@ -1066,9 +1066,13 @@ By default, the metadata catalog for system object names is collated to *SQL_Lat
    WITH CATALOG_COLLATION = DATABASE_DEFAULT
    ```
 
-#### BACKUP_STORAGE_REDUNDANCY = {'LOCAL' | 'ZONE' | 'GEO'}
+<a id="#backup_storage_redundancy--local--zone--geo"></a>
+
+#### BACKUP_STORAGE_REDUNDANCY = {'LOCAL' | 'ZONE' | 'GEO' | 'GEOZONE'}
 
 Specifies how the point-in-time restore and long-term retention backups for a database are replicated. Geo restore or ability to recover from regional outage is only available when database is created with `GEO` backup storage redundancy. Unless explicitly specified, databases created with T-SQL use geo-redundant backup storage.
+
+Use `GEOZONE` for geo-zone redundant storage. Geo-zone redundant storage (GZRS) offers the highest level of protection against zonal outages as well as regional outages for any workload.
 
 To enforce data residency when you're creating a database by using T-SQL, use `LOCAL` or `ZONE` as input to the BACKUP_STORAGE_REDUNDANCY parameter.
 
@@ -1182,7 +1186,7 @@ To change the size, edition, or service objective values later, use [ALTER DATAB
 
 Copying a database using the `CREATE DATABASE` statement is an asynchronous operation. Therefore, a connection to the [!INCLUDE[ssSDS](../../includes/sssds-md.md)] server is not needed for the full duration of the copy process. The `CREATE DATABASE` statement returns control to the user after the entry in `sys.databases` is created but before the database copy operation is complete. In other words, the `CREATE DATABASE` statement returns successfully when the database copy is still in progress.
 
-- Monitoring the copy process on an [!INCLUDE[ssSDS_md](../../includes/sssds-md.md)] server: Query the `percentage_complete` or `replication_state_desc` columns in the [dm_database_copies](../../relational-databases/system-dynamic-management-views/sys-dm-database-copies-azure-sql-database.md) or the `state` column in the **sys.databases** view. The [sys.dm_operation_status](../../relational-databases/system-dynamic-management-views/sys-dm-operation-status-azure-sql-database.md) view can be used as well as it returns the status of database operations including database copy.
+- Monitoring the copy process on an [!INCLUDE[ssSDS_md](../../includes/sssds-md.md)] server: Query the `percentage_complete` or `replication_state_desc` columns in the [dm_database_copies](../../relational-databases/system-dynamic-management-views/sys-dm-database-copies-azure-sql-database.md) or the `state` column in the `sys.databases` view. The [sys.dm_operation_status](../../relational-databases/system-dynamic-management-views/sys-dm-operation-status-azure-sql-database.md) view can be used as well as it returns the status of database operations including database copy.
 
 At the time the copy process completes successfully, the destination database is transactionally consistent with the source database.
 
@@ -1404,7 +1408,7 @@ The following are `CREATE DATABASE` limitations:
 
 ## Permissions
 
-To create a database, a login must be one of the following:
+To create a database, a login must be one of the following types of security principals:
 
 - The server-level principal login
 - The Microsoft Entra administrator for the [logical server in Azure](/azure/azure-sql/database/logical-servers)
@@ -1489,6 +1493,7 @@ CREATE DATABASE database_name [ COLLATE collation_name ]
 ```
 
 ### [Serverless SQL pool](#tab/sqlod)
+
 ```syntaxsql
 CREATE DATABASE database_name [ COLLATE collation_name ]
 [;] 
@@ -1690,7 +1695,9 @@ GO
 
 Databases are created with database compatibility level 120, which is the compatibility level for [!INCLUDE[ssSQL14](../../includes/sssql14-md.md)]. This ensures that the database will be able to use all of the [!INCLUDE[ssSQL14](../../includes/sssql14-md.md)] functionality that PDW uses.
 
-## Limitations and Restrictions
+<a id="limitations-and-restrictions"></a>
+
+## Limitations
 
 The CREATE DATABASE statement is not allowed in an explicit transaction. For more information, see [Statements](../../t-sql/statements/statements.md).
 
@@ -1714,7 +1721,7 @@ After this operation succeeds, an entry for this database will appear in the [sy
 
 ### A. Basic database creation examples
 
-The following example creates the database `mytest` with a storage allocation of 100 GB per Compute node for replicated tables, 500 GB per appliance for distributed tables, and 100 GB per appliance for the transaction log. In this example, AUTOGROW is off by default.
+The following example creates the database `mytest` with a storage allocation of 100 GB per Compute node for replicated tables, 500 GB per appliance for distributed tables, and 100 GB per appliance for the transaction log. In this example, `AUTOGROW` is off by default.
 
 ```sql
 CREATE DATABASE mytest
@@ -1724,7 +1731,7 @@ CREATE DATABASE mytest
     LOG_SIZE = 100 GB );
 ```
 
-The following example creates the database `mytest` with the same parameters as above, except that AUTOGROW is turned on. This allows the database to grow outside the specified size parameters.
+The following example creates the database `mytest` with the same parameters, except that `AUTOGROW` is turned on. This allows the database to grow outside the specified size parameters.
 
 ```sql
 CREATE DATABASE mytest
