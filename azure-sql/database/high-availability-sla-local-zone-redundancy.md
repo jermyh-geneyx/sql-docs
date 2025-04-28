@@ -5,7 +5,7 @@ description: Learn about the architecture of Azure SQL Database that achieves av
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: rsetlem, mathoma, randolphwest
-ms.date: 03/26/2025
+ms.date: 04/28/2025
 ms.service: azure-sql-database
 ms.subservice: high-availability
 ms.topic: conceptual
@@ -138,7 +138,6 @@ The zone-redundant version of the high availability architecture for the General
 
 - All Azure regions that have [Availability zone support](/azure/reliability/regions-list) support zone redundant General databases.
 - For zone redundant availability, choosing a [maintenance window](maintenance-window.md) other than the default is currently available in select regions. For more information, see [Maintenance window availability by region for Azure SQL Database](region-availability.md#maintenance-window-availability).
-- Zone-redundant configuration is only available in SQL Database when standard-series (Gen5) hardware is selected. 
 - Zone-redundancy isn't available for Basic and Standard service tiers in the DTU purchasing model. 
 
 ### <a id="premium-and-business-critical-service-tier-zone-redundant-availability"></a> Premium and Business Critical service tiers

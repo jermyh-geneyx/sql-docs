@@ -14,7 +14,7 @@ ms.collection:
 
 # SqlPackage
 
-**SqlPackage** is a command-line utility that automates the database development tasks by exposing some of the public Data-Tier Application Framework (DacFx) APIs.  The primary use cases for SqlPackage focus on database portability and deployments for the SQL Server, Azure SQL, and Azure Synapse Analytics family of databases. SqlPackage can be automated using [Azure Pipelines and GitHub actions](sqlpackage-pipelines.md) or other CI/CD tools.
+**SqlPackage** is a command-line utility that automates the database development tasks by exposing some of the public Data-Tier Application Framework (DacFx) APIs. The primary use cases for SqlPackage focus on database portability and deployments for the SQL Server, Azure SQL, and Azure Synapse Analytics family of databases. SqlPackage can be automated using [Azure Pipelines and GitHub actions](sqlpackage-pipelines.md) or other CI/CD tools.
 
 **[Download the latest version](sqlpackage-download.md)**. For details about the latest release, see the [release notes](release-notes-sqlpackage.md).
 
@@ -30,7 +30,7 @@ Database portability is the ability to move a database schema and data between d
 
 ## Deployments
 
-Database deployments are the process of updating a database schema to match a desired state, such as adding columns to a table or changing the contents of a stored procedure. SqlPackage supports database deployments through the [Publish](sqlpackage-publish.md) and [Extract](sqlpackage-extract.md) actions. The Publish action updates a database schema to match the contents of a source .dacpac file, while the Extract action creates a data-tier application (.dacpac) file containing the schema or schema and user data from a connected SQL database. SqlPackage enables deployments against both new or existing databases from the same artifact (.dacpac) by automatically creating a deployment plan that will apply the necessary changes to the target database.  The deployment plan can be reviewed before applying the changes to the target database with either the [Script](sqlpackage-script.md) or [DeployReport](sqlpackage-deploy-drift-report.md) actions.
+Database deployments are the process of updating a database schema to match a desired state, such as adding columns to a table or changing the contents of a stored procedure. SqlPackage supports database deployments through the [Publish](sqlpackage-publish.md) and [Extract](sqlpackage-extract.md) actions. The Publish action updates a database schema to match the contents of a source .dacpac file, while the Extract action creates a data-tier application (.dacpac) file containing the schema or schema and user data from a connected SQL database. SqlPackage enables deployments against both new or existing databases from the same artifact (.dacpac) by automatically creating a deployment plan that applies the necessary changes to the target database. The deployment plan can be reviewed before applying the changes to the target database with either the [Script](sqlpackage-script.md) or [DeployReport](sqlpackage-deploy-drift-report.md) actions.
 
 - [Extract](sqlpackage-extract.md): Creates a data-tier application (.dacpac) file containing the schema or schema and user data from a connected SQL database. 
   
@@ -124,7 +124,7 @@ SqlPackage /at:$($AccessToken_Object.Token) /Action:Export /TargetFile:"C:\Adven
     /SourceConnectionString:"Server=tcp:{yourserver}.database.windows.net,1433;Initial Catalog=AdventureWorksLT;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;"
 ```
 
-Alternatively, you can pass the service principal client ID and secret to SqlPackage in the connection string. The [connection string format](../../connect/ado-net/sql/azure-active-directory-authentication.md#using-service-principal-authentication) includes `Authentication=Active Directory Service Principal;` and `User Id=AppId; Password=<password>`. When passing the service principal credentials in the connection string, the `/at` parameter isn't required and SqlPackage will refresh the authentication as needed during the operation.
+Alternatively, you can pass the service principal client ID and secret to SqlPackage in the connection string. The [connection string format](../../connect/ado-net/sql/azure-active-directory-authentication.md#using-service-principal-authentication) includes `Authentication=Active Directory Service Principal;` and `User Id=AppId; Password=<password>`. When the service principal credentials are passed in the connection string, the `/at` parameter isn't required and SqlPackage refreshes the authentication as needed during the operation.
 
 Service principals are supported in both [Azure DevOps](/azure/devops/integrate/get-started/authentication/service-principal-managed-identity) and [GitHub actions](https://github.com/azure/login) CI/CD pipelines.
 
@@ -153,6 +153,17 @@ For Linux and macOS, if the path isn't specified in the `TMPDIR` environment var
 
 [Contained database users](../../relational-databases/security/contained-database-users-making-your-database-portable.md) are included in SqlPackage operations. However, the password portion of the definition is set to a randomly generated string by SqlPackage, the existing value isn't transferred. It's recommended that the new user's password is reset to a secure value following the import of a `.bacpac` or the deployment of a `.dacpac`. In an automated environment the password values can be retrieved from a secure keystore, such as Azure Key Vault, in a step following SqlPackage.
 
+## Extensibility
+
+SqlPackage supports extensibility through the [Managed Extensibility Framework (MEF)](/dotnet/framework/mef/index), enabling advanced scenarios through custom components called **contributors**. These extensions can customize how SqlPackage publishes `.dacpac` files, allowing teams to enforce standards or automate project-specific logic. Deployment contributors are executed as part of the publish process, after the deployment plan is generated but before it's executed. These contributors can access and modify the deployment plan using a `DeploymentPlanModifier` class object to add, remove, or reorder steps. To get started with deployment extensibility, see [Use deployment contributors to customize database build and deployment](../../ssdt/use-deployment-contributors-to-customize-database-build-and-deployment.md).
+
+SqlPackage discovers and loads contributor assemblies by scanning for dynamic-link libraries (`.dll` files) in the same directory as the SqlPackage executable as well as the locations specified through optional command-line property `/p:AdditionalDeploymentContributorPaths`. While this allows for flexible customization, it also introduces important security considerations.
+
+> [!IMPORTANT]
+> Because SqlPackage uses MEF to dynamically load dynamic-link libraries (`.dll` files) at runtime, any assemblies placed alongside the SqlPackage executable may be executed as part of the deployment process. A malicious actor could exploit this behavior by introducing tampered or unauthorized extensions that execute arbitrary code.
+>
+> **It is your responsibility to ensure that any compiled extension files used with SqlPackage are secure and come from trusted sources.** We recommend controlling access to the SqlPackage folder and validating the integrity of all custom or third-party components.
+
 ## Usage data collection
 
 SqlPackage contains Internet-enabled features that can collect and send anonymous feature usage and diagnostic data to Microsoft.
@@ -169,7 +180,7 @@ To disable telemetry collection and reporting, update the environment variable `
 
 ## Support
 
-The DacFx library and the SqlPackage CLI tool have adopted the [Microsoft Modern Lifecycle Policy](https://support.microsoft.com/help/30881/modern-lifecycle-policy). All security updates, fixes, and new features are released only in the latest point version of the major version. Maintaining your DacFx or SqlPackage installations to the current version helps ensure that you receive all applicable bug fixes in a timely manner.
+The DacFx library and the SqlPackage CLI tool follow the [Microsoft Modern Lifecycle Policy](https://support.microsoft.com/help/30881/modern-lifecycle-policy). All security updates, fixes, and new features are released only in the latest point version of the major version. Maintaining your DacFx or SqlPackage installations to the current version helps ensure that you receive all applicable bug fixes in a timely manner.
 
 Get help with SqlPackage, submit feature requests, and report issues in the [DacFx GitHub repository](https://github.com/microsoft/DacFx).
 
