@@ -3,7 +3,8 @@ title: "SET ANSI_NULLS (Transact-SQL)"
 description: SET ANSI_NULLS (Transact-SQL)
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.date: 04/04/2024
+ms.date: 04/28/2025
+ms.reviewer: jovanpop, randolphwest
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -113,6 +114,7 @@ SELECT
 	IIF(@var = 0,     'True', 'False') as EqualZero,
 	IIF(@var <> 0,    'True', 'False') as DifferentZero
 ```
+
 The results are show in the following table.
 
 | EqualNull	| DifferentNull	| EqualZero	| DifferentZero |
