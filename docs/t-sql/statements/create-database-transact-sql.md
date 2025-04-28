@@ -271,7 +271,7 @@ The following options are allowable only when CONTAINMENT has been set to PARTIA
   When OFF, the database cannot participate in cross-database ownership chaining. The default is OFF.
 
   > [!IMPORTANT]
-  > The instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] will recognize this setting when the cross db ownership chaining server option is 0 (OFF). When cross db ownership chaining is 1 (ON), all user databases can participate in cross-database ownership chains, regardless of the value of this option. This option is set by using [sp_configure](../../relational-databases/system-stored-procedures/sp-configure-transact-sql.md).
+  > The instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] recognizes this setting when the cross database ownership chaining server option is 0 (OFF). When cross db ownership chaining is 1 (ON), all user databases can participate in cross-database ownership chains, regardless of the value of this option. This option is set by using [sp_configure](../../relational-databases/system-stored-procedures/sp-configure-transact-sql.md).
 
   To set this option, requires membership in the sysadmin fixed server role. The DB_CHAINING option cannot be set on these system databases: `master`, `model`, `tempdb`.
 
@@ -342,7 +342,7 @@ When you attach a replicated database that was copied instead of being detached,
 - If you attach the database to a different server instance, regardless of version, you must execute [sp_removedbreplication](../../relational-databases/system-stored-procedures/sp-removedbreplication-transact-sql.md) to remove replication after the attach operation is complete.
 
 > [!NOTE]
-> Attach works with the **vardecimal** storage format, but the [!INCLUDE[ssDEnoversion](../../includes/ssdenoversion-md.md)] must be upgraded to at least [!INCLUDE[ssVersion2005](../../includes/ssversion2005-md.md)] SP2. You cannot attach a database using vardecimal storage format to an earlier version of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information about the **vardecimal** storage format, see [Data Compression](../../relational-databases/data-compression/data-compression.md).
+> Attach works with the **vardecimal** storage format, but the [!INCLUDE[ssDEnoversion](../../includes/ssdenoversion-md.md)] must be upgraded to at least [!INCLUDE[ssVersion2005](../../includes/ssversion2005-md.md)] SP2. You cannot attach a database using **vardecimal** storage format to an earlier version of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information about the **vardecimal** storage format, see [Data Compression](../../relational-databases/data-compression/data-compression.md).
 
 When a database is first attached or restored to a new instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], a copy of the database master key (encrypted by the service master key) is not yet stored in the server. You must use the `OPEN MASTER KEY` statement to decrypt the database master key (DMK). Once the DMK has been decrypted, you have the option of enabling automatic decryption in the future by using the `ALTER MASTER KEY REGENERATE` statement to provision the server with a copy of the DMK, encrypted with the service master key (SMK). When a database has been upgraded from an earlier version, the DMK should be regenerated to use the newer AES algorithm. For more information about regenerating the DMK, see [ALTER MASTER KEY](../../t-sql/statements/alter-master-key-transact-sql.md). The time required to regenerate the DMK key to upgrade to AES depends upon the number of objects protected by the DMK. Regenerating the DMK key to upgrade to AES is only necessary once, and has no effect on future regenerations as part of a key rotation strategy. For information about how to upgrade a database by using attach, see [Upgrade a Database Using Detach and Attach](../../relational-databases/databases/upgrade-a-database-using-detach-and-attach-transact-sql.md).
 
@@ -1076,7 +1076,7 @@ Use `GEOZONE` for geo-zone redundant storage. Geo-zone redundant storage (GZRS) 
 
 To enforce data residency when you're creating a database by using T-SQL, use `LOCAL` or `ZONE` as input to the BACKUP_STORAGE_REDUNDANCY parameter.
 
-When creating a database as a copy of another database with `AS COPY OF`, specifying options is supported and should be wrapped in parentheses. For example, `WITH (BACKUP_STORAGE_REDUNDANCY = 'LOCAL');`.
+When you create a database as a copy of another database with `AS COPY OF`, specifying options is supported and should be wrapped in parentheses. For example, `WITH (BACKUP_STORAGE_REDUNDANCY = 'LOCAL');`.
 
 #### LEDGER = {ON | OFF }
 
@@ -1188,7 +1188,7 @@ Copying a database using the `CREATE DATABASE` statement is an asynchronous oper
 
 - Monitoring the copy process on an [!INCLUDE[ssSDS_md](../../includes/sssds-md.md)] server: Query the `percentage_complete` or `replication_state_desc` columns in the [dm_database_copies](../../relational-databases/system-dynamic-management-views/sys-dm-database-copies-azure-sql-database.md) or the `state` column in the `sys.databases` view. The [sys.dm_operation_status](../../relational-databases/system-dynamic-management-views/sys-dm-operation-status-azure-sql-database.md) view can be used as well as it returns the status of database operations including database copy.
 
-At the time the copy process completes successfully, the destination database is transactionally consistent with the source database.
+When the copy process completes successfully, the destination database is transactionally consistent with the source database.
 
 The following syntax and semantic rules apply to your use of the `AS COPY OF` argument:
 
@@ -1549,7 +1549,7 @@ Required permissions:
 
 ## Error handling
 
-If the size of the database reaches MAXSIZE you will receive error code 40544. When this occurs, you cannot insert and update data, or create new objects (such as tables, stored procedures, views, and functions). You can still read and delete data, truncate tables, drop tables and indexes, and rebuild indexes. You can then update MAXSIZE to a value larger than your current database size or delete some data to free storage space. There might be as much as a fifteen-minute delay before you can insert new data.
+If the size of the database reaches MAXSIZE, SQL Server raises error code 40544. When this occurs, you cannot insert and update data, or create new objects (such as tables, stored procedures, views, and functions). You can still read and delete data, truncate tables, drop tables and indexes, and rebuild indexes. You can then update MAXSIZE to a value larger than your current database size or delete some data to free storage space. There might be as much as a fifteen-minute delay before you can insert new data.
 
 ## Limitations
 
@@ -1644,9 +1644,9 @@ The name of the new database. For more information on permitted database names, 
 
 #### AUTOGROW = ON | OFF
 
-Specifies whether the *replicated_size*, *distributed_size*, and *log_size* parameters for this database will automatically grow as needed beyond their specified sizes. Default value is **OFF**.
+Specifies whether the *replicated_size*, *distributed_size*, and *log_size* parameters automatically grow as needed beyond their specified sizes. Default value is **OFF**.
 
-If AUTOGROW is ON, *replicated_size*, *distributed_size*, and *log_size* will grow as required (not in blocks of the initial specified size) with each data insert, update, or other action that requires more storage than has already been allocated.
+If AUTOGROW is ON, *replicated_size*, *distributed_size*, and *log_size* will grow as required with each data insert, update, or other action that requires more storage than has already been allocated.
 
 If AUTOGROW is OFF, the sizes will not grow automatically. [!INCLUDE[ssPDW](../../includes/sspdw-md.md)] will return an error when attempting an action that requires *replicated_size*, *distributed_size*, or *log_size* to grow beyond their specified value.
 
