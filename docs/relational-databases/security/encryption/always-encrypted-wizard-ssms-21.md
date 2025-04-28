@@ -130,7 +130,7 @@ Use the online approach:
 
 - To minimize the downtime/unavailability of the database to your applications.
 
-## Post migration
+## Post encryption
 
 Clear the plan cache for all batches and stored procedures that access the table to refresh parameters encryption information. 
 
