@@ -9298,8 +9298,6 @@ items:
           href: sql-server/azure-arc/connect.md
         - name: Connect when machine already connected to Azure
           href: sql-server/azure-arc/connect-already-enabled.md
-        - name: Azure policy
-          href: sql-server/azure-arc/connect-at-scale-policy.md
         - name: Configure with private path
           href: sql-server/azure-arc/configure-private-path.md
     - name: Manage
