@@ -1,10 +1,10 @@
 ---
-title: "Availability group deployment patterns - SQL Server on Linux"
+title: "Availability Group Deployment Patterns - SQL Server on Linux"
 description: Learn supported deployment configurations for SQL Server Always on availability groups on Linux servers.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: vanto
-ms.date: 07/15/2024
+ms.date: 04/29/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -43,7 +43,9 @@ The following configurations describe the availability group design patterns and
 - **Two synchronous replicas**
 - **Two synchronous replicas and a configuration only replica**
 
-## <a id="threeSynch"></a> Three synchronous replicas
+<a id="threeSynch"></a>
+
+## Three synchronous replicas
 
 This configuration consists of three synchronous replicas. By default, it provides high availability and data protection. It can also provide read-scale.
 
@@ -54,12 +56,16 @@ An availability group with three synchronous replicas can provide read-scale, hi
 | Availability behavior | read-scale | High availability &<br />data protection | Data protection |
 | :--- | --- | --- | --- |
 | `REQUIRED_SYNCHRONIZED_SECONDARIES_TO_COMMIT=` | 0 | 1 <sup>1</sup> | 2 |
-| Primary outage | Automatic failover. Might have data loss. New primary is R/W. | Automatic failover. New primary is R/W. | Automatic failover. New primary isn't available for user update transactions until former primary recovers and joins availability group as secondary. |
-| One secondary replica outage | Primary is R/W. | Primary is R/W. | Primary isn't available for user update transactions until failed secondary recovers and joins availability group. |
+| Primary outage | Automatic failover. Might have data loss. New primary is R/W. | Automatic failover. New primary is R/W. | Automatic failover. New primary is unavailable for read or write transactions until former primary recovers and rejoins availability group as secondary. |
+| One secondary replica outage | Primary is R/W. Available secondary is available for Reads. | Primary is R/W. Available secondary is available for Reads. | The primary remains unavailable for read or write transactions until failed secondary recovers and rejoins availability group. |
+| Two secondary replicas outage | The primary is available only for reads and not for writes until one of the secondary replicas recovers and rejoins the availability group. | The primary is available only for reads and not for writes until one of the secondary replicas recovers and rejoins the availability group. | The primary remains unavailable for read or write transactions until all failed secondary replicas recover and rejoins the availability group. |
+| Primary and one secondary replica outage | Automatic failover. Might have data loss. The new primary is available only for reads and not for writes until one of the secondary replicas recovers and rejoins the availability group. | Automatic failover. The new primary is available only for reads and writes until one of the secondary replicas recovers and rejoins the availability group. | Automatic failover. New primary remains unavailable for read or write transactions until former primary and the secondary replica recovers and rejoins availability group. |
 
 <sup>1</sup> Default
 
-## <a id="twoSynch"></a> Two synchronous replicas
+<a id="twoSynch"></a>
+
+## Two synchronous replicas
 
 This configuration enables data protection. Like the other availability group configurations, it can enable read-scale. The two synchronous replicas configuration doesn't provide automatic high availability. A two replica configuration is only applicable to [!INCLUDE [sssql17-md](../includes/sssql17-md.md)] RTM and is no longer supported with higher (CU1 and beyond) versions of [!INCLUDE [sssql17-md](../includes/sssql17-md.md)].
 
@@ -70,12 +76,14 @@ An availability group with two synchronous replicas provides read-scale and data
 | Availability behavior | read-scale | Data protection |
 | :--- | --- | --- |
 | `REQUIRED_SYNCHRONIZED_SECONDARIES_TO_COMMIT=` | 0 <sup>1</sup> | 1 |
-| Primary outage | Automatic failover. Might have data loss. New primary is R/W. | Automatic failover. New primary isn't available for user update transactions until former primary recovers and joins availability group as secondary. |
-| One secondary replica outage | Primary is R/W, running exposed to data loss. | Primary isn't available for user update transactions until secondary recovers. |
+| Primary outage | Automatic failover. Might have data loss. New primary is R/W. | Automatic failover. The new primary is unavailable for read or write transactions until former primary recovers and rejoins availability group as a secondary. |
+| One secondary replica outage | Primary is R/W, running exposed to data loss. | The primary remains unavailable for read or write transactions until failed secondary recovers and rejoins availability group. |
 
 <sup>1</sup> Default
 
-## <a id="configOnly"></a> Two synchronous replicas and a configuration only replica
+<a id="configOnly"></a>
+
+## Two synchronous replicas and a configuration only replica
 
 An availability group with two (or more) synchronous replicas and a configuration only replica provides data protection and might also provide high availability. The following diagram represents this architecture:
 
@@ -94,10 +102,10 @@ The default value for `REQUIRED_SYNCHRONIZED_SECONDARIES_TO_COMMIT` is 0. The fo
 | Availability behavior | High availability &<br />data protection | Data protection |
 | :--- | --- | --- |
 | `REQUIRED_SYNCHRONIZED_SECONDARIES_TO_COMMIT=` | 0 <sup>1</sup> | 1 |
-| Primary outage | Automatic failover. New primary is R/W. Might have data loss. | Automatic failover. New primary isn't available for user update transactions. |
-| Secondary replica outage | Primary is R/W, running exposed to data loss (if primary fails and can't be recovered). No automatic failover if primary fails as well. | Primary isn't available for user update transactions. No replica to fail over to if primary fails as well. |
+| Primary outage | Automatic failover. New primary is R/W. Might have data loss. | Automatic failover. The new primary is unavailable for read or write transactions until former primary recovers and rejoins availability group as a secondary. |
+| Secondary replica outage | Primary is R/W, running exposed to data loss (if primary fails and can't be recovered). No automatic failover if primary fails as well. | The primary remains unavailable for read or write transactions until failed secondary recovers and rejoins availability group. No replica to fail over to if primary fails as well. |
 | Configuration only replica outage | Primary is R/W. No automatic failover if primary fails as well. | Primary is R/W. No automatic failover if primary fails as well. |
-| Synchronous secondary + configuration only replica outage | Primary isn't available for user update transactions. No automatic failover. | Primary isn't available for user update transactions. No replica to fail over to if primary fails as well. |
+| Synchronous secondary + configuration only replica outage | The primary is unavailable for read or write transactions. No automatic failover. | The primary is unavailable for read or write transactions. No replica to fail over to if primary fails as well. |
 
 <sup>1</sup> Default
 
