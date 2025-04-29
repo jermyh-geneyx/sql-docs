@@ -8882,6 +8882,8 @@ items:
         href: tools/visual-studio-code-extensions/mssql/mssql-extension-visual-studio-code.md
       - name: Connect and Query
         href: tools/visual-studio-code-extensions/mssql/connect-database-visual-studio-code.md
+      - name: Schema Compare (Preview)
+        href: tools/visual-studio-code-extensions/mssql/mssql-schema-compare.md
     - name: SQL bindings for Azure Functions
       items:
       - name: Overview
