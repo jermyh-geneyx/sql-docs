@@ -4,7 +4,7 @@ description: "Use AI options such as OpenAI and vectors to build intelligent app
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: damauri, josephsack, randolphwest, mathoma
-ms.date: 12/09/2024
+ms.date: 04/18/2025
 ms.service: azure-sql-database
 ms.topic: conceptual
 ms.collection:
@@ -17,9 +17,13 @@ monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 
 [!INCLUDE [asdb-fabricsqldb](../includes/appliesto-sqldb-fabricsqldb.md)]
 
+> [!div class="op_single_selector"]
+> * [Azure SQL Database](ai-artificial-intelligence-intelligent-applications.md?view=azuresql&preserve-view=true)
+> * [Azure SQL Managed Instance](../managed-instance/ai-artificial-intelligence-intelligent-applications.md?view=azuresql&preserve-view=true)
+
 This article provides an overview of using artificial intelligence (AI) options, such as OpenAI and vectors, to build intelligent applications with Azure SQL Database and [Fabric SQL database](/fabric/database/sql/overview), which shares many of these features of Azure SQL Database.
 
-For samples and examples, please visit the [SQL AI Samples repository](https://aka.ms/sqlaisamples).
+For samples and examples, visit the [SQL AI Samples repository](https://aka.ms/sqlaisamples).
 
 Watch this video in the [Azure SQL Database essentials series](/shows/azure-sql-database-essentials/) for a brief overview of building an AI ready application:  
 > [!VIDEO https://learn-video.azurefd.net/vod/player?id=466d4554-4747-45dd-8f21-5ae73b1fa981]
@@ -35,7 +39,7 @@ The following links provide sample code of various options to build intelligent 
 | AI Option | Description |
 | --- | --- |
 | **[Azure OpenAI](#azure-openai)** | Generate embeddings for RAG and integrate with any model supported by Azure OpenAI. |
-| **[Vectors](#vectors)** | Learn how to store and query vectors the database. |
+| **[Vectors](#vectors)** | Learn how to store and query vectors in the database. |
 | **[Azure AI Search](#azure-ai-search)** | Use your database together with Azure AI Search to train LLM on your data. |
 | **[Intelligent applications](#intelligent-applications)** | Learn how to create an end-to-end solution using a common pattern that can be replicated in any scenario. |
 | **[Copilot skills in Azure SQL Database](#microsoft-copilot-skills-in-azure-sql-database)** | Learn about the set of AI-assisted experiences designed to streamline the design, operation, optimization, and health of Azure SQL Database-driven applications. |
@@ -130,8 +134,6 @@ For additional examples on using SQL Database and OpenAI, see the following arti
 
 ## Vectors
 
-### Vector data type
-
 In November 2024, the new **vector** data type was introduced in Azure SQL Database.
 
 The dedicated **vector** type allows for efficient and optimized storing of vector data, and comes with a set of functions to help developers streamline vector and similarity search implementation. Calculating distance between two vectors can be done in one line of code using the new `VECTOR_DISTANCE` function. For more information on the [**vector** data type](/sql/t-sql/data-types/vector-data-type) and related functions, see [Overview of vectors in the SQL Database Engine](/sql/relational-databases/vectors/vectors-sql-server).
@@ -154,32 +156,6 @@ ORDER BY
     VECTOR_DISTANCE('cosine', @my_reference_vector, embedding)
 ```
 
-### Vectors in older versions of SQL Server
-
-While older versions of SQL Server engine, up to and including SQL Server 2022, doesn't have a native **vector** type, a vector is nothing more than an ordered tuple, and relational databases are great at managing tuples. You can think of a tuple as the formal term for a row in a table.
-
-Azure SQL Database also supports columnstore indexes and [batch mode execution](/sql/relational-databases/query-processing-architecture-guide#batch-mode-execution). A vector-based approach is used for batch mode processing, which means that each column in a batch has its own memory location where it's stored as a vector. This allows for faster and more efficient processing of data in batches.
-
-The following example shows how a vector can be stored in SQL Database:
-
-```sql
-CREATE TABLE [dbo].[wikipedia_articles_embeddings_titles_vector]
-(
-    [article_id] [int] NOT NULL,
-    [vector_value_id] [int] NOT NULL,
-    [vector_value] [float] NOT NULL
-)
-GO
-
-CREATE CLUSTERED COLUMNSTORE INDEX ixc
-    ON dbo.wikipedia_articles_embeddings_titles_vector
-    ORDER (article_id);
-GO
-```
-
-For an example that uses a common subset of Wikipedia articles with embeddings already generated using OpenAI, see [Vector similarity search with Azure SQL Database and OpenAI](https://devblogs.microsoft.com/azure-sql/vector-similarity-search-with-azure-sql-database-and-openai/).
-
-Another option for leveraging Vector Search in Azure SQL database is integration with Azure AI using the integrated vectorization capabilities: [Vector Search with Azure SQL Database and Azure AI Search](https://devblogs.microsoft.com/azure-sql/vector-search-with-azure-sql-database/)
 
 ## Azure AI Search
 
@@ -195,7 +171,7 @@ Azure SQL Database can be used to build intelligent applications that include AI
 
 :::image type="content" source="media/ai-artificial-intelligence-intelligent-applications/session-recommender-architecture.png" alt-text="Diagram of different AI features to build intelligent applications with Azure SQL Database." lightbox="media/ai-artificial-intelligence-intelligent-applications/session-recommender-architecture.png":::
 
-For an end-to-end sample to build a AI-enabled application using sessions abstract as a sample dataset, see:
+For an end-to-end sample to build an AI-enabled application using sessions abstract as a sample dataset, see:
 
 - [How I built a session recommender in 1 hour using OpenAI](https://devblogs.microsoft.com/azure-sql/how-i-built-a-session-recommender-in-1-hour-using-open-ai/).
 - [Using Retrieval Augmented Generation to build a conference session assistant](https://github.com/Azure-Samples/azure-sql-db-session-recommender-v2)
@@ -213,7 +189,7 @@ A few of samples on using Azure SQL with LangChain:
 
 End-to-end examples:
 
-- [Build a chatbot on your own data in 1 hour with Azure SQL, Langchain and Chainlit](https://devblogs.microsoft.com/azure-sql/build-a-chatbot-on-your-own-data-in-1-hour-with-azure-sql-langchain-and-chainlit/): Build a chatbot using the RAG pattern on your own data using Langchain for orchestrating LLM calls and Chainlit for the UI.
+- [Build a chatbot on your own data in 1 hour with Azure SQL, Langchain, and Chainlit](https://devblogs.microsoft.com/azure-sql/build-a-chatbot-on-your-own-data-in-1-hour-with-azure-sql-langchain-and-chainlit/): Build a chatbot using the RAG pattern on your own data using Langchain for orchestrating LLM calls and Chainlit for the UI.
 
 ### Semantic Kernel integration
 
@@ -229,7 +205,7 @@ An example of how easily Semantic Kernel helps to build AI-enabled solution is h
 
 [Microsoft Copilot in Azure SQL Database (preview)](../copilot/copilot-azure-sql-overview.md) is a set of AI-assisted experiences designed to streamline the design, operation, optimization, and health of Azure SQL Database-driven applications.
 
-Copilot provides relevant answers to user questions, simplifying database management by leveraging database context, documentation, dynamic management views, Query Store, and other knowledge sources. For example:
+Copilot provides relevant answers to user questions, simplifying database management by using database context, documentation, dynamic management views, Query Store, and other knowledge sources. For example:
 
 - Database administrators can independently manage databases and resolve issues, or learn more about the performance and capabilities of your database.
 - Developers can ask questions about their data as they would in text or conversation to generate a T-SQL query. Developers can also learn to write queries faster through detailed explanations of the generated query.
@@ -255,7 +231,7 @@ Copilot provides relevant answers to user questions, simplifying database manage
 
   - **Document-based Q&A**: Ask Copilot questions about general SQL database capabilities, and it responds in natural language. Copilot also helps find documentation related to your request.
 
-Copilot for SQL database utilizes table and view names, column names, primary key, and foreign key metadata to generate T-SQL code. Copilot for SQL database does not use data in tables to generate T-SQL suggestions.
+Copilot for SQL database utilizes table and view names, column names, primary key, and foreign key metadata to generate T-SQL code. Copilot for SQL database doesn't use data in tables to generate T-SQL suggestions.
 
 ## Related content
 

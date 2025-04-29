@@ -5,7 +5,7 @@ description: An overview of database watcher for Azure SQL, a managed monitoring
 author: lcwright
 ms.author: lancewright
 ms.reviewer: wiassaf, dfurman
-ms.date: 03/13/2025
+ms.date: 04/21/2025
 ms.service: azure-sql
 ms.subservice: monitoring
 ms.topic: conceptual
@@ -211,6 +211,7 @@ This section describes recent database watcher fixes, changes, and improvements.
 
 | Time period | Changes |
 |:--|:--|
+| April 2025 | - Fix a bug where a database watcher deployment via Bicep, an ARM template, Terraform, or REST API would fail if the **subscription ID**, **resource group name**, or **watcher name** deployment parameters used inconsistent casing.</br> - Fix a bug where collection of certain datasets for a **SQL database** target would stop if the database was restored from backup.</br> - Change to limit data collection in the **Table metadata** datasets for databases with many tables and for SQL managed instances with many databases to avoid long-running collection queries.</br> - Improve collection query performance for the **Session statistics** dataset for **SQL managed instance** targets. |
 | February 2025 | - Add support for alerting. For more information, see [Database watcher alerts](database-watcher-alerts.md). |
 | January 2025 | - Fix to make database watcher deployments via Bicep or ARM templates idempotent.</br> - Fix a bug where SQL Agent job history details on the SQL Managed Instance detailed dashboard weren't displayed.</br> - Fix a bug when filtering data on the **Sessions** charts on the detailed dashboards would cause KQL query errors.</br> - Fix a bug where storage throughput values on the detailed dashboards were incorrect.</br> - Improve storage utilization charts on the detailed dashboards to include the maximum storage size.</br> - Improve to show the original and compressed size of collected data in the **Data store** section.</br> - Improve the message shown when a dashboard cannot connect to the data store to include suggestions for common problems.</br> - Add informational messages when there is no data shown on the **Top queries** dashboards for known reasons.</br> - Add Hyperscale log rate limit information in the **Replicas** dataset for Azure SQL databases.</br> - Add transaction start time and log bytes used to the **Active sessions** datasets. |
 | November 2024 | - Enable database watcher in the **Australia Central**, **Australia Southeast**, **Canada East**, **Central US**, **Germany West Central**, **Japan West**, **Korea Central**, and **North Central US** Azure regions.</br> - Increase the limit on the number of SQL targets per watcher from 50 to 100. |
@@ -243,14 +244,12 @@ During preview, database watcher has the following known issues.
 |:--|:--|
 | If data collection cannot start or continue because of an error (for example, insufficient access to a SQL target or to the data store), the error is not exposed. | To troubleshoot, see [Data is not collected](#data-is-not-collected). |
 | If a [serverless](./database/serverless-tier-overview.md) database has auto-pause enabled, and is added as a database watcher target, it might not auto-pause as expected. For a [free offer](./database/free-offer.md) database, this might exhaust the free monthly credit sooner than expected. | If retaining the auto-pause functionality is required, do not use database watcher to monitor serverless databases at this time. |
-| In Azure SQL Database, data might not be collected from a high availability (HA) readable secondary replica if database replicas change roles, for example after a maintenance event. | The issue resolves without any action within one or two days. To resume data collection sooner, restart the watcher. |
-| For Azure SQL Managed Instance, data is not collected from the readable high availability replica or from a geo-replica if you are using SQL authentication. | There are two workarounds: </br>1. Use the Microsoft Entra ID authentication (preferred). </br>2. Disable the password policy check. Execute `ALTER LOGIN [database-watcher-login-placeholder] WITH CHECK_POLICY = OFF;`, replacing `database-watcher-login-placeholder` with the name of the SQL authentication login of the watcher. Execute this command on the primary replica, and on the geo-replica, if any. |
+| Because of a known issue in Azure SQL Database and Azure SQL Managed Instance, expected data might not be collected from a high availability (HA) readable secondary replica if database replicas change roles, for example after a maintenance event. | Commonly, the issue resolves without any action within one or two days. To resume data collection sooner, restart the watcher. |
+| For Azure SQL Managed Instance, data might not be collected from the readable high availability replica or from a geo-replica if you are using SQL authentication. | There are two workarounds: </br>1. Use the Microsoft Entra ID authentication (preferred). </br>2. Disable the password policy check. Execute `ALTER LOGIN [database-watcher-login-placeholder] WITH CHECK_POLICY = OFF;`, replacing `database-watcher-login-placeholder` with the name of the SQL authentication login of the watcher. Execute this command on the primary replica, and on the geo-replica, if any. |
 | In Azure SQL Managed Instance, data is not collected if the `EXECUTE` permission on the `sys.xp_msver` system stored procedure is revoked or denied to the `public` role. | Grant the `EXECUTE` permission on `sys.xp_msver` to the database watcher login.</br></br>On every SQL managed instance added as a database watcher target, execute `USE master; CREATE USER [database-watcher-login-placeholder] FOR LOGIN [database-watcher-login-placeholder]; GRANT EXECUTE ON sys.xp_msver TO [database-watcher-login-placeholder];`, replacing `database-watcher-login-placeholder` with the name of the watcher login. |
 | If you create a managed private endpoint for a watcher to connect to a SQL managed instance that is stopped, the provisioning state of the private endpoint is reported as **Failed**, and the watcher cannot connect to the instance. | Delete the managed private endpoint with the **Failed** provisioning state and [start](./managed-instance/instance-stop-start-how-to.md) the SQL managed instance. Once the failed private endpoint is deleted and the instance is running, [re-create](database-watcher-manage.md#create-a-managed-private-endpoint) the managed private endpoint. |
 | Data is not collected if you use a database in Real-Time Analytics as the data store, and the **OneLake availability** option is enabled. | Disable the **OneLake availability** option and restart the watcher to resume data collection. |
-| Because of a known issue in Azure SQL Database, data in the **Backup history** dataset for Azure SQL databases is not collected if the database catalog collation is other than the default `SQL_Latin1_General_CP1_CI_AS`. | None at this time. |
-| Because of a known issue in Azure Monitor Alerts, if you edit an alert rule created from a database watcher template, the scope of any fired alert will be set to the Azure Data Explorer cluster used as the watcher data store instead of the SQL target that the alert applies to. | Edit the alert rule programmatically, for example using Bicep or an ARM template, and set the `resourceIdColumn` property to the value `resource_id`. For more information, see [Resource Manager template samples for log search alert rules in Azure Monitor](/azure/azure-monitor/alerts/resource-manager-alerts-log). |
-| A database watcher deployment via Bicep, an ARM template, Terraform, or REST API fails if the **subscription ID**, **resource group name**, or **watcher name** deployment parameters use inconsistent casing. For example, adding a SQL target for an existing watcher named `example-watcher` fails if the deployment parameter uses `Example-Watcher` as the parameter value. | Use consistent casing for string parameters. For example, standardize on the lower case. |
+| Because of a known issue in Azure Monitor Alerts, if you edit an alert rule created from a database watcher template, the scope of any fired alert is set to the Azure Data Explorer cluster used as the watcher data store instead of the SQL target that the alert applies to. | Edit the alert rule programmatically, for example using Bicep or an ARM template, and set the `resourceIdColumn` property to the value `resource_id`. For more information, see [Resource Manager template samples for log search alert rules in Azure Monitor](/azure/azure-monitor/alerts/resource-manager-alerts-log). |
 
 ## Troubleshoot
 
@@ -258,7 +257,7 @@ This section describes the steps you can take to solve common problems. If the s
 
 ### Data is not collected
 
-If you create a new watcher and do not see monitoring data on dashboards and in the data store, or if you only see older data, review this section.
+If you create a new watcher and do not see monitoring data on dashboards and in the data store, or if you only see older data for an existing watcher, review this section.
 
 - On the watcher **Overview** page, check the **Status** field to see if the watcher is running. If not, use the **Start** button on the same page to start data collection. A new watcher is not [started](database-watcher-manage.md#start-and-stop-a-watcher) automatically.
 
@@ -266,9 +265,9 @@ If you create a new watcher and do not see monitoring data on dashboards and in 
 
 - If you use an Azure Data Explorer database as the data store, check that the Azure Data Explorer cluster is started. For more information, see [Stopped Azure Data Explorer clusters](database-watcher-manage.md#stopped-azure-data-explorer-clusters).
 
-- Check that the watcher has the specific, limited [access to SQL targets](database-watcher-manage.md#grant-access-to-sql-targets). Additionally, if using SQL authentication for any targets, check watcher [access to key vault](database-watcher-manage.md#additional-configuration-to-use-sql-authentication), or use the recommended Microsoft Entra authentication instead.
+- Check that the watcher has the *specific, limited* [access to SQL targets](database-watcher-manage.md#grant-access-to-sql-targets). Additionally, if using SQL authentication for any targets, check watcher [access to key vault](database-watcher-manage.md#additional-configuration-to-use-sql-authentication), or use the recommended Microsoft Entra authentication instead.
 
-- If you want the watcher to use Microsoft Entra authentication to connect to SQL targets, make sure that [Microsoft Entra authentication is enabled](database/authentication-aad-configure.md) on the logical servers hosting the database and elastic pool targets, and on the managed instance targets.
+- If you want the watcher to use Microsoft Entra authentication to connect to SQL targets, make sure that [Microsoft Entra authentication is enabled](database/authentication-aad-configure.md) on the SQL logical servers hosting the database and elastic pool targets, and on the SQL managed instance targets.
 
 - If you created any private endpoints for the watcher, make sure that they are approved by the resource owner.
 

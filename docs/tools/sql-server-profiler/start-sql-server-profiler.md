@@ -9,6 +9,8 @@ ms.date: 05/10/2024
 ms.service: sql
 ms.subservice: profiler
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 ---
 
 # Run SQL Server Profiler

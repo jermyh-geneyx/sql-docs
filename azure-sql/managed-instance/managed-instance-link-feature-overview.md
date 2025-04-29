@@ -139,7 +139,10 @@ The link feature also facilitates migrating from SQL Server to SQL Managed Insta
 - The most performant, minimal downtime migration, compared to all other solutions available today.
 - True online migration to SQL Managed Instance in any service tier. 
 
-Because the link feature enables minimal downtime migration, you can migrate to your managed instance as you maintain your primary workload online. Although it's currently possible to achieve online migrations to the *General Purpose* service tier with other solutions, the link feature is the only solution that allows true online migrations to the *Business Critical* tier. 
+Because the link feature enables minimal downtime migration, you can migrate to your managed instance as you maintain your primary workload online. Although it's currently possible to achieve online migrations to the *General Purpose* service tier with other solutions, the link feature is the only solution that allows true online migrations to the *Business Critical* service tier. 
+
+> [!NOTE]
+> For an in-depth migration comparison, see [Compare the Managed Instance link to LRS](log-replay-service-compare-mi-link.md).
 
 ## Copy data on-premises
 

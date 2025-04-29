@@ -3,7 +3,7 @@ title: "Upgrade: Installation Wizard (Setup)"
 description: The SQL Server Installation Wizard provides a single feature tree for an in-place upgrade of SQL Server components to the latest version of SQL Server.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 10/31/2024
+ms.date: 04/17/2025
 ms.service: sql
 ms.subservice: install
 ms.topic: install-set-up-deploy
@@ -21,9 +21,7 @@ monikerRange: ">=sql-server-2016"
 The [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Installation Wizard provides a single feature tree for an in-place upgrade of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] components to the latest version of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
 
 > [!WARNING]  
-> When you upgrade [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], the previous version of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] is overwritten, and no longer exists on your computer.
->
-> Before upgrading, back up SQL Server databases and other objects associated with the previous SQL Server instance.
+> When you upgrade [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], the previous version of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] is overwritten, and no longer exists on your computer. Before upgrading, back up SQL Server databases and other objects associated with the previous SQL Server instance.
 
 For many production and some development environments, a new installation upgrade or a rolling upgrade is more appropriate than an in-place upgrade. For more information regarding upgrade methods, see:
 
@@ -40,7 +38,7 @@ For many production and some development environments, a new installation upgrad
 You must run Setup as an administrator. If you install [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] from a remote share, you must use a domain account that has read and execute permissions on the remote share, and is a local administrator.
 
 > [!WARNING]  
-> Be aware that you can't change the features to be upgraded, and you can't add features during the upgrade operation. For more information about how to add features to an upgraded instance of [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)] after the upgrade operation is complete, see [Add Features to an Instance of SQL Server (Setup)](add-features-to-an-instance-of-sql-server-setup.md).
+> You can't change the features to be upgraded, and you can't add features during the upgrade operation. For more information about how to add features to an upgraded instance of [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)] after the upgrade operation is complete, see [Add Features to an Instance of SQL Server (Setup)](add-features-to-an-instance-of-sql-server-setup.md).
 
 If you're upgrading the [!INCLUDE [ssDE](../../includes/ssde-md.md)], review [Plan and test the Database Engine upgrade plan](plan-and-test-the-database-engine-upgrade-plan.md) and then perform the following tasks, as appropriate for your environment:
 
@@ -52,7 +50,7 @@ If you're upgrading the [!INCLUDE [ssDE](../../includes/ssde-md.md)], review [Pl
 
 - Ensure that existing SQL Server system databases - master, model, `msdb`, and `tempdb` - are configured to autogrow, and ensure that they have sufficient hard disk space.
 
-- Ensure that all database servers have logon information in the `master` database. This is important for restoring a database, as system logon information resides in master.
+- Ensure that all database servers have logon information in the `master` database. This is important for restoring a database, as system logon information resides in `master`.
 
 - Disable all startup stored procedures, as the upgrade process stops and starts services on the SQL Server instance being upgraded. Stored procedures processed at startup time might block the upgrade process.
 
@@ -67,7 +65,7 @@ If you're upgrading the [!INCLUDE [ssDE](../../includes/ssde-md.md)], review [Pl
 
 <a id="to-upgrade-include-ssnoversionincludesssnoversion-mdmd"></a>
 
-### Upgrade [!INCLUDE [ssNoversion](../../includes/ssnoversion-md.md)]
+### Upgrade SQL Server
 
 1. Insert the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] installation media, and from the root folder, double-click Setup.exe. To install from a network share, move to the root folder on the share, and then double-click Setup.exe.
 
@@ -94,7 +92,7 @@ If you're upgrading the [!INCLUDE [ssDE](../../includes/ssde-md.md)], review [Pl
    The prerequisites for the selected features are displayed on the right-hand pane. [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Setup installs the prerequisites that aren't already installed during the installation step described later in this procedure.
 
    > [!NOTE]  
-   > If you have opted to upgrade the shared features by selecting **\<Upgrade shared features only>** on the **Select Instance** page, all the shared features are preselected on the Feature Selection page. All the shared components are upgraded at the same time.
+   > If you elect to upgrade the shared features by selecting **\<Upgrade shared features only>** on the **Select Instance** page, all the shared features are preselected on the Feature Selection page. All the shared components are upgraded at the same time.
 
 1. On the Instance Configuration page, specify the Instance ID for the instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
 
@@ -112,7 +110,7 @@ If you're upgrading the [!INCLUDE [ssDE](../../includes/ssde-md.md)], review [Pl
 
    To specify the same login account for all service accounts in this instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], provide credentials in the fields at the bottom of the page.
 
-   > [!CAUTION]
+   > [!CAUTION]  
    > [!INCLUDE [ssNoteStrongPass](../../includes/ssnotestrongpass-md.md)]
 
      When you're finished specifying login information for [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] services, select **Next**.
@@ -127,9 +125,10 @@ If you're upgrading the [!INCLUDE [ssDE](../../includes/ssde-md.md)], review [Pl
 
 1. After installation, the Complete page provides a link to the summary log file for the installation and other important notes. To complete the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] installation process, select **Close**.
 
-1. If you're instructed to restart the computer, do so now. It's important to read the message from the Installation Wizard when you have finished with Setup. For more information about Setup log files, see [View and Read SQL Server Setup Log Files](view-and-read-sql-server-setup-log-files.md).
+1. If you're instructed to restart the computer, do so now. You must read the message from the Installation Wizard when you finish with Setup. For more information about Setup log files, see [View and Read SQL Server Setup Log Files](view-and-read-sql-server-setup-log-files.md).
 
 ## Related content
 
 - [Upgrade SQL Server](upgrade-sql-server.md)
-- [Backward Compatibility_deleted](/previous-versions/sql/sql-server-2016/cc280407(v=sql.130))
+- [Issues when upgrading to SQL Server 2022](/troubleshoot/sql/database-engine/install/windows/issues-upgrading-sql-server-2022)
+- [Backward Compatibility](/previous-versions/sql/sql-server-2016/cc280407(v=sql.130))

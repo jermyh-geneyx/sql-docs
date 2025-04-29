@@ -5,7 +5,7 @@ description: Learn about point-in-time restore, which enables you to roll back a
 author: dnethi
 ms.author: dinethi
 ms.reviewer: wiassaf, mathoma, danil
-ms.date: 03/13/2025
+ms.date: 04/04/2025
 ms.service: azure-sql-database
 ms.subservice: backup-restore
 ms.topic: how-to
@@ -76,6 +76,8 @@ To recover by using automated backups, you must be either:
 For more information, see [Azure RBAC: Built-in roles](/azure/role-based-access-control/built-in-roles).
 
 You can recover by using the Azure portal, PowerShell, or the REST API. You can't use Transact-SQL.
+
+Azure SQL Database backups are managed automatically. No one has direct access to the backups. The backups are deleted once the configured retention period expires. For more information, see [Automated backups in Azure SQL Database](automated-backups-overview.md) and [Long-term retention](long-term-retention-overview.md).
 
 ## Point-in-time restore
 

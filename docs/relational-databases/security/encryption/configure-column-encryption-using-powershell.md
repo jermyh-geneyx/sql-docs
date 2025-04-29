@@ -161,7 +161,22 @@ for($i=0; $i -lt $tables.Count; $i++){
 # Decrypt all columns.
 Set-SqlColumnEncryption -ColumnEncryptionSettings $ces -InputObject $database -LogFileDirectory . -KeyVaultAccessToken $keyVaultAccessToken
 ```
- 
+
+## Post encryption
+
+Clear the plan cache for all batches and stored procedures that access the table to refresh parameters encryption information. 
+
+   ```sql
+   ALTER DATABASE SCOPED CONFIGURATION CLEAR PROCEDURE_CACHE;
+   ```
+
+   > [!NOTE]
+   > If you don't remove the plan for the impacted query from the cache, the first execution of the query after encryption might fail.
+   >
+   > Use `ALTER DATABASE SCOPED CONFIGURATION CLEAR PROCEDURE_CACHE` or `DBCC FREEPROCCACHE` to clear the plan cache carefully, as it can result in temporary query performance degradation. To minimize the negative impact of clearing the cache, you can selectively remove the plans for only the impacted queries.
+
+Call [sp_refresh_parameter_encryption](../../system-stored-procedures/sp-refresh-parameter-encryption-transact-sql.md) to update the metadata for the parameters of each module (stored procedure, function, view, trigger) that are persisted in [sys.parameters](../..//system-catalog-views/sys-parameters-transact-sql.md) and might have been invalidated by encrypting the columns.
+
 ## Next Steps
 - [Develop applications using Always Encrypted](always-encrypted-client-development.md)
 

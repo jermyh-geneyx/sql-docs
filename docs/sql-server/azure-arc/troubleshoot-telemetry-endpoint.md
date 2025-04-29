@@ -4,7 +4,7 @@ description: "Describes how to troubleshoot connectivity to the data processing 
 author: twright-msft
 ms.author: twright
 ms.reviewer: mikeray
-ms.date: 09/23/2024
+ms.date: 03/25/2025
 ms.topic: troubleshooting
 ---
 
@@ -123,15 +123,13 @@ You can probe connectivity to all regions with the [test-connectivity.ps1](https
 
 ## Check TLS version compatibility
 
-The telemetry and data processing service endpoints support the following TLS versions: TLS 1.2 and 1.3.  Supported TLS versions by operating system for Windows Server 2012/R2 are listed below.
+The data processing service endpoint supports the following TLS versions: TLS 1.2 and 1.3. Windows Server 2012 and older versions aren't supported.
 
-|Cipher Suite|WS 2012|WS 2012 R2|
-| -------- | -------- | -------- |
-|`TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256 (0xCCA8)`| Not Supported| Not Supported|
-|`TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256 (0xC02F)`| Not Supported| Supported|
-|`TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384 (0xC030)`| Not Supported| Supported|
 
-If an unsupported TLS version is being used, you may see an error in the log 
+For telemetry endpoints, Windows Server 2012 R2 and older are not supported.
+
+If an unsupported TLS version is being used, you may see an error in the log
+
 ```output
 <date time>|ERROR|SqlServerExtension.Service|Request failed with exception 'System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
 
@@ -197,7 +195,7 @@ The following table shows some of the common DPS upload status values and what y
 | `OK` | 200 | The connection is working as expected. |
 |`Bad request`|400|Possible cause: The resource name (SQL Server instance or database name) doesn't conform to Azure resource naming conventions. For example, if the database name is a [reserved word](/azure/azure-resource-manager/troubleshooting/error-reserved-resource-name).|
 | `Unauthorized` | 401 | Likely cause: the extension is configured to send data through an HTTP proxy that requires authentication. Using an HTTP proxy that requires authentication is not currently supported. Use an unauthenticated HTTP proxy or no proxy.|
-| `Forbidden` | 403 | If the Azure Connected Machine agent is otherwise working as expected and this error doesn't resolve itself after a reboot, create a support case with Microsoft Support through the Azure portal.|
+| `Forbidden` | 403 | Check to make sure the `Microsoft.AzureArcData` resource provider is registered on the subscription. If the Azure Connected Machine agent is otherwise working as expected and this error doesn't resolve itself after a reboot, create a support case with Microsoft Support through the Azure portal.|
 | `NotFound` | 404 | The endpoint that the extension is trying to connect to doesn't exist. <br/><br/> To check which endpoint it is trying to connect to, search the logs for `dataprocessingservice`. This condition can happen if the Azure Connected Machine agent was deployed and connected to an Azure region in which the `Microsoft.AzureArcData` resource provider is not yet available. [Redeploy the Azure Connected Machine agent](/azure/azure-arc/servers/manage-agent?tabs=windows#uninstall-the-agent) in a region that the `Microsoft.AzureArcData` resource provider for aSQL Server enabled by Azure Arc is available. See also [Region availability](https://azure.microsoft.com/explore/global-infrastructure/products-by-region/?products=azure-arc).<br/><br/> It is possible that the DNS resolver cache is not refreshed for your machine. To refresh: <br/> - On Windows run: `ipconfig /flushdns`</br> - On Linux (if `systemd` is being used) run: `sudo resolvectl flush-caches` |
 | `Conflict` | 409 | Likely cause: temporary error happening inside of the DPS. If this does not resolve itself, create a support case with Microsoft Support through the Azure portal.|
 | `InternalServerError` | 500 | This is an error that is happening inside of the DPS. Create a support case with Microsoft Support through the Azure portal. |

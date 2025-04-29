@@ -1,13 +1,15 @@
 ---
 title: SQL Server Configuration Manager
 description: Utilizing the SQL Server Configuration Manager client.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.reviewer: randolphwest, vanto
 ms.date: 03/14/2025
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: concept-article
+ms.collection:
+  - data-tools
 helpviewer_keywords:
   - "protocols [SQL Server], managing"
   - "network protocols [SQL Server], managing"

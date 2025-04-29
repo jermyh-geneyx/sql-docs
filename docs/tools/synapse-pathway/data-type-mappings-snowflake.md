@@ -1,5 +1,5 @@
 ---
-title: Azure Synapse Pathway data type mappings Snowflake
+title: Azure Synapse Pathway Data Type Mappings Snowflake
 description: Data type mappings for Snowflake within Azure Synapse Pathway
 author: charlesfeddersen
 ms.author: charlesf
@@ -7,6 +7,8 @@ ms.date: 07/15/2021
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: overview
+ms.collection:
+  - data-tools
 ms.custom:
   - template-overview
   - intro-overview

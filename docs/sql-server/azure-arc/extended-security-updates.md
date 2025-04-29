@@ -330,5 +330,4 @@ If the Arc enabled machine goes offline and reconnects to Azure in a different s
 - [Frequently asked questions about billing](faq.yml#billing)
 - [Extended Security Updates: Frequently asked questions](../end-of-support/extended-security-updates-frequently-asked-questions.md)
 - [Prerequisites - SQL Server enabled by Azure Arc](prerequisites.md)
-- [Automatically connect your SQL Server to Azure Arc](automatically-connect.md)
 - [Manage the unlimited virtualization benefit for a SQL Server ESU subscription](manage-configuration.md#manage-pcore-esu-license)

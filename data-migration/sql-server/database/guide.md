@@ -8,7 +8,8 @@ ms.service: azure-sql-database
 ms.subservice: migration-guide
 ms.topic: how-to
 ms.collection:
-  - sql-migration-content
+ - sql-migration-content
+ - migration
 ---
 # Migration guide: SQL Server to Azure SQL Database
 

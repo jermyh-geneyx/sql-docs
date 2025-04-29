@@ -1,15 +1,17 @@
 ---
-title: Prepare input trace data
+title: Prepare Input Trace Data
 titleSuffix: SQL Server Distributed Replay
 description: Before you can start a distributed replay with SQL Server Distributed Replay, prepare the input trace data by initiating the preprocess stage.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.reviewer: mikeray, randolphwest
 ms.date: 03/17/2023
 ms.service: sql
 ms.subservice: distributed-replay
 ms.topic: how-to
-monikerRange: ">= sql-server-2016 || >= sql-server-linux-2017"
+ms.collection:
+  - data-tools
+monikerRange: ">=sql-server-2016 || >=sql-server-linux-2017"
 ---
 # Prepare input trace data
 

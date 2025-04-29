@@ -1,9 +1,11 @@
 ---
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: 09/20/2024
 ms.service: sql
 ms.topic: include
+ms.collection:
+  - data-tools
 ---
 
 > [!IMPORTANT]

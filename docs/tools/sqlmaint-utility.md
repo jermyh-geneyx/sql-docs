@@ -1,12 +1,14 @@
 ---
 title: "sqlmaint Utility"
 description: In SQL Server, use sqlmaint to run DBCC checks, back up a database and its transaction log, update statistics, and rebuild indexes.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: "03/14/2017"
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
+ms.collection:
+  - data-tools
 helpviewer_keywords:
   - "database maintenance plans [SQL Server]"
   - "sqlmaint utility"

@@ -1,12 +1,14 @@
 ---
 title: "Column Element for Index (DTA)"
 description: In the dta utility, the Column element for Index specifies the columns on which the index is created for a user-specified configuration.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: 03/09/2017
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: reference
+ms.collection:
+  - data-tools
 helpviewer_keywords:
   - "Column element"
 dev_langs:

@@ -1316,9 +1316,9 @@ items:
         href: relational-databases/indexes/columnstore-indexes-overview.md
       - name: What's new
         href: relational-databases/indexes/columnstore-indexes-what-s-new.md
-      - name: Design Guidance
+      - name: Design guidance
         href: relational-databases/indexes/columnstore-indexes-design-guidance.md
-      - name: Data loading Guidance
+      - name: Data loading guidance
         href: relational-databases/indexes/columnstore-indexes-data-loading-guidance.md
       - name: Query performance
         href: relational-databases/indexes/columnstore-indexes-query-performance.md
@@ -9288,8 +9288,6 @@ items:
       href: sql-server/azure-arc/prerequisites.md
     - name: How-to guides
       items:
-      - name: Connect SQL Server to Azure using Arc
-        href: sql-server/azure-arc/automatically-connect.md
       - name: Manage auto deploy
         href: sql-server/azure-arc/manage-autodeploy.md
       - name: Alternate methods to connect
@@ -9298,16 +9296,10 @@ items:
           href: sql-server/azure-arc/deployment-options.md
         - name: Connect when machine not connected to Azure
           href: sql-server/azure-arc/connect.md
-        - name: Connect with installer (.msi)
-          href: sql-server/azure-arc/connect-with-installer.md
         - name: Connect when machine already connected to Azure
           href: sql-server/azure-arc/connect-already-enabled.md
         - name: Azure policy
           href: sql-server/azure-arc/connect-at-scale-policy.md
-        - name: Script
-          href: sql-server/azure-arc/connect-at-scale-script.md
-        - name: Connect machines using Configuration Manager custom task sequence
-          href: sql-server/azure-arc/onboard-configuration-manager-custom-task.md
         - name: Configure with private path
           href: sql-server/azure-arc/configure-private-path.md
     - name: Manage
@@ -9372,6 +9364,8 @@ items:
       items:
       - name: Discover & assess
         href: sql-server/azure-arc/migration-assessment.md
+      - name: Migration dashboard
+        href: sql-server/azure-arc/migration-inventory.md
     - name: FAQ
       href: sql-server/azure-arc/faq.yml
     - name: Data collection & reporting
@@ -14239,36 +14233,12 @@ items:
         href: relational-databases/system-stored-procedures/sp-pdw-remove-network-credentials-sql-data-warehouse.md
       - name: sp_special_columns_100
         href: relational-databases/system-stored-procedures/sp-special-columns-100-sql-data-warehouse.md
-    - name: Azure Synapse Link for SQL & Fabric mirrored databases
+    - name: Fabric mirrored databases
       items:
       - name: sp_change_feed_configure_parameters
         href: relational-databases/system-stored-procedures/sp-change-feed-configure-parameters.md
-      - name: sp_change_feed_create_table_group
-        href: relational-databases/system-stored-procedures/sp-change-feed-create-table-group.md
       - name: sp_change_feed_disable_db
         href: relational-databases/system-stored-procedures/sp-change-feed-disable-db.md
-      - name: sp_change_feed_disable_table
-        href: relational-databases/system-stored-procedures/sp-change-feed-disable-table.md
-      - name: sp_change_feed_drop_table_group
-        href: relational-databases/system-stored-procedures/sp-change-feed-drop-table-group.md
-      - name: sp_change_feed_enable_db
-        href: relational-databases/system-stored-procedures/sp-change-feed-enable-db.md
-      - name: sp_change_feed_enable_table
-        href: relational-databases/system-stored-procedures/sp-change-feed-enable-table.md
-      - name: sp_change_feed_enable_tables_after_reseed
-        href: relational-databases/system-stored-procedures/sp-change-feed-enable-tables-after-reseed.md
-      - name: sp_change_feed_is_slo_allowed
-        href: relational-databases/system-stored-procedures/sp-change-feed-is-slo-allowed.md
-      - name: sp_change_feed_reseed_table
-        href: relational-databases/system-stored-procedures/sp-change-feed-reseed-table.md
-      - name: sp_change_feed_reseed_db_init
-        href: relational-databases/system-stored-procedures/sp-change-feed-reseed-db-init.md
-      - name: sp_change_feed_reseed_db_start_replication
-        href: relational-databases/system-stored-procedures/sp-change-feed-reseed-db-start-replication.md
-      - name: sp_change_feed_vupgrade
-        href: relational-databases/system-stored-procedures/sp-change-feed-vupgrade.md
-      - name: sp_has_change_feed_permissions
-        href: relational-databases/system-stored-procedures/sp-has-change-feed-permissions.md
       - name: sp_help_change_feed
         href: relational-databases/system-stored-procedures/sp-help-change-feed.md
       - name: sp_help_change_feed_table
@@ -14277,8 +14247,35 @@ items:
         href: relational-databases/system-stored-procedures/sp-help-change-feed-settings.md
       - name: sp_help_change_feed_table_groups
         href: relational-databases/system-stored-procedures/sp-help-change-feed-table-groups.md
-      - name: sp_MSchange_feed_ddl_event
-        href: relational-databases/system-stored-procedures/sp-mschange-feed-ddl-event.md
+      - name: Internal only mirroring stored procedures
+        items: 
+        - name: sp_change_feed_create_table_group
+          href: relational-databases/system-stored-procedures/sp-change-feed-create-table-group.md
+        - name: sp_change_feed_disable_table
+          href: relational-databases/system-stored-procedures/sp-change-feed-disable-table.md
+        - name: sp_change_feed_drop_table_group
+          href: relational-databases/system-stored-procedures/sp-change-feed-drop-table-group.md
+        - name: sp_change_feed_enable_db
+          href: relational-databases/system-stored-procedures/sp-change-feed-enable-db.md
+        - name: sp_change_feed_enable_table
+          href: relational-databases/system-stored-procedures/sp-change-feed-enable-table.md
+        - name: sp_change_feed_enable_tables_after_reseed
+          href: relational-databases/system-stored-procedures/sp-change-feed-enable-tables-after-reseed.md
+        - name: sp_change_feed_is_slo_allowed
+          href: relational-databases/system-stored-procedures/sp-change-feed-is-slo-allowed.md
+        - name: sp_change_feed_reseed_db_init
+          href: relational-databases/system-stored-procedures/sp-change-feed-reseed-db-init.md
+        - name: sp_change_feed_reseed_db_start_replication
+          href: relational-databases/system-stored-procedures/sp-change-feed-reseed-db-start-replication.md
+        - name: sp_change_feed_reseed_table
+          href: relational-databases/system-stored-procedures/sp-change-feed-reseed-table.md
+        - name: sp_change_feed_vupgrade
+          href: relational-databases/system-stored-procedures/sp-change-feed-vupgrade.md
+        - name: sp_has_change_feed_permissions
+          href: relational-databases/system-stored-procedures/sp-has-change-feed-permissions.md
+        - name: sp_MSchange_feed_ddl_event
+          href: relational-databases/system-stored-procedures/sp-mschange-feed-ddl-event.md
+          
     - name: SQL Server Agent
       href: relational-databases/system-stored-procedures/sql-server-agent-stored-procedures-transact-sql.md
       items:

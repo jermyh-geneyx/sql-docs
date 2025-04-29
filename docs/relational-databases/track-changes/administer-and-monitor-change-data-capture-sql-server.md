@@ -43,7 +43,7 @@ The `continuous` parameter controls whether `sp_cdc_scan` relinquishes control i
   
 ##### One-shot mode
 
-In one-shot mode, the capture job requests `sp_cdc_scan` to perform up to `maxtrans` scans to try to drain the log and return. Any transactions in addition to `maxtrans` that are present in the log will be processed in later scans.  
+In one-shot mode, the capture job requests `sp_cdc_scan` to perform up to `maxscans` scans to try to drain the log and return. Any transactions in addition to `maxtrans` that are present in the log will be processed in later scans.  
   
  One-shot mode is used in controlled tests, where the volume of transactions to be processed is known, and there are advantages to the fact that the job closes automatically on when it is finished. One-shot mode is not recommended for production use. This is because it relies on the job schedule to manage how frequently the scan cycle is run.  
   

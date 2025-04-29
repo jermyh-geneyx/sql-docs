@@ -624,7 +624,7 @@ Consider the following limitations when migrating with LRS:
 - You must place backup files for different databases in separate folders on the Blob Storage account in a flat-file structure. Nesting folders inside database folders isn't supported.
 - If you're using autocomplete mode, the entire backup chain needs to be available in advance on the Blob Storage account. It isn't possible to add new backup files in autocomplete mode. Use continuous mode if you need to add new backup files while migration is in progress.
 - You must start LRS separately for each database that points to the full URI path that contains an individual database folder. 
-- The backup URI path, container name, or folder names should not contain `backup` or `backups` as these are reserved keywords.
+- The backup URI path, container name, or folder names can't contain `backup` or `Backup` as these are reserved keywords.
 - When starting multiple Log Replay restores in parallel, targeting the same storage container, ensure that the same valid SAS token is provided for every restore operation.
 - LRS can support up to 100 simultaneous restore processes per single managed instance.
 - A single LRS job can run for a maximum of 30 days, after which it will be automatically canceled.
@@ -684,9 +684,11 @@ If LRS fails to start after some time and you get an error, check for the most c
 - Does the backup URI path contain keywords `backup` or `backups`? Rename the container or folders that are using `backup` or `backups` as these are reserved keywords.
 
 
-## Next steps
+## Related content
 
-- Learn more about [migrating to Azure SQL Managed Instance by using the link feature](managed-instance-link-feature-overview.md).
-- Learn more about [migrating from SQL Server to Azure SQL Managed Instance](../migration-guides/managed-instance/sql-server-to-managed-instance-guide.md).
-- Learn more about the [differences between SQL Server and SQL Managed Instance](transact-sql-tsql-differences-sql-server.md).
-- Learn more about [best practices to cost and size workloads migrated to Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/migrate-best-practices-costs).
+- [Log Replay Service overview](log-replay-service-overview.md).
+- [Migrate to Azure SQL Managed Instance by using the link feature](managed-instance-link-feature-overview.md).
+- [Migrate from SQL Server to Azure SQL Managed Instance](../migration-guides/managed-instance/sql-server-to-managed-instance-guide.md).
+- [Differences between SQL Server and SQL Managed Instance](transact-sql-tsql-differences-sql-server.md).
+- [Best practices to cost and size workloads migrated to Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/migrate-best-practices-costs).
+- [Compare LRS with the Managed Instance link for migration](log-replay-service-compare-mi-link.md)

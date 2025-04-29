@@ -1,5 +1,5 @@
 ---
-title: Release notes - Azure Synapse Pathway
+title: Release Notes - Azure Synapse Pathway
 description: Azure Synapse Pathway release notes
 author: prlangad
 ms.author: prlangad
@@ -7,6 +7,8 @@ ms.date: 12/04/2023
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: release-notes
+ms.collection:
+  - data-tools
 ms.custom:
   - template-overview
   - intro-overview

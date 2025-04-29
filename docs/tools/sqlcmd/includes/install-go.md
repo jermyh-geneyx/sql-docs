@@ -4,6 +4,8 @@ ms.author: randolphwest
 ms.date: 06/28/2024
 ms.service: sql
 ms.topic: include
+ms.collection:
+  - data-tools
 ms.custom:
   - linux-related-content
 ---

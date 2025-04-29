@@ -1,12 +1,14 @@
 ---
-title: View the Windows Application Log to troubleshoot SQL Server
+title: View the Windows Application Log to Troubleshoot SQL Server
 description: Find out how to view and manage the Windows application log. You can configure SQL Server to write event information to this log.
-author: markingmyname
-ms.author: maghan
+author: rwestMSFT
+ms.author: randolphwest
 ms.date: 12/26/2024
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: troubleshooting-general
+ms.collection:
+  - data-tools
 helpviewer_keywords:
   - "application logs [SQL Server]"
   - "Windows application logs [SQL Server]"

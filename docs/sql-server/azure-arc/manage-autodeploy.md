@@ -57,7 +57,7 @@ Microsoft automatically installs Azure extension for SQL Server on each Arc-enab
 
 1. Create Arc-enabled SQL Server instance resource in Azure.
 
-To automatically connect [!INCLUDE [ssazurearc](../../includes/ssazurearc.md)], use one of the provided methods that meet your requirements [Automatically connect your SQL Server to Azure Arc](automatically-connect.md).
+To automatically connect [!INCLUDE [ssazurearc](../../includes/ssazurearc.md)], use one of the provided methods that meet your requirements [SQL Server enabled by Azure Arc deployment options](deployment-options.md).
 
 Once the connecting is complete, you can benefit from the Azure features for SQL Server. For more information, visit [Manage SQL Server license and billing options](manage-configuration.md).
 

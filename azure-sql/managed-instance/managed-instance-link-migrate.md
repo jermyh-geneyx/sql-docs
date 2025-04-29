@@ -17,7 +17,7 @@ ms.topic: how-to
 
 This article teaches you to migrate your SQL Server database to Azure SQL Managed Instance by using the [Managed Instance link](managed-instance-link-feature-overview.md). 
 
-For a detailed migration guide, review [Migrate to Azure SQL Managed Instance](../migration-guides/managed-instance/sql-server-to-managed-instance-guide.md)
+For a detailed migration guide, review [Migrate to Azure SQL Managed Instance](../migration-guides/managed-instance/sql-server-to-managed-instance-guide.md). To compare migration tools, review [Compare LRS with MI link](log-replay-service-compare-mi-link.md). 
 
 ## Overview
 
@@ -34,10 +34,8 @@ Migrating with the link gives you:
 - The ability to migrate single or multiple databases from a single or multiple SQL Server instances to the same or multiple SQL managed instances in Azure.
 - The only true online migration to the Business Critical service tier.
 
-
 > [!NOTE]
 > While you can only migrate one database per link, you can establish multiple links from the same SQL Server instance to the same SQL Managed Instance. 
-
 
 ## Prerequisites 
 
@@ -110,3 +108,4 @@ For other replication and migration scenarios, consider:
 
 - [Transactional replication with SQL Managed Instance](replication-transactional-overview.md)
 - [Log Replay Service (LRS)](log-replay-service-overview.md)
+- [Compare LRS with the Managed Instance link for migration](log-replay-service-compare-mi-link.md)

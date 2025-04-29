@@ -4,7 +4,7 @@ description: CREATE INDEX (Transact-SQL)
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: wiassaf, dfurman
-ms.date: 02/25/2025
+ms.date: 04/04/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -963,6 +963,12 @@ Many of the data compression considerations apply to XML compression. You should
 - Changing the XML compression setting of a heap requires all nonclustered indexes on the table to be rebuilt so that they have pointers to the new row locations in the heap.
 - You can enable or disable XML compression online or offline. Enabling compression on a heap is single threaded for an online operation.
 - To determine the XML compression state of partitions in a partitioned table, use the `xml_compression` column of the `sys.partitions` catalog view.
+
+## Index statistics
+
+When a rowstore index is created, the [!INCLUDE[ssDE](../../includes/ssde-md.md)] also creates [statistics](../../relational-databases/statistics/statistics.md) on the key columns of the index. The name of the statistics object in the [sys.stats](../../relational-databases/system-catalog-views/sys-stats-transact-sql.md) catalog view matches the name of the index. For a non-partitioned index, the statistics are built using a full scan of the data. For a partitioned index, statistics are build using the default sampling algorithm.
+
+When a columnstore index is created, the [!INCLUDE[ssDE](../../includes/ssde-md.md)] creates a statistics object in [sys.stats](../../relational-databases/system-catalog-views/sys-stats-transact-sql.md) as well. This statistics object doesn't contain statistics data such as the histogram and the density vector. It is used when creating a database clone by scripting the database. At that time, the `DBCC SHOW_STATISTICS` and `UPDATE STATISTICS ... WITH STATS_STREAM` commands are used to obtain columnstore metadata such as segment, dictionary, and delta store size and add it to the statistics on the columnstore index. This metadata is obtained dynamically at query compilation time for a regular database, but is provided by the statistics object for a database clone. The [UPDATE STATISTICS](../../t-sql/statements/update-statistics-transact-sql.md) command isn't supported for the statistics object on a columnstore index in any other scenario.
 
 ## Permissions
 

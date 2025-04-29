@@ -4,7 +4,7 @@ description: Latest release notes for SQL Server enabled by Azure Arc
 author: anosov1960
 ms.author: sashan
 ms.reviewer: mikeray, randolphwest
-ms.date: 03/12/2025
+ms.date: 04/14/2025
 ms.topic: conceptual
 ms.custom:
   - ignite-2023
@@ -22,6 +22,10 @@ This article lists:
 - Links to additional feature documentation
 
 Extension versions are cumulative. Higher extension versions include all of the updates from previous versions. A release might include internal features. If the version release notes don't describe features, then the updates were internal.
+
+## April 14, 2025
+
+**Extension version**: `1.1.3021.274`
 
 ## March 11, 2025
 
@@ -264,7 +268,7 @@ For a complete list of regions, see [Supported Azure regions](overview.md#suppor
 - Track the provision state and (extension service) status of Azure extension for SQL Server - general availability.
   - Beginning with this release, you can track the provisioning status of Azure Arc extension for SQL Server and Azure Arc guest agent in the properties tab for Arc enabled SQL Server.
 
-For information about server monitoring capabilities, review [Automatically connect your SQL Server to Azure Arc](automatically-connect.md).
+For information about server monitoring capabilities, review [SQL Server enabled by Azure Arc deployment options](deployment-options.md).
 
 For information about database status and inventory capabilities, review [View Azure Arc-enabled inventory](view-inventory.md).
 

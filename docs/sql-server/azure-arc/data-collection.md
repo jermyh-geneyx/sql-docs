@@ -140,6 +140,6 @@ The following lists reflect the monitoring data that is collected from DMV datas
 
 ## Related content
 
-- [Automatically connect your [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] to Azure Arc](automatically-connect.md)
+- [Deployment options for SQL Server enabled by Azure Arc](deployment-options.md)
 - [Configure advanced data security for your [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] instance](configure-advanced-data-security.md)
 - [Configure best practices assessment on an Azure Arc-enabled [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] instance](assess.md)
