@@ -24,6 +24,8 @@ jobs:
               # For testing set to a little used folder as the only target
               BlockedFilesAndFolders: '[
                     "docs/database-engine/availability-groups/windows/failover-and-failover-modes-always-on-availability-groups.md",
+                    "docs/relational-databases/backup-restore/sql-server-backup-to-url.md",
+                    "docs/t-sql/statements/backup-transact-sql.md",
                     "docs/sql-server/what-s-new-in-sql-server-2025.md",
                     "docs/database-engine/availability-groups/windows/distributed-availability-groups.md",
                     "docs/t-sql/statements/alter-availability-group-transact-sql.md",
