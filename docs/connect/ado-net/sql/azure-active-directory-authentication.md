@@ -364,10 +364,10 @@ The following example shows how to set an application client ID through a config
 Available in version 5.2 onwards, there's a new [AccessTokenCallback](/dotnet/api/microsoft.data.sqlclient.sqlconnection.accesstokencallback) property on [SqlConnection](/dotnet/api/microsoft.data.sqlclient.sqlconnection). Use the `AccessTokenCallback` property to define a custom function that returns an access token given the incoming parameters. Using the callback is better than using the [AccessToken](/dotnet/api/microsoft.data.sqlclient.sqlconnection.accesstoken) property because it allows the access token to be refreshed within a connection pool. When using the `AccessToken` property, the token can't be updated after opening the connection. There's also no associated expiration date provided through the property. Once the token expires, new connection requests fail with a server authentication error and pools using it must be manually cleared.
 
 > [!IMPORTANT]
-> An `AccessTokenCallback` must return access tokens of the same security context for the same input parameters. If this is not done, pooled connections may be returned with the wrong security context for a connection.
+> An `AccessTokenCallback` must return access tokens of the same security context for the same input parameters. If the security context is different, a pooled connection with the wrong security context may be returned for a connection request.
 
 > [!NOTE]
-> `AccessTokenCallback` is part of the key used to identify connection pools. Avoid creating a new function callback for every creation of a SqlConnection since that will result in a new pool every time. Reference the same instance of a function for connections you want to be considered for pooling. The connection pool key includes parameters passed to the callback and will partition connection pools appropriately.
+> `AccessTokenCallback` is part of the key used to identify connection pools. Avoid creating a new function callback for every creation of a SqlConnection since that results in a new pool every time. Reference the same instance of a function for connections you want to be considered for pooling. The connection pool key includes parameters passed to the callback to partition connection pools appropriately.
 
 The following code snippet is an example of using the `AccessTokenCallback` property in **Microsoft.Data.SqlClient v5.2 onwards**.
 
@@ -378,7 +378,7 @@ The following code snippet is an example of using the `AccessTokenCallback` prop
 Given more flexibility, the client application can also use its own provider for Microsoft Entra authentication instead of using the `ActiveDirectoryAuthenticationProvider` class. The custom authentication provider needs to be a subclass of `SqlAuthenticationProvider` with overridden methods. It then must register the custom provider, overriding one or more of the existing `Active Directory*` authentication methods.
 
 > [!IMPORTANT]
-> An authentication provider must return access tokens of the same security context for the same input parameters. If this is not done, pooled connections may be returned with the wrong security context for a connection.
+> An authentication provider must return access tokens of the same security context for the same input parameters. If the security context is different, a pooled connection with the wrong security context may be returned for a connection request.
 
 The following example shows how to use a new authentication provider for `Active Directory Device Code Flow` authentication.
 
