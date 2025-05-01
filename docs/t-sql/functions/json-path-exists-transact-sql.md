@@ -4,7 +4,7 @@ description: JSON_PATH_EXISTS tests whether a specified SQL/JSON path exists in 
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest, umajay, jovanpop
-ms.date: 01/07/2025
+ms.date: 04/30/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -82,6 +82,61 @@ SELECT JSON_PATH_EXISTS(@jsonInfo, '$.info.addresses');
 ```output
 0
 ```
+
+### Example 3
+
+The following example uses `JSON_PATH_EXISTS()` with a wildcard:
+
+```sql
+DECLARE @jsonInfo AS NVARCHAR (MAX);
+
+ 
+
+SET @jsonInfo = N'{"info":{"address":[{"town":"Paris"},{"town":"London"}]}}';
+
+ 
+
+SELECT JSON_PATH_EXISTS(@jsonInfo, '$.info.address[*].town'); -- Returns: 1
+```
+
+[!INCLUDE [ssresult-md](../../includes/ssresult-md.md)]
+
+```output
+1
+```
+
+The following looks for at least one element in array has an object with key `town`, and finds one.
+
+```sql
+SET @jsonInfo = N'{"info":{"address":[{"town":"Paris"},{"city":"London"}]}}';
+
+ 
+
+SELECT JSON_PATH_EXISTS(@jsonInfo, '$.info.address[*].town'); -- Returns: 1  (at least one element in array has an object with key "town")
+```
+
+[!INCLUDE [ssresult-md](../../includes/ssresult-md.md)]
+
+```output
+1
+```
+
+The following looks for at least one element in array has an object with key `town`, but finds none.
+
+```sql
+SET @jsonInfo = N'{"info":{"address":[{"city":"Paris"},{"city":"London"}]}}';
+
+ 
+
+SELECT JSON_PATH_EXISTS(@jsonInfo, '$.info.address[*].town'); -- Returns: 0 (no elements in array has an object with key "town")
+```
+
+[!INCLUDE [ssresult-md](../../includes/ssresult-md.md)]
+
+```output
+0
+```
+
 
 ## Related content
 
