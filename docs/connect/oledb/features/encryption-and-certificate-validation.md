@@ -20,7 +20,7 @@ helpviewer_keywords:
 
 [!INCLUDE[Driver_OLEDB_Download](../../../includes/driver_oledb_download.md)]
 
-[!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] always encrypts network packets associated with logging in. If no certificate has been provisioned on the server when it starts up, [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] generates a self-signed certificate, which is used to encrypt login packets.
+[!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] always encrypts network packets associated with logging in. If no certificate is provisioned on the server when it starts up, [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] generates a self-signed certificate, which is used to encrypt login packets.
 
 Self-signed certificates don't guarantee security. The encrypted handshake is based on NT LAN Manager (NTLM). It's highly recommended you provision a verifiable certificate on SQL Server for secure connectivity. Transport Security Layer (TLS) can be made secure only with certificate validation.
 
@@ -28,11 +28,11 @@ Applications may also request encryption of all network traffic by using connect
 
 For information about connection string keywords, see [Using connection string keywords with OLE DB driver for SQL Server](../applications/using-connection-string-keywords-with-oledb-driver-for-sql-server.md).
 
-To enable encryption to be used when a certificate hasn't been provisioned on the server, the **`Force Protocol Encryption`** and the **`Trust Server Certificate`** client [registry settings](./registry-settings.md#encryption-and-certificate-validation) must be set. In this case, encryption uses a self-signed server certificate without validation if no verifiable certificate has been provisioned on the server.
+To enable encryption to be used when a certificate isn't provisioned on the server, the **`Force Protocol Encryption`** and the **`Trust Server Certificate`** client [registry settings](./registry-settings.md#encryption-and-certificate-validation) must be set. In this case, encryption uses a self-signed server certificate without validation if no verifiable certificate is provisioned on the server.
 
 ## Encryption and certificate validation behavior
 
-Application settings never reduce the level of security set in the registry, but may strengthen it. For more information, see [Registry settings](./registry-settings.md#encryption-and-certificate-validation). For example, if **`Force Protocol Encryption`** isn't set for the client, an application may request encryption itself. To guarantee encryption even when a server certificate hasn't been provisioned, an application may request encryption and enable `TrustServerCertificate`. However, if `TrustServerCertificate` isn't enabled in the client's registry configuration, a provisioned server certificate is still required.
+Application settings never reduce the level of security set in the registry, but may strengthen it. For more information, see [Registry settings](./registry-settings.md#encryption-and-certificate-validation). For example, if **`Force Protocol Encryption`** isn't set for the client, an application may request encryption itself. To guarantee encryption even when a server certificate isn't provisioned, an application may request encryption and enable `TrustServerCertificate`. However, if `TrustServerCertificate` isn't enabled in the client's registry configuration, a provisioned server certificate is still required.
 
 Version 19 of the OLE DB Driver for SQL Server introduces breaking changes in the encryption related APIs. For more information, see [Encryption property changes](../major-version-differences.md#encryption-property-changes).
 
@@ -71,7 +71,7 @@ The following table describes the resulting encryption and validation:
 For versions 18.x.x, to improve security, when the new **Authentication** or **Access Token** connection string keywords (or their corresponding properties) are used, the driver overrides the default encryption value by setting it to `yes`. Overriding happens at data source object initialization time. If encryption is set before initialization via any means, the value is respected and not overridden.
 
 > [!NOTE]
-> In ADO applications and in applications that obtain the `IDBInitialize` interface through `IDataInitialize::GetDataSource`, the Core Component implementing the interface explicitly sets encryption to its default value of `no`. As a result, the new authentication properties/keywords respect this setting and the encryption value **isn't** overridden. Therefore, it is **recommended** that these applications explicitly set `Use Encryption for Data=true` to override the default value.
+> In ADO applications and in applications that obtain the `IDBInitialize` interface through `IDataInitialize::GetDataSource`, the Core Component implementing the interface explicitly sets encryption to its default value of `no`. As a result, the new authentication properties/keywords respect this setting and the encryption value **isn't** overridden. Therefore, it's **recommended** that these applications explicitly set `Use Encryption for Data=true` to override the default value.
 
 To improve security, the new authentication methods respect the `TrustServerCertificate` setting (and its corresponding connection string keywords/properties) **independently of the client encryption setting**. As a result, server certificate is validated by default. The driver determines whether to validate the server certificate as follows:
 
