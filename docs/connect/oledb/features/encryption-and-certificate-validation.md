@@ -3,7 +3,7 @@ title: Encryption and certificate validation
 description: Learn about encryption and certificate validation for SQL Server connections. The OLE DB Driver for SQL Server supports encryption and certificate validation.
 author: David-Engel
 ms.author: davidengel
-ms.date: 04/20/2023
+ms.date: 05/02/2025
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: "reference"
@@ -28,11 +28,11 @@ Applications may also request encryption of all network traffic by using connect
 
 For information about connection string keywords, see [Using connection string keywords with OLE DB driver for SQL Server](../applications/using-connection-string-keywords-with-oledb-driver-for-sql-server.md).
 
-To enable encryption to be used when a certificate hasn't been provisioned on the server, the **`Force Protocol Encryption`** and the **`Trust Server Certificate`** client [registry settings](./registry-settings.md#encryption-and-certificate-validation) can be set. In this case, encryption uses a self-signed server certificate without validation if no verifiable certificate has been provisioned on the server.
+To enable encryption to be used when a certificate hasn't been provisioned on the server, the **`Force Protocol Encryption`** and the **`Trust Server Certificate`** client [registry settings](./registry-settings.md#encryption-and-certificate-validation) must be set. In this case, encryption uses a self-signed server certificate without validation if no verifiable certificate has been provisioned on the server.
 
 ## Encryption and certificate validation behavior
 
-Application settings never reduce the level of security set in the registry, but may strengthen it. For more information, see [Registry settings](./registry-settings.md#encryption-and-certificate-validation). For example, if **`Force Protocol Encryption`** isn't set for the client, an application may request encryption itself. To guarantee encryption even when a server certificate hasn't been provisioned, an application may request encryption and enable `TrustServerCertificate`. However, if `TrustServerCertificate` isn't enabled in the client configuration, a provisioned server certificate is still required.
+Application settings never reduce the level of security set in the registry, but may strengthen it. For more information, see [Registry settings](./registry-settings.md#encryption-and-certificate-validation). For example, if **`Force Protocol Encryption`** isn't set for the client, an application may request encryption itself. To guarantee encryption even when a server certificate hasn't been provisioned, an application may request encryption and enable `TrustServerCertificate`. However, if `TrustServerCertificate` isn't enabled in the client's registry configuration, a provisioned server certificate is still required.
 
 Version 19 of the OLE DB Driver for SQL Server introduces breaking changes in the encryption related APIs. For more information, see [Encryption property changes](../major-version-differences.md#encryption-property-changes).
 
@@ -42,9 +42,9 @@ The following table describes the evaluation of the encryption settings:
 
 | Force Protocol Encryption client setting | Connection string/connection attribute Encrypt/Use Encryption for Data | **Resulting encryption** |
 |--|--|--|
-| 0 | No/Optional | Optional |
-| 0 | Yes/Mandatory (default) | Mandatory |
-| 0 | Strict | Strict |
+| 0 (default) | No/Optional | Optional |
+| 0 (default) | Yes/Mandatory (default) | Mandatory |
+| 0 (default) | Strict | Strict |
 | 1 | No/Optional | Mandatory |
 | 1 | Yes/Mandatory (default) | Mandatory |
 | 1 | Strict | Strict |
@@ -52,10 +52,10 @@ The following table describes the evaluation of the encryption settings:
 
 The following table describes the resulting encryption and validation:
 
-| Encryption | Trust Server Certificate client setting | Connection string/connection attribute Trust Server Certificate | Result |
+| Encryption | Trust Server Certificate client registry setting | Connection string/connection attribute Trust Server Certificate | Result |
 |--|--|--|--|
 | Optional | N/A | N/A | Encryption only occurs for LOGIN packets. |
-| Mandatory | 0 | Ignored | Encryption occurs only if there's a verifiable server certificate, otherwise the connection attempt fails. |
+| Mandatory | 0 (default) | Ignored | Encryption occurs only if there's a verifiable server certificate, otherwise the connection attempt fails. |
 | Mandatory | 1 | No (default) | Encryption occurs only if there's a verifiable server certificate, otherwise the connection attempt fails. |
 | Mandatory | 1 | Yes | Encryption always occurs, but may use a self-signed server certificate. |
 | Strict | N/A | N/A | Encryption occurs only if there's a verifiable server certificate, otherwise the connection attempt fails. |
