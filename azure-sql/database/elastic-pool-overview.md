@@ -187,11 +187,6 @@ In the Azure portal, you can monitor the utilization of an elastic pool and the 
 
 You can use the built-in [performance monitoring](performance-guidance.md) and [alerting tools](alerts-create.md) combined with performance ratings. SQL Database can also [emit metrics and resource logs](./metrics-diagnostic-telemetry-logging-streaming-export-configure.md?tabs=azure-portal) for easier monitoring.
 
-## Customer case studies
-
-- [SnelStart](https://azure.microsoft.com/resources/videos/azure-sql-database-case-study-snelstart/): SnelStart used elastic pools with SQL Database to rapidly expand its business services at a rate of 1,000 new SQL databases per month.
-- [Umbraco](https://azure.microsoft.com/resources/videos/azure-sql-database-case-study-umbraco/): Umbraco uses elastic pools with SQL Database to quickly provision and scale services for thousands of tenants in the cloud.
-
 ## Related content
 
 - For pricing information, see [Elastic pool pricing](https://azure.microsoft.com/pricing/details/sql-database/elastic).

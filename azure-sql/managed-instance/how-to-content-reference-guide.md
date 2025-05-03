@@ -124,7 +124,7 @@ To use the link:
 
 ## Design multitenant SaaS applications
 
-- [Multitenant SaaS database tenancy patterns](saas-tenancy-app-design-patterns.md)
+- [Multitenant SaaS database tenancy patterns](../database/saas-tenancy-app-design-patterns.md)
 
 ## Next step
 
