@@ -10,7 +10,6 @@ ms.service: azure-sql-managed-instance
 ms.subservice: backup-restore
 ms.topic: how-to
 ms.custom:
-  - references_regions
   - devx-track-azurepowershell
   - devx-track-azurecli
   - azure-sql-split

@@ -9,7 +9,7 @@ ms.date: 01/22/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: service-overview
 ms.topic: whats-new
-ms.custom: references_regions
+ms.custom: 
 ---
 # What's new in Azure SQL Managed Instance? (Archive)
 

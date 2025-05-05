@@ -10,7 +10,6 @@ ms.service: azure-sql-managed-instance
 ms.subservice: service-overview
 ms.topic: troubleshooting-known-issue
 ms.custom:
-  - references_regions
 ---
 # Known issues with Azure SQL Managed Instance
 

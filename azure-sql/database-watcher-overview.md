@@ -10,7 +10,6 @@ ms.service: azure-sql
 ms.subservice: monitoring
 ms.topic: conceptual
 ms.custom:
-  - references_regions
   - sqldbrb=2
 monikerRange: "=azuresql||=azuresql-db||=azuresql-mi"
 ---
@@ -68,28 +67,8 @@ There is no charge per monitored Azure SQL resource or per user, making database
 
 ## Regional availability
 
-At this time, you can create watchers in the following Azure regions:
+At this time, you can create watchers supported Azure regions for [Azure SQL Database](database/region-availability.md#database-watcher-availability) and [Azure SQL Managed Instance](managed-instance/region-availability.md#database-watcher). 
 
-| Azure geography | Azure region |
-|:--|:--|
-| Asia Pacific | Australia Central |
-| Asia Pacific | Australia East |
-| Asia Pacific | Australia Southeast |
-| Asia Pacific | Japan West |
-| Asia Pacific | Korea Central |
-| Asia Pacific | Southeast Asia |
-| Canada | Canada Central |
-| Canada | Canada East |
-| Europe | Germany West Central |
-| Europe | North Europe |
-| Europe | UK South |
-| Europe | Sweden Central |
-| Europe | West Europe |
-| United States | Central US |
-| United States | East US |
-| United States | East US 2 |
-| United States | North Central US |
-| United States | West US |
 
 > [!TIP]
 > A watcher in one Azure region can monitor targets in another region. Similarly, a watcher and its data store can be located in different regions.
@@ -126,7 +105,7 @@ The following table describes the capabilities of database watcher dashboards in
 
 | Capability | Description |
 |:--|:--|
-| **Estate dashboards** | Visualize high-level monitoring data for multiple monitored resources in a common view. Use **heatmaps** to find top resource consuming databases, elastic pools, or SQL managed instances. </br></br>Use the **top queries** view to find top resource consuming queries across your Azure SQL estate, ranking queries by CPU, duration, execution count, etc. </br></br>Use the subscription, resource group, and resource name filters to focus on subsets of your Azure SQL estate.</br></br>Drill through to detailed dashboards for specific resources. |
+| **Estate dashboards** | Visualize high-level monitoring data for multiple monitored resources in a common view. Use **heatmaps** to find top resource consuming databases, elastic pools, or SQL managed instances. </br></br>Use the **top queries** view to find top resource consuming queries across your Azure SQL estate, ranking queries by CPU, duration, execution count, etc. </br></br>Use the subscription, resource group, and resource name filters to focus on subsets of your Azure SQL estate. </br></br>Drill through to detailed dashboards for specific resources. |
 | **Resource dashboards** | Visualize detailed monitoring data for a database, an elastic pool, or a SQL managed instance, including:</br></br>- Active sessions<br>- Backup history<br>- Common performance counters<br>- Connectivity probes<br>- Database and instance properties and configuration<br>- Geo-replication<br>- Index metadata, usage statistics, warnings, and suggestions<br>- Resource usage<br>- Session and connection statistics<br>- SQL Agent job state and history<br>- Storage consumption and performance<br>- Table metadata<br>- Top queries<br>- Wait statistics<br></br>Use resource dropdowns to quickly switch from one resource to another. Use the **estate** link to zoom out to an estate dashboard. |
 | **Filter by time range** | On each dashboard, set the time range to focus on the desired time interval. Use standard or custom time ranges. Narrow down the time range to an interval of interest by "brushing", or dragging the mouse cursor over a chart to select a shorter time range. |
 | **Historical data** | Depending on the dataset, dashboards show either a summary for the selected time interval, or the latest sample collected in the time interval. </br></br>Toggle between the latest and a historical view to look at data samples earlier in the selected time range. For example, instead of looking at the currently active sessions, review a previous sample of active sessions collected when a spike in resource usage occurred. |
@@ -246,7 +225,7 @@ During preview, database watcher has the following known issues.
 | If a [serverless](./database/serverless-tier-overview.md) database has auto-pause enabled, and is added as a SQL target to a watcher, it might not auto-pause as expected. For a [free offer](./database/free-offer.md) database, this might exhaust the free monthly credit sooner than expected. | If retaining the auto-pause functionality is required, do not use database watcher to monitor serverless databases at this time. |
 | Because of a known issue in Azure SQL Database and Azure SQL Managed Instance, expected data might not be collected from a high availability (HA) readable secondary replica if database replicas change roles, for example after a maintenance event. | Commonly, the issue resolves without any action within one or two days. To resume data collection sooner, restart the watcher. |
 | For Azure SQL Managed Instance, data might not be collected from the readable high availability replica or from a geo-replica if you are using SQL authentication. | There are two workarounds: </br>1. Use the Microsoft Entra ID authentication (preferred). </br>2. Disable the password policy check. Execute `ALTER LOGIN [database-watcher-login-placeholder] WITH CHECK_POLICY = OFF;`, replacing `database-watcher-login-placeholder` with the name of the SQL authentication login of the watcher. Execute this command on the primary replica, and on the geo-replica, if any. |
-| In Azure SQL Managed Instance, data is not collected if the `EXECUTE` permission on the `sys.xp_msver` system stored procedure is revoked or denied to the `public` role. | Grant the `EXECUTE` permission on `sys.xp_msver` to the watcher login.</br></br>On every SQL managed instance added as a SQL target, execute `USE master; CREATE USER [database-watcher-login-placeholder] FOR LOGIN [database-watcher-login-placeholder]; GRANT EXECUTE ON sys.xp_msver TO [database-watcher-login-placeholder];`, replacing `database-watcher-login-placeholder` with the name of the watcher login. |
+| In Azure SQL Managed Instance, data is not collected if the `EXECUTE` permission on the `sys.xp_msver` system stored procedure is revoked or denied to the `public` role. | Grant the `EXECUTE` permission on `sys.xp_msver` to the watcher login. </br></br>On every SQL managed instance added as a SQL target, execute `USE master; CREATE USER [database-watcher-login-placeholder] FOR LOGIN [database-watcher-login-placeholder]; GRANT EXECUTE ON sys.xp_msver TO [database-watcher-login-placeholder];`, replacing `database-watcher-login-placeholder` with the name of the watcher login. |
 | If you create a managed private endpoint for a watcher to connect to a SQL managed instance that is stopped, the provisioning state of the private endpoint is reported as **Failed**, and the watcher cannot connect to the instance. | Delete the managed private endpoint with the **Failed** provisioning state and [start](./managed-instance/instance-stop-start-how-to.md) the SQL managed instance. Once the failed private endpoint is deleted and the instance is running, [re-create](database-watcher-manage.md#create-a-managed-private-endpoint) the managed private endpoint. |
 | Data is not collected if you use a database in Real-Time Analytics as the data store, and the **OneLake availability** option is enabled. | Disable the **OneLake availability** option and restart the watcher to resume data collection. |
 | Because of a known issue in Azure Monitor Alerts, if you edit an alert rule created from a database watcher template, the scope of any fired alert is set to the Azure Data Explorer cluster used as the watcher data store instead of the SQL target that the alert applies to. | Edit the alert rule programmatically, for example using Bicep or an ARM template, and set the `resourceIdColumn` property to the value `resource_id`. For more information, see [Resource Manager template samples for log search alert rules in Azure Monitor](/azure/azure-monitor/alerts/resource-manager-alerts-log). |

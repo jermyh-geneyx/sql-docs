@@ -138,26 +138,9 @@ Zone redundancy is enabled if `zoneRedundant` is set to `true`.
 
 ## Supported regions
 
-Zone redundancy for SQL Managed Instance is supported in the following regions:
-
-> [!NOTE]  
-> Zone-redundant configuration is in public preview for the General Purpose service tier.
-
-| Americas | Europe | Middle East and Africa | Asia Pacific |
-| --- | --- | --- | --- | --- |
-| Brazil South | France Central | Israel Central | Australia East |
-| Canada Central | Germany West Central | Qatar Central | Central India |
-| Central US | Italy North | South Africa North | East Asia |
-| East US | North Europe | UAE North | Japan East |
-| East US 2 | Norway East |New Zealand North | Japan West |
-| Mexico Central | Poland Central | | Korea Central |
-| Spain Central | Sweden Central || Southeast Asia  |
-| West US 2 | Switzerland North  | |  |
-| West US 3 | UK South  | | |
-| |West Europe  | | |
+Review [zone redundancy availability by region](region-availability.md#zone-redundancy) for Azure SQL Managed Instance.
 
 
----
 
 ## Related content
 

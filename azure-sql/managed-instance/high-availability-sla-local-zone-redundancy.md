@@ -9,7 +9,7 @@ ms.date: 06/25/2024
 ms.service: azure-sql-managed-instance
 ms.subservice: high-availability
 ms.topic: conceptual
-ms.custom: references_regions, azure-sql-split, ignite-2023
+ms.custom: azure-sql-split, ignite-2023
 monikerRange: "= azuresql || = azuresql-mi"
 ---
 
@@ -94,13 +94,13 @@ As an extra benefit, the local storage availability model includes the ability t
 
 Zone-redundant availability is based on placing replicas across three Azure availability zones in the primary region. Each availability zone is a separate physical location with independent power, cooling, and networking.
 
-By default, the cluster of nodes for the local storage availability model are created in the same datacenter. With the introduction of [Azure Availability Zones](/azure/reliability/availability-zones-overview), SQL Managed Instance places different replicas in different availability zones in the same region. To eliminate a single point of failure, the control ring is also duplicated across multiple zones. The control plane traffic is then routed to a load balancer that is also deployed across availability zones. Traffic routing from the control plane to the load balancer is controlled by [Azure Traffic Manager (ATM)](/azure/traffic-manager/traffic-manager-overview). 
+By default, the cluster of nodes for the local storage availability model is created in the same datacenter. With the introduction of [Azure Availability Zones](/azure/reliability/availability-zones-overview), SQL Managed Instance places different replicas in different availability zones in the same region. To eliminate a single point of failure, the control ring is also duplicated across multiple zones. The control plane traffic is then routed to a load balancer that is also deployed across availability zones. Traffic routing from the control plane to the load balancer is controlled by [Azure Traffic Manager (ATM)](/azure/traffic-manager/traffic-manager-overview). 
 
 By using a zone-redundant configuration, you can make your Business Critical or General Purpose instances resilient to a much larger set of failures, including catastrophic datacenter outages, without any changes to the application logic. You can convert any existing Business Critical or General Purpose instances to the zone-redundant configuration.
 
 Because zone-redundant instances have replicas in different datacenters with some distance between them, the increased network latency might increase the transaction commit time, and thus impact the performance of some OLTP workloads. You can always return to the single-zone configuration by disabling the zone-redundancy setting. This process is an online operation similar to the regular service tier objective upgrade. At the end of the process, the instance is migrated from a zone-redundant ring to a single-zone ring or vice versa.
 
-To get started with zone redundancy for your SQL managed instance, review [Configure zone redundancy](instance-zone-redundancy-configure.md). 
+To get started with zone redundancy for your SQL managed instance, review [Configure zone redundancy](instance-zone-redundancy-configure.md).  Review [zone redundancy availability by region](region-availability.md#zone-redundancy) for Azure SQL Managed Instance.
 
 ### General Purpose service tier
 
