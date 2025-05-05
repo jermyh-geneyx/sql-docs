@@ -10,7 +10,6 @@ ms.service: azure-sql-managed-instance
 ms.subservice: service-overview
 ms.topic: whats-new
 ms.custom:
-  - references_regions
   - ignite-2023
   - build-2024
   - ignite-2024

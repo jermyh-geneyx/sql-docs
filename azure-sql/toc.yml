@@ -1063,7 +1063,7 @@
       - name: Assessment rules
         href: /data-migration/sql-server/managed-instance/assessment-rules?toc=/azure/azure-sql/toc.json&bc=/azure/bread/toc.json
   - name: Concepts
-    items:
+    items:    
     - name: vCore purchasing model
       href: managed-instance/service-tiers-managed-instance-vcore.md
     - name: Resource limits
@@ -1080,6 +1080,8 @@
       href: managed-instance/instance-pools-overview.md
     - name: Data virtualization
       href: managed-instance/data-virtualization-overview.md
+    - name: Feature availability by region
+      href: managed-instance/region-availability.md
     - name: Log Replay Service (LRS)
       items:
       - name: Overview

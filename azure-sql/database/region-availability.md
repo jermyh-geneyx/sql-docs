@@ -10,9 +10,13 @@ ms.topic: concept-article
 ms.custom:
   - references_regions
 ---
-# Feature availability by region
+# Feature availability by region - Azure SQL Database
 
 [!INCLUDE [appliesto-sqldb](../includes/appliesto-sqldb.md)]
+
+> [!div class="op_single_selector"]
+> * [Azure SQL Database](region-availability.md?view=azuresql-db&preserve-view=true)
+> * [Azure SQL Managed Instance](../managed-instance/region-availability.md?view=azuresql-mi&preserve-view=true)
 
 This article is a centralized list of the availability of various Azure SQL Database features in [Azure regions](https://azure.microsoft.com/explore/global-infrastructure/geographies/). 
 
@@ -67,8 +71,6 @@ Standard-series (Gen5) hardware is available in [all public regions worldwide wh
 | US West 1 | [!INCLUDE [yes](../includes/yes.md)]  | [!INCLUDE [yes](../includes/yes.md)]  |  |
 | US West 2 | [!INCLUDE [yes](../includes/yes.md)]  | [!INCLUDE [yes](../includes/yes.md)]  | [!INCLUDE [yes](../includes/yes.md)]  |
 | US West 3 | [!INCLUDE [yes](../includes/yes.md)]  | [!INCLUDE [yes](../includes/yes.md)]  | [!INCLUDE [yes](../includes/yes.md)]  |
-
-
 
 #### [Asia Pacific](#tab/asia)
 
@@ -344,6 +346,12 @@ Currently, all regions with serverless support 40 vCores and provide [availabili
 | UK West | [!INCLUDE [yes](../includes/yes.md)]  |  |
 
 ---
+
+## Database watcher availability
+
+[Database Watcher](../database-watcher-overview.md) is a feature that helps you monitor the health of your Azure SQL Managed Instance. It is available in the following regions: 
+
+[!INCLUDE [database-watcher](../includes/regional-support/database-watcher.md)]
 
 ## Related content
 
