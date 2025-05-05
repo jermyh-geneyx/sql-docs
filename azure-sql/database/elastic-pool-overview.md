@@ -187,17 +187,11 @@ In the Azure portal, you can monitor the utilization of an elastic pool and the 
 
 You can use the built-in [performance monitoring](performance-guidance.md) and [alerting tools](alerts-create.md) combined with performance ratings. SQL Database can also [emit metrics and resource logs](./metrics-diagnostic-telemetry-logging-streaming-export-configure.md?tabs=azure-portal) for easier monitoring.
 
-## Customer case studies
-
-- [SnelStart](https://azure.microsoft.com/resources/videos/azure-sql-database-case-study-snelstart/): SnelStart used elastic pools with SQL Database to rapidly expand its business services at a rate of 1,000 new SQL databases per month.
-- [Umbraco](https://azure.microsoft.com/resources/videos/azure-sql-database-case-study-umbraco/): Umbraco uses elastic pools with SQL Database to quickly provision and scale services for thousands of tenants in the cloud.
-
 ## Related content
 
 - For pricing information, see [Elastic pool pricing](https://azure.microsoft.com/pricing/details/sql-database/elastic).
 - To scale elastic pools, see [Scale elastic pools](elastic-pool-scale.md) and [Scale an elastic pool - sample code](scripts/monitor-and-scale-pool-powershell.md).
 - Learn how to [manage elastic pools in Azure SQL Database](elastic-pool-manage.md).
 - To learn more about design patterns for SaaS applications by using elastic pools, see [Design patterns for multitenant SaaS applications with SQL Database](saas-tenancy-app-design-patterns.md).
-- For a SaaS tutorial by using elastic pools, see [Introduction to the Wingtip SaaS application](saas-dbpertenant-wingtip-app-overview.md).
 - To learn about resource management in elastic pools with many databases, see [Resource management in dense elastic pools](elastic-pool-resource-management.md).
 - Learn more about [Hyperscale elastic pools](./hyperscale-elastic-pool-overview.md).

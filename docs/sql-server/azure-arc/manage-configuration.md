@@ -119,7 +119,7 @@ You can cancel Extended Security Updates enabled by Azure Arc at any time. The c
 You can exclude certain instances from the at-scale onboarding operations driven by Azure policies or by automatic onboarding processes. To exclude specific instances from these operations, add the instance names to the **Skip Instances** list. For details about at-scale onboarding options, see [Alternate deployment options for SQL Server enabled by Azure Arc](deployment-options.md).
 
 > [!NOTE]  
-> You can't exclude SQL Server instances that use pay-as-you-go billing.
+> You can't exclude SQL Server instances or [associated services](manage-license-billing.md#manage-ssxs) that use pay-as-you-go billing.
 
 #### Save the updated configuration
 
