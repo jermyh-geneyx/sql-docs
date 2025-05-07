@@ -23,7 +23,7 @@ In this tutorial, you learn how to:
 
 > [!div class="checklist"]
 > - Add a certificate for SQL Server.
-> - Install the **adal.dll** library.
+> - Install adal.dll used for connecting to SQL Server.
 > - Create and register a Microsoft Entra ID application.
 > - Grant application permissions.
 > - Upload the certificate to the application.
@@ -53,7 +53,7 @@ In this tutorial, you learn how to:
 
 ## Install adal.dll
 
-1. Install the **adal.dll** library for SQL Server. You can get **adal.dll** from the latest [Microsoft OLE DB Driver for SQL Server](/sql/connect/oledb/download-oledb-driver-for-sql-server).
+1. Install **adal.dll** for SQL Server. This library is needed for connecting to your SQL Server with Microsoft Entra authentication. You can get **adal.dll** from the latest [Microsoft OLE DB Driver for SQL Server](/sql/connect/oledb/download-oledb-driver-for-sql-server) install.
 
 1. After installing the Microsoft OLE DB Driver for SQL Server, make sure that **adal.dll** is in the folder `C:\windows\system32`.
 
