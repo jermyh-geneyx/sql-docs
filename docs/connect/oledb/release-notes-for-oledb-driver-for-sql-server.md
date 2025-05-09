@@ -39,8 +39,8 @@ If you need to download the installer in a language other than the one detected 
 
 | Feature added | Details |
 | :------------ | :------ |
-| ADAL dependency removal | Microsoft SQL Driver Authentication library (mssql-auth.dll) replaces ADAL. mssql-auth.dll is installed and is upgrated as part of installation process. |
-| Added 3 new languages | Added support for three new languages Czech, Polish and Turkish. |
+| ADAL dependency removal | Microsoft SQL Driver Authentication library (mssql-auth.dll) replaces ADAL. mssql-auth.dll is installed as part of installation process. |
+| Added three new languages | Added support for three new languages Czech, Polish, and Turkish. |
 | Arm64 and x64 installers consolidation | A single 64-bit MSI package is provided which is capable of installing the appropriate binary (x64 or Arm64) based on the OS platform. |
 | Installer improvement | Modified the installer to install both features (Core and SDK) by default. |
 
@@ -244,7 +244,7 @@ If you need to download the installer in a language other than the one detected 
 
 | Feature added | Details |
 | :------------ | :------ |
-| Added 3 new languages | Added support for three new languages Czech, Polish and Turkish. |
+| Added three new languages | Added support for three new languages Czech, Polish, and Turkish. |
 | Installer improvement | Modified the installer to install both features (Core and SDK) by default. |
 
 ### Bugs fixed
