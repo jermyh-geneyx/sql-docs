@@ -1,5 +1,5 @@
 ---
-title: What is SQL Server?
+title: What Is SQL Server?
 description: An overview of the relational database engine and components of SQL Server
 author: rwestMSFT
 ms.author: randolphwest
@@ -37,7 +37,7 @@ This section describes some of the key technologies available in [!INCLUDE [ssno
 
 | Component | Description |
 | --- | --- |
-| **Database Engine** | The [!INCLUDE [ssde-md](../includes/ssde-md.md)] is the core service for storing, processing, and securing data. The [!INCLUDE [ssde-md](../includes/ssde-md.md)] provides controlled access and transaction processing to meet the requirements of the most demanding data consuming applications within your enterprise. The [!INCLUDE [ssde-md](../includes/ssde-md.md)] also provides rich support for sustaining business continuity through [Business continuity and database recovery - SQL Server](../database-engine/sql-server-business-continuity-dr.md). |
+| **Database Engine** | The [!INCLUDE [ssde-md](../includes/ssde-md.md)] is the core service for storing, processing, and securing data. The [!INCLUDE [ssde-md](../includes/ssde-md.md)] provides controlled access and transaction processing to meet the requirements of the most demanding data consuming applications within your enterprise. The [!INCLUDE [ssde-md](../includes/ssde-md.md)] also provides rich support for sustaining business continuity through [Business continuity and database recovery](../database-engine/sql-server-business-continuity-dr.md). |
 | **Machine&nbsp;Learning Services (MLS)** | [SQL Server Machine Learning Services](../machine-learning/sql-server-machine-learning-services.md) supports integration of machine learning, using the popular R and Python languages, into enterprise workflows.<br /><br />Machine Learning Services (In-Database) integrates R and Python with [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], making it easy to build, retrain, and score models by calling stored procedures. Machine Learning Server provides enterprise-scale support for R and Python, without requiring [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. |
 | **Integration Services (SSIS)** | [SQL Server Integration Services](../integration-services/sql-server-integration-services.md) is a platform for building high performance data integration solutions, including packages that provide extract, transform, and load (ETL) processing for data warehousing. |
 | **Analysis Services (SSAS)** | [SQL Server Analysis Services](/analysis-services/ssas-overview) is an analytical data platform and toolset for personal, team, and corporate business intelligence. Servers and client designers support traditional OLAP solutions, new tabular modeling solutions, as well as self-service analytics and collaboration using [!INCLUDE [power-pivot-md](../includes/power-pivot-md.md)], Excel, and a SharePoint Server environment. [!INCLUDE [ssASnoversion](../includes/ssasnoversion-md.md)] also includes Data Mining so that you can uncover the patterns and relationships hidden inside large volumes of data. |
@@ -54,17 +54,17 @@ This table provides links to fundamental concepts in [!INCLUDE [ssnoversion-md](
 
 | Area | More information |
 | --- | --- |
-| **Data files** and the **transaction log** | - [Database Files and Filegroups](../relational-databases/databases/database-files-and-filegroups.md)<br />- [System Databases](../relational-databases/databases/system-databases.md)<br />- [The transaction log](../relational-databases/logs/the-transaction-log-sql-server.md) |
+| **Data files** and the **transaction log** | - [Database files and filegroups](../relational-databases/databases/database-files-and-filegroups.md)<br />- [System Databases](../relational-databases/databases/system-databases.md)<br />- [The transaction log](../relational-databases/logs/the-transaction-log-sql-server.md) |
 | **Database compatibility levels** | - [Compatibility certification](../database-engine/install-windows/compatibility-certification.md)<br />- [View or change the compatibility level of a database](../relational-databases/databases/view-or-change-the-compatibility-level-of-a-database.md)<br />- [ALTER DATABASE (Transact-SQL) compatibility level](../t-sql/statements/alter-database-transact-sql-compatibility-level.md) |
 | **Tables** and **views** | - [Tables](../relational-databases/tables/tables.md)<br />- [Views](../relational-databases/views/views.md) |
 | **Functions** and **stored procedures** | - [What are the SQL database functions?](../t-sql/functions/functions.md)<br />- [Stored procedures (Database Engine)](../relational-databases/stored-procedures/stored-procedures-database-engine.md) |
 | **Indexes** | - [Indexes](../relational-databases/indexes/indexes.md)<br />- [SQL Server and Azure SQL index architecture and design guide](../relational-databases/sql-server-index-design-guide.md) |
-| Configure **cost threshold for parallelism**<br />and **maximum degree of parallelism** | - [Configure the cost threshold for parallelism](../database-engine/configure-windows/configure-the-cost-threshold-for-parallelism-server-configuration-option.md)<br />- [Configure the max degree of parallelism](../database-engine/configure-windows/configure-the-max-degree-of-parallelism-server-configuration-option.md) |
+| Configure **cost threshold for parallelism**<br />and **maximum degree of parallelism** | - [Server configuration: cost threshold for parallelism](../database-engine/configure-windows/configure-the-cost-threshold-for-parallelism-server-configuration-option.md)<br />- [Server configuration: max degree of parallelism](../database-engine/configure-windows/configure-the-max-degree-of-parallelism-server-configuration-option.md) |
 | **Memory management** | - [Server memory configuration options](../database-engine/configure-windows/server-memory-server-configuration-options.md)<br />- [Memory management architecture guide](../relational-databases/memory-management-architecture-guide.md) |
 | **Checkpoints**, **startup**, and **crash recovery** | - [Database checkpoints](../relational-databases/logs/database-checkpoints-sql-server.md)<br />- [Accelerated database recovery](../relational-databases/accelerated-database-recovery-concepts.md) |
 | **Back up** and **restore** databases | - [Back Up and Restore of SQL Server Databases](../relational-databases/backup-restore/back-up-and-restore-of-sql-server-databases.md)<br />- [Transaction log backups](../relational-databases/backup-restore/transaction-log-backups-sql-server.md) |
-| **Manage SQL Server services** | - [Manage the Database Engine Services](../database-engine/configure-windows/manage-the-database-engine-services.md)<br />- [SQL Server Configuration Manager](../relational-databases/sql-server-configuration-manager.md)<br />- [Start, stop, pause, resume, and restart SQL Server services](../database-engine/configure-windows/start-stop-pause-resume-restart-sql-server-services.md)<br />- [Add Features to an Instance of SQL Server (Setup)](../database-engine/install-windows/add-features-to-an-instance-of-sql-server-setup.md) |
-| **Database console commands** (DBCC) | - [DBCC (Transact-SQL)](../t-sql/database-console-commands/dbcc-transact-sql.md)<br />- [DBCC HELP (Transact-SQL)](../t-sql/database-console-commands/dbcc-help-transact-sql.md)<br />- [DBCC CHECKDB (Transact-SQL)](../t-sql/database-console-commands/dbcc-checkdb-transact-sql.md) |
+| **Manage SQL Server services** | - [Manage the Database Engine services](../database-engine/configure-windows/manage-the-database-engine-services.md)<br />- [SQL Server Configuration Manager](../relational-databases/sql-server-configuration-manager.md)<br />- [Start, stop, pause, resume, and restart SQL Server services](../database-engine/configure-windows/start-stop-pause-resume-restart-sql-server-services.md)<br />- [Add Features to an Instance of SQL Server (Setup)](../database-engine/install-windows/add-features-to-an-instance-of-sql-server-setup.md) |
+| **Database console commands** (DBCC) | - [DBCC](../t-sql/database-console-commands/dbcc-transact-sql.md)<br />- [DBCC HELP](../t-sql/database-console-commands/dbcc-help-transact-sql.md)<br />- [DBCC CHECKDB](../t-sql/database-console-commands/dbcc-checkdb-transact-sql.md) |
 | **High availability** (HA) and **disaster recovery** (DR) | - [Business continuity and database recovery](../database-engine/sql-server-business-continuity-dr.md)<br />- [About log shipping](../database-engine/log-shipping/about-log-shipping-sql-server.md)<br />- [Failover Clustering and Always On Availability Groups](../database-engine/availability-groups/windows/failover-clustering-and-always-on-availability-groups-sql-server.md)<br />- [What is an Always On availability group?](../database-engine/availability-groups/windows/overview-of-always-on-availability-groups-sql-server.md) |
 | **Query processing** and **performance tuning** | - [Tune performance with the Query Store](../relational-databases/performance/tune-performance-with-the-query-store.md)<br />- [Query processing architecture guide](../relational-databases/query-processing-architecture-guide.md)<br />- [Optimized locking](../relational-databases/performance/optimized-locking.md)<br />- [Transaction locking and row versioning guide](../relational-databases/sql-server-transaction-locking-and-row-versioning-guide.md) |
 
@@ -101,13 +101,17 @@ You can use Azure services and management capabilities, introduce DevOps practic
 
 [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] provides many opportunities to migrate and modernize your data estate.
 
-### Migrating to the cloud
+<a id="migrating-to-the-cloud"></a>
+
+### Migrate to the cloud
 
 - [Migrate SQL Server workloads (FAQ)](/azure/azure-sql/migration-guides/modernization)
 - [Import and Export Data with the SQL Server Import and Export Wizard](../integration-services/import-export-data/import-and-export-data-with-the-sql-server-import-and-export-wizard.md)
 - [Azure Database Migration Guides](/data-migration/)
 
-### Migrating to SQL Server
+<a id="migrating-to-sql-server"></a>
+
+### Migrate to SQL Server
 
 - [Migrate databases and structured data to SQL Server on Linux](../linux/sql-server-linux-migrate-overview.md) <sup>1</sup>
 - [Data Migration Assistant](../dma/dma-overview.md)
@@ -130,7 +134,7 @@ You can use Azure services and management capabilities, introduce DevOps practic
 
 ## Related content
 
-- [SQL Server installation guide](../database-engine/install-windows/install-sql-server.md) (Windows)
+- [SQL Server installation guide](../database-engine/install-windows/install-sql-server.md)
 - [Installation guidance for SQL Server on Linux](../linux/sql-server-linux-setup.md)
-- [Configure and customize SQL Server Docker containers](../linux/sql-server-linux-docker-container-configure.md)
-- [Server configuration options (SQL Server)](../database-engine/configure-windows/server-configuration-options-sql-server.md)
+- [Configure and customize SQL Server Linux containers](../linux/sql-server-linux-docker-container-configure.md)
+- [Server configuration options](../database-engine/configure-windows/server-configuration-options-sql-server.md)

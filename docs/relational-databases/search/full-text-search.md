@@ -4,7 +4,7 @@ description: Full-Text Search lets users and applications run full-text queries 
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: mikeray
-ms.date: 07/29/2024
+ms.date: 05/19/2025
 ms.service: sql
 ms.subservice: search
 ms.topic: conceptual
@@ -36,7 +36,9 @@ A full-text index includes one or more character-based columns in a table. These
 
 Full-text queries perform linguistic searches against text data in full-text indexes, by operating on words and phrases based on the rules of a particular language, such as English or Japanese. Full-text queries can include simple words and phrases or multiple forms of a word or phrase. A full-text query returns any documents that contain at least one match (also known as a *hit*). A match occurs when a target document contains all the terms specified in the full-text query, and meets any other search conditions, such as the distance between the matching terms.
 
-## <a id="queries"></a> Full-Text Search queries
+<a id="queries"></a>
+
+## Full-Text Search queries
 
 After columns are added to a full-text index, users and applications can run full-text queries on the text in the columns. These queries can search for any of the following conditions:
 
@@ -72,11 +74,15 @@ Full-text queries use a small set of [!INCLUDE [tsql](../../includes/tsql-md.md)
 
 For more information, see [Query with Full-Text Search](query-with-full-text-search.md).
 
-## <a id="like"></a> Compare Full-Text Search queries to the LIKE predicate
+<a id="like"></a>
+
+## Compare Full-Text Search queries to the LIKE predicate
 
 In contrast to full-text search, the [LIKE](../../t-sql/language-elements/like-transact-sql.md) [!INCLUDE [tsql](../../includes/tsql-md.md)] predicate works on character patterns only. Also, you can't use the `LIKE` predicate to query formatted binary data. Furthermore, a `LIKE` query against a large amount of unstructured text data is much slower than an equivalent full-text query against the same data. A `LIKE` query against millions of rows of text data can take minutes to return; whereas a full-text query can take only seconds or less against the same data, depending on the number of rows that are returned.
 
-## <a id="architecture"></a> Full-Text Search architecture
+<a id="architecture"></a>
+
+## Full-Text Search architecture
 
 Full-text search architecture consists of the following processes:
 
@@ -90,7 +96,9 @@ These two processes contain the components of the full-text search architecture.
 
 :::image type="content" source="media/full-text-search/architecture.png" alt-text="Diagram of full-text search architecture.":::
 
-### <a id="sqlprocess"></a> SQL Server process
+<a id="sqlprocess"></a>
+
+### SQL Server process
 
 The [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] process uses the following components for full-text search:
 
@@ -105,7 +113,9 @@ The [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] process uses the 
 | **Index writer (indexer)** | The index writer builds the structure that is used to store the indexed tokens. |
 | **Filter daemon manager** | The filter daemon manager is responsible for monitoring the status of the Full-Text Engine filter daemon host. |
 
-### <a id="fdhostprocess"></a> Filter Daemon Host process
+<a id="fdhostprocess"></a>
+
+### Filter Daemon Host process
 
 The filter daemon host is a process that is started by the Full-Text Engine. It runs the following full-text search components, which are responsible for accessing, filtering, and word breaking data from tables, as well as for word breaking and stemming the query input.
 
@@ -119,11 +129,15 @@ The components of the filter daemon host are as follows:
 
 [!INCLUDE [sssql11-md](../../includes/sssql11-md.md)] installs a new version of the word breakers and stemmers for US English (LCID 1033) and UK English (LCID 2057). However you can switch to the previous version of these components if you want to retain the previous behavior. For more information, see [Change the Word Breaker Used for US English and UK English](change-the-word-breaker-used-for-us-english-and-uk-english.md).
 
-## <a id="processing"></a> Full-Text Search processing
+<a id="processing"></a>
+
+## Full-Text Search processing
 
 Full-text search is powered by the Full-Text Engine. The Full-Text Engine has two roles: [indexing support](#indexing) and [querying support](#querying).
 
-### <a id="indexing"></a> Full-Text indexing process
+<a id="indexing"></a>
+
+### Full-Text indexing process
 
 When a full-text population (also known as a crawl) is initiated, the Full-Text Engine pushes large batches of data into memory and notifies the filter daemon host. The host filters and word-breaks the data and converts the converted data into inverted word lists. The full-text search then pulls the converted data from the word lists, processes the data to remove stopwords, and persists the word lists for a batch into one or more inverted indexes.
 
@@ -135,7 +149,9 @@ Extra processing might be performed to remove stopwords, and to normalize tokens
 
 When a population is complete, a final merge process is triggered that merges the index fragments together into one master full-text index. This results in improved query performance since only the master index needs to be queried rather than several index fragments, and better scoring statistics might be used for relevance ranking.
 
-### <a id="querying"></a> Full-Text querying process
+<a id="querying"></a>
+
+### Full-Text querying process
 
 The query processor passes the full-text portions of a query to the Full-Text Engine for processing. The Full-Text Engine performs word breaking and, optionally, thesaurus expansions, stemming, and stopword (noise-word) processing. Then the full-text portions of the query are represented in the form of SQL operators, primarily as streaming table-valued functions (STVFs). During query execution, these STVFs access the inverted index to retrieve the correct results. The results are either returned to the client at this point, or they're further processed before being returned to the client.
 
@@ -147,7 +163,9 @@ Beginning in [!INCLUDE [sql2008-md](../../includes/sql2008-md.md)], the full-tex
 
 Only one full-text index is allowed per table. For a full-text index to be created on a table, the table must have a single, unique non-null column. You can build a full-text index on columns of type **char**, **varchar**, **nchar**, **nvarchar**, **text**, **ntext**, **image**, **xml**, **varbinary**, and **varbinary(max)** can be indexed for full-text search. Creating a full-text index on a column whose data type is **varbinary**, **varbinary(max)**, **image**, or **xml** requires that you specify a type column. A *type column* is a table column in which you store the file extension (`.doc`, `.pdf`, `.xls`, and so forth) of the document in each row.
 
-### <a id="structure"></a> Full-text index structure
+<a id="structure"></a>
+
+### Full-text index structure
 
 A good understanding of the structure of a full-text index helps you understand how the Full-Text Engine works. This article uses the following excerpt of the `Document` table in [!INCLUDE [sssampledbobject-md](../../includes/sssampledbobject-md.md)] as an example table. This excerpt shows only two columns, the `DocumentID` column and the `Title` column, and three rows from the table.
 
@@ -192,7 +210,9 @@ The `DocId` column contains values for an 8-byte integer that maps to a particul
 
 The `Occurrence` column contains an integer value. For each DocId value, there's a list of occurrence values that correspond to the relative word offsets of the particular keyword within that DocId. Occurrence values are useful in determining phrase or proximity matches, for example, phrases have numerically adjacent occurrence values. They're also useful in computing relevance scores; for example, the number of occurrences of a keyword in a DocId might be used in scoring.
 
-### <a id="fragments"></a> Full-text index fragments
+<a id="fragments"></a>
+
+### Full-text index fragments
 
 The logical full-text index is usually split across multiple internal tables. Each internal table is called a full-text index fragment. Some of these fragments might contain newer data than others. For example, if a user updates the following row whose DocId is 3 and the table is auto change-tracked, a new fragment is created.
 
@@ -236,7 +256,9 @@ After being reorganized, the example index would contain the following rows:
 | The addition of data to full-text indexes, called a *population*, can be requested through either a schedule or a specific request, or can occur automatically with the addition of new data. | Updated automatically when the data upon which they're based is inserted, updated, or deleted. |
 | Grouped within the same database into one or more full-text catalogs. | Not grouped. |
 
-## <a id="components"></a> Full-Text search linguistic components and language support
+<a id="components"></a>
+
+## Full-Text search linguistic components and language support
 
 Full-text search supports almost 50 diverse languages, such as English, Spanish, Chinese, Japanese, Arabic, Bangla, and Hindi. For a complete list of the supported full-text languages, see [sys.fulltext_languages](../system-catalog-views/sys-fulltext-languages-transact-sql.md). Each of the columns contained in the full-text index is associated with a Microsoft Windows locale identifier (LCID) that equates to a language that is supported by full-text search. For example, LCID 1033 equates to U.S English, and LCID 2057 equates to British English. For each supported full-text language, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] provides linguistic components that support indexing and querying full-text data that is stored in that language.
 
