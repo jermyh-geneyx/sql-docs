@@ -58,11 +58,11 @@ This section lists the latest versions of each package per distribution, for [!I
 | SLES 15 | High Availability | 16.0.4195.2-4 | [High Availability RPM package](https://packages.microsoft.com/sles/15/mssql-server-2022/Packages/m/mssql-server-ha-16.0.4195.2-4.x86_64.rpm) |
 | SLES 15 | PolyBase | 16.0.4195.2-4 | [PolyBase RPM package](https://packages.microsoft.com/sles/15/mssql-server-2022/Packages/m/mssql-server-polybase-16.0.4195.2-4.x86_64.rpm) |
 | **Ubuntu** | | | |
-| Ubuntu 22.04 | Database Engine | 16.0.4185.3-3 | [Database Engine Debian package](https://packages.microsoft.com/ubuntu/22.04/mssql-server-2022/pool/main/m/mssql-server/mssql-server_16.0.4185.3-3_amd64.deb) |
-| Ubuntu 22.04 | Extensibility | 16.0.4185.3-3 | [Extensibility Debian package](https://packages.microsoft.com/ubuntu/22.04/mssql-server-2022/pool/main/m/mssql-server-extensibility/mssql-server-extensibility_16.0.4185.3-3_amd64.deb) |
-| Ubuntu 22.04 | Full-Text Search | 16.0.4185.3-3 | [Full-Text Search Debian package](https://packages.microsoft.com/ubuntu/22.04/mssql-server-2022/pool/main/m/mssql-server-fts/mssql-server-fts_16.0.4185.3-3_amd64.deb) |
-| Ubuntu 22.04 | High Availability | 16.0.4185.3-3 | [High Availability Debian package](https://packages.microsoft.com/ubuntu/22.04/mssql-server-2022/pool/main/m/mssql-server-ha/mssql-server-ha_16.0.4185.3-3_amd64.deb) |
-| Ubuntu 22.04 | PolyBase | 16.0.4185.3-3 | [PolyBase Debian package](https://packages.microsoft.com/ubuntu/22.04/mssql-server-2022/pool/main/m/mssql-server-polybase/mssql-server-polybase_16.0.4185.3-3_amd64.deb) |
+| Ubuntu 22.04 | Database Engine | 16.0.4195.2-4 | [Database Engine Debian package](https://packages.microsoft.com/ubuntu/22.04/mssql-server-2022/pool/main/m/mssql-server/mssql-server_16.0.4195.2-4_amd64.deb) |
+| Ubuntu 22.04 | Extensibility | 16.0.4195.2-4 | [Extensibility Debian package](https://packages.microsoft.com/ubuntu/22.04/mssql-server-2022/pool/main/m/mssql-server-extensibility/mssql-server-extensibility_16.0.4195.2-4_amd64.deb) |
+| Ubuntu 22.04 | Full-Text Search | 16.0.4195.2-4 | [Full-Text Search Debian package](https://packages.microsoft.com/ubuntu/22.04/mssql-server-2022/pool/main/m/mssql-server-fts/mssql-server-fts_16.0.4195.2-4_amd64.deb) |
+| Ubuntu 22.04 | High Availability | 16.0.4195.2-4 | [High Availability Debian package](https://packages.microsoft.com/ubuntu/22.04/mssql-server-2022/pool/main/m/mssql-server-ha/mssql-server-ha_16.0.4195.2-4_amd64.deb) |
+| Ubuntu 22.04 | PolyBase | 16.0.4195.2-4 | [PolyBase Debian package](https://packages.microsoft.com/ubuntu/22.04/mssql-server-2022/pool/main/m/mssql-server-polybase/mssql-server-polybase_16.0.4195.2-4_amd64.deb) |
 | Ubuntu 20.04 | SSIS | 16.0.4003.1-1 | [SSIS Debian package](https://packages.microsoft.com/ubuntu/20.04/mssql-server-2022/pool/main/m/mssql-server-is/mssql-server-is_16.0.4003.1-1_amd64.deb) |
 
 ## <a id="cuinstall"></a> How to install updates
