@@ -30,11 +30,12 @@ For released versions and dates, see the release notes.
 
 | Driver version | Mainstream support end | Extended support end |
 |----------------|------------------------|----------------------|
-| ODBC Driver 18 for SQL Server | At least today + 2 years | Not applicable |
-| ODBC Driver 17 for SQL Server<sup>1</sup> | January 11, 2028 | January 11, 2033 |
-| ODBC Driver 13 for SQL Server<sup>2</sup> | October 11, 2022 | October 12, 2027 |
-| ODBC Driver 11 for SQL Server<sup>3</sup> | July 9, 2019 | July 9, 2024 |
+| ODBC Driver 18 for SQL Server | January 11, 2028<sup>1</sup> | Not applicable |
+| ODBC Driver 17 for SQL Server<sup>2</sup> | January 11, 2028 | January 11, 2033 |
+| ODBC Driver 13 for SQL Server<sup>3</sup> | October 11, 2022 | October 12, 2027 |
+| ODBC Driver 11 for SQL Server<sup>4</sup> | July 9, 2019 | July 9, 2024 |
 
-<sup>1</sup> ODBC Driver 17 was included in SQL Server 2019 and 2022  
-<sup>2</sup> ODBC Driver 13 was included in SQL Server 2017  
-<sup>3</sup> ODBC Driver 11 was included in SQL Server 2014
+<sup>1</sup> ODBC Driver 18 support dates will be extended if a future SQL Server release ships with it.  
+<sup>2</sup> ODBC Driver 17 was included in SQL Server 2019 and 2022.  
+<sup>3</sup> ODBC Driver 13 was included in SQL Server 2017.  
+<sup>4</sup> ODBC Driver 11 was included in SQL Server 2014.

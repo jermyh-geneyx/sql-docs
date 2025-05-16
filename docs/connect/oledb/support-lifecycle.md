@@ -30,7 +30,8 @@ For released versions and dates, see the release notes.
 
 | Driver version | Mainstream support end | Extended support end |
 |----------------|------------------------|----------------------|
-| OLE DB Driver 19 for SQL Server | At least today + 2 years | Not applicable |
-| OLE DB Driver 18 for SQL Server<sup>1</sup> | January 11, 2028 | January 11, 2033 |
+| OLE DB Driver 19 for SQL Server | January 11, 2028<sup>1</sup> | Not applicable |
+| OLE DB Driver 18 for SQL Server<sup>2</sup> | January 11, 2028 | January 11, 2033 |
 
-<sup>1</sup> OLE DB Driver 18 was included in SQL Server 2019 and 2022  
+<sup>1</sup> OLE DB Driver 19 support dates will be extended if a future SQL Server release ships with it.  
+<sup>2</sup> OLE DB Driver 18 was included in SQL Server 2019 and 2022  
