@@ -39,6 +39,9 @@ SQL Server ships with a default backup compression algorithm, MS_XPRESS.
 
 ## View the backup compression algorithm option
 
+> [!NOTE]
+> There's currently a [known issue](../../sql-server/sql-server-2025-release-notes.md#setting-the-backup-compression-algorithm-to-zstd) with setting the `backup compression algorithm` to ZSTD. 
+
 1. In [!INCLUDE [ssmanstudiofull-md](../../includes/ssmanstudiofull-md.md)], connect to the [!INCLUDE [ssDE](../../includes/ssde-md.md)].
 
 1. From the Standard bar, select **New Query**.

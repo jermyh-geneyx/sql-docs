@@ -160,7 +160,7 @@ FILEGROUP = { logical_filegroup_name | @logical_filegroup_name_var }
 <general_WITH_options> [ ,...n ]::=
 --Backup Set Options
    COPY_ONLY
- | [ COMPRESSION [ ( ALGORITHM = { MS_XPRESS | ZSTD | accelerator_algorithm } [, COMPRESSION_LEVEL = { LOW | MEDIUM | HIGH } ] ) ] | NO_COMPRESSION ]
+ | [ COMPRESSION [ ( ALGORITHM = { MS_XPRESS | ZSTD | accelerator_algorithm } [, LEVEL = { LOW | MEDIUM | HIGH } ] ) ] | NO_COMPRESSION ]
  | DESCRIPTION = { 'text' | @text_variable }
  | NAME = { backup_set_name | @backup_set_name_var }
  | CREDENTIAL
@@ -411,13 +411,15 @@ For more information, see [Copy-Only Backups](../../relational-databases/backup-
 
 <a id="compression"></a> 
 
-####  [ COMPRESSION [ ( ALGORITHM = { MS_XPRESS | ZSTD | accelerator_algorithm } [, COMPRESSION_LEVEL = { LOW | MEDIUM | HIGH } ] ) ] | NO_COMPRESSION ]
+####  [ COMPRESSION [ ( ALGORITHM = { MS_XPRESS | ZSTD | accelerator_algorithm } [, LEVEL = { LOW | MEDIUM | HIGH } ] ) ] | NO_COMPRESSION ]
  
 Specifies whether [backup compression](../../relational-databases/backup-restore/backup-compression-sql-server.md) is performed on this backup, overriding the server-level default.
 
 At installation, the default behavior is no backup compression. But this default can be changed by setting the [backup compression default](../../database-engine/configure-windows/view-or-configure-the-backup-compression-default-server-configuration-option.md) server configuration option. For information about viewing the current value of this option, see [View or Change Server Properties](../../database-engine/configure-windows/view-or-change-server-properties-sql-server.md).
 
 For information about using backup compression with [Transparent Data Encryption (TDE)](../../relational-databases/security/encryption/transparent-data-encryption.md) enabled databases, see the [Remarks](#remarks) section.
+
+The ZSTD compression algorithm was introduced in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)]. This compression algorithm is available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)].
 
 COMPRESSION    
 
@@ -427,18 +429,20 @@ NO_COMPRESSION
 
 Explicitly disables backup compression.
 
-COMPRESSION_LEVEL
+LEVEL
 
-Applies to [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)]. Optional compression level. Affects for `ALGORITHM = ZSTD` and `ALGORITHM = MS_EXPRESS` only. Default is `LOW`.
+Applies to [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions. Optional compression level. Affects for `ALGORITHM = ZSTD` and `ALGORITHM = MS_EXPRESS` only. Default is `LOW`.
+
+The ZSTD compression algorithm is available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)].
 
 ALGORITHM
 
 Applies to [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions. ZSTD and MS_EXPRESS are software-level algorithms. QAT_DEFLATE is hardware-based algorithm requiring Intel&reg; QuickAssist Technology (QAT) for SQL Server. The default is `MS_XPRESS`. 
 
-ZSTD was introduced in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)]. This compression algorithm is available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)]. To use ZSTD:
+The ZSTD compression algorithm is available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)]. To use ZSTD:
 
 ```sql
-BACKUP DATABASE <database_name> TO DISK WITH COMPRESSION (ALGORITHM = ZSTD, COMPRESSION_LEVEL = MEDIUM)
+BACKUP DATABASE <database_name> TO DISK WITH COMPRESSION (ALGORITHM = ZSTD, LEVEL = MEDIUM)
 ```
 
 If you have configured [Integrated acceleration and offloading](../../relational-databases/integrated-acceleration/overview.md), you can use an accelerator provided by the solution. For example, if you have configured [Intel&reg; QuickAssist Technology (QAT) for SQL Server](../../relational-databases/integrated-acceleration/use-integrated-acceleration-and-offloading.md), the following example completes the backup with the accelerator solution, with QATzip library using `QZ_DEFLATE` with the compression level 1.
@@ -455,7 +459,7 @@ Sample behaviors:
 | `BACKUP DATABASE <database_name> TO {DISK\|TAPE\|URL} WITH COMPRESSION`          | Backup with compression using MS_XPRESS algorithm                           |
 | `BACKUP DATABASE <database_name> TO {DISK\|TAPE\|URL} WITH COMPRESSION (ALGORITHM = MS_XPRESS)` | Backup with compression using MS_XPRESS algorithm  |
 | `BACKUP DATABASE <database_name> TO {DISK\|TAPE\|URL} WITH COMPRESSION (ALGORITHM = ZSTD)`     | Backup with compression using ZSTD algorithm. |
-| `BACKUP DATABASE <database_name> TO {DISK\|TAPE\|URL} WITH COMPRESSION (ALGORITHM = ZSTD, COMPRESSION_LEVEL = HIGH)` | Backup with compression using ZSTD algorithm with compression level HIGH.                  |
+| `BACKUP DATABASE <database_name> TO {DISK\|TAPE\|URL} WITH COMPRESSION (ALGORITHM = ZSTD, LEVEL = HIGH)` | Backup with compression using ZSTD algorithm with compression level HIGH.                  |
 
 #### DESCRIPTION = { '_text_' | @_text\_variable_ }
 Specifies the free-form text describing the backup set. The string can have a maximum of 255 characters.
