@@ -140,12 +140,13 @@ Functionally equivalent to Developer edition in previous versions.
 | New feature or update | Details |
 | :--- | :--- |
 | [Optimized locking](../relational-databases/performance/optimized-locking.md) | Reduces blocking and lock memory consumption, and avoids lock escalation. |
-| [Tempdb space resource governance](../relational-databases/resource-governor/tempdb-space-resource-governance.md) | Improves reliability and avoids outages by preventing runaway workloads from consuming a large amount of space in `tempdb`. |
+| [Space resource governance for tempdb](../relational-databases/resource-governor/tempdb-space-resource-governance.md) | Improves reliability and avoids outages by preventing runaway workloads from consuming a large amount of space in `tempdb`. |
 | [Accelerated database recovery in tempdb](../relational-databases/accelerated-database-recovery-concepts.md#adr-improvements-in-sql-server-2025) | Provides the benefits of accelerated database recovery for transactions in the `tempdb` database, such as transactions that use temporary tables. |
 | [Persisted statistics for readable secondaries](../relational-databases/performance/persisted-stats-secondary-replicas.md) | Creates persisted statistics on readable secondaries so that workloads that run against secondary replicas are optimized. |
 | [Change tracking improvements](../relational-databases/track-changes/about-change-tracking-sql-server.md#sql-server-2025-changes) | Adaptive shallow cleanup improves change tracking auto cleanup performance. |
 | [Columnstore improvements](../relational-databases/indexes/columnstore-indexes-what-s-new.md#sql-server-2025-17x) | Multiple improvements in columnstore indexes: </br >- Ordered nonclustered columnstore indexes </br > - Online index build and improved sort quality for ordered columnstore indexes </br > - Improved shrink operations when clustered columnstore indexes are present |
 | [Memory-optimized container and filegroup removal](../relational-databases/in-memory-oltp/memory-optimized-container-filegroup-removal.md) | Supports removal of memory-optimized containers and filegroups when all In-Memory OLTP objects are deleted. |
+| [tmpfs support for tempdb on Linux](../linux/sql-server-linux-tmpfs-tempdb.md) | Enable and run `tempdb` on **tmpfs** for SQL Server on Linux. |
 
 ## Query Store and intelligent query processing
 
