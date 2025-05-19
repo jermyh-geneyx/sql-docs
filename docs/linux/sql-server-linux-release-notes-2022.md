@@ -1,5 +1,5 @@
 ---
-title: Release notes for SQL Server 2022 on Linux
+title: Release Notes for SQL Server 2022 on Linux
 description: This article contains the release notes and supported features for SQL Server 2022 running on Linux. Release notes include the most recent release and several previous releases.
 author: rwestMSFT
 ms.author: randolphwest
@@ -21,6 +21,7 @@ These release notes are specifically for [!INCLUDE [ssSQL22](../includes/sssql22
 
 - [Release notes for SQL Server 2017 on Linux](sql-server-linux-release-notes-2017.md?view=sql-server-ver14&preserve-view=true)
 - [Release notes for SQL Server 2019 on Linux](sql-server-linux-release-notes-2019.md?view=sql-server-ver15&preserve-view=true)
+- [Release notes for SQL Server 2025 Preview on Linux](sql-server-linux-release-notes-2025.md?view=sql-server-ver17&preserve-view=true)
 
 [!INCLUDE [support-policy](includes/support-policy.md)]
 
