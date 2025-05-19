@@ -160,6 +160,12 @@ When enabled, Power BI reports load the latest certified custom visuals from a c
 ###  EnableClientPrinting  
 Determines whether the RSClientPrint ActiveX control is available for download from the report server. The valid values are **true** and **false**. The default value is **true**. For more information about other settings that are required for this control, see [Enable and disable client-side printing for Reporting Services](../../reporting-services/report-server/enable-and-disable-client-side-printing-for-reporting-services.md).  
 
+### EnableCommentOnReports 
+
+*Power BI Report Server, Reporting Services 2019 and later only* 
+
+Determines whether users viewing reports can access and interact with the comments pane. If the value is **false** then this pane is hidden to all users regardless of the permissions set on roles. The valid values are **true** and **false**. The default value is **false**.
+
 ### EnableCustomVisuals 
 
 *Power BI Report Server only* 
