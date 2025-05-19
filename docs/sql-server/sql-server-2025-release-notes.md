@@ -15,7 +15,7 @@ monikerRange: ">= sql-server-2016"
 
 [!INCLUDE[sqlserver2025](../includes/applies-to-version/sqlserver2025.md)]
 
-This article describes requirements, limitations and known issues for [!INCLUDE[sssql25-md](../includes/sssql25-md.md)].
+This article describes requirements, limitations, and known issues for [!INCLUDE[sssql25-md](../includes/sssql25-md.md)].
 
 ## Hardware and software requirements
 
@@ -32,6 +32,19 @@ For more information, see [Limit number of logical cores per NUMA node to 64](co
 ### Upgrade in place
 
 [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] doesn't support in place upgrades from previous versions of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], including SQL Server 2025 CTP releases.
+
+### Setting the backup compression algorithm to ZSTD
+
+There's a known issue when attempting to set the [backup compression algorithm](../database-engine/configure-windows/view-or-configure-the-backup-compression-algorithm-server-configuration-option.md) to ZSTD. 
+
+When specifying the ZSTD algorithm (`backup compression algorithm = 3`), the following error message returns:
+
+```console
+Msg 15129, Level 16, State 1,  Procedure sp_configure `3` is not a valid value for configuration option 'backup compression algorithm'. 
+```
+
+Use the new compression algorithm directly in the [BACKUP](../t-sql/statements/backup-transact-sql.md#-compression---algorithm---ms_xpress--zstd--accelerator_algorithm---level---low--medium--high------no_compression-) Transact-SQL command instead of setting the server configuration option. 
+
 
 ## Build number
 

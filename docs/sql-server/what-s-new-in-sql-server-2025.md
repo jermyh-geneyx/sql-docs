@@ -119,7 +119,7 @@ Functionally equivalent to Developer edition in previous versions.
 | [Distributed AG support for a contained AG](../database-engine/availability-groups/windows/contained-availability-groups-overview.md#distributed-availability-groups) | Configure a distributed availability group between two contained availability groups. |
 | [Distributed AG synchronization improvements](../database-engine/availability-groups/windows/distributed-availability-groups.md#improvement-to-distributed-ag-synchronization) | Improves synchronization performance by reducing network saturation when the global primary and forwarder replicas are in asynchronous commit mode. |
 | [Backups on secondary replicas](../database-engine/availability-groups/windows/active-secondaries-backup-on-secondary-replicas-always-on-availability-groups.md#new-for-sql-server-2025) | In addition to copy-only backups, you can now also perform full and differential backups on any secondary replica. |
-| [ZSTD Backup compression algorithm](../relational-databases/backup-restore/backup-compression-sql-server.md#zstd-compression-algorithm-introduced-in-sql-server-2025) | [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] adds a faster and more effective backup compression algorithm - ZSTD. |
+
 
 ## Security
 
@@ -147,6 +147,7 @@ Functionally equivalent to Developer edition in previous versions.
 | [Columnstore improvements](../relational-databases/indexes/columnstore-indexes-what-s-new.md#sql-server-2025-17x) | Multiple improvements in columnstore indexes: </br >- Ordered nonclustered columnstore indexes </br > - Online index build and improved sort quality for ordered columnstore indexes </br > - Improved shrink operations when clustered columnstore indexes are present |
 | [Memory-optimized container and filegroup removal](../relational-databases/in-memory-oltp/memory-optimized-container-filegroup-removal.md) | Supports removal of memory-optimized containers and filegroups when all In-Memory OLTP objects are deleted. |
 | [tmpfs support for tempdb on Linux](../linux/sql-server-linux-tmpfs-tempdb.md) | Enable and run `tempdb` on **tmpfs** for SQL Server on Linux. |
+| [ZSTD Backup compression algorithm](../relational-databases/backup-restore/backup-compression-sql-server.md#zstd-compression-algorithm-introduced-in-sql-server-2025) | [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] adds a faster and more effective backup compression algorithm - ZSTD. |
 
 ## Query Store and intelligent query processing
 
