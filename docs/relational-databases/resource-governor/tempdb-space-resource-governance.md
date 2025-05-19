@@ -5,11 +5,13 @@ author: dimitri-furman
 ms.author: dfurman
 ms.service: sql
 ms.topic: concept-article
-ms.date: 04/30/2025
+ms.date: 05/19/2025
 monikerRange: " >= sql-server-ver17 || >= sql-server-linux-ver17 "
 ---
 
 # Tempdb space resource governance
+
+[!INCLUDE [sqlserver2025-and-later.md](../../includes/applies-to-version/sqlserver2025-and-later.md)]
 
 When you enable `tempdb` space resource governance, you improve reliability and avoid outages by preventing runaway queries or workloads from consuming a large amount of space in `tempdb`.
 
