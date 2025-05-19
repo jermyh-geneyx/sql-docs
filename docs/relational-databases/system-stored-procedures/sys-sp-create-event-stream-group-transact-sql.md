@@ -33,14 +33,14 @@ Creates an event group stream for the [change event streaming (CES)](../track-ch
 
 ```syntaxsql
 sp_create_event_stream_group
-	[ @stream_group_name = ] N'stream_group_name'
-	, [ @destination_type = ] N'destination_type'
-	, [ @destination_location = ] N'destination_location'
-	[, [ @destination_credential = ] N'destination_credential' ]
-	[, [ @max_message_size_bytes = ] max_message_size_bytes ]
-	[, [ @partition_key_scheme = ] N'partition_key_scheme' ]
-	[, [ @partition_key_column_name = ] N'partition_key_column_name' ]
-	[, [ @encoding = ] N'encoding' ]
+    [ @stream_group_name = ] N'stream_group_name'
+    , [ @destination_type = ] N'destination_type'
+    , [ @destination_location = ] N'destination_location'
+    [, [ @destination_credential = ] N'destination_credential' ]
+    [, [ @max_message_size_bytes = ] max_message_size_bytes ]
+    [, [ @partition_key_scheme = ] N'partition_key_scheme' ]
+    [, [ @partition_key_column_name = ] N'partition_key_column_name' ]
+    [, [ @encoding = ] N'encoding' ]
 ```
 
 ## Arguments
@@ -74,7 +74,7 @@ If specified, defines the max CES message size in bytes. *@max_message_size_byte
 - Minimum allowed value: `131072` (corresponds to 128 KB)
 - Maximum allowed value: `1048576` (corresponds to 20 MB)
 
-The *@max_message_size_bytes* parameter should align to the limits of the destination. For example, the maximum message size for Azure Event Hubs is 1 MB for the Basic and Standard tiers. To learn more, review [Azure Event Hub quotas](/azure/event-hubs/event-hubs-quotas#basic-vs-standard-vs-premium-vs-dedicated-tiers). 
+The *@max_message_size_bytes* parameter should align to the limits of the destination. For example, the maximum message size for Azure Event Hubs is 1 MB for the Basic and Standard tiers. To learn more, review [Azure Event Hubs quotas](/azure/event-hubs/event-hubs-quotas#basic-vs-standard-vs-premium-vs-dedicated-tiers). 
 
 ### [ @partition_key_scheme = ] N'partition_key_scheme'
 

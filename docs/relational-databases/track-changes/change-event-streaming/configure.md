@@ -93,11 +93,11 @@ The following script will create a new policy, or get an existing one, and then 
 ```powershell
 function Generate-SasToken {
 # Provide values for following resources.
-$subscriptionId = "00000000-0000-0000-0000-000000000000"	# Replace with Azure Subscription Id
-$resourceGroupName = "sql-ces-rg1"							# Replace with your Resource Group name
-$namespaceName = "myAzureEventHubsNamespace"				# Replace with your Event Hub Namespace name
-$eventHubName = "myEventHubsInstance"						# Replace with your Event Hubs instance name
-$policyName = "policy1"										# Replace with the policy name
+$subscriptionId = "00000000-0000-0000-0000-000000000000"    # Replace with Azure Subscription Id
+$resourceGroupName = "sql-ces-rg1"                            # Replace with your Resource Group name
+$namespaceName = "myAzureEventHubsNamespace"                # Replace with your Event Hub Namespace name
+$eventHubName = "myEventHubsInstance"                        # Replace with your Event Hubs instance name
+$policyName = "policy1"                                        # Replace with the policy name
 
 # Do not modify rest of the script.
 
@@ -143,10 +143,10 @@ $keys = Get-AzEventHubKey -ResourceGroupName $resourceGroupName `
                           -AuthorizationRuleName $policyName
 
 if (-not $keys) {
-	throw "Could not obtain Azure Event Hub Key. Script failed and will end now."
+    throw "Could not obtain Azure Event Hub Key. Script failed and will end now."
 }
 if (-not $keys.PrimaryKey) {
-	throw "Could not obtain Primary Key. Script failed and will end now."
+    throw "Could not obtain Primary Key. Script failed and will end now."
 }
 
 # Get the Primary Key of the Shared Access Policy
@@ -212,22 +212,22 @@ USE <database name>
 CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<Password>'
 
 CREATE DATABASE SCOPED CREDENTIAL <CredentialName>
-	WITH IDENTITY = 'SHARED ACCESS SIGNATURE',
-	SECRET = '<Generated SAS Token>'
+    WITH IDENTITY = 'SHARED ACCESS SIGNATURE',
+    SECRET = '<Generated SAS Token>'
 
 EXEC sys.sp_enable_event_stream
 
 EXEC sys.sp_create_event_stream_group
-	@stream_group_name =      N'<EventStreamGroupName>',
-	@destination_type =       N'AzureEventHubsAmqp',
-	@destination_location =   N'<AzureEventHubsNamespace>/<EventHubsInstance>',
-	@destination_credential = <CredentialName>,
-	@max_message_size_bytes = <MaxMessageSize>,       -- 268435456
-	@partition_key_scheme =   N'<PatitionKeyScheme>'  -- N'None'
+    @stream_group_name =      N'<EventStreamGroupName>',
+    @destination_type =       N'AzureEventHubsAmqp',
+    @destination_location =   N'<AzureEventHubsNamespace>/<EventHubsInstance>',
+    @destination_credential = <CredentialName>,
+    @max_message_size_bytes = <MaxMessageSize>,       -- 268435456
+    @partition_key_scheme =   N'<PatitionKeyScheme>'  -- N'None'
 
 EXEC sys.sp_add_object_to_event_stream_group
-	N'<EventStreamGroupName>',
-	N'<SchemaName>.<TableName>'
+    N'<EventStreamGroupName>',
+    N'<SchemaName>.<TableName>'
 ```
 
 ### Example: Stream to Azure Event Hubs via Apache Kafka protocol
@@ -247,16 +247,16 @@ SECRET = '<Event Hubs Namespace – Primary connection string>'
 EXEC sys.sp_enable_event_stream
 
 EXEC sys.sp_create_event_stream_group
-	@stream_group_name =      N'<EventStreamGroupName>',
-	@destination_type =       N'AzureEventHubsApacheKafka',
-	@destination_location =   N'<AzureEventHubsHostName>:<port>/<EventHubsInstance>',
-	@destination_credential = <CredentialName>,
-	@max_message_size_bytes = <MaxMessageSize>,
-	@partition_key_scheme =   N'<PatitionKeyScheme>'
+    @stream_group_name =      N'<EventStreamGroupName>',
+    @destination_type =       N'AzureEventHubsApacheKafka',
+    @destination_location =   N'<AzureEventHubsHostName>:<port>/<EventHubsInstance>',
+    @destination_credential = <CredentialName>,
+    @max_message_size_bytes = <MaxMessageSize>,
+    @partition_key_scheme =   N'<PatitionKeyScheme>'
 
 EXEC sys.sp_add_object_to_event_stream_group
-	N'<EventStreamGroupName>',
-	N'<SchemaName>.<TableName>'
+    N'<EventStreamGroupName>',
+    N'<SchemaName>.<TableName>'
 ```
 
 ## View CES configuration and function
