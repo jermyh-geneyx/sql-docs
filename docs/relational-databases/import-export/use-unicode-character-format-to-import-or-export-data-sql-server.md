@@ -58,7 +58,7 @@ Consider whether any of the following workarounds may be available for your *spe
 
 * Re-export the data using a native format,
 
-* Use [BULK INSERT](../../t-sql/statements/bulk-insert-transact-sql.md) or [OPENROWSET](../../t-sql/functions/openrowset-transact-sql.md).  Examples of these workaround are provided below, see [Using BULK INSERT and Unicode Character Format with a Non-XML Format File](#bulk_widechar_fmt) and [Using OPENROWSET and Unicode Character Format with a Non-XML Format File](#openrowset_widechar_fmt),
+* Use [BULK INSERT](../../t-sql/statements/bulk-insert-transact-sql.md) or [OPENROWSET (BULK)](../../t-sql/functions/openrowset-bulk-transact-sql.md).  Examples of these workaround are provided below, see [Using BULK INSERT and Unicode Character Format with a Non-XML Format File](#bulk_widechar_fmt) and [Using OPENROWSET and Unicode Character Format with a Non-XML Format File](#openrowset_widechar_fmt),
  
 * Manually insert first record in destination table and then use **-F 2** switch to have import start on second record,
 
@@ -69,7 +69,7 @@ Consider whether any of the following workarounds may be available for your *spe
 * Re-export the data and change the data field order so that the first data field will be character.  Then use a format file to remap the data field to the actual order in the table.  For an example, see [Use a Format File to Map Table Columns to Data-File Fields (SQL Server)](../../relational-databases/import-export/use-a-format-file-to-map-table-columns-to-data-file-fields-sql-server.md).
   
 ## Command Options for Unicode Character Format<a name="command_options"></a>  
-You can import Unicode character format data into a table using [bcp](../../tools/bcp-utility.md), [BULK INSERT](../../t-sql/statements/bulk-insert-transact-sql.md) or [INSERT ... SELECT * FROM OPENROWSET(BULK...)](../../t-sql/functions/openrowset-transact-sql.md).  For a [bcp](../../tools/bcp-utility.md) command or [BULK INSERT](../../t-sql/statements/bulk-insert-transact-sql.md) statement, you can specify the data format in the statement.  For an [INSERT ... SELECT * FROM OPENROWSET(BULK...)](../../t-sql/functions/openrowset-transact-sql.md) statement, you must specify the data format in a format file.  
+You can import Unicode character format data into a table using [bcp](../../tools/bcp-utility.md), [BULK INSERT](../../t-sql/statements/bulk-insert-transact-sql.md) or [INSERT ... SELECT * FROM OPENROWSET(BULK...)](../../t-sql/functions/openrowset-bulk-transact-sql.md).  For a [bcp](../../tools/bcp-utility.md) command or [BULK INSERT](../../t-sql/statements/bulk-insert-transact-sql.md) statement, you can specify the data format in the statement.  For an [INSERT ... SELECT * FROM OPENROWSET(BULK...)](../../t-sql/functions/openrowset-bulk-transact-sql.md) statement, you must specify the data format in a format file.  
   
 Unicode character format is supported by the following command options:  
   
@@ -93,11 +93,11 @@ GO
 
 USE TestDatabase;
 CREATE TABLE dbo.myWidechar ( 
-	PersonID smallint NOT NULL,
-	FirstName nvarchar(25) NOT NULL,
-	LastName nvarchar(30) NOT NULL,
-	BirthDate date,
-	AnnualSalary money
+    PersonID smallint NOT NULL,
+    FirstName nvarchar(25) NOT NULL,
+    LastName nvarchar(30) NOT NULL,
+    BirthDate date,
+    AnnualSalary money
 );
 
 -- Populate table
@@ -179,10 +179,10 @@ bcp TestDatabase.dbo.myWidechar OUT D:\BCP\myWidechar.bcp -T -w
 ```sql
 TRUNCATE TABLE TestDatabase.dbo.myWidechar; -- for testing
 BULK INSERT TestDatabase.dbo.myWidechar
-	FROM 'D:\BCP\myWidechar.bcp'
-	WITH (
-		DATAFILETYPE = 'widechar'
-		);
+    FROM 'D:\BCP\myWidechar.bcp'
+    WITH (
+        DATAFILETYPE = 'widechar'
+        );
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myWidechar;
@@ -195,8 +195,8 @@ TRUNCATE TABLE TestDatabase.dbo.myWidechar; -- for testing
 BULK INSERT TestDatabase.dbo.myWidechar
    FROM 'D:\BCP\myWidechar.bcp'
    WITH (
-		FORMATFILE = 'D:\BCP\myWidechar.fmt'
-		);
+        FORMATFILE = 'D:\BCP\myWidechar.fmt'
+        );
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myWidechar;
@@ -207,11 +207,11 @@ SELECT * FROM TestDatabase.dbo.myWidechar;
 ```sql
 TRUNCATE TABLE TestDatabase.dbo.myWidechar;  -- for testing
 INSERT INTO TestDatabase.dbo.myWidechar
-	SELECT *
-	FROM OPENROWSET (
-		BULK 'D:\BCP\myWidechar.bcp', 
-		FORMATFILE = 'D:\BCP\myWidechar.fmt'  
-		) AS t1;
+    SELECT *
+    FROM OPENROWSET (
+        BULK 'D:\BCP\myWidechar.bcp', 
+        FORMATFILE = 'D:\BCP\myWidechar.fmt'  
+        ) AS t1;
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myWidechar;

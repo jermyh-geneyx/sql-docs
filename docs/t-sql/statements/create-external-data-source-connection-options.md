@@ -1,10 +1,10 @@
 ---
-title: "CREATE EXTERNAL DATA SOURCE (Transact-SQL) CONNECTION_OPTIONS argument"
-description: The CREATE EXTERNAL DATA SOURCE CONNECTION_OPTIONS argument can vary depending on the external data provider. This article provides additional detail for connection options depending on the provider.
+title: "CREATE EXTERNAL DATA SOURCE CONNECTION_OPTIONS Argument (Transact-SQL)"
+description: The CONNECTION_OPTIONS argument provides connection options for CREATE EXTERNAL DATA SOURCE, depending on the provider.
 author: MikeRayMSFT
 ms.author: mikeray
-ms.reviewer: randolphwest, hudequei
-ms.date: 09/14/2022
+ms.reviewer: randolphwest, hudequei, wiassaf
+ms.date: 05/13/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -13,14 +13,16 @@ f1_keywords:
   - "CREATE_EXTERNAL_DATA_SOURCE CONNECTION_OPTIONS"
 dev_langs:
   - "TSQL"
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=azuresqledge-current"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =azuresqledge-current"
 ---
 
 # CREATE EXTERNAL DATA SOURCE (Transact-SQL) CONNECTION_OPTIONS
 
-This article provides additional detail for CONNECTION_OPTIONS depending on the provider. The [CREATE EXTERNAL DATA SOURCE](create-external-data-source-transact-sql.md) CONNECTION_OPTIONS argument can vary depending on the external data provider.
+[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-pdw](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-pdw.md)]
 
-The CONNECTION_OPTIONS argument for [CREATE EXTERNAL DATA SOURCE](create-external-data-source-transact-sql.md) was first introduced in [!INCLUDE[sssql19-md](../../includes/sssql19-md.md)]. This document applies to [!INCLUDE[sssql19-md](../../includes/sssql19-md.md)] for Windows and Linux, as well as [!INCLUDE[ssbigdataclusters-ss-nover](../../includes/ssbigdataclusters-ver15.md)].
+This article provides additional detail for `CONNECTION_OPTIONS` depending on the provider. The [CREATE EXTERNAL DATA SOURCE](create-external-data-source-transact-sql.md) `CONNECTION_OPTIONS` argument can vary depending on the external data provider.
+
+The `CONNECTION_OPTIONS` argument for [CREATE EXTERNAL DATA SOURCE](create-external-data-source-transact-sql.md) was first introduced in [!INCLUDE[sssql19-md](../../includes/sssql19-md.md)]. This document applies to [!INCLUDE[sssql19-md](../../includes/sssql19-md.md)] for Windows and Linux, as well as [!INCLUDE[ssbigdataclusters-ss-nover](../../includes/ssbigdataclusters-ver15.md)].
 
 - The `key_value_pair` is the keyword and the value for a specific connection option.
 - To use multiple connection options, separate them by a semi-colon.
@@ -35,7 +37,7 @@ You can only specify the key-value pairs that have an entry in [DSN and Connecti
 Connection string keywords and options for Microsoft OLE DB providers:
 
 - Microsoft OLE DB Driver for SQL Server: [Using Connection String Keywords with OLE DB Driver for SQL Server](../../connect/oledb/applications/using-connection-string-keywords-with-oledb-driver-for-sql-server.md)
-- SQL Native Client (deprecated) [Native Client OLE DB (SQLNCLI) Using connection string keywords](../../relational-databases/native-client/applications/using-connection-string-keywords-with-sql-server-native-client.md)
+- SQL Native Client (deprecated) [Using Connection String Keywords with SQL Server Native Client](../../relational-databases/native-client/applications/using-connection-string-keywords-with-sql-server-native-client.md)
 
 Connection string keywords and options for Microsoft ODBC DB providers:
 
@@ -162,28 +164,27 @@ You can only specify the key-value pairs that have an entry in the driver config
 
 | Key name | Default | Required | Description |
 |:--|:--|:--|:--|
-|DefaultStringColumnLength|255|No| The maximum number of characters that can be contained in STRING columns. The maximum value that you can set for this option is 2147483647.|
-|noCursorTimeout|False | No | This option specifies whether the driver allows active cursors on the data source server to expire. When FALSE, the data source server will time out idle cursors after the threshold inactivity period set on the server. When set to TRUE, the driver prevents the data source server from timing out idle cursors, and there is a risk that if the driver should quit or lose the connection to the server unexpectedly, the cursor will remain open on the server indefinitely. You can adjust the threshold for idle cursor timeouts on the MongoDB server, see https://docs.mongodb.com/v3.0/reference/parameters/ for details.|
-|SamplingLimit|100|No|The maximum number of records that the driver can sample to generate a temporary schema definition. When this option is set to 0, the driver samples every document in the database.<br /><br />Make sure to configure the driver to sample all the necessary data. Documents that are not sampled do not get included in the schema definition, and consequently do not become available in ODBC applications.<br /><br />Typically, sampling a large number of documents results in a schema definition that is more accurate and better able to represent all the data in the database. However, the sampling process may take longer than expected when many documents are sampled, especially if the database contains complex, nested data structures.|
-|SamplingStrategy|Forward|No|This option specifies how the driver samples data when generating a temporary schema definition.<br /><br />**Forward**: The driver samples data starting from the first record in the database, then samples the next record, and so on.<br />**Backward**: The driver samples data starting from the last record in the database, then samples the preceding record, and so on.<br />**Random**: The driver selects sample records from the data source at random until the SamplingLimit is reached.|
-| SSL | Clear (0) | No | This option specifies whether the driver uses SSL to connect to the server. Enabled (1): The driver uses SSL to connect to the server.Disabled (0): The driver does not use SSL to connect to the server. |
-
+|`DefaultStringColumnLength`|255|No| The maximum number of characters that can be contained in STRING columns. The maximum value that you can set for this option is 2147483647.|
+|`noCursorTimeout`|False | No | This option specifies whether the driver allows active cursors on the data source server to expire. When FALSE, the data source server will time out idle cursors after the threshold inactivity period set on the server. When set to TRUE, the driver prevents the data source server from timing out idle cursors, and there is a risk that if the driver should quit or lose the connection to the server unexpectedly, the cursor will remain open on the server indefinitely. You can adjust the threshold for idle cursor timeouts on the MongoDB server, see https://docs.mongodb.com/v3.0/reference/parameters/ for details.|
+|`SamplingLimit`|100|No|The maximum number of records that the driver can sample to generate a temporary schema definition. When this option is set to 0, the driver samples every document in the database.<br /><br />Make sure to configure the driver to sample all the necessary data. Documents that are not sampled do not get included in the schema definition, and consequently do not become available in ODBC applications.<br /><br />Typically, sampling a large number of documents results in a schema definition that is more accurate and better able to represent all the data in the database. However, the sampling process might take longer than expected when many documents are sampled, especially if the database contains complex, nested data structures.|
+|`SamplingStrategy`|Forward|No|This option specifies how the driver samples data when generating a temporary schema definition.<br /><br />**Forward**: The driver samples data starting from the first record in the database, then samples the next record, and so on.<br />**Backward**: The driver samples data starting from the last record in the database, then samples the preceding record, and so on.<br />**Random**: The driver selects sample records from the data source at random until the SamplingLimit is reached.|
+| `SSL` | Clear (0) | No | This option specifies whether the driver uses SSL to connect to the server. Enabled (1): The driver uses SSL to connect to the server.Disabled (0): The driver does not use SSL to connect to the server. |
 
 ## Generic ODBC
 
-Valid CONNECTION_OPTIONS that you can specify for PolyBase Generic ODBC External Data Source are driver specific. If not using a Microsoft-provided ODBC provider (see previous section), consult the driver's documentation for valid key-value pairs.
+Valid `CONNECTION_OPTIONS` that you can specify for PolyBase Generic ODBC External Data Source are driver specific. If not using a Microsoft-provided ODBC provider (see previous section), consult the driver's documentation for valid key-value pairs.
 
 There are some valid key-value pairs in PolyBase that are available to all generic ODBC drivers. *The following keys were added to SQL Server 2019 in CU5.*
 
 | Key | Possible values | Description |  
 |:--|:--|:--|
-| PolyBaseOdbcSupportsRowCount | true, FALSE |Indicates whether or not the driver supports the SQLRowCount function being called on ODBC catalog functions. Default is false. For example: `CONNECTION_OPTIONS='PolyBaseOdbcSupportsRowCount=TRUE'`.|
-| PolyBaseOdbcSupportsMetadataIdAttributes | true, FALSE | Indicates whether or not the driver supports setting the METADATA_ID statement attribute. Default is false. For example: `CONNECTION_OPTIONS='PolyBaseOdbcSupportsMetadataIdAttributes=TRUE'`.|
-| PolyBaseOdbcSupportsBindOffset | true, FALSE | Indicates whether or not the driver supports bind offsets for row-wise binding of result sets. If not, use column binding. Default is false. For example: `CONNECTION_OPTIONS='PolyBaseOdbcSupportsBindOffset=TRUE'`.|
-| PolyBaseQoTopPushdownSyntax | TOP, LIMIT | Contains information specifying how to push down the TOP operator to the backend. Default is empty string, indicating a lack of support for TOP pushdown. If the user specifies TOP, `top {0}` is used as the format string. If the user specifies LIMIT, `limit {0}` is used as the format string. This implementation is driver-specific, consult the external data source and/or driver documentation. For example: `CONNECTION_OPTIONS= PolyBaseQoTopPushdownSyntax=TOP'`.|
+| `PolyBaseOdbcSupportsRowCount` | true, FALSE |Indicates whether or not the driver supports the SQLRowCount function being called on ODBC catalog functions. Default is false. For example: `CONNECTION_OPTIONS='PolyBaseOdbcSupportsRowCount=TRUE'`.|
+| `PolyBaseOdbcSupportsMetadataIdAttributes` | true, FALSE | Indicates whether or not the driver supports setting the METADATA_ID statement attribute. Default is false. For example: `CONNECTION_OPTIONS='PolyBaseOdbcSupportsMetadataIdAttributes=TRUE'`.|
+| `PolyBaseOdbcSupportsBindOffset` | true, FALSE | Indicates whether or not the driver supports bind offsets for row-wise binding of result sets. If not, use column binding. Default is false. For example: `CONNECTION_OPTIONS='PolyBaseOdbcSupportsBindOffset=TRUE'`.|
+| `PolyBaseQoTopPushdownSyntax` | TOP, LIMIT | Contains information specifying how to push down the TOP operator to the backend. Default is empty string, indicating a lack of support for TOP pushdown. If the user specifies TOP, `top {0}` is used as the format string. If the user specifies LIMIT, `limit {0}` is used as the format string. This implementation is driver-specific, consult the external data source and/or driver documentation. For example: `CONNECTION_OPTIONS= PolyBaseQoTopPushdownSyntax=TOP'`.|
 
-## Next steps
+## Related content
 
-- [Introducing data virtualization with PolyBase](../../relational-databases/polybase/polybase-guide.md)
+- [Data virtualization with PolyBase in SQL Server](../../relational-databases/polybase/polybase-guide.md)
 - [CREATE EXTERNAL DATA SOURCE (Transact-SQL)](create-external-data-source-transact-sql.md)
 - [PolyBase Frequently asked questions](../../relational-databases/polybase/polybase-faq.yml)

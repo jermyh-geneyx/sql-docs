@@ -19,7 +19,7 @@ monikerRange: ">=aps-pdw-2016||=azuresqldb-current||>=sql-server-2016||>=sql-ser
 A data file can contain more fields than the number of columns in the table. This topic describes modifying both non-XML and XML format files to accommodate a data file with more fields by mapping the table columns to the corresponding data fields and ignoring the extra fields.  Please review [Create a Format File (SQL Server)](../../relational-databases/import-export/create-a-format-file-sql-server.md) for additional information.
 
 > [!NOTE]  
-> Either a non-XML or XML format file can be used to bulk import a data file into the table by using a [bcp utility](../../tools/bcp-utility.md) command, [BULK INSERT](../../t-sql/statements/bulk-insert-transact-sql.md) statement, or INSERT ... SELECT * FROM [OPENROWSET(BULK...)](../../t-sql/functions/openrowset-transact-sql.md) statement. For more information, see [Use a Format File to Bulk Import Data &#40;SQL Server&#41;](../../relational-databases/import-export/use-a-format-file-to-bulk-import-data-sql-server.md).
+> Either a non-XML or XML format file can be used to bulk import a data file into the table by using a [bcp utility](../../tools/bcp-utility.md) command, [BULK INSERT](../../t-sql/statements/bulk-insert-transact-sql.md) statement, or INSERT ... SELECT * FROM [OPENROWSET(BULK...)](../../t-sql/functions/openrowset-bulk-transact-sql.md) statement. For more information, see [Use a Format File to Bulk Import Data &#40;SQL Server&#41;](../../relational-databases/import-export/use-a-format-file-to-bulk-import-data-sql-server.md).
 
 > [!NOTE]  
 > This syntax, including bulk insert, is not supported in Azure Synapse Analytics. [!INCLUDE [Use ADF or PolyBase instead of Synapse Bulk Insert](includes/bulk-insert-synapse.md)]
@@ -233,7 +233,7 @@ GO
 SELECT * FROM TestDatabase.dbo.myTestSkipField;
 ```
 
-### <a id="openrowset_nonxml"></a> Use [OPENROWSET(BULK...)](../../T-SQL/functions/OPENROWSET-Transact-SQL.md) and [non-XML format file](../../relational-databases/import-export/non-XML-format-files-SQL-server.md)
+### <a id="openrowset_nonxml"></a> Use [OPENROWSET(BULK...)](../../t-sql/functions/openrowset-bulk-transact-sql.md) and [non-XML format file](../../relational-databases/import-export/non-XML-format-files-SQL-server.md)
 
 Execute the following Transact-SQL in Microsoft SQL Server Management Studio (SSMS):
 
@@ -254,7 +254,7 @@ GO
 SELECT * FROM TestDatabase.dbo.myTestSkipField;
 ```
 
-### <a id="openrowset_xml"></a> Use [OPENROWSET(BULK...)](../../T-SQL/functions/OPENROWSET-Transact-SQL.md) and [XML format file](../../relational-databases/import-export/XML-format-files-SQL-server.md)
+### <a id="openrowset_xml"></a> Use [OPENROWSET(BULK...)](../../t-sql/functions/openrowset-bulk-transact-sql.md) and [XML format file](../../relational-databases/import-export/XML-format-files-SQL-server.md)
 
 Execute the following Transact-SQL in Microsoft SQL Server Management Studio (SSMS):
 

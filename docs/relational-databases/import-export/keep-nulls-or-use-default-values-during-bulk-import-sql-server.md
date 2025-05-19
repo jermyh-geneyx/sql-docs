@@ -24,14 +24,14 @@ monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-s
 
 By default, when data is imported into a table, the [bcp](../../tools/bcp-utility.md) command and [BULK INSERT](../../t-sql/statements/bulk-insert-transact-sql.md) statement observe any defaults that are defined for the columns in the table.  For example, if there is a null field in a data file, the default value for the column is loaded instead.  The [bcp](../../tools/bcp-utility.md) command and [BULK INSERT](../../t-sql/statements/bulk-insert-transact-sql.md) statement both allow you to specify that nulls values be retained.
 
-In contrast, a regular INSERT statement retains the null value instead of inserting a default value. The INSERT ... SELECT * FROM [OPENROWSET(BULK...)](../../t-sql/functions/openrowset-transact-sql.md) statement provides the same basic behavior as regular INSERT but additionally supports a [table hint](../../t-sql/queries/hints-transact-sql-table.md) for inserting the default values.
+In contrast, a regular INSERT statement retains the null value instead of inserting a default value. The INSERT ... SELECT * FROM [OPENROWSET(BULK...)](../../t-sql/functions/openrowset-bulk-transact-sql.md) statement provides the same basic behavior as regular INSERT but additionally supports a [table hint](../../t-sql/queries/hints-transact-sql-table.md) for inserting the default values.
 
 |Outline|
 |---|
 |[Keeping Null Values](#keep_nulls)<br />[Using Default Values with INSERT ... SELECT * FROM OPENROWSET(BULK...)](#keep_default)<br />[Example Test Conditions](#etc)<br />&emsp;&#9679;&emsp;[Sample Table](#sample_table)<br />&emsp;&#9679;&emsp;[Sample Data File](#sample_data_file)<br />&emsp;&#9679;&emsp;[Sample Non-XML Format File](#nonxml_format_file)<br />[Keep Nulls or Use Default Values During Bulk Import](#import_data)<br />&emsp;&#9679;&emsp;[Using bcp and Keeping Null Values without a Format File](#bcp_null)<br />&emsp;&#9679;&emsp;[Using bcp and Keeping Null Values with a Non-XML Format File](#bcp_null_fmt)<br />&emsp;&#9679;&emsp;[Using bcp and Using Default Values without a Format File](#bcp_default)<br />&emsp;&#9679;&emsp;[Using bcp and Using Default Values with a Non-XML Format File](#bcp_default_fmt)<br />&emsp;&#9679;&emsp;[Using BULK INSERT and Keeping Null Values without a Format File](#bulk_null)<br />&emsp;&#9679;&emsp;[Using BULK INSERT and Keeping Null Values with a Non-XML Format File](#bulk_null_fmt)<br />&emsp;&#9679;&emsp;[Using BULK INSERT and Using Default Values without a Format File](#bulk_default)<br />&emsp;&#9679;&emsp;[Using BULK INSERT and Using Default Values with a Non-XML Format File](#bulk_default_fmt)<br />&emsp;&#9679;&emsp;[Using OPENROWSET(BULK...) and Keeping Null Values with a Non-XML Format File](#openrowset__null_fmt)<br />&emsp;&#9679;&emsp;[Using OPENROWSET(BULK...) and Using Default Values with a Non-XML Format File](#openrowset__default_fmt)
 
 ## Keeping Null Values<a name="keep_nulls"></a>  
-The following qualifiers specify that an empty field in the data file retains its null value during the bulk-import operation, rather than inheriting a default value (if any) for the table columns.  For [OPENROWSET](../../t-sql/functions/openrowset-transact-sql.md), by default, any columns that are not specified in the bulk-load operation are set to NULL.
+The following qualifiers specify that an empty field in the data file retains its null value during the bulk-import operation, rather than inheriting a default value (if any) for the table columns.  For [OPENROWSET (BULK)](../../t-sql/functions/openrowset-bulk-transact-sql.md), by default, any columns that are not specified in the bulk-load operation are set to NULL.
   
 |Command|Qualifier|Qualifier type|  
 |-------------|---------------|--------------------|  
@@ -44,7 +44,7 @@ The following qualifiers specify that an empty field in the data file retains it
 > [!NOTE]
 > These qualifiers disable checking of DEFAULT definitions on a table by these bulk-import commands.  However, for any concurrent INSERT statements, DEFAULT definitions are expected.
  
-## Using Default Values with INSERT ... SELECT * FROM [OPENROWSET(BULK...)](../../t-sql/functions/openrowset-transact-sql.md)<a name="keep_default"></a>  
+## Using Default Values with INSERT ... SELECT * FROM [OPENROWSET(BULK...)](../../t-sql/functions/openrowset-bulk-transact-sql.md)<a name="keep_default"></a>  
 You can specify that for an empty field in the data file, the corresponding table column uses its default value (if any).  To use default values, use the table hint [KEEPDEFAULTS](../../t-sql/queries/hints-transact-sql-table.md).
  
 > [!NOTE]
@@ -194,12 +194,12 @@ USE TestDatabase;
 GO
 TRUNCATE TABLE dbo.myNulls; -- for testing
 BULK INSERT dbo.myNulls
-	FROM 'D:\BCP\myNulls.bcp'
-	WITH (
-		DATAFILETYPE = 'char',  
-		FIELDTERMINATOR = ',',  
-		KEEPNULLS
-		);
+    FROM 'D:\BCP\myNulls.bcp'
+    WITH (
+        DATAFILETYPE = 'char',  
+        FIELDTERMINATOR = ',',  
+        KEEPNULLS
+        );
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myNulls;
@@ -216,9 +216,9 @@ TRUNCATE TABLE dbo.myNulls; -- for testing
 BULK INSERT dbo.myNulls
    FROM 'D:\BCP\myNulls.bcp'
    WITH (
-		FORMATFILE = 'D:\BCP\myNulls.fmt',
-		KEEPNULLS
-		);
+        FORMATFILE = 'D:\BCP\myNulls.fmt',
+        KEEPNULLS
+        );
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myNulls;
@@ -237,7 +237,7 @@ BULK INSERT dbo.myNulls
    WITH (
       DATAFILETYPE = 'char',  
       FIELDTERMINATOR = ','
-	  );
+      );
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myNulls;
@@ -254,14 +254,14 @@ TRUNCATE TABLE dbo.myNulls;  -- for testing
 BULK INSERT dbo.myNulls
    FROM 'D:\BCP\myNulls.bcp'
    WITH (
-		FORMATFILE = 'D:\BCP\myNulls.fmt'
-		);
+        FORMATFILE = 'D:\BCP\myNulls.fmt'
+        );
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myNulls;
 ```
 
-### **Using [OPENROWSET(BULK...)](../../t-sql/functions/openrowset-transact-sql.md) and Keeping Null Values with a [Non-XML Format File](../../relational-databases/import-export/non-xml-format-files-sql-server.md)**<a name="openrowset__null_fmt"></a>
+### **Using [OPENROWSET(BULK...)](../../t-sql/functions/openrowset-bulk-transact-sql.md) and Keeping Null Values with a [Non-XML Format File](../../relational-databases/import-export/non-xml-format-files-sql-server.md)**<a name="openrowset__null_fmt"></a>
 **FORMATFILE** argument.  Execute the following Transact-SQL in Microsoft [!INCLUDE[ssManStudioFull](../../includes/ssmanstudiofull-md.md)] (SSMS):
 
 ```sql
@@ -270,17 +270,17 @@ GO
 
 TRUNCATE TABLE dbo.myNulls;  -- for testing
 INSERT INTO dbo.myNulls
-	SELECT *
-	FROM OPENROWSET (
-		BULK 'D:\BCP\myNulls.bcp', 
-		FORMATFILE = 'D:\BCP\myNulls.fmt'  
-		) AS t1;
+    SELECT *
+    FROM OPENROWSET (
+        BULK 'D:\BCP\myNulls.bcp', 
+        FORMATFILE = 'D:\BCP\myNulls.fmt'  
+        ) AS t1;
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myNulls;
 ```
 
-### **Using [OPENROWSET(BULK...)](../../t-sql/functions/openrowset-transact-sql.md) and Using Default Values with a [Non-XML Format File](../../relational-databases/import-export/non-xml-format-files-sql-server.md)**<a name="openrowset__default_fmt"></a>
+### **Using [OPENROWSET(BULK...)](../../t-sql/functions/openrowset-bulk-transact-sql.md) and Using Default Values with a [Non-XML Format File](../../relational-databases/import-export/non-xml-format-files-sql-server.md)**<a name="openrowset__default_fmt"></a>
 **KEEPDEFAULTS** table hint and **FORMATFILE** argument.  Execute the following Transact-SQL in Microsoft [!INCLUDE[ssManStudioFull](../../includes/ssmanstudiofull-md.md)] (SSMS):
 
 ```sql
@@ -290,11 +290,11 @@ GO
 TRUNCATE TABLE dbo.myNulls;  -- for testing
 INSERT INTO dbo.myNulls
 WITH (KEEPDEFAULTS) 
-	SELECT *
-	FROM OPENROWSET (
-		BULK 'D:\BCP\myNulls.bcp', 
-		FORMATFILE = 'D:\BCP\myNulls.fmt'  
-		) AS t1;
+    SELECT *
+    FROM OPENROWSET (
+        BULK 'D:\BCP\myNulls.bcp', 
+        FORMATFILE = 'D:\BCP\myNulls.fmt'  
+        ) AS t1;
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myNulls;

@@ -32,7 +32,7 @@ To prevent [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] from assign
 |BULK INSERT|KEEPIDENTITY|Argument|  
 |INSERT ... SELECT * FROM OPENROWSET(BULK...)|KEEPIDENTITY|Table hint|  
    
- For more information, see [bcp Utility](../../tools/bcp-utility.md), [BULK INSERT &#40;Transact-SQL&#41;](../../t-sql/statements/bulk-insert-transact-sql.md), [OPENROWSET &#40;Transact-SQL&#41;](../../t-sql/functions/openrowset-transact-sql.md), [INSERT &#40;Transact-SQL&#41;](../../t-sql/statements/insert-transact-sql.md), [SELECT &#40;Transact-SQL&#41;](../../t-sql/queries/select-transact-sql.md), and [Table Hints &#40;Transact-SQL&#41;](../../t-sql/queries/hints-transact-sql-table.md).  
+ For more information, see [bcp Utility](../../tools/bcp-utility.md), [BULK INSERT &#40;Transact-SQL&#41;](../../t-sql/statements/bulk-insert-transact-sql.md), [OPENROWSET BULK &#40;Transact-SQL&#41;](../../t-sql/functions/openrowset-bulk-transact-sql.md), [INSERT &#40;Transact-SQL&#41;](../../t-sql/statements/insert-transact-sql.md), [SELECT &#40;Transact-SQL&#41;](../../t-sql/queries/select-transact-sql.md), and [Table Hints &#40;Transact-SQL&#41;](../../t-sql/queries/hints-transact-sql-table.md).  
 
 > [!NOTE]
 >  To create an automatically incrementing number that can be used in multiple tables or that can be called from applications without referencing any table, see [Sequence Numbers](../../relational-databases/sequence-numbers/sequence-numbers.md).
@@ -172,12 +172,12 @@ GO
 
 TRUNCATE TABLE dbo.myIdentity; -- for testing
 BULK INSERT dbo.myIdentity
-	FROM 'D:\BCP\myIdentity.bcp'
-	WITH (
-		DATAFILETYPE = 'char',  
-		FIELDTERMINATOR = ',',  
-		KEEPIDENTITY
-		);
+    FROM 'D:\BCP\myIdentity.bcp'
+    WITH (
+        DATAFILETYPE = 'char',  
+        FIELDTERMINATOR = ',',  
+        KEEPIDENTITY
+        );
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myIdentity;
@@ -193,9 +193,9 @@ TRUNCATE TABLE dbo.myIdentity; -- for testing
 BULK INSERT dbo.myIdentity
    FROM 'D:\BCP\myIdentity.bcp'
    WITH (
-		FORMATFILE = 'D:\BCP\myIdentity.fmt',
-		KEEPIDENTITY
-		);
+        FORMATFILE = 'D:\BCP\myIdentity.fmt',
+        KEEPIDENTITY
+        );
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myIdentity;
@@ -213,7 +213,7 @@ BULK INSERT dbo.myIdentity
    WITH (
       DATAFILETYPE = 'char',  
       FIELDTERMINATOR = ','
-	  );
+      );
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myIdentity;
@@ -229,14 +229,14 @@ TRUNCATE TABLE dbo.myIdentity;  -- for testing
 BULK INSERT dbo.myIdentity
    FROM 'D:\BCP\myIdentity.bcp'
    WITH (
-		FORMATFILE = 'D:\BCP\myIdentity.fmt'
-		);
+        FORMATFILE = 'D:\BCP\myIdentity.fmt'
+        );
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myIdentity;
 ```
   
-### **Using [OPENROWSET(BULK...)](../../t-sql/functions/openrowset-transact-sql.md) and Keeping Identity Values with a [Non-XML Format File](../../relational-databases/import-export/non-xml-format-files-sql-server.md)**<a name="openrowset_identity_fmt"></a>
+### **Using [OPENROWSET(BULK...)](../../t-sql/functions/openrowset-bulk-transact-sql.md) and Keeping Identity Values with a [Non-XML Format File](../../relational-databases/import-export/non-xml-format-files-sql-server.md)**<a name="openrowset_identity_fmt"></a>
 **KEEPIDENTITY** table hint and **FORMATFILE** argument.  Execute the following Transact-SQL in Microsoft [!INCLUDE[ssManStudioFull](../../includes/ssmanstudiofull-md.md)] (SSMS):
 ```sql
 USE TestDatabase;
@@ -246,17 +246,17 @@ TRUNCATE TABLE dbo.myIdentity;  -- for testing
 INSERT INTO dbo.myIdentity
 WITH (KEEPIDENTITY) 
 (PersonID, FirstName, LastName, BirthDate)
-	SELECT *
-	FROM OPENROWSET (
-		BULK 'D:\BCP\myIdentity.bcp', 
-		FORMATFILE = 'D:\BCP\myIdentity.fmt'  
-		) AS t1;
+    SELECT *
+    FROM OPENROWSET (
+        BULK 'D:\BCP\myIdentity.bcp', 
+        FORMATFILE = 'D:\BCP\myIdentity.fmt'  
+        ) AS t1;
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myIdentity;
 ```
  
-### **Using [OPENROWSET(BULK...)](../../t-sql/functions/openrowset-transact-sql.md) and Generated Identity Values with a [Non-XML Format File](../../relational-databases/import-export/non-xml-format-files-sql-server.md)**<a name="openrowset_default_fmt"></a>
+### **Using [OPENROWSET(BULK...)](../../t-sql/functions/openrowset-bulk-transact-sql.md) and Generated Identity Values with a [Non-XML Format File](../../relational-databases/import-export/non-xml-format-files-sql-server.md)**<a name="openrowset_default_fmt"></a>
 Using defaults and **FORMATFILE** argument.  Execute the following Transact-SQL in Microsoft [!INCLUDE[ssManStudioFull](../../includes/ssmanstudiofull-md.md)] (SSMS):
 ```sql
 USE TestDatabase;
@@ -265,11 +265,11 @@ GO
 TRUNCATE TABLE dbo.myIdentity;  -- for testing
 INSERT INTO dbo.myIdentity
 (FirstName, LastName, BirthDate)
-	SELECT FirstName, LastName, BirthDate
-	FROM OPENROWSET (
-		BULK 'D:\BCP\myIdentity.bcp', 
-		FORMATFILE = 'D:\BCP\myIdentity.fmt'  
-		) AS t1;
+    SELECT FirstName, LastName, BirthDate
+    FROM OPENROWSET (
+        BULK 'D:\BCP\myIdentity.bcp', 
+        FORMATFILE = 'D:\BCP\myIdentity.fmt'  
+        ) AS t1;
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myIdentity;

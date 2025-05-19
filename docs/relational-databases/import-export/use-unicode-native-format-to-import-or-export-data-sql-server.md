@@ -28,7 +28,7 @@ Unicode native format is helpful when information must be copied from one [!INCL
 |[Related Tasks](#RelatedTasks)<p>                                                                                                                                                                                                                  </p>|
   
 ## Command Options for Unicode Native Format<a name="command_options"></a>  
-You can import Unicode native format data into a table using [bcp](../../tools/bcp-utility.md), [BULK INSERT](../../t-sql/statements/bulk-insert-transact-sql.md) or [INSERT ... SELECT * FROM OPENROWSET(BULK...)](../../t-sql/functions/openrowset-transact-sql.md).  For a [bcp](../../tools/bcp-utility.md) command or [BULK INSERT](../../t-sql/statements/bulk-insert-transact-sql.md) statement, you can specify the data format in the statement.  For an [INSERT ... SELECT * FROM OPENROWSET(BULK...)](../../t-sql/functions/openrowset-transact-sql.md) statement, you must specify the data format in a format file.  
+You can import Unicode native format data into a table using [bcp](../../tools/bcp-utility.md), [BULK INSERT](../../t-sql/statements/bulk-insert-transact-sql.md) or [INSERT ... SELECT * FROM OPENROWSET(BULK...)](../../t-sql/functions/openrowset-bulk-transact-sql.md).  For a [bcp](../../tools/bcp-utility.md) command or [BULK INSERT](../../t-sql/statements/bulk-insert-transact-sql.md) statement, you can specify the data format in the statement.  For an [INSERT ... SELECT * FROM OPENROWSET(BULK...)](../../t-sql/functions/openrowset-bulk-transact-sql.md) statement, you must specify the data format in a format file.  
   
 Unicode native format is supported by the following command options:  
   
@@ -52,11 +52,11 @@ GO
 
 USE TestDatabase;
 CREATE TABLE dbo.myWidenative ( 
-	PersonID smallint NOT NULL,
-	FirstName nvarchar(25) NOT NULL,
-	LastName nvarchar(30) NOT NULL,
-	BirthDate date,
-	AnnualSalary money
+    PersonID smallint NOT NULL,
+    FirstName nvarchar(25) NOT NULL,
+    LastName nvarchar(30) NOT NULL,
+    BirthDate date,
+    AnnualSalary money
 );
 
 -- Populate table
@@ -127,10 +127,10 @@ REM Review results is SSMS
 ```sql
 TRUNCATE TABLE TestDatabase.dbo.myWidenative; -- for testing
 BULK INSERT TestDatabase.dbo.myWidenative
-	FROM 'D:\BCP\myWidenative.bcp'
-	WITH (
-		DATAFILETYPE = 'widenative'
-		);
+    FROM 'D:\BCP\myWidenative.bcp'
+    WITH (
+        DATAFILETYPE = 'widenative'
+        );
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myWidenative;
@@ -143,8 +143,8 @@ TRUNCATE TABLE TestDatabase.dbo.myWidenative; -- for testing
 BULK INSERT TestDatabase.dbo.myWidenative
    FROM 'D:\BCP\myWidenative.bcp'
    WITH (
-		FORMATFILE = 'D:\BCP\myWidenative.fmt'
-		);
+        FORMATFILE = 'D:\BCP\myWidenative.fmt'
+        );
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myWidenative;
@@ -155,11 +155,11 @@ SELECT * FROM TestDatabase.dbo.myWidenative;
 ```sql
 TRUNCATE TABLE TestDatabase.dbo.myWidenative;  -- for testing
 INSERT INTO TestDatabase.dbo.myWidenative
-	SELECT *
-	FROM OPENROWSET (
-		BULK 'D:\BCP\myWidenative.bcp', 
-		FORMATFILE = 'D:\BCP\myWidenative.fmt'  
-		) AS t1;
+    SELECT *
+    FROM OPENROWSET (
+        BULK 'D:\BCP\myWidenative.bcp', 
+        FORMATFILE = 'D:\BCP\myWidenative.fmt'  
+        ) AS t1;
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myWidenative;

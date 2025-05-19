@@ -16523,6 +16523,8 @@ items:
             href: t-sql/functions/openquery-transact-sql.md
           - name: OPENROWSET
             href: t-sql/functions/openrowset-transact-sql.md
+          - name: OPENROWSET(BULK)
+            href: t-sql/functions/openrowset-bulk-transact-sql.md
           - name: OPENXML
             href: t-sql/functions/openxml-transact-sql.md
           - name: PREDICT

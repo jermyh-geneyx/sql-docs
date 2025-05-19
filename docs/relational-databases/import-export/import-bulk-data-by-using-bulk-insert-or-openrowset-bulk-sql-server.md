@@ -55,11 +55,13 @@ The OPENROWSET bulk rowset provider is accessed by calling the OPENROWSET functi
 
 To bulk import data, call OPENROWSET(BULK...) from a SELECT...FROM clause within an INSERT statement. The basic syntax for bulk importing data is:
 
+```sql
 INSERT ... SELECT * FROM OPENROWSET(BULK...)
+```
 
 When used in an INSERT statement, OPENROWSET(BULK...) supports table hints. In addition to the regular table hints, such as TABLOCK, the BULK clause can accept the following specialized table hints: IGNORE_CONSTRAINTS (ignores only the CHECK constraints), IGNORE_TRIGGERS, KEEPDEFAULTS, and KEEPIDENTITY. For more information, see [Table Hints (Transact-SQL)](../../t-sql/queries/hints-transact-sql-table.md).
 
-For information about additional uses of the BULK option, see [OPENROWSET (Transact-SQL)](../../t-sql/functions/openrowset-transact-sql.md).
+For information about additional uses of the BULK option, see [OPENROWSET BULK (Transact-SQL)](../../t-sql/functions/openrowset-bulk-transact-sql.md).
 
 ## INSERT...SELECT * FROM OPENROWSET(BULK...) statements - examples
 

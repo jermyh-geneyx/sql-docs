@@ -47,7 +47,7 @@ When using character format, consider:
 <a id="command_options"></a>
 
 ## Command options for character format
-You can import character format data into a table using [bcp](../../tools/bcp-utility.md), [BULK INSERT (Transact-SQL)](../../t-sql/statements/bulk-insert-transact-sql.md), or [OPENROWSET (Transact-SQL)](../../t-sql/functions/openrowset-transact-sql.md). For a [bcp](../../tools/bcp-utility.md) command or [BULK INSERT (Transact-SQL)](../../t-sql/statements/bulk-insert-transact-sql.md) statement, you can specify the data format in the statement. For an [OPENROWSET (Transact-SQL)](../../t-sql/functions/openrowset-transact-sql.md) statement, you must specify the data format in a format file.
+You can import character format data into a table using [bcp](../../tools/bcp-utility.md), [BULK INSERT (Transact-SQL)](../../t-sql/statements/bulk-insert-transact-sql.md), or [OPENROWSET (BULK)](../../t-sql/functions/openrowset-bulk-transact-sql.md). For a [bcp](../../tools/bcp-utility.md) command or [BULK INSERT (Transact-SQL)](../../t-sql/statements/bulk-insert-transact-sql.md) statement, you can specify the data format in the statement. For an [OPENROWSET (BULK)](../../t-sql/functions/openrowset-bulk-transact-sql.md) statement, you must specify the data format in a format file.
   
 Character format is supported by the following command options:  
 

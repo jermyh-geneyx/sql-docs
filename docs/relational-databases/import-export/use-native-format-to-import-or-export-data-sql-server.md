@@ -65,7 +65,7 @@ To import data in native format successfully, ensure that:
      For more information about data conversion, see [Data Type Conversion &#40;Database Engine&#41;](../../t-sql/data-types/data-type-conversion-database-engine.md).  
   
 ## Command options for native format
-You can import native format data into a table using [bcp](../../tools/bcp-utility.md), [BULK INSERT](../../t-sql/statements/bulk-insert-transact-sql.md) or [INSERT ... SELECT * FROM OPENROWSET(BULK...)](../../t-sql/functions/openrowset-transact-sql.md).  For a [bcp](../../tools/bcp-utility.md) command or [BULK INSERT](../../t-sql/statements/bulk-insert-transact-sql.md) statement, you can specify the data format in the statement.  For an [INSERT ... SELECT * FROM OPENROWSET(BULK...)](../../t-sql/functions/openrowset-transact-sql.md) statement, you must specify the data format in a format file.  
+You can import native format data into a table using [bcp](../../tools/bcp-utility.md), [BULK INSERT](../../t-sql/statements/bulk-insert-transact-sql.md) or [INSERT ... SELECT * FROM OPENROWSET(BULK...)](../../t-sql/functions/openrowset-bulk-transact-sql.md).  For a [bcp](../../tools/bcp-utility.md) command or [BULK INSERT](../../t-sql/statements/bulk-insert-transact-sql.md) statement, you can specify the data format in the statement.  For an [INSERT ... SELECT * FROM OPENROWSET(BULK...)](../../t-sql/functions/openrowset-bulk-transact-sql.md) statement, you must specify the data format in a format file.  
 
 Native format is supported by the following command options:  
 
@@ -175,10 +175,10 @@ SQLCMD -Q "SELECT * FROM TestDatabase.dbo.myNative;"
 ```sql
 TRUNCATE TABLE TestDatabase.dbo.myNative; -- for testing
 BULK INSERT TestDatabase.dbo.myNative
-	FROM 'D:\BCP\myNative.bcp'
-	WITH (
-		DATAFILETYPE = 'native'
-		);
+    FROM 'D:\BCP\myNative.bcp'
+    WITH (
+        DATAFILETYPE = 'native'
+        );
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myNative;
@@ -192,8 +192,8 @@ TRUNCATE TABLE TestDatabase.dbo.myNative; -- for testing
 BULK INSERT TestDatabase.dbo.myNative
    FROM 'D:\BCP\myNative.bcp'
    WITH (
-		FORMATFILE = 'D:\BCP\myNative.fmt'
-		);
+        FORMATFILE = 'D:\BCP\myNative.fmt'
+        );
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myNative;
@@ -205,11 +205,11 @@ SELECT * FROM TestDatabase.dbo.myNative;
 ```sql
 TRUNCATE TABLE TestDatabase.dbo.myNative;  -- for testing
 INSERT INTO TestDatabase.dbo.myNative
-	SELECT *
-	FROM OPENROWSET (
-		BULK 'D:\BCP\myNative.bcp', 
-		FORMATFILE = 'D:\BCP\myNative.fmt'  
-		) AS t1;
+    SELECT *
+    FROM OPENROWSET (
+        BULK 'D:\BCP\myNative.bcp', 
+        FORMATFILE = 'D:\BCP\myNative.fmt'  
+        ) AS t1;
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myNative;

@@ -229,7 +229,7 @@ GO
 SELECT * FROM TestDatabase.dbo.myFirstImport;
 ```
 
-### Use [OPENROWSET(BULK...)](../../T-SQL/functions/OPENROWSET-Transact-SQL.md) and [Non-XML Format File](../../relational-databases/import-export/non-XML-format-files-SQL-server.md)
+### Use [OPENROWSET(BULK...)](../../t-sql/functions/openrowset-bulk-transact-sql.md) and [Non-XML Format File](../../relational-databases/import-export/non-XML-format-files-SQL-server.md)
 
 Execute the following Transact-SQL in Microsoft [!INCLUDE[ssManStudioFull](../../includes/ssmanstudiofull-md.md)] (SSMS):
 
@@ -250,7 +250,7 @@ GO
 SELECT * FROM TestDatabase.dbo.myFirstImport;
 ```
 
-### Use [OPENROWSET(BULK...)](../../T-SQL/functions/OPENROWSET-Transact-SQL.md) and [XML Format File](../../relational-databases/import-export/XML-format-files-SQL-server.md)
+### Use [OPENROWSET(BULK...)](../../t-sql/functions/openrowset-bulk-transact-sql.md) and [XML Format File](../../relational-databases/import-export/XML-format-files-SQL-server.md)
 
 Execute the following Transact-SQL in Microsoft [!INCLUDE[ssManStudioFull](../../includes/ssmanstudiofull-md.md)] (SSMS):
 
@@ -282,7 +282,7 @@ SELECT * FROM TestDatabase.dbo.myFirstImport;
 
 - [bcp Utility](../../tools/bcp-utility.md)
 - [BULK INSERT &#40;Transact-SQL&#41;](../../t-sql/statements/bulk-insert-transact-sql.md)
-- [OPENROWSET &#40;Transact-SQL&#41;](../../t-sql/functions/openrowset-transact-sql.md)
+- [OPENROWSET (BULK)](../../t-sql/functions/openrowset-bulk-transact-sql.md)
 - [Non-XML Format Files &#40;SQL Server&#41;](../../relational-databases/import-export/non-xml-format-files-sql-server.md)
 - [XML Format Files &#40;SQL Server&#41;](../../relational-databases/import-export/xml-format-files-sql-server.md)
 - [Format Files for Importing or Exporting Data (SQL Server)](../../relational-databases/import-export/format-files-for-importing-or-exporting-data-sql-server.md)
