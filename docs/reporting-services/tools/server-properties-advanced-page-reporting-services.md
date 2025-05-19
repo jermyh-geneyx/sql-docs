@@ -1,9 +1,9 @@
 ---
 title: "Server properties Advanced page"
 description: Use the Advanced Server Properties page to set system properties on the report server. This tool provides a graphical user interface so that you can set properties without writing code.
-author: kfollis
-ms.author: kfollis
-ms.date: 09/25/2024
+author: petebro
+ms.author: petebro
+ms.date: 05/19/2025
 ms.service: reporting-services
 ms.subservice: tools
 ms.topic: conceptual
