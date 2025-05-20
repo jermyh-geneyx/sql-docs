@@ -91,7 +91,7 @@ WHERE id = 1;
 
 ## Function support
 
-All JSON functions support the **json** type with no code changes or usage difference necessary.
+All JSON functions support the **json** type with no code changes or usage difference necessary, with the exception **OPENJSON**; see [limitations](#limitations).
 
 For a complete list of JSON functions, see [JSON functions](../functions/json-functions-transact-sql.md).
 
