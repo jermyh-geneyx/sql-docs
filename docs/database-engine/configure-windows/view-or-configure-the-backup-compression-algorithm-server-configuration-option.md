@@ -16,9 +16,9 @@ helpviewer_keywords:
 
 [!INCLUDE [SQL Server 2022](../../includes/applies-to-version/sqlserver2022.md)] and later versions
 
-This article describes how to view or configure the `backup compression algorithm` server configuration option in [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)] with [!INCLUDE [tsql](../../includes/tsql-md.md)]. The `backup compression algorithm` option determines which algorithm to use to set the backup.
+This article describes how to view or configure the `backup compression algorithm` server configuration option in [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)] with [!INCLUDE [tsql](../../includes/tsql-md.md)].
 
-The `backup compression algorithm` configuration option is required for you to implement [integrated acceleration and offloading solutions](../../relational-databases/integrated-acceleration/use-integrated-acceleration-and-offloading.md).
+The `backup compression algorithm` option determines which compression algorithm is used by default for backups that use compression. The `backup compression algorithm` configuration option is required for you to implement [integrated acceleration and offloading solutions](../../relational-databases/integrated-acceleration/use-integrated-acceleration-and-offloading.md).
 
 ## Prerequisites
 
@@ -31,11 +31,11 @@ Execute permissions on `sp_configure` with no parameters or with only the first 
 
 ## Backup compression algorithms
 
-SQL Server ships with a default backup compression algorithm, MS_XPRESS.  
+You can use the `backup compression algorithm` option to specify the algorithm used for backup compression. The following algorithms are available:
+- **MS_XPRESS**: The default backup compression algorithm in all editions of SQL Server.
+- **Intel QAT**: The [Intel QuickAssist Technology (QAT) based algorithm](../../relational-databases/integrated-acceleration/use-integrated-acceleration-and-offloading.md) backup compression algorithm. This algorithm is available in [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions.
+- **ZSTD**: The backup compression algorithm that uses the faster and more effective Zstandard (ZSTD) compression algorithm. This algorithm is available in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions.
 
-[!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] shipped with [Intel QuickAssist Technology (QAT) based algorithm](../../relational-databases/integrated-acceleration/use-integrated-acceleration-and-offloading.md). 
-
-[!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] adds a faster and more effective backup compression algorithm, ZSTD. This compression algorithm is available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)].
 
 ## View the backup compression algorithm option
 
@@ -47,8 +47,8 @@ SQL Server ships with a default backup compression algorithm, MS_XPRESS.
 1. From the Standard bar, select **New Query**.
 
 1. Copy and paste the following example into the query window and select **Execute**. This example queries the [sys.configurations](../../relational-databases/system-catalog-views/sys-configurations-transact-sql.md) catalog view to determine the value for `backup compression algorithm`: 
-   - `0` = Backup compression is off.
-   - `1` = SQL Server uses the default backup compression algorithm (MS_XPRESS).
+   - `0` = Backup compression is off, specified by the [backup compression default](view-or-configure-the-backup-compression-default-server-configuration-option.md) option.
+   - `1` = SQL Server uses the MS_XPRESS backup compression algorithm (default).
    - `2` = SQL Server uses the Intel&reg; QAT backup compression algorithm.
    - `3` = SQL Server uses the ZSTD backup compression algorithm.
 
@@ -59,7 +59,7 @@ SQL Server ships with a default backup compression algorithm, MS_XPRESS.
    GO
    ```
 
-## Configure the backup compression default option
+## Configure the backup compression algorithm option
 
 1. In [!INCLUDE [ssmanstudiofull-md](../../includes/ssmanstudiofull-md.md)], connect to the [!INCLUDE [ssDE](../../includes/ssde-md.md)].
 
@@ -73,7 +73,7 @@ SQL Server ships with a default backup compression algorithm, MS_XPRESS.
    RECONFIGURE;
    ```
 
-   To change the default compression algorithm back to the ZSTD algorithm (new in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)]), use the following script:
+   To change the compression algorithm back to the ZSTD algorithm (new in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)]), use the following script:
    
    ```sql
    EXECUTE sp_configure 'backup compression algorithm', 3;
