@@ -82,7 +82,7 @@ The format of the returned JSON is as follows:
 ### Prerequisites
 
 There are 2 prerequisites  that must be meet to use `AI_GENERATE_EMBEDDINGS`:
-- sp_invoke_external_endpoint must be enabled in the database using [sp_configure](../../relational-databases/system-stored-procedures/sp-invoke-external-rest-endpoint-transact-sql.md?view=fabric&tabs=request-headers#permissions&preserve-view=true).
+- sp_invoke_external_endpoint must be enabled in the database using [sp_configure](../../relational-databases/system-stored-procedures/sp-invoke-external-rest-endpoint-transact-sql.md?view=fabric&preserve-view=true&tabs=request-headers#permissions).
 - an [EXTERNAL MODEL](../statements/create-external-model-transact-sql.md) of the `EMBEDDINGS` type that is accessible via the correct grants, roles, and/or permissions. also 
 
 ### Optional parameters
