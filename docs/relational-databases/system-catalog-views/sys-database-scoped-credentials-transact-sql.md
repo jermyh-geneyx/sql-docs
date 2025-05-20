@@ -3,7 +3,7 @@ title: "sys.database_scoped_credentials (Transact-SQL)"
 description: sys.database_scoped_credentials (Transact-SQL)
 author: VanMSFT
 ms.author: vanto
-ms.date: 05/14/2025
+ms.date: 05/19/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: conceptual
@@ -31,7 +31,7 @@ monikerRange: "=azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 |
 |-----------------|---------------|-----------------|  
 | `name` |**sysname**|Name of the database scoped credential. Is unique in the database.|  
 | `credential_id` |**int**|ID of the database scoped credential. Is unique in the database.|  
-| `credential_identity` |**nvarchar(4000)**|Name of the identity to use. This will generally be a Windows user. It does not have to be unique.|  
+| `credential_identity` |**nvarchar(4000)**|Name of the identity to use. It does not have to be unique.|  
 | `create_date` |**datetime**|Time at which the database scoped credential was created.|  
 | `modify_date` |**datetime**|Time at which the database scoped credential was last modified.|  
 | `target_type` |**nvarchar(100)**|Type of database scoped credential. Returns `NULL` for database scoped credentials.|  
@@ -44,7 +44,7 @@ monikerRange: "=azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 |
 | `name` |**sysname**|Name of the database scoped credential. Is unique in the database.|  
 | `credential_id` |**int**|ID of the database scoped credential. Is unique in the database.|  
 | `principal_id` |**int**|ID of the database principal who owns the key.|  
-| `credential_identity` |**nvarchar(4000)**|Name of the identity to use. This will generally be a Windows user. It does not have to be unique.|  
+| `credential_identity` |**nvarchar(4000)**|Name of the identity to use. It does not have to be unique.|  
 | `create_date` |**datetime**|Time at which the database scoped credential was created.|  
 | `modify_date` |**datetime**|Time at which the database scoped credential was last modified.|  
 | `target_type` |**nvarchar(100)**|Type of database scoped credential. Returns `NULL` for database scoped credentials.|  

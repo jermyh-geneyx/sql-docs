@@ -36,7 +36,7 @@ DROP EXTERNAL DATA SOURCE external_data_source_name
 
 ## Metadata
 
- To view a list of external data sources use the `sys.external_data_sources` system view.  
+ To view a list of external data sources, use the `sys.external_data_sources` system view.  
 
 ```sql
 SELECT * FROM sys.external_data_sources;  
