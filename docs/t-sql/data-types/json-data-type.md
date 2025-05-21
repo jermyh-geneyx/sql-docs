@@ -3,8 +3,8 @@ title: JSON data type (preview)
 description: The native JSON data type provides advantages for storing JSON data over varchar or nvarchar. Learn more about the JSON data type.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: randolphwest, jovanpop
-ms.date: 02/07/2025
+ms.reviewer: randolphwest, jovanpop, umajay
+ms.date: 05/21/2025
 ms.service: sql
 ms.topic: reference
 ms.custom:
@@ -91,7 +91,8 @@ WHERE id = 1;
 
 ## Function support
 
-All JSON functions support the **json** type with no code changes or usage difference necessary.
+All JSON functions support the **json** type with no code changes or usage difference necessary. 
+ - `OPENJSON` currently does not support the **json** data type on some platforms. For more information, see [Limitations](#limitations).
 
 For a complete list of JSON functions, see [JSON functions](../functions/json-functions-transact-sql.md).
 
@@ -126,8 +127,8 @@ Using `SELECT ... INTO` with the JSON type creates a table with the JSON type.
 - The behavior of `CAST ( ... AS JSON)` returns a **json** type, but the [sp_describe_first_result_set](../../relational-databases/system-stored-procedures/sp-describe-first-result-set-transact-sql.md) system stored procedure doesn't correctly return the **json** data type. Therefore, many data access clients and driver will see a **varchar** or **nvarchar** data type.
   - Currently, TDS >= 7.4 (with UTF-8) sees **varchar(max)** with `Latin_General_100_bin2_utf8`.
   - Currently, TDS < 7.4 sees **nvarchar(max)** with database collation.
-
-- Currently, the `OPENJSON()` function doesn't accept the **json** type, currently that is an implicit conversion. Explicitly convert to **nvarchar(max)** first.
+- Currently, the `OPENJSON()` function doesn't accept the **json** type in some platforms. Currently, it is an implicit conversion. Explicitly convert to **nvarchar(max)** first.
+  - In SQL Server 2025 (Preview), the `OPENJSON()` function does supports the **json** type. For more information, see [Key JSON capabilities in SQL Server 2025](../../relational-databases/json/json-data-sql-server.md#key-json-capabilities).
 
 ## Related content
 
