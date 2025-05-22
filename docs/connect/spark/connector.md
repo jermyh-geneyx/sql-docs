@@ -1,6 +1,6 @@
 ---
-title: "Apache Spark Connector for SQL Server"
-description: "Learn how to use the Apache Spark connector for SQL Server."
+title: "Apache Spark Connector for SQL Server and Azure SQL"
+description: "Learn how to use the Apache Spark connector for SQL Server and Azure SQL."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: hudequei
@@ -17,11 +17,11 @@ The Apache Spark connector for SQL Server and Azure SQL is a high-performance co
 > [!NOTE]
 > This connector is not actively maintained. This article is only retained for archival purposes.
 
-This library contains the source code for the Apache Spark Connector for SQL Server and Azure SQL.
+This library contains the source code for the Apache Spark Connector for SQL Server and Azure SQL platforms.
 
 [Apache Spark](https://spark.apache.org/) is a unified analytics engine for large-scale data processing.
 
-There are two versions of the connector available through Maven, a 2.4.x compatible version and a 3.0.x compatible version. Both versions can be found [here](https://search.maven.org/search?q=spark-mssql-connector) and can be imported using the coordinates below:
+There are two versions of the connector available through Maven, a 2.4.x compatible version and a 3.0.x compatible version. [Download the connectors from maven.org](https://search.maven.org/search?q=spark-mssql-connector) and can be imported using coordinates:
 
 | Connector | Maven Coordinate |
 | --------- | ------------------ |
