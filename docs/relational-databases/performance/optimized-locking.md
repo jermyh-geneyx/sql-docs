@@ -19,7 +19,7 @@ monikerRange: "=azuresqldb-current || =fabric || >=sql-server-ver17 || >=sql-ser
 
 # Optimized locking
 
-[!INCLUDE [sqlserver2025-asdb-fabric.md](../../includes/applies-to-version/sqlserver2025-asdb-fabric.md)]
+[!INCLUDE [sqlserver2025-asdb-fabric.md](../../includes/applies-to-version/sqlserver2025-asdb-fabricsqldb.md)]
 
 This article introduces optimized locking, a database engine capability that offers an improved transaction locking mechanism to reduce lock memory consumption and blocking for concurrent transactions.
 
@@ -303,7 +303,7 @@ The following improvements help you monitor and troubleshoot blocking and deadlo
     - Under each resource in the deadlock report `<resource-list>`, each `<xactlock>` element reports the underlying resources and specific information for locks of each member of a deadlock. For more information and an example, see [Optimized locking and deadlocks](../sql-server-deadlocks-guide.md#optimized-locking-and-deadlocks).
 - Extended events
     - The `lock_after_qual_stmt_abort` event fires when a statement is internally aborted and restarted because of a conflict with another transaction. For more information, see [Lock after qualification (LAQ)](#lock-after-qualification-laq).
-    - In [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], the `locking_stats` event fires for every database every several minutes and provides aggregate locking statistics for the time interval, such as the number of lock escalations, whether TID locking and LAQ components of optimized locking are enabled, and the the number of queries that were ineligible for LAQ for various reasons. This event fires even if optimized locking is disabled.
+    - In [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], the `locking_stats` event fires for every database every several minutes and provides aggregate locking statistics for the time interval, such as the number of lock escalations, whether TID locking and LAQ components of optimized locking are enabled, and the number of queries that were ineligible for LAQ for various reasons. This event fires even if optimized locking is disabled.
 
 ## Best practices with optimized locking
 
