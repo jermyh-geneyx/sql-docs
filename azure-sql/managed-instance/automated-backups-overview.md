@@ -305,7 +305,11 @@ For a full list of built-in policy definitions for SQL Managed Instance, review 
 > [!IMPORTANT]
 > Azure policies are not enforced when you're creating a database via T-SQL. To enforce data residency when you're creating a database by using T-SQL, [use LOCAL or ZONE as input to the BACKUP_STORAGE_REDUNDANCY parameter in the CREATE DATABASE statement](/sql/t-sql/statements/create-database-transact-sql#create-database-using-zone-redundancy-for-backups).
 
-## Compliance
+## Backup protection
+
+Azure SQL Managed Instance backups are managed entirely within Microsoft-owned Azure subscriptions using secure, internal Azure Storage accounts. These backups are not accessible externally, ensuring strong data isolation and protection. Within Microsoft, only backend services such as the Backup-Restore service has access to create, copy or restore these backups. Microsoft engineers, including developers, do not have standing access. To minimize exposure and maximize security, Microsoft can only obtain Just-In-Time (JIT) access under strict audit controls  when absolutely necessary to troubleshoot specific customer issues.
+
+## Compliance through backup retention
 
 If the default retention doesn't meet your compliance requirements, you can change the PITR retention period. For more information, see [Change the PITR backup retention period](automated-backups-change-settings.md#change-short-term-retention-policy).
 
