@@ -21,7 +21,7 @@ This library contains the source code for the Apache Spark Connector for SQL Ser
 
 [Apache Spark](https://spark.apache.org/) is a unified analytics engine for large-scale data processing.
 
-There are two versions of the connector available through Maven, a 2.4.x compatible version and a 3.0.x compatible version. [Download the connectors from maven.org](https://search.maven.org/search?q=spark-mssql-connector) and can be imported using coordinates:
+There are two versions of the connector available through Maven, a 2.4.x compatible version and a 3.0.x compatible version. [Download the connectors from maven.org](https://search.maven.org/search?q=spark-mssql-connector) and import them using coordinates:
 
 | Connector | Maven Coordinate |
 | --------- | ------------------ |
@@ -52,11 +52,11 @@ You can also build the connector from source or download the jar from the Releas
 
 The Apache Spark Connector for SQL Server and Azure SQL supports the options defined here: [SQL DataSource JDBC](https://spark.apache.org/docs/latest/sql-data-sources-jdbc.html)
 
-In addition following options are supported
+In addition, following options are supported:
 
 | Option | Default | Description |
 | --------- | ------------------ | ------------------------------------------ |
-| `reliabilityLevel` | `BEST_EFFORT` | `BEST_EFFORT` or `NO_DUPLICATES`. `NO_DUPLICATES` implements an reliable insert in executor restart scenarios |
+| `reliabilityLevel` | `BEST_EFFORT` | `BEST_EFFORT` or `NO_DUPLICATES`. `NO_DUPLICATES` implements a reliable insert in executor restart scenarios |
 | `dataPoolDataSource` | `none` | `none` implies the value is not set and the connector should write to SQL Server single instance. Set this value to data source name to write a data pool table in Big Data Clusters|
 | `isolationLevel` | `READ_COMMITTED` | Specify the [isolation level](../../t-sql/statements/set-transaction-isolation-level-transact-sql.md) |
 | `tableLock` | `false` | Implements an insert with `TABLOCK` option to improve write performance |
@@ -70,7 +70,7 @@ Apache Spark Connector for SQL Server and Azure SQL is up to 15x faster than gen
 
 | Connector Type | Options | Description |  Time to write |
 | --------- | ------------------ | -------------------------------------| ---------- |
-| `JDBCConnector` | Default | Generic JDBC connector with default options |  1385 seconds |
+| `JDBCConnector` | Default | Generic JDBC connector with default options |  1,385 seconds |
 | `sql-spark-connector` | `BEST_EFFORT` | Best effort `sql-spark-connector`  with default options |580 seconds |
 | `sql-spark-connector` | `NO_DUPLICATES ` | Reliable `sql-spark-connector` | 709 seconds |
 | `sql-spark-connector` | `BEST_EFFORT` + tabLock=true | Best effort `sql-spark-connector` with table lock enabled | 72 seconds |
@@ -166,7 +166,7 @@ except ValueError as error :
 
 ## Specify the isolation level
 
-This connector by default uses `READ_COMMITTED` isolation level when performing the bulk insert into the database. If you wish to override the isolation level, use the `mssqlIsolationLevel` option as shown below.
+This connector by default uses `READ_COMMITTED` isolation level when performing the bulk insert into the database. If you wish to override the isolation level, use the `mssqlIsolationLevel` option:
 
 ```python
     .option("mssqlIsolationLevel", "READ_UNCOMMITTED") \
