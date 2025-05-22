@@ -16,7 +16,7 @@ ms.topic: conceptual
   The **dtexec** command prompt utility is used to configure and execute [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] [!INCLUDE[ssISnoversion](../../includes/ssisnoversion-md.md)] packages. The **dtexec** utility provides access to all the package configuration and execution features, such as parameters, connections, properties, variables, logging, and progress indicators. The **dtexec** utility lets you load packages from these sources: the [!INCLUDE[ssISnoversion](../../includes/ssisnoversion-md.md)] server, an .ispac project file, a [!INCLUDE[msCoName](../../includes/msconame-md.md)] [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] database, the [!INCLUDE[ssIS](../../includes/ssis-md.md)] Package Store, and the file system.  
   
 > [!NOTE]  
-> When you use the current version of the **dtexec** utility to run a package created by an earlier version of [!INCLUDE[ssISnoversion](../../includes/ssisnoversion-md.md)], the utility temporarily upgrades the package to the current package format. However, you cannot use the **dtexec** utility to save the upgraded package. For more information about how to permanently upgrade a package to the current version, see [Upgrade Integration Services Packages](../../integration-services/install-windows/upgrade-integration-services-packages.md).  
+> When you use the current version of the **dtexec** utility to run a package created by an earlier version of [!INCLUDE[ssISnoversion](../../includes/ssisnoversion-md.md)], the utility temporarily upgrades the package to the current package format. However, you can't use the **dtexec** utility to save the upgraded package. For more information about how to permanently upgrade a package to the current version, see [Upgrade Integration Services Packages](../../integration-services/install-windows/upgrade-integration-services-packages.md).  
   
  This topic includes the following sections:  
   
@@ -105,8 +105,8 @@ DTExec /ISSERVER "\SSISDB\folderB\Integration Services Project17\Package.dtsx" /
 |0|The package executed successfully.|  
 |1|The package failed.|  
 |3|The package was canceled by the user.|  
-|4|The utility was unable to locate the requested package. The package could not be found.|  
-|5|The utility was unable to load the requested package. The package could not be loaded.|  
+|4|The utility was unable to locate the requested package. The package couldn't be found.|  
+|5|The utility was unable to load the requested package. The package couldn't be loaded.|  
 |6|The utility encountered an internal error of syntactic or semantic errors in the command line.|  
   
 ##  <a name="syntaxRules"></a> Syntax Rules  
@@ -114,7 +114,7 @@ DTExec /ISSERVER "\SSISDB\folderB\Integration Services Project17\Package.dtsx" /
   
  All options must start with a slash (/) or a minus sign (-). The options that are shown here start with a slash (/), but the minus sign (-) can be substituted.  
   
- An argument must be enclosed in quotation marks if it contains a space. If the argument is not enclosed in quotation marks, the argument cannot contain white space.  
+ An argument must be enclosed in quotation marks if it contains a space. If the argument isn't enclosed in quotation marks, the argument can't contain white space.  
   
  Doubled quotation marks within quoted strings represent escaped single quotation marks.  
   
@@ -161,11 +161,11 @@ dtexec /option [value] [/option [value]]...
   
 -   **/Ca[llerInfo]**: (Optional). Specifies additional information for a package execution. When you run a package using SQL Server Agent, agent sets this argument to indicate that the package execution is invoked by SQL Server Agent. This parameter is ignored when the **dtexec** utility is run from the command line.  
   
--   **/CheckF[ile]** _filespec_: (Optional). Sets the **CheckpointFileName** property on the package to the path and file spemandcified in *filespec*. This file is used when the package restarts. If this option is specified and no value is supplied for the file name, the **CheckpointFileName** for the package is set to an empty string. If this option is not specified, the values in the package are retained.  
+-   **/CheckF[ile]** _filespec_: (Optional). Sets the **CheckpointFileName** property on the package to the path and file spemandcified in *filespec*. This file is used when the package restarts. If this option is specified and no value is supplied for the file name, the **CheckpointFileName** for the package is set to an empty string. If this option isn't specified, the values in the package are retained.  
   
 -   **/CheckP[ointing]** _{on\off}_ : (Optional). Sets a value that determines whether the package will use checkpoints during package execution. The value **on** specifies that a failed package is to be rerun. When the failed package is rerun, the run-time engine uses the checkpoint file to restart the package from the point of failure.  
   
-     The default value is on if the option is declared without a value. Package execution will fail if the value is set to on and the checkpoint file cannot be found. If this option is not specified, the value set in the package is retained. For more information, see [Restart Packages by Using Checkpoints](../../integration-services/packages/restart-packages-by-using-checkpoints.md).  
+     The default value is on if the option is declared without a value. Package execution will fail if the value is set to on and the checkpoint file can't be found. If this option isn't specified, the value set in the package is retained. For more information, see [Restart Packages by Using Checkpoints](../../integration-services/packages/restart-packages-by-using-checkpoints.md).  
   
      The **/CheckPointing on** option of dtexec is equivalent to setting the **SaveCheckpoints** property of the package to True, and the **CheckpointUsage** property to Always.  
   
@@ -173,7 +173,7 @@ dtexec /option [value] [/option [value]]...
   
 -   **/Conf[igFile]** _filespec_: (Optional). Specifies a configuration file to extract values from. Using this option, you can set a run-time configuration that differs from the configuration that was specified at design time for the package. You can store different configuration settings in an XML configuration file and then load the settings before package execution by using the **/ConfigFile** option.  
   
-     You can use the **/ConfigFile** option to load additional configurations at run time that you did not specify at design time. However, you cannot use the **/ConfigFile** option to replace configured values that you also specified at design time. To understand how package configurations are applied, see [Package Configurations](./legacy-package-deployment-ssis.md).  
+     You can use the **/ConfigFile** option to load additional configurations at run time that you did not specify at design time. However, you can't use the **/ConfigFile** option to replace configured values that you also specified at design time. To understand how package configurations are applied, see [Package Configurations](./legacy-package-deployment-ssis.md).  
   
 -   **/Conn[ection]** _id_or_name;connection_string [[;id_or_name;connection_string]...]_: (Optional). Specifies that the connection manager with the specified name or GUID is located in the package, and specifies a connection string.  
   
@@ -226,7 +226,7 @@ dtexec /option [value] [/option [value]]...
   
      The *package_path* argument specifies the relative path of the [!INCLUDE[ssIS](../../includes/ssis-md.md)] package, starting at the root of the SSIS Package Store, and includes the name of the [!INCLUDE[ssIS](../../includes/ssis-md.md)] package. If the path or file name specified in the *package_path* argument contains a space, you must put quotation marks around the *package_path* argument.  
   
-     The **/DTS** option cannot be used together with the **/File** or **/SQL** option. If multiple options are specified, **dtexec** fails.  
+     The **/DTS** option can't be used together with the **/File** or **/SQL** option. If multiple options are specified, **dtexec** fails.  
   
 -   **/De[crypt]**  _password_: (Optional). Sets the decryption password that is used when you load a package with password encryption.  
   
@@ -273,7 +273,7 @@ dtexec /option [value] [/option [value]]...
 
   The *filespec* argument specifies the path and file name of the package. You can specify the path as either a Universal Naming Convention (UNC) path or a local path. If the path or file name specified in the *filespec* argument contains a space, you must put quotation marks around the *filespec* argument.  
   
--   The **/File** option cannot be used together with the **/DTS** or **/SQL** option. If multiple options are specified, **dtexec** fails.
+-   The **/File** option can't be used together with the **/DTS** or **/SQL** option. If multiple options are specified, **dtexec** fails.
   
 -   **/H[elp]** [*option_name*]: (Optional). Displays help for the options, or displays help for the specified *option_name* and closes the utility.  
   
@@ -289,7 +289,7 @@ dtexec /option [value] [/option [value]]...
   
      You use **/Server** option together with the **/ISSERVER** option. Only Windows Authentication can execute a package on the SSIS Server. The current Windows user is used to access the package. If the /Server option is omitted, the default local instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] is assumed.  
   
-     The **/ISSERVER** option cannot be used together with the **/DTS**, **/SQL** or **/File** option. If multiple options are specified, dtexec fails.  
+     The **/ISSERVER** option can't be used together with the **/DTS**, **/SQL** or **/File** option. If multiple options are specified, dtexec fails.  
   
      This parameter is used by SQL Server Agent.  
   
@@ -380,15 +380,15 @@ dtexec /option [value] [/option [value]]...
   
      **V** Verbose reporting.  
   
-     The arguments of V and N are mutually exclusive to all other arguments; they must be specified alone. If the **/Reporting** option is not specified then the default level is **E** (errors), **W** (warnings), and **P** (progress).  
+     The arguments of V and N are mutually exclusive to all other arguments; they must be specified alone. If the **/Reporting** option isn't specified then the default level is **E** (errors), **W** (warnings), and **P** (progress).  
   
      All events are preceded with a timestamp in the format "YY/MM/DD HH:MM:SS", and a GUID or friendly name if available.  
   
      The optional parameter *event_guid_or_name* is a list of exceptions to the log providers. The exception specifies the events that are not logged that otherwise might have been logged.  
   
-     You do not have to exclude an event if the event is not ordinarily logged by default  
+     You do not have to exclude an event if the event isn't ordinarily logged by default  
   
--   **/Res[tart]** {*deny | force | ifPossible*}: (Optional). Specifies a new value for the <xref:Microsoft.SqlServer.Dts.Runtime.Package.CheckpointUsage%2A> property on the package. The meaning of the parameters are as follows:  
+-   **/Res[tart]** {*deny | force | ifPossible*}: (Optional). Specifies a new value for the <xref:Microsoft.SqlServer.Dts.Runtime.Package.CheckpointUsage%2A> property on the package. The meanings of the parameters are as follows:  
   
      *Deny* Sets <xref:Microsoft.SqlServer.Dts.Runtime.Package.CheckpointUsage%2A> property to <xref:Microsoft.SqlServer.Dts.Runtime.Wrapper.DTSCheckpointUsage.DTSCU_NEVER>.  
   
@@ -412,7 +412,7 @@ dtexec /option [value] [/option [value]]...
   
      `/Project c:\project.ispac /Package Package1.dtsx /SET \Package.Variables[$Package::Parameter];1 /SET \Package.Variables[$Project::Parameter];1`  
   
-     You can use the **/Set** option to change the location from which package configurations are loaded. However, you cannot use the **/Set** option to override a value that was specified by a configuration at design time. To understand how package configurations are applied, see [Package Configurations](./legacy-package-deployment-ssis.md) and [Behavior Changes to Integration Services Features in SQL Server 2016](/previous-versions/sql/sql-server-2016/bb500430(v=sql.130)).  
+     You can use the **/Set** option to change the location from which package configurations are loaded. However, you can't use the **/Set** option to override a value that was specified by a configuration at design time. To understand how package configurations are applied, see [Package Configurations](./legacy-package-deployment-ssis.md) and [Behavior Changes to Integration Services Features in SQL Server 2016](/previous-versions/sql/sql-server-2016/bb500430(v=sql.130)).  
   
 -   **/Ser[ver]** _server_: (Optional). When the **/SQL** or **/DTS** option is specified, this option specifies the name of the server from which to retrieve the package. If you omit the **/Server** option and the **/SQL** or **/DTS** option is specified, package execution is tried against the local server. The *server_instance* value may be quoted.  
   
@@ -433,7 +433,7 @@ dtexec /option [value] [/option [value]]...
   
 -   If the **/Server** option is omitted, the default local instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] is assumed.  
   
-     The **/SQL** option cannot be used together with the **/DTS** or **/File** option. If multiple options are specified, **dtexec** fails.  
+     The **/SQL** option can't be used together with the **/DTS** or **/File** option. If multiple options are specified, **dtexec** fails.  
   
 -   **/Su[m]**: (Optional). Shows an incremental counter that contains the number of rows that will be received by the next component.  
   
@@ -442,7 +442,7 @@ dtexec /option [value] [/option [value]]...
     > [!IMPORTANT]  
     > [!INCLUDE[ssNoteWinAuthentication](../../includes/ssnotewinauthentication-md.md)]  
   
--   **/Va[lidate]**: (Optional). Stops the execution of the package after the validatation phase, without actually running the package. During validation, use of the **/WarnAsError** option causes **dtexec** to treat a warning as an error; therefore the package fails if a warning occurs during validation.  
+-   **/Va[lidate]**: (Optional). Stops the execution of the package after the validation phase, without actually running the package. During validation, use of the **/WarnAsError** option causes **dtexec** to treat a warning as an error; therefore the package fails if a warning occurs during validation.  
   
 -   **/VerifyB[uild]** _major_[*;minor*[*;build*]]: (Optional). Verifies the build number of a package against the build numbers that were specified during the verification phase in the *major*, *minor*, and *build* arguments. If a mismatch occurs, the package will not execute.  
   
@@ -456,7 +456,7 @@ dtexec /option [value] [/option [value]]...
   
 -   **/VerifyP[ackageID]** _packageID_: (Optional). Verifies the GUID of the package to be executed by comparing it to the value specified in the *package_id* argument.  
   
--   **/VerifyS[igned]**: (Optional). Causes [!INCLUDE[ssISnoversion](../../includes/ssisnoversion-md.md)] to check the digital signature of the package. If the package is not signed or the signature is not valid, the package fails. For more information, see [Identify the Source of Packages with Digital Signatures](../../integration-services/security/identify-the-source-of-packages-with-digital-signatures.md).  
+-   **/VerifyS[igned]**: (Optional). Causes [!INCLUDE[ssISnoversion](../../includes/ssisnoversion-md.md)] to check the digital signature of the package. If the package isn't signed or the signature isn't valid, the package fails. For more information, see [Identify the Source of Packages with Digital Signatures](../../integration-services/security/identify-the-source-of-packages-with-digital-signatures.md).  
   
     > [!IMPORTANT]  
     > When configured to check the signature of the package, [!INCLUDE[ssISnoversion](../../includes/ssisnoversion-md.md)] only checks whether the digital signature is present, is valid, and is from a trusted source. [!INCLUDE[ssISnoversion](../../includes/ssisnoversion-md.md)] does not check whether the package has been changed.  
@@ -470,7 +470,7 @@ dtexec /option [value] [/option [value]]...
   
      If you do not include the *Filespec* parameter, Integration Services will not enable a log provider for text files. Integration Services will only write log events to the log providers that were enabled when the package was designed.  
   
--   **/W[arnAsError]**: (Optional). Causes the package to consider a warning as an error; therefore, the package will fail if a warning occurs during validation. If no warnings occur during validation and the **/Validate** option is not specified, the package is executed.  
+-   **/W[arnAsError]**: (Optional). Causes the package to consider a warning as an error; therefore, the package will fail if a warning occurs during validation. If no warnings occur during validation and the **/Validate** option isn't specified, the package is executed.  
   
 -   **/X86**: (Optional). Causes [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Agent to run the package in 32-bit mode on a 64-bit computer. This option is set by [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Agent when the following conditions are true:  
   
@@ -539,7 +539,7 @@ dtexec /f "c:\pkgOne.dtsx" /conf "c:\pkgOneConfig.cfg"
 ```  
   
 > [!NOTE]  
-> The *package_path* or *filespec* arguments of the /SQL, /DTS, or /FILE options must be enclosed in quotation marks if the path or file name contains a space. If the argument is not enclosed in quotation marks, the argument cannot contain white space.  
+> The *package_path* or *filespec* arguments of the /SQL, /DTS, or /FILE options must be enclosed in quotation marks if the path or file name contains a space. If the argument isn't enclosed in quotation marks, the argument can't contain white space.  
   
  **Logging Option**  
   
