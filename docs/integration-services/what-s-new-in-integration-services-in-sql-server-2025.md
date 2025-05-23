@@ -40,10 +40,10 @@ This [**legacy Integration Services** Service](service/integration-services-serv
 
 Integration Services 32-bit mode is deprecated in [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] Integration Services engine. Tools including SQL Server Management Studio 21 and SQL Server Integration Services Projects 2022 supports 64-bit only in current version and onward.
 
-### SDS connection type
+### SqlClient Data Provider (SDS) connection type
 
 SDS connection type is deprecated.
-When editing SSIS package in SSIS Visual Studio extension, in Maintenance Tasks (Including Back Up Database Task, Check Database Integrity Task, Execute SQL Server Agent Job Task, Execute T-SQL Statement Task, History Cleanup Task, and Maintenance Cleanup Task) and For Each loop container, you can explicitly choose this connection type "SDS" when "New" a connection. The SDS connection type is deprecated. You're recommended to migrate to ADO.NET connection type.
+When editing SSIS package in SSIS Visual Studio extension, in Maintenance Tasks (Including Back Up Database Task, Check Database Integrity Task, Execute SQL Server Agent Job Task, Execute T-SQL Statement Task, History Cleanup Task, and Maintenance Cleanup Task) and For Each loop container (including ADO.NET Schema Rowset Enumerator and Foreach SMO Enumerator), you can explicitly choose this connection type "SqlClient Data Provider" when "New" a connection. The SDS connection type is deprecated. You're recommended to migrate to ADO.NET connection type.
 
 ## Features moved out of SQL Server 2025 Preview Integration Services
 
