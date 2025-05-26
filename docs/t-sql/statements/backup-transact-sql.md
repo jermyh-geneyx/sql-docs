@@ -419,27 +419,32 @@ At installation, the default behavior is no backup compression. But this default
 
 For information about using backup compression with [Transparent Data Encryption (TDE)](../../relational-databases/security/encryption/transparent-data-encryption.md) enabled databases, see the [Remarks](#remarks) section.
 
-The ZSTD compression algorithm was introduced in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)]. This compression algorithm is available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)].
+The ZSTD compression algorithm is available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)].
 
-COMPRESSION    
+**COMPRESSION**   
 
 Explicitly enables backup compression.
 
-NO_COMPRESSION    
+**NO_COMPRESSION**  
 
 Explicitly disables backup compression.
 
-LEVEL
+**LEVEL**   
+:::image type="icon" source="../../includes/media/yes-icon.svg" border="false"::: Applies to [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions. 
 
-Applies to [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions. Optional compression level. Affects for `ALGORITHM = ZSTD` and `ALGORITHM = MS_EXPRESS` only. Default is `LOW`.
+This is an optional parameter that specifies the compression level. Affects `ALGORITHM = MS_EXPRESS`, and, starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], `ALGORITHM = ZSTD`. 
 
-The ZSTD compression algorithm is available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)].
+Acceptable values are: 
+- `LOW` (default)
+- `MEDIUM`
+- `HIGH`
 
-ALGORITHM
+**ALGORITHM**  
+:::image type="icon" source="../../includes/media/yes-icon.svg" border="false"::: Applies to [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions. 
 
-Applies to [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions. ZSTD and MS_EXPRESS are software-level algorithms. QAT_DEFLATE is hardware-based algorithm requiring Intel&reg; QuickAssist Technology (QAT) for SQL Server. The default is `MS_XPRESS`. 
+ZSTD and MS_EXPRESS are software-level algorithms. QAT_DEFLATE is hardware-based algorithm requiring Intel&reg; QuickAssist Technology (QAT) for SQL Server. The default is `MS_XPRESS`. 
 
-The ZSTD compression algorithm is available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)]. To use ZSTD:
+To use the ZSTD compression algorithm introduced in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)]: 
 
 ```sql
 BACKUP DATABASE <database_name> TO DISK WITH COMPRESSION (ALGORITHM = ZSTD, LEVEL = MEDIUM)
@@ -455,8 +460,8 @@ Sample behaviors:
 
 | BACKUP STATEMENT                                                                 | OUTCOME                                                                                     |
 |---------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| `BACKUP DATABASE <database_name> TO {DISK\|TAPE\|URL}`                            | Backup without any compression                                         |
-| `BACKUP DATABASE <database_name> TO {DISK\|TAPE\|URL} WITH COMPRESSION`          | Backup with compression using MS_XPRESS algorithm                           |
+| `BACKUP DATABASE <database_name> TO {DISK\|TAPE\|URL} WITH NO_COMPRESSION`        | Backup without any compression |
+| `BACKUP DATABASE <database_name> TO {DISK\|TAPE\|URL} WITH COMPRESSION`          | Backup with compression using the algorithm specified by the server option `backup compression algorithm` (default MS_XPRESS)    |
 | `BACKUP DATABASE <database_name> TO {DISK\|TAPE\|URL} WITH COMPRESSION (ALGORITHM = MS_XPRESS)` | Backup with compression using MS_XPRESS algorithm  |
 | `BACKUP DATABASE <database_name> TO {DISK\|TAPE\|URL} WITH COMPRESSION (ALGORITHM = ZSTD)`     | Backup with compression using ZSTD algorithm. |
 | `BACKUP DATABASE <database_name> TO {DISK\|TAPE\|URL} WITH COMPRESSION (ALGORITHM = ZSTD, LEVEL = HIGH)` | Backup with compression using ZSTD algorithm with compression level HIGH.                  |

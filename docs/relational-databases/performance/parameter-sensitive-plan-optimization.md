@@ -327,63 +327,11 @@ PSP optimization provides audit data for the dispatcher plan statement, and any 
 #### Access violation exception occurs in Query Store in SQL Server 2022 under certain conditions
 
 > [!NOTE]  
-> Starting with [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] Cumulative Update 7, several fixes for a race condition which can lead to an access violation have been released. If access violations related to PSP optimization with Query Store integration occur after applying Cumulative Update 7 for [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], consider the following workaround section.
+> [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] [Cumulative Update 7](/troubleshoot/sql/releases/sqlserver-2022/cumulativeupdate7) released several fixes for a race condition that can lead to an access violation.
 
-This issue occurs because of a race condition that can be caused when the runtime statistics for an executed query are being persisted from the in memory representation of the Query Store (found in the `MEMORYCLERK_QUERYDISKSTORE_HASHMAP` memory clerk) to the on disk version of the Query Store. The runtime statistics, shown as Runtime Stats, are kept in memory for a period of time, defined by the `DATA_FLUSH_INTERVAL_SECONDS` option of the `SET QUERY_STORE` statement (the default value is 15 minutes). You can use the Management Studio Query Store dialog box to enter a value for Data Flush Interval (Minutes), which is internally converted to seconds. If the system is under memory pressure, runtime statistics can be flushed to disk earlier than defined with the `DATA_FLUSH_INTERVAL_SECONDS` option. When additional Query Store background threads related to Query Store query plan cleanup (that is, `STALE_QUERY_THRESHOLD_DAYS` and/or `MAX_STORAGE_SIZE_MB` Query Store options), queries from the Query Store, there is a scenario in which a query variant and/or its associated dispatcher statement can become dereferenced prematurely. This can result in an access violation during insert or delete operations of query variants into the Query Store.
+This issue occured because of a race condition that can be caused when the runtime statistics for an executed query are being persisted from the in memory representation of the Query Store (found in the `MEMORYCLERK_QUERYDISKSTORE_HASHMAP` memory clerk) to the on disk version of the Query Store. The runtime statistics, shown as Runtime Stats, are kept in memory for a period of time, defined by the `DATA_FLUSH_INTERVAL_SECONDS` option of the `SET QUERY_STORE` statement (the default value is 15 minutes). You can use the Management Studio Query Store dialog box to enter a value for Data Flush Interval (Minutes), which is internally converted to seconds. If the system is under memory pressure, runtime statistics can be flushed to disk earlier than defined with the `DATA_FLUSH_INTERVAL_SECONDS` option. When additional Query Store background threads related to Query Store query plan cleanup (that is, `STALE_QUERY_THRESHOLD_DAYS` and/or `MAX_STORAGE_SIZE_MB` Query Store options), queries from the Query Store, there is a scenario in which a query variant and/or its associated dispatcher statement can become dereferenced prematurely. This can result in an access violation during insert or delete operations of query variants into the Query Store.
 
 Refer to the [Remarks](how-query-store-collects-data.md#remarks) section of the How Query Store Collects Data article for more information around Query Store operations.
-
-**Workaround**: The query variants that are in the Query Store can be removed, or the PSP feature can be temporarily disabled at the query or database level until additional fixes become available if your system is still experiencing access violations in Query Store with PSP integration enabled after applying Cumulative Update 7 for [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)].
-
-- To disable PSP optimization at the database level, use the `ALTER DATABASE SCOPED CONFIGURATION SET PARAMETER_SENSITIVE_PLAN_OPTIMIZATION = OFF` database scoped configuration.
-- To disable PSP optimization at the query level, use the `DISABLE_PARAMETER_SENSITIVE_PLAN` query hint.
-
-To remove all of the query variants from the Query Store, not just the query variants that appear in the [sys.query_store_query_variant (Transact-SQL)](../system-catalog-views/sys-query-store-query-variant.md#sysquery_store_query_variant-transact-sql) catalog view, a query similar to the following one can be used. Replace `[<database>]` with the appropriate database that was experiencing issues:
-
-```sql
-USE master;
-GO
-
---Temporarily turn Query Store off in order to remove query variant plans as well as to
---clear the Query Store in-memory representation of Query Store (HashMap) for a particular database
-ALTER DATABASE [<database>] SET QUERY_STORE = OFF;
-GO
-
-USE [<database>];
-GO
-
-DECLARE @QueryIDsCursor CURSOR;
-DECLARE @QueryID BIGINT;
-BEGIN
- -- Getting the cursor for query IDs for query variant plans
-    SET @QueryIDsCursor = CURSOR FAST_FORWARD FOR
-    SELECT query_id
-        FROM sys.query_store_plan
-    WHERE plan_type = 2 --query variant plans
-    ORDER BY query_id;
- 
- -- Using a non-set based method for this example query
-    OPEN @QueryIDsCursor
-        FETCH NEXT FROM @QueryIDsCursor
-        INTO @QueryID
-        WHILE @@FETCH_STATUS = 0
-    BEGIN
-
- -- Deleting query variant(s) from the Query Store
-        EXEC sp_query_store_remove_query @query_id = @QueryID;
-        FETCH NEXT FROM @QueryIDsCursor
-        INTO @QueryID
-    END;
-    CLOSE @QueryIDsCursor ;
-    DEALLOCATE @QueryIDsCursor;
-END;
-
---Turn Query Store back on
-ALTER DATABASE [<database>] SET QUERY_STORE = ON;
-GO
-```
-
-If your Query Store is large, or if your system has a substantial workload and/or high number of ad hoc non-parameterized queries that qualify for capturing by Query Store, turning off the Query Store might take some time. To forcibly turn off the Query Store in these scenarios, use the `ALTER DATABASE [<database>] SET QUERY_STORE = OFF (FORCED)` command instead, in the previous sample T-SQL. To find non-parameterized queries, see [Find non-parameterized queries in Query Store](best-practice-with-the-query-store.md#find-non-parameterized-queries-in-query-store).
 
 ## Related content
 
