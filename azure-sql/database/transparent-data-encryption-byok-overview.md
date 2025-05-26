@@ -181,7 +181,7 @@ When TDE is configured to use a customer-managed key, continuous access to the T
 
 If the database is inaccessible due to an intermittent networking outage (such as a 5XX error), no action is required, as the databases will come back online automatically. To reduce the impact of network errors or outages when accessing the TDE protector in Azure Key Vault, a 24-hour buffer has been introduced before the service attempts to move the database to an inaccessible state. If a failover occurs before reaching the inaccessible state, the database becomes unavailable due to the loss of the encryption cache.
 
-If the server loses access to the customer-managed TDE protector in Azure Key Vault due to any [Azure Key Vault error](transparent-data-encrytpion-byok-overview#accidental-tde-protector-access-revocation) (such as a 4XX error), the database will be moved to an inaccessible state after 30 minutes.
+If the server loses access to the customer-managed TDE protector in Azure Key Vault due to any [Azure Key Vault error](#accidental-tde-protector-access-revocation) (such as a 4XX error), the database will be moved to an inaccessible state after 30 minutes.
 
 ### Restore database access after an Azure Key Vault error
 
@@ -321,7 +321,7 @@ For more information, see [Azure Key Vault availability and redundancy](/azure/k
 
 - Use failover groups for Azure SQL MI and Azure SQL DB for disaster recovery to a secondary region. For more information, see [Failover groups overview & best practices](failover-group-sql-db.md).
 
-- When a database is part of active geo-replication or failover groups and becomes [inaccessible](transparent-data-encrytpion-byok-overview#inaccessible-tde-protector), the SQL control plane breaks the link and converts the database into a standalone database. After fixing the key permissions, the primary database can typically be brought back online. The secondary database cannot be brought back online because Azure SQL does not take full backups for secondary databases by design. The recommendation is to drop the secondary database(s) and re-establish the link.
+- When a database is part of active geo-replication or failover groups and becomes [inaccessible](#inaccessible-tde-protector), the SQL control plane breaks the link and converts the database into a standalone database. After fixing the key permissions, the primary database can typically be brought back online. The secondary database cannot be brought back online because Azure SQL does not take full backups for secondary databases by design. The recommendation is to drop the secondary databases and re-establish the link.
 
 - The configuration might require a more complex DNS zone if private endpoints are used in Azure SQL (for example, it can't create two private endpoints to the same resource in the same DNS zone).
 
