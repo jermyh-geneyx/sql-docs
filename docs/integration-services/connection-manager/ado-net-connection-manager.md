@@ -62,7 +62,7 @@ For more information about the properties that you can set in [!INCLUDE [ssIS](.
 
 Use the **Configure ADO.NET Connection Manager** dialog box to add a connection to a data source that can be accessed by using a .NET Framework data provider. For example, one such provider is the SqlClient provider. The connection manager can use an existing connection, or you can create a new one.  
   
- To learn more about the ADO.NET connection manager, see [ADO.NET Connection Manager](../../integration-services/connection-manager/ado-net-connection-manager.md).  
+ To learn more about the ADO.NET connection manager, see [ADO.NET Connection Manager](#adonet-connection-manager).
   
 #### Options  
 
