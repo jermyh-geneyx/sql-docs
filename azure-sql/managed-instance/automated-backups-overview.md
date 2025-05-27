@@ -41,9 +41,9 @@ Use these backups to restore your database to a specific point in time within th
 
 Azure SQL Managed Instance creates:
 
-- [Full backups](/sql/relational-databases/backup-restore/full-database-backups-sql-server)
-- [Differential backups](/sql/relational-databases/backup-restore/differential-backups-sql-server)
-- [Transaction log backups](/sql/relational-databases/backup-restore/transaction-log-backups-sql-server)
+- [Full backups](/sql/relational-databases/backup-restore/full-database-backups-sql-server) every week.
+- [Differential backups](/sql/relational-databases/backup-restore/differential-backups-sql-server) every 12 or 24 hours.
+- [Transaction log backups](/sql/relational-databases/backup-restore/transaction-log-backups-sql-server) approximately every 10 minutes.
 
 The frequency of transaction log backups depends on the compute size and the amount of database activity. Transaction logs are taken approximately every 10 minutes, but can vary. When you restore a database, the service determines which full, differential, and transaction log backups need to be restored, in their respective order.
 
