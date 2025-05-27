@@ -33,7 +33,7 @@ ms.topic: conceptual
  ![Data Cleansing Process in DQS](../data-quality-services/media/dqs-cleansingprocess.gif "Data Cleansing Process in DQS")  
   
 ##  <a name="ComputerAssisted"></a> Computer-assisted Cleansing  
- The DQS data cleansing process applies the knowledge base to the data to be cleansed, and proposes changes to the data. The data steward has access to each proposed change, enabling him or her to assess and correct the changes. To perform data cleansing, the data steward proceeds as follows:  
+ The DQS data cleansing process applies the knowledge base to the data to be cleansed, and proposes changes to the data. The data steward has access to each proposed change, enabling them to assess and correct the changes. To perform data cleansing, the data steward proceeds as follows:  
   
 1.  Create a data quality project, select a knowledge base against which you want to analyze and cleanse your source data, and select the **Cleansing** activity. Multiple data quality projects can use the same knowledge base.  
   
