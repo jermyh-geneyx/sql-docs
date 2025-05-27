@@ -35,12 +35,12 @@ This example shows how to create and debug a [!INCLUDE[tsql](../../includes/tsql
     @name NVARCHAR(128)  
     AS  
     BEGIN
-        INSERT INTO [dbo].[Product] ([Id], [Name]) VALUES (@id, @name) 
-        SELECT [Name] FROM [dbo].[Product] WHERE [Id] = @id
+        INSERT INTO [dbo].[Products] ([Id], [Name]) VALUES (@id, @name) 
+        SELECT [Name] FROM [dbo].[Products] WHERE [Id] = @id
         DECLARE @nextid INT
         SET @nextid = @id + 1
-        INSERT INTO [dbo].[Product] ([Id], [Name]) VALUES (@id, @name) 
-        SELECT [Name] FROM [dbo].[Product] WHERE [Id] = @nextid
+        INSERT INTO [dbo].[Products] ([Id], [Name]) VALUES (@id, @name) 
+        SELECT [Name] FROM [dbo].[Products] WHERE [Id] = @nextid
     END
     ```  
   
