@@ -388,7 +388,7 @@ You can execute the templates (files) after changing the parameters displayed th
 Complete list of script-commands can be found in [Executing the SSMA Console &#40;SybaseToSQL&#41;](../../ssma/sybase/executing-the-ssma-console-sybasetosql.md)  
   
 ## Script File Validation  
-The user can easily validate his/her script file against the schema definition file **'S2SSConsoleScriptSchema.xsd'** available in the 'Schemas' folder  
+The user can easily validate their script file against the schema definition file **'S2SSConsoleScriptSchema.xsd'** available in the 'Schemas' folder  
   
 ## Next Step  
 The next step in operating the console is [Creating Variable Value Files &#40;SybaseToSQL&#41;](../../ssma/sybase/creating-variable-value-files-sybasetosql.md).  
