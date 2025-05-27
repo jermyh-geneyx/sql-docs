@@ -28,7 +28,7 @@ This example shows how to create and debug a [!INCLUDE[tsql](../../includes/tsql
 1. Paste the following code in the Query Editor.  
   
     ```sql  
-    CREATE TABLE [dbo].[Product] ([Id] INT, [Name] NVARCHAR(128))
+    CREATE TABLE [dbo].[Products] ([Id] INT, [Name] NVARCHAR(128))
 
     CREATE PROCEDURE [dbo].[AddProduct]  
     @id INT,  
