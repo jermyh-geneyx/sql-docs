@@ -65,7 +65,7 @@ The v9.3 release of SSMA for Oracle contains the following changes:
 
 The v9.2 release of SSMA for Oracle contains the following changes:
 
-- Add Support for legacy unicode string literals
+- Add Support for legacy Unicode string literals
 - Add Support for arbitrary expressions in ESCAPE clause
 - Conversion Support for EXTRACT(XML) and XMLQUERY
 - Enhanced data pipeline monitoring for at scale migration
