@@ -43,13 +43,18 @@ When specifying the ZSTD algorithm (`backup compression algorithm = 3`), the fol
 Msg 15129, Level 16, State 1,  Procedure sp_configure `3` is not a valid value for configuration option 'backup compression algorithm'. 
 ```
 
-Use the new compression algorithm directly in the [BACKUP](../t-sql/statements/backup-transact-sql.md#-compression---algorithm---ms_xpress--zstd--accelerator_algorithm---level---low--medium--high------no_compression-) Transact-SQL command instead of setting the server configuration option. 
+Use the new compression algorithm directly in the [BACKUP](../t-sql/statements/backup-transact-sql.md#-compression---algorithm---ms_xpress--zstd--accelerator_algorithm---level---low--medium--high------no_compression-) Transact-SQL command instead of setting the server configuration option.
 
+### Incorrect behavior of SESSION_CONTEXT in parallel plans
+
+Queries that use the built-in `SESSION_CONTEXT` function may return incorrect results or trigger access violation (AV) dumps when executed in parallel query plans. This issue stems from the way `SESSION_CONTEXT` interacts with parallel execution threads, particularly when the session is reset for reuse.
+
+For more information, see the [Known issues](../t-sql/functions/session-context-transact-sql.md#known-issues) section in `SESSION_CONTEXT`.
 
 ## Build number
 
 | Build | Version number | Date |
-| :-- | :-- | :-- |
+| --- | --- | --- |
 | Preview | 17.0.700.9 | May 19, 2025 |
 
 ## Related content
