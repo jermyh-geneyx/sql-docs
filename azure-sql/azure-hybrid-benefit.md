@@ -63,7 +63,7 @@ To set or update the license type to the Azure Hybrid Benefit by using the REST 
 
 ## Enable Azure Hybrid Benefit for Azure SQL Managed Instance
 
-You can enable the Azure Hybrid Benefit for Azure SQL Managed Instance by using the Azure portal, PowerSHell, Azure CLI, or REST API.
+You can enable the Azure Hybrid Benefit for Azure SQL Managed Instance by using the Azure portal, PowerShell, Azure CLI, or REST API.
 
 #### [Portal](#tab/azure-portal)
 
