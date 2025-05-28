@@ -707,7 +707,7 @@ For more information, see [Import native and character format data from earlier 
 
 Performs the bulk copy operation using Unicode characters. This option doesn't prompt for each field; it uses **nchar** as the storage type, no prefixes, `\t` (tab character) as the field separator, and `\n` (newline character) as the row terminator. `-w` isn't compatible with `-c`.
 
-For more information, see [Use unicode character format to import or export data (SQL Server)](../relational-databases/import-export/use-unicode-character-format-to-import-or-export-data-sql-server.md).
+For more information, see [Use Unicode character format to import or export data (SQL Server)](../relational-databases/import-export/use-unicode-character-format-to-import-or-export-data-sql-server.md).
 
 #### -x
 
@@ -1078,7 +1078,7 @@ The following articles contain examples of using **bcp**:
   - [Use native format to import or export data (SQL Server)](../relational-databases/import-export/use-native-format-to-import-or-export-data-sql-server.md)
   - [Use character format to import or export data (SQL Server)](../relational-databases/import-export/use-character-format-to-import-or-export-data-sql-server.md)
   - [Use Unicode Native Format to Import or Export Data (SQL Server)](../relational-databases/import-export/use-unicode-native-format-to-import-or-export-data-sql-server.md)
-  - [Use unicode character format to import or export data (SQL Server)](../relational-databases/import-export/use-unicode-character-format-to-import-or-export-data-sql-server.md)
+  - [Use Unicode character format to import or export data (SQL Server)](../relational-databases/import-export/use-unicode-character-format-to-import-or-export-data-sql-server.md)
 
 - [Specify field and row terminators (SQL Server)](../relational-databases/import-export/specify-field-and-row-terminators-sql-server.md)
 

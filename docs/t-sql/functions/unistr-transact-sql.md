@@ -85,7 +85,7 @@ A string value whose length and type depend on the input types.
 
 ### A. Use UNISTR vs the NCHAR function
 
-The following examples all use the `UNISTR` functions to perform the necessary conversion of the Unicode values into string character set, to display the unicode character Smiling Face With Open Mouth. The database collation must be a [UTF-8 collation](../../relational-databases/collations/collation-and-unicode-support.md) if the input is of **char** or **varchar** data types.
+The following examples all use the `UNISTR` functions to perform the necessary conversion of the Unicode values into string character set, to display the Unicode character Smiling Face With Open Mouth. The database collation must be a [UTF-8 collation](../../relational-databases/collations/collation-and-unicode-support.md) if the input is of **char** or **varchar** data types.
 
 Using `UNISTR` and `NCHAR`:
 

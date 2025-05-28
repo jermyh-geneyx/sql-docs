@@ -1,6 +1,6 @@
 ---
 title: "CREATE VECTOR INDEX (Transact-SQL)"
-description: "CREATE VECTOR INDEX creates an index on vector data to allow approximate neareast neighboor search"
+description: "CREATE VECTOR INDEX creates an index on vector data to allow approximate neareast neighbor search"
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: damauri
@@ -158,8 +158,66 @@ WITH (METRIC = 'cosine', TYPE = 'diskann', MAXDOP = 8)
 ON [SECONDARY]
 ```
 
+### Example 3
+
+A basic end-to-end example using `CREATE VECTOR INDEX` and the related `VECTOR_SEARCH` function. The embeddings are mocked. In a real world scenario, embeddings are generated using an embedding model and [AI_GENERATE_EMBEDDINGS](../functions/ai-generate-embeddings-transact-sql.md), or an external library such as [OpenAI SDK](https://github.com/openai/openai-dotnet?tab=readme-ov-file#how-to-generate-text-embeddings).
+
+The following code block creates mock embeddings with the following steps:
+
+1. Enables the trace flag, necessary in the current preview.
+1. Create a sample table `dbo.Articles` with a column `embedding` with data type **vector(5)**.
+1. Insert sample data with mock embedding data.
+1. Create a vector index on `dbo.Articles.embedding`.
+1. Demonstrate the vector similarity search with the `VECTOR_SEARCH()` function.
+
+```sql
+-- Step 0: Enable Preview Feature
+DBCC TRACEON(466, 474, 13981, -1);
+GO
+
+-- Step 1: Create a sample table with a VECTOR(5) column
+CREATE TABLE dbo.Articles 
+(
+    id INT PRIMARY KEY,
+    title NVARCHAR(100),
+    content NVARCHAR(MAX),
+    embedding VECTOR(5) -- mocked embeddings
+);
+
+-- Step 2: Insert sample data
+INSERT INTO Articles (id, title, content, embedding)
+VALUES
+(1, 'Intro to AI', 'This article introduces AI concepts.', '[0.1, 0.2, 0.3, 0.4, 0.5]'),
+(2, 'Deep Learning', 'Deep learning is a subset of ML.', '[0.2, 0.1, 0.4, 0.3, 0.6]'),
+(3, 'Neural Networks', 'Neural networks are powerful models.', '[0.3, 0.3, 0.2, 0.5, 0.1]'),
+(4, 'Machine Learning Basics', 'ML basics for beginners.', '[0.4, 0.5, 0.1, 0.2, 0.3]'),
+(5, 'Advanced AI', 'Exploring advanced AI techniques.', '[0.5, 0.4, 0.6, 0.1, 0.2]');
+
+-- Step 3: Create a vector index on the embedding column
+CREATE VECTOR INDEX vec_idx ON Articles(embedding)
+WITH (metric = 'cosine', type = 'diskann');
+
+-- Step 4: Perform a vector similarity search
+DECLARE @qv VECTOR(5) = '[0.3, 0.3, 0.3, 0.3, 0.3]';
+SELECT
+    t.id,
+    t.title,
+    t.content,
+    s.distance
+FROM
+    VECTOR_SEARCH(
+        table = Articles AS t,
+        column = embedding,
+        similar_to = @qv,
+        metric = 'cosine',
+        top_n = 3
+    ) AS s
+ORDER BY s.distance, t.title;
+```
+
 ## Related content
 
 - [Overview of vectors in the SQL Database Engine](../../relational-databases/vectors/vectors-sql-server.md)
-- [Azure SQL Database Vector Search Samples](https://github.com/Azure-Samples/azure-sql-db-vector-search)
 - [Vector data type](../data-types/vector-data-type.md)
+- [VECTOR_SEARCH (Transact-SQL)](../functions/vector-search-transact-sql.md)
+- [Azure SQL Database Vector Search Samples](https://github.com/Azure-Samples/azure-sql-db-vector-search)
