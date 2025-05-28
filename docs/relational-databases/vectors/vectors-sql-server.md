@@ -76,7 +76,7 @@ Exact Nearest Neighbor (ENN) Vector Search performs an exhaustive distance calcu
 
 In the SQL Database Engine, k-NN searches can be performed using the [VECTOR_DISTANCE](../../t-sql/functions/vector-distance-transact-sql.md) function, which allows for efficient calculation of distances between vectors and facilitates the retrieval of the nearest neighbors.
 
-The following example show how to do k-NN to return the top 10 most similar vectors stored in the `content_vector` table to the given query vector `@qv`.
+The following example shows how to do k-NN to return the top 10 most similar vectors stored in the `content_vector` table to the given query vector `@qv`.
 
 ```sql
 DECLARE @qv VECTOR(1536) = AI_GENERATE_EMBEDDING(N'Pink Floyd music style' model Ada2Embeddings);
@@ -124,5 +124,8 @@ ORDER BY s.distance
 
 - [Vector data type](../../t-sql/data-types/vector-data-type.md)
 - [Vector functions](../../t-sql/functions/vector-functions-transact-sql.md)
+- [VECTOR_DISTANCE (Transact-SQL)](../../t-sql/functions/vector-distance-transact-sql.md)
+- [VECTOR_SEARCH (Transact-SQL)](../../t-sql/functions/vector-search-transact-sql.md)
+- [CREATE VECTOR INDEX (Transact-SQL)](../../t-sql/statements/create-vector-index-transact-sql.md)
 - [Azure SQL Database Vector Search Samples](https://github.com/Azure-Samples/azure-sql-db-vector-search)
 - [Intelligent applications with Azure SQL Database](/azure/azure-sql/database/ai-artificial-intelligence-intelligent-applications)
