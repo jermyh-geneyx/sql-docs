@@ -4,7 +4,7 @@ description: The sp_invoke_external_rest_endpoint stored procedure invokes an HT
 author: jettermctedder
 ms.author: bspendolini
 ms.reviewer: randolphwest
-ms.date: 04/21/2025
+ms.date: 05/28/2025
 ms.service: sql
 ms.topic: "reference"
 ms.custom:
@@ -214,7 +214,10 @@ And the following example shows a `response` section in XML:
 
 ## Allowed endpoints
 
-Only calls to endpoints in the following services are allowed:
+> [!IMPORTANT]  
+> **This list only applies to Azure SQL Database and Azure SQL Managed Instance.**
+
+Only calls to endpoints for the following services are allowed:
 
 | Azure Service | Domain |
 | --- | --- |
