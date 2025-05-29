@@ -5,7 +5,7 @@ description: Enable several database configuration settings at the individual da
 author: markingmyname
 ms.author: maghan
 ms.reviewer: derekw, jovanpop, wiassaf, mariyaali
-ms.date: 04/17/2025
+ms.date: 05/28/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -520,6 +520,12 @@ Enables or disables [optimized Halloween protection](../../relational-databases/
 
 > [!NOTE]  
 > For database compatibility level 160 or lower, this database scoped configuration has no effect.
+
+#### OPTIONAL_PARAMETER_PLAN_OPTIMIZATION = { ON | OFF }
+
+**Applies to:** [!INCLUDE [sql-server-2025](../../includes/sssql25-md.md)]
+
+Enables or disables the [Optional parameter plan optimization](../../relational-databases/performance/optional-parameter-optimization.md) feature. The default is `ON`. When enabled, the adaptive plan optimization infrastructure is to generate multiple execution plans for queries that include optional parameters typically expressed using predicates in the form of *@p IS NULL AND/OR @p1 IS NOT NULL*. This allows the feature to choose a more optimal plan at runtime based on whether the parameter is null or not, improving performance for queries that could otherwise default to suboptimal performance for such query patterns. The default is ON starting in database compatibility level 170.
 
 ## Permissions
 
