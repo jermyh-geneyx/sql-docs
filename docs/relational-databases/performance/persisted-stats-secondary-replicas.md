@@ -25,7 +25,7 @@ With the addition of the Query Store for readable secondaries, secondary replica
 
 A similar mechanism is being used to send statistics information back to the primary and subsequently send back to all secondary replicas. Temporary statistics that are created on any secondary replica which are stored in `tempdb` will be sent to and persisted on the primary replica, which will make them usable by all readable secondary replicas.
 
-You must enable Trace Flag 15608 to activate the persisted statistics for readable secondaries feature. To enable the [trace flags](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md):
+You must enable Trace Flag 15608 as a startup trace flag on the primary and all secondary replicas, to activate the persisted statistics for readable secondaries feature. To enable the [trace flags](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md):
 
 1. In Windows, launch [SQL Server Configuration Manager](../../tools/configuration-manager/sql-server-configuration-manager.md).
 1. In the list of SQL Server Services, right-click on your SQL Server 2025 (17.x) instance. Select **Properties**.
@@ -38,8 +38,8 @@ To support comparing stats creation/update between secondary and primary, and to
 
 | Column name | Data Type | Description |
 | --- | --- | --- |
-| `replica_role_id` | **tinyint** | Identifies the replica set number for this replica. 1 = Primary, 2 = Secondary |
-| `replica_role_desc` | **nvarchar(60)** | Primary, Secondary |
+| `replica_role_id` | **tinyint** | Identifies the replica set number for this replica. 1 = Primary, 2 = Secondary, 3 = Geo Replication Forwarder, 4 = Geo HA Secondary |
+| `replica_role_desc` | **nvarchar(60)** | Primary, Secondary, Geo Replication Forwarder, Geo HA Secondary |
 | `replica_name` | **sysname** | Instance name of the replica in the availability group. Will be `NULL` for the primary replica |
 
 ## Related content

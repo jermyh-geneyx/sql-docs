@@ -4,7 +4,7 @@ description: "CREATE VECTOR INDEX creates an index on vector data to allow appro
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: damauri
-ms.date: 05/01/2025
+ms.date: 05/28/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -40,6 +40,8 @@ This feature is in preview. In order to use this feature you must enable the fol
 ```sql
 DBCC TRACEON(466, 474, 13981, -1)
 ```
+
+Make sure to check out the [current limitations](#limitations) before using it.
 
 ## Syntax
 
@@ -121,14 +123,17 @@ Is an option to drop and rebuild the existing vector index with modified specifi
 
 ## Limitations
 
+The current preview has the following limitations:
+
 - No partition support. Vector index can't be partitioned.  
 - The table must have a single integer non-nullable column clustered index. 
 - During and for all the time needed for vector index creation to complete, an SCH-M lock is acquired on the table. As a result, the lock prevents any access to the table or its metadata. 
 - Once a vector index is created on a table, the table becomes read-only. No data modification is allowed while the vector index is present on the table. 
+- Vector index are not replicated to subscribers.
 
 ## Permissions
 
-The user must have `ALTER` permission on the table or view.
+The user must have `ALTER` permission on the table.
 
 ## Examples
 

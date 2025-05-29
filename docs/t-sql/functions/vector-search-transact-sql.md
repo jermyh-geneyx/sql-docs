@@ -36,6 +36,8 @@ This feature is in preview. In order to use this feature, you must enable the fo
 DBCC TRACEON(466, 474, 13981, -1)
 ```
 
+Make sure to check out the [current limitations](#limitations) before using it.
+
 ## Syntax
 
 :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md)  
@@ -161,7 +163,7 @@ CROSS APPLY
     VECTOR_SEARCH(
         TABLE = [dbo].[wikipedia_articles_embeddings] as t, 
         COLUMN = [content_vector], 
-        SIMILAR_TO = @qv, 
+        SIMILAR_TO = qv.v, 
         METRIC = 'cosine', 
         TOP_N = 10
     ) AS s
