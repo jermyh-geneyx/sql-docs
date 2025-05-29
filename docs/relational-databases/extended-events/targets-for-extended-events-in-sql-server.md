@@ -1,10 +1,10 @@
 ---
 title: "Targets for Extended Events"
-description: This article explains package0 targets for Extended Events. Learn about target abilities in gathering and reporting data and target parameters.
+description: This article explains different targets for Extended Events sessions. Learn about target abilities in gathering and reporting data and target parameters.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest
-ms.date: 01/22/2024
+ms.date: 05/29/2025
 ms.service: sql
 ms.subservice: xevents
 ms.topic: conceptual
@@ -162,7 +162,7 @@ CREATE EVENT SESSION [locks_acq_rel_eventfile_22]
     (
         SET filename=N'C:\temp\locks_acq_rel_eventfile_22.xel',
         max_file_size=(100), 
-		max_rollover_files=(10)
+        max_rollover_files=(10)
     )
     WITH
     (
