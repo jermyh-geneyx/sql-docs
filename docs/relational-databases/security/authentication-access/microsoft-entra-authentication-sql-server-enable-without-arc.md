@@ -89,20 +89,12 @@ Or,
 1. Select **Add a permission** > **Microsoft Graph** > **Application permissions**
 
    1. Check **Application.Read.All**
-
    1. Check **Group.Read.All**
-
    1. Check **User.Read.All**
-
+      
    1. Select **Add permissions**
 
 1. Select **Grant admin consent**
-
-| Scenario |Minimum permission |
-| --- | --- |
-|`CREATE USER` or `CREATE LOGIN` for a Microsoft Entra service principal or managed identity | **Application.Read.All** |
-|`CREATE USER` or `CREATE LOGIN` for a Microsoft Entra user | **User.Read.All** |
-|`CREATE USER` or `CREATE LOGIN` for a Microsoft Entra group | **Group.Read.All** |
 
 :::image type="content" source="media/microsoft-entra-authentication-sql-server-enable-without-arc/grant-consent.png" alt-text="Screenshot showing how to grant consent in the Azure portal.":::
 
