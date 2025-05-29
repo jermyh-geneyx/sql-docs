@@ -226,7 +226,7 @@ If there are multiple SQL Server instances on the OSE, all instances and replica
 
 - All instances of SQL Server engines in FCI clusters on the node must be passive. If one or more instance is active on the node it will not be considered a passive node.
 
-- There can be no standalone engine instance present on the node.  Example: If a standalone SQL Server engine instance is installed that is not a member of a FCI cluster it will be billed.
+- No instances of the SQL Server service — whether as standalone or as an active node of an FCI — can be in a running state on the node, unless those instances qualify as free passive replicas of availability groups (AGs).
 
 - No instances of [associated services](#manage-ssxs) can be running in the same OSE.  Example: If SQL Server Integration Services is running on the machine, even if all engine instances are passive, the Integration Services instance will be billed.
 
