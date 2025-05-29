@@ -83,9 +83,11 @@ Select the newly created application, and on the left side menu, select **API Pe
 Or,
 
 1. Select **Add a permission** > **Microsoft Graph** > **Application permissions**
+   
    1. Check **Application.Read.All**
    1. Check **Group.Read.All**
    1. Check **User.Read.All**
+
    1. Select **Add permissions**
 
 1. Select **Grant admin consent**
