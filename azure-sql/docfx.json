@@ -195,14 +195,29 @@
     },
     "dest": "azure-sql",
     "rules": {
+      "sensitive-language-ma": {
+        "exclude": [
+          "database-engine/install-windows/**/*.md"
+        ]
+      },
       "sensitive-language-sl": {
         "exclude": [
+          "includes/bias-sensitive-term-t.md",
           "virtual-machines/linux/rhel-high-availability-fencing-tutorial.md",
           "virtual-machines/linux/sles-high-availability-fencing-tutorial.md",
           "virtual-machines/linux/ubuntu-high-availability-fencing-tutorial.md",
           "virtual-machines/linux/high-availability-listener-tutorial.md"
         ]
-      }
-    }
+      },
+      "sensitive-language-wl": {
+        "exclude": [
+          "big-data-cluster/reference-config-spark-hadoop.md",
+          "relational-databases/errors-events/**/*.md"
+        ]
+      },
+      "sensitive-language-bl": {
+        "exclude": []
+       }
+     }
+   }
   }
-}

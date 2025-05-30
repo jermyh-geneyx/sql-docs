@@ -112,7 +112,5 @@ For more assistance with completing this migration scenario, see the following r
 
 ## Related content
 
-- [How to Use the Database Migration Guide](https://azure.microsoft.com/resources/videos/how-to-use-the-azure-database-migration-guide/)
 - [Services and tools for data migration](/azure/dms/dms-tools-matrix)
 - [Azure Database Migration Guides](/data-migration/)
-- [Overview of the migration journey and the tools/services recommended for performing assessment and migration](https://azure.microsoft.com/resources/videos/overview-of-migration-and-recommended-tools-services/)

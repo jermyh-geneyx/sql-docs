@@ -240,4 +240,3 @@ After the data is migrated to the target environment, all the applications that 
 
 - [Services and tools for data migration](/azure/dms/dms-tools-matrix)
 - [Azure Database Migration Guide](/data-migration/)
-- [Overview of the migration journey](https://azure.microsoft.com/resources/videos/overview-of-migration-and-recommended-tools-services/)
