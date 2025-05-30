@@ -107,13 +107,13 @@ After enabling **Extended Protection** on the server computer, use the following
 
 ## Configuring other SQL Server components
 
-For more information about how to configure [!INCLUDE [ssRSnoversion](../../includes/ssrsnoversion-md.md)], see [Extended Protection for Authentication with Reporting Services](../../reporting-services/security/extended-protection-for-authentication-with-reporting-services.md).
+For more information about how to configure [!INCLUDE [ssRSnoversion](../../includes/ssrsnoversion-md.md)], see [Extended protection for authentication with Reporting Services](../../reporting-services/security/extended-protection-for-authentication-with-reporting-services.md).
 
 When using IIS to access [!INCLUDE [ssASnoversion](../../includes/ssasnoversion-md.md)] data using an HTTP or HTTPS connection, [!INCLUDE [ssASnoversion](../../includes/ssasnoversion-md.md)] can take advantage of Extended Protection provided by IIS. For more information about how to configure IIS to use Extended Protection, see [Configure Extended Protection in IIS 7.5](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/ee909472(v=ws.10)).
 
 ## Related content
 
-- [Server Network Configuration](../../database-engine/configure-windows/server-network-configuration.md)
-- [Client Network Configuration](../../database-engine/configure-windows/client-network-configuration.md)
+- [Server Network Configuration](server-network-configuration.md)
+- [Client Network Configuration](client-network-configuration.md)
 - [Extended Protection for Authentication Overview](/previous-versions/dotnet/netframework-3.5/dd767318(v=vs.90))
 - [Integrated Windows Authentication with Extended Protection](/previous-versions/visualstudio/visual-studio-2008/dd639324(v=vs.90))

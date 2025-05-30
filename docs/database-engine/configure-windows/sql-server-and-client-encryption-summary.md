@@ -1,13 +1,13 @@
 ---
-title: SQL Server and client encryption summary
+title: SQL Server and Client Encryption Summary
 description: Learn about the steps required to encrypt all connections to the SQL Server, enable encryption connections from specific clients and check if the encryption works.
 author: suresh-kandoth
 ms.author: sureshka
-ms.reviewer: randolphwest
-ms.date: 12/08/2022
+ms.reviewer: randolphwest, maghan
+ms.date: 05/30/2025
 ms.service: sql
 ms.subservice: configuration
-ms.topic: conceptual
+ms.topic: concept-article
 ---
 
 # SQL Server and client encryption summary
@@ -18,7 +18,7 @@ This article provides a summary of various scenarios and associated procedures f
 
 | Type of certificate | Force encryption in server properties | Import server certificate on each client | Trust Server certificate setting | Encrypt property in the connection string | Comments |
 | --- | --- | --- | --- | --- | --- |
-| [Self-signed certificate - automatically created by SQL Server](special-cases-for-encrypting-connections-sql-server.md#scenario-1-you-want-to-encrypt-all-the-connections-to-sql-server) | Yes | Can't be done | Yes | Ignored | [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and earlier versions use the SHA1 algorithm. [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] and later versions use SHA256. For more information, see [Changes to hashing algorithm for self-signed certificate in SQL Server 2017](https://techcommunity.microsoft.com/t5/sql-server-support-blog/changes-to-hashing-algorithm-for-self-signed-certificate-in-sql/ba-p/319026). We don't recommend this approach for production use. |
+| [Self-signed certificate - automatically created by SQL Server](special-cases-for-encrypting-connections-sql-server.md#scenario-1-you-want-to-encrypt-all-the-connections-to-sql-server) | Yes | Can't be done | Yes | Ignored | [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and earlier versions use the SHA1 algorithm. [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] and later versions use SHA256. For more information, see [Changes to hashing algorithm for self-signed certificate in SQL Server 2017](https://techcommunity.microsoft.com/blog/sqlserversupport/changes-to-hashing-algorithm-for-self-signed-certificate-in-sql-server-2017/319026). We don't recommend this approach for production use. |
 | [Self-signed certificate created by using New-SelfSignedCertificate or makecert - Option 1](special-cases-for-encrypting-connections-sql-server.md#scenario1option1) | Yes | No | Yes | Ignored | We don't recommend this approach for production use. |
 | [Self-signed certificate created by using New-SelfSignedCertificate or makecert - Option 2](special-cases-for-encrypting-connections-sql-server.md#scenario1option2) | Yes | Yes | Optional | Ignored | We don't recommend this approach for production use. |
 | Company's certificate server or from a Certificate Authority (CA) that's not in the [List of Participants - Microsoft Trusted Root Program - Option 1](/security/trusted-root/participants-list) | Yes | No | Yes | Ignored | |
@@ -29,7 +29,7 @@ This article provides a summary of various scenarios and associated procedures f
 
 | Type of certificate | Force encryption in server properties | Import server certificate on each client | Specify Trust Server certificate setting on the client | Manually specify encryption property to Yes/True on the client side | Comments |
 | --- | --- | --- | --- | --- | --- |
-| [Self-signed certificate - automatically created by SQL Server](special-cases-for-encrypting-connections-sql-server.md#scenario-2-only-some-clients-need-encrypted-connections-1) | Yes | Can't be done | Yes | Ignored | [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and earlier versions use the SHA1 algorithm. [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] and later versions use SHA256. For more information, see [Changes to hashing algorithm for self-signed certificate in SQL Server 2017](https://techcommunity.microsoft.com/t5/sql-server-support-blog/changes-to-hashing-algorithm-for-self-signed-certificate-in-sql/ba-p/319026). We don't recommend this approach for production use. |
+| [Self-signed certificate - automatically created by SQL Server](special-cases-for-encrypting-connections-sql-server.md#scenario-2-only-some-clients-need-encrypted-connections-1) | Yes | Can't be done | Yes | Ignored | [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and earlier versions use the SHA1 algorithm. [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] and later versions use SHA256. For more information, see [Changes to hashing algorithm for self-signed certificate in SQL Server 2017](https://techcommunity.microsoft.com/blog/sqlserversupport/changes-to-hashing-algorithm-for-self-signed-certificate-in-sql-server-2017/319026). We don't recommend this approach for production use. |
 | [Self-signed certificate created by using New-SelfSignedCertificate or makecert - Option 1](special-cases-for-encrypting-connections-sql-server.md#scenario2option1) | No | No | Yes | Yes | We don't recommend this approach for production use. |
 | [Self-signed certificate created by using New-SelfSignedCertificate or makecert - Option 2](special-cases-for-encrypting-connections-sql-server.md#scenario2option2) | No | Yes | Optional | Yes | We don't recommend this approach for production use. |
 | Company's certificate server or from a CA that's not in the [List of Participants - Microsoft Trusted Root Program](/security/trusted-root/participants-list) - Option 1 | No | No | Yes | Yes | |
@@ -46,16 +46,13 @@ Alternatively, you can check the encryption status of [!INCLUDE [ssnoversion-md]
 1. Execute the following T-SQL command to check the value of `encrypt_option` column. For encrypted connections the value will be `TRUE`.
 
   ```sql
-  SELECT * FROM sys.dm_exec_connections
+  SELECT * FROM sys.dm_exec_connections;
   ```
 
-## See also
+## Related content
 
 - [TLS 1.2 support for Microsoft SQL Server](/troubleshoot/sql/database-engine/connect/tls-1-2-support-microsoft-sql-server)
 - [Securing SQL Server](../../relational-databases/security/securing-sql-server.md)
-
-## Next steps
-
-- [SQL Server Encryption](../../relational-databases/security/encryption/sql-server-encryption.md)
+- [SQL Server encryption](../../relational-databases/security/encryption/sql-server-encryption.md)
 - [SQL Server fails to start with error 17182](/troubleshoot/sql/security/fails-start-error-17182)
-- [Configuring SQL Server instance for certificates](configure-sql-server-encryption.md)
+- [Configure SQL Server Database Engine for encrypting connections](configure-sql-server-encryption.md)
