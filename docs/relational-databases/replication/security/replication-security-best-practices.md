@@ -16,18 +16,20 @@ helpviewer_keywords:
   - "Internet [SQL Server replication], security"
 ---
 # Replication Security Best Practices
-[!INCLUDE [SQL Server](../../../includes/applies-to-version/sqlserver.md)]
+[!INCLUDE [SQL Server](../../../includes/applies-to-version/sql-asdbmi.md)]
   Replication moves data in distributed environments ranging from intranets on a single domain to applications that access data between untrusted domains and over the Internet. It is important to understand the best approach for securing replication connections under these different circumstances.  
   
  The following information is relevant to replication in all environments:  
   
 -   Encrypt the connections between computers in a replication topology using an industry standard method, such as Virtual Private Networks (VPN), Transport Layer Security (TLS), previously known as Secure Sockets Layer (SSL), or IP Security (IPSEC). For more information, see [Enable Encrypted Connections to the Database Engine &#40;SQL Server Configuration Manager&#41;](../../../database-engine/configure-windows/configure-sql-server-encryption.md). For information about using VPN and TLS for replicating data over the Internet, see [Securing Replication Over the Internet](../../../relational-databases/replication/security/securing-replication-over-the-internet.md).  
   
-     If you use TLS to secure the connections between computers in a replication topology, specify a value of **1** or **2** for the **-EncryptionLevel** parameter of each replication agent (a value of **2** is recommended). A value of **1** specifies that encryption is used, but the agent does not verify that the TLS/SSL server certificate is signed by a trusted issuer; a value of **2** specifies that the certificate is verified. Agent parameters can be specified in agent profiles and on the command line. For more information, see:  
+     If you use TLS 1.2 to secure the connections between computers in a replication topology, specify a value of **1** or **2** for the **-EncryptionLevel** parameter of each replication agent (a value of **2** is recommended). A value of **1** specifies that encryption is used, but the agent does not verify that the TLS/SSL server certificate is signed by a trusted issuer; a value of **2** specifies that the certificate is verified. Azure SQL Managed Instance [supports TLS 1.3](/azure/azure-sql/managed-instance/replication-transactional-overview#tls-1-3-support) for connections between instances by specifying a value of **3** and connections to SQL Server from Azure SQL Managed Instance by specifying a value of **4**.  
+
+    For information about working with agents, see:  
+
+    -   [View and Modify Replication Agent Command Prompt Parameters &#40;SQL Server Management Studio&#41;](../../../relational-databases/replication/agents/view-and-modify-replication-agent-command-prompt-parameters.md) 
   
     -   [Work with Replication Agent Profiles](../../../relational-databases/replication/agents/work-with-replication-agent-profiles.md)  
-  
-    -   [View and Modify Replication Agent Command Prompt Parameters &#40;SQL Server Management Studio&#41;](../../../relational-databases/replication/agents/view-and-modify-replication-agent-command-prompt-parameters.md)  
   
     -   [Replication Agent Executables Concepts](../../../relational-databases/replication/concepts/replication-agent-executables-concepts.md)  
   

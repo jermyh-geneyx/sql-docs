@@ -23,6 +23,21 @@ This article lists:
 
 Extension versions are cumulative. Higher extension versions include all of the updates from previous versions. A release might include internal features. If the version release notes don't describe features, then the updates were internal.
 
+## May 13, 2025
+
+**Extension version**: `1.1.3049.285`
+
+This release enables the following features:
+
+- SQL Server 2025 Preview.
+  - Standard Developer Edition.
+  - Enterprise Developer Edition.
+  - Inbound Entra Authentication using Managed Identity, review [Managed identity (preview)](managed-identity.md).
+  For details about features in SQL Server 2025 Preview, review [What's new in SQL Server 2025 Preview](../what-s-new-in-sql-server-2025.md).
+- Support for migration integrated with Managed Instance link (preview).
+  - [Monitor migration](/azure/azure-sql/managed-instance/managed-instance-link-migrate).
+  - [Additional details](/azure/azure-sql/managed-instance/managed-instance-link-feature-overview).
+
 ## April 30, 2025
 
 **Extension version**: `1.1.3042.282`

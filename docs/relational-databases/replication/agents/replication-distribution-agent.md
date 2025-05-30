@@ -4,7 +4,7 @@ description: Move a snapshot and the transactions held in the distribution datab
 author: "MashaMSFT"
 ms.author: "mathoma"
 ms.reviewer: randolphwest
-ms.date: 10/16/2024
+ms.date: 05/30/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: reference
@@ -44,7 +44,7 @@ distrib [ -? ]
 [ -DistributorLogin distributor_login ]
 [ -DistributorPassword distributor_password ]
 [ -DistributorSecurityMode [ 0 | 1 ] ]
-[ -EncryptionLevel [ 0 | 1 | 2 ] ]
+[ -EncryptionLevel [ 0 | 1 | 2 | 3 | 4 ] ]
 [ -ErrorFile error_path_and_file_name ]
 [ -ExtendedEventConfigFile configuration_path_and_file_name ]
 [ -FileTransferType [ 0 | 1 ] ]
@@ -146,15 +146,19 @@ The Distributor password.
 
 Specifies the security mode of the Distributor. A value of 0 indicates [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] Authentication Mode, and a value of 1 indicates Windows Authentication Mode (default).
 
-#### -EncryptionLevel [ 0 \| 1 \| 2 ]
+<a id="encryptionlevel"></a>
+
+#### -EncryptionLevel [ 0 \| 1 \| 2 \| 3 \| 4 ]
 
 The level of Transport Layer Security (TLS), previously known as Secure Sockets Layer (SSL), encryption used by the Distribution Agent when making connections.
 
 | EncryptionLevel value | Description |
 | --- | --- |
 | `0` | Specifies that TLS isn't used. |
-| `1` | Specifies that TLS is used, but the agent doesn't verify that the TLS server certificate is signed by a trusted issuer. |
-| `2` | Specifies that TLS is used, and that the certificate is verified. |
+| `1` | Specifies that TLS 1.2 is used, but the agent doesn't verify that the TLS server certificate is signed by a trusted issuer. |
+| `2` | Specifies that TLS 1.2 is used, and that the certificate is verified. |
+| `3` | Specifies that for connections from Azure SQL Managed Instance to Azure SQL Managed Instance, TLS 1.3 is used, and the certificate is verified. For connections between Azure SQL Managed Instance and SQL Server, TLS 1.3 is not enforced. |
+| `4` | Specifies that for connections from Azure SQL Managed Instance to Azure SQL Managed Instance, TLS 1.3 is used, and the certificate is verified. For connections from Azure SQL Managed Instance to SQL Server, TLS 1.3 is used, and the certificate is verified. Requires installing the certificate on SQL Server hosts. |
 
 A valid TLS certificate is defined with a fully qualified domain name of the SQL Server. In order for the agent to connect successfully when setting `-EncryptionLevel` to `2`, create an alias on the local SQL Server. The 'Alias Name' parameter should be the server name and the 'Server' parameter should be set to the fully qualified name of the SQL Server.
 

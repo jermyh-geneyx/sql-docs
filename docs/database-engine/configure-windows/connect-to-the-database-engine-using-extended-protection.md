@@ -51,7 +51,7 @@ Service binding addresses luring attacks by requiring a client to send a signed 
 Channel binding establishes a secure channel (Schannel) between a client and an instance of the  SQL Server service. The service verifies the client's authenticity by comparing the client's channel binding token (CBT) specific to that channel with its own CBT. Channel binding addresses both luring and spoofing attacks. However, it incurs a larger runtime cost because it requires Transport Layer Security (TLS) encryption of all the session traffic. Channel Binding occurs when a client application uses encryption to connect to the  SQL Server, regardless of whether encryption is enforced by the client or by the server.
 
 > [!WARNING]  
-> SQL Server and  Microsoft  data providers for SQL Server support TLS 1.0 and SSL 3.0. If you enforce a different protocol (such as TLS 1.1 or TLS 1.2) by making changes in the operating system SChannel layer, your connections to SQL Server might fail. Make sure that you have the latest build of SQL Server to Support TLS 1.1 or TLS 1.2. For more information, see <https://support.microsoft.com/topic/kb3135244-tls-1-2-support-for-microsoft-sql-server-e4472ef8-90a9-13c1-e4d8-44aad198cdbe>.
+> SQL Server and  Microsoft  data providers for SQL Server support TLS 1.0 and SSL 3.0. If you enforce a different protocol (such as TLS 1.1 or TLS 1.2) by making changes in the operating system SChannel layer, your connections to SQL Server might fail. Make sure that you have the latest build of SQL Server to Support TLS 1.1 or TLS 1.2. For more information, see [TLS 1.2 support for Microsoft SQL Server](/troubleshoot/sql/database-engine/connect/tls-1-2-support-microsoft-sql-server).
 
 ### Operating system support
 
@@ -107,13 +107,13 @@ After enabling **Extended Protection** on the server computer, use the following
 
 ## Configuring other SQL Server components
 
-For more information about how to configure [!INCLUDE [ssRSnoversion](../../includes/ssrsnoversion-md.md)], see [Extended Protection for Authentication with Reporting Services](../../reporting-services/security/extended-protection-for-authentication-with-reporting-services.md).
+For more information about how to configure [!INCLUDE [ssRSnoversion](../../includes/ssrsnoversion-md.md)], see [Extended protection for authentication with Reporting Services](../../reporting-services/security/extended-protection-for-authentication-with-reporting-services.md).
 
 When using IIS to access [!INCLUDE [ssASnoversion](../../includes/ssasnoversion-md.md)] data using an HTTP or HTTPS connection, [!INCLUDE [ssASnoversion](../../includes/ssasnoversion-md.md)] can take advantage of Extended Protection provided by IIS. For more information about how to configure IIS to use Extended Protection, see [Configure Extended Protection in IIS 7.5](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/ee909472(v=ws.10)).
 
 ## Related content
 
-- [Server Network Configuration](../../database-engine/configure-windows/server-network-configuration.md)
-- [Client Network Configuration](../../database-engine/configure-windows/client-network-configuration.md)
+- [Server Network Configuration](server-network-configuration.md)
+- [Client Network Configuration](client-network-configuration.md)
 - [Extended Protection for Authentication Overview](/previous-versions/dotnet/netframework-3.5/dd767318(v=vs.90))
 - [Integrated Windows Authentication with Extended Protection](/previous-versions/visualstudio/visual-studio-2008/dd639324(v=vs.90))

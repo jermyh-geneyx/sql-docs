@@ -5,7 +5,7 @@ description: Learn about the new features and documentation improvements for Azu
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: wiassaf, mathoma
-ms.date: 05/22/2025
+ms.date: 05/30/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: service-overview
 ms.topic: whats-new
@@ -50,7 +50,7 @@ The following table lists the features of Azure SQL Managed Instance that are cu
 |[UNISTR (Transact-SQL)](/sql/t-sql/functions/unistr-transact-sql)| Azure SQL Managed Instance now supports the `UNISTR` T-SQL syntax for Unicode string literals.|
 |[Vector data type and functions](/sql/t-sql/data-types/vector-data-type?view=azuresqldb-current&preserve-view=true) | Working with vector data is now easier in Azure SQL Managed Instance with the [Always-up-to-date update policy](update-policy.md#always-up-to-date-update-policy) with the introduction of a new [vector data type](/sql/t-sql/data-types/vector-data-type?view=azuresqlmi-current&preserve-view=true) and [vector functions](/sql/t-sql/functions/vector-functions-transact-sql?view=azuresqlmi-current&preserve-view=true). For more information, see [Intelligent applications with Azure SQL Managed Instance](ai-artificial-intelligence-intelligent-applications.md#vectors). |
 |[Zone redundancy for General Purpose](high-availability-sla-local-zone-redundancy.md#zone-redundant-availability) |  Deploy your General Purpose SQL Managed Instance to multiple availability zones to improve the availability of your instance in the event of a disaster. | 
-|[\|\| (String concatenation)](/sql/t-sql/language-elements/string-concatenation-pipes-transact-sql?view=azuresqldb-current&preserve-view=true) and [\|\|= (Compound assignment)](/sql/t-sql/language-elements/compound-assignment-pipes-transact-sql?view=azuresqldb-current&preserve-view=true) syntax support** | Azure SQL Managed Instance now supports [\|\| (String concatenation)](/sql/t-sql/language-elements/string-concatenation-pipes-transact-sql?view=azuresqldb-current&preserve-view=true) and [\|\|= (Compound assignment)](/sql/t-sql/language-elements/compound-assignment-pipes-transact-sql?view=azuresqldb-current&preserve-view=true) Transact-SQL syntax.|
+|[\|\| (String concatenation)](/sql/t-sql/language-elements/string-concatenation-pipes-transact-sql?view=azuresqldb-current&preserve-view=true) and [\|\|= (Compound assignment)](/sql/t-sql/language-elements/compound-assignment-pipes-transact-sql?view=azuresqldb-current&preserve-view=true) syntax support | Azure SQL Managed Instance now supports [\|\| (String concatenation)](/sql/t-sql/language-elements/string-concatenation-pipes-transact-sql?view=azuresqldb-current&preserve-view=true) and [\|\|= (Compound assignment)](/sql/t-sql/language-elements/compound-assignment-pipes-transact-sql?view=azuresqldb-current&preserve-view=true) Transact-SQL syntax.|
 
 ## General availability (GA)
 
@@ -58,6 +58,7 @@ The following table lists features of Azure SQL Managed Instance that have been 
 
 | Feature | GA Month | Details |
 | ---| --- |--- |
+| [TLS 1.3 support for replication](replication-transactional-overview.md#tls-13-support) | May 2025 | Configure Azure SQL Managed Instance replication agents to use TLS 1.3. |
 | [Free SQL Managed Instance](free-offer.md) | May 2025 | Try Azure SQL Managed Instance for free for the first 12 months after an instance is created.  |
 | [JSON native data type](/sql/t-sql/data-types/json-data-type?view=azuresqlmi-current&preserve-view=true) | May 2025 | The **json** data type provides new capabilities for handling semistructured data in Azure SQL Managed Instance. |
 | [JSON aggregate functions](/sql/relational-databases/json/json-data-sql-server?view=azuresqlmi-current&preserve-view=true#json-data-from-aggregates) | May 2025 | Two **json** aggregate functions (`JSON_OBJECTAGG` and `JSON_ARRAYAGG`) enable construction of JSON objects or arrays based on an aggregate from SQL data. |
@@ -86,8 +87,10 @@ Learn about significant changes to the Azure SQL Managed Instance documentation.
 | **JSON native data type GA** |  The  [**json** data type](/sql/t-sql/data-types/json-data-type?view=azuresqlmi-current&preserve-view=true) provides new capabilities for handling semistructured data in Azure SQL Managed Instance. This data type is now generally available. |
 | **JSON aggregate functions GA** | Two [**json** aggregate functions `JSON_OBJECTAGG` and `JSON_ARRAYAGG`](/sql/relational-databases/json/json-data-sql-server?view=azuresqlmi-current&preserve-view=true#json-data-from-aggregates) enable construction of JSON objects or arrays based on an aggregate from SQL data. These JSON functions are now generally available. |
 | **Regular expression functions preview** | Regular expression (REGEX) functions return text based on values in a search pattern. This capability is currently in preview for Azure SQL Managed Instance. For more information, see [Regular expressions](/sql/relational-databases/regular-expressions/overview). |
+| **TLS 1.3 support for replication GA** | Configure Azure SQL Managed Instance replication agents to use TLS 1.3. This capability is generally available. Review [TLS 1.3 support for replication](replication-transactional-overview.md#tls-13-support) to learn more.  |
 | **UNISTR (Transact-SQL) preview** | Azure SQL Managed Instance now supports the `UNISTR` T-SQL syntax for Unicode string literals. This capability is currently in preview. For more information, see [UNISTR (Transact-SQL)](/sql/t-sql/functions/unistr-transact-sql).|
 | **\|\| (String concatenation) and \|\|= (Compound assignment) syntax support preview** | Azure SQL Managed Instance now supports [\|\| (String concatenation)](/sql/t-sql/language-elements/string-concatenation-pipes-transact-sql) and [\|\|= (Compound assignment)](/sql/t-sql/language-elements/compound-assignment-pipes-transact-sql) Transact-SQL syntax. This capability is currently in preview.|
+
 
 ### April 2025
 

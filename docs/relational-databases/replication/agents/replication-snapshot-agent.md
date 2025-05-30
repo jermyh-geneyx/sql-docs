@@ -3,7 +3,7 @@ title: "Replication Snapshot Agent"
 description: In SQL Server, the Replication Snapshot Agent prepares snapshot files, stores them in a folder, and records synchronization jobs in the distribution database.
 author: "MashaMSFT"
 ms.author: "mathoma"
-ms.date: 09/25/2024
+ms.date: 05/30/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: reference
@@ -43,7 +43,7 @@ snapshot [ -?]
 [-DynamicFilterHostName dynamic_filter_host_name]  
 [-DynamicFilterLogin dynamic_filter_login]  
 [-DynamicSnapshotLocation dynamic_snapshot_location]   
-[-EncryptionLevel [0|1|2]]  
+[-EncryptionLevel [0|1|2|3|4]]  
 [-FieldDelimiter field_delimiter]  
 [-HistoryVerboseLevel [0|1|2|3] ]  
 [-HRBcpBlocks number_of_blocks ]  
@@ -106,7 +106,7 @@ snapshot [ -?]
  Is the login used when connecting to the Distributor using [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] Authentication.  
   
  **-DistributorPassword** _distributor_password_  
- Is the password used when connecting to the Distributor using [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] Authentication. .  
+ Is the password used when connecting to the Distributor using [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] Authentication.
   
  **-DistributorSecurityMode** [ **0**| **1**]  
  Specifies the security mode of the Distributor. A value of **0** indicates [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] Authentication Mode (default), and a value of **1** indicates Windows Authentication Mode.  
@@ -120,14 +120,18 @@ snapshot [ -?]
  **-DynamicSnapshotLocation** _dynamic_snapshot_location_  
  Is the location where the dynamic snapshot should be generated.  
   
- **-EncryptionLevel** [ **0** | **1** | **2** ]  
+<a id="encryptionlevel"></a>
+
+ **-EncryptionLevel** [ **0** | **1** | **2** | **3** | **4**]  
  Is the level of Transport Layer Security (TLS), previously known as Secure Sockets Layer (SSL), encryption used by the Snapshot Agent when making connections.  
   
-|EncryptionLevel value|Description|  
-|---------------------------|-----------------|  
-|**0**|Specifies that TLS is not used.|  
-|**1**|Specifies that TLS is used, but the agent does not verify that the TLS/SSL server certificate is signed by a trusted issuer.|  
-|**2**|Specifies that TLS is used, and that the certificate is verified.|  
+|EncryptionLevel value|Description|
+|---------------------------|-----------------|
+|`0`|Specifies that TLS is not used.|
+|`1`|Specifies that TLS 1.2 is used, but the agent does not verify that the TLS/SSL server certificate is signed by a trusted issuer.|
+|`2`|Specifies that TLS 1.2 is used, and that the certificate is verified.| 
+| `3` | Specifies that for connections from Azure SQL Managed Instance to Azure SQL Managed Instance, TLS 1.3 is used, and the certificate is verified. For connections between Azure SQL Managed Instance and SQL Server, TLS 1.3 is not enforced. |
+| `4` | Specifies that for connections from Azure SQL Managed Instance to Azure SQL Managed Instance, TLS 1.3 is used, and the certificate is verified. For connections from Azure SQL Managed Instance to SQL Server, TLS 1.3 is used, and the certificate is verified. Requires installing the certificate on SQL Server hosts. |
 
  > [!NOTE]  
  >  A valid TLS/SSL certificate is defined with a fully qualified domain name of the SQL Server. In order for the agent to connect successfully when setting -EncryptionLevel to 2, create an alias on the local SQL Server. The 'Alias Name' parameter should be the server name and the 'Server' parameter should be set to the fully qualified name of the SQL Server.
@@ -231,7 +235,7 @@ snapshot [ -?]
  Is the login used when connecting to the Publisher using [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] Authentication.  
   
  **-PublisherPassword**  _publisher_password_  
- Is the password used when connecting to the Publisher using [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] Authentication. .  
+ Is the password used when connecting to the Publisher using [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] Authentication. 
   
  **-PublisherSecurityMode** [ **0**| **1**]  
  Specifies the security mode of the Publisher. A value of **0** indicates [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] Authentication (default), and a value of **1** indicates Windows Authentication Mode.  

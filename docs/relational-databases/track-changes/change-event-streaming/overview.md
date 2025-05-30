@@ -18,7 +18,7 @@ This article describes the change event streaming (CES) feature introduced in [!
 To get started with the feature, see [Configure change event streaming](configure.md).
 
 > [!NOTE]
-> Change event streaming is currently in **preview** for SQL Server 2025. 
+> Change event streaming is currently in [preview](https://azure.microsoft.com/support/legal/preview-supplemental-terms) for SQL Server 2025 and subject to change. For current supportability, see [Limitations](configure.md#limitations).
 
 ## Overview
 
