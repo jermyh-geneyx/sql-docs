@@ -140,7 +140,7 @@ SQL Server Analysis Services databases (multidimensional or tabular models) can 
 
 See [Move an Analysis Services Database](/analysis-services/multidimensional-models/move-an-analysis-services-database?view=asallproducts-allversions&preserve-view=true) to learn more.
 
-Alternatively, you can consider migrating your on-premises Analysis Services tabular models to [Azure Analysis Services](https://azure.microsoft.com/resources/videos/azure-analysis-services-moving-models/) or to [Power BI Premium by using the new XMLA read/write endpoints](/power-bi/admin/service-premium-connect-tools).
+Alternatively, you can consider migrating your on-premises Analysis Services tabular models to [Power BI Premium by using the XMLA read/write endpoints](/power-bi/admin/service-premium-connect-tools).
 
 ## Server objects
 
