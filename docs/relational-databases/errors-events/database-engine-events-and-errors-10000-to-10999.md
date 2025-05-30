@@ -4,7 +4,7 @@ description: "Consult this SQL Server error code list (between 10000 and 10999) 
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/15/2025
+ms.date: 05/30/2025
 ms.service: sql
 ms.subservice: supportability
 ms.topic: error-reference
@@ -15,6 +15,9 @@ monikerRange: "=azuresql || =azuresql-db || =azuresql-mi || >=aps-pdw-2016-au7 |
 This article contains error message numbers (between the range 10,000 and 10,999) and their description, which is the text of the error message from the `sys.messages` catalog view. Where applicable, the error number is a link to further information.
 
 For the full range of error numbers, see the list on [Database Engine events and errors](database-engine-events-and-errors.md#errors-and-events).
+
+> [!TIP]  
+> The term "Books Online" in any error message is a reference to [SQL Server product documentation](../../index.yml).
 
 You can query the [!INCLUDE [ssde-md](../../includes/ssde-md.md)] to see a full list of all errors, by running the following query against the `sys.messages` catalog view:
 
