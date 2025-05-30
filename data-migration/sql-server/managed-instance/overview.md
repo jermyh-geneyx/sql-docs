@@ -143,7 +143,7 @@ You can migrate SQL Server Reporting Services (SSRS) reports to paginated report
 
 ### SQL Server Analysis Services
 
-SQL Server Analysis Services tabular models from SQL Server 2012 and later can be migrated to Azure Analysis Services, which is a platform as a service (PaaS) deployment model for the Analysis Services tabular model in Azure.
+SQL Server Analysis Services tabular models from SQL Server 2012 and later can be migrated to Azure Analysis Services, which is a platform as a service (PaaS) deployment model for the Analysis Services tabular model in Azure. You can learn more about migrating on-premises models to Azure Analysis Services in [this video tutorial](/shows/azure-analysis-services/azureanalysisservicesmovingmodels).
 
 Alternatively, you can consider migrating your on-premises Analysis Services tabular models to [Power BI Premium by using the new XMLA read/write endpoints](/power-bi/admin/service-premium-connect-tools).
 
