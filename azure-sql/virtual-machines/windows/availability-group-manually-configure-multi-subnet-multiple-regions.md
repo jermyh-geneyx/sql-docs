@@ -598,7 +598,7 @@ The replica in the remote datacenter is part of the availability group, but it's
 
 Preferably, update the cluster configuration to set `RegisterAllProvidersIP=1` and the client connection strings to set `MultiSubnetFailover=Yes`. See [Connecting with MultiSubnetFailover](/sql/relational-databases/native-client/features/sql-server-native-client-support-for-high-availability-disaster-recovery#Anchor_0).
 
-If you can't modify the connection strings, you can configure name resolution caching. See [Timeout occurs when you connect to an Always On listener in a multi-subnet environment](https://support.microsoft.com/help/2792139/time-out-error-and-you-cannot-connect-to-a-sql-server-2012-alwayson-av).
+If you can't modify the connection strings, you can configure name resolution caching. See [Timeout occurs when you connect to an Always On listener in a multi-subnet environment](/troubleshoot/sql/database-engine/availability-groups/listener-connection-times-out).
 
 ## Fail over to the remote region
 

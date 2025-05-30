@@ -197,6 +197,7 @@
     "rules": {
       "sensitive-language-sl": {
         "exclude": [
+          "includes/bias-sensitive-term-t.md",
           "virtual-machines/linux/rhel-high-availability-fencing-tutorial.md",
           "virtual-machines/linux/sles-high-availability-fencing-tutorial.md",
           "virtual-machines/linux/ubuntu-high-availability-fencing-tutorial.md",
