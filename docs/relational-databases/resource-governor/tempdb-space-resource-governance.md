@@ -227,7 +227,7 @@ When using `tempdb` space resource governance, consider the following best pract
 
 ## Known issues
 
-- When a workfile is deallocated, the increase in the available `tempdb` space might be accounted against the `internal` workload group instead of the workload group that allocated the workfile. A fix for this problem will be available in a future update.
+- When a workfile is deallocated, the increase in the available `tempdb` space might be counted against the `internal` workload group instead of the workload group that is allocated to the workfile.
 
 ## Related content
 
