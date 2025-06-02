@@ -5,7 +5,7 @@ author: dimitri-furman
 ms.author: dfurman
 ms.service: sql
 ms.topic: concept-article
-ms.date: 05/19/2025
+ms.date: 05/30/2025
 monikerRange: " >= sql-server-ver17 || >= sql-server-linux-ver17 "
 ---
 
@@ -224,6 +224,10 @@ When using `tempdb` space resource governance, consider the following best pract
 - It is allowed for the sum of `GROUP_MAX_TEMPDB_DATA_MB` values for all workload groups to exceed the maximum `tempdb` size. For example, if the maximum `tempdb` size is 100 GB, the `GROUP_MAX_TEMPDB_DATA_MB` limits for workload group *A* and workload group *B* can be 80 GB each.
 
     This approach prevents each workload group from consuming all space in `tempdb` by leaving 20 GB for other workload groups. At the same time, you avoid unnecessary query aborts when free `tempdb` space is still available because workload groups *A* and *B* aren't likely to consume a large amount of `tempdb` space at the same time.
+
+## Known issues
+
+- When a workfile is deallocated, the increase in the available `tempdb` space might be counted against the `internal` workload group instead of the workload group that is allocated to the workfile.
 
 ## Related content
 
