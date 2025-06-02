@@ -21,7 +21,7 @@ A differential backup is based on the most recent, previous full data backup. A 
 
 ## Benefits
 
-Creating a differential backup can be much faster than creating a full backup. A differential backup records only the data that has changed since the full backup upon the differential backup is based. This facilitates taking frequent data backups, which decrease the risk of data loss. However, before you restore a differential backup, you must restore its base. Therefore restoring from a differential backup will necessarily take more steps and time than restoring from a full backup because two backup files are required.
+Creating a differential backup can be much faster than creating a full backup. A differential backup records only the data that has changed since the full backup upon which the differential backup is based. This facilitates taking frequent data backups, which decrease the risk of data loss. However, before you restore a differential backup, you must restore its base. Therefore restoring from a differential backup will necessarily take more steps and time than restoring from a full backup because two backup files are required.
 
 Differential database backups are especially useful if a subset of a database is modified more frequently than the rest of the database. In these cases, differential database backups enable you back up frequently without the overhead of full database backups.
 
