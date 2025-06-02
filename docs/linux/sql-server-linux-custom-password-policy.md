@@ -7,6 +7,8 @@ ms.reviewer: mikeray, randolphwest
 ms.date: 05/01/2025
 ms.service: sql
 ms.topic: how-to
+ms.custom:
+  - build-2025
 # customer intent: As a database professional, I want enforce password policy for SQL logins on SQL Server on Linux so that the configuration more closely aligns with secure practices.
 monikerRange: "=sql-server-ver17 || =sql-server-linux-ver17"
 ---

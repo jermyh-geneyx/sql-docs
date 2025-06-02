@@ -7,6 +7,8 @@ ms.reviewer: mikeray, randolphwest
 ms.date: 04/16/2025
 ms.service: sql
 ms.topic: conceptual
+ms.custom:
+  - build-2025
 # customer intent: As a database professional, connect to ODBC datasources from SQL Server deployments on Linux.
 monikerRange: "=sql-server-ver17 || =sql-server-linux-ver17"
 ---
