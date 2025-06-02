@@ -6,6 +6,7 @@ ms.author: wiassaf
 ms.reviewer: vanto, xiaoyul, mariyaali, maghan
 ms.date: 02/24/2025
 ms.service: sql
+ms.subservice: t-sql
 ms.topic: reference
 ms.custom:
   - ignite-2024

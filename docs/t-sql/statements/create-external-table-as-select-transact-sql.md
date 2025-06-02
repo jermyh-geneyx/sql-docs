@@ -6,6 +6,7 @@ ms.author: maghan
 ms.reviewer: randolphwest, wiassaf, mlandzic, nzagorac
 ms.date: 01/29/2025
 ms.service: sql
+ms.subservice: t-sql
 ms.topic: reference
 f1_keywords:
   - "CREATE EXTERNAL TABLE AS SELECT"
