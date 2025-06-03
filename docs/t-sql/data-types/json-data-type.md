@@ -6,6 +6,7 @@ ms.author: wiassaf
 ms.reviewer: randolphwest, jovanpop, umajay
 ms.date: 05/21/2025
 ms.service: sql
+ms.subservice: t-sql
 ms.topic: reference
 ms.custom:
   - build-2024

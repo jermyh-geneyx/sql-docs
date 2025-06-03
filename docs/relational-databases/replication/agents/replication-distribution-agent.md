@@ -217,7 +217,7 @@ The number of seconds before the login times out. The default is `15` seconds.
 
 #### -MaxBcpThreads *number_of_threads*
 
-Specifies the number of bulk copy operations that can be performed in parallel. The maximum number of threads and ODBC connections that exist simultaneously is the lesser of `MaxBcpThreads` or the number of bulk copy requests that appear in the synchronization transaction in the distribution database. `MaxBcpThreads` must have a value greater than `0` and has no hard-coded upper limit. The default is `2` times the number of processors, up to a maximum value of `8`. When applying a snapshot that was generated at the Publisher using the concurrent snapshot option, one thread is used, regardless of the number you specify for `MaxBcpThreads`.
+Specifies the number of bulk copy operations that can be performed in parallel. The maximum number of threads and ODBC connections that exist simultaneously is the lesser of `MaxBcpThreads` or the number of bulk copy requests that appear in the synchronization transaction in the distribution database. `MaxBcpThreads` must have a value greater than `0` and has no hard-coded upper limit. The default is `1`, up to a maximum value of `8`. When applying a snapshot that was generated at the Publisher using the concurrent snapshot option, one thread is used, regardless of the number you specify for `MaxBcpThreads`.
 
 #### -MaxDeliveredTransactions *number_of_transactions*
 

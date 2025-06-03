@@ -167,7 +167,7 @@ To configure the internal load balancer and create the availability group listen
    | **Listener** | The DNS name that you want to assign to the listener. By default, this template specifies the name "aglistener," but you can change it. The name should not exceed 15 characters. |
    | **Listener Port** | The port that you want the listener to  use. Typically, this port should be the default of 1433. This is the port number that the template specifies. But if your default port has been changed, the listener port should use that value instead. | 
    | **Listener IP** | The IP address that you want the listener to use. This address will be created during template deployment, so provide one that isn't already in use.  |
-   | **Existing Subnet** | The name of the internal subnet of your SQL Server VMs (for example: *default*). You can determine this value by going to **Resource Group**, selecting your virtual network, selecting **Subnets** in the **Settings** pane, and copying the value under **Name**. |
+| **Existing Subnet** | The name of the internal subnet of your SQL Server VMs (for example: *default*). You can determine this value by going to **Resource Group**, selecting your virtual network, selecting **Subnets** in the **Settings** pane, and copying the value under **Name**. |
    | **Existing Internal Load Balancer** | The name of the internal load balancer that you created in step 3. |
    | **Probe Port** | The probe port that you want the internal load balancer to use. The template uses 59999 by default, but you can change this value. |
 
@@ -177,6 +177,10 @@ To configure the internal load balancer and create the availability group listen
 
 >[!NOTE]
 >If your deployment fails halfway through, you'll need to manually [remove the newly created listener](#remove-listener) by using PowerShell before you redeploy the **101-sql-vm-aglistener-setup** quickstart template. 
+
+## Configure probe port
+
+[!INCLUDE [virtual-machines-port-exclusion](../../includes/virtual-machines-port-exclusion.md)]
 
 ## Remove listener
 If you later need to remove the availability group listener that the template configured, you must go through the SQL IaaS Agent extension. Because the listener is registered through the SQL IaaS Agent extension, just deleting it via SQL Server Management Studio is insufficient. 
