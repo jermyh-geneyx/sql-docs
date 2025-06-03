@@ -47,7 +47,7 @@ STLineFromWKB ( 'WKB_linestring' , SRID )
  This method throws a **FormatException** if the input is not well-formatted.  
   
 ## Examples  
- The following example uses `STLineFromWKB()` to create a `geography`instance.  
+ The following example uses `STLineFromWKB()` to create a `geography` instance.  
   
 ```sql
 DECLARE @g geography;  

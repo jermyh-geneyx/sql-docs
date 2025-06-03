@@ -46,7 +46,7 @@ helpviewer_keywords:
   
 -   **_key_in**, a column that uniquely identifies each row.  
   
--   **_key_out**, a column that identifies a group of duplicate rows. The **_key_out** column has the value of the **_key_in** column in the canonical data row. Rows with the same value in **_key_out** are part of the same group. The **_key_out**value for a group corresponds to the value of **_key_in** in the canonical data row.  
+-   **_key_out**, a column that identifies a group of duplicate rows. The **_key_out** column has the value of the **_key_in** column in the canonical data row. Rows with the same value in **_key_out** are part of the same group. The **_key_out** value for a group corresponds to the value of **_key_in** in the canonical data row.  
   
 -   **_score**, a value between 0 and 1 that indicates the similarity of the input row to the canonical row.  
   

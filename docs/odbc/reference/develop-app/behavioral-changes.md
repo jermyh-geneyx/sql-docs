@@ -17,7 +17,7 @@ Behavioral changes are those changes for which the *syntax* of the interface rem
   
  Whether an application exhibits ODBC 2.*x* behavior or ODBC 3.*x* behavior is determined by the SQL_ATTR_ODBC_VERSION environment attribute. This 32-bit value is set to SQL_OV_ODBC2 to exhibit ODBC 2.*x* behavior, and SQL_OV_ODBC3 to exhibit ODBC 3.*x* behavior.  
   
- The SQL_ATTR_ODBC_VERSION environment attribute is set by a call to **SQLSetEnvAttr**. After an application calls **SQLAllocHandle** to allocate an environment handle, it must call**SQLSetEnvAttr** immediately to set the behavior it exhibits. (As a result, there is a new environment state to describe the environment handle in an allocated, but versionless, state.) For more information, see [Appendix B: ODBC State Transition Tables](../../../odbc/reference/appendixes/appendix-b-odbc-state-transition-tables.md).  
+ The SQL_ATTR_ODBC_VERSION environment attribute is set by a call to **SQLSetEnvAttr**. After an application calls **SQLAllocHandle** to allocate an environment handle, it must call **SQLSetEnvAttr** immediately to set the behavior it exhibits. (As a result, there is a new environment state to describe the environment handle in an allocated, but versionless, state.) For more information, see [Appendix B: ODBC State Transition Tables](../../../odbc/reference/appendixes/appendix-b-odbc-state-transition-tables.md).  
   
  An application states what behavior it exhibits with the SQL_ATTR_ODBC_VERSION environment attribute, but the attribute has no effect on the application's connection with an ODBC 2.*x* or ODBC 3.*x* driver. An ODBC 3.*x* application can connect to either an ODBC 2.*x* or 3.*x* driver, no matter what the setting of the environment attribute.  
   

@@ -55,7 +55,7 @@ This option appears when you choose the Stored Procedure command type option. Ty
  Type the number of seconds until the query times out. The default is 30 seconds. The value for **Time out** must be empty or greater than zero. If it is empty, the query does not time out.  
   
  **Refresh Fields**  
- Run the query command to update the list of fields in the **Dataset Properties Dialog Box, Fields**page.  
+ Run the query command to update the list of fields in the **Dataset Properties Dialog Box, Fields** page.  
   
 ## Related content
 

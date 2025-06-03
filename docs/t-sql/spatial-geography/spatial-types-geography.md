@@ -29,7 +29,7 @@ monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-20
   
  [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] supports a set of methods for the **geography** spatial data type. This includes methods on **geography** that are defined by the Open Geospatial Consortium (OGC) standard and a set of [!INCLUDE[msCoName](../../includes/msconame-md.md)] extensions to that standard.  
  
- The error tolerance for the **geography** methods can be as large as 1.0e-7 * extents. The extents refer to the approximate maximal distance between points of the **geography**object.
+ The error tolerance for the **geography** methods can be as large as 1.0e-7 * extents. The extents refer to the approximate maximal distance between points of the **geography** object.
   
 
 ## Registering the geography Type  

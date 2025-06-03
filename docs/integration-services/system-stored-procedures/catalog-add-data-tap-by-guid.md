@@ -33,7 +33,7 @@ catalog.add_data_tap_by_guid [ @execution_id = ] execution_id
  The execution ID for the execution that contains the package. The *execution_id* is a **bigint**.  
   
  [ @dataflow_task_guid = ] *dataflow_task_guid*  
- The ID for the data task flow in the package that contains the data flow path to be tapped. The *dataflow_task_guid* is a**uniqueidentifier**.  
+ The ID for the data task flow in the package that contains the data flow path to be tapped. The *dataflow_task_guid* is a **uniqueidentifier**.  
   
  [ @dataflow_path_id_string = ] *dataflow_path_id_string*  
  The identification string for the data flow path. A path connects two data flow components. The **IdentificationString** property for the path specifies the string.  

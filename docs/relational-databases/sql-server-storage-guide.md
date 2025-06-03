@@ -212,7 +212,7 @@ Most solid-state storage reports 512-byte sector sizes but use 4-KB pages inside
 
 #### 0xFFFFFFFF
 
-A newly formatted drive usually holds all zeros. An erased block of a solid-state device is all `1`s, making a raw read of an erased block all `0xFF`s. However, it's unusual for a user to read an erased block during normal I/O operations.
+A newly formatted drive usually holds all zeros. An erased block of a solid-state device is all `1`s, making a raw read of an erased block all `0xFF` characters. However, it's unusual for a user to read an erased block during normal I/O operations.
 
 #### Pattern stamping
 

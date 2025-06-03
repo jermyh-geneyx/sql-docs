@@ -151,7 +151,7 @@ helpviewer_keywords:
  Using the check boxes, specify the columns that the script transformation will use.  
   
  **Input Column**  
- Select from the list of available input columns for each row. Your selections are reflected in the check box selections in the **Available Input Columns**table.  
+ Select from the list of available input columns for each row. Your selections are reflected in the check box selections in the **Available Input Columns** table.  
   
  **Output Alias**  
  Type an alias for each output column. The default is the name of the input column; however, you can choose any unique, descriptive name.  

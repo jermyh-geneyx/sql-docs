@@ -40,7 +40,7 @@ ms.topic: how-to
   
 2.  Click an entity on the **Entities** menu.  
   
-3.  Make changes to the entity and click on**OK**.  
+3.  Make changes to the entity and click **OK**.  
   
 4.  **Choose A changeset** dialog box is displayed.  
   

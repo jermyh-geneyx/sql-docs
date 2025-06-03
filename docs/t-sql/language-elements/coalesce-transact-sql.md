@@ -88,7 +88,7 @@ The `ISNULL` function and the `COALESCE` expression have a similar purpose but c
 
 1. Data type determination of the resulting expression is different. `ISNULL` uses the data type of the first parameter, and `COALESCE` follows the `CASE` expression rules to return the data type of value with the highest precedence.
 
-1. The NULLability of the result expression is different for `ISNULL` and `COALESCE`. The `ISNULL` return value is always considered `NOT NULL`able (assuming the return value is a non-nullable one). By contrast,`COALESCE` with non-null parameters is considered to be `NULL`. So the expressions `ISNULL(NULL, 1)` and `COALESCE(NULL, 1)`, although equal, have different nullability values. These values make a difference if you're using these expressions in computed columns, creating key constraints, or making the return value of a scalar user-defined function (UDF) deterministic, so that it can be indexed as shown in the following example:
+1. The NULLability of the result expression is different for `ISNULL` and `COALESCE`. The `ISNULL` return value is always considered not nullable (assuming the return value is a non-nullable one). By contrast,`COALESCE` with non-null parameters is considered to be `NULL`. So the expressions `ISNULL(NULL, 1)` and `COALESCE(NULL, 1)`, although equal, have different nullability values. These values make a difference if you're using these expressions in computed columns, creating key constraints, or making the return value of a scalar user-defined function (UDF) deterministic, so that it can be indexed as shown in the following example:
 
     ```sql
     USE tempdb;

@@ -29,9 +29,9 @@ MDX_Expression <= MDX_Expression
 ## Return Value  
  A Boolean value based on the following conditions:  
   
--   t**rue** if both parameters are non-null, and the first parameter has a value that is either less than or equal to the value of the second parameter.  
+-   **true** if both parameters are non-null, and the first parameter has a value that is either less than or equal to the value of the second parameter.  
   
--   f**alse** if both parameters are non-null, and the first parameter has a value that greater than the value of the second parameter.  
+-   **false** if both parameters are non-null, and the first parameter has a value that greater than the value of the second parameter.  
   
 -   null if either or both parameters evaluate to a null value.  
   

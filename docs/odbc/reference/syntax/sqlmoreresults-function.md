@@ -84,7 +84,7 @@ SQLRETURN SQLMoreResults(
 ## Availability of Row Counts  
  When a batch contains multiple consecutive row count-generating statements, it is possible that these row counts are rolled up into just one row count. For example, if a batch has five insert statements, then certain data sources are capable of returning five individual row counts. Certain other data sources return only one row count that represents the sum of the five individual row counts.  
   
- When a batch contains a combination of result set-generating and row count-generating statements, row counts may or may not be available at all. The behavior of the driver with respect to the availability of row counts is enumerated in the SQL_BATCH_ROW_COUNT information type available through a call to **SQLGetInfo**. For example, suppose that the batch contains a **SELECT**, followed by two **INSERT**s and another **SELECT**. Then the following cases are possible:  
+ When a batch contains a combination of result set-generating and row count-generating statements, row counts may or may not be available at all. The behavior of the driver with respect to the availability of row counts is enumerated in the SQL_BATCH_ROW_COUNT information type available through a call to **SQLGetInfo**. For example, suppose that the batch contains a **SELECT**, followed by two **INSERT** statements and another **SELECT**. Then the following cases are possible:  
   
 -   The row counts corresponding to the two **INSERT** statements are not available at all. The first call to **SQLMoreResults** will position you on the result set of the second **SELECT** statement.  
   

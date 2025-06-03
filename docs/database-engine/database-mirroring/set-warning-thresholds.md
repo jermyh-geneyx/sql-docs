@@ -73,7 +73,7 @@ f1_keywords:
  When a warning is not enabled, this field is inactive.  
   
  **OK**  
- Clicking **OK** closes this dialog box and displays the currently specified values of warning thresholds in the **Thresholds** grid on the **Warnings**tabbed page.  
+ Clicking **OK** closes this dialog box and displays the currently specified values of warning thresholds in the **Thresholds** grid on the **Warnings** tabbed page.  
   
 ## Remarks  
  A threshold is only applicable at one partner at a time, but we recommend that you set a threshold for a given event on both partners to ensure that the warning persists if the database fails over. The appropriate threshold for each partner depends on the performance capabilities of that partner's system.  

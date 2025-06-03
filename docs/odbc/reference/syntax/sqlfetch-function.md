@@ -197,7 +197,7 @@ SQLRETURN SQLFetch(
  If a warning applies to the entire function, **SQLFetch** returns SQL_SUCCESS_WITH_INFO and the applicable SQLSTATE. The status records for warnings that apply to the entire function are returned before the status records that apply to individual rows.  
   
 #### Errors and Warnings in Individual Rows  
- If an error (such as SQLSTATE 22012 (Division by zero)) or a warning (such as SQLSTATE 01004 (Data truncated)) applies to a single row, **SQLFetch**does the following:  
+ If an error (such as SQLSTATE 22012 (Division by zero)) or a warning (such as SQLSTATE 01004 (Data truncated)) applies to a single row, **SQLFetch** does the following:  
   
 -   Sets the corresponding element of the row status array to SQL_ROW_ERROR for errors or SQL_ROW_SUCCESS_WITH_INFO for warnings.  
   

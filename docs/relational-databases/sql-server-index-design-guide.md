@@ -137,7 +137,7 @@ When you design an index, consider the following query guidelines:
 
 <a id="sargable"></a>
 
-<sup>1</sup> The term *SARGable* in relational databases refers to a **S**earch **ARG**ument-**able** predicate that can use an index to speed up the execution of the query.
+<sup>1</sup> The term *SARGable* in relational databases refers to a **S**earch **ARG**ument**able** predicate that can use an index to speed up the execution of the query.
 
 ### Column considerations
 

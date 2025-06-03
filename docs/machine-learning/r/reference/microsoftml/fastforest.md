@@ -81,7 +81,7 @@ Creates a list containing the function name and arguments to train a
   
   
  ### `trainThreads`
- The number of threads to use in training. If `NULL`is specified, the number of threads to use is determined internally.  The default value is `NULL`. 
+ The number of threads to use in training. If `NULL` is specified, the number of threads to use is determined internally.  The default value is `NULL`. 
   
   
   

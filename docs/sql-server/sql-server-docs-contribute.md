@@ -109,7 +109,7 @@ To find the correct applies-to include file for your article, use the following 
 - For a list of commonly used includes, see [SQL Server include files for versioning and applies-to](applies-to-includes.md).
 - Look at other articles that cover the same feature or a related task. If you edit that article, you can copy the Markdown for the applies-to include link (you can cancel the edit without submitting it).
 - Search the [docs/includes](https://github.com/MicrosoftDocs/sql-docs/tree/live/docs/includes) directory for files containing the text `applies-to`. You can use the **Find** button in GitHub to quickly filter. Select the file to see how it renders.
-- Pay attention to the naming convention. If the name contains multiple `x` characters in the string, they're usually placeholders indicating the lack of support for a service. For example, `appliesto-xx-xxxx-asdw-xxx-md.md` indicates support for only Azure Synapse Analytics, because only `asdw` is spelled out, whereas the other fields have `x`s.
+- Pay attention to the naming convention. If the name contains multiple `x` characters in the string, they're usually placeholders indicating the lack of support for a service. For example, `appliesto-xx-xxxx-asdw-xxx-md.md` indicates support for only Azure Synapse Analytics, because only `asdw` is spelled out, whereas the other fields are filled with the `x` character.
 - Some includes specify a version number, such as `tsql-appliesto-ss2017-xxxx-xxxx-xxx-md.md`. Only use these include files when you know the feature was introduced with a specific version of SQL Server.
 
 ## Contributor resources

@@ -297,7 +297,7 @@ dev_langs:
   
 |Property name|Data type|Description|  
 |-------------------|---------------|-----------------|  
-|ColumnType|Integer (enumeration)|A value that identifies the type of output column. This property can have one of the following values:<br /><br /> **Undefined** (0)<br /><br /> **KeyIn** (1)<br /><br /> **KeyOut** (2)<br /><br /> **Similarity** (3)<br /><br /> **ColumnSimilarity** (4)<br /><br /> **PassThru** (5)<br /><br /> **Canonica**l (6)|  
+|ColumnType|Integer (enumeration)|A value that identifies the type of output column. This property can have one of the following values:<br /><br /> **Undefined** (0)<br /><br /> **KeyIn** (1)<br /><br /> **KeyOut** (2)<br /><br /> **Similarity** (3)<br /><br /> **ColumnSimilarity** (4)<br /><br /> **PassThru** (5)<br /><br /> **Canonical** (6)|  
 |InputID|Integer|The **LineageID** of the corresponding input column.|  
   
  The input and output of the Fuzzy Grouping transformation have no custom properties.  

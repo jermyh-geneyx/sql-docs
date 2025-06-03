@@ -24,7 +24,7 @@ public int[] executeBatch()
 ```  
   
 ## Return Value  
- An array of **int**s that contain the update counts.  
+ An array of **int** that contain the update counts.  
   
 ## Exceptions  
  [SQLServerException](../../../connect/jdbc/reference/sqlserverexception-class.md)  

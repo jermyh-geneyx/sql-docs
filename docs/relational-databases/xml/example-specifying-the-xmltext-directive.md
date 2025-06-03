@@ -45,7 +45,7 @@ In the resulting XML document:
 
 - Because *AttributeName* isn't specified for the `Overflow` column and the `xmltext` directive is specified, the attributes in the `<overflow>` element are appended to the attribute list of the enclosing `<Parent>` element.
 
-- Because the `PersonID`attribute in the `<xmltext>` element conflicts with the `PersonID` attribute retrieved on the same element level, the attribute in the `<xmltext>` element is ignored, even if `PersonID` is NULL. Generally, an attribute overrides an attribute of the same name in the overflow.
+- Because the `PersonID` attribute in the `<xmltext>` element conflicts with the `PersonID` attribute retrieved on the same element level, the attribute in the `<xmltext>` element is ignored, even if `PersonID` is NULL. Generally, an attribute overrides an attribute of the same name in the overflow.
 
 This is the result:
 

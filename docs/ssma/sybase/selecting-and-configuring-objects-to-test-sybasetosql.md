@@ -31,14 +31,14 @@ Enable using of the selected parameter in test results comparison.
   
 -   If you choose **True**, SSMA will compare the output value of this parameter after executing the procedure on Sybase with the corresponding value on [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]  
   
--   If you choose**False**, the parameter will be excluded from results verification.  
+-   If you choose **False**, the parameter will be excluded from results verification.  
   
 ### Use Custom Scale  
 For parameters of approximate and fixed length numeric data type, you can set a custom scale for the comparison.  
   
 -   If you choose **True**, numeric values will be rounded according to the **Comparing Scale** value before they are compared.  
   
--   If you choose**False**, the numeric comparison will be exact.  
+-   If you choose **False**, the numeric comparison will be exact.  
   
 ### Comparing Scale  
 Available only if the **Use Custom Scale** option is set to **True**. This is the precision for numeric comparison.  

@@ -57,7 +57,7 @@ sys.fn_get_sql ( SqlHandle )
 ## Remarks  
  You can obtain a valid SQL handle from the sql_handle column of the [sys.dm_exec_requests &#40;Transact-SQL&#41;](../../relational-databases/system-dynamic-management-views/sys-dm-exec-requests-transact-sql.md) dynamic management view.  
   
- If you pass a handle that no longer exists in cache, fn_get_sq**l** returns an empty result set. If you pass a handle that is not valid, the batch stops, and an error message is returned.  
+ If you pass a handle that no longer exists in cache, **fn_get_sql** returns an empty result set. If you pass a handle that is not valid, the batch stops, and an error message is returned.  
   
  The [!INCLUDE[ssDEnoversion](../../includes/ssdenoversion-md.md)] cannot cache some [!INCLUDE[tsql](../../includes/tsql-md.md)] statements, such as bulk copy statements and statements with string literals that are larger than 8 KB. Handles to those statements cannot be retrieved by using fn_get_sql.  
   

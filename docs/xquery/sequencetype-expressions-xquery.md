@@ -36,7 +36,7 @@ Expression instance of SequenceType[Occurrence indicator]
   
  **Note** The plus symbol (**+**) and the asterisk (**&#42;**) occurrence indicators are not supported in [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)].  
   
- The following examples illustrate the use of the**instance of** XQuery operator.  
+ The following examples illustrate the use of the **instance of** XQuery operator.  
   
 ### Example A  
  The following example creates an **xml** type variable and specifies a query against it. The query expression specifies an `instance of` operator to determine whether the dynamic type of the value returned by the first operand matches the type specified in the second operand.  
@@ -331,7 +331,7 @@ set @x=''
 select @x.query('"2" cast as xs:integer?')  
 ```  
   
- In the following query, **data()** returns the typed value of the ProductModelID attribute, a string type. The `cast as`operator converts the value to xs:integer.  
+ In the following query, **data()** returns the typed value of the ProductModelID attribute, a string type. The `cast as` operator converts the value to xs:integer.  
   
 ```  
 WITH XMLNAMESPACES ('https://schemas.microsoft.com/sqlserver/2004/07/adventure-works/ProductModelDescription' AS PD)  

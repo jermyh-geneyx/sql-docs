@@ -66,7 +66,7 @@ dev_langs:
   
 ### To publish a stored procedure, stored procedure execution, or user-defined function article in a transactional or snapshot publication  
   
-1.  At the Publisher on the publication database, execute [sp_addarticle](../../../relational-databases/system-stored-procedures/sp-addarticle-transact-sql.md). Specify one of the following values for `@type`to define the type of article:  
+1.  At the Publisher on the publication database, execute [sp_addarticle](../../../relational-databases/system-stored-procedures/sp-addarticle-transact-sql.md). Specify one of the following values for `@type` to define the type of article:  
   
     -   **proc schema only** - a schema-only stored procedure article.  
   

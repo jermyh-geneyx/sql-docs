@@ -35,7 +35,7 @@ Check the project's current Deployment Model, and set it to **Package Deployment
   
 3.  On the **SSIS** menu, click **Package Configurations**.  
   
-4.  In the **Package Configuration Organize**r dialog box, select **Enable package configurations** if it is not already selected, and then click **Add**.  
+4.  In the **Package Configuration Organizer** dialog box, select **Enable package configurations** if it is not already selected, and then click **Add**.  
   
 5.  On the welcome page of the Package Configuration Wizard, click **Next**.  
   
@@ -48,7 +48,7 @@ Check the project's current Deployment Model, and set it to **Package Deployment
   
 8.  On the Completing the Wizard page, type **DataTransfer EV Configuration** in the **Configuration name** box, review the configuration contents in the **Preview** pane, and then click **Finish**.  
   
-9. Close the **Package Configuration Organize**r dialog box.  
+9. Close the **Package Configuration Organizer** dialog box.  
   
 ### To create the XML configuration for the DataTransfer package  
   
@@ -86,7 +86,7 @@ Check the project's current Deployment Model, and set it to **Package Deployment
   
 3.  On the **SSIS** menu, click **Package Configurations**.  
   
-4.  In the **Package Configuration Organize**r dialog box, Click **Add**.  
+4.  In the **Package Configuration Organizer** dialog box, Click **Add**.  
   
 5.  On the welcome page of the Package Configuration Wizard, click **Next**.  
   

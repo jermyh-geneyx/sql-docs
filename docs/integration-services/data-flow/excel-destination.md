@@ -128,7 +128,7 @@ helpviewer_keywords:
  View the name of the data source.  
   
  **Column**  
- View the external (source) columns that you selected in the **Connection Manager** node of the **Excel Source Editor**dialog box.  
+ View the external (source) columns that you selected in the **Connection Manager** node of the **Excel Source Editor** dialog box.  
   
  **Error**  
  Specify what should happen when an error occurs: ignore the failure, redirect the row, or fail the component.  

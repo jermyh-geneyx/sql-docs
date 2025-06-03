@@ -176,7 +176,7 @@ To run the **SSIS Server Maintenance Job**, SSIS creates the SQL Server login **
 |Property Name (**Catalog Properties** dialog box)|Property Name (database view)|  
 |---------------------------------------------------------|-------------------------------------|  
 |Encryption Algorithm Name|ENCRYPTION_ALGORITHM|  
-|Clean Logs Periodically|OPERATION_CLEANUP_ENABLEDâ€‹|  
+|Clean Logs Periodically|OPERATION_CLEANUP_ENABLED|  
 |Retention Period (days)|RETENTION_WINDOW|  
 |Periodically Remove Old Versions|VERSION_CLEANUP_ENABLED|  
 |Maximum Number of Versions per Project|MAX_PROJECT_VERSIONS|  
@@ -665,7 +665,7 @@ If the **Enable Always On support** option on the context menu appears to be dis
   
 2.  Remove the SSISDB database from all **replica nodes**.  
   
-3.  Upgrade the SSISDB database on the **primary node**. In**Object Explorer** in SQL Server Management Studio, expand **Integration Services Catalogs**, right-click **SSISDB**, and then select **Database Upgrade**. Follow the instructions in the **SSISDB Upgrade Wizard** to upgrade the database. Launch the **SSIDB Upgrade Wizard** locally on the **primary node**.  
+3.  Upgrade the SSISDB database on the **primary node**. In **Object Explorer** in SQL Server Management Studio, expand **Integration Services Catalogs**, right-click **SSISDB**, and then select **Database Upgrade**. Follow the instructions in the **SSISDB Upgrade Wizard** to upgrade the database. Launch the **SSIDB Upgrade Wizard** locally on the **primary node**.  
   
 4.  Follow the instructions in [Step 2: Add SSISDB to an Always On Availability Group](#Step2) to add the SSISDB back to an availability group.  
   

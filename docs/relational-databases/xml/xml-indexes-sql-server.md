@@ -208,7 +208,7 @@ FROM Production.ProductModel
 WHERE ProductModelID = 19;
 ```
 
-Except for the differences described later in this article, creating an XML index on an**xml** type column is similar to creating an index on a non-**xml** type column. The following [!INCLUDE[tsql](../../includes/tsql-md.md)] DDL statements can be used to create and manage XML indexes:
+Except for the differences described later in this article, creating an XML index on an **xml** type column is similar to creating an index on a non-**xml** type column. The following [!INCLUDE[tsql](../../includes/tsql-md.md)] DDL statements can be used to create and manage XML indexes:
 
 - [CREATE INDEX (Transact-SQL)](../../t-sql/statements/create-index-transact-sql.md)
 - [ALTER INDEX (Transact-SQL)](../../t-sql/statements/alter-index-transact-sql.md)

@@ -33,7 +33,7 @@ In the example, the source table and destination table each include an `Identity
 The bulk copy operation is executed with the <xref:Microsoft.Data.SqlClient.SqlBulkCopy.BatchSize%2A> property set to 10. When the operation comes across the invalid row, an exception is thrown. In this first example, the bulk copy operation is non-transacted. All batches that are copied up to the point of the error are committed. The batch containing the duplicate key is rolled back, and the bulk copy operation is halted before it processes any remaining batches.  
   
 > [!NOTE]
->  This sample will not run unless you have created the work tables as described in [Bulk copy example setup](bulk-copy-example-setup.md). This code is provided to demonstrate the syntax for using **SqlBulkCopy** only. If the source and destination tables are located in the same SQL Server instance, it is easier and faster to use a Transact-SQL`INSERT … SELECT` statement to copy the data.  
+>  This sample will not run unless you have created the work tables as described in [Bulk copy example setup](bulk-copy-example-setup.md). This code is provided to demonstrate the syntax for using **SqlBulkCopy** only. If the source and destination tables are located in the same SQL Server instance, it is easier and faster to use a Transact-SQL` INSERT ... SELECT` statement to copy the data.  
   
 [!code-csharp[DataWorks SqlBulkCopyOptions_Default#1](~/../sqlclient/doc/samples/SqlBulkCopyOptions_Default.cs#1)]
   
@@ -48,7 +48,7 @@ You can explicitly specify the <xref:Microsoft.Data.SqlClient.SqlBulkCopyOptions
 The following console application is similar to the previous example, with one exception: In this example, the bulk copy operation manages its own transactions. All batches that are copied up to the point of the error are committed. The batch containing the duplicate key is rolled back, and the bulk copy operation is halted before it processes any remaining batches. 
   
 > [!IMPORTANT]
->  This sample will not run unless you have created the work tables as described in [Bulk copy example setup](bulk-copy-example-setup.md). This code is provided to demonstrate the syntax for using **SqlBulkCopy** only. If the source and destination tables are located in the same SQL Server instance, it is easier and faster to use a Transact-SQL`INSERT … SELECT` statement to copy the data.  
+>  This sample will not run unless you have created the work tables as described in [Bulk copy example setup](bulk-copy-example-setup.md). This code is provided to demonstrate the syntax for using **SqlBulkCopy** only. If the source and destination tables are located in the same SQL Server instance, it is easier and faster to use a Transact-SQL `INSERT ... SELECT` statement to copy the data.  
   
 [!code-csharp[DataWorks SqlBulkCopyOptions_UseInternalTransaction#1](~/../sqlclient/doc/samples/SqlBulkCopyOptions_UseInternalTransaction.cs#1)]
   
@@ -60,7 +60,7 @@ If you need to roll back the entire bulk copy operation because an error occurs,
 The following console application is similar to the first (non-transacted) example, with one exception: in this example, the bulk copy operation is included in a larger, external transaction. When the primary key violation error occurs, the entire transaction is rolled back and no rows are added to the destination table.  
   
 > [!IMPORTANT]
->  This sample will not run unless you have created the work tables as described in [Bulk copy example setup](bulk-copy-example-setup.md). This code is provided to demonstrate the syntax for using **SqlBulkCopy** only. If the source and destination tables are located in the same SQL Server instance, it is easier and faster to use a Transact-SQL`INSERT … SELECT` statement to copy the data.  
+>  This sample will not run unless you have created the work tables as described in [Bulk copy example setup](bulk-copy-example-setup.md). This code is provided to demonstrate the syntax for using **SqlBulkCopy** only. If the source and destination tables are located in the same SQL Server instance, it is easier and faster to use a Transact-SQL` INSERT ... SELECT` statement to copy the data.  
   
 [!code-csharp[DataWorks SqlBulkCopy_ExternalTransaction#1](~/../sqlclient/doc/samples/SqlBulkCopy_ExternalTransaction.cs#1)]
   

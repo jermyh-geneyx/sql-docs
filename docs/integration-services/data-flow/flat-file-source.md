@@ -106,7 +106,7 @@ helpviewer_keywords:
  View the name of the data source.  
   
  **Column**  
- View the external (source) columns that you selected on the **Connection Manager** page of the **Flat File Source Editor**dialog box.  
+ View the external (source) columns that you selected on the **Connection Manager** page of the **Flat File Source Editor** dialog box.  
   
  **Error**  
  Specify what should happen when an error occurs: ignore the failure, redirect the row, or fail the component.  

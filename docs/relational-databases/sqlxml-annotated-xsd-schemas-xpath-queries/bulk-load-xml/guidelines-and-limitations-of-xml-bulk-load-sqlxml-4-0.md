@@ -98,7 +98,7 @@ monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||
     </AllCustomers>  
     ```  
   
-     XML Bulk Load ignores these **\<Order>** elements. But if you use the **sql:overflow-field**annotation in the schema to identify a column as an overflow column, XML Bulk Load stores all unconsumed data in this column.  
+     XML Bulk Load ignores these **\<Order>** elements. But if you use the **sql:overflow-field** annotation in the schema to identify a column as an overflow column, XML Bulk Load stores all unconsumed data in this column.  
   
 -   CDATA sections and entity references are translated to their string equivalents before they are stored in the database.  
   
