@@ -6,6 +6,7 @@ ms.author: drskwier
 ms.reviewer: llali
 ms.date: 2/13/2023
 ms.service: sql
+ms.subservice: tools-other
 ms.topic: conceptual
 ms.collection:
   - data-tools

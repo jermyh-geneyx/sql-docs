@@ -6,6 +6,7 @@ ms.author: xiaoyul
 ms.reviewer: wiassaf, randolphwest
 ms.date: 10/06/2024
 ms.service: sql
+ms.subservice: t-sql
 ms.topic: "reference"
 ms.custom:
   - ignite-2024

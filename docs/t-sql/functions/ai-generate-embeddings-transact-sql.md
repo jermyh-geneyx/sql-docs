@@ -6,6 +6,7 @@ ms.author: bspendolini
 ms.reviewer: randolphwest
 ms.date: 05/21/2025
 ms.service: sql
+ms.subservice: t-sql
 ms.topic: "reference"
 ms.custom:
   - sql-ai

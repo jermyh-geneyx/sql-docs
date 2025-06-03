@@ -6,6 +6,7 @@ ms.author: ajagadish
 ms.reviewer: wiassaf
 ms.date: 11/03/2023
 ms.service: sql
+ms.subservice: t-sql
 ms.topic: reference
 dev_langs:
   - "TSQL"

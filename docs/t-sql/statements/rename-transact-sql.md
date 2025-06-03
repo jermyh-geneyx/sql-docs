@@ -6,6 +6,7 @@ ms.author: wiassaf
 ms.reviewer: "WilliamDAssafMSFT"
 ms.date: 08/24/2022
 ms.service: sql
+ms.subservice: t-sql
 ms.topic: reference
 dev_langs:
   - "TSQL"
