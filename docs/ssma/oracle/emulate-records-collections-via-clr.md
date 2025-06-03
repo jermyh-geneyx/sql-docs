@@ -24,7 +24,7 @@ SSMA creates three CLR-based UDTs:
 * `CollectionIndexString`
 * `Record`
 
-The `CollectionIndexInt` type is intended for emulating collections indexed by integer, such as `VARRAY`s, nested tables, and integer key based associative arrays. The `CollectionIndexString` type is used for associative arrays indexed by character keys. The Oracle record functionality is emulated by the `Record` type.
+The `CollectionIndexInt` type is intended for emulating collections indexed by integer, such as `VARRAY`, nested tables, and integer key based associative arrays. The `CollectionIndexString` type is used for associative arrays indexed by character keys. The Oracle record functionality is emulated by the `Record` type.
 
 All declarations of the record or collection types are converted to this Transact-SQL declaration:
 
@@ -116,7 +116,7 @@ Each of the types, `CollectionIndexInt`, `CollectionIndexString`, and `Record`, 
 
 ## Constructor call conversions
 
-Constructor notation can be used only for nested tables and `VARRAY`s, so all the explicit constructor calls are converted using the `CollectionIndexInt` type. Empty constructor calls are converted via `SetType` call invoked on null instance of `CollectionIndexInt`. The `[Null]` property returns the null instance. If the constructor contains a list of elements, special method calls are applied sequentially to add the value to the collection.
+Constructor notation can be used only for nested tables and `VARRAY`, so all the explicit constructor calls are converted using the `CollectionIndexInt` type. Empty constructor calls are converted via `SetType` call invoked on null instance of `CollectionIndexInt`. The `[Null]` property returns the null instance. If the constructor contains a list of elements, special method calls are applied sequentially to add the value to the collection.
 
 For example:
 

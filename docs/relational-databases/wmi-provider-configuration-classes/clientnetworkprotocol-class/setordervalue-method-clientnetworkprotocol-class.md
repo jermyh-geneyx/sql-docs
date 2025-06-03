@@ -32,7 +32,7 @@ object.SetOrderValue(OrderValue)
   
 |Parameter|Description|  
 |---------------|-----------------|  
-|*OrderValue*|A u**int32** value that sets the order value.|  
+|*OrderValue*|A **uint32** value that sets the order value.|  
   
 ## Property Value/Return Value  
  A **uint32** value, which is 0 if the service was successfully modified, 1 if the request is not supported, and any other number to indicate an error.  

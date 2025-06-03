@@ -209,7 +209,7 @@ In summary, the account must:
 
    1. Verify that **From this location** displays the name of the local computer (not a domain). If this field doesn't display the local computer name, select **Locations**. In the **Locations** dialog box, select the local computer, and then select **OK**.
 
-   1. In the **Select Users** dialog box and the **IIS_IUSRS Properties** dialog box, select**OK**.
+   1. In the **Select Users** dialog box and the **IIS_IUSRS Properties** dialog box, select **OK**.
 
 1. Grant minimum account permissions on the folder that contains replisapi.dll:
 

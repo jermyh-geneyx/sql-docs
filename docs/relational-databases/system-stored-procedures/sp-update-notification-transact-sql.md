@@ -71,7 +71,7 @@ To run this stored procedure, users must be granted the **sysadmin** fixed serve
 
 ## Examples
 
-The following example modifies the notification method for notifications sent to `François Ajenstat`for the alert `Test Alert`.
+The following example modifies the notification method for notifications sent to `François Ajenstat` for the alert `Test Alert`.
 
 ```sql
 USE msdb;

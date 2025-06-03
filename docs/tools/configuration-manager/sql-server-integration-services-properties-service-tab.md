@@ -13,7 +13,7 @@ monikerRange: ">=sql-server-2016"
 ---
 # SQL Server Integration Services Properties (Service Tab)
 [!INCLUDE [SQL Server Windows Only](../../includes/applies-to-version/sql-windows-only.md)]
-  Use the **Service**tab on the [!INCLUDE[ssISnoversion](../../includes/ssisnoversion-md.md)] **Properties** dialog box to view or specify the following options.  
+  Use the **Service** tab on the [!INCLUDE[ssISnoversion](../../includes/ssisnoversion-md.md)] **Properties** dialog box to view or specify the following options.  
   
 ## Options  
  **Binary Path**  

@@ -63,7 +63,7 @@ The following table lists required library dependencies for each authentication 
 | `ActiveDirectoryPassword`<br/>`ActiveDirectoryIntegrated` | 6.2.2 - 6.4 | `Adal4j` 1.4.0 |
 | `ActiveDirectoryPassword`<br/>`ActiveDirectoryIntegrated` | 7.0 | `Adal4j` 1.6.0 |
 | `ActiveDirectoryPassword`<br/>`ActiveDirectoryIntegrated` | 7.2 | `Adal4j` 1.6.3<br/>`Client-Runtime-for-AutoRest` 1.6.5 |
-| `ActiveDirectoryPassword`<br/>`ActiveDirectoryIntegrated` | 7.4 - 8.2 | `Adal4j`l4j 1.6.4<br/>`Client-Runtime-for-AutoRest` 1.7.0 |
+| `ActiveDirectoryPassword`<br/>`ActiveDirectoryIntegrated` | 7.4 - 8.2 | `Adal4j` 1.6.4<br/>`Client-Runtime-for-AutoRest` 1.7.0 |
 | `ActiveDirectoryPassword`<br/>`ActiveDirectoryIntegrated` | 8.4 | `Adal4j` 1.6.5<br/>`Client-Runtime-for-AutoRest` 1.7.4 |
 | `ActiveDirectoryPassword`<br/>`ActiveDirectoryIntegrated`<br/>`ActiveDirectoryInteractive`<br/>`ActiveDirectoryServicePrincipal` | 9.2 | `msal4j` 1.7.1 |
 | `ActiveDirectoryPassword`<br/>`ActiveDirectoryIntegrated`<br/>`ActiveDirectoryInteractive`<br/>`ActiveDirectoryServicePrincipal` | 9.4 | `msal4j` 1.10.1 |

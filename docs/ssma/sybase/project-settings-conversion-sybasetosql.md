@@ -76,7 +76,7 @@ When you select a conversion mode in the **Mode** box, SSMA applies the followin
 
 This setting specifies how to convert string concatenation with `NULL`. The following options can be set for this particular setting:
 
-- If **Wrap with ISNULL function** option is selected, every non-constant `string_expression` in concatenation will be wrapped with `ISNULL(string_expression)` and `NULL`s will be replaced with empty string.
+- If **Wrap with ISNULL function** option is selected, every non-constant `string_expression` in concatenation will be wrapped with `ISNULL(string_expression)` and NULLs will be replaced with empty string.
 - **Keep current syntax** will maintain original syntax.
 
 When you select a conversion mode in the **Mode** box, SSMA applies the following setting:

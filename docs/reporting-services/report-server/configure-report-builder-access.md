@@ -31,9 +31,9 @@ The client computer must have [!INCLUDE[msCoName](../../includes/msconame-md.md)
 
 Downloading Report Builder via the portal is enabled by default. Report server administrators have the option of disabling the Report Builder download by setting the report server system property `ShowDownloadMenu` to **false**. Setting this property disables Report Builder, Mobile Report Publisher, Power BI Desktop, and Power BI Mobile downloads for that report server.  
 
- To set report server system properties, you can use Management Studio or script:  	
+ To set report server system properties, you can use Management Studio or script:      
 
- - To use Management Studio, connect to the report server and use the Advanced Server Properties page to set `ShowDownloadMenu` to **false**. For more information about how to open this page, see [Set report server properties &#40;Management Studio&#41;](../../reporting-services/tools/set-report-server-properties-management-studio.md).  	
+ - To use Management Studio, connect to the report server and use the Advanced Server Properties page to set `ShowDownloadMenu` to **false**. For more information about how to open this page, see [Set report server properties &#40;Management Studio&#41;](../../reporting-services/tools/set-report-server-properties-management-studio.md).      
 
  - To view a sample script that sets a report server property, see [Script deployment and administrative tasks](../../reporting-services/tools/script-deployment-and-administrative-tasks.md).  
 
@@ -93,7 +93,7 @@ After you create the role assignments, users have permission to do the following
 
     1. In **Description**, enter a description for the role so that users in the web portal know what the role is for.  
 
-    1. Add the following tasks: **Consume reports**, **View reports**, **View models**, **View resources**, **View folders**, and **Manage individual subscription**s.  
+    1. Add the following tasks: **Consume reports**, **View reports**, **View models**, **View resources**, **View folders**, and **Manage individual subscriptions**.  
 
     1. Select **OK** to save the role.  
 

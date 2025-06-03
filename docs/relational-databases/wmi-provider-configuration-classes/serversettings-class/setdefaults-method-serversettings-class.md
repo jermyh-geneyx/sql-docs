@@ -35,7 +35,7 @@ object.SetDefaults(OverwriteAll)
 |*OverwriteAll*|A Boolean value that specifies whether to overwrite existing values on the instance of [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)]: **true** to overwrite existing data, or **false** if existing data is not to be overwritten.|  
   
 ## Property Value/Return Value  
- A u**int32** value, which is 0 if the service was successfully modified, 1 if the request is not supported, and any other number to indicate an error.  
+ A **uint32** value, which is 0 if the service was successfully modified, 1 if the request is not supported, and any other number to indicate an error.  
   
 ## Remarks  
   

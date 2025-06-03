@@ -856,7 +856,7 @@ RIGHT OUTER JOIN FactInternetSales AS fis
     ON dp.ProductKey = fis.ProductKey;
 ```
 
-The following query uses the `DimSalesTerritory` table as the left table in a left outer join. It retrieves the `SalesOrderNumber` values from the `FactInternetSales` table. If there are no orders for a particular `SalesTerritoryKey`, the query returns a `NULL` for the `SalesOrderNumber` for that row. This query is ordered by the `SalesOrderNumber` column, so that any `NULL`s in this column appear at the top of the results.
+The following query uses the `DimSalesTerritory` table as the left table in a left outer join. It retrieves the `SalesOrderNumber` values from the `FactInternetSales` table. If there are no orders for a particular `SalesTerritoryKey`, the query returns a `NULL` for the `SalesOrderNumber` for that row. This query is ordered by the `SalesOrderNumber` column, so that any NULLs in this column appear at the top of the results.
 
 ```sql
 -- Uses AdventureWorks

@@ -72,7 +72,7 @@ helpviewer_keywords:
   
          This expression sets the initial value of the loop variable.  
   
-    2.  For **EvalExpression**m, enter `@DataReady == 0`.  
+    2.  For **EvalExpression**, enter `@DataReady == 0`.  
   
          When this expression evaluates to **False**, execution passes out of the loop and the incremental load starts.  
   

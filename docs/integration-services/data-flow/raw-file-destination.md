@@ -108,7 +108,7 @@ helpviewer_keywords:
   
  To create the file in the first iteration of the loop, and then append rows in the subsequent iterations of the loop, you need to do the following at design time:  
   
-1.  Set the WriteOption property to **CreateOnce** or **CreateAlways**and run one iteration of the loop. The file is created. This ensures that the metadata of appended data and the file matches.  
+1.  Set the WriteOption property to **CreateOnce** or **CreateAlways** and run one iteration of the loop. The file is created. This ensures that the metadata of appended data and the file matches.  
   
 2.  Reset the WriteOption property to **Append** and set the ValidateExternalMetadata property to **False**.  
   

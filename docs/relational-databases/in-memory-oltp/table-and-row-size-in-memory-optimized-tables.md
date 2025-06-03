@@ -145,7 +145,7 @@ WITH (MEMORY_OPTIMIZED = ON);
 GO
 ```
 
-This table has one hash index and a nonclustered index (the primary key). It also has three fixed-length columns and one variable-length column, with one of the columns being `NULL`able (`OrderDescription`). Let's assume the `Orders` table has 8,379 rows, and the average length of the values in the `OrderDescription` column is 78 characters.
+This table has one hash index and a nonclustered index (the primary key). It also has three fixed-length columns and one variable-length column, with one of the columns being nullable (`OrderDescription`). Let's assume the `Orders` table has 8,379 rows, and the average length of the values in the `OrderDescription` column is 78 characters.
 
 To determine the table size, first determine the size of the indexes. The `bucket_count` for both indexes is specified as 10000. This is rounded up to the nearest power of 2: 16384. Therefore, the total size of the indexes for the `Orders` table is:
 

@@ -73,7 +73,7 @@ The **Rebuild Index Task** uses the ALTER INDEX statement. For more info about t
 
 - **Sort results in tempdb**
 
-  Use the `SORT_IN_TEMPDB` option, which determines where the intermediate sort results, generated during index creation, are temporarily stored. If a sort operation isn't required, or if the sort can be performed in memory, the `SORT_IN_TEMPDB`option is ignored.
+  Use the `SORT_IN_TEMPDB` option, which determines where the intermediate sort results, generated during index creation, are temporarily stored. If a sort operation isn't required, or if the sort can be performed in memory, the `SORT_IN_TEMPDB` option is ignored.
 
 - **Pad index**
 

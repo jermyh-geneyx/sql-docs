@@ -1401,7 +1401,7 @@ Databases in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] have se
 The following are `CREATE DATABASE` limitations:
 
 - Files and filegroups cannot be defined.
-- `WITH`options are not supported, except for `WITH LEDGER`.
+- `WITH` options are not supported, except for `WITH LEDGER`.
 
   > [!TIP]
   > As workaround, use [ALTER DATABASE](../../t-sql/statements/alter-database-transact-sql.md?view=azuresqldb-mi-current&preserve-view=true). after `CREATE DATABASE` to set database options and to add files.

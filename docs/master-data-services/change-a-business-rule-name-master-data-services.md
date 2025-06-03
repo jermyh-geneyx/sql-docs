@@ -47,7 +47,7 @@ helpviewer_keywords:
   
 9. Click **Publish All**.  
   
-10. On the confirmation dialog box, click **OK**. The value in the **Business Rule State**column is **Active**.  
+10. On the confirmation dialog box, click **OK**. The value in the **Business Rule State** column is **Active**.  
   
 ## See Also  
  [Business Rules &#40;Master Data Services&#41;](../master-data-services/business-rules-master-data-services.md)  

@@ -236,7 +236,7 @@ Specify the data flow from source to destination.
   
 Run the package on your computer Integration Services.  
   
-1.  In the Integration Services**Solution Explorer** (right column), right-click `Package.dtsx` and select **Execute**.  
+1.  In the Integration Services **Solution Explorer** (right column), right-click `Package.dtsx` and select **Execute**.  
   
 2.  The package will run and the progress plus any errors will be shown on the **Progress** pane. Use a SQL client to confirm the load, or monitor the load via the SQL Server PDW Admin Console.  
   

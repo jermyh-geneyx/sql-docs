@@ -51,7 +51,7 @@ WHERE ProductModelID=7
   
 |Topic|Description|  
 |-----------|-----------------|  
-|[XML Data &#40;SQL Server&#41;](../relational-databases/xml/xml-data-sql-server.md)|Explains the support for the **xml**data type in the [!INCLUDE[ssDE](../includes/ssde-md.md)] and the methods you can use against this data type. The **xml** data type forms the input XQuery data model on which the XQuery expressions are executed.|  
+|[XML Data &#40;SQL Server&#41;](../relational-databases/xml/xml-data-sql-server.md)|Explains the support for the **xml** data type in the [!INCLUDE[ssDE](../includes/ssde-md.md)] and the methods you can use against this data type. The **xml** data type forms the input XQuery data model on which the XQuery expressions are executed.|  
 |[XML Schema Collections &#40;SQL Server&#41;](../relational-databases/xml/xml-schema-collections-sql-server.md)|Describes how the XML instances stored in a database can be typed. This means you can associate an XML schema collection with the **xml** type column. All the instances stored in the column are validated and typed against the schema in the collection and provide the type information for XQuery.|  
   
 > [!NOTE]  

@@ -358,7 +358,7 @@ FROM Tn;
 
  - A distributed transaction is started to guarantee atomicity across all nodes affected by the update.  
 
- - Set the `XACT_ABORT` `SET`option to `ON` for `INSERT`, `UPDATE`, or `DELETE` statements to work.  
+ - Set the `XACT_ABORT SET` option to `ON` for `INSERT`, `UPDATE`, or `DELETE` statements to work.  
 
  - Any columns in remote tables of type **smallmoney** that are referenced in a partitioned view are mapped as **money**. Therefore, the corresponding columns (in the same ordinal position in the select list) in the local tables must also be of type **money**.  
 

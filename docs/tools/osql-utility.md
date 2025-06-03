@@ -99,7 +99,7 @@ C:\>osql
  Is a workstation name. The workstation name is stored in **sysprocesses.hostname** and is displayed by **sp_who**. If this option is not specified, the current computer name is assumed.  
   
  **-d** _db_name_  
- Issues a USE *db_name* statement when **osql**is started.  
+ Issues a USE *db_name* statement when **osql** is started.  
   
  **-l** _time_out_  
  Specifies the number of seconds before an **osql** login times out. The default time-out for login to **osql** is eight seconds.  
@@ -191,7 +191,7 @@ osql -E -q "select name, object_id from %table%"
 >  The **-n**, **-O** and **-D** options are no longer supported by **osql**.  
   
 ## Remarks  
- The **osql** utility is started directly from the operating system with the case-sensitive options listed here. After **osql**starts, it accepts SQL statements and sends them to [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)] interactively. The results are formatted and displayed on the screen (**stdout**). Use QUIT or EXIT to exit from **osql**.  
+ The **osql** utility is started directly from the operating system with the case-sensitive options listed here. After **osql** starts, it accepts SQL statements and sends them to [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)] interactively. The results are formatted and displayed on the screen (**stdout**). Use QUIT or EXIT to exit from **osql**.  
   
  If you do not specify a user name when you start **osql**, [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)] checks for the environment variables and uses those, for example, **osqluser=(**_user_**)** or **osqlserver=(**_server_**)**. If no environment variables are set, the workstation user name is used. If you do not specify a server, the name of the workstation is used.  
   
@@ -250,7 +250,7 @@ osql -E -i titles.qry -o titles.res
 ```  
   
 > [!IMPORTANT]  
->  When possible, use the **-E**option (trusted connection).  
+>  When possible, use the **-E** option (trusted connection).  
   
  When using **osql** interactively, you can read an operating-system file into the command buffer with **:r**_file\_name_. This sends the SQL script in *file_name* directly to the server as a single batch.  
   

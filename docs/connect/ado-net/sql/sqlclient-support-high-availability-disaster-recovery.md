@@ -79,7 +79,7 @@ When `ApplicationIntent=ReadOnly`, the client requests a read workload when conn
   
 The `ApplicationIntent` keyword does not work with legacy, read-only databases.  
   
-A database can allow or disallow read workloads on the targeted Always On database. (This is done with the `ALLOW_CONNECTIONS` clause of the `PRIMARY_ROLE` and `SECONDARY_ROLE`Transact-SQL statements.)  
+A database can allow or disallow read workloads on the targeted Always On database. (This is done with the `ALLOW_CONNECTIONS` clause of the `PRIMARY_ROLE` and `SECONDARY_ROLE` Transact-SQL statements.)  
   
 The `ApplicationIntent` keyword is used to enable read-only routing.  
   

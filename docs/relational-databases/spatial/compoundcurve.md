@@ -99,7 +99,7 @@ SET @g = geometry::Parse('COMPOUNDCURVE EMPTY');
 <a id="b-declaring-and-instantiating-a-geometry-instance-using-a-compoundcurve-in-the-same-statement"></a>
 
 ### B. Declare and instantiating a geometry instance using a CompoundCurve in the same statement
- The following example shows how to declare and initialize a `geometry` instance with a `CompoundCurve`in the same statement:  
+ The following example shows how to declare and initialize a `geometry` instance with a `CompoundCurve` in the same statement:  
   
 ```sql  
 DECLARE @g geometry = 'COMPOUNDCURVE ((2 2, 0 0),CIRCULARSTRING (0 0, 1 2.1082, 3 6.3246, 0 7, -3 6.3246, -1 2.1082, 0 0))';  

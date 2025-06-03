@@ -213,7 +213,7 @@ SELECT @datetime2 AS '@datetime2', @time AS '@time';
   
 |Input string literal|Conversion Rule|  
 |--------------------------|---------------------|  
-|ODBC DATE|ODBC string literals are mapped to the **datetime** data type. Any assignment operation from ODBC DATETIME literals into **time**types will cause an implicit conversion between **datetime** and this type as defined by the conversion rules.|  
+|ODBC DATE|ODBC string literals are mapped to the **datetime** data type. Any assignment operation from ODBC DATETIME literals into **time** types will cause an implicit conversion between **datetime** and this type as defined by the conversion rules.|  
 |ODBC TIME|See ODBC DATE rule above.|  
 |ODBC DATETIME|See ODBC DATE rule above.|  
 |DATE only|Default values are supplied.|  

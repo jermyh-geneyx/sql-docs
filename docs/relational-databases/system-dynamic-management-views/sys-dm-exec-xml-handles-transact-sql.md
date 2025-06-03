@@ -52,7 +52,7 @@ dm_exec_xml_handles (session_id | 0 )
 |**original_namespace_document_size_bytes**|**bigint**|Size of the unparsed XML namespace document, in bytes. NULL if there is no namespace document.|  
 |**num_openxml_calls**|**bigint**|Number of OPENXML calls with this document handle.|  
 |**row_count**|**bigint**|Number of rows returned by all previous OPENXML calls for this document handle.|  
-|**dormant_duration_ms**|**bigint**|Milliseconds since the last OPENXML call. If OPENXML has not been called, returns milliseconds since the **sp_xml_preparedocumen**t call.|  
+|**dormant_duration_ms**|**bigint**|Milliseconds since the last OPENXML call. If OPENXML has not been called, returns milliseconds since the **sp_xml_preparedocument** call.|  
   
 ## Remarks  
  The lifetime of **sql_handles** used to retrieve the SQL text that executed a call to **sp_xml_preparedocument** outlives the cached plan used to execute the query. If the query text is not available in the cache, the data cannot be retrieved using the information provided in the function result. This can occur if you are running many large batches.  

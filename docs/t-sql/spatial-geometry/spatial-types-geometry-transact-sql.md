@@ -25,7 +25,7 @@ monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-20
   
  [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] supports a set of methods for the **geometry** spatial data type. These methods include methods on **geometry** that are defined by the Open Geospatial Consortium (OGC) standard and a set of [!INCLUDE[msCoName](../../includes/msconame-md.md)] extensions to that standard.  
  
- The error tolerance for the geometry methods can be as large as 1.0e-7 * extents. The extents refer to the approximate maximal distance between points of the **geometry**object.
+ The error tolerance for the geometry methods can be as large as 1.0e-7 * extents. The extents refer to the approximate maximal distance between points of the **geometry** object.
   
 ## Registering the geometry Type  
  The **geometry** type is predefined and available in each database. You can create table columns of type **geometry** and operate on **geometry** data in the same manner as you would use other CLR types. Can be used in persisted and non-persisted computed columns.  

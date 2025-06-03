@@ -27,7 +27,7 @@ global temporary table
 pdwtempdb  
 **pdwtempdb** is the database that stores local temporary tables.  
   
-PDW does not implement temporary tables by using the SQL Server**tempdb** database. Instead, PDW stores them in a database called pdwtempdb. This database exists on each Compute node and is invisible to the user through the PDW interfaces. In the Admin Console, on the storage page, you will see these accounted for in a PDW system database called **tempdb-sql**.  
+PDW does not implement temporary tables by using the SQL Server **tempdb** database. Instead, PDW stores them in a database called pdwtempdb. This database exists on each Compute node and is invisible to the user through the PDW interfaces. In the Admin Console, on the storage page, you will see these accounted for in a PDW system database called **tempdb-sql**.  
   
 tempdb  
 **tempdb** is the SQL Server tempdb database. It uses minimal logging. SQL Server uses tempdb on the Compute nodes to store temporary tables that it needs in the course of performing SQL Server operations.  
@@ -46,7 +46,7 @@ SQL Server PDW drops tables from **tempdb** when:
 SQL Server PDW performs the same operations on temporary tables and permanent tables unless explicitly stated otherwise. For example, the data in local temporary tables, just like permanent tables, is either distributed or replicated across the Compute nodes.  
   
 ## <a name="LimitationsRestrictions"></a>Limitations and Restrictions  
-Limitations and restrictions on the SQL Server PDW**tempdb** database. You *cannot:*  
+Limitations and restrictions on the SQL Server PDW **tempdb** database. You *cannot:*  
   
 -   Create a global temporary table that begins with ##.  
   
@@ -54,7 +54,7 @@ Limitations and restrictions on the SQL Server PDW**tempdb** database. You *cann
   
 -   Modify permissions to **tempdb** with the **GRANT**, **DENY**, or **REVOKE** statements.  
   
--   Execute **DBCC SHRINKLOG** for **tempdb**tempdb.  
+-   Execute **DBCC SHRINKLOG** for the **tempdb** database.  
   
 -   Perform DDL operations on **tempdb**. There are a couple exceptions to this. For details, see the following list of limitations and restrictions on local temporary tables.  
   

@@ -16,7 +16,7 @@ helpviewer_keywords:
 
   The **Plan Cache** object provides counters to monitor how [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] uses memory to store objects such as stored procedures, ad hoc and prepared [!INCLUDE [tsql](../../includes/tsql-md.md)] statements, and triggers. Multiple instances of the **Plan Cache** object can be monitored at the same time, with each instance representing a different type of plan to monitor.  
   
- This table describes are the **SQLServer:Plan Cache**counters.  
+ This table describes are the **SQLServer:Plan Cache** counters.  
   
 |SQL Server Plan Cache counters|Description|  
 |------------------------------------|-----------------|  

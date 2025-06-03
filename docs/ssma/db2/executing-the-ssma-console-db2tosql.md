@@ -25,13 +25,13 @@ The Project commands handle creating projects, opening, saving, and exiting proj
 
 **Script**
 
-- `project-folder` indicates the folder of the project getting created.
+- `project-folder`. Indicates the folder of the project getting created.
 
-- `project-name` indicates the name of the project. {string}
+- `project-name`. Indicates the name of the project. {string}
 
-- `overwrite-if-exists`Optional attribute indicates if an existing project should be overwritten. {boolean}
+- `overwrite-if-exists`: Optional attribute. Indicates if an existing project should be overwritten. {boolean}
 
-- `project-type:`Optional attribute. Indicates the project type. For example, `sql-server-2019` or `sql-azure`. Default is `sql-server-2016`.
+- `project-type`: Optional attribute. Indicates the project type. For example, `sql-server-2019` or `sql-azure`. Default is `sql-server-2016`.
 
 **Example:**
 

@@ -346,7 +346,7 @@ SQL Server and OLE-DB data type mapping table.
 \* Indicate some form of translation to the SQL Server type's representation, as there is no exact equivalent data type in SQL Server. Such conversions could result in loss of precision, overflow, or underflow. The default implicit mappings can be changed in the future if the corresponding data types are supported by future versions of SQL Server.
 
 >[!NOTE]
->`numeric(p,s)` indicates SQL Server data type `numeric` with precision `p` and scale `s`. The maximum allowed precision for `DBTYPE_NUMERIC` and `DBTYPE_DECIMAL` is 38. The provider must support binding to the `DBTYPE_BSTR` column as `DBTYPE_WSTR` while creating an accessor. `DBTYPE_VARIANT`columns are consumed as Unicode character strings `nvarchar`. This requires support for conversion from `DBTYPE_VARIANT` to `DBTYPE_WSTR` from the provider. The provider is expected to implement this conversion as defined in OLE DB. For more information, see [Data Types of the OLE DB Specification](#appendixa).
+>`numeric(p,s)` indicates SQL Server data type `numeric` with precision `p` and scale `s`. The maximum allowed precision for `DBTYPE_NUMERIC` and `DBTYPE_DECIMAL` is 38. The provider must support binding to the `DBTYPE_BSTR` column as `DBTYPE_WSTR` while creating an accessor. `DBTYPE_VARIANT` columns are consumed as Unicode character strings `nvarchar`. This requires support for conversion from `DBTYPE_VARIANT` to `DBTYPE_WSTR` from the provider. The provider is expected to implement this conversion as defined in OLE DB. For more information, see [Data Types of the OLE DB Specification](#appendixa).
 
 #### Interpreting Data Type Mapping
 
@@ -378,7 +378,7 @@ To use export-side mapping in the case of `UPDATE` and `INSERT` statements again
 
 As indicated in the mapping table, if columns of the type `DBTYPE_STR`, `DBTYPE_WSTR`, or `DBTYPE_BSTR` also report `DBCOLUMNFLAGS_ISLONG`, or if their maximum length exceeds 4,000 characters (or if no maximum length is reported), SQL Server treats them as a `text` or `ntext` column as appropriate. Similarly, for `DBTYPE_BYTES` columns, if `DBCOLUMNFLAGS_ISLONG` is set or if the maximum length is higher than 8,000 bytes (or if maximum length is not reported), the columns are treated as `image` columns. `Text`, `ntext` and `image` columns are called LOB columns.
 
-SQL Server does not expose the full text and image functionality on LOBs from an OLE DB provider. `TEXTPTRS` are not supported on large objects from an OLE DB provider; hence, none of the related functionality is supported, for example, the `TEXTPTR` system function and `READTEXT`, `WRITETEXT`, and `UPDATETEXT` statements. `SELECT` statements that retrieve entire LOBs columns are supported, as are `UPDATE`and `INSERT` statements for entire large object columns in remote tables.
+SQL Server does not expose the full text and image functionality on LOBs from an OLE DB provider. `TEXTPTRS` are not supported on large objects from an OLE DB provider; hence, none of the related functionality is supported, for example, the `TEXTPTR` system function and `READTEXT`, `WRITETEXT`, and `UPDATETEXT` statements. `SELECT` statements that retrieve entire LOBs columns are supported, as are `UPDATE` and `INSERT` statements for entire large object columns in remote tables.
 
 SQL Server uses the structured storage interfaces on LOB columns if the provider supports them. The structured storage interfaces in increasing order of preference and functionality are as follows: `ISequentialStream`, `Istream`, or `ILockBytes`. If one or more of these interfaces are supported, the provider must return DBPROPVAL_OO_BLOB as the value of the `DBPROP_OLEOBJECTS` property when it is queried through the `IDBProperties` interface. Also, the provider should indicate support for the interfaces it supports in the `DBPROP_STRUCTUREDSTORAGE` property.
 
@@ -398,7 +398,7 @@ Use the interface pointer for the requested structured storage interface returne
 
 #### `UPDATE` and `INSERT` Statements on LOB Columns
 
-SQL Server passes to the provider a pointer to a new storage object rather than using the provider-supplied interface to modify the storage object. For each LOB column, the value that is updated or inserted on a storage object is created with the chosen structured storage interface. Depending on whether it is an `UPDATE`or an `INSERT` operation, a pointer to the storage object is passed to the provider through `IRowsetChange::SetData` or `IRowsetChange::InsertRow`, respectively.
+SQL Server passes to the provider a pointer to a new storage object rather than using the provider-supplied interface to modify the storage object. For each LOB column, the value that is updated or inserted on a storage object is created with the chosen structured storage interface. Depending on whether it is an `UPDATE` or an `INSERT` operation, a pointer to the storage object is passed to the provider through `IRowsetChange::SetData` or `IRowsetChange::InsertRow`, respectively.
 
 ### Error Handling
 
@@ -440,7 +440,7 @@ For more information, see [`sp_addlinkedsrvlogin`](../../relational-databases/sy
 
 - Pure table scans
 
-- `UPDATE`and DELETE statements
+- `UPDATE` and `DELETE` statements
 
 - `INSERT` statement
 
@@ -569,7 +569,7 @@ The following conditions must be satisfied for a remote table to be updated or d
 
 The following rowset properties are required on the rowset opened against the updated table: `DBPROP_IRowsetLocate`, `DBPROP_IRowsetChange`, and `DBPROP_BOOKMARKS`. The `DBPROP_UPDATABILITY` rowset property is set to `DBPROPVAL_UP_CHANGE` or `DBPROPVAL_UP_DELETE` depending on whether the operation performed is an `UPDATE` or a `DELETE`, respectively.
 
-The following high-level steps against the provider for processing an `UPDATE`or `DELETE` operation are performed:
+The following high-level steps against the provider for processing an `UPDATE` or `DELETE` operation are performed:
 
 1. SQL Server opens the base table rowset through the `IOpenRowset` interface. SQL Server requires the above-mentioned properties on the rowset.
 
@@ -577,11 +577,11 @@ The following high-level steps against the provider for processing an `UPDATE`or
 
 1. SQL Server uses the bookmarks to position on the qualifying rows through the `IRowsetLocate` interface.
 
-1. Use `IRowsetChange::SetData` for `UPDATE`operations or `IRowsetChange::DeleteRows` for delete operations to perform the required changes on the qualifying rows.
+1. Use `IRowsetChange::SetData` for `UPDATE` operations or `IRowsetChange::DeleteRows` for delete operations to perform the required changes on the qualifying rows.
 
 ### `INSERT` Statement
 
-The conditions for supporting `INSERT` statements against a remote table are less stringent than for `UPDATE`and `DELETE` statements:
+The conditions for supporting `INSERT` statements against a remote table are less stringent than for `UPDATE` and `DELETE` statements:
 
 - The provider must support `IRowsetChange::InsertRow` on the rowset opened on the base table being inserted into.
 
@@ -605,7 +605,7 @@ Microsoft SQL Server offers the most robust set of tools for accessing data from
 
 The following table lists all the OLE DB interfaces that are used by SQL Server. The Required column indicates whether the interface is part of the bare minimum OLE DB functionality that SQL Server needs or whether it is optional. If a given interface is not marked as required, SQL Server can still access the provider, but some specific SQL Server functionality or optimization is not possible against the provider.
 
-In the case of the optional interfaces, the Scenarios column indicates one or more of the six scenarios that use the specified interface. For example, the `IRowsetChange` interface on base table rowsets is an optional interface; this interface is used in the `UPDATE`and DELETE statements and `INSERT` statement scenarios. If this interface is not supported, UPDATE, DELETE, and `INSERT` statements cannot be supported against that provider. Some of the other optional interfaces are marked \"performance\" in the Scenarios column, indicating that the interface results in better general performance. For example, if the `IDBSchemaRowset` interface is not supported, SQL Server must open the rowset twice: once for its meta data and once for query execution. By supporting `IDBSchemaRowset`, SQL Server performance is improved.
+In the case of the optional interfaces, the Scenarios column indicates one or more of the six scenarios that use the specified interface. For example, the `IRowsetChange` interface on base table rowsets is an optional interface; this interface is used in the `UPDATE` and DELETE statements and `INSERT` statement scenarios. If this interface is not supported, UPDATE, DELETE, and `INSERT` statements cannot be supported against that provider. Some of the other optional interfaces are marked \"performance\" in the Scenarios column, indicating that the interface results in better general performance. For example, if the `IDBSchemaRowset` interface is not supported, SQL Server must open the rowset twice: once for its meta data and once for query execution. By supporting `IDBSchemaRowset`, SQL Server performance is improved.
 
 |Object|Interface|Required|Comments|Scenarios|
 |:-----|:-----|:-----|:-----|:-----|
