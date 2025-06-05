@@ -22,6 +22,10 @@ monikerRange: ">=sql-server-2016"
 
 This article summarizes the new features and enhancements for [!INCLUDE [sql-server-2025](../includes/sssql25-md.md)].
 
+&nbsp;
+
+> [!VIDEO https://www.youtube-nocookie.com/embed/3RgncKX6K9A]
+
 ## Get [!INCLUDE [sssql25-md](../includes/sssql25-md.md)]
 
 [Get SQL Server 2025 Preview](https://info.microsoft.com/ww-landing-sql-server-2025.html). Build number: 17.0.700.9.
