@@ -20,7 +20,7 @@ keywords:
   - "database recovery"
 monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 ---
-# Overview of business continuity with Azure SQL Database
+# Business continuity in Azure SQL Database
 
 [!INCLUDE [appliesto-sqldb-fabricsqldb](../includes/appliesto-sqldb-fabricsqldb.md)]
 
@@ -34,18 +34,18 @@ monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 
 > [!VIDEO https://learn-video.azurefd.net/vod/player?show=data-exposed&ep=azure-sql-db-high-availability-disaster-recovery-overview-data-exposed]
 
+For prescriptive recommendations to maximize availability and achieve higher business continuity, see: 
+
+- [Availability checklist](high-availability-disaster-recovery-checklist.md#availability-checklist)
+- [High availability checklist](high-availability-disaster-recovery-checklist.md#high-availability-checklist)
+- [Disaster recovery checklist](high-availability-disaster-recovery-checklist.md#disaster-recovery-checklist)
+
 In most cases, SQL Database handles disruptive events that might happen in a cloud environment and keeps your applications and business processes running. However, there are some disruptive events where mitigation might take some time, such as:
 
 - User accidentally deletes or updates a row in a table.
 - Malicious attacker successfully deletes data or drops a database. 
 - Catastrophic natural disaster event takes down a datacenter or availability zone or region. 
 - Rare datacenter, availability zone, or region-wide outage caused by a configuration change, software bug, or hardware failure.
-
-For prescriptive recommendations to maximize availability and achieve higher business continuity, see: 
-
-- [Availability checklist](high-availability-disaster-recovery-checklist.md#availability-checklist)
-- [High availability checklist](high-availability-disaster-recovery-checklist.md#high-availability-checklist)
-- [Disaster recovery checklist](high-availability-disaster-recovery-checklist.md#disaster-recovery-checklist)
 
 ## High Availability
 
