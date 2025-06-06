@@ -1,7 +1,7 @@
 ---
 title: Cloud Business Continuity - Disaster Recovery
 titleSuffix: Azure SQL Database
-description: Learn how Azure SQL Database supports cloud business continuity and disaster recovery to help keep mission-critical cloud applications running.
+description: Learn what to do when a user or application error affects data integrity, an Azure availability zone or region has an outage, or your application requires maintenance.
 author: rajeshsetlem
 ms.author: rsetlem
 ms.reviewer: wiassaf, mathoma
@@ -28,13 +28,11 @@ monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 > * [Azure SQL Database](business-continuity-high-availability-disaster-recover-hadr-overview.md?view=azuresql-db&preserve-view=true)
 > * [Azure SQL Managed Instance](../managed-instance/business-continuity-high-availability-disaster-recover-hadr-overview.md?view=azuresql-mi&preserve-view=true)
 
-This article provides an overview of the business continuity and disaster recovery capabilities of Azure SQL Database, describing the options and recommendations to recover from disruptive events that could lead to data loss or cause your database and application to become unavailable. Learn what to do when a user or application error affects data integrity, an Azure availability zone or region has an outage, or your application requires maintenance.
+**Business continuity** in Azure SQL Database refers to the mechanisms, policies, and procedures that enable your business to continue operating in the face of disruption by providing availability, high availability, and disaster recovery. 
+
+<br/>
 
 > [!VIDEO https://learn-video.azurefd.net/vod/player?show=data-exposed&ep=azure-sql-db-high-availability-disaster-recovery-overview-data-exposed]
-
-## Overview
-
-**Business continuity** in Azure SQL Database refers to the mechanisms, policies, and procedures that enable your business to continue operating in the face of disruption by providing availability, high availability, and disaster recovery. 
 
 In most cases, SQL Database handles disruptive events that might happen in a cloud environment and keeps your applications and business processes running. However, there are some disruptive events where mitigation might take some time, such as:
 
