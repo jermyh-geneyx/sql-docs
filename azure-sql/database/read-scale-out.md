@@ -5,7 +5,7 @@ description: Azure SQL provides the ability to use the capacity of read-only rep
 author: rajeshsetlem
 ms.author: rsetlem
 ms.reviewer: wiassaf, mathoma, randolphwest
-ms.date: 11/28/2023
+ms.date: 06/06/2025
 ms.service: azure-sql
 ms.subservice: scale-out
 ms.topic: concept-article 
@@ -136,16 +136,20 @@ To drop an event session on a read-only replica, follow these steps:
 
 Transactions on read-only replicas always use the snapshot [transaction isolation level](/sql/relational-databases/sql-server-transaction-locking-and-row-versioning-guide#database-engine-isolation-levels), regardless of transaction isolation level of the session, and regardless of any query hints. Snapshot isolation uses row versioning to avoid blocking scenarios where readers block writers.
 
-In rare cases, if a snapshot isolation transaction accesses object metadata that has been modified in another concurrent transaction, it may receive error [3961](/sql/relational-databases/errors-events/mssqlserver-3961-database-engine-error), "Snapshot isolation transaction failed in database '%.*ls' because the object accessed by the statement has been modified by a DDL statement in another concurrent transaction since the start of this transaction. It is disallowed because the metadata is not versioned. A concurrent update to metadata can lead to inconsistency if mixed with snapshot isolation."
+In rare cases, if a snapshot isolation transaction accesses object metadata that has been modified in another concurrent transaction, it may receive error [3961](/sql/relational-databases/errors-events/mssqlserver-3961-database-engine-error), *Snapshot isolation transaction failed in database 'database-name' because the object accessed by the statement has been modified by a DDL statement in another concurrent transaction since the start of this transaction. It is disallowed because the metadata is not versioned. A concurrent update to metadata can lead to inconsistency if mixed with snapshot isolation.*
 
 ### Long-running queries on read-only replicas
 
 Queries running on read-only replicas need to access metadata for the objects referenced in the query (tables, indexes, statistics, etc.) In rare cases, if object metadata is modified on the primary replica while a query holds a lock on the same object on the read-only replica, the query can [block](/sql/database-engine/availability-groups/windows/troubleshoot-primary-changes-not-reflected-on-secondary#BKMK_REDOBLOCK) the process that applies changes from the primary replica to the read-only replica. If such a query were to run for a long time, it would cause the read-only replica to be significantly out of sync with the primary replica. For replicas that are potential failover targets (secondary replicas in Premium and Business Critical service tiers, Hyperscale HA replicas, and all geo-replicas), this would also delay database recovery if a failover were to occur, causing longer than expected downtime.
 
-If a long-running query on a read-only replica directly or indirectly causes this kind of blocking, it may be automatically terminated to avoid excessive data latency and potential database availability impact. The session receives error 1219, "Your session has been disconnected because of a high priority DDL operation", or error 3947, "The transaction was aborted because the secondary compute failed to catch up redo. Retry the transaction."
+If a long-running query on a read-only replica directly or indirectly causes this kind of blocking, it may be automatically terminated to avoid excessive data latency and potential database availability impact. The session receives error 1219, *Your session has been disconnected because of a high priority DDL operation*, or error 3947, *The transaction was aborted because the secondary compute failed to catch up redo. Retry the transaction.*
+
+Because transactions on read-only replicas always use the snapshot [transaction isolation level](/sql/relational-databases/sql-server-transaction-locking-and-row-versioning-guide#database-engine-isolation-levels), a long-running query on a read-only replica can block ghost or persistent version store (PVS) cleanup on the primary replica if it reads recently deleted rows or older row versions. A delay in ghost or PVS cleanup can impact workloads on the primary replica. For more information about troubleshooting PVS cleanup delays, see [Monitor and troubleshoot accelerated database recovery](/sql/relational-databases/accelerated-database-recovery-troubleshoot).
+
+Conversely, if a long-running query on a read-only replica reads recently deleted rows or older row versions, and these rows or versions might no longer be available on the primary replica (for example, because of a scaling operation), the query is terminated with error 3948, *The transaction was terminated because of the availability replica config/state change or because ghost records are being deleted on the primary and the secondary availability replica that might be needed by queries running under snapshot isolation. Retry the transaction.*
 
 > [!NOTE]  
-> If you receive error 3961, 1219, or 3947 when running queries against a read-only replica, retry the query. Alternatively, avoid operations that modify object metadata (schema changes, index maintenance, statistics updates, etc.) on the primary replica while long-running queries execute on secondary replicas.
+> If you receive error 3961, 1219, 3947, or 3948 when running queries against a read-only replica, retry the query. Alternatively, avoid operations that modify object metadata (schema changes, index maintenance, statistics updates, etc.) on the primary replica, or scaling the primary replica while long-running queries execute on secondary replicas.
 
 > [!TIP]  
 > In Premium and Business Critical service tiers, when connected to a read-only replica, the `redo_queue_size` and `redo_rate` columns in the [sys.dm_database_replica_states](/sql/relational-databases/system-dynamic-management-views/sys-dm-database-replica-states-azure-sql-database) DMV may be used to monitor data synchronization process, serving as indicators of data propagation latency on the read-only replica.
