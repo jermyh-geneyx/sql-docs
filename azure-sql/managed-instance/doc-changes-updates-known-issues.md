@@ -1,15 +1,14 @@
 ---
-title: Known issues
+title: Known Issues
 titleSuffix: Azure SQL Managed Instance
 description: Learn about the currently known issues with Azure SQL Managed Instance, and their possible workarounds or resolutions.
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest, mathoma
-ms.date: 05/27/2025
+ms.date: 06/09/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: service-overview
 ms.topic: troubleshooting-known-issue
-ms.custom:
 ---
 # Known issues with Azure SQL Managed Instance
 
@@ -24,8 +23,8 @@ This article lists the currently known issues with [Azure SQL Managed Instance](
 | Issue | Date discovered | Status | Date resolved |
 | --- | --- | --- | --- |
 | [Login to read-secondary failed due to long wait on "HADR_DATABASE_WAIT_FOR_TRANSITION_TO_VERSIONING"](#login-to-read-secondary-failed-due-to-long-wait-on-hadr_database_wait_for_transition_to_versioning) | April 2025 | Has workaround | |
-| [Interim guidance on 2024 time zone updates for Paraguay](#interim-guidance-on-2024-time-zone-updates-for-paraguay) | March 2025 | Has workaround| |
-| [Error 8992 when running DBCC CHECKDB on a SQL Server database that originated from SQL Managed Instance](#error-8992-when-running-dbcc-checkdb-on-a-sql-server-database-that-originated-from-sql-managed-instance) | March 2025 | Has workaround| |
+| [Interim guidance on 2024 time zone updates for Paraguay](#interim-guidance-on-2024-time-zone-updates-for-paraguay) | March 2025 | Has workaround | |
+| [Error 8992 when running DBCC CHECKDB on a SQL Server database that originated from SQL Managed Instance](#error-8992-when-running-dbcc-checkdb-on-a-sql-server-database-that-originated-from-sql-managed-instance) | March 2025 | Has workaround | |
 | [Differential backups aren't taken when an instance is linked to SQL Server](#differential-backups-arent-taken-when-an-instance-is-linked-to-sql-server) | Sept 2024 | By design | |
 | [List of long-term backups in Azure portal shows backup files for active and deleted databases with the same name](#list-of-long-term-backups-in-azure-portal-shows-backup-files-for-active-and-deleted-databases-with-the-same-name) | Mar 2024 | Has Workaround | |
 | [Temporary instance inaccessibility using the failover group listener during scaling operation](#temporary-instance-inaccessibility-using-the-failover-group-listener-during-scaling-operation) | Jan 2024 | No resolution | |
@@ -72,36 +71,41 @@ This article lists the currently known issues with [Azure SQL Managed Instance](
 
 ### Login to read-secondary failed due to long wait on "HADR_DATABASE_WAIT_FOR_TRANSITION_TO_VERSIONING"
 
-You might see this error as an exception for the **Microsoft OLE DB Driver 19 for SQL Server** driver when you try to connect to a read-only secondary replica of a [failover group](failover-group-sql-mi.md), or a database replicated through the [Managed Instance link](managed-instance-link-feature-overview.md). 
+You might see this error as an exception for the **Microsoft OLE DB Driver 19 for SQL Server** driver when you try to connect to a read-only secondary replica of a [failover group](failover-group-sql-mi.md), or a database replicated through the [Managed Instance link](managed-instance-link-feature-overview.md).
 
-This error occurs when the secondary replica is not available for logins because row versions are missing for transactions that were in-flight when a secondary replica was restarted, or recycled, either for maintenance, or due to a failover. When an instance is restarted, or fails over, the versioning data stored in `tempdb` gets cleared so secondary read queries are aborted if there are long-running active transactions that were started before the failover or restart. 
+This error occurs when the secondary replica isn't available for logins because row versions are missing for transactions that were in-flight when a secondary replica was restarted, or recycled, either for maintenance, or due to a failover. When an instance is restarted, or fails over, the versioning data stored in `tempdb` gets cleared so secondary read queries are aborted if there are long-running active transactions that were started before the failover or restart.
 
-To resolve this issue roll back, or commit, active transactions on the primary replica. To avoid this error, minimize long-running write transactions on the primary replica. 
+To resolve this issue roll back, or commit, active transactions on the primary replica. To avoid this error, minimize long-running write transactions on the primary replica.
 
 ### Interim guidance on 2024 time zone updates for Paraguay
 
-On October 14, 2024, the Paraguayan government announced a permanent change to the country’s time zone policy. Paraguay will remain on Daylight Saving Time (DST) year-round, effectively adopting UTC-3 as its standard time. As a result, clocks will not advance by 60 minutes at 12:00 a.m. on March 23, 2025, as previously scheduled. This change affects the Paraguay Standard Time time-zone. Microsoft has released related [Windows updates in February and March 2025](https://techcommunity.microsoft.com/blog/dstblog/paraguay-2025-time-zone-update-now-available/4386720). Azure SQL Managed Instance currently does not reflect this update. Instances using affected time zone will not reflect the changes until Azure SQL Managed Instance service absorbs the update on the OS level. 
+On October 14, 2024, the Paraguayan government announced a permanent change to the country's time zone policy. Paraguay remains on Daylight Saving Time (DST) year-round, effectively adopting UTC-3 as its standard time. As a result, clocks don't advance by 60 minutes at 12:00 a.m. on March 23, 2025, as previously scheduled. This change affects the Paraguay Standard Time time-zone. Microsoft has released related [Windows updates in February and March 2025](https://techcommunity.microsoft.com/blog/dstblog/paraguay-2025-time-zone-update-now-available/4386720). Azure SQL Managed Instance currently doesn't reflect this update. Instances using affected time zone don't reflect the changes until Azure SQL Managed Instance service absorbs the update on the OS level.
 
 **Workaround**: If you need to alter affected time zones for your managed instances, be aware of the [limitations](timezones-overview.md#limitations) and follow the guidance from the documentation.
 
 ### Error 8992 when running DBCC CHECKDB on a SQL Server database that originated from SQL Managed Instance
 
-You may see the following error when you run the DBCC CHECKDB command on a SQL Server 2022 database after you delete an index, or a table with an index, and the database originated from Azure SQL Managed Instance, such as after restoring a backup file, or from the [Managed Instance link feature](/azure/azure-sql/managed-instance/managed-instance-link-feature-overview): 
+You might see the following error when you run the `DBCC CHECKDB` command on a SQL Server 2022 database after you delete an index, or a table with an index, and the database originated from Azure SQL Managed Instance, such as after restoring a backup file, or from the [SQL Managed Instance link feature](managed-instance-link-feature-overview.md):
 
-```
-_Msg 8992, Level 16, State 1, Line <Line_Number>an
-Check Catalog Msg 3853, State 1: Attribute (%ls) of row (%ls) in sys.sysrowsetrefs does not have a matching row (%ls) in sys.indexes._
+```output
+Msg 8992, Level 16, State 1, Line <Line_Number>
+Check Catalog Msg 3853, State 1: Attribute (%ls) of row (%ls) in sys.sysrowsetrefs does not have a matching row (%ls) in sys.indexes.
 ```
 
-To work around the issue, first drop the index, or the table with the index, from the source database in Azure SQL Managed Instance, and then restore, or link, the database to SQL Server 2022 again. If recreating the database from the source Azure SQL Managed Instance isn't possible, please contact Microsoft support to help resolve this issue. 
+To work around the issue, first drop the index, or the table with the index, from the source database in Azure SQL Managed Instance, and then restore, or link, the database to SQL Server 2022 again. If recreating the database from the source Azure SQL Managed Instance isn't possible, contact Microsoft support to help resolve this issue.
+
+> [!CAUTION]  
+> If you create a partitioned index on a table after dropping an index as described in this scenario, the table becomes inaccessible.
 
 ### List of long-term backups in Azure portal shows backup files for active and deleted databases with the same name
 
-Long-term backups can be listed and managed on Azure portal page for an Azure SQL Managed Instance on _Backups_ tab. The page lists active or deleted databases, basic information about their long-term backups, and link for managing backups. When you select the _Manage_ link, a new side pane opens with list of backups. Due to an issue with the filtering logic, the list shows backups for both active database and deleted databases with the same name. This requires a special attention when selecting backups for deletion, to avoid deleting backups for a wrong database.
+Long-term backups can be listed and managed on Azure portal page for an Azure SQL Managed Instance on the *Backups* tab. The page lists active or deleted databases, basic information about their long-term backups, and link for managing backups. When you select the *Manage* link, a new side pane opens with list of backups. Due to an issue with the filtering logic, the list shows backups for both active database and deleted databases with the same name. This requires a special attention when selecting backups for deletion, to avoid deleting backups for a wrong database.
 
-**Workaround**: Use displayed _Backup time (UTC)_ information in the list to differentiate backups belonging to databases with the same name that existed on the instance at different periods. Alternatively, use PowerShell commands [Get-AzSqlInstanceDatabaseLongTermRetentionBackup](/powershell/module/az.sql/get-azsqlinstancedatabaselongtermretentionbackup) and [Remove-AzSqlInstanceDatabaseLongTermRetentionBackup](/powershell/module/az.sql/remove-azsqlinstancedatabaselongtermretentionbackup), or CLI commands [az sql midb ltr-backup list](/cli/azure/sql/midb/ltr-backup?view=azure-cli-latest&preserve-view=true#az-sql-midb-ltr-backup-list) and [az sql midb ltr-backup delete](/cli/azure/sql/midb/ltr-backup?view=azure-cli-latest&preserve-view=true#az-sql-midb-ltr-backup-delete) to manage long-term backups using _DatabaseState_ parameter and _DatabaseDeletionTime_ return value to filter backups for a database.
+**Workaround**: Use displayed *Backup time (UTC)* information in the list to differentiate backups belonging to databases with the same name that existed on the instance at different periods. Alternatively, use PowerShell commands [Get-AzSqlInstanceDatabaseLongTermRetentionBackup](/powershell/module/az.sql/get-azsqlinstancedatabaselongtermretentionbackup) and [Remove-AzSqlInstanceDatabaseLongTermRetentionBackup](/powershell/module/az.sql/remove-azsqlinstancedatabaselongtermretentionbackup), or CLI commands [az sql midb ltr-backup list](/cli/azure/sql/midb/ltr-backup?view=azure-cli-latest&preserve-view=true#az-sql-midb-ltr-backup-list) and [az sql midb ltr-backup delete](/cli/azure/sql/midb/ltr-backup?view=azure-cli-latest&preserve-view=true#az-sql-midb-ltr-backup-delete) to manage long-term backups using the *DatabaseState* parameter and *DatabaseDeletionTime* return value to filter backups for a database.
 
-### <a id="procedure-sp_send_dbmail-may-fail-when-query-parameter-is-used-on-nov22fw-enabled-managed-instances"></a> Procedure sp_send_dbmail might fail when @query parameter
+<a id="procedure-sp_send_dbmail-may-fail-when-query-parameter-is-used-on-nov22fw-enabled-managed-instances"></a>
+
+### Procedure sp_send_dbmail might fail when @query parameter
 
 Procedure `sp_send_dbmail` might fail when `@query` parameter is used. Failures happen when the stored procedure is executed under sysadmin account.
 
@@ -112,47 +116,61 @@ This problem is caused by a known bug related to how `sp_send_dbmail` is using i
 Here's an example of how you can create a dedicated account and modify existing objects that are sending email via `sp_send_dbmail`.
 
 ```sql
-USE [msdb]
+USE [msdb];
 GO
 
 -- Step 1: Create a user mapped to a login to specify as a runtime user.
-CREATE USER [user_name] FOR LOGIN [login_name]
+CREATE USER [user_name] FOR LOGIN [login_name];
 GO
-EXEC msdb.dbo.sp_update_jobstep @job_name=N'db_mail_sending_job', @step_id=db_mail_sending_job_id , @database_user_name=N'user_name'
+
+EXECUTE msdb.dbo.sp_update_jobstep
+    @job_name = N'db_mail_sending_job',
+    @step_id = db_mail_sending_job_id,
+    @database_user_name = N'user_name';
 GO
 
 -- Step 2: Grant DB Mail permissions to the user who created it.
-ALTER ROLE [DatabaseMailUserRole] ADD MEMBER [user_name]
+ALTER ROLE [DatabaseMailUserRole] ADD MEMBER [user_name];
 GO
 
 -- Step 3: If the database of the job step is not msdb, the permission error cannot be avoided even if it is a member of the role, so set it to msdb.
-EXEC msdb.dbo.sp_update_jobstep @job_name=N'db_mail_sending_job', @step_id=db_mail_sending_job_id , @database_name=N'msdb'
-GO 
+EXECUTE msdb.dbo.sp_update_jobstep
+    @job_name = N'db_mail_sending_job',
+    @step_id = db_mail_sending_job_id,
+    @database_name = N'msdb';
+GO
 
 -- Step 4: Set a principal in the email profile
-EXEC msdb.dbo.sysmail_add_principalprofile_sp @principal_name=N'user_name', @profile_name=N'profile_name', @is_default=0
+EXECUTE msdb.dbo.sysmail_add_principalprofile_sp
+    @principal_name = N'user_name',
+    @profile_name = N'profile_name',
+    @is_default = 0;
 GO
 ```
 
 ### Interim guidance on 2022 time zone updates for Chile
 
-On August 8, 2022, the Chilean government made an official announcement about a Daylight-Saving Time (DST) [time zone change](https://techcommunity.microsoft.com/t5/daylight-saving-time-time-zone/interim-guidance-on-2022-time-zone-updates-for-chile/ba-p/3598290). Starting at 12:00 a.m. Saturday, September 10, 2022, until 12:00 a.m. Saturday, April 1, 2023, the official time will advance 60 minutes. The change affects the following three time zones:  **Pacific SA Standard Time**, **Easter Island Standard Time** and **Magallanes Standard Time**. Azure SQL Managed Instances using affected time zones don't reflect the changes [until Microsoft releases an OS update](https://techcommunity.microsoft.com/t5/daylight-saving-time-time-zone/interim-guidance-on-2022-time-zone-updates-for-chile/ba-p/3598290) to support this, and Azure SQL Managed Instance service absorbs the update on the OS level.
+On August 8, 2022, the Chilean government made an official announcement about a Daylight-Saving Time (DST) [time zone change](https://techcommunity.microsoft.com/blog/dstblog/interim-guidance-on-2022-time-zone-updates-for-chile/3598290). Starting at 12:00 a.m. Saturday, September 10, 2022, until 12:00 a.m. Saturday, April 1, 2023, the official time advanced 60 minutes. The change affects the following three time zones: **Pacific SA Standard Time**, **Easter Island Standard Time** and **Magallanes Standard Time**. Azure SQL Managed Instances using affected time zones don't reflect the changes [until Microsoft releases an OS update](https://techcommunity.microsoft.com/blog/dstblog/interim-guidance-on-2022-time-zone-updates-for-chile/3598290) to support this, and Azure SQL Managed Instance service absorbs the update on the OS level.
 
 **Workaround**: If you need to alter affected time zones for your managed instances, be aware of the [limitations](timezones-overview.md#limitations) and follow the guidance from the documentation.
 
-### <a id="changing-the-connection-type-doesnt-affect-connections-through-the-failover-group-endpoint"></a> Change the connection type doesn't affect connections through the failover group endpoint
+<a id="changing-the-connection-type-doesnt-affect-connections-through-the-failover-group-endpoint"></a>
+
+### Change the connection type doesn't affect connections through the failover group endpoint
 
 If an instance participates in a [failover group](failover-group-sql-mi.md), changing the instance's [connection type](connection-types-overview.md) doesn't take effect for the connections established through the failover group listener endpoint.
 
 **Workaround**: Drop and recreate failover group after changing the connection type.
 
-### <a id="procedure-sp_send_dbmail-may-transiently-fail-when-query-parameter-is-used"></a> Procedure sp_send_dbmail might transiently fail when @query parameter is used
+<a id="procedure-sp_send_dbmail-may-transiently-fail-when-query-parameter-is-used"></a>
+
+### Procedure sp_send_dbmail might transiently fail when @query parameter is used
 
 Procedure `sp_send_dbmail` might transiently fail when `@query` parameter is used. When this issue occurs, every second execution of procedure `sp_send_dbmail` fails with error `Msg 22050, Level 16, State 1` and message `Failed to initialize sqlcmd library with error number -2147467259`. To be able to see this error properly, the procedure should be called with default value 0 for the parameter `@exclude_query_output`, otherwise the error isn't propagated.
 
 This problem is caused by a known bug related to how `sp_send_dbmail` is using impersonation and connection pooling.
 
-To work around this issue wrap code for sending email into a retry logic that relies on output parameter `@mailitem_id`. If the execution fails, then parameter value is NULL, indicating `sp_send_dbmail` should be called one more time to successfully send an email. Here is an example this retry logic:
+To work around this issue wrap code for sending email into a retry logic that relies on output parameter `@mailitem_id`. If the execution fails, then parameter value is `NULL`, indicating `sp_send_dbmail` should be called one more time to successfully send an email. Here is an example this retry logic:
 
 ```sql
 CREATE PROCEDURE send_dbmail_with_retry AS
@@ -174,17 +192,17 @@ END
 
 ### Distributed transactions can be executed after removing managed instance from Server Trust Group
 
-[Server Trust Groups](../managed-instance/server-trust-group-overview.md) are used to establish trust between managed instances that is prerequisite for executing [distributed transactions](../database/elastic-transactions-overview.md). After removing managed instance from Server Trust Group or deleting the group, you still might be able to execute distributed transactions. There's a workaround you can apply to be sure that distributed transactions are disabled and that is [user-initiated manual failover](../managed-instance/user-initiated-failover.md) on the managed instance.
+[Server Trust Groups](server-trust-group-overview.md) are used to establish trust between managed instances that is prerequisite for executing [distributed transactions](../database/elastic-transactions-overview.md). After removing managed instance from Server Trust Group or deleting the group, you still might be able to execute distributed transactions. There's a workaround you can apply to be sure that distributed transactions are disabled and that is [user-initiated manual failover](user-initiated-failover.md) on the managed instance.
 
 ### Distributed transactions can't be executed after managed instance scaling operation
 
-SQL Managed Instance scaling operations that include changing service tier or number of vCores will reset Server Trust Group settings on the backend and disable running [distributed transactions](../database/elastic-transactions-overview.md). As a workaround, delete and create new [Server Trust Group](../managed-instance/server-trust-group-overview.md) on Azure portal.
+SQL Managed Instance scaling operations that include changing service tier or number of vCores reset Server Trust Group settings on the backend and disable running [distributed transactions](../database/elastic-transactions-overview.md). As a workaround, delete and create a new [Server Trust Group](server-trust-group-overview.md) on Azure portal.
 
 ### Can't create SQL Managed Instance with the same name as logical server previously deleted
 
 A DNS record of `<name>.database.windows.com` is created when you create a [logical server in Azure](../database/logical-servers.md) for Azure SQL Database, and when you create a SQL Managed Instance. The DNS record must be unique. As such, if you create a logical server for SQL Database and then delete it, there's a threshold period of seven days before the name is released from the records. In that period, a SQL Managed Instance can't be created with the same name as the deleted logical server. As a workaround, use a different name for the SQL Managed Instance, or create a support ticket to release the logical server name.
 
-<a name='service-principal-cant-access-azure-ad-and-akv'></a>
+<a id="service-principal-cant-access-azure-ad-and-akv"></a>
 
 ### Service Principal can't access Microsoft Entra ID and AKV
 
@@ -222,7 +240,7 @@ SQL Server and SQL Managed Instance [don't allow a user to drop a file that isn'
 
 ### Change service tier and create instance operations are blocked by ongoing database restore
 
-An ongoing `RESTORE` statement, a Data Migration Service migration process, and built-in point-in-time restore, will block updating a service tier or resize of the existing instance and creating new instances until the restore process finishes.
+An ongoing `RESTORE` statement, a Data Migration Service migration process, and built-in point-in-time restore, block updating a service tier or resize of the existing instance and creating new instances until the restore process finishes.
 
 The restore process blocks these operations on the managed instances and instance pools in the same subnet where the restore process is running. The instances in instance pools aren't affected. Create or change service tier operations don't fail or time out. They proceed once the restore process is completed or canceled.
 
@@ -230,13 +248,13 @@ The restore process blocks these operations on the managed instances and instanc
 
 ### Resource Governor on Business Critical service tier might need to be reconfigured after failover
 
-The [Resource Governor](/sql/relational-databases/resource-governor/resource-governor) feature that enables you to limit the resources assigned to the user workload might incorrectly classify some user workload after failover or a user-initiated change of service tier (for example, the change of max vCore or max instance storage size).
+The [Resource governor](/sql/relational-databases/resource-governor/resource-governor) feature that enables you to limit the resources assigned to the user workload might incorrectly classify some user workload after failover or a user-initiated change of service tier (for example, the change of max vCore or max instance storage size).
 
-**Workaround**: Run `ALTER RESOURCE GOVERNOR RECONFIGURE` periodically or as part of a SQL Agent job that executes the SQL task when the instance starts if you are using [Resource Governor](/sql/relational-databases/resource-governor/resource-governor).
+**Workaround**: Run `ALTER RESOURCE GOVERNOR RECONFIGURE` periodically or as part of a SQL Agent job that executes the SQL task when the instance starts if you're using [Resource governor](/sql/relational-databases/resource-governor/resource-governor).
 
 ### Cross-database Service Broker dialogs must be reinitialized after service tier upgrade
 
-Cross-database Service Broker dialogs will stop delivering the messages to the services in other databases after change service tier operation. The messages *aren't lost*, and they can be found in the sender queue. Any change of vCores or instance storage size in SQL Managed Instance causes a `service_broke_guid` value in [sys.databases](/sql/relational-databases/system-catalog-views/sys-databases-transact-sql) view to be changed for all databases. Any `DIALOG` created using a [BEGIN DIALOG](/sql/t-sql/statements/begin-dialog-conversation-transact-sql) statement that references Service Brokers in other database stops delivering messages to the target service.
+Cross-database Service Broker dialogs stop delivering the messages to the services in other databases after change service tier operation. The messages *aren't lost*, and they can be found in the sender queue. Any change of vCores or instance storage size in SQL Managed Instance causes a `service_broke_guid` value in [sys.databases](/sql/relational-databases/system-catalog-views/sys-databases-transact-sql) view to be changed for all databases. Any `DIALOG` created using a [BEGIN DIALOG](/sql/t-sql/statements/begin-dialog-conversation-transact-sql) statement that references Service Brokers in other database stops delivering messages to the target service.
 
 **Workaround**: Stop any activity that uses cross-database Service Broker dialog conversations before updating a service tier, and reinitialize them afterward. If there are remaining messages that are undelivered after a service tier change, read the messages from the source queue and resend them to the target queue.
 
@@ -265,7 +283,7 @@ Several system views, performance counters, error messages, XEvents, and error l
 
 ```sql
 SELECT name AS ActualDatabaseName,
-    physical_database_name AS GUIDDatabaseIdentifier
+       physical_database_name AS GUIDDatabaseIdentifier
 FROM sys.databases
 WHERE database_id > 4;
 ```
@@ -312,13 +330,13 @@ When you configure a [link](managed-instance-link-feature-overview.md) between S
 
 Azure SQL Managed Instance service is creating system login for purposes of transactional replication. This login can be found in SSMS (in **Object explorer**, under **Security**, **Logins**) or in system view `sys.syslogins`. Login name format looks like `'DBxCy\WF-abcde01234QWERT'`, and the login has public server role. Under certain conditions, this login is recreated, and due to a fault in the system previous login isn't deleted. This can lead to increased number of logins. These logins don't represent a security threat. They can be safely ignored. These logins shouldn't be deleted because at least one of them is being used for transactional replication.
 
-<a name='azure-ad-logins-and-users-arent-supported-in-ssdt'></a>
+<a id="azure-ad-logins-and-users-arent-supported-in-ssdt"></a>
 
 ### Microsoft Entra logins and users aren't supported in SSDT
 
 SQL Server Data Tools don't fully support Microsoft Entra logins and users.
 
-<a name='impersonation-of-azure-ad-login-types-isnt-supported'></a>
+<a id="impersonation-of-azure-ad-login-types-isnt-supported"></a>
 
 ### Impersonation of Microsoft Entra login types isn't supported
 
@@ -343,28 +361,36 @@ Error logs that are available in SQL Managed Instance aren't persisted, and thei
 
 Scaling managed instance sometimes requires moving the instance to a different virtual cluster, along with the associated service-maintained DNS records. If the managed instance participates in a failover group, the DNS record corresponding to its associated failover group listener (read-write listener, if the instance is the current geo-primary read-only listener, if the instance is the current geo-secondary) is moved to the new virtual cluster.
 
-In the current scaling operation design, the listener DNS records are removed from the originating virtual cluster before the managed instance itself is fully migrated to the new virtual cluster, which in some situations can lead to prolonged time during which the instance's IP address can't be resolved using the listener. During this time, a SQL client attempting to access the instance being scaled using the listener endpoint can expect login failures with the following error message: "**Error 40532**: Cannot open server "xxx.xxx.xxx.xxx" requested by the login. The login failed. (Microsoft SQL Server, Error: 40532)".
+In the current scaling operation design, the listener DNS records are removed from the originating virtual cluster before the managed instance itself is fully migrated to the new virtual cluster, which in some situations can lead to prolonged time during which the instance's IP address can't be resolved using the listener. During this time, a SQL client attempting to access the instance being scaled using the listener endpoint can expect login failures with the following error message:
+
+```output
+Error 40532: Cannot open server "xxx.xxx.xxx.xxx" requested by the login. The login failed. (Microsoft SQL Server, Error: 40532).
+```
 
 The issue will be addressed through scaling operation redesign.
 
 ## Resolved
 
-### <a id="msdb-table-for-manual-backups-doesnt-preserve-the-username"></a> Table for manual backups in msdb doesn't preserve the username
+<a id="msdb-table-for-manual-backups-doesnt-preserve-the-username"></a>
+
+### Table for manual backups in msdb doesn't preserve the username
 
 **(Resolved in August 2023)** We recently introduced support for auto backups in `msdb`, but the table doesn't currently contain username information.
 
-### <a id="querying-external-table-fails-with-not-supported-error-message"></a> Query on external table fails with not supported error message
+<a id="querying-external-table-fails-with-not-supported-error-message"></a>
 
-Querying external table might fail with generic error message "Queries over external tables are not supported with the current service tier or performance level of this database. Consider upgrading the service tier or performance level of the database". The only type of external table supported in Azure SQL Managed Instance are PolyBase external tables (in preview). To allow queries on PolyBase external tables, you need to enable PolyBase on managed instance by running `sp_configure` command.
+### Query on external table fails with not supported error message
 
-External tables related to [Elastic Query](../database/elastic-query-overview.md) feature of Azure SQL Database [aren't supported](../database/features-comparison.md#features-of-sql-database-and-sql-managed-instance) in SQL Managed Instance, but creating and querying them wasn't explicitly blocked. With support for PolyBase external tables, new checks have been introduced, blocking querying of *any* type of external table in managed instance unless PolyBase is enabled.
+Querying external table might fail with generic error message "Queries over external tables aren't supported with the current service tier or performance level of this database. Consider upgrading the service tier or performance level of the database". The only type of external table supported in Azure SQL Managed Instance are PolyBase external tables (in preview). To allow queries on PolyBase external tables, you need to enable PolyBase on managed instance by running `sp_configure` command.
 
-If you're using unsupported Elastic Query external tables to query data in Azure SQL Database or Azure Synapse from your managed instance, you should use Linked Server feature instead. To establish Linked Server connection from SQL Managed Instance to SQL Database, follow instructions from [this article](https://techcommunity.microsoft.com/t5/azure-database-support-blog/lesson-learned-63-it-is-possible-to-create-linked-server-in/ba-p/369168). To establish Linked Server connection from SQL Managed Instance to SQL Synapse, check [step-by-step instructions](https://devblogs.microsoft.com/azure-sql/linked-server-to-synapse-sql-to-implement-polybase-like-scenarios-in-managed-instance/#how-to-use-linked-servers). Since configuring and testing Linked Server connection takes some time, you can use a workaround as a temporary solution to enable querying external tables related to Elastic Query feature:
+External tables related to the [Elastic query](../database/elastic-query-overview.md) feature of Azure SQL Database [aren't supported](../database/features-comparison.md#features-of-sql-database-and-sql-managed-instance) in SQL Managed Instance, but creating and querying them wasn't explicitly blocked. With support for PolyBase external tables, new checks have been introduced, blocking querying of *any* type of external table in managed instance unless PolyBase is enabled.
+
+If you're using unsupported Elastic Query external tables to query data in Azure SQL Database or Azure Synapse from your managed instance, you should use Linked Server feature instead. To establish Linked Server connection from SQL Managed Instance to SQL Database, follow instructions from [this article](https://techcommunity.microsoft.com/blog/azuredbsupport/lesson-learned-63-it-is-possible-to-create-linked-server-in-azure-sql-managed-in/369168). To establish Linked Server connection from SQL Managed Instance to SQL Synapse, check [step-by-step instructions](https://devblogs.microsoft.com/azure-sql/linked-server-to-synapse-sql-to-implement-polybase-like-scenarios-in-managed-instance/#how-to-use-linked-servers). Since configuring and testing Linked Server connection takes some time, you can use a workaround as a temporary solution to enable querying external tables related to Elastic Query feature:
 
 **Workaround**: Execute the following commands (once per instance) that enable queries on external tables:
 
 ```sql
-sp_configure 'polybase enabled', 1;
+EXECUTE sp_configure 'polybase enabled', 1;
 GO
 
 RECONFIGURE;
@@ -375,7 +401,9 @@ GO
 
 Usernames that contain the '@' symbol in the middle (for example, `'abc@xy'`) aren't able to sign in using SQL Server authentication.
 
-### <a id="restoring-manual-backup-without-checksum-might-fail"></a> Restore manual backup without CHECKSUM might fail
+<a id="restoring-manual-backup-without-checksum-might-fail"></a>
+
+### Restore manual backup without CHECKSUM might fail
 
 **(Resolved in June 2020)** In certain circumstances manual backup of databases that was made on a managed instance without CHECKSUM might fail to be restored. In such cases, retry restoring the backup until you're successful.
 
@@ -395,7 +423,9 @@ When the SQL Managed Instance Contributor Azure role is applied to a resource gr
 
 **(Resolved in March 2020)** SQL Agent creates a new session each time a job is started, gradually increasing memory consumption. To avoid hitting the internal memory limit, which would block execution of scheduled jobs, Agent process is restarted once its memory consumption reaches threshold. It might result in interrupting execution of jobs running at the moment of restart.
 
-### <a id="query-parameter-not-supported-in-sp_send_db_mail"></a> @query parameter not supported in sp_send_db_mail
+<a id="query-parameter-not-supported-in-sp_send_db_mail"></a>
+
+### @query parameter not supported in sp_send_db_mail
 
 The `@query` parameter in the [sp_send_db_mail](/sql/relational-databases/system-stored-procedures/sp-send-dbmail-transact-sql) procedure doesn't work.
 
