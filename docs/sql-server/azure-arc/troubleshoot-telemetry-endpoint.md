@@ -4,7 +4,7 @@ description: "Describes how to troubleshoot connectivity to the data processing 
 author: twright-msft
 ms.author: twright
 ms.reviewer: mikeray
-ms.date: 03/25/2025
+ms.date: 06/09/2025
 ms.topic: troubleshooting
 ---
 
@@ -104,6 +104,12 @@ For DPS:
 ```powershell
 Invoke-WebRequest dataprocessingservice.<region>.arcdataservices.com
 ```
+> [!NOTE]
+> For US Government Virginia, replace `arcdataservices.com` with `arcdataservices.azure.us`. This example would be:
+>
+> ```PowerShell
+> Invoke-WebRequest dataprocessingservice.<region>.arcdataservices.azure.us
+>  `
 
 A possible response status code is:
 
@@ -113,11 +119,16 @@ StatusCode        : 200
 StatusDescription : OK
 ```
 
-This one should return a 200 as there is an unauthenticated route.
+200 is expected as there is an unauthenticated route.
 
 ## Probe connectivity to all regions
-
+> [!NOTE]
+> For US Government Virginia, replace `arcdataservices.com` with `arcdataservices.azure.us`.
+> 
 You can probe connectivity to all regions with the [test-connectivity.ps1](https://github.com/microsoft/sql-server-samples/blob/master/samples/features/azure-arc/troubleshooting/test-connectivity.ps1) PowerShell script.
+
+> [!NOTE]
+> For the US Government Virginia region, replace `arcdataservices.com` with `arcdataservices.azure.us`.
 
 :::code language="powershell" source="~/../sql-server-samples/samples/features/azure-arc/troubleshooting/test-connectivity.ps1":::
 
@@ -146,7 +157,7 @@ To connect to Azure, the endpoints use `*.arcdataservices.com`.
 
 Beginning with [March, 12 2024](release-notes.md#march-12-2024), the Azure Extension for SQL Server uses the following endpoints:
 
-- DPS: `dataprocessingservice.<region>.arcdataservices.com`
+- DPS: `dataprocessingservice.<region>.arcdataservices.com`, or for the US Government Virginia region, `*.<region>.arcdataservices.azure.us`.
 - Telemetry `telemetry.<region>.arcdataservices.com`
 
 Replace `<region>` with the short name of the Azure region where the Arc machine resource is located. The short name is derived from the Azure region name without spaces and all lower case.

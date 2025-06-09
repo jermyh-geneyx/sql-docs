@@ -9415,6 +9415,8 @@ items:
         href: sql-server/azure-arc/activity-logs.md
       - name: Move resources
         href: sql-server/azure-arc/move-resources.md
+      - name: US Government region
+        href: sql-server/azure-arc/us-government-region.md
     - name: Business continuity
       items:
       - name: Automatic backups (preview)

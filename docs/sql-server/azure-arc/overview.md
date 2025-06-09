@@ -4,7 +4,7 @@ description: Feature overview. Explains how you can manage instances of SQL Serv
 author: anosov1960
 ms.author: sashan
 ms.reviewer: mikeray, randolphwest
-ms.date: 03/25/2025
+ms.date: 06/09/2025
 ms.topic: concept-article
 ms.custom: references_regions
 ---
@@ -108,7 +108,13 @@ The following diagram illustrates the architecture of [!INCLUDE [ssazurearc](../
 
 [!INCLUDE [get-jumpstart-image](includes/get-jumpstart-image.md)]
 
-## <a id="feature-differentiation"></a> Feature availability depending on license type
+## Supported Azure regions
+
+[!INCLUDE [azure-arc-data-regions](includes/azure-arc-data-regions.md)]
+
+<a id="feature-differentiation"></a>
+
+## Feature availability depending on license type
 
 [!INCLUDE [license-types](includes/license-types.md)]
 
@@ -142,10 +148,6 @@ The [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] Setup Installation Wiz
 - [SQL Server enabled by Azure Arc deployment options](deployment-options.md)
 
 For VMware clusters, review [Support on VMware](#support-on-vmware).
-
-## Supported Azure regions
-
-[!INCLUDE [azure-arc-data-regions](includes/azure-arc-data-regions.md)]
 
 ## Related content
 
