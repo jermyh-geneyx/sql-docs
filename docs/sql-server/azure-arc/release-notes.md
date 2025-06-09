@@ -4,7 +4,7 @@ description: Latest release notes for SQL Server enabled by Azure Arc
 author: anosov1960
 ms.author: sashan
 ms.reviewer: mikeray, randolphwest
-ms.date: 05/12/2025
+ms.date: 05/13/2025
 ms.topic: conceptual
 ms.custom:
   - ignite-2023
@@ -22,6 +22,12 @@ This article lists:
 - Links to additional feature documentation
 
 Extension versions are cumulative. Higher extension versions include all of the updates from previous versions. A release might include internal features. If the version release notes don't describe features, then the updates were internal.
+
+## June 5, 2025
+
+Arc enabled SQL Server is available as preview feature in US Government Virginia with a limited set of features. [SQL Server enabled by Azure Arc in US Government Preview](us-government-region.md).
+
+This release announces the preview region availability. It does not update extension version or other components of any agent or extension.
 
 ## May 13, 2025
 

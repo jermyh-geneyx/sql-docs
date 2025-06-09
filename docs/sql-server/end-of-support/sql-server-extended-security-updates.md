@@ -256,7 +256,8 @@ To download ESUs, follow these steps:
 
 [!INCLUDE [azure-arc-data-regions](../azure-arc/includes/azure-arc-data-regions.md)]
 
-Government regions aren't supported. For more information, see [Can customers get free Extended Security Updates on Azure Government regions?](extended-security-updates-frequently-asked-questions.md#can-i-get-free-extended-security-updates-on-azure-government-regions)
+> [!NOTE]
+> ESUs aren't supported in Azure Government regions. For more information, see [Free ESUs on Azure Government regions](extended-security-updates-frequently-asked-questions.md#can-i-get-free-extended-security-updates-on-azure-government-regions).
 
 ## Frequently asked questions
 
