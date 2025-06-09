@@ -20,10 +20,14 @@ This article explains how to connect your SQL Server instance to Azure Arc on an
 
 If the machine with SQL Server is already connected to Azure Arc, to connect the SQL Server instances, install *Azure extension for SQL Server*. The extension is in the extension tab of "Server -Azure Arc" resource as **Azure Extension for SQL Server**.
 
+For example, you need to use this method to connect a SQL Server instance to Azure Arc at this time in US Government Virginia region, because automatic connection is not currently available in that region. For this case, follow the steps under [Connect](#connect).
+
 > [!IMPORTANT]  
 > The Azure resource with type `SQL Server - Azure Arc` representing the SQL Server instance installed on the machine uses the same region and resource group as the Azure resources for Arc-enabled servers.
 
-## [Azure portal](#tab/azure)
+## Connect
+
+### [Azure portal](#tab/azure)
 
 To install the Azure extension for SQL Server, use the following steps:
 
@@ -36,7 +40,7 @@ To install the Azure extension for SQL Server, use the following steps:
    :::image type="content" source="media/join/license-type-in-extension.png" alt-text="Screenshot for license type and exclude instances.":::
 1. Select **Create**.
 
-## [PowerShell](#tab/powershell)
+### [PowerShell](#tab/powershell)
 
 To install *Azure extension for SQL Server*, run:
 
@@ -46,7 +50,7 @@ $Settings = @{ SqlManagement = @{ IsEnabled = $true }; ExcludedSqlInstances = @(
 New-AzConnectedMachineExtension -Name "WindowsAgent.SqlServer" -ResourceGroupName {your resource group name} -MachineName {your machine name} -Location {azure region} -Publisher "Microsoft.AzureData" -Settings $Settings -ExtensionType "WindowsAgent.SqlServer"
 ```
 
-## [Azure CLI](#tab/az)
+### [Azure CLI](#tab/az)
 
 To install *Azure extension for SQL Server* for Windows Operating System, run:
 

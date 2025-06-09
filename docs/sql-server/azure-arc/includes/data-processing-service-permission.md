@@ -10,6 +10,7 @@ Arc-enabled [!INCLUDE [ssnoversion-md](../../../includes/ssnoversion-md.md)] req
 Each virtual or physical server needs to communicate with Azure. Specifically, they require connectivity to:
 
 - URL: `*.<region>.arcdataservices.com`
+  - For US Government Virginia regions, use `*.<region>.arcdataservices.azure.us`.
 - Port: 443
 - Direction: Outbound
 - Authentication provider: Microsoft Entra ID
