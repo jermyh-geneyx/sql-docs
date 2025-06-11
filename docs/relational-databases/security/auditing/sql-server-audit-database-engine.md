@@ -3,8 +3,8 @@ title: "SQL Server Audit (Database Engine)"
 description: Learn about server audits for the SQL Server Database Engine or an individual database. Server audits contain server and database audit specifications.
 author: sravanisaluru
 ms.author: srsaluru
-ms.reviewer: vanto
-ms.date: 05/15/2024
+ms.reviewer: vanto, randolphwest
+ms.date: 06/11/2025
 ms.service: sql
 ms.subservice: security
 ms.topic: conceptual
@@ -25,16 +25,16 @@ There are several levels of auditing for [!INCLUDE [ssNoVersion](../../../includ
 
 You can record server audit action groups per-instance, and either database audit action groups or database audit actions per database. The audit event occurs every time that the auditable action is encountered.
 
-All editions of [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] support server level audits. All editions support database level audits beginning with [!INCLUDE [ssSQL15_md](../../../includes/sssql16-md.md)] SP1. Prior to that, database level auditing was limited to Enterprise, Developer, and Evaluation editions. For more information, see [Features Supported by the Editions of SQL Server 2016](~/sql-server/editions-and-supported-features-for-sql-server-2016.md).
+All editions of [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] support server level audits. In [!INCLUDE [sssql16-md](../../../includes/sssql16-md.md)] with Service Pack 1 and later versions, all editions support database level audits. Before that, database level auditing was limited to Enterprise, Developer, and Evaluation editions. For more information, see [Editions and supported features of SQL Server 2016](../../../sql-server/editions-and-components-of-sql-server-2016.md).
 
 > [!NOTE]  
-> This topic applies to [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)]. For [!INCLUDE [ssSDS](../../../includes/sssds-md.md)], see [Get started with SQL database auditing](/azure/azure-sql/database/auditing-overview).
+> This article applies to [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)]. For [!INCLUDE [ssSDS](../../../includes/sssds-md.md)], see [Auditing for Azure SQL Database and Azure Synapse Analytics](/azure/azure-sql/database/auditing-overview).
 
-## SQL Server Audit Components
+## SQL Server Audit components
 
 An *audit* is the combination of several elements into a single package for a specific group of server actions or database actions. The components of [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] audit combine to produce an output that is called an audit, just as a report definition combined with graphics and data elements produces a report.
 
-[!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] audit uses *Extended Events* to help create an audit. For more information about Extended Events, see [Extended Events](../../../relational-databases/extended-events/extended-events.md).
+[!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] audit uses *Extended Events* to help create an audit. For more information about Extended Events, see [Extended Events overview](../../extended-events/extended-events.md).
 
 ### SQL Server Audit
 
@@ -48,9 +48,9 @@ The *Server Audit Specification* object belongs to an audit. You can create one 
 
 The server audit specification collects many server-level action groups raised by the Extended Events feature. You can include *audit action groups* in a server audit specification. Audit action groups are predefined groups of actions, which are atomic events occurring in the [!INCLUDE [ssDE](../../../includes/ssde-md.md)]. These actions are sent to the audit, which records them in the target.
 
-Server-level audit action groups are described in the article [SQL Server Audit Action Groups and Actions](../../../relational-databases/security/auditing/sql-server-audit-action-groups-and-actions.md).
+Server-level audit action groups are described in the article [SQL Server Audit action groups and actions](sql-server-audit-action-groups-and-actions.md).
 
-> [!NOTE] 
+> [!NOTE]  
 > Due to performance constraints, we don't audit the `tempdb` and temporary tables. While the batch completed action group captures statements against temporary tables, it might not correctly populate the object names. However, the source table is always audited, ensuring that all inserts from the source table to temporary tables are recorded.
 
 ### Database Audit Specification
@@ -59,7 +59,7 @@ The *Database Audit Specification* object also belongs to a [!INCLUDE [ssNoVersi
 
 The database audit specification collects database-level audit actions raised by the Extended Events feature. You can add either audit action groups or audit events to a database audit specification. *Audit events* are the atomic actions that can be audited by the [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] engine. *Audit action groups* are predefined groups of actions. Both are at the [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] database scope. These actions are sent to the audit, which records them in the target. Don't include server-scoped objects, such as the system views, in a user database audit specification.
 
-Database-level audit action groups and audit actions are described in the article [SQL Server Audit Action Groups and Actions](../../../relational-databases/security/auditing/sql-server-audit-action-groups-and-actions.md).
+Database-level audit action groups and audit actions are described in the article [SQL Server Audit action groups and actions](sql-server-audit-action-groups-and-actions.md).
 
 ### Target
 
@@ -68,7 +68,7 @@ The results of an audit are sent to a target, which can be a file, the Windows S
 > [!IMPORTANT]  
 > Any authenticated user can read and write to the Windows Application event log. The Application event log requires lower permissions than the Windows Security event log and is less secure than the Windows Security event log.
 
-Writing to the Windows Security log requires the [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] service account to be added to the **Generate security audits** policy. By default, the Local System, Local Service, and Network Service are part of this policy. This setting can be configured by using the security policy snap-in (secpol.msc). Additionally, the **Audit object access** security policy must be enabled for both **Success** and **Failure**. This setting can be configured by using the security policy snap-in (secpol.msc). In [!INCLUDE [winvista](../../../includes/winvista-md.md)] or Windows Server 2008 (and higher), you can set the more granular **application generated** policy from the command line by using the audit policy program (**AuditPol.exe)**. For more information about the steps to enable writing to the Windows Security log, see [Write SQL Server Audit Events to the Security Log](../../../relational-databases/security/auditing/write-sql-server-audit-events-to-the-security-log.md). For more information about the Auditpol.exe program, see Knowledge Base article 921469, [How to use Group Policy to configure detailed security auditing](https://www.betaarchive.com/wiki/index.php?title=Microsoft_KB_Archive/921469). The Windows event logs are global to the Windows operating system. For more information about the Windows event logs, see [Event Viewer Overview](/previous-versions/windows/it-pro/windows-server-2003/cc737015(v=ws.10)). If you need more precise permissions on the audit, use the binary file target.
+Writing to the Windows Security log requires the [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] service account to be added to the **Generate security audits** policy. By default, the Local System, Local Service, and Network Service are part of this policy. This setting can be configured by using the security policy snap-in (secpol.msc). Additionally, the **Audit object access** security policy must be enabled for both **Success** and **Failure**. This setting can be configured by using the security policy snap-in (secpol.msc). In [!INCLUDE [winvista](../../../includes/winvista-md.md)] or Windows Server 2008 (and higher), you can set the more granular **application generated** policy from the command line by using the audit policy program (`AuditPol.exe`). For more information about the steps to enable writing to the Windows Security log, see [Write SQL Server Audit events to the Security log](write-sql-server-audit-events-to-the-security-log.md). For more information about the Auditpol.exe program, see Knowledge Base article 921469, [How to use Group Policy to configure detailed security auditing](https://www.betaarchive.com/wiki/index.php?title=Microsoft_KB_Archive/921469). The Windows event logs are global to the Windows operating system. For more information about the Windows event logs, see [Event Viewer Overview](/previous-versions/windows/it-pro/windows-server-2003/cc737015(v=ws.10)). If you need more precise permissions on the audit, use the binary file target.
 
 When you're saving audit information to a file, to help prevent tampering, you can restrict access to the file location in the following ways:
 
@@ -80,76 +80,76 @@ When you're saving audit information to a file, to help prevent tampering, you c
 
 Even when the [!INCLUDE [ssDE](../../../includes/ssde-md.md)] is writing to a file, other Windows users can read the audit file if they have permission. The [!INCLUDE [ssDE](../../../includes/ssde-md.md)] doesn't take an exclusive lock that prevents read operations.
 
-Because the [!INCLUDE [ssDE](../../../includes/ssde-md.md)] can access the file, [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] logins that have CONTROL SERVER permission can use the [!INCLUDE [ssDE](../../../includes/ssde-md.md)] to access the audit files. To record any user that is reading the audit file, define an audit on `master.sys.fn_get_audit_file`. This records the logins with CONTROL SERVER permission that have accessed the audit file through [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)].
+Because the [!INCLUDE [ssDE](../../../includes/ssde-md.md)] can access the file, [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] logins that have `CONTROL SERVER` permission can use the [!INCLUDE [ssDE](../../../includes/ssde-md.md)] to access the audit files. To record any user that is reading the audit file, define an audit on `master.sys.fn_get_audit_file`. This records the logins with `CONTROL SERVER` permission that have accessed the audit file through [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)].
 
 If an Audit Administrator copies the file to a different location (for archive purposes, and so on), the access control lists (ACLs) on the new location should be reduced to the following permissions:
 
 - Audit Administrator - Read / Write
-
 - Audit Reader - Read
 
 We recommend that you generate audit reports from a separate instance of [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)], such as an instance of [!INCLUDE [ssExpress](../../../includes/ssexpress-md.md)], to which only Audit Administrators or Audit Readers have access. By using a separate instance of the [!INCLUDE [ssDE](../../../includes/ssde-md.md)] for reporting, you can help prevent unauthorized users from obtaining access to the audit record.
 
 You can offer extra protection against unauthorized access by encrypting the folder in which the audit file is stored by using Windows BitLocker Drive Encryption or Windows Encrypting File System.
 
-For more information about the audit records that are written to the target, see [SQL Server Audit Records](../../../relational-databases/security/auditing/sql-server-audit-records.md).
+For more information about the audit records that are written to the target, see [SQL Server Audit Records](sql-server-audit-records.md).
 
-## Overview of Using SQL Server Audit
+## Overview of using SQL Server Audit
 
-You can use [!INCLUDE [ssManStudioFull](../../../includes/ssmanstudiofull-md.md)] or [!INCLUDE [tsql](../../../includes/tsql-md.md)] to define an audit. After the audit is created and enabled, the target will receive entries.
+You can use [!INCLUDE [ssManStudioFull](../../../includes/ssmanstudiofull-md.md)] or [!INCLUDE [tsql](../../../includes/tsql-md.md)] to define an audit. After the audit is created and enabled, the target receives entries.
 
-You can read the Windows event logs by using the **Event Viewer** utility in Windows. For file targets, you can use either the **Log File Viewer** in [!INCLUDE [ssManStudioFull](../../../includes/ssmanstudiofull-md.md)] or the [fn_get_audit_file](../../../relational-databases/system-functions/sys-fn-get-audit-file-transact-sql.md) function to read the target file.
+You can read the Windows event logs by using the **Event Viewer** utility in Windows. For file targets, you can use either the **Log File Viewer** in [!INCLUDE [ssManStudioFull](../../../includes/ssmanstudiofull-md.md)] or the [fn_get_audit_file](../../system-functions/sys-fn-get-audit-file-transact-sql.md) function to read the target file.
 
 The general process for creating and using an audit is as follows.
 
 1. Create an audit and define the target.
-
 1. Create either a server audit specification or database audit specification that maps to the audit. Enable the audit specification.
-
 1. Enable the audit.
+1. Read the audit events by using the Windows **Event Viewer**, **Log File Viewer**, or the `fn_get_audit_file` function.
 
-1. Read the audit events by using the Windows **Event Viewer**, **Log File Viewer**, or the fn_get_audit_file function.
-
-For more information, see [Create a Server Audit and Server Audit Specification](../../../relational-databases/security/auditing/create-a-server-audit-and-server-audit-specification.md) and [Create a Server Audit and Database Audit Specification](../../../relational-databases/security/auditing/create-a-server-audit-and-database-audit-specification.md).
+For more information, see [Create a Server Audit and Server Audit Specification](create-a-server-audit-and-server-audit-specification.md) and [Create a server audit and database audit specification](create-a-server-audit-and-database-audit-specification.md).
 
 ## Considerations
 
-In the case of a failure during audit initiation, the server won't start. In this case, the server can be started by using the **-f** option at the command line.
+In the case of a failure during audit initiation, the server doesn't start. In this case, the server can be started by using the `-f` option at the command line.
 
-When an audit failure causes the server to shut down or not to start because ON_FAILURE=SHUTDOWN is specified for the audit, the MSG_AUDIT_FORCED_SHUTDOWN event is written to the log. Because the shutdown occurs on the first encounter of this setting, the event is written one time. This event is written after the failure message for the audit causing the shutdown. An administrator can bypass audit-induced shutdowns by starting [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] in Single User mode using the **-m** flag. If you start in Single User mode, you'll downgrade any audit where ON_FAILURE=SHUTDOWN is specified to run in that session as ON_FAILURE=CONTINUE. When [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] is started by using the **-m** flag, the MSG_AUDIT_SHUTDOWN_BYPASSED message is written to the error log.
+When an audit failure causes the server to shut down or not to start because `ON_FAILURE = SHUTDOWN` is specified for the audit, the `MSG_AUDIT_FORCED_SHUTDOWN` event is written to the log. Because the shutdown occurs on the first encounter of this setting, the event is written one time. This event is written after the failure message for the audit causing the shutdown. An administrator can bypass audit-induced shutdowns by starting [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] in Single User mode using the `-m` flag. If you start in Single User mode, you'll downgrade any audit where `ON_FAILURE = SHUTDOWN` is specified to run in that session as `ON_FAILURE = CONTINUE`. When [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] is started with the `-m` flag, the `MSG_AUDIT_SHUTDOWN_BYPASSED` message is written to the error log.
 
-For more information about service startup options, see [Database Engine Service Startup Options](../../../database-engine/configure-windows/database-engine-service-startup-options.md).
+For more information about service startup options, see [Database Engine Service startup options](../../../database-engine/configure-windows/database-engine-service-startup-options.md).
 
-### Attaching a Database with an Audit Defined
+<a id="attaching-a-database-with-an-audit-defined"></a>
 
-Attaching a database that has an audit specification and specifies a GUID that doesn't exist on the server will cause an *orphaned* audit specification. Because an audit with a matching GUID doesn't exist on the server instance, no audit events are recorded. To correct this situation, use the ALTER DATABASE AUDIT SPECIFICATION command to connect the orphaned audit specification to an existing server audit. Or, use the CREATE SERVER AUDIT command to create a new server audit with the specified GUID.
+### Attach a database with an audit defined
 
-You can attach a database that has an audit specification defined on it to another edition of [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] that doesn't support [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] audit, such as [!INCLUDE [ssExpress](../../../includes/ssexpress-md.md)] but it will not record audit events.
+Attaching a database that has an audit specification and specifies a GUID that doesn't exist on the server, causes an *orphaned* audit specification. Because an audit with a matching GUID doesn't exist on the server instance, no audit events are recorded. To correct this situation, use the `ALTER DATABASE AUDIT SPECIFICATION` command to connect the orphaned audit specification to an existing server audit. Or, use the `CREATE SERVER AUDIT` command to create a new server audit with the specified GUID.
 
-### Database Mirroring and SQL Server Audit
+You can attach a database that has an audit specification defined on it to another edition of [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] that doesn't support [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] audit, such as [!INCLUDE [ssExpress](../../../includes/ssexpress-md.md)] but it doesn't record audit events.
 
-A database that has a database audit specification defined and that uses database mirroring will include the database audit specification. To work correctly on the mirrored SQL instance, the following items must be configured:
+### Database mirroring and SQL Server Audit
 
-- The mirror server must have an audit with the same GUID to enable the database audit specification to write audit records. This can be configured by using the command CREATE AUDIT WITH GUID **=**_\<GUID from source Server Audit_>.
+A database that has a database audit specification defined, and that uses database mirroring, includes the database audit specification. To work correctly on the mirrored SQL instance, the following items must be configured:
+
+- The mirror server must have an audit with the same GUID to enable the database audit specification to write audit records. This can be configured by using the command `CREATE AUDIT WITH GUID = <guid-from-source-server-audit>`.
 
 - For binary file targets, the mirror server service account must have appropriate permissions to the location where the audit trail is being written.
 
 - For Windows event log targets, the security policy on the computer where the mirror server is located must allow for service account access to the security or Application event log.
 
-### Auditing Administrators
+### Auditing administrators
 
 Members of the **sysadmin** fixed server role are identified as the **dbo** user in each database. To audit actions of the administrators, audit the actions of the **dbo** user.
 
-## Creating and Managing Audits with Transact-SQL
+<a id="creating-and-managing-audits-with-transact-sql"></a>
+
+## Create and manage audits with Transact-SQL
 
 You can use DDL statements, dynamic management views and functions, and catalog views to implement all aspects of [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] Audit.
 
-### Data Definition Language Statements
+### Data Definition Language statements
 
 You can use the following DDL statements to create, alter, and drop audit specifications:
 
 | DDL statements | Description |
-| - | - |
+| --- | --- |
 | [ALTER AUTHORIZATION](../../../t-sql/statements/alter-authorization-transact-sql.md) | Changes the ownership of a securable. |
 | [ALTER DATABASE AUDIT SPECIFICATION](../../../t-sql/statements/alter-database-audit-specification-transact-sql.md) | Alters a database audit specification object using the SQL Server Audit feature. |
 | [ALTER SERVER AUDIT](../../../t-sql/statements/alter-server-audit-transact-sql.md) | Alters a server audit object using the SQL Server Audit feature. |
@@ -161,74 +161,62 @@ You can use the following DDL statements to create, alter, and drop audit specif
 | [DROP SERVER AUDIT](../../../t-sql/statements/drop-server-audit-transact-sql.md) | Drops a Server Audit Object using the SQL Server Audit feature. |
 | [DROP SERVER AUDIT SPECIFICATION](../../../t-sql/statements/drop-server-audit-specification-transact-sql.md) | Drops a server audit specification object using the SQL Server Audit feature. |
 
-### Dynamic Views and Functions
+### Dynamic views and functions
 
 The following table lists the dynamic views and function that you can use for [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] Auditing.
 
 | Dynamic views and functions | Description |
 | --- | --- |
-| [sys.dm_audit_actions](../../../relational-databases/system-dynamic-management-views/sys-dm-audit-actions-transact-sql.md) | Returns a row for every audit action that can be reported in the audit log and every audit action group that can be configured as part of [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] Audit. |
-| [sys.dm_server_audit_status](../../../relational-databases/system-dynamic-management-views/sys-dm-server-audit-status-transact-sql.md) | Provides information about the current state of the audit. |
-| [sys.dm_audit_class_type_map](../../../relational-databases/system-dynamic-management-views/sys-dm-audit-class-type-map-transact-sql.md) | Returns a table that maps the class_type field in the audit log to the class_desc field in `sys.dm_audit_actions`. |
-| [fn_get_audit_file](../../../relational-databases/system-functions/sys-fn-get-audit-file-transact-sql.md) | Returns information from an audit file created by a server audit. |
+| [sys.dm_audit_actions](../../system-dynamic-management-views/sys-dm-audit-actions-transact-sql.md) | Returns a row for every audit action that can be reported in the audit log and every audit action group that can be configured as part of [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] Audit. |
+| [sys.dm_server_audit_status](../../system-dynamic-management-views/sys-dm-server-audit-status-transact-sql.md) | Provides information about the current state of the audit. |
+| [sys.dm_audit_class_type_map](../../system-dynamic-management-views/sys-dm-audit-class-type-map-transact-sql.md) | Returns a table that maps the class_type field in the audit log to the class_desc field in `sys.dm_audit_actions`. |
+| [fn_get_audit_file](../../system-functions/sys-fn-get-audit-file-transact-sql.md) | Returns information from an audit file created by a server audit. |
 
-### Catalog Views
+### Catalog views
 
 The following table lists the catalog views that you can use for [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] auditing.
 
 | Catalog views | Description |
 | --- | --- |
-| [sys.database_audit_specifications](../../../relational-databases/system-catalog-views/sys-database-audit-specifications-transact-sql.md) | Contains information about the database audit specifications in a [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] audit on a server instance. |
-| [sys.database_audit_specification_details](../../../relational-databases/system-catalog-views/sys-database-audit-specification-details-transact-sql.md) | Contains information about the database audit specifications in a [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] audit on a server instance for all databases. |
-| [sys.server_audits](../../../relational-databases/system-catalog-views/sys-server-audits-transact-sql.md) | Contains one row for each [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] audit in a server instance. |
-| [sys.server_audit_specifications](../../../relational-databases/system-catalog-views/sys-server-audit-specifications-transact-sql.md) | Contains information about the server audit specifications in a [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] audit on a server instance. |
-| [sys.server_audit_specifications_details](../../../relational-databases/system-catalog-views/sys-server-audit-specification-details-transact-sql.md) | Contains information about the server audit specification details (actions) in a [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] audit on a server instance. |
-| [sys.server_file_audits](../../../relational-databases/system-catalog-views/sys-server-file-audits-transact-sql.md) | Contains stores extended information about the file audit type in a [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] audit on a server instance. |
+| [sys.database_audit_specifications](../../system-catalog-views/sys-database-audit-specifications-transact-sql.md) | Contains information about the database audit specifications in a [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] audit on a server instance. |
+| [sys.database_audit_specification_details](../../system-catalog-views/sys-database-audit-specification-details-transact-sql.md) | Contains information about the database audit specifications in a [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] audit on a server instance for all databases. |
+| [sys.server_audits](../../system-catalog-views/sys-server-audits-transact-sql.md) | Contains one row for each [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] audit in a server instance. |
+| [sys.server_audit_specifications](../../system-catalog-views/sys-server-audit-specifications-transact-sql.md) | Contains information about the server audit specifications in a [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] audit on a server instance. |
+| [sys.server_audit_specifications_details](../../system-catalog-views/sys-server-audit-specification-details-transact-sql.md) | Contains information about the server audit specification details (actions) in a [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] audit on a server instance. |
+| [sys.server_file_audits](../../system-catalog-views/sys-server-file-audits-transact-sql.md) | Contains stores extended information about the file audit type in a [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] audit on a server instance. |
 
 ## Permissions
 
 Each feature and command for [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] Audit has individual permission requirements.
 
-To create, alter, or drop a Server Audit or Server Audit Specification, server principals require the ALTER ANY SERVER AUDIT or the CONTROL SERVER permission. To create, alter, or drop a Database Audit Specification, database principals require the ALTER ANY DATABASE AUDIT permission or the ALTER or CONTROL permission on the database. In addition, principals must have permission to connect to the database, or ALTER ANY SERVER AUDIT or CONTROL SERVER permissions.
+To create, alter, or drop a Server Audit or Server Audit Specification, server principals require the `ALTER ANY SERVER AUDIT` or the `CONTROL SERVER` permission. To create, alter, or drop a Database Audit Specification, database principals require the `ALTER ANY DATABASE AUDIT` permission or the `ALTER` or `CONTROL` permission on the database. In addition, principals must have permission to connect to the database, or `ALTER ANY SERVER AUDIT` or `CONTROL SERVER` permissions.
 
-The VIEW ANY DEFINITION permission provides access to view the server level audit views and VIEW DEFINITION provides access to view the database level audit views. Denial of these permissions overrides the ability to view the catalog views, even if the principal has the ALTER ANY SERVER AUDIT or ALTER ANY DATABASE AUDIT permissions.
+The `VIEW ANY DEFINITION` permission provides access to view the server level audit views and `VIEW DEFINITION` provides access to view the database level audit views. Denial of these permissions overrides the ability to view the catalog views, even if the principal has the `ALTER ANY SERVER AUDIT` or `ALTER ANY DATABASE AUDIT` permissions.
 
-For more information about how to grant rights and permissions, see [GRANT (Transact-SQL)](../../../t-sql/statements/grant-transact-sql.md).
+For more information about how to grant rights and permissions, see [GRANT](../../../t-sql/statements/grant-transact-sql.md).
 
 > [!CAUTION]  
-> Principals in the sysadmin role can tamper with any audit component and those in the db_owner role can tamper with audit specifications in a database. [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] Audit will validate that a logon that creates or alters an audit specification has at least the ALTER ANY DATABASE AUDIT permission. However, it does no validation when you attach a database. You should assume all Database Audit Specifications are only as trustworthy as those principals in the sysadmin or db_owner role.
+> Principals in the **sysadmin** role can tamper with any audit component, and principals in the **db_owner** role can tamper with audit specifications in a database. [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] Audit validates that a logon that creates or alters an audit specification has at least the `ALTER ANY DATABASE AUDIT` permission. However, it does no validation when you attach a database. You should assume all Database Audit Specifications are only as trustworthy as those principals in the **sysadmin** or **db_owner** role.
 
-## Related Tasks
+## Related tasks
 
-[Create a Server Audit and Server Audit Specification](../../../relational-databases/security/auditing/create-a-server-audit-and-server-audit-specification.md)
-
-[Create a Server Audit and Database Audit Specification](../../../relational-databases/security/auditing/create-a-server-audit-and-database-audit-specification.md)
-
-[View a SQL Server Audit Log](../../../relational-databases/security/auditing/view-a-sql-server-audit-log.md)
-
-[Write SQL Server Audit Events to the Security Log](../../../relational-databases/security/auditing/write-sql-server-audit-events-to-the-security-log.md)
+- [Create a Server Audit and Server Audit Specification](create-a-server-audit-and-server-audit-specification.md)
+- [Create a server audit and database audit specification](create-a-server-audit-and-database-audit-specification.md)
+- [View a SQL Server Audit Log](view-a-sql-server-audit-log.md)
+- [Write SQL Server Audit events to the Security log](write-sql-server-audit-events-to-the-security-log.md)
 
 ## Articles closely related to auditing
 
-[Server Properties (Security Page)](../../../database-engine/configure-windows/server-properties-security-page.md)  
-Explains how to turn on login auditing for [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)]. The audit records are stored in the Windows application log.
-
-[c2 audit mode Server Configuration Option](../../../database-engine/configure-windows/c2-audit-mode-server-configuration-option.md)  
-Explains the C2 security compliance auditing mode in [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)].
-
-[Security Audit Event Category (SQL Server Profiler)](../../../relational-databases/event-classes/security-audit-event-category-sql-server-profiler.md)  
-Explains the audit events you can use in [!INCLUDE [ssSqlProfiler](../../../includes/sssqlprofiler-md.md)]. For more information, see [SQL Server Profiler](../../../tools/sql-server-profiler/sql-server-profiler.md).
-
-[SQL Trace](../../../relational-databases/sql-trace/sql-trace.md)  
-Explains how SQL Trace can be used from within your own applications to create traces manually, instead of using [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] Profiler.
-
-[DDL Triggers](../../../relational-databases/triggers/ddl-triggers.md)  
-Explains how you can use Data Definition Language (DDL) triggers to track changes to your databases.
-
-[Microsoft TechNet: SQL Server TechCenter: SQL Server 2005 Security and Protection](../../../sql-server/index.yml)  
-Provides up-to-date information about [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] security.
+| Article | Description |
+| --- | --- |
+| [Server Properties - Security Page](../../../database-engine/configure-windows/server-properties-security-page.md) | Explains how to turn on login auditing for [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)]. The audit records are stored in the Windows application log. |
+| [Server configuration: c2 audit mode](../../../database-engine/configure-windows/c2-audit-mode-server-configuration-option.md) | Explains the C2 security compliance auditing mode in [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)]. |
+| [Security Audit Event Category (SQL Server Profiler)](../../event-classes/security-audit-event-category-sql-server-profiler.md) | Explains the audit events you can use in [!INCLUDE [ssSqlProfiler](../../../includes/sssqlprofiler-md.md)]. For more information, see [SQL Server Profiler](../../../tools/sql-server-profiler/sql-server-profiler.md). |
+| [SQL Trace](../../sql-trace/sql-trace.md) | Explains how SQL Trace can be used from within your own applications to create traces manually, instead of using [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] Profiler. |
+| [DDL Triggers](../../triggers/ddl-triggers.md) | Explains how you can use Data Definition Language (DDL) triggers to track changes to your databases. |
+| [Microsoft TechNet: SQL Server TechCenter: SQL Server 2005 Security and Protection](../../../sql-server/index.yml) | Provides up-to-date information about [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] security. |
 
 ## Related content
 
-- [SQL Server Audit Action Groups and Actions](../../../relational-databases/security/auditing/sql-server-audit-action-groups-and-actions.md)
-- [SQL Server Audit Records](../../../relational-databases/security/auditing/sql-server-audit-records.md)
+- [SQL Server Audit action groups and actions](sql-server-audit-action-groups-and-actions.md)
+- [SQL Server Audit Records](sql-server-audit-records.md)
