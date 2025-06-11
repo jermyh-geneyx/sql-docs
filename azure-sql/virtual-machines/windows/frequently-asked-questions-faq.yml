@@ -130,7 +130,7 @@ sections:
         answer: |
              There are three ways to do this. If you're an Enterprise Agreement (EA) customer, you can provision one of the [virtual machine images](sql-server-on-azure-vm-iaas-what-is-overview.md#licensing). If you have [Software Assurance](https://www.microsoft.com/en-us/licensing/licensing-programs/software-assurance-default), you can enable the [Azure Hybrid Benefit](licensing-model-azure-hybrid-benefit-ahb-change.md) on an existing pay-as-you-go (PAYG) image. Or you can copy the SQL Server installation media to a Windows Server VM, and then install SQL Server on the VM. Be sure to register your SQL Server VM with the [extension](sql-agent-extension-manually-register-single-vm.md) for features such as portal management, automated backup and automated patching. 
           
-          
+ 
       - question: |
           Does a customer need SQL Server Client Access Licenses (CALs) to connect to a SQL Server pay-as-you-go image that is running on Azure Virtual Machines?
         answer:  No. Customers need CALs when they use bring-your-own-license and move their SQL Server SA server / CAL VM to Azure VMs. 
@@ -195,7 +195,12 @@ sections:
           Why do I see that my licenses are assigned at a scope level when I try to modify the license for my SQL Server VM?
         answer: |
               Changing the license type for individual SQL Server VMs deployed to subscriptions with [Centrally managed Azure Hybrid Benefit](licensing-model-azure-hybrid-benefit-ahb-change.md#integration-with-centrally-managed-azure-hybrid-benefit) isn't supported as the licensing is managed at the subscription level - a message displays such as `Your organization manages licenses assigned to Azure at a scope level such as Azure subscription instead of each individual resources.`
-              
+
+      - question: |
+          How many core licenses should I use for my SQL Server on Azure VM if I have 'N' number of vCores?
+        answer: |
+              A vCore on an Azure VM is the equivalent of physical CPU. For SQL Server on Azure VMs, there is a 1:1 relationship between vCores and core licenses. This means that if you have 'N' number of vCores, you should use 'N' number of core licenses. For example, if you have a VM with 8 vCores, that VM uses 8 core licenses. 
+                
                    
   - name: Administration
     questions:
@@ -287,7 +292,11 @@ sections:
         answer: |
              You can get [free extended security updates](sql-server-extend-end-of-support.md) by moving your SQL Server as-is to an Azure virtual machine. Updates are available through the Windows Update channel. For more information, see [end of support options](/sql/sql-server/end-of-support/sql-server-end-of-support-overview). 
             
-             
+      - question: |
+          Why did my configuration change or update fail with the error 'The User Data directory in the registry is not valid?'
+        answer: |
+            The issue happens when the default locations of new data or log files for a database point to an invalid location. To resolve this, review [Invalid directory error](/troubleshoot/sql/database-engine/install/windows/user-data-log-directory-invalid).
+                  
           
   - name: General
     questions:

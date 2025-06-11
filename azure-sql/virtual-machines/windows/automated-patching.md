@@ -48,8 +48,6 @@ The following table describes the options that can be configured for Automated P
 | **Maintenance window duration** | 30-180 | The number of minutes permitted to complete the download and installation of updates. |
 | **Patch Category** | Important | The category of Windows updates to download and install. |
 
-
-
 ## Configure in the Azure portal
 
 You can use the Azure portal to configure Automated Patching during provisioning or for existing VMs.
@@ -120,6 +118,8 @@ Consider the following:
 
 - Automated Patching isn't aware of Always On availability group configurations for your SQL Server VM, so be cautious when creating patching schedules for availability group replicas to avoid unexpected failovers.
 - If your SQL Server VMs are in an availability set and you've configured an Always On availability group, both nodes might be restarted if patches are applied at the same time, so it's important the patching schedules are set for a different day/time for each node. 
+- Your virtual machine can restart during a predefined maintenance window. You can use Event Viewer to confirm that your VM restarted during a maintenance window from automated patching. [Guest patching](/azure/virtual-machines/automatic-vm-guest-patching#how-does-automatic-vm-guest-patching-work) can restart your VM outside of a maintenance window. 
+- If your update fails with an error message that states `The user data or log directory is invalid`, it's likely due to the default locations of new data or log files for a database pointing to an invalid location. To resolve this, review [Invalid directory error](/troubleshoot/sql/database-engine/install/windows/user-data-log-directory-invalid).
 
 
 ## Migrate from Automated Patching to Azure Update Manager
