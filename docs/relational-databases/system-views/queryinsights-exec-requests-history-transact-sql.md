@@ -3,8 +3,8 @@ title: "queryinsights.exec_requests_history (Transact-SQL)"
 description: "The queryinsights.exec_requests_history in Microsoft Fabric provides information about each complete SQL request."
 author: WilliamDAssafMSFT
 ms.author: mariyaali
-ms.reviewer: mariyaali, randolphwest
-ms.date: 1/23/2025
+ms.reviewer: mariyaali, randolphwest, emtehran
+ms.date: 06/11/2025
 ms.service: sql
 ms.topic: "reference"
 f1_keywords:
@@ -45,6 +45,7 @@ The `queryinsights.exec_requests_history` in [!INCLUDE [fabric](../../includes/f
 | `data_scanned_remote_storage_mb` | **decimal(18,3)** | Shows how much data was scanned/read from remote storage (One Lake). |
 | `data_scanned_memory_mb` | **decimal(18,3)** | Shows how much data was scanned from local memory. Data scanned from disk and memory together indicates how much data was read from cache. |
 | `data_scanned_disk_mb` | **decimal(18,3)** | Shows how much data was scanned/read from local disk. Data scanned from disk and memory together indicates how much data was read from cache. |
+| `result_cache_hit` | **int** | Shows the status of [result set caching](/fabric/data-warehouse/result-set-caching) for this query:<br /><br />`2` - query used result set cache (*cache hit*)<br />`1` - query created result set cache<br />`0` - query wasn't applicable for cache creation or usage |
 
 ## Permissions
 
