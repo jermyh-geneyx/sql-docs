@@ -36,6 +36,8 @@ The syntax `CREATE LOGIN FROM WINDOWS` and `CREATE USER FROM WINDOWS` can be use
 
 In order to use the **Windows** authentication metadata mode, the user environment must [Synchronize Active Directory (AD) with Microsoft Entra ID](winauth-azuread-setup.md#synchronize-ad-with-microsoft-entra-id).
 
+To connect using **Windows Authentication**, the user must first configure windows authentication , see [Windows Authentication for Microsoft Entra principals on Azure SQL Managed Instance](winauth-azuread-overview.md).
+
 ## Configure authentication metadata modes
 
 1. Go to the [Azure portal](https://portal.azure.com) and navigate to your SQL Managed Instance resource.
