@@ -4,10 +4,12 @@ description: Sets Transact-SQL and query processing behaviors to be compatible w
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 04/22/2025
+ms.date: 06/11/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - build-2025
 f1_keywords:
   - "COMPATIBILITY_LEVEL_TSQL"
   - "COMPATIBILITY_LEVEL"
@@ -22,8 +24,6 @@ helpviewer_keywords:
 dev_langs:
   - "TSQL"
 monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
-ms.custom:
-  - build-2025
 ---
 
 # ALTER DATABASE (Transact-SQL) compatibility level
@@ -38,7 +38,7 @@ For more information about the syntax conventions, see [Transact-SQL syntax conv
 
 ```syntaxsql
 ALTER DATABASE database_name
-SET COMPATIBILITY_LEVEL = { 170 | 160 | 150 | 140 | 130 | 120 | 110 | 100 | 90 }
+SET COMPATIBILITY_LEVEL = { 170 | 160 | 150 | 140 | 130 | 120 | 110 | 100 }
 ```
 
 ## Arguments
@@ -57,6 +57,7 @@ The version of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] with w
 | --- | --- | --- | --- |
 | [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] | 17 | 170 | 170, 160, 150, 140, 130, 120, 110, 100 |
 | [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)] | 16 | 150 | 160, 150, 140, 130, 120, 110, 100 |
+| [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] | 17 | 170 | 170, 160, 150, 140, 130, 120, 110, 100 |
 | [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] | 16 | 160 | 160, 150, 140, 130, 120, 110, 100 |
 | [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] | 15 | 150 | 150, 140, 130, 120, 110, 100 |
 | [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] | 14 | 140 | 140, 130, 120, 110, 100 |
@@ -69,7 +70,7 @@ The version of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] with w
 | [!INCLUDE [ssVersion2000](../../includes/ssversion2000-md.md)] | 8 | 80 | 80 |
 
 > [!IMPORTANT]  
-> The database engine version numbers for SQL Server and Azure SQL Database are not comparable with each other, and rather are internal build numbers for these separate products. The database engine for Azure SQL Database is based on the same code base as the SQL Server database engine. Most importantly, the database engine in Azure SQL Database always has the newest SQL database engine bits. Version 12 of Azure SQL Database is newer than version 15 of SQL Server.
+> The database engine version numbers for SQL Server and Azure SQL Database aren't comparable with each other, and rather are internal build numbers for these separate products. The database engine for Azure SQL Database is based on the same code base as the SQL Server database engine. Most importantly, the database engine in Azure SQL Database always has the newest SQL database engine bits. Version 12 of Azure SQL Database is newer than version 15 of SQL Server.
 
 ## Best practices for upgrading database compatibility level
 
@@ -77,7 +78,7 @@ For the recommended workflow for upgrading the compatibility level, see [Keep pe
 
 ## Remarks
 
-For all installations of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], the default compatibility level is associated with the version of the [!INCLUDE [ssDE](../../includes/ssde-md.md)]. New databases are set to this level unless the `model` database has a lower compatibility level. For databases attached or restored from any earlier version of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], the database keeps its existing compatibility level, if it is at least minimum allowed for that instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. Moving a database with a compatibility level lower than the allowed level by the [!INCLUDE [ssDE-md](../../includes/ssde-md.md)] automatically sets the database to the lowest compatibility level allowed. This applies to both system and user databases.
+For all installations of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], the default compatibility level is associated with the version of the [!INCLUDE [ssDE](../../includes/ssde-md.md)]. New databases are set to this level unless the `model` database has a lower compatibility level. For databases attached or restored from any earlier version of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], the database keeps its existing compatibility level, if it's at least minimum allowed for that instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. Moving a database with a compatibility level lower than the allowed level by the [!INCLUDE [ssDE-md](../../includes/ssde-md.md)] automatically sets the database to the lowest compatibility level allowed. This applies to both system and user databases.
 
 The following behaviors are expected for [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] when a database is attached or restored, and after an in-place upgrade:
 
@@ -86,10 +87,10 @@ The following behaviors are expected for [!INCLUDE [ssSQL17](../../includes/sssq
 - The compatibility levels of the `tempdb`, `model`, `msdb`, and Resource databases are set to the default compatibility level for a given [!INCLUDE [ssDE](../../includes/ssde-md.md)] version.
 - The `master` system database retains the compatibility level it had before upgrade. This won't affect user database behavior.
 
-For pre-existing databases running at lower compatibility levels, as long as the application doesn't need to use enhancements that are only available in a higher database compatibility level, it is a valid approach to maintain the previous database compatibility level. For new development work, or when an existing application requires use of new features such as [Intelligent query processing in SQL databases](../../relational-databases/performance/intelligent-query-processing.md) and some new [!INCLUDE [tsql](../../includes/tsql-md.md)], plan to upgrade the database compatibility level to the latest available. For more information, see [Compatibility levels and Database Engine upgrades](../../database-engine/install-windows/compatibility-certification.md#compatibility-levels-and-database-engine-upgrades).
+For pre-existing databases running at lower compatibility levels, as long as the application doesn't need to use enhancements that are only available in a higher database compatibility level, it's a valid approach to maintain the previous database compatibility level. For new development work, or when an existing application requires use of new features such as [Intelligent query processing in SQL databases](../../relational-databases/performance/intelligent-query-processing.md) and some new [!INCLUDE [tsql](../../includes/tsql-md.md)], plan to upgrade the database compatibility level to the latest available. For more information, see [Compatibility levels and Database Engine upgrades](../../database-engine/install-windows/compatibility-certification.md#compatibility-levels-and-database-engine-upgrades).
 
 > [!NOTE]  
-> If there are no user objects and dependencies, it is generally safe to upgrade to the default compatibility level. For more information, see [Recommendations - master database](../../relational-databases/databases/master-database.md#recommendations).
+> If there are no user objects and dependencies, it's generally safe to upgrade to the default compatibility level. For more information, see [Recommendations - master database](../../relational-databases/databases/master-database.md#recommendations).
 
 Use `ALTER DATABASE` to change the compatibility level of the database. The new compatibility level setting for a database takes effect when a `USE <database>` command is issued, or a new login is processed with that database as the default database context.
 
@@ -103,9 +104,11 @@ To use database compatibility level 120 or higher for a database overall, but op
 
 The default compatibility level is 170 for newly created databases in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] and [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)].
 
-The default compatibility level is SQL Server 2019 (150) for newly created databases in [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)].
+The default compatibility level is 150 for newly created databases in the [SQL Server 2022 update policy](/azure/azure-sql/managed-instance/update-policy#sql-server-2022-update-policy) of the [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)] offering.
 
-[!INCLUDE [msCoName](../../includes/msconame-md.md)] doesn't automatically update database compatibility level for existing databases. It is up to customers to do at their own discretion.
+The default compatibility level is 170 for newly created databases in the [Always-up-to-date update policy](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy) of the [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)] offering.
+
+[!INCLUDE [msCoName](../../includes/msconame-md.md)] doesn't automatically update database compatibility level for existing databases. It's up to customers to do at their own discretion.
 
 [!INCLUDE [msCoName](../../includes/msconame-md.md)] highly recommends that customers plan to upgrade to the latest compatibility level in order to use the latest query optimization improvements. For tips about how to assess the performance differences of your most important queries between two different compatibility levels on [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], see [Improved Query Performance with Compatibility Level 130 in Azure SQL Database](https://techcommunity.microsoft.com/blog/azuresqlblog/improved-query-performance-with-compatibility-level-130-in-azure-sql-database/386100). This article refers to compatibility level 130 and [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], but the same methodology applies for upgrades to 140 or higher levels in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
@@ -131,7 +134,7 @@ SELECT SERVERPROPERTY('ProductVersion');
 
 Database compatibility level is a valuable tool to help with database modernization by allowing the [!INCLUDE [ssDEnoversion](../../includes/ssdenoversion-md.md)] to be upgraded while keeping the same functional status for connecting applications by maintaining the same pre-upgrade database compatibility level. This means that it's possible to upgrade from an older version of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] (such as [!INCLUDE [sql2008-md](../../includes/sql2008-md.md)]) to [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)] or [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] (including Azure SQL Managed Instance) with no application changes (except for database connectivity). For more information, see [Compatibility certification](../../database-engine/install-windows/compatibility-certification.md).
 
-As long as the application doesn't need to use enhancements that are only available in a higher database compatibility level, it is a valid approach to upgrade the [!INCLUDE [ssDEnoversion](../../includes/ssdenoversion-md.md)] and maintain the previous database compatibility level. For more information on using compatibility level for backward compatibility, see [Compatibility certification](../../database-engine/install-windows/compatibility-certification.md).
+As long as the application doesn't need to use enhancements that are only available in a higher database compatibility level, it's a valid approach to upgrade the [!INCLUDE [ssDEnoversion](../../includes/ssdenoversion-md.md)] and maintain the previous database compatibility level. For more information on using compatibility level for backward compatibility, see [Compatibility certification](../../database-engine/install-windows/compatibility-certification.md).
 
 ## Compatibility levels and stored procedures
 
@@ -158,7 +161,7 @@ For more information, including the recommended workflow for upgrading database 
   Examples of breaking changes **not protected** by compatibility level are:
 
   - Changed column names in system objects. In [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)] the column `single_pages_kb` in `sys.dm_os_sys_info` was renamed to `pages_kb`. Regardless of the compatibility level, the query `SELECT single_pages_kb FROM sys.dm_os_sys_info` will produce error 207 (Invalid column name).
-  
+
   - Removed system objects. In [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)] the `sp_dboption` was removed. Regardless of the compatibility level, the statement `EXEC sp_dboption 'AdventureWorks2022', 'autoshrink', 'FALSE';` produces error 2812 (`Could not find stored procedure 'sp_dboption'`).
 
     For more information on breaking changes, see:
@@ -202,7 +205,7 @@ The fundamental plan-affecting changes added only to the default compatibility l
     | 14 ([!INCLUDE [ssSQL17](../../includes/sssql17-md.md)]) | 100 to 120<br /><br /><br />130<br />140 | Off<br />On<br />Off<br />On<br />Off<br />On | **Disabled**<br />Enabled<br />**Enabled**<br />Enabled<br />**Enabled**<br />Enabled | Disabled<br />Enabled<br />Disabled<br />Enabled<br />Disabled<br />Enabled |
     | 15 ([!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)]) and ([!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)]) | 100 to 120<br /><br /><br />130 to 140<br />150 | Off<br />On<br />Off<br />On<br />Off<br />On | **Disabled**<br />Enabled<br />**Enabled**<br />Enabled<br />**Enabled**<br />Enabled | Disabled<br />Enabled<br />Disabled<br />Enabled<br />Disabled<br />Enabled |
     | 16 ([!INCLUDE [sql-server-2022](../../includes/sssql22-md.md)]) and ([!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)]) | 100 to 120<br /><br /><br />130 to 150<br />160 | Off<br />On<br />Off<br />On<br />Off<br />On | **Disabled**<br />Enabled<br />**Enabled**<br />Enabled<br />**Enabled**<br />Enabled | Disabled<br />Enabled<br />Disabled<br />Enabled<br />Disabled<br />Enabled |
-    | 17 ([!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)]) and ([!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)]) | 100 to 120<br /><br /><br />130 to 160<br />170 | Off<br />On<br />Off<br />On<br />Off<br />On | **Disabled**<br />Enabled<br />**Enabled**<br />Enabled<br />**Enabled**<br />Enabled | Disabled<br />Enabled<br />Disabled<br />Enabled<br />Disabled<br />Enabled |
+    | 17 ([!INCLUDE [sql-server-2025](../../includes/sssql25-md.md)], [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] and [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)]) | 100 to 120<br /><br /><br />130 to 160<br />170 | Off<br />On<br />Off<br />On<br />Off<br />On | **Disabled**<br />Enabled<br />**Enabled**<br />Enabled<br />**Enabled**<br />Enabled | Disabled<br />Enabled<br />Disabled<br />Enabled<br />Disabled<br />Enabled |
 
     Query Optimizer fixes that address wrong results or access violation errors aren't protected by trace flag 4199. Those fixes aren't considered optional.
 
@@ -220,8 +223,9 @@ The fundamental plan-affecting changes added only to the default compatibility l
     | 14 ([!INCLUDE [ssSQL17](../../includes/sssql17-md.md)])<sup>1</sup> | < 140<br />140 | Disabled<br />Enabled |
     | 15 ([!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)])<sup>1</sup> | < 150<br />150 | Disabled<br />Enabled |
     | 16 ([!INCLUDE [sql-server-2022](../../includes/sssql22-md.md)])<sup>1</sup> | < 160<br />160 | Disabled<br />Enabled |
+    | 17 ([!INCLUDE [sql-server-2025](../../includes/sssql25-md.md)])<sup>1</sup> | < 170<br />170 | Disabled<br />Enabled |
 
-    <sup>1</sup> Also applicable to [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+    <sup>1</sup> Also applicable to [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] and [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)].
 
 Other differences between specific compatibility levels are available in the next sections of this article.
 
@@ -232,6 +236,11 @@ This section describes new behaviors introduced with compatibility level 170.
 | Compatibility level setting of 160 or lower | Compatibility level setting of 170 |
 | :--- | :--- |
 | To protect the key material of the symmetric key, database master key and service master key, SQL Server and Azure SQL stores the key material in encrypted form. The encryption uses PKCS#1 v1.5 padding mode. | To protect the key material of the symmetric key, database master key and service master key, SQL Server and Azure SQL stores the key material in encrypted form. The encryption uses OAEP-256 padding mode. In the dm_database_encryption_keys, the encryptor_type will be displayed as `CERTIFICATE_OAEP_256` instead of `CERTIFICATE`. |
+| Regular expressions can be used to match complex patterns and manipulate data in SQL Server and Azure SQL database. Regular expression support within T-SQL has been added. Some regular expression functions aren't available in all database compatibility levels For more information, see [Regular expressions functions](../functions/regular-expressions-functions-transact-sql.md). | Regular expression functions such as REGEXP_LIKE, REGEXP_MATCHES, and REGEXP_SPLIT_TO_TABLE have been introduced to enable pattern matching, extraction, and splitting directly in T-SQL. |
+| The ability to create AI embeddings (vector arrays) from text expressions has been added the Database engine. For more information, see [AI functions](../functions/ai-functions-transact-sql.md). | Introduces the AI_GENERATE_CHUNKS function, which enables chunking of text input for AI model consumption, improving integration with AI services. |
+| Traditionally, the Database Engine protects DML statements from the Halloween problem by introducing a Spool [operator](../../relational-databases/showplan-logical-and-physical-operators-reference.md) in the query plan, or by taking advantage of another blocking operator already present in the plan, such as a Sort or a Hash Match. | [Optimized Halloween protection](../../relational-databases/performance/intelligent-query-processing-details.md#optimized-halloween-protection) removes unnecessary spool operators and improves query performance during DML operations where Halloween protection is required. |
+| Parameterized queries can have multiple cached query plans for different selectivity categories of a parameter. Parameter sensitive plan optimization is enabled by default in compatibility level 160 for select queries only | When [Parameter sensitive plan optimization](../../relational-databases/performance/parameter-sensitive-plan-optimization.md#remarks) is operating under compatibility level 170, DML query support as well as support for `tempdb` is also available |
+| Parameterized queries which have optional parameters might suffer from suboptimal plans due to parameter sniffing. | Query plan optimization for optional parameters, improving performance by generating more appropriate plans for NULL and non-NULL values. |
 
 ## Differences between compatibility level 150 and level 160
 
@@ -266,7 +275,7 @@ This section describes new behaviors introduced with compatibility level 140.
 | Cardinality estimates for statements referencing multi-statement table-valued functions use a fixed row guess. | Cardinality estimates for eligible statements referencing multi-statement table-valued functions will use the actual cardinality of the function output. This is enabled via **interleaved execution** for multi-statement table-valued functions. |
 | Batch-mode queries that request insufficient memory grant sizes that result in spills to disk might continue to have issues on consecutive executions. | Batch-mode queries that request insufficient memory grant sizes that result in spills to disk might have improved performance on consecutive executions. This is enabled via **batch mode memory grant feedback** which will update the memory grant size of a cached plan if spills have occurred for batch mode operators. |
 | Batch-mode queries that request an excessive memory grant size that results in concurrency issues might continue to have issues on consecutive executions. | Batch-mode queries that request an excessive memory grant size that results in concurrency issues might have improved concurrency on consecutive executions. This is enabled via **batch mode memory grant feedback** which will update the memory grant size of a cached plan if an excessive amount was originally requested. |
-| Batch-mode queries that contain join operators are eligible for three physical join algorithms, including nested loop, hash join and merge join. If cardinality estimates are incorrect for join inputs, an inappropriate join algorithm might be selected. If this occurs, performance will suffer, and the inappropriate join algorithm will remain in use until the cached plan is recompiled. | There is an additional join operator called **adaptive join**. If cardinality estimates are incorrect for the outer build join input, an inappropriate join algorithm might be selected. If this occurs and the statement is eligible for an adaptive join, a nested loop will be used for smaller join inputs, and a hash join will be used for larger join inputs dynamically without requiring recompilation. |
+| Batch-mode queries that contain join operators are eligible for three physical join algorithms, including nested loop, hash join and merge join. If cardinality estimates are incorrect for join inputs, an inappropriate join algorithm might be selected. If this occurs, performance will suffer, and the inappropriate join algorithm will remain in use until the cached plan is recompiled. | There's an additional join operator called **adaptive join**. If cardinality estimates are incorrect for the outer build join input, an inappropriate join algorithm might be selected. If this occurs and the statement is eligible for an adaptive join, a nested loop will be used for smaller join inputs, and a hash join will be used for larger join inputs dynamically without requiring recompilation. |
 | Trivial plans referencing Columnstore indexes aren't eligible for batch mode execution. | A trivial plan referencing Columnstore indexes will be discarded in favor of a plan that is eligible for batch mode execution. |
 | The `sp_execute_external_script` UDX operator can only run in row mode. | The `sp_execute_external_script` UDX operator is eligible for batch mode execution. |
 | Multi-statement table-valued functions (TVFs) don't have interleaved execution | Interleaved execution for multi-statement TVFs to improve plan quality. |
