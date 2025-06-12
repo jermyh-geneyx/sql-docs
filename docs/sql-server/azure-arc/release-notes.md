@@ -23,9 +23,9 @@ This article lists:
 
 Extension versions are cumulative. Higher extension versions include all of the updates from previous versions. A release might include internal features. If the version release notes don't describe features, then the updates were internal.
 
-## June 5, 2025
+## June 9, 2025
 
-Arc enabled SQL Server is available as preview feature in US Government Virginia with a limited set of features. [SQL Server enabled by Azure Arc in US Government Preview](us-government-region.md).
+SQL Server enabled by Azure Arc is available as preview feature in US Government Virginia with a limited set of features. For more information, review [SQL Server enabled by Azure Arc in US Government Preview](us-government-region.md).
 
 This release announces the preview region availability. It does not update extension version or other components of any agent or extension.
 
