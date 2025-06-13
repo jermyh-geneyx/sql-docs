@@ -48,7 +48,7 @@ Requires `CONTROL SERVER` permission, or membership in the **sysadmin** fixed se
 
 ### Create a CLR assembly
 
-The following permissions required to create a CLR assembly when `CLR strict security` is enabled:
+The following permissions are required to create a CLR assembly when `CLR strict security` is enabled:
 
 - The user must have the `CREATE ASSEMBLY` permission
 
