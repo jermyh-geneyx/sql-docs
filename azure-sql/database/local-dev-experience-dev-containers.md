@@ -1,13 +1,14 @@
 ---
-title: What are the Dev Container Templates for Azure SQL Database?
+title: What Are the Dev Container Templates for Azure SQL Database?
 titleSuffix: Azure SQL Database
 description: Learn about the local development experience for Azure SQL Database with Dev Container Templates.
 author: croblesm
 ms.author: roblescarlos
 ms.reviewer: wiassaf, randolphwest
-ms.date: 10/24/2024
+ms.date: 06/13/2025
 ms.service: azure-sql-database
 ms.topic: overview
+monikerRange: "=azuresql || =azuresql-db"
 ---
 
 # What are the Dev Container Templates for Azure SQL Database?
@@ -120,7 +121,7 @@ The Dev Container Templates for Azure SQL Database, are available for the follow
 | [Node.js](https://github.com/microsoft/azuresql-devcontainers/tree/main/src/javascript-node) | A development environment for Node.js (JavaScript) and Azure SQL, enabling streamlined local development and testing. |
 | [Python](https://github.com/microsoft/azuresql-devcontainers/tree/main/src/python) | A development environment for Python and Azure SQL, enabling streamlined local development and testing. |
 
-> [!TIP]  
+> [!TIP]
 > Each template comes with a pre-configured Azure SQL Database, making it easy to start developing right away!
 
 ## Related content

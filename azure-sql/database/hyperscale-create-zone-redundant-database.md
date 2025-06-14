@@ -1,16 +1,18 @@
 ---
-title: Create a zone-redundant Hyperscale database
-description: Learn how to create a zone-redundant Hyperscale database. 
+title: Create a Zone-Redundant Hyperscale Database
+description: Learn how to create a zone-redundant Hyperscale database.
 author: dimitri-furman
 ms.author: dfurman
 ms.reviewer: wiassaf, mathoma
-ms.date: 10/12/2023
+ms.date: 06/13/2025
 ms.service: azure-sql-database
 ms.subservice: service-overview
 ms.topic: how-to
+monikerRange: "=azuresql || =azuresql-db"
 ---
 
 # Create a zone-redundant Hyperscale database
+
 [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
 This article teaches you to create a zone-redundant Hyperscale database by creating a new database, creating a geo-replica, or using database copy. 
@@ -44,7 +46,7 @@ az sql db create -g mygroup -s myserver -n mydb -e Hyperscale -f Gen5 –-ha-rep
 
 ## Create a database by creating a geo-replica
 
-To make an existing Hyperscale database zone redundant, use Azure PowerShell or the Azure CLI to create a zone redundant Hyperscale database using active geo-replication.  The geo-replica can be in the same or different region as the existing Hyperscale database.
+To make an existing Hyperscale database zone redundant, use Azure PowerShell or the Azure CLI to create a zone redundant Hyperscale database using active geo-replication. The geo-replica can be in the same or different region as the existing Hyperscale database.
 
 # [Azure PowerShell](#tab/azure-powershell)
 
@@ -70,7 +72,7 @@ az sql db replica create -g mygroup -s myserver -n originalDb --partner-server n
 
 ## Create a database by using database copy
 
-To make an existing Hyperscale database zone redundant, use Azure PowerShell or the Azure CLI to create a zone redundant Hyperscale database using database copy.  The database copy can be in the same or different region as the existing Hyperscale database.
+To make an existing Hyperscale database zone redundant, use Azure PowerShell or the Azure CLI to create a zone redundant Hyperscale database using database copy. The database copy can be in the same or different region as the existing Hyperscale database.
 
 # [Azure PowerShell](#tab/azure-powershell)
 
@@ -94,9 +96,7 @@ az sql db copy --dest-name "CopyOfMySampleDatabase" --dest-resource-group "myRes
 
 ---
 
-## Next steps
-
-Learn more about Hyperscale databases in the following articles:
+## Related content
 
 - [Quickstart: Create a Hyperscale database in Azure SQL Database](hyperscale-database-create-quickstart.md)
 - [Hyperscale service tier](service-tier-hyperscale.md)

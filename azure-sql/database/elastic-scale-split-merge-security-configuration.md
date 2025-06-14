@@ -1,28 +1,35 @@
 ---
-title: Split-merge security configuration
+title: Split-Merge Security Configuration
 description: Set up x409 certificates for encryption with the split/merge service for elastic scale.
-author: bgavrilovicMS
-ms.author: bgavrilovic
-ms.reviewer: wiassaf, mathoma
-ms.date: 12/18/2018
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: bgavrilovic, mathoma
+ms.date: 06/13/2025
 ms.service: azure-sql-database
 ms.subservice: scale-out
 ms.topic: conceptual
-ms.custom: sqldbrb=1
+ms.custom:
+  - sqldbrb=1
+monikerRange: "=azuresql || =azuresql-db "
 ---
 # Split-merge security configuration
+
 [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
-To use the Split/Merge service, you must correctly configure security. The service is part of the Elastic Scale feature of Azure SQL Database. For more information, see [Elastic Scale Split and Merge Service Tutorial](elastic-scale-configure-deploy-split-and-merge.md).
+To use the Split/Merge service, you must correctly configure security. The service is part of the Elastic Scale feature of Azure SQL Database. For more information, see [Deploy a split-merge service to move data between sharded databases](elastic-scale-configure-deploy-split-and-merge.md).
 
-## Configuring certificates
+<a id="configuring-certificates"></a>
+
+## Configure certificates
 
 Certificates are configured in two ways. 
 
 1. [To Configure the TLS/SSL Certificate](#to-configure-the-tlsssl-certificate)
-2. [To Configure Client Certificates](#to-configure-client-certificates) 
+1. [To Configure Client Certificates](#to-configure-client-certificates) 
 
-## To obtain certificates
+<a id="to-obtain-certificates"></a>
+
+## Obtain certificates
 
 Certificates can be obtained from public Certificate Authorities (CAs) or from the [Windows Certificate Service](/windows/win32/seccrypto/certificate-services). These are the preferred methods to obtain certificates.
 
@@ -30,92 +37,120 @@ If those options are not available, you can generate **self-signed certificates*
 
 ## Tools to generate certificates
 
-* [makecert.exe](/previous-versions/dotnet/netframework-4.0/bfsktky3(v=vs.100))
-* [pvk2pfx.exe](/windows-hardware/drivers/devtest/pvk2pfx)
+- [makecert.exe](/previous-versions/dotnet/netframework-4.0/bfsktky3(v=vs.100))
+- [pvk2pfx.exe](/windows-hardware/drivers/devtest/pvk2pfx)
 
-### To run the tools
+<a id="to-run-the-tools"></a>
 
-* From a Developer Command Prompt for Visual Studios, see [Visual Studio Command Prompt](/dotnet/framework/tools/developer-command-prompt-for-vs) 
-  
+### Run the tools
+
+- From a Developer Command Prompt for Visual Studios, see [Visual Studio Command Prompt](/dotnet/framework/tools/developer-command-prompt-for-vs) 
+
     If installed, go to:
-  
+
     ```console
     %ProgramFiles(x86)%\Windows Kits\x.y\bin\x86 
     ```
 
-* Get the WDK from [Windows 8.1: Download kits and tools](https://msdn.microsoft.com/windows/hardware/gg454513#drivers)
+- Get the [Windows Driver Kit (WDK)](/windows-hardware/drivers/download-the-wdk).
 
-## To configure the TLS/SSL certificate
+<a id="to-configure-the-tlsssl-certificate"></a>
+
+## Configure the TLS/SSL certificate
 
 A TLS/SSL certificate is required to encrypt the communication and authenticate the server. Choose the most applicable of the three scenarios below, and execute all its steps:
 
 ### Create a new self-signed certificate
 
 1. [Create a Self-Signed Certificate](#create-a-self-signed-certificate)
-2. [Create PFX file for Self-Signed TLS/SSL Certificate](#create-pfx-file-for-self-signed-tlsssl-certificate)
-3. [Upload TLS/SSL Certificate to Cloud Service](#upload-tlsssl-certificate-to-cloud-service)
-4. [Update TLS/SSL Certificate in Service Configuration File](#update-tlsssl-certificate-in-service-configuration-file)
-5. [Import TLS/SSL Certification Authority](#import-tlsssl-certification-authority)
-
-### To use an existing certificate from the certificate store
-1. [Export TLS/SSL Certificate From Certificate Store](#export-tlsssl-certificate-from-certificate-store)
-2. [Upload TLS/SSL Certificate to Cloud Service](#upload-tlsssl-certificate-to-cloud-service)
-3. [Update TLS/SSL Certificate in Service Configuration File](#update-tlsssl-certificate-in-service-configuration-file)
-
-### To use an existing certificate in a PFX file
+1. [Create PFX file for Self-Signed TLS/SSL Certificate](#create-pfx-file-for-self-signed-tlsssl-certificate)
 1. [Upload TLS/SSL Certificate to Cloud Service](#upload-tlsssl-certificate-to-cloud-service)
-2. [Update TLS/SSL Certificate in Service Configuration File](#update-tlsssl-certificate-in-service-configuration-file)
+1. [Update TLS/SSL Certificate in Service Configuration File](#update-tlsssl-certificate-in-service-configuration-file)
+1. [Import TLS/SSL Certification Authority](#import-tlsssl-certification-authority)
 
-## To configure client certificates
+<a id="to-use-an-existing-certificate-from-the-certificate-store"></a>
+
+### Use an existing certificate from the certificate store
+
+1. [Export TLS/SSL Certificate From Certificate Store](#export-tlsssl-certificate-from-certificate-store)
+1. [Upload TLS/SSL Certificate to Cloud Service](#upload-tlsssl-certificate-to-cloud-service)
+1. [Update TLS/SSL Certificate in Service Configuration File](#update-tlsssl-certificate-in-service-configuration-file)
+
+<a id="to-use-an-existing-certificate-in-a-pfx-file"></a>
+
+### Use an existing certificate in a PFX file
+
+1. [Upload TLS/SSL Certificate to Cloud Service](#upload-tlsssl-certificate-to-cloud-service)
+1. [Update TLS/SSL Certificate in Service Configuration File](#update-tlsssl-certificate-in-service-configuration-file)
+
+<a id="to-configure-client-certificates"></a>
+
+## Configure client certificates
+
 Client certificates are required in order to authenticate requests to the service. Choose the most applicable of the three scenarios below, and execute all its steps:
 
 ### Turn off client certificates
+
 1. [Turn Off Client Certificate-Based Authentication](#turn-off-client-certificate-based-authentication)
 
 ### Issue new self-signed client certificates
+
 1. [Create a Self-Signed Certification Authority](#create-a-self-signed-certification-authority)
-2. [Upload CA Certificate to Cloud Service](#upload-ca-certificate-to-cloud-service)
-3. [Update CA Certificate in Service Configuration File](#update-ca-certificate-in-service-configuration-file)
-4. [Issue Client Certificates](#issue-client-certificates)
-5. [Create PFX files for Client Certificates](#create-pfx-files-for-client-certificates)
-6. [Import Client Certificate](#import-client-certificate)
-7. [Copy Client Certificate Thumbprints](#copy-client-certificate-thumbprints)
-8. [Configure Allowed Clients in the Service Configuration File](#configure-allowed-clients-in-the-service-configuration-file)
+1. [Upload CA Certificate to Cloud Service](#upload-ca-certificate-to-cloud-service)
+1. [Update CA Certificate in Service Configuration File](#update-ca-certificate-in-service-configuration-file)
+1. [Issue Client Certificates](#issue-client-certificates)
+1. [Create PFX files for Client Certificates](#create-pfx-files-for-client-certificates)
+1. [Import Client Certificate](#import-client-certificate)
+1. [Copy Client Certificate Thumbprints](#copy-client-certificate-thumbprints)
+1. [Configure Allowed Clients in the Service Configuration File](#configure-allowed-clients-in-the-service-configuration-file)
 
 ### Use existing client certificates
+
 1. [Find CA Public Key](#find-ca-public-key)
-2. [Upload CA Certificate to Cloud Service](#upload-ca-certificate-to-cloud-service)
-3. [Update CA Certificate in Service Configuration File](#update-ca-certificate-in-service-configuration-file)
-4. [Copy Client Certificate Thumbprints](#copy-client-certificate-thumbprints)
-5. [Configure Allowed Clients in the Service Configuration File](#configure-allowed-clients-in-the-service-configuration-file)
-6. [Configure Client Certificate Revocation Check](#configure-client-certificate-revocation-check)
+1. [Upload CA Certificate to Cloud Service](#upload-ca-certificate-to-cloud-service)
+1. [Update CA Certificate in Service Configuration File](#update-ca-certificate-in-service-configuration-file)
+1. [Copy Client Certificate Thumbprints](#copy-client-certificate-thumbprints)
+1. [Configure Allowed Clients in the Service Configuration File](#configure-allowed-clients-in-the-service-configuration-file)
+1. [Configure Client Certificate Revocation Check](#configure-client-certificate-revocation-check)
 
 ## Allowed IP addresses
+
 Access to the service endpoints can be restricted to specific ranges of IP addresses.
 
-## To configure encryption for the store
+<a id="to-configure-encryption-for-the-store"></a>
+
+## Configure encryption for the store
+
 A certificate is required to encrypt the credentials that are stored in the metadata store. Choose the most applicable of the three scenarios below, and execute all its steps:
 
 ### Use a new self-signed certificate
+
 1. [Create a Self-Signed Certificate](#create-a-self-signed-certificate)
-2. [Create PFX file for Self-Signed Encryption Certificate](#create-pfx-file-for-self-signed-tlsssl-certificate)
-3. [Upload Encryption Certificate to Cloud Service](#upload-encryption-certificate-to-cloud-service)
-4. [Update Encryption Certificate in Service Configuration File](#update-encryption-certificate-in-service-configuration-file)
+1. [Create PFX file for Self-Signed Encryption Certificate](#create-pfx-file-for-self-signed-tlsssl-certificate)
+1. [Upload Encryption Certificate to Cloud Service](#upload-encryption-certificate-to-cloud-service)
+1. [Update Encryption Certificate in Service Configuration File](#update-encryption-certificate-in-service-configuration-file)
 
 ### Use an existing certificate from the certificate store
+
 1. [Export Encryption Certificate From Certificate Store](#export-encryption-certificate-from-certificate-store)
-2. [Upload Encryption Certificate to Cloud Service](#upload-encryption-certificate-to-cloud-service)
-3. [Update Encryption Certificate in Service Configuration File](#update-encryption-certificate-in-service-configuration-file)
+1. [Upload Encryption Certificate to Cloud Service](#upload-encryption-certificate-to-cloud-service)
+1. [Update Encryption Certificate in Service Configuration File](#update-encryption-certificate-in-service-configuration-file)
 
 ### Use an existing certificate in a PFX file
+
 1. [Upload Encryption Certificate to Cloud Service](#upload-encryption-certificate-to-cloud-service)
-2. [Update Encryption Certificate in Service Configuration File](#update-encryption-certificate-in-service-configuration-file)
+1. [Update Encryption Certificate in Service Configuration File](#update-encryption-certificate-in-service-configuration-file)
 
 ## The default configuration
-The default configuration denies all access to the HTTP endpoint. This is the recommended setting, since the requests to these endpoints may carry sensitive information like database credentials.
-The default configuration allows all access to the HTTPS endpoint. This setting may be restricted further.
 
-### Changing the Configuration
+The default configuration denies all access to the HTTP endpoint. This is the recommended setting, since the requests to these endpoints might carry sensitive information like database credentials.
+
+The default configuration allows all access to the HTTPS endpoint. This setting can be restricted further.
+
+<a id="changing-the-configuration"></a>
+
+### Change the Configuration
+
 The group of access control rules that apply to and endpoint are configured in the **\<EndpointAcls>** section in the **service configuration file**.
 
 ```xml
@@ -141,17 +176,21 @@ For example, to allow only IPs in the range 100.100.0.0 to 100.100.255.255 to ac
 ```
 
 ## Denial of service prevention
+
 There are two different mechanisms supported to detect and prevent Denial of Service attacks:
 
-* Restrict number of concurrent requests per remote host (off by default)
-* Restrict rate of access per remote host (on by default)
+- Restrict number of concurrent requests per remote host (off by default)
+- Restrict rate of access per remote host (on by default)
 
 These are based on the features further documented in Dynamic IP Security in IIS. When changing this configuration beware of the following factors:
 
-* The behavior of proxies and Network Address Translation devices over the remote host information
-* Each request to any resource in the web role is considered (for example, loading scripts, images, etc)
+- The behavior of proxies and Network Address Translation devices over the remote host information
+- Each request to any resource in the web role is considered (for example, loading scripts, images, etc)
 
-## Restricting number of concurrent accesses
+<a id="restricting-number-of-concurrent-accesses"></a>
+
+## Restrict number of concurrent accesses
+
 The settings that configure this behavior are:
 
 ```xml
@@ -161,7 +200,10 @@ The settings that configure this behavior are:
 
 Change DynamicIpRestrictionDenyByConcurrentRequests to true to enable this protection.
 
-## Restricting rate of access
+<a id="restricting-rate-of-access"></a>
+
+## Restrict rate of access
+
 The settings that configure this behavior are:
 
 ```xml
@@ -170,7 +212,10 @@ The settings that configure this behavior are:
 <Setting name="DynamicIpRestrictionRequestIntervalInMilliseconds" value="2000" />
 ```
 
-## Configuring the response to a denied request
+<a id="configuring-the-response-to-a-denied-request"></a>
+
+## Configure the response to a denied request
+
 The following setting configures the response to a denied request:
 
 ```xml
@@ -180,12 +225,14 @@ The following setting configures the response to a denied request:
 Refer to the documentation for Dynamic IP Security in IIS for other supported values.
 
 ## Operations for configuring service certificates
-This topic is for reference only. Follow the configuration steps outlined in:
 
-* Configure the TLS/SSL certificate
-* Configure client certificates
+This section is for reference only. Follow the configuration steps outlined in:
+
+- Configure the TLS/SSL certificate
+- Configure client certificates
 
 ## Create a self-signed certificate
+
 Execute:
 
 ```console
@@ -199,11 +246,14 @@ makecert ^
 
 To customize:
 
-* -n with the service URL. Wildcards ("CN=*.cloudapp.net") and alternative names ("CN=myservice1.cloudapp.net, CN=myservice2.cloudapp.net") are supported.
-* -e with the certificate expiration date
-  Create a strong password and specify it when prompted.
+- `-n` with the service URL
+    - Wildcards (`CN=*.cloudapp.net`) and alternative names (`CN=myservice1.cloudapp.net, CN=myservice2.cloudapp.net`) are supported.
+- `-e` with the certificate expiration date
+
+Create a strong password and specify it when prompted.
 
 ## Create PFX file for self-signed TLS/SSL certificate
+
 Execute:
 
 ```console
@@ -212,23 +262,26 @@ pvk2pfx -pvk MySSL.pvk -spc MySSL.cer
 
 Enter password and then export certificate with these options:
 
-* Yes, export the private key
-* Export all extended properties
+- Yes, export the private key
+- Export all extended properties
 
 ## Export TLS/SSL certificate from certificate store
-* Find certificate
-* Click Actions -> All tasks -> Export…
-* Export certificate into a .PFX file with these options:
+
+- Find certificate
+- Select **Actions** -> **All tasks** -> **Export...**
+- Export certificate into a .PFX file with these options:
   * Yes, export the private key
   * Include all certificates in the certification path if possible
     *Export all extended properties
 
 ## Upload TLS/SSL certificate to cloud service
+
 Upload certificate with the existing or generated .PFX file with the TLS key pair:
 
-* Enter the password protecting the private key information
+- Enter the password protecting the private key information
 
 ## Update TLS/SSL certificate in service configuration file
+
 Update the thumbprint value of the following setting in the service configuration file with the thumbprint of the certificate uploaded to the cloud service:
 
 ```console
@@ -236,13 +289,15 @@ Update the thumbprint value of the following setting in the service configuratio
 ```
 
 ## Import TLS/SSL certification authority
+
 Follow these steps in all account/machine that will communicate with the service:
 
-* Double-click the .CER file in Windows Explorer
-* In the Certificate dialog, click Install Certificate…
-* Import certificate into the Trusted Root Certification Authorities store
+1. Double-click the .CER file in Windows Explorer.
+1. In the Certificate dialog, select **Install Certificate...**.
+1. Import certificate into the Trusted Root Certification Authorities store.
 
 ## Turn off client certificate-based authentication
+
 Only client certificate-based authentication is supported and disabling it will allow for public access to the service endpoints, unless other mechanisms are in place (for example, Microsoft Azure Virtual Network).
 
 Change these settings to false in the service configuration file to turn off the feature:
@@ -259,6 +314,7 @@ Then, copy the same thumbprint as the TLS/SSL certificate in the CA certificate 
 ```
 
 ## Create a self-signed certification authority
+
 Execute the following steps to create a self-signed certificate to act as a Certification Authority:
 
 ```console
@@ -273,32 +329,35 @@ makecert ^
 
 To customize it
 
-* -e with the certification expiration date
+- `-e` with the certification expiration date
 
 ## Find CA public key
+
 All client certificates must have been issued by a Certification Authority trusted by the service. Find the public key to the Certification Authority that issued the client certificates that are going to be used for authentication in order to upload it to the cloud service.
 
 If the file with the public key is not available, export it from the certificate store:
 
-* Find certificate
+- Find certificate
   * Search for a client certificate issued by the same Certification Authority
-* Double-click the certificate.
-* Select the Certification Path tab in the Certificate dialog.
-* Double-click the CA entry in the path.
-* Take notes of the certificate properties.
-* Close the **Certificate** dialog.
-* Find certificate
+- Double-click the certificate.
+- Select the Certification Path tab in the Certificate dialog.
+- Double-click the CA entry in the path.
+- Take notes of the certificate properties.
+- Close the **Certificate** dialog.
+- Find certificate
   * Search for the CA noted above.
-* Click Actions -> All tasks -> Export…
-* Export certificate into a .CER with these options:
+- Select **Actions** -> **All tasks** -> **Export...**
+- Export certificate into a .CER with these options:
   * **No, do not export the private key**
   * Include all certificates in the certification path if possible.
   * Export all extended properties.
 
 ## Upload CA certificate to cloud service
+
 Upload certificate with the existing or generated .CER file with the CA public key.
 
 ## Update CA certificate in service configuration file
+
 Update the thumbprint value of the following setting in the service configuration file with the thumbprint of the certificate uploaded to the cloud service:
 
 ```xml
@@ -312,6 +371,7 @@ Update the value of the following setting with the same thumbprint:
 ```
 
 ## Issue client certificates
+
 Each individual authorized to access the service should have a client certificate issued for their exclusive use and should choose their own strong password to protect its private key. 
 
 The following steps must be executed in the same machine where the self-signed CA certificate was generated and stored:
@@ -328,13 +388,14 @@ makecert ^
 
 Customizing:
 
-* -n with an ID for to the client that will be authenticated with this certificate
-* -e with the certificate expiration date
-* MyID.pvk and MyID.cer with unique filenames for this client certificate
+- `-n` with an ID for to the client that will be authenticated with this certificate
+- `-e` with the certificate expiration date
+- `MyID.pvk` and `MyID.cer` with unique filenames for this client certificate
 
 This command will prompt for a password to be created and then used once. Use a strong password.
 
 ## Create PFX files for client certificates
+
 For each generated client certificate, execute:
 
 ```console
@@ -349,31 +410,34 @@ MyID.pvk and MyID.cer with the filename for the client certificate
 
 Enter password and then export certificate with these options:
 
-* Yes, export the private key
-* Export all extended properties
-* The individual to whom this certificate is being issued should choose the export password
+- Yes, export the private key
+- Export all extended properties
+- The individual to whom this certificate is being issued should choose the export password
 
 ## Import client certificate
+
 Each individual for whom a client certificate has been issued should import the key pair in the machines they will use to communicate with the service:
 
-* Double-click the .PFX file in Windows Explorer
-* Import certificate into the Personal store with at least this option:
+- Double-click the .PFX file in Windows Explorer
+- Import certificate into the Personal store with at least this option:
   * Include all extended properties checked
 
 ## Copy client certificate thumbprints
+
 Each individual for whom a client certificate has been issued must follow these steps in order to obtain the thumbprint of their certificate, which will be added to the service configuration file:
 
-* Run certmgr.exe
-* Select the Personal tab
-* Double-click the client certificate to be used for authentication
-* In the Certificate dialog that opens, select the Details tab
-* Make sure Show is displaying All
-* Select the field named Thumbprint in the list
-* Copy the value of the thumbprint
+- Run certmgr.exe
+- Select the Personal tab
+- Double-click the client certificate to be used for authentication
+- In the Certificate dialog that opens, select the Details tab
+- Make sure Show is displaying All
+- Select the field named Thumbprint in the list
+- Copy the value of the thumbprint
   * Delete non-visible Unicode characters in front of the first digit
   * Delete all spaces
 
 ## Configure Allowed clients in the service configuration file
+
 Update the value of the following setting in the service configuration file with a comma-separated list of the thumbprints of the client certificates allowed access to the service:
 
 ```xml
@@ -381,6 +445,7 @@ Update the value of the following setting in the service configuration file with
 ```
 
 ## Configure client certificate revocation check
+
 The default setting does not check with the Certification Authority for client certificate revocation status. To turn on the checks, if the Certification Authority that issued the client certificates supports such checks, change the following setting with one of the values defined in the X509RevocationMode Enumeration:
 
 ```xml
@@ -388,6 +453,7 @@ The default setting does not check with the Certification Authority for client c
 ```
 
 ## Create PFX file for self-signed encryption certificates
+
 For an encryption certificate, execute:
 
 ```console
@@ -402,24 +468,27 @@ MyID.pvk and MyID.cer with the filename for the encryption certificate
 
 Enter password and then export certificate with these options:
 
-* Yes, export the private key
-* Export all extended properties
-* You will need the password when uploading the certificate to the cloud service.
+- Yes, export the private key
+- Export all extended properties
+- You will need the password when uploading the certificate to the cloud service.
 
 ## Export encryption certificate from certificate store
-* Find certificate
-* Click Actions -> All tasks -> Export…
-* Export certificate into a .PFX file with these options: 
+
+1. Find certificate.
+1. Select **Actions** -> **All tasks** -> **Export...**.
+1. Export certificate into a .PFX file with these options: 
   * Yes, export the private key
   * Include all certificates in the certification path if possible 
-* Export all extended properties
+1. Export all extended properties
 
 ## Upload encryption certificate to cloud service
+
 Upload certificate with the existing or generated .PFX file with the encryption key pair:
 
-* Enter the password protecting the private key information
+- Enter the password protecting the private key information
 
 ## Update encryption certificate in service configuration file
+
 Update the thumbprint value of the following settings in the service configuration file with the thumbprint of the certificate uploaded to the cloud service:
 
 ```xml
@@ -427,76 +496,82 @@ Update the thumbprint value of the following settings in the service configurati
 ```
 
 ## Common certificate operations
-* Configure the TLS/SSL certificate
-* Configure client certificates
+
+- Configure the TLS/SSL certificate
+- Configure client certificates
 
 ## Find certificate
+
 Follow these steps:
 
-1. Run mmc.exe.
-2. File -> Add/Remove Snap-in…
-3. Select **Certificates**.
-4. Click **Add**.
-5. Choose the certificate store location.
-6. Click **Finish**.
-7. Click **OK**.
-8. Expand **Certificates**.
-9. Expand the certificate store node.
-10. Expand the Certificate child node.
-11. Select a certificate in the list.
+1. In Windows, run `mmc.exe`.
+1. **File** -> **Add/Remove Snap-in...**
+1. Select **Certificates**.
+1. Select **Add**.
+1. Choose the certificate store location.
+1. Select **Finish**.
+1. Select **OK**.
+1. Expand **Certificates**.
+1. Expand the certificate store node.
+1. Expand the Certificate child node.
+1. Select a certificate in the list.
 
 ## Export certificate
+
 In the **Certificate Export Wizard**:
 
-1. Click **Next**.
-2. Select **Yes**, then **Export the private key**.
-3. Click **Next**.
-4. Select the desired output file format.
-5. Check the desired options.
-6. Check **Password**.
-7. Enter a strong password and confirm it.
-8. Click **Next**.
-9. Type or browse a filename where to store the certificate (use a .PFX extension).
-10. Click **Next**.
-11. Click **Finish**.
-12. Click **OK**.
+1. Select **Next**.
+1. Select **Yes**, then **Export the private key**.
+1. Select **Next**.
+1. Select the desired output file format.
+1. Check the desired options.
+1. Check **Password**.
+1. Enter a strong password and confirm it.
+1. Select **Next**.
+1. Type or browse a filename where to store the certificate (use a .PFX extension).
+1. Select **Next**.
+1. Select **Finish**.
+1. Select **OK**.
 
 ## Import certificate
+
 In the Certificate Import Wizard:
 
 1. Select the store location.
-   
+
    * Select **Current User** if only processes running under current user will access the service
    * Select **Local Machine** if other processes in this computer will access the service
-2. Click **Next**.
-3. If importing from a file, confirm the file path.
-4. If importing a .PFX file:
+1. Select **Next**.
+1. If importing from a file, confirm the file path.
+1. If importing a .PFX file:
    1. Enter the password protecting the private key
-   2. Select import options
-5. Select "Place" certificates in the following store
-6. Click **Browse**.
-7. Select the desired store.
-8. Click **Finish**.
-   
-   * If the Trusted Root Certification Authority store was chosen, click **Yes**.
-9. Click **OK** on all dialog windows.
+   1. Select import options
+1. Select "Place" certificates in the following store
+1. Select **Browse**.
+1. Select the desired store.
+1. Select **Finish**.
+
+   * If the Trusted Root Certification Authority store was chosen, select **Yes**.
+1. Select **OK** on all dialog windows.
 
 ## Upload certificate
+
 In the [Azure portal](https://portal.azure.com/)
 
 1. Select **Cloud Services**.
-2. Select the cloud service.
-3. On the top menu, click **Certificates**.
-4. On the bottom bar, click **Upload**.
-5. Select the certificate file.
-6. If it is a .PFX file, enter the password for the private key.
-7. Once completed, copy the certificate thumbprint from the new entry in the list.
+1. Select the cloud service.
+1. On the top menu, select **Certificates**.
+1. On the bottom bar, select **Upload**.
+1. Select the certificate file.
+1. If it is a .PFX file, enter the password for the private key.
+1. Once completed, copy the certificate thumbprint from the new entry in the list.
 
 ## Other security considerations
+
 The TLS settings described in this document encrypt communication between the service and its clients when the HTTPS endpoint is used. This is important since credentials for database access and potentially other sensitive information are contained in the communication. Note, however, that the service persists internal status, including credentials, in its internal tables in the database in Azure SQL Database that you have provided for metadata storage in your Microsoft Azure subscription. That database was defined as part of the following setting in your service configuration file (.CSCFG file): 
 
 ```xml
-<Setting name="ElasticScaleMetadata" value="Server=…" />
+<Setting name="ElasticScaleMetadata" value="Server=..." />
 ```
 
 Credentials stored in this database are encrypted. However, as a best practice, ensure that both web and worker roles of your service deployments are kept up to date and secure as they both have access to the metadata database and the certificate used for encryption and decryption of stored credentials. 

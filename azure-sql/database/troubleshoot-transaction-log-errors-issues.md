@@ -1,11 +1,11 @@
 ---
-title: Troubleshoot transaction log issues
+title: Troubleshoot Transaction Log Issues
 titleSuffix: Azure SQL Database
 description: Provides steps to troubleshoot transaction log issues in Azure SQL Database.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: wiassaf, mathoma
-ms.date: 09/08/2023
+ms.reviewer: mathoma
+ms.date: 06/13/2025
 ms.service: azure-sql-database
 ms.subservice: development
 ms.topic: troubleshooting
@@ -13,16 +13,17 @@ monikerRange: "=azuresql-db"
 ---
 
 # Troubleshoot transaction log errors with Azure SQL Database
+
 [!INCLUDE [appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
 > [!div class="op_single_selector"]
 > * [Azure SQL Database](troubleshoot-transaction-log-errors-issues.md?view=azuresql-db&preserve-view=true)
 > * [Azure SQL Managed Instance](../managed-instance/troubleshoot-transaction-log-errors-issues.md?view=azuresql-mi&preserve-view=true)
 
-You may see errors 9002 or 40552 when the transaction log is full and cannot accept new transactions. These errors occur when the database transaction log, managed by Azure SQL Database, exceeds thresholds for space and cannot continue to accept transactions. These errors are similar to issues with a full transaction log in SQL Server, but have different resolutions in SQL Server, Azure SQL Database, and Azure SQL Managed Instance.
+You might see errors 9002 or 40552 when the transaction log is full and cannot accept new transactions. These errors occur when the database transaction log, managed by Azure SQL Database, exceeds thresholds for space and cannot continue to accept transactions. These errors are similar to issues with a full transaction log in SQL Server, but have different resolutions in SQL Server, Azure SQL Database, and Azure SQL Managed Instance.
 
 > [!NOTE]
-> **This article is focused on Azure SQL Database.** Azure SQL Database is based on the latest stable version of the Microsoft SQL Server database engine, so much of the content is similar, though troubleshooting options and tools may differ from SQL Server.
+> **This article is focused on Azure SQL Database.** Azure SQL Database is based on the latest stable version of the Microsoft SQL Server database engine, so much of the content is similar, though troubleshooting options and tools might differ from SQL Server.
 >
 > For more on troubleshooting a transaction log in Azure SQL Managed Instance, see [Troubleshoot transaction log errors with Azure SQL Managed Instance](../managed-instance/troubleshoot-transaction-log-errors-issues.md?view=azuresql-mi&preserve-view=true).
 >
@@ -53,17 +54,17 @@ SELECT [name], log_reuse_wait_desc FROM sys.databases;
 
 For Azure SQL Database, it is recommended to connect to a specific user database, rather than the `master` database, to execute this query.
 
-The following values of `log_reuse_wait_desc` in `sys.databases` may indicate the reason why the database's transaction log truncation is being prevented:
+The following values of `log_reuse_wait_desc` in `sys.databases` can indicate the reason why the database's transaction log truncation is being prevented:
 
 | log_reuse_wait_desc | Diagnosis | Response required |
 |--|--|--|
-| **NOTHING** | Typical state. There is nothing blocking the log from truncating. | No. |
-| **CHECKPOINT** | A checkpoint is needed for log truncation. Rare. | No response required unless sustained. If sustained, file a support request with [Azure Support](https://portal.azure.com/#create/Microsoft.Support). | 
-| **LOG BACKUP** | A log backup is required. | No response required unless sustained. If sustained, file a support request with [Azure Support](https://portal.azure.com/#create/Microsoft.Support). | 
-| **ACTIVE BACKUP OR RESTORE** | A database backup is in progress. | No response required unless sustained. If sustained, file a support request with [Azure Support](https://portal.azure.com/#create/Microsoft.Support). | 
-| **ACTIVE TRANSACTION** | An ongoing transaction is preventing log truncation. | The log file cannot be truncated due to active and/or uncommitted transactions. See next section.|
-| **REPLICATION** | In Azure SQL Database, this may occur if [change data capture (CDC)](/sql/relational-databases/track-changes/about-change-data-capture-sql-server) is enabled. | Query [sys.dm_cdc_errors](/sql/relational-databases/system-dynamic-management-views/change-data-capture-sys-dm-cdc-errors) and resolve errors. If unresolvable, file a support request with [Azure Support](https://portal.azure.com/#create/Microsoft.Support).|
-| **AVAILABILITY_REPLICA** | Synchronization to the secondary replica is in progress. | No response required unless sustained. If sustained, file a support request with [Azure Support](https://portal.azure.com/#create/Microsoft.Support). |
+| `NOTHING` | Typical state. There is nothing blocking the log from truncating. | No. |
+| `CHECKPOINT` | A checkpoint is needed for log truncation. Rare. | No response required unless sustained. If sustained, file a support request with [Azure Support](https://portal.azure.com/#create/Microsoft.Support). | 
+| `LOG BACKUP` | A log backup is required. | No response required unless sustained. If sustained, file a support request with [Azure Support](https://portal.azure.com/#create/Microsoft.Support). | 
+| `ACTIVE BACKUP OR RESTORE` | A database backup is in progress. | No response required unless sustained. If sustained, file a support request with [Azure Support](https://portal.azure.com/#create/Microsoft.Support). | 
+| `ACTIVE TRANSACTION` | An ongoing transaction is preventing log truncation. | The log file cannot be truncated due to active and/or uncommitted transactions. See next section.|
+| `REPLICATION` | In Azure SQL Database, this might occur if [change data capture (CDC)](/sql/relational-databases/track-changes/about-change-data-capture-sql-server) is enabled. | Query [sys.dm_cdc_errors](/sql/relational-databases/system-dynamic-management-views/change-data-capture-sys-dm-cdc-errors) and resolve errors. If unresolvable, file a support request with [Azure Support](https://portal.azure.com/#create/Microsoft.Support).|
+| `AVAILABILITY_REPLICA` | Synchronization to the secondary replica is in progress. | No response required unless sustained. If sustained, file a support request with [Azure Support](https://portal.azure.com/#create/Microsoft.Support). |
 
 ### Log truncation prevented by an active transaction
 
@@ -127,7 +128,7 @@ OUTER APPLY sys.dm_exec_sql_text (r.sql_handle) AS est;
 
 ### File management to free more space
 
-If the transaction log is prevented from truncating in Azure SQL Database elastic pools, freeing space for the elastic pool may be part of the solution. However, resolving the root the condition blocking transaction log file truncation is key. In some cases, temporarily creating more disk space allows long-running transactions to complete, removing the condition blocking the transaction log file from truncating with a normal transaction log backup. However, freeing up space may provide only temporary relief until the transaction log grows again.
+If the transaction log is prevented from truncating in Azure SQL Database elastic pools, freeing space for the elastic pool can be part of the solution. However, resolving the root the condition blocking transaction log file truncation is key. In some cases, temporarily creating more disk space allows long-running transactions to complete, removing the condition blocking the transaction log file from truncating with a normal transaction log backup. However, freeing up space might provide only temporary relief until the transaction log grows again.
 
 For more information on managing the file space of databases and elastic pools, see [Manage file space for databases in Azure SQL Database](file-space-manage.md?view=azuresql-db&preserve-view=true).
 
@@ -145,9 +146,9 @@ To resolve this issue, try the following methods:
 > [!NOTE]
 > For more information on other resource governance errors, see [Resource governance errors](troubleshoot-common-errors-issues.md?view=azuresql-db&preserve-view=true#resource-governance-errors).
 
-## Next steps
+## Related content
 
 - [Understand and resolve Azure SQL Database blocking problems](understand-resolve-blocking.md?view=azuresql-db&preserve-view=true#gather-blocking-information)
 - [Troubleshooting connectivity issues and other errors with Azure SQL Database and Azure SQL Managed Instance](troubleshoot-common-errors-issues.md?view=azuresql-db&preserve-view=true)
 - [Troubleshoot transient connection errors in Azure SQL Database and SQL Managed Instance](troubleshoot-common-connectivity-issues.md?view=azuresql-db&preserve-view=true)
-- Video: [Data Loading Best Practices on Azure SQL Database](/shows/data-exposed/data-loading-best-practices-on-azure-sql-database?WT.mc_id=dataexposed-c9-niner)
+- [Video: Data Loading Best Practices on Azure SQL Database](/shows/data-exposed/data-loading-best-practices-on-azure-sql-database?WT.mc_id=dataexposed-c9-niner)

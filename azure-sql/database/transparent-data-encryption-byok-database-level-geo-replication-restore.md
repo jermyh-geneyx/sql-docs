@@ -1,16 +1,18 @@
 ---
-title: Configure geo replication and backup restore for transparent data encryption (TDE) with database level customer-managed keys
+title: "Configure Geo Replication and Backup Restore for Transparent Data Encryption (TDE) with Database Level Customer-Managed Keys"
 titleSuffix: Azure SQL Database
 description: A how-to guide for configuring geo replication for transparent data encryption (TDE) with database level customer-managed keys for Azure SQL Database.
 author: strehan1993
 ms.author: strehan
 ms.reviewer: vanto, mathoma
-ms.date: 09/29/2023
+ms.date: 06/13/2025
 ms.service: azure-sql-database
 ms.subservice: security
-ms.custom: devx-track-azurecli, devx-track-azurepowershell
 ms.topic: how-to
-monikerRange: "= azuresql || = azuresql-db"
+ms.custom:
+  - devx-track-azurecli
+  - devx-track-azurepowershell
+monikerRange: "=azuresql || =azuresql-db"
 ---
 
 # Configure geo replication and backup restore for transparent data encryption with database level customer-managed keys
@@ -32,7 +34,7 @@ In this guide, we go through the steps to configure geo replication and backup r
 > The same guide can be applied to configure database level customer-managed keys in a different tenant by including the federated client ID parameter. For more information, see [Identity and key management for TDE with database level customer-managed keys](transparent-data-encryption-byok-database-level-basic-actions.md).
 
 > [!IMPORTANT]
-> After the database is created or restore, the **Transparent Data Encryption** menu in the **Azure portal** will show the new database with the same settings as the source database, but may have keys missing. In all cases where a new database is created from a source database, the number of keys displayed for a target database in the Azure portal **Additional Database Keys** list could be less than the number of keys displayed for a source database.  This is because the number of displayed keys depends on individual feature requirements used to create a target database. To list all keys available for a newly create database, use the available APIs in [View the database level customer-managed key settings on an Azure SQL Database](transparent-data-encryption-byok-database-level-basic-actions.md#view-the-database-level-customer-managed-key-settings-on-an-azure-sql-database).
+> After the database is created or restore, the **Transparent Data Encryption** menu in the **Azure portal** will show the new database with the same settings as the source database, but might have keys missing. In all cases where a new database is created from a source database, the number of keys displayed for a target database in the Azure portal **Additional Database Keys** list could be less than the number of keys displayed for a source database. This is because the number of displayed keys depends on individual feature requirements used to create a target database. To list all keys available for a newly create database, use the available APIs in [View the database level customer-managed key settings on an Azure SQL Database](transparent-data-encryption-byok-database-level-basic-actions.md#view-the-database-level-customer-managed-key-settings-on-an-azure-sql-database).
 
 ## Create an Azure SQL Database with database level customer-managed keys as a secondary or copy
 
@@ -93,7 +95,7 @@ For information on installing the current release of Azure CLI, see [Install the
 
     ```azurecli
     # Create a secondary replica with Active Geo Replication with the same name as the primary database
-    
+
     az sql db replica create -g $resourceGroup -s $serverName -n $databaseName --partner-server $secondaryServer --partner-database $secondaryDatabase --partner-resource-group $secondaryResourceGroup -i --encryption-protector $encryptionProtector --user-assigned-identity-id $umi --keys $keys
     ```
 
@@ -123,7 +125,7 @@ For Az PowerShell module installation instructions, see [Install Azure PowerShel
     ```powershell
     # Create a secondary replica with Active Geo Replication with the same name as the primary database
     $database = Get-AzSqlDatabase -ResourceGroupName <ResourceGroupName> -ServerName <ServerName> -DatabaseName <DatabaseName> -ExpandKeyList -KeysFilter "current"
-    
+
     $database | New-AzSqlDatabaseSecondary -PartnerResourceGroupName <SecondaryResourceGroupName> -PartnerServerName <SecondaryServerName> -AllowConnections "All" -AssignIdentity -UserAssignedIdentityId <UserAssignedIdentityId> -EncryptionProtector <CustomerManagedKeyId> -FederatedClientId <FederatedClientId>
     -KeyList $database.Keys.Keys
     ```
@@ -142,7 +144,7 @@ New-AzSqlDatabaseCopy -CopyDatabaseName <CopyDatabaseName> -CopyResourceGroupNam
 
 Here's an example of an ARM template that creates a secondary replica and copy of an Azure SQL Database configured with a user-assigned managed identity and customer-managed TDE at the database level.
 
-For more information and ARM templates, see [Azure Resource Manager templates for Azure SQL Database & SQL Managed Instance](arm-templates-content-guide.md).
+For more information and ARM templates, see [Azure Resource Manager templates for Azure SQL Database](arm-templates-content-guide.md).
 
 Use a [Custom deployment in the Azure portal](https://portal.azure.com/#create/Microsoft.Template), and **Build your own template in the editor**. Next, **Save** the configuration once you pasted in the example.
 
@@ -220,7 +222,7 @@ Use a [Custom deployment in the Azure portal](https://portal.azure.com/#create/M
     ```
 
     An example of the `encryption_protector` and `keys_to_add` parameter is:
-    
+
     ```json
         "keys_to_add": {
           "value": {
@@ -307,7 +309,7 @@ This section walks you through the steps to restore an Azure SQL Database config
 
 ### Point in time restore
 
-The following section describes how to restore a database configured with customer-managed keys at the database level to a given point in time. To learn more about backup recovery for SQL Database, see [Recover a database in SQL Database](recovery-using-backups.md).
+The following section describes how to restore a database configured with customer-managed keys at the database level to a given point in time. To learn more about backup recovery for SQL Database, see [Restore a database from a backup in Azure SQL Database](recovery-using-backups.md).
 
 # [Portal](#tab/azure-portal2)
 
@@ -361,7 +363,7 @@ For Az PowerShell module installation instructions, see [Install Azure PowerShel
 
     ```powershell
     $database = Get-AzSqlDatabase -ResourceGroupName <ResourceGroupName> -ServerName <ServerName> -DatabaseName <DatabaseName> -ExpandKeyList -KeysFilter <Timestamp>
-    
+
     # Create a restored database
     Restore-AzSqlDatabase -FromPointInTimeBackup -PointInTime <Timestamp> -ResourceId '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}' -ResourceGroupName <ResourceGroupName> -ServerName <ServerName> -TargetDatabaseName <TargetDatabaseName> -KeyList $database.Keys.Keys -EncryptionProtector <EncryptionProtector> -UserAssignedIdentityId <UserAssignedIdentityId> -AssignIdentity
     ```
@@ -370,7 +372,7 @@ For Az PowerShell module installation instructions, see [Install Azure PowerShel
 
 ### Dropped database restore
 
-The following section describes how to restore a deleted database that was configured with customer-managed keys at the database level. To learn more about backup recovery for SQL Database, see [Recover a database in SQL Database](recovery-using-backups.md).
+The following section describes how to restore a deleted database that was configured with customer-managed keys at the database level. To learn more about backup recovery for SQL Database, see [Restore a database from a backup in Azure SQL Database](recovery-using-backups.md).
 
 # [Portal](#tab/azure-portal2)
 
@@ -430,7 +432,7 @@ For Az PowerShell module installation instructions, see [Install Azure PowerShel
 
     ```powershell
     $database = Get-AzSqlDeletedDatabaseBackup -ResourceGroupName <ResourceGroupName> -ServerName <ServerName> -DatabaseId "dbName,133201549661600000" -ExpandKeyList -DeletionDate <DeletionDate> -DatabaseName <databaseName>
-    
+
     # Create a restored database
     Restore-AzSqlDatabase -FromDeletedDatabaseBackup -DeletionDate <Timestamp> -ResourceId '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/restorableDroppedDatabases/{databaseName}' -ResourceGroupName <ResourceGroupName> -ServerName <ServerName> -TargetDatabaseName <TargetDatabaseName> -KeyList $database.Keys.Keys -EncryptionProtector <EncryptionProtector> -UserAssignedIdentityId <UserAssignedIdentityId> -AssignIdentity
     ```
@@ -439,7 +441,7 @@ For Az PowerShell module installation instructions, see [Install Azure PowerShel
 
 ### Geo restore
 
-The following section describes how to restore a geo-replicated backup of database that is configured with customer-managed keys at the database level. To learn more about backup recovery for SQL Database, see [Recover a database in SQL Database](recovery-using-backups.md).
+The following section describes how to restore a geo-replicated backup of database that is configured with customer-managed keys at the database level. To learn more about backup recovery for SQL Database, see [Restore a database from a backup in Azure SQL Database](recovery-using-backups.md).
 
 # [Portal](#tab/azure-portal2)
 
@@ -449,7 +451,7 @@ The following section describes how to restore a geo-replicated backup of databa
 
 1. The **Create SQL Database** menu appears. Fill **Basic** and **Networking** tabs for your new database. In **Additional settings**, select **Backup** for the **Use existing data** section, and select a geo-replicated backup.
 
-   :::image type="content" source="media/transparent-data-encryption-byok-database-level-geo-replication-restore\create-database-from-backup.png" alt-text="Screenshot of the Azure portal create database menu selecting a backup to use for the database.":::
+   :::image type="content" source="media/transparent-data-encryption-byok-database-level-geo-replication-restore/create-database-from-backup.png" alt-text="Screenshot of the Azure portal create database menu selecting a backup to use for the database.":::
 
 1. Go to the **Security** tab. In the **Transparent Data Encryption Key Management** section, select **Configure transparent data encryption**.
 
@@ -496,7 +498,7 @@ For Az PowerShell module installation instructions, see [Install Azure PowerShel
 
     ```powershell
     $database = Get-AzSqlDatabaseGeoBackup -ResourceGroupName <ResourceGroupName> -ServerName <ServerName> -DatabaseName <databaseName> -ExpandKeyList
-    
+
     # Create a restored database
     Restore-AzSqlDatabase -FromGeoBackup -ResourceId "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recoverableDatabases/{databaseName}" -ResourceGroupName <ResourceGroupName> -ServerName <ServerName> -TargetDatabaseName <TargetDatabaseName> -KeyList $database.Keys.Keys -EncryptionProtector <EncryptionProtector> -UserAssignedIdentityId <UserAssignedIdentityId> -AssignIdentity
     ```
@@ -513,10 +515,7 @@ For Az PowerShell module installation instructions, see [Install Azure PowerShel
 
 Newly copied or restored databases can be configured to automatically rotate the customer-managed key used for transparent data encryption. For information on how to enable automatic key rotation in the Azure portal or using APIs, see [Automatic key rotation at the database level](transparent-data-encryption-byok-key-rotation.md#automatic-key-rotation-at-the-database-level).
 
-## Next steps
-
-Check the following documentation on various database level CMK operations:
+## Related content
 
 - [Transparent data encryption (TDE) with customer-managed keys at the database level](transparent-data-encryption-byok-database-level-overview.md)
-
 - [Identity and key management for TDE with database level customer-managed keys](transparent-data-encryption-byok-database-level-basic-actions.md)
