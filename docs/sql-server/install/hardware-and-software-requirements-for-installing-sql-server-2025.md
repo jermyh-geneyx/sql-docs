@@ -90,7 +90,7 @@ The following requirements apply to all installations:
 
 | Component | Requirement |
 | --- | --- |
-| Operating&nbsp;system | - Windows 10 1709 or greater<br />- Windows Server 2019 or greater |
+| Operating&nbsp;system | - Windows 10 or greater<br />- Windows Server 2019 or greater |
 | .NET Framework | [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] requires .NET Framework 4.7.2. |
 | Network software | Supported operating systems for [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] have built-in network software. Named and default instances of a stand-alone installation support the following network protocols: Shared memory, Named Pipes, and TCP/IP. |
 
@@ -143,7 +143,6 @@ Installing [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] on Server Core 
 - Windows Server 2025 Core
 - Windows Server 2022 Core
 - Windows Server 2019 Core
-- Windows Server 2016 Core
 
 For more information on installing [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] on Server Core, see [Install SQL Server on Server Core](../../database-engine/install-windows/install-sql-server-on-server-core.md).
 
