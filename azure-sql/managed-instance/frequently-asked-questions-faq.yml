@@ -534,10 +534,7 @@ sections:
         answer: |
           SQL Managed Instance case studies:
 
-          - [Komatsu](https://customers.microsoft.com/story/komatsu-australia-manufacturing-azure)
-          - [KMD](https://customers.microsoft.com/en-ca/story/kmd-professional-services-azure-sql-database)
           - [PowerDETAILS](https://customers.microsoft.com/story/powerdetails-partner-professional-services-azure-sql-database-managed-instance)
-          - [Allscripts](https://customers.microsoft.com/story/allscripts-partner-professional-services-azure)
 
           To get a better understanding of the benefits, costs, and risks associated with deploying Azure SQL Managed Instance, there's also a Forrester study: [The Total Economic Impact of Microsoft Azure SQL Managed Instance databases](https://azure.microsoft.com/resources/forrester-tei-sql-database-managed-instance).
 
