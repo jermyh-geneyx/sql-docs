@@ -246,14 +246,6 @@ For Ubuntu 22.04, you should reach out to Canonical directly for the exact steps
 
 ---
 
-## Inaccurate CPU time
-
-**Applies to:** [!INCLUDE [sssql25-md](../includes/sssql25-md.md)]
-
-In [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] on Linux, the CPU time for a query (for example, returned by set statistics time, or captured via Extended Events or SQL Server Profiler traces) can currently display inaccurately. This amount can often show significantly more than the actual execution time, even when the query isn't running in parallel. This is a known issue, and we're actively working on a resolution.
-
-This issue affects [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] on Linux deployed on traditional VMs, physical machines, and container-based environments.
-
 ## Related content
 
 - [Release notes for SQL Server 2022 on Linux](sql-server-linux-release-notes-2022.md)
