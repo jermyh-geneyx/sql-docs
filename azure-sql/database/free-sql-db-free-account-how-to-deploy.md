@@ -1,14 +1,16 @@
 ---
-title: Free SQL Database with Azure free account (old offer)
+title: "Free SQL Database with Azure Free Account (Old Offer)"
 description: Guidance on how to deploy an Azure SQL Database for free using an Azure free account.
 author: rajeshsetlem
 ms.author: rsetlem
 ms.reviewer: wiassaf, randolphwest, mathoma
-ms.date: 09/25/2023
+ms.date: 06/13/2025
 ms.service: azure-sql-database
 ms.subservice: service-overview
 ms.topic: how-to
-ms.custom: template-how-to
+ms.custom:
+  - template-how-to
+monikerRange: "=azuresql || =azuresql-db "
 ---
 
 # Try Azure SQL Database free with Azure free account (old offer)
@@ -30,19 +32,19 @@ To track usage, follow these steps:
 
 1. On the **Overview** page, scroll down to see the tile **Top free services by usage**, and then select **View all free services**.
 
-    :::image type="content" source="media/free-sql-db-free-account-how-to-deploy/free-services-usage-overview.png" alt-text="Screenshot that shows the Free Trial subscription overview page and highlights View all free services.":::
+    :::image type="content" source="media/free-sql-db-free-account-how-to-deploy/free-services-usage-overview.png" alt-text="Screenshot that shows the Free Trial subscription overview page and highlights View all free services." lightbox="media/free-sql-db-free-account-how-to-deploy/free-services-usage-overview.png":::
 
 1. Locate the meters related to **Azure SQL Database** to track usage.
 
-    :::image type="content" source="media/free-sql-db-free-account-how-to-deploy/free-services-tracking.png" alt-text="Screenshot that shows the View and track usage information page on Azure portal for all free services.":::
+    :::image type="content" source="media/free-sql-db-free-account-how-to-deploy/free-services-tracking.png" alt-text="Screenshot that shows the View and track usage information page on Azure portal for all free services." lightbox="media/free-sql-db-free-account-how-to-deploy/free-services-tracking.png":::
 
 The following table describes the values on the track usage page:
 
 | **Value** | **Description** |
 | --- | --- |
-| **Meter** | Identifies the unit of measure for the service being consumed. For example, the meter for Azure SQL Database is *SQL Database, Single Standard, S0 DTUs*, which tracks the number of S0 databases used per day, and has a monthly limit of 1. |
-| **Usage/limit** | The usage of the meter for the current month, and the limit for the meter. |
-| **Status** | The current status of your usage of the service defined by the meter. The possible values for status are:<br />**Not in use**: You haven't used the meter or the usage for the meter hasn't reached the billing system.<br />**Exceeded on \<Date\>**: You've exceeded the limit for the meter on \<Date\>.<br />**Unlikely to Exceed**: You're unlikely to exceed the limit for the meter.<br />**Exceeds on \<Date\>**: You're likely to exceed the limit for the meter on \<Date\>. |
+| `Meter` | Identifies the unit of measure for the service being consumed. For example, the meter for Azure SQL Database is *SQL Database, Single Standard, S0 DTUs*, which tracks the number of S0 databases used per day, and has a monthly limit of 1. |
+| `Usage/limit` | The usage of the meter for the current month, and the limit for the meter. |
+| `Status` | The current status of your usage of the service defined by the meter. The possible values for status are:<br />**Not in use**: You haven't used the meter or the usage for the meter hasn't reached the billing system.<br />**Exceeded on \<Date\>**: You've exceeded the limit for the meter on \<Date\>.<br />**Unlikely to Exceed**: You're unlikely to exceed the limit for the meter.<br />**Exceeds on \<Date\>**: You're likely to exceed the limit for the meter on \<Date\>. |
 
 - With an Azure free account, you also get $200 in credit to use in 30 days. During this time, any usage of the service beyond the free monthly amount is deducted from this credit.
 - At the end of your first 30 days or after you spend your $200 credit (whichever comes first), you'll only pay for what you use beyond the free monthly amount of services. To keep getting free services after 30 days, move to pay-as-you-go pricing. If you don't move to pay as you go, you can't purchase Azure services beyond your $200 credit and eventually your account and services are disabled.

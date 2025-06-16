@@ -1,29 +1,32 @@
 ---
-title: Outbound firewall rules
+title: Outbound Firewall Rules
 titleSuffix: Azure SQL Database and Azure Synapse Analytics
 description: Overview of the outbound firewall rules feature for Azure SQL Database and Azure Synapse Analytics.
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: wiassaf, vanto, mathoma
-ms.date: 05/16/2023
+ms.date: 06/13/2025
 ms.service: azure-sql-database
 ms.subservice: security
-ms.custom: devx-track-azurecli, devx-track-azurepowershell
 ms.topic: conceptual
+ms.custom:
+  - devx-track-azurecli
+  - devx-track-azurepowershell
+monikerRange: "=azuresql || =azuresql-db"
 ---
 
 # Outbound firewall rules for Azure SQL Database and Azure Synapse Analytics
 
 [!INCLUDE[appliesto-sqldb-asa](../includes/appliesto-sqldb-asa-formerly-sqldw.md)] 
 
-Outbound firewall rules limit network traffic from the Azure SQL [logical server](logical-servers.md) to a customer defined list of Azure Storage accounts and Azure SQL logical servers. Any attempt to access storage accounts or databases not in this list is denied. The following [Azure SQL Database](sql-database-paas-overview.md) features support this feature:
+Outbound firewall rules limit network traffic from the [Azure SQL Database logical server](logical-servers.md) to a customer defined list of Azure Storage accounts and Azure SQL Database logical servers. Any attempt to access storage accounts or databases not in this list is denied. The following [Azure SQL Database](sql-database-paas-overview.md) features support this feature:
 
-- [Auditing](auditing-overview.md)
+- [Auditing](auditing-overview.md?view=azuresql-db&preserve-view=true)
 - [Vulnerability assessment](/azure/defender-for-cloud/sql-azure-vulnerability-assessment-overview)
-- [Import/Export service](database-import-export-azure-services-off.md)
-- [OPENROWSET](/sql/t-sql/functions/openrowset-transact-sql)
-- [Bulk Insert](/sql/t-sql/statements/bulk-insert-transact-sql)
-- [sp_invoke_external_rest_endpoint](/sql/relational-databases/system-stored-procedures/sp-invoke-external-rest-endpoint-transact-sql)
+- [Import/Export service](database-import-export-azure-services-off.md?view=azuresql-db&preserve-view=true)
+- [OPENROWSET](/sql/t-sql/functions/openrowset-transact-sql?view=azuresqldb-current&preserve-view=true)
+- [Bulk Insert](/sql/t-sql/statements/bulk-insert-transact-sql?view=azuresqldb-current&preserve-view=true)
+- [sp_invoke_external_rest_endpoint](/sql/relational-databases/system-stored-procedures/sp-invoke-external-rest-endpoint-transact-sql?view=azuresqldb-current&preserve-view=true)
 
 > [!IMPORTANT]
 > - This article applies to both Azure SQL Database and [dedicated SQL pool (formerly SQL DW)](/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-overview-what-is) in Azure Synapse Analytics. These settings apply to all SQL Database and dedicated SQL pool (formerly SQL DW) databases associated with the server. For simplicity, the term 'database' refers to both databases in Azure SQL Database and Azure Synapse Analytics. Likewise, any references to 'server' is referring to the [logical SQL server](logical-servers.md) that hosts Azure SQL Database and dedicated SQL pool (formerly SQL DW) in Azure Synapse Analytics. This article does *not* apply to Azure SQL Managed Instance or dedicated SQL pools in Azure Synapse Analytics workspaces.
@@ -31,21 +34,21 @@ Outbound firewall rules limit network traffic from the Azure SQL [logical server
 
 ## Set outbound firewall rules in the Azure portal
 
-1. Browse to the **Outbound networking** section in the **Firewalls and virtual networks** pane for your Azure SQL Database and select **Configure outbound networking restrictions**.
+1. Under **Security**, select **Networking**.
+1. Select the **Connectivity** tab. Under **Outbound networking**, select the link to **Configure outbound networking restrictions**.
 
-   ![Screenshot of Outbound Networking section][1]  
+   :::image type="content" source="media/outbound-firewall-rule-overview/configure-outbound-networking-restrictions.png" alt-text="Screenshot of Outbound Networking section, and the configure outbound networking restrictions link.":::  
 
-   This will open up the following pane on the right-hand side:
+   This will open up the following pane:
 
-   ![Screenshot of Outbound Networking pane with nothing selected][2]  
+   :::image type="content" source="media/outbound-firewall-rule-overview/restrict-outbound-networking.png" alt-text="Screenshot of Outbound Networking pane with nothing selected.":::
 
-1. Select the check box titled **Restrict outbound networking** and then add the FQDN for the Storage accounts (or SQL Databases) using the **Add domain** button.
-
-   ![Screenshot of Outbound Networking pane showing how to add FQDN][3]  
+1. Select the check box titled **Restrict outbound networking**. 
+1. Select the **Add domain** button and provide the fully-qualified domain name for the Storage accounts (or databases in Azure SQL Database).
 
 1. After you're done, you should see a screen similar to the one below. Select **OK** to apply these settings.
 
-   ![Screenshot of of Outbound Networking pane after FQDNs are added][4]  
+   :::image type="content" source="media/outbound-firewall-rule-overview/fully-qualified-domain-names.png" alt-text="Screenshot of Outbound Networking pane after fully-qualified domain names are added.":::
 
 ## Set outbound firewall rules using PowerShell
 
@@ -66,7 +69,7 @@ $SecureString = ConvertTo-SecureString "<ServerAdminPassword>" -AsPlainText -For
 Set-AzSqlServer -ServerName <SqlServerName> -ResourceGroupName <ResourceGroupName> -SqlAdministratorPassword $SecureString  -RestrictOutboundNetworkAccess "Enabled"
 ```
 
-Use these PowerShell cmdlets to configure outbound firewall rules
+Use these PowerShell cmdlets to configure outbound firewall rules:
 
 ```powershell
 # List all Outbound Firewall Rules
@@ -99,7 +102,7 @@ az sql server show -n sql-server-name -g sql-server-group --query "restrictOutbo
 az sql server update -n sql-server-name -g sql-server-group --set restrictOutboundNetworkAccess="Enabled"
 ```
 
-Use these CLI commands to configure outbound firewall rules
+Use these CLI commands to configure outbound firewall rules:
 
 ```azurecli-interactive
 # List a server's outbound firewall rules.
@@ -115,15 +118,9 @@ az sql server outbound-firewall-rule show -g sql-server-group -s sql-server-name
 az sql server outbound-firewall-rule delete -g sql-server-group -s sql-server-name --outbound-rule-fqdn allowedFQDN
 ```
 
-## Next steps
+## Related content
 
-- For an overview of Azure SQL Database security, see [Securing your database](security-overview.md).
-- For an overview of Azure SQL Database connectivity, see [Azure SQL Connectivity Architecture](connectivity-architecture.md).
-- Learn more about [Azure SQL Database and Azure Synapse Analytics network access controls](network-access-controls-overview.md).
-- Learn about [Azure Private Link for Azure SQL Database and Azure Synapse Analytics](private-endpoint-overview.md).
-
-<!--Image references-->
-[1]: media/outbound-firewall-rules/Step1.jpg
-[2]: media/outbound-firewall-rules/Step2.jpg
-[3]: media/outbound-firewall-rules/Step3.jpg
-[4]: media/outbound-firewall-rules/Step4.jpg
+- [Overview of Azure SQL Database and SQL Managed Instance security capabilities](security-overview.md?view=azuresql-db&preserve-view=true)
+- [Connectivity architecture](connectivity-architecture.md?view=azuresql-db&preserve-view=true)
+- [Azure SQL Database network access controls](network-access-controls-overview.md?view=azuresql-db&preserve-view=true)
+- [Azure Private Link for Azure SQL Database](private-endpoint-overview.md?view=azuresql-db&preserve-view=true)

@@ -1,22 +1,25 @@
 ---
-title: Resolve capacity errors with Azure SQL resources
+title: Resolve Capacity Errors with Azure SQL Resources
 description: Learn how to resolve possible capacity errors when attempting to deploy or scale Azure SQL Database or Azure SQL Managed Instance resources.
 author: sachinpMSFT
 ms.author: sachinp
 ms.reviewer: mathoma
-ms.date: 09/03/2021
+ms.date: 06/13/2025
 ms.service: azure-sql
 ms.subservice: deployment-configuration
 ms.topic: how-to
-ms.custom: references_regions
+ms.custom:
+  - references_regions
+monikerRange: "=azuresql || =azuresql-db || =azuresql-mi"
 ---
 
 # Resolve capacity errors with Azure SQL Database or Azure SQL Managed Instance
+
 [!INCLUDE[appliesto-sqldb-sqlmi](includes/appliesto-sqldb-sqlmi.md)]
 
 In this article, learn how to resolve capacity errors when deploying Azure SQL Database or Azure SQL Managed Instance resources. 
 
-## Exceeded quota 
+## Exceeded quota
 
 If you encounter any of the following errors when attempting to deploy your Azure SQL resource, [request to increase your quota](database/quota-increase-request.md): 
 
@@ -34,7 +37,7 @@ If you see the following errors, please [register your subscription with the SQL
 - `Provisioning is restricted in this region. Please choose a different region. For exceptions to this rule please open a support request with issue type of 'Service and subscription limits' `
 - `Location 'region name' is not accepting creation of new Windows Azure SQL Database servers for the subscription 'subscription id' at this time`
 
-## Enable region 
+## Enable region
 
 Your subscription might not have access to create a server in the selected region if that region hasn't been enabled. To resolve this, file a [support request to enable a specific region](database/quota-increase-request.md#region) for your subscription. 
 
@@ -59,7 +62,7 @@ To register your subscription in the Azure portal, follow these steps:
 1. Enter **sql** in the filter to bring up the SQL-related extensions.
 1. Select **Register**, **Re-register**, or **Unregister** for the  **Microsoft.Sql** provider, depending on your desired action.
 
-   ![Modify the provider](./media/capacity-errors-troubleshoot/register-with-sql-rp.png)
+   :::image type="content" source="media/capacity-errors-troubleshoot/register-with-sql-rp.png" alt-text="Screenshot from the Azure portal of the Resource Providers page, showing how to modify the provider." lightbox="media/capacity-errors-troubleshoot/register-with-sql-rp.png":::
 
 # [Azure CLI](#tab/bash)
 
@@ -81,11 +84,13 @@ Register-AzResourceProvider -ProviderNamespace Microsoft.Sql
 
 ---
 
+After you submit your request, it will be reviewed. You'll be contacted with an answer based on the information you provided in the form.
+
 ## Additional provisioning issues
 
 If you're still experiencing provisioning issues, please open a **Region** access request under the support topic of SQL Database and specify the DTU or vCores you want to consume on Azure SQL Database or Azure SQL Managed Instance. 
 
-## Azure Program regions 
+## Azure Program regions
 
 Azure Program offerings (Azure Pass, Imagine, Azure for Students, MPN, BizSpark, BizSpark Plus, Microsoft for Startups / Sponsorship Offers, Visual Studio Subscriptions / MSDN) have access to a limited set of regions. 
 
@@ -93,8 +98,7 @@ If your subscription is part of an Azure Program offering, and you would like to
 
 _Australia Central, Australia Central 2, Australia SouthEast, Brazil SouthEast, Canada East, China East, China North, China North 2, France South, Germany North, Japan West, JIO India Central, JIO India West, Korea South, Norway West, South Africa West, South India, Switzerland West, UAE Central, UK West, US DoD Central, US DoD East, US Gov Arizona, US Gov Texas, West Central US, West India._ 
 
-## Next steps
+## Next step
 
-After you submit your request, it will be reviewed. You'll be contacted with an answer based on the information you provided in the form.
-
-For more information about other Azure limits, see [Azure subscription and service limits, quotas, and constraints](/azure/azure-resource-manager/management/azure-subscription-service-limits).
+> [!div class="nextstepaction"]
+> [Azure subscription and service limits, quotas, and constraints](/azure/azure-resource-manager/management/azure-subscription-service-limits)

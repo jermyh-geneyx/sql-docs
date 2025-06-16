@@ -1,16 +1,17 @@
 ---
-title: Playbook for addressing common security requirements
+title: Playbook for Addressing Common Security Requirements
 titleSuffix: Azure SQL Database & Azure SQL Managed Instance
 description: This article provides common security requirements and best practices in Azure SQL Database and Azure SQL Managed Instance.
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: wiassaf, mathoma, randolphwest
-ms.date: 04/26/2023
+ms.date: 06/13/2025
 ms.service: azure-sql
 ms.subservice: security
 ms.topic: article
-ms.custom: sqldbrb=2
-monikerRange: "= azuresql || = azuresql-db || = azuresql-mi"
+ms.custom:
+  - sqldbrb=2
+monikerRange: "=azuresql || =azuresql-db || =azuresql-mi"
 ---
 # Playbook for addressing common security requirements with Azure SQL Database and Azure SQL Managed Instance
 
@@ -26,8 +27,8 @@ This document provides guidance on how to solve common security requirements for
 
 ### Azure SQL Database deployment offers covered in this guide
 
-- [Azure SQL Database](./index.yml): [single databases](single-database-overview.md) and [elastic pools](elastic-pool-overview.md) in [servers](logical-servers.md)
-- [Azure SQL Managed Instance](../managed-instance/sql-managed-instance-paas-overview.md)
+- [Azure SQL Database](index.yml): [single databases](single-database-overview.md) and [elastic pools](elastic-pool-overview.md) in [servers](logical-servers.md)
+- [What is Azure SQL Managed Instance?](../managed-instance/sql-managed-instance-paas-overview.md)
 
 ### Deployment offers not covered in this guide
 
@@ -45,9 +46,11 @@ The intended audiences for this guide are customers facing questions on how to s
 - Privacy Officers
 - Security Engineers
 
-### <a id="using"></a> How to use this guide
+<a id="using"></a>
 
-This document is intended as a companion to our existing [Azure SQL Database security](security-overview.md) documentation.
+### How to use this guide
+
+This document is intended as a companion to our existing [overview of Azure SQL Database and SQL Managed Instance security capabilities](security-overview.md).
 
 Unless otherwise stated, we recommend you follow all best practices listed in each section to achieve the respective goal or requirement. To meet specific security compliance standards or best practices, important regulatory compliance controls are listed under the Requirements or Goals section wherever applicable. These are the security standards and regulations that are referenced in this paper:
 
@@ -55,7 +58,7 @@ Unless otherwise stated, we recommend you follow all best practices listed in ea
 - [SOC](https://www.aicpa-cima.com/resources/landing/system-and-organization-controls-soc-suite-of-services): CM-3, SDL-3
 - [ISO/IEC 27001](https://www.iso27001security.com/html/27001.html): Access Control, Cryptography
 - [Microsoft Operational Security Assurance (OSA) practices](https://www.microsoft.com/securityengineering/osa/practices): Practice #1-6 and #9
-- [NIST Special Publication 800-53 Security Controls](https://csrc.nist.gov/Projects/risk-management/sp800-53-controls/release-search#/): AC-5, AC-6
+- [NIST Special Publication 800-53 Security Controls](https://csrc.nist.gov/projects/cprt/catalog#/cprt/framework/version/SP_800_53_5_1_1/home): AC-5, AC-6
 - [PCI DSS](https://www.pcisecuritystandards.org/document_library): 6.3.2, 6.4.2
 
 We plan on continuing to update the recommendations and best practices listed here. Provide input or any corrections for this document using the **Feedback** link at the bottom of this article.
@@ -68,7 +71,7 @@ Authentication is the process of proving the user is who they claim to be. Azure
 - Microsoft Entra authentication
 
 > [!NOTE]  
-> Microsoft Entra authentication may not be supported for all tools and 3rd party applications.
+> Microsoft Entra authentication might not be supported for all tools and 3rd party applications.
 
 ### Central management for identities
 
@@ -87,7 +90,7 @@ Central identity management offers the following benefits:
 - Create a Microsoft Entra tenant and [create users](/azure/active-directory/fundamentals/add-users-azure-active-directory) to represent human users and create [service principals](/azure/active-directory/develop/app-objects-and-service-principals) to represent apps, services, and automation tools. Service principals are equivalent to service accounts in Windows and Linux.
 
 - Assign access rights to resources to Microsoft Entra principals via group assignment: Create Microsoft Entra groups, grant access to groups, and add individual members to the groups. In your database, create contained database users that map to your Microsoft Entra groups. To assign permissions inside the database, add the contained database users representing your groups to database roles, or grant permissions to them directly.
-  - See the articles, [Configure and manage Microsoft Entra authentication with SQL](authentication-aad-configure.md) and [Use Microsoft Entra authentication with SQL](authentication-aad-overview.md).
+  - For more information, see [Configure and manage Microsoft Entra authentication with Azure SQL](authentication-aad-configure.md) and [Microsoft Entra authentication for Azure SQL](authentication-aad-overview.md).
 
   > [!NOTE]  
   > In SQL Managed Instance, you can also create logins that map to Microsoft Entra principals in the `master` database. See [CREATE LOGIN (Transact-SQL)](/sql/t-sql/statements/create-login-transact-sql?view=azuresqldb-mi-current&preserve-view=true).
@@ -109,9 +112,9 @@ Central identity management offers the following benefits:
 > - Azure RBAC permissions granted in Azure do not apply to Azure SQL Database or SQL Managed Instance  permissions. Such permissions must be created/mapped manually using existing SQL permissions.
 > - On the client-side, Microsoft Entra authentication needs access to the internet or via User Defined Route (UDR) to a virtual network.
 > - The Microsoft Entra access token is cached on the client side and its lifetime depends on token configuration. See the article, [Configurable token lifetimes in Microsoft Entra ID](/azure/active-directory/develop/active-directory-configurable-token-lifetimes)
-> - For guidance on troubleshooting Microsoft Entra authentication issues, see the following blog: [Troubleshooting Microsoft Entra ID](https://techcommunity.microsoft.com/t5/azure-sql-database/troubleshooting-problems-related-to-azure-ad-authentication-with/ba-p/1062991).
+> - For guidance on troubleshooting Microsoft Entra authentication issues, see the following blog: [Troubleshooting Microsoft Entra ID](https://techcommunity.microsoft.com/blog/azuresqlblog/troubleshooting-problems-related-to-azure-ad-authentication-with-azure-sql-db-an/1062991).
 
-<a name='azure-ad-multi-factor-authentication'></a>
+<a id="azure-ad-multi-factor-authentication"></a>
 
 ### Microsoft Entra multifactor authentication
 
@@ -199,7 +202,7 @@ For cases when passwords aren't avoidable, make sure they're secured.
 
 - If avoiding passwords or secrets aren't possible, store user passwords and application secrets in Azure Key Vault, and manage access through Key Vault access policies.
 
-- Various app development frameworks may also offer framework-specific mechanisms for protecting secrets in the app. For example: [ASP.NET core app](/aspnet/core/security/app-secrets?tabs=windows).
+- Various app development frameworks might also offer framework-specific mechanisms for protecting secrets in the app. For example: [ASP.NET core app](/aspnet/core/security/app-secrets?tabs=windows).
 
 ### Use SQL authentication for legacy applications
 
@@ -211,9 +214,9 @@ SQL authentication refers to the authentication of a user when connecting to Azu
 
 **Best practices**
 
-- As a server or instance admin, create logins and users. Unless using contained database users with passwords, all passwords are stored in `master` database.
+- As a server or instance admin, create logins and users. Unless using contained database users with passwords, all passwords are stored in `master` database. In Azure SQL Database, the `master` database is part of the [logical server](logical-servers.md).
 
-  - See the article, [Controlling and granting database access to SQL Database, SQL Managed Instance and Azure Synapse Analytics](logins-create-manage.md).
+  - See the article, [Authorize database access to SQL Database, SQL Managed Instance, and Azure Synapse Analytics](logins-create-manage.md).
 
 ## Access management
 
@@ -223,7 +226,7 @@ Access management (also called Authorization) is the process of controlling and 
 
 > Mentioned in: FedRamp controls AC-06, NIST: AC-6, OSA Practice #3
 
-The principle of least privilege states that users shouldn't have more privileges than needed to complete their tasks. For more information, see the article [Just enough administration](/powershell/scripting/learn/remoting/jea/overview).
+The principle of least privilege states that users shouldn't have more privileges than needed to complete their tasks. For more information, see [Just enough administration](/powershell/scripting/learn/remoting/jea/overview).
 
 **How to implement**
 
@@ -308,7 +311,7 @@ Separation of Duties, also called Segregation of Duties describes the requiremen
 - To ensure that a DBA can't see data that is considered highly sensitive and can still do DBA tasks, you can use Always Encrypted with role separation.
   - See the articles, [Overview of Key Management for Always Encrypted](/sql/relational-databases/security/encryption/overview-of-key-management-for-always-encrypted), [Key Provisioning with Role Separation](/sql/relational-databases/security/encryption/configure-always-encrypted-keys-using-powershell#KeyProvisionWithRoles), and [Column Master Key Rotation with Role Separation](/sql/relational-databases/security/encryption/rotate-always-encrypted-keys-using-powershell#column-master-key-rotation-with-role-separation).
 
-- In cases where the use of Always Encrypted isn't feasible, or at least not without major costs and efforts that may even render the system near unusable, compromises can be made and mitigated through the use of compensating controls such as:
+- In cases where the use of Always Encrypted isn't feasible, or at least not without major costs and efforts that might even render the system near unusable, compromises can be made and mitigated through the use of compensating controls such as:
   - Human intervention in processes.
   - Audit trails – for more information on Auditing, see, [Audit critical security events](#audit-critical-security-events).
 
@@ -340,7 +343,7 @@ Separation of Duties, also called Segregation of Duties describes the requiremen
 For the readers that want to dive deeper into SoD, we recommend the following resources:
 
 - For Azure SQL Database and SQL Managed Instance:
-  - [Controlling and granting database access](logins-create-manage.md)
+  - [Authorize database access](logins-create-manage.md)
   - [Engine Separation of Duties for the Application Developer](/previous-versions/sql/sql-server-2008/cc974525(v=sql.100))
   - [Separation of Duties](https://download.microsoft.com/download/d/2/d/d2d931e9-b6b5-4e3b-b0af-22c749f9bb7e/sql_server_separation_of_duties_white_paper_jul2011.docx)
   - [Signing Stored Procedures](/dotnet/framework/data/adonet/sql/signing-stored-procedures-in-sql-server)
@@ -348,7 +351,6 @@ For the readers that want to dive deeper into SoD, we recommend the following re
 - For Azure Resource Management:
   - [Azure built-in roles](/azure/role-based-access-control/built-in-roles)
   - [Azure custom roles](/azure/role-based-access-control/custom-roles)
-  - [Using Microsoft Entra Privileged Identity Management for elevated access](https://www.microsoft.com/itshowcase/using-azure-ad-privileged-identity-management-for-elevated-access)
 
 ### Perform regular code reviews
 
@@ -385,7 +387,7 @@ Separation of Duties is not limited to the data in a database, but includes appl
 Data protection is a set of capabilities for safeguarding important information from compromise by encryption or obfuscation.
 
 > [!NOTE]  
-> Microsoft attests to Azure SQL Database and SQL Managed Instance as being FIPS 140-2 Level 1 compliant. This is done after verifying the strict use of FIPS 140-2 Level 1 acceptable algorithms and FIPS 140-2 Level 1 validated instances of those algorithms including consistency with required key lengths, key management, key generation, and key storage. This attestation is meant to allow our customers to respond to the need or requirement for the use of FIPS 140-2 Level 1 validated instances in the processing of data or delivery of systems or applications. We define the terms "FIPS 140-2 Level 1 compliant" and "FIPS 140-2 Level 1 compliance" used in the above statement to demonstrate their intended applicability to U.S. and Canadian government use of the different term "FIPS 140-2 Level 1 validated."
+> Microsoft attests to Azure SQL Database and Azure SQL Managed Instance as being FIPS 140-2 Level 1 compliant. This is done after verifying the strict use of FIPS 140-2 Level 1 acceptable algorithms and FIPS 140-2 Level 1 validated instances of those algorithms including consistency with required key lengths, key management, key generation, and key storage. This attestation is meant to allow our customers to respond to the need or requirement for the use of FIPS 140-2 Level 1 validated instances in the processing of data or delivery of systems or applications. We define the terms "FIPS 140-2 Level 1 compliant" and "FIPS 140-2 Level 1 compliance" used in the above statement to demonstrate their intended applicability to U.S. and Canadian government use of the different term "FIPS 140-2 Level 1 validated."
 
 ### Encrypt data in transit
 
@@ -413,11 +415,11 @@ Encryption at rest is the cryptographic protection of data when it is persisted 
 - If you're using customer-managed keys in Azure Key Vault, follow the articles, [Guidelines for configuring TDE with Azure Key Vault](transparent-data-encryption-byok-overview.md#recommendations-when-configuring-akv) and [How to configure Geo-DR with Azure Key Vault](transparent-data-encryption-byok-overview.md#geo-dr-and-customer-managed-tde).
 
 > [!NOTE]  
-> Some items considered customer content, such as table names, object names, and index names, may be transmitted in log files for support and troubleshooting by Microsoft.
+> Some items considered customer content, such as table names, object names, and index names, might be transmitted in log files for support and troubleshooting by Microsoft.
 
 ### Protect sensitive data in use from high-privileged, unauthorized users
 
-Data in use is the data stored in memory of the database system during the execution of SQL queries. If your database stores sensitive data, your organization may be required to ensure that high-privileged users are prevented from viewing sensitive data in your database. High-privilege users, such as Microsoft operators or DBAs in your organization should be able to manage the database, but prevented from viewing and potentially exfiltrating sensitive data from the memory of the SQL process or by querying the database.
+Data in use is the data stored in memory of the database system during the execution of SQL queries. If your database stores sensitive data, your organization could be required to ensure that high-privileged users are prevented from viewing sensitive data in your database. High-privilege users, such as Microsoft operators or DBAs in your organization should be able to manage the database, but prevented from viewing and potentially exfiltrating sensitive data from the memory of the SQL process or by querying the database.
 
 The policies that determine which data is sensitive and whether the sensitive data must be encrypted in memory and not accessible to administrators in plaintext, are specific to your organization and compliance regulations you need to adhere to. Please see the related requirement: [Identify and tag sensitive data](#identify-and-tag-sensitive-data).
 
@@ -429,17 +431,17 @@ The policies that determine which data is sensitive and whether the sensitive da
 
 - Always Encrypted isn't a substitute to encrypt data at rest (TDE) or in transit (SSL/TLS). Always Encrypted shouldn't be used for non-sensitive data to minimize performance and functionality impact. Using Always Encrypted in conjunction with TDE and Transport Layer Security (TLS) is recommended for comprehensive protection of data at-rest, in-transit, and in-use.
 
-- Assess the impact of encrypting the identified sensitive data columns before you deploy Always Encrypted in a production database. In general, Always Encrypted reduces the functionality of queries on encrypted columns and has other limitations, listed in [Always Encrypted - Feature Details](/sql/relational-databases/security/encryption/always-encrypted-database-engine#feature-details). Therefore, you may need to rearchitect your application to reimplement the functionality, a query does not support, on the client side or/and refactor your database schema, including the definitions of stored procedures, functions, views and triggers. Existing applications may not work with encrypted columns if they do not adhere to the restrictions and limitations of Always Encrypted. While the ecosystem of Microsoft tools, products and services supporting Always Encrypted is growing, a number of them do not work with encrypted columns. Encrypting a column may also impact query performance, depending on the characteristics of your workload.
+- Assess the impact of encrypting the identified sensitive data columns before you deploy Always Encrypted in a production database. In general, Always Encrypted reduces the functionality of queries on encrypted columns and has other limitations, listed in [Always Encrypted - Feature Details](/sql/relational-databases/security/encryption/always-encrypted-database-engine#feature-details). Therefore, you might need to rearchitect your application to reimplement the functionality, a query does not support, on the client side or/and refactor your database schema, including the definitions of stored procedures, functions, views and triggers. Existing applications might not work with encrypted columns if they do not adhere to the restrictions and limitations of Always Encrypted. While the ecosystem of Microsoft tools, products and services supporting Always Encrypted is growing, a number of them do not work with encrypted columns. Encrypting a column can also affect query performance, depending on the characteristics of your workload.
 
 - Manage Always Encrypted keys with role separation if you're using Always Encrypted to protect data from malicious DBAs. With role separation, a security admin creates the physical keys. The DBA creates the column master key and column encryption key metadata objects describing the physical keys in the database. During this process, the security admin doesn't need access to the database, and the DBA doesn't need access to the physical keys in plaintext.
   - See the article, [Managing Keys with Role Separation](/sql/relational-databases/security/encryption/overview-of-key-management-for-always-encrypted#managing-keys-with-role-separation) for details.
 
 - Store your column master keys in Azure Key Vault for ease of management. Avoid using Windows Certificate Store (and in general, distributed key store solutions, as opposed central key management solutions) that make key management hard.
 
-- Think carefully through the tradeoffs of using multiple keys (column master key or column encryption keys). Keep the number of keys small to reduce key management cost. One column master key and one column encryption key per database is typically sufficient in steady-state environments (not in the middle of a key rotation). You may need additional keys if you have different user groups, each using different keys and accessing different data.
+- Think carefully through the tradeoffs of using multiple keys (column master key or column encryption keys). Keep the number of keys small to reduce key management cost. One column master key and one column encryption key per database is typically sufficient in steady-state environments (not in the middle of a key rotation). You might need additional keys if you have different user groups, each using different keys and accessing different data.
 
 - Rotate column master keys per your compliance requirements. If you also need to rotate column encryption keys, consider using online encryption to minimize application downtime.
-  - See the article, [Performance and Availability Considerations](/sql/relational-databases/security/encryption/configure-column-encryption-using-powershell#performance-and-availability-considerations).
+  - For more information, see [Performance and Availability Considerations](/sql/relational-databases/security/encryption/configure-column-encryption-using-powershell#performance-and-availability-considerations).
 
 - Use deterministic encryption if computations (equality) on data need to be supported. Otherwise, use randomized encryption. Avoid using deterministic encryption for low-entropy data sets, or data sets with publicly known distribution.
 
@@ -471,7 +473,7 @@ When using CLE:
 - Be careful when migrating a database using Cell-Level Encryption via export/import (bacpac files).
   - See the article, [Recommendations for using Cell Level Encryption in Azure SQL Database](/archive/blogs/sqlsecurity/recommendations-for-using-cell-level-encryption-in-azure-sql-database) on how to prevent losing keys when migrating data, and for other best practice guidance.
 
-Keep in mind that Always Encrypted is primarily designed to protect sensitive data in use from high-privilege users of Azure SQL Database (cloud operators, DBAs) - see [Protect sensitive data in use from high-privileged, unauthorized users](#protect-sensitive-data-in-use-from-high-privileged-unauthorized-users). Be aware of the following challenges when using Always Encrypted to protect data from application users:
+Keep in mind that Always Encrypted is primarily designed to protect sensitive data in use from high-privilege users of Azure SQL Database (cloud operators, DBAs). For more information, see [Protect sensitive data in use from high-privileged, unauthorized users](#protect-sensitive-data-in-use-from-high-privileged-unauthorized-users). Be aware of the following challenges when using Always Encrypted to protect data from application users:
 
 - By default, all Microsoft client drivers supporting Always Encrypted maintain a global (one per application) cache of column encryption keys. Once a client driver acquires a plaintext column encryption key by contacting a key store holding a column master key, the plaintext column encryption key is cached. This makes isolating data from users of a multi-user application challenging. If your application impersonates end users when interacting with a key store (such as Azure Key Vault), after a user's query populates the cache with a column encryption key, a subsequent query that requires the same key but is triggered by another user will use the cached key. The driver won't call the key store and it won't check if the second user has a permission to access the column encryption key. As a result, the user can see the encrypted data even if the user doesn't have access to the keys. To achieve the isolation of users within a multi-user application, you can disable column encryption key caching. Disabling caching will cause additional performance overheads, as the driver will need to contact the key store for each data encryption or decryption operation.
 
@@ -491,12 +493,11 @@ Another technique for preventing unauthorized users from viewing data is to obfu
 > [!NOTE]  
 > Dynamic Data Masking cannot be used to protect data from high-privilege users. Masking policies do not apply to users with administrative access like db_owner.
 
-- Don't permit app users to run ad hoc queries (as they may be able to work around Dynamic Data Masking).
-  - See the article, [Bypassing masking using inference or brute-force techniques](/sql/relational-databases/security/dynamic-data-masking#security-note-bypassing-masking-using-inference-or-brute-force-techniques) for details.
+- Don't permit app users to run ad hoc queries (as they might be able to work around Dynamic Data Masking). For more information, see [Bypassing masking using inference or brute-force techniques](/sql/relational-databases/security/dynamic-data-masking#security-note-bypassing-masking-using-inference-or-brute-force-techniques).
 
 - Use a proper access control policy (via SQL permissions, roles, RLS) to limit user permissions to make updates in the masked columns. Creating a mask on a column doesn't prevent updates to that column. Users that receive masked data when querying the masked column, can update the data if they have write-permissions.
 
-- Dynamic Data Masking doesn't preserve the statistical properties of the masked values. This may impact query results (for example, queries containing filtering predicates or joins on the masked data).
+- Dynamic Data Masking doesn't preserve the statistical properties of the masked values. This might affect query results (for example, queries containing filtering predicates or joins on the masked data).
 
 ## Network security
 
@@ -512,7 +513,7 @@ Best practices on how to prevent client machines and applications with well-know
 
 **Best practices**
 
-- Enforce a minimal TLS version at the [logical server in Azure](connectivity-settings.md#minimum-tls-version) or [SQL Managed Instance](../managed-instance/minimal-tls-version-configure.md) level by using the minimal TLS version setting. We recommend setting the minimal TLS version to 1.2, after testing to confirm your applications supports it. TLS 1.2 includes fixes for vulnerabilities found in previous versions.
+- Enforce a minimal TLS version in the [logical server in Azure SQL Database](connectivity-settings.md#minimum-tls-version) or [Azure SQL Managed Instance](../managed-instance/minimal-tls-version-configure.md) by using the minimal TLS version setting. We recommend setting the minimal TLS version to 1.2, after testing to confirm your applications supports it. TLS 1.2 includes fixes for vulnerabilities found in previous versions.
 
 - Configure all your apps and tools to connect to SQL Database with encryption enabled
   - Encrypt = On, TrustServerCertificate = Off (or equivalent with non-Microsoft drivers).
@@ -529,7 +530,7 @@ Minimize the number of features that can be attacked by a malicious user. Implem
 
 **How to implement**
 
-In SQL Database:
+In Azure SQL Database:
 
 - Set Allow Access to Azure services to OFF at the server-level
 - Use VNet Service endpoints and VNet Firewall Rules.
@@ -543,13 +544,13 @@ In SQL Managed Instance:
 
 - Restricting access to Azure SQL Database and SQL Managed Instance by connecting on a private endpoint (for example, using a private data path):
   - A managed instance can be isolated inside a virtual network to prevent external access. Applications and tools that are in the same or peered virtual network in the same region could access it directly. Applications and tools that are in different region could use virtual-network-to-virtual-network connection or ExpressRoute circuit peering to establish connection. Customer should use Network Security Groups (NSG) to restrict access over port 1433 only to resources that require access to a managed instance.
-  - For a SQL Database, use the [Private Link](/azure/private-link/private-endpoint-overview) feature that provides a dedicated private IP for the server inside your virtual network. You can also use [Virtual network service endpoints with virtual network firewall rules](vnet-service-endpoint-rule-overview.md) to restrict access to your servers.
+  - For Azure SQL Database, use [Private Link](/azure/private-link/private-endpoint-overview), which provides a dedicated private IP for the server inside your virtual network. You can also use [virtual network service endpoints](vnet-service-endpoint-rule-overview.md) to restrict access to your logical servers.
   - Mobile users should use point-to-site VPN connections to connect over the data path.
   - Users connected to their on-premises network should use site-to-site VPN connection or ExpressRoute to connect over the data path.
 
 - You can access Azure SQL Database and SQL Managed Instance by connecting to a public endpoint (for example, using a public data path). The following best practices should be considered:
-  - For a server in SQL Database, use [IP firewall rules](firewall-configure.md) to restrict access to only authorized IP addresses.
-  - For SQL Managed Instance, use Network Security Groups (NSG) to restrict access over port 3342 only to required resources. For more information, see [Use a managed instance securely with public endpoints](../managed-instance/public-endpoint-overview.md).
+  - For a server in SQL Database, use [Azure SQL Database and Azure Synapse IP firewall rules](firewall-configure.md) to restrict access to only authorized IP addresses.
+  - For SQL Managed Instance, use Network Security Groups (NSG) to restrict access over port 3342 only to required resources. For more information, see [Use Azure SQL Managed Instance securely with public endpoints](../managed-instance/public-endpoint-overview.md).
 
   > [!NOTE]  
   > The SQL Managed Instance public endpoint is not enabled by default and it and must be explicitly enabled. If company policy disallows the use of public endpoints, use [Azure Policy](/azure/governance/policy/overview) to prevent enabling public endpoints in the first place.
@@ -581,7 +582,7 @@ In SQL Managed Instance:
 
 - [Integrate your app with an Azure Virtual Network](/azure/app-service/overview-vnet-integration) for private data path connectivity to a managed instance. Optionally, you can also deploy a Web App with [App Service Environments (ASE)](/azure/app-service/environment/intro).
 
-- For Web App with ASE or virtual network Integrated Web App connecting to a database in SQL Database, you can use [virtual network service endpoints and virtual network firewall rules](vnet-service-endpoint-rule-overview.md) to limit access from a specific virtual network and subnet. Then set **Allow Azure Services** to OFF. You can also connect ASE to a managed instance in SQL Managed Instance over a private data path.
+- For Web App with ASE or virtual network Integrated Web App connecting to a database in SQL Database, you can use [virtual network service endpoints and virtual network firewall rules](vnet-service-endpoint-rule-overview.md) to limit access from a specific virtual network and subnet. Then set **Allow Azure Services** to OFF. You can also connect ASE to a managed instance in SQL Managed Instance over a private data path.
 
 - Ensure that your Web App is configured per the article, [Best practices for securing platform as a service (PaaS) web and mobile applications using Azure App Service](/azure/security/fundamentals/paas-applications-using-app-services).
 
@@ -619,7 +620,7 @@ DDoS protection is automatically enabled as part of the Azure Platform. It inclu
 
 - Use [Azure DDoS Protection](/azure/ddos-protection/ddos-protection-overview) to monitor public IP addresses associated to resources deployed in virtual networks.
 
-- Use [Advanced Threat Protection for Azure SQL Database](threat-detection-overview.md) to detect Denial of Service (DoS) attacks against databases.
+- Use [SQL Advanced Threat Protection](threat-detection-overview.md) to detect Denial of Service (DoS) attacks against databases.
 
 **Best practices**
 
@@ -650,9 +651,9 @@ Advanced threat protection enables you to detect and respond to potential threat
 
 **Best practices**
 
-- Configure [Microsoft Defender for SQL](azure-defender-for-sql.md) for a specific server or a managed instance. You can also configure Microsoft Defender for SQL for all servers and managed instances in a subscription by enabling [Microsoft Defender for Cloud](/azure/security-center/security-center-pricing).
+- Configure [Microsoft Defender for SQL](azure-defender-for-sql.md) for a specific server or a managed instance. You can also configure Microsoft Defender for SQL for all servers and managed instances in a subscription by enabling [Microsoft Defender for Cloud](/azure/security-center/security-center-pricing).
 
-- For a full investigation experience, it's recommended to enable [SQL Database Auditing](./auditing-overview.md). With auditing, you can track database events and write them to an audit log in an Azure Storage account or Azure Log Analytics workspace.
+- For a full investigation experience, it's recommended to enable [Auditing for Azure SQL Database](auditing-overview.md). With auditing, you can track database events and write them to an audit log in an Azure Storage account or Azure Log Analytics workspace.
 
 ### Audit critical security events
 
@@ -660,14 +661,14 @@ Tracking of database events helps you understand database activity. You can gain
 
 **How to implement**
 
-- Enable [SQL Database Auditing](./auditing-overview.md) or [Managed Instance Auditing](../managed-instance/auditing-configure.md) to track database events and write them to an audit log in your Azure Storage account, Log Analytics workspace (preview), or Event Hubs (preview).
+- Enable [Azure SQL Database Auditing](auditing-overview.md) or [SQL Managed Instance auditing](../managed-instance/auditing-configure.md) to track database events and write them to an audit log in your Azure Storage account, Log Analytics workspace (preview), or Event Hubs (preview).
 
 - Audit logs can be written to an Azure Storage account, to a Log Analytics workspace for consumption by Azure Monitor logs, or to event hub for consumption using event hub. You can configure any combination of these options, and audit logs will be written to each.
 
 **Best practices**
 
-- By configuring [SQL Database Auditing](./auditing-overview.md) on your server or [Managed Instance Auditing](../managed-instance/auditing-configure.md) to audit events, all existing and newly created databases on that server will be audited.
-- By default auditing policy includes all actions (queries, stored procedures and successful and failed logins) against the databases, which may result in high volume of audit logs. It's recommended for customers to [configure auditing for different types of actions and action groups using PowerShell](./auditing-manage-using-api.md). Configuring this will help control the number of audited actions, and minimize the risk of event loss. Custom audit configurations allow customers to capture only the audit data that is needed.
+- By configuring [Auditing for Azure SQL Database](auditing-overview.md) or [Azure SQL Managed Instance](../managed-instance/auditing-configure.md) to audit events, all existing and newly created databases on that server will be audited.
+- By default auditing policy includes all actions (queries, stored procedures and successful and failed logins) against the databases, which might result in high volume of audit logs. It's recommended for customers to [configure auditing for different types of actions and action groups using PowerShell](auditing-manage-using-api.md). Configuring this will help control the number of audited actions, and minimize the risk of event loss. Custom audit configurations allow customers to capture only the audit data that is needed.
 - Audit logs can be consumed directly in the [Azure portal](https://portal.azure.com/), or from the storage location that was configured.
 
 > [!NOTE]  
@@ -675,7 +676,8 @@ Tracking of database events helps you understand database activity. You can gain
 
 **Further resources**
 
-- [SQL Database Auditing](./auditing-overview.md)
+- [Auditing for Azure SQL Database](auditing-overview.md)
+- [Auditing for Azure SQL Managed Instance](../managed-instance/auditing-configure.md)
 - [SQL Server Auditing](/sql/relational-databases/security/auditing/sql-server-audit-database-engine)
 
 ### Secure audit logs
@@ -726,7 +728,7 @@ Discover columns that potentially contain sensitive data. What is considered sen
 
 **How to implement**
 
-- Use [SQL Data Discovery and Classification](data-discovery-and-classification-overview.md) to discover, classify, label, and protect the sensitive data in your databases.
+- Use [Data Discovery and Classification](data-discovery-and-classification-overview.md) to discover, classify, label, and protect the sensitive data in your databases.
   - View the classification recommendations that are created by the automated discovery in the SQL Data Discovery and Classification dashboard. Accept the relevant classifications, such that your sensitive data is persistently tagged with classification labels.
   - Manually add classifications for any additional sensitive data fields that were not discovered by the automated mechanism.
 - For more information, see [SQL Data Discovery and Classification](/sql/relational-databases/security/sql-data-discovery-and-classification).
@@ -790,19 +792,20 @@ Today, Azure SQL Database and SQL Managed Instance offers the following techniqu
 
 ## Security aspects of business continuity and availability
 
-Most security standards address data availability in terms of operational continuity, achieved by implementing redundancy and fail-over capabilities to avoid single points of failure. For disaster scenarios, it's a common practice to keep backups of Data and Log files. The following section provides a high-level overview of the capabilities that are built-into Azure. It also provides additional options that can be configured to meet specific needs:
+Most security standards address data availability in terms of operational continuity, achieved by implementing redundancy and fail-over capabilities to avoid single points of failure. For disaster scenarios, it's a common practice to keep backups of Data and Log files. The following section provides a high-level overview of the capabilities that are built-into Azure. It also provides additional options that can be configured to meet specific needs:
 
-- Azure offers built-in high-availability: [High-availability with SQL Database and SQL Managed Instance](high-availability-sla-local-zone-redundancy.md)
+- Azure offers built-in high-availability: [Availability through redundancy -  Azure SQL Database](high-availability-sla-local-zone-redundancy.md)
 
 - The Business Critical tier includes failover groups, full and differential log backups, and point-in-time-restore backups enabled by default:
-  - [Automated backups](automated-backups-overview.md)
+  - [Automated backups in Azure SQL Database](automated-backups-overview.md)
   - [Recover a database using automated database backups - Point-in-time restore](recovery-using-backups.md#point-in-time-restore)
 
 - Additional business continuity features such as the zone redundant configuration and failover groups across different Azure geos can be configured:  
   - [High-availability - Zone redundant configuration for Premium & Business Critical service tiers](high-availability-sla-local-zone-redundancy.md#zone-redundant-availability)
   - [High-availability - Zone redundant configuration for General Purpose service tier](high-availability-sla-local-zone-redundancy.md#zone-redundant-availability)
-  - [Overview of business continuity](business-continuity-high-availability-disaster-recover-hadr-overview.md)
+  - [Business continuity in Azure SQL Database](business-continuity-high-availability-disaster-recover-hadr-overview.md)
 
-## Next steps
+## Next step
 
-- See [An overview of Azure SQL Database security capabilities](security-overview.md)
+> [!div class="nextstepaction"]
+> [An overview of Azure SQL Database and SQL Managed Instance security capabilities](security-overview.md)
