@@ -1,7 +1,7 @@
 ---
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 01/21/2025
+ms.date: 06/16/2025
 ms.service: sql
 ms.topic: include
 ms.custom:
@@ -10,11 +10,6 @@ ms.custom:
 <a id="ubuntu"></a>
 
 Use the following steps to install the **mssql-tools18** on Ubuntu.
-
-> [!NOTE]  
->  
-> - Ubuntu 18.04 is supported starting with [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] CU 3.
-> - Ubuntu 20.04 is supported starting with [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] CU 10.
 
 1. Import the public repository GPG keys.
 
