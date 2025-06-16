@@ -1,8 +1,8 @@
 ---
 title: "Create a Domain Rule"
 description: "Create a Domain Rule"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "11/08/2011"
 ms.service: sql
 ms.subservice: data-quality-services

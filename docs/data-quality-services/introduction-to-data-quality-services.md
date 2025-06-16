@@ -1,8 +1,8 @@
 ---
 title: "Introduction to Data Quality Services"
 description: "Introduction to Data Quality Services"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "03/05/2012"
 ms.service: sql
 ms.subservice: data-quality-services

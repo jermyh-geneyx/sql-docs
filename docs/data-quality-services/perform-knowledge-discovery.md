@@ -1,8 +1,8 @@
 ---
 title: "Perform Knowledge Discovery"
 description: "Perform Knowledge Discovery"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "06/04/2013"
 ms.service: sql
 ms.subservice: data-quality-services

@@ -1,8 +1,8 @@
 ---
 title: "Run the Data Quality Client Application"
 description: "Run the Data Quality Client Application"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "03/01/2017"
 ms.service: sql
 ms.subservice: data-quality-services

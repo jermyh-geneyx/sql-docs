@@ -1,8 +1,8 @@
 ---
 title: "Create a Composite Domain"
 description: "Create a Composite Domain"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "11/22/2011"
 ms.service: sql
 ms.subservice: data-quality-services
