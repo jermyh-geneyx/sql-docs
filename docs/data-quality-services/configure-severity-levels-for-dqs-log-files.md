@@ -1,8 +1,8 @@
 ---
 title: "Configure Severity Levels for DQS Log Files"
 description: "Configure Severity Levels for DQS Log Files"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "03/01/2017"
 ms.service: sql
 ms.subservice: data-quality-services

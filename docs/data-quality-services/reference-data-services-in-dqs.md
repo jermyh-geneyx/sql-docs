@@ -1,8 +1,8 @@
 ---
 title: "Reference Data Services in DQS"
 description: "Reference Data Services in DQS"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "10/01/2012"
 ms.service: sql
 ms.subservice: data-quality-services

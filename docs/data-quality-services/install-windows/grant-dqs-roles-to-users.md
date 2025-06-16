@@ -1,8 +1,8 @@
 ---
 title: "Grant DQS Roles to Users"
 description: "Grant DQS Roles to Users"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "03/01/2017"
 ms.service: sql
 ms.subservice: data-quality-services

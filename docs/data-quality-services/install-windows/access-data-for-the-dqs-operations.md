@@ -1,8 +1,8 @@
 ---
 title: "Access Data for the DQS Operations"
 description: "Access Data for the DQS Operations"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "03/01/2017"
 ms.service: sql
 ms.subservice: data-quality-services

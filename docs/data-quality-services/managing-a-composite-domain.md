@@ -1,8 +1,8 @@
 ---
 title: "Managing a Composite Domain"
 description: "Managing a Composite Domain"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "07/31/2012"
 ms.service: sql
 ms.subservice: data-quality-services

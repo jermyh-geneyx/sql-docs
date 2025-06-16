@@ -1,8 +1,8 @@
 ---
 title: "Configure DQS to Use Reference Data"
 description: "Configure DQS to Use Reference Data"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "03/01/2017"
 ms.service: sql
 ms.subservice: data-quality-services
