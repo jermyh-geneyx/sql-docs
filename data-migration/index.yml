@@ -7,7 +7,7 @@ metadata:
   description: Step-by-step guidance for modernizing your data assets by migrating to SQL Server, Azure SQL Database, Azure SQL Managed Instance, Azure Database, Azure Cosmos DB, SQL Server on Azure VMs and Azure Synapse Analytics.
   author: rwestMSFT
   ms.author: randolphwest
-  ms.date: 11/19/2024
+  ms.date: 06/16/2024
   ms.service: sql
   ms.subservice: migration-guide
   ms.topic: hub-page
@@ -204,10 +204,6 @@ additionalContent:
   sections:
     - title: Recent customer case studies
       items:
-        - title: Intershop (United States)
-          summary: Intershop, an e-commerce leader, migrates to SQL Server and Azure SQL Database from Oracle, boosts product performance and opens markets.
-          url: https://customers.microsoft.com/story/intershop-partner-professional-services-azure-sql-database
-        # Card
         - title: Minecraft Realms (United States)
           summary: Minecraft Realms migrates from AWS to Azure with minimal disruption to the user base.
           url: https://developer.microsoft.com/games/blog/migrating-minecraft-realms-from-aws-to-azure/
