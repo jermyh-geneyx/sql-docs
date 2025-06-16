@@ -48,7 +48,7 @@ Currently, in the US Government Virginia region, SQL Server registration provide
    - View databases as an Azure resource. 
    - View the properties for each server. For example, you can view the version, edition, and database for each instance.
 
-[All other features](overview.md#feature-differentiation), including license management, and Extended Security Updates (ESU), are not currently available.
+[All other features](overview.md#feature-differentiation), including Extended Security Updates (ESU), are not currently available.
 
 ## Limitations
 
