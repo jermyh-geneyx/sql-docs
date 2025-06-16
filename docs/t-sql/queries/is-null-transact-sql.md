@@ -1,9 +1,10 @@
 ---
 title: "IS NULL (Transact-SQL)"
-description: "IS NULL (Transact-SQL)"
+description: Determines whether a specified expression is null.
 author: VanMSFT
 ms.author: vanto
-ms.date: "03/16/2017"
+ms.reviewer: randolphwest
+ms.date: 06/16/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -33,74 +34,89 @@ dev_langs:
 monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # IS NULL (Transact-SQL)
+
 [!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricse-FabricDW-FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw-fabricsqldb.md)]
 
-  Determines whether a specified expression is NULL.  
-  
- :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md)  
-  
-## Syntax  
-  
+Determines whether a specified expression is `NULL`.
+
+:::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md)
+
+## Syntax
+
 ```syntaxsql
-expression IS [ NOT ] NULL  
-```  
-  
+expression IS [ NOT ] NULL
+```
+
 ## Arguments
- *expression*  
- Is any valid [expression](../../t-sql/language-elements/expressions-transact-sql.md).  
-  
- NOT  
- Specifies that the Boolean result be negated. The predicate reverses its return values, returning TRUE if the value is not NULL, and FALSE if the value is NULL.  
-  
-## Result Types  
- **Boolean**  
-  
-## Return Code Values  
- If the value of *expression* is NULL, IS NULL returns TRUE; otherwise, it returns FALSE.  
-  
- If the value of *expression* is NULL, IS NOT NULL returns FALSE; otherwise, it returns TRUE.  
-  
-## Remarks  
- To determine whether an expression is NULL, use IS NULL or IS NOT NULL instead of comparison operators (such as = or !=). Comparison operators return UNKNOWN when either or both arguments are NULL.  
-  
-## Examples  
- The following example returns the name and the weight for all products for which either the weight is less than `10` pounds or the color is unknown, or `NULL`.  
-  
+
+#### *expression*
+
+Any valid [expression](../language-elements/expressions-transact-sql.md).
+
+- `NOT`
+
+  Specifies that the Boolean result is negated. The predicate reverses its return values, returning `TRUE` if the value isn't `NULL`, and `FALSE` if the value is `NULL`.
+
+## Return types
+
+**Boolean**
+
+## Return code values
+
+If the value of *expression* is `NULL`, `IS NULL` returns `TRUE`; otherwise, it returns `FALSE`.
+
+If the value of *expression* is `NULL`, `IS NOT NULL` returns `FALSE`; otherwise, it returns `TRUE`.
+
+## Remarks
+
+To determine whether an expression is `NULL`, use `IS NULL` or `IS NOT NULL` instead of comparison operators (such as `=` or `!=`). Comparison operators return `UNKNOWN` when either or both arguments are `NULL`.
+
+## Examples
+
+[!INCLUDE [article-uses-adventureworks](../../includes/article-uses-adventureworks.md)]
+
+### A. Return the name and weight for all products
+
+The following example returns the name and the weight for all products for which either the weight is less than 10 pounds, or the color is unknown, or `NULL`.
+
 ```sql
-USE AdventureWorks2022;  
-GO  
-SELECT Name, Weight, Color  
-FROM Production.Product  
-WHERE Weight < 10.00 OR Color IS NULL  
-ORDER BY Name;  
-GO  
-```  
-  
-## Examples: [!INCLUDE[ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] and [!INCLUDE[ssPDW](../../includes/sspdw-md.md)]  
- The following example returns the full names of all employees with middle initials.  
-  
+SELECT Name,
+       Weight,
+       Color
+FROM Production.Product
+WHERE Weight < 10.00
+      OR Color IS NULL
+ORDER BY Name;
+GO
+```
+
+## Examples: Azure Synapse Analytics and Analytics Platform System (PDW)
+
+### B. Return the full names of all employees with initials
+
+The following example returns the full names of all employees with middle initials.
+
 ```sql
--- Uses AdventureWorks  
-  
-SELECT FirstName, LastName, MiddleName  
-FROM DIMEmployee  
-WHERE MiddleName IS NOT NULL  
-ORDER BY LastName DESC;  
-```  
-  
-## See Also  
- [CASE &#40;Transact-SQL&#41;](../../t-sql/language-elements/case-transact-sql.md)   
- [CREATE PROCEDURE &#40;Transact-SQL&#41;](../../t-sql/statements/create-procedure-transact-sql.md)   
- [CREATE TABLE &#40;Transact-SQL&#41;](../../t-sql/statements/create-table-transact-sql.md)   
- [Data Types &#40;Transact-SQL&#41;](../../t-sql/data-types/data-types-transact-sql.md)   
- [Expressions &#40;Transact-SQL&#41;](../../t-sql/language-elements/expressions-transact-sql.md)   
- [INSERT &#40;Transact-SQL&#41;](../../t-sql/statements/insert-transact-sql.md)   
- [LIKE &#40;Transact-SQL&#41;](../../t-sql/language-elements/like-transact-sql.md)   
- [Operators &#40;Transact-SQL&#41;](../../t-sql/language-elements/operators-transact-sql.md)   
- [Logical Operators &#40;Transact-SQL&#41;](../../t-sql/language-elements/logical-operators-transact-sql.md)   
- [SELECT &#40;Transact-SQL&#41;](../../t-sql/queries/select-transact-sql.md)   
- [sp_help &#40;Transact-SQL&#41;](../../relational-databases/system-stored-procedures/sp-help-transact-sql.md)   
- [UPDATE &#40;Transact-SQL&#41;](../../t-sql/queries/update-transact-sql.md)   
- [WHERE &#40;Transact-SQL&#41;](../../t-sql/queries/where-transact-sql.md)  
-  
-  
+SELECT FirstName,
+       LastName,
+       MiddleName
+FROM DIMEmployee
+WHERE MiddleName IS NOT NULL
+ORDER BY LastName DESC;
+```
+
+## Related content
+
+- [CASE (Transact-SQL)](../language-elements/case-transact-sql.md)
+- [CREATE PROCEDURE (Transact-SQL)](../statements/create-procedure-transact-sql.md)
+- [CREATE TABLE (Transact-SQL)](../statements/create-table-transact-sql.md)
+- [Data types (Transact-SQL)](../data-types/data-types-transact-sql.md)
+- [Expressions (Transact-SQL)](../language-elements/expressions-transact-sql.md)
+- [INSERT (Transact-SQL)](../statements/insert-transact-sql.md)
+- [LIKE (Transact-SQL)](../language-elements/like-transact-sql.md)
+- [Operators (Transact-SQL)](../language-elements/operators-transact-sql.md)
+- [Logical Operators (Transact-SQL)](../language-elements/logical-operators-transact-sql.md)
+- [SELECT (Transact-SQL)](select-transact-sql.md)
+- [sp_help](../../relational-databases/system-stored-procedures/sp-help-transact-sql.md)
+- [UPDATE (Transact-SQL)](update-transact-sql.md)
+- [WHERE (Transact-SQL)](where-transact-sql.md)
