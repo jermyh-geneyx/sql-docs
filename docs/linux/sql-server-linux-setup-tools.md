@@ -12,7 +12,7 @@ ms.custom:
   - intro-installation
   - linux-related-content
 ---
-# Install the SQL Server command-line tools sqlcmd and bcp on Linux
+# Install the sqlcmd and bcp SQL Server command-line tools on Linux
 
 [!INCLUDE [SQL Server - Linux](../includes/applies-to-version/sql-linux.md)]
 

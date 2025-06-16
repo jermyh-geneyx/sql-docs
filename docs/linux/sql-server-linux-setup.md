@@ -147,7 +147,7 @@ To upgrade [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], first [ch
 
 To verify your current version and edition of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Linux, use the following procedure:
 
-1. If not already installed, see [Install the SQL Server command-line tools sqlcmd and bcp on Linux](sql-server-linux-setup-tools.md).
+1. If not already installed, see [Install the sqlcmd and bcp SQL Server command-line tools on Linux](sql-server-linux-setup-tools.md).
 
 1. Use **sqlcmd** to run a Transact-SQL command that displays your [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] version and edition.
 
@@ -249,7 +249,7 @@ If your Linux machine doesn't have access to the online repositories used in the
 
 After installation, you can also install or enable optional [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] features.
 
-- [Install the SQL Server command-line tools sqlcmd and bcp on Linux](sql-server-linux-setup-tools.md)
+- [Install the sqlcmd and bcp SQL Server command-line tools on Linux](sql-server-linux-setup-tools.md)
 - [Install SQL Server Agent on Linux](sql-server-linux-setup-sql-agent.md)
 - [Install SQL Server Full-Text Search on Linux](sql-server-linux-setup-full-text-search.md)
 - [Install SQL Server 2019 Machine Learning Services (Python and R) on Linux](sql-server-linux-setup-machine-learning.md)
