@@ -159,7 +159,7 @@ WHERE [UserID] = 1;
 
 Graphic visualization is especially convenient for temporal queries as you can show trends and usage patterns in an intuitive way very easily:
 
-:::image type="content" source="media/temporal-tables/temporal-table-graph-example.png" alt-text="Graph of visted pages over time, based on temporal table history table data." lightbox="media/temporal-tables/temporal-table-graph-example.png":::
+:::image type="content" source="media/temporal-tables/temporal-table-graph-example.png" alt-text="Graph of visited pages over time, based on temporal table history table data." lightbox="media/temporal-tables/temporal-table-graph-example.png":::
 
 <a id="evolving-table-schema"></a>
 

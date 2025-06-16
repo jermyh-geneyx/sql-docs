@@ -48,7 +48,7 @@ Outbound firewall rules limit network traffic from the [Azure SQL Database logic
 
 1. After you're done, you should see a screen similar to the one below. Select **OK** to apply these settings.
 
-   :::image type="content" source="media/outbound-firewall-rule-overview/fully-qualified-domain-names.png" alt-text="Screenshot of of Outbound Networking pane after fully-qualified domain names are added.":::
+   :::image type="content" source="media/outbound-firewall-rule-overview/fully-qualified-domain-names.png" alt-text="Screenshot of Outbound Networking pane after fully-qualified domain names are added.":::
 
 ## Set outbound firewall rules using PowerShell
 
