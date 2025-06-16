@@ -2,9 +2,9 @@
 title: Distributed Transactions Across Cloud Databases
 titleSuffix: Azure SQL Database & Azure SQL Managed Instance
 description: Overview of Elastic Database Transactions with Azure SQL Database and Azure SQL Managed Instance.
-author: scoriani
-ms.author: scoriani
-ms.reviewer: wiassaf, mathoma
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: scoriani, mathoma
 ms.date: 06/13/2025
 ms.service: azure-sql
 ms.subservice: scale-out

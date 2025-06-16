@@ -125,7 +125,5 @@ For pricing information, see [SQL Database pricing details](https://azure.micros
 
 - [.NET](https://github.com/Azure/elastic-db-tools)
 - [Java](https://search.maven.org/#search%7Cga%7C1%7Ca%3A%22azure-elasticdb-tools%22)
-- [Elastic Database Tools for Azure SQL - Entity Framework Integration](/Elastic-Scale-with-Azure-bae904ba)
-- [Elastic Scale announcement](https://azure.microsoft.com/blog/20../../introducing-elastic-scale-preview-for-azure-sql-database/)
-- [Microsoft Q&A question page for Azure SQL Database](/answers/topics/azure-sql-database.html)
+- [Blog: Elastic Scale announcement](https://azure.microsoft.com/blog/introducing-elastic-scale-preview-for-azure-sql-database/)
 - [Building scalable cloud databases](elastic-database-client-library.md)
