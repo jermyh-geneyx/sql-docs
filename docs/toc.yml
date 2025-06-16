@@ -2217,8 +2217,8 @@ items:
         href: relational-databases/xml/xml-system-stored-procedures.md
       - name: Use the value() & nodes() Methods with OPENXML
         href: relational-databases/xml/use-the-value-and-nodes-methods-with-openxml.md
-  - name: Vectors in the SQL Database Engine
-    href: relational-databases/vectors/vectors-sql-server.md
+  - name: Vectors and Embeddings
+    href: relational-databases/vectors/vectors-sql-server.md    
 - name: Development
   items:
   - name: Code a client program >
@@ -7054,6 +7054,8 @@ items:
         href: relational-databases/resource-governor/resource-governor-classifier-function.md
       - name: Tempdb space resource governance
         href: relational-databases/resource-governor/tempdb-space-resource-governance.md
+      - name: Examples to configure tempdb space resource governance
+        href: relational-databases/resource-governor/tempdb-space-resource-governance-walkthrough.md
     - name: Statistics
       href: relational-databases/statistics/statistics.md
       items:
@@ -7133,8 +7135,10 @@ items:
           href: relational-databases/polybase/virtualize-csv.md
         - name: Virtualize delta table in Azure Storage
           href: relational-databases/polybase/virtualize-delta.md
-        - name: ODBC Generic Types
+        - name: ODBC generic types
           href: relational-databases/polybase/polybase-configure-odbc-generic.md
+        - name: Change ODBC driver
+          href: relational-databases/polybase/polybase-change-odbc-driver.md
       - name: Scale-out groups
         items:
         - name: Configure a scale-out group
@@ -11649,6 +11653,8 @@ items:
         href: relational-databases/system-catalog-views/sys-trigger-events-transact-sql.md
       - name: sys.triggers
         href: relational-databases/system-catalog-views/sys-triggers-transact-sql.md
+      - name: sys.vector_indexes
+        href: relational-databases/system-catalog-views/sys-vector-indexes-transact-sql.md
       - name: sys.views
         href: relational-databases/system-catalog-views/sys-views-transact-sql.md
     - name: Partition Function
@@ -11973,7 +11979,7 @@ items:
       - name: sys.xml_schema_wildcard_namespaces
         href: relational-databases/system-catalog-views/sys-xml-schema-wildcard-namespaces-transact-sql.md
       - name: sys.xml_schema_wildcards
-        href: relational-databases/system-catalog-views/sys-xml-schema-wildcards-transact-sql.md
+        href: relational-databases/system-catalog-views/sys-xml-schema-wildcards-transact-sql.md    
   - name: System compatibility views
     href: relational-databases/system-compatibility-views/system-compatibility-views-transact-sql.md
     items:
@@ -15045,10 +15051,6 @@ items:
         href: t-sql/data-types/nchar-and-nvarchar-transact-sql.md
       - name: ntext, text, & image
         href: t-sql/data-types/ntext-text-and-image-transact-sql.md
-    - name: Vectors
-      items:
-      - name: Vector data type
-        href: t-sql/data-types/vector-data-type.md
     - name: Spatial geography & instances (geography Data Type)
       href: t-sql/spatial-geography/spatial-types-geography.md
       items:
@@ -15453,7 +15455,13 @@ items:
       - name: uniqueidentifier
         href: t-sql/data-types/uniqueidentifier-transact-sql.md
     - name: Vectors
-      href: t-sql/functions/vector-functions-transact-sql.md
+      items:
+      - name: Vector data type
+        href: t-sql/data-types/vector-data-type.md
+      - name: Vectors functions
+        href: t-sql/functions/vector-functions-transact-sql.md
+      - name: Vectors indexes
+        href: relational-databases/vectors/vectors-sql-server.md
     - name: XML
       href: t-sql/xml/xml-transact-sql.md
       items:

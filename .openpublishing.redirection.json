@@ -66801,6 +66801,11 @@
       "redirect_document_id": false
     },
     {
+      "source_path": "docs/sql-server/editions-and-components-of-sql-server-2025.md",
+      "redirect_url": "/sql/sql-server/editions-and-components-of-sql-server-2022",
+      "redirect_document_id": false
+    },
+    {
       "source_path": "docs/sql-server/sql-server-version-15-release-notes.md",
       "redirect_url": "/sql/sql-server/sql-server-2019-release-notes",
       "redirect_document_id": false

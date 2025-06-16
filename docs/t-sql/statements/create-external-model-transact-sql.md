@@ -4,7 +4,7 @@ description: CREATE EXTERNAL MODEL (Transact-SQL) for creating an external model
 author: jettermctedder
 ms.author: bspendolini
 ms.reviewer: randolphwest
-ms.date: 04/21/2025
+ms.date: 06/03/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: "reference"
@@ -124,6 +124,28 @@ GRANT EXECUTE ON EXTERNAL MODEL::MODEL_NAME TO [<PRINCIPAL>];
 GO
 ```
 
+## Retry count
+
+If the embeddings call encounters HTTP status codes indicating temporary issues, you can configure the request to automatically retry. To specify the number of retries, add the following JSON to the `PARAMETERS` on the `EXTERNAL MODEL`. The **NUMBER_OF_RETRIES** should be a whole number between zero (0) and ten (10), inclusive, and can't be NULL or negative
+
+```JSON
+{"sql_rest_options":{"retry_count":NUMBER_OF_RETRIES}}
+```
+
+For example, to set the `retry count` to 3, you would write the following JSON string:
+
+```JSON
+{"sql_rest_options":{"retry_count":3}}
+```
+
+### Retry count with other parameters
+
+Retry count can also be combined with other parameters as long as it's a valid JSON string.
+
+```JSON
+{"Dimensions":725,"sql_rest_options":{"retry_count":5}}
+```
+
 ## Remarks
 
 ### HTTPS and TLS
@@ -174,11 +196,58 @@ As there's a collation rule set at the database level, the following logic is ap
    - Check all other segments of the URL are compared in a case-sensitive collation (`Latin1_General_100_BIN2`)
 1. Check that the URL and credential match using the database collation rules (and without doing any URL encoding).
 
+### Managed Identity
+
+To use [Managed Identity](/entra/identity/managed-identities-azure-resources/overview) for authentication on SQL Server 2025, you must enable the option by using `sp_configure` with a user that is [granted the ALTER SETTINGS server-level permission](../../relational-databases/system-stored-procedures/sp-configure-transact-sql.md#permissions).
+
+```sql
+EXECUTE sp_configure 'allow server scoped db credentials', 1;
+
+RECONFIGURE WITH OVERRIDE;
+```
+
+### SCHEMABINDING
+
+Dropping views created with `SCHEMABINDING` and referencing an `EXTERNAL MODEL` (such as a SELECT statement using `AI_GENERATE_EMBEDDINGS`) is prevented with the Database Engine raising an error. The view definition itself must first be modified or dropped to remove dependencies referencing an `EXTERNAL MODEL`.
+
+## Catalog View
+
+External Model metadata is viewed by querying the `sys.external_models` catalog view. Note, you must have access to a model to be able to view the metadata.
+
+```sql
+SELECT * FROM sys.external_models;
+```
+
 ## Examples
 
-### Create an EXTERNAL MODEL with Azure OpenAI
+### Create an EXTERNAL MODEL with Azure OpenAI using Managed Identity
 
 This example creates an EXTERNAL MODEL of the EMBEDDINGS type using Azure OpenAI and uses [Managed Identity](/entra/identity/managed-identities-azure-resources/overview) for authentication.
+
+> [!IMPORTANT]
+> If using Managed Identity with Azure OpenAI and SQL Server 2025, the [**`Cognitive Services OpenAI Contributor`**](/azure/role-based-access-control/built-in-roles#ai--machine-learning) role must be granted to [SQL Server's system-assigned managed identity by ARC](../../sql-server/azure-arc/managed-identity.md). For more information, see [Role-based access control for Azure OpenAI in Azure AI Foundry Models](/azure/ai-services/openai/how-to/role-based-access-control).
+
+```sql
+-- Create access credentials to Azure OpenAI using a managed identity:
+CREATE DATABASE SCOPED CREDENTIAL [https://my-azure-openai-endpoint.openai.azure.com/]
+    WITH IDENTITY = 'Managed Identity', secret = '{"resourceid":"https://cognitiveservices.azure.com"}';
+GO
+
+-- Create the EXTERNAL MODEL
+CREATE EXTERNAL MODEL MyAzureOpenAiModel
+AUTHORIZATION CRM_User
+WITH (
+      LOCATION = 'https://my-azure-openai-endpoint.openai.azure.com/openai/deployments/text-embedding-ada-002/embeddings?api-version=2024-02-01',
+      API_FORMAT = 'Azure OpenAI',
+      MODEL_TYPE = EMBEDDINGS,
+      MODEL = 'text-embedding-ada-002',
+      CREDENTIAL = [https://my-azure-openai-endpoint.openai.azure.com/]
+);
+```
+
+### Create an EXTERNAL MODEL with Azure OpenAI using API keys and parameters
+
+This example creates an EXTERNAL MODEL of the EMBEDDINGS type using Azure OpenAI and uses API Keys for authentication. The example also uses `PARAMETERS` to set the Dimensions parameter at the endpoint to 725.
 
 ```sql
 -- Create access credentials to Azure OpenAI using a key:
@@ -190,23 +259,18 @@ GO
 CREATE EXTERNAL MODEL MyAzureOpenAiModel
 AUTHORIZATION CRM_User
 WITH (
-      LOCATION = 'https://azureopenaiserver.openai.azure.com/openai/deployments/text-embedding-ada-002/embeddings?api-version=2024-02-01',
+      LOCATION = 'https://my-azure-openai-endpoint.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2024-02-01',
       API_FORMAT = 'Azure OpenAI',
       MODEL_TYPE = EMBEDDINGS,
-      MODEL = 'text-embedding-ada-002',
-      CREDENTIAL = [https://my-azure-openai-endpoint.openai.azure.com]
+      MODEL = 'text-embedding-3-small',
+      CREDENTIAL = [https://my-azure-openai-endpoint.openai.azure.com/],
+      PARAMETERS = '{"Dimensions":725}'
 );
 ```
 
-Verify the new external model is created, by querying the `sys.external_models` catalog view.
+### Create an EXTERNAL MODEL with Ollama and an explicit owner
 
-```sql
-SELECT * FROM sys.external_models;
-```
-
-### Create an EXTERNAL MODEL with Ollama, default parameters, and an explicit owner
-
-This example creates an `EXTERNAL MODEL` of the `EMBEDDINGS` type using Ollama hosted locally for development purposes. The example also uses `PARAMETERS` to set the Dimensions parameter at the endpoint to 725.
+This example creates an `EXTERNAL MODEL` of the `EMBEDDINGS` type using Ollama hosted locally for development purposes.
 
 ```sql
 CREATE EXTERNAL MODEL MyOllamaModel
@@ -215,8 +279,7 @@ WITH (
       LOCATION = 'https://localhost:11435/api/embed',
       API_FORMAT = 'Ollama',
       MODEL_TYPE = EMBEDDINGS,
-      MODEL = 'all-minilm',
-      PARAMETERS = '{"Dimensions":"725"}'
+      MODEL = 'all-minilm'
 );
 ```
 
@@ -250,3 +313,5 @@ WITH (
 - [AI_GENERATE_CHUNKS (Transact-SQL)](../functions/ai-generate-chunks-transact-sql.md)
 - [sys.external_models](../../relational-databases/system-catalog-views/sys-external-models-transact-sql.md)
 - [Create and deploy an Azure OpenAI Service resource](/azure/ai-services/openai/how-to/create-resource)
+- [Server configuration options](../../database-engine/configure-windows/server-configuration-options-sql-server.md)
+- [Role-based access control for Azure OpenAI in Azure AI Foundry Models](/azure/ai-services/openai/how-to/role-based-access-control)

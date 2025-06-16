@@ -4,7 +4,7 @@ description: sys.resource_governor_workload_groups (Transact-SQL)
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: dfurman
-ms.date: 04/15/2025
+ms.date: 06/09/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -40,7 +40,8 @@ Returns the stored workload group configuration. Each row represents a workload 
 | `pool_id` | **int** | ID of the resource pool that this workload group uses. |
 | `external_pool_id` | **int** | **Applies to**: [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)] and later.<br /><br /> ID of the external resource pool that this workload group uses. |
 | `request_max_memory_grant_percent_numeric` | **float** | **Applies to**: [!INCLUDE[sql-server-2019](../../includes/sssql19-md.md)] and later.<br /><br /> Maximum memory grant for a single request, as a percentage of the total query workspace memory for a resource pool. The default value is 25. Not nullable.<br /><br /> **Note:** Matches `request_max_memory_grant_percent`, but includes fractions of a percent if specified when creating or modifying a workload group. |
-| `group_max_tempdb_data_mb` | **float** | **Applies to**: Starting with [!INCLUDE [sql-server-2025](../../includes/sssql25-md.md)]<br /><br />Maximum amount of space in the `tempdb` data files that can be consumed by sessions in a given workload group, in megabytes.  When `NULL`, resource governor doesn't limit space consumption in `tempdb`. Nullable. |
+| `group_max_tempdb_data_percent` | **float** | **Applies to**: Starting with [!INCLUDE [sql-server-2025](../../includes/sssql25-md.md)]<br /><br />The maximum amount of space in the `tempdb` data files that can be consumed by sessions in a given workload group, in percent of the [maximum tempdb size](../resource-governor/tempdb-space-resource-governance.md#percent-limit-configuration). When `group_max_tempdb_data_percent` and `group_max_tempdb_data_mb` are both `NULL`, resource governor doesn't limit space consumption in `tempdb`. Nullable. |
+| `group_max_tempdb_data_mb` | **float** | **Applies to**: Starting with [!INCLUDE [sql-server-2025](../../includes/sssql25-md.md)]<br /><br />The maximum amount of space in the `tempdb` data files that can be consumed by sessions in a given workload group, in megabytes. When `group_max_tempdb_data_percent` and `group_max_tempdb_data_mb` are both `NULL`, resource governor doesn't limit space consumption in `tempdb`. Nullable. |
 
 ## Remarks
 

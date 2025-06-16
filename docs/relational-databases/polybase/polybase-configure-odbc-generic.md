@@ -4,13 +4,13 @@ description: PolyBase in SQL Server allows you to connect to compatible data sou
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: mikeray, randolphwest
-ms.date: 04/29/2025
+ms.date: 06/11/2025
 ms.service: sql
 ms.subservice: polybase
 ms.topic: how-to
-monikerRange: ">=sql-server-linux-ver15 || >=sql-server-ver15"
 ms.custom:
   - build-2025
+monikerRange: ">=sql-server-linux-ver15 || >=sql-server-ver15"
 ---
 # Configure PolyBase to access external data with ODBC generic types
 
@@ -23,7 +23,7 @@ This article demonstrates how to create configuring connectivity using an ODBC d
 ## Prerequisites
 
 > [!NOTE]  
-> Prior to [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], this feature requires SQL Server on Windows.
+> In [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and previous versions, this feature requires SQL Server on Windows.
 
 - PolyBase must be installed and enabled for your SQL Server instance [PolyBase installation](polybase-installation.md).
 
@@ -32,6 +32,19 @@ This article demonstrates how to create configuring connectivity using an ODBC d
 ## Install the ODBC driver
 
 Follow the installation instructions for your operating system.
+
+::: moniker range=">=sql-server-linux-ver17 || >=sql-server-ver17"
+
+[!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] defaults to Microsoft ODBC Driver version 18 for SQL Server, for PolyBase `sqlserver` data sources. This driver supports TDS 8.0 and includes various updates, features, and some breaking changes. To use TDS 8.0, you must use a new encryption option, and install a trusted certificate on your server.
+
+For more information about Microsoft ODBC Driver version 18 for SQL Server, see:
+
+- [Download ODBC Driver for SQL Server](../../connect/odbc/download-odbc-driver-for-sql-server.md)
+- [ODBC Driver 18.0 for SQL Server Released | Microsoft Community Hub](https://techcommunity.microsoft.com/blog/sqlserver/odbc-driver-18-0-for-sql-server-released/3169228)
+
+For more information about SQL Server TDS 8.0 support, see [TDS 8.0](../security/networking/tds-8.md).
+
+::: moniker-end
 
 ### [Windows](#tab/windows)
 
@@ -136,7 +149,7 @@ The service uses the default port number `25100`. If this port is in use, it fai
 Failed to bind port "127.0.0.1:25100"
 ```
 
-You can find this message in PolyBase's log file, located at: `/var/opt/mssql-polybase-ees/log/`
+You can find this message in PolyBase's log file, located at: `/var/opt/mssql-polybase-ees/log/`. In [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions, the location has moved to `/var/opt/mssql/log/polybase-ees-log`.
 
 To fix, customize the service to use an available port and restart.
 
@@ -148,6 +161,18 @@ To fix, customize the service to use an available port and restart.
 
    ```bash
    sudo /opt/mssql/lib/dotnet6/dotnet/opt/mssql/lib/ExternalExecutionService.dll -port <newportnumber>
+   ```
+
+   In [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions, use the following command instead:
+
+   ```bash
+   sudo /opt/mssql/bin/mssql-conf set polybaseEES eesport <newportnumber>
+   ```
+
+1. You're prompted to restart the PolyBase service.
+
+   ```bash
+   systemctl restart mssql-ees.service
    ```
 
 ---

@@ -4,7 +4,7 @@ description: Learn about the SQL Server resource governor feature that limits th
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: dfurman
-ms.date: 04/15/2025
+ms.date: 06/10/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
@@ -20,7 +20,9 @@ ms.custom:
 
 [!INCLUDE [SQL Server SQL MI](../../includes/applies-to-version/sql-asdbmi.md)]
 
-You can use resource governor to manage [!INCLUDE[ssde-md](../../includes/ssde-md.md)] resource consumption and enforce policies for user workloads. Resource governor lets you reserve or limit the amount of CPU, memory, and physical I/O that user query workloads can use. You can also modify resource consumption behavior of each query, such as the degree of parallelism or the size of a memory grant. Starting with [!INCLUDE [sql-server-2025](../../includes/sssql25-md.md)], you can use resource governor to [enforce a limit](tempdb-space-resource-governance.md) on the total amount of `tempdb` space consumed by an application or user workload.
+You can use resource governor to manage [!INCLUDE[ssde-md](../../includes/ssde-md.md)] resource consumption and enforce policies for user workloads. Resource governor lets you reserve or limit the amount of CPU, memory, and physical I/O that user query workloads can use. You can also modify resource consumption behavior of each query, such as the degree of parallelism or the size of a memory grant.
+
+Starting with [!INCLUDE [sql-server-2025](../../includes/sssql25-md.md)], you can use resource governor to enforce limits on the total amount of `tempdb` space consumed by an application or user workload. For more information, see [Tempdb space resource governance](tempdb-space-resource-governance.md).
 
 For configuration and monitoring examples and to learn resource governor best practices, see [Tutorial: Resource governor configuration examples and best practices](resource-governor-walkthrough.md).
 

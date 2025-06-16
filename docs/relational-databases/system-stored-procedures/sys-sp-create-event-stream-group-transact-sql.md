@@ -38,7 +38,7 @@ sp_create_event_stream_group
     , [ @destination_type = ] N'destination_type'
     , [ @destination_location = ] N'destination_location'
     [, [ @destination_credential = ] N'destination_credential' ]
-    [, [ @max_message_size_bytes = ] max_message_size_bytes ]
+    [, [ @max_message_size_kb = ] max_message_size_kb ]
     [, [ @partition_key_scheme = ] N'partition_key_scheme' ]
     [, [ @partition_key_column_name = ] N'partition_key_column_name' ]
     [, [ @encoding = ] N'encoding' ]
@@ -66,16 +66,16 @@ For the Apache Kafka protocol, specify the port.
 
 Specifies database scoped credential name to be used. *@destination_credential* is **sysname**, and can't be `NULL`.
 
-### [ @max_message_size_bytes = ] max_message_size_bytes
+### [ @max_message_size_kb = ] max_message_size_kb
 
-If specified, defines the max CES message size in bytes. *@max_message_size_bytes* is **int**, and can't be `NULL`. The message is split if it exceeds the specified max size. This parameter is optional.
+If specified, defines the max CES message size in kilobyes. *@max_message_size_kb* is **int**, and can't be `NULL`. The message is split if it exceeds the specified max size.  This parameter is optional.
 
-*@max_message_size_bytes* has the following characteristics:
-- Default value: `262144` (corresponds to 256 KB)
-- Minimum allowed value: `131072` (corresponds to 128 KB)
-- Maximum allowed value: `1048576` (corresponds to 20 MB)
+*@max_message_size_kb* has the following characteristics:
+- Default value: `256` (corresponds to 256 KB)
+- Minimum allowed value: `128` (corresponds to 128 KB)
+- Maximum allowed value: `1024` (corresponds to 1 MB)
 
-The *@max_message_size_bytes* parameter should align to the limits of the destination. For example, the maximum message size for Azure Event Hubs is 1 MB for the Basic and Standard tiers. To learn more, review [Azure Event Hubs quotas](/azure/event-hubs/event-hubs-quotas#basic-vs-standard-vs-premium-vs-dedicated-tiers). 
+The *@max_message_size_kb* parameter should align to the limits of the destination. For example, the maximum message size for Azure Event Hubs is 1 MB for the Standard and Premium tiers. To learn more, review [Azure Event Hubs quotas](/azure/event-hubs/event-hubs-quotas#basic-vs-standard-vs-premium-vs-dedicated-tiers). 
 
 ### [ @partition_key_scheme = ] N'partition_key_scheme'
 

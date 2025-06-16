@@ -50,7 +50,7 @@ SELECT
     CAST(JSON_ARRAY(1.0, -0.2, 30) AS VECTOR(3)) AS v2;
 ```
 
-or, using implicit casting
+Or, use implicit casting
 
 ```sql
 DECLARE @v1 VECTOR(3) = '[1.0, -0.2, 30]';
@@ -80,8 +80,8 @@ In the SQL Database Engine, k-NN searches can be performed using the [VECTOR_DIS
 The following example shows how to do k-NN to return the top 10 most similar vectors stored in the `content_vector` table to the given query vector `@qv`.
 
 ```sql
-DECLARE @qv VECTOR(1536) = AI_GENERATE_EMBEDDING(N'Pink Floyd music style' model Ada2Embeddings);
-SELECT TOP (10) id, VECTOR_DISTANCE('cosine', @qv, [content_vector]) as distance, title
+DECLARE @qv VECTOR(1536) = AI_GENERATE_EMBEDDING(N'Pink Floyd music style' USE MODEL Ada2Embeddings);
+SELECT TOP (10) id, VECTOR_DISTANCE('cosine', @qv, [content_vector]) AS distance, title
 FROM [dbo].[wikipedia_articles_embeddings]
 ORDER BY distance
 ```
@@ -107,12 +107,12 @@ In MSSQL engine, vector indexes are based on the [DiskANN](https://www.microsoft
 An Approximate Nearest Neighbors algorithm search can be done first creating a vector index using the [CREATE VECTOR INDEX](../../t-sql/statements/create-vector-index-transact-sql.md) T-SQL command and then using [VECTOR_SEARCH](../../t-sql/functions/vector-search-transact-sql.md) T-SQL function to run the approximate search.
 
 ```sql
-DECLARE @qv VECTOR(1536) = AI_GENERATE_EMBEDDING(N'Pink Floyd music style' model Ada2Embeddings);
+DECLARE @qv VECTOR(1536) = AI_GENERATE_EMBEDDING(N'Pink Floyd music style' USE MODEL Ada2Embeddings);
 SELECT 
     t.id, s.distance, t.title
 FROM
     VECTOR_SEARCH(
-        TABLE = [dbo].[wikipedia_articles_embeddings] as t, 
+        TABLE = [dbo].[wikipedia_articles_embeddings] AS t, 
         COLUMN = [content_vector], 
         SIMILAR_TO = @qv, 
         METRIC = 'cosine', 

@@ -51,6 +51,9 @@ TCP handshake :arrow_right: TLS handshake :arrow_right: TDS prelogin (encrypted)
 
 - [sqlcmd utility](../../../tools/sqlcmd/sqlcmd-utility.md#tds-80-support)
 - [bcp utility](../../../tools/bcp-utility.md#tds-80-support)
+- [SQL VSS Writer](../../../database-engine/configure-windows/sql-writer-service.md)
+- [SQL CEIP service](../../../sql-server/usage-and-diagnostic-data-configuration-for-sql-server.md)
+- [Polybase](../../polybase/polybase-guide.md)
 
 ## Strict connection encryption
 
@@ -75,12 +78,9 @@ The following features or tools still use previous version of drivers that don't
 - Always On failover cluster instance (FCI)
 - SQL Server Replication
 - Log Shipping
-- SQL Server CEIP service
 - SQL Server Agent
 - Database Mail
 - Linked Servers
-- Polybase connector to SQL Server
-- SQL VSS Writer
 
 ## Additional changes to connection string encryption properties
 

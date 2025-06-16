@@ -1,10 +1,10 @@
 ---
 title: "Linked Servers (Database Engine)"
-description: "Linked Servers (Database Engine)"
+description: Linked servers enable SQL Server and Azure SQL Managed Instance to read from and execute data in remote data sources.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: vanto
-ms.date: 09/23/2024
+ms.reviewer: vanto, randolphwest
+ms.date: 06/12/2025
 ms.service: sql
 ms.topic: conceptual
 helpviewer_keywords:
@@ -17,14 +17,14 @@ helpviewer_keywords:
   - "remote servers [SQL Server], linked servers"
   - "linked servers [SQL Server], about linked servers"
 ---
-# Linked Servers (Database Engine)
+# Linked servers (Database Engine)
 
 [!INCLUDE [SQL Server SQL MI](../../includes/applies-to-version/sql-asdbmi.md)]
 
 Linked servers enable the [!INCLUDE [ssDEnoversion](../../includes/ssdenoversion-md.md)] and [!INCLUDE [ssazuremi](../../includes/ssazuremi-md.md)] to read data from the remote data sources and execute commands against the remote database servers (for example, OLE DB data sources) outside of the instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. Typically linked servers are configured to enable the [!INCLUDE [ssDE](../../includes/ssde-md.md)] to execute a [!INCLUDE [tsql](../../includes/tsql-md.md)] statement that includes tables in another instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], or another database product such as Oracle. Many types OLE DB data sources can be configured as linked servers, including third-party database providers and Azure Cosmos DB.
 
 > [!NOTE]  
-> Linked servers are available in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazuremi](../../includes/ssazuremi-md.md)] (with some [constraints](/azure/azure-sql/managed-instance/transact-sql-tsql-differences-sql-server#linked-servers)). Linked servers are not available in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+> Linked servers are available in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazuremi](../../includes/ssazuremi-md.md)] (with some [constraints](/azure/azure-sql/managed-instance/transact-sql-tsql-differences-sql-server#linked-servers)). Linked servers aren't available in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
 ## When to use linked servers?
 
@@ -62,7 +62,7 @@ Linked servers to [!INCLUDE [msCoName](../../includes/msconame-md.md)] Access an
 
 The following illustration shows the basics of a linked server configuration.
 
-:::image type="content" source="media/linked-servers-database-engine/lsvr.gif" alt-text="Diagram showing client tier, server tier, and database server tier.":::
+:::image type="content" source="media/linked-servers-database-engine/configuration.png" alt-text="Diagram showing client tier, server tier, and database server tier.":::
 
 Typically, linked servers are used to handle distributed queries. When a client application executes a distributed query through a linked server, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] parses the command and sends requests to OLE DB. The rowset request might be in the form of executing a query against the provider or opening a base table from the provider.
 
@@ -73,13 +73,17 @@ Typically, linked servers are used to handle distributed queries. When a client 
 > When an OLE DB provider is used, the account under which the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] service runs must have read and execute permissions for the directory, and all subdirectories, in which the provider is installed. This includes Microsoft-released providers, and any third-party providers.
 
 > [!NOTE]  
-> Linked servers support Active Directory pass-through authentication when using full delegation. Starting with [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] CU17, pass-through authentication with constrained delegation is also supported; however, [resource-based constrained delegation](/windows-server/security/kerberos/kerberos-constrained-delegation-overview) is not supported.
+> Linked servers support Active Directory pass-through authentication when using full delegation. Starting with [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] CU17, pass-through authentication with constrained delegation is also supported; however, [resource-based constrained delegation](/windows-server/security/kerberos/kerberos-constrained-delegation-overview) isn't supported.
 
-## <a name="managing-providers"></a>Manage providers
+<a id="managing-providers"></a>
+
+## Manage providers
 
 There's a set of options that control how [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] loads and uses OLE DB providers that are specified in the registry.
 
-## <a name="managing-linked-server-definitions"></a>Manage linked server definitions
+<a id="managing-linked-server-definitions"></a>
+
+## Manage linked server definitions
 
 When you're setting up a linked server, register the connection information and data source information with [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. After being registered, that data source can be referred to with a single logical name.
 
@@ -93,11 +97,11 @@ You can use stored procedures and catalog views to manage linked server definiti
 
 You can also define linked servers by using [!INCLUDE [ssManStudioFull](../../includes/ssmanstudiofull-md.md)]. In the Object Explorer, right-click **Server Objects**, select **New**, and select **Linked Server**. You can delete a linked server definition by right-clicking the linked server name and selecting **Delete**.
 
-When you execute a distributed query against a linked server, include a fully qualified, four-part table name for each data source to query. This four-part name should be in the form _linked\_server\_name.catalog_**.**_schema_**.**_object\_name_.
+When you execute a distributed query against a linked server, include a fully qualified, four-part table name for each data source to query. This four-part name should be in the form `<linked_server_name>.<catalog>.<schema>.<object_name>`.
 
 References to temporary objects will always resolve to the local instance's `tempdb` where applicable, even when prefixing with the linked server name.
 
-Linked servers can be defined to point back (loop back) to the server on which they are defined. Loopback servers are most useful when testing an application that uses distributed queries on a single server network. Loopback linked servers are intended for testing and are not supported for many operations, such as distributed transactions.
+Linked servers can be defined to point back (loop back) to the server on which they are defined. Loopback servers are most useful when testing an application that uses distributed queries on a single server network. Loopback linked servers are intended for testing and aren't supported for many operations, such as distributed transactions.
 
 ## Linked servers with Azure SQL Managed Instance
 
@@ -105,13 +109,14 @@ Linked servers can be defined to point back (loop back) to the server on which t
 
 To use SQL Agent jobs on Azure SQL Managed Instance to query a remote server through a linked server, use [sp_addlinkedsrvlogin](../system-stored-procedures/sp-addlinkedsrvlogin-transact-sql.md) to create a mapping from a login on the local server to a login on the remote server. When the SQL Agent job connects to the remote server through the linked server, it executes the T-SQL query in the context of the remote login. For more information, see [SQL Agent jobs with Azure SQL Managed Instance](../../ssms/agent/implement-sql-server-agent-security.md#linked-servers).
 
-<a name='limitations-of-azure-ad-authentication'></a>
+<a id="limitations-of-azure-ad-authentication"></a>
 
 ### Microsoft Entra authentication
 
 Two supported Microsoft Entra authentication modes are: managed identity and pass-through. Managed identity authentication can be used to allow local logins to query remote linked servers. Pass-through authentication allows a principal that can authenticate with a local instance to access a remote instance via a linked server.
 
 To use Microsoft Entra pass-through authentication for a linked server in Azure SQL Managed Instance, you need the following prerequisites:
+
 - The same principal is added as a login on the remote server.
 - Both instances are members of the [SQL trust group](/azure/azure-sql/managed-instance/server-trust-group-overview).
 
@@ -126,6 +131,34 @@ The following limitations apply to Microsoft Entra authentication for linked ser
 ### MSOLEDBSQL19 and linked servers
 
 Currently, MSOLEDBSQL19 prevents the creation of linked servers without encryption and a trusted certificate (a self-signed certificate is insufficient). If linked servers are required, use the existing supported version of MSOLEDBSQL.
+
+Starting in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], you can use Microsoft OLE DB Driver version 19 with linked servers. This updated driver introduces significant security enhancements, including support for [TDS 8.0](../security/networking/tds-8.md). TDS 8 introduces a breaking change: you must set the `Encryption` parameter in your provider string.
+
+The `Encryption` parameter offers three distinct settings:
+
+- `Yes`/`True`/`Mandatory`
+- `No`/`False`/`Optional`
+- `Strict`
+
+The `Strict` option mandates the usage of TDS 8.0, and requires a server certificate for secure connections. For `Yes`/`True`/`Mandatory`, a trusted certificate is expected. You can't use a self-signed certificate.
+
+| OLE DB version | Encryption parameter | Possible values | Default value |
+| --- | --- | --- | --- |
+| OLE DB 18 | Optional | True/Mandatory, False/No | False/No |
+| OLE DB 19 | Required | No/False, Yes/Mandatory, Strict (new) | Yes/Mandatory |
+
+The `TrustServerCertificate` parameter is supported, but not recommended. **Trust Server Certificate** disables certificate validation, weakening the security of encrypted connections.
+
+| Trust Server Certificate client setting | Connection string/connection attribute Trust Server Certificate | Certificate validation |
+| --- | --- | --- |
+| 0 | No (default) | Yes |
+| 0 | Yes | Yes |
+| 1 | No (default) | Yes |
+| 1 | Yes | No |
+
+These settings must be correctly specified in the provider string when configuring linked server connections, to ensure compatibility and security with the new driver.
+
+For more information about OLE DB 19 and encryption, certificate and Trust Server Certificate behavior for OLE DB 19, see [Encryption and certificate validation in OLE DB](../../connect/oledb/features/encryption-and-certificate-validation.md).
 
 ## Related content
 

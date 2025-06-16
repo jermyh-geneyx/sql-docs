@@ -1,10 +1,10 @@
 ---
 title: Thread and task architecture guide
-description: Learn about thread and task architecture in SQL Server, including task scheduling, hot add CPU, and best practices for using computers with more than 64 CPUs.
+description: Learn about thread and task architecture in SQL Server, including task scheduling, and the best practices for using computers with more than 64 CPUs.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: jopilov
-ms.date: 04/24/2025
+ms.date: 06/03/2025
 ms.service: sql
 ms.subservice: supportability
 ms.topic: concept-article
@@ -219,6 +219,9 @@ The [priority boost](../database-engine/configure-windows/configure-the-priority
 If you are running multiple instances of [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)] on a computer, and turn on priority boost for only some of the instances, the performance of any instances running at normal priority can be adversely affected. Also, the performance of other applications and components on the server can decline if priority boost is turned on. Therefore, it should only be used under tightly controlled conditions.
 
 ## Hot add CPU
+
+> [!IMPORTANT]
+> Starting with [!INCLUDE [sql-server-2025](../includes/sssql25-md.md)], the hot add CPU feature is deprecated, and is planned to be removed in a future version of [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)]. Because of known stability issues, Microsoft recommends that you avoid using this feature in [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)] administration in any version of [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)].
 
 Hot add CPU is the ability to dynamically add CPUs to a running system. Adding CPUs can occur physically by adding new hardware, logically by online hardware partitioning, or virtually through a virtualization layer.
 

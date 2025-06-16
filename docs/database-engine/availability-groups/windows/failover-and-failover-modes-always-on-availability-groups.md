@@ -3,7 +3,7 @@ title: "Failover modes for availability groups"
 description: "A description of the different failover modes available for databases participating in an Always On availability group."
 author: MashaMSFT
 ms.author: mathoma
-ms.date: "05/19/2025"
+ms.date: 06/16/2025
 ms.service: sql
 ms.subservice: availability-groups
 ms.topic: conceptual
@@ -78,7 +78,7 @@ In certain situations, with a DR failover, as the secondary replica transitions 
 To improve undo-of-redo for this scenario, [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] introduces an update to the synchronization mechanism so that the availability group now performs page requests asynchronously, and in batches.
 
 Consider the following: 
-- The improvement to the synchronization mechanism is disabled by default. To use the feature, enable [Trace Flag 12350](../../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf12350) on all replicas in an availability group that are currently secondaries, or that might be secondaries in the future. 
+- The improvement to the synchronization mechanism is enabled by default. To disable the improvement and revert to default behavior, enable [Trace Flag 12348](../../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf12348) on all replicas in an availability group that are currently secondaries, or that might be secondaries in the future. 
 - If the AG replicas don't have network latency, this improvement might not improve undo-of-redo.
 
 ### Databases switch to resolving state after a failure
@@ -111,9 +111,9 @@ In rare cases, one or more databases of an availability group might remain in a 
 |-------------------------------|---------------------------------------------------------|------------------------------------------------------------|  
 |Automatic failover|No|No|Yes|  
 |Planned manual failover|No|Yes|Yes|  
-|Forced failover|Yes|Yes|Yes**&#42;**|  
+|Forced failover|Yes|Yes|Yes<sup>1</sup>|  
   
- **&#42;**If you issue a forced failover command on a synchronized secondary replica, the secondary replica behaves the same as for a manual failover.  
+ <sup>1</sup> If you issue a forced failover command on a synchronized secondary replica, the secondary replica behaves the same as for a manual failover.  
   
  The amount of time that the database is unavailable during a failover depends on the type of failover and its cause.  
   

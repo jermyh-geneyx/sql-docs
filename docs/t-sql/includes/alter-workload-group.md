@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: dfurman
-ms.date: 04/15/2025
+ms.date: 06/10/2025
 ms.service: sql
 ms.topic: include
 ms.custom:
@@ -12,22 +12,23 @@ ms.custom:
 Changes an existing resource governor workload group configuration, and optionally assigns it to a different resource governor resource pool.
 
 > [!NOTE]
-> To modify resource governor configuration in [!INCLUDE[ssazuremi-md.md](../../includes/ssazuremi-md.md)], you must be in the context of the `master` database on the primary replica.
+> To modify resource governor configuration in [!INCLUDE [ssazuremi-md.md](../../includes/ssazuremi-md.md)], you must be in the context of the `master` database on the primary replica.
 
 :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../language-elements/transact-sql-syntax-conventions-transact-sql.md).
 
 ## Syntax
 
 ```syntaxsql
-ALTER WORKLOAD GROUP { group_name | [default] }
+ALTER WORKLOAD GROUP { group_name | [ default ] }
 [ WITH
-    ([ IMPORTANCE = { LOW | MEDIUM | HIGH } ]
+    ( [ IMPORTANCE = { LOW | MEDIUM | HIGH } ]
       [ [ , ] REQUEST_MAX_MEMORY_GRANT_PERCENT = value ]
       [ [ , ] REQUEST_MAX_CPU_TIME_SEC = value ]
       [ [ , ] REQUEST_MEMORY_GRANT_TIMEOUT_SEC = value ]
       [ [ , ] MAX_DOP = value ]
       [ [ , ] GROUP_MAX_REQUESTS = value ]
-      [ [ , ] GROUP_MAX_TEMPDB_DATA_MB = value ] )
+      [ [ , ] GROUP_MAX_TEMPDB_DATA_MB = value ]
+      [ [ , ] GROUP_MAX_TEMPDB_DATA_PERCENT = value ] )
 ]
 [ USING { pool_name | [default] } ]
 [ ; ]
@@ -73,7 +74,7 @@ Starting with [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)], the value c
 
 Specifies the maximum amount of CPU time, in seconds, that a batch request can use. *value* must be 0 or a positive integer. The default setting for *value* is 0, which means unlimited.
 
-When the maximum CPU time is exceeded, the `cpu_threshold_exceeded` extended event and a trace event are generated. For more information, see [CPU Threshold Exceeded Event Class](../../relational-databases/event-classes/cpu-threshold-exceeded-event-class.md).
+When the maximum CPU time is exceeded, the `cpu_threshold_exceeded` extended event and a trace event are generated. For more information, see [CPU threshold exceeded event class](../../relational-databases/event-classes/cpu-threshold-exceeded-event-class.md).
 
 In Azure SQL Managed Instance, when the maximum CPU time is exceeded, resource governor aborts the request with error 10961.
 
@@ -97,13 +98,25 @@ Specifies the maximum number of simultaneous requests that are allowed to execut
 
 #### GROUP_MAX_TEMPDB_DATA_MB = *value*
 
-Specifies the maximum amount of space that a workload group can consume in the `tempdb` data files, in megabytes. *value* must be 0 or a positive number. Fractional values are allowed. When the value is 0, `tempdb` space allocations by sessions in the workload group are not allowed. When a value isn't set, resource governor doesn't limit `tempdb` space consumption by the workload group.
+Specifies the maximum amount of space that a workload group can consume in the `tempdb` data files, in megabytes. *value* must be 0 or a positive number. Fractional values are allowed.
+
+When the value is 0, `tempdb` space allocations by sessions in the workload group are not allowed. When a value isn't set, resource governor doesn't limit `tempdb` space consumption by the workload group.
 
 The limit is for the total space consumed in `tempdb` by all sessions in a workload group.
 
 When a request running in a workload group attempts to increase `tempdb` data space consumption by the workload group above the limit set by `GROUP_MAX_TEMPDB_DATA_MB`, resource governor aborts the request with error 1138. For more information, see [Tempdb space resource governance](../../relational-databases/resource-governor/tempdb-space-resource-governance.md).
 
-#### USING { *pool_name* | [default] }
+#### GROUP_MAX_TEMPDB_DATA_PERCENT = *value*
+
+Specifies the maximum amount of space that a workload group can consume in the `tempdb` data files, in percent of the maximum `tempdb` size. For the definition of the maximum `tempdb` size, see [Percent limit configuration](../../relational-databases/resource-governor/tempdb-space-resource-governance.md#percent-limit-configuration). *value* must be in the range from 0 to 100. Fractional values are allowed.
+
+When the value is 0, `tempdb` space allocations by sessions in the workload group are not allowed. When a value isn't set, resource governor doesn't limit `tempdb` space consumption by the workload group. When `GROUP_MAX_TEMPDB_DATA_MB` is set, or when `tempdb` maximum size isn't defined, `GROUP_MAX_TEMPDB_DATA_PERCENT` has no effect.
+
+The limit is for the total space consumed in `tempdb` by all sessions in a workload group.
+
+When a request running in a workload group attempts to increase `tempdb` data space consumption by the workload group above the limit set by `GROUP_MAX_TEMPDB_DATA_PERCENT`, resource governor aborts the request with error 1138. For more information, see [Tempdb space resource governance](../../relational-databases/resource-governor/tempdb-space-resource-governance.md).
+
+#### USING { *pool_name* | [ default ] }
 
 Associates the workload group with the user-defined resource pool identified by *pool_name*, or with the `default` resource pool. If *pool_name* isn't provided, or if the `USING` argument isn't specified, the workload group is associated with the built-in `default` pool.
 
@@ -177,9 +190,11 @@ ALTER RESOURCE GOVERNOR RECONFIGURE;
 - [Resource governor workload group](../../relational-databases/resource-governor/resource-governor-workload-group.md)
 - [Create a workload group](../../relational-databases/resource-governor/create-a-workload-group.md)
 - [Move a workload group](../../relational-databases/resource-governor/move-a-workload-group.md)
-- [CREATE WORKLOAD GROUP](../statements/create-workload-group-transact-sql.md)
-- [DROP WORKLOAD GROUP](../statements/drop-workload-group-transact-sql.md)
-- [CREATE RESOURCE POOL](../statements/create-resource-pool-transact-sql.md)
-- [ALTER RESOURCE POOL](../statements/alter-resource-pool-transact-sql.md)
-- [DROP RESOURCE POOL](../statements/drop-resource-pool-transact-sql.md)
-- [ALTER RESOURCE GOVERNOR](../statements/alter-resource-governor-transact-sql.md)
+- [CREATE WORKLOAD GROUP (Transact-SQL)](../statements/create-workload-group-transact-sql.md)
+- [DROP WORKLOAD GROUP (Transact-SQL)](../statements/drop-workload-group-transact-sql.md)
+- [CREATE RESOURCE POOL (Transact-SQL)](../statements/create-resource-pool-transact-sql.md)
+- [ALTER RESOURCE POOL (Transact-SQL)](../statements/alter-resource-pool-transact-sql.md)
+- [DROP RESOURCE POOL (Transact-SQL)](../statements/drop-resource-pool-transact-sql.md)
+- [ALTER RESOURCE GOVERNOR (Transact-SQL)](../statements/alter-resource-governor-transact-sql.md)
+- [sys.resource_governor_workload_groups](../../relational-databases/system-catalog-views/sys-resource-governor-workload-groups-transact-sql.md)
+- [sys.dm_resource_governor_workload_groups](../../relational-databases/system-dynamic-management-views/sys-dm-resource-governor-workload-groups-transact-sql.md)

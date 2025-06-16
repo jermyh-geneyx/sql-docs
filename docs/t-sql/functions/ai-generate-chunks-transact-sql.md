@@ -4,7 +4,7 @@ description: The ai_generate_chunks table-valued function creates text chunks.
 author: jettermctedder
 ms.author: bspendolini
 ms.reviewer: randolphwest
-ms.date: 04/21/2025
+ms.date: 06/09/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: "reference"
@@ -20,9 +20,12 @@ dev_langs:
   - "TSQL"
 monikerRange: "=azuresqldb-current || >=sql-server-ver17 || >=sql-server-linux-ver17"
 ---
-# AI_GENERATE_CHUNKS (Transact-SQL)
+# AI_GENERATE_CHUNKS (Transact-SQL) (Preview)
 
 [!INCLUDE [sqlserver2025](../../includes/applies-to-version/sqlserver2025.md)]
+
+> [!NOTE]
+> `AI_GENERATE_CHUNKS` in SQL Server 2025 is currently in **preview**.
 
 `AI_GENERATE_CHUNKS` is a table-valued function that creates "chunks", or fragments of text based on a type, size, and source expression.
 
@@ -38,9 +41,10 @@ To change the compatibility level of a database, refer to [View or change the co
 
 ```syntaxsql
 AI_GENERATE_CHUNKS (source = text_expression
-                    , chunk_type = 'FIXED'
+                    , chunk_type = FIXED
                    [ [ , ] chunk_size = numeric_expression ]
                    [ [ , ] overlap = numeric_expression ]
+                   [ [ , ] enable_chunk_set_id = numeric_expression]
 )
 ```
 
@@ -66,6 +70,9 @@ When `chunk_type` is `FIXED`, this parameter sets the character/word count size 
 
 The *overlap* parameter determines the percentage of the preceding text that should be included in the current chunk. This percentage is applied to the `chunk_size` parameter to calculate the size in characters. The *overlap* value can be specified as a variable, a literal, or a scalar expression of type tinyint, smallint, int, or bigint. It must be a whole number between zero (`0`) and 50, inclusive, and cannot be NULL or negative. The default value is zero (`0`).
 
+#### *enable_chunk_set_id*
+
+An **int** or **bit** expression that serves as a flag to enable or disable the `chunk_set_id` output column; a column that returns a number to help group returned chunks belonging to the same source. A value of 1 enables the column. If *enable_chunk_set_id* is omitted, NULL, or has a value of 0, the `chunk_set_id` column is disabled and not returned.
 
 ## Return types
 
@@ -74,10 +81,10 @@ The *overlap* parameter determines the percentage of the preceding text that sho
 | Column name | Data type | Description |
 | --- | --- | --- |
 | `chunk` | Same as source expression data type | Returned text that was chunked from the source expression. |
-| `chunk_set_id` | **int** | An ID that groups all the chunks of a document or row. If multiple documents or rows are chunked in a single transaction, they're each given a different `chunk_set_id`. |
 | `chunk_order` | **int** | A sequence of ordered numbers that relates to the order each chunk was processed starting with `1` and increasing by `1`. |
 | `chunk_offset` | **int** | Position of the chunk of the source data/document in relation to the start of the chunking process. |
 | `chunk_length` | **int** | Character length of the returned text chunk. |
+| `chunk_set_id` | **int** | An *optional column* that contains an ID that groups all the chunks of a source expression, document, or row. If multiple documents or rows are chunked in a single transaction, they're each given a different `chunk_set_id`. Visibility is controlled by the `enable_chunk_set_id` parameter. |
 
 ### Return example
 
@@ -87,17 +94,19 @@ Here's an example of the return results of `AI_GENERATE_CHUNKS` with the followi
 
 - Chunk size of 50 characters.
 
+- The 'chunk_set_id' is enabled.
+
 - Chunk text: `All day long we seemed to dawdle through a country which was full of beauty of every kind. Sometimes we saw little towns or castles on the top of steep hills such as we see in old missals; sometimes we ran by rivers and streams which seemed from the wide stony margin on each side of them to be subject to great floods.`
 
-| chunk | chunk_set_id | chunk_order | chunk_offset | chunk_length |
+| chunk | chunk_order | chunk_offset | chunk_length | chunk_set_id |
 | --- | --- | --- | --- | --- |
-| `All day long we seemed to dawdle through a country` | 1 | 1 | 1 | 50 |
-| ` which was full of beauty of every kind. Sometimes` | 1 | 2 | 51 | 50 |
-| ` we saw little towns or castles on the top of stee` | 1 | 3 | 101 | 50 |
-| `p hills such as we see in old missals; sometimes w` | 1 | 4 | 151 | 50 |
-| `e ran by rivers and streams which seemed from the` | 1 | 5 | 201 | 50 |
-| ` wide stony margin on each side of them to be subje` | 1 | 6 | 251 | 50 |
-| `ct to great floods.` | 1 | 7 | 301 | 19 |
+| `All day long we seemed to dawdle through a country` | 1 | 1 | 50 | 1 |
+| ` which was full of beauty of every kind. Sometimes` | 2 | 51 | 50 | 1 |
+| ` we saw little towns or castles on the top of stee` | 3 | 101 | 50 | 1 |
+| `p hills such as we see in old missals; sometimes w` | 4 | 151 | 50 | 1 |
+| `e ran by rivers and streams which seemed from the` | 5 | 201 | 50 | 1 |
+| ` wide stony margin on each side of them to be subje` | 6 | 251 | 50 | 1 |
+| `ct to great floods.` | 7 | 301 | 19 | 1 |
 
 ## Remarks
 
@@ -116,26 +125,26 @@ GO
 SELECT c.*
 FROM textchunk t
 CROSS APPLY
-   AI_GENERATE_CHUNKS(source = text_to_chunk, chunk_type = N'FIXED', chunk_size = 50) c
+   AI_GENERATE_CHUNKS(source = text_to_chunk, chunk_type = FIXED, chunk_size = 50, enable_chunk_set_id = 1) c
 ```
 
-| chunk | chunk_set_id | chunk_order | chunk_offset | chunk_length |
+| chunk | chunk_order | chunk_offset | chunk_length |  chunk_set_id |
 | --- | --- | --- | --- | --- |
-| `All day long we seemed to dawdle through a country` | **1** | **1** | **1** | **50** |
-| ` which was full of beauty of every kind. Sometimes` | 1 | 2 | 51 | 50 |
-| ` we saw little towns or castles on the top of stee` | 1 | 3 | 101 | 50 |
-| `p hills such as we see in old missals; sometimes w` | 1 | 4 | 151 | 50 |
-| `e ran by rivers and streams which seemed from the` | 1 | 5 | 201 | 50 |
-| ` wide stony margin on each side of them to be subje` | 1 | 6 | 251 | 50 |
-| `ct to great floods.` | 1 | 7 | 301 | 19 |
-| ` My Friend, Welcome to the Carpathians. I am anxi` | **2** | **1** | **1** | **50** |
-| `ously expecting you. Sleep well to-night. At three` | 2 | 2 | 51 | 50 |
-| ` to-morrow the diligence will start for Bukovina;` | 2 | 3 | 101 | 50 |
-| `a place on it is kept for you. At the Borgo Pass m` | 2 | 4 | 151 | 50 |
-| `y carriage will await you and will bring you to me` | 2 | 5 | 201 | 50 |
-| `. I trust that your journey from London has been a` | 2 | 6 | 251 | 50 |
-| ` happy one, and that you will enjoy your stay in m` | 2 | 7 | 301 | 50 |
-| `y beautiful land. Your friend, DRACULA` | 2 | 8 | 351 | 38 |
+| `All day long we seemed to dawdle through a country` | **1** | **1** | **50** | **1** | 
+| ` which was full of beauty of every kind. Sometimes` | 2 | 51 | 50 | 1 |
+| ` we saw little towns or castles on the top of stee` | 3 | 101 | 50 | 1 |
+| `p hills such as we see in old missals; sometimes w` | 4 | 151 | 50 | 1 |
+| `e ran by rivers and streams which seemed from the` | 5 | 201 | 50 | 1 |
+| ` wide stony margin on each side of them to be subje` | 6 | 251 | 50 | 1 |
+| `ct to great floods.` | 7 | 301 | 19 | 1 |
+| ` My Friend, Welcome to the Carpathians. I am anxi` | **1** | **1** | **50** | **2** |
+| `ously expecting you. Sleep well to-night. At three` | 2 | 51 | 50 | 2 |
+| ` to-morrow the diligence will start for Bukovina;` | 3 | 101 | 50 | 2 |
+| `a place on it is kept for you. At the Borgo Pass m` | 4 | 151 | 50 | 2 |
+| `y carriage will await you and will bring you to me` | 5 | 201 | 50 | 2 |
+| `. I trust that your journey from London has been a` | 6 | 251 | 50 | 2 |
+| ` happy one, and that you will enjoy your stay in m` | 7 | 301 | 50 | 2 |
+| `y beautiful land. Your friend, DRACULA` | 8 | 351 | 38 | 2 |
 
 ## Examples
 
@@ -149,7 +158,7 @@ SELECT
 FROM
    docs_table t
 CROSS APPLY
-   AI_GENERATE_CHUNKS(source = text_column, chunk_type = N'FIXED', chunk_size = 100) c
+   AI_GENERATE_CHUNKS(source = text_column, chunk_type = FIXED, chunk_size = 100) c
 ```
 
 ### B. Chunk a text column with overlap
@@ -162,7 +171,7 @@ SELECT
 FROM
    docs_table t
 CROSS APPLY
-   AI_GENERATE_CHUNKS(source = text_column, chunk_type = N'FIXED', chunk_size = 100, overlap = 10) c
+   AI_GENERATE_CHUNKS(source = text_column, chunk_type = FIXED, chunk_size = 100, overlap = 10) c
 ```
 
 ### C. Use AI_GENERATE_EMBEDDINGS with AI_GENERATE_CHUNKS
@@ -178,7 +187,7 @@ SELECT
 FROM
     table_with_text t
 CROSS APPLY
-    AI_GENERATE_CHUNKS(source = t.text_to_chunk, chunk_type = N'FIXED', chunk_size = 100) c
+    AI_GENERATE_CHUNKS(source = t.text_to_chunk, chunk_type = FIXED, chunk_size = 100) c
 ```
 
 ## Related content

@@ -1,9 +1,10 @@
 ---
-title: "What's new in SQL Server Reporting Services (SSRS)"
+title: "What's New in SQL Server Reporting Services (SSRS)"
 description: Learn about what's new in the different versions of SQL Server Reporting Services (SSRS), including changes to the major feature areas.
 author: kfollis
 ms.author: kfollis
-ms.date: 09/25/2024
+ms.reviewer: randolphwest
+ms.date: 06/16/2025
 ms.service: reporting-services
 ms.subservice: reporting-services
 ms.topic: whats-new
@@ -19,9 +20,21 @@ ms.custom:
 
 Learn about what's new in the different versions of SQL Server [!INCLUDE[ssRSnoversion](../includes/ssrsnoversion-md.md)]. This article covers the major feature areas and is updated as new items are released.
 
-For more information about SSRS, see [What is SQL Server Reporting Services (SSRS)](../reporting-services/create-deploy-and-manage-mobile-and-paginated-reports.md).  
+::: moniker range="<sql-server-ver17"
+
+For more information about SSRS, see [What is SQL Server Reporting Services (SSRS)?](create-deploy-and-manage-mobile-and-paginated-reports.md)
 
 For information about Power BI Report Server, see [What's new in Power BI Report Server](/power-bi/report-server/whats-new).
+
+::: moniker-end
+
+::: moniker range="=sql-server-ver17"
+
+## SQL Server 2025 Reporting Services changes
+
+[!INCLUDE [ssrs-power-bi-consolidation](includes/ssrs-power-bi-consolidation.md)]
+
+::: moniker-end
 
 ::: moniker range="=sql-server-ver16"
 
@@ -56,7 +69,7 @@ in future releases to make upgrades easier. However, in rare situations, the fea
 
 ::: moniker-end
 
-::: moniker range=">=sql-server-ver15"
+::: moniker range="=sql-server-ver15"
 
 ## SQL Server 2019 Reporting Services
 
@@ -97,7 +110,7 @@ The newly released version of Report Builder is fully compatible with the 2016, 
 
 ::: moniker-end
 
-::: moniker range=">=sql-server-2017"
+::: moniker range="=sql-server-2017"
 
 ## SQL Server 2017 Reporting Services
 
@@ -132,6 +145,8 @@ For more information, see [Reporting Services blog](/archive/blogs/sqlrsteamblog
 SharePoint integrated mode is deprecated after SQL Server 2016. To add Reporting Services reports to SharePoint, use the [Report Viewer web part on a SharePoint site - Reporting Services](../reporting-services/report-server-sharepoint/report-viewer-web-part-sharepoint-site.md).
 
 ::: moniker-end
+
+::: moniker range="=sql-server-2016"
 
 ## SQL Server 2016 Reporting Services
 
@@ -282,6 +297,8 @@ The new release of SSDT includes the project templates for [!INCLUDE[ssRSCurrent
 
 - [Windows 8.1 DPI Scaling Enhancements](https://blogs.windows.com/windowsexperience/2013/07/15/windows-8-1-dpi-scaling-enhancements/)  
 - [High DPI and Windows 8.1](/previous-versions/windows/it-pro/windows-8.1-and-8/dn528848(v=win.10))  
+
+::: moniker-end
 
 ## Related content
 

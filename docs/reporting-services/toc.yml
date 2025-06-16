@@ -17,6 +17,8 @@
   - name: Backward Compatibility
     href: ../reporting-services/reporting-services-backward-compatibility.md
     items:
+    - name: Reporting Services consolidation FAQ
+      href: reporting-services-consolidation-faq.md
     - name: Deprecated features
       href: ../reporting-services/deprecated-features-in-sql-server-reporting-services-ssrs.md
     - name: Discontinued functionality

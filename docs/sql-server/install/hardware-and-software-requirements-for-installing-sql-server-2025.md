@@ -4,7 +4,7 @@ description: A list of hardware, software, and operating system requirements for
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest, jopilov, rdorr
-ms.date: 05/19/2025
+ms.date: 06/16/2025
 ms.service: sql
 ms.subservice: release-landing
 ms.topic: conceptual
@@ -68,12 +68,16 @@ The following memory and processor requirements apply to all editions of [!INCLU
 
 | Component | Requirement |
 | --- | --- |
-| Storage | [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] requires a minimum of 6 GB of available hard drive space.<br /><br />Disk space requirements vary with the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] components you install. For more information, see [Hard Disk Space Requirements](../../sql-server/install/hardware-and-software-requirements-for-installing-sql-server.md#HardDiskSpace) later in this article. For information on supported storage types for data files, see [Storage Types for Data Files](../../sql-server/install/hardware-and-software-requirements-for-installing-sql-server.md#StorageTypes). |
-| Monitor | [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] requires Super-VGA (800x600) or higher resolution monitor. |
-| Internet | Internet functionality requires Internet access (fees can apply). |
-| Memory | **Minimum:**<br /><br />Express editions: 512 MB<br /><br />All other editions: 1 GB<br /><br />**Recommended:**<br /><br />Express editions: 1 GB<br /><br />All other editions: At least 4 GB and should be increased as database size increases to ensure optimal performance. |
-| Processor speed | **Minimum:** x64 processor: 1.4 GHz<br /><br />**Recommended:** 2.0 GHz or faster |
-| Processor type | x64 processor: All Intel and AMD x86-64 CPUs with [64 cores or less per NUMA node](../compute-capacity-limits-by-edition-of-sql-server.md#numa-64) |
+| **Storage** | [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] requires a minimum of 6 GB of available hard drive space.<br /><br />Disk space requirements vary with the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] components you install. For more information, see [Disk space requirements](#disk-space-requirements) later in this article. For information on supported storage types for data files, see [Storage types for data files](#storage-types-for-data-files). |
+| **Monitor** | [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] requires Super-VGA (800x600) or higher resolution monitor. |
+| **Internet** | Internet functionality requires Internet access (fees can apply). |
+| **Memory** | |
+| Minimum memory | - Express editions: 512 MB<br /><br />- All other editions: 1 GB |
+| Recommended&nbsp;memory | - Express editions: 1 GB<br /><br />- All other editions: At least 4 GB, and should be increased as database size increases to ensure optimal performance. |
+| **Processor** | |
+| Processor type | x64 processor. All Intel and AMD x86-64 CPUs with [up to 64 cores per NUMA node](../compute-capacity-limits-by-edition-of-sql-server.md#numa-64). |
+| Minimum  speed | 1.4 GHz |
+| Recommended speed | 2.0 GHz or faster |
 
 > [!NOTE]  
 > Installation of [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] is supported on x64 processors only.
@@ -86,7 +90,7 @@ The following requirements apply to all installations:
 
 | Component | Requirement |
 | --- | --- |
-| Operating system | Windows 10 1607 or greater<br /><br />Windows Server 2016 or greater. |
+| Operating&nbsp;system | - Windows 10 or greater<br />- Windows Server 2019 or greater |
 | .NET Framework | [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] requires .NET Framework 4.7.2. |
 | Network software | Supported operating systems for [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] have built-in network software. Named and default instances of a stand-alone installation support the following network protocols: Shared memory, Named Pipes, and TCP/IP. |
 
@@ -101,28 +105,30 @@ The following requirements apply to all installations:
 
 ## Operating system support
 
-The following table shows which editions of [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] are compatible with which versions of Windows:
+The following table shows which editions of [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] are compatible with which versions of Windows. You can also use the support lifecycle information to see if your version of Windows is supported.
 
 | [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] edition: | Enterprise <sup>1</sup> | Standard <sup>1</sup> | Web | Express |
 | --- | --- | --- | --- | --- |
+| **Windows Server 2025** ([Support lifecycle](/lifecycle/products/windows-server-2025)) | | | | |
 | Windows Server 2025 Datacenter | Yes | Yes | Yes | Yes |
 | Windows Server 2025 Datacenter: Azure Edition | Yes | Yes | Yes | Yes |
 | Windows Server 2025 Standard | Yes | Yes | Yes | Yes |
 | Windows Server 2025 Essentials | Yes | Yes | Yes | Yes |
+| **Windows Server 2022** ([Support lifecycle](/lifecycle/products/windows-server-2022)) | | | | |
 | Windows Server 2022 Datacenter | Yes | Yes | Yes | Yes |
 | Windows Server 2022 Datacenter: Azure Edition | Yes | Yes | Yes | Yes |
 | Windows Server 2022 Standard | Yes | Yes | Yes | Yes |
 | Windows Server 2022 Essentials | Yes | Yes | Yes | Yes |
+| **Windows Server 2019** ([Support lifecycle](/lifecycle/products/windows-server-2019)) | | | | |
 | Windows Server 2019 Datacenter | Yes | Yes | Yes | Yes |
 | Windows Server 2019 Standard | Yes | Yes | Yes | Yes |
 | Windows Server 2019 Essentials | Yes | Yes | Yes | Yes |
-| Windows Server 2016 Datacenter | Yes | Yes | Yes | Yes |
-| Windows Server 2016 Standard | Yes | Yes | Yes | Yes |
-| Windows Server 2016 Essentials | Yes | Yes | Yes | Yes |
+| **Windows 11** ([Support lifecycle](/lifecycle/products/windows-11-home-and-pro)) | | | | |
 | Windows 11 IoT Enterprise | No | Yes | No | Yes |
 | Windows 11 Enterprise | No | Yes | No | Yes |
 | Windows 11 Professional | No | Yes | No | Yes |
 | Windows 11 Home | No | Yes | No | Yes |
+| **Windows 10** ([Support lifecycle](/lifecycle/products/windows-10-home-and-pro)) | | | | |
 | Windows 10 IoT Enterprise | No | Yes | No | Yes |
 | Windows 10 Enterprise | No | Yes | No | Yes |
 | Windows 10 Professional | No | Yes | No | Yes |
@@ -137,7 +143,6 @@ Installing [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] on Server Core 
 - Windows Server 2025 Core
 - Windows Server 2022 Core
 - Windows Server 2019 Core
-- Windows Server 2016 Core
 
 For more information on installing [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] on Server Core, see [Install SQL Server on Server Core](../../database-engine/install-windows/install-sql-server-on-server-core.md).
 
@@ -155,9 +160,9 @@ During installation of [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.
 
 Actual hard disk space requirements depend on your system configuration and the features that you decide to install. The following table provides disk space requirements for [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] components.
 
-| **Feature** | **Disk space requirement** |
+| Feature | Disk space requirement |
 | --- | ---: |
-| [!INCLUDE [ssDE](../../includes/ssde-md.md)] and data files, Replication, Full-Text Search, and Data Quality Services | 1,480 MB |
+| [!INCLUDE [ssDE](../../includes/ssde-md.md)] and data files, Replication, Full-Text Search | 1,480 MB |
 | [!INCLUDE [ssDE](../../includes/ssde-md.md)] (as above) with R Services (In-Database) | 2,744 MB |
 | [!INCLUDE [ssDE](../../includes/ssde-md.md)] (as above) with PolyBase Query Service for External Data | 4,194 MB |
 | [!INCLUDE [ssASnoversion](../../includes/ssasnoversion-md.md)] and data files | 698 MB |
@@ -169,7 +174,6 @@ Actual hard disk space requirements depend on your system configuration and the 
 | Client Tools Connectivity | 328 MB |
 | [!INCLUDE [ssISnoversion](../../includes/ssisnoversion-md.md)] | 306 MB |
 | Client Components (other than [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Books Online components and Integration Services tools) | 445 MB |
-| [!INCLUDE [ssMDSshort](../../includes/ssmdsshort-md.md)] | 280 MB |
 | [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Books Online Components to view and manage help content <sup>1</sup> | 27 MB |
 | All features | 8,030 MB |
 
@@ -181,7 +185,7 @@ Actual hard disk space requirements depend on your system configuration and the 
 
 The supported storage types for data files are:
 
-- Local disk
+- **Local disk**
 
   - [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] currently supports disk drives that have standard native sector sizes of 512 bytes and 4 KB. For more information about support for larger sector sizes and manufacturer implementations, see the section "4-KB disk sector sizes" in the white paper *SQLIOBasicsCh2.doc*. You can download the whitepaper from the [Download](/previous-versions/sql/sql-server-2005/administrator/cc917726(v=technet.10)#download) section of the [SQL Server I/O Basics, Chapter 2](/previous-versions/sql/sql-server-2005/administrator/cc917726(v=technet.10)) article.
 
@@ -191,11 +195,11 @@ The supported storage types for data files are:
 
   - [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] failover cluster installation supports Local Disk only for installing the `tempdb` files. Ensure that the path specified for the `tempdb` data and log files is valid on all the cluster nodes. During failover, if the `tempdb` directories aren't available on the failover target node, the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] resource fails to come online.
 
-- Shared storage
+- **Shared storage**
 
-- [Storage Spaces Direct \(S2D\)](/windows-server/storage/storage-spaces/storage-spaces-direct-overview)
+- **[Storage Spaces Direct (S2D)](/windows-server/storage/storage-spaces/storage-spaces-direct-overview)**
 
-- SMB file share
+- **SMB file share**
 
   - SMB storage isn't supported for [!INCLUDE [ssASnoversion](../../includes/ssasnoversion-md.md)] data files for either standalone or clustered installations. Use direct attached storage, a storage area network, or S2D instead.
 

@@ -4,7 +4,7 @@ description: "Describes how to configure change event streaming."
 author: sasapopo
 ms.author: sasapopo
 ms.reviewer: mathoma, mikeray
-ms.date: 05/19/2025
+ms.date: 06/19/2025
 ms.service: sql
 ms.topic: how-to
 monikerRange: " = sql-server-ver17 || = sql-server-linux-ver17 "
@@ -62,7 +62,7 @@ Install-Module -Name Az -AllowClobber -Scope CurrentUser -Repository PSGallery -
 Install-Module -Name Az.EventHub -Scope CurrentUser -Force
 ```
 
-If you already have these modules, and you want to update them to the latest version, run the following script: 
+If you already have the required modules, and want to update them to the latest version, run the following script: 
 
 ```powershell
 Update-Module -Name Az -Force
@@ -87,19 +87,24 @@ To create the SAS token, you need a policy. You can either:
 
 #### Create SAS token for a new or existing policy
 
+> [!NOTE]
+> For improved security, SAS token authentication is strongly recommended over key-based authentication whenever possible. Best practices for SAS tokens include: define an appropriate access scope, set an expiration date, and rotate the SAS key regularly. For key-based authentication, ensure keys are rotated periodically. Store all secrets securely using Azure Key Vault or a similar service.
+
+When creating a new policy, ensure it has the **Send** right. If you use an existing policy, verify that it has the **Send** right.
+
 The following script will create a new policy, or get an existing one, and then generates from it a full SAS token in an HTTP authorization header format.
+
+Replace values in angle brackets (`<value>`) with values for your environment.
 
 ```powershell
 function Generate-SasToken {
-# Provide values for following resources.
-#
-$subscriptionId = "00000000-0000-0000-0000-000000000000"    # Replace with Azure Subscription Id
-$resourceGroupName = "myResourceGroup"                      # Replace with your Resource Group name
-$namespaceName = "myAzureEventHubsNamespace"                # Replace with your Event Hub Namespace name
-$eventHubName = "myEventHubsInstance"                       # Replace with your Event Hubs instance name
-$policyName = "myPolicy"                                    # Replace with the policy name
+$subscriptionId = "<Azure-Subscription-ID>"
+$resourceGroupName = "<Resource-group-name>"
+$namespaceName = "<Azure-Event-Hub-Namespace-name>"
+$eventHubName = "<Azure-Event-Hubs-instance-name>"
+$policyName = "<Policy-name>"
 
-# No need to modify rest of the script.
+# Modifying the rest of the script is not necessary.
 
 # Login to Azure and set Azure Subscription.
 Connect-AzAccount
@@ -197,9 +202,17 @@ To enable and configure change event streaming, change the database context to t
 
 The examples in this section demonstrate how to enable CES for the AMQP protocol and the Apache Kafka protocol.
 
-### Example: Stream to Azure Event Hubs via AMQP protocol
+The following are sample parameter values for the examples in this section:
 
-Replace values in angle brackets (`<value>`) with values for your environment.
+- `@stream_group_name = N'myStreamGroup'`
+- `@destination_location = 'N'myEventHubsNamespace.servicebus.windows.net/myEventHubsInstance'`
+- `@partition_key_scheme =   N'None'`
+- Primary or secondary key value: `Secret = 'BVFnT3baC/K6I8xNZzio4AeoFt6nHeK0i+ZErNGsxiw='`
+- `EXEC sys.sp_add_object_to_event_stream_group N'myStreamGroup', N'dbo.myTable'`
+
+### Example: Stream to Azure Event Hubs via AMQP protocol (SAS token auth)
+
+Replace values in angle brackets (`<value>`) with values for your environment. 
 
 ```sql
 USE <database name>
@@ -214,19 +227,77 @@ CREATE DATABASE SCOPED CREDENTIAL <CredentialName>
 EXEC sys.sp_enable_event_stream
 
 EXEC sys.sp_create_event_stream_group
-    @stream_group_name =      N'<EventStreamGroupName>',  -- myStreamGroup
+    @stream_group_name =      N'<EventStreamGroupName>',
     @destination_type =       N'AzureEventHubsAmqp',
-    @destination_location =   N'<AzureEventHubsHostName>/<EventHubsInstance>', -- myEventHubsNamespace.servicebus.windows.net/myEventHubsInstance
+    @destination_location =   N'<AzureEventHubsHostName>/<EventHubsInstance>',
     @destination_credential = <CredentialName>,
-    @max_message_size_bytes = <MaxMessageSize>,       -- 1048576
-    @partition_key_scheme =   N'<PatitionKeyScheme>'  -- N'None'
+    @max_message_size_kb =    <MaxMessageSize>, 
+    @partition_key_scheme =   N'<PartitionKeyScheme>'
 
 EXEC sys.sp_add_object_to_event_stream_group
     N'<EventStreamGroupName>',
-    N'<SchemaName>.<TableName>' -- dbo.myTable
+    N'<SchemaName>.<TableName>'
 ```
 
-### Example: Stream to Azure Event Hubs via Apache Kafka protocol
+### Example: Stream to Azure Event Hubs via AMQP protocol (Key value auth)
+
+Replace values in angle brackets (`<value>`) with values for your environment.
+
+```sql
+USE <database name>
+
+-- Create the Master Key with a password.
+CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<Password>'
+
+CREATE DATABASE SCOPED CREDENTIAL <CredentialName>
+    WITH IDENTITY = '<Azure Event Hubs SAS Policy name>',
+    SECRET = '<Primary or Secondary key value>'
+
+EXEC sys.sp_enable_event_stream
+
+EXEC sys.sp_create_event_stream_group
+    @stream_group_name =      N'<EventStreamGroupName>',
+    @destination_type =       N'AzureEventHubsAmqp',
+    @destination_location =   N'<AzureEventHubsHostName>/<EventHubsInstance>',
+    @destination_credential = <CredentialName>,
+    @max_message_size_kb =    <MaxMessageSize>,
+    @partition_key_scheme =   N'<PatitionKeyScheme>'
+
+EXEC sys.sp_add_object_to_event_stream_group
+    N'<EventStreamGroupName>',
+    N'<SchemaName>.<TableName>'
+```
+
+### Example: Stream to Azure Event Hubs via Apache Kafka protocol (Connection string auth)
+
+Replace values in angle brackets (`<value>`) with values for your environment. 
+
+```sql
+USE <database name>
+
+-- Create the Master Key with a password.
+CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<Password>'
+
+CREATE DATABASE SCOPED CREDENTIAL credential1
+    WITH IDENTITY = 'SHARED ACCESS SIGNATURE',
+    SECRET = '<Event Hubs Namespace – Primary or Secondary connection string>'
+
+EXEC sys.sp_enable_event_stream
+
+EXEC sys.sp_create_event_stream_group
+    @stream_group_name =      N'<EventStreamGroupName>',
+    @destination_type =       N'AzureEventHubsApacheKafka',
+    @destination_location =   N'<AzureEventHubsHostName>:<port>/<EventHubsInstance>',
+    @destination_credential = <CredentialName>,
+    @max_message_size_kb =    <MaxMessageSize>,
+    @partition_key_scheme =   N'<PatitionKeyScheme>'
+
+EXEC sys.sp_add_object_to_event_stream_group
+    N'<EventStreamGroupName>',
+    N'<SchemaName>.<TableName>'
+```
+
+### Example: Stream to Azure Event Hubs via Apache Kafka protocol (Key value auth)
 
 Replace values in angle brackets (`<value>`) with values for your environment.
 
@@ -237,8 +308,8 @@ USE <database name>
 CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<Password>'
 
 CREATE DATABASE SCOPED CREDENTIAL credential1
-WITH IDENTITY = 'SHARED ACCESS SIGNATURE',
-SECRET = '<Event Hubs Namespace – Primary connection string>'
+    WITH IDENTITY = '<Azure Event Hubs SAS Policy name>',
+    SECRET = '<Primary or Secondary key value>' -- BVFnT3baC/K6I8xNZzio4AeoFt6nHeK0i+ZErNGsxiw=
 
 EXEC sys.sp_enable_event_stream
 
@@ -247,7 +318,7 @@ EXEC sys.sp_create_event_stream_group
     @destination_type =       N'AzureEventHubsApacheKafka',
     @destination_location =   N'<AzureEventHubsHostName>:<port>/<EventHubsInstance>', -- myEventHubsNamespace.servicebus.windows.net:9093/myEventHubsInstance
     @destination_credential = <CredentialName>,
-    @max_message_size_bytes = <MaxMessageSize>,       -- 1048576
+    @max_message_size_kb =    <MaxMessageSize>,       -- 1024
     @partition_key_scheme =   N'<PatitionKeyScheme>'  -- N'None'
 
 EXEC sys.sp_add_object_to_event_stream_group

@@ -4,7 +4,7 @@ description: Learn about new features for SQL Server 2025 (17.x), which gives yo
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: wiassaf, randolphwest
-ms.date: 05/19/2025
+ms.date: 06/16/2025
 ms.service: sql
 ms.subservice: release-landing
 ms.topic: whats-new
@@ -28,11 +28,52 @@ This article summarizes the new features and enhancements for [!INCLUDE [sql-ser
 
 ## Get [!INCLUDE [sssql25-md](../includes/sssql25-md.md)]
 
-[Get SQL Server 2025 Preview](https://info.microsoft.com/ww-landing-sql-server-2025.html). Build number: 17.0.700.9.
+[Get SQL Server 2025 Preview](https://info.microsoft.com/ww-landing-sql-server-2025.html). Build number: 17.0.800.3.
 
 For more information and known issues, see [SQL Server 2025 Preview release notes](sql-server-2025-release-notes.md).
 
 For the best experience with [!INCLUDE [sql-server-2025](../includes/sssql25-md.md)], use the [latest tools](../tools/overview-sql-tools.md).
+
+## CTP 2.1
+
+Currently [!INCLUDE [sql-server-2025](../includes/sssql25-md.md)] includes features available through community technology preview (CTP) 2.1.
+
+In addition to features announced previously, CTP 2.1 adds the following changes and features:
+
+- AI
+  - Vectors
+    - Removed several limitations from the [Vector data type](../t-sql/data-types/vector-data-type.md) and [Vector functions](../t-sql/functions/vector-functions-transact-sql.md).
+    - Huge improvements to [Vector Index](../t-sql/statements/create-vector-index-transact-sql.md) build performance.
+    - Transmit vectors in efficient binary format using supported drivers, reducing payload size, and improving performance and precision in AI workloads. Review [Vector data type (preview)](../t-sql/data-types/vector-data-type.md).
+    - Added [sys.vector_indexes](../relational-databases/system-catalog-views/sys-vector-indexes-transact-sql.md) catalog view to query vector indexes.
+    - Table is not locked with SCH-M lock anymore when creating a vector index.
+    - Single column, integer, primary key clustered index required is now required for creating vector index. Read the [Efficiently and Elegantly Modeling Embeddings in Azure SQL and SQL Server](https://devblogs.microsoft.com/azure-sql/efficiently-and-elegantly-modeling-embeddings-in-azure-sql-and-sql-server/) article to get insight on how to properly model your database to store embeddings efficiently.
+  - `EXTERNAL MODEL` now supports a **Retry Count**. If the embeddings call encounters HTTP status codes indicating temporary issues, the model can automatically retry.
+- Availability
+  - The [asynchronous page request dispatching](../database-engine/availability-groups/windows/failover-and-failover-modes-always-on-availability-groups.md#asynchronous-page-request-dispatching-improvement) improvement is now enabled by default. 
+- Security
+  - TDS 8.0 support for:
+    - [SQL VSS Writer](../database-engine/configure-windows/sql-writer-service.md)
+    - [SQL CEIP service](usage-and-diagnostic-data-configuration-for-sql-server.md)
+    - [PolyBase](../relational-databases/polybase/polybase-guide.md)
+- Database engine
+  - Tempdb space resource governance
+    - Support for [percent-based limits](../relational-databases/resource-governor/tempdb-space-resource-governance.md#set-limits-on-tempdb-space-consumption)
+    - Bug fixes, reliability and diagnostic improvements
+  - Immutable storage for Azure Blob Storage is now supported when [backing up to URL](../relational-databases/backup-restore/sql-server-backup-to-url.md#azure-immutable-storage-support). 
+  - The `@max_message_size_kb` parameter is updated for the [sys.sp_create_event_group_stream](../relational-databases/system-stored-procedures/sys-sp-create-event-stream-group-transact-sql.md) stored procedure.
+- Query store and intelligent query processing
+  - Optimized Halloween protection
+    - Bug fixes
+  - A behavioral change was made to the [automatic plan correction](../relational-databases/automatic-tuning/automatic-tuning.md#automatic-plan-correction) (APC) component of the [automatic tuning](../relational-databases/automatic-tuning/automatic-tuning.md) feature. The Database Engine automatically detects any potential plan choice regressions. Automatic plan correction recognizes this condition and invokes an [automatic plan choice correction](../relational-databases/automatic-tuning/automatic-tuning.md#automatic-plan-choice-correction) action, also known as `FORCE_LAST_GOOD_PLAN`. The automatic plan correction's regression detection model that [Trace Flag 12618](../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf12618) provides, is now *on* by default.
+- SQL Server enabled by Azure Arc
+  - Setup and feature integration available beginning with this release. Review [Feature availability by version](azure-arc/overview.md#feature-availability-by-version) for details.
+  - [Manage automatic connection for SQL Server enabled by Azure Arc](azure-arc/manage-autodeploy.md).
+  - [Connect your SQL Server to Azure Arc](azure-arc/connect.md).
+
+- Reporting Services:
+
+  - [!INCLUDE [ssrs-power-bi-consolidation](../reporting-services/includes/ssrs-power-bi-consolidation.md)]
 
 ## Feature highlights
 
@@ -70,7 +111,6 @@ The following sections identify features that are improved or introduced in [!IN
 | New feature or update | Details |
 | :--- | :--- |
 | [Change event streaming](../relational-databases/track-changes/change-event-streaming/overview.md) | Capture and publish incremental DML changes of data (such as updates, inserts, and deletes) in near real-time. Change event streaming sends details of data changes such as the schema, previous values, and new values to Azure Event Hubs in a simple *CloudEvent*, serialized as either native JSON or Avro Binary. |
-| Optimized [sp_executesql](../relational-databases/system-stored-procedures/sp-executesql-transact-sql.md#optimized_sp_executesql) | Effectively reduce the impact of compilation storms. A compilation storms refers to a situation where a large number of queries are being compiled simultaneously, leading to performance issues and resource contention. Enable this feature to allow invocations of `sp_executesql` to behave like objects such as stored procedures and triggers from a compilation perspective.<br /><br />Allowing batches which use `sp_executesql` to serialize the compilation process reduces the impact of compilation storms. |
 | [Fuzzy string match](../relational-databases/fuzzy-string-match/overview.md) | Check if two strings are similar, and calculate the difference between two strings. |
 | [Regular expressions (regex) in SQL Server](../relational-databases/regular-expressions/overview.md) | Define a search pattern for text with a sequence of characters. Query SQL Server with regex to find, replace, or validate text data. |
 | [Regular expressions functions](../t-sql/functions/regular-expressions-functions-transact-sql.md) | Match complex patterns and manipulate data in SQL Server with regular expressions. |
@@ -125,7 +165,6 @@ Functionally equivalent to Developer edition in previous versions.
 | [Distributed AG synchronization improvements](../database-engine/availability-groups/windows/distributed-availability-groups.md#improvement-to-distributed-ag-synchronization) | Improves synchronization performance by reducing network saturation when the global primary and forwarder replicas are in asynchronous commit mode. |
 | [Backups on secondary replicas](../database-engine/availability-groups/windows/active-secondaries-backup-on-secondary-replicas-always-on-availability-groups.md#new-for-sql-server-2025) | In addition to copy-only backups, you can now also perform full and differential backups on any secondary replica. |
 
-
 ## Security
 
 | New feature or update | Details |
@@ -138,7 +177,7 @@ Functionally equivalent to Developer edition in previous versions.
 | [Managed Identity support for Extensible Key Management with Azure Key Vault](azure-arc/managed-identity-extensible-key-management.md) | Supported for EKM with AKV and Managed Hardware Security Modules (HSM). Requires SQL Server enabled by Azure Arc. |
 | [Create Microsoft Entra logins and users with *nonunique display names*](/azure/azure-sql/database/authentication-microsoft-entra-create-users-with-nonunique-names) | Support for the T-SQL syntax `WITH OBJECT_ID` when using the [CREATE LOGIN](../t-sql/statements/create-login-transact-sql.md?view=sql-server-ver17&preserve-view=true#with-object_id--objectid) or [CREATE USER](../t-sql/statements/create-user-transact-sql.md#with-object_id--objectid) statement. |
 | [Support custom password policy on Linux](../linux/sql-server-linux-custom-password-policy.md) | Enforce a custom password policy for SQL authentication logins on SQL Server on Linux. |
-| [TDS 8.0 support](../relational-databases/security/networking/tds-8.md#sql-server-2025-support) | TDS 8.0 support added for the [sqlcmd utility](../tools/sqlcmd/sqlcmd-utility.md#tds-80-support), and [bcp utility](../tools/bcp-utility.md#tds-80-support). |
+| [TDS 8.0 support](../relational-databases/security/networking/tds-8.md#sql-server-2025-support) | TDS 8.0 support added for:<br /> - [sqlcmd utility](../tools/sqlcmd/sqlcmd-utility.md#tds-80-support)<br /> - [bcp utility](../tools/bcp-utility.md#tds-80-support) <br /> - [SQL VSS Writer](../database-engine/configure-windows/sql-writer-service.md)<br /> - [SQL CEIP service](usage-and-diagnostic-data-configuration-for-sql-server.md)<br /> - [PolyBase](../relational-databases/polybase/polybase-guide.md)  |
 
 ## Database Engine
 
@@ -153,6 +192,7 @@ Functionally equivalent to Developer edition in previous versions.
 | [Memory-optimized container and filegroup removal](../relational-databases/in-memory-oltp/memory-optimized-container-filegroup-removal.md) | Supports removal of memory-optimized containers and filegroups when all In-Memory OLTP objects are deleted. |
 | [tmpfs support for tempdb on Linux](../linux/sql-server-linux-tmpfs-tempdb.md) | Enable and run `tempdb` on **tmpfs** for SQL Server on Linux. |
 | [ZSTD Backup compression algorithm](../relational-databases/backup-restore/backup-compression-sql-server.md#zstd-compression-algorithm-introduced-in-sql-server-2025) | [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] adds a faster and more effective backup compression algorithm - ZSTD. |
+| Optimized [sp_executesql](../relational-databases/system-stored-procedures/sp-executesql-transact-sql.md?view=sql-server-ver17&preserve-view=true#optimized_sp_executesql) | Effectively reduce the impact of compilation storms. A compilation storms refers to a situation where a large number of queries are being compiled simultaneously, leading to performance issues and resource contention. Enable this feature to allow invocations of `sp_executesql` to behave like objects such as stored procedures and triggers from a compilation perspective.<br /><br />Allowing batches which use `sp_executesql` to serialize the compilation process reduces the impact of compilation storms. |
 
 ## Query Store and intelligent query processing
 
@@ -230,21 +270,31 @@ Server Gen2 cryptokey is not present, but server assembly object System is set t
 
 For specific updates, see [What's new in SQL Server Analysis Services](/analysis-services/what-s-new-in-sql-server-analysis-services).
 
-## SQL Server Reporting Services
+## Power BI Report Server
 
-For specific updates, see [What's new in SQL Server Reporting Services (SSRS)](../reporting-services/what-s-new-in-sql-server-reporting-services-ssrs.md).
+[!INCLUDE [ssrs-power-bi-consolidation](../reporting-services/includes/ssrs-power-bi-consolidation.md)]
 
 ## SQL Server Integration Services
 
 For changes related to SQL Server Integration Services, see [What's New in SQL Server 2025 Integration Services Preview](../integration-services/what-s-new-in-integration-services-in-sql-server-2025.md).
 
-## Discontinued services
+## Discontinued services and deprecated features
 
-**Data Quality Services** (DQS) is discontinued in this version of SQL Server. We continue to support DQS in [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] and earlier versions.
+**Data Quality Services** (DQS) is discontinued in this version of [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)]. We continue to support DQS in [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] and earlier versions.
 
-**Master Data Services** (MDS) is discontinued in this version of SQL Server. We continue to support MDS in [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] and earlier versions.
+**Master Data Services** (MDS) is discontinued in this version of [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)]. We continue to support MDS in [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] and earlier versions.
 
-**Synapse Link** is discontinued in this version of SQL Server. Use [Mirroring in Fabric](/fabric/database/mirrored-database/overview) instead. For more information, see [Mirroring in Fabric – What's new](https://aka.ms/IntroMirroringSQL).
+**Synapse Link** is discontinued in this version of [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)]. Use [Mirroring in Fabric](/fabric/database/mirrored-database/overview) instead. For more information, see [Mirroring in Fabric – What's new](https://aka.ms/IntroMirroringSQL).
+
+The [Hot add CPU](../relational-databases/thread-and-task-architecture-guide.md#hot-add-cpu) feature is deprecated in this version of [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)], and is planned to be removed in a future version.
+
+**Purview access policies** (DevOps policies and data owner policies) are discontinued in this version of SQL Server. Use [Fixed server roles](../relational-databases/security/authentication-access/server-level-roles.md#fixed-server-level-roles-introduced-in-sql-server-2022) instead.
+
+1. In place of the **SQL Performance Monitoring** Purview policy action, use the `##MS_ServerPerformanceStateReader##` and/or `##MS_PerformanceDefinitionReader##` fixed server roles.
+
+1. In place of **SQL Security Auditing** Purview policy action, use the `##MS_ServerSecurityStateReader##` and/or `##MS_SecurityDefinitionReader##` fixed server roles.
+
+In addition, use the `##MS_DatabaseConnector##` server role with existing logins, to connect to a database without the need to create a user in that database.
 
 ## Other services
 

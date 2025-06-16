@@ -4,7 +4,7 @@ description: Learn about the concepts, requirements, and components necessary fo
 author: dplessMSFT
 ms.author: dpless
 ms.reviewer: mathoma, wiassaf, hudequei, randolphwest
-ms.date: 06/02/2025
+ms.date: 06/16/2025
 ms.service: sql
 ms.subservice: backup-restore
 ms.topic: conceptual
@@ -24,13 +24,15 @@ This article introduces the concepts, requirements, and components necessary to 
 
 ## Overview
 
+SQL Server 2012 Service Pack 1 CU2 and SQL Server 2014 introduced the ability to back up to a URL pointed at Azure Blob Storage, using familiar T-SQL syntax to write backups securely to Azure storage. [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] introduced [File-Snapshot Backups for Database Files in Azure](file-snapshot-backups-for-database-files-in-azure.md) and security via shared-access signature (SAS) keys, a secure and simple way to authenticate certificates to Azure Storage security policy.
+
 It's important to understand the components and the interaction between them to perform a backup to or restore from Microsoft Azure Blob Storage.
 
 Creating an Azure Storage account within your Azure subscription is the first step in this process. This storage account is an administrative account that has full administrative permissions on all containers and objects created with the storage account. [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] can either use the Azure storage account name and its access key value to authenticate and write and read blobs to Microsoft Azure Blob Storage or use a Shared Access Signature token generated on specific containers granting it read and write rights. For more information on Azure Storage Accounts, see [About Azure Storage Accounts](/azure/storage/common/storage-account-create) and for more information about Shared Access Signatures, see [Shared Access Signatures, Part 1: Understanding the SAS Model](/azure/storage/common/storage-sas-overview). The [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Credential stores this authentication information and is used during the backup or restore operations.
 
 ### Azure Storage and S3-compatible storage
 
-SQL Server 2012 Service Pack 1 CU2 and SQL Server 2014 introduced the ability to back up to a URL pointed at Azure Blob Storage, using familiar T-SQL syntax to write backups securely to Azure storage. [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] introduced [File-Snapshot Backups for Database Files in Azure](file-snapshot-backups-for-database-files-in-azure.md) and security via shared-access signature (SAS) keys, a secure and simple way to authenticate certificates to Azure Storage security policy. [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] introduces the ability to write backups to S3-compatible object storage, with backup and restore functionality conceptually similar to working with Backup to URL using Azure Blob Storage as a backup device type. [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] extends the BACKUP/RESTORE TO/FROM URL syntax by adding support for a new S3 connector using the REST API.
+[!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] introduces the ability to write backups to S3-compatible object storage, with backup and restore functionality conceptually similar to working with Backup to URL using Azure Blob Storage as a backup device type. [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] extends the BACKUP/RESTORE TO/FROM URL syntax by adding support for a new S3 connector using the REST API.
 
 This article contains information on using Backup to URL for Azure Blob Storage. To learn more about using Backup to URL for S3-compatible storage, see [SQL Server backup to URL for S3-compatible object storage](sql-server-backup-to-url-s3-compatible-object-storage.md).
 
@@ -72,7 +74,7 @@ The only supported backup to URL for Azure Blob Storage is to block blobs, using
 
 <a id="Blob"></a>
 
-### Microsoft Azure Blob Storage
+### Microsoft Azure Blob Storage 
 
 **Storage Account:** The storage account is the starting point for all storage services. To access Microsoft Azure Blob Storage, first create an Azure storage account. For more information, see [Create a Storage Account](/azure/storage/common/storage-account-create)
 
@@ -103,6 +105,22 @@ For more information about credentials, see [Credentials (Database Engine)](../s
 For information on other examples where credentials are used, see [Create a SQL Server Agent Proxy](../../ssms/agent/create-a-sql-server-agent-proxy.md).
 
 <a id="security"></a>
+
+## Azure immutable storage support
+
+[!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] introduces support for [Azure immutable storage](/azure/storage/blobs/immutable-storage-overview), which protects against ransomware attacks. Files written to immutable storage can't be modified or deleted, as defined by immutability. 
+
+Typically, SQL Server backups are created in two steps. Initially, the `.bak` backup file is created with zeroes, and then the file is updated with data. Since file modification on immutable storage isn't allowed once the file is written and committed, the backup process now skips the initial step to create the backup file with zeroes. Instead, the entire backup is created in one step when written to block blobs.
+
+During preview, [trace flag 3012](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf3012) is required to enable immutable storage support for backups to URL. 
+
+To use immutable storage with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] backup to URL, follow these steps: 
+
+1. Configure [immutability for your Azure storage container](/azure/storage/blobs/immutable-policy-configure-container-scope). 
+1. Enable trace flag 3012 for your [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] instance by running the following DBCC command:   
+   `DBCC TRACEON(3012,-1)`.
+1. Issue the [BACKUP](../../t-sql/statements/backup-transact-sql.md) to back up your database to the Azure storage container:   
+   `BACKP DATABASE [<Database>] TO URL = ‘<url>’ WITH FORMAT`.
 
 ## Security for Azure Blob Storage
 

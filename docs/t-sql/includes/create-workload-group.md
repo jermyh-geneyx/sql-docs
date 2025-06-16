@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: dfurman
-ms.date: 04/15/2025
+ms.date: 06/10/2025
 ms.service: sql
 ms.topic: include
 ms.custom:
@@ -29,11 +29,12 @@ CREATE WORKLOAD GROUP group_name
       [ [ , ] REQUEST_MEMORY_GRANT_TIMEOUT_SEC = value ]
       [ [ , ] MAX_DOP = value ]
       [ [ , ] GROUP_MAX_REQUESTS = value ]
-      [ [ , ] GROUP_MAX_TEMPDB_DATA_MB = value ] )
+      [ [ , ] GROUP_MAX_TEMPDB_DATA_MB = value ]
+      [ [ , ] GROUP_MAX_TEMPDB_DATA_PERCENT = value ] )
 ]
 [ USING {
     [ pool_name | [default] ]
-    [ [ , ] EXTERNAL external_pool_name | [default] ]
+    [ [ , ] EXTERNAL external_pool_name | [ default ] ]
     } ]
 [ ; ]
 ```
@@ -42,7 +43,7 @@ CREATE WORKLOAD GROUP group_name
 
 #### *group_name*
 
-The user-defined name for the workload group. *group_name* is alphanumeric, can be up to 128 characters, must be unique within an instance of the [!INCLUDE[ssDE](../../includes/ssde-md.md)], and must comply with the rules for [Database identifiers](../../relational-databases/databases/database-identifiers.md).
+The user-defined name for the workload group. *group_name* is alphanumeric, can be up to 128 characters, must be unique within an instance of the [!INCLUDE [ssDE](../../includes/ssde-md.md)], and must comply with the rules for [Database identifiers](../../relational-databases/databases/database-identifiers.md).
 
 #### IMPORTANCE = { LOW | MEDIUM | HIGH }
 
@@ -74,7 +75,7 @@ Starting with [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)], the value c
 
 Specifies the maximum amount of CPU time, in seconds, that a batch request can use. *value* must be 0 or a positive integer. The default setting for *value* is 0, which means unlimited.
 
-When the maximum CPU time is exceeded, the `cpu_threshold_exceeded` extended event and a trace event are generated. For more information, see [CPU Threshold Exceeded Event Class](../../relational-databases/event-classes/cpu-threshold-exceeded-event-class.md).
+When the maximum CPU time is exceeded, the `cpu_threshold_exceeded` extended event and a trace event are generated. For more information, see [CPU threshold exceeded event class](../../relational-databases/event-classes/cpu-threshold-exceeded-event-class.md).
 
 In Azure SQL Managed Instance, when the maximum CPU time is exceeded, resource governor aborts the request with error 10961.
 
@@ -101,11 +102,23 @@ Specifies the maximum number of simultaneous requests that are allowed to execut
 
 #### GROUP_MAX_TEMPDB_DATA_MB = *value*
 
-Specifies the maximum amount of space that a workload group can consume in the `tempdb` data files, in megabytes. *value* must be 0 or a positive number. Fractional values are allowed. When the value is 0, `tempdb` space allocations by sessions in the workload group are not allowed. When a value isn't set, resource governor doesn't limit `tempdb` space consumption by the workload group.
+Specifies the maximum amount of space that a workload group can consume in the `tempdb` data files, in megabytes. *value* must be 0 or a positive number. Fractional values are allowed.
+
+When the value is 0, `tempdb` space allocations by sessions in the workload group are not allowed. When a value isn't set, resource governor doesn't limit `tempdb` space consumption by the workload group.
 
 The limit is for the total space consumed in `tempdb` by all sessions in a workload group.
 
 When a request running in a workload group attempts to increase `tempdb` data space consumption by the workload group above the limit set by `GROUP_MAX_TEMPDB_DATA_MB`, resource governor aborts the request with error 1138. For more information, see [Tempdb space resource governance](../../relational-databases/resource-governor/tempdb-space-resource-governance.md).
+
+#### GROUP_MAX_TEMPDB_DATA_PERCENT = *value*
+
+Specifies the maximum amount of space that a workload group can consume in the `tempdb` data files, in percent of the maximum `tempdb` size. For the definition of the maximum `tempdb` size, see [Percent limit configuration](../../relational-databases/resource-governor/tempdb-space-resource-governance.md#percent-limit-configuration). *value* must be in the range from 0 to 100. Fractional values are allowed.
+
+When the value is 0, `tempdb` space allocations by sessions in the workload group are not allowed. When a value isn't set, resource governor doesn't limit `tempdb` space consumption by the workload group. When `GROUP_MAX_TEMPDB_DATA_MB` is set, or when `tempdb` maximum size isn't defined, `GROUP_MAX_TEMPDB_DATA_PERCENT` has no effect.
+
+The limit is for the total space consumed in `tempdb` by all sessions in a workload group.
+
+When a request running in a workload group attempts to increase `tempdb` data space consumption by the workload group above the limit set by `GROUP_MAX_TEMPDB_DATA_PERCENT`, resource governor aborts the request with error 1138. For more information, see [Tempdb space resource governance](../../relational-databases/resource-governor/tempdb-space-resource-governance.md).
 
 #### USING { *pool_name* | [default] }
 
@@ -115,13 +128,13 @@ Associates the workload group with the user-defined resource pool identified by 
 
 Built-in resource pools and workload groups use all lowercase names, such as `default`. Use the lower case `default` on servers that use a case-sensitive collation. Servers with case-insensitive collation treat `default`, `Default`, and `DEFAULT` as the same value.
 
-#### EXTERNAL external_pool_name | [default]
+#### EXTERNAL external_pool_name | [ default ]
 
 **Applies to**: [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later.
 
 Workload group can specify an external resource pool. You can define a workload group and associate it with two pools:
 
-- A resource pool for the [!INCLUDE[ssDE](../../includes/ssde-md.md)] workloads.
+- A resource pool for the [!INCLUDE [ssDE](../../includes/ssde-md.md)] workloads.
 - An external resource pool for external processes. For more information, see [sp_execute_external_script](../../relational-databases/system-stored-procedures/sp-execute-external-script-transact-sql.md).
 
 ## Remarks
@@ -150,7 +163,7 @@ The memory consumed to create a nonaligned index on a partitioned table is propo
 
 Requires the `CONTROL SERVER` permission.
 
-## Example
+## Examples
 
 Creates a workload group named `newReports` in the `default` resource pool, and limits the maximum memory grant, the maximum CPU time for a request, and `MAXDOP`.
 
@@ -170,9 +183,11 @@ USING [default];
 - [Resource governor](../../relational-databases/resource-governor/resource-governor.md)
 - [Resource governor workload group](../../relational-databases/resource-governor/resource-governor-workload-group.md)
 - [Create a workload group](../../relational-databases/resource-governor/create-a-workload-group.md)
-- [ALTER WORKLOAD GROUP](../statements/alter-workload-group-transact-sql.md)
-- [DROP WORKLOAD GROUP](../statements/drop-workload-group-transact-sql.md)
-- [CREATE RESOURCE POOL](../statements/create-resource-pool-transact-sql.md)
-- [ALTER RESOURCE POOL](../statements/alter-resource-pool-transact-sql.md)
-- [DROP RESOURCE POOL](../statements/drop-resource-pool-transact-sql.md)
-- [ALTER RESOURCE GOVERNOR](../statements/alter-resource-governor-transact-sql.md)
+- [ALTER WORKLOAD GROUP (Transact-SQL)](../statements/alter-workload-group-transact-sql.md)
+- [DROP WORKLOAD GROUP (Transact-SQL)](../statements/drop-workload-group-transact-sql.md)
+- [CREATE RESOURCE POOL (Transact-SQL)](../statements/create-resource-pool-transact-sql.md)
+- [ALTER RESOURCE POOL (Transact-SQL)](../statements/alter-resource-pool-transact-sql.md)
+- [DROP RESOURCE POOL (Transact-SQL)](../statements/drop-resource-pool-transact-sql.md)
+- [ALTER RESOURCE GOVERNOR (Transact-SQL)](../statements/alter-resource-governor-transact-sql.md)
+- [sys.resource_governor_workload_groups](../../relational-databases/system-catalog-views/sys-resource-governor-workload-groups-transact-sql.md)
+- [sys.dm_resource_governor_workload_groups](../../relational-databases/system-dynamic-management-views/sys-dm-resource-governor-workload-groups-transact-sql.md)

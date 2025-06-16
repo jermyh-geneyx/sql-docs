@@ -1,6 +1,6 @@
 ---
 title: "CREATE VECTOR INDEX (Transact-SQL)"
-description: "CREATE VECTOR INDEX creates an index on vector data to allow approximate neareast neighbor search"
+description: "CREATE VECTOR INDEX creates an index on vector data to allow approximate nearest neighbor search"
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: damauri
@@ -127,11 +127,10 @@ Is an option to drop and rebuild the existing vector index with modified specifi
 
 The current preview has the following limitations:
 
-- No partition support. Vector index can't be partitioned.  
-- The table must have a single integer non-nullable column clustered index. 
-- During and for all the time needed for vector index creation to complete, an SCH-M lock is acquired on the table. As a result, the lock prevents any access to the table or its metadata. 
-- Once a vector index is created on a table, the table becomes read-only. No data modification is allowed while the vector index is present on the table. 
-- Vector index are not replicated to subscribers.
+- Vector index can't be partitioned. No partition support.
+- The table must have a single column, integer, primary key clustered index.
+- A table with a vector index becomes read only. No data modification is allowed while the vector index is present on the table.
+- Vector indexes aren't replicated to subscribers.
 
 ## Permissions
 
@@ -141,7 +140,7 @@ The user must have `ALTER` permission on the table.
 
 Details of the database used in the sample can be found here: [Download and import the Wikipedia Article with Vector Embeddings](https://github.com/Azure-Samples/azure-sql-db-openai?tab=readme-ov-file#download-and-import-the-wikipedia-article-with-vector-embeddings).
 
-Examples assume the existence of a table named `wikipedia_articles` with a column `title_vector` of type `vector` that stores title's embeddings of Wikipedia articles. `title_vector` is assumed to be an embedding generated with an embedding model like *text-embedding-ada-002* or *text-embedding-3-small* , which returns vectors with 1,536 dimensions.
+Examples assume the existence of a table named `wikipedia_articles` with a column `title_vector` of type `vector` that stores title's embeddings of Wikipedia articles. `title_vector` is assumed to be an embedding generated with an embedding model like *text-embedding-ada-002* or *text-embedding-3-small*, which returns vectors with 1,536 dimensions.
 
 For more examples, including end-to-end solutions, go to the [Azure SQL Database Vector Search Samples GitHub repo](https://github.com/Azure-Samples/azure-sql-db-vector-search).
 
@@ -227,4 +226,5 @@ ORDER BY s.distance, t.title;
 - [Overview of vectors in the SQL Database Engine](../../relational-databases/vectors/vectors-sql-server.md)
 - [Vector data type](../data-types/vector-data-type.md)
 - [VECTOR_SEARCH (Transact-SQL)](../functions/vector-search-transact-sql.md)
+- [sys.vector_indexes (Transact-SQL)](../../relational-databases/system-catalog-views/sys-vector-indexes-transact-sql.md)
 - [Azure SQL Database Vector Search Samples](https://github.com/Azure-Samples/azure-sql-db-vector-search)

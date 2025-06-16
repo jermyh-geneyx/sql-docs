@@ -4,7 +4,7 @@ description: This article provides a step-by-step procedure for installing a new
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: pijocoder
-ms.date: 05/29/2025
+ms.date: 06/15/2025
 ms.service: sql
 ms.subservice: install
 ms.topic: install-set-up-deploy
@@ -1002,6 +1002,11 @@ To use the Azure extension for [!INCLUDE [ssNoVersion](../../includes/ssnoversio
 - `Microsoft.HybridCompute`
 
 To authenticate the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] instance with Azure, you can sign in using an Azure account, or you can use an Azure service principal. For specific security requirements to install the extension, see [Prerequisites - SQL Server enabled by Azure Arc](../../sql-server/azure-arc/prerequisites.md).
+
+If you don't already have an Azure account, select the **Start free** button to begin the Azure sign-up experience. This option takes you to the <https://azure.microsoft.com/free> page, where you can register for a free account and receive credits, if eligible, to explore and use a wide range of Azure services, including capabilities such as [Azure Arc enabling SQL Server](https://aka.ms/arc-sql-server).
+
+> [!NOTE]  
+> For more information on Azure account types, and guidance on selecting the best option for your needs, visit the [Azure account](https://azure.microsoft.com/pricing/purchase-options/azure-account) page. This resource will help you get started with creating, deploying, and managing applications across multiple clouds, on-premises, and at the edge using scalable and cost-effective Azure services.
 
 To sign in with your Azure account, select **Use Azure Login**. Windows might prompt you to add one or more sites to the Trusted sites zone. Follow your organization's security requirements. After you sign in to Azure, proceed to provide the additional registration information.
 
