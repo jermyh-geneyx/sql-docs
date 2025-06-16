@@ -4,7 +4,7 @@ description: This article contains the release notes and supported features for 
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: amitkh, vanto
-ms.date: 05/19/2025
+ms.date: 06/16/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: release-notes
@@ -36,39 +36,38 @@ Most existing client tools that target [!INCLUDE [ssNoVersion](../includes/ssnov
 
 ## Latest versions for all packages
 
-This section lists the latest versions of each package per distribution, for [!INCLUDE [ssSQL25](../includes/sssql25-md.md)]. The following table shows the most recent release, which is **CTP 2.0**. For full release history, see [Release history for [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] 2025 Preview](/troubleshoot/sql/releases/linux/release-history-2025).
+This section lists the latest versions of each package per distribution, for [!INCLUDE [ssSQL25](../includes/sssql25-md.md)]. The following table shows the most recent release, which is **CTP 2.1**. For full release history, see [Release history for SQL Server 2025 Preview on Linux](/troubleshoot/sql/releases/linux/release-history-2025).
 
 | Version | Release | Date | Build | KB article |
 | --- | --- | --- | --- | --- |
-| [!INCLUDE [ssSQL25](../includes/sssql25-md.md)] | CTP 2.0 | 2025-05-19 | 17.0.700.9 | |
-
-> [!IMPORTANT]  
-> In [!INCLUDE [ssSQL25](../includes/sssql25-md.md)] on Linux, the CPU time for a query (for example, returned by set statistics time, or captured via Extended Events or SQL Server Profiler traces) can currently display inaccurately. This amount can often show significantly more than the actual execution time, even when the query isn't running in parallel. This is a known issue, and we're actively working on a resolution. This issue affects [!INCLUDE [ssSQL25](../includes/sssql25-md.md)] on Linux deployed on traditional VMs, physical machines, and container-based environments.
+| [!INCLUDE [ssSQL25](../includes/sssql25-md.md)] | CTP 2.1 | 2025-06-16 | 17.0.800.3 | |
 
 - The **mssql-server-is** package isn't supported on SUSE in this release. For more information, see [SQL Server on Linux: Known issues](sql-server-linux-known-issues.md#sql-server-integration-services-ssis).
 
 | Distribution | Package name | Package version | Download |
 | --- | --- | --- | --- |
 | **Red Hat Enterprise Linux** | | | |
-| RHEL 9 | Database Engine | 17.0.700.9-1 | [Database Engine RPM package](https://packages.microsoft.com/rhel/9/mssql-server-preview/Packages/m/mssql-server-17.0.700.9-1.x86_64.rpm) |
-| RHEL 9 | Extensibility | 17.0.700.9-1 | [Extensibility RPM package](https://packages.microsoft.com/rhel/9/mssql-server-preview/Packages/m/mssql-server-extensibility-17.0.700.9-1.x86_64.rpm) |
-| RHEL 9 | Full-Text Search | 17.0.700.9-1 | [Full-Text Search RPM package](https://packages.microsoft.com/rhel/9/mssql-server-preview/Packages/m/mssql-server-fts-17.0.700.9-1.x86_64.rpm) |
-| RHEL 9 | High Availability | 17.0.700.9-1 | [High Availability RPM package](https://packages.microsoft.com/rhel/9/mssql-server-preview/Packages/m/mssql-server-ha-17.0.700.9-1.x86_64.rpm) |
-| RHEL 9 | PolyBase | 17.0.700.9-1 | [PolyBase RPM package](https://packages.microsoft.com/rhel/9/mssql-server-preview/Packages/m/mssql-server-polybase-17.0.700.9-1.x86_64.rpm) |
+| RHEL 9 | Database Engine | 17.0.800.3-1 | [Database Engine RPM package](https://packages.microsoft.com/rhel/9/mssql-server-preview/Packages/m/mssql-server-17.0.800.3-1.x86_64.rpm) |
+| RHEL 9 | Extensibility | 17.0.800.3-1 | [Extensibility RPM package](https://packages.microsoft.com/rhel/9/mssql-server-preview/Packages/m/mssql-server-extensibility-17.0.800.3-1.x86_64.rpm) |
+| RHEL 9 | Full-Text Search | 17.0.800.3-1 | [Full-Text Search RPM package](https://packages.microsoft.com/rhel/9/mssql-server-preview/Packages/m/mssql-server-fts-17.0.800.3-1.x86_64.rpm) |
+| RHEL 9 | High Availability | 17.0.800.3-1 | [High Availability RPM package](https://packages.microsoft.com/rhel/9/mssql-server-preview/Packages/m/mssql-server-ha-17.0.800.3-1.x86_64.rpm) |
+| RHEL 9 | PolyBase | 17.0.800.3-1 | [PolyBase RPM package](https://packages.microsoft.com/rhel/9/mssql-server-preview/Packages/m/mssql-server-polybase-17.0.800.3-1.x86_64.rpm) |
 | **SUSE Linux Enterprise Server** | | | |
-| SLES 15 | Database Engine | 17.0.700.9-1 | [Database Engine RPM package](https://packages.microsoft.com/sles/15/mssql-server-preview/Packages/m/mssql-server-17.0.700.9-1.x86_64.rpm) |
-| SLES 15 | Extensibility | 17.0.700.9-1 | [Extensibility RPM package](https://packages.microsoft.com/sles/15/mssql-server-preview/Packages/m/mssql-server-extensibility-17.0.700.9-1.x86_64.rpm) |
-| SLES 15 | Full-Text Search | 17.0.700.9-1 | [Full-Text Search RPM package](https://packages.microsoft.com/sles/15/mssql-server-preview/Packages/m/mssql-server-fts-17.0.700.9-1.x86_64.rpm) |
-| SLES 15 | High Availability | 17.0.700.9-1 | [High Availability RPM package](https://packages.microsoft.com/sles/15/mssql-server-preview/Packages/m/mssql-server-ha-17.0.700.9-1.x86_64.rpm) |
-| SLES 15 | PolyBase | 17.0.700.9-1 | [PolyBase RPM package](https://packages.microsoft.com/sles/15/mssql-server-preview/Packages/m/mssql-server-polybase-17.0.700.9-1.x86_64.rpm) |
+| SLES 15 | Database Engine | 17.0.800.3-1 | [Database Engine RPM package](https://packages.microsoft.com/sles/15/mssql-server-preview/Packages/m/mssql-server-17.0.800.3-1.x86_64.rpm) |
+| SLES 15 | Extensibility | 17.0.800.3-1 | [Extensibility RPM package](https://packages.microsoft.com/sles/15/mssql-server-preview/Packages/m/mssql-server-extensibility-17.0.800.3-1.x86_64.rpm) |
+| SLES 15 | Full-Text Search | 17.0.800.3-1 | [Full-Text Search RPM package](https://packages.microsoft.com/sles/15/mssql-server-preview/Packages/m/mssql-server-fts-17.0.800.3-1.x86_64.rpm) |
+| SLES 15 | High Availability | 17.0.800.3-1 | [High Availability RPM package](https://packages.microsoft.com/sles/15/mssql-server-preview/Packages/m/mssql-server-ha-17.0.800.3-1.x86_64.rpm) |
+| SLES 15 | PolyBase | 17.0.800.3-1 | [PolyBase RPM package](https://packages.microsoft.com/sles/15/mssql-server-preview/Packages/m/mssql-server-polybase-17.0.800.3-1.x86_64.rpm) |
 | **Ubuntu** | | | |
-| Ubuntu 22.04 | Database Engine | 17.0.700.9-1 | [Database Engine Debian package](https://packages.microsoft.com/ubuntu/22.04/mssql-server-preview/pool/main/m/mssql-server/mssql-server_17.0.700.9-1_amd64.deb) |
-| Ubuntu 22.04 | Extensibility | 17.0.700.9-1 | [Extensibility Debian package](https://packages.microsoft.com/ubuntu/22.04/mssql-server-preview/pool/main/m/mssql-server-extensibility/mssql-server-extensibility_17.0.700.9-1_amd64.deb) |
-| Ubuntu 22.04 | Full-Text Search | 17.0.700.9-1 | [Full-Text Search Debian package](https://packages.microsoft.com/ubuntu/22.04/mssql-server-preview/pool/main/m/mssql-server-fts/mssql-server-fts_17.0.700.9-1_amd64.deb) |
-| Ubuntu 22.04 | High Availability | 17.0.700.9-1 | [High Availability Debian package](https://packages.microsoft.com/ubuntu/22.04/mssql-server-preview/pool/main/m/mssql-server-ha/mssql-server-ha_17.0.700.9-1_amd64.deb) |
-| Ubuntu 22.04 | PolyBase | 17.0.700.9-1 | [PolyBase Debian package](https://packages.microsoft.com/ubuntu/22.04/mssql-server-preview/pool/main/m/mssql-server-polybase/mssql-server-polybase_17.0.700.9-1_amd64.deb) |
+| Ubuntu 22.04 | Database Engine | 17.0.800.3-1 | [Database Engine Debian package](https://packages.microsoft.com/ubuntu/22.04/mssql-server-preview/pool/main/m/mssql-server/mssql-server_17.0.800.3-1_amd64.deb) |
+| Ubuntu 22.04 | Extensibility | 17.0.800.3-1 | [Extensibility Debian package](https://packages.microsoft.com/ubuntu/22.04/mssql-server-preview/pool/main/m/mssql-server-extensibility/mssql-server-extensibility_17.0.800.3-1_amd64.deb) |
+| Ubuntu 22.04 | Full-Text Search | 17.0.800.3-1 | [Full-Text Search Debian package](https://packages.microsoft.com/ubuntu/22.04/mssql-server-preview/pool/main/m/mssql-server-fts/mssql-server-fts_17.0.800.3-1_amd64.deb) |
+| Ubuntu 22.04 | High Availability | 17.0.800.3-1 | [High Availability Debian package](https://packages.microsoft.com/ubuntu/22.04/mssql-server-preview/pool/main/m/mssql-server-ha/mssql-server-ha_17.0.800.3-1_amd64.deb) |
+| Ubuntu 22.04 | PolyBase | 17.0.800.3-1 | [PolyBase Debian package](https://packages.microsoft.com/ubuntu/22.04/mssql-server-preview/pool/main/m/mssql-server-polybase/mssql-server-polybase_17.0.800.3-1_amd64.deb) |
 
-## <a id="cuinstall"></a> How to install updates
+<a id="cuinstall"></a>
+
+## How to install updates
 
 If you require Docker container images, see official images for [Microsoft SQL Server on Linux for Docker Engine](https://hub.docker.com/_/microsoft-mssql-server). For more information about repository configuration, see [Configure repositories for installing and upgrading SQL Server on Linux](sql-server-linux-change-repo.md).
 
@@ -88,9 +87,10 @@ The following table lists the release history for [!INCLUDE [ssSQL25](../include
 > [!NOTE]  
 > Any missing GDRs apply to the Windows version only.
 
-| Release                                                                  | Version       | Release date |
-| ------------------------------------------------------------------------ | ------------- | ------------ |
-| [CTP 2.0](/troubleshoot/sql/releases/linux/release-history-2025#CTP2.0)  | 17.0.700.9    | 2025-05-19   |
+| Release | Version | Release date |
+| --- | --- | --- |
+| [CTP 2.1](/troubleshoot/sql/releases/linux/release-history-2025#CTP2.1) | 17.0.800.3 | 2025-06-16 |
+| [CTP 2.0](/troubleshoot/sql/releases/linux/release-history-2025#CTP2.0) | 17.0.700.9 | 2025-05-19 |
 
 ## Known issues
 
@@ -103,5 +103,5 @@ For more information, see [SQL Server on Linux: Known issues](sql-server-linux-k
 - [Quickstart: Install SQL Server and create a database on SUSE Linux Enterprise Server](quickstart-install-connect-suse.md)
 - [Quickstart: Install SQL Server and create a database on Ubuntu](quickstart-install-connect-ubuntu.md)
 - [Quickstart: Run SQL Server Linux container images with Docker](quickstart-install-connect-docker.md)
-- [Create a SQL VM in Azure](/azure/azure-sql/virtual-machines/linux/sql-vm-create-portal-quickstart)
+- [Provision a Linux virtual machine running SQL Server in the Azure portal](/azure/azure-sql/virtual-machines/linux/sql-vm-create-portal-quickstart)
 - [Quickstart: Run SQL Server in the cloud](quickstart-install-connect-clouds.md)
