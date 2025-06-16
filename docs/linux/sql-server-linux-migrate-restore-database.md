@@ -147,7 +147,7 @@ At this point, the backup file is on your Linux server in your user's home direc
 
 To restore the database backup, you can use the `RESTORE DATABASE` Transact-SQL (TQL) command.
 
-The following steps use the **sqlcmd** tool. If you haven't installed [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] tools, see [Install the SQL Server command-line tools sqlcmd and bcp on Linux](sql-server-linux-setup-tools.md).
+The following steps use the **sqlcmd** tool. If you haven't installed [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] tools, see [Install the sqlcmd and bcp SQL Server command-line tools on Linux](sql-server-linux-setup-tools.md).
 
 1. In the same terminal, launch **sqlcmd**. The following example connects to the local [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] instance with the `sa` account. Enter the password when prompted, or specify the password by adding the `-P` parameter.
 

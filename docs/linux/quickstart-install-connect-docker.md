@@ -1446,7 +1446,7 @@ The following steps use **sqlcmd** outside of your container to connect to [!INC
 
 1. Find the IP address for your container's host machine, using `ifconfig` or `ip addr`.
 
-1. For this example, install the **sqlcmd** tool on your client machine. For more information, see [sqlcmd utility](../tools/sqlcmd/sqlcmd-utility.md) or [Install the SQL Server command-line tools sqlcmd and bcp on Linux](sql-server-linux-setup-tools.md).
+1. For this example, install the **sqlcmd** tool on your client machine. For more information, see [sqlcmd utility](../tools/sqlcmd/sqlcmd-utility.md) or [Install the sqlcmd and bcp SQL Server command-line tools on Linux](sql-server-linux-setup-tools.md).
 
 1. Run **sqlcmd** specifying the IP address and the port mapped to port 1433 in your container. In this example, the port is the same as port 1433 on the host machine. If you specified a different mapped port on the host machine, you would use it here. You also need to open the appropriate inbound port on your firewall to allow the connection.
 
