@@ -166,7 +166,7 @@ Complete the following steps in the Azure portal to associate the user-assigned 
 
 1. Search for the **MigrationIdentity** by name and select it from the search results.
 
-1) Select **Add** to associate the identity with your app.
+1. Select **Add** to associate the identity with your app.
 
     :::image type="content" source="media/azure-sql-passwordless-migration-nodejs/assign-managed-identity-small.png" lightbox="media/azure-sql-passwordless-migration-nodejs/assign-managed-identity.png" alt-text="Screenshot showing how to assign a managed identity.":::
 

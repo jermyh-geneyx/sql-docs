@@ -26,7 +26,7 @@ In this quickstart, you use Node.js to connect to a database and query data.
 
 To complete this quickstart, you need:
 
-- An Azure account with an active subscription and a database in Azure SQL Database, Azure SQL Managed Instance, or SQL Server on Azure VM. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?icid=azurefreeaccount?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio).
+- An Azure account with an active subscription and a database in Azure SQL Database, Azure SQL Managed Instance, or SQL Server on Azure VM. [Create an account for free](https://azure.microsoft.com/pricing/purchase-options/azure-account?icid=azurefreeaccount?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio). The scripts in this article are written to use the `AdventureWorksLT` sample database. 
 
   | Action | SQL Database | SQL Managed Instance | SQL Server on Azure VM |
   |:--- |:--- |:---|:---|
@@ -36,28 +36,25 @@ To complete this quickstart, you need:
   | Configure | [Server-level IP firewall rule](firewall-create-server-level-portal-quickstart.md)| [Connectivity from a VM](../managed-instance/connect-vm-instance-configure.md)|
   |||[Connectivity from on-premises](../managed-instance/point-to-site-p2s-configure.md) | [Connect to a SQL Server instance](../virtual-machines/windows/sql-vm-create-portal-quickstart.md)
   |Load data|Wide World Importers loaded per quickstart|[Restore Wide World Importers](../managed-instance/restore-sample-database-quickstart.md) | [Restore Wide World Importers](../managed-instance/restore-sample-database-quickstart.md) |
-  |||Restore or import AdventureWorks from a [BACPAC](database-import.md) file from [GitHub](https://github.com/Microsoft/sql-server-samples/tree/master/samples/databases/adventure-works)| Restore or import AdventureWorks from a [BACPAC](database-import.md) file from [GitHub](https://github.com/Microsoft/sql-server-samples/tree/master/samples/databases/adventure-works)|
+  |||Restore or import `AdventureWorksLT` from a [BACPAC](database-import.md) file from [GitHub](https://github.com/Microsoft/sql-server-samples/tree/master/samples/databases/adventure-works)| Restore or import `AdventureWorksLT` from a [BACPAC](database-import.md) file from [GitHub](https://github.com/Microsoft/sql-server-samples/tree/master/samples/databases/adventure-works)|
 
 
+- Install [Node.js](https://nodejs.org) software.
+- Install the ODBC driver relevant to your operating system.
 
-- [Node.js](https://nodejs.org)-related software
-
-  # [macOS](#tab/macos)
-
-  Install Node.js and then install the ODBC driver using the steps on [Install the Microsoft ODBC driver for SQL Server (macOS)](/sql/connect/odbc/linux-mac/install-microsoft-odbc-driver-sql-server-macos).
-
-  # [Ubuntu](#tab/ubuntu)
-
-  Install Node.js and then install the ODBC driver using the steps on [Install the Microsoft ODBC driver for SQL Server (Linux)](/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server).
-
-  # [Windows](#tab/windows)
-
-  Install Node.js and then install the ODBC driver using the steps on [Download ODBC Driver for SQL Server](/sql/connect/odbc/download-odbc-driver-for-sql-server).
-
-  ---
-
-> [!IMPORTANT]
-> The scripts in this article are written to use the **AdventureWorks** database.
+    # [macOS](#tab/macos)
+    
+    Install Node.js and then install the ODBC driver using the steps on [Install the Microsoft ODBC driver for SQL Server (macOS)](/sql/connect/odbc/linux-mac/install-microsoft-odbc-driver-sql-server-macos).
+    
+    # [Ubuntu](#tab/ubuntu)
+    
+    Install Node.js and then install the ODBC driver using the steps on [Install the Microsoft ODBC driver for SQL Server (Linux)](/sql/connect/odbc/linux-mac/installing-the-microsoft-odbc-driver-for-sql-server).
+    
+    # [Windows](#tab/windows)
+    
+    Install Node.js and then install the ODBC driver using the steps on [Download ODBC Driver for SQL Server](/sql/connect/odbc/download-odbc-driver-for-sql-server).
+    
+    ---
 
 ## Get server connection information
 
@@ -74,7 +71,7 @@ Get the connection information you need to connect to the database. You'll need 
 
 ## Create the project
 
-Open a command prompt and create a folder named *sqltest*. Open the folder you created and run the following command:
+Open a command prompt and create a folder named `sqltest`. Open the folder you created and run the following command:
 
   ```bash
   npm init -y
@@ -83,7 +80,7 @@ Open a command prompt and create a folder named *sqltest*. Open the folder you c
 
 ## Add code to query the database
 
-1. In your favorite text editor, create a new file, *sqltest.js*, in the folder where you created the project (*sqltest*).
+1. In your favorite text editor, create a new file, `sqltest.js`, in the folder where you created the project (`sqltest`).
 
 1. Replace its contents with the following code. Then add the appropriate values for your server, database, user, and password.
 

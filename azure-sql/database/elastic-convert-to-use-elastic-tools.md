@@ -69,11 +69,11 @@ For a single-tenant model, create a **list mapping** shard map. The single-tenan
 
 :::image type="content" source="media/elastic-convert-to-use-elastic-tools/listmapping.png" alt-text="Diagram of list mapping.":::
 
-The multi-tenant model assigns several tenants to an individual database (and you can distribute groups of tenants across multiple databases). Use this model when you expect each tenant to have small data needs. In this model, assign a range of tenants to a database using **range mapping**.
+The multitenant model assigns several tenants to an individual database (and you can distribute groups of tenants across multiple databases). Use this model when you expect each tenant to have small data needs. In this model, assign a range of tenants to a database using **range mapping**.
 
 :::image type="content" source="media/elastic-convert-to-use-elastic-tools/rangemapping.png" alt-text="Diagram of range mapping.":::
 
-Or you can implement a multi-tenant database model using a *list mapping* to assign multiple tenants to an individual database. For example, DB1 is used to store information about tenant ID 1 and 5, and DB2 stores data for tenant 7 and tenant 10.
+Or you can implement a multitenant database model using a *list mapping* to assign multiple tenants to an individual database. For example, DB1 is used to store information about tenant ID 1 and 5, and DB2 stores data for tenant 7 and tenant 10.
 
 :::image type="content" source="media/elastic-convert-to-use-elastic-tools/multipleonsingledb.png" alt-text="Diagram of multiple tenants on single DB.":::
 
@@ -90,7 +90,7 @@ $ShardMap = New-ListShardMap -KeyType $([int]) -ListShardMapName 'ListShardMap' 
 
 ### Option 2: Create a shard map for a range mapping
 
-To utilize this mapping pattern, tenant ID values needs to be continuous ranges, and it is acceptable to have gap in the ranges by skipping the range when creating the databases.
+To utilize this mapping pattern, tenant ID values need to be continuous ranges, and it is acceptable to have gap in the ranges by skipping the range when creating the databases.
 
 ```powershell
 # $ShardMapManager is the shard map manager object
@@ -158,4 +158,4 @@ Once you have completed the setup, you can begin to use the Elastic Database cli
 - [Azure Elastic Database tools scripts](https://github.com/Azure/elastic-db-tools/tree/master/Samples/PowerShell)
 - [Azure/elastic-db-tools](https://github.com/Azure/elastic-db-tools)
 - [Deploy a split-merge service to move data between sharded databases](elastic-scale-configure-deploy-split-and-merge.md)
-- [Design Patterns for Multi-tenant SaaS Applications with Azure SQL Database](saas-tenancy-app-design-patterns.md)
+- [Design Patterns for Multitenant SaaS Applications with Azure SQL Database](saas-tenancy-app-design-patterns.md)
