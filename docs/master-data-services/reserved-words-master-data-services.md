@@ -10,6 +10,8 @@ ms.topic: conceptual
 helpviewer_keywords:
   - "reserved words [Master Data Services]"
   - "Master Data Services, reserved words"
+ms.custom:
+  - build-2025
 ---
 # Reserved Words (Master Data Services)
 
@@ -22,26 +24,29 @@ helpviewer_keywords:
 > [!NOTE]  
 >  You should also limit your use of special characters (symbols, hyphenation, etc.).  
   
--   [Models](../master-data-services/reserved-words-master-data-services.md#models)  
+- [Models](#models)  
   
--   [Entities](../master-data-services/reserved-words-master-data-services.md#entities)  
+- [Entities](#entities)  
   
--   [Explicit Hierarchies](../master-data-services/reserved-words-master-data-services.md#exhierarchies)  
+- [Explicit Hierarchies](#explicit-hierarchies)  
   
--   [Attributes](../master-data-services/reserved-words-master-data-services.md#attributes)  
+- [Attributes](#attributes)  
   
--   [Members](../master-data-services/reserved-words-master-data-services.md#members)  
+- [Members](#members)  
   
-##  <a name="models"></a> Models  
+## Models
+
  If you create a model with the name set to **Name** or **Code**, do not select **Create entity with same name as model** because **Name** or **Code** cannot be used for the name of an entity.  
   
-##  <a name="entities"></a> Entities  
+## Entities
+
  For entity names, you cannot use **Name** or **Code**.  
   
-##  <a name="exhierarchies"></a> Explicit Hierarchies  
+## Explicit hierarchies
+
  For explicit hierarchy names, you cannot use **Name** or **Code**.  
   
-##  <a name="attributes"></a> Attributes  
+## Attributes
   
 -   **ID**  
   
@@ -69,10 +74,9 @@ helpviewer_keywords:
   
 -   **Version_ID**  
   
-##  <a name="members"></a> Members  
+## Members
+
  For members, you cannot use **MDMMemberStatus**, **MDMUnused**, or **ROOT** for the **Code** attribute value.  
   
-## See Also  
+## See also  
  [Master Data Services Overview &#40;MDS&#41;](../master-data-services/master-data-services-overview-mds.md)  
-  
-  

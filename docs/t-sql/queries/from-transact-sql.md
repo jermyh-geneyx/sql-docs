@@ -217,7 +217,7 @@ The name of a table or view.
 
 If the table or view exists in another database on the same instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], use a fully qualified name in the form *database*.*schema*.*object_name*.
 
-If the table or view exists outside the instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]l, use a four-part name in the form *linked_server*.*catalog*.*schema*.*object*. For more information, see [sp_addlinkedserver (Transact-SQL)](../../relational-databases/system-stored-procedures/sp-addlinkedserver-transact-sql.md). A four-part name that is constructed by using the [OPENDATASOURCE](../functions/opendatasource-transact-sql.md) function as the server part of the name can also be used to specify the remote table source. When OPENDATASOURCE is specified, *database_name* and *schema_name* may not apply to all data sources and is subject to the capabilities of the OLE DB provider that accesses the remote object.
+If the table or view exists outside the instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], use a four-part name in the form *linked_server*.*catalog*.*schema*.*object*. For more information, see [sp_addlinkedserver (Transact-SQL)](../../relational-databases/system-stored-procedures/sp-addlinkedserver-transact-sql.md). A four-part name that is constructed by using the [OPENDATASOURCE](../functions/opendatasource-transact-sql.md) function as the server part of the name can also be used to specify the remote table source. When OPENDATASOURCE is specified, *database_name* and *schema_name* may not apply to all data sources and is subject to the capabilities of the OLE DB provider that accesses the remote object.
 
 #### [AS] *table_alias*
 
@@ -856,7 +856,7 @@ RIGHT OUTER JOIN FactInternetSales AS fis
     ON dp.ProductKey = fis.ProductKey;
 ```
 
-The following query uses the `DimSalesTerritory` table as the left table in a left outer join. It retrieves the `SalesOrderNumber` values from the `FactInternetSales` table. If there are no orders for a particular `SalesTerritoryKey`, the query returns a `NULL` for the `SalesOrderNumber` for that row. This query is ordered by the `SalesOrderNumber` column, so that any `NULL`s in this column appear at the top of the results.
+The following query uses the `DimSalesTerritory` table as the left table in a left outer join. It retrieves the `SalesOrderNumber` values from the `FactInternetSales` table. If there are no orders for a particular `SalesTerritoryKey`, the query returns a `NULL` for the `SalesOrderNumber` for that row. This query is ordered by the `SalesOrderNumber` column, so that any NULLs in this column appear at the top of the results.
 
 ```sql
 -- Uses AdventureWorks

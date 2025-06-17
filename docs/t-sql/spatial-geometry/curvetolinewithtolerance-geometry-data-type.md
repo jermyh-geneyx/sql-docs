@@ -65,7 +65,7 @@ Returns a polygonal approximation of a **geometry** instance that contains circu
 ## Examples  
   
 ### A. Using different tolerance values on a CircularString instance  
- The following example shows how setting the tolerance affects the `LineString`instance returned from a `CircularString` instance:  
+ The following example shows how setting the tolerance affects the `LineString` instance returned from a `CircularString` instance:  
   
 ```sql
  DECLARE @g geometry; 

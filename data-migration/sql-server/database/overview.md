@@ -1,14 +1,15 @@
 ---
-title: "SQL Server to Azure SQL Database: Migration overview"
+title: "SQL Server to Azure SQL Database: Migration Overview"
 description: Learn about the tools and options available to migrate your SQL Server databases to Azure SQL Database.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: mathoma
-ms.date: 01/08/2025
+ms.date: 06/16/2025
 ms.service: azure-sql-database
 ms.subservice: migration-guide
 ms.topic: how-to
-ms.collection: sql-migration-content
+ms.collection:
+  - sql-migration-content
 ---
 # Migration overview: SQL Server to Azure SQL Database
 
@@ -102,8 +103,7 @@ The following table lists alternative migration tools:
 | [Import Export Service/BACPAC](/azure/azure-sql/database/database-import) | [BACPAC](/sql/relational-databases/data-tier-applications/data-tier-applications#bacpac) is a Windows file with a .bacpac extension that encapsulates a database's schema and data. You can use BACPAC to both export data from a SQL Server source and import the data into Azure SQL Database. A BACPAC file can be imported to a new SQL database through the Azure portal.<br /><br />For scale and performance with large databases sizes or a large number of databases, consider using the [SqlPackage](/azure/azure-sql/database/database-import#use-sqlpackage) command-line tool to export and import databases. |
 | [Bulk copy](/sql/relational-databases/import-export/import-and-export-bulk-data-by-using-the-bcp-utility-sql-server) | The [bulk copy program (bcp) tool](/sql/tools/bcp-utility) copies data from an instance of SQL Server into a data file. Use the tool to export the data from your source and import the data file into the target SQL database.<br /><br />For high-speed bulk copy operations to move data to Azure SQL Database, you can use the [Smart Bulk Copy tool](/samples/azure-samples/smartbulkcopy/smart-bulk-copy/) to maximize transfer speed by taking advantage of parallel copy tasks. |
 | [Azure Data Factory](/azure/data-factory/connector-azure-sql-database) | The [Copy activity](/azure/data-factory/copy-activity-overview) in Azure Data Factory migrates data from source SQL Server databases to Azure SQL Database by using built-in connectors and an [integration runtime](/azure/data-factory/concepts-integration-runtime).<br /><br />Data Factory supports a wide range of [connectors](/azure/data-factory/connector-overview) to move data from SQL Server sources to Azure SQL Database. |
-| [Azure SQL migration extension for Azure Data Studio](/azure/dms/migration-using-azure-data-studio) | Powered by the [Azure Database Migration Service](/azure/dms/dms-overview), the Azure SQL Migration extension for Azure Data Studio helps you to assess your database requirements to understand your migration readiness, get the right-sized SKU recommendations for Azure resources, and migrate your SQL Server database to Azure. You can migrate single databases or at scale using [PowerShell and Azure CLI](/azure/dms/migration-dms-powershell-cli). |
-
+| [Azure SQL migration extension for Azure Data Studio](/azure/dms/migration-using-azure-data-studio) | Powered by the [Azure Database Migration Service](/azure/dms/dms-overview), the Azure SQL migration extension for Azure Data Studio helps you to assess your database requirements to understand your migration readiness, get the right-sized SKU recommendations for Azure resources, and migrate your SQL Server database to Azure. You can migrate single databases or at scale using [PowerShell and Azure CLI](/azure/dms/migration-dms-powershell-cli). |
 
 ## Compare migration options
 

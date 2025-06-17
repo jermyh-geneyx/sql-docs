@@ -1,8 +1,8 @@
 ---
 title: "Create a Data Quality Project"
 description: "Create a Data Quality Project"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "03/01/2017"
 ms.service: sql
 ms.subservice: data-quality-services
@@ -12,6 +12,8 @@ f1_keywords:
 helpviewer_keywords:
   - "create,data quality project"
   - "data quality project,create"
+ms.custom:
+  - build-2025
 ---
 # Create a Data Quality Project
 

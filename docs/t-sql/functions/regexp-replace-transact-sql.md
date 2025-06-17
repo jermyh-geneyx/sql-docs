@@ -4,18 +4,20 @@ description: REGEXP_REPLACE Returns a modified source string replaced by a repla
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: abhtiwar, wiassaf, randolphwest
-ms.date: 05/05/2025
+ms.date: 05/19/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
 dev_langs:
   - "TSQL"
-monikerRange: "=sql-server-ver17 || =sql-server-linux-ver17 || =azuresqldb-current || =fabric"
+monikerRange: "=sql-server-ver17 || =sql-server-linux-ver17 || =azuresqldb-current || =azuresqldb-mi-current || =fabric"
+ms.custom:
+  - build-2025
 ---
 
-# REGEXP_REPLACE (Transact-SQL)
+# REGEXP_REPLACE (Transact-SQL) preview
 
-[!INCLUDE [sqlserver2025-asdb-fabric](../../includes/applies-to-version/sqlserver2025-asdb-fabric.md)]
+[!INCLUDE [sqlserver2025-asdb-asmi-fabric](../../includes/applies-to-version/sqlserver2025-asdb-asmi-fabricsqldb.md)]
 
 [!INCLUDE [preview](../../includes/preview.md)]
 

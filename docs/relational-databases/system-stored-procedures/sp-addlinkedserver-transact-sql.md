@@ -4,7 +4,7 @@ description: "sp_addlinkedserver (Transact-SQL)"
 author: markingmyname
 ms.author: maghan
 ms.reviewer: wiassaf, randolphwest
-ms.date: 08/21/2024
+ms.date: 06/12/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -87,16 +87,18 @@ When the linked server is created against the [!INCLUDE [ssNoVersion](../../incl
   To resolve this issue, add the `User ID` parameter to your connection string. In the following example, `myUser` is the User ID passed to the connection string:
 
   ```sql
-  EXEC master.dbo.sp_addlinkedserver @server = N'LinkServerName',
+  EXECUTE master.dbo.sp_addlinkedserver
+      @server = N'LinkServerName',
       @provider = N'SQLNCLI',
       @srvproduct = 'MS SQL Server',
-      @provstr = N'SERVER=serverName\InstanceName;User ID=myUser'
+      @provstr = N'SERVER=serverName\InstanceName;User ID=myUser';
 
-  EXEC master.dbo.sp_addlinkedsrvlogin @rmtsrvname = N'LinkServerName',
+  EXECUTE master.dbo.sp_addlinkedsrvlogin
+      @rmtsrvname = N'LinkServerName',
       @locallogin = NULL,
       @useself = N'False',
       @rmtuser = N'myUser',
-      @rmtpassword = N'*****'
+      @rmtpassword = N'*****';
   ```
 
   For more information, see [Access to the remote server is denied because no login-mapping exists](/archive/blogs/mdegre/access-to-the-remote-server-is-denied-because-no-login-mapping-exists).
@@ -165,20 +167,19 @@ The following example creates a linked server named `SEATTLESales`. The product 
 ```sql
 USE master;
 GO
-EXEC sp_addlinkedserver
-   N'SEATTLESales',
-   N'SQL Server';
+
+EXECUTE sp_addlinkedserver N'SEATTLESales', N'SQL Server';
 GO
 ```
 
 The following example creates a linked server `S1_instance1` on an instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] by using the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] OLE DB driver.
 
 ```sql
-EXEC sp_addlinkedserver
-   @server=N'S1_instance1',
-   @srvproduct=N'',
-   @provider=N'MSOLEDBSQL',
-   @datasrc=N'S1\instance1';
+EXECUTE sp_addlinkedserver
+    @server = N'S1_instance1',
+    @srvproduct = N'',
+    @provider = N'MSOLEDBSQL',
+    @datasrc = N'S1\instance1';
 ```
 
 The following example creates a linked server `S1_instance1` on an instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] by using the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Native Client OLE DB provider.
@@ -187,11 +188,11 @@ The following example creates a linked server `S1_instance1` on an instance of [
 > SQL Server Native Client OLE DB provider (SQLNCLI) remains deprecated and it isn't recommended to use it for new development work. Instead, use the new [Microsoft OLE DB Driver for SQL Server](../../connect/oledb/oledb-driver-for-sql-server.md) (MSOLEDBSQL) which will be updated with the most recent server features.
 
 ```sql
-EXEC sp_addlinkedserver
-   @server=N'S1_instance1',
-   @srvproduct=N'',
-   @provider=N'SQLNCLI',
-   @datasrc=N'S1\instance1';
+EXECUTE sp_addlinkedserver
+    @server = N'S1_instance1',
+    @srvproduct = N'',
+    @provider = N'SQLNCLI',
+    @datasrc = N'S1\instance1';
 ```
 
 ### B. Use the Microsoft OLE DB Provider for Microsoft Access
@@ -202,11 +203,11 @@ The Microsoft.Jet.OLEDB.4.0 provider connects to Microsoft Access databases that
 > This example assumes that both [!INCLUDE [msCoName](../../includes/msconame-md.md)] Access and the sample `Northwind` database are installed and that the `Northwind` database resides in C:\Msoffice\Access\Samples on the same server as the SQL Server instance.
 
 ```sql
-EXEC sp_addlinkedserver
-   @server = N'SEATTLE Mktg',
-   @provider = N'Microsoft.Jet.OLEDB.4.0',
-   @srvproduct = N'OLE DB Provider for Jet',
-   @datasrc = N'C:\MSOffice\Access\Samples\Northwind.mdb';
+EXECUTE sp_addlinkedserver
+    @server = N'SEATTLE Mktg',
+    @provider = N'Microsoft.Jet.OLEDB.4.0',
+    @srvproduct = N'OLE DB Provider for Jet',
+    @datasrc = N'C:\MSOffice\Access\Samples\Northwind.mdb';
 GO
 ```
 
@@ -218,11 +219,11 @@ The following example creates a linked server named `SEATTLE Payroll` that uses 
 > The specified ODBC data source name must be defined as System DSN in the server before you use the linked server.
 
 ```sql
-EXEC sp_addlinkedserver
-   @server = N'SEATTLE Payroll',
-   @srvproduct = N'',
-   @provider = N'MSDASQL',
-   @datasrc = N'LocalServer';
+EXECUTE sp_addlinkedserver
+    @server = N'SEATTLE Payroll',
+    @srvproduct = N'',
+    @provider = N'MSDASQL',
+    @datasrc = N'LocalServer';
 GO
 ```
 
@@ -231,7 +232,7 @@ GO
 To create a linked server definition using the [!INCLUDE [msCoName](../../includes/msconame-md.md)] OLE DB Provider for Jet to access an Excel spreadsheet in the 1997 - 2003 format, first create a named range in Excel by specifying the columns and rows of the Excel worksheet to select. The name of the range can then be referenced as a table name in a distributed query.
 
 ```sql
-EXEC sp_addlinkedserver 'ExcelSource',
+EXECUTE sp_addlinkedserver 'ExcelSource',
    'Jet 4.0',
    'Microsoft.Jet.OLEDB.4.0',
    'c:\MyData\DistExcl.xls',
@@ -244,14 +245,14 @@ To access data from an Excel spreadsheet, associate a range of cells with a name
 
 ```sql
 SELECT *
-   FROM ExcelSource...SalesData;
+FROM ExcelSource...SalesData;
 GO
 ```
 
 If [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] is running under a domain account that's access to a remote share, a UNC path can be used instead of a mapped drive.
 
 ```sql
-EXEC sp_addlinkedserver 'ExcelShare',
+EXECUTE sp_addlinkedserver 'ExcelShare',
    'Jet 4.0',
    'Microsoft.Jet.OLEDB.4.0',
    '\\MyServer\MyShare\Spreadsheets\DistExcl.xls',
@@ -268,7 +269,7 @@ The data source is the full path of the directory that contains the text files. 
 First, create a linked server.
 
 ```sql
-EXEC sp_addlinkedserver txtsrv, N'Jet 4.0',
+EXECUTE sp_addlinkedserver txtsrv, N'Jet 4.0',
    N'Microsoft.Jet.OLEDB.4.0',
    N'c:\data\distqry',
    NULL,
@@ -278,13 +279,13 @@ EXEC sp_addlinkedserver txtsrv, N'Jet 4.0',
 Set up login mappings.
 
 ```sql
-EXEC sp_addlinkedsrvlogin txtsrv, FALSE, Admin, NULL;
+EXECUTE sp_addlinkedsrvlogin txtsrv, FALSE, Admin, NULL;
 ```
 
 List the tables in the linked server.
 
 ```sql
-EXEC sp_tables_ex txtsrv;
+EXECUTE sp_tables_ex txtsrv;
 ```
 
 Query one of the tables, in this case `file1#txt`, using a four-part name.
@@ -298,7 +299,8 @@ SELECT * FROM txtsrv...[file1#txt];
 The following example creates a linked server named `DB2` that uses the Microsoft OLE DB Provider for DB2.
 
 ```sql
-EXEC sp_addlinkedserver @server = N'DB2',
+EXECUTE sp_addlinkedserver
+    @server = N'DB2',
     @srvproduct = N'Microsoft OLE DB Provider for DB2',
     @catalog = N'DB2',
     @provider = N'DB2OLEDB',
@@ -324,7 +326,7 @@ Here's an example explaining how to connect to an Azure SQL database using distr
 First, add one Azure SQL database as linked server, using the using SQL Server Native Client.
 
 ```sql
-EXEC sp_addlinkedserver
+EXECUTE sp_addlinkedserver
     @server = 'LinkedServerName',
     @srvproduct = '',
     @provider = 'sqlncli',
@@ -337,20 +339,21 @@ EXEC sp_addlinkedserver
 Add credentials and options to this linked server. Replace `<password>` with a valid password.
 
 ```sql
-EXEC sp_addlinkedsrvlogin
-  @rmtsrvname = 'LinkedServerName',
-  @useself = 'false',
-  @rmtuser = 'LoginName',
-  @rmtpassword = '<password>';
+EXECUTE sp_addlinkedsrvlogin
+    @rmtsrvname = 'LinkedServerName',
+    @useself = 'false',
+    @rmtuser = 'LoginName',
+    @rmtpassword = '<password>';
 
-EXEC sp_serveroption 'LinkedServerName', 'rpc out', true;
+EXECUTE sp_serveroption 'LinkedServerName', 'rpc out', true;
 ```
 
 Now, use the linked server to execute queries using four-part names, even to create a new table and insert data.
 
 ```sql
-EXEC ('CREATE TABLE SchemaName.TableName(col1 int not null CONSTRAINT PK_col1 PRIMARY KEY CLUSTERED (col1) )') at LinkedServerName;
-EXEC ('INSERT INTO SchemaName.TableName VALUES(1),(2),(3)') at LinkedServerName;
+EXECUTE ('CREATE TABLE SchemaName.TableName(col1 int not null CONSTRAINT PK_col1 PRIMARY KEY CLUSTERED (col1) )') AT LinkedServerName;
+
+EXECUTE ('INSERT INTO SchemaName.TableName VALUES(1),(2),(3)') AT LinkedServerName;
 ```
 
 Query the data using four-part names:
@@ -359,22 +362,24 @@ Query the data using four-part names:
 SELECT * FROM LinkedServerName.DatabaseName.SchemaName.TableName;
 ```
 
-<a name='h-create-sql-managed-instance-linked-server-with-managed-identity-azure-ad-authentication'></a>
+<a id="h-create-sql-managed-instance-linked-server-with-managed-identity-azure-ad-authentication"></a>
 
-### <a id="managed-identity-authentication"></a> H. Create Azure SQL Managed Instance linked server with managed identity authentication
+<a id="managed-identity-authentication"></a>
+
+### H. Create Azure SQL Managed Instance linked server with managed identity authentication
 
 [!INCLUDE [entra-id](../../includes/entra-id.md)]
 
 To create a linked server with managed identity authentication, execute the following T-SQL, replacing `<managed_instance>` with your own SQL managed instance. The authentication method uses `ActiveDirectoryMSI` in the *@provstr* parameter. Consider optionally using `@locallogin = NULL` to allow all local logins.
 
 ```sql
-EXEC master.dbo.sp_addlinkedserver
+EXECUTE master.dbo.sp_addlinkedserver
     @server = N'MyLinkedServer',
     @srvproduct = N'',
     @provider = N'MSOLEDBSQL',
     @provstr = N'Server=<mi_name>.<dns_zone>.database.windows.net,1433;Authentication=ActiveDirectoryMSI;';
 
-EXEC master.dbo.sp_addlinkedsrvlogin
+EXECUTE master.dbo.sp_addlinkedsrvlogin
     @rmtsrvname = N'MyLinkedServer',
     @useself = N'False',
     @locallogin = N'user1@contoso.com';
@@ -385,19 +390,21 @@ To enable authentication with managed identities, a managed identity assigned to
 If a primary identity is set, it is used, otherwise the system-assigned managed identity is used. If the managed identity is recreated with the same name, the login on the remote instance also needs to be recreated, because the new managed identity Application ID and SQL Managed Instance service principal SID no longer match. To verify these two values match, convert SID to application ID with following query.
 
 ```sql
-SELECT convert(uniqueidentifier, sid) as MSEntraApplicationID
+SELECT CONVERT (UNIQUEIDENTIFIER, sid) AS MSEntraApplicationID
 FROM sys.server_principals
 WHERE name = '<managed_instance_name>';
 ```
 
-<a name='i-create-sql-managed-instance-linked-server-with-pass-through-azure-ad-authentication'></a>
+<a id="i-create-sql-managed-instance-linked-server-with-pass-through-azure-ad-authentication"></a>
 
-### <a id="pass-through-authentication"></a> I. Create SQL Managed Instance linked server with pass-through Microsoft Entra authentication
+<a id="pass-through-authentication"></a>
+
+### I. Create SQL Managed Instance linked server with pass-through Microsoft Entra authentication
 
 To create a linked server with pass-through authentication, execute following T-SQL, replacing `<managed_instance>` with your own SQL managed instance server:
 
 ```sql
-EXEC master.dbo.sp_addlinkedserver
+EXECUTE master.dbo.sp_addlinkedserver
     @server = N'MyLinkedServer',
     @srvproduct = N'',
     @provider = N'MSOLEDBSQL',
@@ -405,6 +412,21 @@ EXEC master.dbo.sp_addlinkedserver
 ```
 
 With pass-through authentication, the security context of the local login is carried over to the remote instance. Pass-through authentication requires the Microsoft Entra principal to be added as a login on both the local and remote Azure SQL Managed Instance. Both managed instances need to be in a [server trust group](/azure/azure-sql/managed-instance/server-trust-group-overview). When the requirements are met, user can sign in to a local instance and query the remote instance via the linked server object.
+
+### J. Use Microsoft SQL Server OLE DB Provider version 19
+
+The following example creates a linked server named `SQLSales`, targeting a SQL Server named `LABSQL2025` with instance name `SQL2025CTP2`, using OLE DB version 19, Encryption is disabled.
+
+```sql
+EXECUTE sp_addlinkedserver
+    @server = N'SQLSales',
+    @srvproduct = N'',
+    @provider = N'MSOLEDBSQL19',
+    @datasrc = N'LABSQL2025\SQL2025CTP2',
+    @provstr = N'Encrypt=No;';
+```
+
+For more information, see [Microsoft OLE DB Driver for SQL Server (MSOLEDBSQL)](../../connect/oledb/oledb-driver-for-sql-server.md#3-microsoft-ole-db-driver-for-sql-server-msoledbsql-recommended).
 
 ## Related content
 

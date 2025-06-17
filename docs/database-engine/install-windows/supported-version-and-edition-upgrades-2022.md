@@ -3,7 +3,7 @@ title: "Supported Version and Edition Upgrades (SQL Server 2022)"
 description: The supported version and edition upgrades for SQL Server 2022.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 05/19/2025
+ms.date: 06/16/2025
 ms.service: sql
 ms.subservice: install
 ms.topic: upgrade-and-migration-article
@@ -112,7 +112,7 @@ For information, see [Upgrade SQL Server to the latest version](../../sql-server
 
 The following tips and tools can help you plan and implement your migration.
 
-- **Migration tools.** Migration is supported through [Data Migration Assistant (DMA)](../../dma/dma-overview.md).
+- **Migration tools.** Migration is supported through the [SQL Server migration component in SQL Server Management Studio](/ssms/migrate-sql-server-component).
 
 - **Backup and restore.** A backup taken on [!INCLUDE [sql2008-md](../../includes/sql2008-md.md)] and later, can be restored to [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] without changing its compatibility level, as long as the database backup has a compatibility level of `100` or higher.
 

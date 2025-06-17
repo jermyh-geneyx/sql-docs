@@ -1,12 +1,14 @@
 ---
 title: "DQS Security"
 description: "DQS Security"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "10/01/2012"
 ms.service: sql
 ms.subservice: data-quality-services
 ms.topic: conceptual
+ms.custom:
+  - build-2025
 ---
 # DQS Security
 

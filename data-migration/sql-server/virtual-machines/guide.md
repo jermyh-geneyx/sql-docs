@@ -1,11 +1,11 @@
 ---
-title: "SQL Server to SQL Server on Azure Virtual Machines: Migration guide"
+title: "SQL Server to SQL Server on Azure Virtual Machines: Migration Guide"
 titleSuffix: SQL Server on Azure VMs
 description: In this guide, you learn how to migrate your individual SQL Server databases to SQL Server on Azure Virtual Machines.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: mathoma
-ms.date: 01/08/2025
+ms.date: 06/16/2025
 ms.service: azure-vm-sql-server
 ms.subservice: migration-guide
 ms.topic: how-to
@@ -103,8 +103,8 @@ The following table provides a list of components and recommended migration meth
 | --- | --- | --- |
 | **Databases** | Model | Script with SQL Server Management Studio. |
 | | The `tempdb` database | Plan to move `tempdb` onto [Azure VM temporary disk (SSD)](/azure/azure-sql/virtual-machines/windows/performance-guidelines-best-practices-checklist#storage) for best performance. Be sure to pick a VM size that has a sufficient local SSD to accommodate your `tempdb`. |
-| | User databases with FileStream | Use the [Backup and restore](#backup-and-restore) methods for migration. Data Migration Assistant doesn't support databases with FileStream. |
-| **Security** | SQL Server and Windows logins | Use Data Migration Assistant to [migrate user logins](/sql/dma/dma-migrateserverlogins). |
+| | User databases with FILESTREAM | Use the [Backup and restore](#backup-and-restore) methods for migration. The [SQL Server migration component in SQL Server Management Studio](/ssms/migrate-sql-server-component) doesn't support databases with FILESTREAM. |
+| **Security** | SQL Server and Windows logins | Use the [SQL Server migration component in SQL Server Management Studio](/ssms/migrate-sql-server-component) to migrate user logins. |
 | | SQL Server roles | Script with SQL Server Management Studio. |
 | | Cryptographic providers | Recommend [converting to use Azure Key Vault](/azure/azure-sql/virtual-machines/windows/azure-key-vault-integration-configure). This procedure uses the [SQL IaaS Agent extension](/azure/azure-sql/virtual-machines/windows/sql-agent-extension-manually-register-single-vm). |
 | **Server objects** | Backup devices | Replace with database backup by using [Azure Backup](/azure/backup/backup-sql-server-database-azure-vms), or write backups to [Azure Storage](/azure/azure-sql/virtual-machines/windows/azure-storage-sql-server-backup-restore-use) (SQL Server 2012 SP1 CU2 +). This procedure uses the [SQL IaaS Agent extension](/azure/azure-sql/virtual-machines/windows/sql-agent-extension-manually-register-single-vm). |
@@ -128,7 +128,7 @@ After you successfully complete the migration stage, you need to complete a seri
 
 After the data is migrated to the target environment, all the applications that formerly consumed the source need to start consuming the target. Accomplishing this task might require changes to the applications in some cases.
 
-Apply any fixes recommended by Data Migration Assistant to user databases. You need to script these fixes to ensure consistency and allow for automation.
+Apply any fixes recommended by the SQL Server migration component to user databases. You need to script these fixes to ensure consistency and allow for automation.
 
 ### Perform tests
 

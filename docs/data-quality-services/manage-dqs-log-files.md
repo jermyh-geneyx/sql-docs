@@ -1,8 +1,8 @@
 ---
 title: "Manage DQS Log Files"
 description: "Manage DQS Log Files"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "03/01/2017"
 ms.service: sql
 ms.subservice: data-quality-services
@@ -11,6 +11,8 @@ helpviewer_keywords:
   - "logging"
   - "log files"
   - "dqs log files"
+ms.custom:
+  - build-2025
 ---
 # Manage DQS Log Files
 

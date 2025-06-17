@@ -6,6 +6,7 @@ ms.author: drskwier
 ms.reviewer: llali
 ms.date: 04/15/2025
 ms.service: sql
+ms.subservice: tools-other
 ms.topic: release-notes
 ms.collection:
   - data-tools

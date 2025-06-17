@@ -81,7 +81,7 @@ View the resource agent logs at `/var/log/cluster/corosync.log`
    sudo vi /etc/hosts
    ```
 
-   The following example shows `/etc/hosts` with additions for three nodes named `sqlfcivm1`, `sqlfcivm2`, and`sqlfcivm3`.
+   The following example shows `/etc/hosts` with additions for three nodes named `sqlfcivm1`, `sqlfcivm2`, and `sqlfcivm3`.
 
    ```text
    127.0.0.1      localhost localhost4 localhost4.localdomain4

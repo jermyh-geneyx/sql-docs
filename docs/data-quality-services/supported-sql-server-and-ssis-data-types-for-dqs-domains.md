@@ -1,12 +1,14 @@
 ---
 title: "Supported SQL Server and SSIS data types for DQS domains"
 description: Describes the four data types for Data Quality Services (DQS) domains (Data, Decimal, Integer, and String) in SQL Server.
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "11/08/2011"
 ms.service: sql
 ms.subservice: data-quality-services
 ms.topic: conceptual
+ms.custom:
+  - build-2025
 ---
 # Supported SQL Server and SSIS data types for DQS Domains
 

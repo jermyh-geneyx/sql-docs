@@ -1,10 +1,10 @@
 ---
-title: Implement a geo-distributed solution
+title: Implement a Geo-Distributed Solution
 description: Learn to configure your database in Azure SQL Database and client application for failover to a replicated database, and test failover.
 author: rajeshsetlem
 ms.author: rsetlem
 ms.reviewer: wiassaf, mathoma
-ms.date: 03/12/2019
+ms.date: 06/13/2025
 ms.service: azure-sql-database
 ms.subservice: high-availability
 ms.topic: tutorial
@@ -12,8 +12,10 @@ ms.custom:
   - sqldbrb=1
   - devx-track-azurecli
   - devx-track-azurepowershell
+monikerRange: "=azuresql || =azuresql-db"
 ---
 # Tutorial: Implement a geo-distributed database (Azure SQL Database)
+
 [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
 Configure a database in SQL Database and client application for failover to a remote region and test a failover plan. You learn how to:
@@ -40,14 +42,12 @@ To complete the tutorial, make sure you've installed the following items:
   - [The Azure portal](single-database-create-quickstart.md)
   - [The Azure CLI](az-cli-script-samples-content-guide.md)
   - [PowerShell](powershell-script-content-guide.md)
-
-  > [!NOTE]
-  > The tutorial uses the *AdventureWorksLT* sample database.
+- The tutorial uses the `AdventureWorksLT` sample database, which is the optional sample database loaded when you create a new Azure SQL Database.
 
 > [!IMPORTANT]
 > Be sure to set up firewall rules to use the public IP address of the computer on which you're performing the steps in this tutorial. Database-level firewall rules will replicate automatically to the secondary server.
 >
-> For information see [Create a database-level firewall rule](/sql/relational-databases/system-stored-procedures/sp-set-database-firewall-rule-azure-sql-database) or to determine the IP address used for the server-level firewall rule for your computer see [Create a server-level firewall](firewall-create-server-level-portal-quickstart.md).  
+> For information see [Create a database-level firewall rule](/sql/relational-databases/system-stored-procedures/sp-set-database-firewall-rule-azure-sql-database) or to determine the IP address used for the server-level firewall rule for your computer see [Quickstart: Create a server-level firewall rule in Azure portal](firewall-create-server-level-portal-quickstart.md).  
 
 ## Create a failover group
 
@@ -111,11 +111,11 @@ az sql failover-group create --name $failoverGroup --partner-server $drServer `
     --failover-policy Automatic --grace-period 2
 ```
 
-* * *
+---
 
 Geo-replication settings can also be changed in the Azure portal, by selecting your database, then **Settings** > **Geo-Replication**.
 
-![Geo-replication settings](./media/geo-distributed-application-configure-tutorial/geo-replication.png)
+:::image type="content" source="media/geo-distributed-application-configure-tutorial/geo-replication.png" alt-text="Diagram with a global map showing geo-replication capabilities with a primary replica in West US and a secondary replica in West Europe.":::
 
 ## Run the sample project
 
@@ -177,7 +177,7 @@ Geo-replication settings can also be changed in the Azure portal, by selecting y
 
 1. Save and close the *pom.xml* file.
 
-1. Open the *App.java* file located in ..\SqlDbSample\src\main\java\com\sqldbsamples and replace the contents with the following code:
+1. Open the *App.java* file located in `..\SqlDbSample\src\main\java\com\sqldbsamples` and replace the contents with the following code:
 
    ```java
    package com.sqldbsamples;
@@ -194,7 +194,7 @@ Geo-replication settings can also be changed in the Azure portal, by selecting y
    public class App {
 
       private static final String FAILOVER_GROUP_NAME = "<your failover group name>";  // add failover group name
-  
+
       private static final String DB_NAME = "<your database>";  // add database name
       private static final String USER = "<your admin>";  // add database user
       private static final String PASSWORD = "<password>";  // add database password
@@ -359,20 +359,12 @@ To test a failover:
    az sql failover-group set-primary --name $failoverGroup --resource-group $resourceGroup --server $server
    ```
 
-* * *
+---
 
-## Next steps
+## Related content
 
-Review the [high availability and disaster recovery checklist](high-availability-disaster-recovery-checklist.md). 
-
-Related Azure SQL Database content: 
-
-- [Business continuity with](business-continuity-high-availability-disaster-recover-hadr-overview.md)
-- [High availability](high-availability-sla-local-zone-redundancy.md)
-- [Failover groups](failover-group-sql-db.md)
+- [High availability and disaster recovery checklist](high-availability-disaster-recovery-checklist.md)
+- [Business continuity in Azure SQL Database](business-continuity-high-availability-disaster-recover-hadr-overview.md)
+- [Availability through redundancy -  Azure SQL Database](high-availability-sla-local-zone-redundancy.md)
+- [Failover groups overview & best practices (Azure SQL Database)](failover-group-sql-db.md)
 - [Active geo-replication](active-geo-replication-overview.md)
-
-
-
-
-

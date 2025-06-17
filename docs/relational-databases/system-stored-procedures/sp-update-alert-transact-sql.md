@@ -134,7 +134,7 @@ Resets the date the alert last occurred. *@last_occurrence_date* is **int**, wit
 
 #### [ @last_occurrence_time = ] *last_occurrence_time*
 
-Resets the time the alert last occurred. *@last_occurrence_time* is **int**, with a default of `NULL`and can be set only to `0`.
+Resets the time the alert last occurred. *@last_occurrence_time* is **int**, with a default of `NULL`, and can be set only to `0`.
 
 #### [ @last_response_date = ] *last_response_date*
 

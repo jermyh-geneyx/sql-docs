@@ -1,10 +1,10 @@
 ---
-title: SQL Server privacy supplement
+title: SQL Server Privacy Supplement
 description: SQL Server privacy supplement
 author: MikeRayMSFT
 ms.author: mikeray
-ms.reviewer: "wopeter"
-ms.date: 05/31/2022
+ms.reviewer: wopeter, randolphwest
+ms.date: 06/16/2025
 ms.service: sql
 ms.subservice: release-landing
 ms.topic: conceptual
@@ -31,10 +31,11 @@ Refer to the [Microsoft Privacy Statement](https://go.microsoft.com/fwlink/?Link
 The data classification in this article only applies to versions of the SQL Server on-premises product.
 
 It doesn't apply to the items listed below:
+
 - [Azure Data Studio](/azure-data-studio/usage-data-collection)
 - [SQL Server Management Studio (SSMS)](../ssms/sql-server-management-studio-telemetry-ssms.md)
 - [SQL Server Data Tools (SSDT)](../ssdt/anonymous-usage-data.md)
-- [Database Migration Assistant (DMA)](../dma/dma-diagnostic-data-collection.md)
+- [SQL Server migration component in SQL Server Management Studio](/ssms/migrate-sql-server-component#migrate-your-database)
 - [SQL Server Migration Assistant (SSMA)](../ssma/ssma-diagnostic-data-collection.md)
 
 Definition of *Permitted usage Scenarios*. For the context of this article, Microsoft defines "Permitted Usages Scenarios" as actions or activities that are initiated by Microsoft.

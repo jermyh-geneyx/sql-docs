@@ -1,9 +1,10 @@
 ---
-title: "What is SQL Server Reporting Services?"
+title: "What Is SQL Server Reporting Services?"
 description: "Learn how to create, deploy, and manage reports by using SQL Server Reporting Services (SSRS) to deliver data insights through paginated reports to web portals."
 author: kfollis
 ms.author: kfollis
-ms.date: 09/25/2024
+ms.reviewer: randolphwest
+ms.date: 06/16/2025
 ms.service: reporting-services
 ms.subservice: reporting-services
 ms.topic: overview
@@ -22,6 +23,9 @@ helpviewer_keywords:
 # What is SQL Server Reporting Services (SSRS)?
 
 [!INCLUDE [ssrs-appliesto](../includes/ssrs-appliesto.md)] [!INCLUDE [ssrs-appliesto-2016-and-later](../includes/ssrs-appliesto-2016-and-later.md)] [!INCLUDE [ssrs-appliesto-not-pbirs](../includes/ssrs-appliesto-not-pbirs.md)]
+
+> [!NOTE]  
+> [!INCLUDE [ssrs-power-bi-consolidation](includes/ssrs-power-bi-consolidation.md)]
 
 SQL Server Reporting Services (SSRS) provides a set of on-premises tools and services to create, deploy, and manage paginated reports. Download [**SQL Server 2022 Reporting Services**](https://www.microsoft.com/download/details.aspx?id=104502) from the Microsoft Download Center, and then [install Reporting Services](../reporting-services/install-windows/install-reporting-services.md).
 

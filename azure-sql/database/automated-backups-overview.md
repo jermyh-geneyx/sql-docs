@@ -169,7 +169,6 @@ To perform a restore, see [Restore a database from backups](recovery-using-backu
 | **Restore a deleted database** | [SQL Database](recovery-using-backups.md)<br>[SQL Managed Instance](../managed-instance/point-in-time-restore.md#restore-a-deleted-database) | [SQL Database](long-term-backup-retention-configure.md#restore-from-ltr-backups) <br/> [SQL Managed Instance](../managed-instance/long-term-backup-retention-configure.md#restore-from-ltr-backups) | [SQL Database](/powershell/module/az.sql/get-azsqldeleteddatabasebackup) <br/> [SQL Managed Instance](/powershell/module/az.sql/get-azsqldeletedinstancedatabasebackup)|
 
 
-
 ## Export a database
 
 Automatic backups taken by the Azure service are not available to download or access directly. They can only be used for restore operations through Azure.
@@ -209,7 +208,7 @@ For all databases, including [TDE-encrypted](../database/transparent-data-encryp
 Azure SQL Database computes your total used backup storage as a cumulative value. Every hour, this value is reported to the Azure billing pipeline. The pipeline is responsible for aggregating this hourly usage to calculate your consumption at the end of each month. After the database is deleted, consumption decreases as backups age out and are deleted. After all backups are deleted and PITR is no longer possible, billing stops.
    
 > [!IMPORTANT]
-> Backups of a database are retained to provide PITR even if the database has been deleted. Although deleting and re-creating a database might save storage and compute costs, it might increase backup storage costs. The reason is that the service retains backups for each deleted database, every time it's deleted. 
+> Backups of a database are retained to provide PITR even if the database has been deleted. Although deleting and recreating a database might save storage and compute costs, it might increase backup storage costs. The reason is that the service retains backups for each deleted database, every time it's deleted. 
 
 ### Monitor consumption
 
@@ -347,9 +346,17 @@ Any issues found during an integrity check result in an alert to the engineering
 
 All database backups are taken with the CHECKSUM option to provide additional backup integrity.
 
-## Compliance
+## Backup protection 
 
-When you migrate your database from a DTU-based service tier to a vCore-based service tier, the PITR retention is preserved to ensure that your application's data recovery policy isn't compromised. If the default retention doesn't meet your compliance requirements, you can change the PITR retention period. For more information, see [Change the PITR backup retention period](automated-backups-change-settings.md#change-short-term-retention-policy).
+Azure SQL Database backups are managed entirely within Microsoft-owned Azure subscriptions using secure, internal Azure Storage accounts. These backups are not accessible externally, ensuring strong data isolation and protection. Within Microsoft, only backend services such as the Backup-Restore service has access to create, copy or restore these backups. Microsoft engineers, including developers, do not have standing access. To minimize exposure and maximize security, Microsoft can only obtain Just-In-Time (JIT) access under strict audit controls when absolutely necessary to troubleshoot specific customer issues.
+
+Backups are automatically deleted after the retention expires.
+
+## Compliance through backup retention 
+
+If the default retention doesn't meet your compliance requirements, you can change the PITR retention period. For more information, see [Change the PITR backup retention period](automated-backups-change-settings.md#change-short-term-retention-policy).
+
+When you migrate your database from a DTU-based service tier to a vCore-based service tier, the PITR retention is preserved to ensure that your application's data recovery policy isn't compromised. 
 
 > [!NOTE]
 > The [Change automated backup settings](automated-backups-change-settings.md) article provides steps about how to delete personal data from the device or service and can be used to support your obligations under the GDPR. For general information about GDPR, see the [GDPR section of the Microsoft Trust Center](https://www.microsoft.com/trust-center/privacy/gdpr-overview) and the [GDPR section of the Service Trust portal](https://servicetrust.microsoft.com/ViewPage/GDPRGetStarted).

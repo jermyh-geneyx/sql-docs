@@ -50,10 +50,11 @@ You can also run backups on a **default** schedule:
 
 ## Backup schedule level
 
-You can schedule backups at
+The following lists the levels of support for backup schedules:
 
-- Instance level
-- Database level (available from [extension version 1.1.2594.118](release-notes.md#march-12-2024) or later)
+- Instance level backups with a default schedule (available starting with [extension version 1.1.2284.7](release-notes.md#april-10-2023))
+- Instance level backups with support for custom schedule (available starting with [extension version 1.1.2504.99](release-notes.md#november-14-2023))
+- Database level backups with support for custom schedule (available starting with [extension version 1.1.2594.118](release-notes.md#march-12-2024))
 
 If both database and instance level backup schedule is set, database level schedule takes precedence over the instance level backup schedule. If you delete the database level backup schedule, the instance level backup schedule applies.
 
@@ -99,7 +100,7 @@ If you use Azure extension for SQL Server [version 1.1.2504.99](release-notes.md
 
 Automated backups are disabled by default.
 
-After you assigned permissions, you can schedule automated backups. After the automated backups are configured, the Arc SQL extension initiates a backup to the default backup location.
+After you assigned permissions, you can schedule automated backups. After the automated backups are configured, the Azure Extension for SQL Server initiates a backup to the default backup location.
 
 The backups are native SQL Server backups, so all backup history is available in the backup related tables in the msdb database.
 

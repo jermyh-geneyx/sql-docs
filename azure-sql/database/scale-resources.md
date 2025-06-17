@@ -1,19 +1,21 @@
 ---
-title: Scale resources
-description: This article explains how to scale your database in Azure SQL Database and Azure SQL Managed Instance by adding or removing allocated resources.
+title: Scale Resources
 titleSuffix: Azure SQL Database & Azure SQL Managed Instance
+description: This article explains how to scale your database in Azure SQL Database and Azure SQL Managed Instance by adding or removing allocated resources.
 author: dimitri-furman
 ms.author: dfurman
 ms.reviewer: wiassaf, mathoma, urmilano
-ms.date: 06/19/2023
+ms.date: 06/13/2025
 ms.service: azure-sql
 ms.subservice: performance
 ms.topic: conceptual
-ms.custom: sqldbrb=1
-monikerRange: "= azuresql || = azuresql-db || = azuresql-mi"
+ms.custom:
+  - sqldbrb=1
+monikerRange: "=azuresql || =azuresql-db || =azuresql-mi"
 ---
 
 # Dynamically scale database resources with minimal downtime - Azure SQL Database & Azure SQL Managed Instance
+
 [!INCLUDE[appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
 
 Azure SQL Database and Azure SQL Managed Instance enable you to dynamically add more resources to your database with minimal [downtime](https://azure.microsoft.com/support/legal/sla/azure-sql-database); however, there is a switch over period where connectivity is lost to the database for a short amount of time, which can be mitigated using retry logic.
@@ -26,9 +28,7 @@ You can mitigate performance issues due to increased usage of your application t
 
 You don't need to worry about purchasing hardware and changing underlying infrastructure. Scaling a database can be easily done via the Azure portal using a slider.
 
-![Scale database performance](./media/scale-resources/scale-performance.svg)
-
-Azure SQL Database offers the [DTU-based purchasing model](service-tiers-dtu.md) and the [vCore-based purchasing model](service-tiers-vcore.md), while Azure SQL Managed Instance offers just the [vCore-based purchasing model](service-tiers-vcore.md). 
+Azure SQL Database offers the [DTU-based purchasing model overview](service-tiers-dtu.md) and the [vCore-based purchasing model](service-tiers-vcore.md), while Azure SQL Managed Instance offers just the [vCore-based purchasing model](service-tiers-vcore.md). 
 
 - The [DTU-based purchasing model](service-tiers-dtu.md) offers a blend of compute, memory, and I/O resources in three service tiers to support lightweight to heavyweight database workloads: Basic, Standard, and Premium. Performance levels within each tier provide a different mix of these resources, to which you can add additional storage resources.
 - The [vCore-based purchasing model](service-tiers-vcore.md) lets you choose the number of vCores, the amount or memory, and the amount and speed of storage. This purchasing model offers three service tiers: General Purpose, Business Critical, and Hyperscale.
@@ -38,7 +38,7 @@ The service tier, compute tier, and resource limits for a database, elastic pool
 > [!NOTE]
 > Notable exceptions where you cannot change the service tier of a database are:
 > - Databases using features which are [only available](features-comparison.md#features-of-sql-database-and-sql-managed-instance) in the Business Critical / Premium service tiers, cannot be changed to use the General Purpose / Standard service tier. Currently, the only such feature is [In-Memory OLTP](/sql/relational-databases/in-memory-oltp/overview-and-usage-scenarios).
-> - Databases originally created in the Hyperscale service tier cannot be migrated to other service tiers. If you migrate an existing database in Azure SQL Database to the Hyperscale service tier, you can reverse migrate to the General Purpose service tier within 45 days of the original migration to Hyperscale. If you wish to migrate the database to another service tier, such as Business Critical, first reverse migrate to the General Purpose service tier, then perform a further migration. Learn more in [How to reverse migrate from Hyperscale](reverse-migrate-from-hyperscale.md). 
+> - Databases originally created in the Hyperscale service tier cannot be migrated to other service tiers. If you migrate an existing database in Azure SQL Database to the Hyperscale service tier, you can reverse migrate to the General Purpose service tier within 45 days of the original migration to Hyperscale. If you wish to migrate the database to another service tier, such as Business Critical, first reverse migrate to the General Purpose service tier, then perform a further migration. For more information, see [Reverse migrate a database from Hyperscale](reverse-migrate-from-hyperscale.md). 
 
 You can adjust the resources allocated to your database by changing service objective, or scaling, to meet workload demands. This also enables you to only pay for the resources that you need, when you need them. Please refer to the [note](#impact-of-scale-up-or-scale-down-operations) on the potential impact that a scale operation might have on an application.
 
@@ -54,7 +54,7 @@ Azure SQL Managed Instance allows you to scale as well:
 > [!TIP]
 > Dynamic scaling lets customers change resource allocation manually or programmatically. The dynamic scaling capability is available for all Azure SQL Database and Azure SQL Managed Instance resources.
 > 
-> In addition to supporting dynamic scaling, the [Serverless tier](serverless-tier-overview.md) in Azure SQL Database supports autoscaling. Databases in the Serverless tier scale resources automatically within a customer-specified range, based on workload demand. No customer action is required to scale the database.
+> In addition to supporting dynamic scaling, the [Serverless compute tier](serverless-tier-overview.md) in Azure SQL Database supports autoscaling. Databases in the Serverless tier scale resources automatically within a customer-specified range, based on workload demand. No customer action is required to scale the database.
 
 ## Impact of scale up or scale down operations
 
@@ -73,7 +73,7 @@ Scaling resources is the easiest and the most effective way to improve performan
 - [Read scale-out](read-scale-out.md) is an available feature where you are getting one read-only replica of your data where you can execute demanding read-only queries such as reports. A read-only replica will handle your read-only workload without affecting resource usage on your primary database.
 - [Database sharding](elastic-scale-introduction.md) is a set of techniques that enables you to split your data into several databases and scale them independently.
 
-## Next steps
+## Related content
 
 - For information about improving database performance by changing database code, see [Find and apply performance recommendations](database-advisor-find-recommendations-portal.md).
 - For information about letting built-in database intelligence optimize your database, see [Automatic tuning](automatic-tuning-overview.md).

@@ -10,6 +10,7 @@ ms.subservice: service-overview
 ms.topic: concept-article
 ms.custom:
   - sqldbrb=1
+  - build-2025
 ---
 
 # Hyperscale service tier
@@ -74,13 +75,9 @@ For more information about Hyperscale pricing, see [Azure SQL Database Pricing](
 
 ## Distributed functions architecture
 
-Hyperscale separates the query processing engine from the components that provide long-term storage and durability for the data. This architecture allows you to smoothly scale storage capacity as far as needed (up to 128 TB), and the ability to scale compute resources rapidly.
+Hyperscale separates the main database engine from the components that provide long-term storage and durability for the data. This architecture allows you to smoothly scale storage capacity as far as needed (up to 128 TB), and the ability to scale compute resources rapidly. 
 
-The following diagram illustrates the functional Hyperscale architecture:
-
-:::image type="content" source="media/service-tier-hyperscale/Hyperscale-architecture.png" alt-text="Diagram showing Hyperscale architecture." lightbox="media/service-tier-hyperscale/Hyperscale-architecture.png":::
-
-Learn more about the [Hyperscale distributed functions architecture](hyperscale-architecture.md).
+For more details, including a helpful diagram, review [Hyperscale architecture](hyperscale-architecture.md#hyperscale-architecture-overview).
 
 ## Scale and performance advantages
 

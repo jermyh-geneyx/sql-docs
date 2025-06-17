@@ -10,6 +10,7 @@ ms.subservice: linux
 ms.topic: troubleshooting-known-issue
 ms.custom:
   - linux-related-content
+  - build-2025
 ---
 # SQL Server on Linux: Known issues
 
@@ -244,14 +245,6 @@ For Ubuntu 22.04, you should reach out to Canonical directly for the exact steps
    Once you have enabled `cgroup-v1` for Ubuntu 22.04, follow the steps in [Install SQL Server 2022 Machine Learning Services (Python and R) on Linux](sql-server-linux-setup-machine-learning-sql-2022.md#install-runtimes-and-packages), to install and enable SQL Machine Learning Service for [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] packages on Ubuntu 22.04.
 
 ---
-
-## Inaccurate CPU time
-
-**Applies to:** [!INCLUDE [sssql25-md](../includes/sssql25-md.md)]
-
-In [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] on Linux, the CPU time for a query (for example, returned by set statistics time, or captured via Extended Events or SQL Server Profiler traces) can currently display inaccurately. This amount can often show significantly more than the actual execution time, even when the query isn't running in parallel. This is a known issue, and we're actively working on a resolution.
-
-This issue affects [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] on Linux deployed on traditional VMs, physical machines, and container-based environments.
 
 ## Related content
 

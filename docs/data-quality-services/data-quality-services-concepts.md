@@ -1,12 +1,14 @@
 ---
 title: "Data Quality Services Concepts"
 description: "Data Quality Services Concepts"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "01/01/2012"
 ms.service: sql
 ms.subservice: data-quality-services
 ms.topic: concept-article
+ms.custom:
+  - build-2025
 ---
 # Data Quality Services Concepts
 

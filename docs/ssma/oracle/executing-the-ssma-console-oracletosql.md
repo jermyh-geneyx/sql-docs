@@ -1,8 +1,8 @@
 ---
 title: "Executing the SSMA Console (OracleToSQL)"
 description: "Executing the SSMA Console (OracleToSQL)"
-author: cpichuka
-ms.author: cpichuka
+author: nilabjaball
+ms.author: niball
 ms.date: "01/19/2017"
 ms.service: sql
 ms.subservice: ssma
@@ -27,13 +27,13 @@ create-new-project
   
 **Script**  
   
--   `project-folder` indicates the folder of the project getting created.  
+-   `project-folder`: Indicates the folder of the project getting created.  
   
--   `project-name` indicates the name of the project. {string}  
+-   `project-name`: Indicates the name of the project. {string}  
   
--   `overwrite-if-exists`Optional attribute indicates if an existing project should be overwritten. {boolean}  
+-   `overwrite-if-exists`: Optional attribute. Indicates if an existing project should be overwritten. {boolean}  
   
--   `project-type:`Optional attribute. Indicates the project type i.e. "sql-server-2005" project or "sql-server-2008" project or "sql-server-2012" project or "sql-server-2014" project or "sql-azure". Default is "sql-server-2014".  
+-   `project-type`: Optional attribute. Indicates the project type i.e. "sql-server-2005" project or "sql-server-2008" project or "sql-server-2012" project or "sql-server-2014" project or "sql-azure". Default is "sql-server-2014".  
   
 **Example:**  
   

@@ -1,12 +1,14 @@
 ---
 title: "Use the DQS Speller"
 description: "Use the DQS Speller"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "11/08/2011"
 ms.service: sql
 ms.subservice: data-quality-services
 ms.topic: how-to
+ms.custom:
+  - build-2025
 ---
 # Use the DQS Speller
 

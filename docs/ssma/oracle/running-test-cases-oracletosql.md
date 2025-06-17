@@ -1,8 +1,8 @@
 ---
 title: "Running Test Cases (OracleToSQL)"
 description: "Running Test Cases (OracleToSQL)"
-author: cpichuka
-ms.author: cpichuka
+author: nilabjaball
+ms.author: niball
 ms.date: "04/29/2021"
 ms.service: sql
 ms.subservice: ssma
@@ -54,7 +54,7 @@ The following object is created in the schema of verified table at [!INCLUDE[ssN
 |-|-|-|
 |`USER_TABLE$Trg`|trigger|Trigger auditing the changes in the verified table.|
 
-And the following objects are created at [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]in the `ssma_tester_changes` schema.
+And the following objects are created at [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] in the `ssma_tester_changes` schema.
 
 |Name|Type|Description|
 |-|-|-|

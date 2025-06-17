@@ -1,8 +1,8 @@
 ---
 title: "Run the Data Quality Client Application"
 description: "Run the Data Quality Client Application"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "03/01/2017"
 ms.service: sql
 ms.subservice: data-quality-services
@@ -10,6 +10,8 @@ ms.topic: how-to
 f1_keywords:
   - "sql13.dqs.browseforservers.f1"
   - "sql13.dqs.connecttoserver.f1"
+ms.custom:
+  - build-2025
 ---
 # Run the Data Quality Client Application
 

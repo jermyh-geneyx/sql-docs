@@ -1,11 +1,11 @@
 ---
-title: Working with JSON data
+title: Work with JSON Data
 titleSuffix: Azure SQL Database & Azure SQL Managed Instance
 description: JSON functionality in the database enables you to parse, query, and format data in JavaScript Object Notation (JSON) notation.
 author: uc-msft
 ms.author: umajay
 ms.reviewer: wiassaf, mathoma
-ms.date: 10/18/2021
+ms.date: 06/13/2025
 ms.service: azure-sql
 ms.subservice: development
 ms.topic: how-to
@@ -14,19 +14,22 @@ ms.custom:
   - ignite-2024
 monikerRange: "=azuresql || =azuresql-db || =azuresql-mi || =fabricsql"
 ---
-# Getting started with JSON features
+# Get started with JSON features
+
 [!INCLUDE [appliesto-sqldb-sqlmi-fabricsqldb](../includes/appliesto-sqldb-sqlmi-fabricsqldb.md)]
 
-Azure SQL Database, Fabric SQL database, and Azure SQL Managed Instance let you parse and query data represented in JavaScript Object Notation [(JSON)](https://www.json.org/) format, and export your relational data as JSON text. The following JSON scenarios are available:
+Azure SQL Database, SQL database in Microsoft Fabric, and Azure SQL Managed Instance let you parse and query data represented in JavaScript Object Notation [(JSON)](https://www.json.org/) format, and export your relational data as JSON text. The following JSON scenarios are available:
 
 - [Formatting relational data in JSON format](#formatting-relational-data-in-json-format) using `FOR JSON` clause.
 - [Working with JSON data](#working-with-json-data)
 - [Querying JSON data](#querying-json-data) using JSON scalar functions.
 - [Transforming JSON into tabular format](#transforming-json-into-tabular-format) using `OPENJSON` function.
 
-## Formatting relational data in JSON format
+<a id="formatting-relational-data-in-json-format"></a>
 
-If you have a web service that takes data from the database layer and provides a response in JSON format, or client-side JavaScript frameworks or libraries that accept data formatted as JSON, you can format your database content as JSON directly in a SQL query. You no longer have to write application code that formats results from Azure SQL Database or Azure SQL Managed Instance as JSON, or include some JSON serialization library to convert tabular query results and then serialize objects to JSON format. Instead, you can use the FOR JSON clause to format SQL query results as JSON and use it directly in your application.
+## Format relational data in JSON format
+
+If you have a web service that takes data from the database layer and provides a response in JSON format, or client-side JavaScript frameworks or libraries that accept data formatted as JSON, you can format your database content as JSON directly in a SQL query. You no longer have to write application code that formats results as JSON, or include some JSON serialization library to convert tabular query results and then serialize objects to JSON format. Instead, you can use the `FOR JSON` clause to format SQL query results as JSON and use it directly in your application.
 
 In the following example, rows from the `Sales.Customer` table are formatted as JSON by using the FOR JSON clause:
 
@@ -36,7 +39,7 @@ from Sales.Customers
 FOR JSON PATH
 ```
 
-The FOR JSON PATH clause formats the results of the query as JSON text. Column names are used as keys, while the cell values are generated as JSON values:
+The `FOR JSON PATH` clause formats the results of the query as JSON text. Column names are used as keys, while the cell values are generated as JSON values:
 
 ```json
 [
@@ -48,7 +51,7 @@ The FOR JSON PATH clause formats the results of the query as JSON text. Column n
 
 The result set is formatted as a JSON array where each row is formatted as a separate JSON object.
 
-PATH indicates that you can customize the output format of your JSON result by using dot notation in column aliases. The following query changes the name of the "CustomerName" key in the output JSON format, and puts phone and fax numbers in the "Contact" sub-object:
+`PATH` indicates that you can customize the output format of your JSON result by using dot notation in column aliases. The following query changes the name of the `CustomerName` key in the output JSON format, and puts phone and fax numbers in the `Contact` sub-object:
 
 ```sql
 select CustomerName as Name, PhoneNumber as [Contact.Phone], FaxNumber as [Contact.Fax]
@@ -71,7 +74,7 @@ The output of this query looks like this:
 
 In this example, we returned a single JSON object instead of an array by specifying the [WITHOUT_ARRAY_WRAPPER](/sql/relational-databases/json/remove-square-brackets-from-json-without-array-wrapper-option) option. You can use this option if you know that you are returning a single object as a result of query.
 
-The main value of the FOR JSON clause is that it lets you return complex hierarchical data from your database formatted as nested JSON objects or arrays. The following example shows how to include the rows from the `Orders` table that belong to the `Customer` as a nested array of `Orders`:
+The main value of the `FOR JSON` clause is that it lets you return complex hierarchical data from your database formatted as nested JSON objects or arrays. The following example shows how to include the rows from the `Orders` table that belong to the `Customer` as a nested array of `Orders`:
 
 ```sql
 select CustomerName as Name, PhoneNumber as Phone, FaxNumber as Fax,
@@ -83,7 +86,7 @@ where Customer.CustomerID = 931
 FOR JSON AUTO, WITHOUT_ARRAY_WRAPPER
 ```
 
-Instead of sending separate queries to get Customer data and then to fetch a list of related Orders, you can get all the necessary data with a single query, as shown in the following sample output:
+Instead of sending separate queries to get `Customer` data and then to fetch a list of related `Orders`, you can get all the necessary data with a single query, as shown in the following sample output:
 
 ```json
 {
@@ -98,11 +101,13 @@ Instead of sending separate queries to get Customer data and then to fetch a lis
 }
 ```
 
-## Working with JSON data
+<a id="working-with-json-data"></a>
+
+## Work with JSON data
 
 If you don't have strictly structured data, if you have complex sub-objects, arrays, or hierarchical data, or if your data structures evolve over time, the JSON format can help you to represent any complex data structure.
 
-JSON is a textual format that can be used like any other string type. You can send or store JSON data as a standard NVARCHAR:
+JSON is a textual format that can be used like any other string type. You can send or store JSON data as a standard **nvarchar**:
 
 ```sql
 CREATE TABLE Products (
@@ -118,7 +123,7 @@ AS BEGIN
 END
 ```
 
-The JSON data used in this example is represented by using the NVARCHAR(MAX) type. JSON can be inserted into this table or provided as an argument of the stored procedure using standard Transact-SQL syntax as shown in the following example:
+The JSON data used in this example is represented by using the **nvarchar(MAX)** type. JSON can be inserted into this table or provided as an argument of the stored procedure using standard Transact-SQL syntax as shown in the following example:
 
 ```sql
 EXEC InsertProduct 'Toy car', '{"Price":50,"Color":"White","tags":["toy","children","games"]}'
@@ -126,9 +131,11 @@ EXEC InsertProduct 'Toy car', '{"Price":50,"Color":"White","tags":["toy","childr
 
 Any client-side language or library that works with string data will also work with JSON data. JSON can be stored in any table that supports the **nvarchar** type, such as a Memory-optimized table or a System-versioned table. JSON does not introduce any constraint either in the client-side code or in the database layer.
 
-## Querying JSON data
+<a id="querying-json-data"></a>
 
-If you have data formatted as JSON stored in Azure SQL tables, JSON functions let you use this data in any SQL query.
+## Query JSON data
+
+If you have data formatted as JSON stored in tables, JSON functions let you use this data in any SQL query.
 
 [JSON functions](/sql/t-sql/functions/json-functions-transact-sql) let you treat data formatted as JSON as any other SQL data type. You can easily extract values from the JSON text, and use JSON data in any query:
 
@@ -142,11 +149,11 @@ set Data = JSON_MODIFY(Data, '$.Price', 60)
 where Id = 1
 ```
 
-The JSON_VALUE function extracts a value from JSON text stored in the Data column. This function uses a JavaScript-like path to reference a value in JSON text to extract. The extracted value can be used in any part of SQL query.
+The `JSON_VALUE` function extracts a value from JSON text stored in the Data column. This function uses a JavaScript-like path to reference a value in JSON text to extract. The extracted value can be used in any part of SQL query.
 
-The JSON_QUERY function is similar to JSON_VALUE. Unlike JSON_VALUE, this function extracts complex sub-object such as arrays or objects that are placed in JSON text.
+The `JSON_QUERY` function is similar to `JSON_VALUE`. Unlike `JSON_VALUE`, this function extracts complex sub-object such as arrays or objects that are placed in JSON text.
 
-The JSON_MODIFY function lets you specify the path of the value in the JSON text that should be updated, as well as a new value that will overwrite the old one. This way you can easily update JSON text without reparsing the entire structure.
+The `JSON_MODIFY` function lets you specify the path of the value in the JSON text that should be updated, as well as a new value that will overwrite the old one. This way you can easily update JSON text without reparsing the entire structure.
 
 Since JSON is stored in a standard text, there are no guarantees that the values stored in text columns are properly formatted. You can verify that text stored in JSON column is properly formatted by using standard check constraints and the `ISJSON` function:
 
@@ -156,19 +163,21 @@ ALTER TABLE Products
         CHECK (ISJSON(Data) > 0)
 ```
 
-If the input text is properly formatted JSON, the ISJSON function returns the value 1. On every insert or update of JSON column, this constraint will verify that new text value is not malformed JSON.
+If the input text is properly formatted JSON, the `ISJSON` function returns the value `1`. On every insert or update of JSON column, this constraint will verify that new text value is not malformed JSON.
 
-## Transforming JSON into tabular format
+<a id="transforming-json-into-tabular-format"></a>
+
+## Transform JSON into tabular format
 
 You can transform JSON collections into tabular format and load or query JSON data.
 
-OPENJSON is a table-value function that parses JSON text, locates an array of JSON objects, iterates through the elements of the array, and returns one row in the output result for each element of the array.
+`OPENJSON` is a table-value T-SQL function that parses JSON text, locates an array of JSON objects, iterates through the elements of the array, and returns one row in the output result for each element of the array.
 
-![JSON tabular](./media/json-features/image_2.png)
+:::image type="content" source="media/json-features/json-input-openjson-output.png" alt-text="Screenshots and code snippets of sample JSON tabular data." lightbox="media/json-features/json-input-openjson-output.png":::
 
-In the example above, we can specify where to locate the JSON array that should be opened (in the $.Orders path), what columns should be returned as result, and where to find the JSON values that will be returned as cells.
+In the example, we can specify where to locate the JSON array that should be opened (in the `$.Orders` path), what columns should be returned as result, and where to find the JSON values that will be returned as cells.
 
-We can transform a JSON array in the @orders variable into a set of rows, analyze this result set, or insert rows into a standard table:
+We can transform a JSON array in the `@orders` variable into a set of rows, analyze this result set, or insert rows into a standard table:
 
 ```sql
 CREATE PROCEDURE InsertOrders(@orders nvarchar(max))

@@ -1,10 +1,10 @@
 ---
-title: Install SQL Server Command-Line Tools on Linux
+title: Install the sqlcmd and bcp SQL Server Command-Line Tools on Linux
 titleSuffix: SQL Server
 description: Learn how to install the SQL Server command-line tools, Microsoft ODBC drivers, and their dependencies on Linux.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 05/19/2025
+ms.date: 06/16/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: install-set-up-deploy
@@ -12,7 +12,7 @@ ms.custom:
   - intro-installation
   - linux-related-content
 ---
-# Install the SQL Server command-line tools sqlcmd and bcp on Linux
+# Install the sqlcmd and bcp SQL Server command-line tools on Linux
 
 [!INCLUDE [SQL Server - Linux](../includes/applies-to-version/sql-linux.md)]
 

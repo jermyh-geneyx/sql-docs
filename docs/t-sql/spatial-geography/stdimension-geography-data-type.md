@@ -51,7 +51,7 @@ SELECT [name], [geom].STDimension() as [dim]
 FROM @temp;  
 ```  
   
- The example then returns the dimensions of each `geography`instance.  
+ The example then returns the dimensions of each `geography` instance.  
   
 |name|dim|  
 |----------|---------|  

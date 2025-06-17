@@ -1,14 +1,16 @@
 ---
 title: "Create a Linked Domain"
 description: "Create a Linked Domain"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "11/08/2011"
 ms.service: sql
 ms.subservice: data-quality-services
 ms.topic: how-to
 f1_keywords:
   - "sql13.dqs.kb.linkeddomain.f1"
+ms.custom:
+  - build-2025
 ---
 # Create a Linked Domain
 

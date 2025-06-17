@@ -16,7 +16,8 @@ helpviewer_keywords:
 dev_langs:
   - "TSQL"
 monikerRange: " = sql-server-ver17 || = sql-server-linux-ver17 "
-
+ms.custom:
+  - build-2025
 ---
 # sys.sp_create_event_group_stream (Transact-SQL)
 
@@ -37,7 +38,7 @@ sp_create_event_stream_group
     , [ @destination_type = ] N'destination_type'
     , [ @destination_location = ] N'destination_location'
     [, [ @destination_credential = ] N'destination_credential' ]
-    [, [ @max_message_size_bytes = ] max_message_size_bytes ]
+    [, [ @max_message_size_kb = ] max_message_size_kb ]
     [, [ @partition_key_scheme = ] N'partition_key_scheme' ]
     [, [ @partition_key_column_name = ] N'partition_key_column_name' ]
     [, [ @encoding = ] N'encoding' ]
@@ -65,16 +66,16 @@ For the Apache Kafka protocol, specify the port.
 
 Specifies database scoped credential name to be used. *@destination_credential* is **sysname**, and can't be `NULL`.
 
-### [ @max_message_size_bytes = ] max_message_size_bytes
+### [ @max_message_size_kb = ] max_message_size_kb
 
-If specified, defines the max CES message size in bytes. *@max_message_size_bytes* is **int**, and can't be `NULL`. The message is split if it exceeds the specified max size.  This parameter is optional.
+If specified, defines the max CES message size in kilobyes. *@max_message_size_kb* is **int**, and can't be `NULL`. The message is split if it exceeds the specified max size.  This parameter is optional.
 
-*@max_message_size_bytes* has the following characteristics:
-- Default value: `262144` (corresponds to 256 KB)
-- Minimum allowed value: `131072` (corresponds to 128 KB)
-- Maximum allowed value: `1048576` (corresponds to 20 MB)
+*@max_message_size_kb* has the following characteristics:
+- Default value: `256` (corresponds to 256 KB)
+- Minimum allowed value: `128` (corresponds to 128 KB)
+- Maximum allowed value: `1024` (corresponds to 1 MB)
 
-The *@max_message_size_bytes* parameter should align to the limits of the destination. For example, the maximum message size for Azure Event Hubs is 1 MB for the Basic and Standard tiers. To learn more, review [Azure Event Hubs quotas](/azure/event-hubs/event-hubs-quotas#basic-vs-standard-vs-premium-vs-dedicated-tiers). 
+The *@max_message_size_kb* parameter should align to the limits of the destination. For example, the maximum message size for Azure Event Hubs is 1 MB for the Standard and Premium tiers. To learn more, review [Azure Event Hubs quotas](/azure/event-hubs/event-hubs-quotas#basic-vs-standard-vs-premium-vs-dedicated-tiers). 
 
 ### [ @partition_key_scheme = ] N'partition_key_scheme'
 
@@ -84,10 +85,10 @@ Defines the type of partitioning. *@partition_key_scheme* is **sysname**, and ca
 
 | Value | Description |
 |---|---|
-| `None` (default) | Partitioning not specified. |
+| `None` (default) | Partitioning isn't specified, so events are assigned to partitions by the [event hub using a round-robin strategy](/azure/event-hubs/event-hubs-features#mapping-of-events-to-partitions). |
 | `StreamGroup`| Partitioning is done by stream group so that all tables in the stream group are streamed to the same partition. |
 | `Table`| Partitioning is done by table so that each table in the stream group is streamed to a different partition. |
-| `Column`| Partitioning is done by column so that each column in the stream group is streamed to a different partition. |  
+| `Column`| Partitioning is done by column so that each column in the stream group is streamed to a different partition. |
 
 ### [ @partition_key_column_name = ] N'partition_key_column_name'
 
@@ -111,6 +112,28 @@ Specifies the message encoding. *@encoding* is **sysname**, and can't be `NULL`.
 ## Permissions
 
 A user with [CONTROL database permissions](../security/permissions-database-engine.md), **db_owner** database role membership, or **sysadmin** server role membership can execute this procedure.
+
+## Examples
+
+### A. Create event stream group that streams into Azure Event Hubs with AMQP protocol
+
+```sql
+EXECUTE sys.sp_create_event_stream_group
+    @stream_group_name = N'myStreamGroup',
+    @destination_type = N'AzureEventHubsAmqp',
+    @destination_location = N'myEventHubsNamespace.servicebus.windows.net/myEventHubsInstance',
+    @destination_credential = MyDatabaseScopedCredentialForCes;
+```
+
+### B. Create event stream group that streams into Azure Event Hubs with Kafka protocol
+
+```sql
+EXECUTE sys.sp_create_event_stream_group
+    @stream_group_name = N'myStreamGroup',
+    @destination_type = N'AzureEventHubsAmqp',
+    @destination_location = N'myEventHubsNamespace.servicebus.windows.net:9093/myEventHubsInstance',
+    @destination_credential = MyDatabaseScopedCredentialForCes;
+```
 
 ## Related content
 

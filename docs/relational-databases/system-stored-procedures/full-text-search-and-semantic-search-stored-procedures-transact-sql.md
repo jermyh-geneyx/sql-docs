@@ -44,7 +44,7 @@ dev_langs:
 
 - [sp_fulltext_keymappings](sp-fulltext-keymappings-transact-sql.md)
 
-  Returns mappings between document identifiers (`DocId`s) and full-text key values.
+  Returns mappings between document identifiers (`DocId`) and full-text key values.
 
 - [sp_fulltext_load_thesaurus_file](sp-fulltext-load-thesaurus-file-transact-sql.md)
 

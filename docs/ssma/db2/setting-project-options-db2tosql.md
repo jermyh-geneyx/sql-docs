@@ -1,8 +1,8 @@
 ---
 title: "Set Project Options (Db2ToSQL)"
 description: Learn how to set project level options in SSMA for Db2.
-author: cpichuka
-ms.author: cpichuka
+author: nilabjaball
+ms.author: niball
 ms.reviewer: randolphwest
 ms.date: 09/24/2024
 ms.service: sql
@@ -40,7 +40,7 @@ For more information about the settings and how the settings are applied in each
 
 - [Project Settings (Conversion)](project-settings-conversion-db2tosql.md)
 - [Project Settings (Migration)](project-settings-migration-db2tosql.md)
-- [Project Settings(Synchronization)](project-settings-synchronization-db2tosql.md)
+- [Project Settings (Synchronization)](project-settings-synchronization-db2tosql.md)
 - [Project Settings (GUI)](project-settings-gui-db2tosql.md)
 - [Project Settings (Type Mapping)](project-settings-type-mapping-db2tosql.md)
 

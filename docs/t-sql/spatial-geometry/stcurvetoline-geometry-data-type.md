@@ -33,7 +33,7 @@ Returns a polygonal approximation of a **geometry** instance that contains circu
  CLR return type: **SqlGeometry**  
   
 ## Remarks  
- Returns an empty **GeometryCollection**instance for empty **geometry** instance variables, and returns **NULL** for uninitialized **geometry** variables.  
+ Returns an empty **GeometryCollection** instance for empty **geometry** instance variables, and returns **NULL** for uninitialized **geometry** variables.  
   
  The polygonal approximation that the method returns depends on the **geometry** instance that you use to call the method:  
   
@@ -69,7 +69,7 @@ Returns a polygonal approximation of a **geometry** instance that contains circu
  ```  
   
 ### C. Using a CircularString Instance  
- The first **SELECT** statement in the following example uses a **CircularString** instance to call the STCurveToLine method. Thus, the method returns a **LineString** instance. This **SELECT** statement also compares the lengths of the two instances, which are approximately the same.  Finally, the second **SELECT** statement returns the number of points for each instance.  It returns only 5 points for the **CircularString** instance, but 65 points for the **LineString**instance.  
+ The first **SELECT** statement in the following example uses a **CircularString** instance to call the STCurveToLine method. Thus, the method returns a **LineString** instance. This **SELECT** statement also compares the lengths of the two instances, which are approximately the same.  Finally, the second **SELECT** statement returns the number of points for each instance.  It returns only 5 points for the **CircularString** instance, but 65 points for the **LineString** instance.  
   
 ```sql
  DECLARE @g1 geometry, @g2 geometry; 

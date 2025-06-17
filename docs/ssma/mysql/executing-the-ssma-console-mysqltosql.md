@@ -1,8 +1,8 @@
 ---
 title: "Executing the SSMA Console (MySQLToSQL)"
 description: "Executing the SSMA Console (MySQLToSQL)"
-author: cpichuka
-ms.author: cpichuka
+author: nilabjaball
+ms.author: niball
 ms.date: "01/19/2017"
 ms.service: sql
 ms.subservice: ssma
@@ -33,13 +33,13 @@ The Project commands handle creating projects, opening, saving, and exiting proj
   
 **Script**  
   
-1.  `project-folder` indicates the folder of the project getting created.  
+1.  `project-folder`: Indicates the folder of the project getting created.  
   
-2.  `project-name` indicates the name of the project. {string}  
+2.  `project-name`: Indicates the name of the project. {string}  
   
-3.  `overwrite-if-exists`Optional attribute indicates if an existing project should be overwritten. {boolean}  
+3.  `overwrite-if-exists`: Optional attribute. Indicates if an existing project should be overwritten. {boolean}  
   
-4.  `project-type:`Optional attribute. Indicates the project type i.e. "sql-server-2005" project or "sql-server-2008" project or "sql-server-2012" or "sql-server-2014" project or "sql-azure" project. Default is "sql-server-2008".  
+4.  `project-type`: Optional attribute. Indicates the project type i.e. "sql-server-2005" project or "sql-server-2008" project or "sql-server-2012" or "sql-server-2014" project or "sql-azure" project. Default is "sql-server-2008".  
   
 **Syntax Example:**  
   

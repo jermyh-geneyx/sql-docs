@@ -3,7 +3,7 @@ title: "Failover modes for availability groups"
 description: "A description of the different failover modes available for databases participating in an Always On availability group."
 author: MashaMSFT
 ms.author: mathoma
-ms.date: "05/19/2025"
+ms.date: 06/16/2025
 ms.service: sql
 ms.subservice: availability-groups
 ms.topic: conceptual
@@ -13,6 +13,8 @@ helpviewer_keywords:
   - "Availability Groups [SQL Server], failover modes"
   - "failover [SQL Server], AlwaysOn Availability Groups"
   - "failover [SQL Server], Always On Availability Groups"
+ms.custom:
+  - build-2025
 ---
 # Failover and Failover Modes (Always On Availability Groups)
 [!INCLUDE [SQL Server](../../../includes/applies-to-version/sqlserver.md)]
@@ -76,7 +78,7 @@ In certain situations, with a DR failover, as the secondary replica transitions 
 To improve undo-of-redo for this scenario, [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] introduces an update to the synchronization mechanism so that the availability group now performs page requests asynchronously, and in batches.
 
 Consider the following: 
-- The improvement to the synchronization mechanism is disabled by default. To use the feature, enable [Trace Flag 12350](../../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf12350) on all replicas in an availability group that are currently secondaries, or that might be secondaries in the future. 
+- The improvement to the synchronization mechanism is enabled by default. To disable the improvement and revert to default behavior, enable [Trace Flag 12348](../../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf12348) on all replicas in an availability group that are currently secondaries, or that might be secondaries in the future. 
 - If the AG replicas don't have network latency, this improvement might not improve undo-of-redo.
 
 ### Databases switch to resolving state after a failure
@@ -94,13 +96,13 @@ In rare cases, one or more databases of an availability group might remain in a 
  A failover that can be initiated by a database administrator when no secondary replica is SYNCHRONIZED with the primary replica or the primary replica isn't running and no secondary replica is failover ready. Forced failover risks possible data loss and is recommended strictly for disaster recovery. Forced failover is also known as forced manual failover because it can only be initiated manually. This is the only form of failover supported by in asynchronous-commit availability mode.  
   
  [!INCLUDE[ssFosAutoC](../../../includes/ssfosautoc-md.md)]  
- Within a given availability group, a pair of availability replicas (including the current primary replica) that are configured for synchronous-commit mode with automatic failover, if any. An [!INCLUDE[ssFosAuto](../../../includes/ssfosauto-md.md)]takes effect only if the secondary replica is currently SYNCHRONIZED with the primary replica.  
+ Within a given availability group, a pair of availability replicas (including the current primary replica) that are configured for synchronous-commit mode with automatic failover, if any. An [!INCLUDE[ssFosAuto](../../../includes/ssfosauto-md.md)] takes effect only if the secondary replica is currently SYNCHRONIZED with the primary replica.  
   
  [!INCLUDE[ssFosSyncC](../../../includes/ssfossyncc-md.md)]  
- Within a given availability group, a set of two or three availability replicas (including the current primary replica) that are configured for synchronous-commit mode, if any. A [!INCLUDE[ssFosSync](../../../includes/ssfossync-md.md)]takes effect only if the secondary replicas are configured for manual failover mode and at least one secondary replica is currently SYNCHRONIZED with the primary replica.  
+ Within a given availability group, a set of two or three availability replicas (including the current primary replica) that are configured for synchronous-commit mode, if any. A [!INCLUDE[ssFosSync](../../../includes/ssfossync-md.md)] takes effect only if the secondary replicas are configured for manual failover mode and at least one secondary replica is currently SYNCHRONIZED with the primary replica.  
   
  [!INCLUDE[ssFosEntireC](../../../includes/ssfosentirec-md.md)]  
- Within a given availability group, the set of all availability replicas whose operational state is currently ONLINE, regardless of availability mode and of failover mode. The [!INCLUDE[ssFosEntire](../../../includes/ssfosentire-md.md)]becomes relevant when no secondary replica is currently SYNCHRONIZED with the primary replica.  
+ Within a given availability group, the set of all availability replicas whose operational state is currently ONLINE, regardless of availability mode and of failover mode. The [!INCLUDE[ssFosEntire](../../../includes/ssfosentire-md.md)] becomes relevant when no secondary replica is currently SYNCHRONIZED with the primary replica.  
   
 ##  <a name="Overview"></a> Overview of Failover  
  The following table summarizes which forms of failover are supported under different availability and failover modes. For each pairing, the effective availability mode and failover mode are determined by the intersection of the modes of the primary replica plus the modes of one or more secondary replicas.  
@@ -109,9 +111,9 @@ In rare cases, one or more databases of an availability group might remain in a 
 |-------------------------------|---------------------------------------------------------|------------------------------------------------------------|  
 |Automatic failover|No|No|Yes|  
 |Planned manual failover|No|Yes|Yes|  
-|Forced failover|Yes|Yes|Yes**&#42;**|  
+|Forced failover|Yes|Yes|Yes<sup>1</sup>|  
   
- **&#42;**If you issue a forced failover command on a synchronized secondary replica, the secondary replica behaves the same as for a manual failover.  
+ <sup>1</sup> If you issue a forced failover command on a synchronized secondary replica, the secondary replica behaves the same as for a manual failover.  
   
  The amount of time that the database is unavailable during a failover depends on the type of failover and its cause.  
   

@@ -160,7 +160,7 @@ dta -d AdventureWorks2022 ...
 >  The **dta** utility does not delete the contents of user-specified tuning log tables if the session is deleted. When tuning very large workloads, we recommend that a table be specified for the tuning log. Since tuning large workloads can result in large tuning logs, the sessions can be deleted much faster when a table is used.  
   
  **-F**  
- Permits **dta** to overwrite an existing output file. If an output file with the same name already exists and **-F** is not specified, **dta**returns an error. You can use **-F** with **-of**, **-or**, or **-ox**.  
+ Permits **dta** to overwrite an existing output file. If an output file with the same name already exists and **-F** is not specified, **dta** returns an error. You can use **-F** with **-of**, **-or**, or **-ox**.  
   
  **-fa** _physical_design_structures_to_add_  
  Specifies what types of physical design structures **dta** should include in the recommendation. The following table lists and describes the values that can be specified for this argument. When no value is specified, **dta** uses the default **-fa IDX**.  

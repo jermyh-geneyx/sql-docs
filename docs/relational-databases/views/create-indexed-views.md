@@ -105,9 +105,9 @@ The following requirements must also be met, in addition to the `SET` options an
   | `COUNT` | Use `COUNT_BIG` |
   | `ROWSET` functions (`OPENDATASOURCE`, `OPENQUERY`, `OPENROWSET`, and `OPENXML`) | |
   | Arithmetic mean (`AVG`) | Use `COUNT_BIG` and `SUM` as separate columns |
-  | Statistical aggregate functions (`STDEV`,`STDEVP`,`VAR`, and`VARP`) | |
+  | Statistical aggregate functions (`STDEV`,`STDEVP`,`VAR`, and `VARP`) | |
   | `SUM` function that references a nullable expression | Use `ISNULL` inside `SUM()` to make the expression non-nullable |
-  | Other aggregate functions (`MIN`,`MAX`,`CHECKSUM_AGG`, and`STRING_AGG`) | |
+  | Other aggregate functions (`MIN`,`MAX`,`CHECKSUM_AGG`, and `STRING_AGG`) | |
   | User-defined aggregate functions (SQL CLR) | |
 
   | SELECT clause | Transact-SQL element | Possible alternative |

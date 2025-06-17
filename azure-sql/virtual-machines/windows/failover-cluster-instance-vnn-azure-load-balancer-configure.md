@@ -4,7 +4,7 @@ description: Learn to configure an Azure Load Balancer to route traffic to the v
 author: AbdullahMSFT
 ms.author: amamun
 ms.reviewer: mathoma
-ms.date: 06/18/2024
+ms.date: 04/30/2025
 ms.service: azure-vm-sql-server
 ms.subservice: hadr
 ms.topic: how-to
@@ -202,6 +202,28 @@ Get-ClusterResource $IPResourceName | Get-ClusterParameter
 > Because there is no private IP address for the external load balancer, users can't directly use the VNN DNS name as it resolves the IP address within the subnet. Use the public IP address of the public load balancer, or configure another DNS mapping on the DNS server. 
 
 ---
+
+## Configure port exclusion 
+
+When using a health probe port between 49,152 and 65,536 (the [default dynamic port range for TCP/IP](/windows/client-management/troubleshoot-tcpip-port-exhaust#default-dynamic-port-range-for-tcpip)), add an exclusion for each health probe port on every VM. 
+
+Configuring port exclusion prevents other system processes from being dynamically assigned the same port on the VM
+
+To set a port exclusion, use the following PowerShell script: 
+-  for each health probe port 
+-  on every VM
+
+```powershell
+[int]$ProbePort = <nnnnn> # The probe port that you configured in the health probe of the load balancer. Any unused TCP port is valid. 
+
+netsh int ipv4 add excludedportrange tcp startport=$ProbePort numberofports=1 store=persistent 
+```
+
+To confirm that exclusions have been configured correctly, use the following command: 
+
+```powershell
+netsh int ipv4 show excludedportrange tcp 
+```
 
 ## Modify the connection string 
 

@@ -1,14 +1,16 @@
 ---
 title: "Data Quality Client Home Screen"
 description: "Data Quality Client Home Screen"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "02/29/2012"
 ms.service: sql
 ms.subservice: data-quality-services
 ms.topic: conceptual
 f1_keywords:
   - "sql13.dqs.clienthome.f1"
+ms.custom:
+  - build-2025
 ---
 # Data Quality Client Home Screen
 

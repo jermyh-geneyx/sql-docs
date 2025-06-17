@@ -1,13 +1,15 @@
 ---
 title: "Install Data Quality Services"
 description: "Install Data Quality Services"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "09/11/2017"
 ms.service: sql
 ms.subservice: data-quality-services
 ms.topic: install-set-up-deploy
-ms.custom: intro-installation
+ms.custom:
+  - intro-installation
+  - build-2025
 ---
 
 # Install Data Quality Services

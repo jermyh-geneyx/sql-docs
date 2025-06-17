@@ -27,7 +27,7 @@ For more general information about date and time data types, see [datetime &#40;
 Provides information about OLE DB (OLE DB Driver for SQL Server) types that support [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] date and time data types.
 
 [Metadata &#40;OLE DB&#41;](metadata-parameter-and-rowset.md)  
-Contains information about the DBBINDING structure, **ICommandWithParameters::GetParameterInfo**, **ICommandWithParameters::SetParameterInfo**, **IColumnsRowset::GetColumnsRowset**, and I**ColumnsInfo::GetColumnInfo**. Also provides information about updates to OLE DB schema rowsets.
+Contains information about the DBBINDING structure, **ICommandWithParameters::GetParameterInfo**, **ICommandWithParameters::SetParameterInfo**, **IColumnsRowset::GetColumnsRowset**, and **IColumnsInfo::GetColumnInfo**. Also provides information about updates to OLE DB schema rowsets.
 
 [Bindings and Conversions &#40;OLE DB&#41;](conversions-ole-db.md)  
 Describes the rules for conversion between server and client for both existing and new date types.

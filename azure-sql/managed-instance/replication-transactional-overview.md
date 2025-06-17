@@ -5,7 +5,7 @@ description: Learn about using SQL Server transactional replication with Azure S
 author: sasapopo
 ms.author: sasapopo
 ms.reviewer: mathoma, randolphwest
-ms.date: 06/10/2024
+ms.date: 05/30/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: data-movement
 ms.topic: conceptual
@@ -77,7 +77,6 @@ The transactional and snapshot replication supportability matrix for Azure SQL M
 
 [!INCLUDE [replication-compat-matrix](../../docs/includes/replication-compat-matrix-transactional.md)]
 
-
 ## When to use
 
 Transactional replication is useful in the following scenarios:
@@ -133,6 +132,18 @@ In this configuration, a database in Azure SQL Database or Azure SQL Managed Ins
 > You may encounter error 53 when connecting to an Azure Storage File if the outbound network security group (NSG) port 445 is blocked when the distributor is an Azure SQL Managed Instance database and the subscriber is on-premises. [Update the vNet NSG](/azure/storage/files/storage-troubleshoot-windows-file-connection-problems) to resolve this issue.
 
 ## Security 
+
+### TLS 1.3 support 
+
+Azure SQL Managed Instance supports TLS 1.3 for replication connections initialized by agents configured to run on a SQL managed instance. This applies to a replication topology between two SQL managed instances, and also to any version of SQL Server as a subscriber from a SQL managed instance publisher and distributor. 
+
+If you use TLS 1.3 to secure the connections between instances in a replication topology, specify a value of **3** or **4** for the **-EncryptionLevel** parameter of each replication agent: 
+
+- [Distribution agent](/sql/relational-databases/replication/agents/replication-distribution-agent#encryption-level)
+- [Log reader agent](/sql/relational-databases/replication/agents/replication-log-reader-agent#encryption-level)
+- [Snapshot agent](/sql/relational-databases/replication/agents/replication-snapshot-agent#encryption-level)
+
+A value of `3` enforces TLS 1.3 connections between SQL managed instances, but has not impact on connections between SQL Server and SQL managed instances. A value of `4` enforces TLS 1.3 connections between SQL managed instances, and also connections from SQL managed instance to SQL Server, and requires that you install the certificate to the SQL Server host. 
 
 ### Login `replAgentUser`
 

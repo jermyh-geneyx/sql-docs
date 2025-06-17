@@ -42,7 +42,7 @@ summary  (object, top = 20, ...)
 
 
  ### `top`
- Specifies the count of top coefficients to show in the summary for linear models such as [rxLogisticRegression](rxLogisticRegression.md) and  [rxFastLinear](rxFastLinear.md). The bias appears first, followed by other weights, sorted by their absolute values in descending order. If set to `NULL`,  all non-zero coefficients are shown. Otherwise, only the first `top`coefficients are shown. 
+ Specifies the count of top coefficients to show in the summary for linear models such as [rxLogisticRegression](rxLogisticRegression.md) and  [rxFastLinear](rxFastLinear.md). The bias appears first, followed by other weights, sorted by their absolute values in descending order. If set to `NULL`,  all non-zero coefficients are shown. Otherwise, only the first `top` coefficients are shown. 
 
 
 

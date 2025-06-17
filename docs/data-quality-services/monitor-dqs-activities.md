@@ -1,8 +1,8 @@
 ---
 title: "Monitor DQS Activities"
 description: "Monitor DQS Activities"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "03/01/2017"
 ms.service: sql
 ms.subservice: data-quality-services
@@ -12,6 +12,8 @@ f1_keywords:
 helpviewer_keywords:
   - "monitoring activity"
   - "activity monitoring"
+ms.custom:
+  - build-2025
 ---
 # Monitor DQS Activities
 

@@ -3,10 +3,12 @@ title: What Is SQL Server?
 description: An overview of the relational database engine and components of SQL Server
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 05/19/2025
+ms.date: 06/16/2025
 ms.service: sql
 ms.subservice: release-landing
 ms.topic: overview
+ms.custom:
+  - build-2025
 ---
 
 # What is SQL Server?
@@ -41,7 +43,7 @@ This section describes some of the key technologies available in [!INCLUDE [ssno
 | **Machine&nbsp;Learning Services (MLS)** | [SQL Server Machine Learning Services](../machine-learning/sql-server-machine-learning-services.md) supports integration of machine learning, using the popular R and Python languages, into enterprise workflows.<br /><br />Machine Learning Services (In-Database) integrates R and Python with [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], making it easy to build, retrain, and score models by calling stored procedures. Machine Learning Server provides enterprise-scale support for R and Python, without requiring [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. |
 | **Integration Services (SSIS)** | [SQL Server Integration Services](../integration-services/sql-server-integration-services.md) is a platform for building high performance data integration solutions, including packages that provide extract, transform, and load (ETL) processing for data warehousing. |
 | **Analysis Services (SSAS)** | [SQL Server Analysis Services](/analysis-services/ssas-overview) is an analytical data platform and toolset for personal, team, and corporate business intelligence. Servers and client designers support traditional OLAP solutions, new tabular modeling solutions, as well as self-service analytics and collaboration using [!INCLUDE [power-pivot-md](../includes/power-pivot-md.md)], Excel, and a SharePoint Server environment. [!INCLUDE [ssASnoversion](../includes/ssasnoversion-md.md)] also includes Data Mining so that you can uncover the patterns and relationships hidden inside large volumes of data. |
-| **Reporting Services (SSRS)** | [SQL Server Reporting Services](../reporting-services/create-deploy-and-manage-mobile-and-paginated-reports.md) delivers enterprise, Web-enabled reporting functionality. You can create reports that draw content from various data sources, publish reports in various formats, and centrally manage security and subscriptions. |
+| **Reporting Services (SSRS)** | [SQL Server Reporting Services](../reporting-services/create-deploy-and-manage-mobile-and-paginated-reports.md) delivers enterprise, Web-enabled reporting functionality. You can create reports that draw content from various data sources, publish reports in various formats, and centrally manage security and subscriptions. [!INCLUDE [ssrs-power-bi-consolidation](../reporting-services/includes/ssrs-power-bi-consolidation.md)] |
 | **Replication** | [SQL Server Replication](../relational-databases/replication/sql-server-replication.md) is a set of technologies for copying and distributing data and database objects from one database to another, and then synchronizing between databases to maintain consistency. By using replication, you can distribute data to different locations and to remote or mobile users with local and wide area networks, dial-up connections, wireless connections, and the Internet. |
 | **Data Quality Services (DQS)** <sup>1</sup> | [Data Quality Services](../data-quality-services/data-quality-services.md) provides you with a knowledge-driven data cleansing solution. DQS enables you to build a knowledge base, and then use that knowledge base to perform data correction and deduplication on your data, using both computer-assisted and interactive means. You can use cloud-based reference data services, and you can build a data management solution that integrates DQS with [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] Integration Services and Master Data Services. |
 | **Master Data Services (MDS)** <sup>1</sup> | [Master Data Services](../master-data-services/master-data-services-overview-mds.md) is the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] solution for master data management. A solution built on [!INCLUDE [ssMDSshort](../includes/ssmdsshort-md.md)] helps ensure that reporting and analysis are based on the right information. Using [!INCLUDE [ssMDSshort](../includes/ssmdsshort-md.md)], you create a central repository for your master data and maintain an auditable, securable record of that data as it changes over time. |
@@ -114,7 +116,7 @@ You can use Azure services and management capabilities, introduce DevOps practic
 ### Migrate to SQL Server
 
 - [Migrate databases and structured data to SQL Server on Linux](../linux/sql-server-linux-migrate-overview.md) <sup>1</sup>
-- [Data Migration Assistant](../dma/dma-overview.md)
+- [SQL Server migration component in SQL Server Management Studio](/ssms/migrate-sql-server-component)
 - [Import data from Excel to SQL Server or Azure SQL Database](../relational-databases/import-export/import-data-from-excel-to-sql.md)
 - [SQL Server Migration Assistant](../ssma/sql-server-migration-assistant.md)
 

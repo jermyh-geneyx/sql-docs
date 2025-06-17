@@ -4,18 +4,20 @@ description: REGEXP_LIKE Returns a Boolean value that indicates whether the text
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: abhtiwar, wiassaf, randolphwest
-ms.date: 12/31/2024
+ms.date: 05/19/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
 dev_langs:
   - "TSQL"
-monikerRange:  "= sql-server-ver17 || = sql-server-linux-ver17 || =azuresqldb-current || =fabric"
+monikerRange:  "= sql-server-ver17 || = sql-server-linux-ver17 || =azuresqldb-current || =azuresqldb-mi-current || =fabric"
+ms.custom:
+  - build-2025
 ---
 
-# REGEXP_LIKE (Transact-SQL)
+# REGEXP_LIKE (Transact-SQL) preview
 
-[!INCLUDE [sqlserver2025-asdb-fabric](../../includes/applies-to-version/sqlserver2025-asdb-fabric.md)]
+[!INCLUDE [sqlserver2025-asdb-asmi-fabric](../../includes/applies-to-version/sqlserver2025-asdb-asmi-fabricsqldb.md)]
 
 [!INCLUDE [preview](../../includes/preview.md)]
 
@@ -58,6 +60,10 @@ Boolean value. `true` or `false`.
 ## Remarks
 
 To enhance the accuracy of [cardinality estimation](../../relational-databases/performance/cardinality-estimation-sql-server.md) for the `REGEXP_LIKE` function, you can use the `ASSUME_FIXED_MIN_SELECTIVITY_FOR_REGEXP` and `ASSUME_FIXED_MAX_SELECTIVITY_FOR_REGEXP` query hints to adjust the default selectivity values. For more information, see [Query hints](../queries/hints-transact-sql-query.md#use_hint).
+
+These query hints are also integrated with [Cardinality estimation (CE) feedback](../../relational-databases/performance/intelligent-query-processing-cardinality-estimation-feedback.md). The CE feedback model automatically identifies queries using `REGEXP_LIKE` function where there is a significant difference between estimated and actual row counts. It then applies the appropriate selectivity hint at the query level to improve plan quality without requiring manual input. 
+ 
+To disable this automatic feedback-based behavior, enable Trace Flag 16268.
 
 ## Examples
 

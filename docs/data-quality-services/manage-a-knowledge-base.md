@@ -1,12 +1,14 @@
 ---
 title: "Manage a Knowledge Base"
 description: "Manage a Knowledge Base"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "06/04/2013"
 ms.service: sql
 ms.subservice: data-quality-services
 ms.topic: how-to
+ms.custom:
+  - build-2025
 ---
 # Manage a Knowledge Base
 

@@ -39,7 +39,7 @@ Provides checklists for the tasks required to configure Analytics Platform Syste
     1. Launch the **Configuration Manager** from the **Start** menu of the PDW Control node. The first screen of the Configuration Manager displays the appliance topology, which was created by your IHV. It is a list of the hardware nodes recognized by your SQL Server PDW software as part of your appliance. You should not need to change any settings on the Appliance Topology screen.  
   
 ## <a id="CMTasks"></a> Perform Configuration Manager Tasks
-The SQL Server PDW**Configuration Manager** (PDWCM) is an appliance administration tool that SQL Server PDW system administrators use to perform appliance-level operations and to change appliance-level settings. For example, use PDWCM to reset passwords, set the time zone, change IP addresses, configure SSL certificates, enable remote access through the firewall, start or stop the appliance, and set Instant File Initialization.  
+The SQL Server PDW **Configuration Manager** (PDWCM) is an appliance administration tool that SQL Server PDW system administrators use to perform appliance-level operations and to change appliance-level settings. For example, use PDWCM to reset passwords, set the time zone, change IP addresses, configure SSL certificates, enable remote access through the firewall, start or stop the appliance, and set Instant File Initialization.  
   
 Use **Configuration Manager** to perform the following configuration tasks.  
   

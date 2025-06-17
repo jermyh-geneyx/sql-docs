@@ -1,12 +1,14 @@
 ---
 title: "Backing Up and Restoring DQS Databases"
 description: "Backing Up and Restoring DQS Databases"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "03/01/2017"
 ms.service: sql
 ms.subservice: data-quality-services
 ms.topic: conceptual
+ms.custom:
+  - build-2025
 ---
 # Backing Up and Restoring DQS Databases
 

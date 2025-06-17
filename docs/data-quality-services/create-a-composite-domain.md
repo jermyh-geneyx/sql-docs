@@ -1,8 +1,8 @@
 ---
 title: "Create a Composite Domain"
 description: "Create a Composite Domain"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "11/22/2011"
 ms.service: sql
 ms.subservice: data-quality-services
@@ -10,6 +10,8 @@ ms.topic: how-to
 f1_keywords:
   - "sql13.dqs.kb.createcd.f1"
   - "sql13.dqs.dm.cdproperties.f1"
+ms.custom:
+  - build-2025
 ---
 # Create a Composite Domain
 

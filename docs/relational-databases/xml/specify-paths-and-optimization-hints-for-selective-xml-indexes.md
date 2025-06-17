@@ -197,7 +197,7 @@ You can use the following two principles to identify the correct subset of nodes
 
    - Node `c`, because its value is used in the XQuery expression.
 
-   - Node `b`, because a predicate is applied over node`b` in the XQuery expression.
+   - Node `b`, because a predicate is applied over node `b` in the XQuery expression.
 
 2. **Principle 2**: For best performance, index all nodes that are required to evaluate a given XQuery expression. If you index only some of the nodes, then the selective XML index improves the evaluation of subexpressions that include only indexed nodes.
 

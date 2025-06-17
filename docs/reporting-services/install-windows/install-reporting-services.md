@@ -1,9 +1,10 @@
 ---
-title: "Install and configure SQL Server Reporting Services"
+title: "Install and Configure SQL Server Reporting Services"
 description: "Install and configure SQL Server Reporting Services (SSRS) components for storing report items, rendering reports, and processing other report services."
 author: kfollis
 ms.author: kfollis
-ms.date: 09/25/2024
+ms.reviewer: randolphwest
+ms.date: 06/13/2025
 ms.service: reporting-services
 ms.subservice: report-server
 ms.topic: install-set-up-deploy
@@ -17,7 +18,12 @@ monikerRange: ">= sql-server-2016"
 
 [!INCLUDE[ssrs-appliesto](../../includes/ssrs-appliesto.md)] [!INCLUDE[ssrs-appliesto-2017-and-later](../../includes/ssrs-appliesto-2017-and-later.md)] [!INCLUDE[ssrs-appliesto-not-pbirsi](../../includes/ssrs-appliesto-not-pbirs.md)]
 
-This article helps you download, install, and configure SQL Server Reporting Services (SSRS). SSRS installation involves server components for storing report items, rendering reports, and processing of subscription and other report services. Alternatively, an administrator can install Reporting Services with [Microsoft Endpoint Configuration Manager](/configmgr/).
+This article helps you download, install, and configure SQL Server Reporting Services (SSRS). SSRS installation involves server components for storing report items, rendering reports, and processing of subscription and other report services. Alternatively, an administrator can install Reporting Services with [Microsoft Endpoint Configuration Manager](/configmgr/).
+
+::: moniker range="=sql-server-ver17"
+[!INCLUDE [ssrs-power-bi-consolidation](../includes/ssrs-power-bi-consolidation.md)]
+
+::: moniker-end
 
 ::: moniker range="=sql-server-ver16"
 Download [**SQL Server 2022 Reporting Services**](https://www.microsoft.com/download/details.aspx?id=104502) from the Microsoft Download Center.
@@ -36,12 +42,12 @@ Download [**SQL Server 2017 Reporting Services**](https://www.microsoft.com/down
 
 > [!NOTE]
 > Looking for Power BI Report Server? See [Install Power BI Report Server](https://powerbi.microsoft.com/documentation/reportserver-install-report-server/).
-> 
+>
 > Upgrading or migrating from a SQL Server 2016 or earlier version of Reporting Services? See [Upgrade and migrate Reporting Services](upgrade-and-migrate-reporting-services.md).
 
 ## Prerequisites
 
-Review the [Hardware and software requirements for installing SQL Server](../../sql-server/install/hardware-and-software-requirements-for-installing-sql-server.md). Ensure that the computer where you're installing SSRS meets the appropriate hardware and software prerequisites for the version you want to install.
+Review the [Hardware and software requirements for SQL Server 2022](../../sql-server/install/hardware-and-software-requirements-for-installing-sql-server-2022.md). Ensure that the computer where you're installing SSRS meets the appropriate hardware and software prerequisites for the version you want to install.
 
 ## Install SSRS
 

@@ -101,4 +101,4 @@ For more information, see [SHUTDOWN](../t-sql/language-elements/shutdown-transac
 
 - [Installation guidance for SQL Server on Linux](sql-server-linux-setup.md)
 - [Troubleshoot SQL Server on Linux](sql-server-linux-troubleshooting-guide.md)
-- [Install the SQL Server command-line tools sqlcmd and bcp on Linux](sql-server-linux-setup-tools.md)
+- [Install the sqlcmd and bcp SQL Server command-line tools on Linux](sql-server-linux-setup-tools.md)

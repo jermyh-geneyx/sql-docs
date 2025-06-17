@@ -1,8 +1,8 @@
 ---
 title: "Perform Knowledge Discovery"
 description: "Perform Knowledge Discovery"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "06/04/2013"
 ms.service: sql
 ms.subservice: data-quality-services
@@ -12,6 +12,8 @@ f1_keywords:
   - "sql13.dqs.kb.viewselectcd.f1"
   - "sql13.dqs.kb.kbanalyze.f1"
   - "sql13.dqs.kb.kbmap.f1"
+ms.custom:
+  - build-2025
 ---
 # Perform Knowledge Discovery
 

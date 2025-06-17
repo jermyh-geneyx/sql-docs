@@ -29,7 +29,7 @@ object.FlagIndex [= value]
  A [ClientSettingsGeneralFlag Class](../../../relational-databases/wmi-provider-configuration-classes/clientsettingsgeneralflag-class/clientsettingsgeneralflag-class.md) object that represents a general flag for the server settings.  
   
 ## Property Value/Return Value  
- A u**int32** value that specifies the index value of the flag.  
+ A **uint32** value that specifies the index value of the flag.  
   
 ## Remarks  
   

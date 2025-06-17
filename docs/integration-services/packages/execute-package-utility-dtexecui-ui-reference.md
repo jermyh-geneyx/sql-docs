@@ -42,7 +42,7 @@ helpviewer_keywords:
   
 3.  In the **Connect to Server** dialog box, enter the server name in the **Server name** list, and then click **Connect**.  
   
-4.  Expand the **Stored Package**s folder and subfolders, right-click the package you want to run, and then click **Run Package**.  
+4.  Expand the **Stored Packages** folder and subfolders, right-click the package you want to run, and then click **Run Package**.  
   
 ### To open the Execute Package Utility at the Command Prompt  
   

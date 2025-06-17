@@ -10,6 +10,7 @@ ms.subservice: t-sql
 ms.topic: reference
 ms.custom:
   - references_regions
+  - build-2025
 f1_keywords:
   - "ALTER_DATABASE_TSQL"
   - "ALTER DATABASE"
@@ -336,7 +337,7 @@ Provides the syntax and related information for the SET options of ALTER DATABAS
 ALTER DATABASE { database_name | CURRENT }
 {
     MODIFY NAME = new_database_name
-  | MODIFY ( <edition_options> [, ... n] )
+  | MODIFY ( <edition_options> [, ... n] ) [WITH MANUAL_CUTOVER]
   | MODIFY BACKUP_STORAGE_REDUNDANCY = { 'LOCAL' | 'ZONE' | 'GEO' }
   | SET { <option_spec> [ ,... n ] WITH <termination>}
   | ADD SECONDARY ON SERVER <partner_server_name>
@@ -346,7 +347,6 @@ ALTER DATABASE { database_name | CURRENT }
   | FAILOVER
   | FORCE_FAILOVER_ALLOW_DATA_LOSS
 }
-[WITH MANUAL_CUTOVER]
 [;]
 
 <edition_options> ::=
@@ -488,7 +488,7 @@ The MAXSIZE value for the DTU model, if specified, has to be a valid value shown
 
 For limits such as maximum data size and `tempdb` size in the vCore purchasing model, refer to the articles for [resource limits for single databases](/azure/azure-sql/database/resource-limits-vcore-single-databases) or [resource limits for elastic pools](/azure/azure-sql/database/resource-limits-vcore-elastic-pools).
 
-If no `MAXSIZE`value is set when using the vCore model, the default is 32 GB. For more information regarding resource limitations for vCore model, see [vCore resource limits](/azure/sql-database/sql-database-dtu-resource-limits).
+If no `MAXSIZE` value is set when using the vCore model, the default is 32 GB. For more information regarding resource limitations for vCore model, see [vCore resource limits](/azure/sql-database/sql-database-dtu-resource-limits).
 
 The following rules apply to MAXSIZE and EDITION arguments:
 

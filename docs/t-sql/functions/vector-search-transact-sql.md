@@ -17,6 +17,8 @@ helpviewer_keywords:
 dev_langs:
   - "TSQL"
 monikerRange: "=sql-server-ver17 || =sql-server-linux-ver17"
+ms.custom:
+  - build-2025
 ---
 
 # VECTOR_SEARCH (Transact-SQL) (Preview)
@@ -35,6 +37,8 @@ This feature is in preview. In order to use this feature, you must enable the fo
 ```sql
 DBCC TRACEON(466, 474, 13981, -1)
 ```
+
+Make sure to check out the [current limitations](#limitations) before using it.
 
 ## Syntax
 
@@ -78,13 +82,15 @@ The alias is used to reference the result set.
 
 ## Return result set
 
-The returned result set has all the columns from the table specified in TABLE argument, plus the additional `distance` column. The `distance` column contains the distance between the given vector in the COLUMN argument and the vector specified in SIMILAR_TO argument.
+The returned result set has all the columns from the table specified in TABLE argument, plus the extra `distance` column. The `distance` column contains the distance between the given vector in the COLUMN argument and the vector specified in SIMILAR_TO argument.
 
-## Remarks
+## Limitations
 
-In the current preview, vector search happens before applying any predicate. 
+The current preview has the following limitations:
 
-The following sample returns the top 10 rows with embeddings most similar to the query vector `@qv`, then applies the predicate specified in the `WHERE` clause. If none of these 10 rows have the `accepted` column equal to 1, the result will be empty. 
+### Post-filtering only
+
+Vector search happens before applying any predicate. Additional predicates are applied only after the most similar vectors are returned. The following sample returns the top 10 rows with embeddings most similar to the query vector `@qv`, then applies the predicate specified in the `WHERE` clause. If none of the 10 rows associated with the vectors returned by the vector search have the `accepted` column equal to 1, the result is empty. 
 
 ```sql
 SELECT
@@ -105,6 +111,10 @@ ORDER BY
   r.distance
 ```
 
+### VECTOR_SEARCH cannot be used in views
+
+`VECTOR_SEARCH` cannot be used in the body of a view.
+
 ## Examples
 
 ### Example 1
@@ -112,7 +122,7 @@ ORDER BY
 The following example finds the 10 most similar articles to the `Pink Floyd music style` in the `wikipedia_articles_embeddings` table.
 
 ```sql
-DECLARE @qv VECTOR(1536) = AI_GENERATE_EMBEDDING(N'Pink Floyd music style' model Ada2Embeddings);
+DECLARE @qv VECTOR(1536) = AI_GENERATE_EMBEDDING(N'Pink Floyd music style' USE MODEL Ada2Embeddings);
 SELECT 
     t.id, s.distance, t.title
 FROM
@@ -139,7 +149,7 @@ CREATE TABLE #t (
 INSERT INTO 
   #t
 SELECT 
-    id, q, ai_generate_embeddings(q model Ada2Embeddings)
+    id, q, ai_generate_embeddings(q USE MODEL Ada2Embeddings)
 FROM
     (VALUES 
         (1, N'four legged furry animal'),
@@ -155,7 +165,7 @@ CROSS APPLY
     VECTOR_SEARCH(
         TABLE = [dbo].[wikipedia_articles_embeddings] as t, 
         COLUMN = [content_vector], 
-        SIMILAR_TO = @qv, 
+        SIMILAR_TO = qv.v, 
         METRIC = 'cosine', 
         TOP_N = 10
     ) AS s
@@ -165,8 +175,66 @@ ORDER BY
   s.distance
 ```
 
+### Example 3
+
+A basic end-to-end example using `CREATE VECTOR INDEX` and the related `VECTOR_SEARCH` function. The embeddings are mocked. In a real world scenario, embeddings are generated using an embedding model and [AI_GENERATE_EMBEDDINGS](../functions/ai-generate-embeddings-transact-sql.md), or an external library such as [OpenAI SDK](https://github.com/openai/openai-dotnet?tab=readme-ov-file#how-to-generate-text-embeddings).
+
+The following code block demonstrates the `VECTOR_SEARCH` function with mock embeddings:
+
+1. Enables the trace flag, necessary in the current preview.
+1. Create a sample table `dbo.Articles` with a column `embedding` with data type **vector(5)**.
+1. Insert sample data with mock embedding data.
+1. Create a vector index on `dbo.Articles.embedding`.
+1. Demonstrate the vector similarity search with the `VECTOR_SEARCH` function.
+
+```sql
+-- Step 0: Enable Preview Feature
+DBCC TRACEON(466, 474, 13981, -1);
+GO
+
+-- Step 1: Create a sample table with a VECTOR(5) column
+CREATE TABLE dbo.Articles 
+(
+    id INT PRIMARY KEY,
+    title NVARCHAR(100),
+    content NVARCHAR(MAX),
+    embedding VECTOR(5) -- mocked embeddings
+);
+
+-- Step 2: Insert sample data
+INSERT INTO Articles (id, title, content, embedding)
+VALUES
+(1, 'Intro to AI', 'This article introduces AI concepts.', '[0.1, 0.2, 0.3, 0.4, 0.5]'),
+(2, 'Deep Learning', 'Deep learning is a subset of ML.', '[0.2, 0.1, 0.4, 0.3, 0.6]'),
+(3, 'Neural Networks', 'Neural networks are powerful models.', '[0.3, 0.3, 0.2, 0.5, 0.1]'),
+(4, 'Machine Learning Basics', 'ML basics for beginners.', '[0.4, 0.5, 0.1, 0.2, 0.3]'),
+(5, 'Advanced AI', 'Exploring advanced AI techniques.', '[0.5, 0.4, 0.6, 0.1, 0.2]');
+
+-- Step 3: Create a vector index on the embedding column
+CREATE VECTOR INDEX vec_idx ON Articles(embedding)
+WITH (metric = 'cosine', type = 'diskann');
+
+-- Step 4: Perform a vector similarity search
+DECLARE @qv VECTOR(5) = '[0.3, 0.3, 0.3, 0.3, 0.3]';
+SELECT
+    t.id,
+    t.title,
+    t.content,
+    s.distance
+FROM
+    VECTOR_SEARCH(
+        table = Articles AS t,
+        column = embedding,
+        similar_to = @qv,
+        metric = 'cosine',
+        top_n = 3
+    ) AS s
+ORDER BY s.distance, t.title;
+```
+
 ## Related content
 
 - [Overview of vectors in the SQL Database Engine](../../relational-databases/vectors/vectors-sql-server.md)
-- [Azure SQL Database Vector Search Samples](https://github.com/Azure-Samples/azure-sql-db-vector-search)
 - [Vector data type](../data-types/vector-data-type.md)
+- [CREATE VECTOR INDEX (Transact-SQL)](../statements/create-vector-index-transact-sql.md)
+- [Azure SQL Database Vector Search Samples](https://github.com/Azure-Samples/azure-sql-db-vector-search)

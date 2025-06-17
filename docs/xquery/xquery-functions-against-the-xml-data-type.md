@@ -21,7 +21,7 @@ dev_langs:
   
  The XQuery functions belong to the http://www.w3.org/2004/07/xpath-functions namespace. The W3C specifications use the "fn:" namespace prefix to describe these functions. You do not have to specify the "fn:" namespace prefix explicitly when you are using the functions. Because of this and to improve readability, the namespace prefixes are generally not used in this documentation.  
   
- The following table lists the XQuery functions that are supported against the **xml**data type.  
+ The following table lists the XQuery functions that are supported against the **xml** data type.  
   
 |Category|Function Name|  
 |--------------|-------------------|  

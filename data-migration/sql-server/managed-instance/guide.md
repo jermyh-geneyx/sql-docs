@@ -1,10 +1,10 @@
 ---
-title: "SQL Server to Azure SQL Managed Instance: Migration guide"
+title: "SQL Server to Azure SQL Managed Instance: Migration Guide"
 description: This guide teaches you to migrate your SQL Server databases to Azure SQL Managed Instance.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: mathoma, danil
-ms.date: 01/08/2025
+ms.date: 06/16/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: migration-guide
 ms.topic: how-to
@@ -142,7 +142,6 @@ To migrate with Azure Data Studio, follow these steps:
    1. Ensure all database backups have the status Restored in the monitoring details page.
    1. Select Complete cutover in the monitoring details page.
 
-
 ## Data sync and cutover
 
 When using migration options that continuously replicate / sync data changes from source to the target, the source data and schema can change and drift from the target. During data sync, ensure that all changes on the source are captured and applied to the target during the migration process.
@@ -188,7 +187,7 @@ Some SQL Server features are only available once the [database compatibility lev
 - [Service Tiers in Azure SQL Managed Instance](/azure/azure-sql/managed-instance/sql-managed-instance-paas-overview#service-tiers)
 - [T-SQL differences between SQL Server & Azure SQL Managed Instance](/azure/azure-sql/managed-instance/transact-sql-tsql-differences-sql-server)
 - [Azure total Cost of Ownership Calculator](https://azure.microsoft.com/pricing/tco/calculator/)
-- [Migrate databases with Azure SQL Migration extension for Azure Data Studio](/azure/dms/dms-overview#migrate-databases-with-azure-sql-migration-extension-for-azure-data-studio)
+- [Migrate databases with Azure SQL migration extension for Azure Data Studio](/azure/dms/dms-overview#migrate-databases-with-azure-sql-migration-extension-for-azure-data-studio)
 - [Tutorial: Migrate SQL Server to Azure SQL Managed Instance with DMS](database-migration-service.md)
 - [Cloud Adoption Framework for Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/contoso-migration-scale)
 - [Best practices for costing and sizing workloads migrate to Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/migrate-best-practices-costs)

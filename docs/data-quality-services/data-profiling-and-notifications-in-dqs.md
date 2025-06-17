@@ -1,12 +1,14 @@
 ---
 title: "Data Profiling and Notifications in DQS"
 description: "Data Profiling and Notifications in DQS"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: 04/01/2020
 ms.service: sql
 ms.subservice: data-quality-services
 ms.topic: conceptual
+ms.custom:
+  - build-2025
 ---
 # Data Profiling and Notifications in DQS
 

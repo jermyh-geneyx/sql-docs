@@ -6,6 +6,7 @@ ms.author: wiassaf
 ms.reviewer: vanto, xiaoyul, mariyaali, periclesrocha
 ms.date: 05/20/2024
 ms.service: sql
+ms.subservice: t-sql
 ms.topic: reference
 dev_langs:
   - "TSQL"

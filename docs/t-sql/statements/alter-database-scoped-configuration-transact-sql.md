@@ -5,12 +5,13 @@ description: Enable several database configuration settings at the individual da
 author: markingmyname
 ms.author: maghan
 ms.reviewer: derekw, jovanpop, wiassaf, mariyaali
-ms.date: 04/17/2025
+ms.date: 06/05/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
 ms.custom:
   - ignite-2024
+  - build-2025
 f1_keywords:
   - "ALTER_DATABASE_SCOPED_CONFIGURATION"
   - "ALTER_DATABASE_SCOPED_CONFIGURATION_TSQL"
@@ -115,6 +116,7 @@ ALTER DATABASE SCOPED CONFIGURATION
     | LEDGER_DIGEST_STORAGE_ENDPOINT = { <endpoint URL string> | OFF }
     | OPTIMIZED_SP_EXECUTESQL = { ON | OFF }
     | OPTIMIZED_HALLOWEEN_PROTECTION = { ON | OFF }
+    | OPTIONAL_PARAMETER_PLAN_OPTIMIZATION = { ON | OFF }
 }
 ```
 
@@ -155,13 +157,11 @@ Specifies the default **max degree of parallelism (MAXDOP)** setting that should
 
 You can use the MAXDOP option to limit the number of processors to use in parallel plan execution. [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] considers parallel execution plans for queries, index data definition language (DDL) operations, parallel insert, online alter column, parallel stats collection, and static and keyset-driven cursor population.
 
-> [!NOTE]  
-> The **max degree of parallelism (MAXDOP)** limit is set per [task](../../relational-databases/system-dynamic-management-views/sys-dm-os-tasks-transact-sql.md). It isn't a per [request](../../relational-databases/system-dynamic-management-views/sys-dm-exec-requests-transact-sql.md) or per query limit. This means that during a parallel query execution, a single request can spawn multiple tasks which are assigned to a [scheduler](../../relational-databases/system-dynamic-management-views/sys-dm-os-tasks-transact-sql.md). For more information, see the [Thread and Task Architecture Guide](../../relational-databases/thread-and-task-architecture-guide.md).
+The **max degree of parallelism (MAXDOP)** limit is set per [task](../../relational-databases/system-dynamic-management-views/sys-dm-os-tasks-transact-sql.md). It isn't a per [request](../../relational-databases/system-dynamic-management-views/sys-dm-exec-requests-transact-sql.md) or per query limit. This means that during a parallel query execution, a single request can spawn multiple tasks which are assigned to a [scheduler](../../relational-databases/system-dynamic-management-views/sys-dm-os-tasks-transact-sql.md). For more information, see the [Thread and Task Architecture Guide](../../relational-databases/thread-and-task-architecture-guide.md).
 
 To set this option at the instance level, see [Configure the max degree of parallelism Server Configuration Option](../../database-engine/configure-windows/configure-the-max-degree-of-parallelism-server-configuration-option.md).
 
-> [!NOTE]  
-> In [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], the MAXDOP database-scoped configuration for new single and elastic pool databases is set to 8 by default. MAXDOP can be configured for each database as described in the current article. For recommendations on configuring MAXDOP optimally, see [Additional Resources](#additional-resources) section.
+In [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], the MAXDOP database-scoped configuration for new single and elastic pool databases is set to 8 by default. For more information and recommendations on configuring MAXDOP optimally in Azure SQL Database, see [Configure MAXDOP on Azure SQL Database](/azure/azure-sql/database/configure-max-degree-of-parallelism?view=azuresql-db&preserve-view=true).
 
 > [!TIP]  
 > To accomplish this at the query level, use the **MAXDOP** [query hint](../../t-sql/queries/hints-transact-sql-query.md).  
@@ -506,7 +506,7 @@ Causes SQL Server to generate a Showplan XML fragment with the ParameterRuntimeV
 
 #### OPTIMIZED_SP_EXECUTESQL = { ON | OFF }
 
-**Applies to:** [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)]
+**Applies to:** [!INCLUDE [sql-server-2025](../../includes/sssql25-md.md)], [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] and [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)]
 
 Enables or disables the compilation serialization behavior of `sp_executesql` when a batch is compiled. The default is `OFF`. Allowing batches which use `sp_executesql` to serialize the compilation process reduces the impact of compilation storms.  A compilation storms refers to a situation where a large number of queries are being compiled simultaneously, leading to performance issues and resource contention.
 
@@ -520,6 +520,21 @@ Enables or disables [optimized Halloween protection](../../relational-databases/
 
 > [!NOTE]  
 > For database compatibility level 160 or lower, this database scoped configuration has no effect.
+
+#### OPTIONAL_PARAMETER_PLAN_OPTIMIZATION = { ON | OFF }
+
+**Applies to:** [!INCLUDE [sql-server-2025](../../includes/sssql25-md.md)]
+
+Enables or disables the [Optional parameter plan optimization](../../relational-databases/performance/optional-parameter-optimization.md) feature. The default is `ON`.
+
+When enabled, the adaptive plan optimization generates multiple execution plans for queries that include optional parameters. These plans are typically expressed using predicates in the form of:
+
+- `@p IS NULL AND @p1 IS NOT NULL`
+- `@p IS NULL OR @p1 IS NOT NULL`
+
+The feature can choose a more optimal plan at runtime based on whether the parameter is `NULL`, which improves performance for queries that could otherwise default to suboptimal performance for such query patterns.
+
+The default is `ON` starting in database compatibility level 170.
 
 ## Permissions
 

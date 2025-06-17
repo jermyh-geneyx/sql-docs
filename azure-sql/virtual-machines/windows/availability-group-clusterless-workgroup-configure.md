@@ -15,7 +15,6 @@ tags: azure-service-management
 
 This article explains the steps necessary to create an Active Directory domain-independent cluster with an Always On availability group; this is also known as a workgroup cluster. This article focuses on the steps that are relevant to preparing and configuring the workgroup and availability group, and glosses over steps that are covered in other articles, such as how to create the cluster, or deploy the availability group. 
 
-
 ## Prerequisites
 
 To configure a workgroup availability group, you need the following:
@@ -34,7 +33,6 @@ For reference, the following parameters are used in this article, but can be mod
 | **Listener** | AGListener (10.0.0.7) | 
 | **DNS suffix** | ag.wgcluster.example.com | 
 | **Work group name** | AGWorkgroup | 
-
 
 ## Set a DNS suffix 
 
@@ -280,7 +278,7 @@ In this step, configure your availability group, and add your databases to it. D
 
 ## Configure a load balancer
 
-In this final step, configure the load balancer using either the [Azure portal](availability-group-load-balancer-portal-configure.md) or [PowerShell](availability-group-listener-powershell-configure.md).
+In this final step, configure the load balancer by using either the [Azure portal](availability-group-load-balancer-portal-configure.md) or [PowerShell](availability-group-listener-powershell-configure.md).
 
 However, there may be some [limitations](https://techcommunity.microsoft.com/t5/core-infrastructure-and-security/sql-server-workgroup-cluster-fcm-errors/ba-p/371387) when using the Windows Cluster GUI, and as such, you should use PowerShell to create a client access point or the network name for your listener with the following example script:
 
@@ -295,9 +293,11 @@ Set-ClusterResourceDependency -Resource TestName -Dependency "[IPAddress1] or [I
 Start-ClusterResource -Name TestName -Verbose 
 ```
 
+## Configure probe port
 
+[!INCLUDE [virtual-machines-port-exclusion](../../includes/virtual-machines-port-exclusion.md)]
 
-## Next steps
+## Related content
 
 Once the availability group is deployed, consider optimizing the [HADR settings for SQL Server on Azure VMs](hadr-cluster-best-practices.md). 
 

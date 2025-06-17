@@ -183,7 +183,7 @@ SqlPackage /at:$($AccessToken_Object.Token) /Action:Publish /SourceFile:"C:\Adve
 |**/p:**|IgnoreDatabaseWorkloadGroups=(BOOLEAN 'False')|Specifies whether to exclude workload groups that exist on the target during deployment.  No Database Workload Groups will be added, modified, or dropped.|
 |**/p:**|IgnoreDdlTriggerOrder=(BOOLEAN 'False')|Specifies whether differences in the order of Data Definition Language (DDL) triggers should be ignored or updated when you publish to a database or server.|
 |**/p:**|IgnoreDdlTriggerState=(BOOLEAN 'False')|Specifies whether differences in the enabled or disabled state of Data Definition Language (DDL) triggers should be ignored or updated when you publish to a database.|
-|**/p:**|IgnoreDefaultSchema=(BOOLEAN 'False')|Specifies whether differences in the default schema should be ignored or updated when you publish to a database.|
+|**/p:**|IgnoreDefaultSchema=(BOOLEAN 'False')|Specifies whether differences in the DEFAULT_SCHEMA option on users and application roles should be ignored or updated when you publish to a database.|
 |**/p:**|IgnoreDmlTriggerOrder=(BOOLEAN 'False')|Specifies whether differences in the order of Data Manipulation Language (DML) triggers should be ignored or updated when you publish to a database.|
 |**/p:**|IgnoreDmlTriggerState=(BOOLEAN 'False')|Specifies whether differences in the enabled or disabled state of DML triggers should be ignored or updated when you publish to a database.|
 |**/p:**|IgnoreExtendedProperties=(BOOLEAN 'False')|Specifies whether differences in the extended properties should be ignored or updated when you publish to a database.|

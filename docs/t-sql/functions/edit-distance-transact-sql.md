@@ -10,12 +10,14 @@ ms.subservice: t-sql
 ms.topic: reference
 dev_langs:
   - "TSQL"
-monikerRange: "=azuresqldb-current || =fabric || >=sql-server-2016"
+monikerRange: "=azuresqldb-current || =azuresqldb-mi-current || =fabric || >=sql-server-2016"
+ms.custom:
+  - build-2025
 ---
 
-# EDIT_DISTANCE (Transact-SQL)
+# EDIT_DISTANCE (Transact-SQL) preview
 
-[!INCLUDE [sqlserver2025-asdb-asmi-fabricsqldb](../../includes/applies-to-version/sqlserver2025-asdb-fabricsqldb.md)]
+[!INCLUDE [sqlserver2025-asdb-asmi-fabricsqldb](../../includes/applies-to-version/sqlserver2025-asdb-asmi-fabricsqldb.md)]
 
 [!INCLUDE [preview](../../includes/preview.md)]
 

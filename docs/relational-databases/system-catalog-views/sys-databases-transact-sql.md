@@ -3,12 +3,13 @@ title: "sys.databases (Transact-SQL)"
 description: sys.databases (Transact-SQL)
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 05/19/2025
+ms.date: 06/11/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
 ms.custom:
   - ignite-2024
+  - build-2025
 f1_keywords:
   - "databases"
   - "databases_TSQL"
@@ -111,7 +112,7 @@ If a database isn't `ONLINE`, or `AUTO_CLOSE` is set to `ON` and the database is
 | `catalog_collation_type` | **int** | The catalog collation setting:<br />`0` = DATABASE_DEFAULT<br />`2` = `SQL_Latin_1_General_CP1_CI_AS`<br /><br />**Applies to**: [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] |
 | `catalog_collation_type_desc` | **nvarchar(60)** | The catalog collation setting:<br />DATABASE_DEFAULT<br />`SQL_Latin_1_General_CP1_CI_AS`<br /><br />**Applies to**: [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] |
 | `physical_database_name` | **nvarchar(128)** | For [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], the physical name of the database. For [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], a unique identifier for the current physical database corresponding to the user database. Changing the database service level objective or restoring the database will cause this value to change.<br /><br />**Applies to**: [!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)] and later versions, and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] |
-| `is_result_set_caching_on` | **bit** | Indicates whether result set caching is enabled.<br />`1` = result set caching is enabled<br />`0` = result set caching is disabled<br /><br />**Applies to**: [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] Gen2. While this feature is being rolled out to all regions, check the version deployed to your instance and the latest [Azure Synapse release notes](/azure/synapse-analytics/sql-data-warehouse/release-notes-10-0-10106-0) and [Gen2 upgrade schedule](/azure/synapse-analytics/sql-data-warehouse/gen2-migration-schedule) for feature availability. |
+| `is_result_set_caching_on` | **bit** | Indicates whether result set caching is enabled.<br />`1` = result set caching is enabled<br />`0` = result set caching is disabled<br /><br />**Applies to**: [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] dedicated SQL pools and [!INCLUDE [fabric](../../includes/fabric.md)]. For more information, see [Result set caching](/fabric/data-warehouse/result-set-caching). |
 | `is_accelerated_database_recovery_on` | **bit** | Indicates whether Accelerated Database Recovery (ADR) is enabled.<br />`1` = ADR is enabled<br />`0` = ADR is disabled<br /><br />**Applies to**: [!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)] and later versions, [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and [!INCLUDE[ssazuremi-md](../../includes/ssazuremi-md.md)] |
 | `is_tempdb_spill_to_remote_store` | **bit** | Indicates whether `tempdb` spill to remote store is enabled.<br />`1` = enabled<br />`0` = disabled<br /><br />**Applies to**: [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] Gen2. |
 | `is_stale_page_detection_on` | **bit** | Indicates whether stale page detection is enabled.<br />`1` = stale page detection is enabled<br />`0` = stale page detection is disabled<br /><br />**Applies to**: [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] Gen2. While this feature is being rolled out to all regions, check the version deployed to your instance and the latest [Azure Synapse release notes](/azure/synapse-analytics/sql-data-warehouse/release-notes-10-0-10106-0) and [Gen2 upgrade schedule](/azure/synapse-analytics/sql-data-warehouse/gen2-migration-schedule) for feature availability. |

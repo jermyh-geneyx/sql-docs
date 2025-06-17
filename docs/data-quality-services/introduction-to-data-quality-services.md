@@ -1,14 +1,16 @@
 ---
 title: "Introduction to Data Quality Services"
 description: "Introduction to Data Quality Services"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "03/05/2012"
 ms.service: sql
 ms.subservice: data-quality-services
 ms.topic: conceptual
 helpviewer_keywords:
   - "Domains"
+ms.custom:
+  - build-2025
 ---
 # Introduction to Data Quality Services
 

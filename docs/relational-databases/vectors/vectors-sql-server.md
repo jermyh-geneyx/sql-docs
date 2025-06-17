@@ -11,6 +11,7 @@ ms.collection:
   - ce-skilling-ai-copilot
 ms.custom:
   - intro-quickstart
+  - build-2025
 helpviewer_keywords:
   - "Vectors"
   - "Vectors, built-in support"
@@ -49,7 +50,7 @@ SELECT
     CAST(JSON_ARRAY(1.0, -0.2, 30) AS VECTOR(3)) AS v2;
 ```
 
-or, using implicit casting
+Or, use implicit casting
 
 ```sql
 DECLARE @v1 VECTOR(3) = '[1.0, -0.2, 30]';
@@ -76,11 +77,11 @@ Exact Nearest Neighbor (ENN) Vector Search performs an exhaustive distance calcu
 
 In the SQL Database Engine, k-NN searches can be performed using the [VECTOR_DISTANCE](../../t-sql/functions/vector-distance-transact-sql.md) function, which allows for efficient calculation of distances between vectors and facilitates the retrieval of the nearest neighbors.
 
-The following example show how to do k-NN to return the top 10 most similar vectors stored in the `content_vector` table to the given query vector `@qv`.
+The following example shows how to do k-NN to return the top 10 most similar vectors stored in the `content_vector` table to the given query vector `@qv`.
 
 ```sql
-DECLARE @qv VECTOR(1536) = AI_GENERATE_EMBEDDING(N'Pink Floyd music style' model Ada2Embeddings);
-SELECT TOP (10) id, VECTOR_DISTANCE('cosine', @qv, [content_vector]) as distance, title
+DECLARE @qv VECTOR(1536) = AI_GENERATE_EMBEDDING(N'Pink Floyd music style' USE MODEL Ada2Embeddings);
+SELECT TOP (10) id, VECTOR_DISTANCE('cosine', @qv, [content_vector]) AS distance, title
 FROM [dbo].[wikipedia_articles_embeddings]
 ORDER BY distance
 ```
@@ -106,12 +107,12 @@ In MSSQL engine, vector indexes are based on the [DiskANN](https://www.microsoft
 An Approximate Nearest Neighbors algorithm search can be done first creating a vector index using the [CREATE VECTOR INDEX](../../t-sql/statements/create-vector-index-transact-sql.md) T-SQL command and then using [VECTOR_SEARCH](../../t-sql/functions/vector-search-transact-sql.md) T-SQL function to run the approximate search.
 
 ```sql
-DECLARE @qv VECTOR(1536) = AI_GENERATE_EMBEDDING(N'Pink Floyd music style' model Ada2Embeddings);
+DECLARE @qv VECTOR(1536) = AI_GENERATE_EMBEDDING(N'Pink Floyd music style' USE MODEL Ada2Embeddings);
 SELECT 
     t.id, s.distance, t.title
 FROM
     VECTOR_SEARCH(
-        TABLE = [dbo].[wikipedia_articles_embeddings] as t, 
+        TABLE = [dbo].[wikipedia_articles_embeddings] AS t, 
         COLUMN = [content_vector], 
         SIMILAR_TO = @qv, 
         METRIC = 'cosine', 
@@ -124,5 +125,8 @@ ORDER BY s.distance
 
 - [Vector data type](../../t-sql/data-types/vector-data-type.md)
 - [Vector functions](../../t-sql/functions/vector-functions-transact-sql.md)
+- [VECTOR_DISTANCE (Transact-SQL)](../../t-sql/functions/vector-distance-transact-sql.md)
+- [VECTOR_SEARCH (Transact-SQL)](../../t-sql/functions/vector-search-transact-sql.md)
+- [CREATE VECTOR INDEX (Transact-SQL)](../../t-sql/statements/create-vector-index-transact-sql.md)
 - [Azure SQL Database Vector Search Samples](https://github.com/Azure-Samples/azure-sql-db-vector-search)
 - [Intelligent applications with Azure SQL Database](/azure/azure-sql/database/ai-artificial-intelligence-intelligent-applications)

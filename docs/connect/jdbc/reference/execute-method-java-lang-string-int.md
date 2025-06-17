@@ -19,8 +19,8 @@ apitype: "Assembly"
 
 ```Java
 public final boolean execute(
-	java.lang.String sql,
-	int[] columnIndexes)
+    java.lang.String sql,
+    int[] columnIndexes)
 ```
 
 #### Parameters
@@ -30,7 +30,7 @@ A **String** that contains a SQL statement.
 
 *columnIndexes*
 
-An array of **int**s that indicates the column indexes of the auto-generated keys that should be made available.
+An array of **int** that indicates the column indexes of the auto-generated keys that should be made available.
 
 ## Return Value
 **true** if the first result is a result set. Otherwise, **false**.

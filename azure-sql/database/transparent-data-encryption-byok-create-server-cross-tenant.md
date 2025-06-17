@@ -1,24 +1,26 @@
 ---
-title: Create server configured with user-assigned managed identity and cross-tenant CMK for TDE
+title: Create Azure SQL Database Logical Server Configured with User-Assigned Managed Identity and Cross-Tenant CMK for TDE
 description: Learn how to configure user-assigned managed identity and transparent data encryption (TDE) with cross-tenant customer managed keys (CMK) while creating an Azure SQL Database logical server using the Azure portal, PowerShell, or Azure CLI.
 author: Pietervanhove
 ms.author: pivanho
 ms.reviewer: vanto, mathoma
-ms.date: 10/10/2023
+ms.date: 06/13/2025
 ms.service: azure-sql-database
 ms.subservice: security
-ms.custom: devx-track-azurecli, has-azure-ad-ps-ref
 ms.topic: how-to
+ms.custom:
+  - devx-track-azurecli
+  - has-azure-ad-ps-ref
+monikerRange: "=azuresql || =azuresql-db"
 ---
 
-# Create server configured with user-assigned managed identity and cross-tenant CMK for TDE
+# Create Azure SQL Database logical server configured with user-assigned managed identity and cross-tenant CMK for TDE
 
 [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
-In this guide, we'll go through the steps to create an Azure SQL [logical server](logical-servers.md) with transparent data encryption (TDE) and customer-managed keys (CMK), utilizing a [user-assigned managed identity](/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types) to access an [Azure Key Vault](/azure/key-vault/general/quick-create-portal) in a different Microsoft Entra tenant than the logical server's tenant. For more information, see [Cross-tenant customer-managed keys with transparent data encryption](transparent-data-encryption-byok-cross-tenant.md).
+In this guide, we'll go through the steps to create an [Azure SQL Database logical server](logical-servers.md) with transparent data encryption (TDE) and customer-managed keys (CMK), utilizing a [user-assigned managed identity](/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types) to access an [Azure Key Vault](/azure/key-vault/general/quick-create-portal) in a different Microsoft Entra tenant than the logical server's tenant. For more information, see [Cross-tenant customer-managed keys with transparent data encryption](transparent-data-encryption-byok-cross-tenant.md).
 
 [!INCLUDE [entra-id](../includes/entra-id.md)]
-
 
 ## Prerequisites
 
@@ -66,7 +68,7 @@ Before we can configure TDE for Azure SQL Database with a cross-tenant CMK, we n
    1. Select the *Get, Wrap Key, Unwrap Key* permissions under **Key permissions** when creating the access policy
    1. Select the multitenant application created in the first step in the **Principal** option when creating the access policy
 
-   :::image type="content" source="media/transparent-data-encryption-byok-create-server-cross-tenant/access-policy-principal.png" alt-text="Screenshot of the access policy menu of a key vault in the Azure portal.":::
+   :::image type="content" source="media/transparent-data-encryption-byok-create-server-cross-tenant/access-policy-principal.png" alt-text="Screenshot of the access policy menu of a key vault in the Azure portal." lightbox="media/transparent-data-encryption-byok-create-server-cross-tenant/access-policy-principal.png":::
 
 1. Once the access policy and key has been created, [Retrieve the key from Key Vault](/azure/key-vault/keys/quick-create-portal#retrieve-a-key-from-key-vault) and record the **Key Identifier**
 
@@ -81,61 +83,55 @@ This guide will walk you through the process of creating a logical server and da
 
 1. Browse to the [Select SQL deployment](https://portal.azure.com/#create/Microsoft.AzureSQL) option page in the Azure portal.
 
-2. If you aren't already signed in to Azure portal, sign in when prompted.
+1. If you aren't already signed in to Azure portal, sign in when prompted.
 
-3. Under **SQL databases**, leave **Resource type** set to **Single database**, and select **Create**.
+1. Under **SQL databases**, leave **Resource type** set to **Single database**, and select **Create**.
 
-4. On the **Basics** tab of the **Create SQL Database** form, under **Project details**, select the desired Azure **Subscription**.
+1. On the **Basics** tab of the **Create SQL Database** form, under **Project details**, select the desired Azure **Subscription**.
 
-5. For **Resource group**, select **Create new**, enter a name for your resource group, and select **OK**.
+1. For **Resource group**, select **Create new**, enter a name for your resource group, and select **OK**.
 
-6. For **Database name** enter a database name. For example, `ContosoHR`.
+1. For **Database name** enter a database name. For example, `ContosoHR`.
 
-7. For **Server**, select **Create new**, and fill out the **New server** form with the following values:
+1. For **Server**, select **Create new**, and fill out the **New server** form with the following values:
 
     - **Server name**: Enter a unique server name. Server names must be globally unique for all servers in Azure, not just unique within a subscription. Enter something like `mysqlserver135`, and the Azure portal will let you know if it's available or not.
     - **Server admin login**: Enter an admin login name, for example: `azureuser`.
     - **Password**: Enter a password that meets the password requirements, and enter it again in the **Confirm password** field.
     - **Location**: Select a location from the dropdown list
 
-8. Select **Next: Networking** at the bottom of the page.
+1. Select **Next: Networking** at the bottom of the page.
 
-9. On the **Networking** tab, for **Connectivity method**, select **Public endpoint**.
+1. On the **Networking** tab, for **Connectivity method**, select **Public endpoint**.
 
-10. For **Firewall rules**, set **Add current client IP address** to **Yes**. Leave **Allow Azure services and resources to access this server** set to **No**. The rest of the selections on this page can be left as default.
+1. For **Firewall rules**, set **Add current client IP address** to **Yes**. Leave **Allow Azure services and resources to access this server** set to **No**. The rest of the selections on this page can be left as default.
 
-    :::image type="content" source="media/transparent-data-encryption-byok-create-server/networking-settings.png" alt-text="Screenshot of networking settings when creating a SQL server in the Azure portal.":::
+1. Select **Next: Security** at the bottom of the page.
 
-11. Select **Next: Security** at the bottom of the page.
+1. On the Security tab, under **Identity**, select **Configure Identities**.
 
-12. On the Security tab, under **Identity**, select **Configure Identities**.
+1. On the **Identity** menu, select **Off** for **System assigned managed identity** and then select **Add** under **User assigned managed identity**. Select the desired **Subscription** and then under **User assigned managed identities**, select the desired user-assigned managed identity from the selected subscription. Then select the  **Add** button.
 
-    :::image type="content" source="media/transparent-data-encryption-byok-create-server/configure-identity.png" alt-text="Screenshot of security settings and configuring identities in the Azure portal.":::
+1. Under **Primary identity**, select the same user-assigned managed identity selected in the previous step.
 
-13. On the **Identity** menu, select **Off** for **System assigned managed identity** and then select **Add** under **User assigned managed identity**. Select the desired **Subscription** and then under **User assigned managed identities**, select the desired user-assigned managed identity from the selected subscription. Then select the  **Add** button.
+1. For **Federated client identity**, select the **Change identity** option, and search for the multitenant application that you created in the [Prerequisites](#prerequisites).
 
-14. Under **Primary identity**, select the same user-assigned managed identity selected in the previous step.
-
-    :::image type="content" source="media/transparent-data-encryption-byok-create-server/selecting-primary-identity-for-server.png" alt-text="Screenshot of selecting primary identity and federated client identity for server.":::
-
-15. For **Federated client identity**, select the **Change identity** option, and search for the multitenant application that you created in the [Prerequisites](#prerequisites).
-
-    :::image type="content" source="media/transparent-data-encryption-byok-create-server-cross-tenant/selecting-user-assigned-managed-identity.png" alt-text="Screenshot of user assigned managed identity when configuring server identity.":::
+    :::image type="content" source="media/transparent-data-encryption-byok-create-server-cross-tenant/selecting-user-assigned-managed-identity.png" alt-text="Screenshot of user assigned managed identity when configuring server identity." lightbox="media/transparent-data-encryption-byok-create-server-cross-tenant/selecting-user-assigned-managed-identity.png":::
 
     > [!NOTE]
     > If the multitenant application hasn't been added to the key vault access policy with the required permissions (*Get, Wrap Key, Unwrap Key*), using this application for identity federation in the Azure portal will show an error. Make sure that the permissions are configured correctly before configuring the federated client identity.
 
-16. Select **Apply**
+1. Select **Apply**
 
-17. On the Security tab, under **Transparent data encryption**, select **Configure transparent data encryption**. Select **Customer-managed key**, and an option to **Enter a key identifier** will appear. Add the **Key Identifier** obtained from the key in the second tenant.
+1. On the Security tab, under **Transparent data encryption**, select **Configure transparent data encryption**. Select **Customer-managed key**, and an option to **Enter a key identifier** will appear. Add the **Key Identifier** obtained from the key in the second tenant.
 
-    :::image type="content" source="media/transparent-data-encryption-byok-create-server-cross-tenant/key-identifier-selection.png" alt-text="Screenshot configuring TDE using a key identifier.":::
+    :::image type="content" source="media/transparent-data-encryption-byok-create-server-cross-tenant/key-identifier-selection.png" alt-text="Screenshot configuring TDE using a key identifier." lightbox="media/transparent-data-encryption-byok-create-server-cross-tenant/key-identifier-selection.png":::
 
-18. Select **Apply**
+1. Select **Apply**
 
-19. Select **Review + create** at the bottom of the page
+1. Select **Review + create** at the bottom of the page
 
-20. On the **Review + create** page, after reviewing, select **Create**.
+1. On the **Review + create** page, after reviewing, select **Create**.
 
 # [The Azure CLI](#tab/azure-cli)
 
@@ -156,7 +152,6 @@ az sql server create \
     --primary-user-assigned-identity-id $primaryidentityid \
     --key-id $keyid \
     --federated-client-id $federatedid
- 
 ```
 
 Create a database with the [az sql db create](/cli/azure/sql/db) command.
@@ -221,9 +216,9 @@ New-AzSqlServer @params
 
 Here's an example of an ARM template that creates an Azure SQL logical server with a user-assigned managed identity and customer-managed TDE. For a cross-tenant CMK, use the **Key Identifier** from the second tenant Key Vault, and the **Application ID** from the multitenant application.
 
-The template also adds a Microsoft Entra admin set for the server and enables [Microsoft Entra-only authentication](authentication-azure-ad-only-authentication.md), but this can be removed from the template example.
+The template also adds a Microsoft Entra admin set for the server and enables [Microsoft Entra-only authentication with Azure SQL](authentication-azure-ad-only-authentication.md), but this can be removed from the template example.
 
-For more information and ARM templates, see [Azure Resource Manager templates for Azure SQL Database & SQL Managed Instance](arm-templates-content-guide.md).
+For more information and ARM templates, see [Azure Resource Manager templates for Azure SQL Database](arm-templates-content-guide.md).
 
 Use a [Custom deployment in the Azure portal](https://portal.azure.com/#create/Microsoft.Template), and **Build your own template in the editor**. Next, **Save** the configuration once you pasted in the example.
 
@@ -330,18 +325,14 @@ To get your user-assigned managed identity **Resource ID**, search for **Managed
         }
     ]
 }
-
 ```
 
 ---
 
-## Next steps
-
-- Get started with Azure Key Vault integration and Bring Your Own Key support for TDE: [Turn on TDE using your own key from Key Vault](transparent-data-encryption-byok-configure.md)
-- [Cross-tenant customer-managed keys with transparent data encryption](transparent-data-encryption-byok-cross-tenant.md)
-
-## See also
+## Related content
 
 - [Transparent data encryption (TDE) with customer-managed keys at the database level](transparent-data-encryption-byok-database-level-overview.md)
 - [Configure geo replication and backup restore for transparent data encryption with database level customer-managed keys](transparent-data-encryption-byok-database-level-geo-replication-restore.md)
 - [Identity and key management for TDE with database level customer-managed keys](transparent-data-encryption-byok-database-level-basic-actions.md)
+- [PowerShell and Azure CLI: Enable Transparent Data Encryption with customer-managed key from Azure Key Vault](transparent-data-encryption-byok-configure.md)
+- [Cross-tenant customer-managed keys with transparent data encryption](transparent-data-encryption-byok-cross-tenant.md)

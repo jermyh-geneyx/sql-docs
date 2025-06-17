@@ -1,8 +1,8 @@
 ---
 title: "Selecting and Configuring Affected Objects (OracleToSQL)"
 description: "Selecting and Configuring Affected Objects (OracleToSQL)"
-author: cpichuka
-ms.author: cpichuka
+author: nilabjaball
+ms.author: niball
 ms.date: "01/19/2017"
 ms.service: sql
 ms.subservice: ssma
@@ -61,14 +61,14 @@ Determine if this column will participate in test results verification.
   
 -   If you choose **True**, SSMA will compare the contents of this column after executing the test on Oracle with the contents of the column in SQL Server. 
   
--   If you choose**False**, the column will be excluded from results verification.  
+-   If you choose **False**, the column will be excluded from results verification.  
   
 ### Use Custom Scale  
 For columns of numeric data type, you can set a custom scale for the comparison.  
   
 -   If you choose **True**, numeric values will be rounded according to the **Comparing Scale** value before they are compared.  
   
--   If you choose**False**, the numeric comparison will be exact.  
+-   If you choose **False**, the numeric comparison will be exact.  
   
 ### Comparing Scale  
   

@@ -1,10 +1,10 @@
 ---
 title: "CREATE VECTOR INDEX (Transact-SQL)"
-description: "CREATE VECTOR INDEX creates an index on vector data to allow approximate neareast neighboor search"
+description: "CREATE VECTOR INDEX creates an index on vector data to allow approximate nearest neighbor search"
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: damauri
-ms.date: 05/01/2025
+ms.date: 05/28/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -22,6 +22,8 @@ helpviewer_keywords:
 dev_langs:
   - "TSQL"
 monikerRange: "=sql-server-ver17 || =sql-server-linux-ver17"
+ms.custom:
+  - build-2025
 ---
 
 # CREATE VECTOR INDEX (Transact-SQL)
@@ -40,6 +42,8 @@ This feature is in preview. In order to use this feature you must enable the fol
 ```sql
 DBCC TRACEON(466, 474, 13981, -1)
 ```
+
+Make sure to check out the [current limitations](#limitations) before using it.
 
 ## Syntax
 
@@ -121,20 +125,22 @@ Is an option to drop and rebuild the existing vector index with modified specifi
 
 ## Limitations
 
-- No partition support. Vector index can't be partitioned.  
-- The table must have a single integer non-nullable column clustered index. 
-- During and for all the time needed for vector index creation to complete, an SCH-M lock is acquired on the table. As a result, the lock prevents any access to the table or its metadata. 
-- Once a vector index is created on a table, the table becomes read-only. No data modification is allowed while the vector index is present on the table. 
+The current preview has the following limitations:
+
+- Vector index can't be partitioned. No partition support.
+- The table must have a single column, integer, primary key clustered index.
+- A table with a vector index becomes read only. No data modification is allowed while the vector index is present on the table.
+- Vector indexes aren't replicated to subscribers.
 
 ## Permissions
 
-The user must have `ALTER` permission on the table or view.
+The user must have `ALTER` permission on the table.
 
 ## Examples
 
 Details of the database used in the sample can be found here: [Download and import the Wikipedia Article with Vector Embeddings](https://github.com/Azure-Samples/azure-sql-db-openai?tab=readme-ov-file#download-and-import-the-wikipedia-article-with-vector-embeddings).
 
-Examples assume the existence of a table named `wikipedia_articles` with a column `title_vector` of type `vector` that stores title's embeddings of Wikipedia articles. `title_vector` is assumed to be an embedding generated with an embedding model like *text-embedding-ada-002* or *text-embedding-3-small* , which returns vectors with 1,536 dimensions.
+Examples assume the existence of a table named `wikipedia_articles` with a column `title_vector` of type `vector` that stores title's embeddings of Wikipedia articles. `title_vector` is assumed to be an embedding generated with an embedding model like *text-embedding-ada-002* or *text-embedding-3-small*, which returns vectors with 1,536 dimensions.
 
 For more examples, including end-to-end solutions, go to the [Azure SQL Database Vector Search Samples GitHub repo](https://github.com/Azure-Samples/azure-sql-db-vector-search).
 
@@ -158,8 +164,67 @@ WITH (METRIC = 'cosine', TYPE = 'diskann', MAXDOP = 8)
 ON [SECONDARY]
 ```
 
+### Example 3
+
+A basic end-to-end example using `CREATE VECTOR INDEX` and the related `VECTOR_SEARCH` function. The embeddings are mocked. In a real world scenario, embeddings are generated using an embedding model and [AI_GENERATE_EMBEDDINGS](../functions/ai-generate-embeddings-transact-sql.md), or an external library such as [OpenAI SDK](https://github.com/openai/openai-dotnet?tab=readme-ov-file#how-to-generate-text-embeddings).
+
+The following code block creates mock embeddings with the following steps:
+
+1. Enables the trace flag, necessary in the current preview.
+1. Create a sample table `dbo.Articles` with a column `embedding` with data type **vector(5)**.
+1. Insert sample data with mock embedding data.
+1. Create a vector index on `dbo.Articles.embedding`.
+1. Demonstrate the vector similarity search with the `VECTOR_SEARCH()` function.
+
+```sql
+-- Step 0: Enable Preview Feature
+DBCC TRACEON(466, 474, 13981, -1);
+GO
+
+-- Step 1: Create a sample table with a VECTOR(5) column
+CREATE TABLE dbo.Articles 
+(
+    id INT PRIMARY KEY,
+    title NVARCHAR(100),
+    content NVARCHAR(MAX),
+    embedding VECTOR(5) -- mocked embeddings
+);
+
+-- Step 2: Insert sample data
+INSERT INTO Articles (id, title, content, embedding)
+VALUES
+(1, 'Intro to AI', 'This article introduces AI concepts.', '[0.1, 0.2, 0.3, 0.4, 0.5]'),
+(2, 'Deep Learning', 'Deep learning is a subset of ML.', '[0.2, 0.1, 0.4, 0.3, 0.6]'),
+(3, 'Neural Networks', 'Neural networks are powerful models.', '[0.3, 0.3, 0.2, 0.5, 0.1]'),
+(4, 'Machine Learning Basics', 'ML basics for beginners.', '[0.4, 0.5, 0.1, 0.2, 0.3]'),
+(5, 'Advanced AI', 'Exploring advanced AI techniques.', '[0.5, 0.4, 0.6, 0.1, 0.2]');
+
+-- Step 3: Create a vector index on the embedding column
+CREATE VECTOR INDEX vec_idx ON Articles(embedding)
+WITH (metric = 'cosine', type = 'diskann');
+
+-- Step 4: Perform a vector similarity search
+DECLARE @qv VECTOR(5) = '[0.3, 0.3, 0.3, 0.3, 0.3]';
+SELECT
+    t.id,
+    t.title,
+    t.content,
+    s.distance
+FROM
+    VECTOR_SEARCH(
+        table = Articles AS t,
+        column = embedding,
+        similar_to = @qv,
+        metric = 'cosine',
+        top_n = 3
+    ) AS s
+ORDER BY s.distance, t.title;
+```
+
 ## Related content
 
 - [Overview of vectors in the SQL Database Engine](../../relational-databases/vectors/vectors-sql-server.md)
-- [Azure SQL Database Vector Search Samples](https://github.com/Azure-Samples/azure-sql-db-vector-search)
 - [Vector data type](../data-types/vector-data-type.md)
+- [VECTOR_SEARCH (Transact-SQL)](../functions/vector-search-transact-sql.md)
+- [sys.vector_indexes (Transact-SQL)](../../relational-databases/system-catalog-views/sys-vector-indexes-transact-sql.md)
+- [Azure SQL Database Vector Search Samples](https://github.com/Azure-Samples/azure-sql-db-vector-search)

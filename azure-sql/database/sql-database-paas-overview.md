@@ -4,7 +4,7 @@ description: "Get an introduction to SQL Database: technical details and capabil
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: mathoma
-ms.date: 05/13/2025
+ms.date: 06/17/2025
 ms.service: azure-sql-database
 ms.subservice: service-overview
 ms.topic: overview
@@ -202,7 +202,7 @@ Microsoft Defender for SQL is a unified package for advanced SQL security capabi
 
 ### Data encryption
 
-SQL Database helps secure your data by providing encryption. For data in motion, it uses [transport layer security](/windows-server/security/tls/transport-layer-security-protocol). For data at rest, it uses [transparent data encryption](/sql/relational-databases/security/encryption/transparent-data-encryption-azure-sql). For data in use, it uses [Always Encrypted](/sql/relational-databases/security/encryption/always-encrypted-database-engine).
+SQL Database helps secure your data by providing encryption. For data in motion, it uses [transport layer security](/troubleshoot/sql/database-engine/connect/tls-1-2-support-microsoft-sql-server). For data at rest, it uses [transparent data encryption](/sql/relational-databases/security/encryption/transparent-data-encryption-azure-sql). For data in use, it uses [Always Encrypted](/sql/relational-databases/security/encryption/always-encrypted-database-engine).
 
 ### Data discovery and classification
 

@@ -7,6 +7,8 @@ ms.date: "03/01/2017"
 ms.service: sql
 ms.subservice: master-data-services
 ms.topic: how-to
+ms.custom:
+  - build-2025
 ---
 # Create a Changeset (Master Data Services)
 
@@ -40,7 +42,7 @@ ms.topic: how-to
   
 2.  Click an entity on the **Entities** menu.  
   
-3.  Make changes to the entity and click on**OK**.  
+3.  Make changes to the entity and click **OK**.  
   
 4.  **Choose A changeset** dialog box is displayed.  
   

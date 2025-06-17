@@ -7,6 +7,8 @@ ms.reviewer: randolphwest
 ms.date: 05/05/2025
 ms.service: sql
 ms.topic: concept-article #Don't change.
+ms.custom:
+  - build-2025
 # customer intent: As a data engineer, I want statistics that are created on readable secondaries to be persisted so that my workloads that are running against secondary replicas are optimized.
 ---
 
@@ -25,21 +27,14 @@ With the addition of the Query Store for readable secondaries, secondary replica
 
 A similar mechanism is being used to send statistics information back to the primary and subsequently send back to all secondary replicas. Temporary statistics that are created on any secondary replica which are stored in `tempdb` will be sent to and persisted on the primary replica, which will make them usable by all readable secondary replicas.
 
-You must enable Trace Flag 15608 to activate the persisted statistics for readable secondaries feature. To enable the [trace flags](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md):
-
-1. In Windows, launch [SQL Server Configuration Manager](../../tools/configuration-manager/sql-server-configuration-manager.md).
-1. In the list of SQL Server Services, right-click on your SQL Server 2025 (17.x) instance. Select **Properties**.
-1. Select the **Start Parameters** tab. In **Specify a startup parameter:**, add: `-T15608` and select **Add**.
-1. The SQL Server instance service must be restarted before the change will take effect.
-
 ## Support catalog views
 
 To support comparing stats creation/update between secondary and primary, and to assist with understanding where statistics were created, three new columns have been added to the `sys.stats` catalog view:
 
 | Column name | Data Type | Description |
 | --- | --- | --- |
-| `replica_role_id` | **tinyint** | Identifies the replica set number for this replica. 1 = Primary, 2 = Secondary |
-| `replica_role_desc` | **nvarchar(60)** | Primary, Secondary |
+| `replica_role_id` | **tinyint** | Identifies the replica set number for this replica. 1 = Primary, 2 = Secondary, 3 = Geo Replication Forwarder, 4 = Geo HA Secondary |
+| `replica_role_desc` | **nvarchar(60)** | Primary, Secondary, Geo Replication Forwarder, Geo HA Secondary |
 | `replica_name` | **sysname** | Instance name of the replica in the availability group. Will be `NULL` for the primary replica |
 
 ## Related content

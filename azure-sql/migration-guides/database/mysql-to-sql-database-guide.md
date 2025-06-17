@@ -175,6 +175,4 @@ The Data SQL Engineering team developed these resources. This team's core charte
 
 - For other migration guides, see [Azure Database Migration Guide](/data-migration/).
 
-- For migration videos, see [Overview of the migration journey and recommended migration and assessment tools and services](https://azure.microsoft.com/resources/videos/overview-of-migration-and-recommended-tools-services/).
-
 - For more [cloud migration resources](https://azure.microsoft.com/migration/resources/), see [cloud migration solutions](https://azure.microsoft.com/migration).

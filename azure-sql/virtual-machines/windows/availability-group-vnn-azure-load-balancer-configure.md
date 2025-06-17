@@ -4,7 +4,7 @@ description: Learn to configure an Azure load balancer to route traffic to the v
 author: AbdullahMSFT
 ms.author: amamun
 ms.reviewer: mathoma
-ms.date: 06/18/2024
+ms.date: 04/30/2025
 ms.service: azure-vm-sql-server
 ms.subservice: hadr
 ms.topic: how-to
@@ -207,6 +207,28 @@ Get-ClusterResource $IPResourceName | Get-ClusterParameter
 
 ---
 
+## Configure port exclusion 
+
+When using a health probe port between 49,152 and 65,536 (the [default dynamic port range for TCP/IP](/windows/client-management/troubleshoot-tcpip-port-exhaust#default-dynamic-port-range-for-tcpip)), add an exclusion for each health probe port on every VM. 
+
+Configuring port exclusion prevents other system processes from being dynamically assigned the same port on the VM
+
+To set a port exclusion, use the following PowerShell script: 
+-  for each health probe port 
+-  on every VM
+
+```powershell
+[int]$ProbePort = <nnnnn> # The probe port that you configured in the health probe of the load balancer. Any unused TCP port is valid. 
+
+netsh int ipv4 add excludedportrange tcp startport=$ProbePort numberofports=1 store=persistent 
+```
+
+To confirm that exclusions have been configured correctly, use the following command: 
+
+```powershell
+netsh int ipv4 show excludedportrange tcp 
+```
+
 ## Modify the connection string 
 
 For clients that support it, add `MultiSubnetFailover=True` to the connection string. Although the `MultiSubnetFailover` connection option isn't required, it provides the benefit of a faster subnet failover. This is because the client driver tries to open a TCP socket for each IP address in parallel. The client driver waits for the first IP address to respond with success. After the successful response, the client driver uses that IP address for the connection.
@@ -217,7 +239,7 @@ Use PowerShell to modify the `RegisterAllProvidersIp` and `HostRecordTTL` settin
 
 ```powershell
 Get-ClusterResource yourListenerName | Set-ClusterParameter RegisterAllProvidersIP 0  
-Get-ClusterResource yourListenerName|Set-ClusterParameter HostRecordTTL 300 
+Get-ClusterResource yourListenerName | Set-ClusterParameter HostRecordTTL 300 
 ```
 
 To learn more, see the [documentation about listener connection timeout in SQL Server](/troubleshoot/sql/availability-groups/listener-connection-times-out). 

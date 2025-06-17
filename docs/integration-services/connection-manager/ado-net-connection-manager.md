@@ -13,6 +13,8 @@ helpviewer_keywords:
   - "connection managers [Integration Services], ADO.NET"
   - "ADO.NET connection manager [Integration Services]"
   - "connections [Integration Services], ADO.NET"
+ms.custom:
+  - build-2025
 ---
 # ADO.NET connection manager
 
@@ -62,7 +64,7 @@ For more information about the properties that you can set in [!INCLUDE [ssIS](.
 
 Use the **Configure ADO.NET Connection Manager** dialog box to add a connection to a data source that can be accessed by using a .NET Framework data provider. For example, one such provider is the SqlClient provider. The connection manager can use an existing connection, or you can create a new one.  
   
- To learn more about the ADO.NET connection manager, see [ADO.NET Connection Manager](../../integration-services/connection-manager/ado-net-connection-manager.md).  
+ To learn more about the ADO.NET connection manager, see [ADO.NET Connection Manager](#adonet-connection-manager).
   
 #### Options  
 
@@ -116,17 +118,7 @@ To use .NET API [Microsoft.SqlServer.Dts.Runtime Namespace](/dotnet/api/microsof
 1. SSIS package includes the following SSIS tasks that rely on SQL Server Management Objects (SMO): **Transfer Database Task**, **Transfer Error Messages Task**, **Transfer Jobs Task**, **Transfer Logins Task**, **Transfer Master Stored Procedures Task**, **Transfer SQL Server Objects Task**, **Maintenance Cleanup Task**, **Back Up Database Task**, **History Cleanup Task**, **Notify Operator Task**, **Check Database Integrity Task**, **Rebuild Index Task**, **Shrink Database Task**, **Reorganize Index Task**, **Execute SQL Server Agent Job Task**, **Execute T-SQL Statement Task**, and **Update Statistics Task**, add the following reference to their project and rebuild the project:
 
    ```xml
-   <PropertyGroup>
-   <DTSPath>C:\Program Files\Microsoft SQL Server\170\DTS\BINN</ DTSPath></PropertyGroup>
-   <ItemGroup>
-    <Reference Include=" $(DTSPath)/Microsoft.SqlServer.Management.Sdk.Sfc.dll" />
-   <Reference Include=" $(DTSPath)/Microsoft.SqlServer.SmoExtended.dll" />
-   <Reference Include=" $(DTSPath)/Microsoft.SqlServer.Smo.dll" />
-   <Reference Include=" $(DTSPath)/Microsoft.SqlServer.SqlEnum.dll" />
-   <Reference Include=" $(DTSPath)/Microsoft.SqlServer.ConnectionInfo.dll" />
-   <Reference Include=" $(DTSPath)/ Microsoft.SqlServer.Dmf.Common.dll" />
-   <PackageReference Include="Microsoft.Data.SqlClient" Version="5.0.0" />
-   </ItemGroup>
+   <ItemGroup><PackageReference Include="Microsoft.SqlServer.SqlManagementObjects" Version="172.74.0" />  </ItemGroup>
    ```
   
 #### Managed identities for Azure resources authentication

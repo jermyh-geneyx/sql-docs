@@ -19,6 +19,8 @@ helpviewer_keywords:
   - "Availability Groups [SQL Server], Transact-SQL statements"
 dev_langs:
   - "TSQL"
+ms.custom:
+  - build-2025
 ---
 
 # ALTER AVAILABILITY GROUP (Transact-SQL)
@@ -424,7 +426,7 @@ Specifies the address of the instance of [!INCLUDE[ssNoVersion](../../includes/s
   
 Use a comma-separated list to specify all of the server instances that might host a readable secondary replica. Read-only routing will follow the order in which server instances are specified in the list. If you include a replica's host server instance on the replica's read-only routing list, placing this server instance at the end of the list is typically a good practice, so that read-intent connections go to a secondary replica, if one is available.
   
-Beginning with [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)], you can load-balance read-intent requests across readable secondary replicas. You specify this by placing the replicas in a nested set of parentheses within the read-only routing list. For more information and examples, see [Configure load-balancing across read-only replicas](../../database-engine/availability-groups/windows/configure-read-only-routing-for-an-availability-group-sql-server.md#loadbalancing).
+Beginning with [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)], you can load-balance read-intent requests across readable secondary replicas. You specify this by placing the replicas in a nested set of parentheses within the read-only routing list. For more information and examples, see [Configure load-balancing across read-only replicas](../../database-engine/availability-groups/windows/configure-read-only-routing-for-an-availability-group-sql-server.md#configure-load-balancing-across-read-only-replicas).
   
 #### NONE
 Specifies that when this availability replica is the primary replica, read-only routing won't be supported. This is the default behavior. When used with MODIFY REPLICA ON, this value disables an existing list, if any.

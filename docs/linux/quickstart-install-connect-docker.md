@@ -1,10 +1,10 @@
 ---
-title: "Docker: Install Containers for SQL Server on Linux"
+title: "Docker: Run Containers for SQL Server on Linux"
 description: This quickstart shows how to use Docker to run the SQL Server Linux container images. You connect to a database and run a query.
 author: amitkh-msft
 ms.author: amitkh
 ms.reviewer: vanto, randolphwest
-ms.date: 05/02/2025
+ms.date: 06/06/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: quickstart
@@ -12,6 +12,7 @@ ms.custom:
   - intro-quickstart
   - kr2b-contr-experiment
   - linux-related-content
+  - build-2025
 zone_pivot_groups: cs1-command-shell
 monikerRange: ">=sql-server-linux-2017 || >=sql-server-2017"
 ---
@@ -240,7 +241,7 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" `
 > [!CAUTION]  
 > [!INCLUDE [password-complexity](includes/password-complexity.md)] If you don't follow these password requirements, the container can't set up [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], and stops working. You can examine the error log by using the [`docker logs`](https://docs.docker.com/reference/cli/docker/container/logs) command.
 
-By default, this quickstart creates a container with the Developer edition of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. The process for running production editions in containers is slightly different. For more information, see [Run production container images](./sql-server-linux-docker-container-deployment.md#production).
+By default, this quickstart creates a container with the Developer edition of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. The process for running production editions in containers is slightly different. For more information, see [Run production container images](sql-server-linux-docker-container-deployment.md#production).
 
 The following table provides a description of the parameters in the previous `docker run` example:
 
@@ -484,7 +485,7 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" `
 > [!CAUTION]  
 > [!INCLUDE [password-complexity](includes/password-complexity.md)] If you don't follow these password requirements, the container can't set up [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], and stops working. You can examine the error log by using the [`docker logs`](https://docs.docker.com/reference/cli/docker/container/logs) command.
 
-By default, this quickstart creates a container with the Developer edition of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. The process for running production editions in containers is slightly different. For more information, see [Run production container images](./sql-server-linux-docker-container-deployment.md#production).
+By default, this quickstart creates a container with the Developer edition of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. The process for running production editions in containers is slightly different. For more information, see [Run production container images](sql-server-linux-docker-container-deployment.md#production).
 
 The following table provides a description of the parameters in the previous `docker run` example:
 
@@ -561,7 +562,7 @@ sqlcmd create mssql get-tags
 
 ::: zone-end
 
-By default, this quickstart creates a container with the Developer edition of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. The process for running production editions in containers is slightly different. For more information, see [Run production container images](./sql-server-linux-docker-container-deployment.md#production).
+By default, this quickstart creates a container with the Developer edition of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. The process for running production editions in containers is slightly different. For more information, see [Run production container images](sql-server-linux-docker-container-deployment.md#production).
 
 The following table provides a description of the parameters in the previous `docker run` example:
 
@@ -727,7 +728,7 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" `
 > [!CAUTION]  
 > [!INCLUDE [password-complexity](includes/password-complexity.md)] If you don't follow these password requirements, the container can't set up [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], and stops working. You can examine the error log by using the [`docker logs`](https://docs.docker.com/reference/cli/docker/container/logs) command.
 
-By default, this quickstart creates a container with the Developer edition of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. The process for running production editions in containers is slightly different. For more information, see [Run production container images](./sql-server-linux-docker-container-deployment.md#production).
+By default, this quickstart creates a container with the Developer edition of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. The process for running production editions in containers is slightly different. For more information, see [Run production container images](sql-server-linux-docker-container-deployment.md#production).
 
 The following table provides a description of the parameters in the previous `docker run` example:
 
@@ -857,7 +858,7 @@ sqlcmd create mssql get-tags
 
 ::: zone-end
 
-By default, this quickstart creates a container with the Developer edition of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. The process for running production editions in containers is slightly different. For more information, see [Run production container images](./sql-server-linux-docker-container-deployment.md#production).
+By default, this quickstart creates a container with the Developer edition of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. The process for running production editions in containers is slightly different. For more information, see [Run production container images](sql-server-linux-docker-container-deployment.md#production).
 
 The following table provides a description of the parameters in the previous `docker run` example:
 
@@ -1047,7 +1048,7 @@ docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" `
 > [!CAUTION]  
 > [!INCLUDE [password-complexity](includes/password-complexity.md)] If you don't follow these password requirements, the container can't set up [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], and stops working. You can examine the error log by using the [`docker logs`](https://docs.docker.com/reference/cli/docker/container/logs) command.
 
-By default, this quickstart creates a container with the Developer edition of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. The process for running production editions in containers is slightly different. For more information, see [Run production container images](./sql-server-linux-docker-container-deployment.md#production).
+By default, this quickstart creates a container with the Developer edition of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. The process for running production editions in containers is slightly different. For more information, see [Run production container images](sql-server-linux-docker-container-deployment.md#production).
 
 The following table provides a description of the parameters in the previous `docker run` example:
 
@@ -1177,7 +1178,7 @@ sqlcmd create mssql get-tags
 
 ::: zone-end
 
-By default, this quickstart creates a container with the Developer edition of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. The process for running production editions in containers is slightly different. For more information, see [Run production container images](./sql-server-linux-docker-container-deployment.md#production).
+By default, this quickstart creates a container with the Developer edition of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. The process for running production editions in containers is slightly different. For more information, see [Run production container images](sql-server-linux-docker-container-deployment.md#production).
 
 The following table provides a description of the parameters in the previous `docker run` example:
 
@@ -1445,7 +1446,7 @@ The following steps use **sqlcmd** outside of your container to connect to [!INC
 
 1. Find the IP address for your container's host machine, using `ifconfig` or `ip addr`.
 
-1. For this example, install the **sqlcmd** tool on your client machine. For more information, see [sqlcmd utility](../tools/sqlcmd/sqlcmd-utility.md) or [Install the SQL Server command-line tools sqlcmd and bcp on Linux](sql-server-linux-setup-tools.md).
+1. For this example, install the **sqlcmd** tool on your client machine. For more information, see [sqlcmd utility](../tools/sqlcmd/sqlcmd-utility.md) or [Install the sqlcmd and bcp SQL Server command-line tools on Linux](sql-server-linux-setup-tools.md).
 
 1. Run **sqlcmd** specifying the IP address and the port mapped to port 1433 in your container. In this example, the port is the same as port 1433 on the host machine. If you specified a different mapped port on the host machine, you would use it here. You also need to open the appropriate inbound port on your firewall to allow the connection.
 

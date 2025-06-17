@@ -38,7 +38,7 @@ xp_sscanf { 'string' OUTPUT , 'format' } [ , 'argument' [ , ...n ] ]
 
 The character string to read the argument values from.
 
-When `OUTPUT`is specified, *string* puts the value of *argument* in the output parameter.
+When `OUTPUT` is specified, *string* puts the value of *argument* in the output parameter.
 
 #### '*format*'
 

@@ -231,7 +231,7 @@ where ProductModelID=19
   
  Note the following from the previous query:  
   
--   The **value()** method of the **xml**data type is used in the query.  
+-   The **value()** method of the **xml** data type is used in the query.  
   
 -   The Boolean result of the query is converted to **nvarchar(10)** and returned.  
   

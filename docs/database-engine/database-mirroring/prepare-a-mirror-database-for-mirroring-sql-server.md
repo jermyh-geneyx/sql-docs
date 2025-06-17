@@ -178,7 +178,7 @@ helpviewer_keywords:
         > [!IMPORTANT]  
         >  If the path names of the principal and mirror databases differ, you cannot add a file. This is because on receiving the log for the add file operation, the mirror server instance attempts to place the new file in the location used by the principal database.  
   
-         For example, the following command restores a backup of a principal database residing in C:\Program Files\Microsoft SQL Server\MSSQL.*n*\MSSQL\Data\ to a different location, D:\Program Files\Microsoft SQL Server\MSSQL.*n*\MSSQL\Dat`a\`, where the mirror database is to reside.  
+         For example, the following command restores a backup of a principal database residing in C:\Program Files\Microsoft SQL Server\MSSQL.*n*\MSSQL\Data\ to a different location, D:\Program Files\Microsoft SQL Server\MSSQL.*n*\MSSQL\Data\, where the mirror database is to reside.  
   
         ```  
         RESTORE DATABASE AdventureWorks  

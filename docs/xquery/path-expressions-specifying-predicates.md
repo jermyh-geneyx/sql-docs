@@ -151,7 +151,7 @@ WHERE ProductModelID=7
   
 3.  If the value of the predicate expression is one simple type value of type Boolean, the predicate truth value is equal to the value of the predicate expression.  
   
-     For example, the following query is specified against an **xml**type variable that holds an XML instance, the customer survey XML instance. The query retrieves those customers who have children. In this query, that would be \<HasChildren>1\</HasChildren>.  
+     For example, the following query is specified against an **xml** type variable that holds an XML instance, the customer survey XML instance. The query retrieves those customers who have children. In this query, that would be \<HasChildren>1\</HasChildren>.  
   
     ```  
     declare @x xml  

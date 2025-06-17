@@ -1,8 +1,8 @@
 ---
 title: "Selecting and Configuring Objects to Test (OracleToSQL)"
 description: "Selecting and Configuring Objects to Test (OracleToSQL)"
-author: cpichuka
-ms.author: cpichuka
+author: nilabjaball
+ms.author: niball
 ms.date: "01/19/2017"
 ms.service: sql
 ms.subservice: ssma
@@ -30,14 +30,14 @@ Enable using of the selected parameter in test results comparison.
   
 -   If you choose **True**, SSMA will compare the output value of this parameter after executing the procedure on Oracle with the corresponding value on SQL Server.
   
--   If you choose**False**, the parameter will be excluded from results verification.  
+-   If you choose **False**, the parameter will be excluded from results verification.  
   
 ### Use Custom Scale  
 For parameters of numeric data type, you can set a custom scale for the comparison.  
   
 -   If you choose **True**, numeric values will be rounded according to the **Comparing Scale** value before they are compared.  
   
--   If you choose**False**, the numeric comparison will be exact.  
+-   If you choose **False**, the numeric comparison will be exact.  
   
 ### Comparing Scale  
 Available only if the **Use Custom Scale** option is set to **True**. This is the precision for numeric comparison.  

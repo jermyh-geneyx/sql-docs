@@ -52,7 +52,7 @@ INNER JOIN Person.Person AS P
 ON  E.BusinessEntityID = P.BusinessEntityID;
 ```
 
-You combine these queries with `UNION AL`L, apply `FOR XML EXPLICIT`, and specify the required `ORDER BY` clause. You must sort the rowset first by `BusinessEntityID` and then by name so that the NULL values in the name appear first. By executing the following query without the FOR XML clause, you can see the universal table generated.
+You combine these queries with `UNION ALL`, apply `FOR XML EXPLICIT`, and specify the required `ORDER BY` clause. You must sort the rowset first by `BusinessEntityID` and then by name so that the NULL values in the name appear first. By executing the following query without the FOR XML clause, you can see the universal table generated.
 
 This is the final query:
 

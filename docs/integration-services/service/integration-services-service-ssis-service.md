@@ -417,7 +417,7 @@ SSIS doesn't support the delegation of credentials, sometimes referred to as a d
   
 4.  On the **Exceptions** tab, click **Add Port.**  
   
-5.  In the **Add a Port** dialog box, type **RPC(TCP/135)** or another descriptive name in the **Nam**e box, type **135** in the **Port Number** box, and then select **TCP**.  
+5.  In the **Add a Port** dialog box, type **RPC(TCP/135)** or another descriptive name in the **Name** box, type **135** in the **Port Number** box, and then select **TCP**.  
   
     > [!IMPORTANT]  
     >  [!INCLUDE[ssISnoversion](../../includes/ssisnoversion-md.md)] service always uses port 135. You cannot specify a different port.  

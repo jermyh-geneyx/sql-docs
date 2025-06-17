@@ -1,14 +1,16 @@
 ---
 title: "Create Term-Based Relations"
 description: "Create Term-Based Relations"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "11/08/2011"
 ms.service: sql
 ms.subservice: data-quality-services
 ms.topic: concept-article
 f1_keywords:
   - "sql13.dqs.dm.kbtermsbased.f1"
+ms.custom:
+  - build-2025
 ---
 # Create Term-Based Relations
 

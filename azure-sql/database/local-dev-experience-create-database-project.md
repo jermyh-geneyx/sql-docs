@@ -1,16 +1,21 @@
 ---
-title: Create a project for a local development environment
+title: Create a Project for a Local Development Environment
 description: Learn how to create a database project as part of the local development experience for Azure SQL Database.
 author: croblesm
 ms.author: roblescarlos
 ms.reviewer: mathoma, wiassaf
-ms.date: 09/04/2024
+ms.date: 06/13/2025
 ms.service: azure-sql-database
 ms.topic: how-to
-ms.custom: template-how-to, build-2023, build-2023-dataai
+ms.custom:
+  - template-how-to
+  - build-2023
+  - build-2023-dataai
+monikerRange: "=azuresql || =azuresql-db"
 ---
 
 # Create a project for a local Azure SQL Database development environment
+
 [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
 The Azure SQL Database [local development experience](local-dev-experience-overview.md) empowers application developers and database professionals to design, edit, build/validate, publish, and run database schemas for databases directly on their workstation using an Azure SQL Database containerized environment. As part of this workflow, you'll create a SQL Database Project. The SQL Database Project extension allows you to create a new blank project, create a new project from a database, and open previously created projects.

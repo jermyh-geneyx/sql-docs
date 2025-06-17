@@ -4,7 +4,7 @@ description: Latest release notes for SQL Server enabled by Azure Arc
 author: anosov1960
 ms.author: sashan
 ms.reviewer: mikeray, randolphwest
-ms.date: 05/12/2025
+ms.date: 05/13/2025
 ms.topic: conceptual
 ms.custom:
   - ignite-2023
@@ -22,6 +22,24 @@ This article lists:
 - Links to additional feature documentation
 
 Extension versions are cumulative. Higher extension versions include all of the updates from previous versions. A release might include internal features. If the version release notes don't describe features, then the updates were internal.
+
+## June 9, 2025
+
+SQL Server enabled by Azure Arc is available as preview feature in US Government Virginia with a limited set of features. For more information, review [SQL Server enabled by Azure Arc in US Government Preview](us-government-region.md).
+
+This release announces the preview region availability. It does not update extension version or other components of any agent or extension.
+
+## May 13, 2025
+
+**Extension version**: `1.1.3049.285`
+
+This release enables the following features:
+
+- SQL Server 2025 Preview.
+  - Standard Developer Edition.
+  - Enterprise Developer Edition.
+  - Inbound Microsoft Entra Authentication using Managed Identity, review [Managed identity (preview)](managed-identity.md).
+  For details about features in SQL Server 2025 Preview, review [What's new in SQL Server 2025 Preview](../what-s-new-in-sql-server-2025.md).
 
 ## April 30, 2025
 
@@ -77,7 +95,7 @@ This release includes bug fixes in the high availability and disaster recovery (
 
 **Extension version**: `1.1.2859.223`
 
-Minor bug fixes. This release does not enable or introduce new features. 
+Minor bug fixes. This release doesn't enable or introduce new features. 
 
 ## October 8, 2024
 
@@ -95,7 +113,7 @@ Inventory additional service resources in portal (preview):
 
 ### ESU update to bill-back calculation
 
-ESU sets the bill-back date to the beginning of the current ESU year based on the timestamp when ESU was enabled, or p-core ESU license got activated. For details, review [SQL Server Extended Security Updates enabled by Azure Arc](extended-security-updates.md).
+ESU sets the bill-back date to the beginning of the current ESU year based on the timestamp when ESU was enabled, or p-core ESU license was activated. For details, review [SQL Server Extended Security Updates enabled by Azure Arc](extended-security-updates.md).
 
 ## September 9, 2024
 

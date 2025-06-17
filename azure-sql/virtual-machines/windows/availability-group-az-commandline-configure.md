@@ -193,7 +193,6 @@ Although the disk witness is the most resilient quorum option, it requires an Az
 
 If you have an even number of votes in the cluster, configure the [quorum solution](hadr-cluster-quorum-configure-how-to.md) that best suits your business needs. For more information, see [Quorum with SQL Server VMs](hadr-windows-server-failover-cluster-overview.md#quorum). 
 
-
 ## Validate cluster 
 
 For a failover cluster to be supported by Microsoft, it must pass cluster validation. Connect to the VM using your preferred method, such as [Bastion](/azure/bastion/bastion-connect-vm-rdp-windows), and validate that your cluster passes validation before proceeding further. Failure to do so leaves your cluster in an unsupported state. 
@@ -217,8 +216,9 @@ Manually create the availability group as you normally would, by using [SQL Serv
 
 The Always On availability group listener requires an internal instance of Azure Load Balancer. The internal load balancer provides a "floating" IP address for the availability group listener that allows for faster failover and reconnection. If the SQL Server VMs in an availability group are part of the same availability set, you can use a Basic load balancer. Otherwise, you need to use a Standard load balancer.  
 
-> [!NOTE]
-> The internal load balancer should be in the same virtual network as the SQL Server VM instances. 
+> [!IMPORTANT]
+> - The internal load balancer should be in the same virtual network as the SQL Server VM instances. 
+> - The public IP resource for each SQL Server VM should have a Standard SKU to be compatible with the Standard load balancer. To determine the SKU of your VM's public IP resource, go to **Resource Group**, select your **Public IP Address** resource for the desired SQL Server VM, and locate the value under **SKU** in the **Overview** pane.  
 
 The following code snippet creates the internal load balancer:
 
@@ -247,8 +247,6 @@ $intLb = New-AzLoadBalancer -name <load balancer name> -ResourceGroupName <resou
 
 ---
 
->[!IMPORTANT]
-> The public IP resource for each SQL Server VM should have a Standard SKU to be compatible with the Standard load balancer. To determine the SKU of your VM's public IP resource, go to **Resource Group**, select your **Public IP Address** resource for the desired SQL Server VM, and locate the value under **SKU** in the **Overview** pane.  
 
 ## Create listener
 
@@ -336,6 +334,10 @@ New-AzAvailabilityGroupListener -ResourceGroupName <resource group name> `
 ```
 
 ---
+
+## Configure probe port
+
+[!INCLUDE [virtual-machines-port-exclusion](../../includes/virtual-machines-port-exclusion.md)]
 
 ## Modify number of replicas 
 There's an added layer of complexity when you're deploying an availability group to SQL Server VMs hosted in Azure. The resource provider and the virtual machine group now manage the resources. As such, when you're adding or removing replicas in the availability group, there's an additional step of updating the listener metadata with information about the SQL Server VMs. When you're modifying the number of replicas in the availability group, you must also use the [az sql vm group ag-listener update](/cli/azure/sql/vm/group/ag-listener#az-sql-vm-group-ag-listener-update) command to update the listener with the metadata of the SQL Server VMs. 

@@ -3,7 +3,7 @@ title: "Use Unicode Native Format to Import or Export Data (SQL Server)"
 description: Use Unicode native format for bulk transfer of data between instances of SQL Server, which eliminates conversion of data types to and from character format.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 05/19/2025
+ms.date: 05/27/2025
 ms.service: sql
 ms.subservice: data-movement
 ms.topic: how-to
@@ -52,7 +52,7 @@ The examples in this topic are based on the sample table `myWidenative` and form
 
 ### Sample table
 
-The script below creates a test database, a table named `myWidenative` and populates the table with some initial values. Execute the following Transact-SQL in Microsoft [!INCLUDE[ssManStudioFull](../../includes/ssmanstudiofull-md.md)] (SSMS):
+The following script creates a test database, a table named `myWidenative` and populates the table with some initial values. Execute the following Transact-SQL:
 ```sql
 CREATE DATABASE TestDatabase;
 GO
@@ -68,10 +68,9 @@ CREATE TABLE dbo.myWidenative (
 
 -- Populate table
 INSERT TestDatabase.dbo.myWidenative
-VALUES 
-(1, N'ϴAnthony', N'Grosse', '02-23-1980', 65000.00),
-(2, N'❤Alica', N'Fatnowna', '11-14-1963', 45000.00),
-(3, N'☎Stella', N'Rossenhain', '03-02-1992', 120000.00);
+VALUES (1, N'ϴAnthony', N'Grosse', '02-23-1980', 65000.00),
+       (2, N'❤Alica', N'Fatnowna', '11-14-1963', 45000.00),
+       (3, N'☎Stella', N'Rossenhain', '03-02-1992', 120000.00);
 
 -- Review Data
 SELECT * FROM TestDatabase.dbo.myWidenative;
@@ -173,17 +172,17 @@ REM Review results is SSMS
 <a id="using-bulk-insert-and-unicode-native-format-without-a-format-file"></a>
 
 ### Use BULK INSERT and Unicode native format without a format file
+
 The `DATAFILETYPE` argument. 
 
 Execute the following Transact-SQL in Microsoft [!INCLUDE[ssManStudioFull](../../includes/ssmanstudiofull-md.md)] (SSMS):
 
 ```sql
 TRUNCATE TABLE TestDatabase.dbo.myWidenative; -- for testing
+
 BULK INSERT TestDatabase.dbo.myWidenative
     FROM 'D:\BCP\myWidenative.bcp'
-    WITH (
-        DATAFILETYPE = 'widenative'
-        );
+    WITH (DATAFILETYPE = 'widenative' );
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myWidenative;
@@ -201,11 +200,10 @@ Execute the following Transact-SQL in Microsoft [!INCLUDE[ssManStudioFull](../..
 
 ```sql
 TRUNCATE TABLE TestDatabase.dbo.myWidenative; -- for testing
+
 BULK INSERT TestDatabase.dbo.myWidenative
    FROM 'D:\BCP\myWidenative.bcp'
-   WITH (
-        FORMATFILE = 'D:\BCP\myWidenative.fmt'
-        );
+   WITH ( FORMATFILE = 'D:\BCP\myWidenative.fmt'  );
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myWidenative;
@@ -222,13 +220,13 @@ The `FORMATFILE` argument.
 Execute the following Transact-SQL in Microsoft [!INCLUDE[ssManStudioFull](../../includes/ssmanstudiofull-md.md)] (SSMS):
 
 ```sql
-TRUNCATE TABLE TestDatabase.dbo.myWidenative;  -- for testing
+TRUNCATE TABLE TestDatabase.dbo.myWidenative; -- for testing
+
 INSERT INTO TestDatabase.dbo.myWidenative
-    SELECT *
-    FROM OPENROWSET (
-        BULK 'D:\BCP\myWidenative.bcp', 
-        FORMATFILE = 'D:\BCP\myWidenative.fmt'  
-        ) AS t1;
+SELECT * FROM OPENROWSET (
+    BULK 'D:\BCP\myWidenative.bcp',
+    FORMATFILE = 'D:\BCP\myWidenative.fmt'
+) AS t1;
 
 -- review results
 SELECT * FROM TestDatabase.dbo.myWidenative;
@@ -236,16 +234,14 @@ SELECT * FROM TestDatabase.dbo.myWidenative;
 
 <a id="RelatedTasks"></a>
 
-## Related Tasks
+## Related tasks
 
-To use data formats for bulk import or bulk export  
--   [Import native and character format data from earlier versions of SQL Server](import-native-and-character-format-data-from-earlier-versions-of-sql-server.md)  
+To use data formats for bulk import or bulk export:
 
--   [Use character format to import or export data (SQL Server)](use-character-format-to-import-or-export-data-sql-server.md)  
-
--   [Use native format to import or export data (SQL Server)](use-native-format-to-import-or-export-data-sql-server.md)  
-
--   [Use unicode character format to import or export data (SQL Server)](use-unicode-character-format-to-import-or-export-data-sql-server.md)  
+- [Import native and character format data from earlier versions of SQL Server](import-native-and-character-format-data-from-earlier-versions-of-sql-server.md)
+- [Use character format to import or export data (SQL Server)](use-character-format-to-import-or-export-data-sql-server.md)
+- [Use native format to import or export data (SQL Server)](use-native-format-to-import-or-export-data-sql-server.md)
+- [Use Unicode character format to import or export data (SQL Server)](use-unicode-character-format-to-import-or-export-data-sql-server.md)
 
 ## Related content
 

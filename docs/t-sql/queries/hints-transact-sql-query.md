@@ -1,16 +1,17 @@
 ---
-title: "Query hints (Transact-SQL)"
+title: "Query Hints (Transact-SQL)"
 description: "Query hints specify that the indicated hints are used in the scope of a query. They affect all operators in the statement."
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: wiassaf
-ms.date: 04/18/2025
+ms.date: 06/11/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
 ms.custom:
   - build-2024
   - ignite-2024
+  - build-2025
 f1_keywords:
   - "Query_Hint_TSQL"
   - "Query_TSQL"
@@ -143,8 +144,8 @@ Query hints specify that the indicated hints are used in the scope of a query. T
 
 Specifies that aggregations that the query's `GROUP BY` or `DISTINCT` clause describes should use hashing or ordering.
 
-- Generally, a hash-based algorithm can improve the performance of queries that involve large or complex grouping sets. 
-- Generally, a sort-based algorithm can improve the performance of queries that involve small or simple grouping sets. 
+- Generally, a hash-based algorithm can improve the performance of queries that involve large or complex grouping sets.
+- Generally, a sort-based algorithm can improve the performance of queries that involve small or simple grouping sets.
 
 #### { MERGE | HASH | CONCAT } UNION
 
@@ -241,7 +242,7 @@ The min_grant_percent memory grant option overrides the `sp_configure` option (m
 
 **Applies to**: [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] (starting with [!INCLUDE [sql2008-md](../../includes/sql2008-md.md)]) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
-Overrides the **max degree of parallelism** configuration option of `sp_configure`. Also overrides the Resource Governor for the query specifying this option. The `MAXDOP` query hint can exceed the value configured with `sp_configure`. If `MAXDOP` exceeds the value configured with Resource Governor, the [!INCLUDE [ssDE](../../includes/ssde-md.md)] uses the Resource Governor `MAXDOP` value, described in [ALTER WORKLOAD GROUP](../statements/alter-workload-group-transact-sql.md). All semantic rules used with the **max degree of parallelism** configuration option are applicable when you use the `MAXDOP` query hint. For more information, see [Configure the max degree of parallelism Server Configuration Option](../../database-engine/configure-windows/configure-the-max-degree-of-parallelism-server-configuration-option.md).
+Overrides the **max degree of parallelism** configuration option of `sp_configure`. Also overrides the Resource Governor for the query specifying this option. The `MAXDOP` query hint can exceed the value configured with `sp_configure`. If `MAXDOP` exceeds the value configured with Resource Governor, the [!INCLUDE [ssDE](../../includes/ssde-md.md)] uses the Resource Governor `MAXDOP` value, described in [ALTER WORKLOAD GROUP](../statements/alter-workload-group-transact-sql.md). All semantic rules used with the **max degree of parallelism** configuration option are applicable when you use the `MAXDOP` query hint. For more information, see [Server configuration: max degree of parallelism](../../database-engine/configure-windows/configure-the-max-degree-of-parallelism-server-configuration-option.md).
 
 > [!WARNING]  
 > If `MAXDOP` is set to zero, then the server chooses the max degree of parallelism.
@@ -355,6 +356,7 @@ The following hint names are supported:
 | `'FORCE_LEGACY_CARDINALITY_ESTIMATION'` <a id="use_hint_ce70"></a> | Forces the Query Optimizer to use [Cardinality Estimation](../../relational-databases/performance/cardinality-estimation-sql-server.md) model of [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)] and earlier versions. This hint name is equivalent to [Trace Flag](../database-console-commands/dbcc-traceon-trace-flags-transact-sql.md) 9481 or [database scoped configuration](../statements/alter-database-scoped-configuration-transact-sql.md) setting `LEGACY_CARDINALITY_ESTIMATION = ON`. |
 | `'QUERY_OPTIMIZER_COMPATIBILITY_LEVEL_n'` <sup>1</sup> | Forces the Query Optimizer behavior at a query level. This behavior happens as if the query was compiled with database compatibility level *n*, where *n* is a supported database compatibility level. For a list of currently supported values for *n*, see [sys.dm_exec_valid_use_hints](../../relational-databases/system-dynamic-management-views/sys-dm-exec-valid-use-hints-transact-sql.md).<br /><br />**Applies to**: [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] CU 10 and later versions, and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] |
 | `'QUERY_PLAN_PROFILE'` <sup>2</sup> | Enables lightweight profiling for the query. When a query that contains this new hint finishes, a new extended event, `query_plan_profile`, is fired. This extended event exposes execution statistics and actual execution plan XML similar to the `query_post_execution_showplan` extended event but only for queries that contains the new hint.<br /><br />**Applies to**: [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] SP 2 CU 3, [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] CU 11, and later versions |
+| `'DISABLE_RESULT_SET_CACHE'` | Disables result set caching (preview) for a specific run of a query, if result set cache is enabled for the currently-connected item. This means it will neither generate new result set cache nor leverage existing result set cache (if any). This could be useful in debugging or A/B testing scenarios. For more information, see [Result set caching](/fabric/data-warehouse/result-set-caching).<br /><br />**Applies to**: [!INCLUDE [fabric](../../includes/fabric.md)] |
 
 <sup>1</sup> The `QUERY_OPTIMIZER_COMPATIBILITY_LEVEL_n` hint doesn't override default or legacy cardinality estimation setting, if you force it through database scoped configuration, trace flag, or another query hint such as `QUERYTRACEON`. This hint only affects the behavior of the Query Optimizer. It doesn't affect other features of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] that might depend on the [database compatibility level](../statements/alter-database-transact-sql-compatibility-level.md), such as the availability of certain database features. For more information, see [Developer's Choice: Hinting Query Execution model](/archive/blogs/sql_server_team/developers-choice-hinting-query-execution-model).
 
@@ -367,7 +369,7 @@ The list of all supported `USE HINT` names can be queried using the dynamic mana
 
 #### <a id="use-plan"></a> USE PLAN N'*xml_plan*'
 
-Forces the Query Optimizer to use an existing query plan for a query specified by *xml_plan*. `USE PLAN` can't be specified with `INSERT`, `UPDATE`, `MERGE`, or `DELETE` statements.
+Forces the Query Optimizer to use an existing query plan for a query specified by *xml_plan*.
 
 The resulting execution plan forced by this feature is the same or similar to the plan being forced. Because the resulting plan might not be identical to the plan specified by `USE PLAN`, the performance of the plans can vary. In rare cases, the performance difference can be significant and negative; in that case, the administrator must remove the forced plan.
 
@@ -396,7 +398,7 @@ Table hints other than `INDEX`, `FORCESCAN`, and `FORCESEEK` are disallowed as q
 
 #### <a id="for-timestamp"></a> FOR TIMESTAMP AS OF '*point_in_time*'
 
-**Applies to**: [!INCLUDE [fabric](../../includes/fabric.md)] Data Warehouse
+**Applies to**: [!INCLUDE [fabric-dw](../../includes/fabric-dw.md)] in [!INCLUDE [fabric](../../includes/fabric.md)]
 
 Use the `TIMESTAMP` syntax in the `OPTION` clause to query data as it existed in the past, part of the time travel feature in Synapse Data Warehouse in Microsoft Fabric.
 
@@ -406,7 +408,7 @@ The `TIMESTAMP AS OF` hint can be specified only once using the `OPTION` clause.
 
 #### FORCE [ SINGLE NODE | DISTRIBUTED ] PLAN
 
-**Applies to**: [!INCLUDE [fabric](../../includes/fabric.md)] Data Warehouse
+**Applies to**: [!INCLUDE [fabric-dw](../../includes/fabric-dw.md)] in [!INCLUDE [fabric](../../includes/fabric.md)]
 
 Allows user to choose whether to force a single node plan or a distributed plan for query's execution.
 
@@ -455,7 +457,7 @@ You can enforce hints on queries identified through Query Store without making c
 
 These query hints are exclusive to [!INCLUDE [fabric](../../includes/fabric.md)] Data Warehouse:
 
-- `FORCE SINGLE NODE PLAN`, `FORCE DISTRIBUTED PLAN`
+- `FORCE SINGLE NODE PLAN`, `FORCE DISTRIBUTED PLAN`, `DISABLE_RESULT_SET_CACHE`
 
 ## Examples
 
@@ -759,6 +761,40 @@ FROM FactInternetSales
 GROUP BY OrderDateKey
 ORDER BY OrderDateKey
 OPTION (FOR TIMESTAMP AS OF '2024-03-13T19:39:35.28');--March 13, 2024 at 7:39:35.28 PM UTC
+```
+
+### P. Query force a single node or distributed query
+
+**Applies to**: [!INCLUDE [fabric-dw](../../includes/fabric-dw.md)] in [!INCLUDE [fabric](../../includes/fabric.md)]
+
+To force a query in Fabric Data Warehouse to use a single node, use the [FORCE [ SINGLE NODE | DISTRIBUTED ] PLAN](#force--single-node--distributed--plan) hint.
+
+```sql
+SELECT OrderDateKey, SalesAmount
+FROM FactInternetSales
+OPTION (FORCE SINGLE NODE PLAN);
+```
+
+To force a query in Fabric Data Warehouse to use a distributed query:
+
+```sql
+SELECT OrderDateKey, SalesAmount
+FROM FactInternetSales
+OPTION (FORCE DISTRIBUTED PLAN);
+```
+
+### Q. Disable a query from creating or applying result set cache (preview)
+
+**Applies to**: [!INCLUDE [fabric](../../includes/fabric.md)]
+
+Use `'DISABLE_RESULT_SET_CACHE'` as a `hint_name` to block result set cache for a particular run of a query. For more information, see [Result set caching](/fabric/data-warehouse/result-set-caching).
+
+```sql
+SELECT OrderDateKey, SUM(SalesAmount) AS TotalSales
+FROM FactInternetSales
+GROUP BY OrderDateKey
+ORDER BY OrderDateKey
+OPTION (USE HINT ('DISABLE_RESULT_SET_CACHE'));
 ```
 
 ## Related content

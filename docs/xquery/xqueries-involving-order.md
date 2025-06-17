@@ -106,7 +106,7 @@ where ProductModelID=7
   
  Note the following from the previous query:  
   
--   The query constructs the <Loca`tion`> element and retrieves its attribute values from the database.  
+-   The query constructs the `<Location>` element and retrieves its attribute values from the database.  
   
 -   It uses two FLWOR (for...return) iterations: one to retrieve tools and one to retrieve the material used.  
   

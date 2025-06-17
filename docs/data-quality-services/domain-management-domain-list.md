@@ -1,14 +1,16 @@
 ---
 title: "Domain Management: Domain List"
 description: "Domain Management: Domain List"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "11/08/2011"
 ms.service: sql
 ms.subservice: data-quality-services
 ms.topic: conceptual
 f1_keywords:
   - "sql13.dqs.dm.domainlist.f1"
+ms.custom:
+  - build-2025
 ---
 # Domain Management: Domain List
 

@@ -224,10 +224,10 @@ If there are multiple SQL Server instances on the OSE, all instances and replica
 
 ### To qualify as passive node of failover clustered Instance (FCI)
 
-- The node must be passive of all FCIs present.
-- There is no standalone instance present in the node that does not qualify for AG passive replica.
-- No instances of [associated services](#manage-ssxs) in the same OSE.
 
+- No instances of the SQL Server service — whether as standalone or as an active node of an FCI — can be in a running state on the node, unless those instances qualify as free passive replicas of availability groups (AGs).
+
+- No instances of [associated services](#manage-ssxs) can be running in the same OSE.  Example: If SQL Server Integration Services is running on the machine, even if all engine instances are passive, the Integration Services instance will be billed.
 
 ### Limitations
 

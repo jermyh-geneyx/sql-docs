@@ -1,8 +1,8 @@
 ---
 title: "DQS Administration"
 description: "DQS Administration"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "10/01/2012"
 ms.service: sql
 ms.subservice: data-quality-services
@@ -11,6 +11,8 @@ helpviewer_keywords:
   - "dqs administration"
   - "administration"
   - "dqs,administration"
+ms.custom:
+  - build-2025
 ---
 # DQS Administration
 

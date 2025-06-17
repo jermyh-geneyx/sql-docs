@@ -1,10 +1,10 @@
 ---
-title: "Migrate from SQL Server: Pre-migration"
+title: "Migrate from SQL Server: Pre-Migration"
 description: Follow these steps when migrating from SQL Server, for a successful discovery and assessment of your environment.
 author: abhims14
 ms.author: abhishekum
 ms.reviewer: randolphwest
-ms.date: 01/08/2025
+ms.date: 06/16/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: migration-guide
 ms.topic: how-to
@@ -77,11 +77,11 @@ When migrating from SQL Server on-premises to SQL Server on Azure Virtual Machin
 > [!IMPORTANT]  
 > When you choose a target Azure virtual machine for your SQL Server instance, be sure to review [Checklist: Best practices for SQL Server on Azure VMs](/azure/azure-sql/virtual-machines/windows/performance-guidelines-best-practices-checklist).
 
-### Upgrade databases with Data Migration Assistant
+### Upgrade databases with the SQL Server migration component
 
-If the target SQL Server on Azure VM instance is a higher version, use [Overview of Data Migration Assistant](/sql/dma/dma-overview) to assess on-premises SQL Server instances to understand the gaps between the source and target versions.
+If the target SQL Server on Azure VM instance is a higher version, use the [SQL Server migration component in SQL Server Management Studio](/ssms/migrate-sql-server-component) to assess on-premises SQL Server instances to understand the gaps between the source and target versions.
 
-If you're upgrading the SQL Server version, you might have a series of recommendations to ensure your user databases perform and function correctly after the upgrade. Data Migration Assistant provides details on the affected objects and resources for how to resolve each issue. Make sure to resolve all breaking changes and behavior changes before you start production upgrade.
+If you're upgrading the SQL Server version, you might have a series of recommendations to ensure your user databases perform and function correctly after the upgrade. The SQL Server migration component provides details on the affected objects and resources for how to resolve each issue. Make sure to resolve all breaking changes and behavior changes before you start production upgrade.
 
 For deprecated features, you can choose to run your user databases in their original [compatibility](/sql/t-sql/statements/alter-database-transact-sql-compatibility-level) mode if you want to avoid making these changes and speed up migration. This action prevents [upgrading your database compatibility](/sql/database-engine/install-windows/compatibility-certification#compatibility-levels-and-database-engine-upgrades) until the deprecated items are resolved.
 
@@ -134,9 +134,9 @@ For details, see [Assess instances for migration with SQL Server enabled by Azur
 
 ### Assess with Azure Data Studio 
 
-The [Azure SQL Migration extension for Azure Data Studio](/azure/dms/migration-using-azure-data-studio) provides a seamless wizard-based experience to assess, get Azure recommendations and migrate your SQL Server databases on-premises to Azure. Besides highlighting any migration blockers or warnings, the extension also includes an option for Azure recommendations to collect your databases' performance data and [ recommends a right-sized Azure SQL target](/azure/dms/ads-sku-recommend) to meet the performance needs of your workload (with the lowest price).
+The [Azure SQL migration extension for Azure Data Studio](/azure/dms/migration-using-azure-data-studio) provides a seamless wizard-based experience to assess, get Azure recommendations and migrate your SQL Server databases on-premises to Azure. Besides highlighting any migration blockers or warnings, the extension also includes an option for Azure recommendations to collect your databases' performance data and [ recommends a right-sized Azure SQL target](/azure/dms/ads-sku-recommend) to meet the performance needs of your workload (with the lowest price).
 
-You can use the Azure SQL Migration extension for Azure Data Studio to assess databases to get:
+You can use the Azure SQL migration extension for Azure Data Studio to assess databases to get:
 
 - [Assessment rules for SQL Server to Azure SQL migration targets](managed-instance/assessment-rules.md)
 - [Get Azure recommendations to migrate your SQL Server database](/azure/dms/ads-sku-recommend)
@@ -144,7 +144,7 @@ You can use the Azure SQL Migration extension for Azure Data Studio to assess da
 > [!IMPORTANT]  
 > To assess databases using the Azure SQL migration extension, ensure that the logins used to connect the source SQL Server are members of the sysadmin server role or have CONTROL SERVER permission.
 
-To assess your environment using the Azure SQL Migration extension, follow these steps:
+To assess your environment using the Azure SQL migration extension, follow these steps:
 
 1. Open the [Azure SQL migration extension for Azure Data Studio](/azure-data-studio/extensions/azure-sql-migration-extension).
 1. Connect to your source SQL Server instance.
@@ -155,7 +155,7 @@ To assess your environment using the Azure SQL Migration extension, follow these
 1. Look for migration blocking and feature parity issues. The assessment report can also be exported to a file that can be shared with other teams or personnel in your organization.
 1. Determine the database compatibility level that minimizes post-migration efforts.
 
-To get an Azure recommendation using the Azure SQL Migration extension, follow these steps:
+To get an Azure recommendation using the Azure SQL migration extension, follow these steps:
 
 1. Open the [Azure SQL migration extension for Azure Data Studio](/azure-data-studio/extensions/azure-sql-migration-extension).
 1. Connect to your source SQL Server instance.
@@ -182,26 +182,16 @@ If you have multiple servers and databases that need to be assessed and analyzed
 - [Performing scaled assessments using PowerShell - Azure Migrate](/sql/dma/dma-consolidatereports)
 - [Analyzing assessment reports using Power BI - Azure Migrate](/sql/dma/dma-consolidatereports#dma-reports)
 
-
-Running assessments at scale for multiple databases can also be automated using [Run Data Migration Assistant from the command line](/sql/dma/dma-commandline) which also allows the results to be uploaded to [Azure Migrate](/sql/dma/dma-assess-sql-data-estate-to-sqldb#view-target-readiness-assessment-results) for further analysis and target readiness.
-
-
 You can automate the process by using scripts with one of the following options. To learn more about using scripting, see [Migrate databases at scale using automation (Preview)](/azure/dms/migration-dms-powershell-cli).
 
 - [Az.DataMigration PowerShell module](/powershell/module/az.datamigration)
 - [az datamigration CLI extension](/cli/azure/datamigration)
-- [Run Data Migration Assistant from the command line](/sql/dma/dma-commandline)
-
-For summary reporting across large estates, Data Migration Assistant assessments can also be [consolidated into Azure Migrate](/sql/dma/dma-assess-sql-data-estate-to-sqldb).
-
 
 ### Assess the applications
 
-Typically, an application layer accesses user databases to persist and modify data. Data Migration Assistant can assess the data access layer of an application in two ways:
+Typically, an application layer accesses user databases to persist and modify data. The SQL Server migration component can assess the data access layer of an application in two ways:
 
 - By using captured [extended events](/sql/relational-databases/extended-events/extended-events) or [SQL Server Profiler traces](/sql/tools/sql-server-profiler/create-a-trace-sql-server-profiler) of your user databases.
-
-During the assessment of user databases, use Data Migration Assistant to [import](/sql/dma/dma-assesssqlonprem#add-databases-and-extended-events-trace-to-assess) captured trace files.
 
 ## Related content
 

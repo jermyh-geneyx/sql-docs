@@ -39,7 +39,7 @@ monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||
 |**NUMERIC_PRECISION**|**tinyint**|Precision of approximate numeric data, exact numeric data, integer data, or monetary data. Otherwise, returns NULL.|  
 |**NUMERIC_PRECISION_RADIX**|**smallint**|Precision radix of approximate numeric data, exact numeric data, integer data, or monetary data. Otherwise, returns NULL.|  
 |**NUMERIC_SCALE**|**tinyint**|Scale of approximate numeric data, exact numeric data, integer data, or monetary data. Otherwise, returns NULL.|  
-|**DATETIME_PRECISION**|**smallint**|Subtype code for **datetime** and ISO**integer** data types. For other data types, returns NULL.|  
+|**DATETIME_PRECISION**|**smallint**|Subtype code for **datetime** and ISO **integer** data types. For other data types, returns NULL.|  
 |**CHARACTER_SET_CATALOG**|**varchar(**6**)**|Returns **master**. This indicates the database in which the character set is located if the column is character data or **text** data type. Otherwise, returns NULL.|  
 |**CHARACTER_SET_SCHEMA**|**varchar(**3**)**|Always returns NULL.|  
 |**CHARACTER_SET_NAME**|**nvarchar(**128**)**|Returns the unique name for the character set if this column is character data or **text** data type. Otherwise, returns NULL.|  

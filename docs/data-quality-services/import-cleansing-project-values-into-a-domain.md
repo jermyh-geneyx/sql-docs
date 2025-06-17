@@ -1,14 +1,16 @@
 ---
 title: "Import Cleansing Project Values into a Domain"
 description: "Import Cleansing Project Values into a Domain"
-author: swinarko
-ms.author: sawinark
+author: chugugrace
+ms.author: chugu
 ms.date: "03/01/2017"
 ms.service: sql
 ms.subservice: data-quality-services
 ms.topic: how-to
 f1_keywords:
   - "sql13.dqs.kb.importprojectvalues.f1"
+ms.custom:
+  - build-2025
 ---
 # Import Cleansing Project Values into a Domain
 

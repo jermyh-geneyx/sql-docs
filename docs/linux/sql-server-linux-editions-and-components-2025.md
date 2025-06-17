@@ -10,6 +10,7 @@ ms.subservice: linux
 ms.topic: conceptual
 ms.custom:
   - linux-related-content
+  - build-2025
 helpviewer_keywords:
   - "Enterprise Edition [SQL Server]"
   - "Developer Edition [SQL Server]"
@@ -49,7 +50,7 @@ For a list of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] feature
 
 ## SQL Server editions
 
-[!INCLUDE [sql-server-editions](../includes/paragraph-content/sql-server-editions.md)]
+[!INCLUDE [sql-server-editions](../includes/paragraph-content/sql-server-editions-2.md)]
 
 ## Use SQL Server with client/server applications
 

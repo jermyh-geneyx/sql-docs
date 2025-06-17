@@ -1,8 +1,8 @@
 ---
 title: "Executing the SSMA Console (SybaseToSQL)"
 description: "Executing the SSMA Console (SybaseToSQL)"
-author: cpichuka
-ms.author: cpichuka
+author: nilabjaball
+ms.author: niball
 ms.date: "09/27/2017"
 ms.service: sql
 ms.subservice: ssma
@@ -35,7 +35,7 @@ This command creates a new SSMA project.
   
 -   `project-name` indicates the name of the project. {string}  
   
--   `overwrite-if-exists`Optional attribute indicates whether an existing project should be overwritten. {boolean}  
+-   `overwrite-if-exists` Optional attribute indicates whether an existing project should be overwritten. {boolean}  
   
 -   `project-type:`Optional attribute. Indicates the project type, that is "sql-server-2005" project or "sql-server-2008" project or "sql-server-2012" project or "sql-server-2014" project or "sql-azure" project. Default is "sql-server-2008."  
   

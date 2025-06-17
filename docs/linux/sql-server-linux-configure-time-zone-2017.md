@@ -10,6 +10,7 @@ ms.subservice: linux
 ms.topic: install-set-up-deploy
 ms.custom:
   - linux-related-content
+  - build-2025
 ---
 # Configure the time zone for SQL Server 2017 on Linux
 
@@ -496,4 +497,4 @@ Symbolic links in `/usr/share/zoneinfo` and `/usr/lib/zoneinfo` are considered. 
 
 - [What is SQL Server on Linux?](sql-server-linux-overview.md)
 - [Installation guidance for SQL Server on Linux](sql-server-linux-setup.md)
-- [Install the SQL Server command-line tools sqlcmd and bcp on Linux](sql-server-linux-setup-tools.md)
+- [Install the sqlcmd and bcp SQL Server command-line tools on Linux](sql-server-linux-setup-tools.md)
