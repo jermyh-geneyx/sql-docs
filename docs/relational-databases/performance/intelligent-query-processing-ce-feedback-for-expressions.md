@@ -64,7 +64,6 @@ To enable the feedback for expressions feature for a database, the following pre
 
 - The `CE_FEEDBACK_FOR_EXPRESSIONS` database-scoped configuration must be enabled.
 
-- Trace Flag 12005 is enabled. This can be used as a startup or global trace flag and is only valid for the preview version of SQL Server 2025. The trace flag will be removed before the GA of SQL Server 2025.
 
 The `CE_FEEDBACK_FOR_EXPRESSIONS` database-scoped configuration is enabled by default.
 
