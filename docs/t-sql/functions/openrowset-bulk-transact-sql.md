@@ -4,7 +4,7 @@ description: "OPENROWSET BULK operations perform bulk data manipulation operatio
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest, hudequei, wiassaf
-ms.date: 05/15/2025
+ms.date: 06/17/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -18,11 +18,11 @@ monikerRange: "=azuresqldb-mi-current || >=sql-server-2016 || =azuresqldb-curren
 
 [!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
 
-`OPENROWSET BULK` is an alternative to reading tables from a linked server and is a one-time, ad hoc method of connecting and accessing remote data. An `OPENROWSET` T-SQL command includes all connection information that is required to access remote data from an external data source. 
+An `OPENROWSET` T-SQL command includes all connection information that is required to access remote data from an external data source. `OPENROWSET` also supports bulk operations through a built-in `BULK` provider that enables data from a file to be read and returned as a rowset. `OPENROWSET BULK` is for reading from external data files, `OPENROWSET` without bulk is for reading from another database engine.
 
-The `OPENROWSET` function can be referenced in the `FROM` clause of a query as if it were a table name. The `OPENROWSET` function can also be referenced as the target table of an `INSERT`, `UPDATE`, or `DELETE` statement, subject to the capabilities of the data provider. Although the query might return multiple result sets, `OPENROWSET` returns only the first one.
+The `OPENROWSET` function can be referenced in the `FROM` clause of a query as if it were a table name. The `OPENROWSET` function can also be referenced as the target of an `INSERT`, `UPDATE`, or `DELETE` statement, subject to the capabilities of the data provider. Although the query might return multiple result sets, `OPENROWSET` returns only the first one.
 
-`OPENROWSET` also supports bulk operations through a built-in `BULK` provider that enables data from a file to be read and returned as a rowset. `OPENROWSET` without the `BULK` operator is available on [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] only, for more information, see [OPENROWSET (Transact-SQL)](openrowset-transact-sql.md).
+`OPENROWSET` without the `BULK` operator is available on [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] only, for more information, see [OPENROWSET (Transact-SQL)](openrowset-transact-sql.md).
 
 Details and links to similar examples on other platforms:
 
@@ -84,27 +84,9 @@ A string constant that is the user name passed to the specified data provider. *
 
 A string constant that is the user password to be passed to the data provider. *password* is passed in as the `DBPROP_AUTH_PASSWORD` property when initializing the provider. *password* can't be a Microsoft Windows password.
 
-```sql
-SELECT a.* FROM OPENROWSET(
-    'Microsoft.Jet.OLEDB.4.0',
-    'C:\SAMPLES\Northwind.mdb';
-    'admin';
-    'password',
-    Customers
-) AS a;
-```
-
 #### '*provider_string*'
 
 A provider-specific connection string that is passed in as the `DBPROP_INIT_PROVIDERSTRING` property to initialize the OLE DB provider. *provider_string* typically encapsulates all the connection information required to initialize the provider. For a list of keywords that the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Native Client OLE DB provider recognizes, see [Initialization and Authorization Properties (Native Client OLE DB Provider)](../../relational-databases/native-client-ole-db-data-source-objects/initialization-and-authorization-properties.md).
-
-```sql
-SELECT d.* FROM OPENROWSET(
-    'SQLNCLI',
-    'Server=Seattle1;Trusted_Connection=yes;',
-    Department
-) AS d;
-```
 
 <a id="table_or_view"></a>
 
@@ -115,14 +97,6 @@ Remote table or view containing the data that `OPENROWSET` should read. It can b
 - *catalog* (optional) - the name of the catalog or database in which the specified object resides.
 - *schema* (optional) - the name of the schema or object owner for the specified object.
 - *object* - the object name that uniquely identifies the object to work with.
-
-```sql
-SELECT d.* FROM OPENROWSET(
-    'SQLNCLI',
-    'Server=Seattle1;Trusted_Connection=yes;',
-    AdventureWorks2022.HumanResources.Department
-) AS d;
-```
 
 #### '*query*'
 
@@ -534,8 +508,7 @@ WITH IDENTITY = 'MANAGED IDENTITY';
 
 CREATE EXTERNAL DATA SOURCE SampleSource
 WITH (
-    TYPE = BLOB_STORAGE,
-    LOCATION = 'https://****************.blob.core.windows.net/curriculum',
+    LOCATION = 'abs://****************.blob.core.windows.net/curriculum',
     CREDENTIAL = sampletestcred
 );
 ```
@@ -581,7 +554,7 @@ SELECT * FROM OPENROWSET(
 ) AS data;
 ```
 
-### J. Use OPENROWSET to access several Delta files from Azure Data Lake Gen2
+### J. Use OPENROWSET to access several Delta tables from Azure Data Lake Gen2
 
 **Applies to:** [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions.
 
@@ -651,7 +624,6 @@ For more examples that show using `INSERT...SELECT * FROM OPENROWSET(BULK...)`, 
 - [OPENDATASOURCE (Transact-SQL)](opendatasource-transact-sql.md)
 - [OPENQUERY (Transact-SQL)](openquery-transact-sql.md)
 - [SELECT (Transact-SQL)](../queries/select-transact-sql.md)
-- [sp_addlinkedserver (Transact-SQL)](../../relational-databases/system-stored-procedures/sp-addlinkedserver-transact-sql.md)
 - [sp_serveroption (Transact-SQL)](../../relational-databases/system-stored-procedures/sp-serveroption-transact-sql.md)
 - [UPDATE (Transact-SQL)](../queries/update-transact-sql.md)
 - [WHERE (Transact-SQL)](../queries/where-transact-sql.md)

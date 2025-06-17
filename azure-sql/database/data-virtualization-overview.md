@@ -5,7 +5,7 @@ description: Learn about data virtualization capabilities of Azure SQL Database.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: hudequei, mikeray
-ms.date: 05/13/2025
+ms.date: 06/17/2025
 ms.service: azure-sql-database
 ms.topic: conceptual
 ---
@@ -40,14 +40,19 @@ Files can be stored in Azure Data Lake Storage Gen2 or Azure Blob Storage. To qu
 ```sql
 --Blob Storage endpoint
 abs://<container>@<storage_account>.blob.core.windows.net/<path>/<file_name>.parquet
+--or
+abs://<storage_account_name>.blob.core.windows.net/<container_name>/
 
 --Data Lake endpoint
 adls://<container>@<storage_account>.dfs.core.windows.net/<path>/<file_name>.parquet
+--or
+adls://<storage_account_name>.dfs.core.windows.net/<container_name>/
 ```
 
 > [!IMPORTANT]  
-> The provided Location type prefix is used to choose the optimal protocol for communication and to leverage any advanced capabilities offered by the particular storage type.
-> Using the generic `https://` prefix is disabled. Always use endpoint-specific prefixes.
+> Always use endpoint-specific prefixes. The provided Location type prefix is used to choose the optimal protocol for communication and to leverage any advanced capabilities offered by the particular storage type.
+> 
+> The generic `https://` prefix is only supported for `BULK INSERT`, but not for other use cases including `OPENROWSET` or `EXTERNAL TABLE`.
 
 ## Get started
 
@@ -121,14 +126,7 @@ The Azure storage administrator must first grant permissions to the managed iden
     - Instead of granting membership to the Storage Blob Data Reader Azure RBAC role for the managed identity, you could also grant more granular permissions on a subset of files. All users who need access to read individual files in this container also must have **Execute** permission on all parent folders up to the root (the container). For more information, see [set ACLs in Azure Data Lake Storage Gen2](/azure/storage/blobs/data-lake-storage-explorer-acl).
 1. On the next page, for **Assign access to**, select **Managed identity**. 
 1. Select **+ Select members**. Search for and select the managed identity. For more information, see [Assign Azure roles using the Azure portal](/azure/role-based-access-control/role-assignments-portal).
-1. Before you create a database scoped credential in Azure SQL Database, you must first create the [database master key](/sql/t-sql/statements/create-master-key-transact-sql?view=azuresqldb-current&preserve-view=true), if one does not already exist. A database master key is required when the credential requires `SECRET`.
-
-    ```sql
-    -- Create MASTER KEY if it doesn't exist in the database:
-    CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<Some Very Strong Password Here>'
-    GO
-    ```
-1. Create the database scoped credential for managed identity authentication in your Azure SQL database, using [CREATE DATABASE SCOPED CREDENTIAL (Transact-SQL)](/sql/t-sql/statements/create-database-scoped-credential-transact-sql?view=azuresqldb-current&preserve-view=true). In the following example, `IDENTITY = 'Managed Identity'` is a hard-coded string. The same `IDENTITY = 'Managed Identity'` is used for both a system-assigned managed identity and a user-assigned managed identity.
+1. Create the database scoped credential for managed identity authentication in your Azure SQL database, using [CREATE DATABASE SCOPED CREDENTIAL (Transact-SQL)](/sql/t-sql/statements/create-database-scoped-credential-transact-sql?view=azuresqldb-current&preserve-view=true). In the following example, `IDENTITY = 'Managed Identity'` is a hard-coded string. The same `IDENTITY = 'Managed Identity'` is used for both a system-assigned managed identity and a user-assigned managed identity. With a managed identity, a database master key is not required because the credential doesn't contain a `SECRET`.
 
     ```sql
     CREATE DATABASE SCOPED CREDENTIAL MyCredential
@@ -144,15 +142,7 @@ User identity, also known as "Microsoft Entra pass-through", is an authorization
     - As an alternative, you can specify fine-grained ACL rules to access files and folders. Even if you are an Owner of a Storage Account, you still need to add yourself into one of the Storage Blob Data roles. To learn more about access control in Azure Data Lake Store Gen2, see [Access control in Azure Data Lake Storage Gen2](/azure/storage/blobs/data-lake-storage-access-control).
     - Microsoft Entra pass-through authentication does not support SQL authenticated login types. 
 
-1. Before you create a database scoped credential in Azure SQL Database, you must first create the [database master key](/sql/t-sql/statements/create-master-key-transact-sql?view=azuresqldb-current&preserve-view=true), if one does not already exist. A database master key is required when the credential requires `SECRET`.
-
-    ```sql
-    -- Create MASTER KEY if it doesn't exist in the database:
-    CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<Some Very Strong Password Here>';
-    GO
-    ```
-
-1. Create a database scoped credential for a Microsoft Entra ID account with access to the Azure SQL Database. Subsitute `<UserCredential>` for the name of the identity, such as `identity-<random string>`. In the following example, `IDENTITY = 'User Identity'` is a hard-coded string. 
+1. Create a database scoped credential for a Microsoft Entra ID account with access to the Azure SQL Database. Subsitute `<UserCredential>` for the name of the identity, such as `identity-<random string>`. In the following example, `IDENTITY = 'User Identity'` is a hard-coded string. With a managed user identity, a database master key is not required because the credential doesn't contain a `SECRET`.
 
     ```sql
     CREATE DATABASE SCOPED CREDENTIAL <UserCredential>
@@ -185,8 +175,8 @@ When accessing nonpublic storage accounts, along with the location, you also nee
 --Create external data source pointing to the file path, and referencing database-scoped credential:
 CREATE EXTERNAL DATA SOURCE MyPrivateExternalDataSource
 WITH (
-    LOCATION = 'abs://public@pandemicdatalake.blob.core.windows.net/curated/covid-19/bing_covid-19_data/latest'
-        CREDENTIAL = [MyCredential];
+    LOCATION = 'abs://<privatecontainer>@privatestorageaccount.blob.core.windows.net/dataset/' 
+       CREDENTIAL = [MyCredential];
 )
 ```
 
@@ -301,12 +291,6 @@ When querying multiple files or folders, you can use `filepath()` and `filename(
 --Query all files and project file path and file name information for each row:
 SELECT TOP 10 filerows.filepath(1) as [Year_Folder], filerows.filepath(2) as [Month_Folder],
 filerows.filename() as [File_name], filerows.filepath() as [Full_Path], *
-FROM OPENROWSET(
- BULK 'yellow/puYear=*/puMonth=*/*.parquet',
- DATA_SOURCE = 'NYCTaxiExternalDataSource',
- FORMAT = 'parquet') AS filerows;
---List all paths:
-SELECT DISTINCT filerows.filepath(1) as [Year_Folder], filerows.filepath(2) as [Month_Folder]
 FROM OPENROWSET(
  BULK 'yellow/puYear=*/puMonth=*/*.parquet',
  DATA_SOURCE = 'NYCTaxiExternalDataSource',
@@ -505,6 +489,7 @@ WHERE
 
 If your stored data isn't partitioned, consider partitioning it to improve query performance.
 
+<!--
 ### Statistics
 
 Collecting statistics on your external data is one of the most important things you can do for query optimization. The more the instance knows about your data, the faster it can execute queries. The SQL engine query optimizer is a cost-based optimizer. It compares the cost of various query plans, and then chooses the plan with the lowest cost. In most cases, it chooses the plan that executes the fastest.
@@ -553,6 +538,7 @@ The `WITH` options are mandatory, and for the sample size, the allowed options a
 
 - To create single-column statistics for multiple columns, execute `CREATE STATISTICS` for each of the columns. 
 - Multi-column statistics are not supported.
+--> 
 
 ## Troubleshoot
 
@@ -567,10 +553,11 @@ Issues with query execution are typically caused by Azure SQL Database not being
 
 ## Limitations
 
+- Currently, statistics on external tables are not supported in Azure SQL Database.
 - Currently, `CREATE EXTERNAL TABLE AS SELECT` is not available on Azure SQL Database.
 - [Row level security](/sql/relational-databases/security/row-level-security?view=azuresqldb-current&preserve-view=true) feature is not supported with external tables.
 - [Dynamic data masking](/sql/relational-databases/security/dynamic-data-masking?view=azuresqldb-current&preserve-view=true) rule can't be defined for a column in an external table.
-
+- Managed Identity does not support cross-tenant scenarios, if you Azure Storage Account is in a different tenant, Shared access signature is the supported method.
 
 ## Known issues
 

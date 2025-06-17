@@ -4,7 +4,7 @@ description: "OPENROWSET includes all connection information that is required to
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest, hudequei, wiassaf, nzagorac, jovanpop
-ms.date: 05/15/2025
+ms.date: 06/17/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -94,7 +94,7 @@ For a list of keywords that the [!INCLUDE [ssNoVersion](../../includes/ssnoversi
 
 ```sql
 SELECT d.* FROM OPENROWSET(
-    'SQLNCLI',
+    'MSOLEDBSQL',
     'Server=Seattle1;Trusted_Connection=yes;',
     Department
 ) AS d;
@@ -112,7 +112,7 @@ Remote table or view containing the data that `OPENROWSET` should read. It can b
 
 ```sql
 SELECT d.* FROM OPENROWSET(
-    'SQLNCLI',
+    'MSOLEDBSQL',
     'Server=Seattle1;Trusted_Connection=yes;',
     AdventureWorks2022.HumanResources.Department
 ) AS d;
