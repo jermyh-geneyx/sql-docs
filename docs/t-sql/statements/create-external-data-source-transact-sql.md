@@ -555,7 +555,7 @@ WITH (
 
 ### E. Create an external data source for bulk operations retrieving data from Azure Storage
 
-**Applies to:** [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] and later.
+**Applies to:** [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] and later versions.
 
 Use the following data source for bulk operations using [BULK INSERT](bulk-insert-transact-sql.md) or [OPENROWSET](../functions/openrowset-bulk-transact-sql.md). The credential must set `SHARED ACCESS SIGNATURE` as the identity, mustn't have the leading `?` in the SAS token, must have at least read permission on the file that should be loaded (for example `srt=o&sp=r`), and the expiration period should be valid (all dates are in UTC time). For more information on shared access signatures, see [Using Shared Access Signatures (SAS)](/azure/storage/common/storage-sas-overview).
 
@@ -684,7 +684,7 @@ Additional notes and guidance when setting the location:
 
 <!-- See also docs\t-sql\statements\create-external-data-source-connection-options.md -->
 
-Specified for [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and later. Specifies additional options when connecting over `ODBC` to an external data source. To use multiple connection options, separate them by a semi-colon.
+Specified for [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and later versions. Specifies additional options when connecting over `ODBC` to an external data source. To use multiple connection options, separate them by a semi-colon.
 
 Applies to generic `ODBC` connections, as well as built-in `ODBC` connectors for [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], Oracle, Teradata, MongoDB, and Azure Cosmos DB API for MongoDB.
 
@@ -1138,11 +1138,11 @@ WITH (
 
 ::: moniker-end
 
-::: moniker range=">=sql-server-ver16||=sql-server-linux-ver16"
+::: moniker range="=sql-server-ver16||=sql-server-linux-ver16"
 
 ## Overview: SQL Server 2022
 
-**Applies to**: [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)]
+**Applies to**: [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions
 
 Creates an external data source for PolyBase queries. External data sources are used to establish connectivity and support these primary use cases:
 
@@ -1154,7 +1154,7 @@ Creates an external data source for PolyBase queries. External data sources are 
 
 ## <a id="syntax"></a> Syntax for SQL Server 2022
 
-## Syntax for SQL Server 2022 and later
+## Syntax for SQL Server 2022 and later versions
 
 ```syntaxsql
 CREATE EXTERNAL DATA SOURCE <data_source_name>
@@ -1226,7 +1226,7 @@ Additional notes and guidance when setting the location:
 
 <!-- See also docs\t-sql\statements\create-external-data-source-connection-options.md -->
 
-Specified for [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and later. Specifies additional options when connecting over `ODBC` to an external data source. To use multiple connection options, separate them by a semi-colon.
+Specified for [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and later versions. Specifies additional options when connecting over `ODBC` to an external data source. To use multiple connection options, separate them by a semi-colon.
 
 Applies to generic `ODBC` connections, as well as built-in `ODBC` connectors for [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], Oracle, Teradata, MongoDB, and Azure Cosmos DB API for MongoDB.
 
@@ -1241,7 +1241,7 @@ Starting in [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] Cumulative Upd
 
 #### PUSHDOWN = ON | OFF
 
-**Applies to: [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and later.** States whether computation can be pushed down to the external data source. It is on by default.
+**Applies to: [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and later versions.** States whether computation can be pushed down to the external data source. It is on by default.
 
 `PUSHDOWN` is supported when connecting to [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], Oracle, Teradata, MongoDB, the Azure Cosmos DB API for MongoDB, or ODBC at the external data source level.
 
@@ -1678,7 +1678,7 @@ For a more detailed example on  how to access delta files stored on Azure Data L
 
 ### H. Create an external data source for bulk operations retrieving data from Azure Storage
 
-**Applies to:** [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later.
+**Applies to:** [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions.
 
 Use the following data source for bulk operations using [BULK INSERT (Transact-SQL)](bulk-insert-transact-sql.md) or [OPENROWSET (Transact-SQL)](../functions/openrowset-bulk-transact-sql.md). The credential must set `SHARED ACCESS SIGNATURE` as the identity, mustn't have the leading `?` in the SAS token, must have at least read permission on the file that should be loaded (for example `srt=o&sp=r`), and the expiration period should be valid (all dates are in UTC time). For more information on shared access signatures, see [Using Shared Access Signatures (SAS)](/azure/storage/common/storage-sas-overview).
 

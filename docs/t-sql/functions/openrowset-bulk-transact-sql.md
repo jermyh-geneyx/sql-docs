@@ -44,7 +44,7 @@ OPENROWSET( BULK 'data_file' ,
 )
 
 <bulk_options> ::=
-   [ , DATASOURCE = 'data_source_name' ]
+   [ , DATA_SOURCE = 'data_source_name' ]
 
    -- bulk_options related to input file format
    [ , CODEPAGE = { 'ACP' | 'OEM' | 'RAW' | 'code_page' } ]
@@ -65,51 +65,6 @@ OPENROWSET( BULK 'data_file' ,
 ```
 
 ## Arguments
-
-#### '*provider_name*'
-
-A character string that represents the friendly name (or `PROGID`) of the data provider as specified in the registry. *provider_name* has no default value. Provider name examples are `Microsoft.Jet.OLEDB.4.0`, `SQLNCLI`, or `MSDASQL`.
-
-#### '*datasource*'
-
-A string constant that corresponds to a particular OLE DB data source. *datasource* is the `DBPROP_INIT_DATASOURCE` property to be passed to the `IDBProperties` interface of the provider to initialize the provider. Typically, this string includes the name of the database file, the name of a database server, or a name that the provider understands for locating the database or databases.
-
-Data source can be file path `C:\SAMPLES\Northwind.mdb'` for `Microsoft.Jet.OLEDB.4.0` provider, or connection string `Server=Seattle1;Trusted_Connection=yes;` for `SQLNCLI` provider.
-
-#### '*user_id*'
-
-A string constant that is the user name passed to the specified data provider. *user_id* specifies the security context for the connection and is passed in as the `DBPROP_AUTH_USERID` property to initialize the provider. *user_id* can't be a Microsoft Windows login name.
-
-#### '*password*'
-
-A string constant that is the user password to be passed to the data provider. *password* is passed in as the `DBPROP_AUTH_PASSWORD` property when initializing the provider. *password* can't be a Microsoft Windows password.
-
-#### '*provider_string*'
-
-A provider-specific connection string that is passed in as the `DBPROP_INIT_PROVIDERSTRING` property to initialize the OLE DB provider. *provider_string* typically encapsulates all the connection information required to initialize the provider. For a list of keywords that the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Native Client OLE DB provider recognizes, see [Initialization and Authorization Properties (Native Client OLE DB Provider)](../../relational-databases/native-client-ole-db-data-source-objects/initialization-and-authorization-properties.md).
-
-<a id="table_or_view"></a>
-
-#### [ catalog. ] [ schema. ] object
-
-Remote table or view containing the data that `OPENROWSET` should read. It can be three-part-name object with the following components:
-
-- *catalog* (optional) - the name of the catalog or database in which the specified object resides.
-- *schema* (optional) - the name of the schema or object owner for the specified object.
-- *object* - the object name that uniquely identifies the object to work with.
-
-#### '*query*'
-
-A string constant sent to and executed by the provider. The local instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] doesn't process this query, but processes query results returned by the provider, a pass-through query. Pass-through queries are useful when used on providers that don't make available their tabular data through table names, but only through a command language. Pass-through queries are supported on the remote server, as long as the query provider supports the OLE DB Command object and its mandatory interfaces. For more information, see [SQL Server Native Client (OLE DB) Interfaces](../../relational-databases/native-client-ole-db-interfaces/sql-server-native-client-ole-db-interfaces.md).
-
-```sql
-SELECT a.*
-FROM OPENROWSET(
-    'SQLNCLI',
-    'Server=Seattle1;Trusted_Connection=yes;',
-    'SELECT TOP 10 GroupName, Name FROM AdventureWorks2022.HumanResources.Department'
-) AS a;
-```
 
 ### BULK arguments
 
@@ -161,6 +116,10 @@ The default for *maximum_errors* is 10.
 > `MAX_ERRORS` doesn't apply to `CHECK` constraints, or to converting **money** and **bigint** data types.
 
 ### BULK data processing options
+
+#### DATA_SOURCE 
+
+`DATA_SOURCE` is the external location created with [CREATE EXTERNAL DATA SOURCE](../statements/create-external-data-source-transact-sql?view=azuresqldb-current&preserve-view=true).
 
 #### FIRSTROW = *first_row*
 

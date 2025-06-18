@@ -71,7 +71,7 @@ SELECT TOP 10 *
 FROM OPENROWSET(
  BULK 'abs://public@pandemicdatalake.blob.core.windows.net/curated/covid-19/bing_covid-19_data/latest/bing_covid-19_data.parquet',
  FORMAT = 'parquet'
-) AS filerows
+) AS filerows;
 ```
 
 You can continue data set exploration by appending `WHERE`, `GROUP BY` and other clauses based on the result set of the first query.
@@ -101,8 +101,8 @@ A shared access signature (SAS) provides delegated access to files in a storage 
 
     ```sql
     -- Create MASTER KEY if it doesn't exist in the database:
-    CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<Some Very Strong Password Here>'
-    GO
+    CREATE MASTER KEY 
+    ENCRYPTION BY PASSWORD = '<Some Very Strong Password Here>';
     ```
     
 1. When a SAS token is generated, it includes a question mark (`?`) at the beginning of the token. To use the token, you must remove the question mark (`?`) when creating a credential. For example:
@@ -111,7 +111,6 @@ A shared access signature (SAS) provides delegated access to files in a storage 
     CREATE DATABASE SCOPED CREDENTIAL MyCredential
     WITH IDENTITY = 'SHARED ACCESS SIGNATURE',
     SECRET = 'sv=secret string here';
-    GO
     ```
     
 ### [Managed identity](#tab/managed-identity)
@@ -166,7 +165,7 @@ An external data source is an abstraction that enables easy referencing of a fil
 CREATE EXTERNAL DATA SOURCE MyExternalDataSource
 WITH (
     LOCATION = 'abs://public@pandemicdatalake.blob.core.windows.net/curated/covid-19/bing_covid-19_data/latest'
-)
+);
 ```
 
 When accessing nonpublic storage accounts, along with the location, you also need to reference a database scoped credential with encapsulated authentication parameters. The following script creates an external data source pointing to the file path, and referencing a database-scoped credential.
@@ -176,8 +175,8 @@ When accessing nonpublic storage accounts, along with the location, you also nee
 CREATE EXTERNAL DATA SOURCE MyPrivateExternalDataSource
 WITH (
     LOCATION = 'abs://<privatecontainer>@privatestorageaccount.blob.core.windows.net/dataset/' 
-       CREDENTIAL = [MyCredential];
-)
+       CREDENTIAL = [MyCredential]
+);
 ```
 
 ## Query data sources using OPENROWSET
@@ -336,7 +335,7 @@ FROM OPENROWSET(
  BULK 'yellow/puYear=*/puMonth=*/*.parquet',
  DATA_SOURCE = 'NYCTaxiExternalDataSource',
  FORMAT = 'parquet'
-) AS filerows
+) AS filerows;
 ```
 
 It's also convenient to add columns with the file location data to a view using the `filepath()` function for easier and more performant filtering. Using views can reduce the number of files and the amount of data the query on top of the view needs to read and process when filtered by any of those columns:
@@ -350,7 +349,7 @@ FROM OPENROWSET(
  BULK 'yellow/puYear=*/puMonth=*/*.parquet',
  DATA_SOURCE = 'NYCTaxiExternalDataSource',
  FORMAT = 'parquet'
-) AS filerows
+) AS filerows;
 ```
 
 Views also enable reporting and analytic tools like Power BI to consume results of `OPENROWSET`.
@@ -364,8 +363,7 @@ External tables encapsulate access to files making the querying experience almos
 CREATE EXTERNAL FILE FORMAT DemoFileFormat
 WITH (
  FORMAT_TYPE=PARQUET
-)
-GO
+);
 
 --Create external table:
 CREATE EXTERNAL TABLE tbl_TaxiRides(
@@ -396,7 +394,6 @@ WITH (
  DATA_SOURCE = NYCTaxiExternalDataSource,
  FILE_FORMAT = DemoFileFormat
 );
-GO
 ```
 
 Once the external table is created, you can query it just like any other table:
@@ -445,49 +442,7 @@ ORDER BY
 
 If your stored data isn't partitioned, consider partitioning it to improve query performance.
 
-If you are using external tables, `filepath()` and `filename()` functions are supported but not in the WHERE clause. You can still filter by `filename` or `filepath` if you use them in computed columns. The following example demonstrates this:
-
-```sql
-CREATE EXTERNAL TABLE tbl_TaxiRides (
- vendorID VARCHAR(100) COLLATE Latin1_General_BIN2,
- tpepPickupDateTime DATETIME2,
- tpepDropoffDateTime DATETIME2,
- passengerCount INT,
- tripDistance FLOAT,
- puLocationId VARCHAR(8000),
- doLocationId VARCHAR(8000),
- startLon FLOAT,
- startLat FLOAT,
- endLon FLOAT,
- endLat FLOAT,
- rateCodeId SMALLINT,
- storeAndFwdFlag VARCHAR(8000),
- paymentType VARCHAR(8000),
- fareAmount FLOAT,
- extra FLOAT,
- mtaTax FLOAT,
- improvementSurcharge VARCHAR(8000),
- tipAmount FLOAT,
- tollsAmount FLOAT,
- totalAmount FLOAT,
- [Year]  AS CAST(filepath(1) AS INT), --use filepath() for partitioning
- [Month]  AS CAST(filepath(2) AS INT) --use filepath() for partitioning
-)
-WITH (
- LOCATION = 'yellow/puYear=*/puMonth=*/*.parquet',
- DATA_SOURCE = NYCTaxiExternalDataSource,
- FILE_FORMAT = DemoFileFormat
-);
-GO
-
-SELECT *
-      FROM tbl_TaxiRides
-WHERE
-      [year]=2017            
-      AND [month] in (10,11,12);
-```
-
-If your stored data isn't partitioned, consider partitioning it to improve query performance.
+If you are using external tables, `filepath()` and `filename()` functions are supported but not in the `WHERE` clause. 
 
 <!--
 ### Statistics

@@ -60,13 +60,13 @@ OPENROWSET
 
 #### '*provider_name*'
 
-A character string that represents the friendly name (or `PROGID`) of the data provider as specified in the registry. *provider_name* has no default value. Provider name examples are `Microsoft.Jet.OLEDB.4.0`, `SQLNCLI`, or `MSDASQL`.
+A character string that represents the friendly name (or `PROGID`) of the data provider as specified in the registry. *provider_name* has no default value. Provider name examples are `MSOLEDBSQL`, `Microsoft.Jet.OLEDB.4.0`, or `MSDASQL`.
 
 #### '*datasource*'
 
 A string constant that corresponds to a particular data source. *datasource* is the `DBPROP_INIT_DATASOURCE` property to be passed to the `IDBProperties` interface of the provider to initialize the provider. Typically, this string includes the name of the database file, the name of a database server, or a name that the provider understands for locating the database or databases.
 
-Data source can be file path `C:\SAMPLES\Northwind.mdb'` for `Microsoft.Jet.OLEDB.4.0` provider, or connection string `Server=Seattle1;Trusted_Connection=yes;` for `SQLNCLI` provider.
+Data source can be file path `C:\SAMPLES\Northwind.mdb'` for `Microsoft.Jet.OLEDB.4.0` provider, or connection string `Server=Seattle1;Trusted_Connection=yes;` for `MSOLEDBSQL` provider.
 
 #### '*user_id*'
 
@@ -127,7 +127,7 @@ For more information, see [SQL Server Native Client (OLE DB) Interfaces](../../r
 ```sql
 SELECT a.*
 FROM OPENROWSET(
-    'SQLNCLI',
+    'MSOLEDBSQL',
     'Server=Seattle1;Trusted_Connection=yes;',
     'SELECT TOP 10 GroupName, Name FROM AdventureWorks2022.HumanResources.Department'
 ) AS a;
@@ -162,12 +162,12 @@ This section provides general examples to demonstrate how to use OPENROWSET.
 
 ### A. Use OPENROWSET with SELECT and the SQL Server Native Client OLE DB Provider
 
-The following example uses the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Native Client OLE DB provider to access the `HumanResources.Department` table in the [!INCLUDE [ssSampleDBobject](../../includes/sssampledbobject-md.md)] database on the remote server `Seattle1`. (Use SQLNCLI and [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] will redirect to the latest version of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Native Client OLE DB Provider.) A `SELECT` statement is used to define the row set returned. The provider string contains the `Server` and `Trusted_Connection` keywords. These keywords are recognized by the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Native Client OLE DB provider.
+The following example uses the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Native Client OLE DB provider to access the `HumanResources.Department` table in the [!INCLUDE [ssSampleDBobject](../../includes/sssampledbobject-md.md)] database on the remote server `Seattle1`. (Use `MSOLEDBSQL` for the modern Microsoft SQL Server OLE DB Data Provider that replaced `SQLNCLI`.) A `SELECT` statement is used to define the row set returned. The provider string contains the `Server` and `Trusted_Connection` keywords. These keywords are recognized by the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Native Client OLE DB provider.
 
 ```sql
 SELECT a.*
 FROM OPENROWSET(
-    'SQLNCLI', 'Server=Seattle1;Trusted_Connection=yes;',
+    'MSOLEDBSQL', 'Server=Seattle1;Trusted_Connection=yes;',
     'SELECT GroupName, Name, DepartmentID
          FROM AdventureWorks2022.HumanResources.Department
          ORDER BY GroupName, Name'
