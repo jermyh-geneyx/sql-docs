@@ -57,28 +57,31 @@ Each contained AG has its own `master` and `msdb` system databases, named after 
 
 The system databases in a newly created contained AG aren't copies from the instance where the `CREATE AVAILABILITY GROUP` command is run. They are initially empty templates without any data. Immediately after creation, the admin accounts on the instance creating the contained AG are copied into the contained AG `master`. That way, the administrator can log into the contained AG and set up the rest of the configuration. 
 
-If you create local users or configurations in your instance, they don't automatically appear when you create your contained system databases, and they aren't visible when you connect to the contained AG. Once the user database has been joined to a contained AG, it will immediately become inaccessible to these users. You need to manually re-create them in the contained system databases within the context of the contained AG, by connecting directly to the database or by using the listener endpoint. The exception to this is that all of the logins in the sysadmin role in the parent instance are copied into the new AG specific `master` database.
+If you create local users or configurations in your instance, they don't automatically appear when you create your contained system databases, and they aren't visible when you connect to the contained AG. Once the user database has been joined to a contained AG, it will immediately become inaccessible to these users. You need to manually re-create them in the contained system databases within the context of the contained AG, by connecting directly to the database or by using the listener endpoint. The exception to this is that all of the logins in the sysadmin role in the parent instance are copied into the new AG specific `master` database during creation of contained AG.
 
 > [!NOTE]  
 > Because the `master` database is separate for each contained availability group, server-scope activities performed in the context of the contained AG are only persisted in the contained system database. This includes auditing. If you audit server level activity with SQL Server Auditing, you must create the same server audits within each contained AG.
 
+#### Initial Data synchronization
+The contained system databases only support auto seeding as initial data synchronization way. 
+
+In [!INCLUDE [sssql22-md](../../../includes/sssql22-md.md)] and earlier versions, contained availability groups must use automatic seeding during creation. When using the `CREATE AVAILABILITY GROUP` statement or the New Availability Group wizard in SQL Server Management Studio, only include user databases that support auto seeding. To add large databases using manual seeding (`JOIN ONLY`), wait until after the contained AG is created.
+
+In [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)], contained system databases always use automatic seeding, even if the `CREATE AVAILABILITY GROUP` statement specifies manual seeding. You can set seeding mode to manual to create a contained AG, and later add user databases using synchronization methods other than auto seeding.
+
 #### Restore a contained system database
 
-You can restore a contained system database using one of two different ways.
-
-- **Restore a contained database using a secondary replica**:
-
-  1. Restore the contained `master` and `msdb` database onto a server instance that hosts the secondary replica, using `RESTORE WITH NORECOVERY` for every restore operation. For more information, see [Prepare a secondary database for an Always On availability group](manually-prepare-a-secondary-database-for-an-availability-group-sql-server.md).
-
-  1. Join each contained database to the availability group. For more information, see [Join a secondary database to an Always On availability group](join-a-secondary-database-to-an-availability-group-sql-server.md).
-
-- **Restore a contained database by dropping the contained AG**:
+To restore backups of contained system databases, follow these steps:
 
   1. Drop the contained AG.
 
-  1. Restore the contained `master` and `msdb` database in each of the instances participating in the contained AG.
+  1. Restore the contained `master` and `msdb` databases on the original primary replica of the contained AG.
+  
+  1. Drop the contained `master` and `msdb` database from secondary replicas.
 
-  1. Recreate the contained AG using original nodes and name, using `WITH (CONTAINED, REUSE_SYSTEM_DATABASES)` syntax.
+  1. On the primary replica, recreate the contained AG using the original name and nodes, with `WITH (CONTAINED, REUSE_SYSTEM_DATABASES)` and `SEEDING_MODE = AUTOMATIC` syntax.
+
+When recreating a contained availability group, don't include contained system databases in the `CREATE AVAILABILITY GROUP` statement. [!INCLUDE [ssnoversion-md](../../../includes/ssnoversion-md.md)] detects them automatically when `REUSE_SYSTEM_DATABASES` is specified. In [!INCLUDE [sssql22-md](../../../includes/sssql22-md.md)] and earlier versions, include only small user databases that support automatic seeding. Add large databases separately after the contained AG is created, using `JOIN ONLY`.
 
 ### Contained availability group jobs
 
@@ -218,7 +221,7 @@ This specifies that the AG being created should be a contained AG.
 
 #### REUSE_SYSTEM_DATABASES
 
-The `REUSE_SYSTEM_DATABASES` option is only valid for contained AGs, and specifies that the newly created AG should reuse existing contained system databases for a previous contained AG of the same name. For example, if you had a contained AG with the name `MyContainedAG`, and wanted to drop and recreate it, you could use this option to reuse the contents of the original contained system databases.
+The `REUSE_SYSTEM_DATABASES` option is only valid for contained AGs, and specifies that the newly created AG should reuse existing contained system databases for a previous contained AG of the same name. For example, if you had a contained AG with the name `MyContainedAG`, and wanted to drop and recreate it, you could use this option to reuse the contents of the original contained system databases. When using this option, don't specify system database names. SQL Server automatically detects them.
 
 #### AUTOSEEDING_SYSTEM_DATABASES
 Applies to: [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] and later
