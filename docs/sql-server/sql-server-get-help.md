@@ -25,6 +25,9 @@ Customers with an Azure technical support plan can [open a ticket](/azure/azure-
 
 You can also use the [Global Customer Service phone numbers](https://support.microsoft.com/topic/global-customer-service-phone-numbers-c0389ade-5640-e588-8b0e-28de8afeb3f2) to open a support ticket.
 
+> [!NOTE]
+> SQL Server 2025 is currently in preview and is not eligible for Microsoft Support case creation. For issues, please share through [feedback suggestions](#feedback-suggestions).
+
 ## Troubleshooting documentation
 
 You can find all the latest troubleshooting guidance and resolution to common issues in the [SQL Server Troubleshooting documentation](/troubleshoot/sql/).
