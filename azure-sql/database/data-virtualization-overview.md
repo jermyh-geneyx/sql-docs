@@ -141,7 +141,7 @@ User identity, also known as "Microsoft Entra pass-through", is an authorization
     - As an alternative, you can specify fine-grained ACL rules to access files and folders. Even if you are an Owner of a Storage Account, you still need to add yourself into one of the Storage Blob Data roles. To learn more about access control in Azure Data Lake Store Gen2, see [Access control in Azure Data Lake Storage Gen2](/azure/storage/blobs/data-lake-storage-access-control).
     - Microsoft Entra pass-through authentication does not support SQL authenticated login types. 
 
-1. Create a database scoped credential for a Microsoft Entra ID account with access to the Azure SQL Database. Subsitute `<UserCredential>` for the name of the identity, such as `identity-<random string>`. In the following example, `IDENTITY = 'User Identity'` is a hard-coded string. With a managed user identity, a database master key is not required because the credential doesn't contain a `SECRET`.
+1. Create a database scoped credential for a Microsoft Entra ID account with access to the Azure SQL Database. Substitute `<UserCredential>` for the name of the identity, such as `identity-<random string>`. In the following example, `IDENTITY = 'User Identity'` is a hard-coded string. With a managed user identity, a database master key is not required because the credential doesn't contain a `SECRET`.
 
     ```sql
     CREATE DATABASE SCOPED CREDENTIAL <UserCredential>
