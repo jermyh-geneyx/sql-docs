@@ -119,7 +119,7 @@ The default for *maximum_errors* is 10.
 
 #### DATA_SOURCE 
 
-`DATA_SOURCE` is the external location created with [CREATE EXTERNAL DATA SOURCE](../statements/create-external-data-source-transact-sql?view=azuresqldb-current&preserve-view=true).
+`DATA_SOURCE` is the external location created with [CREATE EXTERNAL DATA SOURCE](../statements/create-external-data-source-transact-sql.md).
 
 #### FIRSTROW = *first_row*
 
