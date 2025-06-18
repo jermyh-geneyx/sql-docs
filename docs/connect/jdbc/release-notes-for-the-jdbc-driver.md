@@ -3,7 +3,7 @@ title: Release notes
 description: This article lists the releases of the Microsoft JDBC Driver for SQL Server. For each release version, the changes are named and described.
 author: David-Engel
 ms.author: davidengel
-ms.date: 03/17/2025
+ms.date: 06/18/2025
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
@@ -13,6 +13,45 @@ ms.topic: conceptual
 This article lists the releases of the _Microsoft JDBC Driver for SQL Server_. For each release version, the changes are named and described.
 
 ## <a id="130"></a> 12.10
+
+:::image type="icon" source="../../includes/media/download.svg" border="false"::: **[Download Microsoft JDBC Driver 12.10.1 for SQL Server (zip)](https://go.microsoft.com/fwlink/?linkid=2325115)**  
+:::image type="icon" source="../../includes/media/download.svg" border="false"::: **[Download Microsoft JDBC Driver 12.10.1 for SQL Server (tar.gz)](https://go.microsoft.com/fwlink/?linkid=2324918)**
+
+Release number: 12.10.1  
+Released: June 18, 2025
+
+If you need to download the driver in a language other than the one detected for you, you can use these direct links.  
+For the driver in a zip file: [Chinese (Simplified)](https://go.microsoft.com/fwlink/?linkid=2325115&clcid=0x804) | [Chinese (Traditional)](https://go.microsoft.com/fwlink/?linkid=2325115&clcid=0x404) | [English (United States)](https://go.microsoft.com/fwlink/?linkid=2325115&clcid=0x409) | [French](https://go.microsoft.com/fwlink/?linkid=2325115&clcid=0x40c) | [German](https://go.microsoft.com/fwlink/?linkid=2325115&clcid=0x407) | [Italian](https://go.microsoft.com/fwlink/?linkid=2325115&clcid=0x410) | [Japanese](https://go.microsoft.com/fwlink/?linkid=2325115&clcid=0x411) | [Korean](https://go.microsoft.com/fwlink/?linkid=2325115&clcid=0x412) | [Portuguese (Brazil)](https://go.microsoft.com/fwlink/?linkid=2325115&clcid=0x416) | [Russian](https://go.microsoft.com/fwlink/?linkid=2325115&clcid=0x419) | [Spanish](https://go.microsoft.com/fwlink/?linkid=2325115&clcid=0x40a)  
+For the driver in a tar.gz file: [Chinese (Simplified)](https://go.microsoft.com/fwlink/?linkid=2324918&clcid=0x804) | [Chinese (Traditional)](https://go.microsoft.com/fwlink/?linkid=2324918&clcid=0x404) | [English (United States)](https://go.microsoft.com/fwlink/?linkid=2324918&clcid=0x409) | [French](https://go.microsoft.com/fwlink/?linkid=2324918&clcid=0x40c) | [German](https://go.microsoft.com/fwlink/?linkid=2324918&clcid=0x407) | [Italian](https://go.microsoft.com/fwlink/?linkid=2324918&clcid=0x410) | [Japanese](https://go.microsoft.com/fwlink/?linkid=2324918&clcid=0x411) | [Korean](https://go.microsoft.com/fwlink/?linkid=2324918&clcid=0x412) | [Portuguese (Brazil)](https://go.microsoft.com/fwlink/?linkid=2324918&clcid=0x416) | [Russian](https://go.microsoft.com/fwlink/?linkid=2324918&clcid=0x419) | [Spanish](https://go.microsoft.com/fwlink/?linkid=2324918&clcid=0x40a)
+
+### 12.10 Compliance
+
+| Compliance change | Details |
+| :---------------- | :------ |
+| Download the latest updates for JDBC Driver 12.10. | &bull; &nbsp; [GitHub, 12.10.0](https://github.com/Microsoft/mssql-jdbc/releases/tag/v12.10.0)<br/>&bull; &nbsp; [Maven Central](https://search.maven.org/search?q=g:com.microsoft.sqlserver) |
+| Fully compliant with JDBC API Specification 4.2. | The jars in the 12.10 package are named according to Java version compatibility.<br/><br/>For example, the mssql-jdbc-12.10.0.jre11.jar file from the 12.10 package should be used with Java 11 (or higher). |
+| Compatible with Java Development Kit (JDK) version 22.0, 21.0, 17.0, 11.0, and 1.8. | Microsoft JDBC Driver 12.10 for SQL Server is now compatible with Java Development Kit (JDK) version 22.0 in addition to JDK 21.0, 17.0, 11.0 and 1.8. |
+
+### 12.10 Releases
+
+Release number: 12.10.1  
+Released: June 18, 2025
+
+Fixed issues in 12.10.1:
+
+- Updated OSGi packaging to make com.ibm.security.auth.module and com.sun.security.auth.module optional imports, preventing deployment failures
+- Invalidate existing enclave session during connection (re)connect
+- Updated readFromFile() in ConfigurableRetryLogic to handle filePath related issues
+- Increased the max noOfRedirections per connection to 10
+- Fixed New Type Param Definitions logic in doExecutePreparedStatement
+- Fixed session recovery for Azure SQL DB in redirect mode connected
+
+:::image type="icon" source="../../includes/media/download.svg" border="false"::: **[Download Microsoft JDBC Driver 12.10.1 for SQL Server (zip)](https://go.microsoft.com/fwlink/?linkid=2325115)**  
+:::image type="icon" source="../../includes/media/download.svg" border="false"::: **[Download Microsoft JDBC Driver 12.10.1 for SQL Server (tar.gz)](https://go.microsoft.com/fwlink/?linkid=2324918)**
+
+If you need to download the driver in a language other than the one detected for you, you can use these direct links.  
+For the driver in a zip file: [Chinese (Simplified)](https://go.microsoft.com/fwlink/?linkid=2325115&clcid=0x804) | [Chinese (Traditional)](https://go.microsoft.com/fwlink/?linkid=2325115&clcid=0x404) | [English (United States)](https://go.microsoft.com/fwlink/?linkid=2325115&clcid=0x409) | [French](https://go.microsoft.com/fwlink/?linkid=2325115&clcid=0x40c) | [German](https://go.microsoft.com/fwlink/?linkid=2325115&clcid=0x407) | [Italian](https://go.microsoft.com/fwlink/?linkid=2325115&clcid=0x410) | [Japanese](https://go.microsoft.com/fwlink/?linkid=2325115&clcid=0x411) | [Korean](https://go.microsoft.com/fwlink/?linkid=2325115&clcid=0x412) | [Portuguese (Brazil)](https://go.microsoft.com/fwlink/?linkid=2325115&clcid=0x416) | [Russian](https://go.microsoft.com/fwlink/?linkid=2325115&clcid=0x419) | [Spanish](https://go.microsoft.com/fwlink/?linkid=2325115&clcid=0x40a)  
+For the driver in a tar.gz file: [Chinese (Simplified)](https://go.microsoft.com/fwlink/?linkid=2324918&clcid=0x804) | [Chinese (Traditional)](https://go.microsoft.com/fwlink/?linkid=2324918&clcid=0x404) | [English (United States)](https://go.microsoft.com/fwlink/?linkid=2324918&clcid=0x409) | [French](https://go.microsoft.com/fwlink/?linkid=2324918&clcid=0x40c) | [German](https://go.microsoft.com/fwlink/?linkid=2324918&clcid=0x407) | [Italian](https://go.microsoft.com/fwlink/?linkid=2324918&clcid=0x410) | [Japanese](https://go.microsoft.com/fwlink/?linkid=2324918&clcid=0x411) | [Korean](https://go.microsoft.com/fwlink/?linkid=2324918&clcid=0x412) | [Portuguese (Brazil)](https://go.microsoft.com/fwlink/?linkid=2324918&clcid=0x416) | [Russian](https://go.microsoft.com/fwlink/?linkid=2324918&clcid=0x419) | [Spanish](https://go.microsoft.com/fwlink/?linkid=2324918&clcid=0x40a)
 
 Release number: 12.10.0  
 Released: March 07, 2025
