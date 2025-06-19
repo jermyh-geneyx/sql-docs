@@ -1,12 +1,14 @@
 ---
 title: "CREATE AVAILABILITY GROUP (Transact-SQL)"
-description: CREATE AVAILABILITY GROUP (Transact-SQL)
+description: Creates a new availability group, if the instance of SQL Server is enabled for availability groups feature.
 author: "MikeRayMSFT"
 ms.author: "mikeray"
-ms.date: 05/19/2025
+ms.date: 06/19/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - build-2025
 f1_keywords:
   - "AVAILABILITY GROUP"
   - "CREATE_AVAILABILITY_TSQL"
@@ -21,8 +23,6 @@ helpviewer_keywords:
   - "Availability Groups [SQL Server], Transact-SQL statements"
 dev_langs:
   - "TSQL"
-ms.custom:
-  - build-2025
 ---
 
 # CREATE AVAILABILITY GROUP (Transact-SQL)
@@ -56,8 +56,8 @@ CREATE AVAILABILITY GROUP group_name
   | DTC_SUPPORT  = { PER_DB | NONE }  
   | [ BASIC | DISTRIBUTED | CONTAINED [ REUSE_SYSTEM_DATABASES | AUTOSEEDING_SYSTEM_DATABASES ] ]
   | REQUIRED_SYNCHRONIZED_SECONDARIES_TO_COMMIT = { integer }
-  | CLUSTER_TYPE = { WSFC | EXTERNAL | NONE }
- 
+  | CLUSTER_TYPE = { WSFC | EXTERNAL | NONE } 
+  | WRITE_LEASE_VALIDITY = { seconds }
   
 <add_replica_spec>::=  
   <server_instance> WITH  
@@ -229,6 +229,14 @@ Not supported for CREATE AVAILABILITY GROUP. Beginning with [!INCLUDE [sssql22-m
 **Applies to:** [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE[sssql17-md](../../includes/sssql17-md.md)]).
 
 Used to identify if the availability group is on a Windows Server Failover Cluster (WSFC). Set to WSFC when availability group is on a failover cluster instance on a Windows Server failover cluster. Set to EXTERNAL when the cluster is managed by a cluster manager that isn't a Windows Server failover cluster, like Linux Pacemaker. Set to NONE when availability group not using WSFC for cluster coordination. For example, when an availability group includes Linux servers with no cluster manager. 
+
+#### WRITE_LEASE_VALIDITY
+
+**Applies to:** [!INCLUDE[sssql17-md](../../includes/sssql17-md.md)] and later versions.
+
+Specifies the lease time (in seconds) before it expires or needs renewal. This monitors the health and communication between local cluster orchestrator and SQL Server instance processes. The lease validity mechanism uses *heartbeat* signals to the availability group primary SQL Server instance. If the primary fails to send or receive a lease renewal within the lease validity period, it's considered unresponsive, and the primary will go offline. This mechanism prevents split-brain situations when the cluster orchestrator cannot notify SQL Server to stop being primary when a new primary is elected by a failover. It is applicable only for `CLUSTER_TYPE = EXTERNAL`, when the cluster is managed by a cluster manager that isn't a Windows Server failover cluster, like Linux Pacemaker.
+
+The external orchestrator is responsible to ensure the external lease renewal process is consistently stable. If the lease renew message is unexpectedly missed, the current AG replica is set offline, which causes AG availability loss.
 
 #### DATABASE *database_name*  
 
