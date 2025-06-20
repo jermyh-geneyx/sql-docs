@@ -1,5 +1,5 @@
 - name: Programming to interact with SQL Server
-  href: ../connect/homepage-sql-connection-programming.md
+  href: ../connect/index.yml
 - name: Welcome to SQL Server >
   href: ../sql-server/index.yml
 - name: SQL Server drivers
@@ -5894,26 +5894,23 @@
       href: ../connect/php/example-application-sqlsrv-driver.md
 - name: Python
   items:
-  - name: Python Driver for SQL Server
+  - name: Python drivers for SQL Server
     href: ../connect/python/python-driver-for-sql-server.md
-  - name: Python SQL Driver - pyodbc
+  - name: Python SQL driver - mssql-python
+    href: ../connect/python/mssql-python/python-sql-driver-mssql-python.md
+    items:
+    - name: 'Quickstart: mssql-python driver for Python'
+      href: ../connect/python/mssql-python/python-sql-driver-mssql-python-quickstart.md
+  - name: Python SQL driver - pyodbc
     href: ../connect/python/pyodbc/python-sql-driver-pyodbc.md
     items:
-    - name: 'Step 1: Configure development environment'
-      href: ../connect/python/pyodbc/step-1-configure-development-environment-for-pyodbc-python-development.md
-    - name: 'Step 2: Create a SQL database'
-      href: ../connect/python/pyodbc/step-2-create-a-sql-database-for-pyodbc-python-development.md
-    - name: 'Step 3: Proof of concept connecting to SQL'
-      href: ../connect/python/pyodbc/step-3-proof-of-concept-connecting-to-sql-using-pyodbc.md
-  - name: Python SQL Driver - pymssql
+    - name: 'Quickstart: pyodbc driver for Python'
+      href: ../connect/python/pyodbc/python-sql-driver-pyodbc-quickstart.md
+  - name: Python SQL driver - pymssql
     href: ../connect/python/pymssql/python-sql-driver-pymssql.md
     items:
-    - name: 'Step 1: Configure development environment'
-      href: ../connect/python/pymssql/step-1-configure-development-environment-for-pymssql-python-development.md
-    - name: 'Step 2: Create a SQL database'
-      href: ../connect/python/pymssql/step-2-create-a-sql-database-for-pymssql-python-development.md
-    - name: 'Step 3: Proof of concept connecting to SQL'
-      href: ../connect/python/pymssql/step-3-proof-of-concept-connecting-to-sql-using-pymssql.md
+    - name: 'Quickstart: pymssql driver for Python'
+      href: ../connect/python/pymssql/python-sql-driver-pymssql-quickstart.md
 - name: Ruby
   items:
   - name: Ruby Driver for SQL Server

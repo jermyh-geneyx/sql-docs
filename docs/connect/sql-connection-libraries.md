@@ -1,17 +1,17 @@
 ---
-title: Connection libraries for Microsoft SQL Database
+title: Connection Libraries for Microsoft SQL Database
 description: Provides download links for modules, which enable connection to Microsoft SQL Server and Azure SQL Database, from various client programming languages.
 author: David-Engel
 ms.author: davidengel
-ms.reviewer: vanto
-ms.date: 02/11/2025
+ms.reviewer: vanto, randolphwest
+ms.date: 06/18/2025
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: article
 ---
 # Connection modules for Microsoft SQL Database
 
-This article provides download links to connection modules or *drivers* that your client programs can use for interacting with [databases in SQL Server](../relational-databases/databases/databases.md), [Azure SQL Database](/azure/azure-sql/database/sql-database-paas-overview?view=azuresql-db&preserve-view=true), [SQL database in Microsoft Fabric](/fabric/database/sql/overview), and [Azure SQL Managed Instance](/azure/azure-sql/managed-instance/sql-managed-instance-paas-overview?view=azuresql-mi&preserve-view=true). 
+This article provides download links to connection modules or *drivers* that your client programs can use for interacting with [databases in SQL Server](../relational-databases/databases/databases.md), [Azure SQL Database](/azure/azure-sql/database/sql-database-paas-overview?view=azuresql-db&preserve-view=true), [SQL database in Microsoft Fabric (Preview)](/fabric/database/sql/overview), and [Azure SQL Managed Instance](/azure/azure-sql/managed-instance/sql-managed-instance-paas-overview?view=azuresql-mi&preserve-view=true).
 
 Drivers are available for a variety of programming languages, running on the following operating systems:
 
@@ -27,7 +27,7 @@ Drivers are available for a variety of programming languages, running on the fol
 
 The present article devotes separate sections to these two kinds of connection drivers.
 
-<a name="anchor-20-drivers-relational-access"></a>
+<a id="anchor-20-drivers-relational-access"></a>
 
 ## Drivers for relational access
 
@@ -39,10 +39,10 @@ The present article devotes separate sections to these two kinds of connection d
 | Java | [JDBC](jdbc/download-microsoft-jdbc-driver-for-sql-server.md) |
 | Node.js | [Node.js driver, install instructions](node-js/step-1-configure-development-environment-for-node-js-development.md) |
 | PHP | [PHP](php/download-drivers-php-sql-server.md) |
-| Python | [pyodbc, install instructions](python/pyodbc/step-1-configure-development-environment-for-pyodbc-python-development.md)<br />[Download ODBC](odbc/download-odbc-driver-for-sql-server.md) |
+| Python | [mssql-python (preview)](python/mssql-python/python-sql-driver-mssql-python.md)<br />[pyodbc, install instructions](python/pyodbc/python-sql-driver-pyodbc.md)<br />[Download ODBC](odbc/download-odbc-driver-for-sql-server.md) |
 | Ruby | [Ruby driver install instructions](ruby/step-1-configure-development-environment-for-ruby-development.md)<br />[Ruby download page](https://rubyinstaller.org/downloads/) |
 
-<a name="anchor-40-drivers-orm-access"></a>
+<a id="anchor-40-drivers-orm-access"></a>
 
 ## Drivers for ORM access
 

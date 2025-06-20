@@ -2,15 +2,15 @@
 title: SQL Server technical documentation
 summary: Technical documentation to help you get started, administer, develop, and work with SQL Server and associated products.
 metadata:
-  title: SQL Server technical documentation
+  title: SQL Server Technical Documentation
   description: Choose the area of SQL Server you are interested in. 
   ms.service: sql
   ms.topic: landing-page
   author: MashaMSFT
   ms.author: mathoma
   ms.reviewer: randolphwest
-  ms.date: 07/19/2024
-  ms.custom: FY22Q2Fresh
+  ms.date: 06/19/2025
+  ms.custom: build-2025
 
 landingContent:
   - title: SQL on Azure
@@ -54,9 +54,9 @@ landingContent:
       - linkListType: whats-new
         links:
           - text: SQL Server 2025 Preview
-            url: ./what-s-new-in-sql-server-2025.md
+            url: what-s-new-in-sql-server-2025.md
           - text: SQL Server 2022
-            url: ./what-s-new-in-sql-server-2022.md
+            url: what-s-new-in-sql-server-2022.md
           - text: SQL Server on Linux
             url: ../linux/sql-server-linux-overview.md
           - text: SQL Server enabled by Azure Arc
@@ -68,9 +68,9 @@ landingContent:
           - text: Connect to the Database Engine
             url: connect-to-database-engine.md
           - text: Connect and query with Azure Data Studio
-            url: ../azure-data-studio/quickstart-sql-server.md
+            url: /azure-data-studio/quickstart-sql-server
           - text: Connect and query with SSMS
-            url: ../ssms/quickstarts/ssms-connect-query-sql-server.md
+            url: /ssms/quickstarts/ssms-connect-query-sql-server
       - linkListType: download
         links:
           - text: SQL Server
@@ -90,7 +90,7 @@ landingContent:
           - text: Internals and architecture guides
             url: ../relational-databases/sql-server-guides.md
           - text: Previous versions 2005-2014
-            url: ./previous-versions-sql-server.md
+            url: previous-versions-sql-server.md
 
   - title: Business continuity
     linkLists:

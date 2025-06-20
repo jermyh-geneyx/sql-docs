@@ -1,37 +1,49 @@
 ---
-title: "SQL Server 2025 release notes"
+title: "SQL Server 2025 Release Notes"
 description: Find information about SQL Server 2025 (17.x) limitations, known issues, help resources, and other release notes.
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest
-ms.date: 06/12/2025
+ms.date: 06/19/2025
 ms.service: sql
 ms.subservice: release-landing
 ms.topic: release-notes
-monikerRange: ">= sql-server-2016"
 ms.custom:
   - build-2025
+monikerRange: ">=sql-server-2016"
 ---
 
 # SQL Server 2025 Preview release notes
 
-[!INCLUDE[sqlserver2025](../includes/applies-to-version/sqlserver2025.md)]
+[!INCLUDE [sqlserver2025](../includes/applies-to-version/sqlserver2025.md)]
 
-This article describes requirements, limitations, and known issues for [!INCLUDE[sssql25-md](../includes/sssql25-md.md)].
+This article describes requirements, limitations, and known issues for [!INCLUDE [sssql25-md](../includes/sssql25-md.md)].
 
 This article is updated for community technology preview (CTP 2.1).
 
 ## Hardware and software requirements
 
-For hardware and software requirements, see [SQL Server 2025: Hardware and software requirements](install/hardware-and-software-requirements-for-installing-sql-server-2025.md).
+For hardware and software requirements, see [Hardware and software requirements for SQL Server 2025 Preview](install/hardware-and-software-requirements-for-installing-sql-server-2025.md).
 
 ## Known issues
 
-### SQL Server fails to start after installation
+### SQL Server on Windows fails to start after installation
 
 **Issue**: SQL Server instances on Windows might fail to start after the installation if the machine has more than 64 logical cores per NUMA node.
 
 For more information, see [Limit number of logical cores per NUMA node to 64](compute-capacity-limits-by-edition-of-sql-server.md#limit-number-of-logical-cores-per-numa-node-to-64).
+
+### SQL Server on Linux fails to start after installation
+
+**Issue**: SQL Server instances on Linux might fail to start if the machine uses an Intel 12th Gen or later hybrid architecture CPU, and the host operating system is Linux.
+
+You might see an error message similar to the following output:
+
+```output
+Reason: 0x00000004 Message: ASSERT: Expression=(result * DrtlGetProcessorCoreCount() == DrtlGetProcessorCount()) File=LibOS\Windows\Kernel\SQLPal\common\dk\sos\src\sosnumap.cpp Line=208
+```
+
+If you want to use a Linux host operating system, you can work around the issue by disabling efficiency cores (E-cores) in your BIOS. If you use containers, or a hypervisor like Hyper-V on Windows (including WSL), you aren't affected.
 
 ### Upgrade in place
 
@@ -39,19 +51,19 @@ For more information, see [Limit number of logical cores per NUMA node to 64](co
 
 ### Setting the backup compression algorithm to ZSTD
 
-There's a known issue when attempting to set the [backup compression algorithm](../database-engine/configure-windows/view-or-configure-the-backup-compression-algorithm-server-configuration-option.md) to ZSTD. 
+There's a known issue when attempting to set the [backup compression algorithm](../database-engine/configure-windows/view-or-configure-the-backup-compression-algorithm-server-configuration-option.md) to ZSTD.
 
 When specifying the ZSTD algorithm (`backup compression algorithm = 3`), the following error message returns:
 
-```console
-Msg 15129, Level 16, State 1,  Procedure sp_configure `3` is not a valid value for configuration option 'backup compression algorithm'. 
+```output
+Msg 15129, Level 16, State 1,  Procedure sp_configure `3` is not a valid value for configuration option 'backup compression algorithm'.
 ```
 
 Use the new compression algorithm directly in the [BACKUP](../t-sql/statements/backup-transact-sql.md#-compression---algorithm---ms_xpress--zstd--accelerator_algorithm---level---low--medium--high------no_compression-) Transact-SQL command instead of setting the server configuration option.
 
 ### Incorrect behavior of SESSION_CONTEXT in parallel plans
 
-Queries that use the built-in `SESSION_CONTEXT` function may return incorrect results or trigger access violation (AV) dumps when executed in parallel query plans. This issue stems from the way `SESSION_CONTEXT` interacts with parallel execution threads, particularly when the session is reset for reuse.
+Queries that use the built-in `SESSION_CONTEXT` function might return incorrect results or trigger access violation (AV) dumps when executed in parallel query plans. This issue stems from the way `SESSION_CONTEXT` interacts with parallel execution threads, particularly when the session is reset for reuse.
 
 For more information, see the [Known issues](../t-sql/functions/session-context-transact-sql.md#known-issues) section in `SESSION_CONTEXT`.
 

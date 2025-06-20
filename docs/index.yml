@@ -3,12 +3,12 @@ title: Microsoft SQL documentation
 summary: "Learn how to use SQL Server and Azure SQL, both on-premises and in the cloud."
 brand: sql
 metadata:
-  title: Microsoft SQL documentation
+  title: Microsoft SQL Documentation
   description: Learn how to use SQL Server and Azure SQL to manage your database needs, both on-premises and in the cloud.
   author: MikeRayMSFT
   ms.author: mikeray
   ms.reviewer: randolphwest
-  ms.date: 11/15/2024
+  ms.date: 06/18/2025
   ms.service: sql
   ms.topic: hub-page
   ms.custom:
@@ -161,7 +161,7 @@ additionalContent:
         - title: Development
           links:
             - text: SQL Server client connectivity
-              url: connect/homepage-sql-connection-programming.md
+              url: connect/index.yml
             - text: Azure SQL Database applications
               url: /azure/sql-database/sql-database-develop-overview
             - text: Azure SQL Database connectivity libraries

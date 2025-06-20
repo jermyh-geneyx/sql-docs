@@ -2223,7 +2223,7 @@ items:
   items:
   - name: Code a client program >
     displayName: ADO, ADO.NET, connect, C#, C++, Java, Node.js, ODBC, OLE DB, PHP, Python, Ruby
-    href: ./connect/homepage-sql-connection-programming.md
+    href: ./connect/index.yml
   - name: Common Language Runtime (CLR)
     href: relational-databases/clr-integration/common-language-runtime-integration-overview.md
     items:

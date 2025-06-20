@@ -3,7 +3,7 @@ title: Download Microsoft SqlClient Data Provider for SQL Server
 description: Download page for ADO.NET and Microsoft SqlClient Data Provider for SQL Server.
 author: cheenamalhotra
 ms.author: cmalhotra
-ms.date: 01/24/2025
+ms.date: 06/19/2025
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
@@ -16,13 +16,12 @@ The Microsoft.Data.SqlClient library is distributed as a NuGet package. Add a Nu
 
 ## Downloading the driver
 
-If you need to download the Microsoft.Data.SqlClient package for offline use, it's available on NuGet.org. Refer to the dependencies section from the links below to download the dependencies.
+If you need to download the Microsoft.Data.SqlClient package for offline use, it's available on NuGet.org. To download dependencies, see the dependencies section on NuGet.org.
 
 For more information about version compatibility and support, see [SQL version compatibility with Microsoft.Data.SqlClient](sqlclient-driver-support-lifecycle.md#sql-version-compatibility-with-microsoftdatasqlclient).
 
 ## Download supported versions of Microsoft SqlClient Data Provider for SQL Server
 
-* [6.0.1](https://www.nuget.org/packages/Microsoft.Data.SqlClient/6.0.1)
-* [5.2.2](https://www.nuget.org/packages/Microsoft.Data.SqlClient/5.2.2)
-* [5.1.6](https://www.nuget.org/packages/Microsoft.Data.SqlClient/5.1.6)
-* [3.1.7](https://www.nuget.org/packages/Microsoft.Data.SqlClient/3.1.7)
+* [6.0.2](https://www.nuget.org/packages/Microsoft.Data.SqlClient/6.0.2)
+* [5.2.3](https://www.nuget.org/packages/Microsoft.Data.SqlClient/5.2.3)
+* [5.1.7](https://www.nuget.org/packages/Microsoft.Data.SqlClient/5.1.7)

@@ -64996,8 +64996,38 @@
       "redirect_document_id": false
     },
     {
-      "source_path": "docs/connect/index.md",
-      "redirect_url": "/sql/connect/homepage-sql-connection-programming",
+      "source_path": "docs/connect/homepage-sql-connection-programming.md",
+      "redirect_url": "/sql/connect",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "docs/connect/python/pymssql/step-1-configure-development-environment-for-pymssql-python-development.md",
+      "redirect_url": "/sql/connect/python/pymssql/python-sql-driver-pymssql-quickstart",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "docs/connect/python/pymssql/step-2-create-a-sql-database-for-pymssql-python-development.md",
+      "redirect_url": "/sql/connect/python/pymssql/python-sql-driver-pymssql-quickstart",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "docs/connect/python/pymssql/step-3-proof-of-concept-connecting-to-sql-using-pymssql.md",
+      "redirect_url": "/sql/connect/python/pymssql/python-sql-driver-pymssql-quickstart",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "docs/connect/python/pyodbc/step-1-configure-development-environment-for-pyodbc-python-development.md",
+      "redirect_url": "/sql/connect/python/pyodbc/python-sql-driver-pyodbc-quickstart",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "docs/connect/python/pyodbc/step-2-create-a-sql-database-for-pyodbc-python-development.md",
+      "redirect_url": "/sql/connect/python/pyodbc/python-sql-driver-pyodbc-quickstart",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "docs/connect/python/pyodbc/step-3-proof-of-concept-connecting-to-sql-using-pyodbc.md",
+      "redirect_url": "/sql/connect/python/pyodbc/python-sql-driver-pyodbc-quickstart",
       "redirect_document_id": false
     },
     {
