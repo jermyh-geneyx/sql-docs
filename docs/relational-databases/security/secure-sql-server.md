@@ -1,6 +1,6 @@
 ---
 title: Secure your SQL Server
-description: Learn how to secure SQL Server, with best practices for protecting data, managing access, and defending against common threats.
+description: Learn how to secure SQL Server, with best practices for protecting data, manage access, and defend against common threats.
 author: VanMSFT
 ms.author: vanto
 ms.service: sql
@@ -21,7 +21,7 @@ This article provides guidance on how to best secure your SQL Server.
 
 Securing network access to SQL Server helps prevent unauthorized connections, reduces exposure to attacks, and ensures only trusted sources can reach your databases.
 
-- **Restrict inbound traffic with firewalls and NSGs**: Limit network access to SQL Server by [Configuring Windows Firewall for Database Engine access](../../database-engine/configure-windows/configure-a-windows-firewall-for-database-engine-access.md). For SQL Server in Azure VM, use [Azure Firewall](/azure/firewall/features) and [Network Security Groups (NSGs)](/azure/virtual-network/network-security-groups-overview) to enforce these restrictions.
+- **Restrict inbound traffic with firewalls and NSGs**: Limit network access to SQL Server by [Configuring Windows Firewall for Database Engine access](../../database-engine/configure-windows/configure-a-windows-firewall-for-database-engine-access.md). For SQL Server in Azure virtual machines (VMs), use [Azure Firewall](/azure/firewall/features) and [Network Security Groups (NSGs)](/azure/virtual-network/network-security-groups-overview) to enforce these restrictions.
 
 - **Encrypt connections to SQL Server**: Configure SQL Server Database Engine to encrypt connections using a certificate. This ensures data in transit is protected from eavesdropping and tampering. For more information, see [Encrypt connections to SQL Server Database Engine](../../database-engine/configure-windows/configure-sql-server-encryption.md).
 
@@ -37,7 +37,7 @@ Strong identity and authentication controls help ensure only authorized users an
 
 - **Use group-managed service accounts (gMSA) for services**: Use gMSA to manage service account credentials automatically and securely. For more information, see [Group-Managed Service Accounts overview](/windows-server/security/group-managed-service-accounts/group-managed-service-accounts-overview).
 
-- **Enforce strong password policies**: If you are using SQL authentication, require complex passwords that can't be easily guessed and aren't used for other accounts. Regularly update passwords and enforce Active Directory policies. For more information, see [Strong passwords](strong-passwords.md).
+- **Enforce strong password policies**: If you're using SQL authentication, require complex passwords that can't be easily guessed and aren't used for other accounts. Regularly update passwords and enforce Active Directory policies. For more information, see [Strong passwords](strong-passwords.md).
 
 - **Use contained database users when appropriate**: Consider contained database users for applications that need database-level authentication without requiring server-level logins. For more information, see [Contained database users](contained-database-users-making-your-database-portable.md).
 
