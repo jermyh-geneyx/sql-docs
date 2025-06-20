@@ -4,7 +4,7 @@ description: "Transaction locking and row versioning guide"
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest, wiassaf
-ms.date: 02/05/2025
+ms.date: 06/20/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
@@ -1191,15 +1191,15 @@ Each database row may use up to 14 bytes at the end of the row for row versionin
 - The table has a trigger.
 - Multiple Active Results Sets (MARS) is being used.
 - Online index build operations are currently running on the table.
+- [Accelerated database recovery (ADR)](/azure/azure-sql/accelerated-database-recovery) is enabled.
 
-If the version store is in `tempdb`, these 14 bytes are removed from the database row the first time the row is modified under all of these conditions:
+These 14 bytes are removed from the database row the first time the row is modified under all of these conditions:
 
 - `READ_COMMITTED_SNAPSHOT` and `ALLOW_SNAPSHOT_ISOLATION` options are set to `OFF`.
 - The trigger no longer exists on the table.
 - MARS isn't being used.
 - Online index build operations are not currently running.
-
-The 14 bytes are also removed when a row is modified if ADR is no longer enabled and the above conditions are satisfied.
+- [Accelerated database recovery (ADR)](/azure/azure-sql/accelerated-database-recovery) is disabled.
 
 If you use any of the row versioning features, you might need to allocate additional disk space for the database to accommodate the 14 bytes per database row. Adding the row versioning information can cause index page splits or the allocation of a new data page if there isn't enough space available on the current page. For example, if the average row length is 100 bytes, the additional 14 bytes cause an existing table to grow up to 14 percent.
 
