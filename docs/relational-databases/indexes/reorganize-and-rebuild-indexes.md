@@ -89,13 +89,13 @@ The result set returned by `sys.dm_db_column_store_row_group_physical_stats` inc
 | `total_rows` | Number of rows physically stored in the row group. For compressed row groups, this includes the rows that are marked as deleted. |
 | `deleted_rows` | Number of rows physically stored in a compressed row group that are marked for deletion. 0 for row groups that are in delta store. |
 
-To determine the total number of physically stored deleted rows for a nonclustered columnstore index, add the value in the `deleted_rows` column in `sys.dm_db_column_store_row_group_physical_stats` to the value in the `rows` column in [sys.internal_partitions](../system-catalog-views/sys-internal-partitions-transact-sql.md) for the internal object type `COLUMN_STORE_DELETE_BUFFER` and the same object, index, and partition.
-
 Compressed row group fragmentation in a columnstore index can be computed using this formula:
 
 ```sql
-100.0 * (ISNULL(total_deleted_rows, 0)) / NULLIF(total_rows, 0)
+100.0 * (ISNULL(total_stored_deleted_rows, 0)) / NULLIF(total_rows, 0)
 ```
+
+To determine the total number of physically stored deleted rows for a nonclustered columnstore index, add the value in the `deleted_rows` column in `sys.dm_db_column_store_row_group_physical_stats` to the value in the `rows` column in [sys.internal_partitions](../system-catalog-views/sys-internal-partitions-transact-sql.md) for the internal object type `COLUMN_STORE_DELETE_BUFFER` and the same object, index, and partition. For an example, see [Check the fragmentation of a columnstore index](#check-the-fragmentation-of-a-columnstore-index).
 
 > [!TIP]  
 > For both rowstore and columnstore indexes, review index or heap fragmentation and page density after a large number of rows is deleted or updated. For heaps, if there are frequent updates, review fragmentation periodically to avoid proliferation of forwarding records. For more information about heaps, see [Heaps (Tables without Clustered Indexes)](../../relational-databases/indexes/heaps-tables-without-clustered-indexes.md#heap-structures).
@@ -297,7 +297,7 @@ For an [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] table
 
 ## Examples
 
-### Check the fragmentation and page density of a rowstore index using [!INCLUDE [tsql](../../includes/tsql-md.md)]
+### Check the fragmentation and page density of a rowstore index
 
 The following example determines the average fragmentation and page density for all rowstore indexes in the current database. It uses the `SAMPLED` mode to return actionable results quickly. For more accurate results, use the `DETAILED` mode. This requires scanning all index pages, and can take a long time.
 
@@ -333,7 +333,7 @@ dbo          DimCustomer           IX_DimCustomer_CustomerAlternateKey      NONC
 
 For more information, see [sys.dm_db_index_physical_stats](../../relational-databases/system-dynamic-management-views/sys-dm-db-index-physical-stats-transact-sql.md).
 
-### Check the fragmentation of a columnstore index using [!INCLUDE [tsql](../../includes/tsql-md.md)]
+### Check the fragmentation of a columnstore index
 
 The following example determines the average fragmentation for all columnstore indexes with compressed row groups in the current database.
 
