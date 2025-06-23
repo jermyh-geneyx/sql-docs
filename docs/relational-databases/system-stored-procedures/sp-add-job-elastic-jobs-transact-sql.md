@@ -3,7 +3,8 @@ title: "jobs.sp_add_job (Azure Elastic Jobs) (Transact-SQL)"
 description: "jobs.sp_add_job adds a new job executed by the Azure Elastic Jobs service for Azure SQL Database."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.date: 08/21/2024
+ms.reviewer: randolphwest
+ms.date: 06/23/2025
 ms.service: azure-sql-database
 ms.subservice: system-objects
 ms.topic: "reference"

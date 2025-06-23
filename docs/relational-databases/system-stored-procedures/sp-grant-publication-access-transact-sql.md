@@ -4,7 +4,7 @@ description: sp_grant_publication_access adds a login to the access list of the 
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 07/16/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"

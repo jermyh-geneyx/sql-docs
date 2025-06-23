@@ -4,7 +4,7 @@ description: sp_readerrorlog allows you to read the contents of the SQL Server o
 author: pijocoder
 ms.author: jopilov
 ms.reviewer: randolphwest
-ms.date: 11/18/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"

@@ -1,10 +1,10 @@
 ---
-title: "Azure Synapse Analytics stored procedures"
+title: "Azure Synapse Analytics Stored Procedures"
 description: "Azure Synapse Analytics stored procedures"
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.topic: "reference"
 dev_langs:

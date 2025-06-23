@@ -4,7 +4,7 @@ description: Returns unprocessed changes, such as pending inserts, updates, and 
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"

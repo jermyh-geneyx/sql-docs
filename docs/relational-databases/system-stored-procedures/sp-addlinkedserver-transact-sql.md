@@ -4,7 +4,7 @@ description: "sp_addlinkedserver (Transact-SQL)"
 author: markingmyname
 ms.author: maghan
 ms.reviewer: wiassaf, randolphwest
-ms.date: 06/12/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"

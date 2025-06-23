@@ -4,7 +4,7 @@ description: sp_dropdynamicsnapshot_job removes a filtered data snapshot job for
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 11/28/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"

@@ -4,7 +4,7 @@ description: sp_showrowreplicainfo displays information about a row in a table t
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 04/08/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"

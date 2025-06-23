@@ -4,7 +4,7 @@ description: Returns a public key of the certificate used for authentication on 
 author: MladjoA
 ms.author: mlandzic
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"

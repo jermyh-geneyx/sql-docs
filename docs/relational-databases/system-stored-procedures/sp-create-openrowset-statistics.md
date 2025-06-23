@@ -4,7 +4,7 @@ description: sp_create_openrowset_statistics creates column statistics for a col
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: azure-synapse-analytics
 ms.topic: "reference"
 f1_keywords:

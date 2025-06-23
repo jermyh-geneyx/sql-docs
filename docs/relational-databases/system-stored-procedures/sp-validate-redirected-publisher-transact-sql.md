@@ -4,7 +4,7 @@ description: Verifies that the current host for the publishing database is capab
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 11/14/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"

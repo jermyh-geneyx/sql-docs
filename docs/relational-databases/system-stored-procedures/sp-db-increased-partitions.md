@@ -1,10 +1,10 @@
 ---
 title: "sp_db_increased_partitions"
-description: sp_db_increased_partitions enables or disables support for up to 15,000 partitions for the specified database.
+description: "sp_db_increased_partitions enables or disables support for up to 15,000 partitions for the specified database."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 07/04/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"

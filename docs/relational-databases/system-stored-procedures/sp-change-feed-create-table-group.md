@@ -3,8 +3,8 @@ title: "sys.sp_change_feed_create_table_group (Transact-SQL)"
 description: "The sys.sp_change_feed_create_table_group system stored procedure enables the creation of new change feed table group within the current database."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: imotiwala, ajayj
-ms.date: 05/01/2025
+ms.reviewer: imotiwala, ajayj, randolphwest
+ms.date: 06/23/2025
 ms.service: fabric
 ms.subservice: system-objects
 ms.topic: "reference"

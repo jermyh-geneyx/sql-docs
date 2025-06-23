@@ -4,7 +4,7 @@ description: sp_delete_database_firewall_rule removes database-level firewall se
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: azure-sql-database
 ms.topic: "reference"
 f1_keywords:
@@ -16,7 +16,7 @@ helpviewer_keywords:
   - "sp_delete_database_firewall_rule procedure"
 dev_langs:
   - "TSQL"
-monikerRange: "= azuresqldb-current"
+monikerRange: "=azuresqldb-current"
 ---
 # sp_delete_database_firewall_rule (Azure SQL Database)
 

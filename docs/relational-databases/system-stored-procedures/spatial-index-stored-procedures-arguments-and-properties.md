@@ -1,10 +1,10 @@
 ---
-title: "Arguments and properties of spatial index stored procedures"
+title: "Arguments and Properties of Spatial Index Stored Procedures"
 description: "Arguments and properties of spatial index stored procedures."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/14/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"

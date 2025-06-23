@@ -4,7 +4,7 @@ description: sp_getqueuedrows retrieves rows at the Subscriber that have updates
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 07/16/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"

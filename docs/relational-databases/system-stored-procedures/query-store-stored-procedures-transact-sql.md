@@ -1,10 +1,10 @@
 ---
-title: "Query Store stored procedures (Transact-SQL)"
+title: "Query Store Stored Procedures (Transact-SQL)"
 description: "Query Store stored procedures (Transact-SQL)"
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"

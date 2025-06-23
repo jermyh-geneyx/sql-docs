@@ -1,10 +1,10 @@
 ---
-title: sp_check_join_filter (Transact-SQL)
+title: "sp_check_join_filter (Transact-SQL)"
 description: sp_check_join_filter verifies a join filter between two tables to determine if the join filter clause is valid.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 07/05/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"

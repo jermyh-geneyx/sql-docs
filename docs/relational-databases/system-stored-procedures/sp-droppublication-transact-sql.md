@@ -4,7 +4,7 @@ description: Drops a publication and its associated Snapshot Agent. This stored 
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 11/28/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"

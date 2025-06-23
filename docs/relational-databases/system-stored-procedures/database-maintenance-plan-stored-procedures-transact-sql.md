@@ -1,10 +1,10 @@
 ---
-title: "Database Maintenance Plan stored procedures (Transact-SQL)"
+title: "Database Maintenance Plan Stored Procedures (Transact-SQL)"
 description: "Database Maintenance Plan stored procedures (Transact-SQL)"
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"

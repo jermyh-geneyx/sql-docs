@@ -1,10 +1,10 @@
 ---
-title: "Policy-Based Management stored procedures (Transact-SQL)"
+title: "Policy-Based Management Stored Procedures (Transact-SQL)"
 description: "Policy-Based Management stored procedures (Transact-SQL)"
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"

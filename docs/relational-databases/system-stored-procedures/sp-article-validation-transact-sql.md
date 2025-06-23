@@ -4,7 +4,7 @@ description: sp_article_validation initiates a data validation request for the s
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/04/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"

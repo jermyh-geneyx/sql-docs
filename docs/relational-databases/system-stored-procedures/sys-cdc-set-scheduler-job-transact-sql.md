@@ -4,7 +4,7 @@ description: "For Azure SQL Database, instruct the change data capture (CDC) sch
 author: abhimantiwari
 ms.author: abhtiwar
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"

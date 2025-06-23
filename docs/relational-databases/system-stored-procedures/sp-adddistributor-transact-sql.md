@@ -4,7 +4,7 @@ description: "Adds an entry in the sys.servers and marks the server entry as a D
 author: mashamsft
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 11/02/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"

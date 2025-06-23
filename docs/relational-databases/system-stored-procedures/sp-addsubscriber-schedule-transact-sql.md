@@ -4,7 +4,7 @@ description: sp_addsubscriber_schedule adds a schedule for the Distribution Agen
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 01/23/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"

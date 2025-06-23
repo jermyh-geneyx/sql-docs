@@ -1,10 +1,10 @@
 ---
-title: "Catalog stored procedures (Transact-SQL)"
+title: "Catalog Stored Procedures (Transact-SQL)"
 description: "An index of catalog stored procedures in SQL Server Transact-SQL."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/24/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"

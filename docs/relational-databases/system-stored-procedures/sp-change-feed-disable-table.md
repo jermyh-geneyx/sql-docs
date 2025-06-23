@@ -4,7 +4,7 @@ description: "The internal sys.sp_change_feed_disable_table system stored proced
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest, ajayj, imotiwala
-ms.date: 05/01/2025
+ms.date: 06/23/2025
 ms.service: fabric
 ms.subservice: system-objects
 ms.topic: "reference"

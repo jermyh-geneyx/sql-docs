@@ -3,8 +3,8 @@ title: "sys.sp_has_change_feed_permissions (Transact-SQL)"
 description: "The internal sys.sp_has_change_feed_permissions system stored procedure checks for permissions when enabling change feed publishing."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: imotiwala, ajayj
-ms.date: 05/01/2025
+ms.reviewer: imotiwala, ajayj, randolphwest
+ms.date: 06/23/2025
 ms.service: fabric
 ms.subservice: system-objects
 ms.topic: "reference"

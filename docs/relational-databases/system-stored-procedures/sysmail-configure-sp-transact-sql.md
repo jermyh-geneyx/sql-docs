@@ -4,7 +4,7 @@ description: "Changes configuration settings for Database Mail."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 11/18/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"

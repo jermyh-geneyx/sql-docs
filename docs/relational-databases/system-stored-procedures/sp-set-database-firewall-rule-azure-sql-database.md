@@ -5,7 +5,7 @@ description: sp_set_database_firewall_rule creates or updates the database-level
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 04/08/2024
+ms.date: 06/23/2025
 ms.service: azure-sql-database
 ms.topic: "reference"
 f1_keywords:
@@ -18,7 +18,7 @@ helpviewer_keywords:
   - "firewall_rules, setting database rules"
 dev_langs:
   - "TSQL"
-monikerRange: "= azuresqldb-current"
+monikerRange: "=azuresqldb-current"
 ---
 # sp_set_database_firewall_rule (Azure SQL Database)
 

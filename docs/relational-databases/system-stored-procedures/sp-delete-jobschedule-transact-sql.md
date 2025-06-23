@@ -4,7 +4,7 @@ description: "sp_delete_jobschedule deletes a schedule for a job in the SQL Serv
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 01/23/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"

@@ -4,7 +4,7 @@ description: sp_invalidate_textptr invalidates the specified in-row text pointer
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 07/16/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"

@@ -4,7 +4,7 @@ description: Returns a list of all defined ODBC and OLE DB data source names for
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 07/16/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"

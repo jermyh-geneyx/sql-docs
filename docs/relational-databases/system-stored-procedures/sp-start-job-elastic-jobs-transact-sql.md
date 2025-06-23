@@ -3,7 +3,8 @@ title: "jobs.sp_start_job (Azure Elastic Jobs) (Transact-SQL)"
 description: "jobs.sp_start_job starts an existing job in the Azure Elastic Jobs service for Azure SQL Database."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.date: 08/21/2024
+ms.reviewer: randolphwest
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"

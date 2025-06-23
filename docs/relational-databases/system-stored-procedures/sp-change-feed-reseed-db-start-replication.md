@@ -3,8 +3,8 @@ title: "sys.sp_change_feed_reseed_db_start_replication (Transact-SQL)"
 description: "The sys.sp_change_feed_reseed_db_start_replication system internal stored procedure begins replication for a database in a reseed state."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: imotiwala, ajayj
-ms.date: 05/01/2025
+ms.reviewer: imotiwala, ajayj, randolphwest
+ms.date: 06/23/2025
 ms.service: fabric
 ms.subservice: system-objects
 ms.topic: "reference"

@@ -1,10 +1,10 @@
 ---
-title: "Log Shipping stored procedures (Transact-SQL)"
+title: "Log Shipping Stored Procedures (Transact-SQL)"
 description: "Log Shipping stored procedures (Transact-SQL)"
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"

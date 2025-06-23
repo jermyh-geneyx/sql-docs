@@ -4,7 +4,7 @@ description: sp_helpdynamicsnapshot_job returns information on agent jobs that g
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/15/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"

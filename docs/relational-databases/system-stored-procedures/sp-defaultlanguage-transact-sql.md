@@ -4,7 +4,7 @@ description: sp_defaultlanguage changes the default language of for a SQL Server
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 07/04/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"

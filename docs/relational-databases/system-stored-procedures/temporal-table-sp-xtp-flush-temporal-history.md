@@ -4,7 +4,7 @@ description: "Invokes the data flush task to move all committed rows from in-mem
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 07/29/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: conceptual

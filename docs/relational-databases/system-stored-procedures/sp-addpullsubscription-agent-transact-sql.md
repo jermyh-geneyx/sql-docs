@@ -4,7 +4,7 @@ description: Adds a new scheduled agent job used to synchronize a pull subscript
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 11/02/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"

@@ -4,7 +4,7 @@ description: sp_posttracertoken posts a tracer token into the transaction log at
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"

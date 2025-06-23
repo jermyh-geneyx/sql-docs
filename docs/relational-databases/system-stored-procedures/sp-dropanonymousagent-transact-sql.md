@@ -4,7 +4,7 @@ description: sp_dropanonymousagent drops an anonymous agent for replication moni
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 11/28/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"

@@ -4,7 +4,7 @@ description: sp_register_custom_scripting registers a stored procedure or Transa
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 04/21/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"

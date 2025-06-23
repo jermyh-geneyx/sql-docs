@@ -1,10 +1,10 @@
 ---
-title: "Database Engine stored procedures (Transact-SQL)"
+title: "Database Engine Stored Procedures (Transact-SQL)"
 description: "Database Engine stored procedures (Transact-SQL)"
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/24/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"

@@ -4,7 +4,7 @@ description: sp_changeqreader_agent changes security properties of a Queue Reade
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 07/05/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"

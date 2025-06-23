@@ -4,7 +4,7 @@ description: sp_cleanup_log_shipping_history cleans up history locally, and on t
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 07/05/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"

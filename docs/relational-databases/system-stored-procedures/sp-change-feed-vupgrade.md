@@ -3,8 +3,8 @@ title: "sys.sp_change_feed_vupgrade (Transact-SQL)"
 description: "The internal sys.sp_change_feed_vupgrade system stored procedure upgrades the change feed schema if required."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: imotiwala, ajayj
-ms.date: 05/01/2025
+ms.reviewer: imotiwala, ajayj, randolphwest
+ms.date: 06/23/2025
 ms.service: fabric
 ms.subservice: system-objects
 ms.topic: "reference"

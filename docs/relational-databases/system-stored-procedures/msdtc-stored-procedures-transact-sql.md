@@ -1,10 +1,10 @@
 ---
-title: "MSDTC stored procedures (Transact-SQL)"
+title: "MSDTC Stored Procedures (Transact-SQL)"
 description: "Microsoft Distributed Transaction Coordinator (MSDTC) stored procedures (Transact-SQL)"
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 05/24/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"

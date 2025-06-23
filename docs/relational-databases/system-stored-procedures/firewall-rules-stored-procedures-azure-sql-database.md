@@ -1,11 +1,11 @@
 ---
-title: "Firewall rules stored procedures"
+title: "Firewall Rules Stored Procedures"
 titleSuffix: Azure SQL Database
 description: "Firewall rules stored procedures (Azure SQL Database)"
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: azure-sql-database
 ms.topic: "reference"
 helpviewer_keywords:
