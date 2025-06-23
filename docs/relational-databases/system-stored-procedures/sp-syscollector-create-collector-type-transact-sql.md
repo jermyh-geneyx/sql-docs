@@ -4,7 +4,7 @@ description: Creates a collector type for the data collector.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 07/04/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -77,11 +77,10 @@ Requires membership in the **dc_admin** (with EXECUTE permission) fixed database
 This example creates the Generic T-SQL Query collector type.
 
 ```sql
-EXEC sp_syscollector_create_collector_type
+EXECUTE sp_syscollector_create_collector_type
     @collector_type_uid = '302E93D1-3424-4be7-AA8E-84813ECF2419',
     @name = 'Generic T-SQL Query Collector Type',
-    @parameter_schema =
-    '<?xml version="1.0" encoding="utf-8"?>
+    @parameter_schema = '<?xml version="1.0" encoding="utf-8"?>
   <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="DataCollectorType">
     <xs:element name="TSQLQueryCollector">
       <xs:complexType>

@@ -4,7 +4,7 @@ description: "Adds a policy category that can be used with Policy-Based Manageme
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -67,9 +67,9 @@ Requires membership in the **PolicyAdministratorRole** fixed database role.
 The following example creates a policy category where subscription to the category isn't mandated. This means that individual databases can be configured to opt in or opt out of policies in the category.
 
 ```sql
-DECLARE @policy_category_id INT;
+DECLARE @policy_category_id AS INT;
 
-EXEC msdb.dbo.sp_syspolicy_add_policy_category
+EXECUTE msdb.dbo.sp_syspolicy_add_policy_category
     @name = N'Table Naming Policies',
     @mandate_database_subscriptions = 0,
     @policy_category_id = @policy_category_id OUTPUT;

@@ -4,7 +4,7 @@ description: sp_srvrolepermission displays the permissions of a fixed server rol
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 04/08/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -77,7 +77,7 @@ Requires membership in the **public** role.
 The following query returns the permissions associated with the **sysadmin** fixed server role.
 
 ```sql
-EXEC sp_srvrolepermission 'sysadmin';
+EXECUTE sp_srvrolepermission 'sysadmin';
 GO
 ```
 

@@ -4,7 +4,7 @@ description: sp_start_job instructs the SQL Server Agent to execute a job immedi
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -102,7 +102,7 @@ The following example starts a job named `Weekly Sales Data Backup`.
 USE msdb;
 GO
 
-EXEC dbo.sp_start_job N'Weekly Sales Data Backup';
+EXECUTE dbo.sp_start_job N'Weekly Sales Data Backup';
 GO
 ```
 

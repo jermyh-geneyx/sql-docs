@@ -4,7 +4,7 @@ description: Creates a new collection set.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -145,7 +145,7 @@ The following example creates a collection set by specifying only the required p
 USE msdb;
 GO
 
-DECLARE @collection_set_id INT;
+DECLARE @collection_set_id AS INT;
 
 EXECUTE dbo.sp_syscollector_create_collection_set
     @name = N'Simple collection set test 1',
@@ -163,12 +163,12 @@ The following example creates a collection set by specifying values for many of 
 USE msdb;
 GO
 
-DECLARE @collection_set_id INT;
-DECLARE @collection_set_uid UNIQUEIDENTIFIER;
+DECLARE @collection_set_id AS INT;
+DECLARE @collection_set_uid AS UNIQUEIDENTIFIER;
 
 SET @collection_set_uid = NEWID();
 
-EXEC dbo.sp_syscollector_create_collection_set
+EXECUTE dbo.sp_syscollector_create_collection_set
     @name = N'Simple collection set test 2',
     @collection_mode = 0,
     @days_until_expiration = 365,

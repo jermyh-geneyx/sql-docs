@@ -4,7 +4,7 @@ description: "sp_spaceused displays the number of rows, disk space reserved, and
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 04/08/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -140,8 +140,8 @@ This mode is the default, when no parameters are specified. The following result
 | Column name | Data type | Description |
 | --- | --- | --- |
 | `database_name` | **nvarchar(128)** | Name of the current database. |
-| `database_size` | **varchar(18)** | Size of the current database in megabytes. `database_size` includes both data and log files. If the database has a  `MEMORY_OPTIMIZED_DATA` filegroup, this value includes the total on-disk size of all checkpoint files in the filegroup. |
-| `unallocated space` | **varchar(18)** | Space in the database that isn't reserved for database objects. If the database has a  `MEMORY_OPTIMIZED_DATA` filegroup, this value includes the total on-disk size of the checkpoint files with state `PRECREATED` in the filegroup. |
+| `database_size` | **varchar(18)** | Size of the current database in megabytes. `database_size` includes both data and log files. If the database has a `MEMORY_OPTIMIZED_DATA` filegroup, this value includes the total on-disk size of all checkpoint files in the filegroup. |
+| `unallocated space` | **varchar(18)** | Space in the database that isn't reserved for database objects. If the database has a `MEMORY_OPTIMIZED_DATA` filegroup, this value includes the total on-disk size of the checkpoint files with state `PRECREATED` in the filegroup. |
 
 Space used by tables in the database. This result set doesn't reflect memory-optimized tables, as there's no per-table accounting of disk usage:
 
@@ -165,15 +165,15 @@ If *@objname* is omitted, the value of *@oneresultset* is `1`, and *@include_tot
 | Column name | Data type | Description |
 | --- | --- | --- |
 | `database_name` | **nvarchar(128)** | Name of the current database. |
-| `database_size` | **varchar(18)** | Size of the current database in megabytes. `database_size` includes both data and log files. If the database has a  `MEMORY_OPTIMIZED_DATA` filegroup, this value includes the total on-disk size of all checkpoint files in the filegroup. |
-| `unallocated space` | **varchar(18)** | Space in the database that isn't reserved for database objects. If the database has a  `MEMORY_OPTIMIZED_DATA` filegroup, this value includes the total on-disk size of the checkpoint files with state `PRECREATED` in the filegroup. |
+| `database_size` | **varchar(18)** | Size of the current database in megabytes. `database_size` includes both data and log files. If the database has a `MEMORY_OPTIMIZED_DATA` filegroup, this value includes the total on-disk size of all checkpoint files in the filegroup. |
+| `unallocated space` | **varchar(18)** | Space in the database that isn't reserved for database objects. If the database has a `MEMORY_OPTIMIZED_DATA` filegroup, this value includes the total on-disk size of the checkpoint files with state `PRECREATED` in the filegroup. |
 | `reserved` | **varchar(18)** | Total amount of space allocated by objects in the database. |
 | `data` | **varchar(18)** | Total amount of space used by data. |
 | `index_size` | **varchar(18)** | Total amount of space used by indexes. |
 | `unused` | **varchar(18)** | Total amount of space reserved for objects in the database, but not yet used. |
 | `xtp_precreated` <sup>1</sup> | **varchar(18)** | Total size of checkpoint files with state `PRECREATED`, in KB. This value counts toward the unallocated space in the database as a whole. Returns `NULL` if the database doesn't have a `MEMORY_OPTIMIZED_DATA` filegroup with at least one container. |
-| `xtp_used` <sup>1</sup> | **varchar(18)** | Total size of checkpoint files with states `UNDER CONSTRUCTION`, `ACTIVE`, and `MERGE TARGET`, in KB. This value is the disk space actively used for data in memory-optimized tables. Returns `NULL` if the database doesn't have a  `MEMORY_OPTIMIZED_DATA` filegroup with at least one container. |
-| `xtp_pending_truncation` <sup>1</sup> | **varchar(18)** | Total size of checkpoint files with state `WAITING_FOR_LOG_TRUNCATION`, in KB. This value is the disk space used for checkpoint files that are awaiting cleanup, once log truncation happens. Returns `NULL` if the database doesn't have a  `MEMORY_OPTIMIZED_DATA` filegroup with at least one container. |
+| `xtp_used` <sup>1</sup> | **varchar(18)** | Total size of checkpoint files with states `UNDER CONSTRUCTION`, `ACTIVE`, and `MERGE TARGET`, in KB. This value is the disk space actively used for data in memory-optimized tables. Returns `NULL` if the database doesn't have a `MEMORY_OPTIMIZED_DATA` filegroup with at least one container. |
+| `xtp_pending_truncation` <sup>1</sup> | **varchar(18)** | Total size of checkpoint files with state `WAITING_FOR_LOG_TRUNCATION`, in KB. This value is the disk space used for checkpoint files that are awaiting cleanup, once log truncation happens. Returns `NULL` if the database doesn't have a `MEMORY_OPTIMIZED_DATA` filegroup with at least one container. |
 
 <sup>1</sup> Only included if *@include_total_xtp_storage* is set to `1`.
 
@@ -203,7 +203,8 @@ The following example reports disk space information for the `Vendor` table and 
 ```sql
 USE AdventureWorks2022;
 GO
-EXEC sp_spaceused N'Purchasing.Vendor';
+
+EXECUTE sp_spaceused N'Purchasing.Vendor';
 GO
 ```
 
@@ -214,7 +215,8 @@ The following example summarizes space used in the current database and uses the
 ```sql
 USE AdventureWorks2022;
 GO
-EXEC sp_spaceused @updateusage = N'TRUE';
+
+EXECUTE sp_spaceused @updateusage = N'TRUE';
 GO
 ```
 
@@ -226,7 +228,7 @@ The following example summarizes the space used by the remote table associated w
 USE StretchedAdventureWorks2022;
 GO
 
-EXEC sp_spaceused N'Purchasing.Vendor', @mode = 'REMOTE_ONLY';
+EXECUTE sp_spaceused N'Purchasing.Vendor', @mode = 'REMOTE_ONLY';
 ```
 
 ### D. Display space usage information for a database in a single result set
@@ -236,7 +238,8 @@ The following example summarizes space usage for the current database in a singl
 ```sql
 USE AdventureWorks2022;
 GO
-EXEC sp_spaceused @oneresultset = 1;
+
+EXECUTE sp_spaceused @oneresultset = 1;
 ```
 
 ### E. Display space usage information for a database with at least one MEMORY_OPTIMIZED file group in a single result set
@@ -244,10 +247,11 @@ EXEC sp_spaceused @oneresultset = 1;
 The following example summarizes space usage for the current database with at least one `MEMORY_OPTIMIZED` file group in a single result set.
 
 ```sql
-USE WideWorldImporters
+USE WideWorldImporters;
 GO
 
-EXEC sp_spaceused @updateusage = 'FALSE',
+EXECUTE sp_spaceused
+    @updateusage = 'FALSE',
     @mode = 'ALL',
     @oneresultset = '1',
     @include_total_xtp_storage = '1';
@@ -259,10 +263,11 @@ GO
 The following example summarizes space usage for a `MEMORY_OPTIMIZED` table object in the current database with at least one `MEMORY_OPTIMIZED` file group.
 
 ```sql
-USE WideWorldImporters
+USE WideWorldImporters;
 GO
 
-EXEC sp_spaceused @objname = N'VehicleTemperatures',
+EXECUTE sp_spaceused
+    @objname = N'VehicleTemperatures',
     @updateusage = 'FALSE',
     @mode = 'ALL',
     @oneresultset = '0',

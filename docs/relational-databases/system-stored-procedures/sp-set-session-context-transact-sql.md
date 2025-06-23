@@ -4,7 +4,7 @@ description: sp_set_session_context sets a key-value pair in the session context
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -69,7 +69,9 @@ The total size of the session context is limited to 1 MB. If you set a value tha
 You can monitor overall memory usage by querying [sys.dm_os_memory_cache_counters](../system-dynamic-management-views/sys-dm-os-memory-cache-counters-transact-sql.md) as follows:
 
 ```sql
-SELECT * FROM sys.dm_os_memory_cache_counters WHERE type = 'CACHESTORE_SESSION_CONTEXT';
+SELECT *
+FROM sys.dm_os_memory_cache_counters
+WHERE type = 'CACHESTORE_SESSION_CONTEXT';
 ```
 
 ## Examples
@@ -79,14 +81,20 @@ SELECT * FROM sys.dm_os_memory_cache_counters WHERE type = 'CACHESTORE_SESSION_C
 The following example shows how to set and then return a session's context key named `language`, with a value of `English`.
 
 ```sql
-EXEC sys.sp_set_session_context @key = N'language', @value = 'English';
+EXECUTE sys.sp_set_session_context
+    @key = N'language',
+    @value = 'English';
+
 SELECT SESSION_CONTEXT(N'language');
 ```
 
 The following example demonstrates the use of the optional read-only flag.
 
 ```sql
-EXEC sys.sp_set_session_context @key = N'user_id', @value = 4, @read_only = 1;
+EXECUTE sys.sp_set_session_context
+    @key = N'user_id',
+    @value = 4,
+    @read_only = 1;
 ```
 
 ### B. Set and return a client correlation ID
@@ -96,7 +104,7 @@ The following example shows how to set and retrieve a session context key named 
 1. Set the value.
 
    ```sql
-   EXEC sp_set_session_context 'client_correlation_id', '12323ad';
+   EXECUTE sp_set_session_context 'client_correlation_id', '12323ad';
    ```
 
 1. Retrieve the value.

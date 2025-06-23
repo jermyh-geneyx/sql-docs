@@ -4,7 +4,7 @@ description: "Deletes a policy category in Policy-Based Management."
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -65,7 +65,7 @@ Requires membership in the **PolicyAdministratorRole** fixed database role.
 The following example deletes a policy category that is named `Finance`.
 
 ```sql
-EXEC msdb.dbo.sp_syspolicy_delete_policy_category @name = N'Finance';
+EXECUTE msdb.dbo.sp_syspolicy_delete_policy_category @name = N'Finance';
 GO
 ```
 

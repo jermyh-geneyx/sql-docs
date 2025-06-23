@@ -4,7 +4,7 @@ description: Specifies the database name defined in the connection string used t
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 07/04/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -59,7 +59,8 @@ The following example sets the name of the management data warehouse to `RemoteM
 ```sql
 USE msdb;
 GO
-EXEC sp_syscollector_set_warehouse_database_name N'RemoteMDW';
+
+EXECUTE sp_syscollector_set_warehouse_database_name N'RemoteMDW';
 GO
 ```
 

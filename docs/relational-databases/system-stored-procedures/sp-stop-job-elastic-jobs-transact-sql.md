@@ -3,7 +3,8 @@ title: "jobs.sp_stop_job (Azure Elastic Jobs) (Transact-SQL)"
 description: "jobs.sp_stop_job instructs the elastic job agent to stop a job execution in the Azure Elastic Jobs service for Azure SQL Database."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.date: 08/21/2024
+ms.reviewer: randolphwest
+ms.date: 06/23/2025
 ms.service: azure-sql-database
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -59,26 +60,27 @@ Connect to the `job_database` and run the following command:
 --Connect to the job database specified when creating the job agent
 
 -- View all active executions to determine job_execution_id
-SELECT job_name
-, job_execution_id
-, job_version
-, step_id
-, is_active
-, lifecycle
-, start_time
-, current_attempts
-, current_attempt_start_time
-, last_message
-, target_group_name
-, target_server_name
-, target_database_name
+SELECT job_name,
+       job_execution_id,
+       job_version,
+       step_id,
+       is_active,
+       lifecycle,
+       start_time,
+       current_attempts,
+       current_attempt_start_time,
+       last_message,
+       target_group_name,
+       target_server_name,
+       target_database_name
 FROM jobs.job_executions
-WHERE is_active = 1 AND job_name = 'ResultPoolsJob'
+WHERE is_active = 1
+      AND job_name = 'ResultPoolsJob'
 ORDER BY start_time DESC;
 GO
 
 -- Cancel job execution with the specified job_execution_id
-EXEC jobs.sp_stop_job '01234567-89ab-cdef-0123-456789abcdef';
+EXECUTE jobs.sp_stop_job '01234567-89ab-cdef-0123-456789abcdef';
 ```
 
 ## Related content

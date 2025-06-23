@@ -4,7 +4,7 @@ description: Starts an upload of collection set data if the collection set is en
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 07/04/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -68,7 +68,8 @@ Does an on-demand upload of a collection set named `Simple Collection Set`.
 ```sql
 USE msdb;
 GO
-EXEC sp_syscollector_upload_collection_set @name = 'Simple Collection Set';
+
+EXECUTE sp_syscollector_upload_collection_set @name = 'Simple Collection Set';
 ```
 
 ## Related content

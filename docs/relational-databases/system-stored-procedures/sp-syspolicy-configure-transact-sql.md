@@ -4,7 +4,7 @@ description: "Configures settings for Policy-Based Management, such as whether P
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -84,7 +84,7 @@ Requires membership in the **PolicyAdministratorRole** fixed database role.
 The following example enables Policy-Based Management.
 
 ```sql
-EXEC msdb.dbo.sp_syspolicy_configure
+EXECUTE msdb.dbo.sp_syspolicy_configure
     @name = N'Enabled',
     @value = 1;
 GO
@@ -93,7 +93,7 @@ GO
 The following example sets the policy history retention to 14 days.
 
 ```sql
-EXEC msdb.dbo.sp_syspolicy_configure
+EXECUTE msdb.dbo.sp_syspolicy_configure
     @name = N'HistoryRetentionInDays',
     @value = 14;
 GO
@@ -102,7 +102,7 @@ GO
 The following example configures Policy-Based Management to log both successful and failed policy evaluations.
 
 ```sql
-EXEC msdb.dbo.sp_syspolicy_configure
+EXECUTE msdb.dbo.sp_syspolicy_configure
     @name = N'LogOnSuccess',
     @value = 1;
 GO

@@ -4,7 +4,7 @@ description: sp_special_columns_100 returns the optimal set of columns that uniq
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest
-ms.date: 04/08/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.topic: "reference"
 dev_langs:
@@ -105,12 +105,12 @@ None.
 
 Requires `SELECT` permission on the schema.
 
-## Examples: [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] and [!INCLUDE [ssPDW](../../includes/sspdw-md.md)]
+## Examples: Azure Synapse Analytics and Analytics Platform System (PDW)
 
 The following example returns information about the column that uniquely identifies rows in the `FactFinance` table in the `AdventureWorks` database.
 
 ```sql
-EXEC sp_special_columns_100 @table_name = 'FactFinance';
+EXECUTE sp_special_columns_100 @table_name = 'FactFinance';
 ```
 
 ## Related content

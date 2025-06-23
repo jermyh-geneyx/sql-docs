@@ -4,7 +4,7 @@ description: Used to modify the properties of a user-defined collection item or 
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -112,7 +112,7 @@ The following example changes the collection frequency for the specified collect
 USE msdb;
 GO
 
-EXEC sp_syscollector_update_collection_item
+EXECUTE sp_syscollector_update_collection_item
     @name = N'My custom T-SQL query collector item',
     @frequency = 3000;
 GO
@@ -126,7 +126,7 @@ The following example renames a collection item.
 USE msdb;
 GO
 
-EXEC sp_syscollector_update_collection_item
+EXECUTE sp_syscollector_update_collection_item
     @name = N'My custom T-SQL query collector item',
     @new_name = N'My modified T-SQL item';
 GO
@@ -139,9 +139,10 @@ The following example changes the parameters associated with the collection item
 ```sql
 USE msdb;
 GO
-EXEC sp_syscollector_update_collection_item
-@collection_item_id = 9,
-@parameters = '
+
+EXECUTE sp_syscollector_update_collection_item
+    @collection_item_id = 9,
+    @parameters = '
     <ns:TSQLQueryCollector xmlns:ns="DataCollectorType">
         <Query>
             <Value>SELECT * FROM sys.dm_db_index_usage_stats</Value>

@@ -4,7 +4,7 @@ description: sp_setnetname sets the network names in sys.servers to their actual
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -62,11 +62,13 @@ Because linked servers and remote servers reside in the same namespace, they can
 In this example, Assume `sqlserv2` is the actual name of the SQL Server instance.
 
 ```sql
-EXEC sp_addlinkedserver 'sqlserv2';
+EXECUTE sp_addlinkedserver 'sqlserv2';
 GO
-EXEC sp_addserver 'rpcserv2';
+
+EXECUTE sp_addserver 'rpcserv2';
 GO
-EXEC sp_setnetname 'rpcserv2', 'sqlserv2';
+
+EXECUTE sp_setnetname 'rpcserv2', 'sqlserv2';
 ```
 
 > [!NOTE]  
@@ -83,9 +85,10 @@ The following example shows a typical administrative sequence used on [!INCLUDE 
 ```sql
 USE master;
 GO
-EXEC sp_addserver 'Win_1';
-EXEC sp_setnetname 'Win_1', 'Win-1';
-EXEC Win_1.master.dbo.sp_who;
+
+EXECUTE sp_addserver 'Win_1';
+EXECUTE sp_setnetname 'Win_1', 'Win-1';
+EXECUTE Win_1.master.dbo.sp_who;
 ```
 
 ## Related content

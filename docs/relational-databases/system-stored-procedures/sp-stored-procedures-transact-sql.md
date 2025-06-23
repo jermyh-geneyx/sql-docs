@@ -4,7 +4,7 @@ description: sp_stored_procedures returns a list of stored procedures in the cur
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 04/08/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -102,7 +102,8 @@ The following example returns all stored procedures in the [!INCLUDE [ssSampleDB
 ```sql
 USE AdventureWorks2022;
 GO
-EXEC sp_stored_procedures;
+
+EXECUTE sp_stored_procedures;
 ```
 
 ### B. Return a single stored procedure
@@ -113,10 +114,7 @@ The following example returns a result set for the `uspLogError` stored procedur
 USE AdventureWorks2022;
 GO
 
-sp_stored_procedures N'uspLogError',
-    N'dbo',
-    N'AdventureWorks2022',
-    1;
+EXECUTE sp_stored_procedures N'uspLogError', N'dbo', N'AdventureWorks2022', 1;
 ```
 
 ## Related content
