@@ -4,7 +4,7 @@ description: "sysmail_delete_profileaccount_sp (Transact-SQL)"
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -77,7 +77,7 @@ The stored procedure `sysmail_delete_profileaccount_sp` is in the `msdb` databas
 The following example shows removing the account `Audit Account` from the profile `AdventureWorks Administrator`.
 
 ```sql
-EXEC msdb.dbo.sysmail_delete_profileaccount_sp
+EXECUTE msdb.dbo.sysmail_delete_profileaccount_sp
     @profile_name = 'AdventureWorks Administrator',
     @account_name = 'Audit Account';
 ```
@@ -85,6 +85,6 @@ EXEC msdb.dbo.sysmail_delete_profileaccount_sp
 ## Related content
 
 - [Database Mail](../database-mail/database-mail.md)
-- [Create a Database Mail Account](../database-mail/create-a-database-mail-account.md)
+- [Create a Database Mail account](../database-mail/create-a-database-mail-account.md)
 - [Database Mail Configuration Objects](../database-mail/database-mail-configuration-objects.md)
 - [Database Mail stored procedures (Transact-SQL)](database-mail-stored-procedures-transact-sql.md)

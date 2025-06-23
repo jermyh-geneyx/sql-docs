@@ -4,7 +4,7 @@ description: "Returns version information about SQL Server."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -75,7 +75,7 @@ Requires membership in the **public** role.
 
 ## Related content
 
-- [System Functions by category for Transact-SQL](../system-functions/system-functions-category-transact-sql.md)
+- [System functions by category for Transact-SQL](../system-functions/system-functions-category-transact-sql.md)
 - [System stored procedures (Transact-SQL)](system-stored-procedures-transact-sql.md)
 - [General extended stored procedures (Transact-SQL)](general-extended-stored-procedures-transact-sql.md)
 - [@@VERSION - Transact SQL Configuration Functions](../../t-sql/functions/version-transact-sql-configuration-functions.md)

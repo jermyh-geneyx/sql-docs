@@ -4,7 +4,7 @@ description: "Lists information about associations between Database Mail profile
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -83,7 +83,7 @@ If `sysmail_help_principalprofile_sp` is invoked without parameters, the result 
 The following example shows listing the information for all associations between the `AdventureWorks Administrator` profile and the `ApplicationLogin` principal in the `msdb` database.
 
 ```sql
-EXEC msdb.dbo.sysmail_help_principalprofile_sp
+EXECUTE msdb.dbo.sysmail_help_principalprofile_sp
     @principal_name = 'danw',
     @profile_name = 'AdventureWorks Administrator';
 ```
@@ -101,7 +101,7 @@ principal_id principal_name     profile_id  profile_name                   is_de
 The following example shows listing the information for all associations in the instance.
 
 ```sql
-EXEC msdb.dbo.sysmail_help_principalprofile_sp;
+EXECUTE msdb.dbo.sysmail_help_principalprofile_sp;
 ```
 
 Here is a sample result set, reformatted for line length.

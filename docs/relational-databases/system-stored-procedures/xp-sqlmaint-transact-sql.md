@@ -4,7 +4,7 @@ description: "Calls the sqlmaint utility with a string that contains sqlmaint op
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -60,7 +60,7 @@ Requires membership in the **sysadmin** fixed server role, or execute permission
 In the following example, `xp_sqlmaint` calls **sqlmaint** to perform integrity checks, create a report file, and update `msdb.dbo.sysdbmaintplan_history`.
 
 ```sql
-EXEC xp_sqlmaint '-D AdventureWorks2022 -PlanID 02A52657-D546-11D1-9D8A-00A0C9054212
+EXECUTE xp_sqlmaint '-D AdventureWorks2022 -PlanID 02A52657-D546-11D1-9D8A-00A0C9054212
    -Rpt "C:\Program Files\Microsoft SQL Server\MSSQL\LOG\DBMaintPlan2.txt" -WriteHistory -CkDB -CkAl';
 ```
 

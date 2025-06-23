@@ -4,7 +4,7 @@ description: "Lists information about one or more mail profiles."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/30/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -72,7 +72,7 @@ The stored procedure `sysmail_help_profile_sp` is in the `msdb` database and is 
 The following example shows listing all profiles in the instance.
 
 ```sql
-EXEC msdb.dbo.sysmail_help_profile_sp;
+EXECUTE msdb.dbo.sysmail_help_profile_sp;
 ```
 
 Here is a sample result set, reformatted for line length:
@@ -89,8 +89,7 @@ profile_id  name                          description
 The following example shows listing information for the profile `AdventureWorks Administrator`.
 
 ```sql
-EXEC msdb.dbo.sysmail_help_profile_sp
-    @profile_name = 'AdventureWorks Administrator' ;
+EXECUTE msdb.dbo.sysmail_help_profile_sp @profile_name = 'AdventureWorks Administrator';
 ```
 
 Here is a sample result set, reformatted for line length:

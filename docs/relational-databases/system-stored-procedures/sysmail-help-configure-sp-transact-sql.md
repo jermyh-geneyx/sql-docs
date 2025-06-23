@@ -4,7 +4,7 @@ description: "Displays configuration settings for Database Mail."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/30/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -68,7 +68,7 @@ The stored procedure `sysmail_help_configure_sp` is in the `msdb` database and i
 The following example shows listing the Database Mail configuration settings for the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] instance.
 
 ```sql
-EXEC msdb.dbo.sysmail_help_configure_sp;
+EXECUTE msdb.dbo.sysmail_help_configure_sp;
 ```
 
 Here is a sample result set, edited for line length:

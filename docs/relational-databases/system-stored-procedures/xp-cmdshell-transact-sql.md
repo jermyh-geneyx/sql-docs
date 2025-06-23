@@ -4,7 +4,7 @@ description: "Spawns a Windows command shell and passes in a string for executio
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -51,7 +51,7 @@ An optional parameter, specifying that no output should be returned to the clien
 Executing the following `xp_cmdshell` statement returns a directory listing of the current directory.
 
 ```sql
-EXEC xp_cmdshell 'dir *.exe';
+EXECUTE xp_cmdshell 'dir *.exe';
 GO
 ```
 
@@ -72,12 +72,12 @@ The Windows process spawned by `xp_cmdshell` has the same security rights as the
 
 ## xp_cmdshell proxy account
 
-When it's called by a user that isn't a member of the **sysadmin** fixed server role, `xp_cmdshell` connects to Windows by using the account name and password stored in the credential named **##xp_cmdshell_proxy_account##**. If this proxy credential doesn't exist, `xp_cmdshell` fails.
+When it's called by a user that isn't a member of the **sysadmin** fixed server role, `xp_cmdshell` connects to Windows by using the account name and password stored in the credential named `##xp_cmdshell_proxy_account##`. If this proxy credential doesn't exist, `xp_cmdshell` fails.
 
-The proxy account credential can be created by executing `sp_xp_cmdshell_proxy_account`. As arguments, this stored procedure takes a Windows user name and password. For example, the following command creates a proxy credential for Windows domain user `SHIPPING\KobeR` that has the Windows password `sdfh%dkc93vcMt0`.
+The proxy account credential can be created by executing `sp_xp_cmdshell_proxy_account`. As arguments, this stored procedure takes a Windows user name and password. For example, the following command creates a proxy credential for Windows domain user `SHIPPING\KobeR`. Replace `<password>` with a strong password.
 
 ```sql
-EXEC sp_xp_cmdshell_proxy_account 'SHIPPING\KobeR', 'sdfh%dkc93vcMt0';
+EXECUTE sp_xp_cmdshell_proxy_account 'SHIPPING\KobeR', '<password>';
 ```
 
 For more information, see [sp_xp_cmdshell_proxy_account](sp-xp-cmdshell-proxy-account-transact-sql.md).
@@ -100,7 +100,7 @@ To allow non-administrators to use `xp_cmdshell`, and allow [!INCLUDE [ssNoVersi
 1. In [!INCLUDE [ssManStudio](../../includes/ssmanstudio-md.md)], using the `master` database, execute the following Transact-SQL statement to give specific non-**sysadmin** users the ability to execute `xp_cmdshell`. The specified user must exist in the `master` database.
 
    ```sql
-    GRANT exec ON xp_cmdshell TO N'<some_user>';
+   GRANT exec ON xp_cmdshell TO N'<some_user>';
    ```
 
 Now non-administrators can launch operating system processes with `xp_cmdshell` and those processes run with the permissions of the proxy account that you configured. Users with CONTROL SERVER permission (members of the **sysadmin** fixed server role) continue to receive the permissions of the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] service account for child processes that are launched by `xp_cmdshell`.
@@ -108,15 +108,17 @@ Now non-administrators can launch operating system processes with `xp_cmdshell` 
 To determine the Windows account being used by `xp_cmdshell` when launching operating system processes, execute the following statement:
 
 ```sql
-EXEC xp_cmdshell 'whoami.exe';
+EXECUTE xp_cmdshell 'whoami.exe';
 ```
 
 To determine the security context for another login, execute the following Transact-SQL code:
 
 ```sql
-EXEC AS LOGIN = '<other_login>';
+EXECUTE AS LOGIN = '<other_login>';
 GO
-xp_cmdshell 'whoami.exe';
+
+EXECUTE xp_cmdshell 'whoami.exe';
+
 REVERT;
 ```
 
@@ -127,7 +129,7 @@ REVERT;
 The following example shows the `xp_cmdshell` extended stored procedure executing a directory command.
 
 ```sql
-EXEC master..xp_cmdshell 'dir *.exe'
+EXECUTE master..xp_cmdshell 'dir *.exe';
 ```
 
 ### B. Return no output
@@ -137,7 +139,7 @@ The following example uses `xp_cmdshell` to execute a command string without ret
 ```sql
 USE master;
 
-EXEC xp_cmdshell 'copy c:\SQLbcks\AdvWorks.bck
+EXECUTE xp_cmdshell 'copy c:\SQLbcks\AdvWorks.bck
     \\server2\backups\SQLbcks', NO_OUTPUT;
 GO
 ```
@@ -147,12 +149,12 @@ GO
 In the following example, the `xp_cmdshell` extended stored procedure also suggests return status. The return code value is stored in the variable `@result`.
 
 ```sql
-DECLARE @result INT;
+DECLARE @result AS INT;
 
-EXEC @result = xp_cmdshell 'dir *.exe';
+EXECUTE @result = xp_cmdshell 'dir *.exe';
 
 IF (@result = 0)
-    PRINT 'Success'
+    PRINT 'Success';
 ELSE
     PRINT 'Failure';
 ```
@@ -162,13 +164,11 @@ ELSE
 The following example writes the contents of the `@var` variable to a file named `var_out.txt` in the current server directory.
 
 ```sql
-DECLARE @cmd SYSNAME,
-    @var SYSNAME;
-
+DECLARE @cmd AS SYSNAME, @var AS SYSNAME;
 SET @var = 'Hello world';
 SET @cmd = 'echo ' + @var + ' > var_out.txt';
 
-EXEC master..xp_cmdshell @cmd;
+EXECUTE master..xp_cmdshell @cmd;
 ```
 
 ### E. Capture the result of a command to a file
@@ -176,13 +176,11 @@ EXEC master..xp_cmdshell @cmd;
 The following example writes the contents of the current directory to a file named `dir_out.txt` in the current server directory.
 
 ```sql
-DECLARE @cmd SYSNAME,
-    @var SYSNAME;
-
+DECLARE @cmd AS SYSNAME, @var AS SYSNAME;
 SET @var = 'dir /p';
 SET @cmd = @var + ' > dir_out.txt';
 
-EXEC master..xp_cmdshell @cmd;
+EXECUTE master..xp_cmdshell @cmd;
 ```
 
 ## Related content

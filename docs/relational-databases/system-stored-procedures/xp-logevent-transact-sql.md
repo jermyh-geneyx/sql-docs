@@ -4,7 +4,7 @@ description: "Logs a user-defined message in the SQL Server log file and in the 
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -83,7 +83,8 @@ SELECT @@MESSAGE = 'The table ' + @@TABNAME + ' is not owned by the user
 
 USE master;
 
-EXEC xp_logevent 60000, @@MESSAGE, informational;
+EXECUTE xp_logevent 60000,
+    @@MESSAGE, informational;
 ```
 
 ## Related content

@@ -4,7 +4,7 @@ description: "Changes the information in an existing Database Mail account."
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 11/02/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -122,7 +122,7 @@ The stored procedure `sysmail_update_account_sp` is in the `msdb` database and i
 The following example updates the account `AdventureWorks Administrator` In the `msdb` database. The information for the account is set to the values provided.
 
 ```sql
-EXEC msdb.dbo.sysmail_update_account_sp
+EXECUTE msdb.dbo.sysmail_update_account_sp
     @account_name = 'AdventureWorks Administrator',
     @description = 'Mail account for administrative e-mail.',
     @email_address = 'dba@adventure-works.com',
@@ -143,7 +143,7 @@ EXEC msdb.dbo.sysmail_update_account_sp
 The following example changes the name and updates the account information for the with account ID `125`. The new name of the account is `Backup Mail Server`.
 
 ```sql
-EXEC msdb.dbo.sysmail_update_account_sp
+EXECUTE msdb.dbo.sysmail_update_account_sp
     @account_id = 125,
     @account_name = 'Backup Mail Server',
     @description = 'Mail account for administrative e-mail.',
@@ -163,5 +163,5 @@ EXEC msdb.dbo.sysmail_update_account_sp
 ## Related content
 
 - [Database Mail](../database-mail/database-mail.md)
-- [Create a Database Mail Account](../database-mail/create-a-database-mail-account.md)
+- [Create a Database Mail account](../database-mail/create-a-database-mail-account.md)
 - [Database Mail stored procedures (Transact-SQL)](database-mail-stored-procedures-transact-sql.md)
