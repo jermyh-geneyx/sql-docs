@@ -4,7 +4,7 @@ description: Facilitates the keying of grid parameters for a spatial index.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -81,7 +81,7 @@ The bounding box for the **geography** type is the entire globe.
 The following example calls `sp_help_spatial_geography_histogram` on the `Person.Address` table in the [!INCLUDE [ssSampleDBnormal](../../includes/sssampledbnormal-md.md)] database.
 
 ```sql
-EXEC sp_help_spatial_geography_histogram
+EXECUTE sp_help_spatial_geography_histogram
     @tabname = Person.Address,
     @colname = SpatialLocation,
     @resolution = 64,

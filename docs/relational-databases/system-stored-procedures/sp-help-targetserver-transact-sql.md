@@ -4,7 +4,7 @@ description: sp_help_targetserver lists all target servers.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/14/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -73,7 +73,7 @@ The following example lists information for all registered target servers.
 USE msdb;
 GO
 
-EXEC dbo.sp_help_targetserver;
+EXECUTE dbo.sp_help_targetserver;
 GO
 ```
 
@@ -85,7 +85,7 @@ The following example lists information for the target server `SEATTLE2`.
 USE msdb;
 GO
 
-EXEC dbo.sp_help_targetserver N'SEATTLE2';
+EXECUTE dbo.sp_help_targetserver N'SEATTLE2';
 GO
 ```
 

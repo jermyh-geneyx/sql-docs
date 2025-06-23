@@ -4,7 +4,7 @@ description: sp_help_spatial_geometry_index_xml returns the names and values for
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/14/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -57,10 +57,11 @@ The following example uses `sp_help_spatial_geometry_index_xml` to investigate t
 An [XQuery Basics](../../xquery/xquery-basics.md) is then run on the result set, returning a specific property.
 
 ```sql
-DECLARE @qs geometry = 'POLYGON((-90.0 -180.0, -90.0 180.0, 90.0 180.0, 90.0 -180.0, -90.0 -180.0))';
-DECLARE @x XML;
+DECLARE @qs AS geometry = 'POLYGON((-90.0 -180.0, -90.0 180.0, 90.0 180.0, 90.0 -180.0, -90.0 -180.0))';
+DECLARE @x AS XML;
 
-EXEC sp_help_spatial_geometry_index_xml 'geometry_col',
+EXECUTE sp_help_spatial_geometry_index_xml
+    'geometry_col',
     'SIndx_SpatialTable_geometry_col2',
     0,
     @qs,

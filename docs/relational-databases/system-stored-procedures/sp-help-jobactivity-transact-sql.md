@@ -4,7 +4,7 @@ description: Lists information about the runtime state of SQL Server Agent jobs.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/14/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -85,7 +85,7 @@ Returns the following result set:
 
 This procedure provides a snapshot of the current state of the jobs. The results returned represent information at the time that the request is processed.
 
-[!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Agent creates a session ID each time that the Agent service starts. The session ID is stored in the table `msdb`.dbo.syssessions**.
+[!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Agent creates a session ID each time that the Agent service starts. The session ID is stored in the table `msdb.dbo.syssessions`.
 
 When no *@session_id* is provided, lists information about the most recent session.
 
@@ -113,7 +113,7 @@ The following example lists activity for all jobs that the current user has perm
 USE msdb;
 GO
 
-EXEC dbo.sp_help_jobactivity;
+EXECUTE dbo.sp_help_jobactivity;
 GO
 ```
 

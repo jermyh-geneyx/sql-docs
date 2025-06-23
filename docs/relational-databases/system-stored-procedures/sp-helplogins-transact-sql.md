@@ -4,7 +4,7 @@ description: sp_helplogins provides information about logins and the users assoc
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/15/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -86,7 +86,7 @@ If `sp_helplogins` can't access a database, `sp_helplogins` will return as much 
 The following example reports information about the login `John`.
 
 ```sql
-EXEC sp_helplogins 'John';
+EXECUTE sp_helplogins 'John';
 GO
 ```
 

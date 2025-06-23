@@ -4,7 +4,7 @@ description: Facilitates the keying of bounding box and grid parameters for a sp
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -103,19 +103,19 @@ GO
 
 -- Set database compatibility for circular arc segments
 ALTER DATABASE AdventureWorksDW2012
-SET COMPATIBILITY_LEVEL = 110;
+    SET COMPATIBILITY_LEVEL = 110;
 GO
 
 -- Create table to execute sp_help_spatial_geometry_histogram on
-CREATE TABLE TownSites (
+CREATE TABLE TownSites
+(
     Location geometry NULL,
-    SiteName NVARCHAR(50) NULL
-)
+    SiteName NVARCHAR (50) NULL
+);
 GO
 
 -- Insert site data into table
-DECLARE @g geometry;
-
+DECLARE @g AS geometry;
 SET @g = geometry::Parse('POINT(0 0)');
 
 INSERT INTO TownSites (Location, SiteName)
@@ -137,7 +137,7 @@ INSERT INTO TownSites (Location, SiteName)
 SELECT @g, N'Main Road';
 
 -- Call proc to see data within bounding box
-EXEC sp_help_spatial_geometry_histogram
+EXECUTE sp_help_spatial_geometry_histogram
     @tabname = TownSites,
     @colname = Location,
     @resolution = 64,

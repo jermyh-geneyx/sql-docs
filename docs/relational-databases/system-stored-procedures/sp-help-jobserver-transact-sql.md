@@ -4,7 +4,7 @@ description: sp_help_jobserver returns information about the server for a given 
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/14/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -101,7 +101,7 @@ The following example returns information, including last-run information, about
 USE msdb;
 GO
 
-EXEC dbo.sp_help_jobserver
+EXECUTE dbo.sp_help_jobserver
     @job_name = N'NightlyBackups',
     @show_last_run_details = 1;
 GO

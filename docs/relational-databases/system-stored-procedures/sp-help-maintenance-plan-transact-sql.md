@@ -4,7 +4,7 @@ description: Returns information about the specified maintenance plan.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/14/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -91,8 +91,7 @@ If *@plan_id* is specified, `sp_help_maintenance_plan` returns three tables: *Pl
 This example descriptive information about the maintenance plan `FAD6F2AB-3571-11D3-9D4A-00C04FB925FC`.
 
 ```sql
-EXEC sp_help_maintenance_plan
-    N'FAD6F2AB-3571-11D3-9D4A-00C04FB925FC';
+EXECUTE sp_help_maintenance_plan N'FAD6F2AB-3571-11D3-9D4A-00C04FB925FC';
 ```
 
 ## Related content

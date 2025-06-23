@@ -4,7 +4,7 @@ description: Returns information about the scheduling of jobs used by SQL Server
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/14/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -125,8 +125,7 @@ The following example returns the scheduling information for a job named `Backup
 USE msdb;
 GO
 
-EXEC dbo.sp_help_jobschedule
-    @job_name = N'BackupDatabase' ;
+EXECUTE dbo.sp_help_jobschedule @job_name = N'BackupDatabase';
 GO
 ```
 
@@ -138,7 +137,7 @@ The following example returns the information for the schedule named `NightlyJob
 USE msdb;
 GO
 
-EXEC dbo.sp_help_jobschedule
+EXECUTE dbo.sp_help_jobschedule
     @job_name = N'RunReports',
     @schedule_name = N'NightlyJobs';
 GO
@@ -152,7 +151,7 @@ The following example returns the information for the schedule named `NightlyJob
 USE msdb;
 GO
 
-EXEC dbo.sp_help_jobschedule
+EXECUTE dbo.sp_help_jobschedule
     @job_name = N'RunReports',
     @schedule_name = N'NightlyJobs',
     @include_description = 1;

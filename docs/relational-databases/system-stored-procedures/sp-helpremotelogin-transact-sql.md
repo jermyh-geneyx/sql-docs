@@ -4,7 +4,7 @@ description: Reports information about remote logins for a particular remote ser
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/15/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -74,7 +74,7 @@ No permissions are checked.
 The following example displays information about all remote users on the remote server `Accounts`.
 
 ```sql
-EXEC sp_helpremotelogin 'Accounts';
+EXECUTE sp_helpremotelogin 'Accounts';
 ```
 
 ### B. Reporting help on all remote users
@@ -82,7 +82,7 @@ EXEC sp_helpremotelogin 'Accounts';
 The following example displays information about all remote users on all remote servers known to the local server.
 
 ```sql
-EXEC sp_helpremotelogin;
+EXECUTE sp_helpremotelogin;
 ```
 
 ## Related content

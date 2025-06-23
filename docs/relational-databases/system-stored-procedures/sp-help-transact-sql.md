@@ -4,7 +4,7 @@ description: Reports information about a database object (any object listed in t
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -177,7 +177,8 @@ The following example lists information about each object in the `master` databa
 ```sql
 USE master;
 GO
-EXEC sp_help;
+
+EXECUTE sp_help;
 GO
 ```
 
@@ -188,7 +189,8 @@ The following example displays information about the `Person.Person` table.
 ```sql
 USE AdventureWorks2022;
 GO
-EXEC sp_help 'Person.Person';
+
+EXECUTE sp_help 'Person.Person';
 GO
 ```
 

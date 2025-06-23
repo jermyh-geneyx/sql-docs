@@ -4,7 +4,7 @@ description: Returns information for the steps in a job used by SQL Server Agent
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/14/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -123,8 +123,7 @@ The following example returns all the job steps for the job named `Weekly Sales 
 USE msdb;
 GO
 
-EXEC dbo.sp_help_jobstep
-    @job_name = N'Weekly Sales Data Backup';
+EXECUTE dbo.sp_help_jobstep @job_name = N'Weekly Sales Data Backup';
 GO
 ```
 
@@ -136,7 +135,7 @@ The following example returns information about the first job step for the job n
 USE msdb;
 GO
 
-EXEC dbo.sp_help_jobstep
+EXECUTE dbo.sp_help_jobstep
     @job_name = N'Weekly Sales Data Backup',
     @step_id = 1;
 GO

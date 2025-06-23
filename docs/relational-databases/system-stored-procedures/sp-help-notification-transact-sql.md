@@ -4,7 +4,7 @@ description: Reports a list of alerts for a given operator or a list of operator
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/14/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -121,7 +121,7 @@ The following example returns all alerts for which the operator `François Ajens
 USE msdb;
 GO
 
-EXEC dbo.sp_help_notification
+EXECUTE dbo.sp_help_notification
     @object_type = N'ALERTS',
     @name = N'François Ajenstat',
     @enum_type = N'ACTUAL',
@@ -137,7 +137,7 @@ The following example returns all operators who receive any kind of notification
 USE msdb;
 GO
 
-EXEC sp_help_notification
+EXECUTE sp_help_notification
     @object_type = N'OPERATORS',
     @name = N'Test Alert',
     @enum_type = N'ACTUAL',

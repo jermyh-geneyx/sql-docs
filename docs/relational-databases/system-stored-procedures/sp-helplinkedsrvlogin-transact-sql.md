@@ -4,7 +4,7 @@ description: Provides information about login mappings defined against a specifi
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/15/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -71,7 +71,7 @@ No permissions are checked.
 The following example displays all login mappings for all linked servers defined on the local computer running [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
 
 ```sql
-EXEC sp_helplinkedsrvlogin;
+EXECUTE sp_helplinkedsrvlogin;
 GO
 ```
 
@@ -91,7 +91,7 @@ Marketing        NULL          1               NULL
 The following example displays all locally defined login mappings for the `Sales` linked server.
 
 ```sql
-EXEC sp_helplinkedsrvlogin 'Sales';
+EXECUTE sp_helplinkedsrvlogin 'Sales';
 GO
 ```
 
@@ -109,7 +109,7 @@ Sales            Mary          0               sa
 The following example displays all locally defined login mappings for the login `Mary`.
 
 ```sql
-EXEC sp_helplinkedsrvlogin NULL, 'Mary';
+EXECUTE sp_helplinkedsrvlogin NULL, 'Mary';
 GO
 ```
 

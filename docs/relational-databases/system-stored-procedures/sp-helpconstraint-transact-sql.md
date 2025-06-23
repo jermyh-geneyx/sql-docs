@@ -4,7 +4,7 @@ description: sp_helpconstraint returns a list of all constraint types and their 
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/14/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -69,7 +69,8 @@ The following example shows all constraints for the `Product.Product` table.
 ```sql
 USE AdventureWorks2022;
 GO
-EXEC sp_helpconstraint 'Production.Product';
+
+EXECUTE sp_helpconstraint 'Production.Product';
 ```
 
 ## Related content

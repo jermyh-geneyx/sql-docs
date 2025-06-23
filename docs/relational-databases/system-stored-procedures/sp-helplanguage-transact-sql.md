@@ -4,7 +4,7 @@ description: sp_helplanguage Reports information about a particular alternative 
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/15/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -70,7 +70,7 @@ Requires membership in the **public** role.
 The following example displays information about the alternative language `French`.
 
 ```sql
-EXEC sp_helplanguage French;
+EXECUTE sp_helplanguage French;
 ```
 
 ### B. Return information about all languages
@@ -78,7 +78,7 @@ EXEC sp_helplanguage French;
 The following example displays information about all installed alternative languages.
 
 ```sql
-EXEC sp_helplanguage;
+EXECUTE sp_helplanguage;
 ```
 
 ## Related content

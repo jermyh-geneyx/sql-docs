@@ -4,7 +4,7 @@ description: sp_helprole returns information about the roles in the current data
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/15/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -63,7 +63,7 @@ Requires membership in the **public** role.
 The following query returns all the roles in the current database.
 
 ```sql
-EXEC sp_helprole;
+EXECUTE sp_helprole;
 ```
 
 ## Related content

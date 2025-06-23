@@ -4,7 +4,7 @@ description: sp_helpdevice reports information about SQL Server backup devices.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/14/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -70,7 +70,7 @@ Requires membership in the **public** role.
 The following example reports information about all dump devices on an instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
 
 ```sql
-EXEC sp_helpdevice;
+EXECUTE sp_helpdevice;
 ```
 
 ## Related content

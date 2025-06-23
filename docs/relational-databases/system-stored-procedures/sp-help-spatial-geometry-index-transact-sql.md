@@ -4,7 +4,7 @@ description: Returns the names and values for a specified set of properties abou
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/14/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -52,9 +52,9 @@ Properties containing `NULL` values aren't included in the return set.
 The following example uses `sp_help_spatial_geometry_index` to investigate the spatial index `SIndx_SpatialTable_geometry_col2` defined on table `geometry_col` for the given query sample in `@qs`. This example returns only the core properties of the specified index.
 
 ```sql
-DECLARE @qs geometry = 'POLYGON((-90.0 -180.0, -90.0 180.0, 90.0 180.0, 90.0 -180.0, -90.0 -180.0))';
+DECLARE @qs AS geometry = 'POLYGON((-90.0 -180.0, -90.0 180.0, 90.0 180.0, 90.0 -180.0, -90.0 -180.0))';
 
-EXEC sp_help_spatial_geometry_index
+EXECUTE sp_help_spatial_geometry_index
     'geometry_col',
     'SIndx_SpatialTable_geometry_col2',
     0,

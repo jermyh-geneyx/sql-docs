@@ -4,7 +4,7 @@ description: Returns information about the jobs that a particular schedule is at
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/14/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -117,8 +117,7 @@ The following example lists the jobs attached to the `NightlyJobs` schedule.
 USE msdb;
 GO
 
-EXEC sp_help_jobs_in_schedule
-    @schedule_name = N'NightlyJobs';
+EXECUTE sp_help_jobs_in_schedule @schedule_name = N'NightlyJobs';
 GO
 ```
 

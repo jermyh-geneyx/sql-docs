@@ -4,7 +4,7 @@ description: "Returns information about a merge publication."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"
@@ -113,7 +113,7 @@ The name of the publication database. *@publisher_db* is **sysname**, with a def
 | `allow_subscriber_initiated_snapshot` | **bit** | Determines if Subscribers can initiate the filtered data snapshot generation process. A value of `1` means that Subscribers can initiate the snapshot process. |
 | `allow_web_synchronization` | **bit** | Determines if the publication is enabled for Web synchronization. A value of `1` means that Web synchronization is enabled. |
 | `web_synchronization_url` | **nvarchar(500)** | Internet URL that is used for Web synchronization. |
-| `allow_partition_realignment` | **bit** | Determines whether deletes are sent to the subscriber when modification of the row on the publisher causes it to change its partition. A value of `1` means that deletes are sent to the Subscriber. For more information, see [sp_addmergepublication (Transact-SQL)](sp-addmergepublication-transact-sql.md). |
+| `allow_partition_realignment` | **bit** | Determines whether deletes are sent to the subscriber when modification of the row on the publisher causes it to change its partition. A value of `1` means that deletes are sent to the Subscriber. For more information, see [sp_addmergepublication](sp-addmergepublication-transact-sql.md). |
 | `retention_period_unit` | **tinyint** | Defines the unit that is used when defining retention. This can be one of the following values:<br /><br />`0` = day<br /><br />`1` = week<br /><br />`2` = month<br /><br />`3` = year |
 | `has_downloadonly_articles` | **bit** | Indicates if any articles that belong to the publication are download-only articles. A value of `1` indicates that there are download-only articles. |
 | `decentralized_conflicts` | **int** | Indicates whether the conflict records are stored at the Subscriber that caused the conflict. A value of `0` indicates that conflict records aren't stored at the Subscriber. A value of `1` indicates that conflict records are stored at the Subscriber. |

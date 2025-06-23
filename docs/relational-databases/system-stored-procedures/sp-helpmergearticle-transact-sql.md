@@ -4,7 +4,7 @@ description: "Returns information about an article. This stored procedure is exe
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"
@@ -74,7 +74,7 @@ The name of the article for which to return information. *@article* is **sysname
 | `destination_object` | **sysname** | Name of the destination object. Applicable to merge stored procedures, views, and UDF schema articles only. |
 | `allow_interactive_resolver` | **int** | If the Interactive Resolver is used on an article; where `1` means that this resolver is used, and `0` means that it isn't used. |
 | `fast_multicol_updateproc` | **int** | Enables or disables the Merge Agent to apply changes to multiple columns in the same row in one UPDATE statement; where `1` means that multiple columns are updated in one statement, and `0` means that separate UPDATE statements are issues for each updated column. |
-| `check_permissions` | **int** | Integer value that represents the bitmap of the table-level permissions that are verified. For a list of possible values, see [sp_addmergearticle (Transact-SQL)](sp-addmergearticle-transact-sql.md). |
+| `check_permissions` | **int** | Integer value that represents the bitmap of the table-level permissions that are verified. For a list of possible values, see [sp_addmergearticle](sp-addmergearticle-transact-sql.md). |
 | `processing_order` | **int** | The order in which data changes are applied to articles in a publication. |
 | `upload_options` | **tinyint** | Defines restrictions on updates made at a Subscriber with a client subscription, which can be one of the following values.<br /><br />`0` = There are no restrictions on updates made at a Subscriber with a client subscription; all changes are uploaded to the Publisher.<br /><br />`1` = Changes are allowed at a Subscriber with a client subscription, but they aren't uploaded to the Publisher.<br /><br />`2` = Changes aren't allowed at a Subscriber with a client subscription.<br /><br />For more information, see [Optimize Merge Replication Performance with Download-Only Articles](../replication/merge/optimize-merge-replication-performance-with-download-only-articles.md). |
 | `identityrangemanagementoption` | **int** | Specifies if automatic identity range handling is enabled. `1` is enabled, and `0` is disabled. |
