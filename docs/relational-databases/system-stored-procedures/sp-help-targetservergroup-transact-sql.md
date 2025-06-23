@@ -4,7 +4,7 @@ description: sp_help_targetservergroup lists all target servers in the specified
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/14/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -62,7 +62,7 @@ This example lists information for all target server groups.
 USE msdb;
 GO
 
-EXEC dbo.sp_help_targetservergroup;
+EXECUTE dbo.sp_help_targetservergroup;
 GO
 ```
 
@@ -74,8 +74,7 @@ This example lists information for the `Servers Maintaining Customer Information
 USE msdb;
 GO
 
-EXEC dbo.sp_help_targetservergroup
-    N'Servers Maintaining Customer Information';
+EXECUTE dbo.sp_help_targetservergroup N'Servers Maintaining Customer Information';
 GO
 ```
 

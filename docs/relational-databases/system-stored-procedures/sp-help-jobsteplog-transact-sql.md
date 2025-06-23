@@ -4,7 +4,7 @@ description: Returns metadata about a specific SQL Server Agent job step log.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/14/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -104,8 +104,7 @@ The following example returns all the job step log information, for the job name
 USE msdb;
 GO
 
-EXEC dbo.sp_help_jobsteplog
-    @job_name = N'Weekly Sales Data Backup';
+EXECUTE dbo.sp_help_jobsteplog @job_name = N'Weekly Sales Data Backup';
 GO
 ```
 
@@ -117,7 +116,7 @@ The following example returns job step log information, about the first job step
 USE msdb;
 GO
 
-EXEC dbo.sp_help_jobsteplog
+EXECUTE dbo.sp_help_jobsteplog
     @job_name = N'Weekly Sales Data Backup',
     @step_id = 1;
 GO

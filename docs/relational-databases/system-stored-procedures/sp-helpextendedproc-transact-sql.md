@@ -4,7 +4,7 @@ description: Reports the currently defined extended stored procedures and the na
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -68,7 +68,8 @@ The following example reports on all extended stored procedures.
 ```sql
 USE master;
 GO
-EXEC sp_helpextendedproc;
+
+EXECUTE sp_helpextendedproc;
 GO
 ```
 
@@ -79,7 +80,8 @@ The following example reports on the `xp_cmdshell` extended stored procedure.
 ```sql
 USE master;
 GO
-EXEC sp_helpextendedproc xp_cmdshell;
+
+EXECUTE sp_helpextendedproc xp_cmdshell;
 GO
 ```
 

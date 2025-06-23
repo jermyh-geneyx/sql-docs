@@ -4,7 +4,7 @@ description: sp_helpfile returns the physical names and attributes of files asso
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -65,7 +65,8 @@ The following example returns information about the files in [!INCLUDE [ssSample
 ```sql
 USE AdventureWorks2022;
 GO
-EXEC sp_helpfile;
+
+EXECUTE sp_helpfile;
 GO
 ```
 

@@ -4,7 +4,7 @@ description: sp_help_schedule lists information about schedules.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/14/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -113,7 +113,7 @@ The following example lists information for all schedules in the instance.
 USE msdb;
 GO
 
-EXEC dbo.sp_help_schedule;
+EXECUTE dbo.sp_help_schedule;
 GO
 ```
 
@@ -125,8 +125,7 @@ The following example lists information for the schedule named `NightlyJobs`.
 USE msdb;
 GO
 
-EXEC dbo.sp_help_schedule
-    @schedule_name = N'NightlyJobs';
+EXECUTE dbo.sp_help_schedule @schedule_name = N'NightlyJobs';
 GO
 ```
 

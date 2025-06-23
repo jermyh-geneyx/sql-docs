@@ -4,7 +4,7 @@ description: sp_helpdb reports information about a specified database or all dat
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/14/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -83,7 +83,7 @@ If a database can't be accessed, `sp_helpdb` displays error message 15622 and as
 The following example displays information about the [!INCLUDE [ssSampleDBobject](../../includes/sssampledbobject-md.md)] database.
 
 ```sql
-EXEC sp_helpdb N'AdventureWorks2022';
+EXECUTE sp_helpdb N'AdventureWorks2022';
 ```
 
 ### B. Return information about all databases
@@ -91,7 +91,7 @@ EXEC sp_helpdb N'AdventureWorks2022';
 This following example displays information about all databases on the server running [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
 
 ```sql
-EXEC sp_helpdb;
+EXECUTE sp_helpdb;
 GO
 ```
 

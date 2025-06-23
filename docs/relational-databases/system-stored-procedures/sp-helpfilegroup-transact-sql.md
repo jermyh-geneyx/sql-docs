@@ -4,7 +4,7 @@ description: sp_helpfilegroup returns the names and attributes of filegroups ass
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -75,7 +75,8 @@ The following example returns information about the filegroups in the [!INCLUDE 
 ```sql
 USE AdventureWorks2022;
 GO
-EXEC sp_helpfilegroup;
+
+EXECUTE sp_helpfilegroup;
 GO
 ```
 
@@ -86,7 +87,8 @@ The following example returns information for all files in the `PRIMARY` filegro
 ```sql
 USE AdventureWorks2022;
 GO
-EXEC sp_helpfilegroup 'PRIMARY';
+
+EXECUTE sp_helpfilegroup 'PRIMARY';
 GO
 ```
 

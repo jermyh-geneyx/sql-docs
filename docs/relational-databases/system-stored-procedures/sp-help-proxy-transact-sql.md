@@ -4,7 +4,7 @@ description: sp_help_proxy lists information for one or more proxies.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 07/16/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -116,7 +116,7 @@ The following example lists information for all proxies in the instance.
 USE msdb;
 GO
 
-EXEC dbo.sp_help_proxy;
+EXECUTE dbo.sp_help_proxy;
 GO
 ```
 
@@ -128,8 +128,7 @@ The following example lists information for the proxy named `Catalog application
 USE msdb;
 GO
 
-EXEC dbo.sp_help_proxy
-    @proxy_name = N'Catalog application proxy';
+EXECUTE dbo.sp_help_proxy @proxy_name = N'Catalog application proxy';
 GO
 ```
 

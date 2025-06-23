@@ -4,7 +4,7 @@ description: Provides information about the jobs for servers in the multiserver 
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/14/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -177,8 +177,7 @@ The following example lists all job information for the `NightlyBackups` job.
 USE msdb;
 GO
 
-EXEC dbo.sp_help_jobhistory
-    @job_name = N'NightlyBackups';
+EXECUTE dbo.sp_help_jobhistory @job_name = N'NightlyBackups';
 GO
 ```
 
@@ -190,7 +189,7 @@ The following example prints all columns and all job information for any failed 
 USE msdb;
 GO
 
-EXEC dbo.sp_help_jobhistory
+EXECUTE dbo.sp_help_jobhistory
     @sql_message_id = 50100,
     @sql_severity = 20,
     @run_status = 0,

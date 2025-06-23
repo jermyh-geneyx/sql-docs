@@ -4,7 +4,7 @@ description: sp_helpindex reports information about the indexes on a table or vi
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/15/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -69,7 +69,8 @@ The following example reports on the types of indexes on the `Customer` table in
 ```sql
 USE AdventureWorks2022;
 GO
-EXEC sp_helpindex N'Sales.Customer';
+
+EXECUTE sp_helpindex N'Sales.Customer';
 GO
 ```
 

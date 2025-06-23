@@ -4,7 +4,7 @@ description: sp_helpdbfixedrole returns a list of the fixed database roles.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/14/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -83,7 +83,7 @@ Information returned is subject to restrictions on access to metadata. Entities 
 The following example shows a list of all fixed database roles.
 
 ```sql
-EXEC sp_helpdbfixedrole;
+EXECUTE sp_helpdbfixedrole;
 GO
 ```
 

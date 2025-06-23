@@ -4,7 +4,7 @@ description: Returns the names and values for a specified set of properties abou
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/14/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -48,9 +48,9 @@ User must be assigned a **public** role to access the procedure. Requires READ A
 The following example uses `sp_help_spatial_geography_index` to investigate the **geography** spatial index `SIndx_SpatialTable_geography_col2` defined on table `geography_col` for the given query sample in `@qs`. This example returns only the core properties of the specified index.
 
 ```sql
-DECLARE @qs GEOGRAPHY = 'POLYGON((-90.0 -180, -90 180.0, 90 180.0, 90 -180, -90 -180.0))';
+DECLARE @qs AS GEOGRAPHY = 'POLYGON((-90.0 -180, -90 180.0, 90 180.0, 90 -180, -90 -180.0))';
 
-EXEC sp_help_spatial_geography_index
+EXECUTE sp_help_spatial_geography_index
     'geography_col',
     'SIndx_SpatialTable_geography_col2',
     0,

@@ -4,7 +4,7 @@ description: sp_helpntgroup reports information about Windows groups with accoun
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 05/15/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -63,7 +63,7 @@ Requires membership in the **public** role.
 The following example prints a list of the Windows groups with access to the current database.
 
 ```sql
-EXEC sp_helpntgroup;
+EXECUTE sp_helpntgroup;
 ```
 
 ## Related content
