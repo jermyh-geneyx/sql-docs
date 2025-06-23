@@ -4,7 +4,7 @@ description: Updates a collector type for a collection item.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -80,7 +80,8 @@ This example updates the Generic T-SQL Query collector type. (In the example, th
 USE msdb;
 GO
 
-EXEC sp_syscollector_update_collector_type @collector_type_uid = '302E93D1-3424-4BE7-AA8E-84813ECF2419',
+EXECUTE sp_syscollector_update_collector_type
+    @collector_type_uid = '302E93D1-3424-4BE7-AA8E-84813ECF2419',
     @name = 'Generic T-SQL Query Collector Type',
     @parameter_schema = '<?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="DataCollectorType">

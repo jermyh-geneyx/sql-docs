@@ -4,7 +4,7 @@ description: Used to modify the properties of a user-defined collection set or t
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -153,9 +153,10 @@ The following example renames a user-defined collection set.
 ```sql
 USE msdb;
 GO
+
 EXECUTE dbo.sp_syscollector_update_collection_set
-@name = N'Simple collection set test 1',
-@new_name = N'Collection set test 1 in cached mode';
+    @name = N'Simple collection set test 1',
+    @new_name = N'Collection set test 1 in cached mode';
 GO
 ```
 
@@ -166,10 +167,11 @@ The following example changes the collection mode from non-cached mode to cached
 ```sql
 USE msdb;
 GO
+
 EXECUTE dbo.sp_syscollector_update_collection_set
-@name = N'Collection set test 1 in cached mode',
-@collection_mode = 0,
-@schedule_uid = 'C7022AF3-51B8-4011-B159-64C47C88FF70';
+    @name = N'Collection set test 1 in cached mode',
+    @collection_mode = 0,
+    @schedule_uid = 'C7022AF3-51B8-4011-B159-64C47C88FF70';
 -- alternatively, use @schedule_name.
 -- @schedule_name = N'CollectorSchedule_Every_15min;
 GO
@@ -183,7 +185,7 @@ The following example updates various properties of the collection set named `Si
 USE msdb;
 GO
 
-EXEC dbo.sp_syscollector_update_collection_set
+EXECUTE dbo.sp_syscollector_update_collection_set
     @name = N'Simple collection set test 2',
     @collection_mode = 1,
     @days_until_expiration = 5,

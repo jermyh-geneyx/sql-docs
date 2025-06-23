@@ -4,7 +4,7 @@ description: Enables the data collector.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -55,7 +55,8 @@ The following example enables the data collector.
 ```sql
 USE msdb;
 GO
-EXEC dbo.sp_syscollector_enable_collector;
+
+EXECUTE dbo.sp_syscollector_enable_collector;
 ```
 
 ## Related content

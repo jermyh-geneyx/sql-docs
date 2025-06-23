@@ -4,7 +4,7 @@ description: "Deletes a policy category subscription for a specific database."
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 06/26/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -56,11 +56,11 @@ To obtain values for *@policy_category_subscription_id*, you can use the followi
 
 ```sql
 SELECT a.policy_category_subscription_id,
-    a.target_object,
-    b.name AS category_name
+       a.target_object,
+       b.name AS category_name
 FROM msdb.dbo.syspolicy_policy_category_subscriptions AS a
-INNER JOIN msdb.dbo.syspolicy_policy_categories AS b
-    ON a.policy_category_id = b.policy_category_id;
+     INNER JOIN msdb.dbo.syspolicy_policy_categories AS b
+         ON a.policy_category_id = b.policy_category_id;
 ```
 
 ## Examples
@@ -68,8 +68,7 @@ INNER JOIN msdb.dbo.syspolicy_policy_categories AS b
 The following example deletes a policy category subscription with an ID of 1.
 
 ```sql
-EXEC msdb.dbo.sp_syspolicy_delete_policy_category_subscription
-    @policy_category_subscription_id = 1;
+EXECUTE msdb.dbo.sp_syspolicy_delete_policy_category_subscription @policy_category_subscription_id = 1;
 GO
 ```
 

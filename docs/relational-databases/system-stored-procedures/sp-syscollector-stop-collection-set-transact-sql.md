@@ -4,7 +4,7 @@ description: Stops a collection set.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -70,8 +70,8 @@ The following example stops a collection set using its identifier.
 ```sql
 USE msdb;
 GO
-EXEC sp_syscollector_stop_collection_set
-    @collection_set_id = 1;
+
+EXECUTE sp_syscollector_stop_collection_set @collection_set_id = 1;
 ```
 
 ## Related content

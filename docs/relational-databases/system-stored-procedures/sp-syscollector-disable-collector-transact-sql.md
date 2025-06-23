@@ -4,7 +4,7 @@ description: Disables the data collector.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -53,7 +53,7 @@ Requires membership in the **dc_admin** or **dc_operator** (with EXECUTE permiss
 The following example disables the data collector.
 
 ```sql
-EXEC dbo.sp_syscollector_disable_collector;
+EXECUTE dbo.sp_syscollector_disable_collector;
 ```
 
 ## Related content

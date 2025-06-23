@@ -4,7 +4,7 @@ description: Deletes a collection item from a collection set.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -65,7 +65,8 @@ The following example deletes a collection item named `MyCollectionItem1`.
 ```sql
 USE msdb;
 GO
-EXEC sp_syscollector_delete_collection_item @name = 'MyCollectionItem1';
+
+EXECUTE sp_syscollector_delete_collection_item @name = 'MyCollectionItem1';
 ```
 
 ## Related content

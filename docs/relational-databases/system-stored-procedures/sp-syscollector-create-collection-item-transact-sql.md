@@ -4,7 +4,7 @@ description: Creates a collection item in a user-defined collection set.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -90,16 +90,17 @@ The following example creates a collection item based on the collection type `Ge
 USE msdb;
 GO
 
-DECLARE @collection_item_id INT;
-DECLARE @collection_set_id INT = (
-        SELECT collection_set_id
-        FROM syscollector_collection_sets
-        WHERE name = N'Simple collection set test 2');
-DECLARE @collector_type_uid UNIQUEIDENTIFIER = (
-        SELECT collector_type_uid
-        FROM syscollector_collector_types
-        WHERE name = N'Generic T-SQL Query Collector Type');
-DECLARE @params XML = CONVERT(XML, N'\<ns:TSQLQueryCollector xmlns:ns="DataCollectorType">
+DECLARE @collection_item_id AS INT;
+
+DECLARE @collection_set_id AS INT = (SELECT collection_set_id
+                                     FROM syscollector_collection_sets
+                                     WHERE name = N'Simple collection set test 2');
+
+DECLARE @collector_type_uid AS UNIQUEIDENTIFIER = (SELECT collector_type_uid
+                                                   FROM syscollector_collector_types
+                                                   WHERE name = N'Generic T-SQL Query Collector Type');
+
+DECLARE @params AS XML = CONVERT (XML, N'\<ns:TSQLQueryCollector xmlns:ns="DataCollectorType">
             <Query>
                 <Value>SELECT * FROM sys.objects</Value>
                 <OutputTable>MyOutputTable</OutputTable>
@@ -111,7 +112,8 @@ DECLARE @params XML = CONVERT(XML, N'\<ns:TSQLQueryCollector xmlns:ns="DataColle
             </Databases>
          \</ns:TSQLQueryCollector>');
 
-EXEC sp_syscollector_create_collection_item @collection_set_id = @collection_set_id,
+EXECUTE sp_syscollector_create_collection_item
+    @collection_set_id = @collection_set_id,
     @collector_type_uid = @collector_type_uid,
     @name = 'My custom T-SQL query collector item',
     @frequency = 6000,

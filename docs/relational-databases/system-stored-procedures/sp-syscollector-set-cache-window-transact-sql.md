@@ -4,7 +4,7 @@ description: Sets the number of times to attempt a data upload if a failure occu
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -63,10 +63,13 @@ The following example disables the data collector, configures the cache window t
 ```sql
 USE msdb;
 GO
+
 EXECUTE dbo.sp_syscollector_disable_collector;
 GO
+
 EXECUTE dbo.sp_syscollector_set_cache_window 3;
 GO
+
 EXECUTE dbo.sp_syscollector_enable_collector;
 ```
 

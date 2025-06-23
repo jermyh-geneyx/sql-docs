@@ -4,7 +4,7 @@ description: Starts a collection set if the collector is already enabled, and th
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -72,8 +72,8 @@ Start a collection set using its identifier.
 ```sql
 USE msdb;
 GO
-EXEC sp_syscollector_run_collection_set
-    @collection_set_id = 1;
+
+EXECUTE sp_syscollector_run_collection_set @collection_set_id = 1;
 ```
 
 ## Related content

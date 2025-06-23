@@ -4,7 +4,7 @@ description: Specifies the directory where collected data is stored before it is
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -55,11 +55,13 @@ The following example disables the data collector, sets the cache directory for 
 ```sql
 USE msdb;
 GO
+
 EXECUTE dbo.sp_syscollector_disable_collector;
 GO
-EXEC dbo.sp_syscollector_set_cache_directory
-    @cache_directory = N'D:\tempdata';
+
+EXECUTE dbo.sp_syscollector_set_cache_directory @cache_directory = N'D:\tempdata';
 GO
+
 EXECUTE dbo.sp_syscollector_enable_collector;
 GO
 ```

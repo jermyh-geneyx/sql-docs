@@ -4,7 +4,7 @@ description: "Deletes execution history for policies in Policy-Based Management.
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -55,12 +55,12 @@ To obtain values for *@policy_id*, and to view execution history dates, you can 
 
 ```sql
 SELECT a.name AS N'policy_name',
-    b.policy_id,
-    b.start_date,
-    b.end_date
+       b.policy_id,
+       b.start_date,
+       b.end_date
 FROM msdb.dbo.syspolicy_policies AS a
-INNER JOIN msdb.dbo.syspolicy_policy_execution_history AS b
-    ON a.policy_id = b.policy_id;
+     INNER JOIN msdb.dbo.syspolicy_policy_execution_history AS b
+         ON a.policy_id = b.policy_id;
 ```
 
 The following behavior applies if you specify `NULL` for one or both values:
@@ -84,7 +84,7 @@ Requires membership in the **PolicyAdministratorRole** fixed database role.
 The following example deletes policy execution history before a specific date for a policy with an ID of `7`.
 
 ```sql
-EXEC msdb.dbo.sp_syspolicy_delete_policy_execution_history
+EXECUTE msdb.dbo.sp_syspolicy_delete_policy_execution_history
     @policy_id = 7,
     @oldest_date = '2019-02-16 16:00:00.000';
 GO

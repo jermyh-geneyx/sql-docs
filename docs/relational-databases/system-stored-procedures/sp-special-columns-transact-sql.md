@@ -4,7 +4,7 @@ description: sp_special_columns returns the optimal set of columns that uniquely
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 04/08/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -114,7 +114,8 @@ The following example returns information about the column that uniquely identif
 USE AdventureWorks2022;
 GO
 
-EXEC sp_special_columns @table_name = 'Department',
+EXECUTE sp_special_columns
+    @table_name = 'Department',
     @table_owner = 'HumanResources';
 ```
 

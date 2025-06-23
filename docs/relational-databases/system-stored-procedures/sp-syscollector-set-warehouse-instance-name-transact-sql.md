@@ -4,7 +4,7 @@ description: Specifies the instance name for the connection string used to conne
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -61,7 +61,8 @@ The following example illustrates how to configure the data collector to use a m
 ```sql
 USE msdb;
 GO
-EXEC sp_syscollector_set_warehouse_instance_name N'RemoteSERVER'; -- the default instance is assumed on the remote server
+
+EXECUTE sp_syscollector_set_warehouse_instance_name N'RemoteSERVER'; -- the default instance is assumed on the remote server
 GO
 ```
 

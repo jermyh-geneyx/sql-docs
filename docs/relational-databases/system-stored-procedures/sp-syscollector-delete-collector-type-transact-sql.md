@@ -4,7 +4,7 @@ description: Deletes the definition of a collector type.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 07/04/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -65,8 +65,8 @@ This example deletes the Generic T-SQL Query collector type.
 ```sql
 USE msdb;
 GO
-EXEC sp_syscollector_delete_collector_type
-    @collector_type_uid = '302E93D1-3424-4be7-AA8E-84813ECF2419';
+
+EXECUTE sp_syscollector_delete_collector_type @collector_type_uid = '302E93D1-3424-4be7-AA8E-84813ECF2419';
 ```
 
 ## Related content

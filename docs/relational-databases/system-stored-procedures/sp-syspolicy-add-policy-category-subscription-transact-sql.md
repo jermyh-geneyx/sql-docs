@@ -4,7 +4,7 @@ description: "Adds a policy category subscription to the specified database."
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -74,7 +74,7 @@ This stored procedure runs in the context of the current owner of the stored pro
 The following example configures the specified database to subscribe to a policy category that is named `Table Naming Policies`.
 
 ```sql
-EXEC msdb.dbo.sp_syspolicy_add_policy_category_subscription
+EXECUTE msdb.dbo.sp_syspolicy_add_policy_category_subscription
     @target_type = N'DATABASE',
     @target_object = N'AdventureWorks2022',
     @policy_category = N'Table Naming Policies';

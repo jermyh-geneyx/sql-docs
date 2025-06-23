@@ -4,7 +4,7 @@ description: "Removes the policy evaluation history according to the history ret
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 06/26/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -65,7 +65,7 @@ Requires membership in the **PolicyAdministratorRole** fixed database role.
 The following example removes the policy evaluation history.
 
 ```sql
-EXEC msdb.dbo.sp_syspolicy_purge_history;
+EXECUTE msdb.dbo.sp_syspolicy_purge_history;
 GO
 ```
 

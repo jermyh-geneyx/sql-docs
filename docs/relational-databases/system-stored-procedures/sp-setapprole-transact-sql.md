@@ -4,7 +4,7 @@ description: sp_setapprole activates the permissions associated with an applicat
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -95,22 +95,23 @@ Requires membership in **public** and knowledge of the password for the role.
 
 ### A. Activate an application role without the encrypt option
 
-The following example activates an application role named `SalesAppRole`, with the plain-text password `AsDeF00MbXX`, created with permissions designed for the application used by the current user.
+The following example activates an application role named `SalesAppRole`, created with permissions designed for the application used by the current user. Replace `<password>` with a strong password.
 
 ```sql
-EXEC sys.sp_setapprole 'SalesApprole', 'AsDeF00MbXX';
+EXECUTE sys.sp_setapprole 'SalesApprole', '<password>';
 GO
 ```
 
 ### B. Activate an application role with a cookie and then reverting to the original context
 
-The following example activates the `Sales11` application role with password `fdsd896#gfdbfdkjgh700mM`, and creates a cookie. The example returns the name of the current user, and then reverts to the original context by executing `sp_unsetapprole`.
+The following example activates the `Sales11` application role, and creates a cookie. The example returns the name of the current user, and then reverts to the original context by executing `sp_unsetapprole`. Replace `<password>` with a strong password.
 
 ```sql
-DECLARE @cookie VARBINARY(8000);
+DECLARE @cookie AS VARBINARY (8000);
 
-EXEC sys.sp_setapprole 'Sales11',
-    'fdsd896#gfdbfdkjgh700mM',
+EXECUTE sys.sp_setapprole
+    'Sales11',
+    '<password>',
     @fCreateCookie = true,
     @cookie = @cookie OUTPUT;
 ```
@@ -124,7 +125,7 @@ SELECT USER_NAME();
 Unset the application role.
 
 ```sql
-EXEC sys.sp_unsetapprole @cookie;
+EXECUTE sys.sp_unsetapprole @cookie;
 GO
 ```
 

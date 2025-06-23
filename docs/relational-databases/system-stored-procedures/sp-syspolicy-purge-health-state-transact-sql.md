@@ -4,7 +4,7 @@ description: "Deletes the policy health states in Policy-Based Management."
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 06/26/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -61,7 +61,7 @@ Requires membership in the **PolicyAdministratorRole** fixed database role.
 The following example deletes the health states for a specific node in Object Explorer.
 
 ```sql
-EXEC msdb.dbo.sp_syspolicy_purge_health_state
+EXECUTE msdb.dbo.sp_syspolicy_purge_health_state
     @target_tree_root_with_id = 'Server/Database[@ID=7]';
 GO
 ```

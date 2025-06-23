@@ -4,7 +4,7 @@ description: "The sp_statistics system stored procedure returns a list of all in
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 04/08/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -109,12 +109,12 @@ The `sp_statistics` system stored procedure is equivalent to `SQLStatistics` in 
 
 Requires `SELECT` permission on the schema.
 
-## Example: [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] and [!INCLUDE [ssPDW](../../includes/sspdw-md.md)]
+## Example: Azure Synapse Analytics and Analytics Platform System (PDW)
 
 The following example returns information about the `DimEmployee` table from the `AdventureWorks` sample database.
 
 ```sql
-EXEC sp_statistics DimEmployee;
+EXECUTE sp_statistics DimEmployee;
 ```
 
 ## Related content

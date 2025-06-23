@@ -4,7 +4,7 @@ description: sp_settriggerorder specifies the AFTER triggers that are fired firs
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 04/08/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -116,7 +116,8 @@ The following example specifies that trigger `uSalesOrderHeader` is the first tr
 USE AdventureWorks2022;
 GO
 
-EXEC sp_settriggerorder @triggername = 'Sales.uSalesOrderHeader',
+EXECUTE sp_settriggerorder
+    @triggername = 'Sales.uSalesOrderHeader',
     @order = 'First',
     @stmttype = 'UPDATE';
 ```
@@ -129,7 +130,8 @@ The following example specifies that trigger `ddlDatabaseTriggerLog` is the firs
 USE AdventureWorks2022;
 GO
 
-EXEC sp_settriggerorder @triggername = 'ddlDatabaseTriggerLog',
+EXECUTE sp_settriggerorder
+    @triggername = 'ddlDatabaseTriggerLog',
     @order = 'First',
     @stmttype = 'ALTER_TABLE',
     @namespace = 'DATABASE';
