@@ -4,7 +4,7 @@ description: "Returns the Extended Events logged by Smart Admin."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -76,7 +76,8 @@ The following example returns all the events logged for the past 30 minutes.
 ```sql
 USE msdb;
 GO
-EXEC managed_backup.sp_get_backup_diagnostics;
+
+EXECUTE managed_backup.sp_get_backup_diagnostics;
 ```
 
 The following example returns all the events logged for a specific time range.
@@ -84,8 +85,11 @@ The following example returns all the events logged for a specific time range.
 ```sql
 USE msdb;
 GO
-EXEC managed_backup.sp_get_backup_diagnostics @xevent_channel = 'Admin',
-  @begin_time = '2022-06-01', @end_time = '2022-06-10';
+
+EXECUTE managed_backup.sp_get_backup_diagnostics
+    @xevent_channel = 'Admin',
+    @begin_time = '2022-06-01',
+    @end_time = '2022-06-10';
 ```
 
 The following example returns all the analytical events logged for the past 30 minutes
@@ -93,5 +97,6 @@ The following example returns all the analytical events logged for the past 30 m
 ```sql
 USE msdb;
 GO
-EXEC managed_backup.sp_get_backup_diagnostics @xevent_channel = 'Analytic';
+
+EXECUTE managed_backup.sp_get_backup_diagnostics @xevent_channel = 'Analytic';
 ```

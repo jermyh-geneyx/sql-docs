@@ -4,7 +4,7 @@ description: "sp_add_job creates a new job to be executed by the SQL Server Agen
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -171,7 +171,7 @@ This example adds a new job named `NightlyBackups`.
 USE msdb;
 GO
 
-EXEC dbo.sp_add_job @job_name = N'NightlyBackups';
+EXECUTE dbo.sp_add_job @job_name = N'NightlyBackups';
 GO
 ```
 
@@ -186,7 +186,7 @@ This example creates a job named `Ad hoc Sales Data Backup` that notifies `Fran√
 USE msdb;
 GO
 
-EXEC dbo.sp_add_job
+EXECUTE dbo.sp_add_job
     @job_name = N'Ad hoc Sales Data Backup',
     @enabled = 1,
     @description = N'Ad hoc backup of sales data',

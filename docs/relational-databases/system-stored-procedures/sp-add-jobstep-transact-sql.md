@@ -1,10 +1,10 @@
 ---
-title: sp_add_jobstep (Transact-SQL)
+title: "sp_add_jobstep (Transact-SQL)"
 description: "sp_add_jobstep adds a step (operation) to a SQL Server Agent job."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -247,7 +247,8 @@ The following example creates a job step that changes database access to read-on
 ```sql
 USE msdb;
 GO
-EXEC sp_add_jobstep
+
+EXECUTE sp_add_jobstep
     @job_name = N'Weekly Sales Data Backup',
     @step_name = N'Set database to read only',
     @subsystem = N'TSQL',

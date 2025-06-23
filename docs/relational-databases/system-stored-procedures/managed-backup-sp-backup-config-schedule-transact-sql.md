@@ -4,7 +4,7 @@ description: Configures automated or custom scheduling options for SQL Server Ma
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 11/02/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -30,7 +30,7 @@ Configures automated or custom scheduling options for [!INCLUDE [ss-managed-back
 ## Syntax
 
 ```syntaxsql
-EXEC managed_backup.sp_backup_config_schedule
+EXECUTE managed_backup.sp_backup_config_schedule
     [ @database_name = ] 'database_name'
     , [ @scheduling_option = ] { 'Custom' | 'System' }
     , [ @full_backup_freq_type = ] { 'Daily' | 'Weekly' }
@@ -92,7 +92,8 @@ The following example configures managed backups for database `Test`, performing
 USE msdb;
 GO
 
-EXEC managed_backup.sp_backup_config_schedule @database_name = 'Test',
+EXECUTE managed_backup.sp_backup_config_schedule
+    @database_name = 'Test',
     @scheduling_option = 'Custom',
     @full_backup_freq_type = 'Daily',
     @backup_begin_time = '04:00',

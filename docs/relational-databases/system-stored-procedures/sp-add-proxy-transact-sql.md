@@ -4,7 +4,7 @@ description: "Adds the specified SQL Server Agent proxy."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -92,7 +92,7 @@ This example creates a proxy for the credential `CatalogApplicationCredential`. 
 USE msdb;
 GO
 
-EXEC dbo.sp_add_proxy
+EXECUTE dbo.sp_add_proxy
     @proxy_name = 'Catalog application proxy',
     @enabled = 1,
     @description = 'Maintenance tasks on catalog application.',

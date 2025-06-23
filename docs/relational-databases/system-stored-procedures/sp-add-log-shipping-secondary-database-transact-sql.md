@@ -4,7 +4,7 @@ description: "Sets up a secondary database for log shipping."
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -137,7 +137,7 @@ Only members of the **sysadmin** fixed server role can run this procedure.
 This example illustrates using the `sp_add_log_shipping_secondary_database` stored procedure to add the database `LogShipAdventureWorks` as a secondary database in a log shipping configuration with the primary database [!INCLUDE [ssSampleDBobject](../../includes/sssampledbobject-md.md)] residing on the primary server `TRIBECA`.
 
 ```sql
-EXEC master.dbo.sp_add_log_shipping_secondary_database
+EXECUTE master.dbo.sp_add_log_shipping_secondary_database
     @secondary_database = N'LogShipAdventureWorks',
     @primary_server = N'TRIBECA',
     @primary_database = N'AdventureWorks2022',

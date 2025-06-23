@@ -4,7 +4,7 @@ description: "Sets up a notification for an alert."
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 06/02/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -84,7 +84,7 @@ The following example adds an e-mail notification for the specified alert (`Test
 USE msdb;
 GO
 
-EXEC dbo.sp_add_notification
+EXECUTE dbo.sp_add_notification
     @alert_name = N'Test Alert',
     @operator_name = N'François Ajenstat',
     @notification_method = 1;

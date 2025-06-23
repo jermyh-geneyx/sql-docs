@@ -4,7 +4,7 @@ description: "Adds the specified server group."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 06/02/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -61,7 +61,7 @@ The following example creates the target server group named `Servers Processing 
 USE msdb;
 GO
 
-EXEC dbo.sp_add_targetservergroup 'Servers Processing Customer Orders';
+EXECUTE dbo.sp_add_targetservergroup 'Servers Processing Customer Orders';
 GO
 ```
 

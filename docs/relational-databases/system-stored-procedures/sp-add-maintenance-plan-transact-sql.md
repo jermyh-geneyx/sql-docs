@@ -4,7 +4,7 @@ description: "Adds a maintenance plan and returns the plan ID."
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -65,13 +65,13 @@ Specifies the ID of the maintenance plan. *@plan_id* is **uniqueidentifier**.
 Create a maintenance plan called `MyPlan`.
 
 ```sql
-DECLARE @myplan_id UNIQUEIDENTIFIER;
+DECLARE @myplan_id AS UNIQUEIDENTIFIER;
 
 EXECUTE sp_add_maintenance_plan
     @plan_name = N'MyPlan',
-    @plan_id = @myplan_id OUTPUT
+    @plan_id = @myplan_id OUTPUT;
 
-PRINT 'The ID for the maintenance plan "MyPlan" is:' + convert(VARCHAR(256), @myplan_id);
+PRINT 'The ID for the maintenance plan "MyPlan" is:' + CONVERT (VARCHAR (256), @myplan_id);
 GO
 ```
 

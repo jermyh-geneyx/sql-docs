@@ -4,7 +4,7 @@ description: "Pauses or resumes the SQL Server Managed Backup to Microsoft Azure
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -38,7 +38,7 @@ In other words, there's no check to determine:
 ## Syntax
 
 ```syntaxsql
-EXEC managed_backup.sp_backup_master_switch [ @new_state = ] { 0 | 1 }
+EXECUTE managed_backup.sp_backup_master_switch [ @new_state = ] { 0 | 1 }
 [ ; ]
 ```
 
@@ -63,8 +63,9 @@ The following example can be used to pause [!INCLUDE [ss-managed-backup](../../i
 ```sql
 USE msdb;
 GO
-EXEC managed_backup.sp_backup_master_switch @new_state = 0;
-Go
+
+EXECUTE managed_backup.sp_backup_master_switch @new_state = 0;
+GO
 ```
 
 The following example can be used to resume [!INCLUDE [ss-managed-backup](../../includes/ss-managed-backup-md.md)].
@@ -72,8 +73,9 @@ The following example can be used to resume [!INCLUDE [ss-managed-backup](../../
 ```sql
 USE msdb;
 GO
-EXEC managed_backup.sp_backup_master_switch @new_state = 1;
-Go
+
+EXECUTE managed_backup.sp_backup_master_switch @new_state = 1;
+GO
 ```
 
 ## Related content

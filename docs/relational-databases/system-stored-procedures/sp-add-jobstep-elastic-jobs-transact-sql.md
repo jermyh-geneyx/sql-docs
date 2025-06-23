@@ -3,7 +3,8 @@ title: "jobs.sp_add_jobstep (Azure Elastic Jobs) (Transact-SQL)"
 description: "jobs.sp_add_jobstep adds a step to an existing job in the Azure Elastic Jobs service for Azure SQL Database."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.date: 02/03/2025
+ms.reviewer: randolphwest
+ms.date: 06/23/2025
 ms.service: azure-sql-database
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -184,15 +185,15 @@ Connect to the `job_database` and run the following command:
 --Connect to the job database specified when creating the job agent
 
 --Add job for create table
-EXEC jobs.sp_add_job 
-@job_name = 'CreateTableTest', 
-@description = 'Create Table Test';
+EXECUTE jobs.sp_add_job
+    @job_name = 'CreateTableTest',
+    @description = 'Create Table Test';
 
 -- Add job step for create table
-EXEC jobs.sp_add_jobstep 
-@job_name = 'CreateTableTest',
-@command = N'IF NOT EXISTS (SELECT * FROM sys.tables WHERE object_id = object_id(''Test'')) CREATE TABLE [dbo].[Test]([TestId] [int] NOT NULL);',
-@target_group_name = 'PoolGroup';
+EXECUTE jobs.sp_add_jobstep
+    @job_name = 'CreateTableTest',
+    @command = N'IF NOT EXISTS (SELECT * FROM sys.tables WHERE object_id = object_id(''Test'')) CREATE TABLE [dbo].[Test]([TestId] [int] NOT NULL);',
+    @target_group_name = 'PoolGroup';
 ```
 
 ### Create a job step to execute a T-SQL statement and collect results
@@ -203,18 +204,20 @@ The following example shows how to create an elastic job to execute a T-SQL stat
 --Connect to the job database specified when creating the job agent
 
 -- Add a job to collect perf results
-EXEC jobs.sp_add_job @job_name ='ResultsJob', @description='Collection Performance data from all customers'
+EXECUTE jobs.sp_add_job
+    @job_name = 'ResultsJob',
+    @description = 'Collection Performance data from all customers';
 
 -- Add a job step w/ schedule to collect results
-EXEC jobs.sp_add_jobstep
-@job_name = 'ResultsJob',
-@command = N' SELECT DB_NAME() DatabaseName, $(job_execution_id) AS job_execution_id, * FROM sys.dm_db_resource_stats WHERE end_time > DATEADD(mi, -20, GETDATE());',
-@target_group_name = 'PoolGroup',
-@output_type = 'SqlDatabase',
-@output_server_name = 'server1.database.windows.net',
-@output_database_name = 'Results',
-@output_schema_name = 'dbo',
-@output_table_name = 'results_table';
+EXECUTE jobs.sp_add_jobstep
+    @job_name = 'ResultsJob',
+    @command = N' SELECT DB_NAME() DatabaseName, $(job_execution_id) AS job_execution_id, * FROM sys.dm_db_resource_stats WHERE end_time > DATEADD(mi, -20, GETDATE());',
+    @target_group_name = 'PoolGroup',
+    @output_type = 'SqlDatabase',
+    @output_server_name = 'server1.database.windows.net',
+    @output_database_name = 'Results',
+    @output_schema_name = 'dbo',
+    @output_table_name = 'results_table';
 ```
 
 ## Related content

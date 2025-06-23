@@ -4,7 +4,7 @@ description: "Closes nontransactional file handles to FileTable data."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -89,14 +89,15 @@ sp_kill_filestream_non_transacted_handles @table_name = 'myFileTable', @handle_i
 The following example shows how to use a script to get a *handle_id* and close it.
 
 ```sql
-DECLARE @handle_id VARBINARY(16);
-DECLARE @table_name SYSNAME;
+DECLARE @handle_id AS VARBINARY (16);
+DECLARE @table_name AS SYSNAME;
 
 SELECT TOP 1 @handle_id = handle_id,
     @table_name = Object_name(table_id)
 FROM sys.dm_FILESTREAM_non_transacted_handles;
 
-EXEC sp_kill_filestream_non_transacted_handles @dbname,
+EXECUTE sp_kill_filestream_non_transacted_handles
+    @dbname,
     @table_name,
     @handle_id;
 GO

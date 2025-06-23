@@ -4,7 +4,7 @@ description: Configures the SQL Server Managed Backup to Azure basic settings fo
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -33,7 +33,7 @@ Configures the [!INCLUDE [ss-managed-backup](../../includes/ss-managed-backup-md
 ## Syntax
 
 ```syntaxsql
-EXEC managed_backup.sp_backup_config_basic
+EXECUTE managed_backup.sp_backup_config_basic
     [ @enable_backup = ] { 0 | 1 }
     , [ @database_name = ] 'database_name'
     , [ @container_url = ] 'Azure_Storage_blob_container'
@@ -115,7 +115,8 @@ The following example enables [!INCLUDE [ss-managed-backup](../../includes/ss-ma
 USE msdb;
 GO
 
-EXEC managed_backup.sp_backup_config_basic @enable_backup = 1,
+EXECUTE managed_backup.sp_backup_config_basic
+    @enable_backup = 1,
     @container_url = 'https://mystorageaccount.blob.core.windows.net/myContainer',
     @retention_days = 30;
 GO
@@ -129,7 +130,7 @@ The following example disables [!INCLUDE [ss-managed-backup](../../includes/ss-m
 USE msdb;
 GO
 
-EXEC managed_backup.sp_backup_config_basic @enable_backup = 0;
+EXECUTE managed_backup.sp_backup_config_basic @enable_backup = 0;
 GO
 ```
 

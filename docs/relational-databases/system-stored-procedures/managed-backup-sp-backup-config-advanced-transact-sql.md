@@ -4,7 +4,7 @@ description: Configures advanced settings for SQL Server Managed Backup to Azure
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -30,7 +30,7 @@ Configures advanced settings for [!INCLUDE [ss-managed-backup](../../includes/ss
 ## Syntax
 
 ```syntaxsql
-EXEC managed_backup.sp_backup_config_advanced
+EXECUTE managed_backup.sp_backup_config_advanced
     [ @database_name = ] 'database_name'
     , [ @encryption_algorithm = ] 'name of the encryption algorithm'
     , [ @encryptor_type = ] { 'CERTIFICATE' | 'ASYMMETRIC_KEY' }
@@ -89,9 +89,10 @@ The following example sets advanced configuration options for [!INCLUDE [ss-mana
 USE msdb;
 GO
 
-EXEC managed_backup.sp_backup_config_advanced @encryption_algorithm = 'AES_128',
+EXECUTE managed_backup.sp_backup_config_advanced
+    @encryption_algorithm = 'AES_128',
     @encryptor_type = 'CERTIFICATE',
-    @encryptor_name = 'MyTestDBBackupEncryptCert'
+    @encryptor_name = 'MyTestDBBackupEncryptCert';
 GO
 ```
 

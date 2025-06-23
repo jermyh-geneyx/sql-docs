@@ -4,7 +4,7 @@ description: "sp_add_alert (Transact-SQL)"
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -176,7 +176,7 @@ By default, only members of the **sysadmin** fixed server role can execute `sp_a
 
 ## Examples
 
-### Example 1 - Add an alert for a job 
+### Example 1 - Add an alert for a job
 
 The following example adds an alert (Test Alert) that runs the `Back up the AdventureWorks2022 Database` job when fired.
 
@@ -187,7 +187,7 @@ The following example adds an alert (Test Alert) that runs the `Back up the Adve
 USE msdb;
 GO
 
-EXEC dbo.sp_add_alert
+EXECUTE dbo.sp_add_alert
     @name = N'Test Alert',
     @message_id = 55001,
     @severity = 0,
@@ -198,20 +198,20 @@ GO
 
 ### Example 2 - Add an alert for a replication threshold
 
-The following example adds an alert to let you know when a replication transaction has exceeded the latency threshold: 
+The following example adds an alert to let you know when a replication transaction has exceeded the latency threshold:
 
 ```sql
-EXEC msdb.dbo.sp_add_alert @name=N'Replication Warning: Transactional replication latency (Threshold: latency)',
-@message_id=14161,
-@severity=0,
-@enabled=1,
-@delay_between_responses=30,
-@include_event_description_in=5,
-@category_name=N'Replication',
-@job_id=N'00000000-0000-0000-0000-000000000000'
+EXECUTE msdb.dbo.sp_add_alert
+    @name = N'Replication Warning: Transactional replication latency (Threshold: latency)',
+    @message_id = 14161,
+    @severity = 0,
+    @enabled = 1,
+    @delay_between_responses = 30,
+    @include_event_description_in = 5,
+    @category_name = N'Replication',
+    @job_id = N'00000000-0000-0000-0000-000000000000';
 GO
 ```
-
 
 ## Related content
 

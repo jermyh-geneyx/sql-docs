@@ -4,7 +4,7 @@ description: Removes a SQL Server instance from a PolyBase group for scale-out c
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: polybase
 ms.topic: conceptual
@@ -51,7 +51,7 @@ You can only remove a compute node from a group.
 After running the stored procedure, restart the PolyBase engine and PolyBase Data Movement Service on the machine. To verify, run the following DMV on the head node:
 
 ```sql
-EXEC sys.dm_exec_compute_nodes;
+EXECUTE sys.dm_exec_compute_nodes;
 ```
 
 ## Examples
@@ -59,7 +59,7 @@ EXEC sys.dm_exec_compute_nodes;
 The example removes the current machine from a PolyBase group.
 
 ```sql
-EXEC sp_polybase_leave_group;
+EXECUTE sp_polybase_leave_group;
 ```
 
 ## Related content

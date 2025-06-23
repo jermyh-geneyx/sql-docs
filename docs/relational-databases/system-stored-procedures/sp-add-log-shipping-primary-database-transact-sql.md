@@ -4,7 +4,7 @@ description: "Sets up the primary database for a log shipping configuration, inc
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -120,7 +120,7 @@ Specifies whether a log shipping configuration uses [backup compression](../back
 
 - `0`: Disabled. Never compress log backups.
 - `1`: Enabled. Always compress log backups.
-- `2` (default): Use the setting of the [View or configure the backup compression default (server configuration option)](../../database-engine/configure-windows/view-or-configure-the-backup-compression-default-server-configuration-option.md).
+- `2` (default): Use the [backup compression default](../../database-engine/configure-windows/view-or-configure-the-backup-compression-default-server-configuration-option.md) server configuration option.
 
 ## Return code values
 
@@ -156,7 +156,7 @@ This example adds the database [!INCLUDE [ssSampleDBobject](../../includes/sssam
 DECLARE @LS_BackupJobId AS UNIQUEIDENTIFIER;
 DECLARE @LS_PrimaryId AS UNIQUEIDENTIFIER;
 
-EXEC master.dbo.sp_add_log_shipping_primary_database
+EXECUTE master.dbo.sp_add_log_shipping_primary_database
     @database = N'AdventureWorks',
     @backup_directory = N'c:\lsbackup',
     @backup_share = N'\\tribeca\lsbackup',

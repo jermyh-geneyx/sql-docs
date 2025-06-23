@@ -4,7 +4,7 @@ description: "Adds a SQL Server instance as a compute node to a PolyBase group f
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: conceptual
@@ -65,7 +65,7 @@ Requires CONTROL SERVER permission.
 After running the stored procedure, shut down the PolyBase engine, and restart the PolyBase Data Movement Service on the machine. To verify, run the following DMV on the head node:
 
 ```sql
-EXEC sys.dm_exec_compute_nodes;
+EXECUTE sys.dm_exec_compute_nodes;
 ```
 
 ## Examples
@@ -73,7 +73,7 @@ EXEC sys.dm_exec_compute_nodes;
 The example joins the current machine as a compute node to a PolyBase group. The name of the head node is `HST01` and the name of the SQL Server instance on the head node is `MSSQLSERVER`.
 
 ```sql
-EXEC sp_polybase_join_group N'HST01', 16450, N'MSSQLSERVER';
+EXECUTE sp_polybase_join_group N'HST01', 16450, N'MSSQLSERVER';
 ```
 
 ## Related content

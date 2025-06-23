@@ -4,7 +4,7 @@ description: "Inserts a row in the management data warehouse core.snapshots view
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -92,7 +92,7 @@ The following example creates a snapshot for the Disk Usage collection set, adds
 ```sql
 USE <management_data_warehouse>;
 DECLARE @snapshot_id int;
-EXEC core.sp_create_snapshot
+EXECUTE core.sp_create_snapshot
     @collection_set_uid = '7B191952-8ECF-4E12-AEB2-EF646EF79FEF',
     @collector_type_uid = '302E93D1-3424-4BE7-AA8E-84813ECF2419',
     @machine_name = '<computername>',

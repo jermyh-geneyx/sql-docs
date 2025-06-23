@@ -3,7 +3,8 @@ title: "jobs.sp_add_target_group_member (Azure Elastic Jobs) (Transact-SQL)"
 description: "jobs.sp_add_target_group_member adds a new member to a target group for the Azure Elastic Jobs service for Azure SQL Database."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.date: 08/21/2024
+ms.reviewer: randolphwest
+ms.date: 06/23/2025
 ms.service: azure-sql-database
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -106,21 +107,22 @@ Connect to the `job_database` and run the following command to add the `master` 
 -- Connect to the job database specified when creating the job agent
 
 -- Create a target group containing elastic job database
-EXEC jobs.sp_add_target_group 'ElasticJobGroup';
+EXECUTE jobs.sp_add_target_group 'ElasticJobGroup';
 
 -- Add a server target member
-EXEC jobs.sp_add_target_group_member
-@target_group_name = 'ElasticJobGroup',
-@target_type = 'SqlDatabase',
-@server_name = 'server1.database.windows.net',
-@database_name = 'master';
+EXECUTE jobs.sp_add_target_group_member
+    @target_group_name = 'ElasticJobGroup',
+    @target_type = 'SqlDatabase',
+    @server_name = 'server1.database.windows.net',
+    @database_name = 'master';
 
 --View the recently created target group and target group members
 SELECT * FROM jobs.target_groups
-WHERE target_group_name='ServerGroup1';
+WHERE target_group_name = 'ServerGroup1';
 GO
+
 SELECT * FROM jobs.target_group_members
-WHERE target_group_name='ServerGroup1';
+WHERE target_group_name = 'ServerGroup1';
 GO
 ```
 
@@ -133,29 +135,29 @@ When using Microsoft Entra authentication (formerly Azure Active Directory), omi
 ```sql
 --Connect to the jobs database specified when creating the job agent.
 
--- Create a target group containing server(s)
-EXEC jobs.sp_add_target_group @target_group_name =  N'Servers Maintaining Customer Information';
+-- Create a target group containing servers
+EXECUTE jobs.sp_add_target_group @target_group_name = N'Servers Maintaining Customer Information';
 GO
 
 -- Add a server target member
-EXEC jobs.sp_add_target_group_member
-@target_group_name = N'Servers Maintaining Customer Information',
-@target_type = N'SqlServer',
---@refresh_credential_name=N'refresh_credential', --database-scoped credential
-@server_name=N'London.database.windows.net';
+EXECUTE jobs.sp_add_target_group_member
+    @target_group_name = N'Servers Maintaining Customer Information',
+    @target_type = N'SqlServer',
+    -- @refresh_credential_name=N'refresh_credential', --database-scoped credential
+    @server_name = N'London.database.windows.net';
 GO
 
 -- Add a server target member
-EXEC jobs.sp_add_target_group_member
-@target_group_name = N'Servers Maintaining Customer Information',
-@target_type = N'SqlServer',
---@refresh_credential_name=N'refresh_credential', --database-scoped credential
-@server_name=N'NewYork.database.windows.net';
+EXECUTE jobs.sp_add_target_group_member
+    @target_group_name = N'Servers Maintaining Customer Information',
+    @target_type = N'SqlServer',
+    -- @refresh_credential_name=N'refresh_credential', --database-scoped credential
+    @server_name = N'NewYork.database.windows.net';
 GO
 
 --View the recently added members to the target group
 SELECT * FROM [jobs].target_group_members
-WHERE target_group_name= N'Servers Maintaining Customer Information';
+WHERE target_group_name = N'Servers Maintaining Customer Information';
 GO
 ```
 
@@ -168,39 +170,40 @@ Connect to the `job_database` and run the following command:
 ```sql
 --Connect to the job database specified when creating the job agent
 
--- Create a target group containing server(s)
-EXEC [jobs].sp_add_target_group N'ServerGroup';
+-- Create a target group containing servers
+EXECUTE [jobs].sp_add_target_group N'ServerGroup';
 GO
 
 -- Add a server target member
-EXEC jobs.sp_add_target_group_member
-@target_group_name = N'ServerGroup',
-@target_type = N'SqlServer',
-@server_name=N'server1.database.windows.net';
+EXECUTE jobs.sp_add_target_group_member
+    @target_group_name = N'ServerGroup',
+    @target_type = N'SqlServer',
+    @server_name = N'server1.database.windows.net';
 GO
 
 --Exclude one database from a server target group
-EXEC [jobs].sp_add_target_group_member
-@target_group_name = N'ServerGroup',
-@membership_type = N'Exclude',
-@target_type = N'SqlDatabase',
-@server_name = N'server1.database.windows.net',
-@database_name = N'MappingDB';
+EXECUTE [jobs].sp_add_target_group_member
+    @target_group_name = N'ServerGroup',
+    @membership_type = N'Exclude',
+    @target_type = N'SqlDatabase',
+    @server_name = N'server1.database.windows.net',
+    @database_name = N'MappingDB';
 GO
 
 --Exclude another database from a server target group
-EXEC [jobs].sp_add_target_group_member
-@target_group_name = N'ServerGroup',
-@membership_type = N'Exclude',
-@target_type = N'SqlDatabase',
-@server_name = N'server1.database.windows.net',
-@database_name = N'MappingDB2';
+EXECUTE [jobs].sp_add_target_group_member
+    @target_group_name = N'ServerGroup',
+    @membership_type = N'Exclude',
+    @target_type = N'SqlDatabase',
+    @server_name = N'server1.database.windows.net',
+    @database_name = N'MappingDB2';
 GO
 
 --View the recently created target group and target group members
 SELECT * FROM [jobs].target_groups
 WHERE target_group_name = N'ServerGroup';
 GO
+
 SELECT * FROM [jobs].target_group_members
 WHERE target_group_name = N'ServerGroup';
 GO
@@ -215,20 +218,21 @@ Connect to the `job_database` and run the following command:
 ```sql
 --Connect to the job database specified when creating the job agent
 
--- Create a target group containing pool(s)
-EXEC jobs.sp_add_target_group 'PoolGroup';
+-- Create a target group containing pools
+EXECUTE jobs.sp_add_target_group 'PoolGroup';
 
 -- Add an elastic pool(s) target member
-EXEC jobs.sp_add_target_group_member
-@target_group_name = 'PoolGroup',
-@target_type = 'SqlElasticPool',
-@server_name = 'server1.database.windows.net',
-@elastic_pool_name = 'ElasticPool1';
+EXECUTE jobs.sp_add_target_group_member
+    @target_group_name = 'PoolGroup',
+    @target_type = 'SqlElasticPool',
+    @server_name = 'server1.database.windows.net',
+    @elastic_pool_name = 'ElasticPool1';
 
 -- View the recently created target group and target group members
 SELECT * FROM jobs.target_groups
 WHERE target_group_name = N'PoolGroup';
 GO
+
 SELECT * FROM jobs.target_group_members
 WHERE target_group_name = N'PoolGroup';
 GO

@@ -3,7 +3,8 @@ title: "jobs.sp_add_target_group (Azure Elastic Jobs) (Transact-SQL)"
 description: "jobs.sp_add_target_group creates a target group for jobs in the Azure Elastic Jobs service for Azure SQL Database."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.date: 08/21/2024
+ms.reviewer: randolphwest
+ms.date: 06/23/2025
 ms.service: azure-sql-database
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -67,7 +68,7 @@ The following example creates a target group named `ServerGroup1`.
 
 ```sql
 -- Add a target group containing server(s)
-EXEC [jobs].sp_add_target_group @target_group_name = N'ServerGroup1';
+EXECUTE [jobs].sp_add_target_group @target_group_name = N'ServerGroup1';
 ```
 
 ## Related content

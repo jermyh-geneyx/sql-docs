@@ -4,7 +4,7 @@ description: "Associates a database with a maintenance plan."
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -65,7 +65,7 @@ Specifies the name of the database to be added to the maintenance plan. The data
 This example adds the [!INCLUDE [ssSampleDBobject](../../includes/sssampledbobject-md.md)] database to the maintenance plan created in `sp_add_maintenance_plan`.
 
 ```sql
-EXEC sp_add_maintenance_plan_db
+EXECUTE sp_add_maintenance_plan_db
     N'FAD6F2AB-3571-11D3-9D4A-00C04FB925FC',
     N'AdventureWorks2022';
 ```

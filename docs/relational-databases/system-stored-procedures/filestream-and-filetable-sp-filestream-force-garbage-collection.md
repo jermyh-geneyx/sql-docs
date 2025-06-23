@@ -4,7 +4,7 @@ description: Forces the FILESTREAM garbage collector to run, deleting any unneed
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -91,7 +91,8 @@ The following examples run the GC for FILESTREAM containers in the `fsdb` databa
 ```sql
 USE fsdb;
 GO
-EXEC sp_filestream_force_garbage_collection @dbname = N'fsdb';
+
+EXECUTE sp_filestream_force_garbage_collection @dbname = N'fsdb';
 ```
 
 ### B. Specify a container
@@ -99,7 +100,9 @@ EXEC sp_filestream_force_garbage_collection @dbname = N'fsdb';
 ```sql
 USE fsdb;
 GO
-EXEC sp_filestream_force_garbage_collection @dbname = N'fsdb',
+
+EXECUTE sp_filestream_force_garbage_collection
+    @dbname = N'fsdb',
     @filename = N'FSContainer';
 ```
 

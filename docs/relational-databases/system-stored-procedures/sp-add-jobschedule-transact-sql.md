@@ -4,7 +4,7 @@ description: "sp_add_jobschedule creates a schedule for a SQL Server Agent job."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -196,13 +196,13 @@ For details about the permissions of these roles, see [SQL Server Agent Fixed Da
 The following example assigns a job schedule to `SaturdayReports`, which executes every Saturday at 2:00 AM.
 
 ```sql
-EXEC msdb.dbo.sp_add_jobschedule
+EXECUTE msdb.dbo.sp_add_jobschedule
     @job_name = N'SaturdayReports', -- Job name
     @name = N'Weekly_Sat_2AM', -- Schedule name
     @freq_type = 8, -- Weekly
     @freq_interval = 64, -- Saturday
     @freq_recurrence_factor = 1, -- every week
-    @active_start_time = 20000 -- 2:00 AM
+    @active_start_time = 20000; -- 2:00 AM
 ```
 
 ## Related content

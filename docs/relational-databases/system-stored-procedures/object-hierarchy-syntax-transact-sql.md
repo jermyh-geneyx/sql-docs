@@ -1,10 +1,10 @@
 ---
-title: "Object hierarchy syntax (Transact-SQL)"
+title: "Object Hierarchy Syntax (Transact-SQL)"
 description: "Object hierarchy syntax (Transact-SQL)"
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -71,20 +71,20 @@ The following are examples of object hierarchy syntax that use a SQL-DMO SQLServ
 
 ```sql
 -- Get the AdventureWorks2022 Person.Address Table object.
-EXEC @hr = sp_OAGetProperty @object,
-   'Databases("AdventureWorks2022").Tables("Person.Address")',
-   @table OUT
+EXECUTE @hr = sp_OAGetProperty @object,
+    'Databases("AdventureWorks2022").Tables("Person.Address")',
+    @table OUTPUT;
 
 -- Get the Rows property of the AdventureWorks2022 Person.Address table.
-EXEC @hr = sp_OAGetProperty @object,
-   'Databases("AdventureWorks2022").Tables("Person.Address").Rows',
-   @rows OUT
+EXECUTE @hr = sp_OAGetProperty @object,
+    'Databases("AdventureWorks2022").Tables("Person.Address").Rows',
+    @rows OUTPUT;
 
 -- Call the CheckTable method to validate the
 -- AdventureWorks2022 Person.Address table.
-EXEC @hr = sp_OAMethod @object,
-   'Databases("AdventureWorks2022").Tables("Person.Address").CheckTable',
-   @checkoutput OUT
+EXECUTE @hr = sp_OAMethod @object,
+    'Databases("AdventureWorks2022").Tables("Person.Address").CheckTable',
+    @checkoutput OUTPUT;
 ```
 
 ## Related content

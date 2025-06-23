@@ -4,7 +4,7 @@ description: "Associates a maintenance plan with an existing job."
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -65,7 +65,7 @@ Specifies the ID of the job to be associated with the maintenance plan. *@job_id
 This example adds the job `B8FCECB1-E22C-11D2-AA64-00C04F688EAE` to the maintenance plan created using `sp_add_maintenance_plan_job`.
 
 ```sql
-EXEC sp_add_maintenance_plan_job
+EXECUTE sp_add_maintenance_plan_job
     @plan_id = N'FAD6F2AB-3571-11D3-9D4A-00C04FB925FC',
     @job_id = N'B8FCECB1-E22C-11D2-AA64-00C04F688EAE';
 ```

@@ -4,7 +4,7 @@ description: "Sets up the primary information, adds local and remote monitor lin
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -139,7 +139,8 @@ Only members of the **sysadmin** fixed server role can run this procedure.
 This example illustrates using the `sp_add_log_shipping_secondary_primary` stored procedure to set up information for the primary database [!INCLUDE [ssSampleDBobject](../../includes/sssampledbobject-md.md)] on the secondary server.
 
 ```sql
-EXEC master.dbo.sp_add_log_shipping_secondary_primary @primary_server = N'TRIBECA',
+EXECUTE master.dbo.sp_add_log_shipping_secondary_primary
+    @primary_server = N'TRIBECA',
     @primary_database = N'AdventureWorks2022',
     @backup_source_directory = N'\\tribeca\LogShipping',
     @backup_destination_directory = N'',

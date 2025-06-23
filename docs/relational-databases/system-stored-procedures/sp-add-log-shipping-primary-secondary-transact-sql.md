@@ -4,7 +4,7 @@ description: "This stored procedure adds an entry for a secondary database on th
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -69,7 +69,7 @@ Only members of the **sysadmin** fixed server role can run this procedure.
 This example uses `sp_add_log_shipping_primary_secondary` to add an entry for the secondary database `LogShipAdventureWorks` to the secondary server `FLATIRON`.
 
 ```sql
-EXEC master.dbo.sp_add_log_shipping_primary_secondary
+EXECUTE master.dbo.sp_add_log_shipping_primary_secondary
     @primary_database = N'AdventureWorks',
     @secondary_server = N'flatiron',
     @secondary_database = N'LogShipAdventureWorks';

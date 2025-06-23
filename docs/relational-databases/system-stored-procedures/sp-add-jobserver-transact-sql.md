@@ -4,7 +4,7 @@ description: "Targets the specified job at the specified server."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -94,7 +94,7 @@ The following example assigns the job `NightlyBackups` to run on the local serve
 USE msdb;
 GO
 
-EXEC dbo.sp_add_jobserver @job_name = N'NightlyBackups';
+EXECUTE dbo.sp_add_jobserver @job_name = N'NightlyBackups';
 GO
 ```
 
@@ -109,7 +109,8 @@ The following example assigns the multiserver job `Weekly Sales Backups` to the 
 USE msdb;
 GO
 
-EXEC dbo.sp_add_jobserver @job_name = N'Weekly Sales Backups',
+EXECUTE dbo.sp_add_jobserver
+    @job_name = N'Weekly Sales Backups',
     @server_name = N'SEATTLE2';
 GO
 ```

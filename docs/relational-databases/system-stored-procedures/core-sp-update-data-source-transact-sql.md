@@ -4,7 +4,7 @@ description: "Updates an existing row or inserts a new row in the management dat
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -87,7 +87,7 @@ USE <management_data_warehouse>;
 GO
 DECLARE @source_id INT;
 
-EXEC core.sp_update_data_source @collection_set_uid = '7B191952-8ECF-4E12-AEB2-EF646EF79FEF',
+EXECUTE core.sp_update_data_source @collection_set_uid = '7B191952-8ECF-4E12-AEB2-EF646EF79FEF',
     @machine_name = '<computername>',
     @named_instance = 'MSSQLSERVER',
     @days_until_expiration = 10,

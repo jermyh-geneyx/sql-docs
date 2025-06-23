@@ -4,7 +4,7 @@ description: "Adds a log file to a database when recovery can't complete on a da
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -86,10 +86,10 @@ In the following example, the database `db1` was marked suspect during recovery 
 USE master;
 GO
 
-EXEC sp_add_log_file_recover_suspect_db db1,
+EXECUTE sp_add_log_file_recover_suspect_db
+    db1,
     logfile2,
-    'C:\Program Files\Microsoft SQL
-    Server\MSSQL13.MSSQLSERVER\MSSQL\Data\db1_logfile2.ldf',
+    'C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Data\db1_logfile2.ldf',
     '1 MB';
 ```
 

@@ -4,7 +4,7 @@ description: "Requests SQL Server Managed Backup to Microsoft Azure to perform a
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -36,7 +36,7 @@ An error is returned if [!INCLUDE [ss-managed-backup](../../includes/ss-managed-
 ## Syntax
 
 ```syntaxsql
-EXEC managed_backup.sp_backup_on_demand
+EXECUTE managed_backup.sp_backup_on_demand
     [ @database_name = ] 'database name'
     , [ @type = ] { 'Database' | 'Log' }
 [ ; ]
@@ -68,7 +68,7 @@ The following example makes a database backup request for the database `TestDB`.
 USE msdb;
 GO
 
-EXEC managed_backup.sp_backup_on_demand
+EXECUTE managed_backup.sp_backup_on_demand
     @database_name = 'TestDB',
     @type = 'Database';
 GO

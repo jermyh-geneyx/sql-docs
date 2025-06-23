@@ -4,7 +4,7 @@ description: "Creates a schedule that can be used by any number of jobs."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -186,7 +186,7 @@ The following example creates a schedule named `RunOnce`. The schedule runs one 
 USE msdb;
 GO
 
-EXEC dbo.sp_add_schedule
+EXECUTE dbo.sp_add_schedule
     @schedule_name = N'RunOnce',
     @freq_type = 1,
     @active_start_time = 233000;
@@ -204,19 +204,19 @@ The following example creates a schedule named `NightlyJobs`. Jobs that use this
 USE msdb;
 GO
 
-EXEC sp_add_schedule
+EXECUTE sp_add_schedule
     @schedule_name = N'NightlyJobs',
     @freq_type = 4,
     @freq_interval = 1,
     @active_start_time = 010000;
 GO
 
-EXEC sp_attach_schedule
+EXECUTE sp_attach_schedule
     @job_name = N'BackupDatabase',
     @schedule_name = N'NightlyJobs';
 GO
 
-EXEC sp_attach_schedule
+EXECUTE sp_attach_schedule
     @job_name = N'RunReports',
     @schedule_name = N'NightlyJobs';
 GO

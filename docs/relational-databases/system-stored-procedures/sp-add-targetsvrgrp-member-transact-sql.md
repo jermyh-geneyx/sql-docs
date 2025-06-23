@@ -4,7 +4,7 @@ description: "Adds the specified target server to the specified target server gr
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 06/02/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -67,7 +67,7 @@ The following example adds the group `Servers Maintaining Customer Information` 
 USE msdb;
 GO
 
-EXEC dbo.sp_add_targetsvrgrp_member
+EXECUTE dbo.sp_add_targetsvrgrp_member
     @group_name = N'Servers Maintaining Customer Information',
     @server_name = N'LONDON1';
 GO

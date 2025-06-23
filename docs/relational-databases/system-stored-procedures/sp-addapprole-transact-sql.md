@@ -4,7 +4,7 @@ description: Adds an application role to the current database.
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -77,10 +77,10 @@ Requires ALTER ANY APPLICATION ROLE permission on the database. If a schema with
 
 ## Examples
 
-The following example adds the new application role `SalesApp` with the password `x97898jLJfcooFUYLKm387gf3` to the current database.
+The following example adds the new application role `SalesApp` to the current database. Replace `<password>` with a strong password.
 
 ```sql
-EXEC sp_addapprole 'SalesApp', 'x97898jLJfcooFUYLKm387gf3';
+EXECUTE sp_addapprole 'SalesApp', '<password>';
 GO
 ```
 

@@ -4,7 +4,7 @@ description: "Sets the value of the specified Smart Admin system parameter."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -32,7 +32,7 @@ The available parameters are related to [!INCLUDE [ss-managed-backup](../../incl
 ## Syntax
 
 ```syntaxsql
-EXEC managed_backup.sp_set_parameter
+EXECUTE managed_backup.sp_set_parameter
     [ @parameter_name = ] {
         N'SSMBackup2WANotificationEmailIds'
         | N'SSMBackup2WAEnableUserDefinedPolicy'
@@ -84,12 +84,14 @@ The following examples enable operational and debug extended events.
 -- Enable operational events
 USE msdb;
 GO
-EXEC managed_backup.sp_set_parameter N'FileRetentionOperationalXevent', N'True';
+
+EXECUTE managed_backup.sp_set_parameter N'FileRetentionOperationalXevent', N'True';
 
 -- Enable debug events
 USE msdb;
 GO
-EXEC managed_backup.sp_set_parameter N'FileRetentionDebugXevent', N'True';
+
+EXECUTE managed_backup.sp_set_parameter N'FileRetentionDebugXevent', N'True';
 ```
 
 The following example enables email notifications of errors and warnings, and sets the email address for sending notifications:
@@ -97,5 +99,8 @@ The following example enables email notifications of errors and warnings, and se
 ```sql
 USE msdb;
 GO
-EXEC managed_backup.sp_set_parameter @parameter_name = 'SSMBackup2WANotificationEmailIds', @parameter_value = '<email address>';
+
+EXECUTE managed_backup.sp_set_parameter
+    @parameter_name = 'SSMBackup2WANotificationEmailIds',
+    @parameter_value = '<email address>';
 ```

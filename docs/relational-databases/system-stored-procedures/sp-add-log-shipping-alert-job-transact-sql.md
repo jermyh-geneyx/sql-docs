@@ -4,7 +4,7 @@ description: "This stored procedure checks to see if an alert job has been creat
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -62,7 +62,7 @@ This example shows the execution of `sp_add_log_shipping_alert_job` to create an
 USE master;
 GO
 
-EXEC sp_add_log_shipping_alert_job;
+EXECUTE sp_add_log_shipping_alert_job;
 ```
 
 ## Related content
