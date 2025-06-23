@@ -4,7 +4,7 @@ description: Applies a filter to a trace.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -116,9 +116,9 @@ Requires ALTER TRACE permission.
 The following example sets three filters on Trace `1`. The filters `N'SQLT%'` and `N'MS%'` operate on one column (`AppName`, value `10`) using the "`LIKE`" comparison operator. The filter `N'joe'` operates on a different column (`UserName`, value `11`) using the "`EQUAL`" comparison operator.
 
 ```sql
-EXEC sp_trace_setfilter 1, 10, 0, 6, N'SQLT%';
-EXEC sp_trace_setfilter 1, 10, 0, 6, N'MS%';
-EXEC sp_trace_setfilter 1, 11, 0, 0, N'joe';
+EXECUTE sp_trace_setfilter 1, 10, 0, 6, N'SQLT%';
+EXECUTE sp_trace_setfilter 1, 10, 0, 6, N'MS%';
+EXECUTE sp_trace_setfilter 1, 11, 0, 0, N'joe';
 ```
 
 ## Related content

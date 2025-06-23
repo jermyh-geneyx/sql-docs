@@ -4,7 +4,7 @@ description: Unbinds a rule from a column or an alias data type in the current d
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -72,7 +72,7 @@ To unbind a rule from a table column requires ALTER permission on the table. To 
 The following example unbinds the rule from the `startdate` column of an `employees` table.
 
 ```sql
-EXEC sp_unbindrule 'employees.startdate';
+EXECUTE sp_unbindrule 'employees.startdate';
 ```
 
 ### B. Unbind a rule from an alias data type
@@ -80,7 +80,7 @@ EXEC sp_unbindrule 'employees.startdate';
 The following example unbinds the rule from the alias data type `ssn`. It unbinds the rule from existing and future columns of that type.
 
 ```sql
-EXEC sp_unbindrule ssn;
+EXECUTE sp_unbindrule ssn;
 ```
 
 ### C. Use futureonly_flag
@@ -88,7 +88,7 @@ EXEC sp_unbindrule ssn;
 The following example unbinds the rule from the alias data type `ssn` without affecting existing `ssn` columns.
 
 ```sql
-EXEC sp_unbindrule 'ssn', 'futureonly';
+EXECUTE sp_unbindrule 'ssn', 'futureonly';
 ```
 
 ### D. Use delimited identifiers
@@ -96,13 +96,16 @@ EXEC sp_unbindrule 'ssn', 'futureonly';
 The following example shows using delimited identifiers in the *@objname* parameter. Notice the period as part of the table name. In the `sp_bindrule` portion, the object contains two periods; the first is part of the table name, and the second distinguishes the table name from the column name.
 
 ```sql
-CREATE TABLE [t.4] (c1 int);
+CREATE TABLE [t.4] (c1 INT);
 GO
+
 CREATE RULE rule2 AS @value > 100;
 GO
-EXEC sp_bindrule rule2, '[t.4].c1'
+
+EXECUTE sp_bindrule rule2, '[t.4].c1';
 GO
-EXEC sp_unbindrule '[t.4].c1';
+
+EXECUTE sp_unbindrule '[t.4].c1';
 ```
 
 ## Related content

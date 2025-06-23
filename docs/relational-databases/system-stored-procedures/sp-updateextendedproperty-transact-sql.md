@@ -4,7 +4,7 @@ description: Updates the value of an existing extended property.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 12/27/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -145,10 +145,11 @@ The following example updates the value of property `Caption` on column `ID` in 
 USE AdventureWorks2022;
 GO
 
-CREATE TABLE T1 (id INT, name CHAR(20));
+CREATE TABLE T1 (id INT, name CHAR (20));
 GO
 
-EXEC sp_addextendedproperty @name = N'Caption',
+EXECUTE sp_addextendedproperty
+    @name = N'Caption',
     @value = N'Employee ID',
     @level0type = 'SCHEMA',
     @level0name = N'dbo',
@@ -159,7 +160,8 @@ EXEC sp_addextendedproperty @name = N'Caption',
 GO
 
 --Update the extended property.
-EXEC sp_updateextendedproperty @name = N'Caption',
+EXECUTE sp_updateextendedproperty
+    @name = N'Caption',
     @value = 'Employee ID must be unique.',
     @level0type = 'SCHEMA',
     @level0name = N'dbo',
@@ -178,14 +180,16 @@ The following example first creates an extended property on the [!INCLUDE [ssSam
 USE AdventureWorks2022;
 GO
 
-EXEC sp_addextendedproperty @name = N'NewCaption',
+EXECUTE sp_addextendedproperty
+    @name = N'NewCaption',
     @value = 'AdventureWorks Sample OLTP Database';
 GO
 
 USE AdventureWorks2022;
 GO
 
-EXEC sp_updateextendedproperty @name = N'NewCaption',
+EXECUTE sp_updateextendedproperty
+    @name = N'NewCaption',
     @value = 'AdventureWorks Sample Database';
 GO
 ```

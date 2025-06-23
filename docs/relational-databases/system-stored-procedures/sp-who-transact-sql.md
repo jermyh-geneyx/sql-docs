@@ -4,7 +4,7 @@ description: Provides information about current users, sessions, and processes i
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -88,7 +88,8 @@ The following example uses `sp_who` without parameters to report all current use
 ```sql
 USE master;
 GO
-EXEC sp_who;
+
+EXECUTE sp_who;
 GO
 ```
 
@@ -99,7 +100,8 @@ The following example shows how to view information about a single current user 
 ```sql
 USE master;
 GO
-EXEC sp_who 'janetl';
+
+EXECUTE sp_who 'janetl';
 GO
 ```
 
@@ -108,7 +110,8 @@ GO
 ```sql
 USE master;
 GO
-EXEC sp_who 'active';
+
+EXECUTE sp_who 'active';
 GO
 ```
 
@@ -117,7 +120,8 @@ GO
 ```sql
 USE master;
 GO
-EXEC sp_who '10' --specifies the process_id;
+
+EXECUTE sp_who '10'; --specifies the process_id;
 GO
 ```
 

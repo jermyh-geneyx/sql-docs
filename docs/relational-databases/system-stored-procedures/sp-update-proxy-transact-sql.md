@@ -4,7 +4,7 @@ description: Changes the properties of an existing proxy.
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/28/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -93,7 +93,7 @@ The following example sets the enabled value for the proxy `Catalog application 
 USE msdb;
 GO
 
-EXEC dbo.sp_update_proxy
+EXECUTE dbo.sp_update_proxy
     @proxy_name = 'Catalog application proxy',
     @enabled = 0;
 GO

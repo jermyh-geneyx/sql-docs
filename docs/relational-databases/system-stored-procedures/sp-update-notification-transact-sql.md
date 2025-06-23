@@ -4,7 +4,7 @@ description: Updates the notification method of an alert notification.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/28/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -77,10 +77,10 @@ The following example modifies the notification method for notifications sent to
 USE msdb;
 GO
 
-EXEC dbo.sp_update_notification
-   @alert_name = N'Test Alert',
-   @operator_name = N'François Ajenstat',
-   @notification_method = 7;
+EXECUTE dbo.sp_update_notification
+    @alert_name = N'Test Alert',
+    @operator_name = N'François Ajenstat',
+    @notification_method = 7;
 GO
 ```
 

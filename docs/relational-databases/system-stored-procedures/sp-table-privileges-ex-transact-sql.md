@@ -4,7 +4,7 @@ description: Returns privilege information about the specified table from the sp
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 12/28/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -87,10 +87,11 @@ Requires `SELECT` permission on the schema.
 The following example returns privilege information about tables with names that start with `Product` in the [!INCLUDE [ssSampleDBobject](../../includes/sssampledbobject-md.md)] database from the specified linked server `Seattle1`. [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] is assumed as the linked server.
 
 ```sql
-EXEC sp_table_privileges_ex @table_server = 'Seattle1',
+EXECUTE sp_table_privileges_ex
+    @table_server = 'Seattle1',
     @table_name = 'Product%',
     @table_schema = 'Production',
-    @table_catalog ='AdventureWorks2022';
+    @table_catalog = 'AdventureWorks2022';
 ```
 
 ## Related content

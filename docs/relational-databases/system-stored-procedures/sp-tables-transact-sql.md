@@ -4,7 +4,7 @@ description: sp_tables returns a list of objects that can be queried in the curr
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 12/28/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -101,7 +101,7 @@ Privilege information about the current user's read or write access to a specifi
 The following example returns a list of objects that can be queries in the current environment.
 
 ```sql
-EXEC sp_tables;
+EXECUTE sp_tables;
 ```
 
 ### B. Return information about the tables in a specified schema
@@ -111,20 +111,21 @@ The following example returns information about the tables that belong to the `P
 ```sql
 USE AdventureWorks2022;
 GO
-EXEC sp_tables
-   @table_name = '%',
-   @table_owner = 'Person',
-   @table_qualifier = 'AdventureWorks2022';
+
+EXECUTE sp_tables
+    @table_name = '%',
+    @table_owner = 'Person',
+    @table_qualifier = 'AdventureWorks2022';
 ```
 
-## Examples: [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] and [!INCLUDE [ssPDW](../../includes/sspdw-md.md)]
+## Examples: Azure Synapse Analytics and Analytics Platform System (PDW)
 
 ### C. Return a list of objects that can be queried in the current environment
 
 The following example returns a list of objects that can be queries in the current environment.
 
 ```sql
-EXEC sp_tables;
+EXECUTE sp_tables;
 ```
 
 ### D. Return information about the tables in a specified schema
@@ -133,11 +134,10 @@ The following example returns information about the dimension tables in the `Adv
 
 ```sql
 -- Uses AdventureWorks
-
-EXEC sp_tables
-   @table_name = 'Dim%',
-   @table_owner = 'dbo',
-   @table_qualifier = 'AdventureWorksPDW2012';
+EXECUTE sp_tables
+    @table_name = 'Dim%',
+    @table_owner = 'dbo',
+    @table_qualifier = 'AdventureWorksPDW2012';
 ```
 
 ## Related content

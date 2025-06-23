@@ -4,7 +4,7 @@ description: Changes the name of a category.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/28/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -74,10 +74,10 @@ The following example renames a job category from `AdminJobs` to `Administrative
 USE msdb;
 GO
 
-EXEC dbo.sp_update_category
-  @class = N'JOB',
-  @name = N'AdminJobs',
-  @new_name = N'Administrative Jobs';
+EXECUTE dbo.sp_update_category
+    @class = N'JOB',
+    @name = N'AdminJobs',
+    @new_name = N'Administrative Jobs';
 GO
 ```
 

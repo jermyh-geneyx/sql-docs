@@ -4,7 +4,7 @@ description: "Updates a policy category subscription for a specified database."
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 06/26/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -67,12 +67,12 @@ To obtain values for *@policy_category_subscription_id* and for *@policy_categor
 
 ```sql
 SELECT a.policy_category_subscription_id,
-    a.target_type,
-    a.target_object,
-    b.name AS policy_category
+       a.target_type,
+       a.target_object,
+       b.name AS policy_category
 FROM msdb.dbo.syspolicy_policy_category_subscriptions AS a
-INNER JOIN msdb.dbo.syspolicy_policy_categories AS b
-    ON a.policy_category_id = b.policy_category_id;
+     INNER JOIN msdb.dbo.syspolicy_policy_categories AS b
+         ON a.policy_category_id = b.policy_category_id;
 ```
 
 ## Permissions
@@ -86,7 +86,7 @@ Requires membership in the **PolicyAdministratorRole** fixed database role.
 The following example updates an existing policy category subscription so that the [!INCLUDE [sssampledbobject-md](../../includes/sssampledbobject-md.md)] database subscribes to the `Finance` policy category.
 
 ```sql
-EXEC msdb.dbo.sp_syspolicy_update_policy_category_subscription
+EXECUTE msdb.dbo.sp_syspolicy_update_policy_category_subscription
     @policy_category_subscription_id = 1,
     @target_object = 'AdventureWorks2022',
     @policy_category = 'Finance';

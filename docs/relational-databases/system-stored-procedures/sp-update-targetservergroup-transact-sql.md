@@ -4,7 +4,7 @@ description: Changes the name of the specified target server group.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/28/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -63,7 +63,7 @@ The following example changes the name of the target server group `Servers Proce
 USE msdb;
 GO
 
-EXEC dbo.sp_update_targetservergroup
+EXECUTE dbo.sp_update_targetservergroup
     @name = N'Servers Processing Customer Orders',
     @new_name = N'Local Servers Processing Customer Orders';
 GO

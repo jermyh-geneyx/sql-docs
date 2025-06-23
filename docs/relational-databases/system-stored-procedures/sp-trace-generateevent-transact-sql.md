@@ -4,7 +4,7 @@ description: Fires a user-defined event to a trace or an event session.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -90,31 +90,28 @@ DROP TABLE IF EXISTS dbo.user_defined_event_example;
 
 CREATE TABLE dbo.user_defined_event_example
 (
-Id int IDENTITY(1,1) PRIMARY KEY,
-Data nvarchar(60) NOT NULL
+    Id INT IDENTITY (1, 1) PRIMARY KEY,
+    Data NVARCHAR (60) NOT NULL
 );
 
 DROP TRIGGER IF EXISTS fire_user_defined_event;
 GO
 
 -- Create an insert trigger on the table
-CREATE TRIGGER fire_user_defined_event ON dbo.user_defined_event_example
-FOR INSERT
-AS
-DECLARE @EventData varbinary(8000);
-
+CREATE TRIGGER fire_user_defined_event
+    ON dbo.user_defined_event_example
+    FOR INSERT
+    AS DECLARE @EventData AS VARBINARY (8000);
 -- Convert inserted rows to JSON and cast it as a binary value
-SELECT @EventData = CAST((
-                         SELECT Id, Data
-                         FROM inserted
-                         FOR JSON AUTO
-                         ) AS varbinary(8000));
-
+       SELECT @EventData = CAST ((SELECT Id,
+                                         Data
+                                  FROM inserted
+                                  FOR JSON AUTO) AS VARBINARY (8000));
 -- Fire the event with the payload carrying inserted rows as JSON
-EXEC dbo.sp_trace_generateevent
-    @eventid = 82,
-    @userinfo = N'Inserted rows into dbo.user_defined_event_example',
-    @userdata = @EventData;
+              EXECUTE dbo.sp_trace_generateevent
+           @eventid = 82,
+           @userinfo = N'Inserted rows into dbo.user_defined_event_example',
+           @userdata = @EventData;
 GO
 
 -- Insert a row into the table. The trigger fires the event.
@@ -122,7 +119,7 @@ INSERT INTO dbo.user_defined_event_example (Data)
 VALUES (N'Example data');
 
 -- Copy the binary payload from the event and cast it to a string with the JSON value
-SELECT CAST(0x5B007B0022004900640022003A0031002C002200440061007400610022003A0022004500780061006D0070006C0065002000640061007400610022007D005D00 AS nvarchar(max));
+SELECT CAST (0x5B007B0022004900640022003A0031002C002200440061007400610022003A0022004500780061006D0070006C0065002000640061007400610022007D005D00 AS NVARCHAR (MAX));
 -- This returns: [{"Id":1,"Data":"Example data"}]
 ```
 

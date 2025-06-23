@@ -4,7 +4,7 @@ description: "Reads the XML text provided as input, parses the text by using the
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -82,9 +82,8 @@ Requires membership in the **public** role.
 The following example returns a handle to the newly created internal representation of the XML document that is provided as input. In the call to `sp_xml_preparedocument`, a default namespace prefix mapping is used.
 
 ```sql
-DECLARE @hdoc INT;
-DECLARE @doc VARCHAR(1000);
-
+DECLARE @hdoc AS INT;
+DECLARE @doc AS VARCHAR (1000);
 SET @doc = '
 <ROOT>
 <Customer CustomerID="VINET" ContactName="Paul Henriot">
@@ -101,10 +100,12 @@ SET @doc = '
 </ROOT>';
 
 --Create an internal representation of the XML document.
-EXEC sp_xml_preparedocument @hdoc OUTPUT, @doc;
+EXECUTE sp_xml_preparedocument
+    @hdoc OUTPUT,
+    @doc;
 
 -- Remove the internal representation.
-EXEC sp_xml_removedocument @hdoc;
+EXECUTE sp_xml_removedocument @hdoc;
 ```
 
 ### B. Prepare an internal representation for a well-formed XML document with a DTD
@@ -112,8 +113,8 @@ EXEC sp_xml_removedocument @hdoc;
 The following example returns a handle to the newly created internal representation of the XML document that is provided as input. The stored procedure validates the document loaded against the DTD included in the document. In the call to `sp_xml_preparedocument`, a default namespace prefix mapping is used.
 
 ```sql
-DECLARE @hdoc int;
-DECLARE @doc varchar(2000);
+DECLARE @hdoc AS INT;
+DECLARE @doc AS VARCHAR (2000);
 SET @doc = '
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE root
@@ -124,7 +125,9 @@ SET @doc = '
 <Customers CustomerID="ALFKI" ContactName="Maria Anders"/>
 </root>';
 
-EXEC sp_xml_preparedocument @hdoc OUTPUT, @doc;
+EXECUTE sp_xml_preparedocument
+    @hdoc OUTPUT,
+    @doc;
 ```
 
 ### C. Specify a namespace URI
@@ -132,9 +135,9 @@ EXEC sp_xml_preparedocument @hdoc OUTPUT, @doc;
 The following example returns a handle to the newly created internal representation of the XML document that is provided as input. The call to `sp_xml_preparedocument` preserves the `mp` prefix to the metaproperty namespace mapping and adds the `xyz` mapping prefix to the namespace `urn:MyNamespace`.
 
 ```sql
-DECLARE @hdoc int;
-DECLARE @doc varchar(1000);
-SET @doc ='
+DECLARE @hdoc AS INT;
+DECLARE @doc AS VARCHAR (1000);
+SET @doc = '
 <ROOT>
 <Customer CustomerID="VINET" ContactName="Paul Henriot">
    <Order CustomerID="VINET" EmployeeID="5"
@@ -149,9 +152,12 @@ SET @doc ='
       <OrderDetail OrderID="10283" ProductID="72" Quantity="3"/>
    </Order>
 </Customer>
-</ROOT>'
+</ROOT>';
+
 --Create an internal representation of the XML document.
-EXEC sp_xml_preparedocument @hdoc OUTPUT, @doc, '<ROOT xmlns:xyz="urn:MyNamespace"/>';
+EXECUTE sp_xml_preparedocument
+    @hdoc OUTPUT,
+    @doc, '<ROOT xmlns:xyz="urn:MyNamespace"/>';
 ```
 
 ## Related content

@@ -4,7 +4,7 @@ description: "Returns a list of table permissions (such as INSERT, DELETE, UPDAT
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 12/28/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -84,7 +84,8 @@ The following example returns privilege information about all tables with names 
 ```sql
 USE AdventureWorks2022;
 GO
-EXEC sp_table_privileges @table_name = 'Contact%';
+
+EXECUTE sp_table_privileges @table_name = 'Contact%';
 ```
 
 ## Related content

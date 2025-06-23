@@ -4,7 +4,7 @@ description: Deactivates an application role and reverts to the previous securit
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -58,13 +58,13 @@ Requires membership in **public** and knowledge of the cookie saved when the app
 
 ### Activate an application role with a cookie, then reverting to the previous context
 
-The following example activates the `Sales11` application role with password `fdsd896#gfdbfdkjgh700mM`, and creates a cookie. The example returns the name of the current user, and then reverts to the original context by executing `sp_unsetapprole`.
+The following example activates the `Sales11` application role, and creates a cookie. The example returns the name of the current user, and then reverts to the original context by executing `sp_unsetapprole`. Replace `<password>` with a strong password.
 
 ```sql
-DECLARE @cookie VARBINARY(8000);
+DECLARE @cookie AS VARBINARY (8000);
 
-EXEC sp_setapprole 'Sales11',
-    'fdsd896#gfdbfdkjgh700mM',
+EXECUTE sp_setapprole 'Sales11',
+    '<password>',
     @fCreateCookie = true,
     @cookie = @cookie OUTPUT;
 
@@ -72,7 +72,7 @@ EXEC sp_setapprole 'Sales11',
 SELECT USER_NAME();
 
 -- Return the name of the application role, Sales11.
-EXEC sp_unsetapprole @cookie;
+EXECUTE sp_unsetapprole @cookie;
     -- The application role is no longer active.
     -- The original context has now been restored.
 GO

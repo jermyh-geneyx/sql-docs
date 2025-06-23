@@ -4,7 +4,7 @@ description: "Renames an existing condition in Policy-Based Management."
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -68,7 +68,7 @@ Requires membership in the **PolicyAdministratorRole** fixed database role.
 The following example renames a condition that is named `Change Tracking Enabled`.
 
 ```sql
-EXEC msdb.dbo.sp_syspolicy_rename_condition
+EXECUTE msdb.dbo.sp_syspolicy_rename_condition
     @name = N'Change Tracking Enabled',
     @new_name = N'Verify Change Tracking Enabled';
 GO

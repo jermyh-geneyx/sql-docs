@@ -4,7 +4,7 @@ description: Unbinds, or removes, a default from a column or from an alias data 
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -70,7 +70,7 @@ To unbind a default from a table column requires ALTER permission on the table. 
 The following example unbinds the default from the `hiredate` column of an `employees` table.
 
 ```sql
-EXEC sp_unbindefault 'employees.hiredate';
+EXECUTE sp_unbindefault 'employees.hiredate';
 ```
 
 ### B. Unbind a default from an alias data type
@@ -78,7 +78,7 @@ EXEC sp_unbindefault 'employees.hiredate';
 The following example unbinds the default from the alias data type `ssn`. It unbinds existing and future columns of that type.
 
 ```sql
-EXEC sp_unbindefault 'ssn';
+EXECUTE sp_unbindefault 'ssn';
 ```
 
 ### C. Use the futureonly_flag
@@ -86,7 +86,7 @@ EXEC sp_unbindefault 'ssn';
 The following example unbinds future uses of the alias data type `ssn` without affecting existing `ssn` columns.
 
 ```sql
-EXEC sp_unbindefault 'ssn', 'futureonly';
+EXECUTE sp_unbindefault 'ssn', 'futureonly';
 ```
 
 ### D. Use delimited identifiers
@@ -100,9 +100,9 @@ CREATE TABLE [t.3] (c1 INT);
 CREATE DEFAULT default2 AS 0;
 GO
 
-EXEC sp_bindefault 'default2', '[t.3].c1';
+EXECUTE sp_bindefault 'default2', '[t.3].c1';
 
-EXEC sp_unbindefault '[t.3].c1';
+EXECUTE sp_unbindefault '[t.3].c1';
 ```
 
 ## Related content

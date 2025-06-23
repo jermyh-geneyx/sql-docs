@@ -5,7 +5,7 @@ description: "sp_wait_for_database_copy_sync is scoped to an active geo-replicat
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: azure-sql-database
 ms.topic: "reference"
 f1_keywords:
@@ -67,7 +67,10 @@ The following example invokes `sp_wait_for_database_copy_sync` to ensure that al
 ```sql
 USE AdventureWorks;
 GO
-EXEC sys.sp_wait_for_database_copy_sync @target_server = N'serverSecondary', @target_database = N'AdventureWorks';
+
+EXECUTE sys.sp_wait_for_database_copy_sync
+    @target_server = N'serverSecondary',
+    @target_database = N'AdventureWorks';
 GO
 ```
 

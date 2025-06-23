@@ -4,7 +4,7 @@ description: sp_tableoption sets option values for user-defined tables.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -112,7 +112,8 @@ The following example specifies that the **xml** data in the `HumanResources.Job
 ```sql
 USE AdventureWorks2022;
 GO
-EXEC sp_tableoption 'HumanResources.JobCandidate', 'large value types out of row', 1;
+
+EXECUTE sp_tableoption 'HumanResources.JobCandidate', 'large value types out of row', 1;
 ```
 
 ### B. Enable vardecimal storage format on a table
@@ -122,14 +123,16 @@ The following example modifies the `Production.WorkOrderRouting` table to store 
 ```sql
 USE master;
 GO
+
 -- The database must be enabled for vardecimal storage format
 -- before a table can be enabled for vardecimal storage format
-EXEC sp_db_vardecimal_storage_format 'AdventureWorks2022', 'ON';
+EXECUTE sp_db_vardecimal_storage_format 'AdventureWorks2022', 'ON';
 GO
+
 USE AdventureWorks2022;
 GO
-EXEC sp_tableoption 'Production.WorkOrderRouting',
-   'vardecimal storage format', 'ON';
+
+EXECUTE sp_tableoption 'Production.WorkOrderRouting', 'vardecimal storage format', 'ON';
 ```
 
 ## Related content
