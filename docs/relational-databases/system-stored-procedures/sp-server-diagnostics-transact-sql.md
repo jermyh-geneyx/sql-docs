@@ -4,7 +4,7 @@ description: sp_server_diagnostics captures diagnostic data and health informati
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -126,18 +126,16 @@ The following query reads the Extended Events session log file on [!INCLUDE [sss
 
 ```sql
 SELECT xml_data.value('(/event/@name)[1]', 'varchar(max)') AS Name,
-    xml_data.value('(/event/@package)[1]', 'varchar(max)') AS Package,
-    xml_data.value('(/event/@timestamp)[1]', 'datetime') AS 'Time',
-    xml_data.value('(/event/data[@name=''component_type'']/value)[1]', 'sysname') AS SYSNAME,
-    xml_data.value('(/event/data[@name=''component_name'']/value)[1]', 'sysname') AS Component,
-    xml_data.value('(/event/data[@name=''state'']/value)[1]', 'int') AS STATE,
-    xml_data.value('(/event/data[@name=''state_desc'']/value)[1]', 'sysname') AS State_desc,
-    xml_data.query('(/event/data[@name="data"]/value/*)') AS Data
-FROM (
-    SELECT object_name AS event,
-        CONVERT(XML, event_data) AS xml_data
-    FROM sys.fn_xe_file_target_read_file('C:\Program Files\Microsoft SQL Server\MSSQL13.MSSQLSERVER\MSSQL\Log\*.xel', NULL, NULL, NULL)
-) AS XEventData
+       xml_data.value('(/event/@package)[1]', 'varchar(max)') AS Package,
+       xml_data.value('(/event/@timestamp)[1]', 'datetime') AS 'Time',
+       xml_data.value('(/event/data[@name=''component_type'']/value)[1]', 'sysname') AS SYSNAME,
+       xml_data.value('(/event/data[@name=''component_name'']/value)[1]', 'sysname') AS Component,
+       xml_data.value('(/event/data[@name=''state'']/value)[1]', 'int') AS STATE,
+       xml_data.value('(/event/data[@name=''state_desc'']/value)[1]', 'sysname') AS State_desc,
+       xml_data.query('(/event/data[@name="data"]/value/*)') AS Data
+FROM (SELECT object_name AS event,
+             CONVERT (XML, event_data) AS xml_data
+      FROM sys.fn_xe_file_target_read_file('C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Log\*.xel', NULL, NULL, NULL)) AS XEventData
 ORDER BY TIME;
 ```
 
@@ -146,7 +144,8 @@ ORDER BY TIME;
 The following example captures the output of `sp_server_diagnostics` to a table in a non-repeat mode:
 
 ```sql
-CREATE TABLE SpServerDiagnosticsResult (
+CREATE TABLE SpServerDiagnosticsResult
+(
     create_time DATETIME,
     component_type SYSNAME,
     component_name SYSNAME,
@@ -156,15 +155,15 @@ CREATE TABLE SpServerDiagnosticsResult (
 );
 
 INSERT INTO SpServerDiagnosticsResult
-EXEC sp_server_diagnostics;
+EXECUTE sp_server_diagnostics;
 ```
 
 The following query reads the summary output from the example table:
 
 ```sql
 SELECT create_time,
-    component_name,
-    state_desc
+       component_name,
+       state_desc
 FROM SpServerDiagnosticsResult;
 ```
 
@@ -176,14 +175,14 @@ The following example queries read some of the detailed output from each compone
 
 ```sql
 SELECT data.value('(/system/@systemCpuUtilization)[1]', 'bigint') AS 'System_CPU',
-    data.value('(/system/@sqlCpuUtilization)[1]', 'bigint') AS 'SQL_CPU',
-    data.value('(/system/@nonYieldingTasksReported)[1]', 'bigint') AS 'NonYielding_Tasks',
-    data.value('(/system/@pageFaults)[1]', 'bigint') AS 'Page_Faults',
-    data.value('(/system/@latchWarnings)[1]', 'bigint') AS 'Latch_Warnings',
-    data.value('(/system/@BadPagesDetected)[1]', 'bigint') AS 'BadPages_Detected',
-    data.value('(/system/@BadPagesFixed)[1]', 'bigint') AS 'BadPages_Fixed'
+       data.value('(/system/@sqlCpuUtilization)[1]', 'bigint') AS 'SQL_CPU',
+       data.value('(/system/@nonYieldingTasksReported)[1]', 'bigint') AS 'NonYielding_Tasks',
+       data.value('(/system/@pageFaults)[1]', 'bigint') AS 'Page_Faults',
+       data.value('(/system/@latchWarnings)[1]', 'bigint') AS 'Latch_Warnings',
+       data.value('(/system/@BadPagesDetected)[1]', 'bigint') AS 'BadPages_Detected',
+       data.value('(/system/@BadPagesFixed)[1]', 'bigint') AS 'BadPages_Fixed'
 FROM SpServerDiagnosticsResult
-WHERE component_name LIKE 'system'
+WHERE component_name LIKE 'system';
 GO
 ```
 
@@ -191,14 +190,14 @@ GO
 
 ```sql
 SELECT data.value('(./Record/ResourceMonitor/Notification)[1]', 'VARCHAR(max)') AS [Notification],
-    data.value('(/resource/memoryReport/entry[@description=''Working Set'']/@value)[1]', 'bigint') / 1024 AS [SQL_Mem_in_use_MB],
-    data.value('(/resource/memoryReport/entry[@description=''Available Paging File'']/@value)[1]', 'bigint') / 1024 AS [Avail_Pagefile_MB],
-    data.value('(/resource/memoryReport/entry[@description=''Available Physical Memory'']/@value)[1]', 'bigint') / 1024 AS [Avail_Physical_Mem_MB],
-    data.value('(/resource/memoryReport/entry[@description=''Available Virtual Memory'']/@value)[1]', 'bigint') / 1024 AS [Avail_VAS_MB],
-    data.value('(/resource/@lastNotification)[1]', 'varchar(100)') AS 'LastNotification',
-    data.value('(/resource/@outOfMemoryExceptions)[1]', 'bigint') AS 'OOM_Exceptions'
+       data.value('(/resource/memoryReport/entry[@description=''Working Set'']/@value)[1]', 'bigint') / 1024 AS [SQL_Mem_in_use_MB],
+       data.value('(/resource/memoryReport/entry[@description=''Available Paging File'']/@value)[1]', 'bigint') / 1024 AS [Avail_Pagefile_MB],
+       data.value('(/resource/memoryReport/entry[@description=''Available Physical Memory'']/@value)[1]', 'bigint') / 1024 AS [Avail_Physical_Mem_MB],
+       data.value('(/resource/memoryReport/entry[@description=''Available Virtual Memory'']/@value)[1]', 'bigint') / 1024 AS [Avail_VAS_MB],
+       data.value('(/resource/@lastNotification)[1]', 'varchar(100)') AS 'LastNotification',
+       data.value('(/resource/@outOfMemoryExceptions)[1]', 'bigint') AS 'OOM_Exceptions'
 FROM SpServerDiagnosticsResult
-WHERE component_name LIKE 'resource'
+WHERE component_name LIKE 'resource';
 GO
 ```
 
@@ -206,12 +205,12 @@ GO
 
 ```sql
 SELECT waits.evt.value('(@waitType)', 'varchar(100)') AS 'Wait_Type',
-    waits.evt.value('(@waits)', 'bigint') AS 'Waits',
-    waits.evt.value('(@averageWaitTime)', 'bigint') AS 'Avg_Wait_Time',
-    waits.evt.value('(@maxWaitTime)', 'bigint') AS 'Max_Wait_Time'
+       waits.evt.value('(@waits)', 'bigint') AS 'Waits',
+       waits.evt.value('(@averageWaitTime)', 'bigint') AS 'Avg_Wait_Time',
+       waits.evt.value('(@maxWaitTime)', 'bigint') AS 'Max_Wait_Time'
 FROM SpServerDiagnosticsResult
 CROSS APPLY data.nodes('/queryProcessing/topWaits/nonPreemptive/byDuration/wait') AS waits(evt)
-WHERE component_name LIKE 'query_processing'
+WHERE component_name LIKE 'query_processing';
 GO
 ```
 
@@ -219,12 +218,12 @@ GO
 
 ```sql
 SELECT waits.evt.value('(@waitType)', 'varchar(100)') AS 'Wait_Type',
-    waits.evt.value('(@waits)', 'bigint') AS 'Waits',
-    waits.evt.value('(@averageWaitTime)', 'bigint') AS 'Avg_Wait_Time',
-    waits.evt.value('(@maxWaitTime)', 'bigint') AS 'Max_Wait_Time'
+       waits.evt.value('(@waits)', 'bigint') AS 'Waits',
+       waits.evt.value('(@averageWaitTime)', 'bigint') AS 'Avg_Wait_Time',
+       waits.evt.value('(@maxWaitTime)', 'bigint') AS 'Max_Wait_Time'
 FROM SpServerDiagnosticsResult
 CROSS APPLY data.nodes('/queryProcessing/topWaits/preemptive/byDuration/wait') AS waits(evt)
-WHERE component_name LIKE 'query_processing'
+WHERE component_name LIKE 'query_processing';
 GO
 ```
 
@@ -232,12 +231,12 @@ GO
 
 ```sql
 SELECT cpureq.evt.value('(@sessionId)', 'bigint') AS 'SessionID',
-    cpureq.evt.value('(@command)', 'varchar(100)') AS 'Command',
-    cpureq.evt.value('(@cpuUtilization)', 'bigint') AS 'CPU_Utilization',
-    cpureq.evt.value('(@cpuTimeMs)', 'bigint') AS 'CPU_Time_ms'
+       cpureq.evt.value('(@command)', 'varchar(100)') AS 'Command',
+       cpureq.evt.value('(@cpuUtilization)', 'bigint') AS 'CPU_Utilization',
+       cpureq.evt.value('(@cpuTimeMs)', 'bigint') AS 'CPU_Time_ms'
 FROM SpServerDiagnosticsResult
 CROSS APPLY data.nodes('/queryProcessing/cpuIntensiveRequests/request') AS cpureq(evt)
-WHERE component_name LIKE 'query_processing'
+WHERE component_name LIKE 'query_processing';
 GO
 ```
 
@@ -247,7 +246,7 @@ GO
 SELECT blk.evt.query('.') AS 'Blocked_Process_Report_XML'
 FROM SpServerDiagnosticsResult
 CROSS APPLY data.nodes('/queryProcessing/blockingTasks/blocked-process-report') AS blk(evt)
-WHERE component_name LIKE 'query_processing'
+WHERE component_name LIKE 'query_processing';
 GO
 ```
 
@@ -255,9 +254,9 @@ GO
 
 ```sql
 SELECT data.value('(/ioSubsystem/@ioLatchTimeouts)[1]', 'bigint') AS 'Latch_Timeouts',
-    data.value('(/ioSubsystem/@totalLongIos)[1]', 'bigint') AS 'Total_Long_IOs'
+       data.value('(/ioSubsystem/@totalLongIos)[1]', 'bigint') AS 'Total_Long_IOs'
 FROM SpServerDiagnosticsResult
-WHERE component_name LIKE 'io_subsystem'
+WHERE component_name LIKE 'io_subsystem';
 GO
 ```
 
@@ -265,12 +264,12 @@ GO
 
 ```sql
 SELECT xevts.evt.value('(@name)', 'varchar(100)') AS 'xEvent_Name',
-    xevts.evt.value('(@package)', 'varchar(100)') AS 'Package',
-    xevts.evt.value('(@timestamp)', 'datetime') AS 'xEvent_Time',
-    xevts.evt.query('.') AS 'Event Data'
+       xevts.evt.value('(@package)', 'varchar(100)') AS 'Package',
+       xevts.evt.value('(@timestamp)', 'datetime') AS 'xEvent_Time',
+       xevts.evt.query('.') AS 'Event Data'
 FROM SpServerDiagnosticsResult
 CROSS APPLY data.nodes('/events/session/RingBufferTarget/event') AS xevts(evt)
-WHERE component_name LIKE 'events'
+WHERE component_name LIKE 'events';
 GO
 ```
 

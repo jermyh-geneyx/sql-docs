@@ -4,7 +4,7 @@ description: jobs.sp_purge_jobhistory removes the history records for a job crea
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: azure-sql-database
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -74,7 +74,7 @@ Connect to the `job_database` and run the following command:
 --Connect to the job database specified when creating the job agent
 
 -- Delete history of a specific job's executions older than the specified date
-EXEC jobs.sp_purge_jobhistory
+EXECUTE jobs.sp_purge_jobhistory
     @job_name = 'ResultPoolsJob',
     @oldest_date = '2016-07-01 00:00:00';
 GO
@@ -90,7 +90,7 @@ Connect to the `job_database` and run the following command:
 --Connect to the job database specified when creating the job agent
 
 --Delete a job and all its history
-EXEC jobs.sp_delete_job @job_name = 'ResultsPoolsJob';
+EXECUTE jobs.sp_delete_job @job_name = 'ResultsPoolsJob';
 ```
 
 ## Related content

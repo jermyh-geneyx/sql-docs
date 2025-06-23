@@ -4,7 +4,7 @@ description: sp_revokelogin Removes the login entries from SQL Server for a Wind
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -51,7 +51,7 @@ The name of the Windows user or group. *@loginame* is **sysname**, with no defau
 For example, if Windows user `ADVWORKS\john` is a member of the Windows group `ADVWORKS\Admins`, and `sp_revokelogin` revokes the access of `ADVWORKS\john`:
 
 ```sql
-EXEC sp_revokelogin [ADVWORKS\john]
+EXECUTE sp_revokelogin [ADVWORKS\john];
 ```
 
 User `ADVWORKS\john` can still connect if `ADVWORKS\Admins` is granted access to an instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. Similarly, if Windows group `ADVWORKS\Admins` has its access revoked but `ADVWORKS\john` is granted access, `ADVWORKS\john` can still connect.
@@ -69,13 +69,13 @@ Requires `ALTER ANY LOGIN` permission on the server.
 The following example removes the login entries for the Windows user `Corporate\MollyA`.
 
 ```sql
-EXEC sp_revokelogin 'Corporate\MollyA';
+EXECUTE sp_revokelogin 'Corporate\MollyA';
 ```
 
 Or
 
 ```sql
-EXEC sp_revokelogin [Corporate\MollyA];
+EXECUTE sp_revokelogin [Corporate\MollyA];
 ```
 
 ## Related content

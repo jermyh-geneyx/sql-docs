@@ -4,7 +4,7 @@ description: sp_scriptdynamicupdproc generates the CREATE PROCEDURE statement th
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 04/08/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"
@@ -56,89 +56,84 @@ This example creates an article (with *@artid* set to `1`) on the `authors` tabl
 Generate the custom stored procedures to be executed by the Distribution Agent at the Subscriber by running the following stored procedure at the Publisher:
 
 ```sql
-EXEC sp_scriptdynamicupdproc @artid = '1';
+EXECUTE sp_scriptdynamicupdproc @artid = '1';
 ```
 
 The statement returns:
 
 ```sql
-CREATE PROCEDURE [sp_mupd_authors] @c1 VARCHAR(11),
-    @c2 VARCHAR(40),
-    @c3 VARCHAR(20),
-    @c4 CHAR(12),
-    @c5 VARCHAR(40),
-    @c6 VARCHAR(20),
-    @c7 CHAR(2),
-    @c8 CHAR(5),
+CREATE PROCEDURE [sp_mupd_authors] (@c1 VARCHAR (11),
+    @c2 VARCHAR (40),
+    @c3 VARCHAR (20),
+    @c4 CHAR (12),
+    @c5 VARCHAR (40),
+    @c6 VARCHAR (20),
+    @c7 CHAR (2),
+    @c8 CHAR (5),
     @c9 BIT,
-    @pkc1 VARCHAR(11),
-    @bitmap BINARY (2)
+    @pkc1 VARCHAR (11),
+    @bitmap BINARY (2))
 AS
-DECLARE @stmt NVARCHAR(4000),
-    @spacer NVARCHAR(1);
-
+DECLARE @stmt AS NVARCHAR (4000), @spacer AS NVARCHAR (1);
 SELECT @spacer = N'';
-
 SELECT @stmt = N'UPDATE [authors] SET ';
 
 IF SUBSTRING(@bitmap, 1, 1) & 2 = 2
 BEGIN
-    SELECT @stmt = @stmt + @spacer + N'[au_lname]' + N'=@2'
-    SELECT @spacer = N','
-END;
-
+    SELECT @stmt = @stmt + @spacer + N'[au_lname]' + N'=@2';
+    SELECT @spacer = N',';
+END
 IF SUBSTRING(@bitmap, 1, 1) & 4 = 4
 BEGIN
-    SELECT @stmt = @stmt + @spacer + N'[au_fname]' + N'=@3'
-    SELECT @spacer = N','
-END;
+    SELECT @stmt = @stmt + @spacer + N'[au_fname]' + N'=@3';
+    SELECT @spacer = N',';
+END
 
 IF SUBSTRING(@bitmap, 1, 1) & 8 = 8
 BEGIN
-    SELECT @stmt = @stmt + @spacer + N'[phone]' + N'=@4'
-    SELECT @spacer = N','
-END;
+    SELECT @stmt = @stmt + @spacer + N'[phone]' + N'=@4';
+    SELECT @spacer = N',';
+END
 
 IF SUBSTRING(@bitmap, 1, 1) & 16 = 16
 BEGIN
-    SELECT @stmt = @stmt + @spacer + N'[address]' + N'=@5'
-    SELECT @spacer = N','
-END;
+    SELECT @stmt = @stmt + @spacer + N'[address]' + N'=@5';
+    SELECT @spacer = N',';
+END
 
 IF SUBSTRING(@bitmap, 1, 1) & 32 = 32
 BEGIN
-    SELECT @stmt = @stmt + @spacer + N'[city]' + N'=@6'
-    SELECT @spacer = N','
-END;
+    SELECT @stmt = @stmt + @spacer + N'[city]' + N'=@6';
+    SELECT @spacer = N',';
+END
 
 IF SUBSTRING(@bitmap, 1, 1) & 64 = 64
 BEGIN
-    SELECT @stmt = @stmt + @spacer + N'[state]' + N'=@7'
-    SELECT @spacer = N','
-END;
+    SELECT @stmt = @stmt + @spacer + N'[state]' + N'=@7';
+    SELECT @spacer = N',';
+END
 
 IF SUBSTRING(@bitmap, 1, 1) & 128 = 128
 BEGIN
-    SELECT @stmt = @stmt + @spacer + N'[zip]' + N'=@8'
-    SELECT @spacer = N','
-END;
+    SELECT @stmt = @stmt + @spacer + N'[zip]' + N'=@8';
+    SELECT @spacer = N',';
+END
 
 IF SUBSTRING(@bitmap, 2, 1) & 1 = 1
 BEGIN
-    SELECT @stmt = @stmt + @spacer + N'[contract]' + N'=@9'
-    SELECT @spacer = N','
-END;
+    SELECT @stmt = @stmt + @spacer + N'[contract]' + N'=@9';
+    SELECT @spacer = N',';
+END
 
-SELECT @stmt = @stmt + N' where [au_id] = @1'
+SELECT @stmt = @stmt + N' where [au_id] = @1';
 
-EXEC sp_executesql @stmt,
-    N' @1 varchar(11),@2 varchar(40),@3 varchar(20),@4 char(12),@5 varchar(40),
-    @6 varchar(20),@7 char(2),@8 char(5),@9 bit',
-    @pkc1, @c2, @c3, @c4, @c5, @c6, @c7, @c8, @c9;
+EXECUTE sp_executesql @stmt, N'
+    @1 varchar(11), @2 varchar(40), @3 varchar(20), @4 char(12), @5 varchar(40),
+    @6 varchar(20), @7 char(2), @8 char(5), @9 bit', @pkc1, @c2, @c3, @c4, @c5, @c6, @c7, @c8, @c9;
 
 IF @@rowcount = 0
     IF @@microsoftversion > 0x07320000
-        EXEC sp_MSreplraiserror 20598;
+        EXECUTE sp_MSreplraiserror 20598;
 ```
 
 After running this stored procedure, you can use the resulting script to create the stored procedure manually at the Subscribers.

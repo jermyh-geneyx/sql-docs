@@ -4,7 +4,7 @@ description: Returns detailed, article-level information about a specific replic
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 11/23/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"
@@ -71,4 +71,4 @@ Only members of the **db_owner** or **replmonitor** fixed database role on the d
 
 ## Related content
 
-- [Programmatically Monitor Replication](../replication/monitor/programmatically-monitor-replication.md)
+- [Programmatically monitor replication](../replication/monitor/programmatically-monitor-replication.md)

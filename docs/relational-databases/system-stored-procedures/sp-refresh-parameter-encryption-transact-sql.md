@@ -4,7 +4,7 @@ description: sp_refresh_parameter_encryption updates the Always Encrypted metada
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: conceptual
@@ -83,27 +83,30 @@ The following example creates a table and a procedure referencing the table, con
 First create the initial table and a stored procedure referencing the table.
 
 ```sql
-CREATE TABLE [Patients] (
-    [PatientID] INT IDENTITY(1, 1) NOT NULL,
-    [SSN] CHAR(11),
-    [FirstName] NVARCHAR(50) NULL,
-    [LastName] NVARCHAR(50) NOT NULL,
-    [MiddleName] NVARCHAR(50) NULL,
-    [StreetAddress] NVARCHAR(50) NOT NULL,
-    [City] NVARCHAR(50) NOT NULL,
-    [ZipCode] CHAR(5) NOT NULL,
-    [State] CHAR(2) NOT NULL,
+CREATE TABLE [Patients]
+(
+    [PatientID] INT IDENTITY (1, 1) NOT NULL,
+    [SSN] CHAR (11),
+    [FirstName] NVARCHAR (50) NULL,
+    [LastName] NVARCHAR (50) NOT NULL,
+    [MiddleName] NVARCHAR (50) NULL,
+    [StreetAddress] NVARCHAR (50) NOT NULL,
+    [City] NVARCHAR (50) NOT NULL,
+    [ZipCode] CHAR (5) NOT NULL,
+    [State] CHAR (2) NOT NULL,
     [BirthDate] DATE NOT NULL,
     CONSTRAINT [PK_Patients] PRIMARY KEY CLUSTERED ([PatientID] ASC)
 );
 GO
 
-CREATE PROCEDURE [find_patient] @SSN CHAR(11)
+CREATE PROCEDURE [find_patient]
+@SSN CHAR (11)
 AS
 BEGIN
-    SELECT * FROM [Patients]
-    WHERE SSN = @SSN
-END;
+    SELECT *
+    FROM [Patients]
+    WHERE SSN = @SSN;
+END
 GO
 ```
 
@@ -130,20 +133,18 @@ GO
 Finally, replace the SSN column with the encrypted column, and run the `sp_refresh_parameter_encryption` procedure to update the Always Encrypted components.
 
 ```sql
-ALTER TABLE [Patients]
-DROP COLUMN [SSN];
+ALTER TABLE [Patients] DROP COLUMN [SSN];
 GO
 
 ALTER TABLE [Patients]
-ADD [SSN] CHAR(11) COLLATE Latin1_General_BIN2 ENCRYPTED
-WITH (
-    COLUMN_ENCRYPTION_KEY = [CEK1],
-    ENCRYPTION_TYPE = Deterministic,
-    ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
-) NOT NULL;
+    ADD [SSN] CHAR (11) COLLATE Latin1_General_BIN2  ENCRYPTED WITH (
+             COLUMN_ENCRYPTION_KEY = [CEK1],
+             ENCRYPTION_TYPE = DETERMINISTIC,
+             ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
+            ) NOT NULL;
 GO
 
-EXEC sp_refresh_parameter_encryption [find_patient];
+EXECUTE sp_refresh_parameter_encryption [find_patient];
 GO
 ```
 

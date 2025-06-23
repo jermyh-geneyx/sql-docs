@@ -4,7 +4,7 @@ description: sp_purge_jobhistory removes the history records for a job in the SQ
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -85,8 +85,7 @@ The following example removes the history for a job named `NightlyBackups`.
 USE msdb;
 GO
 
-EXEC dbo.sp_purge_jobhistory
-    @job_name = N'NightlyBackups';
+EXECUTE dbo.sp_purge_jobhistory @job_name = N'NightlyBackups';
 GO
 ```
 
@@ -100,7 +99,7 @@ The following example executes the procedure with no parameters to remove all hi
 USE msdb;
 GO
 
-EXEC dbo.sp_purge_jobhistory;
+EXECUTE dbo.sp_purge_jobhistory;
 GO
 ```
 

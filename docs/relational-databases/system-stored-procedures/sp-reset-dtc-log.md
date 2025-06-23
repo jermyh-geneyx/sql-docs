@@ -4,7 +4,7 @@ description: "sp_reset_dtc_log (Transact-SQL)"
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -44,7 +44,7 @@ Requires **sysadmin** or have CONTROL SERVER permissions.
 ## Examples
 
 ```sql
-EXEC sp_reset_dtc_log;
+EXECUTE sp_reset_dtc_log;
 ```
 
 ## Related content

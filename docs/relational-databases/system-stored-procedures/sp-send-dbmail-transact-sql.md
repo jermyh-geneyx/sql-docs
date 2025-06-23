@@ -4,7 +4,7 @@ description: "Sends an e-mail message to the specified recipients."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 02/27/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -247,9 +247,7 @@ EXECUTE msdb.dbo.sp_send_dbmail
     @recipients = 'yourfriend@adventure-works.com',
     @query = 'SELECT COUNT(*) FROM AdventureWorks2022.Production.WorkOrder
                   WHERE DueDate > ''2022-04-30''
-                  AND  DATEDIFF(dd, ''2022-04-30'', DueDate) < 2',
-    @subject = 'Work Order Count',
-    @attach_query_result_as_file = 1;
+                  AND DATEDIFF(dd, ''2022-04-30'', DueDate) < 2', @subject = 'Work Order Count', @attach_query_result_as_file = 1;
 ```
 
 ### C. Send an HTML e-mail message
@@ -282,7 +280,8 @@ SET @tableHTML = N'<H1>Work Order Report</H1>' + N'<table border="1">'
             ) AS NVARCHAR(MAX))
     + N'</table>';
 
-EXEC msdb.dbo.sp_send_dbmail @recipients = 'yourfriend@adventure-works.com',
+EXECUTE msdb.dbo.sp_send_dbmail
+    @recipients = 'yourfriend@adventure-works.com',
     @subject = 'Work Order List',
     @body = @tableHTML,
     @body_format = 'HTML';

@@ -4,7 +4,7 @@ description: "Causes stored procedures, triggers, and user-defined functions to 
 author: markingmyname
 ms.author: maghan
 ms.reviewer: wiassaf, randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -72,7 +72,8 @@ The following example causes stored procedures, triggers, and user-defined funct
 ```sql
 USE AdventureWorks2022;
 GO
-EXEC sp_recompile N'Sales.Customer';
+
+EXECUTE sp_recompile N'Sales.Customer';
 GO
 ```
 

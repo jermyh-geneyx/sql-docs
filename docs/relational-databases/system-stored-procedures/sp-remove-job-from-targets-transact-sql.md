@@ -4,7 +4,7 @@ description: sp_remove_job_from_targets removes the specified job from the given
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -73,7 +73,7 @@ The following example removes the previously created `Weekly Sales Backups` job 
 USE msdb;
 GO
 
-EXEC dbo.sp_remove_job_from_targets
+EXECUTE dbo.sp_remove_job_from_targets
     @job_name = N'Weekly Sales Backups',
     @target_server_groups = N'Servers Processing Customer Orders',
     @target_servers = N'SEATTLE2,SEATTLE1';

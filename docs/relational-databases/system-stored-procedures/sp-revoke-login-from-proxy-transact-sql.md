@@ -4,7 +4,7 @@ description: sp_revoke_login_from_proxy removes access to a proxy for a security
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -72,7 +72,7 @@ The following example revokes access for the login `terrid` to access the proxy 
 USE msdb;
 GO
 
-EXEC dbo.sp_revoke_login_from_proxy
+EXECUTE dbo.sp_revoke_login_from_proxy
     @name = N'terrid',
     @proxy_name = N'Catalog application proxy';
 GO

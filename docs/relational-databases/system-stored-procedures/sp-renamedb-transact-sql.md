@@ -4,7 +4,7 @@ description: sp_renamedb changes the name of a database.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -69,12 +69,12 @@ GO
 CREATE DATABASE Accounting;
 GO
 
-EXEC sp_renamedb N'Accounting', N'Financial';
+EXECUTE sp_renamedb N'Accounting', N'Financial';
 GO
 
 SELECT name,
-    database_id,
-    create_date
+       database_id,
+       create_date
 FROM sys.databases
 WHERE name = N'Financial';
 GO

@@ -1,10 +1,10 @@
 ---
-title: sp_refreshsqlmodule (Transact-SQL)
+title: "sp_refreshsqlmodule (Transact-SQL)"
 description: sp_refreshsqlmodule updates the metadata for the specified non-schema-bound object.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -85,24 +85,27 @@ In the first step, create an alias type.
 USE AdventureWorks2022;
 GO
 
-IF EXISTS (SELECT 'mytype' FROM sys.types WHERE name = 'mytype')
-DROP TYPE mytype;
+IF EXISTS (SELECT 'mytype'
+           FROM sys.types
+           WHERE name = 'mytype')
+    DROP TYPE mytype;
 GO
 
-CREATE TYPE mytype FROM NVARCHAR(5);
+CREATE TYPE mytype
+    FROM NVARCHAR (5);
 GO
 
 IF OBJECT_ID('dbo.to_upper', 'FN') IS NOT NULL
-DROP FUNCTION dbo.to_upper;
+    DROP FUNCTION dbo.to_upper;
 GO
 
 CREATE FUNCTION dbo.to_upper (@a mytype)
 RETURNS mytype
-    WITH ENCRYPTION
+WITH ENCRYPTION
 AS
 BEGIN
     RETURN UPPER(@a);
-END;
+END
 GO
 
 SELECT dbo.to_upper('abcde');
@@ -112,17 +115,19 @@ GO
 Next, increase the length of the alias type.
 
 ```sql
-sp_rename 'mytype', 'myoldtype', 'userdatatype';
+EXECUTE sp_rename 'mytype', 'myoldtype', 'userdatatype';
 GO
 
-CREATE TYPE mytype FROM NVARCHAR(10);
+CREATE TYPE mytype
+    FROM NVARCHAR (10);
 GO
 ```
 
 The function parameter still uses the old type, and fails because of truncation.
 
 ```sql
-SELECT name, TYPE_NAME(user_type_id)
+SELECT name,
+       TYPE_NAME(user_type_id)
 FROM sys.parameters
 WHERE object_id = OBJECT_ID('dbo.to_upper');
 GO
@@ -134,13 +139,14 @@ GO
 Refresh the function to bind to the renamed type.
 
 ```sql
-EXEC sys.sp_refreshsqlmodule 'dbo.to_upper';
+EXECUTE sys.sp_refreshsqlmodule 'dbo.to_upper';
 ```
 
 The function parameters are now bound to the correct type and the statement works correctly.
 
 ```sql
-SELECT name, TYPE_NAME(user_type_id)
+SELECT name,
+       TYPE_NAME(user_type_id)
 FROM sys.parameters
 WHERE object_id = OBJECT_ID('dbo.to_upper');
 GO
@@ -157,7 +163,7 @@ The following example refreshes a database-level DDL trigger.
 USE AdventureWorks2022;
 GO
 
-EXEC sys.sp_refreshsqlmodule
+EXECUTE sys.sp_refreshsqlmodule
     @name = 'ddlDatabaseTriggerLog',
     @namespace = 'DATABASE_DDL_TRIGGER';
 GO
@@ -171,7 +177,7 @@ The following example refreshes a server-level DDL trigger.
 USE master;
 GO
 
-EXEC sys.sp_refreshsqlmodule
+EXECUTE sys.sp_refreshsqlmodule
     @name = 'ddl_trig_database',
     @namespace = 'SERVER_DDL_TRIGGER';
 GO
