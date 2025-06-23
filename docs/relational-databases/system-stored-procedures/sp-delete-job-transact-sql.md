@@ -4,7 +4,7 @@ description: "sp_delete_job (Transact-SQL) deletes an existing job from the SQL 
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -113,8 +113,7 @@ The following example deletes the job `NightlyBackups`.
 USE msdb;
 GO
 
-EXEC sp_delete_job
-    @job_name = N'NightlyBackups';
+EXECUTE sp_delete_job @job_name = N'NightlyBackups';
 GO
 ```
 

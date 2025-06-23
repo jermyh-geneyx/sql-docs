@@ -4,7 +4,7 @@ description: Removes a remote login mapped to a local login used to execute remo
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 11/28/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -76,7 +76,7 @@ Requires membership in the **sysadmin** or **securityadmin** fixed server roles.
 The following example removes the entry for the remote server `ACCOUNTS`, and, therefore, removes all mappings between logins on the local server and remote logins on the remote server.
 
 ```sql
-EXEC sp_dropremotelogin 'ACCOUNTS';
+EXECUTE sp_dropremotelogin 'ACCOUNTS';
 ```
 
 ### B. Drop a login mapping
@@ -84,7 +84,7 @@ EXEC sp_dropremotelogin 'ACCOUNTS';
 The following example removes the entry for mapping remote logins from the remote server `ACCOUNTS` to the local login `Albert`.
 
 ```sql
-EXEC sp_dropremotelogin 'ACCOUNTS', 'Albert';
+EXECUTE sp_dropremotelogin 'ACCOUNTS', 'Albert';
 ```
 
 ### C. Drop a remote user
@@ -92,7 +92,7 @@ EXEC sp_dropremotelogin 'ACCOUNTS', 'Albert';
 The following example removes the login for the remote login `Chris` on the remote server `ACCOUNTS` that was mapped to the local login `salesmgr`.
 
 ```sql
-EXEC sp_dropremotelogin 'ACCOUNTS', 'salesmgr', 'Chris';
+EXECUTE sp_dropremotelogin 'ACCOUNTS', 'salesmgr', 'Chris';
 ```
 
 ## Related content

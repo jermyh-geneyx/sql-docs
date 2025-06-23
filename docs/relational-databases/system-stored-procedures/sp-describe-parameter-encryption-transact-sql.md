@@ -4,7 +4,7 @@ description: sp_describe_parameter_encryption analyzes the specified Transact-SQ
 author: jaszymas
 ms.author: jaszymas
 ms.reviewer: vanto, randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -121,7 +121,7 @@ CREATE TABLE t1 (
         ) NULL,
 );
 
-EXEC sp_describe_parameter_encryption
+EXECUTE sp_describe_parameter_encryption
     N'INSERT INTO t1 VALUES(@c1)',
     N'@c1 INT';
 ```

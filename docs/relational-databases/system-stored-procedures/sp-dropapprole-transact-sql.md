@@ -4,7 +4,7 @@ description: sp_dropapprole removes an application role from the current databas
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 11/28/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -59,7 +59,7 @@ Requires `ALTER ANY APPLICATION ROLE` permission on the database.
 The following example removes the `SalesApp` application role from the current database.
 
 ```sql
-EXEC sp_dropapprole 'SalesApp';
+EXECUTE sp_dropapprole 'SalesApp';
 ```
 
 ## Related content

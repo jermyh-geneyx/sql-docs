@@ -4,7 +4,7 @@ description: sp_delete_proxy removes the specified proxy.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 01/23/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -70,8 +70,8 @@ The following example deletes the proxy `Catalog application proxy`.
 USE msdb;
 GO
 
-EXEC dbo.sp_delete_proxy
-    @proxy_name = N'Catalog application proxy' ;
+EXECUTE dbo.sp_delete_proxy
+    @proxy_name = N'Catalog application proxy';
 GO
 ```
 

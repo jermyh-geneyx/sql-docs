@@ -4,7 +4,7 @@ description: sp_delete_jobserver removes the specified target server.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 01/23/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -73,7 +73,7 @@ The following example removes the server `SEATTLE2` from processing the `Weekly 
 USE msdb;
 GO
 
-EXEC sp_delete_jobserver
+EXECUTE sp_delete_jobserver
     @job_name = N'Weekly Sales Backups',
     @server_name = N'SEATTLE2';
 GO

@@ -3,7 +3,8 @@ title: "jobs.sp_delete_target_group (Azure Elastic Jobs) (Transact-SQL)"
 description: "jobs.sp_delete_target_group removes a target group in the Azure Elastic Jobs service for Azure SQL Database."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.date: 10/30/2023
+ms.reviewer: randolphwest
+ms.date: 06/23/2025
 ms.service: azure-sql-database
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -59,8 +60,7 @@ The following example removes a target group named `ServerGroup1`.
 
 ```sql
 -- Remove a target group member of type server
-EXEC jobs.sp_delete_target_group
-@target_group_name = N'ServerGroup1';
+EXECUTE jobs.sp_delete_target_group @target_group_name = N'ServerGroup1';
 ```
 
 ## Related content

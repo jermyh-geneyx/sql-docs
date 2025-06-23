@@ -4,7 +4,7 @@ description: Removes a target server from a target server group.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 01/23/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -63,7 +63,7 @@ The following example removes the server `LONDON1` from the `Servers Maintaining
 USE msdb;
 GO
 
-EXEC sp_delete_targetsvrgrp_member
+EXECUTE sp_delete_targetsvrgrp_member
     @group_name = N'Servers Maintaining Customer Information',
     @server_name = N'LONDON1';
 GO

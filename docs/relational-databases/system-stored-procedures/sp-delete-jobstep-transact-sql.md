@@ -4,7 +4,7 @@ description: Removes a job step from a job in the SQL Server Agent service.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -96,7 +96,7 @@ The following example removes job step `1` from the job `Weekly Sales Data Backu
 USE msdb;
 GO
 
-EXEC dbo.sp_delete_jobstep
+EXECUTE dbo.sp_delete_jobstep
     @job_name = N'Weekly Sales Data Backup',
     @step_id = 1;
 GO

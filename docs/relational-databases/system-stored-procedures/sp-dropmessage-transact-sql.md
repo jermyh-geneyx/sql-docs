@@ -4,7 +4,7 @@ description: Drops a specified user-defined error message from an instance of th
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 11/28/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -68,7 +68,8 @@ The following example drops a user-defined message, number `50001`, from `sys.me
 ```sql
 USE master;
 GO
-EXEC sp_dropmessage 50001;
+
+EXECUTE sp_dropmessage 50001;
 ```
 
 ### B. Drop a user-defined message that includes a localized version
@@ -80,14 +81,14 @@ USE master;
 GO
 
 -- Create a user-defined message in U.S. English
-EXEC sp_addmessage
+EXECUTE sp_addmessage
     @msgnum = 60000,
     @severity = 16,
     @msgtext = N'The item named %s already exists in %s.',
     @lang = 'us_english';
 
 -- Create a localized version of the same message.
-EXEC sp_addmessage
+EXECUTE sp_addmessage
     @msgnum = 60000,
     @severity = 16,
     @msgtext = N'L''élément nommé %1! existe déjà dans %2!',
@@ -96,11 +97,12 @@ GO
 
 -- This statement will fail as long as the localized version
 -- of the message exists.
-EXEC sp_dropmessage 60000;
+EXECUTE sp_dropmessage 60000;
 GO
 
 -- This statement will drop the message.
-EXEC sp_dropmessage @msgnum = 60000,
+EXECUTE sp_dropmessage
+    @msgnum = 60000,
     @lang = 'all';
 GO
 ```
@@ -114,14 +116,14 @@ USE master;
 GO
 
 -- Create a user-defined message in U.S. English
-EXEC sp_addmessage
+EXECUTE sp_addmessage
     @msgnum = 60000,
     @severity = 16,
     @msgtext = N'The item named %s already exists in %s.',
     @lang = 'us_english';
 
 -- Create a localized version of the same message.
-EXEC sp_addmessage
+EXECUTE sp_addmessage
     @msgnum = 60000,
     @severity = 16,
     @msgtext = N'L''élément nommé %1! existe déjà dans %2!',
@@ -130,7 +132,7 @@ GO
 
 -- This statement will remove only the localized version of the
 -- message.
-EXEC sp_dropmessage
+EXECUTE sp_dropmessage
     @msgnum = 60000,
     @lang = 'French';
 GO

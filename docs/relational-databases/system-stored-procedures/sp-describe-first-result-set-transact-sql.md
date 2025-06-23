@@ -4,7 +4,7 @@ description: Returns the metadata for the first possible result set of the Trans
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -133,7 +133,7 @@ This guarantee presumes there are no relevant schema changes on the server. Rele
 
 - The query includes the creation of a permanent table that is then queried.
 
-If all other checks succeed, all possible control flow paths inside the input batch are considered. This takes into account all control flow statements (`GOTO`, `IF`/`ELSE`, `WHILE`, and [!INCLUDE [tsql](../../includes/tsql-md.md)] `TRY`/`CATCH` blocks) as well as any procedures, dynamic [!INCLUDE [tsql](../../includes/tsql-md.md)] batches, or triggers invoked from the input batch by an `EXEC` statement, a DDL statement that causes DDL triggers to be fired, or a DML statement that causes triggers to be fired on a target table or on a table that is modified because of cascading action on a foreign key constraint. At some point, as with many possible control paths, an algorithm stops.
+If all other checks succeed, all possible control flow paths inside the input batch are considered. This takes into account all control flow statements (`GOTO`, `IF`/`ELSE`, `WHILE`, and [!INCLUDE [tsql](../../includes/tsql-md.md)] `TRY`/`CATCH` blocks) as well as any procedures, dynamic [!INCLUDE [tsql](../../includes/tsql-md.md)] batches, or triggers invoked from the input batch by an `EXECUTE` statement, a DDL statement that causes DDL triggers to be fired, or a DML statement that causes triggers to be fired on a target table or on a table that is modified because of cascading action on a foreign key constraint. At some point, as with many possible control paths, an algorithm stops.
 
 For each control flow path, the first statement (if any) that returns a result set is determined by `sp_describe_first_result_set`.
 
@@ -169,17 +169,16 @@ Requires permission to execute the *@tsql* argument.
 The following example describes the result set returned from a single query.
 
 ```sql
-EXEC sp_describe_first_result_set @tsql = N'SELECT object_id, name, type_desc FROM sys.indexes';
+EXECUTE sp_describe_first_result_set @tsql = N'SELECT object_id, name, type_desc FROM sys.indexes';
 ```
 
 The following example shows the result set returned from a single query that contains a parameter.
 
 ```sql
-EXEC sp_describe_first_result_set @tsql = N'
+EXECUTE sp_describe_first_result_set @tsql = N'
 SELECT object_id, name, type_desc
 FROM sys.indexes
-WHERE object_id = @id1',
-@params = N'@id1 int';
+WHERE object_id = @id1', @params = N'@id1 int';
 ```
 
 #### B. Browse mode examples
@@ -189,18 +188,19 @@ The following three examples illustrate the key difference between the different
 Example using `0`, indicating no information is returned.
 
 ```sql
-CREATE TABLE dbo.t (
+CREATE TABLE dbo.t
+(
     a INT PRIMARY KEY,
     b1 INT
 );
 GO
 
 CREATE VIEW dbo.v AS
-SELECT b1 AS b2
-FROM dbo.t;
+    SELECT b1 AS b2
+    FROM dbo.t;
 GO
 
-EXEC sp_describe_first_result_set N'SELECT b2 AS b3 FROM dbo.v', NULL, 0;
+EXECUTE sp_describe_first_result_set N'SELECT b2 AS b3 FROM dbo.v', NULL, 0;
 ```
 
 Here's a partial result set.
@@ -212,7 +212,7 @@ Here's a partial result set.
 Example using 1 indicating it returns information as if it includes a FOR BROWSE option on the query.
 
 ```sql
-EXEC sp_describe_first_result_set N'SELECT b2 AS b3 FROM v', NULL, 1;
+EXECUTE sp_describe_first_result_set N'SELECT b2 AS b3 FROM v', NULL, 1;
 ```
 
 Here's a partial result set.
@@ -225,7 +225,7 @@ Here's a partial result set.
 Example using 2 indicating analyzed as if you're preparing a cursor.
 
 ```sql
-EXEC sp_describe_first_result_set N'SELECT b2 AS b3 FROM v', NULL, 2;
+EXECUTE sp_describe_first_result_set N'SELECT b2 AS b3 FROM v', NULL, 2;
 ```
 
 [!INCLUDE [ssResult](../../includes/ssresult-md.md)]
@@ -242,13 +242,14 @@ In some scenarios, you need to put the results of the `sp_describe_first_result_
 First you need to create a table that matches the output of the `sp_describe_first_result_set` procedure:
 
 ```sql
-CREATE TABLE #frs (
+CREATE TABLE #frs
+(
     is_hidden BIT NOT NULL,
     column_ordinal INT NOT NULL,
     name SYSNAME NULL,
     is_nullable BIT NOT NULL,
     system_type_id INT NOT NULL,
-    system_type_name NVARCHAR(256) NULL,
+    system_type_name NVARCHAR (256) NULL,
     max_length SMALLINT NOT NULL,
     precision TINYINT NOT NULL,
     scale TINYINT NOT NULL,
@@ -257,7 +258,7 @@ CREATE TABLE #frs (
     user_type_database SYSNAME NULL,
     user_type_schema SYSNAME NULL,
     user_type_name SYSNAME NULL,
-    assembly_qualified_type_name NVARCHAR(4000),
+    assembly_qualified_type_name NVARCHAR (4000),
     xml_collection_id INT NULL,
     xml_collection_database SYSNAME NULL,
     xml_collection_schema SYSNAME NULL,
@@ -288,12 +289,13 @@ CREATE TABLE #frs (
 When you create a table, you can store the schema of some query in that table.
 
 ```sql
-DECLARE @tsql NVARCHAR(MAX) = 'select top 0 * from sys.credentials';
+DECLARE @tsql AS NVARCHAR (MAX) = 'select top 0 * from sys.credentials';
 
 INSERT INTO #frs
-EXEC sys.sp_describe_first_result_set @tsql;
+EXECUTE sys.sp_describe_first_result_set @tsql;
 
-SELECT * FROM #frs;
+SELECT *
+FROM #frs;
 ```
 
 ### Examples of problems
@@ -301,15 +303,17 @@ SELECT * FROM #frs;
 The following examples use two tables for all examples. Execute the following statements to create the example tables.
 
 ```sql
-CREATE TABLE dbo.t1 (
+CREATE TABLE dbo.t1
+(
     a INT NULL,
-    b VARCHAR(10) NULL,
-    c NVARCHAR(10) NULL
+    b VARCHAR (10) NULL,
+    c NVARCHAR (10) NULL
 );
 
-CREATE TABLE dbo.t2 (
+CREATE TABLE dbo.t2
+(
     a SMALLINT NOT NULL,
-    d VARCHAR(20) NOT NULL,
+    d VARCHAR (20) NOT NULL,
     e INT NOT NULL
 );
 ```
@@ -319,7 +323,7 @@ CREATE TABLE dbo.t2 (
 Number of columns in possible first result sets differ in this example.
 
 ```sql
-EXEC sp_describe_first_result_set @tsql = N'
+EXECUTE sp_describe_first_result_set @tsql = N'
 IF (1 = 1)
     SELECT a FROM t1;
 ELSE
@@ -333,7 +337,7 @@ SELECT * FROM t; -- Ignored, not a possible first result set.';
 Columns types differ in different possible first result sets.
 
 ```sql
-EXEC sp_describe_first_result_set @tsql = N'
+EXECUTE sp_describe_first_result_set @tsql = N'
 IF (1 = 1)
     SELECT a FROM t1;
 ELSE
@@ -347,7 +351,7 @@ This results in an error of mismatching types (**int** vs. **smallint**).
 Columns in possible first result sets differ by length for same variable length type, nullability, and column names:
 
 ```sql
-EXEC sp_describe_first_result_set @tsql = N'
+EXECUTE sp_describe_first_result_set @tsql = N'
 IF (1 = 1)
     SELECT b FROM t1;
 ELSE
@@ -368,7 +372,7 @@ Here's a partial result set.
 Same as previous, but columns have the same name through column aliasing.
 
 ```sql
-EXEC sp_describe_first_result_set @tsql = N'
+EXECUTE sp_describe_first_result_set @tsql = N'
 IF (1 = 1)
     SELECT b FROM t1;
 ELSE
@@ -389,7 +393,7 @@ Here's a partial result set.
 The columns types differ in different possible first result sets.
 
 ```sql
-EXEC sp_describe_first_result_set @tsql = N'
+EXECUTE sp_describe_first_result_set @tsql = N'
 IF (1 = 1)
     SELECT b FROM t1;
 ELSE
@@ -403,7 +407,7 @@ This results in an error of mismatching types (**varchar(10)** vs. **nvarchar(10
 First result set is either error or result set.
 
 ```sql
-EXEC sp_describe_first_result_set @tsql = N'
+EXECUTE sp_describe_first_result_set @tsql = N'
 IF (1 = 1)
     RAISERROR(''Some Error'', 16 , 1);
 ELSE
@@ -424,7 +428,7 @@ Here's a partial result set.
 First result set is either null or a result set.
 
 ```sql
-EXEC sp_describe_first_result_set @tsql = N'
+EXECUTE sp_describe_first_result_set @tsql = N'
 IF (1 = 1)
     RETURN;
 SELECT a FROM t1;';
@@ -443,8 +447,8 @@ Here's a partial result set.
 First result set is dynamic SQL that is discoverable because it's a literal string.
 
 ```sql
-EXEC sp_describe_first_result_set @tsql = N'
-EXEC(N''SELECT a FROM t1'');';
+EXECUTE sp_describe_first_result_set @tsql = N'
+EXECUTE(N''SELECT a FROM t1'');';
 ```
 
 Here's a partial result set.
@@ -460,12 +464,12 @@ Here's a partial result set.
 First result set is undefined because of dynamic SQL.
 
 ```sql
-EXEC sp_describe_first_result_set @tsql = N'
+EXECUTE sp_describe_first_result_set @tsql = N'
 DECLARE @SQL NVARCHAR(max);
 SET @SQL = N''SELECT a FROM t1 WHERE 1 = 1'';
 IF (1 = 1)
     SET @SQL += N'' AND e > 10'';
-EXEC(@SQL);';
+EXECUTE(@SQL);';
 ```
 
 This results in an error. The result isn't discoverable because of the dynamic SQL.
@@ -475,13 +479,12 @@ This results in an error. The result isn't discoverable because of the dynamic S
 First result set is specified manually by user.
 
 ```sql
-EXEC sp_describe_first_result_set @tsql =
-N'
+EXECUTE sp_describe_first_result_set @tsql = N'
 DECLARE @SQL NVARCHAR(max);
 SET @SQL = N''SELECT a FROM t1 WHERE 1 = 1'';
 IF (1 = 1)
     SET @SQL += N'' AND e > 10'';
-EXEC(@SQL)
+EXECUTE(@SQL)
     WITH RESULT SETS (
         (Column1 BIGINT NOT NULL)
     );';
@@ -500,11 +503,10 @@ Here's a partial result set.
 This example assumes that another user named `user1` has a table named `t1` in the default schema `s1` with columns (`a int NOT NULL`).
 
 ```sql
-EXEC sp_describe_first_result_set @tsql = N'
+EXECUTE sp_describe_first_result_set @tsql = N'
     IF (@p > 0)
     EXECUTE AS USER = ''user1'';
-    SELECT * FROM t1;',
-@params = N'@p int';
+    SELECT * FROM t1;', @params = N'@p int';
 ```
 
 This code results in an `Invalid object name` error. `t1` can be either `dbo.t1` or `s1.t1`, each with a different number of columns.
@@ -514,8 +516,7 @@ This code results in an `Invalid object name` error. `t1` can be either `dbo.t1`
 Use the same assumptions as the previous example.
 
 ```sql
-EXEC sp_describe_first_result_set @tsql =
-N'
+EXECUTE sp_describe_first_result_set @tsql = N'
     IF (@p > 0)
     EXECUTE AS USER = ''user1'';
     SELECT a FROM t1;';

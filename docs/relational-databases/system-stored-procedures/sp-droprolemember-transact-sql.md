@@ -4,7 +4,7 @@ description: sp_droprolemember removes a security account from a SQL Server role
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -80,15 +80,15 @@ Requires `ALTER` permission on the role.
 The following example removes the user `JonB` from the role `Sales`.
 
 ```sql
-EXEC sp_droprolemember 'Sales', 'Jonb';
+EXECUTE sp_droprolemember 'Sales', 'Jonb';
 ```
 
-## Examples: [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] and [!INCLUDE [ssPDW](../../includes/sspdw-md.md)]
+## Examples: Azure Synapse Analytics and Analytics Platform System (PDW)
 
 The following example removes the user `JonB` from the role `Sales`.
 
 ```sql
-EXEC sp_droprolemember 'Sales', 'JonB'
+EXECUTE sp_droprolemember 'Sales', 'JonB';
 ```
 
 ## Related content

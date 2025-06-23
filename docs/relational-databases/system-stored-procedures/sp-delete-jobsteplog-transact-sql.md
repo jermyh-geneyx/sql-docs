@@ -4,7 +4,7 @@ description: Removes all SQL Server Agent job step logs that are specified with 
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 01/23/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -114,8 +114,7 @@ The following example removes all job step logs for the job `Weekly Sales Data B
 USE msdb;
 GO
 
-EXEC dbo.sp_delete_jobsteplog
-    @job_name = N'Weekly Sales Data Backup';
+EXECUTE dbo.sp_delete_jobsteplog @job_name = N'Weekly Sales Data Backup';
 GO
 ```
 
@@ -127,7 +126,7 @@ The following example removes the job step log for step 2 in the job `Weekly Sal
 USE msdb;
 GO
 
-EXEC dbo.sp_delete_jobsteplog
+EXECUTE dbo.sp_delete_jobsteplog
     @job_name = N'Weekly Sales Data Backup',
     @step_id = 2;
 GO
@@ -141,7 +140,7 @@ The following example removes all job steps logs that are older than noon Octobe
 USE msdb;
 GO
 
-EXEC dbo.sp_delete_jobsteplog
+EXECUTE dbo.sp_delete_jobsteplog
     @job_name = N'Weekly Sales Data Backup',
     @older_than = '10/25/2005 12:00:00',
     @larger_than = 104857600;

@@ -4,7 +4,7 @@ description: Returns a result set that contains metadata about undeclared parame
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -252,8 +252,7 @@ Requires permission to execute the *@tsql* argument.
 The following example returns information such as the expected data type for the undeclared `@id` and `@name` parameters.
 
 ```sql
-EXEC sp_describe_undeclared_parameters @tsql =
-N'SELECT object_id, name, type_desc
+EXECUTE sp_describe_undeclared_parameters @tsql = N'SELECT object_id, name, type_desc
 FROM sys.indexes
 WHERE object_id = @id OR name = @name';
 ```
@@ -261,11 +260,9 @@ WHERE object_id = @id OR name = @name';
 When the `@id` parameter is provided as a `@params` reference, the `@id` parameter is omitted from the result set and only the `@name` parameter is described.
 
 ```sql
-EXEC sp_describe_undeclared_parameters @tsql =
-N'SELECT object_id, name, type_desc
+EXECUTE sp_describe_undeclared_parameters @tsql = N'SELECT object_id, name, type_desc
 FROM sys.indexes
-WHERE object_id = @id OR NAME = @name',
-@params = N'@id int';
+WHERE object_id = @id OR NAME = @name', @params = N'@id int';
 ```
 
 ## Related content

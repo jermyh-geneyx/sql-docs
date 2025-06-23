@@ -4,7 +4,7 @@ description: sp_dropextendedproperty drops an existing extended property.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -100,10 +100,15 @@ Users can drop extended properties to objects they own, or on which they have `A
 The following example removes the property `caption` from column `id` in table `T1` contained in the schema `dbo`.
 
 ```sql
-CREATE TABLE T1 (id INT, name CHAR(20));
+CREATE TABLE T1
+(
+    id INT,
+    name CHAR (20)
+);
 GO
 
-EXEC sp_addextendedproperty @name = 'caption',
+EXECUTE sp_addextendedproperty
+    @name = 'caption',
     @value = 'Employee ID',
     @level0type = 'SCHEMA',
     @level0name = N'dbo',
@@ -113,7 +118,8 @@ EXEC sp_addextendedproperty @name = 'caption',
     @level2name = N'id';
 GO
 
-EXEC sp_dropextendedproperty @name = 'caption',
+EXECUTE sp_dropextendedproperty
+    @name = 'caption',
     @level0type = 'SCHEMA',
     @level0name = N'dbo',
     @level1type = 'TABLE',
@@ -134,7 +140,7 @@ The following example removes the property named `MS_Description` from the [!INC
 USE AdventureWorks2022;
 GO
 
-EXEC sp_dropextendedproperty @name = N'MS_Description';
+EXECUTE sp_dropextendedproperty @name = N'MS_Description';
 GO
 ```
 

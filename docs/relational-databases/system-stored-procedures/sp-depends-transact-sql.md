@@ -4,7 +4,7 @@ description: sp_depends displays information about database object dependencies.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -97,7 +97,8 @@ The following example lists the database objects that depend on the `Sales.Custo
 ```sql
 USE AdventureWorks2022;
 GO
-EXEC sp_depends @objname = N'Sales.Customer';
+
+EXECUTE sp_depends @objname = N'Sales.Customer';
 ```
 
 ### B. List dependencies on a trigger
@@ -105,7 +106,7 @@ EXEC sp_depends @objname = N'Sales.Customer';
 The following example lists the database objects on which the trigger `iWorkOrder` depends.
 
 ```sql
-EXEC sp_depends @objname = N'AdventureWorks2022.Production.iWorkOrder';
+EXECUTE sp_depends @objname = N'AdventureWorks2022.Production.iWorkOrder';
 ```
 
 ## Related content

@@ -4,7 +4,7 @@ description: Drops a database device or backup device from SQL Server instance, 
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 11/28/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -65,7 +65,7 @@ Requires membership in the **diskadmin** fixed server role.
 The following example drops the `tapedump1` tape dump device from the [!INCLUDE [ssDE](../../includes/ssde-md.md)].
 
 ```sql
-EXEC sp_dropdevice 'tapedump1';
+EXECUTE sp_dropdevice 'tapedump1';
 ```
 
 ## Related content

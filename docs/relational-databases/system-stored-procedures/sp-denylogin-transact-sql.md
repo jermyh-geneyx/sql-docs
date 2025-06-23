@@ -4,7 +4,7 @@ description: sp_denylogin Prevents a Windows user or Windows group from connecti
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 07/04/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -59,7 +59,7 @@ Requires membership in the **sysadmin** fixed server role, or execute permission
 The following example shows how to use `sp_denylogin` to prevent Windows user `CORPORATE\GeorgeV` from connecting to the server.
 
 ```sql
-EXEC sp_denylogin 'CORPORATE\GeorgeV';
+EXECUTE sp_denylogin 'CORPORATE\GeorgeV';
 ```
 
 ## Related content

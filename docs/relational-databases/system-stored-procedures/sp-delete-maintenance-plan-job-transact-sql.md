@@ -4,7 +4,7 @@ description: Disassociates the specified maintenance plan from the specified job
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 01/23/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -67,7 +67,7 @@ When all jobs are removed from the maintenance plan, you should run `sp_delete_m
 This example deletes the job `B8FCECB1-E22C-11D2-AA64-00C04F688EAE` from the maintenance plan.
 
 ```sql
-EXEC sp_delete_maintenance_plan_job
+EXECUTE sp_delete_maintenance_plan_job
     N'FAD6F2AB-3571-11D3-9D4A-00C04FB925FC',
     N'B8FCECB1-E22C-11D2-AA64-00C04F688EAE';
 ```

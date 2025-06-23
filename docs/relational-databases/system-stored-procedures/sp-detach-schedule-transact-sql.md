@@ -4,7 +4,7 @@ description: sp_detach_schedule removes an association between a schedule and a 
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 07/04/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -103,7 +103,7 @@ The following example removes an association between a `NightlyJobs` schedule an
 USE msdb;
 GO
 
-EXEC dbo.sp_detach_schedule
+EXECUTE dbo.sp_detach_schedule
     @job_name = 'BackupDatabase',
     @schedule_name = 'NightlyJobs';
 GO

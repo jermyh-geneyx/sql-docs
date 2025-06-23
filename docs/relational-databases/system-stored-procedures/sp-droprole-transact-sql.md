@@ -4,7 +4,7 @@ description: sp_droprole removes a database role from the current database.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 11/28/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -65,7 +65,7 @@ Requires `CONTROL` permission on the role.
 The following example removes the application role `Sales`.
 
 ```sql
-EXEC sp_droprole 'Sales';
+EXECUTE sp_droprole 'Sales';
 GO
 ```
 

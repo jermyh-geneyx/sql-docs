@@ -4,7 +4,7 @@ description: Removes the specified server from the list of available target serv
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 01/23/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -78,8 +78,7 @@ The following example removes the server `LONDON1` from the available job server
 USE msdb;
 GO
 
-EXEC dbo.sp_delete_targetserver
-    @server_name = N'LONDON1';
+EXECUTE dbo.sp_delete_targetserver @server_name = N'LONDON1';
 GO
 ```
 

@@ -3,7 +3,8 @@ title: "jobs.sp_delete_target_group_member (Azure Elastic Jobs) (Transact-SQL)"
 description: "jobs.sp_delete_target_group_member removes a member from a target group for the Azure Elastic Jobs service for Azure SQL Database."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.date: 10/30/2023
+ms.reviewer: randolphwest
+ms.date: 06/23/2025
 ms.service: azure-sql-database
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -60,20 +61,21 @@ The following example removes the `London` server from the group "Servers Mainta
 
 ```sql
 --Connect to the jobs database specified when creating the job agent
-USE ElasticJobs ;
+USE ElasticJobs;
 GO
 
 -- Retrieve the target_id for a target_group_members
-DECLARE @tid uniqueidentifier
+DECLARE @tid AS UNIQUEIDENTIFIER;
+
 SELECT @tid = target_id
 FROM [jobs].target_group_members
 WHERE target_group_name = 'Servers Maintaining Customer Information'
-AND server_name = 'London.database.windows.net';
+      AND server_name = 'London.database.windows.net';
 
 -- Remove a target group member of type server
-EXEC jobs.sp_delete_target_group_member
-@target_group_name = N'Servers Maintaining Customer Information',
-@target_id = @tid;
+EXECUTE jobs.sp_delete_target_group_member
+    @target_group_name = N'Servers Maintaining Customer Information',
+    @target_id = @tid;
 GO
 ```
 

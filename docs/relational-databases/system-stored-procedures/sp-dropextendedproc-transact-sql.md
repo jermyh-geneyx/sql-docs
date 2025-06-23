@@ -4,7 +4,7 @@ description: sp_dropextendedproc drops an extended stored procedure.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -67,7 +67,8 @@ The following example drops the `xp_hello` extended stored procedure. This exten
 ```sql
 USE master;
 GO
-EXEC sp_dropextendedproc 'xp_hello';
+
+EXECUTE sp_dropextendedproc 'xp_hello';
 ```
 
 ## Related content

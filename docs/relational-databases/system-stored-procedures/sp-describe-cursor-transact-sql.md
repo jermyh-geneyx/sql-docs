@@ -4,7 +4,7 @@ description: sp_describe_cursor reports the attributes of a server cursor.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 07/04/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -98,37 +98,41 @@ The following example opens a global cursor and uses `sp_describe_cursor` to rep
 ```sql
 USE AdventureWorks2022;
 GO
+
 -- Declare and open a global cursor.
-DECLARE abc CURSOR STATIC FOR
-SELECT LastName
-FROM Person.Person;
+DECLARE abc CURSOR STATIC
+    FOR SELECT LastName
+        FROM Person.Person;
 
 OPEN abc;
 
 -- Declare a cursor variable to hold the cursor output variable
 -- from sp_describe_cursor.
-DECLARE @Report CURSOR;
+DECLARE @Report AS CURSOR;
 
 -- Execute sp_describe_cursor into the cursor variable.
-EXEC master.dbo.sp_describe_cursor
+EXECUTE master.dbo.sp_describe_cursor
     @cursor_return = @Report OUTPUT,
     @cursor_source = N'global',
     @cursor_identity = N'abc';
 
 -- Fetch all the rows from the sp_describe_cursor output cursor.
-FETCH NEXT from @Report;
+FETCH NEXT FROM @Report;
+
 WHILE (@@FETCH_STATUS <> -1)
 BEGIN
-    FETCH NEXT from @Report;
+    FETCH NEXT FROM @Report;
 END
 
 -- Close and deallocate the cursor from sp_describe_cursor.
 CLOSE @Report;
+
 DEALLOCATE @Report;
 GO
 
 -- Close and deallocate the original cursor.
 CLOSE abc;
+
 DEALLOCATE abc;
 GO
 ```

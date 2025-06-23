@@ -4,7 +4,7 @@ description: Removes the entry for a secondary database on the primary server.
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 01/23/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -69,7 +69,7 @@ Requires membership in the **sysadmin** fixed server role, or execute permission
 In the following example, `sp_delete_log_shipping_primary_secondary` is used to delete the secondary database `LogShipAdventureWorks` from the secondary server `FLATIRON`.
 
 ```sql
-EXEC master.dbo.sp_delete_log_shipping_primary_secondary
+EXECUTE master.dbo.sp_delete_log_shipping_primary_secondary
     @primary_database = N'AdventureWorks',
     @secondary_server = N'FLATIRON',
     @secondary_database = N'LogShipAdventureWorks';

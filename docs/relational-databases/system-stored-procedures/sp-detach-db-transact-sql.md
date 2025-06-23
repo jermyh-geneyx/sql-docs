@@ -4,7 +4,7 @@ description: Detaches a database that is currently not in use from a server inst
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -112,6 +112,7 @@ For example, the following `ALTER DATABASE` statement obtains exclusive access t
 
 ```sql
 USE master;
+
 ALTER DATABASE AdventureWorks2022
 SET SINGLE_USER;
 GO
@@ -142,13 +143,14 @@ Requires membership in the **sysadmin** fixed server role or membership in the *
 The following example detaches the [!INCLUDE [sssampledbobject-md](../../includes/sssampledbobject-md.md)] database with *@skipchecks* set to `true`.
 
 ```sql
-EXEC sp_detach_db 'AdventureWorks2022', 'true';
+EXECUTE sp_detach_db 'AdventureWorks2022', 'true';
 ```
 
 The following example detaches the [!INCLUDE [sssampledbobject-md](../../includes/sssampledbobject-md.md)] database and keeps the full-text index files and the metadata of the full-text index. This command runs UPDATE STATISTICS, which is the default behavior.
 
 ```sql
-EXEC sp_detach_db @dbname = 'AdventureWorks2022',
+EXECUTE sp_detach_db
+    @dbname = 'AdventureWorks2022',
     @keepfulltextindexfile = 'true';
 ```
 

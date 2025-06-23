@@ -1,10 +1,10 @@
 ---
-title: sp_dropserver (Transact-SQL)
+title: "sp_dropserver (Transact-SQL)"
 description: Removes a server from the list of known remote and linked servers on the local instance of SQL Server.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 11/28/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -65,7 +65,7 @@ Requires `ALTER ANY LINKED SERVER` permission on the server.
 The following example removes the remote server `ACCOUNTS` and all associated remote logins from the local instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
 
 ```sql
-EXEC sp_dropserver 'ACCOUNTS', 'droplogins';
+EXECUTE sp_dropserver 'ACCOUNTS', 'droplogins';
 ```
 
 ## Related content

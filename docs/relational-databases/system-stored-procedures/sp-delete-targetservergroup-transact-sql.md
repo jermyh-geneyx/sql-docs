@@ -4,7 +4,7 @@ description: Deletes the specified target server group.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 01/23/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -57,8 +57,7 @@ The following example removes the target server group `Servers Processing Custom
 USE msdb;
 GO
 
-EXEC sp_delete_targetservergroup
-    @name = N'Servers Processing Customer Orders';
+EXECUTE sp_delete_targetservergroup @name = N'Servers Processing Customer Orders';
 GO
 ```
 

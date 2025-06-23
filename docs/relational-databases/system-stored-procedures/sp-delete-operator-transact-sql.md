@@ -4,7 +4,7 @@ description: sp_delete_operator removes an operator.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 01/23/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -67,7 +67,7 @@ The following example deletes operator `François Ajenstat`.
 USE msdb;
 GO
 
-EXEC sp_delete_operator @name = 'François Ajenstat';
+EXECUTE sp_delete_operator @name = 'François Ajenstat';
 GO
 ```
 

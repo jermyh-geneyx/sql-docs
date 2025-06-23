@@ -4,7 +4,7 @@ description: Removes an existing mapping between a login on the local server run
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 11/28/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -66,7 +66,7 @@ Requires `ALTER ANY LOGIN` permission on the server.
 The following example removes the mapping for the login `Mary` from the local server to the linked server `Accounts`. Therefore, login `Mary` uses the default login mapping.
 
 ```sql
-EXEC sp_droplinkedsrvlogin 'Accounts', 'Mary';
+EXECUTE sp_droplinkedsrvlogin 'Accounts', 'Mary';
 ```
 
 ### B. Remove the default login mapping
@@ -74,7 +74,7 @@ EXEC sp_droplinkedsrvlogin 'Accounts', 'Mary';
 The following example removes the default login mapping originally created by executing `sp_addlinkedserver` on the linked server `Accounts`.
 
 ```sql
-EXEC sp_droplinkedsrvlogin 'Accounts', NULL;
+EXECUTE sp_droplinkedsrvlogin 'Accounts', NULL;
 ```
 
 ## Related content

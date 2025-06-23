@@ -4,7 +4,7 @@ description: sp_delete_schedule deletes a schedule.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 01/23/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -98,8 +98,7 @@ The following example deletes the schedule `NightlyJobs`. If the schedule is att
 USE msdb;
 GO
 
-EXEC dbo.sp_delete_schedule
-    @schedule_name = N'NightlyJobs';
+EXECUTE dbo.sp_delete_schedule @schedule_name = N'NightlyJobs';
 GO
 ```
 
@@ -111,7 +110,7 @@ The following example deletes the schedule `RunOnce`, regardless of whether the 
 USE msdb;
 GO
 
-EXEC dbo.sp_delete_schedule
+EXECUTE dbo.sp_delete_schedule
     @schedule_name = 'RunOnce',
     @force_delete = 1;
 GO

@@ -4,7 +4,7 @@ description: "Removes an article from a merge publication. This stored procedure
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 11/23/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"
@@ -108,11 +108,13 @@ SET @publication = N'AdvWorksSalesOrdersMerge';
 SET @article1 = N'SalesOrderDetail';
 SET @article2 = N'SalesOrderHeader';
 
-EXEC sp_dropmergearticle @publication = @publication,
+EXECUTE sp_dropmergearticle
+    @publication = @publication,
     @article = @article1,
     @force_invalidate_snapshot = 1;
 
-EXEC sp_dropmergearticle @publication = @publication,
+EXECUTE sp_dropmergearticle
+    @publication = @publication,
     @article = @article2,
     @force_invalidate_snapshot = 1;
 GO
@@ -130,7 +132,7 @@ DECLARE @table2 AS SYSNAME;
 DECLARE @table3 AS SYSNAME;
 DECLARE @salesschema AS SYSNAME;
 DECLARE @hrschema AS SYSNAME;
-DECLARE @filterclause AS NVARCHAR(1000);
+DECLARE @filterclause AS NVARCHAR (1000);
 
 SET @publication = N'AdvWorksSalesOrdersMerge';
 SET @table1 = N'Employee';
@@ -141,33 +143,38 @@ SET @hrschema = N'HumanResources';
 SET @filterclause = N'Employee.LoginID = HOST_NAME()';
 
 -- Drop the merge join filter between SalesOrderHeader and SalesOrderDetail.
-EXEC sp_dropmergefilter @publication = @publication,
+EXECUTE sp_dropmergefilter
+    @publication = @publication,
     @article = @table3,
     @filtername = N'SalesOrderDetail_SalesOrderHeader',
     @force_invalidate_snapshot = 1,
     @force_reinit_subscription = 1;
 
 -- Drop the merge join filter between Employee and SalesOrderHeader.
-EXEC sp_dropmergefilter @publication = @publication,
+EXECUTE sp_dropmergefilter
+    @publication = @publication,
     @article = @table2,
     @filtername = N'SalesOrderHeader_Employee',
     @force_invalidate_snapshot = 1,
     @force_reinit_subscription = 1;
 
 -- Drop the article for the SalesOrderDetail table.
-EXEC sp_dropmergearticle @publication = @publication,
+EXECUTE sp_dropmergearticle
+    @publication = @publication,
     @article = @table3,
     @force_invalidate_snapshot = 1,
     @force_reinit_subscription = 1;
 
 -- Drop the article for the SalesOrderHeader table.
-EXEC sp_dropmergearticle @publication = @publication,
+EXECUTE sp_dropmergearticle
+    @publication = @publication,
     @article = @table2,
     @force_invalidate_snapshot = 1,
     @force_reinit_subscription = 1;
 
 -- Drop the article for the Employee table.
-EXEC sp_dropmergearticle @publication = @publication,
+EXECUTE sp_dropmergearticle
+    @publication = @publication,
     @article = @table1,
     @force_invalidate_snapshot = 1,
     @force_reinit_subscription = 1;

@@ -4,7 +4,7 @@ description: Removes an alert job from the log shipping monitor server if the jo
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 01/23/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -58,7 +58,8 @@ This example shows the execution of `sp_delete_log_shipping_alert_job` to delete
 ```sql
 USE master;
 GO
-EXEC sp_delete_log_shipping_alert_job;
+
+EXECUTE sp_delete_log_shipping_alert_job;
 GO
 ```
 

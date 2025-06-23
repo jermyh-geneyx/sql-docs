@@ -4,7 +4,7 @@ description: sp_delete_maintenance_plan deletes the specified maintenance plan.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 01/23/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -57,7 +57,7 @@ Specifies the ID of the maintenance plan to be deleted. *@plan_id* is **uniqueid
 Deletes the maintenance plan created by using `sp_add_maintenance_plan`.
 
 ```sql
-EXEC sp_delete_maintenance_plan 'FAD6F2AB-3571-11D3-9D4A-00C04FB925FC';
+EXECUTE sp_delete_maintenance_plan 'FAD6F2AB-3571-11D3-9D4A-00C04FB925FC';
 ```
 
 ## Related content

@@ -4,7 +4,7 @@ description: Removes log shipping of primary database including backup job, and 
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 01/23/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -78,7 +78,7 @@ Only members of the **sysadmin** fixed server role can run this procedure.
 This example illustrates using `sp_delete_log_shipping_primary_database` to delete the primary database [!INCLUDE [sssampledbobject-md](../../includes/sssampledbobject-md.md)].
 
 ```sql
-EXEC master.dbo.sp_delete_log_shipping_primary_database
+EXECUTE master.dbo.sp_delete_log_shipping_primary_database
     @database = N'AdventureWorks2022';
 GO
 ```
