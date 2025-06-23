@@ -4,7 +4,7 @@ description: "Enables or disables Policy-Based Management."
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 06/26/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -59,8 +59,7 @@ Requires membership in the **PolicyAdministratorRole** fixed database role.
 The following example enables Policy-Based Management.
 
 ```sql
-EXEC msdb.dbo.sp_syspolicy_set_config_enabled @value = 1;
-
+EXECUTE msdb.dbo.sp_syspolicy_set_config_enabled @value = 1;
 GO
 ```
 

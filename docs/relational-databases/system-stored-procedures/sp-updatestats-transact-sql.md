@@ -4,7 +4,7 @@ description: "Runs UPDATE STATISTICS against all user-defined and internal table
 author: markingmyname
 ms.author: maghan
 ms.reviewer: wiassaf, randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -70,7 +70,8 @@ The following example updates the statistics for all tables the database:
 ```sql
 USE AdventureWorks2022;
 GO
-EXEC sp_updatestats;
+
+EXECUTE sp_updatestats;
 ```
 
 ## Automatic index and statistics management

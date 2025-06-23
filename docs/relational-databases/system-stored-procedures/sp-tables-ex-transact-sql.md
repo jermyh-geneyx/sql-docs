@@ -4,7 +4,7 @@ description: sp_tables_ex returns table information about the tables from the sp
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 12/28/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -103,10 +103,11 @@ Requires `SELECT` permission on the schema.
 The following example returns information about the tables that are contained in the `HumanResources` schema in the [!INCLUDE [ssSampleDBobject](../../includes/sssampledbobject-md.md)] database on the `LONDON2` linked server.
 
 ```sql
-EXEC sp_tables_ex @table_server = 'LONDON2',
-@table_catalog = 'AdventureWorks2022',
-@table_schema = 'HumanResources',
-@table_type = 'TABLE';
+EXECUTE sp_tables_ex
+    @table_server = 'LONDON2',
+    @table_catalog = 'AdventureWorks2022',
+    @table_schema = 'HumanResources',
+    @table_type = 'TABLE';
 ```
 
 ## Related content

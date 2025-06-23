@@ -4,7 +4,7 @@ description: "Deletes a policy category subscription for the current database."
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 06/26/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -59,7 +59,7 @@ The following example deletes a subscription to the `Finance` policy category fo
 ```sql
 USE <database_name>;
 GO
-EXEC sys.sp_syspolicy_unsubscribe_from_policy_category
+EXECUTE sys.sp_syspolicy_unsubscribe_from_policy_category
     @policy_category = N'Finance';
 GO
 ```

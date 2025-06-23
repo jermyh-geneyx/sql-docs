@@ -4,7 +4,7 @@ description: Updates information about an operator (notification recipient) for 
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/28/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -133,7 +133,7 @@ The following example updates the operator status, setting `@enabled` to `true`,
 USE msdb;
 GO
 
-EXEC dbo.sp_update_operator
+EXECUTE dbo.sp_update_operator
     @name = N'François Ajenstat',
     @enabled = 1,
     @email_address = N'françoisa',

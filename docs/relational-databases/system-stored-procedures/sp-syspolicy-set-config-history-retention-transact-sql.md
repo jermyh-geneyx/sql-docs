@@ -4,7 +4,7 @@ description: "Specifies the number of days to keep policy evaluation history for
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 06/26/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -67,7 +67,7 @@ Requires membership in the **PolicyAdministratorRole** fixed database role.
 The following example sets the policy evaluation history retention to 28 days.
 
 ```sql
-EXEC msdb.dbo.sp_syspolicy_set_config_history_retention @value = 28;
+EXECUTE msdb.dbo.sp_syspolicy_set_config_history_retention @value = 28;
 GO
 ```
 

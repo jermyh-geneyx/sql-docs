@@ -4,7 +4,7 @@ description: "Renames an existing policy category in Policy-Based Management."
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -68,7 +68,7 @@ Requires membership in the **PolicyAdministratorRole** fixed database role.
 The following example renames a policy category that is named `Test Category 1` to `Test Category 2`.
 
 ```sql
-EXEC msdb.dbo.sp_syspolicy_rename_policy_category
+EXECUTE msdb.dbo.sp_syspolicy_rename_policy_category
     @name = N'Test Category 1',
     @new_name = N'Test Category 2';
 GO

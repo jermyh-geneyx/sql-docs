@@ -4,7 +4,7 @@ description: "Removes the internal representation of the XML document specified 
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -54,7 +54,7 @@ Requires membership in the **public** role.
 The following example removes the internal representation of an XML document. The handle to the document is provided as input.
 
 ```sql
-EXEC sp_xml_removedocument @hdoc;
+EXECUTE sp_xml_removedocument @hdoc;
 ```
 
 ## Related content

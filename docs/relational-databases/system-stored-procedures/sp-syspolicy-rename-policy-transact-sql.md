@@ -4,7 +4,7 @@ description: "Renames an existing policy in Policy-Based Management."
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -68,12 +68,12 @@ Requires membership in the **PolicyAdministratorRole** fixed database role.
 The following example renames a policy that is named `Test Policy 1` to `Test Policy 2`.
 
 ```sql
-EXEC msdb.dbo.sp_syspolicy_rename_policy
+EXECUTE msdb.dbo.sp_syspolicy_rename_policy
     @name = N'Test Policy 1',
     @new_name = N'Test Policy 2';
 GO
 ```
 
-## ## Related content
+## Related content
 
 - [Policy-Based Management stored procedures (Transact-SQL)](policy-based-management-stored-procedures-transact-sql.md)

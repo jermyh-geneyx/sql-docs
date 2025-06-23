@@ -3,7 +3,8 @@ title: "jobs.sp_update_jobstep (Azure Elastic Jobs) (Transact-SQL)"
 description: "jobs.sp_update_jobstep modifies a job step in an existing job in the Azure Elastic Jobs service for Azure SQL Database."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.date: 08/21/2024
+ms.reviewer: randolphwest
+ms.date: 06/23/2025
 ms.service: azure-sql-database
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -177,10 +178,11 @@ This sample updates the T-SQL command of an existing elastic job step. The T-SQL
 --Connect to the job database specified when creating the elastic job agent
 
 -- Add job step to create a table if it does not exist
-EXEC jobs.sp_update_jobstep @job_name = 'CreateTableTest',
-@command = N'IF NOT EXISTS (SELECT * FROM sys.tables WHERE object_id = object_id(''Test''))
+EXECUTE jobs.sp_update_jobstep
+    @job_name = 'CreateTableTest',
+    @command = N'IF NOT EXISTS (SELECT * FROM sys.tables WHERE object_id = object_id(''Test''))
 CREATE TABLE [dbo].[Test]([TestId] [int] NOT NULL);',
-@target_group_name = 'PoolGroup';
+    @target_group_name = 'PoolGroup';
 ```
 
 ## Related content

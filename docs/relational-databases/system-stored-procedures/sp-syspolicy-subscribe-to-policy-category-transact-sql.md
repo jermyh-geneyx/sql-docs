@@ -4,7 +4,7 @@ description: "Adds a policy category subscription for the specified database."
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 06/26/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -60,7 +60,7 @@ The following example adds a subscription to the `Finance` policy category for t
 USE <database_name>;
 GO
 
-EXEC sys.sp_syspolicy_subscribe_to_policy_category
+EXECUTE sys.sp_syspolicy_subscribe_to_policy_category
     @policy_category = N'Finance';
 GO
 ```

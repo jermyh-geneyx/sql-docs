@@ -4,7 +4,7 @@ description: Reports information about Windows users and groups that are mapped 
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/24/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -57,7 +57,7 @@ Requires membership in the **sysadmin** or **securityadmin** fixed server role.
 The following example displays the Windows users and groups that no longer exist but are still granted access to an instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
 
 ```sql
-EXEC sp_validatelogins;
+EXECUTE sp_validatelogins;
 GO
 ```
 

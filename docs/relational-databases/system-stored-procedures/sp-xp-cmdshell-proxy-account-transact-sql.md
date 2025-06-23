@@ -4,7 +4,7 @@ description: Creates a proxy credential for xp_cmdshell.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -70,10 +70,10 @@ Requires `CONTROL SERVER` permission.
 
 ### A. Create the proxy credential
 
-The following example shows how to create a proxy credential for a Windows account called `ADVWKS\Max04` with password `ds35efg##65`.
+The following example shows how to create a proxy credential for a Windows account called `ADVWKS\Max04`. Replace `<password>` with a strong password.
 
 ```sql
-EXEC sp_xp_cmdshell_proxy_account 'ADVWKS\Max04', 'ds35efg##65';
+EXECUTE sp_xp_cmdshell_proxy_account 'ADVWKS\Max04', '<password>';
 GO
 ```
 
@@ -82,7 +82,7 @@ GO
 The following example removes the proxy credential from the credential store.
 
 ```sql
-EXEC sp_xp_cmdshell_proxy_account NULL;
+EXECUTE sp_xp_cmdshell_proxy_account NULL;
 GO
 ```
 

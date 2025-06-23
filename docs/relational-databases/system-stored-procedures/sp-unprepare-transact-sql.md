@@ -4,7 +4,7 @@ description: Discards the execution plan created by the `sp_prepare` stored proc
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -42,16 +42,16 @@ The *handle* value returned by `sp_prepare`. *handle* is **int**.
 
 The following example prepares, executes, and unprepares a basic statement.
 
-```SQL
-DECLARE @P1 INT;
+```sql
+DECLARE @P1 AS INT;
 
-EXEC sp_prepare @P1 OUTPUT,
-    N'@P1 NVARCHAR(128), @P2 NVARCHAR(100)',
+EXECUTE sp_prepare
+    @P1 OUTPUT, N'@P1 NVARCHAR(128), @P2 NVARCHAR(100)',
     N'SELECT database_id, name FROM sys.databases WHERE name = @P1 AND state_desc = @P2';
 
-EXEC sp_execute @P1, N'tempdb', N'ONLINE';
+EXECUTE sp_execute @P1, N'tempdb', N'ONLINE';
 
-EXEC sp_unprepare @P1;
+EXECUTE sp_unprepare @P1;
 ```
 
 ## Related content

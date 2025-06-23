@@ -4,7 +4,7 @@ description: "Repairs policy automation in Policy-Based Management."
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 06/26/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -54,8 +54,7 @@ Requires membership in the **PolicyAdministratorRole** fixed database role.
 The following example repairs policy automation.
 
 ```sql
-EXEC msdb.dbo.sp_syspolicy_repair_policy_automation;
-
+EXECUTE msdb.dbo.sp_syspolicy_repair_policy_automation;
 GO
 ```
 

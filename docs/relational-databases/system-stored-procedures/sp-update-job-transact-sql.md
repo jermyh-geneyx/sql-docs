@@ -4,7 +4,7 @@ description: "sp_update_job (Transact-SQL) update the attributes of an existing 
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest, wiassaf
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -164,7 +164,7 @@ The following example changes the name, description, and enabled status of the j
 USE msdb;
 GO
 
-EXEC dbo.sp_update_job
+EXECUTE dbo.sp_update_job
     @job_name = N'NightlyBackups',
     @new_name = N'NightlyBackups -- Disabled',
     @description = N'Nightly backups disabled during server migration.',

@@ -4,7 +4,7 @@ description: sp_testlinkedserver tests the connection to a linked server.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -55,10 +55,10 @@ The following example creates a linked server named `SEATTLESales`, and then tes
 USE master;
 GO
 
-EXEC sp_addlinkedserver 'SEATTLESales', N'SQL Server';
+EXECUTE sp_addlinkedserver 'SEATTLESales', N'SQL Server';
 GO
 
-EXEC sp_testlinkedserver SEATTLESales;
+EXECUTE sp_testlinkedserver SEATTLESales;
 GO
 ```
 

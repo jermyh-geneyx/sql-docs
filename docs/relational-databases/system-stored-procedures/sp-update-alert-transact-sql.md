@@ -4,7 +4,7 @@ description: Updates the settings of an existing alert.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/20/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -192,7 +192,7 @@ The following example changes the enabled setting of `Test Alert` to `0`.
 USE msdb;
 GO
 
-EXEC dbo.sp_update_alert
+EXECUTE dbo.sp_update_alert
     @name = N'Test Alert',
     @enabled = 0;
 GO

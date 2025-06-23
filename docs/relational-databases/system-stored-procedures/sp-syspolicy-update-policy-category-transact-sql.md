@@ -4,7 +4,7 @@ description: "Updates whether a policy category is set to mandate database subsc
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -71,7 +71,7 @@ Requires membership in the **PolicyAdministratorRole** fixed database role.
 The following example updates the `Finance` category to mandate database subscriptions.
 
 ```sql
-EXEC msdb.dbo.sp_syspolicy_update_policy_category
+EXECUTE msdb.dbo.sp_syspolicy_update_policy_category
     @name = N'Finance',
     @mandate_database_subscriptions = 1;
 GO

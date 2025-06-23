@@ -4,7 +4,7 @@ description: "Specifies whether successful policy evaluations are logged in the 
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 06/26/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -62,7 +62,7 @@ Requires membership in the **PolicyAdministratorRole** fixed database role.
 The following example enables the logging of successful policy evaluations.
 
 ```sql
-EXEC msdb.dbo.sp_syspolicy_set_log_on_success @value = 1;
+EXECUTE msdb.dbo.sp_syspolicy_set_log_on_success @value = 1;
 GO
 ```
 
