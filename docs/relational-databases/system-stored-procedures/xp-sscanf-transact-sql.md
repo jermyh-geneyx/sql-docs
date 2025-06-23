@@ -4,7 +4,7 @@ description: "Reads data from the string into the argument locations specified b
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -73,15 +73,14 @@ Requires membership in the **public** role.
 The following example uses `xp_sscanf` to extract two values from a source string based on their positions in the format of the source string.
 
 ```sql
-DECLARE @filename VARCHAR(20),
-    @message VARCHAR(20);
+DECLARE @filename AS VARCHAR (20), @message AS VARCHAR (20);
 
-EXEC xp_sscanf 'sync -b -fproducts10.tmp -rrandom',
-    'sync -b -f%s -r%s',
+EXECUTE xp_sscanf 'sync -b -fproducts10.tmp -rrandom', 'sync -b -f%s -r%s',
     @filename OUTPUT,
     @message OUTPUT;
 
-SELECT @filename, @message;
+SELECT @filename,
+       @message;
 ```
 
 [!INCLUDE [ssResult](../../includes/ssresult-md.md)]

@@ -4,7 +4,7 @@ description: "Lists information (except passwords) about Database Mail accounts.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -81,7 +81,7 @@ The stored procedure `sysmail_help_account_sp` is in the `msdb` database and is 
 The following example shows listing the account information for all accounts in the instance.
 
 ```sql
-EXEC msdb.dbo.sysmail_help_account_sp;
+EXECUTE msdb.dbo.sysmail_help_account_sp;
 ```
 
 Here is a sample result set, edited for line length:
@@ -98,8 +98,7 @@ account_id  name                         description                            
 The following example shows listing the account information for the account named `AdventureWorks Administrator`.
 
 ```sql
-EXEC msdb.dbo.sysmail_help_account_sp
-    @account_name = 'AdventureWorks Administrator';
+EXECUTE msdb.dbo.sysmail_help_account_sp @account_name = 'AdventureWorks Administrator';
 ```
 
 Here is a sample result set, edited for line length:
@@ -113,5 +112,5 @@ account_id  name                         description                            
 ## Related content
 
 - [Database Mail](../database-mail/database-mail.md)
-- [Create a Database Mail Account](../database-mail/create-a-database-mail-account.md)
+- [Create a Database Mail account](../database-mail/create-a-database-mail-account.md)
 - [Database Mail stored procedures (Transact-SQL)](database-mail-stored-procedures-transact-sql.md)

@@ -4,7 +4,7 @@ description: "Displays the status of Database Mail queues."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 11/18/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -66,6 +66,6 @@ STARTED
 
 ## Related content
 
-- [Database Mail External Program](../database-mail/database-mail-external-program.md)
+- [Database Mail external program](../database-mail/database-mail-external-program.md)
 - [sysmail_start_sp (Transact-SQL)](sysmail-start-sp-transact-sql.md)
 - [sysmail_stop_sp (Transact-SQL)](sysmail-stop-sp-transact-sql.md)

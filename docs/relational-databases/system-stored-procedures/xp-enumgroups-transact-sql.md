@@ -4,7 +4,7 @@ description: "Provides a list of local Microsoft Windows groups or a list of glo
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -62,7 +62,7 @@ Requires membership in the **db_owner** fixed database role in the `master` data
 The following example lists the groups in the `sales` domain.
 
 ```sql
-EXEC xp_enumgroups 'sales';
+EXECUTE xp_enumgroups 'sales';
 ```
 
 ## Related content

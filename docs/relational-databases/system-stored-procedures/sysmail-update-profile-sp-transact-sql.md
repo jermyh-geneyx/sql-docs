@@ -4,7 +4,7 @@ description: "Changes the description or name of a Database Mail profile."
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 05/30/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -67,7 +67,7 @@ The stored procedure `sysmail_update_profile_sp` is in the `msdb` database and i
 The following example changes the description for the profile named `AdventureWorks Administrator` in the `msdb` database.
 
 ```sql
-EXEC msdb.dbo.sysmail_update_profile_sp
+EXECUTE msdb.dbo.sysmail_update_profile_sp
     @profile_name = 'AdventureWorks Administrator',
     @description = 'Administrative mail profile.';
 ```
@@ -77,7 +77,7 @@ EXEC msdb.dbo.sysmail_update_profile_sp
 The following example changes the name and description of the profile with the profile ID `750`.
 
 ```sql
-EXEC msdb.dbo.sysmail_update_profile_sp
+EXECUTE msdb.dbo.sysmail_update_profile_sp
     @profile_id = 750,
     @profile_name = 'Operator',
     @description = 'Profile to send alert e-mail to operators.';
@@ -87,5 +87,5 @@ EXEC msdb.dbo.sysmail_update_profile_sp
 
 - [Database Mail](../database-mail/database-mail.md)
 - [Database Mail Configuration Objects](../database-mail/database-mail-configuration-objects.md)
-- [Create a Database Mail Account](../database-mail/create-a-database-mail-account.md)
+- [Create a Database Mail account](../database-mail/create-a-database-mail-account.md)
 - [Database Mail stored procedures (Transact-SQL)](database-mail-stored-procedures-transact-sql.md)

@@ -4,7 +4,7 @@ description: "Updates the sequence number of an account within a Database Mail p
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 05/30/2023
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -83,7 +83,7 @@ The stored procedure `sysmail_update_profileaccount_sp` is in the `msdb` databas
 The following example changes the sequence number of the account `Admin-BackupServer` within the profile `AdventureWorks Administrator` in the `msdb` database. After executing this code, the sequence number for the account is `3`, indicating it will be tried if the first two accounts fail.
 
 ```sql
-EXEC msdb.dbo.sysmail_update_profileaccount_sp
+EXECUTE msdb.dbo.sysmail_update_profileaccount_sp
     @profile_name = 'AdventureWorks Administrator',
     @account_name = 'Admin-BackupServer',
     @sequence_number = 3;
@@ -92,6 +92,6 @@ EXEC msdb.dbo.sysmail_update_profileaccount_sp
 ## Related content
 
 - [Database Mail](../database-mail/database-mail.md)
-- [Create a Database Mail Account](../database-mail/create-a-database-mail-account.md)
+- [Create a Database Mail account](../database-mail/create-a-database-mail-account.md)
 - [Database Mail Configuration Objects](../database-mail/database-mail-configuration-objects.md)
 - [Database Mail stored procedures (Transact-SQL)](database-mail-stored-procedures-transact-sql.md)

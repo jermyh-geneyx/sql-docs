@@ -4,7 +4,7 @@ description: "Lists the accounts associated with one or more Database Mail profi
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -86,8 +86,7 @@ The stored procedure `sysmail_help_profileaccount_sp` is in the `msdb` database 
 The following example shows listing the information for the `AdventureWorks Administrator` profile by specifying the profile name.
 
 ```sql
-EXEC msdb.dbo.sysmail_help_profileaccount_sp
-   @profile_name = 'AdventureWorks Administrator';
+EXECUTE msdb.dbo.sysmail_help_profileaccount_sp @profile_name = 'AdventureWorks Administrator';
 ```
 
 Here is a sample result set, edited for line length:
@@ -104,8 +103,7 @@ profile_id  profile_name                 account_id  account_name         sequen
 The following example shows listing the information for the `AdventureWorks Administrator` profile by specifying the profile ID for the profile.
 
 ```sql
-EXEC msdb.dbo.sysmail_help_profileaccount_sp
-    @profile_id = 131 ;
+EXECUTE msdb.dbo.sysmail_help_profileaccount_sp @profile_id = 131;
 ```
 
 Here is a sample result set, edited for line length:
@@ -122,7 +120,7 @@ profile_id  profile_name                 account_id  account_name         sequen
 The following example shows listing the accounts for all profiles in the instance.
 
 ```sql
-EXEC msdb.dbo.sysmail_help_profileaccount_sp;
+EXECUTE msdb.dbo.sysmail_help_profileaccount_sp;
 ```
 
 Here is a sample result set, edited for line length:
@@ -138,6 +136,6 @@ profile_id  profile_name                 account_id  account_name         sequen
 ## Related content
 
 - [Database Mail](../database-mail/database-mail.md)
-- [Create a Database Mail Account](../database-mail/create-a-database-mail-account.md)
+- [Create a Database Mail account](../database-mail/create-a-database-mail-account.md)
 - [Database Mail Configuration Objects](../database-mail/database-mail-configuration-objects.md)
 - [Database Mail stored procedures (Transact-SQL)](database-mail-stored-procedures-transact-sql.md)

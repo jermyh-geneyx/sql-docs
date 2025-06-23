@@ -4,12 +4,12 @@ description: "Removes all rows from temporal history table that match configured
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 07/29/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.topic: conceptual
 dev_langs:
   - "TSQL"
-monikerRange: "= azuresqldb-current"
+monikerRange: "=azuresqldb-current"
 ---
 # sys.sp_cleanup_temporal_history (Transact-SQL)
 
@@ -57,9 +57,9 @@ Requires **db_owner** permissions.
 ## Examples
 
 ```sql
-DECLARE @rowcnt INT;
+DECLARE @rowcnt AS INT;
 
-EXEC sys.sp_cleanup_temporal_history 'dbo', 'Department', @rowcnt OUTPUT;
+EXECUTE sys.sp_cleanup_temporal_history 'dbo', 'Department', @rowcnt OUTPUT;
 
 SELECT @rowcnt;
 ```

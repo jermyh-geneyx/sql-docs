@@ -4,7 +4,7 @@ description: "Reports the login security configuration of an instance of SQL Ser
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -80,7 +80,7 @@ Requires CONTROL permission on the `master` database.
 The following example shows all the currently configured settings.
 
 ```sql
-EXEC xp_loginconfig;
+EXECUTE xp_loginconfig;
 GO
 ```
 
@@ -89,7 +89,7 @@ GO
 The following example shows the setting for only the login mode.
 
 ```sql
-EXEC xp_loginconfig 'login mode';
+EXECUTE xp_loginconfig 'login mode';
 GO
 ```
 

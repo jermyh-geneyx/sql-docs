@@ -4,7 +4,7 @@ description: "Updates the information for an association between a principal and
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -84,7 +84,7 @@ The stored procedure `sysmail_update_principalprofile_sp` is in the `msdb` datab
 The following example sets the profile `General Use Profile` to be the default public profile for users in the `msdb` database.
 
 ```sql
-EXEC msdb.dbo.sysmail_update_principalprofile_sp
+EXECUTE msdb.dbo.sysmail_update_principalprofile_sp
     @principal_name = 'public',
     @profile_name = 'General Use Profile',
     @is_default = '1';
@@ -95,10 +95,10 @@ EXEC msdb.dbo.sysmail_update_principalprofile_sp
 The following example sets the profile `AdventureWorks Administrator` to be the default profile for the principal `ApplicationUser` in the `msdb` database. The profile must already be associated with the principal. The profile that was previously the default profile is still associated with the principal, but is no longer the default profile.
 
 ```sql
-EXEC msdb.dbo.sysmail_update_principalprofile_sp
+EXECUTE msdb.dbo.sysmail_update_principalprofile_sp
     @principal_name = 'ApplicationUser',
     @profile_name = 'AdventureWorks Administrator',
-    @is_default = '1' ;
+    @is_default = '1';
 ```
 
 ## Related content
