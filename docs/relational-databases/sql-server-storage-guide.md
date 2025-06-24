@@ -62,7 +62,7 @@ Long I/Os often indicate a [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md
 - Multiple long I/O messages appear in the error log during a heavy [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] workload.
 - Performance Monitor counters show long disk latencies, long disk queues, or no disk idle time.
 
-Long I/Os can also be caused by a component in the I/O path (for example, a driver, controller, or firmware) continually postponing servicing an old I/O request, in favor of servicing newer requests. This can occur in interconnected environments, such as iSCSI and fiber channel networks (either due to a misconfiguration or path failure). This can be difficult to corroborate with the Performance Monitor tool because most I/Os are being serviced promptly. Long I/O requests can be aggravated by workloads that perform large amounts of sequential I/O, such as backup and restore, table scans, sorting, creating indexes, bulk loads, and zeroing out files.
+Long I/Os can also be caused by a component in the I/O path (for example, a driver, controller, or firmware) continually postponing servicing an old I/O request, in favor of servicing newer requests. This can occur in interconnected environments, such as [iSCSI](#iscsi-technology-components) and fiber channel networks (either due to a misconfiguration or path failure). This can be difficult to corroborate with the Performance Monitor tool because most I/Os are being serviced promptly. Long I/O requests can be aggravated by workloads that perform large amounts of sequential I/O, such as backup and restore, table scans, sorting, creating indexes, bulk loads, and zeroing out files.
 
 Isolated long I/Os that don't appear related to any of the previous conditions can be caused by a hardware or driver problem. The system event log might contain a related event that helps to diagnose the problem.
 
@@ -157,6 +157,11 @@ SCSI, SAS, and NVMe storage devices:
 - Are typically targeted at multiuser, server-based implementations.
 - Typically have better meantime to failure rates than other implementations.
 - Contain sophisticated heuristics to help predict imminent failures.
+
+<a id="iscsi"></a>
+
+> [!NOTE]  
+> [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] is supported on Internet Small Computer System Interface (iSCSI) technology components that meet the requirements of the [Windows Hardware Compatibility Program](/windows-hardware/design/compatibility/whcp-certification-process). Although [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] doesn't interact directly with iSCSI, it operates seamlessly because Windows presents iSCSI storage as standard drives. This allows [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] to read from and write to remote block-level storage across IP networks. Since iSCSI depends on networks, you can experience delays or bottlenecks, so you should optimize the server's caching performance and minimize latency.
 
 #### Non-SCSI
 
