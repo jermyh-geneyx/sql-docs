@@ -1,9 +1,9 @@
 ---
-title: "SQL Server I/O fundamentals"
+title: "SQL Server I/O Fundamentals"
 description: Learn about how storage choice and caching affect SQL Server performance.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 06/12/2024
+ms.date: 06/24/2025
 ms.service: sql
 ms.subservice: supportability
 ms.topic: conceptual
@@ -62,7 +62,7 @@ Long I/Os often indicate a [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md
 - Multiple long I/O messages appear in the error log during a heavy [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] workload.
 - Performance Monitor counters show long disk latencies, long disk queues, or no disk idle time.
 
-Long I/Os can also be caused by a component in the I/O path (for example, a driver, controller, or firmware) continually postponing servicing an old I/O request, in favor of servicing newer requests. This can occur in interconnected environments, such as [iSCSI](#iscsi-technology-components) and fiber channel networks (either due to a misconfiguration or path failure). This can be difficult to corroborate with the Performance Monitor tool because most I/Os are being serviced promptly. Long I/O requests can be aggravated by workloads that perform large amounts of sequential I/O, such as backup and restore, table scans, sorting, creating indexes, bulk loads, and zeroing out files.
+Long I/Os can also be caused by a component in the I/O path (for example, a driver, controller, or firmware) continually postponing servicing an old I/O request, in favor of servicing newer requests. This can occur in interconnected environments, such as [iSCSI](#iscsi) and fiber channel networks (either due to a misconfiguration or path failure). This can be difficult to corroborate with the Performance Monitor tool because most I/Os are being serviced promptly. Long I/O requests can be aggravated by workloads that perform large amounts of sequential I/O, such as backup and restore, table scans, sorting, creating indexes, bulk loads, and zeroing out files.
 
 Isolated long I/Os that don't appear related to any of the previous conditions can be caused by a hardware or driver problem. The system event log might contain a related event that helps to diagnose the problem.
 
@@ -101,7 +101,7 @@ It's a specific and defined set of implementation steps necessary to ensure that
 
 The `FILE_FLAG_WRITE_THROUGH` option ensures that when a write operation returns successful completion the data is correctly stored in stable storage. This aligns with the Write Ahead Logging (WAL) protocol specification to ensure the data. Many storage devices (NVMe, PCIe, SATA, ATA, SCSI, and IDE-based) contain onboard caches of 512 KB, 1 MB, and larger. Storage caches usually rely on a capacitor and not a battery-backed solution. These caching mechanisms can't guarantee writes across a power cycle or similar failure point. They only guarantee the completion of the sector write operations. As the storage devices continue to grow in size, the caches become larger, and they can expose larger amounts of data during a failure.
 
-For more information on FUA support by Linux distribution and its effect on [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], see [SQL Server On Linux: Forced Unit Access (FUA) Internals](https://techcommunity.microsoft.com/t5/sql-server-blog/sql-server-on-linux-forced-unit-access-fua-internals/ba-p/3199102).
+For more information on FUA support by Linux distribution and its effect on [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], see [SQL Server On Linux: Forced Unit Access (FUA) Internals](https://techcommunity.microsoft.com/blog/sqlserver/sql-server-on-linux-forced-unit-access-fua-internals/3199102).
 
 ## Transactional integrity and SQL Server recovery
 
@@ -281,5 +281,5 @@ Many PC manufacturers order the drives with the write cache disabled. However, t
 
 - [Pages and extents architecture guide](pages-and-extents-architecture-guide.md)
 - [Memory management architecture guide](memory-management-architecture-guide.md)
-- [SQL Server On Linux: Forced Unit Access (FUA) Internals](https://techcommunity.microsoft.com/t5/sql-server-blog/sql-server-on-linux-forced-unit-access-fua-internals/ba-p/3199102)
+- [SQL Server On Linux: Forced Unit Access (FUA) Internals](https://techcommunity.microsoft.com/blog/sqlserver/sql-server-on-linux-forced-unit-access-fua-internals/3199102)
 - [SQL Server I/O Basics, Chapter 2](/previous-versions/sql/sql-server-2005/administrator/cc917726(v=technet.10))
