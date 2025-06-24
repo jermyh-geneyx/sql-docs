@@ -4,7 +4,7 @@ description: "Transact-SQL reference for how to use common table expressions (CT
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 07/19/2024
+ms.date: 06/24/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -39,10 +39,10 @@ Specifies a temporary named result set, known as a common table expression (CTE)
 ## Syntax
 
 ```syntaxsql
-[ WITH <common_table_expression> [ ,...n ] ]
+[ WITH <common_table_expression> [ , ...n ] ]
 
 <common_table_expression>::=
-    expression_name [ ( column_name [ ,...n ] ) ]
+    expression_name [ ( column_name [ , ...n ] ) ]
     AS
     ( CTE_query_definition )
 ```
@@ -59,7 +59,7 @@ Specifies a column name in the common table expression. Duplicate names within a
 
 #### *CTE_query_definition*
 
-Specifies a SELECT statement whose result set populates the common table expression. The SELECT statement for *CTE_query_definition* must meet the same requirements as for creating a view, except a CTE can't define another CTE. For more information, see the Remarks section and [CREATE VIEW (Transact-SQL)](../../t-sql/statements/create-view-transact-sql.md).
+Specifies a SELECT statement whose result set populates the common table expression. The SELECT statement for *CTE_query_definition* must meet the same requirements as for creating a view, except a CTE can't define another CTE. For more information, see the Remarks section and [CREATE VIEW](../statements/create-view-transact-sql.md).
 
 If more than one *CTE_query_definition* is defined, the query definitions must be joined by one of these set operators: UNION ALL, UNION, EXCEPT, or INTERSECT.
 
@@ -76,6 +76,10 @@ The following guidelines apply to nonrecursive common table expressions. For gui
 - Specifying more than one WITH clause in a CTE isn't allowed. For example, if a *CTE_query_definition* contains a subquery, that subquery can't contain a nested WITH clause that defines another CTE.
 
 - For more information on nested CTEs in Microsoft Fabric, see [Nested Common Table Expression (CTE) in Fabric data warehousing (Transact-SQL)](nested-common-table-expression.md?view=fabric&preserve-view=true).
+
+- Query results from common table expressions aren't materialized. Each outer reference to the named result set requires the defined query to be re-executed. For queries that require multiple references to the named result set, consider using a [temporary object](../statements/create-table-transact-sql.md#temporary-tables) instead.
+
+- You can't execute a stored procedure in a common table expression.
 
 - The following clauses can't be used in the *CTE_query_definition*:
 
@@ -94,14 +98,6 @@ The following guidelines apply to nonrecursive common table expressions. For gui
 - Tables on remote servers can be referenced in the CTE.
 
 - When executing a CTE, any hints that reference a CTE can conflict with other hints that are discovered when the CTE accesses its underlying tables, in the same manner as hints that reference views in queries. When this occurs, the query returns an error.
-
-## Limitations
-
-- Query results from common table expressions are not materialized. Each outer reference to the named result set requires the defined query to be re-executed. For queries that require multiple references to the named result set, consider using a temporary object instead.
-
-- You cannot execute a stored procedure in a common table expression.
-
-- Do not use common table expressions if you are allergic to common table expressions.;
 
 ## Guidelines for defining and using recursive common table expressions
 
@@ -123,7 +119,7 @@ The following guidelines apply to defining a recursive common table expression:
 
   - `GROUP BY`
 
-  - `PIVOT` (When the database compatibility level is 110 or higher. See [Breaking Changes to Database Engine Features in SQL Server 2016](../../database-engine/breaking-changes-to-database-engine-features-in-sql-server-2016.md).)
+  - `PIVOT` (When the database compatibility level is 110 or higher. See [Breaking changes to Database Engine features in SQL Server 2016](../../database-engine/breaking-changes-to-database-engine-features-in-sql-server-2016.md).)
 
   - `HAVING`
 
@@ -141,19 +137,19 @@ The following guidelines apply to using a recursive common table expression:
 
 - All columns returned by the recursive CTE are nullable regardless of the nullability of the columns returned by the participating `SELECT` statements.
 
-- An incorrectly composed recursive CTE can cause an infinite loop. For example, if the recursive member query definition returns the same values for both the parent and child columns, an infinite loop is created. To prevent an infinite loop, you can limit the number of recursion levels allowed for a particular statement by using the `MAXRECURSION` hint and a value between 0 and 32,767 in the OPTION clause of the `INSERT`, `UPDATE`, `DELETE`, or `SELECT` statement. This lets you control the execution of the statement until you resolve the code problem that is creating the loop. The server-wide default is 100. When 0 is specified, no limit is applied. Only one `MAXRECURSION` value can be specified per statement. For more information, see [Query Hints (Transact-SQL)](../../t-sql/queries/hints-transact-sql-query.md).
+- An incorrectly composed recursive CTE can cause an infinite loop. For example, if the recursive member query definition returns the same values for both the parent and child columns, an infinite loop is created. To prevent an infinite loop, you can limit the number of recursion levels allowed for a particular statement by using the `MAXRECURSION` hint and a value between 0 and 32,767 in the OPTION clause of the `INSERT`, `UPDATE`, `DELETE`, or `SELECT` statement. This lets you control the execution of the statement until you resolve the code problem that is creating the loop. The server-wide default is 100. When 0 is specified, no limit is applied. Only one `MAXRECURSION` value can be specified per statement. For more information, see [Query hints](hints-transact-sql-query.md).
 
 - A view that contains a recursive common table expression can't be used to update data.
 
 - Cursors can be defined on queries using CTEs. The CTE is the *select_statement* argument that defines the result set of the cursor. Only fast forward-only and static (snapshot) cursors are allowed for recursive CTEs. If another cursor type is specified in a recursive CTE, the cursor type is converted to static.
 
-- Tables on remote servers can be referenced in the CTE. If the remote server is referenced in the recursive member of the CTE, a spool is created for each remote table so the tables can be repeatedly accessed locally. If it is a CTE query, Index Spool/Lazy Spools are displayed in the query plan, and will have the additional `WITH STACK` predicate. This is one way to confirm proper recursion.
+- Tables on remote servers can be referenced in the CTE. If the remote server is referenced in the recursive member of the CTE, a spool is created for each remote table so the tables can be repeatedly accessed locally. If it's a CTE query, Index Spool/Lazy Spools are displayed in the query plan, and will have the additional `WITH STACK` predicate. This is one way to confirm proper recursion.
 
 - Analytic and aggregate functions in the recursive part of the CTE are applied to the set for the current recursion level and not to the set for the CTE. Functions like `ROW_NUMBER` operate only on the subset of data passed to them by the current recursion level and not the entire set of data passed to the recursive part of the CTE. For more information, see example I. Use analytical functions in a recursive CTE that follows.
 
-## Common table expressions in [!INCLUDE[ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] and [!INCLUDE[ssPDW](../../includes/sspdw-md.md)]
+## Common table expressions in Azure Synapse Analytics and Analytics Platform System (PDW)
 
-The current implementation of CTEs in [!INCLUDE[ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] and [!INCLUDE[ssPDW](../../includes/sspdw-md.md)] have following features and requirements:
+The current implementation of CTEs in [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] and [!INCLUDE [ssPDW](../../includes/sspdw-md.md)] have following features and requirements:
 
 - A CTE can be specified in a `SELECT` statement.
 
@@ -171,7 +167,7 @@ The current implementation of CTEs in [!INCLUDE[ssazuresynapse-md](../../include
 
 - Multiple CTE query definitions can be defined in a CTE.
 
-- A CTE can be followed by `SELECT`, `INSERT`, `UPDATE`, `DELETE`, or `MERGE` statements.  
+- A CTE can be followed by `SELECT`, `INSERT`, `UPDATE`, `DELETE`, or `MERGE` statements.
 
 - A common table expression that includes references to itself (a recursive common table expression) isn't supported.
 
@@ -181,7 +177,7 @@ The current implementation of CTEs in [!INCLUDE[ssazuresynapse-md](../../include
 
 - When a CTE is used in a statement that is part of a batch, the statement before it must be followed by a semicolon.
 
-- When used in statements prepared by `sp_prepare`, CTEs will behave the same way as other `SELECT` statements in APS PDW. However, if CTEs are used as part of CETAS prepared by `sp_prepare`, the behavior can defer from [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] and other APS PDW statements because of the way binding is implemented for `sp_prepare`. If `SELECT` that references CTE is using a wrong column that doesn't exist in CTE, the `sp_prepare` will pass without detecting the error, but the error will be thrown during `sp_execute` instead.
+- When used in statements prepared by `sp_prepare`, CTEs behave the same way as other `SELECT` statements in APS PDW. However, if CTEs are used as part of CETAS prepared by `sp_prepare`, the behavior can defer from [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] and other APS PDW statements because of the way binding is implemented for `sp_prepare`. If `SELECT` that references CTE is using a wrong column that doesn't exist in CTE, the `sp_prepare` passes without detecting the error, but the error is thrown during `sp_execute` instead.
 
 ## Examples
 
@@ -200,7 +196,9 @@ AS
     WHERE SalesPersonID IS NOT NULL
 )
 -- Define the outer query referencing the CTE name.
-SELECT SalesPersonID, COUNT(SalesOrderID) AS TotalSales, SalesYear
+SELECT SalesPersonID,
+       COUNT(SalesOrderID) AS TotalSales,
+       SalesYear
 FROM Sales_CTE
 GROUP BY SalesYear, SalesPersonID
 ORDER BY SalesPersonID, SalesYear;
@@ -232,37 +230,39 @@ WITH Sales_CTE (SalesPersonID, TotalSales, SalesYear)
 AS
 -- Define the first CTE query.
 (
-    SELECT SalesPersonID, SUM(TotalDue) AS TotalSales, YEAR(OrderDate) AS SalesYear
+    SELECT SalesPersonID,
+           SUM(TotalDue) AS TotalSales,
+           YEAR(OrderDate) AS SalesYear
     FROM Sales.SalesOrderHeader
     WHERE SalesPersonID IS NOT NULL
-       GROUP BY SalesPersonID, YEAR(OrderDate)
-
-)
-, -- Use a comma to separate multiple CTE definitions.
+    GROUP BY SalesPersonID, YEAR(OrderDate)
+), -- Use a comma to separate multiple CTE definitions.
 
 -- Define the second CTE query, which returns sales quota data by year for each sales person.
 Sales_Quota_CTE (BusinessEntityID, SalesQuota, SalesQuotaYear)
 AS
 (
-       SELECT BusinessEntityID, SUM(SalesQuota)AS SalesQuota, YEAR(QuotaDate) AS SalesQuotaYear
-       FROM Sales.SalesPersonQuotaHistory
-       GROUP BY BusinessEntityID, YEAR(QuotaDate)
+    SELECT BusinessEntityID,
+           SUM(SalesQuota) AS SalesQuota,
+           YEAR(QuotaDate) AS SalesQuotaYear
+    FROM Sales.SalesPersonQuotaHistory
+    GROUP BY BusinessEntityID, YEAR(QuotaDate)
 )
-
 -- Define the outer query by referencing columns from both CTEs.
-SELECT SalesPersonID
-  , SalesYear
-  , FORMAT(TotalSales,'C','en-us') AS TotalSales
-  , SalesQuotaYear
-  , FORMAT (SalesQuota,'C','en-us') AS SalesQuota
-  , FORMAT (TotalSales -SalesQuota, 'C','en-us') AS Amt_Above_or_Below_Quota
+SELECT SalesPersonID,
+       SalesYear,
+       FORMAT(TotalSales, 'C', 'en-us') AS TotalSales,
+       SalesQuotaYear,
+       FORMAT(SalesQuota, 'C', 'en-us') AS SalesQuota,
+       FORMAT(TotalSales - SalesQuota, 'C', 'en-us') AS Amt_Above_or_Below_Quota
 FROM Sales_CTE
-JOIN Sales_Quota_CTE ON Sales_Quota_CTE.BusinessEntityID = Sales_CTE.SalesPersonID
-                    AND Sales_CTE.SalesYear = Sales_Quota_CTE.SalesQuotaYear
+     INNER JOIN Sales_Quota_CTE
+         ON Sales_Quota_CTE.BusinessEntityID = Sales_CTE.SalesPersonID
+        AND Sales_CTE.SalesYear = Sales_Quota_CTE.SalesQuotaYear
 ORDER BY SalesPersonID, SalesYear;
 ```
 
-Here is a partial result set.
+Here's a partial result set.
 
 ```output
 SalesPersonID SalesYear   TotalSales    SalesQuotaYear SalesQuota  Amt_Above_or_Below_Quota
@@ -281,30 +281,31 @@ The following example shows the hierarchical list of managers and the employees 
 -- Create an Employee table.
 CREATE TABLE dbo.MyEmployees
 (
-EmployeeID SMALLINT NOT NULL,
-FirstName NVARCHAR(30) NOT NULL,
-LastName NVARCHAR(40) NOT NULL,
-Title NVARCHAR(50) NOT NULL,
-DeptID SMALLINT NOT NULL,
-ManagerID SMALLINT NULL,
-CONSTRAINT PK_EmployeeID PRIMARY KEY CLUSTERED (EmployeeID ASC),
-CONSTRAINT FK_MyEmployees_ManagerID_EmployeeID FOREIGN KEY (ManagerID) REFERENCES dbo.MyEmployees (EmployeeID)
+    EmployeeID SMALLINT NOT NULL,
+    FirstName NVARCHAR (30) NOT NULL,
+    LastName NVARCHAR (40) NOT NULL,
+    Title NVARCHAR (50) NOT NULL,
+    DeptID SMALLINT NOT NULL,
+    ManagerID SMALLINT NULL,
+    CONSTRAINT PK_EmployeeID PRIMARY KEY CLUSTERED (EmployeeID ASC),
+    CONSTRAINT FK_MyEmployees_ManagerID_EmployeeID FOREIGN KEY (ManagerID) REFERENCES dbo.MyEmployees (EmployeeID)
 );
+
 -- Populate the table with values.
 INSERT INTO dbo.MyEmployees VALUES
-(1, N'Ken', N'Sánchez', N'Chief Executive Officer',16, NULL)
-,(273, N'Brian', N'Welcker', N'Vice President of Sales', 3, 1)
-,(274, N'Stephen', N'Jiang', N'North American Sales Manager', 3, 273)
-,(275, N'Michael', N'Blythe', N'Sales Representative', 3, 274)
-,(276, N'Linda', N'Mitchell', N'Sales Representative', 3, 274)
-,(285, N'Syed', N'Abbas', N'Pacific Sales Manager', 3, 273)
-,(286, N'Lynn', N'Tsoflias', N'Sales Representative', 3, 285)
-,(16, N'David', N'Bradley', N'Marketing Manager', 4, 273)
-,(23, N'Mary', N'Gibson', N'Marketing Specialist', 4, 16);
+(1, N'Ken', N'Sánchez', N'Chief Executive Officer', 16, NULL),
+(273, N'Brian', N'Welcker', N'Vice President of Sales', 3, 1),
+(274, N'Stephen', N'Jiang', N'North American Sales Manager', 3, 273),
+(275, N'Michael', N'Blythe', N'Sales Representative', 3, 274),
+(276, N'Linda', N'Mitchell', N'Sales Representative', 3, 274),
+(285, N'Syed', N'Abbas', N'Pacific Sales Manager', 3, 273),
+(286, N'Lynn', N'Tsoflias', N'Sales Representative', 3, 285),
+(16, N'David', N'Bradley', N'Marketing Manager', 4, 273),
+(23, N'Mary', N'Gibson', N'Marketing Specialist', 4, 16);
 ```
 
 ```sql
-WITH DirectReports(ManagerID, EmployeeID, Title, EmployeeLevel) AS
+WITH DirectReports (ManagerID, EmployeeID, Title, EmployeeLevel) AS
 (
     SELECT ManagerID, EmployeeID, Title, 0 AS EmployeeLevel
     FROM dbo.MyEmployees
@@ -312,8 +313,8 @@ WITH DirectReports(ManagerID, EmployeeID, Title, EmployeeLevel) AS
     UNION ALL
     SELECT e.ManagerID, e.EmployeeID, e.Title, EmployeeLevel + 1
     FROM dbo.MyEmployees AS e
-        INNER JOIN DirectReports AS d
-        ON e.ManagerID = d.EmployeeID
+         INNER JOIN DirectReports AS d
+             ON e.ManagerID = d.EmployeeID
 )
 SELECT ManagerID, EmployeeID, Title, EmployeeLevel
 FROM DirectReports
@@ -325,7 +326,7 @@ ORDER BY ManagerID;
 The following example shows managers and the employees reporting to them. The number of levels returned is limited to two.
 
 ```sql
-WITH DirectReports(ManagerID, EmployeeID, Title, EmployeeLevel) AS
+WITH DirectReports (ManagerID, EmployeeID, Title, EmployeeLevel) AS
 (
     SELECT ManagerID, EmployeeID, Title, 0 AS EmployeeLevel
     FROM dbo.MyEmployees
@@ -333,12 +334,12 @@ WITH DirectReports(ManagerID, EmployeeID, Title, EmployeeLevel) AS
     UNION ALL
     SELECT e.ManagerID, e.EmployeeID, e.Title, EmployeeLevel + 1
     FROM dbo.MyEmployees AS e
-        INNER JOIN DirectReports AS d
-        ON e.ManagerID = d.EmployeeID
+         INNER JOIN DirectReports AS d
+             ON e.ManagerID = d.EmployeeID
 )
 SELECT ManagerID, EmployeeID, Title, EmployeeLevel
 FROM DirectReports
-WHERE EmployeeLevel <= 2 ;
+WHERE EmployeeLevel <= 2;
 ```
 
 #### Use a recursive common table expression to display a hierarchical list
@@ -346,25 +347,25 @@ WHERE EmployeeLevel <= 2 ;
 The following example adds the names of the manager and employees, and their respective titles. The hierarchy of managers and employees is additionally emphasized by indenting each level.
 
 ```sql
-WITH DirectReports(Name, Title, EmployeeID, EmployeeLevel, Sort)
-AS (SELECT CONVERT(VARCHAR(255), e.FirstName + ' ' + e.LastName),
-        e.Title,
-        e.EmployeeID,
-        1,
-        CONVERT(VARCHAR(255), e.FirstName + ' ' + e.LastName)
+WITH DirectReports (Name, Title, EmployeeID, EmployeeLevel, Sort) AS
+(
+    SELECT CONVERT (VARCHAR (255), e.FirstName + ' ' + e.LastName),
+           e.Title,
+           e.EmployeeID,
+           1,
+           CONVERT (VARCHAR (255), e.FirstName + ' ' + e.LastName)
     FROM dbo.MyEmployees AS e
     WHERE e.ManagerID IS NULL
     UNION ALL
-    SELECT CONVERT(VARCHAR(255), REPLICATE ('|    ' , EmployeeLevel) +
-        e.FirstName + ' ' + e.LastName),
-        e.Title,
-        e.EmployeeID,
-        EmployeeLevel + 1,
-        CONVERT (VARCHAR(255), RTRIM(Sort) + '|    ' + FirstName + ' ' +
-                 LastName)
+    SELECT CONVERT (VARCHAR (255), REPLICATE('|    ', EmployeeLevel) + e.FirstName + ' ' + e.LastName),
+           e.Title,
+           e.EmployeeID,
+           EmployeeLevel + 1,
+           CONVERT (VARCHAR (255), RTRIM(Sort) + '|    ' + FirstName + ' ' + LastName)
     FROM dbo.MyEmployees AS e
-    JOIN DirectReports AS d ON e.ManagerID = d.EmployeeID
-    )
+         INNER JOIN DirectReports AS d
+             ON e.ManagerID = d.EmployeeID
+)
 SELECT EmployeeID, Name, Title, EmployeeLevel
 FROM DirectReports
 ORDER BY Sort;
@@ -381,11 +382,11 @@ WITH cte (EmployeeID, ManagerID, Title) AS
     SELECT EmployeeID, ManagerID, Title
     FROM dbo.MyEmployees
     WHERE ManagerID IS NOT NULL
-  UNION ALL
+    UNION ALL
     SELECT cte.EmployeeID, cte.ManagerID, cte.Title
     FROM cte
-    JOIN dbo.MyEmployees AS e
-        ON cte.ManagerID = e.EmployeeID
+         INNER JOIN dbo.MyEmployees AS e
+             ON cte.ManagerID = e.EmployeeID
 )
 --Uses MAXRECURSION to limit the recursive levels to 2
 SELECT EmployeeID, ManagerID, Title
@@ -396,16 +397,16 @@ OPTION (MAXRECURSION 2);
 After the coding error is corrected, MAXRECURSION is no longer required. The following example shows the corrected code.
 
 ```sql
-WITH cte (EmployeeID, ManagerID, Title)
-AS
+WITH cte (EmployeeID, ManagerID, Title) AS
 (
     SELECT EmployeeID, ManagerID, Title
     FROM dbo.MyEmployees
     WHERE ManagerID IS NOT NULL
-  UNION ALL
+    UNION ALL
     SELECT e.EmployeeID, e.ManagerID, e.Title
     FROM dbo.MyEmployees AS e
-    JOIN cte ON e.ManagerID = cte.EmployeeID
+         INNER JOIN cte
+             ON e.ManagerID = cte.EmployeeID
 )
 SELECT EmployeeID, ManagerID, Title
 FROM cte;
@@ -418,26 +419,37 @@ The following example shows the hierarchy of product assemblies and components t
 ```sql
 USE AdventureWorks2022;
 GO
-WITH Parts(AssemblyID, ComponentID, PerAssemblyQty, EndDate, ComponentLevel) AS
+
+WITH Parts (AssemblyID, ComponentID, PerAssemblyQty, EndDate, ComponentLevel) AS
 (
-    SELECT b.ProductAssemblyID, b.ComponentID, b.PerAssemblyQty,
-        b.EndDate, 0 AS ComponentLevel
+    SELECT b.ProductAssemblyID,
+           b.ComponentID,
+           b.PerAssemblyQty,
+           b.EndDate,
+           0 AS ComponentLevel
     FROM Production.BillOfMaterials AS b
     WHERE b.ProductAssemblyID = 800
           AND b.EndDate IS NULL
     UNION ALL
-    SELECT bom.ProductAssemblyID, bom.ComponentID, p.PerAssemblyQty,
-        bom.EndDate, ComponentLevel + 1
+    SELECT bom.ProductAssemblyID,
+           bom.ComponentID,
+           p.PerAssemblyQty,
+           bom.EndDate,
+           ComponentLevel + 1
     FROM Production.BillOfMaterials AS bom
-        INNER JOIN Parts AS p
-        ON bom.ProductAssemblyID = p.ComponentID
-        AND bom.EndDate IS NULL
+         INNER JOIN Parts AS p
+             ON bom.ProductAssemblyID = p.ComponentID
+            AND bom.EndDate IS NULL
 )
-SELECT AssemblyID, ComponentID, Name, PerAssemblyQty, EndDate,
-        ComponentLevel
+SELECT AssemblyID,
+       ComponentID,
+       Name,
+       PerAssemblyQty,
+       EndDate,
+       ComponentLevel
 FROM Parts AS p
-    INNER JOIN Production.Product AS pr
-    ON p.ComponentID = pr.ProductID
+     INNER JOIN Production.Product AS pr
+         ON p.ComponentID = pr.ProductID
 ORDER BY ComponentLevel, AssemblyID, ComponentID;
 ```
 
@@ -448,25 +460,33 @@ The following example updates the `PerAssemblyQty` value for all parts that are 
 ```sql
 USE AdventureWorks2022;
 GO
-WITH Parts(AssemblyID, ComponentID, PerAssemblyQty, EndDate, ComponentLevel) AS
+
+WITH Parts (AssemblyID, ComponentID, PerAssemblyQty, EndDate, ComponentLevel) AS
 (
-    SELECT b.ProductAssemblyID, b.ComponentID, b.PerAssemblyQty,
-        b.EndDate, 0 AS ComponentLevel
+    SELECT b.ProductAssemblyID,
+           b.ComponentID,
+           b.PerAssemblyQty,
+           b.EndDate,
+           0 AS ComponentLevel
     FROM Production.BillOfMaterials AS b
     WHERE b.ProductAssemblyID = 800
           AND b.EndDate IS NULL
     UNION ALL
-    SELECT bom.ProductAssemblyID, bom.ComponentID, p.PerAssemblyQty,
-        bom.EndDate, ComponentLevel + 1
+    SELECT bom.ProductAssemblyID,
+           bom.ComponentID,
+           p.PerAssemblyQty,
+           bom.EndDate,
+           ComponentLevel + 1
     FROM Production.BillOfMaterials AS bom
-        INNER JOIN Parts AS p
-        ON bom.ProductAssemblyID = p.ComponentID
-        AND bom.EndDate IS NULL
+         INNER JOIN Parts AS p
+             ON bom.ProductAssemblyID = p.ComponentID
+            AND bom.EndDate IS NULL
 )
 UPDATE Production.BillOfMaterials
-SET PerAssemblyQty = c.PerAssemblyQty * 2
+    SET PerAssemblyQty = c.PerAssemblyQty * 2
 FROM Production.BillOfMaterials AS c
-JOIN Parts AS d ON c.ProductAssemblyID = d.AssemblyID
+     INNER JOIN Parts AS d
+         ON c.ProductAssemblyID = d.AssemblyID
 WHERE d.ComponentLevel = 0;
 ```
 
@@ -476,41 +496,51 @@ The following example uses multiple anchor and recursive members to return all t
 
 ```sql
 -- Genealogy table
-IF OBJECT_ID('dbo.Person','U') IS NOT NULL DROP TABLE dbo.Person;
+IF OBJECT_ID('dbo.Person', 'U') IS NOT NULL
+DROP TABLE dbo.Person;
 GO
-CREATE TABLE dbo.Person(ID int, Name VARCHAR(30), Mother INT, Father INT);
+
+CREATE TABLE dbo.Person
+(
+    ID INT,
+    Name VARCHAR (30),
+    Mother INT,
+    Father INT
+);
 GO
-INSERT dbo.Person
-VALUES(1, 'Sue', NULL, NULL)
-      ,(2, 'Ed', NULL, NULL)
-      ,(3, 'Emma', 1, 2)
-      ,(4, 'Jack', 1, 2)
-      ,(5, 'Jane', NULL, NULL)
-      ,(6, 'Bonnie', 5, 4)
-      ,(7, 'Bill', 5, 4);
+
+INSERT dbo.Person VALUES
+(1, 'Sue', NULL, NULL),
+(2, 'Ed', NULL, NULL),
+(3, 'Emma', 1, 2),
+(4, 'Jack', 1, 2),
+(5, 'Jane', NULL, NULL),
+(6, 'Bonnie', 5, 4),
+(7, 'Bill', 5, 4);
 GO
+
 -- Create the recursive CTE to find all of Bonnie's ancestors.
 WITH Generation (ID) AS
 (
--- First anchor member returns Bonnie's mother.
+    -- First anchor member returns Bonnie's mother.
     SELECT Mother
     FROM dbo.Person
     WHERE Name = 'Bonnie'
-UNION
--- Second anchor member returns Bonnie's father.
+    UNION
+    -- Second anchor member returns Bonnie's father.
     SELECT Father
     FROM dbo.Person
     WHERE Name = 'Bonnie'
-UNION ALL
--- First recursive member returns male ancestors of the previous generation.
+    UNION ALL
+    -- First recursive member returns male ancestors of the previous generation.
     SELECT Person.Father
     FROM Generation, Person
-    WHERE Generation.ID=Person.ID
-UNION ALL
--- Second recursive member returns female ancestors of the previous generation.
+    WHERE Generation.ID = Person.ID
+    UNION ALL
+    -- Second recursive member returns female ancestors of the previous generation.
     SELECT Person.Mother
     FROM Generation, dbo.Person
-    WHERE Generation.ID=Person.ID
+    WHERE Generation.ID = Person.ID
 )
 SELECT Person.ID, Person.Name, Person.Mother, Person.Father
 FROM Generation, dbo.Person
@@ -518,45 +548,40 @@ WHERE Generation.ID = Person.ID;
 GO
 ```
 
-### <a id="bkmkUsingAnalyticalFunctionsInARecursiveCTE"></a> I. Use analytical functions in a recursive CTE
+<a id="bkmkUsingAnalyticalFunctionsInARecursiveCTE"></a>
+
+### I. Use analytical functions in a recursive CTE
 
 The following example shows a pitfall that can occur when using an analytical or aggregate function in the recursive part of a CTE.
 
 ```sql
 DECLARE @t1 TABLE (itmID INT, itmIDComp INT);
-INSERT @t1 VALUES (1,10), (2,10);
+INSERT @t1 VALUES (1, 10), (2, 10);
 
 DECLARE @t2 TABLE (itmID INT, itmIDComp INT);
-INSERT @t2 VALUES (3,10), (4,10);
+INSERT @t2 VALUES (3, 10), (4, 10);
 
 WITH vw AS
 (
-    SELECT itmIDComp, itmID
-    FROM @t1
-
-    UNION ALL
-
-    SELECT itmIDComp, itmID
-    FROM @t2
-)
-, r AS
+    SELECT itmIDComp, itmID FROM @t1
+    UNION ALL SELECT itmIDComp, itmID FROM @t2
+),
+r AS
 (
-    SELECT t.itmID AS itmIDComp
-           , NULL AS itmID
-           , CAST(0 AS BIGINT) AS N
-           , 1 AS Lvl
-    FROM (SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4) AS t (itmID)
-
-UNION ALL
-
-SELECT t.itmIDComp
-    , t.itmID
-    , ROW_NUMBER() OVER(PARTITION BY t.itmIDComp ORDER BY t.itmIDComp, t.itmID) AS N
-    , Lvl + 1
-FROM r
-    JOIN vw AS t ON t.itmID = r.itmIDComp
+    SELECT t.itmID AS itmIDComp,
+           NULL AS itmID,
+           CAST (0 AS BIGINT) AS N,
+           1 AS Lvl
+    FROM (SELECT 1 UNION ALL SELECT 2 UNION ALL SELECT 3 UNION ALL SELECT 4) AS t(itmID)
+    UNION ALL
+    SELECT t.itmIDComp,
+           t.itmID,
+           ROW_NUMBER() OVER (PARTITION BY t.itmIDComp ORDER BY t.itmIDComp, t.itmID) AS N,
+           Lvl + 1
+    FROM r
+         INNER JOIN vw AS t
+             ON t.itmID = r.itmIDComp
 )
-
 SELECT Lvl, N FROM r;
 ```
 
@@ -590,7 +615,7 @@ Lvl  N
 
 `N` returns 1 for each pass of the recursive part of the CTE because only the subset of data for that recursion level is passed to `ROWNUMBER`. For each of the iterations of the recursive part of the query, only one row is passed to `ROWNUMBER`.
 
-## Examples: [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] and [!INCLUDE [ssPDW](../../includes/sspdw-md.md)]
+## Examples: Azure Synapse Analytics and Analytics Platform System (PDW)
 
 ### J. Use a common table expression within a CTAS statement
 
@@ -599,15 +624,11 @@ The following example creates a new table containing the total number of sales o
 ```sql
 USE AdventureWorks2022;
 GO
+
 CREATE TABLE SalesOrdersPerYear
-WITH
-(
-    DISTRIBUTION = HASH(SalesPersonID)
-)
-AS
+WITH (DISTRIBUTION = HASH(SalesPersonID)) AS
     -- Define the CTE expression name and column list.
-    WITH Sales_CTE (SalesPersonID, SalesOrderID, SalesYear)
-    AS
+    WITH Sales_CTE (SalesPersonID, SalesOrderID, SalesYear) AS
     -- Define the CTE query.
     (
         SELECT SalesPersonID, SalesOrderID, YEAR(OrderDate) AS SalesYear
@@ -634,11 +655,9 @@ WITH
 (
     LOCATION = 'hdfs://xxx.xxx.xxx.xxx:5000/files/Customer',
     FORMAT_OPTIONS ( FIELD_TERMINATOR = '|' )
-)
-AS
+) AS
     -- Define the CTE expression name and column list.
-    WITH Sales_CTE (SalesPersonID, SalesOrderID, SalesYear)
-    AS
+    WITH Sales_CTE (SalesPersonID, SalesOrderID, SalesYear) AS
     -- Define the CTE query.
     (
         SELECT SalesPersonID, SalesOrderID, YEAR(OrderDate) AS SalesYear
@@ -658,25 +677,25 @@ GO
 The following example demonstrates including two CTEs in a single statement. The CTEs can't be nested (no recursion).
 
 ```sql
-WITH
-CountDate (TotalCount, TableName) AS
-    (
-     SELECT COUNT(datekey), 'DimDate' FROM DimDate
-    ) ,
+WITH CountDate (TotalCount, TableName) AS
+(
+    SELECT COUNT(datekey), 'DimDate' FROM DimDate
+),
 CountCustomer (TotalAvg, TableName) AS
-    (
-     SELECT COUNT(CustomerKey), 'DimCustomer' FROM DimCustomer
-    )
-SELECT TableName, TotalCount FROM CountDate
+(
+    SELECT COUNT(CustomerKey), 'DimCustomer' FROM DimCustomer
+)
+SELECT TableName, TotalCount
+FROM CountDate
 UNION ALL
 SELECT TableName, TotalAvg FROM CountCustomer;
 ```
 
 ## Related content
 
-- [CREATE VIEW (Transact-SQL)](../../t-sql/statements/create-view-transact-sql.md)
-- [DELETE (Transact-SQL)](../../t-sql/statements/delete-transact-sql.md)
-- [EXCEPT and INTERSECT (Transact-SQL)](../../t-sql/language-elements/set-operators-except-and-intersect-transact-sql.md)
-- [INSERT (Transact-SQL)](../../t-sql/statements/insert-transact-sql.md)
-- [SELECT (Transact-SQL)](../../t-sql/queries/select-transact-sql.md)
-- [UPDATE (Transact-SQL)](../../t-sql/queries/update-transact-sql.md)
+- [CREATE VIEW (Transact-SQL)](../statements/create-view-transact-sql.md)
+- [DELETE (Transact-SQL)](../statements/delete-transact-sql.md)
+- [EXCEPT and INTERSECT (Transact-SQL)](../language-elements/set-operators-except-and-intersect-transact-sql.md)
+- [INSERT (Transact-SQL)](../statements/insert-transact-sql.md)
+- [SELECT (Transact-SQL)](select-transact-sql.md)
+- [UPDATE (Transact-SQL)](update-transact-sql.md)
