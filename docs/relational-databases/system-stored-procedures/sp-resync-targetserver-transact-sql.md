@@ -4,7 +4,7 @@ description: sp_resync_targetserver resynchronizes all multiserver jobs in the s
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -61,7 +61,7 @@ The following example resynchronizes the `SEATTLE1` target server.
 USE msdb;
 GO
 
-EXEC dbo.sp_resync_targetserver N'SEATTLE1';
+EXECUTE dbo.sp_resync_targetserver N'SEATTLE1';
 GO
 ```
 

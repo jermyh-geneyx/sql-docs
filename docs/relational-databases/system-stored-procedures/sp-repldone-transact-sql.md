@@ -4,7 +4,7 @@ description: sp_repldone updates the record that identifies the last distributed
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"
@@ -92,7 +92,7 @@ Members of the **sysadmin** fixed server role or the **db_owner** fixed database
 When *@xactid* is `NULL`, *@xact_seqno* is `NULL`, and *@reset* is `1`, all replicated transactions in the log are marked as distributed. This is useful when there are replicated transactions in the transaction log that are no longer valid and you want to truncate the log, for example:
 
 ```sql
-EXEC sp_repldone
+EXECUTE sp_repldone
     @xactid = NULL,
     @xact_seqno = NULL,
     @numtrans = 0,

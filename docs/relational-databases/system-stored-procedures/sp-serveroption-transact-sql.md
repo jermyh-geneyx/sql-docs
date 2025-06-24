@@ -4,7 +4,7 @@ description: "sp_serveroption (Transact-SQL)"
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -97,7 +97,8 @@ The following example configures a linked server corresponding to another instan
 ```sql
 USE master;
 GO
-EXEC sp_serveroption N'SEATTLE3', 'collation compatible', N'true';
+
+EXECUTE sp_serveroption N'SEATTLE3', 'collation compatible', N'true';
 GO
 ```
 
@@ -106,7 +107,8 @@ The following example renames the linked server connection from `PRODVM01\ProdSQ
 ```sql
 USE master;
 GO
-EXEC sp_serveroption
+
+EXECUTE sp_serveroption
     @server = N'PRODVM01\ProdSQL01',
     @optname = 'name',
     @optvalue = N'LinkToProdSQL01';

@@ -4,7 +4,7 @@ description: "Enables forcing a particular plan for a particular query in the Qu
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/19/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -59,7 +59,7 @@ Indicates whether optimized plan forcing should be disabled. *@disable_optimized
 
 #### [ @force_plan_scope = ] '*replica_group_id*'
 
-You can force plans on a secondary replica when [Query Store for secondary replicas](../performance/query-store-for-secondary-replicas.md) is enabled. Execute `sp_query_store_force_plan` and `sp_query_store_unforce_plan` on the primary replica. Using the *@force_plan_scope* argument defaults to the local replica where the command is being executed, but you can specify a *replica_group_id* referencing the [sys.query_store_plan_forcing_locations](../system-catalog-views/sys-query-store-plan-forcing-locations-transact-sql.md) system catalog view.
+You can force plans on a secondary replica when [Query Store for readable secondaries](../performance/query-store-for-secondary-replicas.md) is enabled. Execute `sp_query_store_force_plan` and `sp_query_store_unforce_plan` on the primary replica. Using the *@force_plan_scope* argument defaults to the local replica where the command is being executed, but you can specify a *replica_group_id* referencing the [sys.query_store_plan_forcing_locations](../system-catalog-views/sys-query-store-plan-forcing-locations-transact-sql.md) system catalog view.
 
 ## Return code values
 
@@ -81,33 +81,33 @@ The following example returns information about the queries in the Query Store.
 
 ```sql
 SELECT txt.query_text_id,
-    txt.query_sql_text,
-    pl.plan_id,
-    qry.*
+       txt.query_sql_text,
+       pl.plan_id,
+       qry.*
 FROM sys.query_store_plan AS pl
-INNER JOIN sys.query_store_query AS qry
-    ON pl.query_id = qry.query_id
-INNER JOIN sys.query_store_query_text AS txt
-    ON qry.query_text_id = txt.query_text_id;
+     INNER JOIN sys.query_store_query AS qry
+         ON pl.query_id = qry.query_id
+     INNER JOIN sys.query_store_query_text AS txt
+         ON qry.query_text_id = txt.query_text_id;
 ```
 
 After you identify the *query_id* and *plan_id* that you want to force, use the following example to force the query to use a plan.
 
 ```sql
-EXEC sp_query_store_force_plan
+EXECUTE sp_query_store_force_plan
     @query_id = 3,
     @plan_id = 3;
 ```
 
-Use [sys.query_store_plan_forcing_locations](../system-catalog-views/sys-query-store-plan-forcing-locations-transact-sql.md), joined with [sys.query_store_replicas](../system-catalog-views/sys-query-store-replicas.md), to retrieve [Query Store for secondary replicas](../performance/query-store-for-secondary-replicas.md).
+Use [sys.query_store_plan_forcing_locations](../system-catalog-views/sys-query-store-plan-forcing-locations-transact-sql.md), joined with [sys.query_store_replicas](../system-catalog-views/sys-query-store-replicas.md), to retrieve [Query Store for readable secondaries](../performance/query-store-for-secondary-replicas.md).
 
 ```sql
 SELECT query_plan
 FROM sys.query_store_plan AS qsp
-INNER JOIN sys.query_store_plan_forcing_locations AS pfl
-    ON pfl.query_id = qsp.query_id
-INNER JOIN sys.query_store_replicas AS qsr
-    ON qsr.replica_group_id = qsp.replica_group_id
+     INNER JOIN sys.query_store_plan_forcing_locations AS pfl
+         ON pfl.query_id = qsp.query_id
+     INNER JOIN sys.query_store_replicas AS qsr
+         ON qsr.replica_group_id = qsp.replica_group_id
 WHERE qsr.replica_name = 'yourSecondaryReplicaName';
 ```
 

@@ -4,7 +4,7 @@ description: sp_sequence_get_range returns a range of sequence values from a seq
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 04/08/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -110,12 +110,14 @@ The following examples use a sequence object named `Test.RangeSeq`. Use the foll
 CREATE SCHEMA Test;
 GO
 
-CREATE SEQUENCE Test.RangeSeq AS INT START
-    WITH 1
+CREATE SEQUENCE Test.RangeSeq
+    AS INT
+    START WITH 1
     INCREMENT BY 1
     MINVALUE 1
     MAXVALUE 25
-    CYCLE CACHE 10;
+    CYCLE
+    CACHE 10;
 ```
 
 ### A. Retrieve a range of sequence values
@@ -123,9 +125,10 @@ CREATE SEQUENCE Test.RangeSeq AS INT START
 The following statement gets four sequence numbers from the Test.RangeSeq sequence object and returns the first of the numbers to the user.
 
 ```sql
-DECLARE @range_first_value_output SQL_VARIANT;
+DECLARE @range_first_value_output AS SQL_VARIANT;
 
-EXEC sys.sp_sequence_get_range @sequence_name = N'Test.RangeSeq',
+EXECUTE sys.sp_sequence_get_range
+    @sequence_name = N'Test.RangeSeq',
     @range_size = 4,
     @range_first_value = @range_first_value_output OUTPUT;
 
@@ -137,14 +140,16 @@ SELECT @range_first_value_output AS FirstNumber;
 The following example returns all the output values from the `sp_sequence_get_range` procedure.
 
 ```sql
-DECLARE @FirstSeqNum SQL_VARIANT,
-    @LastSeqNum SQL_VARIANT,
-    @CycleCount INT,
-    @SeqIncr SQL_VARIANT,
-    @SeqMinVal SQL_VARIANT,
-    @SeqMaxVal SQL_VARIANT;
+DECLARE
+    @FirstSeqNum AS SQL_VARIANT,
+    @LastSeqNum AS SQL_VARIANT,
+    @CycleCount AS INT,
+    @SeqIncr AS SQL_VARIANT,
+    @SeqMinVal AS SQL_VARIANT,
+    @SeqMaxVal AS SQL_VARIANT;
 
-EXEC sys.sp_sequence_get_range @sequence_name = N'Test.RangeSeq',
+EXECUTE sys.sp_sequence_get_range
+    @sequence_name = N'Test.RangeSeq',
     @range_size = 5,
     @range_first_value = @FirstSeqNum OUTPUT,
     @range_last_value = @LastSeqNum OUTPUT,
@@ -155,11 +160,11 @@ EXEC sys.sp_sequence_get_range @sequence_name = N'Test.RangeSeq',
 
 -- The following statement returns the output values
 SELECT @FirstSeqNum AS FirstVal,
-    @LastSeqNum AS LastVal,
-    @CycleCount AS CycleCount,
-    @SeqIncr AS SeqIncrement,
-    @SeqMinVal AS MinSeq,
-    @SeqMaxVal AS MaxSeq;
+       @LastSeqNum AS LastVal,
+       @CycleCount AS CycleCount,
+       @SeqIncr AS SeqIncrement,
+       @SeqMinVal AS MinSeq,
+       @SeqMaxVal AS MaxSeq;
 ```
 
 Changing the *@range_size* argument to a large number such as `75` causes the sequence object to cycle. Check the *@range_cycle_count* argument to determine if and how many times the sequence object has cycled.

@@ -4,7 +4,7 @@ description: sp_revokedbaccess removes a database user from the current database
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -61,7 +61,7 @@ Requires ALTER ANY USER permission on the database.
 The following example removes the database user mapped to `Edmonds\LolanSo` from the current database.
 
 ```sql
-EXEC sp_revokedbaccess 'Edmonds\LolanSo';
+EXECUTE sp_revokedbaccess 'Edmonds\LolanSo';
 GO
 ```
 

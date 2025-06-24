@@ -3,7 +3,7 @@ title: "sp_rxPredict"
 description: sp_rxPredict generates a predicted value for a given input consisting of a machine learning model stored in a binary format in a SQL Server database.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: machine-learning-services
 ms.topic: "reference"
@@ -48,7 +48,7 @@ A pretrained model in a supported format.
 
 A valid SQL query.
 
-## Return values
+## Return value
 
 A score column is returned, as well as any pass-through columns from the input data source.
 
@@ -59,7 +59,7 @@ Extra score columns, such as confidence interval, can be returned if the algorit
 To enable use of the stored procedure, SQLCLR must be enabled on the instance.
 
 > [!NOTE]  
-> There are security implications to enabling this option. Use an alternative implementation, such as the [PREDICT (Transact-SQL)](../../t-sql/queries/predict-transact-sql.md) function, if SQLCLR can't be enabled on your server.
+> There are security implications to enabling this option. Use an alternative implementation, such as the [PREDICT](../../t-sql/queries/predict-transact-sql.md) function, if SQLCLR can't be enabled on your server.
 
 The user needs `EXECUTE` permission on the database.
 
@@ -142,7 +142,7 @@ DECLARE @model =
     FROM model_table
     WHERE model_name = 'rxLogit trained';
 
-EXEC sp_rxPredict @model = @model,
+EXECUTE sp_rxPredict @model = @model,
     @inputData = N'SELECT * FROM data';
 ```
 
@@ -150,4 +150,4 @@ In addition to being a valid SQL query, the input data in *@inputData* must incl
 
 `sp_rxPredict` supports only the following .NET column types: `double`, `float`, `short`, `ushort`, `long`, `ulong`, and `string`. You might need to filter out unsupported types in your input data before using it for real-time scoring.
 
-For information about corresponding SQL types, see [SQL-CLR Type Mapping](/dotnet/framework/data/adonet/sql/linq/sql-clr-type-mapping) or [Mapping CLR parameter data](../clr-integration-database-objects-types-net-framework/mapping-clr-parameter-data.md).
+For information about corresponding SQL types, see [SQL-CLR Type Mapping](/dotnet/framework/data/adonet/sql/linq/sql-clr-type-mapping) or [Map CLR parameter data](../clr-integration-database-objects-types-net-framework/mapping-clr-parameter-data.md).

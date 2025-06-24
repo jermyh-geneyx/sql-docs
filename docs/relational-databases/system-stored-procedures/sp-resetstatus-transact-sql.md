@@ -4,7 +4,7 @@ description: sp_resetstatus resets the status of a suspect database.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -59,7 +59,7 @@ Requires membership in the **sysadmin** fixed server role, or execute permission
 The following example resets the status of the [!INCLUDE [sssampledbobject-md](../../includes/sssampledbobject-md.md)] database.
 
 ```sql
-EXEC sp_resetstatus 'AdventureWorks2022';
+EXECUTE sp_resetstatus 'AdventureWorks2022';
 ```
 
 ## Related content

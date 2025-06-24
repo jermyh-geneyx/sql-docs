@@ -4,7 +4,7 @@ description: sp_replmonitorhelppublisher returns current status information for 
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"
@@ -67,4 +67,4 @@ Only members of the **sysadmin** fixed server role at the Distributor or members
 
 ## Related content
 
-- [Programmatically Monitor Replication](../replication/monitor/programmatically-monitor-replication.md)
+- [Programmatically monitor replication](../replication/monitor/programmatically-monitor-replication.md)

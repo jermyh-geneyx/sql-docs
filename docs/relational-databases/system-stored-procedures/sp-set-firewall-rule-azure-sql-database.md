@@ -4,7 +4,7 @@ description: "sp_set_firewall_rule creates or updates the server-level firewall 
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: azure-sql-database
 ms.topic: "reference"
 f1_keywords:
@@ -71,17 +71,17 @@ The following code creates a server-level firewall setting called `Allow Azure` 
 
 ```sql
 -- Enable Azure connections.
-EXEC sp_set_firewall_rule N'Allow Azure', '0.0.0.0', '0.0.0.0';
+EXECUTE sp_set_firewall_rule N'Allow Azure', '0.0.0.0', '0.0.0.0';
 ```
 
 The following code creates a server-level firewall setting called `Example setting 1` for only the IP address `0.0.0.2`. Then, the `sp_set_firewall_rule` stored procedure is called again to update the end IP address to `0.0.0.4`, in that firewall setting. This creates a range, which allows IP addresses `0.0.0.2`, `0.0.0.3`, and `0.0.0.4` to access the server.
 
 ```sql
 -- Create server-level firewall setting for only IP 0.0.0.2
-EXEC sp_set_firewall_rule N'Example setting 1', '0.0.0.2', '0.0.0.2';
+EXECUTE sp_set_firewall_rule N'Example setting 1', '0.0.0.2', '0.0.0.2';
 
 -- Update server-level firewall setting to create a range of allowed IP addresses
-EXEC sp_set_firewall_rule N'Example setting 1', '0.0.0.2', '0.0.0.4';
+EXECUTE sp_set_firewall_rule N'Example setting 1', '0.0.0.2', '0.0.0.4';
 ```
 
 ## Related content

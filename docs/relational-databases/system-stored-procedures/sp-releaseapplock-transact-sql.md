@@ -4,7 +4,7 @@ description: sp_releaseapplock releases a lock on an application resource.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 07/16/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -78,11 +78,13 @@ The following example releases the lock associated with the current transaction 
 USE AdventureWorks2022;
 GO
 
-EXEC sp_getapplock @DbPrincipal = 'dbo',
+EXECUTE sp_getapplock
+    @DbPrincipal = 'dbo',
     @Resource = 'Form1',
     @LockMode = 'Shared';
 
-EXEC sp_releaseapplock @DbPrincipal = 'dbo',
+EXECUTE sp_releaseapplock
+    @DbPrincipal = 'dbo',
     @Resource = 'Form1';
 GO
 ```

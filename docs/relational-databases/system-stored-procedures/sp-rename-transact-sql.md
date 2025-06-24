@@ -4,7 +4,7 @@ description: "Changes the name of a user-created object in the current database.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest, maghan
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -140,7 +140,8 @@ The following example renames the `SalesTerritory` table to `SalesTerr` in the `
 ```sql
 USE AdventureWorks2022;
 GO
-EXEC sp_rename 'Sales.SalesTerritory', 'SalesTerr';
+
+EXECUTE sp_rename 'Sales.SalesTerritory', 'SalesTerr';
 GO
 ```
 
@@ -151,7 +152,8 @@ The following example renames the `TerritoryID` column in the `SalesTerritory` t
 ```sql
 USE AdventureWorks2022;
 GO
-EXEC sp_rename 'Sales.SalesTerritory.TerritoryID', 'TerrID', 'COLUMN';
+
+EXECUTE sp_rename 'Sales.SalesTerritory.TerritoryID', 'TerrID', 'COLUMN';
 GO
 ```
 
@@ -162,7 +164,8 @@ The following example renames the `IX_ProductVendor_VendorID` index to `IX_Vendo
 ```sql
 USE AdventureWorks2022;
 GO
-EXEC sp_rename N'Purchasing.ProductVendor.IX_ProductVendor_VendorID', N'IX_VendorID', N'INDEX';
+
+EXECUTE sp_rename N'Purchasing.ProductVendor.IX_ProductVendor_VendorID', N'IX_VendorID', N'INDEX';
 GO
 ```
 
@@ -173,7 +176,8 @@ The following example renames the `Phone` alias data type to `Telephone`.
 ```sql
 USE AdventureWorks2022;
 GO
-EXEC sp_rename N'Phone', N'Telephone', N'USERDATATYPE';
+
+EXECUTE sp_rename N'Phone', N'Telephone', N'USERDATATYPE';
 GO
 ```
 
@@ -184,29 +188,34 @@ The following examples rename a PRIMARY KEY constraint, a CHECK constraint and a
 ```sql
 USE AdventureWorks2022;
 GO
+
 -- Return the current Primary Key, Foreign Key and Check constraints for the Employee table.
-SELECT name, SCHEMA_NAME(schema_id) AS schema_name, type_desc
+SELECT name,
+       SCHEMA_NAME(schema_id) AS schema_name,
+       type_desc
 FROM sys.objects
 WHERE parent_object_id = (OBJECT_ID('HumanResources.Employee'))
-AND type IN ('C','F', 'PK');
+      AND type IN ('C', 'F', 'PK');
 GO
 
 -- Rename the primary key constraint.
-EXEC sp_rename 'HumanResources.PK_Employee_BusinessEntityID', 'PK_EmployeeID';
+EXECUTE sp_rename 'HumanResources.PK_Employee_BusinessEntityID', 'PK_EmployeeID';
 GO
 
 -- Rename a check constraint.
-EXEC sp_rename 'HumanResources.CK_Employee_BirthDate', 'CK_BirthDate';
+EXECUTE sp_rename 'HumanResources.CK_Employee_BirthDate', 'CK_BirthDate';
 GO
 
 -- Rename a foreign key constraint.
-EXEC sp_rename 'HumanResources.FK_Employee_Person_BusinessEntityID', 'FK_EmployeeID';
+EXECUTE sp_rename 'HumanResources.FK_Employee_Person_BusinessEntityID', 'FK_EmployeeID';
 
 -- Return the current Primary Key, Foreign Key and Check constraints for the Employee table.
-SELECT name, SCHEMA_NAME(schema_id) AS schema_name, type_desc
+SELECT name,
+       SCHEMA_NAME(schema_id) AS schema_name,
+       type_desc
 FROM sys.objects
 WHERE parent_object_id = (OBJECT_ID('HumanResources.Employee'))
-AND type IN ('C','F', 'PK');
+      AND type IN ('C', 'F', 'PK');
 GO
 ```
 
@@ -244,13 +253,13 @@ The following example creates a statistics object named `contactMail1` and then 
 
 ```sql
 CREATE STATISTICS ContactMail1
-    ON Person.Person (BusinessEntityID, EmailPromotion)
+    ON Person.Person(BusinessEntityID, EmailPromotion)
     WITH SAMPLE 5 PERCENT;
 
-EXEC sp_rename 'Person.Person.ContactMail1', 'NewContact','Statistics';
+EXECUTE sp_rename 'Person.Person.ContactMail1', 'NewContact', 'Statistics';
 ```
 
-## Examples: [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)]
+## Examples: Azure Synapse Analytics
 
 ### G. Rename a column
 
@@ -261,7 +270,8 @@ The following example renames the `c1` column in the `table1` table to `col1`.
 
 ```sql
 CREATE TABLE table1 (c1 INT, c2 INT);
-EXEC sp_rename 'table1.c1', 'col1', 'COLUMN';
+
+EXECUTE sp_rename 'table1.c1', 'col1', 'COLUMN';
 GO
 ```
 
@@ -270,7 +280,10 @@ GO
 The following example renames the table `dbo.table1` to `dbo.table2`, using the `OBJECT` type.
 
 ```sql
-EXEC sp_rename @objname = 'dbo.table1', @newname = 'table2', @objtype = 'OBJECT';
+EXECUTE sp_rename
+    @objname = 'dbo.table1',
+    @newname = 'table2',
+    @objtype = 'OBJECT';
 ```
 
 ## Related content

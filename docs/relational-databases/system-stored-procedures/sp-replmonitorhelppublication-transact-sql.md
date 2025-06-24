@@ -4,7 +4,7 @@ description: Returns current status information for one or more publications at 
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"
@@ -107,4 +107,4 @@ Only members of the **db_owner** or **replmonitor** fixed database role on the d
 
 ## Related content
 
-- [Programmatically Monitor Replication](../replication/monitor/programmatically-monitor-replication.md)
+- [Programmatically monitor replication](../replication/monitor/programmatically-monitor-replication.md)

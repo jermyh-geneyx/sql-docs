@@ -4,7 +4,7 @@ description: sp_remoteoption displays or changes options for a remote login defi
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -47,4 +47,4 @@ This stored procedure returns the following error message:
 
 ## Related content
 
-- [Linked Servers (Database Engine)](../linked-servers/linked-servers-database-engine.md)
+- [Linked servers (Database Engine)](../linked-servers/linked-servers-database-engine.md)

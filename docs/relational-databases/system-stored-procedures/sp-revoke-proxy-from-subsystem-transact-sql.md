@@ -4,7 +4,7 @@ description: sp_revoke_proxy_from_subsystem revokes access to a subsystem from a
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/22/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -116,7 +116,7 @@ The following example revokes access to the [!INCLUDE [ssIS](../../includes/ssis
 USE msdb;
 GO
 
-EXEC dbo.sp_revoke_proxy_from_subsystem
+EXECUTE dbo.sp_revoke_proxy_from_subsystem
     @proxy_name = 'Catalog application proxy',
     @subsystem_name = N'Dts';
 ```

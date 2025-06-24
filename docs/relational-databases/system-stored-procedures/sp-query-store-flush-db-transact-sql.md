@@ -4,7 +4,7 @@ description: "Flushes the in-memory portion of the Query Store data to disk."
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/07/2025
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -45,7 +45,7 @@ None.
 
 ## Remarks
 
-If [Query Store for secondary replicas](../performance/query-store-for-secondary-replicas.md) is enabled, when `sys.sp_query_store_flush_db` is executed on a secondary replica, that secondary replica's cache is forced to flush to the cache on the primary replica. This can accelerate the Query Store cache data being synced to the primary replica, if the secondary replica cache flush is otherwise delayed under heavy workload.
+If [Query Store for readable secondaries](../performance/query-store-for-secondary-replicas.md) is enabled, when `sys.sp_query_store_flush_db` is executed on a secondary replica, that secondary replica's cache is forced to flush to the cache on the primary replica. This can accelerate the Query Store cache data being synced to the primary replica, if the secondary replica cache flush is otherwise delayed under heavy workload.
 
 ## Permissions
 
@@ -56,13 +56,13 @@ Requires the ALTER permission on the database.
 The following example flushes the in-memory portion of the Query Store data to disk.
 
 ```sql
-EXEC sp_query_store_flush_db;
+EXECUTE sp_query_store_flush_db;
 ```
 
 ## Related content
 
 - [Monitor performance by using the Query Store](../performance/monitoring-performance-by-using-the-query-store.md)
-- [Query Store for secondary replicas](../performance/query-store-for-secondary-replicas.md)
+- [Query Store for readable secondaries](../performance/query-store-for-secondary-replicas.md)
 - [sp_query_store_force_plan (Transact-SQL)](sp-query-store-force-plan-transact-sql.md)
 - [sp_query_store_remove_query (Transact-SQL)](sp-query-store-remove-query-transact-sql.md)
 - [sp_query_store_unforce_plan (Transact-SQL)](sp-query-store-unforce-plan-transact-sql.md)

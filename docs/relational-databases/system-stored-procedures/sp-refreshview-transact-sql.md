@@ -1,10 +1,10 @@
 ---
-title: "sp_refreshview updates the metadata for the specified non-schema-bound view."
-description: "sp_refreshview (Transact-SQL)"
+title: "sp_refreshview (Transact-SQL)"
+description: sp_refreshview updates the metadata for the specified non-schema-bound view.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/21/2024
+ms.date: 06/23/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -70,11 +70,13 @@ Assume that the table `Person.Person` was changed in a way that would affect the
 ```sql
 USE AdventureWorks2022;
 GO
-SELECT DISTINCT 'EXEC sp_refreshview ''' + name + ''''
+
+SELECT DISTINCT 'EXECUTE sp_refreshview ''' + name + ''''
 FROM sys.objects AS so
-INNER JOIN sys.sql_expression_dependencies AS sed
-    ON so.object_id = sed.referencing_id
-WHERE so.type = 'V' AND sed.referenced_id = OBJECT_ID('Person.Person');
+     INNER JOIN sys.sql_expression_dependencies AS sed
+         ON so.object_id = sed.referencing_id
+WHERE so.type = 'V'
+      AND sed.referenced_id = OBJECT_ID('Person.Person');
 ```
 
 ## Related content
