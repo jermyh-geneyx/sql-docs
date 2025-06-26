@@ -121,6 +121,9 @@ The following sections identify features that are improved or introduced in [!IN
 
 ## New developer editions
 
+> [!NOTE]
+> Full edition and feature support for SQL Server 2025 is not completely documented until the product is generally available (GA). The features and editions described in this article are subject to change until GA.
+
 The following free editions are designed to provide all the features of their corresponding paid editions. They can be used to develop SQL Server applications without requiring a paid license.
 
 For features by edition, review [Editions and supported features of SQL Server 2025 Preview](editions-and-components-of-sql-server-2025.md).
