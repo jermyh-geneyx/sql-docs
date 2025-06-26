@@ -4,7 +4,7 @@ description: This quickstart describes installing Python, and mssql-python then 
 author: dlevy-msft-sql
 ms.author: dlevy
 ms.reviewer: vanto, randolphwest
-ms.date: 06/18/2025
+ms.date: 06/26/2025
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: quickstart-sdk
@@ -161,7 +161,7 @@ Use a SQL query string to execute a query and parse the results.
    ```python
    records = cursor.fetchall()
    for r in records:
-       print(f"{r[0]}\t{r[2]}\t{r[1]}")
+       print(f"{r.CustomerID}\t{r.OrderCount}\t{r.CompanyName}")
    ```
 
 1. **Save** the `app.py` file.
