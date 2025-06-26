@@ -105,6 +105,9 @@ For more information, see [Server Auditing Settings - Create Or Update](/rest/ap
 
 ---
 
+> [!NOTE] 
+> When auditing is configured using a managed identity, copying the database to a new server or creating a geo-replica may break audit logging. This is because the new server has a different managed identity, which might not have access to the audit storage account. Ensure the new server's identity is granted appropriate permissions to maintain audit continuity.
+
 ## Configure system-assigned managed identity for Azure Synapse Analytics auditing
 
 You can't use UMI based authentication to a storage account for auditing. Only system-assigned managed identity (SMI) can be used for Azure Synapse Analytics. For SMI authentication to work, the managed identity must have the **Storage Blob Data Contributor** role assigned to it, in the storage account's **Access Control** settings. This role is automatically added if Azure portal is used to configure auditing.

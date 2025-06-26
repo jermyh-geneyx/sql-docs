@@ -10,7 +10,7 @@ metadata:
   ms.author: wiassaf
   ms.reviewer: scottkim, mathoma, urosmil
   ms.custom: azure-sql-split
-  ms.date: 06/19/2024
+  ms.date: 06/25/2025
   monikerRange: "=azuresql||=azuresql-mi"
 
 title: Maintenance window FAQ for Azure SQL Managed Instance
@@ -44,7 +44,7 @@ sections:
         
       - question: Would I receive a notification of the maintenance window?
         answer: |
-          You can opt in to receive notification up to 26 hours before the maintenance event, immediately before maintenance starts, and when the maintenance window is completed. The Resource health center can be checked for more information. To receive emails, advance notifications must be configured. For more information, see [Advance notifications](advance-notifications.md).
+          You can opt in to receive notification 24 hours before the maintenance event, immediately before maintenance starts, and when the maintenance window is completed. The Resource health center can be checked for more information. To receive emails, advance notifications must be configured. For more information, see [Advance notifications](advance-notifications.md).
 
       - question: In which service level objectives (SLOs) can I choose a maintenance window? 
         answer: |
