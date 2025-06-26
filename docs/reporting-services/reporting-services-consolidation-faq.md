@@ -32,7 +32,7 @@ You can install PBIRS through [Install Power BI Report Server](/power-bi/report-
 
 ### Why are we making this change?
 
-SSRS represents a subset of PBIRS, offering only RDL capabilities. By transitioning to PBIRS, customers can access advanced functionalities, including rich and interactive PBIX reports, which aren't available in SSRS. Adopting PBIRS enables customers to seamlessly move to their reporting capabilities to the cloud when they're ready.
+SSRS represents a subset of PBIRS, offering only RDL capabilities. By transitioning to PBIRS, customers can access advanced functionalities, including rich and interactive PBIX reports, which aren't available in SSRS. Adopting PBIRS enables customers to seamlessly move their reporting capabilities to the cloud when they're ready.
 
 ### How is PBIRS different and similar to SSRS?
 
