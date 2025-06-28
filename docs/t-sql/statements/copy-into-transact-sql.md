@@ -629,9 +629,6 @@ When a column list isn't specified, COPY maps columns based on the source and ta
 
 #### *External location*
 
-> [!NOTE]
-> [Fabric OneLake](/fabric/onelake/onelake-overview) paths are currently not supported, only BLOB and ADLS Gen2 storage accounts are supported.
-
 Specifies where the files containing the data is staged. Currently Azure Data Lake Storage (ADLS) Gen2 and Azure Blob Storage are supported:
 
 - *External location* for Blob Storage: `https://<account\>.blob.core.windows.net/<container\>/<path\>`
@@ -802,6 +799,16 @@ Parser version 1.0 is available for backward compatibility only, and should be u
 > [!NOTE]  
 > *MATCH_COLUMN_COUNT* works independently from *MAXERRORS*. A column count mismatch causes `COPY INTO` to fail regardless of *MAXERRORS*.
 
+## Using COPY INTO with OneLake (Public Preview)
+You can now use `COPY INTO` to load data directly from files stored in **OneLake**, specifically from the **Files folder** of a Lakehouse. This eliminates the need for external staging accounts (such as ADLS Gen2 or Blob Storage) and enables workspace-governed, SaaS-native ingestion using Fabric permissions.
+
+This functionality supports:
+- Reading from `Files` folders in Lakehouses
+- Workspace-to-Warehouse loads within the same tenant
+- Native identity enforcement using Microsoft Entra ID
+> [!NOTE]
+> This feature is currently in Public Preview.
+
 ## Permissions
 
 ### Control plane permissions
@@ -821,13 +828,27 @@ GO
 GRANT INSERT to [mike@contoso.com];
 GO
 ```
-
 > [!NOTE]  
 > When using the *ErrorFile* option, the user must have the minimal permission of Blob Storage Contributor on the Storage Account container.
+
+> [!NOTE]
+> When using OneLake as the source (Public Preview), the user must have **Contributor** or higher permissions on both the **source workspace** (where the Lakehouse is located) and the **target workspace** (where the Warehouse resides).  
+> All access is governed via Microsoft Entra ID and Fabric workspace roles.
 
 ## Remarks
 
 The COPY statement accepts only UTF-8 and UTF-16 valid characters for row data and command parameters. Source files or parameters (such as ROW TERMINATOR or FIELD TERMINATOR) that use invalid characters may be interpreted incorrectly by the COPY statement and cause unexpected results such as data corruption, or other failures. Make sure your source files and parameters are UTF-8 or UTF-16 compliant before you invoke the COPY statement.  
+
+## Limitations for OneLake as source (Public Preview)
+
+- **Only Microsoft Entra ID authentication is supported.** Other authentication methods, such as SAS tokens, shared keys, or connection strings, are not permitted.
+
+- **Only the `Files` folder of a Lakehouse is supported as a source.** Access to subfolders, shortcuts, or other OneLake locations is not currently available.
+
+- **OneLake paths must use workspace and warehouse IDs.** Friendly names for workspaces or Lakehouses are not supported at this time.
+
+- **Contributor permissions are required on both workspaces.** The executing user must have at least Contributor role on the source Lakehouse workspace and the target Warehouse workspace.
+
 
 ## Examples
 
@@ -929,6 +950,17 @@ WITH (
     CREDENTIAL=(IDENTITY= 'Shared Access Signature', SECRET='<Your_SAS_Token>')
     FIELDTERMINATOR = '|'
 )
+```
+
+### F. Load data from OneLake (Public Preview)
+
+```sql
+COPY INTO t1
+FROM 'https://onelake.dfs.fabric.microsoft.com/<workspaceId>/<lakehouseId>/Files/*.csv'
+WITH (
+    FILE_TYPE = 'CSV',
+    FIRSTROW = 2
+);
 ```
 
 ## FAQ
