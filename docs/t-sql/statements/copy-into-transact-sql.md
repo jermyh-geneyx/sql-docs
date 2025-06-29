@@ -1,11 +1,11 @@
 ---
-title: COPY INTO (Transact-SQL)
+title: "COPY INTO (Transact-SQL)"
 titleSuffix: Azure Synapse Analytics and Microsoft Fabric
 description: Use the COPY statement in Azure Synapse Analytics and Warehouse in Microsoft Fabric for loading from external storage accounts.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: procha, mikeray, fresantos
-ms.date: 02/26/2025
+ms.date: 06/29/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -16,7 +16,7 @@ f1_keywords:
   - "LOAD"
 dev_langs:
   - "TSQL"
-monikerRange: "=azure-sqldw-latest||=fabric"
+monikerRange: "=azure-sqldw-latest || =fabric"
 ---
 # COPY INTO (Transact-SQL)
 
@@ -141,7 +141,7 @@ Multiple file locations can only be specified from the same storage account and 
 
 *FILE_TYPE* specifies the format of the external data.
 
-- CSV: Specifies a comma-separated values file compliant to the [RFC 4180](https://tools.ietf.org/html/rfc4180) standard.
+- CSV: Specifies a comma-separated values file compliant to the [RFC 4180](https://datatracker.ietf.org/doc/html/rfc4180) standard.
 - PARQUET: Specifies a Parquet format.
 - ORC: Specifies an Optimized Row Columnar (ORC) format.
 
@@ -174,28 +174,28 @@ Multiple file locations can only be specified from the same storage account and 
 
   - *IDENTITY: A constant with a value of 'Shared Access Signature'*
   - *SECRET: The* [*shared access signature*](/azure/storage/common/storage-sas-overview) *provides delegated access to resources in your storage account.*
-  -  Minimum permissions required: READ and LIST
+-  Minimum permissions required: READ and LIST
 
 - Authenticating with [*Service Principals*](/azure/sql-data-warehouse/sql-data-warehouse-load-from-azure-data-lake-store#create-a-credential)
 
   - *IDENTITY: \<ClientID\>@<OAuth_2.0_Token_EndPoint>*
   - *SECRET: Microsoft Entra application service principal key*
-  -  Minimum RBAC roles required: Storage blob data contributor, Storage blob data contributor, Storage blob data owner, or Storage blob data reader
+-  Minimum RBAC roles required: Storage blob data contributor, Storage blob data contributor, Storage blob data owner, or Storage blob data reader
 
 - Authenticating with Storage account key
 
   - *IDENTITY: A constant with a value of 'Storage Account Key'*
-  - *SECRET: Storage account key*
+- *SECRET: Storage account key*
 
 - Authenticating with [Managed Identity](/azure/sql-data-warehouse/load-data-from-azure-blob-storage-using-polybase#authenticate-using-managed-identities-to-load-optional) (VNet Service Endpoints)
 
   - *IDENTITY: A constant with a value of 'Managed Identity'*
-  - Minimum RBAC roles required: Storage blob data contributor or Storage blob data owner for the Microsoft Entra registered [logical server in Azure](/azure/azure-sql/database/logical-servers). When using a dedicated SQL pool (formerly SQL DW) that is not associated with a Synapse Workspace this RBAC role is not required, but the managed identity requires Access Control List (ACL) permissions on the target objects to enable read access to the source files
+- Minimum RBAC roles required: Storage blob data contributor or Storage blob data owner for the Microsoft Entra registered [logical server in Azure](/azure/azure-sql/database/logical-servers). When using a dedicated SQL pool (formerly SQL DW) that is not associated with a Synapse Workspace this RBAC role is not required, but the managed identity requires Access Control List (ACL) permissions on the target objects to enable read access to the source files
 
 - Authenticating with a Microsoft Entra user
 
   - *CREDENTIAL isn't required*
-  - Minimum RBAC roles required: Storage blob data contributor or Storage blob data owner for the Microsoft Entra user
+- Minimum RBAC roles required: Storage blob data contributor or Storage blob data owner for the Microsoft Entra user
 
 #### *ERRORFILE = Directory Location*
 
@@ -218,23 +218,23 @@ If ERRORFILE has the full path of the storage account defined, then the ERRORFIL
 - Authenticating with Shared Access Signatures (SAS)
   - *IDENTITY: A constant with a value of 'Shared Access Signature'*
   - *SECRET: The* [*shared access signature*](/azure/storage/common/storage-sas-overview) *provides delegated access to resources in your storage account.*
-  - Minimum permissions required: READ, LIST, WRITE, CREATE, DELETE
+- Minimum permissions required: READ, LIST, WRITE, CREATE, DELETE
 
 - Authenticating with [*Service Principals*](/azure/sql-data-warehouse/sql-data-warehouse-load-from-azure-data-lake-store#create-a-credential)
   - *IDENTITY: \<ClientID\>@<OAuth_2.0_Token_EndPoint>*
   - *SECRET: Microsoft Entra application service principal key*
-  - Minimum RBAC roles required: Storage blob data contributor or Storage blob data owner
+- Minimum RBAC roles required: Storage blob data contributor or Storage blob data owner
 
 > [!NOTE]  
 > Use the OAuth 2.0 token endpoint **V1**
 
 - Authenticating with [Managed Identity](/azure/sql-data-warehouse/load-data-from-azure-blob-storage-using-polybase#authenticate-using-managed-identities-to-load-optional) (VNet Service Endpoints)
   - *IDENTITY: A constant with a value of 'Managed Identity'*
-  - Minimum RBAC roles required: Storage blob data contributor or Storage blob data owner for the Microsoft Entra registered SQL Database server
+- Minimum RBAC roles required: Storage blob data contributor or Storage blob data owner for the Microsoft Entra registered SQL Database server
 
 - Authenticating with a Microsoft Entra user
   - *CREDENTIAL isn't required*
-  - Minimum RBAC roles required: Storage blob data contributor or Storage blob data owner for the Microsoft Entra user
+- Minimum RBAC roles required: Storage blob data contributor or Storage blob data owner for the Microsoft Entra user
 
 Using a storage account key with ERRORFILE_CREDENTIAL is not supported. 
 
@@ -345,7 +345,7 @@ GRANT ALTER on SCHEMA::HR to [mike@contoso.com];
 
 ## Remarks
 
-The COPY statement accepts only UTF-8 and UTF-16 valid characters for row data and command parameters. Source files or parameters (such as ROW TERMINATOR or FIELD TERMINATOR) that use invalid characters may be interpreted incorrectly by the COPY statement and cause unexpected results such as data corruption, or other failures. Make sure your source files and parameters are UTF-8 or UTF-16 compliant before you invoke the COPY statement.  
+The COPY statement accepts only UTF-8 and UTF-16 valid characters for row data and command parameters. Source files or parameters (such as ROW TERMINATOR or FIELD TERMINATOR) that use invalid characters might be interpreted incorrectly by the COPY statement and cause unexpected results such as data corruption, or other failures. Make sure your source files and parameters are UTF-8 or UTF-16 compliant before you invoke the COPY statement.  
 
 ## Examples
 
@@ -488,11 +488,11 @@ The COPY command has better performance depending on your workload.
 
 - Compressed files can't be split automatically. For best loading performance, consider splitting your input into multiple files when loading compressed CSVs.
 
-- Large uncompressed CSV files can be split and loaded in parallel automatically, so there's no need to manually split uncompressed CSV files in most cases. In certain cases where auto file splitting isn't feasible due to data characteristics, manually splitting large CSVs may still benefit performance.
+- Large uncompressed CSV files can be split and loaded in parallel automatically, so there's no need to manually split uncompressed CSV files in most cases. In certain cases where auto file splitting isn't feasible due to data characteristics, manually splitting large CSVs might still benefit performance.
 
 ### What is the file splitting guidance for the COPY command loading compressed CSV files?
 
-Guidance on the number of files is outlined in the following table. Once the recommended number of files are reached, you have better performance the larger the files. The number of files is determined by number of compute nodes multiplied by 60. For example, at 6000DWU we have 12 compute nodes and 12*60 = 720 partitions.  For a simple file splitting experience, refer to [How to maximize COPY load throughput with file splits](https://techcommunity.microsoft.com/t5/azure-synapse-analytics/how-to-maximize-copy-load-throughput-with-file-splits/ba-p/1314474).
+Guidance on the number of files is outlined in the following table. Once the recommended number of files are reached, you have better performance the larger the files. The number of files is determined by number of compute nodes multiplied by 60. For example, at 6000DWU we have 12 compute nodes and 12*60 = 720 partitions. For a simple file splitting experience, refer to [How to maximize COPY load throughput with file splits](https://techcommunity.microsoft.com/blog/azuresynapseanalyticsblog/how-to-maximize-copy-load-throughput-with-file-splits/1314474).
 
 | DWU | #Files |
 | :---: | :---: |
@@ -523,7 +523,7 @@ There are no limitations on the number or size of files; however, for best perfo
 
 ### Are there any known issues with the COPY statement?
 
-If you have an Azure Synapse workspace that was created prior to December 7, 2020, you may run into a similar error message when authenticating using Managed Identity: `com.microsoft.sqlserver.jdbc.SQLServerException: Managed Service Identity has not been enabled on this server. Please enable Managed Service Identity and try again.`
+If you have an Azure Synapse workspace that was created prior to December 7, 2020, you might run into a similar error message when authenticating using Managed Identity: `com.microsoft.sqlserver.jdbc.SQLServerException: Managed Service Identity has not been enabled on this server. Please enable Managed Service Identity and try again.`
 
 Follow these steps to work around this issue by re-registering the workspace's managed identity:
 
@@ -534,7 +534,7 @@ Follow these steps to work around this issue by re-registering the workspace's m
    Select-AzSubscription -SubscriptionId <subscriptionId>
    Set-AzSqlServer -ResourceGroupName your-database-server-resourceGroup -ServerName your-SQL-servername -AssignIdentity
    ```
-   
+
 ## Related content
 
 - [Loading overview with [!INCLUDE[ssazuresynapse-md](../../includes/ssazuresynapse-md.md)]](/azure/sql-data-warehouse/design-elt-data-loading)
@@ -670,7 +670,7 @@ To access files on Azure Data Lake Storage (ADLS) Gen2 and Azure Blob Storage lo
 
 *FILE_TYPE* specifies the format of the external data.
 
-- CSV: Specifies a comma-separated values file compliant to the [RFC 4180](https://tools.ietf.org/html/rfc4180) standard.
+- CSV: Specifies a comma-separated values file compliant to the [RFC 4180](https://datatracker.ietf.org/doc/html/rfc4180) standard.
 - PARQUET: Specifies a Parquet format.
 
 #### *CREDENTIAL (IDENTITY = '', SECRET = '')*
@@ -683,12 +683,12 @@ To access files on Azure Data Lake Storage (ADLS) Gen2 and Azure Blob Storage lo
 
   - *IDENTITY: A constant with a value of 'Shared Access Signature'*
   - *SECRET: The* [*shared access signature*](/azure/storage/common/storage-sas-overview) *provides delegated access to resources in your storage account.*
-  -  Minimum permissions required: READ and LIST
+-  Minimum permissions required: READ and LIST
 
 - Authenticating with Storage Account Key
 
   - *IDENTITY: A constant with a value of 'Storage Account Key'*
-  - *SECRET: Storage account key*
+- *SECRET: Storage account key*
 
 #### *ERRORFILE = Directory Location*
 
@@ -705,12 +705,12 @@ When using a firewall protected Azure Storage Account, the error file will be cr
 
 #### *ERRORFILE_CREDENTIAL = (IDENTITY= '', SECRET = '')*
 
-*ERRORFILE_CREDENTIAL* only applies to CSV files.  On [!INCLUDE [fabricdw](../../includes/fabric-dw.md)] in [!INCLUDE [fabric](../../includes/fabric.md)], the only supported authentication mechanism is Shared Access Signature (SAS).
+*ERRORFILE_CREDENTIAL* only applies to CSV files. On [!INCLUDE [fabricdw](../../includes/fabric-dw.md)] in [!INCLUDE [fabric](../../includes/fabric.md)], the only supported authentication mechanism is Shared Access Signature (SAS).
 
 - Authenticating with Shared Access Signatures (SAS)
   - *IDENTITY: A constant with a value of 'Shared Access Signature'*
   - *SECRET: The* [*shared access signature*](/azure/storage/common/storage-sas-overview) *provides delegated access to resources in your storage account.*
-  - Minimum permissions required: READ, LIST, WRITE, CREATE, DELETE
+- Minimum permissions required: READ, LIST, WRITE, CREATE, DELETE
 
 > [!NOTE]  
 > If you are using the same storage account for your ERRORFILE and specifying the ERRORFILE path relative to the root of the container, you do not need to specify the ERROR_CREDENTIAL.
@@ -794,20 +794,21 @@ Parser version 1.0 is available for backward compatibility only, and should be u
   - If a value is not provided to a non-nullable column, the COPY command fails.
 - If *MATCH_COLUMN_COUNT* is `ON`:
   - The COPY command checks if the column count on each row in each file from the source matches the column count of the destination table.
-  - If there is a column count mismatch, the COPY command fails.
- 
+- If there is a column count mismatch, the COPY command fails.
+
 > [!NOTE]  
 > *MATCH_COLUMN_COUNT* works independently from *MAXERRORS*. A column count mismatch causes `COPY INTO` to fail regardless of *MAXERRORS*.
 
-## Using COPY INTO with OneLake (Public Preview)
-You can now use `COPY INTO` to load data directly from files stored in **OneLake**, specifically from the **Files folder** of a Lakehouse. This eliminates the need for external staging accounts (such as ADLS Gen2 or Blob Storage) and enables workspace-governed, SaaS-native ingestion using Fabric permissions.
+## Use COPY INTO with OneLake
 
-This functionality supports:
+You can now use `COPY INTO` to load data directly from files stored in the Fabric OneLake, specifically from the **Files folder** of a Fabric Lakehouse. This eliminates the need for external staging accounts (such as ADLS Gen2 or Blob Storage) and enables workspace-governed, SaaS-native ingestion using Fabric permissions. This functionality supports:
+
 - Reading from `Files` folders in Lakehouses
-- Workspace-to-Warehouse loads within the same tenant
+- Workspace-to-warehouse loads within the same tenant
 - Native identity enforcement using Microsoft Entra ID
+
 > [!NOTE]
-> This feature is currently in Public Preview.
+> This feature is currently in [preview](/fabric/fundamentals/preview).
 
 ## Permissions
 
@@ -837,7 +838,7 @@ GO
 
 ## Remarks
 
-The COPY statement accepts only UTF-8 and UTF-16 valid characters for row data and command parameters. Source files or parameters (such as ROW TERMINATOR or FIELD TERMINATOR) that use invalid characters may be interpreted incorrectly by the COPY statement and cause unexpected results such as data corruption, or other failures. Make sure your source files and parameters are UTF-8 or UTF-16 compliant before you invoke the COPY statement.  
+The COPY statement accepts only UTF-8 and UTF-16 valid characters for row data and command parameters. Source files or parameters (such as `ROW TERMINATOR` or `FIELD TERMINATOR`) that use invalid characters might be interpreted incorrectly by the COPY statement and cause unexpected results such as data corruption, or other failures. Make sure your source files and parameters are UTF-8 or UTF-16 compliant before you invoke the COPY statement.  
 
 ## Limitations for OneLake as source (Public Preview)
 
@@ -848,7 +849,6 @@ The COPY statement accepts only UTF-8 and UTF-16 valid characters for row data a
 - **OneLake paths must use workspace and warehouse IDs.** Friendly names for workspaces or Lakehouses are not supported at this time.
 
 - **Contributor permissions are required on both workspaces.** The executing user must have at least Contributor role on the source Lakehouse workspace and the target Warehouse workspace.
-
 
 ## Examples
 
