@@ -1,10 +1,10 @@
 ---
-title: "SQL injection"
+title: "SQL Injection"
 description: Learn how SQL injection attacks work. Mitigate such attacks by validating input and reviewing code for SQL injection in SQL Server.
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 05/03/2024
+ms.date: 06/30/2025
 ms.service: sql
 ms.subservice: security
 ms.topic: conceptual
@@ -86,7 +86,7 @@ Always validate user input by testing type, length, format, and range. When you 
 
 - Don't accept the following strings in fields from which file names can be constructed: `AUX`, `CLOCK$`, `COM1` through `COM8`, `CON`, `CONFIG$`, `LPT1` through `LPT8`, `NUL`, and `PRN`.
 
-When you can, reject input that contains the following characters.
+If possible, reject input that contains the following characters.
 
 | Input character | Meaning in Transact-SQL |
 | --- | --- |
@@ -133,7 +133,9 @@ SqlParameter parm = myCommand.SelectCommand.Parameters.Add("@au_id",
 parm.Value = Login.Text;
 ```
 
-### <a id="filtering-input"></a> Filter input
+<a id="filtering-input"></a>
+
+### Filter input
 
 Filtering input might also be helpful in protecting against SQL injection by removing escape characters. However, because of the large number of characters that might pose problems, filtering isn't a reliable defense. The following example searches for the character string delimiter.
 
@@ -154,7 +156,9 @@ s = s.Replace("%", "[%]");
 s = s.Replace("_", "[_]");
 ```
 
-## <a id="reviewing-code-for-sql-injection"></a> Review code for SQL injection
+<a id="reviewing-code-for-sql-injection"></a>
+
+## Review code for SQL injection
 
 You should review all code that calls `EXECUTE`, `EXEC`, or `sp_executesql`. You can use queries similar to the following to help you identify procedures that contain these statements. This query checks for 1, 2, 3, or 4 spaces after the words `EXECUTE` or `EXEC`.
 
@@ -172,7 +176,9 @@ WHERE UPPER(TEXT) LIKE '%EXECUTE (%'
     OR UPPER(TEXT) LIKE '%SP_EXECUTESQL%';
 ```
 
-### <a id="wrapping-parameters-with-quotename-and-replace"></a> Wrap parameters with QUOTENAME() and REPLACE()
+<a id="wrapping-parameters-with-quotename-and-replace"></a>
+
+### Wrap parameters with QUOTENAME() and REPLACE()
 
 In each selected stored procedure, verify that all variables that are used in dynamic Transact-SQL are handled correctly. Data that comes from the input parameters of the stored procedure or that is read from a table should be wrapped in `QUOTENAME()` or `REPLACE()`. Remember that the value of *@variable* that is passed to `QUOTENAME()` is of **sysname**, and has a maximum length of 128 characters.
 
@@ -211,7 +217,7 @@ DECLARE @command VARCHAR(200)
 
 -- Construct the dynamic Transact-SQL.
 SET @command = 'UPDATE Users SET password=' + QUOTENAME(@new, '''')
-    + ' WHERE username=' + QUOTENAME(@loginname, '''') 
+    + ' WHERE username=' + QUOTENAME(@loginname, '''')
     + ' AND password=' + QUOTENAME(@old, '''')
 
 -- Execute the command.
