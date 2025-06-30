@@ -1,14 +1,14 @@
 ---
-title: Server roles
+title: Server Roles
 titleSuffix: Azure SQL Database
 description: This article provides an overview of server roles for the logical server of Azure SQL Database.
 author: VanMSFT
 ms.author: vanto
-ms.reviewer: wiassaf, vanto, mathoma, randolphwest
-ms.date: 05/09/2024
+ms.reviewer: wiassaf, mathoma, randolphwest
+ms.date: 06/30/2025
 ms.service: azure-sql-database
 ms.subservice: security
-ms.topic: concept-article 
+ms.topic: concept-article
 ---
 
 # Azure SQL Database server roles for permission management
@@ -34,7 +34,7 @@ Like SQL Server on-premises, server permissions are organized hierarchically. Th
 For example, the server-level role `##MS_ServerStateReader##` holds the permission `VIEW SERVER STATE`. If a login who is member of this role has a user account in the databases `master` and `WideWorldImporters`, this user has the permission `VIEW DATABASE STATE` in those two databases.
 
 > [!NOTE]  
-> Any permission can be denied within user databases, in effect, overriding the server-wide grant via role membership. However, in the system database *master*, permissions can't be granted or denied.
+> Any permission can be denied within user databases, in effect, overriding the server-wide grant via role membership. However, in the system database `master`, permissions can't be granted or denied.
 
 Azure SQL Database currently provides seven fixed server roles. The permissions that are granted to the fixed server roles can't be changed and these roles can't have other fixed roles as members. You can add server-level logins as members to server-level roles.
 
@@ -163,7 +163,7 @@ GO
 
 #### Part 2: Testing role membership
 
-Log in as login `Jiao` and connect to the user database used in the example.
+Sign in as login `Jiao` and connect to the user database used in the example.
 
 ```sql
 -- retrieve server-level permissions of currently logged on User

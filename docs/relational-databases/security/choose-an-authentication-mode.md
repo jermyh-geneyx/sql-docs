@@ -1,9 +1,9 @@
 ---
-title: "Choose an authentication mode"
+title: "Choose an Authentication Mode"
 description: Choose between Windows Authentication mode and mixed mode authentication for the SQL Server Database Engine at setup time.
 author: VanMSFT
 ms.author: vanto
-ms.date: 09/12/2024
+ms.date: 06/30/2025
 ms.service: sql
 ms.subservice: security
 ms.topic: how-to
@@ -33,7 +33,7 @@ During setup, you must select an authentication mode for the [!INCLUDE [ssDE](..
 
 If you select Mixed Mode Authentication (SQL Server and Windows Authentication mode) during setup, you must provide and then confirm a strong password for the built-in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] system administrator account named `sa`. The `sa` account connects by using [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Authentication.
 
-If you select Windows Authentication during setup, the setup creates the `sa` account for [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] authentication but it's disabled. If you later change to Mixed Mode Authentication and you want to use the `sa` account, you must enable the account. Any Windows or [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] account can be configured as a system administrator. Because the `sa` account is well known and often targeted by malicious users, don't enable the `sa` account unless your application requires it. Never set a blank or weak password for the `sa` account. To change from Windows Authentication mode to Mixed Mode Authentication and use [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Authentication, see [Change Server Authentication Mode](../../database-engine/configure-windows/change-server-authentication-mode.md).
+If you select Windows Authentication during setup, the setup creates the `sa` account for [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] authentication but it's disabled. If you later change to Mixed Mode Authentication and you want to use the `sa` account, you must enable the account. Any Windows or [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] account can be configured as a system administrator. Because the `sa` account is well known and often targeted by malicious users, don't enable the `sa` account unless your application requires it. Never set a blank or weak password for the `sa` account. To change from Windows Authentication mode to Mixed Mode Authentication and use [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Authentication, see [Change server authentication mode](../../database-engine/configure-windows/change-server-authentication-mode.md).
 
 ## Connecting through Windows Authentication
 
@@ -48,7 +48,7 @@ By using Windows Authentication, Windows groups can be created at the domain lev
 
 ## Connecting through SQL Server Authentication
 
-When using [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Authentication, logins are created in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] that aren't based on Windows user accounts. Both the user name and the password are created by using [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] and stored in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. Users connecting using [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Authentication must provide their credentials (login and password) every time that they connect. When using [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Authentication, you must set strong passwords for all [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] accounts. For strong password guidelines, see [Strong Passwords](../../relational-databases/security/strong-passwords.md).
+When using [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Authentication, logins are created in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] that aren't based on Windows user accounts. Both the user name and the password are created by using [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] and stored in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. Users connecting using [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Authentication must provide their credentials (login and password) every time that they connect. When using [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Authentication, you must set strong passwords for all [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] accounts. For strong password guidelines, see [Strong Passwords](strong-passwords.md).
 
 Three optional password policies are available for [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] logins.
 
@@ -97,8 +97,8 @@ Three optional password policies are available for [!INCLUDE [ssNoVersion](../..
 - Allows software developers to distribute their applications by using a complex permission hierarchy based on known, preset [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] logins.
 
   > [!NOTE]  
-  > Using [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Authentication does not limit the permissions of local administrators on the computer where [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] is installed.
+  > Using [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Authentication doesn't limit the permissions of local administrators on the computer where [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] is installed.
 
 ## Related content
 
-- [Security Considerations for a SQL Server Installation](../../sql-server/install/security-considerations-for-a-sql-server-installation.md)
+- [Security considerations for a SQL Server installation](../../sql-server/install/security-considerations-for-a-sql-server-installation.md)

@@ -1,9 +1,9 @@
 ---
 title: "Migrate a Node.js Application to Use Passwordless Connections"
 description: Learn how to migrate a Node.js application to use passwordless connections with Azure SQL Database.
-author: diberry
-ms.author: rotabor
-ms.reviewer: mathoma
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: rotabor, diberry, mathoma
 ms.date: 06/13/2025
 ms.service: azure-sql-database
 ms.subservice: security

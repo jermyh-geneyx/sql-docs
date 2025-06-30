@@ -1,6 +1,7 @@
 ---
-author: alexwolfmsft
-ms.author: alexwolf
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: rotabor, alexwolf
 ms.date: 05/11/2023
 ms.topic: include
 ms.service: azure-sql-database

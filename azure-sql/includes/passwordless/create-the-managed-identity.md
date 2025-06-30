@@ -1,6 +1,8 @@
 ---
-author: bobtabor-msft
-ms.author: rotabor
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: rotabor, alexwolf
+
 ms.date: 06/01/2023
 ms.service: azure-sql-database
 ms.topic: include
