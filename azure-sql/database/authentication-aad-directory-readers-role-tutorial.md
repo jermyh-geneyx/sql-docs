@@ -5,7 +5,7 @@ description: This article guides you through enabling the Directory Readers role
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: wiassaf, vanto, mathoma
-ms.date: 06/10/2025
+ms.date: 06/30/2025
 ms.service: azure-sql
 ms.subservice: security
 ms.topic: tutorial
@@ -42,9 +42,9 @@ For more information on the benefits of assigning the Directory Readers role to 
 
 1. A user with [Privileged Role Administrator](/azure/active-directory/roles/permissions-reference#privileged-role-administrator) permissions is required for this initial setup.
 1. Have the privileged user sign into the [Azure portal](https://portal.azure.com).
-1. Go to the **Microsoft Entra ID** resource. Under **Managed**, go to **Groups**. Select **New group** to create a new group.
+1. Go to the **Microsoft Entra ID** resource. Under **Manage**, go to **Groups**. Select **New group** to create a new group.
 1. Select **Security** as the group type, and fill in the rest of the fields. Make sure that the setting **Microsoft Entra roles can be assigned to the group** is switched to **Yes**. Then assign the Microsoft Entra ID **Directory readers** role to the group.
-1. Assign Microsoft Entra users as owner(s) to the group that was created. A group owner can be a regular AD user without any Microsoft Entra administrative role assigned. The owner should be a user that is managing your SQL Database, SQL Managed Instance, or Azure Synapse.
+1. Assign Microsoft Entra users as an owner to the group that was created. A group owner can be a regular AD user without any Microsoft Entra administrative role assigned. The owner should be a user that is managing your SQL Database, SQL Managed Instance, or Azure Synapse.
 1. Select **Create**
 
 <a id="checking-the-group-that-was-created"></a>
@@ -52,7 +52,7 @@ For more information on the benefits of assigning the Directory Readers role to 
 ### Check the group that was created
 
 > [!NOTE]
-> Make sure that the **Group Type** is **Security**. *Microsoft 365* groups are not supported for Azure SQL.
+> Make sure that the **Group Type** is **Security**. *Microsoft 365* groups aren't supported for Azure SQL.
 
 To check and manage the group that was created, go back to the **Groups** pane in the Azure portal, and search for your group name. Additional owners and members can be added under the **Owners** and **Members** menu of **Manage** setting after selecting your group. You can also review the **Assigned roles** for the group.
 
@@ -77,20 +77,18 @@ For subsequent steps, the Privileged Role Administrator user is no longer needed
 
     :::image type="content" source="media/authentication-aad-directory-readers-role-tutorial/azure-ad-managed-instance-service-principal.png" alt-text="Screenshot of the Enterprise applications page for a Microsoft Entra ID resource with the Object ID of the SQL Managed instance highlighted." lightbox="media/authentication-aad-directory-readers-role-tutorial/azure-ad-managed-instance-service-principal.png":::
 
-1. Go to the **Microsoft Entra ID** resource. Under **Managed**, go to **Groups**. Select the group that you created. Under the **Managed** setting of your group, select **Members**. Select **Add members** and add your SQL Managed Instance service principal as a member of the group by searching for the name found above.
-
-   :::image type="content" source="media/authentication-aad-directory-readers-role-tutorial/azure-ad-add-managed-instance-service-principal.png" alt-text="Screenshot of the Members page for a Microsoft Entra resource with the options highlighted for adding a SQL Managed instance as a new member." lightbox="media/authentication-aad-directory-readers-role-tutorial/azure-ad-add-managed-instance-service-principal.png":::
+1. Go to the **Microsoft Entra ID** resource. Under **Manage**, go to **Groups**. Select the group that you created. Under the **Manage** setting of your group, select **Members**. Select **Add members** and add your SQL Managed Instance service principal as a member of the group by searching for the name found above.
 
 > [!NOTE]
-> It can take a few minutes to propagate the service principal permissions through the Azure system, and allow access to Microsoft Graph API. You might have to wait a few minutes before you provision a Microsoft Entra admin for SQL Managed Instance.
+> It can take a few minutes to propagate the service principal permissions through the Azure system, and allow access to Microsoft Graph. You might have to wait a few minutes before you provision a Microsoft Entra admin for SQL Managed Instance.
 
 ### Remarks
 
 For SQL Database and Azure Synapse, the server identity can be created during [logical server](logical-servers.md) creation or after the server is created. For more information on how to create or set the server identity in SQL Database or Azure Synapse, see [Enable service principals to create Microsoft Entra users](authentication-aad-service-principal.md#enable-service-principals-to-create-azure-ad-users).
 
-For SQL Managed Instance, the **Directory Readers** role must be assigned to managed instance identity before you can [set up a Microsoft Entra admin for the managed instance](authentication-aad-configure.md#provision-azure-ad-admin-sql-managed-instance).
+For SQL Managed Instance, the **Directory Readers** role must be assigned to the managed instance identity before you can [set up a Microsoft Entra admin for the managed instance](authentication-aad-configure.md#provision-azure-ad-admin-sql-managed-instance).
 
-Assigning the **Directory Readers** role to the server identity isn't required for SQL Database or Azure Synapse when setting up a Microsoft Entra admin for the logical server. However, to enable Microsoft Entra object creation in SQL Database or Azure Synapse on behalf of a Microsoft Entra application, the **Directory Readers** role is required. If the role isn't assigned to the logical server identity, creating Microsoft Entra users in Azure SQL will fail. For more information, see [Microsoft Entra service principals with Azure SQL](authentication-aad-service-principal.md).
+Assigning the **Directory Readers** role to the server identity isn't required for SQL Database or Azure Synapse when setting up a Microsoft Entra admin for the logical server. However, to enable Microsoft Entra object creation in SQL Database or Azure Synapse on behalf of a Microsoft Entra application, the **Directory Readers** role (or lower level permissions discussed in [Managed identities in Microsoft Entra for Azure SQL](authentication-azure-ad-user-assigned-managed-identity.md)) is required. If the role isn't assigned to the logical server identity, creating Microsoft Entra users in Azure SQL will fail. For more information, see [Microsoft Entra service principals with Azure SQL](authentication-aad-service-principal.md).
 
 ## Directory Readers role assignment using PowerShell
 
