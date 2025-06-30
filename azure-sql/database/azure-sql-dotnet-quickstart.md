@@ -1,9 +1,9 @@
 ---
 title: Connect to and query Azure SQL Database using .NET and the Microsoft.Data.SqlClient library
 description: Learn how to connect to a database in Azure SQL Database and query data using .NET
-author: alexwolfmsft
-ms.author: alexwolf
-ms.reviewer: mathoma, vanto
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: alexwolf, mathoma, vanto
 ms.date: 09/17/2024
 ms.service: azure-sql-database
 ms.subservice: security
