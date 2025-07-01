@@ -282,11 +282,12 @@ There are multiple approaches to successfully creating a credential for AWS S3:
     , REPLACE, RESTORE_OPTIONS = '{"s3": {"region":"us-west-2"}}'; -- REGION AS PARAMETER)
     GO
     ```
+
 > [!NOTE]
 > Azure SQL Managed Instance supports only `RESTORE` operation from S3 storage accounts. `BACKUP` operation is currently not supported.
 
-### G. Create and use a Managed Identity credential to access Azure Blob Storage
-**Applies to**: SQL Server 2022 CU17 and later, and Azure SQL Managed Instance
+### G. Create and use a managed identity credential to access Azure Blob Storage
+**Applies to**: SQL Server 2022 CU17 and later versions, and Azure SQL Managed Instance
 
 You can use managed identities with SQL Server credentials to back up to and restore SQL Server databases from Azure Blob storage. For more information about SQL Server on Azure VM, see [Backup and restore to URL using managed identities](/azure/azure-sql/virtual-machines/windows/backup-restore-to-url-using-managed-identities).
 
