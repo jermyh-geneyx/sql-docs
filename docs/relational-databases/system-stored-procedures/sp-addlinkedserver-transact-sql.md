@@ -426,7 +426,7 @@ EXECUTE sp_addlinkedserver
     @provstr = N'Encrypt=No;';
 ```
 
-For more information, see [Microsoft OLE DB Driver for SQL Server (MSOLEDBSQL)](../../connect/oledb/oledb-driver-for-sql-server.md#3-microsoft-ole-db-driver-for-sql-server-msoledbsql-recommended).
+For more information, see [Microsoft OLE DB Driver for SQL Server (MSOLEDBSQL) (recommended)](../../connect/oledb/oledb-driver-for-sql-server.md#1-microsoft-ole-db-driver-for-sql-server-msoledbsql-recommended).
 
 ## Related content
 
