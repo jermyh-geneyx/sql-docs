@@ -7,7 +7,7 @@ ms.service: sql
 ms.subservice: security
 ms.topic: concept-article
 ms.custom: horz-security
-ms.date: 06/19/2025
+ms.date: 07/01/2025
 ai-usage: ai-assisted
 ---
 
