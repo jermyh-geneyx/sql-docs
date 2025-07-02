@@ -187,7 +187,7 @@ For an example of creating a credential with a managed identity for SQL Server o
 
 ### F. Create a credential for backup/restore to S3-compatible storage
 
-**Applies to**: [!INCLUDE[ssSQL22](../../includes/sssql22-md.md)] and later versions and Azure SQL Managed Instance
+**Applies to**: [!INCLUDE[ssSQL22](../../includes/sssql22-md.md)] and later versions, and Azure SQL Managed Instance
 
 The open S3-compatible standard provides for storage paths and details that may differ based on the storage platform. For more information, see [SQL Server backup to URL for S3-compatible object storage](../../relational-databases/backup-restore/sql-server-backup-to-url-s3-compatible-object-storage.md).
 
