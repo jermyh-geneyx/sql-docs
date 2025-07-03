@@ -1,9 +1,9 @@
 ---
-title: "Troubleshoot extension"
+title: "Troubleshoot Extension"
 description: "Describes how to troubleshoot SQL Server enabled by Azure Arc extension."
 author: MikeRayMSFT
 ms.author: mikeray
-ms.date: 06/03/2024
+ms.date: 07/03/2025
 ms.topic: troubleshooting-general
 ---
 
@@ -11,7 +11,7 @@ ms.topic: troubleshooting-general
 
 [!INCLUDE [sqlserver](../../includes/applies-to-version/sqlserver.md)]
 
-This article describes ways to identify unhealthy extensions that are not installed correctly, running properly, or not connected to Azure.
+This article describes ways to identify unhealthy extensions that aren't installed correctly, running properly, or not connected to Azure.
 
 ## Identify unhealthy extensions
 
@@ -19,16 +19,16 @@ This article describes ways to identify unhealthy extensions that are not instal
 
 You can use the [built-in extension health dashboard](https://ms.portal.azure.com/#view/Microsoft_Azure_ArcCenterUX/ArcCenterMenuBlade/~/sqlServerHealthDashboard) in the Azure portal to show the health for all deployed Azure extensions for SQL Server.
 
-> [!TIP]
+> [!TIP]  
 > Create your own custom dashboard with this file from the sql-server-samples GitHub repository: [Arc-enabled SQL Server Health.json](https://github.com/microsoft/sql-server-samples/blob/master/samples/features/azure-arc/dashboard/Arc-enabled%20SQL%20Server%20Health.json).
 
 ### Query unhealthy extensions using Azure Resource Graph
 
-Use Azure Resource Graph to identify the state the Azure extension for SQL Server on your Azure Arc-enabled servers. 
+Use Azure Resource Graph to identify the state the Azure extension for SQL Server on your Azure Arc-enabled servers.
 
-> [!TIP] 
+> [!TIP]  
 > If you're not already familiar, learn about Azure Resource Graph:
-> 
+>  
 > - [What is Azure Resource Graph](/azure/governance/resource-graph/overview)
 > - [Quickstart: Run Resource Graph query using Azure portal](/azure/governance/resource-graph/first-query-portal)
 
@@ -36,8 +36,8 @@ This query returns instances of SQL Server on servers with extensions installed,
 
 ```kusto
 resources
-| where type == "microsoft.hybridcompute/machines/extensions" 
-| where properties.type in ("WindowsAgent.SqlServer", "LinuxAgent.SqlServer") 
+| where type == "microsoft.hybridcompute/machines/extensions"
+| where properties.type in ("WindowsAgent.SqlServer", "LinuxAgent.SqlServer")
 | extend targetMachineName = tolower(tostring(split(id, '/')[8])) // Extract the machine name from the extension's id
 | join kind=leftouter (
     resources
@@ -58,10 +58,10 @@ resources
 | extend FailureReasons = strcat( // Makes a String to list all the reason that this resource got flagged for
         iif(MachineStatus != "Connected",strcat("- Machine's status is ", MachineStatus," -"),"") ,
         iif(MachineErrors != "[]","- Machine reports errors -", ""),
-        iif(properties.instanceView.status.message !contains "SQL Server Extension Agent: Healthy","- Extension reported unhealthy -",""), 
+        iif(properties.instanceView.status.message !contains "SQL Server Extension Agent: Healthy","- Extension reported unhealthy -",""),
         iif(isNotInDateRange,"- Last upload outside acceptable range -",""),
-        iif(properties.instanceView.status.message !contains "uploadStatus : OK","- Upload status is not reported OK -",""), 
-        iif(properties.provisioningState != "Succeeded",strcat("- Extension provisiong state is ", properties.provisioningState," -"),"") 
+        iif(properties.instanceView.status.message !contains "uploadStatus : OK","- Upload status is not reported OK -",""),
+        iif(properties.provisioningState != "Succeeded",strcat("- Extension provisiong state is ", properties.provisioningState," -"),"")
     )
 | extend RecommendedAction = //Attempt to Identify RootCause based on information gathered, and point customer to what they should investigate first.
     iif(MachineStatus == "Disconnected", "Machine is disconnected. Please reconnect the machine.",
@@ -81,7 +81,7 @@ resources
             )
         )
     )
-| project ID = id, MachineName, ResourceGroup = resourceGroup, SubscriptionID = subscriptionId, Location = location, RecommendedAction, FailureReasons, LicenseType = properties.settings.LicenseType, 
+| project ID = id, MachineName, ResourceGroup = resourceGroup, SubscriptionID = subscriptionId, Location = location, RecommendedAction, FailureReasons, LicenseType = properties.settings.LicenseType,
     LastReportedExtensionHealth = iif(properties.instanceView.status.message !contains "SQL Server Extension Agent: Healthy", "Unhealthy", "Healthy"),
     LastExtensionUploadTimestamp = iif(indexof(properties.instanceView.status.message, "timestampUTC : ") > 0,
         substring(properties.instanceView.status.message, indexof(properties.instanceView.status.message, "timestampUTC : ") + 15, 10),
@@ -94,16 +94,18 @@ resources
 
 To identify possible problems, review the value in the **RecommendedAction** or the **FailureReasons** column. The RecommendedAction column provides possible first steps to solve the issue or clues for what to check first. The FailureReasons column lists the reasons the resource was deemed unhealthy. Finally, check **LastExtensionStatusMessage** to see the last reported message by the agent.
 
-### Troubleshooting guide
+<a id="troubleshooting-guide"></a>
+
+### Recommendations
 
 | Recommended Action | Action Details |
-|--------------------|----------------|
-| Machine cert is expired.<br /><br />Go to the machine on the Azure portal for more information on how to resolve this issue. | The Arc-enabled machine must be re-onboarded to Arc because the certificate used to authenticate to Azure expired. The Arc machine status is **Expired** in the Azure portal. Uninstall the agent by following the documentation [here](/azure/azure-arc/servers/manage-agent#uninstall-the-agent) and then re-onboard [here](/azure/azure-arc/servers/deployment-options). There is no need to delete the Arc-enabled SQL Server resources in the portal if you are re-onboarding. The SQL extension is automatically installed again as long as [auto-onboarding](connect.md) is enabled (default). |
-| Machine is disconnected.<br /><br />Reconnect the machine. | The Arc machine is in a `state = Disconnected`. This state could be for various reasons:<br /><br />Arc connected machine agent is stopped, disabled, or constantly crashing<br /><br />or<br /><br />Connectivity is blocked between the agent and Azure.<br /><br />[Check the state of that Arc connected machine services/daemons to make sure they are enabled and running](/azure/azure-arc/servers/agent-overview#agent-resources).<br /><br />[Check the connectivity](/azure/azure-arc/servers/troubleshoot-agent-onboard).<br /><br />[Troubleshoot the agent using the verbose log](/azure/azure-arc/servers/troubleshoot-agent-onboard#agent-verbose-log). |
-| Extension reported as unhealthy.<br /><br />View FailureReasons and LastExtensionStatusMessage for more information as to the cause of the failure.<br /><br />Last upload outside acceptable range (within the last three days). | Check the **LastExtensionUploadTimestamp** column. If it is **No timestamp**, it never reported inventory or usage data to Azure. [Troubleshoot connectivity from the SQL extension to Azure](troubleshoot-telemetry-endpoint.md).<br /><br />If the last upload is outside the acceptable range (within the last three days) and everything else looks OK such as **LastExtensionUploadStatus**, **ExtensionProvisioningState**, and **MachineStatus**, then it is possible that the Azure Extension for SQL Server service/daemon is stopped. Figure out why it is stopped and start it again. Check the **LastExtensionStatusMessage** for any other clues about the problem. |
-| Extension provisioning status is **Failed**.<br /><br />Investigate and resolve extension provisioning state. | Either the initial installation of the SQL extension or the update failed.[ Check the deployer and extension logs](troubleshoot-deployment.md).<br /><br />Check the value in the **LastExtensionStatusMessage**. |
-| Upload status is not reported OK | Check the **LastExtensionMessage** column in the dashboard and look at the **uploadStatus** value and the **uploadMessage** value (if present, depending on version).<br /><br />The **uploadStatus** value is typically an HTTP error code. Review [Troubleshoot error codes](troubleshoot-telemetry-endpoint.md#error-codes).<br /><br />The **uploadMessage** may have more specific information. [General Azure Extension for SQL Server connectivity troubleshooting](troubleshoot-telemetry-endpoint.md). |
-| Extension provisioning status is **Updating**<br /><br />or<br /><br />Extension provisioning state is **Creating**<br /><br />or<br /><br />Extension provisioning state is **Failed**<br /><br />or<br /><br />Extension provisioning state is **Deleting** | If a given extension stays one of these states for more than 30 minutes, there is likely a problem with provisioning. Uninstall the extension and reinstall it using the CLI or portal. If the problem persists, [check the deployer and extension logs](troubleshoot-deployment.md).<br /><br />If delete fails, try uninstalling the agent and deleting the Arc machine resource in the portal if needed and then redeploy.<br /><br />Uninstall the agent by following the documentation [here](/azure/azure-arc/servers/manage-agent#uninstall-the-agent) and then re-onboard [here](/azure/azure-arc/servers/deployment-options). |
+| --- | --- |
+| Machine cert is expired.<br /><br />Go to the machine on the Azure portal for more information on how to resolve this issue. | The Arc-enabled machine must be re-onboarded to Arc because the certificate used to authenticate to Azure expired. The Arc machine status is **Expired** in the Azure portal. Uninstall the agent by following the documentation [here](/azure/azure-arc/servers/manage-agent#uninstall-the-agent) and then re-onboard [here](/azure/azure-arc/servers/deployment-options). There's no need to delete the Arc-enabled SQL Server resources in the portal if you're re-onboarding. The SQL extension is automatically installed again as long as [auto-onboarding](connect.md) is enabled (default). |
+| Machine is disconnected.<br /><br />Reconnect the machine. | The Arc machine is in a `state = Disconnected`. This state could be for various reasons:<br />Arc connected machine agent is stopped, disabled, or constantly crashing<br />or<br />Connectivity is blocked between the agent and Azure.<br />[Check the state of that Arc connected machine services/daemons to make sure they are enabled and running](/azure/azure-arc/servers/agent-overview#agent-resources).<br />[Check the connectivity](/azure/azure-arc/servers/troubleshoot-agent-onboard).<br />[Troubleshoot the agent using the verbose log](/azure/azure-arc/servers/troubleshoot-agent-onboard#agent-verbose-log). |
+| Extension reported as unhealthy.<br /><br />View FailureReasons and LastExtensionStatusMessage for more information as to the cause of the failure.<br />Last upload outside acceptable range (within the last three days). | Check the **LastExtensionUploadTimestamp** column. If it's **No timestamp**, it never reported inventory or usage data to Azure. [Troubleshoot connectivity to the data processing service and telemetry endpoints](troubleshoot-telemetry-endpoint.md).<br />If the last upload is outside the acceptable range (within the last three days) and everything else looks OK such as **LastExtensionUploadStatus**, **ExtensionProvisioningState**, and **MachineStatus**, then it's possible that the Azure Extension for SQL Server service/daemon is stopped. Figure out why it is stopped and start it again. Check the **LastExtensionStatusMessage** for any other clues about the problem. |
+| Extension provisioning status is **Failed**.<br /><br />Investigate and resolve extension provisioning state. | Either the initial installation of the SQL extension or the update failed.[Troubleshoot Azure extension for SQL Server deployment](troubleshoot-deployment.md).<br />Check the value in the **LastExtensionStatusMessage**. |
+| Upload status isn't reported OK | Check the **LastExtensionMessage** column in the dashboard and look at the **uploadStatus** value and the **uploadMessage** value (if present, depending on version).<br /><br />The **uploadStatus** value is typically an HTTP error code. Review [Troubleshoot error codes](troubleshoot-telemetry-endpoint.md#error-codes).<br />The **uploadMessage** might have more specific information. [Troubleshoot connectivity to the data processing service and telemetry endpoints](troubleshoot-telemetry-endpoint.md). |
+| Extension provisioning status is **Updating**<br /><br />or<br />Extension provisioning state is **Creating**<br />or<br />Extension provisioning state is **Failed**<br />or<br />Extension provisioning state is **Deleting** | If a given extension stays one of these states for more than 30 minutes, there's likely a problem with provisioning. Uninstall the extension and reinstall it using the CLI or portal. If the problem persists, [check the deployer and extension logs](troubleshoot-deployment.md).<br />If delete fails, try uninstalling the agent and deleting the Arc machine resource in the portal if needed and then redeploy.<br />Uninstall the agent by following the documentation [here](/azure/azure-arc/servers/manage-agent#uninstall-the-agent) and then re-onboard [here](/azure/azure-arc/servers/deployment-options). |
 
 ## Identify unhealthy extension (PowerShell)
 
@@ -121,8 +123,8 @@ This example runs in PowerShell. The example returns the same result as the prev
 # Define the Azure Resource Graph query
 $query = @"
 resources
-| where type == "microsoft.hybridcompute/machines/extensions" 
-| where properties.type in ("WindowsAgent.SqlServer", "LinuxAgent.SqlServer") 
+| where type == "microsoft.hybridcompute/machines/extensions"
+| where properties.type in ("WindowsAgent.SqlServer", "LinuxAgent.SqlServer")
 | extend targetMachineName = tolower(tostring(split(id, '/')[8])) // Extract the machine name from the extension's id
 | join kind=leftouter (
     resources
@@ -143,10 +145,10 @@ resources
 | extend FailureReasons = strcat( // Makes a String to list all the reason that this resource got flagged for
         iif(MachineStatus != "Connected",strcat("- Machine's status is ", MachineStatus," -"),"") ,
         iif(MachineErrors != "[]","- Machine reports errors -", ""),
-        iif(properties.instanceView.status.message !contains "SQL Server Extension Agent: Healthy","- Extension reported unhealthy -",""), 
+        iif(properties.instanceView.status.message !contains "SQL Server Extension Agent: Healthy","- Extension reported unhealthy -",""),
         iif(isNotInDateRange,"- Last upload outside acceptable range -",""),
-        iif(properties.instanceView.status.message !contains "uploadStatus : OK","- Upload status is not reported OK -",""), 
-        iif(properties.provisioningState != "Succeeded",strcat("- Extension provisiong state is ", properties.provisioningState," -"),"") 
+        iif(properties.instanceView.status.message !contains "uploadStatus : OK","- Upload status is not reported OK -",""),
+        iif(properties.provisioningState != "Succeeded",strcat("- Extension provisiong state is ", properties.provisioningState," -"),"")
     )
 | extend RecommendedAction = //Attempt to Identify RootCause based on information gathered, and point customer to what they should investigate first.
     iif(MachineStatus == "Disconnected", "Machine is disconnected. Please reconnect the machine.",
@@ -166,7 +168,7 @@ resources
             )
         )
     )
-| project ID = id, MachineName, ResourceGroup = resourceGroup, SubscriptionID = subscriptionId, Location = location, RecommendedAction, FailureReasons, LicenseType = properties.settings.LicenseType, 
+| project ID = id, MachineName, ResourceGroup = resourceGroup, SubscriptionID = subscriptionId, Location = location, RecommendedAction, FailureReasons, LicenseType = properties.settings.LicenseType,
     LastReportedExtensionHealth = iif(properties.instanceView.status.message !contains "SQL Server Extension Agent: Healthy", "Unhealthy", "Healthy"),
     LastExtensionUploadTimestamp = iif(indexof(properties.instanceView.status.message, "timestampUTC : ") > 0,
         substring(properties.instanceView.status.message, indexof(properties.instanceView.status.message, "timestampUTC : ") + 15, 10),
@@ -188,7 +190,7 @@ To identify possible problems, review the value in the **RecommendedAction** or 
 
 ## Identify extensions missing updates
 
-Identify extensions without recent status updates. This query returns a list of Azure extensions for SQL Server ordered by the number of days since the extension last updated its status. A value of '-1' indicates that the extension crashed and there is a callstack in the extension status.
+Identify extensions without recent status updates. This query returns a list of Azure extensions for SQL Server ordered by the number of days since the extension last updated its status. A value of '-1' indicates that the extension crashed and there's a callstack in the extension status.
 
 ```kusto
 // Show the timestamp extracted
@@ -207,7 +209,7 @@ resources
 | order by ['agentHeartbeatLagInDays'] asc
 ```
 
-This query returns a count of extensions grouped by the number of days since the extension last updated its status. A value of '-1' indicates that the extension crashed and there is a callstack in the extension status.
+This query returns a count of extensions grouped by the number of days since the extension last updated its status. A value of '-1' indicates that the extension crashed and there's a callstack in the extension status.
 
 ```kusto
 // Aggregate by timestamp
@@ -227,3 +229,5 @@ resources
 | summarize numExtensions = count() by agentHeartbeatLagInDays
 | order by numExtensions desc
 ```
+
+[!INCLUDE [manage-extension](includes/manage-extension.md)]

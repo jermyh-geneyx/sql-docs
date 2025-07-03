@@ -4,7 +4,7 @@ description: Connect an instance of SQL Server to Azure Arc on a server that is 
 author: anosov1960
 ms.author: sashan
 ms.reviewer: mikeray, maghan
-ms.date: 06/30/2025
+ms.date: 07/03/2025
 ms.topic: how-to
 ---
 
@@ -88,6 +88,8 @@ The extension runs continuously to detect changes in the SQL Server configuratio
 Go to **Azure Arc > SQL Server** and open the newly registered Arc-enabled SQL Server resource to validate.
 
 :::image type="content" source="media/join/validate-sql-server-azure-arc.png" alt-text="Screenshot of validating a connected SQL Server." lightbox="media/join/validate-sql-server-azure-arc.png":::
+
+[!INCLUDE [manage-extension](includes/manage-extension.md)]
 
 ## Related content
 
