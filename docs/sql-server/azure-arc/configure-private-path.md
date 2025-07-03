@@ -3,10 +3,9 @@ title: Connect with Private Path
 description: This article describes how to connect SQL Server enabled by Azure Arc to Azure with a private path.
 author: MikeRayMSFT
 ms.author: mikeray
+ms.date: 07/03/2025
 ms.topic: how-to #Don't change
-ms.date: 02/01/2025
-
-#customer intent: As a data engineer, I want to use a private path to connect to Azure Arc so I can avoid internet traffic.
+# customer intent: As a data engineer, I want to use a private path to connect to Azure Arc so I can avoid internet traffic.
 ---
 
 # Connect to Azure with a private path for SQL Server enabled by Azure Arc
@@ -15,12 +14,12 @@ This article describes how to configure communication for a SQL Server enabled b
 
 This design deploys forward proxy servers in Azure to allow SQL Server to communicate over a site-to-site VPN or ExpressRouteConnection with private IP addresses. The proxies communicate with Arc URLs over the Azure backbone network.
 
-> [!IMPORTANT]
+> [!IMPORTANT]  
 > This implementation uses [Azure Firewall Explicit proxy](/azure/firewall/explicit-proxy) - which is currently available in preview.
 
 The following diagram represents this pattern.
 
-:::image type="content" source="media/configure-private-path/architecture.png" alt-text="Diagram representing private path deployment.":::
+:::image type="content" source="media/configure-private-path/architecture.png" alt-text="Diagram representing private path deployment." lightbox="media/configure-private-path/architecture.png":::
 
 For the forward proxy, choose either:
 
@@ -28,7 +27,7 @@ For the forward proxy, choose either:
 
   Or
 
-- A third-party proxy Network Virtual Appliance (NVA).  
+- A third-party proxy Network Virtual Appliance (NVA).
 
   The diagram shows Azure Firewall Explicit proxy.
 
@@ -63,7 +62,7 @@ Create a site-to-site VPN from your SQL Server location to Azure.
 
 1. Follow the steps at [Tutorial: Create and manage a VPN gateway using the Azure portal](/azure/vpn-gateway/tutorial-create-gateway-portal) to create VPN Gateway.
 
-2. Create a Local Network Gateway before creating a Site 2 Site VPN. Follow the steps at [Tutorial: Create a site-to-site VPN connection in the Azure portal](/azure/vpn-gateway/tutorial-site-to-site-portal).
+1. Create a Local Network Gateway before creating a Site 2 Site VPN. Follow the steps at [Tutorial: Create a site-to-site VPN connection in the Azure portal](/azure/vpn-gateway/tutorial-site-to-site-portal).
 
 ## Create firewall and configure the proxy
 
@@ -126,8 +125,10 @@ If you're not going to continue to use this application, delete these resources.
 To delete the resources from Azure portal:
 
 1. Enter the name of your resource group in the search box select it from the search results.
-2. Select **Delete resource group**.
-3. Confirm the resource group name at **Type the resource group name**, and select Delete.
+1. Select **Delete resource group**.
+1. Confirm the resource group name at **Type the resource group name**, and select Delete.
+
+[!INCLUDE [manage-extension](includes/manage-extension.md)]
 
 ## Related content
 
@@ -136,4 +137,3 @@ To delete the resources from Azure portal:
 - [Monitor Azure Firewall](/azure/firewall/monitor-firewall#azure-monitor-resource-logs)
 - [Tutorial: Create and manage a VPN gateway using the Azure portal](/azure/vpn-gateway/tutorial-create-gateway-portal)
 - [Tutorial: Create a site-to-site VPN connection in the Azure portal](/azure/vpn-gateway/tutorial-site-to-site-portal)
-
