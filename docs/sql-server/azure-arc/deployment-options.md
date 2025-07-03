@@ -40,4 +40,4 @@ Be sure to review the basic [prerequisites](prerequisites.md) before you deploy 
 
 ## Related content
 
-- [prerequisites](prerequisites.md)
+- [Prerequisites](prerequisites.md)
