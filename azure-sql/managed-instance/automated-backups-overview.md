@@ -2,10 +2,10 @@
 title: Automatic, Geo-Redundant Backups
 titleSuffix: Azure SQL Managed Instance
 description: Learn how Azure SQL Managed Instance automatically backs up all databases and provides point-in-time restore capability.
-author: Stralle
-ms.author: strrodic
-ms.reviewer: mathoma, wiassaf, danil, randolphwest
-ms.date: 05/27/2025
+author: dinethi
+ms.author: dinethi
+ms.reviewer: mathoma, wiassaf, mlandzic, strrodic, danil, randolphwest
+ms.date: 06/26/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: backup-restore
 ms.topic: conceptual
@@ -287,6 +287,17 @@ If your database is encrypted with TDE, backups are automatically encrypted at r
 Microsoft is fully responsible for keeping and rotating keys for databases with service-managed keys (SMK). Backups, either PITR or LTR, taken from instances that have TDE with SMK enabled can be restored by Microsoft.
 
 Automatic backups stored in Azure-managed storage accounts are automatically encrypted by Azure storage. Learn more about [Azure Storage encryption for data at rest](/azure/storage/common/storage-service-encryption).
+
+## Common issues with automated backups due to customer actions
+
+While Azure SQL Managed Instance provides automated backups to ensure data protection and recovery, certain customer-side configurations or actions can lead to backup failures. Common scenarios include:
+
+- Insufficient storage for the SQL managed instance. If the storage allocated to your instance is full, automated backups aren't taken.
+- User-defined jobs or scripts that kill system processes can stop automated backup operations.
+- Incorrect DNS settings can prevent the SQL managed instance from accessing required Azure endpoints, including those used for backups, leading to backup failures.
+- The transaction log could fill due to prevented truncation from misconfigured replication, CDC or full storage (at the instance level). If the transaction log is full and can't be truncated, full and differential backups fail, but log backups still succeed without truncating the log file.
+
+To ensure reliable backups, it's important to monitor system resources, validate configuration settings, and avoid interfering with built-in service operations. Make sure to monitor allocated storage, have correct DNS settings, and review custom jobs and replication configurations.
 
 ## Backup integrity
 
