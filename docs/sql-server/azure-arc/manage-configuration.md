@@ -4,7 +4,7 @@ description: Learn how to manage configuration options for SQL Server enabled by
 author: anosov1960
 ms.author: sashan
 ms.reviewer: mikeray, randolphwest
-ms.date: 09/09/2024
+ms.date: 07/03/2025
 ms.topic: how-to
 ---
 
@@ -80,18 +80,24 @@ There are two ways to configure the SQL Server host in the Azure portal:
 
    :::image type="content" source="media/billing/sql-server-instance-configuration.png" alt-text="Screenshot of the area for SQL Server instance configuration in the Azure portal." lightbox="media/billing/sql-server-instance-configuration.png":::
 
-#### <a id="set-license-type"></a> Set the license type property
+<a id="set-license-type"></a>
+
+#### Set the license type property
 
 Choose one of the license types. For descriptions, see [License types](manage-license-billing.md#license-types).
 
-#### <a id="use-physical-core-license"></a> Use a physical core license
+<a id="use-physical-core-license"></a>
+
+#### Use a physical core license
 
 Select the **Use physical core license** checkbox if you're configuring a virtual machine (VM) and you're using the unlimited virtualization benefit for licensing the SQL Server software or for your SQL subscription. It sets the host configuration property `UsePhysicalCoreLicense` to `True`. If this checkbox is selected, the physical core (p-core) license takes precedence, and the SQL Server software costs are nullified.
 
 > [!IMPORTANT]  
 > If the p-core license is configured with a pay-as-you-go billing plan, the selected **License type** value should be **Pay-as-you-go**. This selection doesn't trigger additional charges at the VM level, but it does ensure uninterrupted licensing and billing if the p-core license is deactivated or deleted.
 
-#### <a id="subscribe-esu"></a> Subscribe to Extended Security Updates
+<a id="subscribe-esu"></a>
+
+#### Subscribe to Extended Security Updates
 
 You can subscribe to Extended Security Updates (ESUs) for the individual host. To qualify for an ESU subscription, the host must have **License type** set to **Pay-as-you-go** or **License with Software Assurance**. This option allows you to subscribe by using vCPUs (v-cores) when the host is a virtual machine, or by using physical cores when the host is a physical server that runs without using virtual machines.
 
@@ -104,19 +110,25 @@ For more information about ESU licensing options, see [Subscribe to Extended Sec
 >
 > After you enable ESUs, you can't change the **License Type** value of the host to **License only** until the ESU subscription is canceled.
 
-#### <a id="use-physical-core-esu-license"></a> Use a physical core ESU license
+<a id="use-physical-core-esu-license"></a>
+
+#### Use a physical core ESU license
 
 Select the **Use physical core ESU license** checkbox if you're configuring a virtual machine and you're using the unlimited virtualization benefit when enabling the ESU subscription. It sets `UseEsuPhysicalCoreLicense` to `true`.
 
 If you select the checkbox, the p-core license takes precedence, and the SQL Server ESU charges at the VM level are nullified.
 
-#### <a id="unsubscribe-esu"></a> Unsubscribe from Extended Security Updates
+<a id="unsubscribe-esu"></a>
+
+#### Unsubscribe from Extended Security Updates
 
 You can cancel Extended Security Updates enabled by Azure Arc at any time. The cancellation immediately stops the ESU charges. Select **Unsubscribe from Extended Security Updates**. The subscription ends after you select **Save**.
 
-#### <a id="add-excluded"></a> Add to the excluded instances list
+<a id="add-excluded"></a>
 
-You can exclude certain instances from the at-scale onboarding operations driven by Azure policies or by automatic onboarding processes. To exclude specific instances from these operations, add the instance names to the **Skip Instances** list. For details about at-scale onboarding options, see [Alternate deployment options for SQL Server enabled by Azure Arc](deployment-options.md).
+#### Add to the excluded instances list
+
+You can exclude certain instances from the at-scale onboarding operations driven by Azure policies or by automatic onboarding processes. To exclude specific instances from these operations, add the instance names to the **Skip Instances** list. For details about at-scale onboarding options, see [Deployment options for SQL Server enabled by Azure Arc](deployment-options.md).
 
 > [!NOTE]  
 > You can't exclude SQL Server instances or [associated services](manage-license-billing.md#manage-ssxs) that use pay-as-you-go billing.
@@ -169,7 +181,9 @@ If you already have an older version of the Azure extension installed, be sure t
 > [!IMPORTANT]  
 > The unlimited virtualization benefit for SQL Server software or a SQL Server ESU subscription isn't supported on infrastructure from the [listed providers](https://aka.ms/listedproviders). If you're running SQL Server on a listed provider's VM and you select this option, your intent will be ignored and you'll be charged for the v-cores of the VM.
 
-## <a id="subscribe-esu-via-policy"></a> Subscribe to Extended Security Updates at scale by using Azure Policy
+<a id="subscribe-esu-via-policy"></a>
+
+## Subscribe to Extended Security Updates at scale by using Azure Policy
 
 You can activate the ESU subscription on multiple Azure Arc-enabled machines by using an Azure Policy definition called [Subscribe eligible Arc-enabled SQL Servers instances to Extended Security Updates](https://portal.azure.com/#view/Microsoft_Azure_Policy/PolicyDetail.ReactView/id/%2Fproviders%2FMicrosoft.Authorization%2FpolicyDefinitions%2Ff692cc79-76fb-4c61-8861-467e454ac6f8).
 
@@ -311,8 +325,8 @@ on $left.containerId == $right.machineId
     | where properties.type in ("WindowsAgent.SqlServer","LinuxAgent.SqlServer")
     | extend machineIdHasSQLServerExtensionInstalled = tolower(iff(id contains "/extensions/WindowsAgent.SqlServer" or id contains "/extensions/LinuxAgent.SqlServer", substring(id, 0, indexof(id, "/extensions/")), ""))
     | project machineIdHasSQLServerExtensionInstalled,
-     Extension_State = properties.provisioningState, 
-     License_Type = properties.settings.LicenseType, 
+     Extension_State = properties.provisioningState,
+     License_Type = properties.settings.LicenseType,
      ESU = iff(notnull(properties.settings.enableExtendedSecurityUpdates), iff(properties.settings.enableExtendedSecurityUpdates == 'true',"ENABLED","disabled"), "disabled"),
      Extension_Version = properties.instanceView.typeHandlerVersion
 )
@@ -393,7 +407,9 @@ resources
 | order by Name asc
 ```
 
-## <a id="manage-pcore-license"></a> Manage the unlimited virtualization benefit for SQL Server
+<a id="manage-pcore-license"></a>
+
+## Manage the unlimited virtualization benefit for SQL Server
 
 To enable unlimited virtualization, SQL Server enabled by Azure Arc supports a special resource type: *SQLServerLicense*. You can use this resource to license many virtual machines with the installed SQL Server instances. For details about the licensing model, see [License SQL Server instances with unlimited virtualization](manage-license-billing.md#unlimited-virtualization).
 
@@ -408,7 +424,9 @@ Your role-based access control (RBAC) role includes the following permissions:
 - `Microsoft.Resources/subscriptions/resourceGroups/read`
 - `Microsoft.Support/supporttickets/write`
 
-### <a id="create-license-resource"></a> Create a SQL Server license
+<a id="create-license-resource"></a>
+
+### Create a SQL Server license
 
 To create a SQL Server license resource, use one of the following methods:
 
@@ -454,7 +472,9 @@ Here's an example of `sqlserverlicense.json` that creates a deactivated license:
 
 ---
 
-### <a id="change-license-resource"></a> Update a SQL Server license resource
+<a id="change-license-resource"></a>
+
+### Update a SQL Server license resource
 
 To change the SQL Server license property (for example, activate it at a later date), use one of the following methods:
 
@@ -495,7 +515,9 @@ Here's the content of `activate.json` to activate the license:
 
 ---
 
-### <a id="manage-license-resources"></a> Manage resources in the scope of a p-core license
+<a id="manage-license-resources"></a>
+
+### Manage resources in the scope of a p-core license
 
 You can manage the resources in the scope of a specific SQL Server physical core license by using the following steps:
 
@@ -547,7 +569,9 @@ resources
         |order by name asc
 ```
 
-## <a id="manage-pcore-esu-license"></a> Manage the unlimited virtualization benefit for a SQL Server ESU subscription
+<a id="manage-pcore-esu-license"></a>
+
+## Manage the unlimited virtualization benefit for a SQL Server ESU subscription
 
 To enable unlimited virtualization for an ESU subscription, SQL Server enabled by Azure Arc supports a special resource type: *SQLServerEsuLicense*. You can use this resource to enable an ESU subscription for a set of physical hosts with an unlimited number of virtual machines running the out-of-support SQL Server instances. For details about the licensing model, see [Subscribe to SQL Server ESUs by using physical cores with unlimited virtualization](extended-security-updates.md#unlimited-virtualization).
 
@@ -562,7 +586,9 @@ Your RBAC role includes the following permissions:
 - `Microsoft.Resources/subscriptions/resourceGroups/read`
 - `Microsoft.Support/supporttickets/write`
 
-### <a id="create-esu-license-resource"></a> Create a SQL Server ESU license resource
+<a id="create-esu-license-resource"></a>
+
+### Create a SQL Server ESU license resource
 
 To create a SQL Server ESU license resource, use one of the following methods:
 
@@ -607,7 +633,9 @@ Here's an example of `sqlserverlicense.json` that creates a deactivated license:
 
 ---
 
-### <a id="change-esu-license-resource"></a> Update a SQL Server ESU license resource
+<a id="change-esu-license-resource"></a>
+
+### Update a SQL Server ESU license resource
 
 To change the SQL Server ESU license properties (for example, terminate the subscription), use one of the following methods:
 
@@ -648,7 +676,9 @@ Here's the content of `terminate.json` to activate the license:
 
 ---
 
-### <a id="manage-esu-license-resources"></a> Manage resources in the scope of an ESU p-core license
+<a id="manage-esu-license-resources"></a>
+
+### Manage resources in the scope of an ESU p-core license
 
 You can manage the resources in the scope of a specific SQL Server ESU license by using the following steps:
 
@@ -699,6 +729,8 @@ resources
         | project id, name, properties.status, resourceGroup, subscriptionId, Model = properties.detectedProperties.model, Manufacturer = properties.detectedProperties.manufacturer, kind, OSE = properties.osName, License_applied = properties1.settings.UseEsuPhysicalCoreLicense.IsApplied
         |order by name asc
 ```
+
+[!INCLUDE [manage-extension](includes/manage-extension.md)]
 
 ## Related content
 

@@ -1,10 +1,10 @@
 ---
-title: Configure automatic updates
+title: Configure Automatic Updates
 description: This article explains how to configure automatic updates for SQL Server enabled by Azure Arc.
 author: AbdullahMSFT
 ms.author: amamun
 ms.reviewer: mikeray, randolphwest
-ms.date: 09/09/2024
+ms.date: 07/03/2025
 ms.topic: how-to
 ---
 
@@ -72,6 +72,8 @@ To manage automatic updates programmatically or by policy, review the informatio
 - [Trigger an update assessment](/azure/update-manager/manage-arc-enabled-servers-programmatically?tabs=cli%2Crest#update-assessment)
 - [Enable Microsoft updates (to enable SQL Server updates)](/azure/update-manager/configure-wu-agent#enable-updates-for-other-microsoft-products)
 - [Enable Azure Update Manager via Azure policy](/azure/update-manager/tutorial-assessment-deployment-using-policy)
+
+[!INCLUDE [manage-extension](includes/manage-extension.md)]
 
 ## Related content
 
