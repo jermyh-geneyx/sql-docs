@@ -4,7 +4,7 @@ description: A quickstart that walks through using creating a new container and 
 author: dlevy-msft
 ms.author: dlevy
 ms.reviewer: maghan, randolphwest
-ms.date: 12/06/2023
+ms.date: 07/02/2025
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: quickstart
@@ -22,7 +22,7 @@ In this quickstart, you'll use a single command in **sqlcmd** to create a new co
 ## Prerequisites
 
 - A container runtime installed, such as [Docker](https://www.docker.com/) or [Podman](https://podman.io/)
-- Download and install [[!INCLUDE [azure-data-studio](../../includes/azure-data-studio-short.md)]](/azure-data-studio/download-azure-data-studio)
+- Download and install [Azure Data Studio](/azure-data-studio/download-azure-data-studio)
 - Install the latest **sqlcmd**
 
 ## Remarks
@@ -35,7 +35,7 @@ You can reverse the order to make **sqlcmd** (ODBC) the default again.
 
 ## Download and install sqlcmd (Go)
 
-[!INCLUDE [install-go](includes/install-go.md)]
+For more information, see [Download and install the sqlcmd utility](sqlcmd-download-install.md#download-and-install-sqlcmd-go).
 
 ## What problem will we solve?
 
@@ -58,35 +58,35 @@ Open [!INCLUDE [azure-data-studio](../../includes/azure-data-studio-short.md)] a
 1. Now that you have a local copy of your database, you can run queries. Here is a query you can use to analyze spending by customer:
 
    ```sql
-   SELECT       bg.BuyingGroupName AS CustomerName
-                ,COUNT(DISTINCT i.InvoiceID) AS InvoiceCount
-                ,COUNT(il.InvoiceLineID) AS InvoiceLineCount
-                ,SUM(il.LineProfit) AS Profit
-                ,SUM(il.ExtendedPrice) AS ExtendedPrice
-   FROM         Sales.Invoices i
-                INNER JOIN Sales.Customers c 
-                    ON i.CustomerID = c.CustomerID
-                INNER JOIN Sales.InvoiceLines il 
-                    ON i.InvoiceID = il.InvoiceID
-                INNER JOIN Sales.BuyingGroups bg 
-                    ON c.BuyingGroupID = bg.BuyingGroupID
-   GROUP BY     bg.BuyingGroupName
+   SELECT bg.BuyingGroupName AS CustomerName,
+          COUNT(DISTINCT i.InvoiceID) AS InvoiceCount,
+          COUNT(il.InvoiceLineID) AS InvoiceLineCount,
+          SUM(il.LineProfit) AS Profit,
+          SUM(il.ExtendedPrice) AS ExtendedPrice
+   FROM Sales.Invoices AS i
+        INNER JOIN Sales.Customers AS c
+            ON i.CustomerID = c.CustomerID
+        INNER JOIN Sales.InvoiceLines AS il
+            ON i.InvoiceID = il.InvoiceID
+        INNER JOIN Sales.BuyingGroups AS bg
+            ON c.BuyingGroupID = bg.BuyingGroupID
+   GROUP BY bg.BuyingGroupName
    UNION
-   SELECT       c.CustomerName
-                ,COUNT(DISTINCT i.InvoiceID) AS InvoiceCount
-                ,COUNT(il.InvoiceLineID) AS InvoiceLineCount
-                ,SUM(il.LineProfit) AS Profit
-                ,SUM(il.ExtendedPrice) AS ExtendedPrice
-   FROM         Sales.Invoices i
-                INNER JOIN Sales.Customers c
-                    ON i.CustomerID = c.CustomerID
-                INNER JOIN Sales.InvoiceLines il
-                    ON i.InvoiceID = il.InvoiceID
-                LEFT JOIN Sales.BuyingGroups bg
-                    ON c.BuyingGroupID = bg.BuyingGroupID
-   WHERE        bg.BuyingGroupID IS NULL
-   GROUP BY     c.CustomerName
-   ORDER BY     Profit DESC
+   SELECT c.CustomerName,
+          COUNT(DISTINCT i.InvoiceID) AS InvoiceCount,
+          COUNT(il.InvoiceLineID) AS InvoiceLineCount,
+          SUM(il.LineProfit) AS Profit,
+          SUM(il.ExtendedPrice) AS ExtendedPrice
+   FROM Sales.Invoices AS i
+        INNER JOIN Sales.Customers AS c
+            ON i.CustomerID = c.CustomerID
+        INNER JOIN Sales.InvoiceLines AS il
+            ON i.InvoiceID = il.InvoiceID
+        LEFT OUTER JOIN Sales.BuyingGroups AS bg
+            ON c.BuyingGroupID = bg.BuyingGroupID
+   WHERE bg.BuyingGroupID IS NULL
+   GROUP BY c.CustomerName
+   ORDER BY Profit DESC;
    ```
 
 ## How did we solve the problem?

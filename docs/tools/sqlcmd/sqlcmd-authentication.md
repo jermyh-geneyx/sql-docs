@@ -4,7 +4,7 @@ description: Authenticating with Microsoft Entra ID in the new standalone sqlcmd
 author: dlevy-msft
 ms.author: dlevy
 ms.reviewer: randolphwest
-ms.date: 04/18/2025
+ms.date: 07/02/2025
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: how-to
@@ -22,7 +22,7 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 
 [!INCLUDE [entra-id-hard-coded](../../includes/entra-id-hard-coded.md)]
 
-For more information on the difference between **sqlcmd** versions, see [sqlcmd utility](sqlcmd-utility.md#find-out-which-version-you-have-installed).
+To find out which variant and version of **sqlcmd** is installed on your system, see [Check installed version of sqlcmd utility](sqlcmd-installed-version.md). For information on how to get **sqlcmd**, see [Download and install the sqlcmd utility](sqlcmd-download-install.md).
 
 ## [sqlcmd (Go)](#tab/go)
 
@@ -32,7 +32,7 @@ For more information on the difference between **sqlcmd** versions, see [sqlcmd 
 
 To use Microsoft Entra authentication, you can use one of two command line switches.
 
-`-G` is (mostly) compatible with its usage in **sqlcmd** (ODBC). If a username and password are provided, it authenticates using Microsoft Entra password authentication. If a username is provided, it uses Microsoft Entra interactive authentication, which may display a web browser. If no username or password is provided, it uses a `DefaultAzureCredential`, which attempts to authenticate through various mechanisms.
+`-G` is (mostly) compatible with its usage in **sqlcmd** (ODBC). If a username and password are provided, it authenticates using Microsoft Entra password authentication. If a username is provided, it uses Microsoft Entra interactive authentication, which can display a web browser. If no username or password is provided, it uses a `DefaultAzureCredential`, which attempts to authenticate through various mechanisms.
 
 `--authentication-method=` can be used to specify one of the following authentication types.
 
@@ -99,15 +99,15 @@ Set this environment variable to the identifier of an application registered in 
 
 The `-G` option is used by **sqlcmd** (ODBC) when connecting to Azure SQL Database or Azure Synapse Analytics, to specify that the user be authenticated using Microsoft Entra authentication. This option sets the **sqlcmd** scripting variable `SQLCMDUSEAAD=true`.
 
-- The `-G` option requires at least **sqlcmd** version [13.1](https://go.microsoft.com/fwlink/?LinkID=825643). Microsoft Entra interactive authentication requires **sqlcmd** (ODBC) [version 15.0.1000.34](sqlcmd-utility.md#download-and-install-sqlcmd) and later versions, as well as [ODBC version 17.2 and later versions](../../connect/odbc/download-odbc-driver-for-sql-server.md).
+- The `-G` option requires at least **sqlcmd** version [13.1](https://go.microsoft.com/fwlink/?LinkID=825643). Microsoft Entra interactive authentication requires **sqlcmd** (ODBC) [version 15.0.1000.34](sqlcmd-download-install.md) and later versions, as well as [ODBC version 17.2 and later versions](../../connect/odbc/download-odbc-driver-for-sql-server.md).
 
-- Microsoft Entra integrated authentication requires [Microsoft ODBC Driver 17 for SQL Server](../../connect/odbc/download-odbc-driver-for-sql-server.md) version 17.6.1 and later versions, and a properly [configured Kerberos environment](../../connect/odbc/linux-mac/using-integrated-authentication.md).
+- Microsoft Entra integrated authentication requires [Microsoft ODBC Driver for SQL Server](../../connect/odbc/download-odbc-driver-for-sql-server.md) version 17.6.1 and later versions, and a properly [configured Kerberos environment](../../connect/odbc/linux-mac/using-integrated-authentication.md).
 
 - The `-G` option only applies to Azure SQL Database and Azure Synapse Analytics.
 
 - Microsoft Entra interactive authentication isn't currently supported on Linux or macOS.
 
-To determine your version, execute `sqlcmd "-?"`. For more information, see [Connecting to SQL Database or Azure Synapse Analytics By Using Azure Active Directory Authentication](/azure/azure-sql/database/authentication-aad-overview). The `-A` option isn't supported with the `-G` option.
+To determine your version, execute `sqlcmd "-?"`. For more information, see [Microsoft Entra authentication for Azure SQL](/azure/azure-sql/database/authentication-aad-overview). The `-A` option isn't supported with the `-G` option.
 
 ### Microsoft Entra username and password
 
@@ -138,7 +138,7 @@ SERVER = Target_DB_or_DW.testsrv.database.windows.net;Authentication=ActiveDirec
 ```
 
 > [!NOTE]  
-> The `-E` option (`Trusted_Connection`) cannot be used along with the `-G` option.
+> The `-E` option (`Trusted_Connection`) can't be used along with the `-G` option.
 
 ### Microsoft Entra interactive authentication
 
@@ -169,12 +169,12 @@ sqlcmd -S testsrv.database.windows.net -d Target_DB_or_DW -G -U joe@contoso.com
 If guest users exist in a specific Microsoft Entra tenant, and are part of a group that exists in Azure SQL Database that has database permissions to execute the **sqlcmd** command, their guest user alias is used (for example, `keith0@adventureworks.com`).
 
 > [!IMPORTANT]  
-> There is a known issue when using the `-G` and `-U` option with **sqlcmd** (ODBC), where putting the `-U` option before the `-G` option may cause authentication to fail. Always start with the `-G` option followed by the `-U` option.
+> There is a known issue when using the `-G` and `-U` option with **sqlcmd** (ODBC), where putting the `-U` option before the `-G` option might cause authentication to fail. Always start with the `-G` option followed by the `-U` option.
 
 ---
 
 ## Related content
 
 - [sqlcmd utility](sqlcmd-utility.md)
-- [sqlcmd - Start the utility](sqlcmd-start-utility.md)
-- [sqlcmd - Use the utility](sqlcmd-use-utility.md)
+- [Start the sqlcmd utility](sqlcmd-start-utility.md)
+- [Use sqlcmd](sqlcmd-use-utility.md)

@@ -3,8 +3,8 @@ title: Start the sqlcmd Utility
 description: Learn how to start the sqlcmd utility, which lets you enter Transact-SQL statements, system procedures, and script files, in SQLCMD mode or in scripts and jobs.
 author: dlevy-msft
 ms.author: dlevy
-ms.reviewer: maghan, randolphwest
-ms.date: 07/29/2024
+ms.reviewer: randolphwest
+ms.date: 07/02/2025
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: how-to
@@ -18,7 +18,7 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 
 [!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Azure Synapse Analytics PDW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
-The [**sqlcmd** utility](sqlcmd-utility.md) lets you enter Transact-SQL statements, system procedures, and script files at the command prompt, in [Edit SQLCMD Scripts with Query Editor](edit-sqlcmd-scripts-query-editor.md) in [About SQL Server Management Studio](../../ssms/menu-help/about-sql-server-management-studio.md), and in a Windows script file or in [an operating system (Cmd.exe) job step](../../ssms/agent/create-a-cmdexec-job-step.md) of a SQL Server Agent job.
+The [sqlcmd utility](sqlcmd-utility.md) lets you enter Transact-SQL statements, system procedures, and script files at the command prompt, in [Edit SQLCMD Scripts with Query Editor](edit-sqlcmd-scripts-query-editor.md) in [About SQL Server Management Studio](../../ssms/menu-help/about-sql-server-management-studio.md), and in a Windows script file or in [an operating system (Cmd.exe) job step](../../ssms/agent/create-a-cmdexec-job-step.md) of a SQL Server Agent job.
 
 > [!NOTE]  
 > Windows Authentication is the default authentication mode for **sqlcmd**. To use SQL Server Authentication, you must specify a user name and password by using the `-U` and `-P` options.
@@ -52,6 +52,6 @@ By default, [!INCLUDE [ssExpress](../../includes/ssexpress-md.md)] installs as t
 ## Related content
 
 - [Edit SQLCMD Scripts with Query Editor](edit-sqlcmd-scripts-query-editor.md)
-- [sqlcmd - Run Transact-SQL script files](sqlcmd-run-transact-sql-script-files.md)
-- [sqlcmd - use the utility](sqlcmd-use-utility.md)
+- [Execute T-SQL from a script file with sqlcmd](sqlcmd-run-transact-sql-script-files.md)
+- [Use sqlcmd](sqlcmd-use-utility.md)
 - [SQL Server Utilities Statements - GO](../../t-sql/language-elements/sql-server-utilities-statements-go.md)
