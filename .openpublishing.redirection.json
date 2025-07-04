@@ -47901,6 +47901,11 @@
       "redirect_document_id": false
     },
     {
+      "source_path": "docs/tools/configuration-manager/sql-server-browser-service.md",
+      "redirect_url": "/sql/database-engine/configure-windows/sql-server-browser-service-database-engine-and-ssas",
+      "redirect_document_id": false
+    },
+    {
       "source_path": "docs/2014/tools/configuration-manager/sql-server-browser-sql-server-configuration-manager.md",
       "redirect_url": "/previous-versions/sql/2014/tools/configuration-manager/sql-server-browser-sql-server-configuration-manager",
       "redirect_document_id": false

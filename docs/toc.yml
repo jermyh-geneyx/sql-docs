@@ -4706,7 +4706,7 @@ items:
       - name: SQL Server Configuration Manager services
         items:
         - name: SQL Server Services
-          href: tools\configuration-manager\sql-server-services.md
+          href: tools/configuration-manager/sql-server-services.md
         - name: Connect to another computer
           href: database-engine/configure-windows/scm-services-connect-to-another-computer.md
         - name: Set an instance to start automatically
@@ -8323,13 +8323,14 @@ items:
       - name: Cancel Option
         href: tools/distributed-replay/cancel-option-distributed-replay-administration-tool.md
   - name: SQL Server Configuration Manager
-    href: tools\configuration-manager\sql-server-configuration-manager.md
     items:
+    - name: Overview
+      href: tools/configuration-manager/sql-server-configuration-manager.md
     - name: Help
       href: tools/configuration-manager/sql-server-configuration-manager-help.md
-    - name: SQL Server Browser Service
-      href: tools/configuration-manager/sql-server-browser-service.md
-    - name: Connecting Using IPv6
+    - name: SQL Server Browser service
+      href: database-engine/configure-windows/sql-server-browser-service-database-engine-and-ssas.md
+    - name: Connect using IPv6
       href: tools/configuration-manager/connecting-using-ipv6.md
     - name: Analysis Server
       href: tools/configuration-manager/analysis-server-server-sql-server-configuration-manager.md
