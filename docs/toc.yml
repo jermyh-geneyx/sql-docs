@@ -8465,6 +8465,12 @@ items:
     items:
     - name: sqlcmd overview
       href: tools/sqlcmd/sqlcmd-utility.md
+    - name: Check installed version
+      href: tools/sqlcmd/sqlcmd-installed-version.md
+    - name: Download and install
+      href: tools/sqlcmd/sqlcmd-download-install.md
+    - name: sqlcmd edit and variable commands
+      href: tools/sqlcmd/sqlcmd-commands.md
     - name: Authenticate sqlcmd with Microsoft Entra ID
       href: tools/sqlcmd/sqlcmd-authentication.md
     - name: Start the utility

@@ -3,8 +3,8 @@ title: Use sqlcmd
 description: Learn how to use the sqlcmd for ad hoc interactive execution of Transact-SQL statements and scripts, and automate Transact-SQL scripting tasks.
 author: dlevy-msft
 ms.author: dlevy
-ms.reviewer: maghan, randolphwest, mikeray
-ms.date: 09/19/2024
+ms.reviewer: randolphwest, mikeray
+ms.date: 07/02/2025
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: how-to
@@ -42,7 +42,7 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 - Authentication options (`-E`, `-U`, and `-P`) specify the credentials that **sqlcmd** uses to connect to the instance of [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)].
 
   > [!NOTE]  
-  > The option `-E` is the default and does not need to be specified.
+  > The option `-E` is the default and doesn't need to be specified.
 
 - Input options (`-Q`, `-q`, and `-i`) identify the location of the input to **sqlcmd**.
 
@@ -57,7 +57,7 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
   ```
 
   > [!NOTE]  
-  > In the previous example, `-E` is not specified because it is the default and **sqlcmd** connects to the default instance by using Windows Authentication.
+  > In the previous example, `-E` isn't specified because it's the default, and **sqlcmd** connects to the default instance using Windows Authentication.
 
 - Connect to a named instance by using Windows Authentication to interactively run T-SQL statements:
 
@@ -246,7 +246,7 @@ The following command lists connection strings to be used to connect to the inst
 sqlcmd config connection-strings
 ```
 
-The following command is used to remove the container when it is no longer needed:
+The following command is used to remove the container when it's no longer needed:
 
 ```cmd
 sqlcmd delete
@@ -254,7 +254,7 @@ sqlcmd delete
 
 ## Run Transact-SQL script files using sqlcmd
 
-You can use **sqlcmd** to execute database script files. Script files are text files that contain a mix of T-SQL statements, **sqlcmd** commands, and scripting variables. For more information about how to script variables, see [Use sqlcmd with Scripting Variables](./sqlcmd-use-scripting-variables.md). **sqlcmd** works with the statements, commands, and scripting variables in a script file in a manner similar to how it works with statements and commands that are entered interactively. The main difference is that **sqlcmd** reads through the input file without pause instead of waiting for a user to enter the statements, commands, and scripting variables.
+You can use **sqlcmd** to execute database script files. Script files are text files that contain a mix of T-SQL statements, **sqlcmd** commands, and scripting variables. For more information about how to script variables, see [Use sqlcmd with scripting variables](sqlcmd-use-scripting-variables.md). **sqlcmd** works with the statements, commands, and scripting variables in a script file in a manner similar to how it works with statements and commands that are entered interactively. The main difference is that **sqlcmd** reads through the input file without pause instead of waiting for a user to enter the statements, commands, and scripting variables.
 
 There are different ways to create database script files:
 
@@ -559,7 +559,7 @@ If the provider specifies `ForceProtocolEncryption = True`, then encryption is e
 ## Related content
 
 - [sqlcmd utility](sqlcmd-utility.md)
-- [sqlcmd - Use with scripting variables](sqlcmd-use-scripting-variables.md)
+- [Use sqlcmd with scripting variables](sqlcmd-use-scripting-variables.md)
 - [Edit SQLCMD Scripts with Query Editor](edit-sqlcmd-scripts-query-editor.md)
 - [Manage Job Steps](../../ssms/agent/manage-job-steps.md)
 - [Create a CmdExec Job Step](../../ssms/agent/create-a-cmdexec-job-step.md)

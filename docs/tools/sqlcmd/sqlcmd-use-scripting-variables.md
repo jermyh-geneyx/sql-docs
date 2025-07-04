@@ -1,40 +1,56 @@
 ---
-title: sqlcmd Utility - Use Scripting Variables
+title: Use sqlcmd with Scripting Variables
 description: Learn how to use scripting variables to make a script that that can be used in multiple scenarios.
 author: dlevy-msft
 ms.author: dlevy
-ms.reviewer: maghan, randolphwest
-ms.date: 08/15/2023
+ms.reviewer: randolphwest
+ms.date: 07/02/2025
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
 ms.collection:
   - data-tools
 ms.custom:
-  - ignite-2024
+  - linux-related-content
 helpviewer_keywords:
-  - "scripts [SQL Server], sqlcmd utility"
-  - "variables [SQL Server], scripts"
-  - "scripting variables [SQL Server]"
-  - "sqlcmd utility, scripts"
-  - "setvar command"
-dev_langs:
-  - "TSQL"
-monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
+  - "statements [SQL Server], command prompt"
+  - "go-sqlcmd"
+  - "QUIT command"
+  - "Transact-SQL statements, command prompt"
+  - "EXIT command"
+  - "sqlcmd commands"
+  - "ED command"
+  - "sqlcmd utility"
+  - "command prompt utilities [SQL Server], sqlcmd"
+  - "!! command"
+  - "stored procedures [SQL Server], command prompt"
+  - "system stored procedures [SQL Server], command prompt"
+  - "sqlcmd utility, about sqlcmd utility"
+  - "scripts [SQL Server], command prompt"
+  - "RESET command"
+  - "GO command"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =fabric"
 ---
-# sqlcmd - Use with scripting variables
+# Use sqlcmd with scripting variables
 
 [!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Azure Synapse Analytics PDW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
+The [sqlcmd utility](sqlcmd-utility.md) lets you enter Transact-SQL statements, system procedures, and script files.
+
+> [!NOTE]  
+> To find out which variant and version of **sqlcmd** is installed on your system, see [Check installed version of sqlcmd utility](sqlcmd-installed-version.md). For information on how to get **sqlcmd**, see [Download and install the sqlcmd utility](sqlcmd-download-install.md).
+
+## Scripting variables in sqlcmd
+
 Variables that are used in scripts are called scripting variables. Scripting variables enable one script to be used in multiple scenarios. For example, if you want to run one script against multiple servers, instead of modifying the script for each server, you can use a scripting variable for the server name. By changing the server name supplied to the scripting variable, the same script can be executed on different servers.
 
-Scripting variables can be defined explicitly by using the **setvar** command, or implicitly by using the `sqlcmd -v` option.
+Scripting variables can be defined explicitly by using the `setvar` command, or implicitly by using the `sqlcmd -v` option.
 
-This article also includes examples defining environmental variables at the Cmd.exe command prompt by using `SET`.
+This article also includes examples defining environmental variables at the command line by using `SET`.
 
 ## Set scripting variables with the setvar command
 
-The **setvar** command is used to define scripting variables. Variables that are defined by using the **setvar** command are stored internally. Scripting variables shouldn't be confused with environment variables that are defined at the command prompt by using `SET`. If a script references a variable that isn't an environment variable or isn't defined by using **setvar**, an error message is returned and the execution of the script stops. For more information, see the `-b` option in [**sqlcmd**](sqlcmd-utility.md).
+The `setvar` command defines scripting variables. Variables that are defined by using the `setvar` command are stored internally. Scripting variables shouldn't be confused with environment variables that are defined at the command prompt by using `SET`. If a script references a variable that isn't an environment variable or isn't defined by using `setvar`, an error message is returned and the execution of the script stops. For more information, see the `-b` option in [**sqlcmd**](sqlcmd-utility.md#-b).
 
 ## Variable precedence (low to high)
 
@@ -47,9 +63,9 @@ If more than one type of variable has the same name, the variable with the highe
 1. `:Setvar X Y`
 
 > [!NOTE]  
-> To view the environmental variables, in **Control Panel**, open **System**, and then select the **Advanced** tab.
+> To view the environmental variables on Windows 11, open **Settings**, then navigate to **System** > **About**, and select the **Advanced system settings** link. In the System Properties window, select **Environment Variables**. On Linux, type `printenv` at the command line, and in macOS, type `env`.
 
-## Implicitly setting scripting variables
+## Implicitly set scripting variables
 
 When you start **sqlcmd** with an option that has a related **sqlcmd** variable, the **sqlcmd** variable is set implicitly to the value that is specified by using the option. In the following example, `sqlcmd` is started with the `-l` option. This implicitly sets the `SQLLOGINTIMEOUT` variable.
 
@@ -92,7 +108,7 @@ Consider the following guidelines when you name scripting variables:
 
 Consider the following guidelines when you specify values for scripting variables:
 
-- Variable values that are defined by using **setvar** or the `-v` option must be enclosed by quotation marks if the string value contains spaces.
+- Variable values that are defined by using `setvar` or the `-v` option must be enclosed by quotation marks if the string value contains spaces.
 - If quotation marks are part of the variable value, they must be escaped. For example: :`setvar MyVar "spac""e"`.
 
 ## Guidelines for cmd.exe SET variable values and names
@@ -100,38 +116,38 @@ Consider the following guidelines when you specify values for scripting variable
 Variables that are defined by using `SET` are part of the **cmd.exe** environment and can be referenced by **sqlcmd**. Consider the following guidelines:
 
 - Variable names must not contain white space characters or quotation marks.
-- Variable values may contain spaces or quotation marks.
+- Variable values might contain spaces or quotation marks.
 
 ## sqlcmd scripting variables
 
-Variables that are defined by **sqlcmd** are known as scripting variables. The following table lists **sqlcmd** scripting variables.
-
 | Variable | Related option | R/W | Default |
 | --- | --- | --- | --- |
-| SQLCMDUSER <sup>1</sup> | -U | R <sup>2</sup> | "" |
-| SQLCMDPASSWORD <sup>1</sup> | -P | -- | "" |
-| SQLCMDSERVER <sup>1</sup> | -S | R <sup>2</sup> | "DefaultLocalInstance" |
-| SQLCMDWORKSTATION | -H | R <sup>2</sup> | "ComputerName" |
-| SQLCMDDBNAME | -d | R <sup>2</sup> | "" |
-| SQLCMDLOGINTIMEOUT | -l | R/W <sup>3</sup> | "8" (seconds) |
-| SQLCMDSTATTIMEOUT | -t | R/W <sup>3</sup> | "0" = wait indefinitely |
-| SQLCMDHEADERS | -h | R/W <sup>3</sup> | "0" |
-| SQLCMDCOLSEP | -s | R/W <sup>3</sup> | " " |
-| SQLCMDCOLWIDTH | -w | R/W <sup>3</sup> | "0" |
-| SQLCMDPACKETSIZE | -a | R <sup>2</sup> | "4096" |
-| SQLCMDERRORLEVEL | -m | R/W <sup>3</sup> | "0" |
-| SQLCMDMAXVARTYPEWIDTH | -y | R/W <sup>3</sup> | "256" |
-| SQLCMDMAXFIXEDTYPEWIDTH | -Y | R/W <sup>3</sup> | "0" = unlimited |
-| SQLCMDEDITOR | | R/W <sup>3</sup> | "edit.com" |
-| SQLCMDINI | | R <sup>2</sup> | "" |
+| `SQLCMDUSER` <sup>1</sup> | `-U` | `R` <sup>2</sup> | "" |
+| `SQLCMDPASSWORD` <sup>1</sup> | `-P` | `--` | "" |
+| `SQLCMDSERVER` <sup>1</sup> | `-S` | `R` <sup>2</sup> | "DefaultLocalInstance" |
+| `SQLCMDWORKSTATION` | `-H` | `R` <sup>2</sup> | "ComputerName" |
+| `SQLCMDDBNAME` | `-d` | `R` <sup>2</sup> | "" |
+| `SQLCMDLOGINTIMEOUT` | `-l` | `R/W` <sup>3</sup> | "8" (seconds) |
+| `SQLCMDSTATTIMEOUT` | `-t` | `R/W` <sup>3</sup> | "0" = wait indefinitely |
+| `SQLCMDHEADERS` | `-h` | `R/W` <sup>3</sup> | "0" |
+| `SQLCMDCOLSEP` | `-s` | `R/W` <sup>3</sup> | " " |
+| `SQLCMDCOLWIDTH` | `-w` | `R/W` <sup>3</sup> | "0" |
+| `SQLCMDPACKETSIZE` | `-a` | `R` <sup>2</sup> | "4096" |
+| `SQLCMDERRORLEVEL` | `-m` | `R/W` <sup>3</sup> | "0" |
+| `SQLCMDMAXVARTYPEWIDTH` | `-y` | `R/W` <sup>3</sup> | "256" |
+| `SQLCMDMAXFIXEDTYPEWIDTH` | `-Y` | `R/W` <sup>3</sup> | "0" = unlimited |
+| `SQLCMDEDITOR` | | `R/W` <sup>3</sup> | "edit.com" |
+| `SQLCMDINI` | | `R` <sup>2</sup> | "" |
 
 <sup>1</sup> SQLCMDUSER, SQLCMDPASSWORD and SQLCMDSERVER are set when `:Connect` is used.
 
 <sup>2</sup> R indicates the value can only be set one time during program initialization.
 
-<sup>3</sup> R/W indicates that the value can be reset by using the **setvar** command and subsequent commands use the new value.
+<sup>3</sup> R/W indicates that the value can be reset by using the `setvar` command and subsequent commands use the new value.
 
 ## Examples
+
+[!INCLUDE [article-uses-adventureworks](../../includes/article-uses-adventureworks.md)]
 
 ### A. Use the setvar command in a script
 
@@ -330,8 +346,15 @@ These statements return the row.
 2> GO
 ```
 
-## Next steps
+## Related content
 
-- [Use the sqlcmd Utility](sqlcmd-use-utility.md)
-- [sqlcmd utility](sqlcmd-utility.md)
-- [Command Prompt Utility Reference (Database Engine)](../../tools/command-prompt-utility-reference-database-engine.md)
+- [Learn more about sqlcmd (Go) utility on GitHub](https://github.com/microsoft/go-sqlcmd)
+- [Quickstart: Run SQL Server Linux container images with Docker](../../linux/quickstart-install-connect-docker.md)
+- [Start the sqlcmd utility](sqlcmd-start-utility.md)
+- [Execute T-SQL from a script file with sqlcmd](sqlcmd-run-transact-sql-script-files.md)
+- [use the utility](sqlcmd-use-utility.md)
+- [Use sqlcmd with scripting variables](sqlcmd-use-scripting-variables.md)
+- [Connect to SQL Server with sqlcmd](sqlcmd-connect-database-engine.md)
+- [Edit SQLCMD Scripts with Query Editor](edit-sqlcmd-scripts-query-editor.md)
+- [Manage Job Steps](../../ssms/agent/manage-job-steps.md)
+- [Create a CmdExec Job Step](../../ssms/agent/create-a-cmdexec-job-step.md)
