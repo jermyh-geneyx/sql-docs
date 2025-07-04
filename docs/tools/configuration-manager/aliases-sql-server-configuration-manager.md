@@ -86,7 +86,7 @@ To connect to the SQL Server using an alias with TCP/IP, you must:
 
 - Specify **TCP/IP** for the **Protocol**.
 
-- Optionally, enter a port number for the **Port No**. The default is `1433`, which is the port number of the default instance of the [!INCLUDE [ssDE](../../includes/ssde-md.md)] on a server. To connect to a named instance or a default instance that isn't listening on port 1433, you must provide the port number, or start the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Browser service. For information on configuring the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Browser service, see [SQL Server Browser Service](../../tools/configuration-manager/sql-server-browser-service.md).
+- Optionally, enter a port number for the **Port No**. The default is `1433`, which is the port number of the default instance of the [!INCLUDE [ssDE](../../includes/ssde-md.md)] on a server. To connect to a named instance or a default instance that isn't listening on port 1433, you must provide the port number, or start the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Browser service. For information on configuring the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Browser service, see [SQL Server Browser service (Database Engine and SSAS)](../../database-engine/configure-windows/sql-server-browser-service-database-engine-and-ssas.md).
 
 At the time of connection, the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Native Client component reads the server, protocol, and port values from the registry for the specified alias name, and creates a connection string in the format `tcp:<servername>[\<instancename>],<port>` or `tcp:<IPAddress>[\<instancename>],<port>`.
 

@@ -179,7 +179,7 @@ The Remote Registry service must be up and running.
 
 Remote Administration must be enabled.
 
-For SQL Server instances using a non-default port, use the network configuration of the SQL Server Configuration Manager to determine the port used by the SQL Server instance you want to unblock. Enable the TCP port for IPALL in the firewall if you want to connect to your SQL Server instance using the [SQL Server Browser Service](../../../tools/configuration-manager/sql-server-browser-service.md), which uses a different IP address than the clustered instance, and UDP port 1434.
+For SQL Server instances using a non-default port, use the network configuration of the SQL Server Configuration Manager to determine the port used by the SQL Server instance you want to unblock. Enable the TCP port for IPALL in the firewall if you want to connect to your SQL Server instance using the [SQL Server Browser service](../../../database-engine/configure-windows/sql-server-browser-service-database-engine-and-ssas.md), which uses a different IP address than the clustered instance, and UDP port 1434.
 
 Failover cluster Setup operations include a rule that checks network binding order. Although binding orders might seem correct, you might have disabled or "ghosted" NIC configurations on the system. "Ghosted" NIC configurations can affect the binding order and cause the binding order rule to issue a warning. To avoid this situation, use the following steps to identify and remove disabled network adapters:
 

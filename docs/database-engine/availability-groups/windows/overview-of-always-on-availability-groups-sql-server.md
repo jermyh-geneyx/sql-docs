@@ -5,6 +5,7 @@ author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest, vanto
 ms.date: 06/23/2025
+ms.update-cycle: 1825-days
 ms.service: sql
 ms.subservice: availability-groups
 ms.topic: concept-article

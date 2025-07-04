@@ -17,7 +17,7 @@ ms.topic: include
 
   To check the version of Azure Extension for SQL Server and update to the latest, review [Upgrade extensions](/azure/azure-arc/servers/manage-vm-extensions-portal#upgrade-extensions).
 
-- If the server hosts a named instance of SQL Server, the [SQL Server Browser service](../../../tools/configuration-manager/sql-server-browser-service.md) must be running.
+- If the server hosts a named instance of SQL Server, the [SQL Server Browser service](../../../database-engine/configure-windows/sql-server-browser-service-database-engine-and-ssas.md) must be running.
 
 - [A Log Analytics workspace](/azure/azure-monitor/logs/quick-create-workspace?tabs=azure-portal) must be in the same subscription as your Azure Arc-enabled SQL Server resource.
 

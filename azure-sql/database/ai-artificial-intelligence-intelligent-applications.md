@@ -5,6 +5,7 @@ author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: damauri, josephsack, randolphwest, mathoma
 ms.date: 05/06/2025
+ms.update-cycle: 180-days
 ms.service: azure-sql-database
 ms.topic: conceptual
 ms.collection:

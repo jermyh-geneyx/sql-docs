@@ -5,6 +5,7 @@ author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: damauri, josephsack, randolphwest, mathoma
 ms.date: 04/18/2025
+ms.update-cycle: 180-days
 ms.service: azure-sql-managed-instance
 ms.topic: conceptual
 ms.collection:

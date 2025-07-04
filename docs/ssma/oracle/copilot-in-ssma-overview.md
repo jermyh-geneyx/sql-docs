@@ -5,6 +5,7 @@ author: nilabjaball
 ms.author: niball
 ms.reviewer: randolphwest
 ms.date: 05/15/2025
+ms.update-cycle: 180-days
 ms.service: sql
 ms.subservice: ssma
 ms.topic: overview
