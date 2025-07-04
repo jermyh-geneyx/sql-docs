@@ -18,9 +18,9 @@ helpviewer_keywords:
 ---
 # SQL Server Browser service (Database Engine and SSAS)
 
-[!INCLUDE [SQL Server](../../includes/applies-to-version/sqlserver.md)]
+[!INCLUDE [sql-windows-only](../../includes/applies-to-version/sql-windows-only.md)]
 
-The SQL Server Browser (`sqlbrowser`) runs as a service, to help client computers find instances of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] on the Windows server. SQL Server Browser is installed with [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. The [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Browser service doesn't need to be configured, but must be running under some connection scenarios.
+The SQL Server Browser (`sqlbrowser`) runs as a service, to help client computers find instances of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] on a server running Windows. SQL Server Browser is installed with [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. The [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Browser service doesn't need to be configured, but must be running under some connection scenarios.
 
 The SQL Server Browser can help with:
 
