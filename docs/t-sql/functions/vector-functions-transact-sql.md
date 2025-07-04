@@ -5,6 +5,7 @@ author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: damauri, pookam
 ms.date: 05/01/2025
+ms.update-cycle: 180-days
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"

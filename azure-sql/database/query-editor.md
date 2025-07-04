@@ -6,6 +6,7 @@ author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: ivujic, mathoma
 ms.date: 08/01/2024
+ms.update-cycle: 180-days
 ms.service: azure-sql-database
 ms.subservice: development
 ms.topic: concept-article 
