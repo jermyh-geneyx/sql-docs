@@ -2,10 +2,10 @@
 title: Change automated backup settings
 titleSuffix: Azure SQL Managed Instance
 description: Change point-in-time restore and backup redundancy options for automatic backups in Azure SQL Managed Instance by using the Azure portal, the Azure CLI, Azure PowerShell, and the REST API.
-author: Stralle
-ms.author: strrodic
-ms.reviewer: wiassaf, mathoma, danil
-ms.date: 07/20/2022
+author: dinethi
+ms.author: dinethi
+ms.reviewer: wiassaf, mathoma, strrodic, mlandzic
+ms.date: 07/08/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: backup-restore
 ms.topic: how-to
@@ -82,6 +82,7 @@ az sql midb short-term-retention-policy set \
     --retention-days 1 \
 ```
 
+For more information, see the [Backup retention Azure CLI command](/cli/azure/sql/midb/short-term-retention-policy).
 
 ### [PowerShell](#tab/powershell)
 
@@ -119,12 +120,14 @@ Get-AzSqlDeletedInstanceDatabaseBackup -ResourceGroupName resourceGroup -Instanc
 
 Zero days of retention would denote that a backup is immediately deleted and no longer kept for a deleted database. After you reduce PITR backup retention for a deleted database, you can no longer increase it.
 
+For more information, see the [Backup retention PowerShell command](/powershell/module/az.sql/set-azsqlinstancedatabasebackupshorttermretentionpolicy).
+
 ### [Rest API](#tab/rest-api)
 
 #### Sample request
 
 ```http
-PUT https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup/providers/Microsoft.Sql/servers/testserver/databases/testDatabase/backupShortTermRetentionPolicies/default?api-version=2017-10-01-preview
+PUT https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/resourceGroup/providers/Microsoft.Sql/managedInstances/testManagedInstance/databases/testDatabase/backupShortTermRetentionPolicies/default?api-version=2017-10-01-preview
 ```
 
 #### Request body
@@ -143,16 +146,16 @@ Status code: 200
 
 ```json
 {
-  "id": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/resourceGroups/resourceGroup/servers/testserver/databases/testDatabase/backupShortTermRetentionPolicies/default",
+  "id": "/subscriptions/00000000-1111-2222-3333-444444444444/providers/Microsoft.Sql/resourceGroups/resourceGroup/managedInstances/testserver/databases/testDatabase/backupShortTermRetentionPolicies/default",
   "name": "default",
-  "type": "Microsoft.Sql/resourceGroups/servers/databases/backupShortTermRetentionPolicies",
+  "type": "Microsoft.Sql/resourceGroups/managedInstances/databases/backupShortTermRetentionPolicies",
   "properties": {
     "retentionDays": 28
   }
 }
 ```
 
-For more information, see [Backup retention REST API](/rest/api/sql/backup-short-term-retention-policies).
+For more information, see the [Backup retention REST API](/rest/api/sql/managed-backup-short-term-retention-policies).
 
 ---
 
