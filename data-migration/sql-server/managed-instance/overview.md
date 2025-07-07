@@ -231,6 +231,6 @@ The Data SQL Engineering team developed these resources. This team's core charte
 - [Services and tools available for data migration scenarios](/azure/dms/dms-tools-matrix)
 - [Service tiers in Azure SQL Managed Instance](/azure/azure-sql/managed-instance/sql-managed-instance-paas-overview#service-tiers)
 - [T-SQL differences between SQL Server & Azure SQL Managed Instance](/azure/azure-sql/managed-instance/transact-sql-tsql-differences-sql-server)
-- [Azure Total Cost of Ownership Calculator](https://azure.microsoft.com/pricing/tco/calculator/)
+- [Azure Migrate Business case total cost of ownership](/azure/migrate/concepts-business-case-calculation) 
 - [Cloud Adoption Framework for Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/contoso-migration-scale)
 - [Best practices for costing and sizing workloads migrated to Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/migrate-best-practices-costs)

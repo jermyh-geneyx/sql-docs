@@ -160,8 +160,8 @@ conceptualContent:
         - text: Cloud Economics
           url: https://azure.microsoft.com/overview/cloud-economics
           itemType: reference
-        - text: Total Cost of Ownership Calculator
-          url: https://azure.microsoft.com/pricing/tco/calculator/
+        - text: Azure Migrate Business case total cost of ownership
+          url: /azure/migrate/concepts-business-case-calculation
           itemType: reference
         - text: Azure Hybrid Benefit
           url: https://azure.microsoft.com/pricing/hybrid-benefit/

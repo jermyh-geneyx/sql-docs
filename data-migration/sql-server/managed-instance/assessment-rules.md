@@ -542,6 +542,6 @@ More information: [Stored Procedure differences in Azure SQL Managed Instance](/
 - [Services and tools available for data migration scenarios](/azure/dms/dms-tools-matrix)
 - [Service Tiers in Azure SQL Managed Instance](/azure/azure-sql/managed-instance/sql-managed-instance-paas-overview#service-tiers)
 - [T-SQL differences between SQL Server & Azure SQL Managed Instance](/azure/azure-sql/managed-instance/transact-sql-tsql-differences-sql-server)
-- [Azure total Cost of Ownership Calculator](https://azure.microsoft.com/pricing/tco/calculator/)
+- [Azure Migrate Business case total cost of ownership](/azure/migrate/concepts-business-case-calculation) 
 - [Cloud Adoption Framework for Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/contoso-migration-scale)
 - [Best practices for costing and sizing workloads migrate to Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/migrate-best-practices-costs)

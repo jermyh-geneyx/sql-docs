@@ -186,7 +186,7 @@ Some SQL Server features are only available once the [database compatibility lev
 - [Services and tools available for data migration scenarios](/azure/dms/dms-tools-matrix)
 - [Service Tiers in Azure SQL Managed Instance](/azure/azure-sql/managed-instance/sql-managed-instance-paas-overview#service-tiers)
 - [T-SQL differences between SQL Server & Azure SQL Managed Instance](/azure/azure-sql/managed-instance/transact-sql-tsql-differences-sql-server)
-- [Azure total Cost of Ownership Calculator](https://azure.microsoft.com/pricing/tco/calculator/)
+- [Azure Migrate Business case total cost of ownership](/azure/migrate/concepts-business-case-calculation) 
 - [Migrate databases with Azure SQL migration extension for Azure Data Studio](/azure/dms/dms-overview#migrate-databases-with-azure-sql-migration-extension-for-azure-data-studio)
 - [Tutorial: Migrate SQL Server to Azure SQL Managed Instance with DMS](database-migration-service.md)
 - [Cloud Adoption Framework for Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/contoso-migration-scale)
