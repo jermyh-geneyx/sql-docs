@@ -4,7 +4,7 @@ description: How to convert an Azure SQL Database to the Hyperscale tier.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: dfurman, blakhani
-ms.date: 07/02/2025
+ms.date: 07/07/2025
 ms.service: azure-sql-database
 ms.topic: how-to
 ms.custom:
@@ -45,8 +45,7 @@ The conversion process is divided into two stages - the conversion of database, 
   - If you choose to manually cutover at a time of your choosing, you have 24 hours to initiate a manual cutover after the point when the database ready for cutover. You can initiate a manual cutover via the Azure portal, Azure CLI, PowerShell, or T-SQL.
 - During the final cutover to Hyperscale, your applications only experience a short period of downtime, usually less than a minute.
 
-
-There are multiple phases in the conversion process which can be seen in the Azure Portal (progress reporting page), Azure CLI ([az sql db op list](/cli/azure/sql/db/op#az-sql-db-op-list)), PowerShell ([Get-AzSqlDatabaseActivity](/powershell/module/az.sql/get-azsqldatabaseactivity)) and T-SQL ([sys.dm_operation_status](/sql/relational-databases/system-dynamic-management-views/sys-dm-operation-status-azure-sql-database) DMV). When converting a database from the Premium or Business Critical service tiers to Hyperscale, existing client connections are disconnected during phase 1. This is similar to the disconnect that occurs when scaling the database between service tiers. Applications should be designed to gracefully handle transient connectivity interruptions by implementing retry logic as described in [Retry logic for transient errors](/azure/azure-sql/database/troubleshoot-common-connectivity-issues#retry-logic-for-transient-errors).
+There are multiple phases in the conversion process which can be monitored in the Azure portal (progress reporting page), Azure CLI ([az sql db op list](/cli/azure/sql/db/op#az-sql-db-op-list)), PowerShell ([Get-AzSqlDatabaseActivity](/powershell/module/az.sql/get-azsqldatabaseactivity)), or T-SQL (with [sys.dm_operation_status](/sql/relational-databases/system-dynamic-management-views/sys-dm-operation-status-azure-sql-database)). When converting a database from the Premium or Business Critical service tiers to Hyperscale, existing client connections are disconnected during phase 1. This is similar to the disconnect that occurs when scaling the database between service tiers. Applications should be designed to gracefully handle transient connectivity interruptions by implementing retry logic as described in [Retry logic for transient errors](/azure/azure-sql/database/troubleshoot-common-connectivity-issues#retry-logic-for-transient-errors).
 
 ## Convert a database to Hyperscale
 
