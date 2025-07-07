@@ -5,7 +5,7 @@ description: Learn about the new features and documentation improvements for Azu
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: wiassaf, mathoma
-ms.date: 07/15/2025
+ms.date: 07/16/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: service-overview
 ms.topic: whats-new
@@ -42,7 +42,7 @@ The following table lists the features of Azure SQL Managed Instance that are cu
 |[Endpoint policies](./service-endpoint-policies-configure.md) | Configure which Azure Storage accounts can be accessed from a SQL Managed Instance subnet. Grants an extra layer of protection against inadvertent or malicious data exfiltration.|
 |[Flexible memory](resource-limits.md#flexible-memory-preview) | Save on cost by choosing the memory allocation for your [Next-gen General Purpose](service-tiers-next-gen-general-purpose-use.md) instance based on your workload needs.|
 |[Modernization Advisor](../virtual-machines/modernization-advisor.md) | Use the Modernization Advisor in the Azure portal to help you determine if migrating to Azure SQL Managed Instance from a SQL Server VM saves you money or optimizes performance. |
-|[Migrate SQL Server to Azure](/sql/azure-arc/migrate-to-azure-sql-managed-instance) | Migrate your SQL Server enabled by Azure Arc instance to Azure SQL Managed Instance through the Azure portal.|
+|[Migrate SQL Server to Azure](/sql/sql-server/azure-arc/migrate-to-azure-sql-managed-instance) | Migrate your SQL Server instance enabled by Azure Arc to Azure SQL Managed Instance through the Azure portal.|
 |[Next-gen General Purpose](service-tiers-next-gen-general-purpose-use.md) | An architectural upgrade of the General Purpose service tier that uses managed disks for greater resource flexibility, and improved performance while maintaining the same baseline cost as the General Purpose service tier.  |
 |[Regular expression functions](/sql/relational-databases/regular-expressions/overview) | Regular expression (REGEX) functions return text based on values in a search pattern. |
 |[SDK-style SQL project](/sql/azure-data-studio/extensions/sql-database-project-extension-sdk-style-projects) | Use [Microsoft.Build.Sql](https://www.nuget.org/packages/Microsoft.Build.Sql) for SDK-style SQL projects in the SQL Database Projects extension in Azure Data Studio or Visual Studio Code. SDK-style SQL projects are especially advantageous for applications shipped through pipelines or built in cross-platform environments.|
@@ -85,7 +85,7 @@ Learn about significant changes to the Azure SQL Managed Instance documentation.
 | Changes | Details |
 | --- | --- |
 | **Degrees of parallelism (DOP) feedback GA** |  DOP feedback improves query performance by identifying parallelism inefficiencies for repeating queries, based on elapsed time and waits. DOP feedback is now generally available for Azure SQL Managed Instance with the [Always-up-to-date update policy](update-policy.md#always-up-to-date-update-policy). To learn more, see [Degrees of parallelism (DOP) feedback](/sql/relational-databases/performance/intelligent-query-processing-degree-parallelism-feedback?view=azuresqldbmi-current&preserve-view=true). For additional information, see the [Smarter Parallelism: Degree of parallelism feedback in SQL Server 2025](https://techcommunity.microsoft.com/blog/sqlserver/smarter-parallelism-degree-of-parallelism-feedback-in-sql-server-2025/4431318) blog. |
-|**Migrate SQL Server instance to Azure preview** | Migrate your SQL Server enabled by Azure Arc instance to Azure SQL Managed Instance through the Azure portal. This feature is currently in preview. Review [Migrate SQL Server instance to Azure SQL Managed Instance](/sql/azure-arc/migrate-to-azure-sql-managed-instance) to learn more. |
+|**Migrate SQL Server instance to Azure preview** | Migrate your SQL Server instance enabled by Azure Arc to Azure SQL Managed Instance through the Azure portal. This feature is currently in preview. Review [Migrate SQL Server instance to Azure SQL Managed Instance](/sql/sql-server/azure-arc/migrate-to-azure-sql-managed-instance) to learn more. |
 
 ### June 2025
 
