@@ -143,6 +143,7 @@ After the license is activated:
 
 - You can't change the license version.
 - You can decrease the core count, but you can't increase it. To increase the core count, create another license resource.
+- You can't change the license scope.
 
 After the license is terminated:
 
