@@ -4,7 +4,7 @@ description: PolyBase enables your SQL Server instance to process Transact-SQL q
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: hudequei, randolphwest
-ms.date: 04/29/2025
+ms.date: 07/08/2025
 ms.service: sql
 ms.subservice: polybase
 ms.topic: "overview"
@@ -55,7 +55,7 @@ PolyBase provides these same functionalities for the following SQL products from
 | --- | --- |
 | Native support for CSV, Parquet, & Delta <sup>1</sup> | PolyBase Query Service for External Data installation is no longer required to use OPENROWSET, CREATE EXTERNAL TABLE, or CREATE EXTERNAL TABLE AS SELECT with the following types of external data: Parquet, Delta, Azure Blob Storage (ABS), Azure Data Lake Storage (ADLS), or S3-Compatible Object storage. |
 | Use generic ODBC data sources on Linux | For more information, see [Configure PolyBase to access external data with ODBC generic types](polybase-configure-odbc-generic.md). |
-|TDS 8.0 Support|When using [Microsoft ODBC Driver 18 for SQL Server driver](/sql/connect/odbc/windows/features-of-the-microsoft-odbc-driver-for-sql-server-on-windows).<br /><br /> TDS 8.0 is not supported for sqlserver as [external data source](/sql/t-sql/statements/create-external-data-source-transact-sql).|
+| TDS 8.0 support | When using [Microsoft ODBC Driver 18 for SQL Server](../../connect/odbc/windows/features-of-the-microsoft-odbc-driver-for-sql-server-on-windows.md), TDS 8.0 isn't supported for [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] as an [external data source](../../t-sql/statements/create-external-data-source-transact-sql.md). |
 
 <sup>1</sup> On [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], PolyBase Query Service for External Data is still required to connect with other databases. For example: SQL Server, Oracle, DB2, Teradata, MongoDB, or ODBC.
 
@@ -69,7 +69,7 @@ PolyBase provides these same functionalities for the following SQL products from
 | Delta table format | PolyBase is now capable of querying (read-only) data from Delta Table format stored on S3-compatible object storage, Azure Storage Account V2, and Azure Data Lake Storage Gen2. For more information, see to [Virtualize delta table with PolyBase](virtualize-delta.md) |
 | Create External Table as Select (CETAS) | PolyBase can now use CETAS to create an external table and then export, in parallel, the result of a [!INCLUDE [tsql](../../includes/tsql-md.md)] SELECT statement to Azure Data Lake Storage Gen2, Azure Storage Account V2, and S3-compatible object storage. For more information, see [CREATE EXTERNAL TABLE AS SELECT (CETAS)](../../t-sql/statements/create-external-table-as-select-transact-sql.md). |
 
-For more new features of [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], see [What's new in SQL Server 2022?](../../sql-server/what-s-new-in-sql-server-2022.md)
+For more new features of [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], see [What's new in SQL Server 2022](../../sql-server/what-s-new-in-sql-server-2022.md).
 
 > [!TIP]  
 > For a tutorial of PolyBase features and capabilities in [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], see [Get started with PolyBase in SQL Server 2022](polybase-get-started.md).

@@ -4,7 +4,7 @@ description: "CREATE VECTOR INDEX creates an index on vector data to allow appro
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: damauri
-ms.date: 05/28/2025
+ms.date: 07/08/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -56,7 +56,6 @@ ON object ( vector_column )
     [,] METRIC = { 'cosine' | 'dot' | 'euclidean' }
     [ [,] TYPE = 'DiskANN' ]
     [ [,] MAXDOP = max_degree_of_parallelism ]
-    [ [,] DROP_EXISTING = { ON | OFF } ]
 ) ]
 [ ON { filegroup_name | "default" } ]
 [;]
@@ -110,18 +109,6 @@ For more information, see [Configure Parallel Index Operations](../../relational
 
 > [!NOTE]  
 > Parallel index operations aren't available in every edition of [!INCLUDE[msCoName](../../includes/msconame-md.md)] [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For a list of features that are supported by the editions of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], see [Editions and supported features of SQL Server 2022](../../sql-server/editions-and-components-of-sql-server-2022.md) or [Editions and supported features of SQL Server 2025 Preview](../../sql-server/editions-and-components-of-sql-server-2025.md).
-
-## DROP_EXISTING = { ON | OFF }
-
-Is an option to drop and rebuild the existing vector index with modified specifications, and keep the same name for the index. The default is `OFF`.
-
-- `ON`
-
-  Specifies to drop and rebuild the existing index, which must have the same name as the parameter *index_name*.
-
-- `OFF`
-
-  Specifies not to drop and rebuild the existing index. SQL Server displays an error if the specified index name already exists.
 
 ## Limitations
 
