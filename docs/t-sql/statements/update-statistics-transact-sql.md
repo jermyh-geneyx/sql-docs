@@ -4,7 +4,7 @@ description: UPDATE STATISTICS updates query optimization statistics on a table 
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: derekw, randolphwest
-ms.date: 04/04/2025
+ms.date: 07/07/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -34,7 +34,7 @@ Updating statistics ensures that queries compile with up-to-date statistics. Upd
 ::: moniker range="=fabric"
 
 > [!NOTE]  
-> For more information on statistics in [!INCLUDE [fabric](../../includes/fabric.md)], see [Statistics in Fabric data warehousing](/fabric/data-warehouse/statistics).
+> For more information on statistics in [!INCLUDE [fabric](../../includes/fabric.md)], see [Statistics in Fabric Data Warehouse](/fabric/data-warehouse/statistics).
 
 ::: moniker-end
 
@@ -119,7 +119,7 @@ The name of the table or indexed view that contains the statistics object.
 
 The name of the index to update statistics on or name of the statistics to update. If *index_or_statistics_name* or *statistics_name* isn't specified, the query optimizer updates all statistics for the table or indexed view. This includes statistics created using the `CREATE STATISTICS` statement, single-column statistics created when `AUTO_CREATE_STATISTICS` is on, and statistics created for indexes.
 
-For more information about `AUTO_CREATE_STATISTICS`, see [ALTER DATABASE SET Options](../../t-sql/statements/alter-database-transact-sql-set-options.md). To view all indexes for a table or view, you can use [sp_helpindex](../../relational-databases/system-stored-procedures/sp-helpindex-transact-sql.md).
+For more information about `AUTO_CREATE_STATISTICS`, see [ALTER DATABASE SET options](alter-database-transact-sql-set-options.md). To view all indexes for a table or view, you can use [sp_helpindex](../../relational-databases/system-stored-procedures/sp-helpindex-transact-sql.md).
 
 #### FULLSCAN
 
@@ -156,7 +156,7 @@ In [!INCLUDE [fabricdw](../../includes/fabric-dw.md)] in [!INCLUDE [fabric](../.
 
 When `ON`, the statistics will retain the set sampling percentage for subsequent updates that don't explicitly specify a sampling percentage. When `OFF`, statistics sampling percentage will get reset to default sampling in subsequent updates that don't explicitly specify a sampling percentage. The default is `OFF`.
 
-[DBCC SHOW_STATISTICS](../../t-sql/database-console-commands/dbcc-show-statistics-transact-sql.md) and [sys.dm_db_stats_properties](../../relational-databases/system-dynamic-management-views/sys-dm-db-stats-properties-transact-sql.md) expose the persisted sample percent value for the selected statistic.
+[DBCC SHOW_STATISTICS](../database-console-commands/dbcc-show-statistics-transact-sql.md) and [sys.dm_db_stats_properties](../../relational-databases/system-dynamic-management-views/sys-dm-db-stats-properties-transact-sql.md) expose the persisted sample percent value for the selected statistic.
 
 If `AUTO_UPDATE_STATISTICS` is executed, it uses the persisted sampling percentage if available, or use default sampling percentage if not. `RESAMPLE` behavior isn't affected by this option.
 
@@ -184,7 +184,7 @@ To re-enable the `AUTO_UPDATE_STATISTICS` option behavior, run `UPDATE STATISTIC
 > [!WARNING]  
 > Using this option can produce suboptimal query plans. We recommend using this option sparingly, and then only by a qualified system administrator.
 
-For more information about the `AUTO_STATISTICS_UPDATE` option, see [ALTER DATABASE SET Options](../../t-sql/statements/alter-database-transact-sql-set-options.md).
+For more information about the `AUTO_STATISTICS_UPDATE` option, see [ALTER DATABASE SET options](alter-database-transact-sql-set-options.md).
 
 #### INCREMENTAL = { ON | OFF }
 
@@ -206,7 +206,7 @@ If per partition statistics aren't supported an error is generated. Incremental 
 
 **Applies to**: [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] SP2 and [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] CU3).
 
-Overrides the `max degree of parallelism` configuration option for the duration of the statistic operation. For more information, see [Configure the max degree of parallelism Server Configuration Option](../../database-engine/configure-windows/configure-the-max-degree-of-parallelism-server-configuration-option.md). Use `MAXDOP` to limit the number of processors used in a parallel plan execution. The maximum is 64 processors.
+Overrides the `max degree of parallelism` configuration option for the duration of the statistic operation. For more information, see [Server configuration: max degree of parallelism](../../database-engine/configure-windows/configure-the-max-degree-of-parallelism-server-configuration-option.md). Use `MAXDOP` to limit the number of processors used in a parallel plan execution. The maximum is 64 processors.
 
 *max_degree_of_parallelism* can be:
 
@@ -235,7 +235,7 @@ Currently, if statistics are created by a third party tool on a customer databas
 (Starting with [!INCLUDE [sql-server-2022](../../includes/sssql22-md.md)])| This feature allows the creation of statistics objects in a mode such that a schema change will *not* be blocked by the statistics, but instead the statistics will be dropped. In this way, auto drop statistics behave like auto created statistics.
 
 > [!NOTE]  
-> Trying to set or unset the *Auto_Drop* property on auto created statistics might raise errors - auto created statistics always uses auto drop. Some backups, when restored, might have this property set incorrectly until the next time the statistics object is updated (manually or automatically). However, auto created statistics always behave like auto drop statistics.
+> Trying to set or unset the `AUTO_DROP` property on auto created statistics might raise errors. Auto created statistics always uses auto drop. Some backups, when restored, might have this property set incorrectly until the next time the statistics object is updated (manually or automatically). However, in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)], and [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions, automatically created statistics always behave as though the [AUTO_DROP](../../relational-databases/statistics/statistics.md#auto_drop-option) has been set.
 
 ## Remarks
 
@@ -246,10 +246,13 @@ For more information about when to use `UPDATE STATISTICS`, see [When to update 
 ### Limitations
 
 - Updating statistics isn't supported on external tables. To update statistics on an external table, drop and re-create the statistics.
-- Updating the statistics created automatically on a columnstore index isn't supported. Attempting this results in error 35337: `UPDATE STATISTICS failed because statistics cannot be updated on a columnstore index. UPDATE STATISTICS is valid only when used with the STATS_STREAM option.` For more information, see [Index statistics](create-index-transact-sql.md#index-statistics).
 
-    Updating statistics on individual columns, or sets of columns of a columnstore index is supported.
+- Updating the statistics created automatically on a columnstore index isn't supported. Attempting this results in error 35337: `UPDATE STATISTICS failed because statistics can't be updated on a columnstore index. UPDATE STATISTICS is valid only when used with the STATS_STREAM option.` For more information, see [Index statistics](create-index-transact-sql.md#index-statistics).
+
+  Updating statistics on individual columns, or sets of columns of a columnstore index is supported.
+
 - The `MAXDOP` option isn't compatible with `STATS_STREAM`, `ROWCOUNT` and `PAGECOUNT` options.
+
 - The `MAXDOP` option is limited by the Resource Governor workload group `MAX_DOP` setting, if used.
 
 ### Update all statistics with sp_updatestats
@@ -266,7 +269,7 @@ Use solutions such as [Adaptive Index Defrag](https://github.com/Microsoft/tiger
 
 ### Determine the Last Statistics Update
 
-To determine when statistics were last updated, use the [STATS_DATE](../../t-sql/functions/stats-date-transact-sql.md) function.
+To determine when statistics were last updated, use the [STATS_DATE](../functions/stats-date-transact-sql.md) function.
 
 ### PDW / Azure Synapse Analytics
 
@@ -352,7 +355,7 @@ UPDATE STATISTICS Production.Product (Products)
 GO
 ```
 
-## Examples: [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] and [!INCLUDE [ssPDW](../../includes/sspdw-md.md)]
+## Examples: Azure Synapse Analytics and Analytics Platform System (PDW)
 
 ### E. Update statistics on a table
 
@@ -389,7 +392,7 @@ UPDATE STATISTICS Customer (CustomerStats1) WITH AUTO_DROP = ON;
 ## Related content
 
 - [Statistics](../../relational-databases/statistics/statistics.md)
-- [Statistics in Microsoft Fabric](/fabric/data-warehouse/statistics)
+- [Statistics in Fabric Data Warehouse](/fabric/data-warehouse/statistics)
 - [ALTER DATABASE (Transact-SQL)](alter-database-transact-sql.md)
 - [sys.dm_db_stats_properties (Transact-SQL)](../../relational-databases/system-dynamic-management-views/sys-dm-db-stats-properties-transact-sql.md)
 - [sys.dm_db_stats_histogram (Transact-SQL)](../../relational-databases/system-dynamic-management-views/sys-dm-db-stats-histogram-transact-sql.md)
