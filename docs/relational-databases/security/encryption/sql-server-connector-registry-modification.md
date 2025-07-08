@@ -42,7 +42,7 @@ To upgrade the SQL Server Connector (Version: 1.0.5.0 with a Date Published: Jan
 1. Start SQL Server service.
 1. Test encrypted databases are accessible.
 
-If your database is in a RECOVERY PENDING state, you need to run an ALTER command on the cryptographic provider. Be sure to replace *AzureKeyVault_EKM* with the name of your actual cryptographic provider, which you can find in the [sys.cryptographic_providers](../../../relational-databases/system-catalog-views/sys-cryptographic-providers-transact-sql.md) system view.
+If your database is in a `RECOVERY PENDING` state, you need to run an `ALTER` command on the cryptographic provider. Replace *AzureKeyVault_EKM* with the name of your actual cryptographic provider, which you can find in the [sys.cryptographic_providers](../../../relational-databases/system-catalog-views/sys-cryptographic-providers-transact-sql.md) system view.
 
 ``` sql
 ALTER CRYPTOGRAPHIC PROVIDER AzureKeyVault_EKM DISABLE;  
@@ -73,7 +73,7 @@ Restart the SQL Server service after modifying the cryptographic provider.
 > - Starting with [1.0.4.0: (version 13.0.811.168)](https://download.microsoft.com/download/8/0/9/809494f2-bac9-4388-ad07-7eaf9745d77b/SQL%20Server%20Connector%20for%20Microsoft%20Azure%20Key%20Vault%201.0.4.0.msi), there is support for private Azure clouds, including Azure operated by 21Vianet, Azure Germany, and Azure Government.
 > - There is a breaking change in version 1.0.5.0 in terms of the thumbprint algorithm. You may experience database restore failures after upgrading to 1.0.5.0. For more information, see [Error 33111 when restoring backups from older versions of SQL Server Connector for Microsoft Azure Key Vault](/troubleshoot/sql/database-engine/backup-restore/error-33111-restore-issues-sql-connector).
 > - Starting with version [1.0.5.0 (with a file date of September 2020)](https://www.microsoft.com/en-us/download/details.aspx?id=45344), the SQL Server Connector supports filtering messages and network request retry logic.
-> - Starting with version [1.0.5.0 (with a file date of November 2024)](https://www.microsoft.com/en-us/download/details.aspx?id=45344), the SQL Server Connector supports authentication with Azure Key Vault using managed identity for SQL Server on Azure Virtual Machines, starting with SQL Server 2022 CU17 and later versions.
+> - Starting with version [1.0.5.0 (with a file date of November 2024)](https://www.microsoft.com/en-us/download/details.aspx?id=45344) and SQL Server 2022 CU17 and later versions., the SQL Server Connector supports authentication with Azure Key Vault using managed identity for SQL Server on Azure Virtual Machines.
 > - *The old version of the SQL Server Connector is also version: [1.0.5.0 (version 15.0.300.96) – File date January 2018](https://download.microsoft.com/download/8/0/9/809494f2-bac9-4388-ad07-7eaf9745d77b/1033_15.0.2000.367/SQLServerConnectorforMicrosoftAzureKeyVault.msi)*. Upgrade to the newest SQL Server Connector if you experience any issues.
 
 **System Requirements** - Supported SQL Server versions:

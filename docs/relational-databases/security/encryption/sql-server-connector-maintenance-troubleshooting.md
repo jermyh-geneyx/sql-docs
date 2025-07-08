@@ -46,7 +46,7 @@ Versions 1.0.0.440 and older have been replaced and are no longer supported in p
 1. Start SQL Server service.
 1. Test encrypted databases are accessible.
 
-If your database is in a RECOVERY PENDING state, you need to run an ALTER command on the cryptographic provider. Be sure to replace *AzureKeyVault_EKM* with the name of your actual cryptographic provider, which you can find in the [sys.cryptographic_providers](../../../relational-databases/system-catalog-views/sys-cryptographic-providers-transact-sql.md) system view.
+If your database is in a `RECOVERY PENDING` state, you need to run an `ALTER` command on the cryptographic provider. Replace *AzureKeyVault_EKM* with the name of your actual cryptographic provider, which you can find in the [sys.cryptographic_providers](../../../relational-databases/system-catalog-views/sys-cryptographic-providers-transact-sql.md) system view.
 
 ``` sql
 ALTER CRYPTOGRAPHIC PROVIDER AzureKeyVault_EKM DISABLE;  
