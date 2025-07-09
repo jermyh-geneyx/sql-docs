@@ -131,7 +131,7 @@ sections:
     questions:
       - question: What if I don't see the banner and "Apply Offer" button?
         answer: |
-          It's possible your subscription isn't eligible for the [free SQL Managed Instance](free-offer.md#prerequisites). Otherwise, there's a limit of one free instance per subscription. You need to remove an existing free instance to create another one. If you have recently deleted your free instance, it can take up to one hour for the free offer banner to reappear.
+          It's possible your subscription isn't eligible for the [free SQL Managed Instance](free-offer.md#supported-subscription-types). Otherwise, there's a limit of one free instance per subscription. You need to remove an existing free instance to create another one. If you have recently deleted your free instance, it can take up to one hour for the free offer banner to reappear.
 
       - question: Help! I'm no longer able to connect to my instance!
         answer: |
@@ -159,7 +159,7 @@ sections:
 
       - question: Can I use my Student subscription with the free Azure SQL Managed Instance?
         answer: |
-          Currently, the Student subscription is ineligible. For eligible subscriptions, review the [free SQL Managed Instance offer prerequisites](free-offer.md#prerequisites).
+          Currently, the Student subscription is ineligible. For eligible subscriptions, review the [free SQL Managed Instance offer supported subscription types](free-offer.md#supported-subscription-types).
 
   - name: Naming conventions
     questions:
