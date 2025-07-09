@@ -71,7 +71,7 @@ To read and write event data, the [!INCLUDE [ssde-md](../../docs/includes/ssde-m
 
     # [SQL Database](#tab/sqldb)
 
-    Create a database-scoped [credential](/sql/relational-databases/security/authentication-access/credentials-database-engine). Using a client tool such as SSMS or ADS, open a new query window, connect to the database where you create the event session, and paste the following T-SQL batch. Make sure you're connected to your user database, and not to the `master` database.
+    Create a database-scoped [credential](/sql/relational-databases/security/authentication-access/credentials-database-engine). Using a client tool such as SSMS, open a new query window, connect to the database where you create the event session, and paste the following T-SQL batch. Make sure you're connected to your user database, and not to the `master` database.
 
     > [!NOTE]  
     > Executing the following T-SQL batch requires the `CONTROL` database permission, which is held by the database owner (`dbo`), by the members of the `db_owner` database role, and by the administrator of the logical server.
@@ -97,7 +97,7 @@ To read and write event data, the [!INCLUDE [ssde-md](../../docs/includes/ssde-m
 
     # [SQL Managed Instance](#tab/sqlmi)
 
-    Create a server-scoped [credential](/sql/relational-databases/security/authentication-access/credentials-database-engine). Using a client tool such as SSMS or ADS, open a new query window, connect it to the `master` database on the SQL managed instance where you create the event session, and paste the following T-SQL batch.
+    Create a server-scoped [credential](/sql/relational-databases/security/authentication-access/credentials-database-engine). Using a client tool such as SSMS, open a new query window, connect it to the `master` database on the SQL managed instance where you create the event session, and paste the following T-SQL batch.
 
     > [!NOTE]
     > Executing the following T-SQL batch requires the `CONTROL` database permission in the `master` database, which is held by the members of the `db_owner` database role in `master`, and by the members of the `sysadmin` server role on the SQL managed instance.
@@ -147,7 +147,7 @@ To read and write event data, the [!INCLUDE [ssde-md](../../docs/includes/ssde-m
 
     # [SQL Database](#tab/sqldb)
 
-    Store the SAS token in a database-scoped [credential](/sql/relational-databases/security/authentication-access/credentials-database-engine). Using a client tool such as SSMS or ADS, open a new query window, connect to the database where you create the event session, and paste the following T-SQL batch. Make sure you're connected to your user database, and not to the `master` database.
+    Store the SAS token in a database-scoped [credential](/sql/relational-databases/security/authentication-access/credentials-database-engine). Using a client tool such as SSMS, open a new query window, connect to the database where you create the event session, and paste the following T-SQL batch. Make sure you're connected to your user database, and not to the `master` database.
 
     > [!NOTE]  
     > Executing the following T-SQL batch requires the `CONTROL` database permission, which is held by the database owner (`dbo`), by the members of the `db_owner` database role, and by the administrator of the logical server.
@@ -189,7 +189,7 @@ To read and write event data, the [!INCLUDE [ssde-md](../../docs/includes/ssde-m
 
     # [SQL Managed Instance](#tab/sqlmi)
 
-    Store the SAS token in a server-scoped [credential](/sql/relational-databases/security/authentication-access/credentials-database-engine). Using a client tool such as SSMS or ADS, open a new query window, connect it to the `master` database on the SQL managed instance where you create the event session, and paste the following T-SQL batch.
+    Store the SAS token in a server-scoped [credential](/sql/relational-databases/security/authentication-access/credentials-database-engine). Using a client tool such as SSMS, open a new query window, connect it to the `master` database on the SQL managed instance where you create the event session, and paste the following T-SQL batch.
 
     > [!NOTE]
     > Executing the following T-SQL batch requires the `CONTROL` database permission in the `master` database, which is held by the members of the `db_owner` database role in `master`, and by the members of the `sysadmin` server role on the SQL managed instance.
@@ -287,12 +287,12 @@ The following list contains errors that you might encounter when starting an ext
     - If using SAS token authentication:
         - The storage account [firewall](/azure/storage/common/storage-network-security) is enabled. This is not supported for event sessions that use SAS token authentication.
         - The SAS token doesn't have sufficient permissions, or has expired. For more information, see [Grant access using a SAS token](#grant-access-using-a-sas-token).
-- **The operating system returned error 86: 'The specified network password is not correct'**
+- **The operating system returned error 86: 'The specified network password is not correct.'**
     - There is no database-scoped credential (for Azure SQL Database) or server-scoped credential (for Azure SQL Managed Instance) with the name matching the blob container URL. For more information, see the examples in [Grant access to the container](#grant-access-to-the-container).
     - The credential name ends with a slash (`/`). The credential name should end with the container name not including the trailing slash.
-- **The operating system returned error 3: 'The system cannot find the path specified'**
+- **The operating system returned error 3: 'The system cannot find the path specified.'**
     - The container specified in the blob container URL doesn't exist.
-- **The operating system returned error 13: 'The data is invalid'**
+- **The operating system returned error 13: 'The data is invalid.'**
     - There is an [immutability policy](/azure/storage/blobs/immutable-policy-configure-container-scope) on the blob container. Immutable storage isn't supported for event sessions.
     - The storage account has the [hierarchical namespace](/azure/storage/blobs/data-lake-storage-namespace) enabled. Storage accounts with hierarchical namespace enabled aren't supported for event sessions.
 
