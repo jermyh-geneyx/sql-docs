@@ -27,7 +27,7 @@ SqlPackage runs on Windows, macOS, and Linux, and is available to install throug
 SqlPackage is developed and released for both .NET 8 and .NET Framework. Installing the .NET 8 SqlPackage version is recommended via the [convenient `dotnet tool` method](#installation-cross-platform), which is cross-platform and easy to update, or via the [portable self-contained .zip download](#installation-file-download-alternative). The .NET 8 SqlPackage releases benefit from the continual advances to the performance and scalability of .NET as part of the [focus on for modern applications](/dotnet/core/introduction#net-ecosystem), which contrasts to the maintenance support of .NET Framework for Windows. The .NET Framework version is only available as a [.msi Windows installer](#windows-net-framework).
 
 > [!NOTE]  
-> Previously, SqlPackage had a distinct version number (19) and build number (160.x). Beginning with version 161, the version number of SqlPackage matches the DacFx version number it is associated with (for example, 162.0.52).
+> Previously, SqlPackage had a distinct version number (19) and build number (160.x). Beginning with version 161, the version number of SqlPackage matches the DacFx version number it's associated with (for example, 162.0.52).
 
 ## Installation, cross-platform
 
@@ -65,13 +65,19 @@ If you encounter issues during installation, follow these steps:
 
    If the .NET SDK isn't listed, download and install it from the [.NET SDK download page](https://dotnet.microsoft.com/download/dotnet/8.0).
 
-2. **Verify NuGet source configuration**: Ensure that `nuget.org` is a configured NuGet source for dotnet. List the configured NuGet sources by running:
+2. **Verify NuGet source configuration**: SqlPackage is published to `nuget.org`, a public NuGet feed. You may encounter an error indicating that `microsoft.sqlpackage` can't be found:
+
+   ```output
+   microsoft.sqlpackage is not found in NuGet feeds C:\Program Files(x86)\Microsoft SDKs\NuGetPackages\
+   ```
+
+   Ensure that `nuget.org` is a configured NuGet source for dotnet. List the configured NuGet sources by running:
 
    ```bash
    dotnet nuget list source
    ```
 
-   If `nuget.org` isn't listed, add it as a NuGet source using the following command:
+   This command should display a list of NuGet sources. Look for `nuget.org` in the output, which is typically listed as `https://api.nuget.org/v3/index.json`. If `nuget.org` isn't listed, add it as a NuGet source using the following command:
 
    ```bash
    dotnet nuget add source https://api.nuget.org/v3/index.json
@@ -112,7 +118,7 @@ SqlPackage is also prepared as a self-contained download for Windows, macOS, and
 ### Linux
 
 1. Download [SqlPackage for Linux](https://aka.ms/sqlpackage-linux)
-1. Extract the file and launch SqlPackage, open a new Terminal window and type the following commands:
+1. Extract the file and launch SqlPackage. Open a new Terminal window and type the following commands:
 
    ```bash
    cd ~
@@ -149,7 +155,7 @@ SqlPackage is also prepared as a self-contained download for Windows, macOS, and
 ### macOS
 
 1. Download [SqlPackage for macOS](https://aka.ms/sqlpackage-macos)
-1. Extract the file and launch SqlPackage, open a new Terminal window and type the following commands:
+1. Extract the file and launch SqlPackage. Open a new Terminal window and type the following commands:
 
    ```bash
    mkdir sqlpackage
@@ -219,7 +225,7 @@ dotnet add package Microsoft.SqlServer.DacFx
 ```
 
 > [!NOTE]  
-> Additional NuGet packages were published under the DacFx name, "Microsoft.SqlServer.DacFx.x64" and "Microsoft.SqlServer.DacFx.x86". Support for both platforms is covered under the "Microsoft.SqlServer.DacFx" package. New references should be made to this package, not the x64 or x86 variants.
+> Other NuGet packages were published under the DacFx name, `Microsoft.SqlServer.DacFx.x64` and `Microsoft.SqlServer.DacFx.x86`. Support for both platforms is covered under the `Microsoft.SqlServer.DacFx` package. New references should be made to this package, not the x64 or x86 variants.
 
 ## Supported Operating Systems
 
