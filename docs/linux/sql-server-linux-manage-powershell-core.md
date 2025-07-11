@@ -4,7 +4,7 @@ description: Learn about SQL Server PowerShell by walking through a couple of ex
 author: SQLvariant
 ms.author: aanelson
 ms.reviewer: vanto, randolphwest
-ms.date: 07/03/2025
+ms.date: 07/11/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: how-to
@@ -21,7 +21,7 @@ For more information about Windows PowerShell, see [What is Windows PowerShell?]
 
 ## Cross-platform editor options
 
-All of the following steps for PowerShell work in a regular terminal, or you can run them from a terminal within Visual Studio Code or Azure Data Studio. Both VS Code and Azure Data Studio are available on macOS and Linux. For more information on Azure Data Studio, see [Quickstart: Use Azure Data Studio to connect and query SQL Server](/azure-data-studio/quickstart-sql-server). You might also want to consider using the [PowerShell Editor Support for Azure Data Studio](/azure-data-studio/extensions/powershell-extension).
+All of the following steps for PowerShell work in a regular terminal, or you can run them from a terminal within Visual Studio Code. Visual Studio Code is available on macOS and Linux. For more information on the MSSQL extension, see [What is the MSSQL extension for Visual Studio Code?](../tools/visual-studio-code-extensions/mssql/mssql-extension-visual-studio-code.md)
 
 ## Install PowerShell
 

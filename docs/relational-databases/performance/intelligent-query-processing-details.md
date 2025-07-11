@@ -4,7 +4,7 @@ description: "Intelligent query processing features described in detail."
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: derekw, wiassaf
-ms.date: 04/30/2025
+ms.date: 07/10/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
@@ -419,15 +419,15 @@ Optimized Halloween protection removes these downsides by making the **Spool** o
 
 ### Use optimized Halloween protection
 
-To enable optimized Halloween protection for a database, the following prerequisites are required:
+For a query to use optimized Halloween protection, the following prerequisites are required:
 
 - [Accelerated database recovery (ADR)](../accelerated-database-recovery-concepts.md) must be enabled for the database.
-- The database must use compatibility level 170.
+- The query must be compiled under compatibility level 170.
 - The `OPTIMIZED_HALLOWEEN_PROTECTION` [database scoped configuration](../../t-sql/statements/alter-database-scoped-configuration-transact-sql.md#optimized_halloween_protection---on--off-) must be enabled.
 
-The `OPTIMIZED_HALLOWEEN_PROTECTION` database-scoped configuration is enabled by default. This means that when you enable ADR for a database using compatibility level 170, the database starts using optimized Halloween protection.
+The `OPTIMIZED_HALLOWEEN_PROTECTION` database-scoped configuration is enabled by default. This means that when you enable ADR for a database using compatibility level 170, queries in the database start using optimized Halloween protection by default.
 
-To ensure that a database uses optimized Halloween protection, execute the following statements:
+To ensure that queries in a database use optimized Halloween protection, execute the following statements:
 
 ```sql
 ALTER DATABASE [<database-name-placeholder>] SET ACCELERATED_DATABASE_RECOVERY = ON;
