@@ -27,6 +27,8 @@ When establishing a link between SQL Server and Azure SQL Managed Instance, ther
 
 If the speed of the link between the two instances is slower than what is necessary, the time to seed is likely to be noticeably affected. You can use the stated seeding speed, total size of data, and the link speed to estimate how long the initial seeding phase will take before data replication starts. For example, for a single 100-GB database, the initial seed phase would take about 1.2 hours if the link is capable of pushing 84 GB per hour, and if there are no other databases being seeded to a different link. If the link can only transfer 10 GB per hour, then seeding a 100-GB database can take about 10 hours. If there are multiple databases to replicate via multiple links, seeding will be executed in parallel, and, when combined with a slow link speed, the initial seeding phase might take considerably longer, especially if the parallel seeding of data from all databases exceeds the available link bandwidth.
 
+The initial seeding phase isn't resilient to network interruptions and instance maintenance or failover operations. If bi-directional connectivity between SQL Server and SQL Managed Instance is temporarily lost, or if either SQL Server or SQL Managed instance is restarted or failed over during the initial seeding phase, seeding is restarted. 
+
 > [!IMPORTANT]
 > The initial seeding phase can take days with extremely low-speed or busy links. In this case, creating the link can time out. Creating the link is automatically canceled after 6 days. 
 
