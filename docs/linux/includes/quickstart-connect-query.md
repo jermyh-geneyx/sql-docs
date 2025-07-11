@@ -1,7 +1,7 @@
 ---
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 11/18/2024
+ms.date: 07/11/2025
 ms.service: sql
 ms.subservice: linux
 ms.custom:
@@ -134,16 +134,15 @@ In addition to **sqlcmd**, you can use the following cross-platform tools to man
 
 | Tool | Description |
 | --- | --- |
-| [Azure Data Studio](../../azure-data-studio/index.yml) | A cross-platform GUI database management utility. |
-| [Visual Studio Code](../../tools/visual-studio-code/sql-server-develop-use-vscode.md) | A cross-platform GUI code editor that run Transact-SQL statements with the mssql extension. |
-| [PowerShell Core](../sql-server-linux-manage-powershell-core.md) | A cross-platform automation and configuration tool based on cmdlets. |
+| [Visual Studio Code](../../tools/visual-studio-code/sql-server-develop-use-vscode.md) | A cross-platform GUI code editor that runs Transact-SQL statements with the [MSSQL extension](../../tools/visual-studio-code-extensions/mssql/mssql-extension-visual-studio-code.md). |
+| [PowerShell](../sql-server-linux-manage-powershell-core.md) | A cross-platform automation and configuration tool based on cmdlets. |
 | [mssql-cli](https://github.com/dbcli/mssql-cli/tree/master/doc) | A cross-platform command-line interface for running Transact-SQL commands. |
 
 ## Connect from Windows
 
 [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] tools on Windows connect to [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] instances on Linux in the same way they would connect to any remote [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] instance.
 
-If you have a Windows machine that can connect to your Linux machine, try the same steps in this topic from a Windows command-prompt running **sqlcmd**. You must use the target Linux machine name or IP address rather than `localhost`, and make sure that TCP port 1433 is open on the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] machine. If you have any problems connecting from Windows, see [connection troubleshooting recommendations](../sql-server-linux-troubleshooting-guide.md#connection).
+If you have a Windows machine that can connect to your Linux machine, try the same steps in this article from a Windows command-prompt running **sqlcmd**. You must use the target Linux machine name or IP address rather than `localhost`, and make sure that TCP port 1433 is open on the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] machine. If you have any problems connecting from Windows, see [connection troubleshooting recommendations](../sql-server-linux-troubleshooting-guide.md#connection).
 
 For other tools that run on Windows but connect to [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] on Linux, see:
 

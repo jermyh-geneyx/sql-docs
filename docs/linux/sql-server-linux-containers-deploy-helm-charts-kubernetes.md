@@ -4,7 +4,7 @@ description: Learn how to deploy a SQL Server on Linux container to Azure Kubern
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: amitkh
-ms.date: 11/18/2024
+ms.date: 07/11/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: quickstart
@@ -133,7 +133,7 @@ replicaset.apps/mssql-latest-deploy-7f8c7f5bc   1         1         1       2m56
 
 ## Connect to the SQL Server running on AKS
 
-You can connect to the SQL Server instance using any familiar SQL Server client tool, such as SQL Server Management Studio (SSMS), Azure Data Studio, or **sqlcmd**.
+[!INCLUDE [connect-instance-client](../includes/connect-instance-client.md)]
 
 For example, if you connect to the SQL Server instance using SSMS, you can use the following settings:
 
