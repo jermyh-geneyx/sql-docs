@@ -34,6 +34,8 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 
 Specifies a temporary named result set, known as a common table expression (CTE). This is derived from a simple query and defined within the execution scope of a single `SELECT`, `INSERT`, `UPDATE`, `MERGE`, or `DELETE` statement. This clause can also be used in a `CREATE VIEW` statement as part of its defining `SELECT` statement. A common table expression can include references to itself. This is referred to as a recursive common table expression.
 
+For more information, see [Recursive queries using common table expressions](recursive-common-table-expression-transact-sql.md).
+
 :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md)
 
 ## Syntax
@@ -115,7 +117,7 @@ When executing a CTE, any hints that reference a CTE can conflict with other hin
 > [!NOTE]  
 > The following guidelines apply to defining a recursive common table expression. For guidelines that apply to nonrecursive CTEs, see [Guidelines for nonrecursive common table expressions](#guidelines-for-nonrecursive-common-table-expressions).
 
-The recursive CTE definition must contain at least two CTE query definitions, an anchor member and a recursive member. Multiple anchor members and recursive members can be defined; however, all anchor member query definitions must be put before the first recursive member definition. All CTE query definitions are anchor members unless they reference the CTE itself.
+The [recursive CTE](recursive-common-table-expression-transact-sql.md) definition must contain at least two CTE query definitions, an anchor member and a recursive member. Multiple anchor members and recursive members can be defined; however, all anchor member query definitions must be put before the first recursive member definition. All CTE query definitions are anchor members unless they reference the CTE itself.
 
 Anchor members must be combined by one of these set operators: `UNION ALL`, `UNION`, `INTERSECT`, or `EXCEPT`. `UNION ALL` is the only set operator allowed between the last anchor member and first recursive member, and when combining multiple recursive members.
 
@@ -123,7 +125,7 @@ The number of columns in the anchor and recursive members must be the same.
 
 The data type of a column in the recursive member must be the same as the data type of the corresponding column in the anchor member.
 
-The FROM clause of a recursive member must refer only one time to the CTE *expression_name*.
+The `FROM` clause of a recursive member must refer only one time to the CTE *expression_name*.
 
 The following items aren't allowed in the *CTE_query_definition* of a recursive member:
 
@@ -699,6 +701,7 @@ SELECT TableName, TotalAvg FROM CountCustomer;
 
 ## Related content
 
+- [Recursive queries using common table expressions (Transact-SQL)](recursive-common-table-expression-transact-sql.md)
 - [CREATE VIEW (Transact-SQL)](../statements/create-view-transact-sql.md)
 - [DELETE (Transact-SQL)](../statements/delete-transact-sql.md)
 - [EXCEPT and INTERSECT (Transact-SQL)](../language-elements/set-operators-except-and-intersect-transact-sql.md)
