@@ -24,7 +24,7 @@ SQL Server 2017 introduces a Docker image that can deploy on Kubernetes. You can
 
 ## Container with SQL Server instance on Kubernetes
 
-Kubernetes 1.6 and later has support for [*storage classes*](https://kubernetes.io/docs/concepts/storage/storage-classes/), [*persistent volume claims*](https://kubernetes.io/docs/concepts/storage/storage-classes/#persistentvolumeclaims), and the [*Azure disk volume type*](https://github.com/kubernetes/examples/tree/master/staging/volumes/azure_disk).
+Kubernetes 1.6 and later has support for [*storage classes*](https://kubernetes.io/docs/concepts/storage/storage-classes/), [*persistent volume claims*](https://kubernetes.io/docs/concepts/storage/storage-classes/#persistentvolumeclaims), and the [*Azure disk volume type*](/azure/aks/azure-disk-csi).
 
 In this configuration, Kubernetes plays the role of the container orchestrator.
 
