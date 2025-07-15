@@ -5,6 +5,7 @@ author: ajithkr-ms
 ms.author: ajithkr
 ms.reviewer: randolphwest
 ms.date: 06/16/2025
+ms.update-cycle: 1825-days
 ms.service: sql
 ms.subservice: dma
 ms.topic: overview

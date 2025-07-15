@@ -1,10 +1,10 @@
 ---
-title: Deadlocks guide
+title: Deadlocks Guide
 description: Learn about deadlocks in the SQL Server Database Engine.
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest, wiassaf
-ms.date: 09/16/2024
+ms.date: 07/14/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
@@ -21,7 +21,7 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 
 This article discusses deadlocks in the [!INCLUDE [ssdenoversion-md](../includes/ssdenoversion-md.md)] in depth. Deadlocks are caused by competing, concurrent locks in the database, often in multi-step transactions. For more on transaction locking, see [Transaction locking and row versioning guide](sql-server-transaction-locking-and-row-versioning-guide.md).
 
-For more specific information on identification and prevention of deadlocks in Azure SQL Database, see [Analyze and prevent deadlocks in Azure SQL Database](/azure/azure-sql/database/analyze-prevent-deadlocks).
+For more specific information on identification and prevention of deadlocks in Azure SQL Database, see [Analyze and prevent deadlocks in Azure SQL Database and Fabric SQL database](/azure/azure-sql/database/analyze-prevent-deadlocks).
 
 <a id="deadlocks"></a>
 
@@ -133,7 +133,7 @@ To view deadlock information, the [!INCLUDE [ssDEnoversion](../includes/ssdenove
 
 <a id="deadlock_xevent"></a>
 
-### Deadlock extended event
+### Deadlock Extended Event
 
 In [!INCLUDE [ssSQL11](../includes/sssql11-md.md)] and later versions, the `xml_deadlock_report` Extended Event (XEvent) should be used instead of the Deadlock graph event class in SQL Trace or SQL Profiler.
 
@@ -160,7 +160,7 @@ FROM (SELECT CAST ([target_data] AS XML) AS Target_Data
                ON xs.address = xt.event_session_address
       WHERE xs.name = N'system_health'
             AND xt.target_name = N'ring_buffer') AS XML_Data
-      CROSS APPLY Target_Data.nodes('RingBufferTarget/event[@name="xml_deadlock_report"]') AS XEventData(xdr)
+CROSS APPLY Target_Data.nodes('RingBufferTarget/event[@name="xml_deadlock_report"]') AS XEventData(xdr)
 ORDER BY [Date] DESC;
 ```
 
@@ -234,6 +234,8 @@ END
   </data>
 </event>
 ```
+
+If you want to capture the plan that caused the deadlock, see [Using xEvents to capture an Actual Execution Plan](https://techcommunity.microsoft.com/blog/sqlserver/using-xevents-to-capture-an-actual-execution-plan/392136).
 
 For more information, see [Use the system_health session](extended-events/use-the-system-health-session.md)
 
@@ -614,5 +616,5 @@ This scenario of competing `UPDATE` statements results in a deadlock. In this ca
 - [Lock:Deadlock Chain Event Class](event-classes/lock-deadlock-chain-event-class.md)
 - [Lock:Deadlock Event Class](event-classes/lock-deadlock-event-class.md)
 - [SET DEADLOCK_PRIORITY (Transact-SQL)](../t-sql/statements/set-deadlock-priority-transact-sql.md)
-- [Analyze and prevent deadlocks in Azure SQL Database](/azure/azure-sql/database/analyze-prevent-deadlocks)
+- [Analyze and prevent deadlocks in Azure SQL Database and Fabric SQL database](/azure/azure-sql/database/analyze-prevent-deadlocks)
 - [Open, view, and print a deadlock file in SQL Server Management Studio (SSMS)](performance/open-view-and-print-a-deadlock-file-sql-server-management-studio.md)

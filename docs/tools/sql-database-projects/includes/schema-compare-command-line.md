@@ -1,8 +1,9 @@
 ---
 author: dzsquared
 ms.author: drskwier
-ms.date: 08/29/2024
+ms.reviewer: randolphwest
+ms.date: 07/11/2025
 ms.service: sql
 ms.topic: include
 ---
-Schema compare requires a graphical tool such as Visual Studio or Azure Data Studio.
+Schema compare requires a graphical tool such as Visual Studio, or the [MSSQL extension for Visual Studio Code](../../visual-studio-code-extensions/mssql/mssql-extension-visual-studio-code.md).

@@ -4,7 +4,7 @@ description: "Learn about the optimized locking enhancement to the database engi
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest, peskount, praspu, dfurman
-ms.date: 04/14/2025
+ms.date: 07/07/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
@@ -235,6 +235,19 @@ LAQ is disabled for the database if the percentage of the potentially wasted wor
 
 If the wasted work and the number of restarted statements fall below their respective thresholds, LAQ is re-enabled for the database.
 
+#### LAQ limitations
+
+Lock after qualification might not be used in the following scenarios:
+
+- When disabled by [LAQ heuristics](#laq-heuristics).
+- When conflicting locking hints, such as `UPDLOCK`, `READCOMMITTEDLOCK`, `XLOCK`, or `HOLDLOCK` are used.
+- When the transaction isolation level is other than `READ COMMITTED`, or when the `READ_COMMITTED_SNAPSHOT` database option is disabled.
+- When the table being modified has a columnstore index.
+- When the DML statement includes variable assignment.
+- When the DML statement has an `OUTPUT` clause.
+- When the DML statement uses more than one index seek or scan operator to read the rows being modified.
+- In `MERGE` statements.
+
 ### <a id="behavior"></a> Query behavior changes with optimized locking and RCSI
 
 Concurrent workloads under read committed snapshot isolation (RCSI) that rely on strict execution order of transactions might experience differences in query behavior when optimized locking is enabled.
@@ -304,7 +317,7 @@ The following improvements help you monitor and troubleshoot blocking and deadlo
     - Under each resource in the deadlock report `<resource-list>`, each `<xactlock>` element reports the underlying resources and specific information for locks of each member of a deadlock. For more information and an example, see [Optimized locking and deadlocks](../sql-server-deadlocks-guide.md#optimized-locking-and-deadlocks).
 - Extended events
     - The `lock_after_qual_stmt_abort` event fires when a statement is internally aborted and restarted because of a conflict with another transaction. For more information, see [Lock after qualification (LAQ)](#lock-after-qualification-laq).
-    - In [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], the `locking_stats` event fires for every database every several minutes and provides aggregate locking statistics for the time interval, such as the number of lock escalations, whether TID locking and LAQ components of optimized locking are enabled, and the number of queries that were ineligible for LAQ for various reasons. This event fires even if optimized locking is disabled.
+    - In [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], the `locking_stats` event fires for every database every several minutes and provides aggregate locking statistics for the time interval, such as the number of lock escalations, whether TID locking and LAQ components of optimized locking are enabled, and the number of queries where LAQ wasn't used for various reasons. This event fires even if optimized locking is disabled.
 
 ## Best practices with optimized locking
 

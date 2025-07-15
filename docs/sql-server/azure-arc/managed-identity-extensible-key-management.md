@@ -27,7 +27,7 @@ Starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], managed ide
 - [Enable managed identity for SQL Server 2025 Preview](managed-identity.md).
 - An Azure Key Vault and key created in the key vault. For more information, see [Create a key vault](../../relational-databases/security/encryption/setup-steps-for-extensible-key-management-using-the-azure-key-vault.md?tabs=portal#step-2-create-a-key-vault).
 - The managed identity for the SQL Server enabled by Azure Arc needs to have the `Key Vault Crypto Service Encryption User` role assigned to the key vault if you're using [Azure role-based access control](../../relational-databases/security/encryption/setup-steps-for-extensible-key-management-using-the-azure-key-vault.md?tabs=portal#azure-role-based-access-control) or the *Unwrap Key* and *Wrap Key* permissions if you're using [vault access policy](../../relational-databases/security/encryption/setup-steps-for-extensible-key-management-using-the-azure-key-vault.md?tabs=portal#vault-access-policy).
-- [Download and install the latest version of the SQL Server Connector](https://www.microsoft.com/download/details.aspx?id=45344).
+- [Download and install the preview version of the SQL Server Connector](https://www.microsoft.com/download/details.aspx?id=108278).
 
 ## Step 1: Add registry key for the EKM provider
 

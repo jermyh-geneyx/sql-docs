@@ -4706,7 +4706,7 @@ items:
       - name: SQL Server Configuration Manager services
         items:
         - name: SQL Server Services
-          href: tools\configuration-manager\sql-server-services.md
+          href: tools/configuration-manager/sql-server-services.md
         - name: Connect to another computer
           href: database-engine/configure-windows/scm-services-connect-to-another-computer.md
         - name: Set an instance to start automatically
@@ -7804,6 +7804,8 @@ items:
   items:
   - name: Overview
     href: relational-databases/security/securing-sql-server.md
+  - name: Security baseline
+    href: relational-databases/security/secure-sql-server.md
   - name: Best practices
     href: relational-databases/security/sql-server-security-best-practices.md
   - name: How-to
@@ -8177,19 +8179,19 @@ items:
       href: tools/mssql-cli.md
     - name: osql
       href: tools/osql-utility.md
-    - name: Profiler Utility
+    - name: Profiler utility
       href: tools/profiler-utility.md
-    - name: sqlagent90 Application
-      href: tools/sqlagent90-application.md
+    - name: sqlagent application
+      href: tools/sqlagent-application.md
     - name: SQLdiag
       href: tools/sqldiag-utility.md
     - name: SqlLocalDB
       href: tools/sqllocaldb-utility.md
-    - name: sqllogship Application
+    - name: sqllogship application
       href: tools/sqllogship-application.md
     - name: sqlmaint
       href: tools/sqlmaint-utility.md
-    - name: sqlservr Application
+    - name: sqlservr application
       href: tools/sqlservr-application.md
     - name: tablediff
       href: tools/tablediff-utility.md
@@ -8321,13 +8323,14 @@ items:
       - name: Cancel Option
         href: tools/distributed-replay/cancel-option-distributed-replay-administration-tool.md
   - name: SQL Server Configuration Manager
-    href: tools\configuration-manager\sql-server-configuration-manager.md
     items:
+    - name: Overview
+      href: tools/configuration-manager/sql-server-configuration-manager.md
     - name: Help
       href: tools/configuration-manager/sql-server-configuration-manager-help.md
-    - name: SQL Server Browser Service
-      href: tools/configuration-manager/sql-server-browser-service.md
-    - name: Connecting Using IPv6
+    - name: SQL Server Browser service
+      href: database-engine/configure-windows/sql-server-browser-service-database-engine-and-ssas.md
+    - name: Connect using IPv6
       href: tools/configuration-manager/connecting-using-ipv6.md
     - name: Analysis Server
       href: tools/configuration-manager/analysis-server-server-sql-server-configuration-manager.md
@@ -8463,6 +8466,12 @@ items:
     items:
     - name: sqlcmd overview
       href: tools/sqlcmd/sqlcmd-utility.md
+    - name: Check installed version
+      href: tools/sqlcmd/sqlcmd-installed-version.md
+    - name: Download and install
+      href: tools/sqlcmd/sqlcmd-download-install.md
+    - name: sqlcmd edit and variable commands
+      href: tools/sqlcmd/sqlcmd-commands.md
     - name: Authenticate sqlcmd with Microsoft Entra ID
       href: tools/sqlcmd/sqlcmd-authentication.md
     - name: Start the utility
@@ -16635,6 +16644,8 @@ items:
           href: t-sql/queries/updatetext-transact-sql.md
         - name: WITH common_table_expression
           href: t-sql/queries/with-common-table-expression-transact-sql.md
+        - name: Recursive queries using common table expressions
+          href: t-sql/queries/recursive-common-table-expression-transact-sql.md
         - name: Nested common table expressions in Fabric Warehouse
           href: t-sql/queries/nested-common-table-expression.md
         - name: WRITETEXT

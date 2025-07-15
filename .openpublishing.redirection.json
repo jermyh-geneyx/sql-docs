@@ -47631,6 +47631,11 @@
       "redirect_document_id": false
     },
     {
+      "source_path": "docs/tools/sqlagent90-application.md",
+      "redirect_url": "/sql/tools/sqlagent-application",
+      "redirect_document_id": false
+    },
+    {
       "source_path": "docs/2014/tools/sqlcmd-utility.md",
       "redirect_url": "/previous-versions/sql/2014/tools/sqlcmd-utility",
       "redirect_document_id": false
@@ -47898,6 +47903,11 @@
     {
       "source_path": "docs/2014/tools/configuration-manager/sql-server-browser-service.md",
       "redirect_url": "/previous-versions/sql/2014/tools/configuration-manager/sql-server-browser-service",
+      "redirect_document_id": false
+    },
+    {
+      "source_path": "docs/tools/configuration-manager/sql-server-browser-service.md",
+      "redirect_url": "/sql/database-engine/configure-windows/sql-server-browser-service-database-engine-and-ssas",
       "redirect_document_id": false
     },
     {

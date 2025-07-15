@@ -4,7 +4,7 @@ description: Understand Active Directory authentication with SQL Server on Linux
 author: amitkh-msft
 ms.author: amitkh
 ms.reviewer: randolphwest
-ms.date: 01/21/2025
+ms.date: 07/11/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: concept-article
@@ -58,7 +58,7 @@ This file is necessary for Active Directory authentication to work. `krb5.conf` 
 
 For more information on the `krb5.conf` file, refer to the [MIT Kerberos Consortium documentation](http://web.mit.edu/kerberos/krb5-1.16/doc/admin/conf_files/krb5_conf.html).
 
-## Configure Kerberos for [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] on Linux
+## Configure Kerberos for SQL Server on Linux
 
 These are the values you need on the host server running [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] on Linux. If you have other (non-[!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)]) services running on the same host, your `krb5.conf` file might need several more entries.
 
@@ -130,7 +130,10 @@ For [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] containers, you can 
 
 Because we are connecting to a container, the server name in the client connection might be different than just the hostname. It could be the hostname, the container name, or another alias. In addition, there's a good chance that the exposed port for [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] won't be the default `1433`.
 
-You must use the SPN that is stored in `mssql.keytab` to connect to the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] container. For example, if the SPN in `mssql.keytab` is `MSSQLSvc/sqlcontainer.domain.com:8000`, you would use `sqlcontainer.domain.com,8000` as your connection string in the client (including **sqlcmd**, SQL Server Management Studio, and Azure Data Studio).
+You must use the SPN that is stored in `mssql.keytab` to connect to the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] container. For example, if the SPN in `mssql.keytab` is `MSSQLSvc/sqlcontainer.domain.com:8000`, you would use `sqlcontainer.domain.com,8000` as your connection string in the client.
+
+> [!NOTE]  
+> [!INCLUDE [connect-instance-client](../includes/connect-instance-client.md)]
 
 :::image type="content" source="media/sql-server-linux-ad-auth-understanding/active-directory-authentication-explained-container.png" alt-text="Diagram showing Active Directory authentication for SQL Server Containers." lightbox="media/sql-server-linux-ad-auth-understanding/active-directory-authentication-explained-container.svg":::
 
