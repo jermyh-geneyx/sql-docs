@@ -4,7 +4,7 @@ metadata:
    description: This article provides answers to frequently asked questions (FAQ) about SQL Server running on Linux.
    author: rwestMSFT
    ms.author: randolphwest
-   ms.date: 05/02/2025
+   ms.date: 07/11/2025
    ms.topic: conceptual
    ms.service: sql
    ms.subservice: linux
@@ -103,7 +103,7 @@ sections:
 
              1. **Is there a tool like SSMS that runs on Linux?**
 
-                The new Azure Data Studio is a cross-platform tool for managing SQL Server. For more information, see [What is Azure Data Studio](../azure-data-studio/what-is-azure-data-studio.md).
+                Visual Studio Code is a cross-platform tool, and you can install the MSSQL extension to manage SQL Server. For more information, see [What is the MSSQL extension for Visual Studio Code?](../tools/visual-studio-code-extensions/mssql/mssql-extension-visual-studio-code.md)
 
              1. **Are commands like sqlcmd and bcp available on Linux?**
 

@@ -4,7 +4,7 @@ description: This quickstart shows how to use Docker to run the SQL Server Linux
 author: amitkh-msft
 ms.author: amitkh
 ms.reviewer: vanto, randolphwest
-ms.date: 07/03/2025
+ms.date: 07/11/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: quickstart
@@ -1519,11 +1519,10 @@ The following steps use **sqlcmd** outside of your container to connect to [!INC
 
 Other common tools to connect to [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] include:
 
-- [SQL Server extension for Visual Studio Code](../tools/visual-studio-code/sql-server-develop-use-vscode.md)
-- [Use SQL Server Management Studio on Windows to manage SQL Server on Linux](sql-server-linux-manage-ssms.md)
-- [What is Azure Data Studio?](/azure-data-studio/what-is-azure-data-studio)
+- [MSSQL extension for Visual Studio Code](../tools/visual-studio-code-extensions/mssql/mssql-extension-visual-studio-code.md)
+- [SQL Server Management Studio](sql-server-linux-manage-ssms.md)
 - [mssql-cli (Preview)](https://github.com/dbcli/mssql-cli/blob/master/doc/usage_guide.md)
-- [Use PowerShell on Linux to manage SQL Server on Linux](sql-server-linux-manage-powershell-core.md)
+- [PowerShell](sql-server-linux-manage-powershell-core.md)
 
 ## Remove your container
 

@@ -3,7 +3,7 @@ title: Manage SQL Server on Linux
 description: This article provides links to common management tasks and tools for SQL Server running on Linux.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 07/03/2025
+ms.date: 07/11/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -25,9 +25,9 @@ The **mssql-conf** tool configures [!INCLUDE [ssnoversion-md](../includes/ssnove
 
 Almost everything you can do in a client tool can also be accomplished with Transact-SQL statements. [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] provides [System dynamic management views](../relational-databases/system-dynamic-management-views/system-dynamic-management-views.md) that query the status and configuration of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. There are also [Transact-SQL commands](../t-sql/language-reference.md) for database management tasks. You can run these commands in any client tool that supports connecting to [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] and running Transact-SQL queries, for example [sqlcmd](sql-server-linux-setup-tools.md) or [Visual Studio Code](../tools/visual-studio-code/sql-server-develop-use-vscode.md).
 
-## Azure Data Studio
+## MSSQL extension for Visual Studio Code
 
-The new Azure Data Studio is a cross-platform tool for managing [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. For more information, see [What is Azure Data Studio?](/azure-data-studio/what-is-azure-data-studio)
+Visual Studio Code is a cross-platform tool, and you can install the MSSQL extension to manage SQL Server. For more information, see [What is the MSSQL extension for Visual Studio Code?](../tools/visual-studio-code-extensions/mssql/mssql-extension-visual-studio-code.md)
 
 ## Named Pipes
 

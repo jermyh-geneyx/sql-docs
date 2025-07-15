@@ -5,7 +5,7 @@ description: "Learn how to install SQL Server 2022 Machine Learning Services on 
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: arunguru-msft, randolphwest
-ms.date: 07/03/2025
+ms.date: 07/11/2025
 ms.service: sql
 ms.subservice: machine-learning-services
 ms.topic: how-to
@@ -38,7 +38,7 @@ For more information, see [the Supported platforms section in the installation g
 
 - You should have a tool for running T-SQL commands.
 
-  - You can use [Azure Data Studio](/azure-data-studio/download-azure-data-studio), a free database tool that runs on Linux, Windows, and macOS.
+  - [!INCLUDE [connect-instance-client](../includes/connect-instance-client.md)]
 
 - Restarting the SQL Server instance during this installation process will be required.
 
