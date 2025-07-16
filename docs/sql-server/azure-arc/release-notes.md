@@ -25,6 +25,10 @@ Extension versions are cumulative. Higher extension versions include all of the 
 
 Only Azure extension for SQL Server agent versions released within the last year are supported.
 
+## July 7, 2025
+
+**Extension version**: `1.1.3106.305`
+
 ## June 18, 2025
 
 **Extension version**: `1.1.3089.297`
@@ -38,7 +42,7 @@ This release enables the following features:
   - Includes retail pricing information to simplify decisions
   - Recommends a single migration target type among the Azure SQL offerings based your migration strategy selection:
     - Minimize cost
-    - Modernize to Paas
+    - Modernize to Platform-as-a-Service (PaaS)
   - Introduces assessment settings experience to set pricing options and migration strategy to suit your requirements
 
   For details, review [Assess migration readiness - SQL Server enabled by Azure Arc](migration-assessment.md).
@@ -165,19 +169,3 @@ Extended Security Updates (ESU) subscription for [!INCLUDE [sssql11-md](../../in
 
 `SqlServerExtensionPermissionProvider` task no longer runs hourly. The task is triggered by specific events. For details, review [Roles](permissions-granted-agent-extension.md#roles).
 
-## June 14, 2024
-
-**Extension version**: `1.1.2717.190`
-
-### Licensing and billing
-
-Support Extended Security Updates (ESU) subscription for [!INCLUDE [sssql11-md](../../includes/sssql11-md.md)] with an option to bill back to year 1 of extended support (for managed accounts only).
-
-### Business continuity
-
-- Inventory and manual failover of availability groups is now generally available. For details, review [Manage Always On availability groups](manage-availability-group.md).
-- Inventory of failover cluster instance is now generally available. Failover cluster instance in portal now shows instance name, instance type, network name, active node, and passive nodes. For details, review [View Always On failover cluster instances in Azure Arc](support-for-fci.md).
-
-### Migration
-
-Run assessment on demand (preview): The SQL Server migration assessment runs every Sunday around 11:00 PM. Beginning with this release, you can initiate the SQL Server migration assessment whenever you want. This immediate assessment shows readiness evaluations and Azure SQL configuration assessments right away. For details, review [Assess migration readiness - SQL Server enabled by Azure Arc](migration-assessment.md).
