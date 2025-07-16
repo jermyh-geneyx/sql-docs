@@ -178,9 +178,9 @@ For information, see:
 
 [!INCLUDE [manage-passive-instance](includes/manage-passive-instance.md)]
 
-[!INCLUDE [billing-after-failover](includes/billing-after-failover.md)]
+The ESU subscription enabled on a connected server with passive SQL Server instances doesn't incur the ESU charges. This way you can guarantee that future ESUs will be applied to that server. To qualify, all SQL Server instances on this server must meet the passivity criteria defined in [Manage passive license for high availability and disaster recovery](manage-license-billing.md#free-dr).
 
-For additional information on passive replica detection logic, review [Manage passive license for high availability and disaster recovery](manage-license-billing.md#manage-passive-license-for-high-availability-and-disaster-recovery).
+[!INCLUDE [billing-after-failover](includes/billing-after-failover.md)]
 
 ## <a id="server-cal"></a> Manage SQL Server instances that use a Server+CAL license
 
@@ -234,7 +234,7 @@ The usage of the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] ESU 
 
 - [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] ESU subscription usage is reported per OSE whether one or multiple [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] instances are installed on the same OSE.
 
-- If multiple out-of-support [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] instances of the same version are installed on the same OSE, the highest [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] edition defines the ESU subscription meter that's sent every hour.
+- If multiple out-of-support [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] instances of the same version are installed on the same OSE, the highest [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] edition defines the ESU subscription meter.
 
 - If multiple out-of-support instances of both [!INCLUDE [sssql11-md](../../includes/sssql11-md.md)] and [!INCLUDE [sssql14-md](../../includes/sssql14-md.md)] are installed on the same OSE, with the same or different editions, one instance of the same version is billed separately because they have different prices and bill-back periods.
 
@@ -320,7 +320,7 @@ If the Arc enabled machine goes offline and reconnects to Azure in a different s
 >
 > This difference is expected, and it should be a one-time charge.
 >
-> During the following months, you should see only the regular hourly charges. Additional bill-back charges could be added in cases of connectivity disruptions, but they're typically much smaller amounts.
+> In later months, you should see only the regular hourly charges. Additional bill-back charges could be added to account for the connectivity disruptions, but they're typically much smaller amounts.
 
 ## Related content
 
@@ -328,7 +328,7 @@ If the Arc enabled machine goes offline and reconnects to Azure in a different s
 - [SQL Server licensing guide (download link)](https://download.microsoft.com/download/e/2/9/e29a9331-965d-4faa-bd2e-7c1db7cd8348/SQL_Server_2019_Licensing_guide.pdf)
 - [SQL Server 2022 pricing and licensing](https://www.microsoft.com/sql-server/sql-server-2022-pricing)
 - [Configure SQL Server enabled by Azure Arc](manage-configuration.md)
-- [Frequently asked questions about billing](faq.yml#billing)
+- [Frequently asked questions about billing](faq.yml#recurring-pay-as-you-go-billing)
 - [Extended Security Updates: Frequently asked questions](../end-of-support/extended-security-updates-frequently-asked-questions.md)
 - [Prerequisites - SQL Server enabled by Azure Arc](prerequisites.md)
 - [Manage the unlimited virtualization benefit for a SQL Server ESU subscription](manage-configuration.md#manage-pcore-esu-license)
