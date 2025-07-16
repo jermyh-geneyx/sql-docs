@@ -199,7 +199,12 @@ The SQL Server associated services are billed for ESU using the regular ESU mete
 > [!IMPORTANT]
 >
 > - The SQL Server associated service installations are billed for the ESU subscription only when they are installed on the machine as a standalone instance (without SQL Server engine). Otherwise, the SQL Server engine instance is billed.
+>
 > - If a p-core ESU license is activated for the corresponding scope and the machine is configured to use it, the SQL Server associated service is not individually billed for ESU even if it is a standalone instance (without SQL Server engine). For details, see [Manage resources in the scope of an ESU p-core license](manage-configuration.md#manage-esu-license-resources).
+>
+> - If a SQL Server associated service is installed with SQL Server engine on the same OSE and the associated service has a different version than SQL Server engine, the associated service as well as SQL Server engine will be billed separately.
+>
+> - If the SQL Server associated service is installed with SQL Server engine on the same OSE and the associated service has a higher edition than SQL Server engine, then the service with the highest edition will be billed.
 
 ## <a id="license-transition"></a> Manage the transition from a p-core ESU license to a v-core ESU license
 

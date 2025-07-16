@@ -266,6 +266,10 @@ The SQL Server associated services are represented and managed for licensing pur
 > When the SQL Server associated service is a standalone instance (without SQL Server database engine) and the machine is configured using a pay-as-you-go subscription, the corresponding pay-as-you-go meters are activated for the instance.
 >
 > If a p-core license is activated as a pay-as-you-go subscription in the corresponding scope, and the machine is configured to use it, the SQL Server associated service is not individually billed for the pay-as-you-go subscription when it is a standalone instance (without SQL Server engine). For details, see [Use a physical core license](manage-configuration.md#use-physical-core-license).
+>
+> If a SQL Server associated service is installed with SQL Server engine on the same OSE and the associated service has a different version than SQL Server engine, the associated service as well as SQL Server engine will be billed separately.
+>
+> If the SQL Server associated service is installed with SQL Server engine on the same OSE and the associated service has a higher edition than SQL Server engine, then the service with the highest edition will be billed.
 
 ## <a id="usage-metering"></a> Metering software usage
 
