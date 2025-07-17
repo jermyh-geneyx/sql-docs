@@ -199,7 +199,9 @@ The SQL Server associated services are billed for ESU using the regular ESU mete
 > [!IMPORTANT]
 >
 > - The SQL Server associated service installations are billed for the ESU subscription only when they are installed on the machine as a standalone instance (without SQL Server engine). Otherwise, the SQL Server engine instance is billed.
+>
 > - If a p-core ESU license is activated for the corresponding scope and the machine is configured to use it, the SQL Server associated service is not individually billed for ESU even if it is a standalone instance (without SQL Server engine). For details, see [Manage resources in the scope of an ESU p-core license](manage-configuration.md#manage-esu-license-resources).
+>
 
 ## <a id="license-transition"></a> Manage the transition from a p-core ESU license to a v-core ESU license
 
@@ -226,17 +228,16 @@ If you want to purchase a Year 1 or Year 2 ESU offer through Azure because you h
 
 ## <a id="esu-usage-metering"></a> Understand ESU usage meters
 
-The usage of the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] ESU subscription is reported once an hour. The specific meter is automatically selected based on the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] edition and the number v-cores or p-cores visible to the OSE. The following rules apply:
+The usage of the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] ESU subscription is reported once an hour. The specific meter is automatically selected based on edition and the version eligible for ESU. The ESU usage will be reported for all v-cores or p-cores visible to the OSE. The following rules apply:
 
-- If you install one or several [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] instances on a virtual machine and don't specify the use of a p-core ESU license, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] ESU subscription usage is metered based on the total number of virtual cores available to the OSE. The minimum is four cores per OSE.
+- If one or several instances of SQL Server or SQL Server associated services eligible for ESU are installed on a virtual machine and don't specify the use of a p-core ESU license, the ESU subscription usage is metered based on the total number of virtual cores available to the OSE. The minimum is four v-cores per OSE.
 
-- If you install one or several [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] instances on a physical server without using virtual machines, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] ESU subscription usage is metered based on the total number physical cores available to the OSE. The minimum is four cores per OSE.
+- If several instances of SQL Server or SQL Server associated services eligible for ESU are installed on a physical server without using virtual machines, the ESU subscription usage is metered based on the total number physical cores available to the OSE. The minimum is four cores per OSE.
 
-- [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] ESU subscription usage is reported per OSE whether one or multiple [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] instances are installed on the same OSE.
+- If multiple instances of SQL Server or SQL Server associated services are installed with the same version that is eligible for ESU, only one ESU subscription usage is reported per OSE. The reported usage is associated with the instance that has the highest edition.
 
-- If multiple out-of-support [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] instances of the same version are installed on the same OSE, the highest [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] edition defines the ESU subscription meter that's sent every hour.
+- If two or more instances of SQL Server or SQL Server associated services are installed with the different versions that are eligible for ESU, each eligible version will report ESU usage separately based one the instance of that version with the highest edition. This reflects the differences in ESU prices and bill-back periods for different versions.
 
-- If multiple out-of-support instances of both [!INCLUDE [sssql11-md](../../includes/sssql11-md.md)] and [!INCLUDE [sssql14-md](../../includes/sssql14-md.md)] are installed on the same OSE, with the same or different editions, one instance of the same version is billed separately because they have different prices and bill-back periods.
 
 The following table shows the ESU subscription meters (also called *SKUs*) that are used for metering and billing for a [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] ESU subscription on a single OSE:
 
@@ -320,7 +321,7 @@ If the Arc enabled machine goes offline and reconnects to Azure in a different s
 >
 > This difference is expected, and it should be a one-time charge.
 >
-> During the following months, you should see only the regular hourly charges. Additional bill-back charges could be added in cases of connectivity disruptions, but they're typically much smaller amounts.
+> In following billing periods, you should see only the regular hourly charges. Additional bill-back charges could be added in cases of connectivity disruptions, but they're typically much smaller amounts.
 
 ## Related content
 
