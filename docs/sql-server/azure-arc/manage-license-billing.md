@@ -257,7 +257,7 @@ If you converted your Enterprise Server+CAL license to a core-based license, you
 
 For details, see [Feature availability by service type](overview.md#feature-availability-by-service-type).
 
-The SQL Server associated services are represented and managed for licensing purposes as SQL Server instances. Their usage is reported using the same metering rules as described in [Metering software usage](manage-license-billing.md#usage-metering).
+The SQL Server associated services are represented and managed for licensing purposes as SQL Server instances. Their usage is reported using the metering rules described in [Metering software usage](manage-license-billing.md#usage-metering).
 
 > [!IMPORTANT]
 >
@@ -266,22 +266,21 @@ The SQL Server associated services are represented and managed for licensing pur
 > When the SQL Server associated service is a standalone instance (without SQL Server database engine) and the machine is configured using a pay-as-you-go subscription, the corresponding pay-as-you-go meters are activated for the instance.
 >
 > If a p-core license is activated as a pay-as-you-go subscription in the corresponding scope, and the machine is configured to use it, the SQL Server associated service is not individually billed for the pay-as-you-go subscription when it is a standalone instance (without SQL Server engine). For details, see [Use a physical core license](manage-configuration.md#use-physical-core-license).
->
-> If a SQL Server associated service is installed with SQL Server engine on the same OSE and the associated service has a different version than SQL Server engine, the associated service as well as SQL Server engine will be billed separately.
->
-> If the SQL Server associated service is installed with SQL Server engine on the same OSE and the associated service has a higher edition than SQL Server engine, then the service with the highest edition will be billed.
 
-## <a id="usage-metering"></a> Metering software usage
+
+## <a id="usage-metering"></a> Metering and reporting software usage
 
 The usage of the SQL Server software is reported once an hour. The specific meter is automatically selected based on the SQL Server edition and the number v-cores or p-cores visible to the OSE. The following rules apply:
 
-- If you install one or several SQL Server instances on a virtual machine and don't specify the use of a physical core license, SQL Server software usage is metered based on the total number of virtual cores available to the OSE. The minimum is four cores per OSE.
+- If you install one or several instances of SQL Server or SQL Server associated services on a virtual machine and don't specify the use of a physical core license, SQL Server software usage is metered based on the total number of virtual cores available to the OSE. The minimum is four cores per OSE.
 
-- If you install one or several SQL Server instances on a physical server without using virtual machines, SQL Server software usage is metered based on the total number physical cores available to the OSE. The minimum is four cores per OSE.
+- If you install one or several instances of SQL Server or SQL Server associated services on a physical server without using virtual machines, SQL Server software usage is metered based on the total number physical cores available to the OSE. The minimum is four cores per OSE.
 
-- SQL Server software usage is reported per OSE whether one or multiple SQL Server instances are installed on the same OSE.
+- SQL Server software usage is reported per OSE whether one or multiple instances of SQL Server or SQL Server associated services are installed on the same OSE.
 
-- If two or more instances of the same edition are installed, the first instance in alphabetical order reports usage.
+- If two or more instances of SQL Server or SQL Server associated services with the same edition are installed, the first instance in alphabetical order reports usage.
+
+- If two or more instances of SQL Server or SQL Server associated services are installed on the same OSE the instance with the highest edition will be billed.
 
 - The combination of the selected `LicenseType` value and the highest SQL Server edition installed on the OSE defines which meter is sent every hour.
 
