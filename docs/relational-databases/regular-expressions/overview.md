@@ -75,23 +75,22 @@ The following table lists currently supported Perl character classes.
 
 The following table lists currently supported ASCII character classes.
 
-|ASCII character classes  |Description  |
-|---------|---------|
-| `[[:alnum:]]`           | alphanumeric ( `[0-9A-Za-z]`) |
-| `[[:alpha:]]`           | alphabetic ( `[A-Za-z]`) |
-| `[[:ascii:]]`           | ASCII ( `[\x00-\x7F]`) |
-| `[[:blank:]]`           | blank ( `[\t ]`) |
-| `[[:cntrl:]]`           | control ( `[\x00-\x1F\x7F]`) |
-| `[[:digit:]]`           | digits ( `[0-9]`) |
-| `[[:graph:]]`           |	graphical ( `[!-~]` or ``[A-Za-z0-9!“#$%&’()*+,\-./:;<=>?@[\\\]^_`{|}~]``) |
-| `[[:lower:]]`           | lower case ( `[a-z]`) |
-| `[[:print:]]`           | printable ( `[ -~]` or `[ [:graph:]]`) |
-| `[[:punct:]]`           | punctuation ( `[!-/:-@[-\``{-~]`) |
-| `[[:space:]]`           | whitespace ( `[\t\n\v\f\r ]`) |
-| `[[:upper:]]`           | upper case ( `[A-Z]`) |
-| `[[:word:]]`            | word characters ( `[0-9A-Za-z_]`) |
-| `[[:xdigit:]]`          | hex digit ( `[0-9A-Fa-f]`) |
-
+| ASCII character classes | Description |
+| --- | --- |
+| `[[:alnum:]]` | alphanumeric ( `[0-9A-Za-z]`) |
+| `[[:alpha:]]` | alphabetic ( `[A-Za-z]`) |
+| `[[:ascii:]]` | ASCII ( `[\x00-\x7F]`) |
+| `[[:blank:]]` | blank ( `[\t ]`) |
+| `[[:cntrl:]]` | control ( `[\x00-\x1F\x7F]`) |
+| `[[:digit:]]` | digits ( `[0-9]`) |
+| `[[:graph:]]` | graphical ( `[!-~]` or ``[A-Za-z0-9!"#$%&'()*+,\-./:;<=>?@[\\\]^_`{|}~]``) |
+| `[[:lower:]]` | lower case ( `[a-z]`) |
+| `[[:print:]]` | printable ( `[ -~]` or `[ [:graph:]]`) |
+| `[[:punct:]]` | punctuation ( `[!-/:-@[-\``{-~]`) |
+| `[[:space:]]` | whitespace ( `[\t\n\v\f\r ]`) |
+| `[[:upper:]]` | upper case ( `[A-Z]`) |
+| `[[:word:]]` | word characters ( `[0-9A-Za-z_]`) |
+| `[[:xdigit:]]` | hex digit ( `[0-9A-Fa-f]`) |
 
 ### Literal characters
 
