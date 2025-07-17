@@ -20,13 +20,13 @@ ms.devlang: azurecli
 > Azure has announced that support for older TLS versions (TLS 1.0, and 1.1) ends August 31, 2025. For more information, see [TLS 1.0 and 1.1 deprecation](https://azure.microsoft.com/updates/azure-support-tls-will-end-by-31-october-2024-2/).
 > Starting November 2024, you'll no longer be able to set the minimal TLS version for Azure SQL Managed Instance client connections below TLS 1.2.
 
-The Minimal [Transport Layer Security (TLS)](/troubleshoot/sql/database-engine/connect/tls-1-2-support-microsoft-sql-server) Version setting allows customers to control the version of TLS used by their Azure SQL Managed Instance.
+The Minimal [Transport Layer Security (TLS)](/troubleshoot/sql/database-engine/connect/tls-1-2-support-microsoft-sql-server) version setting allows customers to control the version of TLS used by their Azure SQL Managed Instance.
 
 Setting **Minimum TLS version** to 1.2 is currently enforced for SQL Managed Instance. Setting a Minimal TLS version ensures that subsequent, newer TLS versions are supported. Only connections using TLS 1.2 or above are accepted.
 
 For more information, see [TLS considerations for SQL Database connectivity](../database/connect-query-content-reference-guide.md#tls-considerations-for-database-connectivity).
 
-After setting the Minimal TLS Version, login attempts from clients that are using a TLS version lower than the Minimal TLS Version of the server will fail with following error:
+After setting the Minimal TLS version, login attempts from clients that are using a TLS version lower than the Minimal TLS version of the server will fail with following error:
 
 ```output
 Error 47072
