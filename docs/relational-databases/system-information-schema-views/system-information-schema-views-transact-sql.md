@@ -1,9 +1,10 @@
 ---
 title: "System Information Schema Views (Transact-SQL)"
-description: "System Information Schema Views (Transact-SQL)"
+description: System information schema views are one method to provide SQL Server Database Engine metadata.
 author: markingmyname
 ms.author: maghan
-ms.date: "07/30/2019"
+ms.reviewer: randolphwest
+ms.date: 07/16/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -16,89 +17,74 @@ helpviewer_keywords:
 dev_langs:
   - "TSQL"
 ---
-# System Information Schema Views (Transact-SQL)
+# System information schema views (Transact-SQL)
 
 [!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
 
-An information schema view is one of several methods [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] provides for obtaining metadata. Information schema views provide an internal, system table-independent view of the [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] metadata. Information schema views enable applications to work correctly although significant changes have been made to the underlying system tables. The information schema views included in [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] comply with the ISO standard definition for the INFORMATION_SCHEMA.
+An information schema view is one of several methods [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] provides for obtaining metadata. Information schema views provide an internal, system table-independent view of the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] metadata. Information schema views enable applications to work correctly, although significant changes were made to the underlying system tables. The information schema views included in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] comply with the ISO standard definition for the `INFORMATION_SCHEMA`.
 
-> [!IMPORTANT]
-> Some changes have been made to the information schema views that break backward compatibility. These changes are described in the topics for the specific views.
+> [!IMPORTANT]  
+> Some changes were made to the information schema views that break backward compatibility. These changes are described in the articles for the specific views.
 
-[!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] supports a three-part naming convention when you refer to the current server. The ISO standard also supports a three-part naming convention. However, the names used in both naming conventions are different. The information schema views are defined in a special schema named INFORMATION_SCHEMA. This schema is contained in each database. Each information schema view contains metadata for all data objects stored in that particular database. The following table shows the relationships between the [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] names and the SQL standard names.
+[!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] supports a three-part naming convention when you refer to the current server. The ISO standard also supports a three-part naming convention. However, the names used in both naming conventions are different. The information schema views are defined in a special schema named `INFORMATION_SCHEMA`. This schema is contained in each database. Each information schema view contains metadata for all data objects stored in that particular database. The following table shows the relationships between the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] names and the SQL standard names.
 
-|SQL Server name|Maps to this equivalent SQL standard name|
-|---------------------|-----------------------------------------------|
-|Database|Catalog|
-|Schema|Schema|
-|Object|Object|
-|user-defined data type|Domain|
+| SQL Server name | Maps to this equivalent SQL standard name |
+| --- | --- |
+| Database | Catalog |
+| Schema | Schema |
+| Object | Object |
+| User-defined data type | Domain |
 
-This name-mapping convention applies to the following [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ISO-compatible views.
+This name-mapping convention applies to the following [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] ISO-compatible views.
 
-:::row:::
-    :::column:::
-        [CHECK_CONSTRAINTS](../../relational-databases/system-information-schema-views/check-constraints-transact-sql.md)
-
-        [COLUMN_DOMAIN_USAGE](../../relational-databases/system-information-schema-views/column-domain-usage-transact-sql.md)
-
-        [COLUMN_PRIVILEGES](../../relational-databases/system-information-schema-views/column-privileges-transact-sql.md)
-
-        [COLUMNS](../../relational-databases/system-information-schema-views/columns-transact-sql.md)
-
-        [CONSTRAINT_COLUMN_USAGE](../../relational-databases/system-information-schema-views/constraint-column-usage-transact-sql.md)
-
-        [CONSTRAINT_TABLE_USAGE](../../relational-databases/system-information-schema-views/constraint-table-usage-transact-sql.md)
-
-        [DOMAIN_CONSTRAINTS](../../relational-databases/system-information-schema-views/domain-constraints-transact-sql.md)
-
-        [DOMAINS](../../relational-databases/system-information-schema-views/domains-transact-sql.md)
-
-        [KEY_COLUMN_USAGE](../../relational-databases/system-information-schema-views/key-column-usage-transact-sql.md)
-
-        [PARAMETERS](../../relational-databases/system-information-schema-views/parameters-transact-sql.md)
-    :::column-end:::
-    :::column:::
-        [REFERENTIAL_CONSTRAINTS](../../relational-databases/system-information-schema-views/referential-constraints-transact-sql.md)
-
-        [ROUTINES](../../relational-databases/system-information-schema-views/routines-transact-sql.md)
-
-        [ROUTINE_COLUMNS](../../relational-databases/system-information-schema-views/routine-columns-transact-sql.md)
-
-        [SCHEMATA](../../relational-databases/system-information-schema-views/schemata-transact-sql.md)
-
-        [TABLE_CONSTRAINTS](../../relational-databases/system-information-schema-views/table-constraints-transact-sql.md)
-
-        [TABLE_PRIVILEGES](../../relational-databases/system-information-schema-views/table-privileges-transact-sql.md)
-
-        [TABLES](../../relational-databases/system-information-schema-views/tables-transact-sql.md)
-
-        [VIEW_COLUMN_USAGE](../../relational-databases/system-information-schema-views/view-column-usage-transact-sql.md)
-
-        [VIEW_TABLE_USAGE](../../relational-databases/system-information-schema-views/view-table-usage-transact-sql.md)
-
-        [VIEWS](../../relational-databases/system-information-schema-views/views-transact-sql.md)
-    :::column-end:::
-:::row-end:::
+- [CHECK_CONSTRAINTS](check-constraints-transact-sql.md)
+- [COLUMN_DOMAIN_USAGE](column-domain-usage-transact-sql.md)
+- [COLUMN_PRIVILEGES](column-privileges-transact-sql.md)
+- [COLUMNS](columns-transact-sql.md)
+- [CONSTRAINT_COLUMN_USAGE](constraint-column-usage-transact-sql.md)
+- [CONSTRAINT_TABLE_USAGE](constraint-table-usage-transact-sql.md)
+- [DOMAIN_CONSTRAINTS](domain-constraints-transact-sql.md)
+- [DOMAINS](domains-transact-sql.md)
+- [KEY_COLUMN_USAGE](key-column-usage-transact-sql.md)
+- [PARAMETERS](parameters-transact-sql.md)
+- [REFERENTIAL_CONSTRAINTS](referential-constraints-transact-sql.md)
+- [ROUTINE_COLUMNS](routine-columns-transact-sql.md)
+- [ROUTINES](routines-transact-sql.md)
+- [SCHEMATA](schemata-transact-sql.md)
+- [TABLE_CONSTRAINTS](table-constraints-transact-sql.md)
+- [TABLE_PRIVILEGES](table-privileges-transact-sql.md)
+- [TABLES](tables-transact-sql.md)
+- [VIEW_COLUMN_USAGE](view-column-usage-transact-sql.md)
+- [VIEW_TABLE_USAGE](view-table-usage-transact-sql.md)
+- [VIEWS](views-transact-sql.md)
 
 Also, some views contain references to different classes of data such as character data or binary data.
 
 When you reference the information schema views, you must use a qualified name that includes the `INFORMATION_SCHEMA` schema name. For example:
 
 ```sql
-SELECT TABLE_CATALOG, TABLE_SCHEMA, TABLE_NAME, COLUMN_NAME, COLUMN_DEFAULT
-FROM AdventureWorks2022.INFORMATION_SCHEMA.COLUMNS
+USE AdventureWorks2022;
+GO
+
+SELECT TABLE_CATALOG,
+       TABLE_SCHEMA,
+       TABLE_NAME,
+       COLUMN_NAME,
+       COLUMN_DEFAULT
+FROM INFORMATION_SCHEMA.COLUMNS
 WHERE TABLE_NAME = N'Product';
 ```
 
-## Permissions  
-The visibility of the metadata in information schema views is limited to securables that a user either owns or on which the user has been granted some permission. For more information, see [Metadata Visibility Configuration](../../relational-databases/security/metadata-visibility-configuration.md).
+## Permissions
 
-> [!NOTE]  
-> Information schema views are defined server-wide and therefore cannot be denied within the context of a user database. To REVOKE or DENY access (SELECT), the master database must be used. By default the public role has SELECT-permission to all information schema views but the content is limited with metadata visibility rules.
+The visibility of the metadata in information schema views is limited to securables that a user either owns or on which the user is granted some permission. For more information, see [Metadata Visibility Configuration](../security/metadata-visibility-configuration.md).
 
-## See Also
+Information schema views are defined server-wide and therefore can't be denied within the context of a user database. To `REVOKE` or `DENY` access (`SELECT`), the `master` database must be used. By default the public role has `SELECT`-permission to all information schema views but the content is limited with metadata visibility rules.
 
-- [System Views &#40;Transact-SQL&#41;](../../relational-databases/system-views/replication-views-transact-sql.md)
-- [Data Types &#40;Transact-SQL&#41;](../../t-sql/data-types/data-types-transact-sql.md)
-- [System Stored Procedures &#40;Transact-SQL&#41;](../../relational-databases/system-stored-procedures/system-stored-procedures-transact-sql.md) 
+You can't deny access to information schema views in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+
+## Related content
+
+- [Replication Views (Transact-SQL)](../system-views/replication-views-transact-sql.md)
+- [Data types (Transact-SQL)](../../t-sql/data-types/data-types-transact-sql.md)
+- [System stored procedures (Transact-SQL)](../system-stored-procedures/system-stored-procedures-transact-sql.md)
