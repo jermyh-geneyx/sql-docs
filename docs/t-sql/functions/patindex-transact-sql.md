@@ -47,7 +47,9 @@ PATINDEX ( '%pattern%' , expression )
 **bigint** if *expression* is of the **varchar(max)** or **nvarchar(max)** data types; otherwise **int**.  
   
 ## Remarks  
-If either *pattern* or *expression* is NULL, PATINDEX returns NULL.  
+If *pattern* is NULL, PATINDEX returns NULL.
+
+If expression is NULL, PATINDEX returns error.
  
 The starting position for PATINDEX is 1.
  
