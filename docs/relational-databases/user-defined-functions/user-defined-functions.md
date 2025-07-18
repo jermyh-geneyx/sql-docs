@@ -3,7 +3,7 @@ title: User-Defined Functions
 description: User-defined functions are routines that accept parameters, perform an action, and return the result as a single scalar value or a result set.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 05/19/2025
+ms.date: 07/18/2025
 ms.service: sql
 ms.topic: conceptual
 helpviewer_keywords:
@@ -27,7 +27,7 @@ Why use user-defined functions (UDFs)?
 
 - **Modular programming.** You can create the function once, store it in the database, and call it any number of times in your program. User-defined functions can be modified independently of the program source code.
 
-- **Faster execution.** Similar to stored procedures, [!INCLUDE [tsql](../../includes/tsql-md.md)] user-defined functions reduce the compilation cost of [!INCLUDE [tsql](../../includes/tsql-md.md)] code by caching the plans and reusing them for repeated executions. This means the user-defined function doesn't need to be reparsed and reoptimized with each use, resulting in much faster execution times.
+- **Faster execution.** Similar to stored procedures, [!INCLUDE [tsql](../../includes/tsql-md.md)] user-defined functions reduce the compilation cost of [!INCLUDE [tsql](../../includes/tsql-md.md)] code by caching the plans and reusing them for repeated executions. This means the user-defined function doesn't need to be reparsed and reoptimized with each use, resulting in faster execution times.
 
   Common language runtime (CLR) functions offer significant performance advantage over [!INCLUDE [tsql](../../includes/tsql-md.md)] functions for computational tasks, string manipulation, and business logic. [!INCLUDE [tsql](../../includes/tsql-md.md)] functions are better suited for data-access intensive logic.
 
@@ -58,7 +58,7 @@ User-defined table-valued functions (TVFs) return a **table** data type. For an 
 
 [!INCLUDE [tsql](../../includes/tsql-md.md)] errors that cause a statement to be canceled and continue with the next statement in the module (such as triggers or stored procedures) are treated differently inside a function. In functions, such errors cause the execution of the function to stop. This in turn causes the statement that invoked the function to be canceled.
 
-The statements in a `BEGIN...END` block can't have any side effects. Function side effects are any permanent changes to the state of a resource that has a scope outside the function such as a modification to a database table. The only changes that statements in the function can make, are changes to objects local to the function, such as local cursors or variables. Modifications to database tables, operations on cursors that aren't local to the function, sending e-mail, attempting a catalog modification, and generating a result set that is returned to the user are examples of actions that can't be performed in a function.
+The statements in a `BEGIN...END` block can't have any side effects. Function side effects are any permanent changes to the state of a resource that has a scope outside the function such as a modification to a database table. The only changes that statements in the function can make, are changes to objects local to the function, such as local cursors or variables. Modifications to database tables, operations on cursors that aren't local to the function, such as sending e-mail, attempting a catalog modification, and generating a result set that is returned to the user, are examples of actions that can't be performed in a function.
 
 If a `CREATE FUNCTION` statement produces side effects against resources that don't exist when the `CREATE FUNCTION` statement is issued, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] executes the statement. However, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] doesn't execute the function when it's invoked.
 
@@ -110,14 +110,7 @@ The following nondeterministic built-in functions can be used in Transact-SQL us
 - `@@TOTAL_READ`
 - `@@TOTAL_WRITE`
 
-The following nondeterministic built-in functions **cannot** be used in [!INCLUDE [tsql](../../includes/tsql-md.md)] user-defined functions.
-
-- `NEWID`
-- `NEWSEQUENTIALID`
-- `RAND`
-- `TEXTPTR`
-
-For a list of deterministic and nondeterministic built-in system functions, see [Deterministic and nondeterministic functions](deterministic-and-nondeterministic-functions.md).
+[!INCLUDE [side-effecting-functions](../includes/side-effecting-functions.md)]
 
 <a id="SchemaBound"></a>
 

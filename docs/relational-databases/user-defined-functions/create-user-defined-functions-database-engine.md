@@ -1,10 +1,10 @@
 ---
-title: "Create User-defined Functions (Database Engine)"
-description: "Create User-defined Functions (Database Engine)"
+title: "Create User-Defined Functions (Database Engine)"
+description: Learn how to create user-defined functions with Transact-SQL.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: mathoma
-ms.date: 09/27/2024
+ms.date: 07/18/2025
 ms.service: sql
 ms.topic: language-reference
 helpviewer_keywords:
@@ -13,6 +13,7 @@ helpviewer_keywords:
   - "user-defined functions [SQL Server], creating"
   - "CREATE FUNCTION statement"
   - "valid statements [SQL Server]"
+  - "side-effecting functions"
   - "UDF"
   - "TVF"
 monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || >=aps-pdw-2016 || =azure-sqldw-latest"
@@ -23,104 +24,134 @@ monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-20
 
 This article describes how to create a user-defined function (UDF) in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] by using [!INCLUDE [tsql](../../includes/tsql-md.md)].
 
-## <a id="Restrictions"></a> Limitations and restrictions
+<a id="Restrictions"></a>
 
-- User-defined functions can't be used to perform actions that modify the database state.
+## Limitations
 
-- User-defined functions can't contain an `OUTPUT INTO` clause that has a table as its target.
+User-defined functions can't be used to perform actions that modify the database state.
 
-- User-defined functions can't return multiple result sets. Use a stored procedure if you need to return multiple result sets.
+User-defined functions can't contain an `OUTPUT INTO` clause that has a table as its target.
 
-- Error handling is restricted in a user-defined function. A UDF doesn't support `TRY...CATCH`, `@ERROR` or `RAISERROR`.
+User-defined functions can't return multiple result sets. Use a stored procedure if you need to return multiple result sets.
 
-- User-defined functions can't call a stored procedure, but can call an extended stored procedure.
+Error handling is restricted in a user-defined function. A UDF doesn't support `TRY...CATCH`, `@ERROR`, or `RAISERROR`.
 
-- User-defined functions can't make use of dynamic SQL or temp tables. Table variables are allowed.
+User-defined functions can't call a stored procedure, but can call an extended stored procedure.
 
-- `SET` statements aren't allowed in a user-defined function (for example, `SET NOCOUNT ON;`). Variable value assignment can use `SET`.
+User-defined functions can't make use of dynamic SQL or temp tables. Table variables are allowed.
 
-- The `FOR XML` clause isn't allowed.
+`SET` statements aren't allowed in a user-defined function (for example, `SET NOCOUNT ON;`). Variable value assignment can use `SET`.
 
-- User-defined functions can be nested; that is, one user-defined function can call another. The nesting level is incremented when the called function starts execution, and decremented when the called function finishes execution. User-defined functions can be nested up to 32 levels. Exceeding the maximum levels of nesting causes the whole calling function chain to fail. Any reference to managed code from a Transact-SQL user-defined function counts as one level against the 32-level nesting limit. Methods invoked from within managed code don't count against this limit.
+The `FOR XML` clause isn't allowed.
 
-- The following Service Broker statements **cannot be included** in the definition of a [!INCLUDE [tsql](../../includes/tsql-md.md)] user-defined function:
+### Nested user-defined functions
 
-  - `BEGIN DIALOG CONVERSATION`
-  - `END CONVERSATION`
-  - `GET CONVERSATION GROUP`
-  - `MOVE CONVERSATION`
-  - `RECEIVE`
-  - `SEND`
+User-defined functions can be nested. That is, one user-defined function can call another. The nesting level is incremented when the called function starts execution, and decremented when the called function finishes execution.
+
+User-defined functions can be nested up to 32 levels. Exceeding the maximum levels of nesting causes the whole calling function chain to fail. Any reference to managed code from a Transact-SQL user-defined function counts as one level against the 32-level nesting limit.
+
+Methods invoked from within managed code don't count against this limit.
+
+### Service Broker statements
+
+The following Service Broker statements **cannot be included** in the definition of a [!INCLUDE [tsql](../../includes/tsql-md.md)] user-defined function:
+
+- `BEGIN DIALOG CONVERSATION`
+- `END CONVERSATION`
+- `GET CONVERSATION GROUP`
+- `MOVE CONVERSATION`
+- `RECEIVE`
+- `SEND`
+
+### Side-effecting functions
+
+[!INCLUDE [side-effecting-functions](../includes/side-effecting-functions.md)]
+
+To work around this issue, you can wrap the side-effecting function in a view, and call the view from within a function.
 
 ## Permissions
 
 Requires `CREATE FUNCTION` permission in the database and `ALTER` permission on the schema in which the function is being created. If the function specifies a user-defined type, requires `EXECUTE` permission on the type.
 
-## <a id="Scalar"></a> Scalar function examples
+<a id="Scalar"></a>
+
+## Scalar function examples
 
 ### Scalar function (scalar UDF)
 
 The following example creates a multi-statement *scalar function (scalar UDF)* in the [!INCLUDE [ssSampleDBnormal](../../includes/sssampledbnormal-md.md)] database. The function takes one input value, a `ProductID`, and returns a single data value, the aggregated quantity of the specified product in inventory.
 
 ```sql
-IF OBJECT_ID (N'dbo.ufnGetInventoryStock', N'FN') IS NOT NULL
+IF OBJECT_ID(N'dbo.ufnGetInventoryStock', N'FN') IS NOT NULL
     DROP FUNCTION ufnGetInventoryStock;
 GO
-CREATE FUNCTION dbo.ufnGetInventoryStock(@ProductID int)
-RETURNS int
+
+CREATE FUNCTION dbo.ufnGetInventoryStock (@ProductID INT)
+RETURNS INT
 AS
 -- Returns the stock level for the product.
 BEGIN
-    DECLARE @ret int;
+    DECLARE @ret AS INT;
     SELECT @ret = SUM(p.Quantity)
-    FROM Production.ProductInventory p
+    FROM Production.ProductInventory AS p
     WHERE p.ProductID = @ProductID
-        AND p.LocationID = '6';
-     IF (@ret IS NULL)
+          AND p.LocationID = '6';
+    IF (@ret IS NULL)
         SET @ret = 0;
     RETURN @ret;
-END;
+END
 ```
 
 The following example uses the `ufnGetInventoryStock` function to return the current inventory quantity for products that have a `ProductModelID` between 75 and 80.
 
 ```sql
-SELECT ProductModelID, Name, dbo.ufnGetInventoryStock(ProductID)AS CurrentSupply
+SELECT ProductModelID,
+       Name,
+       dbo.ufnGetInventoryStock(ProductID) AS CurrentSupply
 FROM Production.Product
-WHERE ProductModelID BETWEEN 75 and 80;
+WHERE ProductModelID BETWEEN 75 AND 80;
 ```
 
 For more information and examples of scalar functions, see [CREATE FUNCTION](../../t-sql/statements/create-function-transact-sql.md).
 
-## <a id="TVF"></a> Table-valued function examples
+<a id="TVF"></a>
+
+## Table-valued function examples
 
 ### Inline table-valued function (TVF)
 
 The following example creates an inline table-valued function (TVF) in the [!INCLUDE [ssSampleDBnormal](../../includes/sssampledbnormal-md.md)] database. The function takes one input parameter, a customer (store) ID, and returns the columns `ProductID`, `Name`, and the aggregate of year-to-date sales as `YTD Total` for each product sold to the store.
 
 ```sql
-IF OBJECT_ID (N'Sales.ufn_SalesByStore', N'IF') IS NOT NULL
+IF OBJECT_ID(N'Sales.ufn_SalesByStore', N'IF') IS NOT NULL
     DROP FUNCTION Sales.ufn_SalesByStore;
 GO
-CREATE FUNCTION Sales.ufn_SalesByStore (@storeid int)
+
+CREATE FUNCTION Sales.ufn_SalesByStore (@storeid INT)
 RETURNS TABLE
 AS
 RETURN
 (
-    SELECT P.ProductID, P.Name, SUM(SD.LineTotal) AS 'Total'
-    FROM Production.Product AS P
-    JOIN Sales.SalesOrderDetail AS SD ON SD.ProductID = P.ProductID
-    JOIN Sales.SalesOrderHeader AS SH ON SH.SalesOrderID = SD.SalesOrderID
-    JOIN Sales.Customer AS C ON SH.CustomerID = C.CustomerID
-    WHERE C.StoreID = @storeid
-    GROUP BY P.ProductID, P.Name
+    SELECT P.ProductID,
+            P.Name,
+            SUM(SD.LineTotal) AS 'Total'
+     FROM Production.Product AS P
+          INNER JOIN Sales.SalesOrderDetail AS SD
+              ON SD.ProductID = P.ProductID
+          INNER JOIN Sales.SalesOrderHeader AS SH
+              ON SH.SalesOrderID = SD.SalesOrderID
+          INNER JOIN Sales.Customer AS C
+              ON SH.CustomerID = C.CustomerID
+     WHERE C.StoreID = @storeid
+     GROUP BY P.ProductID, P.Name
 );
 ```
 
 The following example invokes the function and specifies customer ID 602.
 
 ```sql
-SELECT * FROM Sales.ufn_SalesByStore (602);
+SELECT *
+FROM Sales.ufn_SalesByStore(602);
 ```
 
 ### Multi-statement table-valued function (MSTVF)
@@ -128,50 +159,70 @@ SELECT * FROM Sales.ufn_SalesByStore (602);
 The following example creates a multi-statement table-valued function (MSTVF) in the [!INCLUDE [ssSampleDBnormal](../../includes/sssampledbnormal-md.md)] database. The function takes a single input parameter, an `EmployeeID` and returns a list of all the employees who report to the specified employee directly or indirectly. The function is then invoked specifying employee ID 109.
 
 ```sql
-IF OBJECT_ID (N'dbo.ufn_FindReports', N'TF') IS NOT NULL
+IF OBJECT_ID(N'dbo.ufn_FindReports', N'TF') IS NOT NULL
     DROP FUNCTION dbo.ufn_FindReports;
 GO
-CREATE FUNCTION dbo.ufn_FindReports (@InEmpID INTEGER)
+
+CREATE FUNCTION dbo.ufn_FindReports (@InEmpID INT)
 RETURNS @retFindReports TABLE
 (
-    EmployeeID int primary key NOT NULL,
-    FirstName nvarchar(255) NOT NULL,
-    LastName nvarchar(255) NOT NULL,
-    JobTitle nvarchar(50) NOT NULL,
-    RecursionLevel int NOT NULL
+    EmployeeID INT PRIMARY KEY NOT NULL,
+    FirstName NVARCHAR (255) NOT NULL,
+    LastName NVARCHAR (255) NOT NULL,
+    JobTitle NVARCHAR (50) NOT NULL,
+    RecursionLevel INT NOT NULL
 )
 --Returns a result set that lists all the employees who report to the
 --specific employee directly or indirectly.*/
 AS
 BEGIN
-WITH EMP_cte(EmployeeID, OrganizationNode, FirstName, LastName, JobTitle, RecursionLevel) -- CTE name and columns
+    WITH EMP_cte (EmployeeID, OrganizationNode, FirstName, LastName, JobTitle, RecursionLevel) -- CTE name and columns
     AS (
-        SELECT e.BusinessEntityID, e.OrganizationNode, p.FirstName, p.LastName, e.JobTitle, 0 -- Get the initial list of Employees for Manager n
-        FROM HumanResources.Employee e
-INNER JOIN Person.Person p
-ON p.BusinessEntityID = e.BusinessEntityID
+        -- Get the initial list of Employees for Manager n
+        SELECT e.BusinessEntityID,
+               e.OrganizationNode,
+               p.FirstName,
+               p.LastName,
+               e.JobTitle,
+               0
+        FROM HumanResources.Employee AS e
+             INNER JOIN Person.Person AS p
+                 ON p.BusinessEntityID = e.BusinessEntityID
         WHERE e.BusinessEntityID = @InEmpID
         UNION ALL
-        SELECT e.BusinessEntityID, e.OrganizationNode, p.FirstName, p.LastName, e.JobTitle, RecursionLevel + 1 -- Join recursive member to anchor
-        FROM HumanResources.Employee e
-            INNER JOIN EMP_cte
-            ON e.OrganizationNode.GetAncestor(1) = EMP_cte.OrganizationNode
-INNER JOIN Person.Person p
-ON p.BusinessEntityID = e.BusinessEntityID
-        )
--- copy the required columns to the result of the function
-   INSERT @retFindReports
-   SELECT EmployeeID, FirstName, LastName, JobTitle, RecursionLevel
-   FROM EMP_cte
-   RETURN
-END;
+        SELECT e.BusinessEntityID,
+               e.OrganizationNode,
+               p.FirstName,
+               p.LastName,
+               e.JobTitle,
+               RecursionLevel + 1
+        -- Join recursive member to anchor
+        FROM HumanResources.Employee AS e
+             INNER JOIN EMP_cte
+                 ON e.OrganizationNode.GetAncestor(1) = EMP_cte.OrganizationNode
+             INNER JOIN Person.Person AS p
+                 ON p.BusinessEntityID = e.BusinessEntityID)
+    -- copy the required columns to the result of the function
+    INSERT @retFindReports
+    SELECT EmployeeID,
+           FirstName,
+           LastName,
+           JobTitle,
+           RecursionLevel
+    FROM EMP_cte;
+    RETURN;
+END
 GO
 ```
 
 The following example invokes the function and specifies employee ID 1.
 
 ```sql
-SELECT EmployeeID, FirstName, LastName, JobTitle, RecursionLevel
+SELECT EmployeeID,
+       FirstName,
+       LastName,
+       JobTitle,
+       RecursionLevel
 FROM dbo.ufn_FindReports(1);
 ```
 
@@ -185,13 +236,13 @@ If a user-defined function (UDF) isn't created with the `SCHEMABINDING` clause, 
 
 - Execute the [sp_refreshsqlmodule](../system-stored-procedures/sp-refreshsqlmodule-transact-sql.md) stored procedure after modifying any object that is specified in the definition of the UDF.
 
-If creating a UDF that doesn't access data, specify the `SCHEMABINDING` option to prevent the query optimizer from generating unnecessary spool operators for query plans involving these UDFs. For more information on spools, see [Showplan Logical and Physical Operators Reference](../showplan-logical-and-physical-operators-reference.md). For more information on creating a schema bound function, see [Schema-bound functions](../../relational-databases/user-defined-functions/user-defined-functions.md#SchemaBound).
+If creating a UDF that doesn't access data, specify the `SCHEMABINDING` option to prevent the query optimizer from generating unnecessary spool operators for query plans involving these UDFs. For more information on spools, see [Logical and physical showplan operator reference](../showplan-logical-and-physical-operators-reference.md). For more information on creating a schema bound function, see [Schema-bound functions](../../relational-databases/user-defined-functions/user-defined-functions.md#SchemaBound).
 
 Joining to an MSTVF in a `FROM` clause is possible, but can result in poor performance. [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] is unable to use all the optimized techniques on some statements that can be included in an MSTVF, resulting in a suboptimal query plan. To obtain the best possible performance, whenever possible use joins between base tables instead of functions.
 
-MSTVFs have a fixed cardinality guess of 100 starting with [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)], and 1 for earlier [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] versions.
+MSTVFs have a fixed cardinality guess of 100 starting with [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)], and 1 for earlier versions of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
 
-Starting with [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)], optimizing an execution plan that uses MSTVFs can use interleaved execution, which results in using actual cardinality instead of the above heuristics.
+In [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] and later versions, optimizing an execution plan that uses MSTVFs can use interleaved execution, which results in using actual cardinality instead of the previously mentioned heuristics.
 
 For more information, see [Interleaved execution for multi-statement table valued functions](../../relational-databases/performance/intelligent-query-processing-details.md#interleaved-execution-for-mstvfs).
 
