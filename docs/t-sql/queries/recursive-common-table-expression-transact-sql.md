@@ -53,7 +53,13 @@ A recursive CTE consists of three elements:
    The termination check is implicit; recursion stops when no rows are returned from the previous invocation.
 
 > [!NOTE]  
-> An incorrectly composed recursive CTE might cause an infinite loop. For example, if the recursive member query definition returns the same values for both the parent and child columns, an infinite loop is created. When testing the results of a recursive query, you can limit the number of recursion levels allowed for a specific statement by using the `MAXRECURSION` hint and a value between 0 and 32,767 in the `OPTION` clause of the `INSERT`, `UPDATE`, `DELETE`, or `SELECT` statement. For more information, see [Query hints](hints-transact-sql-query.md) and [WITH common_table_expression](with-common-table-expression-transact-sql.md).
+> An incorrectly composed recursive CTE might cause an infinite loop. For example, if the recursive member query definition returns the same values for both the parent and child columns, an infinite loop is created. When testing the results of a recursive query, you can limit the number of recursion levels allowed for a specific statement by using the `MAXRECURSION` hint and a value between 0 and 32,767 in the `OPTION` clause of the `INSERT`, `UPDATE`, `DELETE`, or `SELECT` statement.
+
+For more information, see:
+
+- [Query hints](hints-transact-sql-query.md)
+- [WITH common_table_expression](with-common-table-expression-transact-sql.md)
+- [Recursive CTEs](https://techcommunity.microsoft.com/blog/sqlserver/recursive-ctes/383326)
 
 ## Pseudocode and semantics
 
@@ -231,3 +237,4 @@ NULL      1          Chief Executive Officer       0
 - [UPDATE (Transact-SQL)](update-transact-sql.md)
 - [DELETE (Transact-SQL)](../statements/delete-transact-sql.md)
 - [EXCEPT and INTERSECT (Transact-SQL)](../language-elements/set-operators-except-and-intersect-transact-sql.md)
+- [Recursive CTEs](https://techcommunity.microsoft.com/blog/sqlserver/recursive-ctes/383326)
