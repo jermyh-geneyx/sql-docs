@@ -130,7 +130,7 @@ SELECT
 FROM
     myTable
 CROSS APPLY
-    AI_GENERATE_CHUNKS(source = large_text, chunk_type = N'FIXED' , chunk_size = 10) c;
+    AI_GENERATE_CHUNKS(source = large_text, chunk_type = FIXED , chunk_size = 10) c;
 ```
 
 ### C. Create embeddings with a table update
@@ -214,7 +214,7 @@ INSERT INTO text_embeddings (chunked_text, vector_embeddings)
 SELECT c.chunk, AI_GENERATE_EMBEDDINGS(c.chunk USE MODEL MyAzureOpenAiModel)
 FROM textchunk t
 CROSS APPLY
-    AI_GENERATE_CHUNKS(source = t.text_to_chunk, chunk_type = N'FIXED', chunk_size = 100) c;
+    AI_GENERATE_CHUNKS(source = t.text_to_chunk, chunk_type = FIXED, chunk_size = 100) c;
 
 -- View the results
 SELECT * FROM text_embeddings;
