@@ -116,11 +116,18 @@ sections:
     questions:
       - question: I have an enterprise or a small business account with Microsoft, can I enable recurring pay-as-you-go billing?
         answer: |
-          No. At this point, recurring billing is only offered to cloud solution provider (CSP) managed customers.
+          No. At this point, recurring billing is only offered to CSP-managed customers.
 
       - question: How do I ensure that my VM and SQL server are not billed when it is disconnected or turned off intentionally?
         answer: |
-          If the machine is offline for less than 30 days and then reconnects, the uploaded SQL Server usage will reflect the offline period, and the monthly invoice will account for it. If you keep it offline for longer than 30 days, the billing will resume when the machine is back online and reconnects.
+          If the machine is offline for less than 30 days and then reconnects, the uploaded SQL Server usage will reflect the offline period, and the monthly invoice will account for it. If you plan to keep it offline for longer than 30 days, you should use the method described in Managing Long Offline Periods.
+
+      - question: If I have a server that is regularly disconnected for more than 30 days, what should I do?
+        answer: |
+          You have two options: 
+          - If your SQL Server instance will be continuously running during the disconnected time period with the same configuration (e.g., number of cores, edition, etc.), you can enable pay-as-you-go recurring billing (requires consent). Recurring billing will automatically continue to charge you during the period of disconnection based on the last-known configuration and will resume usage-based billing when connectivity is reestablished.
+          - When you take your VM offline intentionally and stop using SQL Server, set the maintenance mode property of the connected machine resource to True using Azure API or CLI.
+
 
       - question: How can I be notified about when a given machine does not send usage data when expected or when recurring billing has happened or is happening?
         answer: |
