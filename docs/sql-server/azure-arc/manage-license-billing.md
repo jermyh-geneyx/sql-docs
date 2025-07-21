@@ -91,6 +91,8 @@ The following license types are supported when you're licensing v-cores:
 
 - The pay-as-you-go hourly charges are issued only when SQL Server is running on the machine at any point within a particular hour, and if the machine is online.
 
+- You can configure recurrent billing. For details, review [Manage recurrent billing for SQL Server enabled by Azure Arc with pay-as-you-go license](manage-pay-as-you-go-transition.md).
+
 - By selecting a license with Software Assurance, you attest that you have Enterprise or Standard licenses with active Software Assurance or an active SQL Server subscription license.
 
 - For SQL Server Enterprise, Standard, or Web edition instances of SQL Server licensed from cloud service providers or hosting service providers using the Service Provider Licensing Agreement (SPLA), use `license only` for the license type.
@@ -209,7 +211,7 @@ For information, see:
 - [Creating Enterprise and Organization Azure Dev/Test Subscriptions](/azure/devtest/offer/quickstart-create-enterprise-devtest-subscriptions).
 - The section "Licensing SQL Server for non-production use" in the [SQL Server licensing guide (download link)](https://go.microsoft.com/fwlink/p/?linkid=2215573).
 
-## Manage passive license for high availability and disaster recovery
+## <a id="free-dr"></a> Manage passive license for high availability and disaster recovery
 
 [!INCLUDE [manage-passive-instance](includes/manage-passive-instance.md)]
 
@@ -217,10 +219,14 @@ For information, see:
 
 - All replicas present in the operating system environment (OSE) must be a secondary replica of an Always On availability group or the forwarder of a distributed availability group.
 - No standalone database outside of an AG irrespective of [database state](../../relational-databases/databases/database-states.md#database-state-definitions).
-- No active connections to any database except master, msdb, tempdb, or model databases.
+- No active connections to any database except `master`, `msdb`, `tempdb`, or `model` databases.
 - No instances of [associated services](#manage-ssxs) in the same OSE.
 
 If there are multiple SQL Server instances on the OSE, all instances and replicas must meet the conditions above.
+
+> [!NOTE]  
+> You can query DMVs or issue `DATABASE BACKUP` commands as long as your connections are limited to `master`, `msdb`, `tempdb`, or `model` databases. These operations will not disqualify your passive instance(s). 
+
 
 ### To qualify as passive node of failover clustered Instance (FCI)
 
@@ -234,14 +240,13 @@ If there are multiple SQL Server instances on the OSE, all instances and replica
 The current passive instance detection logic has the following limitations:
 
 - The checks are hourly. A failover within the hour may or may not bill both replicas.
-- Passive instances for other HADR technologies like log shipping or mirroring are not automatically detected at this time.
-- The detection logic does not support free disaster recovery testing or monitoring connections like database consistency checks, backups or monitoring resource usage data.
+- Passive instances for other disaster recovery technologies like log shipping or mirroring are not automatically detected at this time.
+- The detection logic does not support free disaster recovery testing.
+- Monitoring resource usage data on the replica requires an app attribute in the connection string: `App = Monitoring or Backup`.
 
 If you are unable to work within these limitations, you can use volume licensing instead of `PAYG`. For details, review [Configure SQL Server enabled by Azure Arc](manage-configuration.md).
 
 [!INCLUDE [billing-after-failover](includes/billing-after-failover.md)]
-
-For additional information, review [SQL Server Extended Security Updates enabled by Azure Arc](extended-security-updates.md#manage-hadr).
 
 ## <a id="server-cal"></a> Manage SQL Server instances that use a Server+CAL license
 
@@ -328,6 +333,7 @@ The following table shows the meter SKUs that are used for metering and billing 
 
 - [Product terms for SQL Server enabled by Azure Arc](https://www.microsoft.com/licensing/terms/productoffering/MicrosoftAzure/eaeas#ServiceSpecificTerms)
 - [SQL Server Licensing Resources and Documents](https://www.microsoft.com/licensing/docs/view/SQL-Server)
+
 - [SQL Server 2022 pricing and licensing](https://www.microsoft.com/sql-server/sql-server-2022-pricing)
 - [Configure SQL Server enabled by Azure Arc](manage-configuration.md)
-- [Frequently asked questions](faq.yml#billing)
+- [Frequently asked questions](faq.yml#recurring-pay-as-you-go-billing)

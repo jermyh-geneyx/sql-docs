@@ -738,5 +738,5 @@ resources
 - [SQL Server 2022 pricing](https://www.microsoft.com/sql-server/sql-server-2022-pricing)
 - [SQL Server installation guide](../../database-engine/install-windows/install-sql-server.md)
 - [What are Extended Security Updates for SQL Server?](../end-of-support/sql-server-extended-security-updates.md)
-- [Frequently asked questions](faq.yml#billing)
+- [Frequently asked questions](faq.yml#recurring-pay-as-you-go-billing)
 - [Configure automatic updates for SQL Server enabled by Azure Arc](update.md)

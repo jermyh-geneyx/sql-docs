@@ -178,9 +178,9 @@ For information, see:
 
 [!INCLUDE [manage-passive-instance](includes/manage-passive-instance.md)]
 
-[!INCLUDE [billing-after-failover](includes/billing-after-failover.md)]
+The ESU subscription enabled on a connected server with passive SQL Server instances doesn't incur the ESU charges. This way you can guarantee that future ESUs will be applied to that server. To qualify, all SQL Server instances on this server must meet the passivity criteria defined in [Manage passive license for high availability and disaster recovery](manage-license-billing.md#free-dr).
 
-For additional information on passive replica detection logic, review [Manage passive license for high availability and disaster recovery](manage-license-billing.md#manage-passive-license-for-high-availability-and-disaster-recovery).
+[!INCLUDE [billing-after-failover](includes/billing-after-failover.md)]
 
 ## <a id="server-cal"></a> Manage SQL Server instances that use a Server+CAL license
 
@@ -236,8 +236,7 @@ The usage of the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] ESU 
 
 - If multiple instances of SQL Server or SQL Server associated services are installed with the same version that is eligible for ESU, only one ESU subscription usage is reported per OSE. The reported usage is associated with the instance that has the highest edition.
 
-- If two or more instances of SQL Server or SQL Server associated services are installed with the different versions that are eligible for ESU, each eligible version will report ESU usage separately based one the instance of that version with the highest edition. This reflects the differences in ESU prices and bill-back periods for different versions.
-
+- If two or more instances of SQL Server or SQL Server associated services are installed with different versions that are eligible for ESU, each eligible version will report ESU usage separately based the instance of that version with the highest edition. This reflects the differences in ESU prices and bill-back periods for different versions.
 
 The following table shows the ESU subscription meters (also called *SKUs*) that are used for metering and billing for a [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] ESU subscription on a single OSE:
 
@@ -329,7 +328,7 @@ If the Arc enabled machine goes offline and reconnects to Azure in a different s
 - [SQL Server licensing guide (download link)](https://download.microsoft.com/download/e/2/9/e29a9331-965d-4faa-bd2e-7c1db7cd8348/SQL_Server_2019_Licensing_guide.pdf)
 - [SQL Server 2022 pricing and licensing](https://www.microsoft.com/sql-server/sql-server-2022-pricing)
 - [Configure SQL Server enabled by Azure Arc](manage-configuration.md)
-- [Frequently asked questions about billing](faq.yml#billing)
+- [Frequently asked questions about billing](faq.yml#recurring-pay-as-you-go-billing)
 - [Extended Security Updates: Frequently asked questions](../end-of-support/extended-security-updates-frequently-asked-questions.md)
 - [Prerequisites - SQL Server enabled by Azure Arc](prerequisites.md)
 - [Manage the unlimited virtualization benefit for a SQL Server ESU subscription](manage-configuration.md#manage-pcore-esu-license)
