@@ -5390,8 +5390,25 @@ items:
         - name: Snapshot replication
           href: relational-databases/replication/snapshot-replication.md
         - name: Merge replication
-          href: relational-databases/replication/merge/merge-replication.md
           items:
+          - name: Overview
+            href: relational-databases/replication/merge/merge-replication.md
+          - name: How merge replication works
+            items:
+            - name: Initialize publications and subscriptions
+              href: relational-databases/replication/merge/merge-replication-initialize-publication-subscription.md
+            - name: Track and enumerate changes
+              href: relational-databases/replication/merge/merge-replication-track-enumerate-changes.md
+            - name: Evaluate partitions in filtered publications
+              href: relational-databases/replication/merge/merge-replication-evaluate-partition-filtered-publication.md
+            - name: Manage subscription expiration and metadata cleanup
+              href: relational-databases/replication/merge/merge-replication-manage-subscription-expiration-metadata-cleanup.md
+            - name: Detect and resolve conflicts
+              items:
+              - name: Overview
+                href: relational-databases/replication/merge/merge-replication-detect-resolve-conflicts.md
+              - name: Conflict resolution by subscription type and assigned priorities
+                href: relational-databases/replication/merge/merge-replication-resolve-subscription-priorities.md
           - name: Article options
             href: relational-databases/replication/merge/article-options-for-merge-replication.md
           - name: Best practices for time-based row filters
