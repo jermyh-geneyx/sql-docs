@@ -4,7 +4,7 @@ titleSuffix: SQL Server Language Extensions
 description: Learn how to install SQL Server Java Language Extension on Red Hat, Ubuntu, and SUSE Linux.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 03/28/2025
+ms.date: 07/11/2025
 ms.service: sql
 ms.subservice: language-extensions
 ms.topic: how-to
@@ -29,7 +29,7 @@ Although you can [install the Database Engine and Language Extensions concurrent
   - [SUSE Linux Enterprise Server](quickstart-install-connect-suse.md) (SLES)
   - [Ubuntu](quickstart-install-connect-ubuntu.md)
 
-- You should have a tool for running Transact-SQL (T-SQL) commands. A query editor is necessary for post-install configuration and validation. We recommend [Azure Data Studio](../azure-data-studio/download-azure-data-studio.md?view=sql-server-2017&preserve-view=true#linux-installation), a free download that runs on Linux.
+- You should have a tool for running Transact-SQL (T-SQL) commands. A query editor is necessary for post-install configuration and validation. We recommend the [MSSQL extension for Visual Studio Code](../tools/visual-studio-code-extensions/mssql/mssql-extension-visual-studio-code.md), which is a free download that runs on Linux.
 
 ::: monikerRange="=sql-server-ver15||=sql-server-linux-ver15"
 
@@ -159,7 +159,7 @@ sudo zypper install mssql-server-extensibility-java
    systemctl restart mssql-server.service
    ```
 
-1. Enable external script execution using Azure Data Studio, or another tool like SQL Server Management Studio (Windows only), that runs T-SQL.
+1. Enable external script execution. [!INCLUDE [connect-instance-client](../includes/connect-instance-client.md)]
 
    ```sql
    EXECUTE sp_configure 'external scripts enabled', 1;
@@ -196,7 +196,7 @@ For more information, see [CREATE EXTERNAL LANGUAGE](../t-sql/statements/create-
 
 Java feature integration doesn't include libraries, but you can run `grep -r JRE_HOME /etc` to confirm creation of the `JAVA_HOME` environment variable.
 
-To validate installation, run a T-SQL script that executes a system stored procedure invoking Java. You need a query tool for this task. Azure Data Studio is a good choice. Other commonly used tools such as SQL Server Management Studio is Windows-only. If you have a Windows computer with these tools, use it to connect to your Linux installation of the [!INCLUDE [ssde-md](../includes/ssde-md.md)].
+To validate installation, run a T-SQL script that executes a system stored procedure invoking Java. You need a query tool for this task. [!INCLUDE [connect-instance-client](../includes/connect-instance-client.md)]
 
 ::: monikerRange="=sql-server-ver15||=sql-server-linux-ver15"
 

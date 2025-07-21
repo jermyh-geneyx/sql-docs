@@ -27,7 +27,9 @@ Complete the [Prerequisites - SQL Server enabled by Azure Arc](prerequisites.md)
 
 Optionally, specify the license type for each instance of SQL Server.
 
-To specify the desired license type, provide the license type value tag. The automatic connecting workflow requires that tag. For more information, visit [Tag resources, resource groups, and subscriptions for a logical organization](/azure/azure-resource-manager/management/tag-resources).
+To specify the desired license type, provide the license type value tag. The automatic connecting workflow requires that tag. For more information, visit [Tag resources, resource groups, and subscriptions for a logical organization](/azure/azure-resource-manager/management/tag-resources). 
+
+You can set tag values at the subscription, resource group, or resource level. Tag values set at subscription level supersede values set at the resource group and resource level. Tag values set at the resource group level supersede values set at the resource level.
 
 Add one of the following tags and values to your subscription, resource groups, or Arc Server resources.
 
@@ -41,6 +43,8 @@ Microsoft uses this value when the automatic connecting workflow deploys the SQL
 
 > [!IMPORTANT]  
 > To maximize the value of Azure Arc for SQL Server customers, Microsoft uses an automated process of determining the license type value if you haven't set the default value using the `ArcSQLServerExtensionDeployment` tag. If your SQL Server is covered by Software Assurance (SA) or Subscription and Support, and the number of licenses you have purchased is greater than the number of licenses you already committed to Azure to use Azure Hybrid Benefit, this process sets the license type value to **Paid** for the onboarded SQL Server instances on a first-come-first-serve basis. As a result, you automatically have access to valuable management features provided to SA customers.
+
+### License type setting precedence
 
 ## Automatically install the Azure Extension for SQL Server on new servers connected to Arc
 

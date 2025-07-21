@@ -4,7 +4,7 @@ description: Learn about instant file initialization and how to enable it on you
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest
-ms.date: 02/19/2025
+ms.date: 07/16/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
@@ -20,7 +20,7 @@ helpviewer_keywords:
 
 [!INCLUDE [SQL Server](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
 
-In this article, you learn about instant file initialization (IFI) and how to enable it to speed up growth for your [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] database files.
+In this article, you learn about instant file initialization (IFI) and how to enable it to speed up the growth for your [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] database files.
 
 By default, data and log files are initialized to overwrite any existing data left on the disk from previously deleted files. Data and log files are first initialized by zeroing the files (filling with zeros) when you perform the following operations:
 
@@ -29,7 +29,7 @@ By default, data and log files are initialized to overwrite any existing data le
 - Increase the size of an existing file (including autogrow operations).
 - Restore a database or filegroup.
 
-In [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], instant file initialization allows for faster execution of the previously mentioned file operations, since it reclaims used disk space without filling that space with zeros. Instead, disk content is overwritten as new data is written to the files.
+In [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], instant file initialization allows for faster execution of the previously mentioned file operations, since it reclaims used disk space without filling that space with zeros. Instead, old disk content is overwritten as new data is written to the files.
 
 In [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] and [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)], instant file initialization is available for transaction log files only.
 
@@ -47,40 +47,42 @@ Unlike instant file initialization for data files, which is prevented if transpa
 
 ## Enable instant file initialization
 
-Instant file initialization of data files is only available if the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] service startup account is granted `SE_MANAGE_VOLUME_NAME`. Members of the Windows Administrator group have this right and can grant it to other users by adding them to the **Perform Volume Maintenance Tasks** security policy. The `SE_MANAGE_VOLUME_NAME` right isn't required for instant file initialization of growth events up to 64 MB in the transaction log, which was introduced with the release of [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)].
+Instant file initialization of data files is only available if either the service account or the service SID of the [!INCLUDE [ssDE](../../includes/ssde-md.md)] service is granted the `SE_MANAGE_VOLUME_NAME` privilege. Members of the Windows Administrators group have this right and can grant it to other users by adding them to the **Perform volume maintenance tasks** security policy. The `SE_MANAGE_VOLUME_NAME` privilege isn't required for instant file initialization of growth events up to 64 MB in the transaction log, which was introduced with the release of [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)].
+
+We recommend that you grant the `SE_MANAGE_VOLUME_NAME` privilege to the [service SID](../../database-engine/configure-windows/configure-windows-service-accounts-and-permissions.md#Serv_SID) of the [!INCLUDE [ssDE](../../includes/ssde-md.md)] service. This ensures that the grant remains even if you change the service account of the [!INCLUDE [ssDE](../../includes/ssde-md.md)] service. For more information, see [Using Service SIDs to grant permissions to services in SQL Server](../security/using-service-sids-to-grant-permissions-to-services-in-sql-server.md).
 
 > [!IMPORTANT]  
 > Some feature usage, such as [Transparent data encryption (TDE)](../security/encryption/transparent-data-encryption.md), can prevent instant file initialization (IFI). In [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions, and on [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] and [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)], IFI is allowed on the transaction log. For more information, see [Instant file initialization and the transaction log](#instant-file-initialization-and-the-transaction-log).
 
-In [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later versions, this permission can be granted to the service account at install time, during setup.
+In [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later versions, this permission can be granted to the [!INCLUDE [ssDE](../../includes/ssde-md.md)] service security identifier (SID) at install time, during setup.
 
 If you use the [command prompt install](../../database-engine/install-windows/install-sql-server-from-the-command-prompt.md), add the `/SQLSVCINSTANTFILEINIT` argument, or check the box *Grant Perform Volume Maintenance Task privilege to SQL Server Database Engine Service* in the [installation wizard](../../database-engine/install-windows/install-sql-server-from-the-installation-wizard-setup.md).
 
-To grant an account the `Perform volume maintenance tasks` permission:
+To grant an account or a service SID the `Perform volume maintenance tasks` security policy:
 
-1. On the computer where the data file will be created, open the **Local Security Policy** application (`secpol.msc`).
+1. On the computer where data files will be created, open the **Local Security Policy** application (`secpol.msc`).
 
 1. In the left pane, expand **Local Policies**, and then select **User Rights Assignment**.
 
 1. In the right pane, double-click **Perform volume maintenance tasks**.
 
-1. Select **Add User or Group** and add the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] service account.
+1. Select **Add User or Group** and add the [!INCLUDE [ssDE](../../includes/ssde-md.md)] service account or its service SID.
 
 1. Select **Apply**, and then close all **Local Security Policy** dialog boxes.
 
-1. Restart the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] service.
+1. Restart the [!INCLUDE [ssDE](../../includes/ssde-md.md)] service.
 
-1. Check the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] error log at startup.
+1. Check the [!INCLUDE [ssDE](../../includes/ssde-md.md)] error log at startup.
 
    **Applies to:** [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)] SP4, [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)] SP2, and [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later).
 
-   1. If the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] service startup account is granted `SE_MANAGE_VOLUME_NAME`, an informational message that resembles the following example is logged:
+   1. If the [!INCLUDE [ssDE](../../includes/ssde-md.md)] service account or its service SID is granted the `SE_MANAGE_VOLUME_NAME` privilege, an informational message that resembles the following example is logged:
 
       ```output
       Database Instant File Initialization: enabled. For security and performance considerations see the topic 'Database Instant File Initialization' in SQL Server Books Online. This is an informational message only. No user action is required.
       ```
 
-   1. If the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] service startup account was **not** granted `SE_MANAGE_VOLUME_NAME`, an informational message that resembles the following example is logged:
+   1. If the [!INCLUDE [ssDE](../../includes/ssde-md.md)] service account or its service SID was **not** granted the `SE_MANAGE_VOLUME_NAME` privilege, an informational message that resembles the following example is logged:
 
       ```output
       Database Instant File Initialization: disabled. For security and performance considerations see the topic 'Database Instant File Initialization' in SQL Server Books Online. This is an informational message only. No user action is required.
@@ -95,7 +97,7 @@ We recommend enabling instant file initialization as the benefits can outweigh t
 
 When you use instant file initialization, the deleted disk content is overwritten only as new data is written to the files. For this reason, the deleted content is potentially accessible by an unauthorized principal, until some other data writes on that specific area of the data file.
 
-While the database file is attached to the instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], this information disclosure risk is reduced by the discretionary access control list (DACL) on the file. This DACL allows file access only to the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] service account and the local administrator. However, when the file is detached, it's potentially accessible by a user or service that doesn't have `SE_MANAGE_VOLUME_NAME`.
+While the database file is attached to the instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], this information disclosure risk is reduced by the discretionary access control list (DACL) on the file. The DACL allows file access only to the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] service account, its service SID, and the local administrator. However, when the file is detached, it's potentially accessible by a user or service that doesn't have the `SE_MANAGE_VOLUME_NAME` privilege.
 
 Similar considerations exist when:
 
@@ -109,18 +111,18 @@ If the potential for disclosing deleted content is a concern, you should take on
 
 - Always make sure that any detached data files and backup files have restrictive DACLs.
 
-- Disable instant file initialization for the instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. To do so, revoke `SE_MANAGE_VOLUME_NAME` from the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] service startup account.
+- Disable instant file initialization for the instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. To do so, revoke `SE_MANAGE_VOLUME_NAME` from the [!INCLUDE [ssDE](../../includes/ssde-md.md)] service account and its service SID.
 
   > [!NOTE]  
-  > Disabling will increase allocation times for data files, and only affects files that are created or increased in size after the user right is revoked.
+  > Disabling IFI increases growth time for data files, and only affects files that are created or increased in size after the privilege is revoked.
 
-### SE_MANAGE_VOLUME_NAME user right
+### SE_MANAGE_VOLUME_NAME privilege
 
-The `SE_MANAGE_VOLUME_NAME` user privilege can be assigned in **Windows Administrative Tools**, **Local Security Policy** applet. Under **Local Policies** select **User Right Assignment** and modify the **Perform volume maintenance tasks** property.
+The `SE_MANAGE_VOLUME_NAME` privilege can be assigned in **Windows Administrative Tools**, **Local Security Policy** applet. Under **Local Policies** select **User Right Assignment** and modify the **Perform volume maintenance tasks** property.
 
 ## Performance considerations
 
-The Database File initialization process writes zeros to the new regions of the file under initialization. The duration of this process depends on size of file portion that is initialized and on the response time and capacity of the storage system. If the initialization takes a long time, you might see the following messages recorded in the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] error log and the Application Log.
+The database file initialization process writes zeros to the new regions of the file under initialization. The duration of this process depends on size of file portion that is initialized and on the response time and capacity of the storage system. If the initialization takes a long time, you might see the following messages recorded in the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] error log and the Application Log.
 
 ```output
 Msg 5144

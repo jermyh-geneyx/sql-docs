@@ -4,7 +4,7 @@ description: Understand Active Directory authentication with SQL Server on Linux
 author: amitkh-msft
 ms.author: amitkh
 ms.reviewer: randolphwest
-ms.date: 07/03/2025
+ms.date: 07/11/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: concept-article
@@ -130,7 +130,10 @@ For [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] containers, you can 
 
 Because we are connecting to a container, the server name in the client connection might be different than just the hostname. It could be the hostname, the container name, or another alias. In addition, there's a good chance that the exposed port for [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] won't be the default `1433`.
 
-You must use the SPN that is stored in `mssql.keytab` to connect to the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] container. For example, if the SPN in `mssql.keytab` is `MSSQLSvc/sqlcontainer.domain.com:8000`, you would use `sqlcontainer.domain.com,8000` as your connection string in the client (including **sqlcmd**, SQL Server Management Studio, and Azure Data Studio).
+You must use the SPN that is stored in `mssql.keytab` to connect to the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] container. For example, if the SPN in `mssql.keytab` is `MSSQLSvc/sqlcontainer.domain.com:8000`, you would use `sqlcontainer.domain.com,8000` as your connection string in the client.
+
+> [!NOTE]  
+> [!INCLUDE [connect-instance-client](../includes/connect-instance-client.md)]
 
 :::image type="content" source="media/sql-server-linux-ad-auth-understanding/active-directory-authentication-explained-container.png" alt-text="Diagram showing Active Directory authentication for SQL Server Containers." lightbox="media/sql-server-linux-ad-auth-understanding/active-directory-authentication-explained-container.svg":::
 

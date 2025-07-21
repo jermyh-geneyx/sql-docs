@@ -5,7 +5,7 @@ description: Describes extended events (XEvents) in Azure SQL Database and Azure
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: wiassaf, mathoma, randolphwest
-ms.date: 10/21/2024
+ms.date: 07/09/2025
 ms.service: azure-sql
 ms.subservice: performance
 ms.topic: reference
@@ -36,7 +36,7 @@ The feature set, functionality, and usage scenarios for Extended Events in Azure
 
 There are two examples to help you get started with Extended Events in Azure SQL Database and Azure SQL Managed Instance quickly:
 
-- [Create a session with an event_file target in Azure Storage](xevent-code-event-file.md). This example shows you how to capture event data in a file (blob) in Azure Storage using the `event_file` target. Use this if you need to persist captured event data, or if you want to use event viewer in SQL Server Management Studio (SSMS) to analyze captured data.
+- [Create a session with an event_file target in Azure Storage](xevent-code-event-file.md). This example shows you how to capture event data in a file (blob) in Azure Storage using the `event_file` target, and includes [troubleshooting guidance](xevent-code-event-file.md#troubleshoot-event-sessions-with-an-event_file-target-in-azure-storage) for common errors. Use this if you need to persist captured event data, or if you want to use event viewer in SQL Server Management Studio (SSMS) to analyze captured data.
 - [Create a session with a ring_buffer target in memory](xevent-code-ring-buffer.md). This example shows you how to capture the latest events from an event session in memory using the `ring_buffer` target. Use this as a quick way to look at recent events during ad hoc investigations or troubleshooting, without having to store captured event data.
 
 Extended Events can be used to monitor read-only replicas. For more information, see [Read queries on replicas](read-scale-out.md#monitor-read-only-replicas-with-extended-events).
@@ -49,6 +49,7 @@ Adopt the following best practices to use Extended Events in Azure SQL Database 
   - Use a storage account in the same Azure region as the database or managed instance where you create event sessions.
   - Align the redundancy of the storage account with the redundancy of the database, elastic pool, or managed instance. For [locally redundant](high-availability-sla-local-zone-redundancy.md#locally-redundant-availability) resources, use LRS, GRS, or RA-GRS. For [zone-redundant](high-availability-sla-local-zone-redundancy.md#zone-redundant-availability) resources, use ZRS, GZRS, or RA-GZRS. See [Azure Storage redundancy](/azure/storage/common/storage-redundancy) for details.
   - Don't use any [blob access tier](/azure/storage/blobs/access-tiers-overview) other than `Hot`.
+  - Don't enable the [hierarchical namespace](/azure/storage/blobs/data-lake-storage-namespace) for the storage account.
 - If you want to create a continuously running event session that starts automatically after each [!INCLUDE [ssde-md](../../docs/includes/ssde-md.md)] restart (for example, after a failover or a maintenance event), include the event session option of `STARTUP_STATE = ON` in your `CREATE EVENT SESSION`  or `ALTER EVENT SESSION` statements.
 - Conversely, use `STARTUP_STATE = OFF` for short-term event sessions such as those used in ad hoc troubleshooting.
 - In Azure SQL Database, do not read deadlock events from the built-in `dl` event session. If there is a large number of deadlock events collected, reading them with the [sys.fn_xe_file_target_read_file()](/sql/relational-databases/system-functions/sys-fn-xe-file-target-read-file-transact-sql) function can cause an out-of-memory error in the `master` database. This might impact login processing and result in an application outage. For the recommended ways to monitor deadlocks, see [Collect deadlock graphs in Azure SQL Database with Extended Events](analyze-prevent-deadlocks.md#collect-deadlock-graphs-in-azure-sql-database-with-extended-events).

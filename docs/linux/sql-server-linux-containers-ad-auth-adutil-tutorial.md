@@ -4,7 +4,7 @@ description: Step by step on how to configure Active Directory authentication wi
 author: amitkh-msft
 ms.author: amitkh
 ms.reviewer: randolphwest
-ms.date: 07/03/2025
+ms.date: 07/11/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: tutorial
@@ -244,7 +244,10 @@ sudo docker run -e "ACCEPT_EULA=Y" -e "MSSQL_SA_PASSWORD=<password>" -p 5433:143
 
 ## Create Active Directory-based SQL Server logins using Transact-SQL
 
-Connect to the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] container. Using the following commands, create the login and confirm that it exists. You can run this command from a client machine (Windows or Linux) running SSMS, Azure Data Studio, or any other command-line interface (CLI) tool.
+Connect to the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] container. Using the following commands, create the login and confirm that it exists.
+
+> [!NOTE]  
+> [!INCLUDE [connect-instance-client](../includes/connect-instance-client.md)]
 
 ```sql
 CREATE LOGIN [contoso\amvin]
@@ -256,9 +259,11 @@ FROM sys.server_principals;
 
 ## Connect to SQL Server with Active Directory authentication
 
-To connect using [SQL Server Management Studio](../ssms/download-sql-server-management-studio-ssms.md) (SSMS) or [Azure Data Studio](/azure-data-studio/download-azure-data-studio), sign in to the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] with Windows credentials using the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] name and port number (name could be the container name or the host name). For our example, the server name would be `sql1.contoso.com,5433`.
+[!INCLUDE [connect-instance-client](../includes/connect-instance-client.md)]
 
-You can also use a tool like [sqlcmd](../tools/sqlcmd/sqlcmd-utility.md) to connect to the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] in your container.
+Sign in to the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] with Windows credentials using the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] name and port number (name could be the container name or the host name). For our example, the server name would be `sql1.contoso.com,5433`.
+
+The following command shows how to connect to your container with **sqlcmd**.
 
 ```bash
 sqlcmd -E -S 'sql1.contoso.com,5433'

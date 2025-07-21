@@ -4,7 +4,7 @@ description: Explore how SQL Server can be deployed on Linux containers and lear
 author: amitkh-msft
 ms.author: amitkh
 ms.reviewer: vanto, randolphwest
-ms.date: 05/02/2025
+ms.date: 07/11/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: install-set-up-deploy
@@ -54,12 +54,7 @@ You can connect and query SQL Server in a container from either outside the cont
 
 ### Tools outside the container
 
-You can connect to the SQL Server instance on your container host from any external Linux, Windows, or macOS tool that supports SQL connections. Some common tools include:
-
-- [sqlcmd](sql-server-linux-setup-tools.md)
-- [Azure Data Studio](/azure-data-studio/quickstart-sql-server)
-- [Visual Studio Code](../tools/visual-studio-code/sql-server-develop-use-vscode.md)
-- [SQL Server Management Studio (SSMS) on Windows](sql-server-linux-manage-ssms.md)
+[!INCLUDE [connect-instance-client](../includes/connect-instance-client.md)]
 
 The following example uses **sqlcmd** to connect to SQL Server running in a container. The IP address in the connection string is the IP address of the host machine that is running the container.
 

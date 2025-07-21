@@ -3,7 +3,7 @@ title: Import Data from Excel to SQL Server or Azure SQL Database
 description: This article describes methods to import data from Excel to SQL Server or Azure SQL Database. Some use a single step, others require an intermediate text file.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 05/19/2025
+ms.date: 07/16/2025
 ms.service: sql
 ms.subservice: data-movement
 ms.topic: concept-article
@@ -74,7 +74,7 @@ To start learning how to build SSIS packages, see the tutorial [How to Create an
 > [!IMPORTANT]  
 > In [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], you can't import directly from Excel. You must first [export the data to a text (CSV) file](import-bulk-data-by-using-bulk-insert-or-openrowset-bulk-sql-server.md).
 
-The following examples use the JET provider, because the ACE provider included with Office that connects to Excel data sources is intended for interactive client-side use.
+The following examples use the JET provider. The ACE provider included with Office that connects to Excel data sources is intended for interactive client-side use, which can cause unexpected results when used non-interactively.
 
 ### Distributed queries
 
@@ -100,6 +100,7 @@ The following code sample uses `OPENROWSET` to import the data from the Excel `S
 ```sql
 USE ImportFromExcel;
 GO
+
 SELECT * INTO Data_dq
 FROM OPENROWSET('Microsoft.JET.OLEDB.4.0',
     'Excel 8.0; Database=C:\Temp\Data.xls', [Sheet1$]);
@@ -111,6 +112,7 @@ Here's the same example with `OPENDATASOURCE`.
 ```sql
 USE ImportFromExcel;
 GO
+
 SELECT * INTO Data_dq
 FROM OPENDATASOURCE('Microsoft.JET.OLEDB.4.0',
     'Data Source=C:\Temp\Data.xls;Extended Properties=Excel 8.0')...[Sheet1$];
@@ -136,6 +138,7 @@ You can also configure a persistent connection from [!INCLUDE [ssnoversion-md](.
 ```sql
 USE ImportFromExcel;
 GO
+
 SELECT * INTO Data_ls FROM EXCELLINK...[Data$];
 GO
 ```
@@ -143,14 +146,14 @@ GO
 You can create a linked server from SQL Server Management Studio (SSMS), or by running the system stored procedure `sp_addlinkedserver`, as shown in the following example.
 
 ```sql
-DECLARE @RC INT;
-DECLARE @server NVARCHAR(128);
-DECLARE @srvproduct NVARCHAR(128);
-DECLARE @provider NVARCHAR(128);
-DECLARE @datasrc NVARCHAR(4000);
-DECLARE @location NVARCHAR(4000);
-DECLARE @provstr NVARCHAR(4000);
-DECLARE @catalog NVARCHAR(128);
+DECLARE @RC AS INT;
+DECLARE @server AS NVARCHAR (128);
+DECLARE @srvproduct AS NVARCHAR (128);
+DECLARE @provider AS NVARCHAR (128);
+DECLARE @datasrc AS NVARCHAR (4000);
+DECLARE @location AS NVARCHAR (4000);
+DECLARE @provstr AS NVARCHAR (4000);
+DECLARE @catalog AS NVARCHAR (128);
 
 -- Set parameter values
 SET @server = 'EXCELLINK';
@@ -159,7 +162,9 @@ SET @provider = 'Microsoft.JET.OLEDB.4.0';
 SET @datasrc = 'C:\Temp\Data.xls';
 SET @provstr = 'Excel 8.0';
 
-EXEC @RC = [master].[dbo].[sp_addlinkedserver] @server,
+EXECUTE
+    @RC = [master].[dbo].[sp_addlinkedserver]
+    @server,
     @srvproduct,
     @provider,
     @datasrc,
@@ -207,11 +212,9 @@ As described previously in the [Prerequisites](#prerequisites) section, you have
 ```sql
 USE ImportFromExcel;
 GO
+
 BULK INSERT Data_bi FROM 'C:\Temp\data.csv'
-   WITH (
-      FIELDTERMINATOR = ',',
-      ROWTERMINATOR = '\n'
-);
+    WITH (FIELDTERMINATOR = ',', ROWTERMINATOR = '\n');
 GO
 ```
 

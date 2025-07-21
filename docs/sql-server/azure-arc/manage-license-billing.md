@@ -231,9 +231,9 @@ If there are multiple SQL Server instances on the OSE, all instances and replica
 
 ### Limitations
 
-The current passive instance detection logic has the following limitations.
+The current passive instance detection logic has the following limitations:
 
-- The checks are done every hour. A failover within the hour may or may not bill both replicas.
+- The checks are hourly. A failover within the hour may or may not bill both replicas.
 - Passive instances for other HADR technologies like log shipping or mirroring are not automatically detected at this time.
 - The detection logic does not support free disaster recovery testing or monitoring connections like database consistency checks, backups or monitoring resource usage data.
 
@@ -257,7 +257,7 @@ If you converted your Enterprise Server+CAL license to a core-based license, you
 
 For details, see [Feature availability by service type](overview.md#feature-availability-by-service-type).
 
-The SQL Server associated services are represented and managed for licensing purposes as SQL Server instances. Their usage is reported using the same metering rules as described in [Metering software usage](manage-license-billing.md#usage-metering).
+The SQL Server associated services are represented and managed for licensing purposes as SQL Server instances. Their usage is reported using the metering rules described in [Metering software usage](manage-license-billing.md#usage-metering).
 
 > [!IMPORTANT]
 >
@@ -267,19 +267,22 @@ The SQL Server associated services are represented and managed for licensing pur
 >
 > If a p-core license is activated as a pay-as-you-go subscription in the corresponding scope, and the machine is configured to use it, the SQL Server associated service is not individually billed for the pay-as-you-go subscription when it is a standalone instance (without SQL Server engine). For details, see [Use a physical core license](manage-configuration.md#use-physical-core-license).
 
-## <a id="usage-metering"></a> Metering software usage
+
+## <a id="usage-metering"></a> Metering and reporting software usage
 
 The usage of the SQL Server software is reported once an hour. The specific meter is automatically selected based on the SQL Server edition and the number v-cores or p-cores visible to the OSE. The following rules apply:
 
-- If you install one or several SQL Server instances on a virtual machine and don't specify the use of a physical core license, SQL Server software usage is metered based on the total number of virtual cores available to the OSE. The minimum is four cores per OSE.
+- If you install one or several instances of SQL Server or SQL Server associated services on a virtual machine and don't specify the use of a physical core license, SQL Server software usage is metered based on the total number of virtual cores available to the OSE. The minimum is four cores per OSE.
 
-- If you install one or several SQL Server instances on a physical server without using virtual machines, SQL Server software usage is metered based on the total number physical cores available to the OSE. The minimum is four cores per OSE.
+- If you install one or several instances of SQL Server or SQL Server associated services on a physical server without using virtual machines, SQL Server software usage is metered based on the total number physical cores available to the OSE. The minimum is four cores per OSE.
 
-- SQL Server software usage is reported per OSE whether one or multiple SQL Server instances are installed on the same OSE.
+- SQL Server software usage is reported per OSE whether one or multiple instances of SQL Server or SQL Server associated services are installed on the same OSE.
 
-- If two or more instances of the same edition are installed, the first instance in alphabetical order reports usage.
+- If two or more instances of SQL Server or SQL Server associated services with the same edition are installed, the first instance in alphabetical order reports usage.
 
-- The combination of the selected `LicenseType` value and the highest SQL Server edition installed on the OSE defines which meter is sent every hour.
+- If two or more instances of SQL Server or SQL Server associated services are installed on the same OSE the instance with the highest edition will be billed.
+
+- The combination of the selected `LicenseType` value and the highest SQL Server edition installed on the OSE defines which meter is sent.
 
 For more information, see [SQL Server Licensing Resources and Documents](https://www.microsoft.com/licensing/docs/view/SQL-Server).
 

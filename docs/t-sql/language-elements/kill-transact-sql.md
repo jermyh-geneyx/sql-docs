@@ -137,7 +137,7 @@ The same status report can be obtained by repeating the same `KILL` statement wi
 
 **[!INCLUDE [ssSDS](../../includes/sssds-md.md)]:** Requires the `KILL DATABASE CONNECTION` permission. The server-level principal login has the `KILL DATABASE CONNECTION` permission.
 
-**[!INCLUDE [fabric](../../includes/fabric.md)] Data Warehouse:** Requires Write item permission.
+**[!INCLUDE [fabric](../../includes/fabric.md)] Data Warehouse:** Requires the Monitor item permission, or membership in the Workspace Admins role.
 
 **SQL database in [!INCLUDE [fabric](../../includes/fabric.md)]:** Requires the `KILL DATABASE CONNECTION` permission in the SQL database engine, or the Write item permission in the Fabric workspace.
 

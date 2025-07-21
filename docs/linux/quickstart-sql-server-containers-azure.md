@@ -3,7 +3,7 @@ title: "Quickstart: Deploy a SQL Server Container Cluster on Azure Kubernetes Se
 description: This tutorial shows how to deploy a SQL Server high availability solution with Azure Kubernetes Service or Azure Red Hat OpenShift.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 07/03/2025
+ms.date: 07/11/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: quickstart
@@ -573,9 +573,9 @@ You can connect with an application from outside the Azure virtual network, usin
 
 You can use the following applications to connect to the SQL Server instance.
 
-- [SQL Server Managed Studio (SSMS)](./sql-server-linux-manage-ssms.md)
+- [MSSQL extension for Visual Studio Code](../tools/visual-studio-code-extensions/mssql/mssql-extension-visual-studio-code.md)
+- [SQL Server Management Studio (SSMS)](sql-server-linux-manage-ssms.md)
 - [SQL Server Data Tools (SSDT)](./sql-server-linux-develop-use-ssdt.md)
-- [Azure Data Studio](/azure-data-studio/quickstart-sql-server)
 
 ### Connect with sqlcmd
 
