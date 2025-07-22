@@ -181,6 +181,7 @@ For details, review [How to add, modify, or delete registry subkeys and values b
 ---
 
 ## Grant application permissions to the identity
+
 > [!IMPORTANT]
 > Only a [Privileged Role Administrator](/entra/identity/role-based-access-control/permissions-reference#privileged-role-administrator) or higher role can grant these permissions.
 
@@ -190,8 +191,6 @@ The system-assigned managed identity, which uses the Arc-enabled machine name, m
 - [Application.Read.ALL](/graph/permissions-reference#application-resource-permissions): Allows access to Microsoft Entra service principal (application) information.
 
 You can use PowerShell to grant required permissions to the managed identity. Alternatively, you can [create a role-assignable group](/entra/identity/role-based-access-control/groups-create-eligible). After the group is created, assign the **Directory readers** role or `User.Read.All`, `GroupMember.Read.All`, and `Application.Read.All` to the group, and [add all system-assigned managed identities for your Arc-enabled machines to the group](https://learn.microsoft.com/en-us/azure/azure-sql/database/authentication-aad-directory-readers-role-tutorial?view=azuresql). We do not recommend using Directory reader in the production. 
-
-Note
 
 The following PowerShell script grants the required permissions to the managed identity. Make sure this script is run on PowerShell 7.5 or a later version, and has the `Microsoft.Graph` module 2.28 or later installed.
 
