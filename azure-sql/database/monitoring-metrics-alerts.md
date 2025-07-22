@@ -70,6 +70,7 @@ The following table describes commonly used metrics in Azure SQL Database.
 | **Failed Connections : User Errors** | `connection_failed_user_error` | This metric shows the number of connection attempts to a database that failed because of user-correctable errors, such as an incorrect password or connection being blocked by firewall. This metric can be split by two dimensions, `Error` and `ValidatedDriverNameAndVersion`, to see the number of failed connection attempts due to a specific error, or from a specific client driver. |
 | **Deadlocks** | `deadlock` | This metric shows the number of [deadlocks](analyze-prevent-deadlocks.md) in a database.|
 | **Availability** | `availability` | Availability is determined based on the database being operational for connections. For each one-minute data point, the possible values are either `100%` or `0%`. For more information, see [Availability metric](#availability-metric). |
+| **Replication lag** | `replication_lag_seconds` |Replication lag or RPO is the number of seconds that the secondary database is behind the primary database.  This value is available on the primary database only. For more information about RTO and RPO, see [Business continuity in Azure SQL Database](business-continuity-high-availability-disaster-recover-hadr-overview.md#rto-and-rpo) |
 
 #### Availability metric
 
