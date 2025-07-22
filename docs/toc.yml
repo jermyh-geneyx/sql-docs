@@ -1912,7 +1912,7 @@ items:
       - name: Cleanup and troubleshooting
         href: relational-databases/track-changes/cleanup-and-troubleshoot-change-tracking-sql-server.md
     - name: Change event streaming
-      items: 
+      items:
       - name: Overview
         href: relational-databases/track-changes/change-event-streaming/overview.md
       - name: Configure
@@ -2218,7 +2218,7 @@ items:
       - name: Use the value() & nodes() Methods with OPENXML
         href: relational-databases/xml/use-the-value-and-nodes-methods-with-openxml.md
   - name: Vectors and Embeddings
-    href: relational-databases/vectors/vectors-sql-server.md    
+    href: relational-databases/vectors/vectors-sql-server.md
 - name: Development
   items:
   - name: Code a client program >
@@ -4549,7 +4549,7 @@ items:
       - name: allow updates
         href: database-engine/configure-windows/allow-updates-server-configuration-option.md
       - name: availability group commit time
-        href: database-engine/configure-windows/availability-group-commit-time-server-configuration-options.md     
+        href: database-engine/configure-windows/availability-group-commit-time-server-configuration-options.md
       - name: backup checksum default
         href: database-engine/configure-windows/backup-checksum-default.md
       - name: backup compression algorithm
@@ -4621,7 +4621,7 @@ items:
       - name: Configure the max worker threads
         href: database-engine/configure-windows/configure-the-max-worker-threads-server-configuration-option.md
       - name: Configure ucs flow control
-        href: database-engine/configure-windows/ucs-flow-control-sp-configure.md   
+        href: database-engine/configure-windows/ucs-flow-control-sp-configure.md
       - name: Configure the media retention
         href: database-engine/configure-windows/configure-the-media-retention-server-configuration-option.md
       - name: Configure the min memory per query
@@ -12015,7 +12015,7 @@ items:
       - name: sys.xml_schema_wildcard_namespaces
         href: relational-databases/system-catalog-views/sys-xml-schema-wildcard-namespaces-transact-sql.md
       - name: sys.xml_schema_wildcards
-        href: relational-databases/system-catalog-views/sys-xml-schema-wildcards-transact-sql.md    
+        href: relational-databases/system-catalog-views/sys-xml-schema-wildcards-transact-sql.md
   - name: System compatibility views
     href: relational-databases/system-compatibility-views/system-compatibility-views-transact-sql.md
     items:
@@ -12155,7 +12155,7 @@ items:
       - name: sys.sp_add_object_to_event_stream_group
         href: relational-databases/system-stored-procedures/sys-sp-add-object-to-event-stream-group-transact-sql.md
       - name: sys.sp_remove_object_from_event_stream_group
-        href: relational-databases/system-stored-procedures/sys-sp-remove-object-from-event-stream-group-transact-sql.md                      
+        href: relational-databases/system-stored-procedures/sys-sp-remove-object-from-event-stream-group-transact-sql.md
     - name: Common Language Runtime
       href: relational-databases/system-dynamic-management-views/common-language-runtime-related-dynamic-management-views-transact-sql.md
       items:
@@ -14407,7 +14407,7 @@ items:
       - name: sp_help_change_feed_table_groups
         href: relational-databases/system-stored-procedures/sp-help-change-feed-table-groups.md
       - name: Internal only mirroring stored procedures
-        items: 
+        items:
         - name: sp_change_feed_create_table_group
           href: relational-databases/system-stored-procedures/sp-change-feed-create-table-group.md
         - name: sp_change_feed_disable_table
@@ -14434,7 +14434,6 @@ items:
           href: relational-databases/system-stored-procedures/sp-has-change-feed-permissions.md
         - name: sp_MSchange_feed_ddl_event
           href: relational-databases/system-stored-procedures/sp-mschange-feed-ddl-event.md
-          
     - name: SQL Server Agent
       href: relational-databases/system-stored-procedures/sql-server-agent-stored-procedures-transact-sql.md
       items:
