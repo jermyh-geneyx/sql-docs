@@ -52,6 +52,7 @@ Currently, in the US Government Virginia region, SQL Server registration provide
 The following SQL Server features aren't currently available in any US Government region:
 
 - Failover cluster instance (FCI)
+- Availability group (AG)
 - SQL Server dependent services like [!INCLUDE [ssis-md](../../includes/ssis-md.md)], [!INCLUDE [ssas-md](../../includes/ssas-md.md)], [!INCLUDE [ssrs](../../includes/ssrs.md)], or Power BI Report Server as well.
 
 ## Related content
