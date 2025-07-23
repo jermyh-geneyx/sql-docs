@@ -205,11 +205,7 @@ The following link includes example code invoking the pretrained models.
 
 ## Research and resources
 
-<<<<<<< HEAD
-Currently the models that are available are deep neural network (DNN) models for sentiment analysis and image classification. All pretrained models were trained by using Microsoft's [Computation Network Toolkit (CNTK)](/previous-versions/cognitive-toolkit/).
-=======
 Currently the models that are available are deep neural network (DNN) models for sentiment analysis and image classification. All pretrained models were trained by using Microsoft's [Computation Network Toolkit (CNTK)](https://github.com/microsoft/CNTK).
->>>>>>> 32fa6875c59d4c3ca0cf50275c6956c46f769d30
 
 The configuration of each network was based on the following reference implementations:
 
