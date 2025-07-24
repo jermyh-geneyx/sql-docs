@@ -18,16 +18,14 @@ helpviewer_keywords:
   - "vector, search"
 dev_langs:
   - "TSQL"
-monikerRange: "=sql-server-ver17 || =sql-server-linux-ver17  || =azuresqldb-mi-current "
+monikerRange: "=sql-server-ver17 || =sql-server-linux-ver17   "
 ---
 
 # VECTOR_SEARCH (Transact-SQL) (Preview)
 
-[!INCLUDE [sqlserver2025-asmi](../../includes/applies-to-version/sqlserver2025-asmi.md)]
+[!INCLUDE [sqlserver2025](../../includes/applies-to-version/sqlserver2025.md)]
 
 Use `VECTOR_SEARCH` to search for vectors similar to a given query vectors using an approximate nearest neighbors vector search algorithm. To learn more about how vector indexing and vector search works, and the differences between exact and approximate search, refer to [Overview of vector search and vector indexes in the SQL Database Engine](../../relational-databases/vectors/vectors-sql-server.md).
-
-`VECTOR_SEARCH` is available in Azure SQL Managed Instance configured with the [Always-up-to-date](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy) update policy.
 
 ## Preview feature
 
