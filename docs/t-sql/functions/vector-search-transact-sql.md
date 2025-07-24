@@ -4,10 +4,12 @@ description: "VECTOR_SEARCH search for vectors similar to a given query vectors 
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: damauri
-ms.date: 05/01/2025
+ms.date: 07/24/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - build-2025
 f1_keywords:
   - "VECTOR_SEARCH"
   - "VECTOR_SEARCH_TSQL"
@@ -16,20 +18,16 @@ helpviewer_keywords:
   - "vector, search"
 dev_langs:
   - "TSQL"
-monikerRange: "=sql-server-ver17 || =sql-server-linux-ver17"
-ms.custom:
-  - build-2025
+monikerRange: "=sql-server-ver17 || =sql-server-linux-ver17  || =azuresqldb-mi-current "
 ---
 
 # VECTOR_SEARCH (Transact-SQL) (Preview)
 
-[!INCLUDE [sqlserver2025-asdb-asmi-fabricsqldb](../../includes/applies-to-version/sqlserver2025-asdb-asmi-fabricsqldb.md)]
+[!INCLUDE [sqlserver2025-asmi](../../includes/applies-to-version/sqlserver2025-asmi.md)]
 
-Search for vectors similar to a given query vectors using an approximate nearest neighbors vector search algorithm. To learn more about how vector indexing and vector search works, and the differences between exact and approximate search, refer to [Vectors in the SQL Database Engine](../../relational-databases/vectors/vectors-sql-server.md).
+Use `VECTOR_SEARCH` to search for vectors similar to a given query vectors using an approximate nearest neighbors vector search algorithm. To learn more about how vector indexing and vector search works, and the differences between exact and approximate search, refer to [Overview of vector search and vector indexes in the SQL Database Engine](../../relational-databases/vectors/vectors-sql-server.md).
 
-> [!NOTE]
-> `VECTOR_SEARCH` is available in Azure SQL Managed Instance configured with the [Always-up-to-date](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy) update policy.
-
+`VECTOR_SEARCH` is available in Azure SQL Managed Instance configured with the [Always-up-to-date](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy) update policy.
 
 ## Preview feature
 
@@ -181,7 +179,7 @@ ORDER BY
 
 ### Example 3
 
-A basic end-to-end example using `CREATE VECTOR INDEX` and the related `VECTOR_SEARCH` function. The embeddings are mocked. In a real world scenario, embeddings are generated using an embedding model and [AI_GENERATE_EMBEDDINGS](../functions/ai-generate-embeddings-transact-sql.md), or an external library such as [OpenAI SDK](https://github.com/openai/openai-dotnet?tab=readme-ov-file#how-to-generate-text-embeddings).
+A basic end-to-end example using `CREATE VECTOR INDEX` and the related `VECTOR_SEARCH` function. The embeddings are mocked. In a real world scenario, embeddings are generated using an embedding model and [AI_GENERATE_EMBEDDINGS](ai-generate-embeddings-transact-sql.md), or an external library such as [OpenAI SDK](https://github.com/openai/openai-dotnet?tab=readme-ov-file#how-to-generate-text-embeddings).
 
 The following code block demonstrates the `VECTOR_SEARCH` function with mock embeddings:
 
@@ -238,7 +236,7 @@ ORDER BY s.distance, t.title;
 
 ## Related content
 
-- [Overview of vectors in the SQL Database Engine](../../relational-databases/vectors/vectors-sql-server.md)
+- [Overview of vector search and vector indexes in the SQL Database Engine](../../relational-databases/vectors/vectors-sql-server.md)
 - [Vector data type](../data-types/vector-data-type.md)
 - [CREATE VECTOR INDEX (Transact-SQL)](../statements/create-vector-index-transact-sql.md)
 - [Azure SQL Database Vector Search Samples](https://github.com/Azure-Samples/azure-sql-db-vector-search)
