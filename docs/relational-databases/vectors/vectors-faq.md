@@ -1,10 +1,10 @@
 ---
 title: Vector & Embeddings Frequently Asked Questions (FAQ)
-description: Answers to common questions about vector search and vector indexes in SQL Server.
-author: yorek
-ms.author: damauri
-ms.reviewer: damauri
-ms.date: 07/17/2025
+description: Answers to common questions about vector search and vector indexes in the SQL Database Engine.
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: damauri, mikeray
+ms.date: 07/24/2025
 ms.service: sql
 ms.topic: language-reference
 ms.collection:
@@ -20,6 +20,8 @@ monikerRange: "=sql-server-ver17 || =sql-server-linux-ver17 || =azuresqldb-curre
 # Vector and embeddings: Frequently asked questions (FAQ)
 
 [!INCLUDE [sqlserver2025-asdb-asmi-fabricsqldb](../../includes/applies-to-version/sqlserver2025-asdb-asmi-fabricsqldb.md)]
+
+This article contains frequently asked questions about vectors and embeddings in the SQL Database Engine.
 
 > [!NOTE]
 > Vector features are available in Azure SQL Managed Instance configured with the [Always-up-to-date](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy) policy. 
@@ -46,7 +48,7 @@ For more information about how to choose the right embedding model, see [Embeddi
 
 ## What about sparse vectors?
 
-At this time, the **vector** data type in SQL Server is designed for dense vectors, which are arrays of floating-point numbers where most of the elements are non-zero. Sparse vectors, which contain a significant number of zero elements, aren't natively supported. 
+At this time, the **vector** data type in the SQL Database Engine is designed for dense vectors, which are arrays of floating-point numbers where most of the elements are non-zero. Sparse vectors, which contain a significant number of zero elements, aren't natively supported. 
 
 ## What are some performance benchmarks for SQL vector search?
 
@@ -59,19 +61,19 @@ If you have multiple columns that you want to use for generating embeddings, you
 - Create one embedding for each column, or
 - Concatenate the values of multiple columns into a single string and then generate a single embedding for that concatenated string.
 
-For more information about the two options and the related database design considerations, see [Efficiently and Elegantly Modeling Embeddings in Azure SQL and SQL Server](https://devblogs.microsoft.com/azure-sql/efficiently-and-elegantly-modeling-embeddings-in-azure-sql-and-sql-server/).
+For more information about the two options and the related database design considerations, see [Efficiently and Elegantly Modeling Embeddings](https://devblogs.microsoft.com/azure-sql/efficiently-and-elegantly-modeling-embeddings-in-azure-sql-and-sql-server/).
 
 ## What about re-ranking?
 
-Re-ranking is a technique used to improve the relevance of search results by re-evaluating the initial results based on additional criteria or models. In SQL Server, you can implement re-ranking by combining vector search with full-text (which provides BM25 ranking) or additional SQL queries or machine learning models to refine the results based on specific business logic or user preferences.
+Re-ranking is a technique used to improve the relevance of search results by re-evaluating the initial results based on additional criteria or models. In the SQL Database Engine, you can implement re-ranking by combining vector search with full-text (which provides BM25 ranking) or additional SQL queries or machine learning models to refine the results based on specific business logic or user preferences.
 
-For more information, review [Enhancing Search Capabilities in SQL Server and Azure SQL with Hybrid Search and RRF Re-Ranking](https://devblogs.microsoft.com/azure-sql/enhancing-search-capabilities-in-sql-server-and-azure-sql-with-hybrid-search-and-rrf-re-ranking/).
+For more information, review [Enhancing Search Capabilities with Hybrid Search and RRF Re-Ranking](https://devblogs.microsoft.com/azure-sql/enhancing-search-capabilities-in-sql-server-and-azure-sql-with-hybrid-search-and-rrf-re-ranking/).
 
 ## When to use AI Search (now AI Foundry) vs using SQL for vectors search scenarios?
 
 AI Search (now AI Foundry) is a specialized service designed for advanced search scenarios, including vector search, natural language processing, and AI-driven insights. It provides a comprehensive set of features for building intelligent search applications, such as built-in support for various AI models, advanced ranking algorithms, and integration with other AI services.
 
-Azure SQL and SQL Server provide the ability to store any kind of data and run any kind of query: structured and unstructured, and to perform vector search on that data. It is a good choice for scenarios where you need to do search across all these data together, and you don't want to use a separate service for search that would complicate your architecture. Azure SQL and SQL Server offer critical enterprise security features to make sure data is always protected, such as row-level security (RLS), dynamic data masking (DDM), Always Encrypted, immutable ledger tables, and transparent data encryption (TDE).
+The SQL Database Engine provides the ability to store any kind of data and run any kind of query: structured and unstructured, and to perform vector search on that data. It is a good choice for scenarios where you need to do search across all these data together, and you don't want to use a separate service for search that would complicate your architecture. The SQL Database Engine offers critical enterprise security features to make sure data is always protected, such as row-level security (RLS), dynamic data masking (DDM), Always Encrypted, immutable ledger tables, and transparent data encryption (TDE).
 
 Here's an example of a single query that can be run in Azure SQL or SQL Server that combines vector, geospatial, structured and unstructured data all at once. The sample query retrieves the top 50 most relevant restaurants based on the description of the restaurant, the location of the restaurant, and the user's preferences, using vector search for the description and geospatial search for the location, filtering also by star numbers, number of reviews, category and so on:
 
