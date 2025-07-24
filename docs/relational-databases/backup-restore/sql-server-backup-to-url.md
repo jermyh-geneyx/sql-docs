@@ -169,6 +169,8 @@ The following are security considerations and requirements when backing up to or
 
 - [Immutable storage for Azure Blob Storage](/azure/storage/blobs/storage-blob-immutable-storage) isn't supported. Set the **Immutable Storage** policy to false.
 
+- Backup to URL isn't supported to [premium storage](/azure/storage/blobs/storage-blob-block-blob-premium). 
+
 ## Supported arguments and statements in Azure Blob Storage
 
 <a id="Support"></a>

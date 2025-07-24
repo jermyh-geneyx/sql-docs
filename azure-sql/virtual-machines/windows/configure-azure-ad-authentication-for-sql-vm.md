@@ -308,8 +308,11 @@ Set-AzVMExtension -ExtensionName "SqlIaasExtension" -ResourceGroupName $resource
 
 ## Create logins and users
 
-Follow the steps in the [Microsoft Entra tutorial](/sql/sql-server/azure-arc/entra-authentication-setup-tutorial#create-logins-and-users) to create logins and Users for the managed identity.
+Follow the steps in the [Microsoft Entra tutorial](/sql/sql-server/azure-arc/entra-authentication-setup-tutorial#create-logins-and-users) to create logins and users for the managed identity.
 
+## Connect to your instance
+
+Follow the instructions in the [Microsoft Entra tutorial](/sql/sql-server/azure-arc/entra-authentication-setup-tutorial#connect-with-a-supported-authentication-method) to connect to your SQL Server instance using Microsoft Entra authentication.
 
 ## Limitations
 

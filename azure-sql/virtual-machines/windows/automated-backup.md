@@ -421,9 +421,7 @@ The following table lists the possible solutions if you're having issues enablin
 | **Automated Backup fails for SQL 2016 +**| **Allow Blob Public Access** is enabled on the storage Account. This provides a temporary workaround to a known issue. |
 
 
-
-
-### Common issues with Automated or Managed Backup
+### Common issues with Automated or Managed Backups
 
 The following table lists possible errors and solutions when working with Automated Backups: 
 
@@ -440,6 +438,7 @@ The following table lists possible errors and solutions when working with Automa
 | **Error 3202: Write on Storage account failed 13 (The data is invalid)** | Remove the immutable blob policy on the storage container and make sure the storage account is using, at minimum, TLS 1.0.  | 
 | **Error 3063: Write to backup block blob device. Device has reached its limit of allowed blocks.** | This can happen if you're running automated backups from a secondary Always On availability group replica that has the `Readable` configuration set to `NO`. For automated backups to work on a secondary replica, the replica must be readable. | 
 | **Unable to schedule a backup for a particular day** | If you're using [Automated backups for SQL Server 2014](automated-backup-sql-2014.md), this is expected. You can configure a backup schedule starting with SQL Server 2016. |
+| **403 forbidden error when connecting to the remote server** | To resolve this: <br > - **Check network security**: Make sure that the network security group (NSG) allows traffic on the necessary ports, particularly port `443` for HTTPS. <br /> - **Verify IP addresses**: Ensure the IP addresses of the VMs that need access to the storage account are added to the allowed list  for the storage account. <br /> - **Review DNS settings**: Confirm that the DNS settings are correctly configured to resolve the storage account name. | 
 
 
 ### Disabling Automated Backup or Managed Backup fails
