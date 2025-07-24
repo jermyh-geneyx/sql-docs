@@ -1,10 +1,10 @@
 ---
-title: JSON data type (preview)
+title: "JSON Data Type"
 description: The native JSON data type provides advantages for storing JSON data over varchar or nvarchar. Learn more about the JSON data type.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest, jovanpop, umajay
-ms.date: 05/21/2025
+ms.date: 07/23/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -13,7 +13,7 @@ ms.custom:
   - build-2025
 helpviewer_keywords:
   - "JSON data type"
-monikerRange: "=azuresqldb-current||=azuresqldb-mi-current"
+monikerRange: "=sql-server-ver17 || =azuresqldb-current || =azuresqldb-mi-current || =fabric"
 ---
 # JSON data type
 
@@ -61,10 +61,9 @@ JSON function support was first introduced in [!INCLUDE [sssql16-md](../../inclu
 **json** is available under all database compatibility levels.
 
 > [!NOTE]
-> The [JSON data type](../../t-sql/data-types/json-data-type.md): 
+> The [JSON data type](json-data-type.md): 
 > - is generally available for Azure SQL Database and Azure SQL Managed Instance configured with the **[Always-up-to-date update policy](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy)**.  
 > - is in preview for [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)]. 
-
 
 ## modify method
 
@@ -77,7 +76,6 @@ For JSON strings, if the new value is less than or equal to the existing value, 
 
 For JSON numbers, if the new value is of the same type, or within the range of the existing value, then in-place modification is possible.
 
-
 ```sql
 DROP TABLE IF EXISTS JsonTable;
 CREATE TABLE JsonTable ( id int PRIMARY KEY, d JSON );
@@ -89,7 +87,6 @@ UPDATE JsonTable
 SET d.modify('$.b', 'def')
 WHERE id = 1;
 ```
-
 
 ## Function support
 

@@ -1,10 +1,10 @@
 ---
 title: "Index JSON Data"
-description: "Index JSON data"
+description: "Learn how to optimize your queries over JSON documents using indexes."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: jroth, jovanpop, randolphwest
-ms.date: 06/19/2025
+ms.reviewer: umajay, jovanpop, randolphwest
+ms.date: 07/23/2025
 ms.service: sql
 ms.topic: how-to
 ms.custom:
@@ -12,21 +12,22 @@ ms.custom:
 helpviewer_keywords:
   - "JSON, indexing JSON data"
   - "indexing JSON data"
-monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Index JSON data
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-fabricsqldb.md)]
 
 You can optimize your queries over JSON documents using standard indexes.
 
 The [JSON data type](../../t-sql/data-types/json-data-type.md):
 
-- is generally available for Azure SQL Database and Azure SQL Managed Instance configured with the **[Always-up-to-date update policy](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy)**.
+- is generally available for Azure SQL Database and SQL database in Fabric.
+- is generally available in Azure SQL Managed Instance configured with the **[Always-up-to-date update policy](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy)**.
 - is in preview for [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)].
 
 > [!NOTE]  
-> In [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], you can use the [CREATE JSON INDEX](../../t-sql/statements/create-json-index-transact-sql.md) feature.
+> In [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], you can use the [CREATE JSON INDEX (Transact-SQL)](../../t-sql/statements/create-json-index-transact-sql.md) feature.
 
 Indexes work the same way on JSON data in **varchar**/**nvarchar** or the [native **json** data type](../../t-sql/data-types/json-data-type.md).
 
@@ -207,7 +208,7 @@ Since the order of values in the index isn't compliant with French collation rul
 
 ### Microsoft videos
 
-For a visual introduction to the built-in JSON support in SQL Server and Azure SQL Database, see the following video:
+For a visual introduction to the built-in JSON support, see the following video:
 
 - [JSON as a bridge between NoSQL and relational worlds](/shows/datadriven-sqlserver2016/json-as-bridge-betwen-nosql-relational-worlds)
 

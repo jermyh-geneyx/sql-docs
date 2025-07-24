@@ -1,26 +1,27 @@
 ---
-title: "Use FOR JSON Output in SQL Server and in Client Apps"
-description: "Use FOR JSON output in SQL Server and in client apps (SQL Server)"
-author: jovanpop-msft
-ms.author: jovanpop
-ms.reviewer: jroth
-ms.date: 03/12/2025
+title: "Use FOR JSON Output in the SQL Database Engine and in Client Apps"
+description: "Use FOR JSON output in the SQL Database Engine and in client apps."
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: jovanpop, umajay
+ms.date: 07/23/2025
 ms.service: sql
 ms.topic: language-reference
 helpviewer_keywords:
   - "FOR JSON, using in client apps"
   - "FOR JSON, using in SQL Server"
-monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
+  - "FOR JSON, using in the SQL Database Engine"
+monikerRange: "=azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
-# Use FOR JSON output in SQL Server and in client apps
+# Use FOR JSON output in the SQL Database Engine and in client apps
 
-[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-serverless-pool-only](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-serverless-pool-only.md)]
+[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricsqldb](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricsqldb.md)]
 
-The following examples demonstrate some of the ways to use the `FOR JSON` clause and its JSON output in [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] or in client apps.  [Format query results as JSON with FOR JSON](format-query-results-as-json-with-for-json-sql-server.md)
+The following examples demonstrate some of the ways to use the `FOR JSON` clause and its JSON output in [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] or in client apps. For more information, see [Format query results as JSON with FOR JSON](format-query-results-as-json-with-for-json-sql-server.md).
 
 In Fabric Data Warehouse, `FOR JSON` must be the last operator in the query, and so is not allowed inside subqueries, as in the examples in this article.
 
-## Use FOR JSON output in SQL Server variables
+## Use FOR JSON output in the SQL Database Engine variables
 
 The output of the `FOR JSON` clause is of type **nvarchar(max)**, so you can assign it to any variable, as shown in the following example.  
 
@@ -31,7 +32,7 @@ DECLARE @x NVARCHAR(MAX) =
      FOR JSON AUTO)  
 ```  
 
-## Use FOR JSON output in SQL Server user-defined functions
+## Use FOR JSON output in the SQL Database Engine user-defined functions
 
  You can create user-defined functions that format result sets as JSON and return this JSON output. The following example creates a user-defined function that fetches some sales order detail rows and formats them as a JSON array.  
 
@@ -116,12 +117,10 @@ using(var conn = new SqlConnection("<connection string>"))
 
 ## Learn more about JSON in the SQL Database Engine
 
-### Microsoft videos
+For a visual introduction to the built-in JSON support, see the following videos:
 
-For a visual introduction to the built-in JSON support in SQL Server and Azure SQL Database, see the following videos:
-
--   [JSON as a bridge between NoSQL and relational worlds](https://channel9.msdn.com/events/DataDriven-SQLServer2016/JSON-as-bridge-betwen-NoSQL-relational-worlds)
+- [JSON as a bridge between NoSQL and relational worlds](/events/datadriven-sqlserver2016/json-as-bridge-betwen-nosql-relational-worlds)
 
 ## Related content
 
-- [Format Query Results as JSON with FOR JSON (SQL Server)](../../relational-databases/json/format-query-results-as-json-with-for-json-sql-server.md)
+- [Format query results as JSON with FOR JSON](format-query-results-as-json-with-for-json-sql-server.md)

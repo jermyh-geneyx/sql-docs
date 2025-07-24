@@ -3,8 +3,8 @@ title: "JSON_QUERY (Transact-SQL)"
 description: JSON_QUERY extracts an object or an array from a JSON string.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: jovanpop, randolphwest
-ms.date: 05/19/2025
+ms.reviewer: jovanpop, umajay, randolphwest
+ms.date: 07/23/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -25,11 +25,11 @@ monikerRange: "=azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 |
 ---
 # JSON_QUERY (Transact-SQL)
 
-[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-fabricse-fabricdw](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-fabricse-fabricdw.md)]
+[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-fabricse-fabricdw-fabricsqldb](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-fabricse-fabricdw-fabricsqldb.md)]
 
-Extracts an object or an array from a JSON string.
+The `JSON_QUERY` syntax extracts an object or an array from a JSON string.
 
-To extract a scalar value from a JSON string instead of an object or an array, see [JSON_VALUE](json-value-transact-sql.md). For info about the differences between **JSON_VALUE** and `JSON_QUERY`, see [Compare JSON_VALUE and JSON_QUERY](../../relational-databases/json/validate-query-and-change-json-data-with-built-in-functions-sql-server.md#JSONCompare).
+To extract a scalar value from a JSON string instead of an object or an array, see [JSON_VALUE](json-value-transact-sql.md). For info about the differences between `JSON_VALUE` and `JSON_QUERY`, see [Compare JSON_VALUE and JSON_QUERY](../../relational-databases/json/validate-query-and-change-json-data-with-built-in-functions-sql-server.md#JSONCompare).
 
 :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md)
 
@@ -53,7 +53,7 @@ A JSON path that specifies the object or the array to extract.
 
 In [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] and in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], you can provide a variable as the value of *path*.
 
-The JSON path can specify lax or strict mode for parsing. If you don't specify the parsing mode, lax mode is the default. For more info, see [JSON Path Expressions (SQL Server)](../../relational-databases/json/json-path-expressions-sql-server.md).
+The JSON path can specify lax or strict mode for parsing. If you don't specify the parsing mode, lax mode is the default. For more info, see [JSON Path Expressions](../../relational-databases/json/json-path-expressions-sql-server.md).
 
 The default value for *path* is `$`. As a result, if you don't provide a value for *path*, `JSON_QUERY` returns the input *expression*.
 
@@ -64,7 +64,7 @@ If the format of *path* isn't valid, `JSON_QUERY` returns an error.
 > [!NOTE]
 > `WITH ARRAY WRAPPER` is currently in preview and only available in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)]. 
 
-The ANSI SQL `JSON_QUERY` function is currently used to return a JSON object or array in a specified path. With the support for [array wildcards](../../relational-databases/json/json-path-expressions-sql-server.md#array-wildcard-and-range-support)  in SQL/JSON path expression introduced in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], `JSON_QUERY` can be used to return specified properties of elements in a JSON array where each element is a JSON object. Since wildcard searches can return multiple values, specify the `WITH ARRAY WRAPPER` clause in a JSON query expression along with a SQL/JSON path expression with wildcard or range or list to return the values as a JSON array. `WITH ARRAY WRAPPER` clause is supported only if the input is a **json** type.
+The ANSI SQL `JSON_QUERY` function is currently used to return a JSON object or array in a specified path. With the support for [array wildcards](../../relational-databases/json/json-path-expressions-sql-server.md#array-wildcard-and-range-support) in SQL/JSON path expression introduced in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], `JSON_QUERY` can be used to return specified properties of elements in a JSON array where each element is a JSON object. Since wildcard searches can return multiple values, specify the `WITH ARRAY WRAPPER` clause in a JSON query expression along with a SQL/JSON path expression with wildcard or range or list to return the values as a JSON array. `WITH ARRAY WRAPPER` clause is supported only if the input is a **json** type.
 
 Consider the following JSON document:
 
@@ -156,7 +156,7 @@ Consider the following JSON text:
 }
 ```
 
-The following table compares the behavior of `JSON_QUERY` in lax mode and in strict mode. For more info about the optional path mode specification (lax or strict), see [JSON Path Expressions (SQL Server)](../../relational-databases/json/json-path-expressions-sql-server.md).
+The following table compares the behavior of `JSON_QUERY` in lax mode and in strict mode. For more info about the optional path mode specification (lax or strict), see [JSON Path Expressions](../../relational-databases/json/json-path-expressions-sql-server.md).
 
 | Path | Return value in lax mode | Return value in strict mode | More info |
 | --- | --- | --- | --- |
@@ -220,5 +220,5 @@ credit_card_types
 
 ## Related content
 
-- [JSON Path Expressions (SQL Server)](../../relational-databases/json/json-path-expressions-sql-server.md)
+- [JSON Path Expressions](../../relational-databases/json/json-path-expressions-sql-server.md)
 - [JSON data in SQL Server](../../relational-databases/json/json-data-sql-server.md)

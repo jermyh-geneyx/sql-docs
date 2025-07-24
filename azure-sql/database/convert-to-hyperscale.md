@@ -40,7 +40,8 @@ If a geo-primary database is in an elastic pool, it can be moved to an existing 
 
 The conversion process is divided into two stages - the conversion of database, which occurs while the existing database is online, and then a cutover to the new Hyperscale database. 
 
-- The time required to move an existing database to Hyperscale consists of the time to copy data and the time to replay the changes made in the source database while copying data. The data copy time is proportional to data size. We recommend converting to Hyperscale during a lower write activity period so that the time to replay accumulated changes is shorter.
+- The time required to move an existing database to Hyperscale consists of the time to copy data and the time to replay the changes made in the source database while copying data. While the data copy time scales roughly with the size of the database, actual copy speed can vary due to factors such as network throughput, I/O bandwidth, storage latency, and transient service load. We recommend converting to Hyperscale during a lower write activity period so that the time to replay accumulated changes is shorter. It is recommended to use manual cutover to control the next stage.
+
 - You have the ability to choose when the cutover occurs - as soon as the database is ready, or manually at a time of your choosing. By default, the process to convert to Hyperscale will cutover automatically.
   - If you choose to manually cutover at a time of your choosing, you have 24 hours to initiate a manual cutover after the point when the database ready for cutover. You can initiate a manual cutover via the Azure portal, Azure CLI, PowerShell, or T-SQL.
 - During the final cutover to Hyperscale, your applications only experience a short period of downtime, usually less than a minute.

@@ -3,8 +3,8 @@ title: "Format Query Results as JSON with fOR JSON"
 description: Format query results as JSON, or export data from SQL Server as JSON, by adding the FOR JSON clause to a SELECT statement.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: randolphwest, jovanpop
-ms.date: 03/12/2025
+ms.reviewer: jovanpop, umajay, randolphwest
+ms.date: 07/23/2025
 ms.service: sql
 ms.topic: how-to
 ms.custom:
@@ -18,7 +18,7 @@ monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-20
 ---
 # Format query results as JSON with FOR JSON
 
-[!INCLUDE [sql-asdbmi-asa-svrless-poolonly-fabricse-fabricdw](../../includes/applies-to-version/sql-asdbmi-asa-svrless-poolonly-fabricse-fabricdw.md)]
+[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricse-fabricdw-fabricsqldb](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-svrless-only-fabricse-fabricdw-fabricsqldb.md)]
 
 Format query results as JSON, or export data from SQL Server as JSON, by adding the `FOR JSON` clause to a `SELECT` statement. Use the `FOR JSON` clause to simplify client applications by delegating the formatting of JSON output from the app to [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
 
@@ -152,7 +152,7 @@ JSON_F52E2B61-18A1-11d1-B105-00805F49916B
 
 ### More info about FOR JSON AUTO
 
-For more detailed info and examples, see [Format JSON Output Automatically with AUTO Mode (SQL Server)](format-json-output-automatically-with-auto-mode-sql-server.md).
+For more detailed info and examples, see [Format JSON Output Automatically with AUTO Mode](format-json-output-automatically-with-auto-mode-sql-server.md).
 
 For syntax and usage, see [SELECT - FOR Clause (Transact-SQL)](../../t-sql/queries/select-for-clause-transact-sql.md).
 
@@ -164,7 +164,7 @@ Control the output of the `FOR JSON` clause, using the following extra options.
 
 - `ROOT`
 
-   To add a single, top-level element to the JSON output, specify the `ROOT` option. If you don't specify this option, the JSON output doesn't have a root element. For more info, see [Add a Root Node to JSON Output with the ROOT Option (SQL Server)](add-a-root-node-to-json-output-with-the-root-option-sql-server.md).
+   To add a single, top-level element to the JSON output, specify the `ROOT` option. If you don't specify this option, the JSON output doesn't have a root element. For more info, see [Add a Root Node to JSON Output with the ROOT Option](add-a-root-node-to-json-output-with-the-root-option-sql-server.md).
 
 - `INCLUDE_NULL_VALUES`
 
@@ -194,7 +194,7 @@ The output of the `FOR JSON` clause has the following characteristics:
 
    - Each column in the results of the SELECT statement (before the FOR JSON clause is applied) becomes a property of the JSON object.
 
-1. Both the names of columns and their values are escaped according to JSON syntax. For more info, see [How FOR JSON escapes special characters and control characters (SQL Server)](how-for-json-escapes-special-characters-and-control-characters-sql-server.md).
+1. Both the names of columns and their values are escaped according to JSON syntax. For more info, see [How FOR JSON escapes special characters and control characters](how-for-json-escapes-special-characters-and-control-characters-sql-server.md).
 
 ### Example
 
@@ -231,8 +231,8 @@ Here's an example that demonstrates how the `FOR JSON` clause formats the JSON o
 
 ## Related content
 
-- [How FOR JSON converts SQL Server data types to JSON data types (SQL Server)](how-for-json-converts-sql-server-data-types-to-json-data-types-sql-server.md)
-- [How FOR JSON escapes special characters and control characters (SQL Server)](how-for-json-escapes-special-characters-and-control-characters-sql-server.md)
+- [How FOR JSON converts SQL Server data types to JSON data types](how-for-json-converts-sql-server-data-types-to-json-data-types-sql-server.md)
+- [How FOR JSON escapes special characters and control characters](how-for-json-escapes-special-characters-and-control-characters-sql-server.md)
 - [Video: JSON as a bridge between NoSQL and relational worlds](/shows/datadriven-sqlserver2016/json-as-bridge-betwen-nosql-relational-worlds)
 - [SELECT - FOR Clause (Transact-SQL)](../../t-sql/queries/select-for-clause-transact-sql.md)
-- [Use FOR JSON output in SQL Server and in client apps (SQL Server)](use-for-json-output-in-sql-server-and-in-client-apps-sql-server.md)
+- [Use FOR JSON output in the SQL Database Engine and in client apps](use-for-json-output-in-sql-server-and-in-client-apps-sql-server.md)

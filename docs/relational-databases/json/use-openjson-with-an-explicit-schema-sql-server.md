@@ -1,23 +1,23 @@
 ---
 title: "Use OPENJSON with an Explicit Schema"
 description: "Use OPENJSON with an Explicit Schema (SQL Server)"
-author: jovanpop-msft
-ms.author: jovanpop
-ms.reviewer: jroth
-ms.date: 03/06/2025
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: jovanpop, umajay
+ms.date: 07/23/2025
 ms.service: sql
 ms.topic: language-reference
 helpviewer_keywords:
   - "OPENJSON, with explicit schema"
-monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
+monikerRange: "=azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Use OPENJSON with an Explicit Schema
 
-[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricse-fabricdw](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricse-fabricdw.md)]
+[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricse-fabricdw-fabricsqldb](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-svrless-only-fabricse-fabricdw-fabricsqldb.md)]
 
-  Use `OPENJSON` with an explicit schema to return a table that's formatted as you specify in the WITH clause.  
+  Use `OPENJSON` with an explicit schema to return a table that's formatted as you specify in the `WITH` clause.  
 
- Here are some examples that use `OPENJSON` with an explicit schema. For more info and more  examples, see [OPENJSON (Transact-SQL)](../../t-sql/functions/openjson-transact-sql.md).
+ Here are some examples that use `OPENJSON` with an explicit schema. For more information, see [OPENJSON (Transact-SQL)](../../t-sql/functions/openjson-transact-sql.md).
 
 ## Example - Use the WITH clause to format the output
 
@@ -82,9 +82,9 @@ DECLARE @json NVARCHAR(MAX) = '{
 
 ## Learn more about JSON in the SQL Database Engine
 
-For a visual introduction to the built-in JSON support in SQL Server and Azure SQL Database, see the following videos:
+For a visual introduction to the built-in JSON support, see the following videos:
 
--   [JSON as a bridge between NoSQL and relational worlds](https://channel9.msdn.com/events/DataDriven-SQLServer2016/JSON-as-bridge-betwen-NoSQL-relational-worlds)
+- [JSON as a bridge between NoSQL and relational worlds](/events/datadriven-sqlserver2016/json-as-bridge-betwen-nosql-relational-worlds)
 
 ## Related content
 

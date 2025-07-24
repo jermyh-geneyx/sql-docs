@@ -1,20 +1,21 @@
 ---
-title: "Store JSON documents"
+title: "Store JSON Documents"
 description: "Learn why and how to store and index JSON documents, and how to optimize queries over the JSON documents."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: umajay 
-ms.date: 08/20/2024
+ms.reviewer: jovanpop, umajay
+ms.date: 07/23/2025
 ms.service: sql
+ms.topic: how-to
 ms.custom:
   - build-2024
-ms.topic: how-to
-monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Store JSON documents
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi.md)]
 
-The SQL Database Engine provides native JSON functions that enable you to parse JSON documents using standard SQL language. You can store JSON documents in SQL Server or SQL Database and query JSON data as in a NoSQL database. This article describes the options for storing JSON documents.
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-fabricsqldb.md)]
+
+The SQL Database Engine provides native JSON functions that enable you to parse JSON documents using standard SQL language. You can store JSON documents in the SQL Database Engine and query JSON data as in a NoSQL database. This article describes the options for storing JSON documents.
 
 ## JSON storage format
 
@@ -171,11 +172,11 @@ This natively compiled procedure takes the query and creates .DLL code that runs
 
 Native JSON functions in SQL Server and SQL Database enable you to process JSON documents just like in NoSQL databases. Every database - relational or NoSQL - has some pros and cons for JSON data processing. The key benefit of storing JSON documents in SQL Server or SQL Database is full SQL language support. You can use the rich Transact-SQL language to process data and to configure a variety of storage options, from columnstore indexes for high compression and fast analytics, to memory-optimized tables for lock-free processing. At the same time, you get the benefit of mature security and internationalization features which you can easily reuse in your NoSQL scenario. The reasons described in this article are excellent reasons to consider storing JSON documents in SQL Server or SQL Database.
 
-## Learn more about JSON in SQL Server and Azure SQL Database
-  
-For a visual introduction to the built-in JSON support in SQL Server and Azure SQL Database, see the following videos:
+## Learn more about JSON in the SQL Database Engine
 
-- [JSON as a bridge between NoSQL and relational worlds](https://channel9.msdn.com/events/DataDriven-SQLServer2016/JSON-as-bridge-betwen-NoSQL-relational-worlds)
+For a visual introduction to the built-in JSON support, see the following videos:
+
+- [JSON as a bridge between NoSQL and relational worlds](/shows/datadriven-sqlserver2016/json-as-bridge-betwen-nosql-relational-worlds)
 
 ## Related content
 

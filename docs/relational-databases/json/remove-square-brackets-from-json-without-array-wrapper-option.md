@@ -1,19 +1,19 @@
 ---
 title: "Remove Square Brackets from JSON - WITHOUT_ARRAY_WRAPPER Option"
 description: "To remove the square brackets that surround the JSON output of the FOR JSON clause by default, specify the WITHOUT_ARRAY_WRAPPER option."
-author: jovanpop-msft
-ms.author: jovanpop
-ms.reviewer: jroth
-ms.date: 03/06/2025
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: jovanpop, umajay
+ms.date: 07/23/2025
 ms.service: sql
 ms.topic: how-to
 helpviewer_keywords:
   - "WITHOUT_ARRAY_WRAPPER"
-monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
+monikerRange: "=azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Remove Square Brackets from JSON - WITHOUT_ARRAY_WRAPPER Option
 
-[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricse-fabricdw](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricse-fabricdw.md)]
+[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricse-fabricdw-fabricsqldb](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-svrless-only-fabricse-fabricdw-fabricsqldb.md)]
 
 To remove the square brackets that surround the JSON output of the `FOR JSON` clause by default, specify the `WITHOUT_ARRAY_WRAPPER` option. Use this option with a single-row result to generate a single JSON object as output instead of an array with a single element.
 
@@ -101,12 +101,10 @@ FOR JSON PATH, WITHOUT_ARRAY_WRAPPER
 
 ## Learn more about JSON in the SQL Database Engine
 
-### Microsoft videos
+For a visual introduction to the built-in JSON support, see the following videos:
 
-For a visual introduction to the built-in JSON support in SQL Server and Azure SQL Database, see the following videos:
-
--   [JSON as a bridge between NoSQL and relational worlds](https://channel9.msdn.com/events/DataDriven-SQLServer2016/JSON-as-bridge-betwen-NoSQL-relational-worlds)
+- [JSON as a bridge between NoSQL and relational worlds](/events/datadriven-sqlserver2016/json-as-bridge-betwen-nosql-relational-worlds)
 
 ## Related content
 
-- [FOR Clause (Transact-SQL)](../../t-sql/queries/select-for-clause-transact-sql.md)
+- [SELECT - FOR Clause (Transact-SQL)](../../t-sql/queries/select-for-clause-transact-sql.md)

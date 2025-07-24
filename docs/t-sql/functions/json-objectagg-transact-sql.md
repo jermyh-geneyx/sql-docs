@@ -4,7 +4,7 @@ description: JSON_OBJECTAGG constructs a JSON object from an aggregation of SQL 
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: umajay, jovanpop, randolphwest
-ms.date: 05/06/2025
+ms.date: 07/23/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -18,17 +18,17 @@ helpviewer_keywords:
   - "JSON_OBJECTAGG function"
 dev_langs:
   - "TSQL"
-monikerRange: "=azuresqldb-current || =azuresqldb-mi-current || =fabric"
+monikerRange: "=sql-server-ver17 || =azuresqldb-current || =azuresqldb-mi-current || =fabric"
 ---
 # JSON_OBJECTAGG (Transact-SQL)
 
 [!INCLUDE [sqlserver2025-asdb-asmi-fabricsqldb](../../includes/applies-to-version/sqlserver2025-asdb-asmi-fabricsqldb.md)]
 
-Constructs a JSON object from an aggregation of SQL data or columns. JSON_OBJECTAGG can also be used in a SELECT statement with GROUP BY GROUPING SETS clause.
+The `JSON_OBJECTAGG` syntax constructs a JSON object from an aggregation of SQL data or columns. `JSON_OBJECTAGG` can also be used in a `SELECT` statement with `GROUP BY GROUPING SETS` clause.
 
 The key/value pairs can be specified as input values, column, variable references.
 
-To create a JSON array from an aggregate instead, use [JSON_ARRAYAGG](json-arrayagg-transact-sql.md).
+To create a JSON array from an aggregate instead, use [JSON_ARRAYAGG (Transact-SQL)](json-arrayagg-transact-sql.md).
 
 > [!NOTE]  
 > Both **json** aggregate functions `JSON_OBJECTAGG` and `JSON_ARRAYAGG` are generally available for Azure SQL Database, Azure SQL Managed Instance (configured with the **[Always-up-to-date update policy](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy)**), and Fabric Data Warehouse.
@@ -144,6 +144,6 @@ SELECT id,
 
 ## Related content
 
-- [JSON Path Expressions (SQL Server)](../../relational-databases/json/json-path-expressions-sql-server.md)
+- [JSON Path Expressions](../../relational-databases/json/json-path-expressions-sql-server.md)
 - [JSON data in SQL Server](../../relational-databases/json/json-data-sql-server.md)
 - [JSON_ARRAYAGG (Transact-SQL)](json-arrayagg-transact-sql.md)

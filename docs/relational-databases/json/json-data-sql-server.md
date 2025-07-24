@@ -1,10 +1,10 @@
 ---
-title: Work with JSON data in SQL Server
+title: Work with JSON Data in SQL Server
 description: Combine NoSQL and relational concepts in the same database with JSON data in SQL Server
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: randolphwest, jovanpop
-ms.date: 05/19/2025
+ms.reviewer: jovanpop, umajay, randolphwest
+ms.date: 07/23/2025
 ms.service: sql
 ms.topic: overview
 ms.custom:
@@ -20,17 +20,16 @@ monikerRange: "=azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 |
 
 [!INCLUDE [sqlserver2016-asdb-asdbmi-asa-fabricsqldb](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-fabricsqldb.md)]
 
-This article provides an overview of the textual data format JSON in SQL Server, Azure SQL Database, Azure SQL Managed Instance, Azure Synapse Analytics, and SQL database in Microsoft Fabric. 
+This article provides an overview of the textual data format JSON in SQL Server, Azure SQL Database, Azure SQL Managed Instance, Azure Synapse Analytics, and SQL database in Microsoft Fabric.
 
 > [!NOTE]  
-> - JSON support requires [database compatibility level](../databases/view-or-change-the-compatibility-level-of-a-database.md) 130 or higher.
+> JSON support requires [database compatibility level](../databases/view-or-change-the-compatibility-level-of-a-database.md) 130 or higher.
 
 ## Overview
 
 JSON is a popular textual data format that's used for exchanging data in modern web and mobile applications. JSON is also used for storing unstructured data in log files or NoSQL databases such as Microsoft Azure Cosmos DB. Many REST web services return results that are formatted as JSON text or accept data that's formatted as JSON. For example, most Azure services, such as Azure Search, Azure Storage, and Azure Cosmos DB, have REST endpoints that return or consume JSON. JSON is also the main format for exchanging data between webpages and web servers by using AJAX calls.
 
 JSON functions, first introduced in [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)], enable you to combine NoSQL and relational concepts in the same database. You can combine classic relational columns with columns that contain documents formatted as JSON text in the same table, parse and import JSON documents in relational structures, or format relational data to JSON text.
-
 
 The following is an example of JSON text:
 
@@ -56,7 +55,7 @@ By using [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] built-in 
 
 :::image type="content" source="media/json-data-sql-server/json-slides-overview.png" alt-text="Diagram showing the overview of built-in JSON support.":::
 
-## SQL Server 2025 changes 
+## SQL Server 2025 changes
 
 [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] introduces the following JSON enhancements, all currently in preview: 
 
@@ -65,7 +64,6 @@ By using [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] built-in 
 - [JSON_CONTAINS function](../../t-sql/functions/json-contains-transact-sql.md)
 - [ANSI SQL path expression array wildcard support](json-path-expressions-sql-server.md#array-wildcard-and-range-support)
 - [ANSI SQL WITH ARRAY WRAPPER clause in JSON_QUERY function](../../t-sql/functions/json-query-transact-sql.md#with-array-wrapper)
-
 
 ## Key JSON capabilities
 
@@ -116,7 +114,7 @@ ORDER BY JSON_VALUE(jsonCol, '$.info.address.PostCode');
 
 Applications and tools see no difference between the values taken from scalar table columns and the values taken from JSON columns. You can use values from JSON text in any part of a Transact-SQL query (including WHERE, ORDER BY, or GROUP BY clauses, window aggregates, and so on). JSON functions use JavaScript-like syntax for referencing values inside JSON text.
 
-For more information, see [Validate, Query, and Change JSON Data with Built-in Functions (SQL Server)](validate-query-and-change-json-data-with-built-in-functions-sql-server.md), [JSON_VALUE (Transact-SQL)](../../t-sql/functions/json-value-transact-sql.md), and [JSON_QUERY (Transact-SQL)](../../t-sql/functions/json-query-transact-sql.md).
+For more information, see [Validate, Query, and Change JSON Data with Built-in Functions](validate-query-and-change-json-data-with-built-in-functions-sql-server.md), [JSON_VALUE](../../t-sql/functions/json-value-transact-sql.md), and [JSON_QUERY](../../t-sql/functions/json-query-transact-sql.md).
 
 ### Change JSON values
 
@@ -177,7 +175,7 @@ FROM OPENJSON(@json) WITH (
 - You can optionally specify a path after the type specification to reference a nested property or to reference a property by a different name.
 - The optional `strict` prefix in the path specifies that values for the specified properties must exist in the JSON text.
 
-For more information, see [Parse and Transform JSON Data with OPENJSON](convert-json-data-to-rows-and-columns-with-openjson-sql-server.md) and [OPENJSON (Transact-SQL)](../../t-sql/functions/openjson-transact-sql.md).
+For more information, see [Parse and Transform JSON Data with OPENJSON](convert-json-data-to-rows-and-columns-with-openjson-sql-server.md) and [OPENJSON](../../t-sql/functions/openjson-transact-sql.md).
 
 JSON documents might have sub-elements and hierarchical data that can't be directly mapped into the standard relational columns. In this case, you can flatten JSON hierarchy by joining parent entity with sub-arrays.
 
@@ -265,7 +263,7 @@ The `FOR JSON` clause formats SQL results as JSON text that can be provided to a
 ]
 ```
 
-For more information, see [Format query results as JSON with FOR JSON](format-query-results-as-json-with-for-json-sql-server.md) and [FOR Clause (Transact-SQL)](../../t-sql/queries/select-for-clause-transact-sql.md).
+For more information, see [Format query results as JSON with FOR JSON](format-query-results-as-json-with-for-json-sql-server.md) and [SELECT - FOR Clause](../../t-sql/queries/select-for-clause-transact-sql.md).
 
 ### JSON data from aggregates
 
@@ -281,41 +279,41 @@ JSON aggregate functions enable construction of JSON objects or arrays based on 
 
 JSON support in [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and Azure SQL Database lets you combine relational and NoSQL concepts. You can easily transform relational to semi-structured data and vice-versa. JSON isn't a replacement for existing relational models, however. Here are some specific use cases that benefit from the JSON support in [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and in SQL Database.
 
-### Simplify complex data models
+- Simplify complex data models
 
-Consider denormalizing your data model with JSON fields in place of multiple child tables.
+    Consider denormalizing your data model with JSON fields in place of multiple child tables.
 
-### Store retail and e-commerce data
+- Store retail and e-commerce data
 
-Store info about products with a wide range of variable attributes in a denormalized model for flexibility.
+    Store info about products with a wide range of variable attributes in a denormalized model for flexibility.
 
-### Process log and telemetry data
+- Process log and telemetry data
 
-Load, query, and analyze log data stored as JSON files with all the power of the Transact-SQL language.
+    Load, query, and analyze log data stored as JSON files with all the power of the Transact-SQL language.
 
-### Store semi-structured IoT data
+- Store semi-structured IoT data
 
-When you need real-time analysis of IoT data, load the incoming data directly into the database instead of staging it in a storage location.
+    When you need real-time analysis of IoT data, load the incoming data directly into the database instead of staging it in a storage location.
 
-### Simplify REST API development
+- Simplify REST API development
 
-Transform relational data from your database easily into the JSON format used by the REST APIs that support your web site.
+    Transform relational data from your database easily into the JSON format used by the REST APIs that support your web site.
 
 ## Combine relational and JSON data
 
 [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] provides a hybrid model for storing and processing both relational and JSON data by using standard Transact-SQL language. You can organize collections of your JSON documents in tables, establish relationships between them, combine strongly typed scalar columns stored in tables with flexible key/value pairs stored in JSON columns, and query both scalar and JSON values in one or more tables by using full Transact-SQL.
 
-JSON text is stored in `VARCHAR` or `NVARCHAR` columns and is indexed as plain text. Any [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] feature or component that supports text supports JSON, so there are almost no constraints on interaction between JSON and other [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] features. You can store JSON in In-memory or Temporal tables, apply Row-Level Security predicates on JSON text, and so on.
+JSON text is stored in **varchar** or **nvarchar** columns and is indexed as plain text. Any [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] feature or component that supports text supports JSON, so there are almost no constraints on interaction between JSON and other [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] features. You can store JSON in In-memory or Temporal tables, apply Row-Level Security predicates on JSON text, and so on.
 
 Here are some use cases that show how you can use the built-in JSON support in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
 
 ## Store and index JSON data in SQL Server
 
-JSON is a textual format so the JSON documents can be stored in `NVARCHAR` columns in a SQL Database. Since `NVARCHAR` type is supported in all [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] subsystems you can put JSON documents in tables with clustered columnstore indexes, memory optimized tables, or external files that can be read using OPENROWSET or PolyBase.
+JSON is a textual format so the JSON documents can be stored in **nvarchar** columns in a SQL Database. Since **nvarchar** type is supported in all [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] subsystems you can put JSON documents in tables with clustered columnstore indexes, memory optimized tables, or external files that can be read using OPENROWSET or PolyBase.
 
 To learn more about your options for storing, indexing, and optimizing JSON data in [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)], see the following articles:
 
-- [Store JSON documents in SQL Server or SQL Database](store-json-documents-in-sql-tables.md)
+- [Store JSON documents](store-json-documents-in-sql-tables.md)
 - [Index JSON data](index-json-data.md)
 - [Optimize JSON processing with in-memory OLTP](optimize-json-processing-with-in-memory-oltp.md)
 
@@ -426,23 +424,21 @@ After you restore the sample database to an instance of [!INCLUDE [ssnoversion-m
 
 Here's what you can do with the scripts that are included in the file:
 
-- Denormalize the existing schema to create columns of JSON data.
+1. Denormalize the existing schema to create columns of JSON data.
 
   - Store information from `SalesReasons`, `SalesOrderDetails`, `SalesPerson`, `Customer`, and other tables that contain information related to sales order into JSON columns in the `SalesOrder_json` table.
 
   - Store information from `EmailAddresses` and `PersonPhone` tables in the `Person_json` table as arrays of JSON objects.
 
-- Create procedures and views that query JSON data.
+1. Create procedures and views that query JSON data.
 
-- Index JSON data. Create indexes on JSON properties and full-text indexes.
+1. Index JSON data. Create indexes on JSON properties and full-text indexes.
 
-- Import and export JSON. Create and run procedures that export the content of the `Person` and the `SalesOrder` tables as JSON results, and import and update the `Person` and the `SalesOrder` tables by using JSON input.
+1. Import and export JSON. Create and run procedures that export the content of the `Person` and the `SalesOrder` tables as JSON results, and import and update the `Person` and the `SalesOrder` tables by using JSON input.
 
-- Run query examples. Run some queries that call the stored procedures and views that you created in steps 2 and 4.
+1. Run query examples. Run some queries that call the stored procedures and views that you created in steps 2 and 4.
 
-- Clean up scripts. Don't run this part if you want to keep the stored procedures and views that you created in steps 2 and 4.
-
-
+1. Clean up scripts. Don't run this part if you want to keep the stored procedures and views that you created in steps 2 and 4.
 
 ## Related content
 
