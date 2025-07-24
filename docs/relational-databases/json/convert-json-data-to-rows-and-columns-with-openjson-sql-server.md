@@ -1,10 +1,10 @@
 ---
 title: "Parse and Transform JSON Data with OPENJSON"
 description: OPENJSON converts JSON into a set of rows and columns. Use it to run any SQL query on the returned data, or insert it into a SQL Server table.
-author: jovanpop-msft
-ms.author: jovanpop
-ms.reviewer: jroth, randolphwest
-ms.date: 03/06/2025
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: jovanpop, umajay, randolphwest
+ms.date: 07/23/2025
 ms.service: sql
 ms.topic: how-to
 helpviewer_keywords:
@@ -15,7 +15,7 @@ monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-20
 ---
 # Parse and transform JSON data with OPENJSON
 
-[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricse-fabricdw](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricse-fabricdw.md)]
+[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricse-fabricdw-fabricsqldb](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-svrless-only-fabricse-fabricdw-fabricsqldb.md)]
 
 The `OPENJSON` rowset function converts JSON text into a set of rows and columns. After you transform a JSON collection into a rowset with `OPENJSON`, you can run any SQL query on the returned data or insert it into a SQL Server table. For more information about working with JSON data in the [!INCLUDE [ssdenoversion-md](../../includes/ssdenoversion-md.md)], see [JSON data in SQL Server](json-data-sql-server.md).
 
@@ -116,7 +116,7 @@ This function returns and formats the elements of a JSON array.
 
 - For each column, specified by using the `colName type json_path` syntax, `OPENJSON` converts the value found in each array element on the specified path to the specified type. In this example, values for the `Date` column are taken from each element on the path `$.Order.Date` and converted to datetime values.
 
-For more info and examples, see [Use OPENJSON with an Explicit Schema (SQL Server)](use-openjson-with-an-explicit-schema-sql-server.md).
+For more info and examples, see [Use OPENJSON with an Explicit Schema](use-openjson-with-an-explicit-schema-sql-server.md).
 
 For syntax and usage, see [OPENJSON](../../t-sql/functions/openjson-transact-sql.md).
 

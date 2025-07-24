@@ -1,22 +1,22 @@
 ---
 title: "JSON Path Expressions"
-description: "JSON Path Expressions (SQL Server)"
-author: jovanpop-msft
-ms.author: jovanpop
-ms.reviewer: jroth, randolphwest
-ms.date: 05/19/2025
+description: "Learn how to use JSON Path expressions to reference the properties of JSON objects."
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: jovanpop, umajay, randolphwest
+ms.date: 07/23/2025
 ms.service: sql
 ms.topic: conceptual
+ms.custom:
+  - build-2025
 helpviewer_keywords:
   - "JSON, path expressions"
   - "path expressions (JSON)"
-monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
-ms.custom:
-  - build-2025
+monikerRange: "=azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current||=fabric"
 ---
-# JSON Path Expressions (SQL Server)
+# JSON Path Expressions in the SQL Database Engine
 
-[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-serverless-pool-only](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-serverless-pool-only.md)]
+[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricsqldb](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricsqldb.md)]
 
 Use JSON path expressions to reference the properties of JSON objects.
 
@@ -160,9 +160,9 @@ SELECT value
 FROM OPENJSON (@json, '$.person.info');
 ```
 
-## Learn more about JSON in SQL Server and Azure SQL Database
+## Learn more about JSON
 
-For a visual introduction to the built-in JSON support in SQL Server and Azure SQL Database, see the following video:
+For a visual introduction to the built-in JSON support, see the following video:
 
 - [JSON as a bridge between NoSQL and relational worlds](/shows/datadriven-sqlserver2016/json-as-bridge-betwen-nosql-relational-worlds)
 

@@ -3,8 +3,8 @@ title: "JSON_MODIFY (Transact-SQL)"
 description: JSON_MODIFY updates the value of a property in a JSON string and returns the updated JSON string.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: jovanpop, randolphwest
-ms.date: 01/07/2025
+ms.reviewer: jovanpop, umajay, randolphwest
+ms.date: 07/23/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -17,9 +17,9 @@ monikerRange: "=azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 |
 ---
 # JSON_MODIFY (Transact-SQL)
 
-[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-fabricse-fabricdw](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-fabricse-fabricdw.md)]
+[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-fabricse-fabricdw-fabricsqldb](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-fabricse-fabricdw-fabricsqldb.md)]
 
-Updates the value of a property in a JSON string and returns the updated JSON string.
+The `JSON_MODIFY` syntax updates the value of a property in a JSON string and returns the updated JSON string.
 
 :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md)
 
@@ -61,7 +61,7 @@ A JSON path expression that specifies the property to update.
 
 - `<json path>`
 
-  Specifies the path for the property to update. For more info, see [JSON Path Expressions (SQL Server)](../../relational-databases/json/json-path-expressions-sql-server.md).
+  Specifies the path for the property to update. For more info, see [JSON Path Expressions](../../relational-databases/json/json-path-expressions-sql-server.md).
 
   In [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] and in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], you can provide a variable as the value of *path*.
 
@@ -85,7 +85,7 @@ Returns the updated value of *expression* as properly formatted JSON text.
 
 The `JSON_MODIFY` function lets you either update the value of an existing property, insert a new key:value pair, or delete a key based on a combination of modes and provided values.
 
-The following table compares the behavior of `JSON_MODIFY` in lax mode and in strict mode. For more info about the optional path mode specification (lax or strict), see [JSON Path Expressions (SQL Server)](../../relational-databases/json/json-path-expressions-sql-server.md).
+The following table compares the behavior of `JSON_MODIFY` in lax mode and in strict mode. For more info about the optional path mode specification (lax or strict), see [JSON Path Expressions](../../relational-databases/json/json-path-expressions-sql-server.md).
 
 | New value | Path exists | Lax mode | Strict mode |
 | --- | --- | --- | --- |
@@ -285,5 +285,5 @@ WHERE EmployeeID = 17;
 
 ## Related content
 
-- [JSON Path Expressions (SQL Server)](../../relational-databases/json/json-path-expressions-sql-server.md)
+- [JSON Path Expressions](../../relational-databases/json/json-path-expressions-sql-server.md)
 - [JSON data in SQL Server](../../relational-databases/json/json-data-sql-server.md)

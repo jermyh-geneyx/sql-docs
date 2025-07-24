@@ -1,10 +1,10 @@
 ---
 title: "How FOR JSON Escapes Special Characters and Control Characters"
 description: This article describes how the FOR JSON clause of a SQL Server SELECT statement escapes special characters and represents control characters in the JSON output.
-author: jovanpop-msft
-ms.author: jovanpop
-ms.reviewer: jroth, randolphwest
-ms.date: 03/06/2025
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: jovanpop, umajay, randolphwest
+ms.date: 07/23/2025
 ms.service: sql
 ms.topic: conceptual
 helpviewer_keywords:
@@ -13,12 +13,11 @@ monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-20
 ---
 # How FOR JSON escapes special characters and control characters
 
-[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricse-fabricdw](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricse-fabricdw.md)]
+[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricse-fabricdw-fabricsqldb](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-svrless-only-fabricse-fabricdw-fabricsqldb.md)]
 
 This article describes how the `FOR JSON` clause of a SQL Server `SELECT` statement escapes special characters and represents control characters in the JSON output.
 
-> [!IMPORTANT]  
-> This article describes the built-in support for JSON in Microsoft SQL Server. For general information about escaping and encoding in JSON, see Section 2.5 of the [JSON RFC](https://www.ietf.org/rfc/rfc4627.txt).
+This article describes the built-in support for JSON in Microsoft SQL Server. For general information about escaping and encoding in JSON, see Section 2.5 of the [JSON RFC](https://www.ietf.org/rfc/rfc4627.txt).
 
 ## Escape of special characters
 
@@ -76,6 +75,6 @@ FOR JSON PATH;
 
 ## Related content
 
-- [Format Query Results as JSON with FOR JSON (SQL Server)](format-query-results-as-json-with-for-json-sql-server.md)
+- [Format query results as JSON with FOR JSON](format-query-results-as-json-with-for-json-sql-server.md)
 - [SELECT - FOR Clause (Transact-SQL)](../../t-sql/queries/select-for-clause-transact-sql.md)
-- [JSON as a bridge between NoSQL and relational worlds](https://channel9.msdn.com/events/DataDriven-SQLServer2016/JSON-as-bridge-betwen-NoSQL-relational-worlds)
+- [JSON as a bridge between NoSQL and relational worlds](/shows/datadriven-sqlserver2016/json-as-bridge-betwen-nosql-relational-worlds)
