@@ -4,11 +4,15 @@ description: "VECTOR_NORM takes a vector as an input and returns the norm of the
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: damauri, pookam
-ms.date: 02/18/2025
-ms.update-cycle: 180-days
+ms.date: 07/24/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.collection:
+  - ce-skilling-ai-copilot
+ms.update-cycle: 180-days
+ms.custom:
+  - build-2025
 f1_keywords:
   - "VECTOR_NORM"
   - "VECTOR_NORM_TSQL"
@@ -17,19 +21,13 @@ helpviewer_keywords:
   - "vector, norm calculation"
 dev_langs:
   - "TSQL"
-monikerRange: "= azuresqldb-current"
-ms.collection: ce-skilling-ai-copilot
-ms.custom:
-  - build-2025
+monikerRange: "=sql-server-ver17 || =sql-server-linux-ver17 || =azuresqldb-current || =azuresqldb-mi-current || =fabric"
 ---
 # VECTOR_NORM (Transact-SQL) (Preview)
 
-[!INCLUDE [Azure SQL Database](../../includes/applies-to-version/asdb.md)]
+[!INCLUDE [sqlserver2025-asdb-asmi-fabricsqldb](../../includes/applies-to-version/sqlserver2025-asdb-asmi-fabricsqldb.md)]
 
-> [!NOTE]
-> This data type is in preview and is subject to change. Make sure to read preview usage terms in the [Service Level Agreements (SLA) for Online Services](https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services) document.
-
-Takes a vector as an input and returns the norm of the vector (which is a measure of its length or magnitude) in a given [norm type](https://mathworld.wolfram.com/VectorNorm.html).
+Use `VECTOR_NORM` to take a vector as an input and return the norm of the vector (which is a measure of its length or magnitude) in a given [norm type](https://mathworld.wolfram.com/VectorNorm.html).
 
 For example, if you want to calculate the Euclidean norm (which is the most common norm type), you can use:
 
@@ -37,12 +35,17 @@ For example, if you want to calculate the Euclidean norm (which is the most comm
 SELECT VECTOR_NORM ( vector, 'norm2' )
 FROM ...
 ```
-  
-## Syntax  
-  
+
+> [!NOTE]
+> This data type is in preview and is subject to change. Make sure to read preview usage terms in the [Service Level Agreements (SLA) for Online Services](https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services) document.
+
+`VECTOR_NORM` is available in Azure SQL Managed Instance configured with the [Always-up-to-date](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy) update policy.
+
+## Syntax
+
 :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md)  
 
-```syntaxsql  
+```syntaxsql
 VECTOR_NORM ( vector, norm_type )
 ```
 
@@ -64,7 +67,7 @@ A string with the name of the norm type to use to calculate the norm of the give
 
 The function returns a **float** value that represents the norm of the vector using the specified norm type.
 
-An error is returned if *norm_type* isn't a valid norm type and if the vector is not of the [vector data type](../../t-sql/data-types/vector-data-type.md).
+An error is returned if *norm_type* isn't a valid norm type and if the vector is not of the [vector data type](../data-types/vector-data-type.md).
 
 ## Examples
 
