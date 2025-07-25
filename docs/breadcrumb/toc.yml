@@ -45,10 +45,6 @@
       topicHref: /sql/sql-server/index
       
     - name: SQL Server
-      tocHref: /sql/dea/
-      topicHref: /sql/sql-server/index
-
-    - name: SQL Server
       tocHref: /sql/dma/
       topicHref: /sql/sql-server/index
 
