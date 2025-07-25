@@ -234,6 +234,12 @@ exec sp_configure @configname = 'polybase enabled', @configvalue = 1;
 RECONFIGURE WITH OVERRIDE;
 ```
 
+### Trace flag
+
+**Applies to:** [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions
+
+To use PolyBase capabilities on Linux, you must enable [Trace Flag 13702](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf13702) during SQL Server start up. For more information, see [Configure SQL Server on Linux with the mssql-conf tool](../../linux/sql-server-linux-configure-mssql-conf.md).
+
 ## Update PolyBase
 
 If you already have `mssql-server-polybase` installed, you can update to the latest version with the following commands:
