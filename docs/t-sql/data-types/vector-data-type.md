@@ -4,7 +4,7 @@ description: The vector data type stores vector data optimized for machine learn
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: damauri, pookam
-ms.date: 05/01/2025
+ms.date: 07/25/2025
 ms.update-cycle: 180-days
 ms.service: sql
 ms.subservice: t-sql
@@ -278,9 +278,9 @@ class Program
 ### [JDBC](#tab/jdbc)
 
 > [!IMPORTANT]
-> Requires **Microsoft JDBC Driver for SQL Server 13.1.0 Preview or later** for native vector type support.
+> Requires **Microsoft JDBC Driver for SQL Server 13.1.0 or later versions** for native vector type support.
 
-Example of Insertion of **vector** data into table
+Example of insertion of **vector** data into table:
 
 ```java
 @Test
@@ -315,7 +315,9 @@ public void getVectorData() throws SQLException {
     }
 }
 ```
-Example of selecting vector data from table
+
+Example of selecting **vector** data from a table:
+
 ```java
 @Test
     public void getVectorData() throws SQLException {
