@@ -3,7 +3,7 @@ title: "sys.query_store_query (Transact-SQL)"
 description: Contains information about the query and its associated overall aggregated runtime execution statistics.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 12/16/2023
+ms.date: 07/14/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -28,9 +28,9 @@ Contains information about the query and its associated overall aggregated runti
 | Column name | Data type | Description |
 | --- | --- | --- |
 | `query_id` | **bigint** | Primary key. |
-| `query_text_id` | **bigint** | Foreign key. Joins to [sys.query_store_query_text (Transact-SQL)](sys-query-store-query-text-transact-sql.md) |
-| `context_settings_id` <sup>1</sup> | **bigint** | Foreign key. Joins to [sys.query_context_settings (Transact-SQL)](sys-query-context-settings-transact-sql.md). |
-| `object_id` <sup>2</sup> | **bigint** | ID of the database object that the query is part of (stored procedure, trigger, CLR UDF/UDAgg, etc.). `0` if the query isn't executed as part of a database object (ad hoc query). |
+| `query_text_id` | **bigint** | Foreign key. Joins to [sys.query_store_query_text](sys-query-store-query-text-transact-sql.md) |
+| `context_settings_id` <sup>1</sup> | **bigint** | Foreign key. Joins to [sys.query_context_settings](sys-query-context-settings-transact-sql.md). |
+| `object_id` <sup>2</sup> | **bigint** | ID of the database object that the query is part of (stored procedure, trigger, CLR UDF/UDAgg, etc.). `0` if the query isn't executed as part of a database object (ad hoc query). See the [Remarks](#remarks) section in this article. |
 | `batch_sql_handle` <sup>3</sup> | **varbinary(64)** | ID of the statement batch the query is part of. Populated only if query references temporary tables or table variables. |
 | `query_hash` | **binary(8)** | Zobrist hash over the shape of the individual query, based on the bound (input) logical query tree. Query hints aren't included as part of the hash. |
 | `is_internal_query` <sup>2</sup> | **bit** | The query was generated internally. |
@@ -39,7 +39,7 @@ Contains information about the query and its associated overall aggregated runti
 | `initial_compile_start_time` | **datetimeoffset** | Initial compile start time. |
 | `last_compile_start_time` | **datetimeoffset** | Most recent compile start time. |
 | `last_execution_time` | **datetimeoffset** | Last execution time refers to the last end time of the query/plan. |
-| `last_compile_batch_sql_handle` | **varbinary(64)** | Handle of the last SQL batch in which query was used last time. It can be provided as input to [sys.dm_exec_sql_text (Transact-SQL)](../system-dynamic-management-views/sys-dm-exec-sql-text-transact-sql.md) to get the full text of the batch. |
+| `last_compile_batch_sql_handle` | **varbinary(64)** | Handle of the last SQL batch in which query was used last time. It can be provided as input to [sys.dm_exec_sql_text](../system-dynamic-management-views/sys-dm-exec-sql-text-transact-sql.md) to get the full text of the batch. |
 | `last_compile_batch_offset_start` <sup>2</sup> | **bigint** | Information that can be provided to `sys.dm_exec_sql_text` along with `last_compile_batch_sql_handle`. |
 | `last_compile_batch_offset_end` <sup>2</sup> | **bigint** | Information that can be provided to `sys.dm_exec_sql_text` along with `last_compile_batch_sql_handle`. |
 | `count_compiles` <sup>1</sup> | **bigint** | Compilation statistics. |
@@ -66,9 +66,15 @@ Contains information about the query and its associated overall aggregated runti
 
 <sup>4</sup> Azure Synapse Analytics always returns `None`.
 
+## Remarks
+
+The `object_id` column is populated only when the statement is compiled from a Transact‑SQL module. A module is any schema‑scoped object that has a row in [sys.sql_modules](sys-sql-modules-transact-sql.md).
+
+Because the query optimizer expands non-indexed views before it produces a plan, only the underlying tables remain, though indexed views do appear as tables.
+
 ## Permissions
 
-Requires the **VIEW DATABASE STATE** permission.
+Requires the `VIEW DATABASE STATE` permission.
 
 ## Related content
 
