@@ -505,6 +505,8 @@
         href: database/business-continuity-high-availability-disaster-recover-hadr-overview.md
       - name: High availability
         href: database/high-availability-sla-local-zone-redundancy.md
+      - name: Enable zone redundancy
+        href: database/enable-zone-redundancy.md
       - name: HA/DR checklist
         href: database/high-availability-disaster-recovery-checklist.md
       - name: Automated backups

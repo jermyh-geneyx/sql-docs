@@ -13,7 +13,7 @@ metadata:
   author: WilliamDAssafMSFT
   ms.author: wiassaf
   ms.reviewer: mathoma
-  ms.date: 09/27/2024
+  ms.date: 07/24/2025
 
 # linkListType: architecture | concept | deploy | download | get-started | how-to-guide | learn | overview | quickstart | reference | tutorial | video | whats-new
 
@@ -123,6 +123,8 @@ landingContent:
             url: automated-backups-overview.md
           - text: High availability
             url: high-availability-sla-local-zone-redundancy.md
+          - text: Enable zone redundancy
+            url: enable-zone-redundancy.md
           - text: Active-geo replication
             url: active-geo-replication-overview.md 
           - text: Failover groups
