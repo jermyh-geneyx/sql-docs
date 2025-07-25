@@ -174,6 +174,10 @@ For information about spatial data types, see [Using Spatial Datatypes](use-spat
 
 For information about JSON data type, see [Use JSON Data type](use-json-data-type.md).
 
+## Vector data type
+
+For information about vector data type, see [Using Vector Datatype](using-vector-datatype.md).
+
 ## See also
 
 [Understanding the JDBC driver data types](understanding-the-jdbc-driver-data-types.md)  
