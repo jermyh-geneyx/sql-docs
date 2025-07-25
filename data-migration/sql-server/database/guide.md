@@ -149,4 +149,3 @@ You might encounter a wide variety of compatibility issues, depending both on th
 - [Cloud Adoption Framework for Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/contoso-migration-scale)
 - [Best practices for costing and sizing workloads for migration to Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/migrate-best-practices-costs)
 - [Cloud Migration Resources](https://azure.microsoft.com/migration/resources)
-- [Overview of Database Experimentation Assistant](/sql/dea/database-experimentation-assistant-overview)

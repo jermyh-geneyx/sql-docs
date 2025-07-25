@@ -184,27 +184,10 @@ In Azure SQL Database, a [server](./logical-servers.md) is a logical construct t
 
 When a database with a zone-redundant configuration is created on a logical server, the `master` database associated with the server is automatically made zone-redundant as well. This ensures that in a zonal outage, applications using the database remain unaffected because features dependent on the `master` database, such as logins and firewall rules, are still available. Making the `master` database zone-redundant is an asynchronous process and will take some time to finish in the background.
 
-When none of the databases on a server are zone-redundant, or when you create an empty server, then the `master` database associated with the server is **not zone-redundant**.
+When none of the databases on a server are zone-redundant, or when you create an empty server, then the `master` database associated with the server is **not zone-redundant**. To migrate your Azure SQL Database to use zone redundancy, follow the steps in [Migrate Azure SQL Database to availability zone support](enable-zone-redundancy.md).
 
-You can use Azure PowerShell or the Azure CLI or the [REST API](/rest/api/sql/databases/get) to check the `ZoneRedundant` property for the `master` database:
+To check the `ZoneRedundant` property of the `master` database, use the Azure PowerShell or the Azure CLI or the [REST API](/rest/api/sql/databases/get) steps in [Validate Azure SQL Database availability zone status](enable-zone-redundancy.md#validate-zone-redundancy).
 
-# [Azure PowerShell](#tab/azure-powershell)
-
-Use the following example command to check the value of "ZoneRedundant" property for `master` database.
-
-```powershell
-Get-AzSqlDatabase -ResourceGroupName "myResourceGroup" -ServerName "myServerName" -DatabaseName "master"
-```
-
-# [Azure CLI](#tab/azure-cli)
-
-Use the following example command to check the value of "ZoneRedundant" property for `master` database.
-
-```azurecli
-az sql db show --resource-group "myResourceGroup" --server "myServerName" --name master
-```
-
----
 
 ## <a id="testing-application-fault-resiliency"></a> Test application fault resiliency
 
@@ -226,9 +209,12 @@ A failover can be initiated using PowerShell, REST API, or Azure CLI:
 
 Azure SQL Database features a built-in high availability solution that is deeply integrated with the Azure platform. It's dependent on Service Fabric for failure detection and recovery, on Azure Blob storage for data protection, and on Availability Zones for higher fault tolerance. In addition, SQL Database uses the Always On availability group technology from SQL Server for data synchronization and failover. The combination of these technologies enables applications to fully realize the benefits of a mixed storage model and supports the most demanding SLAs.
 
-## Related content
+## Next step
 
-To learn more, review: 
+> [!div class="nextstepaction"]
+> [Migrate Azure SQL Database to availability zone support](enable-zone-redundancy.md)
+
+## Related content
 
 - [Azure Availability Zones](/azure/reliability/availability-zones-overview)
 - [Service Fabric](/azure/service-fabric/service-fabric-overview)

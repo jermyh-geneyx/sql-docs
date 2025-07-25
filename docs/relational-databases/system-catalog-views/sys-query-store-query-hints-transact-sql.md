@@ -3,7 +3,7 @@ title: "sys.query_store_query_hints (Transact-SQL)"
 description: The sys.query_store_query_hints system catalog view returns Query Store hints.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 11/01/2024
+ms.date: 07/25/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: reference
@@ -29,6 +29,7 @@ Returns query hints from [Query Store hints](../performance/query-store-hints.md
 | --- | --- | --- |
 | `query_hint_id` | **bigint** | Unique identifier of a query hint. |
 | `query_id` | **bigint** | Unique identifier of a query in the Query Store. Foreign key to the `query_id` column in [sys.query_store_query](sys-query-store-query-transact-sql.md). |
+| `replica_group_id` | **bigint** | Determines the scope at which the hint is applied, as per the `replica_group_id` column in [sys.query_store_replicas](sys-query-store-replicas.md). |
 | `query_hint_text` | **nvarchar(max)** | Hint definition in form of `N'OPTION (...)` |
 | `last_query_hint_failure_reason` | **int** | Error code returned when if applying hints failed. Includes the `message_id` of the error message. |
 | `last_query_hint_failure_reason_desc` | **nvarchar(128)** | Includes the error description of the error message. |
@@ -36,7 +37,6 @@ Returns query hints from [Query Store hints](../performance/query-store-hints.md
 | `source` | **int** | Source of Query Store hint: user source is zero and system-generated is non-zero. |
 | `source_desc` | **nvarchar(128)** | Description of source of Query Store hint. |
 | `comment` | **nvarchar(max)** | Internal use only. |
-| `query_hint_scope` | **tinyint** | Determines the scope at which the hint is applied, as per the `replica_group_id` column in [sys.query_store_replicas](sys-query-store-replicas.md). |
 
 ## Remarks
 
@@ -57,6 +57,7 @@ The following example returns existing Query Store hints for `query_id` 39:
 ```sql
 SELECT query_hint_id,
        query_id,
+       replica_group_id,
        query_hint_text,
        last_query_hint_failure_reason,
        last_query_hint_failure_reason_desc,

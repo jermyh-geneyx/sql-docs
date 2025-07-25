@@ -188,10 +188,6 @@ tools:
       imageSrc: media/index/migration-service-symbol.svg
       url: /azure/dms/
     # Card
-    - title: Data Migration Assistant (DMA)
-      imageSrc: media/index/database-migration-assistant-symbol.svg
-      url: /sql/dma/dma-overview
-    # Card
     - title: SQL Server Migration Assistant (SSMA)
       imageSrc: media/index/sql-server-migration-assistant-symbol.svg
       url: /sql/ssma/sql-server-migration-assistant

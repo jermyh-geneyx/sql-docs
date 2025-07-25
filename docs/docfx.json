@@ -97,7 +97,6 @@
         "reporting-services/**/*.md": "SQL Server Reporting Services (SSRS)",
         "reporting-services/report-design/*.md": "Microsoft Report Builder & Power BI Report Builder",
         "reporting-services/report-builder/*.md": "Microsoft Report Builder & Power BI Report Builder",
-        "dea/**/*.md": "Database Experimentation Assistant",
         "sql-server/failover-clusters/**/*.md": "SQL Server Always On",
         "database-engine/availability-groups/**/*.md": "SQL Server Always On",
         "database-engine/database-mirroring/**/*.md": "SQL Server Database Mirroring",
@@ -132,8 +131,6 @@
         "connect/**/*.md": ">= sql-server-2016 || >= sql-server-linux-2017 || = azuresqldb-current || = azuresqldb-mi-current || = azure-sqldw-latest || >= aps-pdw-2016 || = fabric",
         "database-engine/**/*.md": ">= sql-server-2016 || >= sql-server-linux-2017",
         "data-quality-services/**/*.md": "= sql-server-2016 || = sql-server-2017 || = sql-server-linux-2017 || = sql-server-ver15 || = sql-server-linux-ver15 || = sql-server-ver16 || = sql-server-linux-ver16",
-        "dea/**/*.md": ">= sql-server-2016 || >= sql-server-linux-2017 || = azuresqldb-current || = azuresqldb-mi-current || = azure-sqldw-latest || >= aps-pdw-2016",
-        "dma/**/*.md": ">= sql-server-2016 || >= sql-server-linux-2017 || = azuresqldb-current || = azuresqldb-mi-current || = azure-sqldw-latest || >= aps-pdw-2016",
         "dmx/**/*.md": ">= sql-server-2016",
         "integration-services/**/*.md": ">=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-current||=azuresqldb-mi-current",
         "language-extensions/**/*.md": ">= sql-server-ver15 || >= sql-server-linux-ver15",
@@ -247,7 +244,6 @@
         "database-engine/service-broker/*.md": "UpdateFrequency5",
         "data-quality-services/*.md": "UpdateFrequency5",
         "data-quality-services/install-windows/*.md": "UpdateFrequency5",
-        "dea/*.md": "UpdateFrequency5",
         "dmx/*.md": "UpdateFrequency5",
         "integration-services/**/*.md": "UpdateFrequency5",
         "integration-services/catalog/*.md": "UpdateFrequency5",
@@ -365,7 +361,6 @@
         "database-engine/service-broker/*.md": "1825-days",
         "data-quality-services/*.md": "1825-days",
         "data-quality-services/install-windows/*.md": "1825-days",
-        "dea/*.md": "1825-days",
         "dmx/*.md": "1825-days",
         "integration-services/**/*.md": "1825-days",
         "integration-services/catalog/*.md": "1825-days",
@@ -533,12 +528,6 @@
         ],
         "ado/**/*.md": [
           "sql-server-ver15"
-        ],
-        "dea/**/*.md": [
-          "sql-server-ver16"
-        ],
-        "dma/**/*.{md,yml,yaml}": [
-          "sql-server-ver16"
         ]
       }
     },
