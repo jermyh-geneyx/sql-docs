@@ -107,16 +107,12 @@ If connectivity is restored within 30 days, pay-as-you-go billing resumes based 
 
 ## Recurring billing consent
 
-You have to consent to recurring billing before it can be activated.
+An explicit consent is required to select the pay-as-you-go billing for SQL Server in the CSP-managed Azure subscriptions.
 
 Consent is recorded by adding a `ConsentToRecurringPAYG` property to the Azure extension for SQL Server resource. It consists of the two values:
 
 - `Consented`: Indicates that you agree to recurring billing.
 - `ConsentTimestamp`: The UTC timestamp marking when the consent was granted. This timestamp is used by the Hybrid Data Service to determine when recurring billing goes into effect. After that time any disconnection longer than 30 days activates the recurring pay-as-you-go billing.  
-
-### Customer consent requirement for recurring billing
-
-An explicit consent is required to select the pay-as-you-go billing for SQL Server in the CSP-managed Azure subscriptions.
 
 > [!IMPORTANT]
 >
@@ -124,7 +120,7 @@ An explicit consent is required to select the pay-as-you-go billing for SQL Serv
 >
 > Once registered, the consent property can't be changed without reinstalling the extension.
 
-### Enable recurring pay-as-you-go at scale using Azure Automation
+## Enable recurring pay-as-you-go at scale using Azure Automation
 
 Cloud solution providers who manage large customer accounts can enable recurring pay-as-you-go billing on multiple machines with a script. A flexible Modify License Type PowerShell script performs the necessary configuration changes, including the registration of consent. For example, the following operation will switch all connected machines in the same tenant to pay-as-you-go:
 
