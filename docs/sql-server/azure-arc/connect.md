@@ -1,12 +1,13 @@
 ---
-title: Connect your SQL Server to Azure Arc
+title: Connect Your SQL Server to Azure Arc
 description: Connect an instance of SQL Server to Azure Arc. Allows you to manage SQL Server centrally, as an Arc-enabled resource.
 author: anosov1960
 ms.author: sashan
 ms.reviewer: mikeray, maghan
-ms.date: 03/08/2024
+ms.date: 07/08/2025
 ms.topic: how-to
-ms.custom: references_regions
+ms.custom:
+  - references_regions
 ---
 
 # Connect your SQL Server to Azure Arc
@@ -15,22 +16,23 @@ ms.custom: references_regions
 
 [!INCLUDE [automatic](includes/if-manual.md)]
 
-This article explains how to connect your SQL Server instance to Azure Arc. Before you proceed, complete the [Prerequisites](prerequisites.md).
+This article explains how to connect your SQL Server instance to Azure Arc. Before you proceed, complete the [Prerequisites - SQL Server enabled by Azure Arc](prerequisites.md).
 
 ## Onboard the server to Azure Arc
 
 If the server that runs your SQL Server instance isn't yet connected to Azure, you can initiate the connection from the target machine using the onboarding script. This script connects the server to Azure and installs the Azure extension for SQL Server.
 
 > [!NOTE]  
-> If your server is already connected to Azure, proceed to [When the machine is already connected to an Arc-enabled Server](connect-already-enabled.md).
+> If your server is already connected to Azure, proceed to [Connect your SQL Server to Azure Arc on a server already enabled by Azure Arc](connect-already-enabled.md).
 
 ### Generate an onboarding script for SQL Server
 
-1. Go to **Azure Arc > SQL Server** and select **+ Add**
+1. Go to [Azure Arc](https://portal.azure.com/#view/Microsoft_Azure_ArcCenterUX/ArcCenterMenuBlade/~/getStarted) in the Azure portal.
+1. Under **Data services**, select **SQL Server instances** and then select **+ Add** to open the **Add existing SQL Server instances** page.
 
-   :::image type="content" source="media/join/start-creation-of-sql-server-azure-arc-resource.png" alt-text="Screenshot of the start creation.":::
+   :::image type="content" source="media/join/start-creation-of-sql-server-azure-arc-resource.png" alt-text="Screenshot of the Azure Arc page with SQL Server instances and +Add selected." lightbox="media/join/start-creation-of-sql-server-azure-arc-resource.png":::
 
-1. Under **Connect SQL Server to Azure Arc**, select **Connect Servers**
+1. On the **Add existing SQL Server instances** page, select **Connect SQL Server instances** for a new registration or **Register SQL Server instances** for a disconnected instance.
 
 1. Review the prerequisites and select **Next: Server details**
 
@@ -45,23 +47,23 @@ If the server that runs your SQL Server instance isn't yet connected to Azure, y
 
     To use a specific name for Azure Arc enabled Server instead of default host name, users can add the name for Azure Arc enabled Server in **Server Name**.
 
-   :::image type="content" source="media/join/server-details-sql-server-azure-arc.png" alt-text="Screenshot of server details for Azure Arc.":::
+   :::image type="content" source="media/join/server-details-sql-server-azure-arc.png" alt-text="Screenshot of server details for Azure Arc." lightbox="media/join/server-details-sql-server-azure-arc.png":::
 
-1. Select the SQL Server edition and license type you are using on this machine. Some Arc-enabled SQL Server features are only available for SQL Server instances with Software Assurance (Paid) or with Azure pay-as-you-go. For more information, review [Manage SQL Server license type](manage-configuration.md).
+1. Select the SQL Server edition and license type you're using on this machine. Some Arc-enabled SQL Server features are only available for SQL Server instances with Software Assurance (Paid) or with Azure pay-as-you-go. For more information, review [Configure SQL Server enabled by Azure Arc](manage-configuration.md).
 
-1. Specify the SQL Server instance(s) you want to exclude from registering (if you have multiple instances installed on the server).  Separate each excluded instance by a space.
+1. Specify the SQL Server instance(s) you want to exclude from registering (if you have multiple instances installed on the server). Separate each excluded instance by a space.
 
    > [!IMPORTANT]  
-   > If the machine hosting the SQL Server instance is already [connected to Azure Arc](/azure/azure-arc/servers/onboard-portal), make sure to select the same resource group that contains the corresponding **Server - Azure Arc** resource.
+   > If the machine that hosts the SQL Server instance is already [connected to Azure Arc](/azure/azure-arc/servers/onboard-portal), make sure to select the same resource group that contains the corresponding **Server - Azure Arc** resource.
 
-   :::image type="content" source="media/join/server-details-sql-server-management-azure-arc.png" alt-text="Screenshot of server management details.":::
+   :::image type="content" source="media/join/server-details-sql-server-management-azure-arc.png" alt-text="Screenshot of server management details." lightbox="media/join/server-details-sql-server-management-azure-arc.png":::
 
 1. Select **Next: Tags** to optionally add tags to the resource for your SQL Server instance.
 
 1. Select **Run script** to generate the onboarding script.
 Screenshot of
 
-   :::image type="content" source="media/join/download-script-sql-server-azure-arc.png" alt-text="Screenshot of a download script.":::
+   :::image type="content" source="media/join/download-script-sql-server-azure-arc.png" alt-text="Screenshot of a download script." lightbox="media/join/download-script-sql-server-azure-arc.png":::
 
 1. Select **Download** to download the script to your machine.
 
@@ -97,14 +99,17 @@ In this step, execute the script you downloaded from the Azure portal, on the ta
    ```
 
 ---
+
 ## Validate your Arc-enabled SQL Server resources
 
 Go to **Azure Arc > SQL Server** and open the newly registered Arc-enabled SQL Server resource to validate.
 
-   :::image type="content" source="media/join/validate-sql-server-azure-arc.png" alt-text="Screenshot of validating a connected SQL Server.":::
+   :::image type="content" source="media/join/validate-sql-server-azure-arc.png" alt-text="Screenshot of validating a connected SQL Server." lightbox="media/join/validate-sql-server-azure-arc.png":::
 
-## Next steps
+[!INCLUDE [manage-extension](includes/manage-extension.md)]
 
-- [Configure advanced data security for your SQL Server instance](configure-advanced-data-security.md)
-- [Configure best practices assessment on a [!INCLUDE [ssazurearc](../../includes/ssazurearc.md)] instance](assess.md)
+## Related content
+
+- [Protect SQL Server with Microsoft Defender for Cloud](configure-advanced-data-security.md)
+- [Configure best practices assessment for SQL Server enabled by Azure Arc](assess.md)
 - [Known issues: SQL Server enabled by Azure Arc](known-issues.md)

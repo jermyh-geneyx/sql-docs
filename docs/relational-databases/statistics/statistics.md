@@ -4,7 +4,7 @@ description: The Query Optimizer uses statistics to create query plans that impr
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: derekw, randolphwest
-ms.date: 12/17/2024
+ms.date: 07/07/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
@@ -206,6 +206,8 @@ In [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] prior to [!INCLUDE
 
 Starting with [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], the auto drop option is enabled by default on all new and migrated databases. The `AUTO_DROP` property allows the creation of statistics objects in a mode such that a subsequent schema change *isn't* blocked by the statistic object, but instead the statistics are dropped as necessary. In this way, manually created statistics with auto drop enabled behave like auto-created statistics.
 
+In [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)], and [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions, automatically created statistics always behave as though the [AUTO_DROP](../../relational-databases/statistics/statistics.md#auto_drop-option) has been set.
+
 > [!NOTE]  
 > Trying to set or unset the auto drop property on auto-created statistics can raise errors. Auto-created statistics always uses auto drop. Some backups, when restored, can have this property set incorrectly until the next time the statistics object is updated (manually or automatically). However, auto-created statistics always behave like auto drop statistics. When restoring a database to [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] from a previous version, it's recommended to execute `sp_updatestats` on the database, setting the proper metadata for the statistics auto drop feature.
 
@@ -261,8 +263,8 @@ The Query Optimizer already creates statistics in the following ways:
 
 1. The Query Optimizer creates statistics for indexes on tables or views when the index is created. These statistics are created on the key columns of the index. If the index is a filtered index, the Query Optimizer creates filtered statistics on the same subset of rows specified for the filtered index. For more information about filtered indexes, see [Create filtered indexes](../indexes/create-filtered-indexes.md) and [CREATE INDEX](../../t-sql/statements/create-index-transact-sql.md).
 
-    > [!NOTE]  
-    > Starting with [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)], statistics aren't created by scanning all rows in the table when a partitioned index is created or rebuilt. Instead, the Query Optimizer uses the default sampling algorithm to generate statistics. After upgrading a database with partitioned indexes, you might notice a difference in the histogram data for these indexes. This change in behavior might not affect query performance. To obtain statistics on partitioned indexes by scanning all the rows in the table, use `CREATE STATISTICS` or `UPDATE STATISTICS` with the `FULLSCAN` clause.
+   > [!NOTE]  
+   > In [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)] and later versions, statistics aren't created by scanning all rows in the table when a partitioned index is created or rebuilt. Instead, the Query Optimizer uses the default sampling algorithm to generate statistics. After upgrading a database with partitioned indexes, you might notice a difference in the histogram data for these indexes. This change in behavior might not affect query performance. To obtain statistics on partitioned indexes by scanning all the rows in the table, use `CREATE STATISTICS` or `UPDATE STATISTICS` with the `FULLSCAN` clause.
 
 1. The Query Optimizer creates statistics for single columns in query predicates when [AUTO_CREATE_STATISTICS](../../t-sql/statements/alter-database-transact-sql-set-options.md#auto_create_statistics) is on.
 
@@ -442,69 +444,69 @@ To improve the cardinality estimates for variables and functions, follow these g
 
 - If a stored procedure contains a query that uses a passed-in parameter, avoid changing the parameter value within the stored procedure before using it in the query. The cardinality estimates for the query are based on the passed-in parameter value and not the updated value. To avoid changing the parameter value, you can rewrite the query to use two stored procedures.
 
-    For example, the following stored procedure `Sales.GetRecentSales` changes the value of the parameter `@date` when `@date` is `NULL`.
+  For example, the following stored procedure `Sales.GetRecentSales` changes the value of the parameter `@date` when `@date` is `NULL`.
 
-    ```sql
-    USE AdventureWorks2022;
-    GO
+  ```sql
+  USE AdventureWorks2022;
+  GO
 
-    IF OBJECT_ID('Sales.GetRecentSales', 'P') IS NOT NULL
-        DROP PROCEDURE Sales.GetRecentSales;
-    GO
+  IF OBJECT_ID('Sales.GetRecentSales', 'P') IS NOT NULL
+      DROP PROCEDURE Sales.GetRecentSales;
+  GO
 
-    CREATE PROCEDURE Sales.GetRecentSales
-    @date DATETIME
-    AS
-    BEGIN
-        IF @date IS NULL
-            SET @date = DATEADD(MONTH, -3,
-                (SELECT MAX(ORDERDATE)
-                FROM Sales.SalesOrderHeader));
-        SELECT *
-        FROM Sales.SalesOrderHeader AS h, Sales.SalesOrderDetail AS d
-        WHERE h.SalesOrderID = d.SalesOrderID
-            AND h.OrderDate > @date;
-    END
-    GO
-    ```
+  CREATE PROCEDURE Sales.GetRecentSales
+  @date DATETIME
+  AS
+  BEGIN
+      IF @date IS NULL
+          SET @date = DATEADD(MONTH, -3,
+              (SELECT MAX(ORDERDATE)
+              FROM Sales.SalesOrderHeader));
+      SELECT *
+      FROM Sales.SalesOrderHeader AS h, Sales.SalesOrderDetail AS d
+      WHERE h.SalesOrderID = d.SalesOrderID
+          AND h.OrderDate > @date;
+  END
+  GO
+  ```
 
-    If the first call to the stored procedure `Sales.GetRecentSales` passes a `NULL` for the `@date` parameter, the Query Optimizer compiles the stored procedure with the cardinality estimate for `@date = NULL` even though the query predicate isn't called with `@date = NULL`. This cardinality estimate might be significantly different than the number of rows in the actual query result. As a result, the Query Optimizer might choose a suboptimal query plan. To help avoid this, you can rewrite the stored procedure into two procedures as follows:
+  If the first call to the stored procedure `Sales.GetRecentSales` passes a `NULL` for the `@date` parameter, the Query Optimizer compiles the stored procedure with the cardinality estimate for `@date = NULL` even though the query predicate isn't called with `@date = NULL`. This cardinality estimate might be significantly different than the number of rows in the actual query result. As a result, the Query Optimizer might choose a suboptimal query plan. To help avoid this, you can rewrite the stored procedure into two procedures as follows:
 
-    ```sql
-    USE AdventureWorks2022;
-    GO
+  ```sql
+  USE AdventureWorks2022;
+  GO
 
-    IF OBJECT_ID('Sales.GetNullRecentSales', 'P') IS NOT NULL
-        DROP PROCEDURE Sales.GetNullRecentSales;
-    GO
+  IF OBJECT_ID('Sales.GetNullRecentSales', 'P') IS NOT NULL
+      DROP PROCEDURE Sales.GetNullRecentSales;
+  GO
 
-    CREATE PROCEDURE Sales.GetNullRecentSales
-    @date DATETIME
-    AS
-    BEGIN
-        IF @date IS NULL
-            SET @date = DATEADD(MONTH, -3,
-                (SELECT MAX(ORDERDATE)
-                FROM Sales.SalesOrderHeader));
-        EXECUTE Sales.GetNonNullRecentSales @date;
-    END
-    GO
+  CREATE PROCEDURE Sales.GetNullRecentSales
+  @date DATETIME
+  AS
+  BEGIN
+      IF @date IS NULL
+          SET @date = DATEADD(MONTH, -3,
+              (SELECT MAX(ORDERDATE)
+              FROM Sales.SalesOrderHeader));
+      EXECUTE Sales.GetNonNullRecentSales @date;
+  END
+  GO
 
-    IF OBJECT_ID('Sales.GetNonNullRecentSales', 'P') IS NOT NULL
-        DROP PROCEDURE Sales.GetNonNullRecentSales;
-    GO
+  IF OBJECT_ID('Sales.GetNonNullRecentSales', 'P') IS NOT NULL
+      DROP PROCEDURE Sales.GetNonNullRecentSales;
+  GO
 
-    CREATE PROCEDURE Sales.GetNonNullRecentSales
-    @date DATETIME
-    AS
-    BEGIN
-        SELECT *
-        FROM Sales.SalesOrderHeader AS h, Sales.SalesOrderDetail AS d
-        WHERE h.SalesOrderID = d.SalesOrderID
-            AND h.OrderDate > @date;
-    END
-    GO
-    ```
+  CREATE PROCEDURE Sales.GetNonNullRecentSales
+  @date DATETIME
+  AS
+  BEGIN
+      SELECT *
+      FROM Sales.SalesOrderHeader AS h, Sales.SalesOrderDetail AS d
+      WHERE h.SalesOrderID = d.SalesOrderID
+          AND h.OrderDate > @date;
+  END
+  GO
+  ```
 
 <a id="improving-cardinality-estimates-with-query-hints"></a>
 

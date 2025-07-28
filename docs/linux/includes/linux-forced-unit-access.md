@@ -1,14 +1,14 @@
 ---
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 01/21/2025
+ms.date: 07/03/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: include
 ms.custom:
   - linux-related-content
 ---
-Certain versions of supported Linux distributions provide support for FUA I/O subsystem capability, which provides data durability. [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] uses the FUA capability to provide highly efficient and reliable I/O for [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] workloads. For more information on FUA support by Linux distribution and its effect on [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)], see [SQL Server On Linux: Forced Unit Access (FUA) Internals](https://techcommunity.microsoft.com/t5/sql-server-blog/sql-server-on-linux-forced-unit-access-fua-internals/ba-p/3199102).
+Certain versions of supported Linux distributions provide support for FUA I/O subsystem capability, which provides data durability. [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] uses the FUA capability to provide highly efficient and reliable I/O for [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] workloads. For more information on FUA support by Linux distribution and its effect on [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)], see [SQL Server On Linux: Forced Unit Access (FUA) Internals](https://techcommunity.microsoft.com/blog/sqlserver/sql-server-on-linux-forced-unit-access-fua-internals/3199102).
 
 SUSE Linux Enterprise Server 12 SP5, Red Hat Enterprise Linux 8.0, and Ubuntu 18.04 introduced support for FUA capability in the I/O subsystem. If you're using [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] CU 6 and later versions, you should use following configuration for high performing and efficient I/O implementation with FUA by [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)].
 
@@ -18,7 +18,12 @@ Use this recommended configuration if the following conditions are met.
 
 - Linux distribution and version that supports FUA capability (starting with Red Hat Enterprise Linux 8.0, SUSE Linux Enterprise Server 12 SP5, or Ubuntu 18.04)
 
-- XFS file system for [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] storage
+- **XFS** file system for [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] storage, on Linux kernel 4.18 or later versions.
+
+- **ext4** file system for [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] storage, on Linux kernel 5.6 or later versions.
+
+  > [!NOTE]  
+  > You should use the **XFS** filesystem for hosting [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] data and transaction log files when the Linux kernel version is lower than 5.6. Starting with the kernel version 5.6, you can choose between **XFS** and **ext4** based on your specific requirements.
 
 - Storage subsystem and/or hardware that supports and is configured for FUA capability
 
@@ -38,7 +43,7 @@ For almost all other configuration that doesn't meet the previous conditions, th
 
 1. The [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] must use persisted mounted storage, and not `overlayfs`.
 
-1. The storage must use the XFS filesystem and should support FUA. Before enabling this setting, you should work with your Linux distribution and storage vendor, to ensure that the OS and storage subsystem supports FUA options. On Kubernetes, you can query for the filesystem type using the following command, where `<pvc-name>` is your `PersistentVolumeClaim`:
+1. The storage must use the **XFS** or **ext4** filesystems and should support FUA (**ext4** does not support FUA on the Linux kernel earlier than version 5.6). Before enabling this setting, you should work with your Linux distribution and storage vendor, to ensure that the OS and storage subsystem supports FUA options. On Kubernetes, you can query for the filesystem type using the following command, where `<pvc-name>` is your `PersistentVolumeClaim`:
 
    ```bash
    kubectl describe pv <pvc-name>

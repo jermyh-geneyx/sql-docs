@@ -2,10 +2,10 @@
 title: Work with JSON Data
 titleSuffix: Azure SQL Database & Azure SQL Managed Instance
 description: JSON functionality in the database enables you to parse, query, and format data in JavaScript Object Notation (JSON) notation.
-author: uc-msft
-ms.author: umajay
-ms.reviewer: wiassaf, mathoma
-ms.date: 06/13/2025
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: jovanpop, umajay, mathoma
+ms.date: 07/23/2025
 ms.service: azure-sql
 ms.subservice: development
 ms.topic: how-to

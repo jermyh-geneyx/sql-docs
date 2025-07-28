@@ -3,7 +3,7 @@ title: "Password Policy"
 description: This article goes over the Windows password policy mechanisms applying to a login that uses SQL Server authentication and to a contained database user with a password.
 author: VanMSFT
 ms.author: vanto
-ms.date: 05/24/2024
+ms.date: 06/30/2025
 ms.service: sql
 ms.subservice: security
 ms.topic: conceptual
@@ -39,7 +39,7 @@ helpviewer_keywords:
 [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] can apply the same complexity and expiration policies used in Windows to passwords used inside [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. This functionality depends on the `NetValidatePasswordPolicy` API.
 
 > [!NOTE]  
-> Azure SQL Database enforces [password complexity](#password-complexity). The password expiration and policy enforcement sections do not apply to Azure SQL Database.
+> Azure SQL Database enforces [password complexity](#password-complexity). The password expiration and policy enforcement sections don't apply to Azure SQL Database.
 >
 > For information on password policy for Azure SQL Managed Instance, see our [SQL Managed Instance FAQ](/azure/azure-sql/managed-instance/frequently-asked-questions-faq#password-policy-).
 
@@ -69,7 +69,7 @@ Password expiration policies are used to manage the lifespan of a password. When
 
 ## Policy Enforcement
 
-The enforcement of password policy can be configured separately for each SQL Server login. Use [ALTER LOGIN (Transact-SQL)](../../t-sql/statements/alter-login-transact-sql.md) to configure the password policy options of a SQL Server login. The following rules apply to the configuration of password policy enforcement:
+The enforcement of password policy can be configured separately for each SQL Server login. Use [ALTER LOGIN](../../t-sql/statements/alter-login-transact-sql.md) to configure the password policy options of a SQL Server login. The following rules apply to the configuration of password policy enforcement:
 
 - When CHECK_POLICY is changed to ON, the following behaviors occur:
 
@@ -104,7 +104,7 @@ Some combinations of policy options aren't supported.
 The security policy might be set in Windows, or might be received from the domain. To view the password policy on the computer, use the Local Security Policy MMC snap-in (**secpol.msc**).
 
 > [!NOTE]  
-> For SQL Server logins that have CHECK_POLICY enabled, if you run [ALTER LOGIN](../../t-sql/statements/alter-login-transact-sql.md) and do not include OLD_PASSWORD in the command to change the password, then [Enforce Password History](/windows/security/threat-protection/security-policy-settings/enforce-password-history) is ignored. This is a by-design behavior to allow password resets, despite any previously used passwords. Other checks associated with CHECK_POLICY, including length and complexity are checked regardless of whether OLD_PASSWORD is used.
+> For SQL Server logins that have CHECK_POLICY enabled, if you run [ALTER LOGIN](../../t-sql/statements/alter-login-transact-sql.md) and don't include OLD_PASSWORD in the command to change the password, then [Enforce Password History](/windows/security/threat-protection/security-policy-settings/enforce-password-history) is ignored. This is a by-design behavior to allow password resets, despite any previously used passwords. Other checks associated with CHECK_POLICY, including length and complexity are checked regardless of whether OLD_PASSWORD is used.
 
 ## Checking SQL user password policy information
 
@@ -128,18 +128,18 @@ FROM sys.sql_logins;
 
 ## Related tasks
 
-[CREATE LOGIN (Transact-SQL)](../../t-sql/statements/create-login-transact-sql.md)
+[CREATE LOGIN](../../t-sql/statements/create-login-transact-sql.md)
 
-[ALTER LOGIN (Transact-SQL)](../../t-sql/statements/alter-login-transact-sql.md)
+[ALTER LOGIN](../../t-sql/statements/alter-login-transact-sql.md)
 
-[CREATE USER (Transact-SQL)](../../t-sql/statements/create-user-transact-sql.md)
+[CREATE USER](../../t-sql/statements/create-user-transact-sql.md)
 
-[ALTER USER (Transact-SQL)](../../t-sql/statements/alter-user-transact-sql.md)
+[ALTER USER](../../t-sql/statements/alter-user-transact-sql.md)
 
-[Create a Login](../../relational-databases/security/authentication-access/create-a-login.md)
+[Create a login](authentication-access/create-a-login.md)
 
-[Create a Database User](../../relational-databases/security/authentication-access/create-a-database-user.md)
+[Create a database user](authentication-access/create-a-database-user.md)
 
 ## Related content
 
-- [Strong Passwords](../../relational-databases/security/strong-passwords.md)
+- [Strong Passwords](strong-passwords.md)

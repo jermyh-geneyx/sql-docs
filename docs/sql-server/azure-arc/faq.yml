@@ -27,7 +27,7 @@ sections:
         answer: |
            No. Microsoft only captures metadata and information about your SQL Server to help troubleshoot and inventory. The data sent doesn't include user data or about your utilization of SQL Server.
 
-  - name: Billing
+  - name: Pay-as-you-go billing
     questions:
       - question: Does pay-as-you-go billing stop charging when connectivity between the SQL Server resource and Azure is temporarily interrupted?
         answer: No, Intermittent internet connectivity doesn't stop the pay-as-you-go billing. The usage is reported and accounted for by the billing logic when the connectivity is restored.
@@ -49,6 +49,26 @@ sections:
 
       - question: Can I switch from pay-as-you-go to license and vice versa?
         answer: Yes, you can change your selection. To change, run SQL Server Setup again, and choose the **Maintenance** tab, then select **Edition Upgrade**. The mode is now changed to Enterprise license. To revert back to pay-as-you-go, you can use the same steps and change the setting.
+
+      - question: I have an enterprise or a small business account with Microsoft, do I need to enable the recurring pay-as-you-go billing?
+        answer: |
+          No. At this point, recurring billing is only enabled in the cloud solution provider (CSP) managed Azure subscriptions.
+
+      - question: How do I ensure that my VM and SQL server are not billed when it is disconnected or turned off intentionally?
+        answer: |
+          If the machine is offline for less than 30 days and then reconnects, the uploaded SQL Server usage will reflect the offline period, and the monthly invoice will account for it. If you keep the machine offline for longer than 30 days, the pay-as-you-go billing will resume when the machine is back online and reconnects to Azure Arc.
+
+      - question: If I have a server that is regularly disconnected for more than 30 days, what should I do?
+        answer: |
+          - If you take your VM offline intentionally for a period longer than 30 days, and stop using SQL Server, the pay-as-you-go billing will resume when the machine is back online and reconnects to Azure Arc.
+          - If your SQL Server instance is continuously running during the disconnected time period, you must restore the connectivity to stay compliant. Review [Troubleshoot extension](troubleshoot-extension.md).
+
+      - question: How can I be notified about when a given machine does not send usage data when expected or when recurring billing has happened or is happening?
+        answer: |
+          You can:
+          - See the billing mode of each machine in the Arc-enabled SQL Server Billing dashboard in the Azure portal.
+          - Write your own ARG query to get the billing mode and last billed data points.
+          - Subscribe to Activity Log events for when usage records are not received when expected or when recurring billing starts or is happening. Review [Use activity logs with SQL Server enabled by Azure Arc](activity-logs.md).
 
   - name: Security
     questions:
@@ -91,6 +111,28 @@ sections:
     questions:
       - question: How does SQL Server enabled by Azure Arc license management work with associated services? 
         answer: The associated services are represented as SQL Server instances in Azure Resource Manager (ARM) with a service_type property reflecting if it is an engine or an associated service installation. Review [Manage licensing and billing](manage-license-billing.md) and [Extended Security Updates](extended-security-updates.md) for details. 
+
+  - name: "Recurring pay-as-you-go billing"
+    questions:
+      - question: I have an enterprise or a small business account with Microsoft, can I enable recurring pay-as-you-go billing?
+        answer: |
+          No. At this point, recurring billing is only offered to cloud solution provider (CSP) managed customers.
+
+      - question: How do I ensure that my VM and SQL server are not billed when it is disconnected or turned off intentionally?
+        answer: |
+          If the machine is offline for less than 30 days and then reconnects, the uploaded SQL Server usage will reflect the offline period, and the monthly invoice will account for it. If you keep it offline for longer than 30 days, the billing will resume when the machine is back online and reconnects.
+
+      - question: How can I be notified about when a given machine does not send usage data when expected or when recurring billing has happened or is happening?
+        answer: |
+          You can:
+          - See the billing mode of each machine in the Arc-enabled SQL Server Billing dashboard in the Azure portal.
+          - Write your own ARG query to get the billing mode and last billed data points.
+          - Subscribe to Activity Log events for when usage records are not received when expected or when recurring billing starts or is happening.
+          Review [Manage recurrent billing for pay-as-you go licenses](manage-pay-as-you-go-transition.md) for details. 
+
+      - question: Can I enable recurring pay-as-you-go billing for my Arc-enabled SQL Servers that use the license with SA to ensure continuous reclassification?
+        answer: |
+          No. Recurring billing is a feature of pay-as-you-go subscriptions.
 
 additionalContent: |
 

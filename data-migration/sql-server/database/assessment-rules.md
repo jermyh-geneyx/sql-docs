@@ -469,6 +469,6 @@ Review affected objects section in Azure Migrate to see all objects using `xp_cm
 - [Migration guide: SQL Server to Azure SQL Database](guide.md)
 - [Services and tools available for data migration scenarios](/azure/dms/dms-tools-matrix)
 - [What is Azure SQL Database?](/azure/azure-sql/database/sql-database-paas-overview)
-- [Azure total Cost of Ownership Calculator](https://azure.microsoft.com/pricing/tco/calculator/)
+- [Azure Migrate Business case total cost of ownership](/azure/migrate/concepts-business-case-calculation) 
 - [Cloud Adoption Framework for Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/contoso-migration-scale)
 - [Best practices for costing and sizing workloads migrate to Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/migrate-best-practices-costs)

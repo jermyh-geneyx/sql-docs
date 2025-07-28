@@ -71,4 +71,4 @@ After you configure [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] t
 ## Related content
 
 - [Create or delete a server alias for use by a client](create-or-delete-a-server-alias-for-use-by-a-client.md)
-- [SQL Server Browser service](../../tools/configuration-manager/sql-server-browser-service.md)
+- [SQL Server Browser service (Database Engine and SSAS)](sql-server-browser-service-database-engine-and-ssas.md)

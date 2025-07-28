@@ -190,4 +190,3 @@ For pricing:
 
 To migrate:
 - [Migrate to Azure SQL](migration-guides/index.yml)
-- [Identify the right SKU for your on-premises database](/sql/dma/dma-sku-recommend-sql-db/)

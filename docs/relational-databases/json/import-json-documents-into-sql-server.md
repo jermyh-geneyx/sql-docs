@@ -1,17 +1,17 @@
 ---
-title: "Import JSON documents"
-description: "Import JSON documents into SQL Server"
-author: jovanpop-msft
-ms.author: jovanpop
-ms.reviewer: jroth, randolphwest
-ms.date: 02/21/2024
+title: "Import JSON Documents"
+description: "Learn how to import JSON documents into SQL Server."
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: jovanpop, umajay, randolphwest
+ms.date: 07/23/2025
 ms.service: sql
 ms.topic: how-to
-monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Import JSON documents into SQL Server
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-fabricsqldb.md)]
 
 This article describes how to import JSON files into [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)]. JSON documents store many types of data, for example, application logs, sensor data, and so forth. It's important to be able to read the JSON data stored in files, load the data into [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)], and analyze it.
 
@@ -170,5 +170,5 @@ Now you can return this table to the user, or load the data into another table.
 
 ## Related content
 
-- [JSON as a bridge between NoSQL and relational worlds](https://channel9.msdn.com/events/DataDriven-SQLServer2016/JSON-as-bridge-betwen-NoSQL-relational-worlds)
-- [Parse and Transform JSON Data with OPENJSON](convert-json-data-to-rows-and-columns-with-openjson-sql-server.md)
+- [JSON as a bridge between NoSQL and relational worlds](/shows/datadriven-sqlserver2016/json-as-bridge-betwen-nosql-relational-worlds)
+- [Parse and transform JSON data with OPENJSON](convert-json-data-to-rows-and-columns-with-openjson-sql-server.md)

@@ -1,10 +1,10 @@
 ---
-title: Certificate requirements for SQL Server
+title: Certificate Requirements for SQL Server
 description: This article describes the requirements for SQL Server encryption and how to check if a certificate meets the requirements.
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 04/18/2024
+ms.date: 06/30/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
@@ -16,7 +16,7 @@ This article describes certificate requirements for [!INCLUDE [ssnoversion-md](.
 
 ## Certificate requirements for SQL Server encryption
 
-For using TLS for [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] encryption, you need to provision a certificate (one of the three digital types) that meets the following conditions:
+For using Transport Layer Security (TLS) for [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] encryption, you need to provision a certificate (one of the three digital types) that meets the following conditions:
 
 - The certificate must be in either the local computer certificate store or the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] service account certificate store. We recommend local computer certificate store as it avoids reconfiguring certificates with [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] startup account changes.
 
@@ -38,7 +38,7 @@ For using TLS for [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] 
 The client must be able to verify the ownership of the certificate used by the server. If the client has the public key certificate of the certification authority that signed the server certificate, no further configuration is necessary. Microsoft Windows includes the public key certificates of many certification authorities. If the server certificate was signed by a public or private certification authority for which the client doesn't have the public key certificate, you must install the public key certificate of the certification authority that signed the server certificate on each client that is going to connect to [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)].
 
 > [!IMPORTANT]  
-> [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] will not start if a certificate exists in the computer store, but only meets some requirements in the above list and if it's manually configured for use by [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] Configuration Manager or through registry entries. Select another certificate that meets all the requirements or remove the certificate from being used by [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] until you can provision one that meets requirements or use a self-generated certificate as discussed in [SQL Server generated self-signed certificates](configure-sql-server-encryption.md#sql-server-generated-self-signed-certificates).
+> [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] won't start if a certificate exists in the computer store, but only meets some requirements in the above list and if it's manually configured for use by [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] Configuration Manager or through registry entries. Select another certificate that meets all the requirements or remove the certificate from being used by [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] until you can provision one that meets requirements or use a self-generated certificate as discussed in [SQL Server generated self-signed certificates](configure-sql-server-encryption.md#sql-server-generated-self-signed-certificates).
 
 ## Check if a certificate meets the requirements
 
@@ -64,7 +64,7 @@ You can use one of the following methods to check the validity of the certificat
 
 ### Expired certificates
 
-[!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] only checks the validity of the certificates at the time of configuration. For example, you can't use Configuration Manager on [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and later versions, to provision an expired certificate. [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] continues to run without problems if the certificate expires after it is already provisioned. But, some client applications like Power BI check the validity of the certificate on each connection and raise an error if the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] instance is configured to use an expired certificate for encryption. We recommend that you don't use an expired certificate for [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] encryption.
+[!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] only checks the validity of the certificates at the time of configuration. For example, you can't use Configuration Manager on [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and later versions, to provision an expired certificate. [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] continues to run without problems if the certificate expires after it's already provisioned. But, some client applications like Power BI check the validity of the certificate on each connection and raise an error if the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] instance is configured to use an expired certificate for encryption. We recommend that you don't use an expired certificate for [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] encryption.
 
 ## Related content
 

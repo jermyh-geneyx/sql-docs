@@ -1,9 +1,9 @@
 ---
-title: "Configure server startup options (SQL Server Configuration Manager)"
+title: "Configure Server Startup Options (SQL Server Configuration Manager)"
 description: Learn how to set options that the SQL Server Database Engine uses when it starts. View limitations and restrictions on making changes to startup parameters.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 07/26/2024
+ms.date: 07/15/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: how-to
@@ -29,7 +29,7 @@ This article describes how to configure startup options that are used every time
 
 On a cluster, changes must be made on the active server when [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] is online, which take effect when the [!INCLUDE [ssDE](../../includes/ssde-md.md)] is restarted. The registry update of the startup options on the other node will occur upon the next failover.
 
-Starting with [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], when you set the **Start Mode** for a [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] service to *Automatic* in Configuration Manager, the service starts in *Automatic (Delayed Start)* mode instead, even though the **Start Mode** shows as *Automatic*.
+In [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions, when you set the **Start Mode** for a [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] service to *Automatic* in Configuration Manager, the service starts in *Automatic (Delayed Start)* mode instead, even though the **Start Mode** shows as *Automatic*.
 
 ## Permissions
 
@@ -39,7 +39,9 @@ Configuring server startup options is restricted to users who can change the rel
 
 - The domain account that is used by [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], if the [!INCLUDE [ssDE](../../includes/ssde-md.md)] is configured to run under a domain account.
 
-## <a id="SSMSProcedure"></a> Use SQL Server Configuration Manager
+<a id="SSMSProcedure"></a>
+
+## Use SQL Server Configuration Manager
 
 ### Configure startup options
 
@@ -69,7 +71,11 @@ Configuring server startup options is restricted to users who can change the rel
 1. Restart the [!INCLUDE [ssDE](../../includes/ssde-md.md)].
 
    > [!WARNING]  
-   > After you're finished using single-user mode, in the Startup Parameters box, select the **-m** parameter in the **Existing Parameters** box, and then select **Remove**. Restart the [!INCLUDE [ssDE](../../includes/ssde-md.md)] to restore [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] to the typical multi-user mode.
+   > After you're finished using single-user mode, in the Startup Parameters box, select the `-m` parameter in the **Existing Parameters** box, and then select **Remove**. Restart the [!INCLUDE [ssDE](../../includes/ssde-md.md)] to restore [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] to the typical multi-user mode.
+
+- Don't use double quotes around startup parameter values even if they contain spaces or special characters.
+
+- [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Configuration Manager doesn't support dashes (`-`) and slashes (`/`) in startup parameter values.
 
 ## Related content
 

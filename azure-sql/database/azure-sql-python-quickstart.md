@@ -1,9 +1,9 @@
 ---
 title: Connect to and query Azure SQL Database using Python and the pyodbc library
 description: Learn how to connect to a database in Azure SQL Database and query data using Python and the pyodbc library.
-author: bobtabor-msft
-ms.author: rotabor
-ms.reviewer: mathoma
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: rotabor, mathoma
 ms.custom: passwordless-python
 ms.date: 03/21/2024
 ms.service: azure-sql-database

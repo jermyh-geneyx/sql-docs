@@ -4,10 +4,13 @@ description: "VECTOR_NORMALIZE takes a vector as an input and returns the normal
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: damauri, pookam
-ms.date: 02/18/2025
+ms.date: 07/24/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.collection:
+  - ce-skilling-ai-copilot
+ms.update-cycle: 180-days
 f1_keywords:
   - "VECTOR_NORMALIZE"
   - "VECTOR_NORMALIZE_TSQL"
@@ -16,17 +19,13 @@ helpviewer_keywords:
   - "vector, normalize calculation"
 dev_langs:
   - "TSQL"
-monikerRange: "= azuresqldb-current"
-ms.collection: ce-skilling-ai-copilot
+monikerRange: "=sql-server-ver17 || =sql-server-linux-ver17 || =azuresqldb-current || =azuresqldb-mi-current || =fabric"
 ---
 # VECTOR_NORMALIZE (Transact-SQL) (Preview)
 
-[!INCLUDE [Azure SQL Database](../../includes/applies-to-version/asdb.md)]
+[!INCLUDE [sqlserver2025-asdb-asmi-fabricsqldb](../../includes/applies-to-version/sqlserver2025-asdb-asmi-fabricsqldb.md)]
 
-> [!NOTE]
-> This data type is in preview and is subject to change. Make sure to read preview usage terms in the [Service Level Agreements (SLA) for Online Services](https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services) document.
-
-`VECTOR_NORMALIZE` takes a vector as an input and returns the normalized vector, which is a vector scaled to have a length of 1 in a given [norm type](https://mathworld.wolfram.com/VectorNorm.html).
+Use `VECTOR_NORMALIZE` to take a vector as an input and return the normalized vector, which is a vector scaled to have a length of 1 in a given [norm type](https://mathworld.wolfram.com/VectorNorm.html).
 
 This standardization is crucial in various artificial intelligence applications where vectors represent different forms of data, such as visual content, textual information, or audio signals. By normalizing vectors, we ensure uniformity in their scale, which is particularly useful for operations that rely on measuring vector distances or for grouping and distinguishing data points.
 
@@ -42,6 +41,11 @@ For example, if you want a normalized vector using the Euclidean norm (which is 
 SELECT VECTOR_NORMALIZE ( vector, 'norm2' )
 FROM ...
 ```
+
+> [!NOTE]  
+> - This function is in preview and is subject to change. Make sure to read preview usage terms in [Service Level Agreements (SLA) for Online Services](https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services).
+
+`VECTOR_NORMALIZE` is available in Azure SQL Managed Instance configured with the [Always-up-to-date](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy) update policy.
 
 ## Syntax
 
@@ -71,7 +75,7 @@ The result is a vector with the same direction as the input vector but with a le
 
 If the input is `NULL`, the returned result will also be `NULL`.
 
-An error is returned if *norm_type* isn't a valid norm type and if the *vector* is not of the [vector](../../t-sql/data-types/vector-data-type.md) data type.
+An error is returned if *norm_type* isn't a valid norm type and if the *vector* is not of the [vector](../data-types/vector-data-type.md) data type.
 
 ## Examples
 
@@ -103,6 +107,6 @@ SELECT VECTOR_NORMALIZE(@v, 'norm1'), VECTOR_NORMALIZE(@v, 'norminf');
 
 ## Related content
 
-- [Vector functions (Transact SQL)](../..//t-sql/functions/vector-functions-transact-sql.md)
-- [Vector data type](../../t-sql/data-types/vector-data-type.md)
+- [Vector functions (preview)](vector-functions-transact-sql.md)
+- [Vector data type](../data-types/vector-data-type.md)
 - [Intelligent applications with Azure SQL Database](/azure/azure-sql/database/ai-artificial-intelligence-intelligent-applications)

@@ -61,7 +61,7 @@ Because SQL Server Configuration Manager is a snap-in for the [!INCLUDE [msconam
 - [Run SQL Server With or Without a Network](run-sql-server-with-or-without-a-network.md)
 - [Security Requirements for Managing Services](security-requirements-for-managing-services.md)
 - [Single-user mode for SQL Server](start-sql-server-in-single-user-mode.md)
-- [SQL Server Browser Service (Database Engine and SSAS)](sql-server-browser-service-database-engine-and-ssas.md)
+- [SQL Server Browser service (Database Engine and SSAS)](sql-server-browser-service-database-engine-and-ssas.md)
 - [SQL Server Configuration Manager: Change the password of the accounts used](scm-services-change-the-password-of-the-accounts-used.md)
 - [SQL Server Configuration Manager: Change the service startup account](scm-services-change-the-service-startup-account.md)
 - [SQL Server Configuration Manager: Configure server startup options](scm-services-configure-server-startup-options.md)

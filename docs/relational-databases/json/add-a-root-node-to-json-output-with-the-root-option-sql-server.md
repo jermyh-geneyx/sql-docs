@@ -1,10 +1,10 @@
 ---
 title: "Add a Root Node to JSON Output with the ROOT Option"
 description: "To add a single, top-level element to the JSON output of the FOR JSON clause, specify the ROOT option."
-author: jovanpop-msft
-ms.author: jovanpop
-ms.reviewer: jroth
-ms.date: 03/06/2025
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: jovanpop, umajay
+ms.date: 07/23/2025
 ms.service: sql
 ms.topic: how-to
 helpviewer_keywords:
@@ -13,7 +13,7 @@ monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-20
 ---
 # Add a Root Node to JSON Output with the ROOT Option
 
-[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricse-fabricdw](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricse-fabricdw.md)]
+[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricse-fabricdw-fabricsqldb](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-svrless-only-fabricse-fabricdw-fabricsqldb.md)]
 
   To add a single, top-level element to the JSON output of the `FOR JSON` clause, specify the `ROOT` option.  
 
@@ -149,8 +149,8 @@ SELECT TOP 5
 
 For a visual introduction to the built-in JSON support, see the following videos:
 
--   [JSON as a bridge between NoSQL and relational worlds](https://channel9.msdn.com/events/DataDriven-SQLServer2016/JSON-as-bridge-betwen-NoSQL-relational-worlds)
+- [JSON as a bridge between NoSQL and relational worlds](/events/datadriven-sqlserver2016/json-as-bridge-betwen-nosql-relational-worlds)
 
 ## Related content
 
-- [FOR Clause (Transact-SQL)](../../t-sql/queries/select-for-clause-transact-sql.md)
+- [SELECT - FOR Clause (Transact-SQL)](../../t-sql/queries/select-for-clause-transact-sql.md)

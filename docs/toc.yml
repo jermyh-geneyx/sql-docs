@@ -1912,7 +1912,7 @@ items:
       - name: Cleanup and troubleshooting
         href: relational-databases/track-changes/cleanup-and-troubleshoot-change-tracking-sql-server.md
     - name: Change event streaming
-      items: 
+      items:
       - name: Overview
         href: relational-databases/track-changes/change-event-streaming/overview.md
       - name: Configure
@@ -2217,8 +2217,12 @@ items:
         href: relational-databases/xml/xml-system-stored-procedures.md
       - name: Use the value() & nodes() Methods with OPENXML
         href: relational-databases/xml/use-the-value-and-nodes-methods-with-openxml.md
-  - name: Vectors and Embeddings
-    href: relational-databases/vectors/vectors-sql-server.md    
+  - name: Vectors and embeddings
+    items:
+      - name: Vectors and embeddings
+        href: relational-databases/vectors/vectors-sql-server.md    
+      - name: Vectors and embeddings FAQ
+        href: relational-databases/vectors/vectors-faq.md    
 - name: Development
   items:
   - name: Code a client program >
@@ -4549,7 +4553,7 @@ items:
       - name: allow updates
         href: database-engine/configure-windows/allow-updates-server-configuration-option.md
       - name: availability group commit time
-        href: database-engine/configure-windows/availability-group-commit-time-server-configuration-options.md     
+        href: database-engine/configure-windows/availability-group-commit-time-server-configuration-options.md
       - name: backup checksum default
         href: database-engine/configure-windows/backup-checksum-default.md
       - name: backup compression algorithm
@@ -4621,7 +4625,7 @@ items:
       - name: Configure the max worker threads
         href: database-engine/configure-windows/configure-the-max-worker-threads-server-configuration-option.md
       - name: Configure ucs flow control
-        href: database-engine/configure-windows/ucs-flow-control-sp-configure.md   
+        href: database-engine/configure-windows/ucs-flow-control-sp-configure.md
       - name: Configure the media retention
         href: database-engine/configure-windows/configure-the-media-retention-server-configuration-option.md
       - name: Configure the min memory per query
@@ -4706,7 +4710,7 @@ items:
       - name: SQL Server Configuration Manager services
         items:
         - name: SQL Server Services
-          href: tools\configuration-manager\sql-server-services.md
+          href: tools/configuration-manager/sql-server-services.md
         - name: Connect to another computer
           href: database-engine/configure-windows/scm-services-connect-to-another-computer.md
         - name: Set an instance to start automatically
@@ -5390,8 +5394,25 @@ items:
         - name: Snapshot replication
           href: relational-databases/replication/snapshot-replication.md
         - name: Merge replication
-          href: relational-databases/replication/merge/merge-replication.md
           items:
+          - name: Overview
+            href: relational-databases/replication/merge/merge-replication.md
+          - name: How merge replication works
+            items:
+            - name: Initialize publications and subscriptions
+              href: relational-databases/replication/merge/merge-replication-initialize-publication-subscription.md
+            - name: Track and enumerate changes
+              href: relational-databases/replication/merge/merge-replication-track-enumerate-changes.md
+            - name: Evaluate partitions in filtered publications
+              href: relational-databases/replication/merge/merge-replication-evaluate-partition-filtered-publication.md
+            - name: Manage subscription expiration and metadata cleanup
+              href: relational-databases/replication/merge/merge-replication-manage-subscription-expiration-metadata-cleanup.md
+            - name: Detect and resolve conflicts
+              items:
+              - name: Overview
+                href: relational-databases/replication/merge/merge-replication-detect-resolve-conflicts.md
+              - name: Conflict resolution by subscription type and assigned priorities
+                href: relational-databases/replication/merge/merge-replication-resolve-subscription-priorities.md
           - name: Article options
             href: relational-databases/replication/merge/article-options-for-merge-replication.md
           - name: Best practices for time-based row filters
@@ -5991,57 +6012,6 @@ items:
         href: relational-databases/import-export/use-a-format-file-to-skip-a-data-field-sql-server.md
       - name: Use a format file to map table columns to data-file fields
         href: relational-databases/import-export/use-a-format-file-to-map-table-columns-to-data-file-fields-sql-server.md
-  - name: Database Experimentation Assistant (DEA)
-    href: dea/database-experimentation-assistant-overview.md
-    items:
-    - name: Workload comparison overview
-      href: dea/database-experimentation-assistant-get-started.md
-    - name: Configure replay
-      href: dea/database-experimentation-assistant-configure-replay.md
-    - name: Capture trace
-      href: dea/database-experimentation-assistant-capture-trace.md
-    - name: Replay trace
-      href: dea/database-experimentation-assistant-replay-trace.md
-    - name: Create reports
-      href: dea/database-experimentation-assistant-create-report.md
-    - name: Review reports
-      href: dea/database-experimentation-assistant-view-report.md
-    - name: Run at command prompt
-      href: dea/database-experimentation-assistant-run-command-prompt.md
-  - name: Database Migration Assistant (DMA)
-    items:
-    - name: Overview
-      href: dma/dma-overview.md
-    - name: Usage and diagnostic data
-      href: dma/dma-diagnostic-data-collection.md
-    - name: What's new
-      href: dma/dma-whats-new.md
-    - name: Assess SQL Server Integration Services (SSIS)
-      href: dma/dma-assess-ssis.md
-    - name: Save and load assessments
-      href: dma/dma-save-load-assessments.md
-    - name: Identify target Azure SQL SKU
-      href: dma/dma-sku-recommend-sql-db.md
-    - name: Upgrade SQL Server to a later version
-      href: dma/dma-migrateonpremsql.md
-    - name: Migrate SQL Server to Azure SQL Database
-      href: dma/dma-migrateonpremsqltosqldb.md
-    - name: Migrate SQL Server logins
-      href: dma/dma-migrateserverlogins.md
-    - name: Best practices
-      href: dma/dma-bestpractices.md
-    - name: Run from the command-line
-      href: dma/dma-commandline.md
-    - name: Configure settings
-      href: dma/dma-configurationsettings.md
-    - name: Assess Azure SQL DB readiness
-      items:
-      - name: Create assessment
-        href: dma/dma-assesssqlonprem.md
-      - name: Use DMA GUI
-        href: dma/dma-assess-sql-data-estate-to-sqldb.md
-      - name: Use DMA command-line
-        href: dma/dma-assess-sql-data-estate-to-sqldb-commandline.md
   - name: SQL Server Migration Assistant (SSMA)
     href: ssma/toc.yml
   - name: Azure Synapse Pathway
@@ -7804,6 +7774,8 @@ items:
   items:
   - name: Overview
     href: relational-databases/security/securing-sql-server.md
+  - name: Security baseline
+    href: relational-databases/security/secure-sql-server.md
   - name: Best practices
     href: relational-databases/security/sql-server-security-best-practices.md
   - name: How-to
@@ -8177,19 +8149,19 @@ items:
       href: tools/mssql-cli.md
     - name: osql
       href: tools/osql-utility.md
-    - name: Profiler Utility
+    - name: Profiler utility
       href: tools/profiler-utility.md
-    - name: sqlagent90 Application
-      href: tools/sqlagent90-application.md
+    - name: sqlagent application
+      href: tools/sqlagent-application.md
     - name: SQLdiag
       href: tools/sqldiag-utility.md
     - name: SqlLocalDB
       href: tools/sqllocaldb-utility.md
-    - name: sqllogship Application
+    - name: sqllogship application
       href: tools/sqllogship-application.md
     - name: sqlmaint
       href: tools/sqlmaint-utility.md
-    - name: sqlservr Application
+    - name: sqlservr application
       href: tools/sqlservr-application.md
     - name: tablediff
       href: tools/tablediff-utility.md
@@ -8321,13 +8293,14 @@ items:
       - name: Cancel Option
         href: tools/distributed-replay/cancel-option-distributed-replay-administration-tool.md
   - name: SQL Server Configuration Manager
-    href: tools\configuration-manager\sql-server-configuration-manager.md
     items:
+    - name: Overview
+      href: tools/configuration-manager/sql-server-configuration-manager.md
     - name: Help
       href: tools/configuration-manager/sql-server-configuration-manager-help.md
-    - name: SQL Server Browser Service
-      href: tools/configuration-manager/sql-server-browser-service.md
-    - name: Connecting Using IPv6
+    - name: SQL Server Browser service
+      href: database-engine/configure-windows/sql-server-browser-service-database-engine-and-ssas.md
+    - name: Connect using IPv6
       href: tools/configuration-manager/connecting-using-ipv6.md
     - name: Analysis Server
       href: tools/configuration-manager/analysis-server-server-sql-server-configuration-manager.md
@@ -8463,6 +8436,12 @@ items:
     items:
     - name: sqlcmd overview
       href: tools/sqlcmd/sqlcmd-utility.md
+    - name: Check installed version
+      href: tools/sqlcmd/sqlcmd-installed-version.md
+    - name: Download and install
+      href: tools/sqlcmd/sqlcmd-download-install.md
+    - name: sqlcmd edit and variable commands
+      href: tools/sqlcmd/sqlcmd-commands.md
     - name: Authenticate sqlcmd with Microsoft Entra ID
       href: tools/sqlcmd/sqlcmd-authentication.md
     - name: Start the utility
@@ -9050,7 +9029,7 @@ items:
         href: linux/sql-server-linux-editions-and-components-2019.md
       - name: SQL Server 2017
         href: linux/sql-server-linux-editions-and-components-2017.md
-    - name: FAQ
+    - name: Linux FAQ
       href: linux/sql-server-linux-faq.yml
     - name: Known issues
       href: linux/sql-server-linux-known-issues.md
@@ -9411,6 +9390,8 @@ items:
         href: sql-server/azure-arc/manage-configuration.md
       - name: Licensing & billing
         href: sql-server/azure-arc/manage-license-billing.md
+      - name: Manage pay-as-you-go transition
+        href: sql-server/azure-arc/manage-pay-as-you-go-transition.md
       - name: Extended Security Updates
         href: sql-server/azure-arc/extended-security-updates.md
       - name: Automate updates
@@ -9473,7 +9454,9 @@ items:
         href: sql-server/azure-arc/migration-assessment.md
       - name: Migration dashboard
         href: sql-server/azure-arc/migration-inventory.md
-    - name: FAQ
+      - name: Migrate to Azure SQL Managed Instance
+        href: sql-server/azure-arc/migrate-to-azure-sql-managed-instance.md
+    - name: SQL Server enabled by Azure Arc FAQ
       href: sql-server/azure-arc/faq.yml
     - name: Data collection & reporting
       href: sql-server/azure-arc/data-collection.md
@@ -10105,6 +10088,8 @@ items:
           href: relational-databases/errors-events/mssqlserver-945-database-engine-error.md
         - name: "948"
           href: relational-databases/errors-events/mssqlserver-948-database-engine-error.md
+        - name: "988"
+          href: relational-databases/errors-events/mssqlserver-988-database-engine-error.md
       - name: Errors 1,000 to 1,999
         items:
         - name: Overview
@@ -11985,7 +11970,7 @@ items:
       - name: sys.xml_schema_wildcard_namespaces
         href: relational-databases/system-catalog-views/sys-xml-schema-wildcard-namespaces-transact-sql.md
       - name: sys.xml_schema_wildcards
-        href: relational-databases/system-catalog-views/sys-xml-schema-wildcards-transact-sql.md    
+        href: relational-databases/system-catalog-views/sys-xml-schema-wildcards-transact-sql.md
   - name: System compatibility views
     href: relational-databases/system-compatibility-views/system-compatibility-views-transact-sql.md
     items:
@@ -12125,7 +12110,7 @@ items:
       - name: sys.sp_add_object_to_event_stream_group
         href: relational-databases/system-stored-procedures/sys-sp-add-object-to-event-stream-group-transact-sql.md
       - name: sys.sp_remove_object_from_event_stream_group
-        href: relational-databases/system-stored-procedures/sys-sp-remove-object-from-event-stream-group-transact-sql.md                      
+        href: relational-databases/system-stored-procedures/sys-sp-remove-object-from-event-stream-group-transact-sql.md
     - name: Common Language Runtime
       href: relational-databases/system-dynamic-management-views/common-language-runtime-related-dynamic-management-views-transact-sql.md
       items:
@@ -14377,7 +14362,7 @@ items:
       - name: sp_help_change_feed_table_groups
         href: relational-databases/system-stored-procedures/sp-help-change-feed-table-groups.md
       - name: Internal only mirroring stored procedures
-        items: 
+        items:
         - name: sp_change_feed_create_table_group
           href: relational-databases/system-stored-procedures/sp-change-feed-create-table-group.md
         - name: sp_change_feed_disable_table
@@ -14404,7 +14389,6 @@ items:
           href: relational-databases/system-stored-procedures/sp-has-change-feed-permissions.md
         - name: sp_MSchange_feed_ddl_event
           href: relational-databases/system-stored-procedures/sp-mschange-feed-ddl-event.md
-          
     - name: SQL Server Agent
       href: relational-databases/system-stored-procedures/sql-server-agent-stored-procedures-transact-sql.md
       items:
@@ -16635,6 +16619,8 @@ items:
           href: t-sql/queries/updatetext-transact-sql.md
         - name: WITH common_table_expression
           href: t-sql/queries/with-common-table-expression-transact-sql.md
+        - name: Recursive queries using common table expressions
+          href: t-sql/queries/recursive-common-table-expression-transact-sql.md
         - name: Nested common table expressions in Fabric Warehouse
           href: t-sql/queries/nested-common-table-expression.md
         - name: WRITETEXT

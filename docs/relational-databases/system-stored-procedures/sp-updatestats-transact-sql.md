@@ -4,7 +4,7 @@ description: "Runs UPDATE STATISTICS against all user-defined and internal table
 author: markingmyname
 ms.author: maghan
 ms.reviewer: wiassaf, randolphwest
-ms.date: 06/23/2025
+ms.date: 07/07/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -55,7 +55,7 @@ For disk-based tables, `sp_updatestats` updates statistics based on the `modific
 
 `sp_updatestats` preserves the latest `NORECOMPUTE` option for specific statistics. For more information about disabling and re-enabling statistics updates, see [Statistics](../statistics/statistics.md).
 
-When restoring a database to [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] from a previous version, you should execute `sp_updatestats` on the database. This is related to setting proper metadata for the [statistics auto drop feature](../statistics/statistics.md#auto_drop-option) introduced in [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)]. The auto drop feature is available in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)], and starting with [!INCLUDE [ssSQL22](../../includes/sssql22-md.md)].
+When restoring a database to [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] from a previous version, you should execute `sp_updatestats` on the database. This is related to setting proper metadata for the [statistics auto drop feature](../statistics/statistics.md#auto_drop-option) introduced in [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)]. In [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)], and [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions, automatically created statistics always behave as though the [AUTO_DROP](../../relational-databases/statistics/statistics.md#auto_drop-option) has been set.
 
 ## Permissions
 

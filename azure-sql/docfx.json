@@ -184,6 +184,9 @@
         "database/saas-tenancy-wingtip-app-guidance-tips.md": [
           "azuresql"
         ]
+      },
+      "ms.update-cycle": {
+        "copilot/**.md": "180-days"
       }
     },
     "template": [],

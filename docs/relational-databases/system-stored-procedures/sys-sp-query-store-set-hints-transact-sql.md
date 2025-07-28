@@ -3,7 +3,7 @@ title: "sys.sp_query_store_set_hints (Transact-SQL)"
 description: "Creates or updates Query Store hints for a given query, allowing you to influence queries without changing application code or database objects."
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 06/23/2025
+ms.date: 07/25/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: reference
@@ -33,7 +33,7 @@ Creates or updates [Query Store hints](../performance/query-store-hints.md) for 
 sp_query_store_set_hints
     [ @query_id = ] query_id ,
     [ @query_hints = ] 'query_hints'
-    [ , [ @query_hint_scope = ] 'replica_group_id' ]
+    [ , [ @replica_group_id = ] 'replica_group_id' ]
 [ ; ]
 ```
 
@@ -43,15 +43,23 @@ sp_query_store_set_hints
 
 #### [ @query_id = ] *query_id*
 
-The Query Store `query_id` column from [sys.query_store_query](../system-catalog-views/sys-query-store-query-transact-sql.md). *@query_id* is **bigint**.
+The Query Store `query_id` column from [sys.query_store_query](../system-catalog-views/sys-query-store-query-transact-sql.md).
+
+*@query_id* is **bigint**.
 
 #### [ @query_hints = ] N'*query_hints*'
 
-A character string of query options beginning with `OPTION`. *@query_hints* is **nvarchar(max)**. For more information, see [Supported query hints](#supported-query-hints) in this article.
+A character string of query options beginning with `OPTION`. *@query_hints* is **nvarchar(max)**.
 
-#### [ @query_hint_scope = ] '*replica_group_id*'
+When `USE HINT` is included in the `@query_hints` argument, the single quotes around individual hint names must be repeated. For example, `@query_hints = N'OPTION (MAXDOP = 1, USE HINTS (''ENABLE_QUERY_OPTIMIZER_HOTFIXES'',''QUERY_OPTIMIZER_COMPATIBILITY_LEVEL_150''))'`.
 
-By default, the scope of a new Query Store hint is the local replica only. *@query_hint_scope* is **tinyint**. This optional parameter determines the scope at which the hint will be applied on a secondary replica when [Query Store for readable secondaries](../performance/query-store-for-secondary-replicas.md) is enabled. The optional *query_hint_scope* argument defaults only to the local replica (primary or secondary), but you can optionally specify a *replica_group_id* referencing [sys.query_store_replicas](../system-catalog-views/sys-query-store-replicas.md).
+For more information, see [Supported query hints](#supported-query-hints).
+
+#### [ @replica_group_id = ] '*replica_group_id*'
+
+This optional parameter determines the scope at which the hint is applied on a secondary replica when [Query Store for readable secondaries](../performance/query-store-for-secondary-replicas.md) is enabled. *@replica_group_id* is **bigint**.
+
+The *@replica_group_id* argument defaults to the local replica (primary or secondary), but you can optionally specify a value matching a value in the `replica_group_id` column in [sys.query_store_replicas](../system-catalog-views/sys-query-store-replicas.md) to set a hint for a different replica group.
 
 ## Return value
 
@@ -62,8 +70,8 @@ By default, the scope of a new Query Store hint is the local replica only. *@que
 Hints are specified in a valid T-SQL string format `N'OPTION (..)'`.
 
 - If no Query Store hints exist for a specific *@query_id*, a new Query Store hint is created.
-- If a Query Store hint already exists for a specific *@query_id*, the value specified for *@query_hints* overrides previously specified hints for the associated query.
-- If a *query_id* doesn't exist, an error will be raised.
+- If a Query Store hint already exists for a specific *@query_id*, the value specified for *@query_hints* replaces the previously specified hints for the associated query.
+- If a *query_id* doesn't exist, an error is raised.
 
 In the case where one of the hints would prevent a query plan being produced, all the hints are ignored. For more information about failure details, see [sys.query_store_query_hints](../system-catalog-views/sys-query-store-query-hints-transact-sql.md).
 
@@ -105,7 +113,7 @@ The following query hints are currently unsupported:
 
 ## Permissions
 
-Requires the ALTER permission on the database.
+Requires the `ALTER` permission on the database.
 
 ## Examples
 
@@ -143,7 +151,7 @@ In the following samples, the previous query example in the `SalesLT` database w
 
 ### Apply single hint
 
-The following example applies the RECOMPILE hint to *query_id* 39, as identified in Query Store:
+The following example applies the `RECOMPILE` hint to *query_id* 39, as identified in Query Store:
 
 ```sql
 EXECUTE sys.sp_query_store_set_hints
@@ -161,7 +169,7 @@ EXECUTE sys.sp_query_store_set_hints
 
 ### Apply multiple hints
 
-The following example applies multiple query hints to *query_id* 39, including RECOMPILE, MAXDOP 1, and the SQL 2012 query optimizer behavior:
+The following example applies multiple query hints to *query_id* 39, including `RECOMPILE`, `MAXDOP 1`, and the query optimizer behavior in compatibility level 110:
 
 ```sql
 EXECUTE sys.sp_query_store_set_hints
@@ -176,6 +184,7 @@ The following example returns existing Query Store hints:
 ```sql
 SELECT query_hint_id,
        query_id,
+       replica_group_id,
        query_hint_text,
        last_query_hint_failure_reason,
        last_query_hint_failure_reason_desc,

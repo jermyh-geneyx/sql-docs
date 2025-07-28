@@ -131,7 +131,7 @@ sections:
     questions:
       - question: What if I don't see the banner and "Apply Offer" button?
         answer: |
-          It's possible your subscription isn't eligible for the [free SQL Managed Instance](free-offer.md#prerequisites). Otherwise, there's a limit of one free instance per subscription. You need to remove an existing free instance to create another one. If you have recently deleted your free instance, it can take up to one hour for the free offer banner to reappear.
+          It's possible your subscription isn't eligible for the [free SQL Managed Instance](free-offer.md#supported-subscription-types). Otherwise, there's a limit of one free instance per subscription. You need to remove an existing free instance to create another one. If you have recently deleted your free instance, it can take up to one hour for the free offer banner to reappear.
 
       - question: Help! I'm no longer able to connect to my instance!
         answer: |
@@ -159,7 +159,7 @@ sections:
 
       - question: Can I use my Student subscription with the free Azure SQL Managed Instance?
         answer: |
-          Currently, the Student subscription is ineligible. For eligible subscriptions, review the [free SQL Managed Instance offer prerequisites](free-offer.md#prerequisites).
+          Currently, the Student subscription is ineligible. For eligible subscriptions, review the [free SQL Managed Instance offer supported subscription types](free-offer.md#supported-subscription-types).
 
   - name: Naming conventions
     questions:
@@ -215,7 +215,7 @@ sections:
           - [Automatic tuning](../database/automatic-tuning-overview.md) that provides peak performance and stable workloads through continuous performance tuning based on AI and machine learning.
           - [In-memory OLTP](in-memory-oltp-overview.md) that improves throughput and latency on transactional processing workloads and delivers faster business insights. 
           - Applying some of the [best practices for application and database tuning](performance-guidance.md#tune-your-database).
-          - [Switching the connection type from proxy to redirect mode](connection-types-overview.md#changing-connection-type) for lower latency and higher throughput, in case your workload consists of lots of small transactions.
+          - [Switching the connection type from proxy to redirect mode](connection-types-overview.md#change-the-connection-type) for lower latency and higher throughput, in case your workload consists of lots of small transactions.
 
       - question: How can I further tune performance of my General Purpose managed instance?
         answer: |

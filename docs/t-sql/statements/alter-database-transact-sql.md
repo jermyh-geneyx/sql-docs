@@ -125,7 +125,7 @@ ALTER DATABASE { database_name | CURRENT }
   | <temporal_history_retention>
   | <data_retention_policy>
   | <compatibility_level>
-      { 160 | 150 | 140 | 130 | 120 | 110 | 100 | 90 }
+      { 170 | 160 | 150 | 140 | 130 | 120 | 110 | 100 }
 }
 ```
 
@@ -406,7 +406,7 @@ ALTER DATABASE { database_name | CURRENT }
   | <termination>
   | <temporal_history_retention>
   | <compatibility_level>
-    { 160 | 150 | 140 | 130 | 120 | 110 | 100 | 90 }
+    { 170 | 160 | 150 | 140 | 130 | 120 | 110 | 100 }
 
 }
 ```
@@ -836,7 +836,7 @@ ALTER DATABASE { database_name | CURRENT }
   | <target_recovery_time_option>
   | <temporal_history_retention>
   | <compatibility_level>
-      { 160 | 150 | 140 | 130 | 120 | 110 | 100 | 90 }
+      { 170 | 160 | 150 | 140 | 130 | 120 | 110 | 100 }
 
 }  
 ```
@@ -1008,7 +1008,7 @@ ALTER DATABASE { database_name | Current }
   | ANSI_PADDING { ON | OFF } 
   | ANSI_WARNINGS { ON | OFF } 
   | ARITHABORT { ON | OFF } 
-  | COMPATIBILITY_LEVEL = { 140 | 130 | 120 | 110 | 100 } 
+  | COMPATIBILITY_LEVEL = { 170 | 160 | 150 | 140 | 130 | 120 | 110 | 100 } 
   | CONCAT_NULL_YIELDS_NULL { ON | OFF } 
   | NUMERIC_ROUNDABORT { ON | OFF } 
   | QUOTED_IDENTIFIER { ON | OFF } 

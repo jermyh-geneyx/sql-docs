@@ -266,7 +266,7 @@ The Data SQL Engineering team developed these resources. This team's core charte
 
 - To learn more about SQL Managed Instance, see:
   - [An overview of Azure SQL Managed Instance](../../managed-instance/sql-managed-instance-paas-overview.md)
-  - [Azure Total Cost of Ownership (TCO) Calculator](https://azure.microsoft.com/pricing/tco/calculator/)
+  - [Azure Migrate Business case total cost of ownership](/azure/migrate/concepts-business-case-calculation) 
 
 - To learn more about the framework and adoption cycle for cloud migrations, see:
    -  [Cloud Adoption Framework for Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/contoso-migration-scale)

@@ -120,6 +120,9 @@ Native mode report servers use **2** databases. The following are example databa
 
 - ReportServerTempDB
 
+> [!NOTE]  
+> When you configure Reporting Services to work with an availability group (AG), the recovery model for the `ReportServerTemp` database changes to Full. As a result, there are scenarios where the `ReportServerTemp` database keeps growing in size. It is a best practice to remove the `ReportServerTemp` database from your AG configuration, and have the recovery model set to Simple. The `ReportServerTemp` database only stores temporary data. Removing it from the AG doesn't affect Reporting Services.
+
 Native mode doesn't support or use the Alerting databases and related features. You configure native mode report servers in the [!INCLUDE [ssRSnoversion](../../../includes/ssrsnoversion-md.md)] Configuration Manager. For SharePoint mode, you configure the service application database name to be the name of the "client access point" you created as part of the SharePoint configuration. For more information on configuring SharePoint with [!INCLUDE [ssHADR](../../../includes/sshadr-md.md)], see [Configure and manage SQL Server availability groups for SharePoint Server (/previous-versions/office/sharepoint-server-2010/hh913923(v=office.14))](/previous-versions/office/sharepoint-server-2010/hh913923(v=office.14)).
 
 > [!NOTE]  
