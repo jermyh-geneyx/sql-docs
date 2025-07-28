@@ -1,7 +1,7 @@
 ---
 author: MikeRayMSFT
 ms.author: mikeray
-ms.date: 03/25/2025
+ms.date: 07/28/2025
 ms.topic: include
 ms.custom: ignite-2023
 ---
@@ -19,3 +19,4 @@ Azure Arc-enabled [!INCLUDE [ssnoversion-md](../../../includes/ssnoversion-md.md
 - [!INCLUDE [ssnoversion-md](../../../includes/ssnoversion-md.md)] in Azure Virtual Machines.
 - An Always On availability group where one or more replicas is on a failover cluster instance.
 - SQL Server Reporting Services (SharePoint Mode).
+- [DBCC CLONEDATABASE](https://learn.microsoft.com/en-us/sql/t-sql/database-console-commands/dbcc-clonedatabase-transact-sql) throws error on the default installation of the Azure extension for SQL Server. To run the DBCC CLONEDATABASE, the Azure extension must be run on [least privilaged mode](https://learn.microsoft.com/en-us/sql/sql-server/azure-arc/configure-least-privilege).
