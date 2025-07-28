@@ -18,3 +18,8 @@ The following table identifies settings, if they're enabled by default, and wher
 | [Best practices assessment](../assess.md)                                  | Disabled                   | Yes             | Instance               |
 | [Microsoft Entra Authentication](../entra-authentication-setup-tutorial.md)| Disabled                   | Yes             | Instance               |
 | [Collect performance metrics (preview)](../sql-monitoring.md)              | Enabled                    | Yes             | Instance               |
+| [Migration assessment ](../migration-assessment.md)                        | Enabled                    | Yes             | Instance               |
+| [Extension log collection](../troubleshoot-deployment.md#log-file-locations) | Enabled                    | No              | Not configurable       |
+| [Availability Group discovery management](../manage-availability-group.md) | Enabled                    | Yes             | `AvailabilityGroupDiscovery` feature flag |
+| [SQL Server instance and DB discovery](../view-inventory.md)               | Enabled                    | No              | Not configurable       |
+| [Purview](/purview/register-scan-azure-arc-enabled-sql-server)             | Disabled                   | Yes             | Extension, Instance    |
