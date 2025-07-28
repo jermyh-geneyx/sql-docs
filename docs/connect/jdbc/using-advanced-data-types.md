@@ -27,8 +27,8 @@ The following table lists the default mappings between the advanced [!INCLUDE[ss
 |Udt<sup>1</sup>|VARBINARY|String (default), byte[], InputStream|  
 |sqlvariant|SQLVARIANT|Object|  
 |geometry<br /><br /> geography|VARBINARY|byte[]|
-|json|microsoft.sql.Types.JSON|String (default), InputStream|  
-
+|json|microsoft.sql.Types.JSON|String (default), InputStream|
+|vector|microsoft.sql.Types.VECTOR|microsoft.sql.Vector|
 
 <sup>1</sup> The [!INCLUDE[jdbcNoVersion](../../includes/jdbcnoversion_md.md)] supports sending and retrieving CLR UDTs as binary data but doesn't support manipulation of the CLR metadata.  
   

@@ -57,6 +57,7 @@ The following table lists the default mappings between the basic [!INCLUDE[ssNoV
 | geometry           | VARBINARY                                          | byte[]                       |
 | geography          | VARBINARY                                          | byte[]                       |
 | json               | microsoft.sql.Types.JSON                           | String                       |
+| vector             | microsoft.sql.Types.VECTOR                         | microsoft.sql.Vector         |
   
 <sup>1</sup> To use java.sql.Time with the time [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] type, you must set the **sendTimeAsDatetime** connection property to false.  
   
