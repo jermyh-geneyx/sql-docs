@@ -4,7 +4,7 @@ description: Release notes for Microsoft SqlPackage.
 author: dzsquared
 ms.author: drskwier
 ms.reviewer: llali
-ms.date: 04/15/2025
+ms.date: 07/29/2025
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: release-notes
@@ -18,6 +18,44 @@ ms.custom:
 **[Download the latest version](sqlpackage-download.md)**
 
 This article lists the features and fixes delivered by the released versions of SqlPackage.
+
+## 170.1.61 SqlPackage
+
+**Release date:** April 15, 2025
+
+```bash
+dotnet tool install -g microsoft.sqlpackage --version 170.1.61
+```
+
+|Platform|Download|
+|:---|:---|
+|Windows .NET 8 |[.zip file](https://go.microsoft.com/fwlink/?linkid=2316204)|
+|Windows|[.msi file](https://go.microsoft.com/fwlink/?linkid=2316310)|
+|macOS .NET 8 |[.zip file](https://go.microsoft.com/fwlink/?linkid=2316113)|
+|Linux .NET 8 |[.zip file](https://go.microsoft.com/fwlink/?linkid=2316311)|
+
+### Features
+
+|Feature|Details|
+|:---|:---|
+| Deployment | Adds support for publish properties `/p:IgnorePreDeployScript` and `/p:IgnorePostDeployScript`. These properties default to `false` and when enabled result in the  |
+| Permissions | Adds support for the permission `ALTER ANY EXTERNAL MIRROR` for Azure SQL Database and SQL database in Fabric. This permission is required to export a database that contains one or more [mirrored tables](/fabric/database/mirrored-database/azure-sql-database-limitations). [GitHub issue](https://github.com/microsoft/DacFx/issues/648) |
+| Permissions | Adds support for the permissions `CREATE ANY EXTERNAL MODEL` and `ALTER ANY EXTERNAL MODEL` for SQL Server 2025. |
+| Permissions | Adds support for the permission `ALTER ANY INFORMATION PROTECTION` for SQL Server 2025 and Azure SQL Database. |
+| ScriptDom | Updated ScriptDom to version 170.0.44. |
+
+
+### Fixes
+
+|Feature|Details|
+|:---|:---|
+| Always Encrypted | Fixed an issue where the `Interactive` option for the `/AzureKeyVaultAuthMethod` publish parameter was not working correctly. |
+| Deployment | Fixed an issue where the `DbScopedConfigMaxDOPSecondary` [property](../sql-database-projects/concepts/project-properties.md) was not being set correctly in the deployment. [GitHub issue](https://github.com/microsoft/DacFx/issues/597) |
+| Deployment | Fixed an issue where publishing tables containing foreign key constraints would fail with syntax not supported in Data warehouse in Microsoft Fabric. |
+| Deployment | Fixed an issue where server objects were included when deploying to SQL database in Fabric. Server objects are not supported in SQL database in Fabric. [GitHub issue](https://github.com/microsoft/DacFx/issues/646) |
+| Deployment | Fixed an issue where clustered columnstore indexes were being created by first creating a clustered index, causing the deployment to incur additional overhead and time. [GitHub issue](https://github.com/microsoft/DacFx/issues/264) |
+| Extract | Fixed an issue where extracting a database from SQL database in Fabric would result in unusable user definition scripts. [GitHub issue](https://github.com/microsoft/DacFx/issues/631) |
+
 
 ## 170.0.94 SqlPackage
 
