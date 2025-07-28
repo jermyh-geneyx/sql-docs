@@ -5,7 +5,7 @@ description: Use the COPY statement in Azure Synapse Analytics and Warehouse in 
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: procha, mikeray, fresantos
-ms.date: 06/29/2025
+ms.date: 07/28/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -85,7 +85,7 @@ WITH
 
 #### *schema_name*
 
-Optional if the default schema for the user performing the operation is the schema of the specified table. If *schema* isn't specified, and the default schema of the user performing the COPY operation is different from the schema of the specified table, COPY is canceled, and an error message is returned.
+Optional if the default schema for the user performing the operation is the schema of the specified table. If *schema* isn't specified, and the default schema of the user performing the COPY operation is different from the schema of the specified table, then the COPY operation is canceled and an error message is returned.
 
 #### *table_name*
 
@@ -116,7 +116,7 @@ Is where the files containing the data is staged. Currently Azure Data Lake Stor
 - *External location* for ADLS Gen2: `https://<account\>.dfs.core.windows.net/<container\>/<path\>`
 
 > [!NOTE]  
-> The .blob endpoint is available for ADLS Gen2 as well and currently yields the best performance. Use the .blob endpoint when .dfs is not required for your authentication method.
+> The `.blob` endpoint is available for ADLS Gen2 as well and currently yields the best performance. Use the `.blob` endpoint when `.dfs`  is not required for your authentication method.
 
 - *Account* - The storage account name
 
@@ -128,7 +128,7 @@ Wildcards cards can be included in the path where
 
 - Wildcard path name matching is case-sensitive
 - Wildcard can be escaped using the backslash character (`\`)
-- Wildcard expansion is applied recursively. For instance, all CSV files under Customer1 (including subdirectories of Customer1) are loaded in the following example: `Account/Container/Customer1/*.csv`
+- Wildcard expansion is applied recursively. For instance, all CSV files under `Customer1` (including subdirectories of `Customer1`) are loaded in the following example: `Account/Container/Customer1/*.csv`
 
 > [!NOTE]  
 > For best performance, avoid specifying wildcards that would expand over a larger number of files. If possible, list multiple file locations instead of specifying wildcards.
@@ -260,9 +260,9 @@ When *FILE_TYPE* is 'PARQUET', exceptions that are caused by data type conversio
 
 The COPY command autodetects the compression type based on the file extension when this parameter isn't specified:
 
-- .gz  - **GZIP**
-- .snappy – **Snappy**
-- .deflate - **DefaultCodec**  (Parquet and ORC only)
+- `.gz` - **GZIP**
+- `.snappy` - **Snappy**
+- `.deflate` - **DefaultCodec**  (Parquet and ORC only)
 
 The COPY command requires that gzip files do not contain any trailing garbage to operate normally. The gzip format strictly requires that files be composed of valid members without any additional information before, between, or after them. Any deviation from this format, such as the presence of trailing non-gzip data, will result in the failure of the COPY command. Make sure to verify there's no trailing garbage at the end of gzip files to ensure COPY can successfully process these files.
 
@@ -299,7 +299,7 @@ DATEFORMAT only applies to CSV and specifies the date format of the date mapping
 
 #### *IDENTITY_INSERT = 'ON' | 'OFF'*
 
-IDENTITY_INSERT specifies whether the identity value or values in the imported data file are to be used for the identity column. If IDENTITY_INSERT is OFF (default), the identity values for this column are verified, but not imported. Azure Synapse Analytics automatically assigns unique values based on the seed and increment values specified during table creation. Note the following behavior with the COPY command:
+IDENTITY_INSERT specifies whether the identity value or values in the imported data file are to be used for the identity column. If IDENTITY_INSERT is OFF (default), the identity values for this column are verified, but not imported. Note the following behavior with the COPY command:
 
 - If IDENTITY_INSERT is OFF, and table has an identity column
   - A column list must be specified which doesn't map an input field to the identity column.
@@ -307,6 +307,8 @@ IDENTITY_INSERT specifies whether the identity value or values in the imported d
   - If a column list is passed, it must map an input field to the identity column.
 - Default value isn't supported for the IDENTITY COLUMN in the column list.
 - IDENTITY_INSERT can only be set for one table at a time.
+
+Azure Synapse Analytics automatically assigns unique values based on the seed and increment values specified during table creation. 
 
 #### *AUTO_CREATE_TABLE = { 'ON' | 'OFF' }*
 
@@ -318,9 +320,9 @@ IDENTITY_INSERT specifies whether the identity value or values in the imported d
 > [!NOTE]  
 > The automatic table creation works alongside with automatic schema discovery. The automatic table creation is NOT enabled by default.
 
-Don't load into hash distributed tables from Parquet files using COPY INTO with AUTO_CREATE_TABLE = 'ON'.
+Don't load into hash distributed tables from Parquet files using `COPY INTO` with `AUTO_CREATE_TABLE = 'ON'`.
 
-If Parquet files are to be loaded into hash distributed tables using COPY INTO, load it into a round robin staging table followed by INSERT ... SELECT from that table to the target hash distributed table.
+If Parquet files are to be loaded into hash distributed tables using `COPY INTO`, load it into a round robin staging table followed by `INSERT ... SELECT` from that table to the target hash distributed table.
 
 ### Permissions
 
@@ -637,7 +639,7 @@ Specifies where the files containing the data is staged. Currently Azure Data La
 Azure Data Lake Storage (ADLS) Gen2 offers better performance than Azure Blob Storage (legacy). Consider using an ADLS Gen2 account whenever possible.
 
 > [!NOTE]  
-> The .blob endpoint is available for ADLS Gen2 as well and currently yields the best performance. Use the `blob` endpoint when `dfs` is not required for your authentication method.
+> The `.blob` endpoint is available for ADLS Gen2 as well and currently yields the best performance. Use the `blob` endpoint when `dfs` is not required for your authentication method.
 
 - *Account* - The storage account name
 
@@ -659,7 +661,7 @@ Multiple file locations can only be specified from the same storage account and 
 
 **External locations behind firewall**
 
-To access files on Azure Data Lake Storage (ADLS) Gen2 and Azure Blob Storage locations that are behind a firewall, the following prerequisites are apply:
+To access files on Azure Data Lake Storage (ADLS) Gen2 and Azure Blob Storage locations that are behind a firewall, the following prerequisites apply:
 
 - A **workspace identity** for the workspace hosting your warehouse must be provisioned. For more information on how to set up a workspace identity, see [Workspace identity](/fabric/security/workspace-identity).
 - Your Entra ID account must be able to use the workspace identity.
@@ -730,7 +732,7 @@ In Microsoft Fabric, *MAXERRORS* cannot be used when *FILE_TYPE* is 'PARQUET'.
 
 The COPY command autodetects the compression type based on the file extension when this parameter isn't specified:
 
-- .gz  - **GZIP**
+- `.gz` - **GZIP**
 
 Loading compressed files is currently only supported with *PARSER_VERSION* 1.0. 
 
