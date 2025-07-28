@@ -4,7 +4,7 @@ description: CREATE SERVER AUDIT creates a server audit object using SQL Server 
 author: sravanisaluru
 ms.author: srsaluru
 ms.reviewer: randolphwest
-ms.date: 11/25/2024
+ms.date: 07/25/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -69,6 +69,10 @@ CREATE SERVER AUDIT audit_name
 ```
 
 ## Arguments
+
+#### *audit_name*
+
+The name of the audit. Can't contain spaces in [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and earlier versions.
 
 #### TO { FILE | APPLICATION_LOG | SECURITY_LOG | URL | EXTERNAL_MONITOR }
 

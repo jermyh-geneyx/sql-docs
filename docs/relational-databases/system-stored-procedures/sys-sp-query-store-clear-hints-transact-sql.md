@@ -1,9 +1,9 @@
 ---
 title: "sp_query_store_clear_hints (Transact-SQL)"
-description: "Removes all Query Store hints for a given query."
+description: Removes all Query Store hints for a given query.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 06/23/2025
+ms.date: 07/25/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: reference
@@ -32,6 +32,7 @@ Removes all [Query Store hints](../performance/query-store-hints.md) for a given
 ```syntaxsql
 sp_query_store_clear_hints
     [ @query_id = ] query_id
+    [ , [ @replica_group_id = ] 'replica_group_id' ]
 [ ; ]
 ```
 
@@ -43,6 +44,10 @@ sp_query_store_clear_hints
 
 The Query Store `query_id` column from [sys.query_store_query](../system-catalog-views/sys-query-store-query-transact-sql.md). *query_id* is **bigint**.
 
+#### [ @replica_group_id = ] '*replica_group_id*'
+
+The optional *@replica_group_id* argument defaults to the local replica (primary or secondary), but you can optionally specify a value matching a value in the `replica_group_id` column in [sys.query_store_replicas](../system-catalog-views/sys-query-store-replicas.md) to clear a hint for a different replica group. *@replica_group_id* is **bigint**.
+
 ## Return value
 
 `0` (success) or `1` (failure).
@@ -53,7 +58,7 @@ Query Store hints are created by [sys.sp_query_store_set_hints](sys-sp-query-sto
 
 ## Permissions
 
-Requires the ALTER permission on the database.
+Requires the `ALTER` permission on the database.
 
 ## Examples
 
@@ -72,6 +77,7 @@ The following example returns existing Query Store hints for *query_id* 39:
 ```sql
 SELECT query_hint_id,
        query_id,
+       replica_group_id,
        query_hint_text,
        last_query_hint_failure_reason,
        last_query_hint_failure_reason_desc,
