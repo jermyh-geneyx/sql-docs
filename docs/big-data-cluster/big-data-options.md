@@ -5,7 +5,7 @@ description: This article discusses migration strategies for SQL Server 2019 Big
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: hudequei, randolphwest
-ms.date: 03/08/2024
+ms.date: 07/29/2025
 ms.service: sql
 ms.subservice: big-data-cluster
 ms.topic: conceptual
@@ -23,7 +23,7 @@ The [!INCLUDE [ssbigdataclusters-ver15](../includes/ssbigdataclusters-ver15.md)]
 
 ## Retirement of the [!INCLUDE [ssbigdataclusters-ver15](../includes/ssbigdataclusters-ver15.md)] add-on
 
-On February 28, 2025, we will retire [!INCLUDE [ssbigdataclusters-ver15](../includes/ssbigdataclusters-ver15.md)]. All existing users of SQL Server 2019 with Software Assurance will be fully supported on the platform and the software will continue to be maintained through SQL Server cumulative updates until that time. **For more information, see [the announcement blog post](https://aka.ms/sqlserver_bigdataclusters).**
+On February 28, 2025, [!INCLUDE [ssbigdataclusters-ver15](../includes/ssbigdataclusters-ver15.md)] retired. **For more information, see [the announcement blog post](https://aka.ms/sqlserver_bigdataclusters).**
 
 ## Changes to PolyBase support in SQL Server
 
