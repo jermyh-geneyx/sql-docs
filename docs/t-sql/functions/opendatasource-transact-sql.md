@@ -36,14 +36,16 @@ OPENDATASOURCE ( 'provider_name', 'init_string' )
   
 ## Arguments
 
-#### '*provider_name*'  
- Is the name registered as the PROGID of the OLE DB provider used to access the data source. *provider_name* is a **char** data type, with no default value.  
+#### '*provider_name*'
+
+The name registered as the PROGID of the OLE DB provider used to access the data source. *provider_name* is a **char** data type, with no default value.  
 
  > [!IMPORTANT]
  > [!INCLUDE[snac-removed-oledb-only](../../includes/snac-removed-oledb-only.md)]
 
- #### '*init_string*'  
- Is the connection string passed to the IDataInitialize interface of the destination provider. The provider string syntax is based on keyword-value pairs separated by semicolons, such as: **'**_keyword1_=_value_ **;** _keyword2_=_value_**'**.  
+#### '*init_string*'
+
+The connection string passed to the IDataInitialize interface of the destination provider. The provider string syntax is based on keyword-value pairs separated by semicolons, such as: `'keyword1=value;keyword2=value'`.  
   
  For specific keyword-value pairs supported on the provider, see the [!INCLUDE[msCoName](../../includes/msconame-md.md)] Data Access SDK. This documentation defines the basic syntax. The following table lists the most frequently used keywords in the *init_string* argument.  
   
@@ -63,7 +65,7 @@ OPENDATASOURCE ( 'provider_name', 'init_string' )
 
 `OPENDATASOURCE` can be used to access remote data from OLE DB data sources only when the DisallowAdhocAccess registry option is explicitly set to 0 for the specified provider, and the Ad Hoc Distributed Queries advanced configuration option is enabled. When these options are not set, the default behavior does not allow for ad hoc access.  
   
-The `OPENDATASOURCE` function can be used in the same [!INCLUDE[tsql](../../includes/tsql-md.md)] syntax locations as a linked-server name. Therefore, `OPENDATASOURCE` can be used as the first part of a four-part name that refers to a table or view name in a SELECT, INSERT, UPDATE, or DELETE statement, or to a remote stored procedure in an EXECUTE statement. When executing remote stored procedures, `OPENDATASOURCE` should refer to another instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. OPENDATASOURCE does not accept variables for its arguments.  
+The `OPENDATASOURCE` function can be used in the same [!INCLUDE[tsql](../../includes/tsql-md.md)] syntax locations as a linked-server name. Therefore, `OPENDATASOURCE` can be used as the first part of a four-part name that refers to a table or view name in a SELECT, INSERT, UPDATE, or DELETE statement, or to a remote stored procedure in an EXECUTE statement. In remote stored procedures, `OPENDATASOURCE` should refer to another instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. OPENDATASOURCE does not accept variables for its arguments.  
   
 Like the `OPENROWSET` function, `OPENDATASOURCE` should only reference OLE DB data sources that are accessed infrequently. Define a linked server for any data sources accessed more than several times. Neither OPENDATASOURCE nor OPENROWSET provides all the functionality of linked-server definitions, such as security management and the ability to query catalog information. All connection information, including passwords, must be provided every time that OPENDATASOURCE is called.  
   
