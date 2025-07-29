@@ -687,8 +687,6 @@ FROM OPENROWSET(
 );
 ```
 
-https://github.com/MicrosoftDocs/sql-docs-pr/pull/34838
-
 ### BULK input file format options
 
 #### FORMAT = { 'CSV' | 'PARQUET' | 'JSONL' }
