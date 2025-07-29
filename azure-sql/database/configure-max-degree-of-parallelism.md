@@ -1,11 +1,11 @@
 ---
 title: "Configure the Max Degree of Parallelism (MAXDOP)"
 titleSuffix: Azure SQL Database
-description: Learn about the max degree of parallelism (MAXDOP) in Azure SQL Database.
+description: Learn about the max degree of parallelism (MAXDOP) in Azure SQL Database and SQL database in Fabric.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: mathoma
-ms.date: 06/13/2025
+ms.date: 07/28/2025
 ms.service: azure-sql-database
 ms.subservice: performance
 ms.topic: concept-article
@@ -16,18 +16,18 @@ dev_langs:
 ms.devlang: tsql
 monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 ---
-# Configure the max degree of parallelism (MAXDOP) in Azure SQL Database
+# Configure the max degree of parallelism (MAXDOP) in Azure SQL Database and SQL database in Fabric
 
 [!INCLUDE [appliesto-sqldb-fabricsqldb](../includes/appliesto-sqldb-fabricsqldb.md)]
 
-  This article describes the **max degree of parallelism (MAXDOP)** configuration setting in Azure SQL Database. 
+  This article describes the **max degree of parallelism (MAXDOP)** configuration setting in Azure SQL Database and SQL database in Fabric. 
 
 > [!NOTE]
-> **This content is focused on Azure SQL Database.** Azure SQL Database is based on the latest stable version of the Microsoft SQL Server database engine, so much of the content is similar though troubleshooting and configuration options differ. For more on MAXDOP in SQL Server, see [Configure the max degree of parallelism Server Configuration Option](/sql/database-engine/configure-windows/configure-the-max-degree-of-parallelism-server-configuration-option).
+> **This content is focused on Azure SQL Database and SQL database in Fabric.** Azure SQL Database is based on the latest stable version of the Microsoft SQL Server database engine, so much of the content is similar though troubleshooting and configuration options differ. For more on MAXDOP in SQL Server and Azure SQL Managed Instance, see [Configure the max degree of parallelism Server Configuration Option](/sql/database-engine/configure-windows/configure-the-max-degree-of-parallelism-server-configuration-option).
 
   MAXDOP controls intra-query parallelism in the database engine. Higher MAXDOP values generally result in more parallel threads per query, and faster query execution. 
 
-  In Azure SQL Database, the default MAXDOP setting for each new single database and elastic pool database is 8. This default prevents unnecessary resource utilization, while still allowing the database engine to execute queries faster using parallel threads. It is not typically necessary to further configure MAXDOP in Azure SQL Database workloads, though it might provide benefits as an advanced performance tuning exercise.
+  In Azure SQL Database and SQL database in Fabric, the default MAXDOP setting for each new single database and elastic pool database is 8. This default prevents unnecessary resource utilization, while still allowing the database engine to execute queries faster using parallel threads. It is not typically necessary to further configure MAXDOP in Azure SQL Database workloads, though it might provide benefits as an advanced performance tuning exercise.
 
 > [!Note]
 > In September 2020, based on years of telemetry in the Azure SQL Database service MAXDOP 8 was made the [default for new databases](https://techcommunity.microsoft.com/blog/azuresqlblog/changing-default-maxdop-in-azure-sql-database-and-azure-sql-managed-instance/1538528), as the optimal value for the widest variety of customer workloads. This default helped prevent performance problems due to excessive parallelism. Prior to that, the default setting for new databases was `MAXDOP 0`. MAXDOP was not automatically changed for existing databases created prior to September 2020.
@@ -51,11 +51,11 @@ monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 
 ## Considerations
 
--   In Azure SQL Database, you can change the default MAXDOP value:
+-   In Azure SQL Database and SQL database in Fabric, you can change the default MAXDOP value:
     -   At the query level, using the **MAXDOP** [query hint](/sql/t-sql/queries/hints-transact-sql-query).     
     -   At the database level, using the **MAXDOP** [database scoped configuration](/sql/t-sql/statements/alter-database-scoped-configuration-transact-sql).
 
--   Long-standing SQL Server MAXDOP considerations and [recommendations](/sql/database-engine/configure-windows/configure-the-max-degree-of-parallelism-server-configuration-option#Guidelines) are applicable to Azure SQL Database. 
+-   Long-standing SQL Server MAXDOP considerations and [recommendations](/sql/database-engine/configure-windows/configure-the-max-degree-of-parallelism-server-configuration-option#Guidelines) are applicable to Azure SQL Database and SQL database in Fabric. 
 
 -   Index operations that create or rebuild an index, or that drop a clustered index, can be resource intensive. You can override the database MAXDOP value for index operations by specifying the MAXDOP index option in the `CREATE INDEX` or `ALTER INDEX` statement. The MAXDOP value is applied to the statement at execution time and is not stored in the index metadata. For more information, see [Configure Parallel Index Operations](/sql/relational-databases/indexes/configure-parallel-index-operations).  
 
@@ -74,13 +74,13 @@ monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 > [!Tip]
 > We recommend that customers avoid setting MAXDOP to 0 even if it does not appear to cause problems currently.
 
-  Excessive parallelism becomes most problematic when there are more concurrent requests than can be supported by the CPU and worker thread resources provided by the service objective. Avoid `MAXDOP 0` to reduce the risk of potential future problems due to excessive parallelism if a database is scaled up, or if future hardware configurations in Azure SQL Database provide more cores for the same database service objective.
+  Excessive parallelism becomes most problematic when there are more concurrent requests than can be supported by the CPU and worker thread resources provided by the service objective. Avoid `MAXDOP 0` to reduce the risk of potential future problems due to excessive parallelism if a database is scaled up, or if future hardware configurations provide more cores for the same database service objective.
 
 <a id="modifying-maxdop"></a>
 
 ### Modify MAXDOP
 
-  If you determine that a MAXDOP setting different from the default is optimal for your Azure SQL Database workload, you can use the `ALTER DATABASE SCOPED CONFIGURATION` T-SQL statement. For examples, see the [Examples using Transact-SQL](#examples) section below. To change MAXDOP to a non-default value for each new database you create, add this step to your database deployment process.
+  If you determine that a MAXDOP setting different from the default is optimal for your workload, you can use the `ALTER DATABASE SCOPED CONFIGURATION` T-SQL statement. For examples, see the [Examples using Transact-SQL](#examples) section below. To change MAXDOP to a non-default value for each new database you create, add this step to your database deployment process.
 
   If non-default MAXDOP benefits only a small subset of queries in the workload, you can override MAXDOP at the query level by adding the `OPTION (MAXDOP)` hint. For examples, see [Examples using Transact-SQL](#examples). 
 
@@ -98,7 +98,7 @@ monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 
 ## Examples
 
-  These examples use the latest `AdventureWorksLT` sample database when the `SAMPLE` option is chosen for a new single database of Azure SQL Database.
+  These examples use the latest `AdventureWorksLT` sample database when the `SAMPLE` option is chosen for a new single database.
 
 ### PowerShell
 
@@ -150,7 +150,7 @@ $params = @{
 
 ### Transact-SQL
 
-  You can use the [Azure portal query editor for Azure SQL Database](query-editor.md), [SQL Server Management Studio (SSMS)](/sql/ssms/download-sql-server-management-studio-ssms), or [Azure Data Studio](/azure-data-studio/download-azure-data-studio) to execute T-SQL queries against your Azure SQL Database.
+  You can use the [Azure portal query editor for Azure SQL Database](query-editor.md), [SQL Server Management Studio (SSMS)](/sql/ssms/download-sql-server-management-studio-ssms), the [mssql extension](https://aka.ms/mssql-marketplace) for [Visual Studio Code](https://code.visualstudio.com/docs), or the [SQL query editor in the Fabric portal](/fabric/database/sql/query-editor) to execute T-SQL queries. 
 
 1. Open a new query window.
 

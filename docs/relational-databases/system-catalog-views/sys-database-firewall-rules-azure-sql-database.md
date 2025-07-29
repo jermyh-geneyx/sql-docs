@@ -1,10 +1,10 @@
 ---
-title: "sys.database_firewall_rules (Azure SQL Database)"
-description: Returns information about the database-level firewall settings associated with your Azure SQL Database.
+title: "sys.database_firewall_rules"
+description: Returns information about the database-level firewall settings associated with your Azure SQL Database and SQL database in Fabric.
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 09/09/2022
+ms.date: 07/29/2025
 ms.service: azure-sql-database
 ms.topic: "reference"
 f1_keywords:
@@ -19,11 +19,11 @@ dev_langs:
   - "TSQL"
 monikerRange: "=azuresqldb-current"
 ---
-# sys.database_firewall_rules (Azure SQL Database)
+# sys.database_firewall_rules
 
-[!INCLUDE[Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/asdb-asdbmi.md)]
+[!INCLUDE[Azure SQL Database FabricSQLDB](../../includes/applies-to-version/asdb-fabricsqldb.md)]
 
-Returns information about the database-level firewall settings associated with your [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)]. Database-level firewall settings are useful when using contained database users. For more information, see [Contained Database Users - Making Your Database Portable](../../relational-databases/security/contained-database-users-making-your-database-portable.md).
+Returns information about the database-level firewall settings associated with your [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] and [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)]. Database-level firewall settings are useful when using contained database users. For more information, see [Contained Database Users - Making Your Database Portable](../../relational-databases/security/contained-database-users-making-your-database-portable.md).
 
 The `sys.database_firewall_rules` view contains the following columns:
 
