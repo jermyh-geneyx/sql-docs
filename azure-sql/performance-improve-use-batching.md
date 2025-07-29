@@ -1,34 +1,37 @@
 ---
 title: How to Use Batching to Improve Application Performance
-description: The article provides evidence that batching database operations greatly improves the speed and scalability of your Azure SQL Database and Azure SQL Managed Instance applications. Although these batching techniques work for any SQL database, the focus of the article is on Azure.
+description: The article provides evidence that batching database operations greatly improves the speed and scalability of your cloud applications. 
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: mathoma, wiassaf
-ms.date: 06/13/2025
+ms.date: 07/29/2025
 ms.service: azure-sql-database
 ms.subservice: performance
 ms.topic: how-to
 ms.custom:
   - sqldbrb=2
-monikerRange: "=azuresql || =azuresql-db || =azuresql-mi"
+monikerRange: "= azuresql || = azuresql-db || = azuresql-mi || = fabricsql"
 ---
-# How to use batching to improve Azure SQL Database and Azure SQL Managed Instance application performance
+# How to use batching to improve application performance
+[!INCLUDE [appliesto-sqldb-sqlmi-fabricsqldb](includes/appliesto-sqldb-sqlmi-fabricsqldb.md)]
 
-[!INCLUDE[appliesto-sqldb-sqlmi](includes/appliesto-sqldb-sqlmi.md)]
+Batching operations to Azure SQL Database, SQL database in Fabric, and Azure SQL Managed Instance significantly improves the performance and scalability of your applications. Although these batching techniques work for any SQL database, the focus of the article is on Azure.
 
-Batching operations to Azure SQL Database and Azure SQL Managed Instance significantly improves the performance and scalability of your applications. In order to understand the benefits, the first part of this article covers some sample test results that compare sequential and batched requests to a database in Azure SQL Database or Azure SQL Managed Instance. The remainder of the article shows the techniques, scenarios, and considerations to help you to use batching successfully in your Azure applications.
+In order to understand the benefits, the first part of this article covers some sample test results that compare sequential and batched requests to a database. The remainder of the article shows the techniques, scenarios, and considerations to help you to use batching successfully in your cloud applications.
 
-## Why is batching important for Azure SQL Database and Azure SQL Managed Instance?
+<a id="why-is-batching-important-for-azure-sql-database-and-azure-sql-managed-instance"></a>
+
+## Why is batching important?
 
 Batching calls to a remote service is a well-known strategy for increasing performance and scalability. There are fixed processing costs to any interactions with a remote service, such as serialization, network transfer, and deserialization. Packaging many separate transactions into a single batch minimizes these costs.
 
-In this article, we want to examine various batching strategies and scenarios. Although these strategies are also important for on-premises applications that use SQL Server, there are several reasons for highlighting the use of batching for Azure SQL Database and Azure SQL Managed Instance:
+In this article, we want to examine various batching strategies and scenarios. Although these strategies are also important for on-premises applications that use SQL Server, there are several reasons for highlighting the use of batching:
 
-- There's potentially greater network latency in accessing Azure SQL Database and Azure SQL Managed Instance, especially if you're accessing Azure SQL Database or Azure SQL Managed Instance from outside the same Microsoft Azure datacenter.
-- The multitenant characteristics of Azure SQL Database and Azure SQL Managed Instance means that the efficiency of the data access layer correlates to the overall scalability of the database. In response to usage in excess of predefined quotas, Azure SQL Database and Azure SQL Managed Instance can reduce throughput or respond with throttling exceptions. Efficiencies, such as batching, enable you to do more work before reaching these limits.
+- There's potentially greater network latency in accessing cloud-based resources than on-premises, especially if you're accessing them from outside the same Microsoft Azure datacenter.
+- Multitenant characteristics means that the efficiency of the data access layer correlates to the overall scalability of the database. In response to usage in excess of predefined quotas, Azure SQL Database, SQL database in Fabric, and Azure SQL Managed Instance can reduce throughput or respond with throttling exceptions. Efficiencies, such as batching, enable you to do more work before reaching these limits.
 - Batching is also effective for architectures that use multiple databases (sharding). The efficiency of your interaction with each database unit is still a key factor in your overall scalability.
 
-One of the benefits of using Azure SQL Database or Azure SQL Managed Instance is that you don't have to manage the servers that host the database. However, this managed infrastructure also means that you have to think differently about database optimizations. You can no longer look to improve the database hardware or network infrastructure. Microsoft Azure controls those environments. The main area that you can control is how your application interacts with Azure SQL Database and Azure SQL Managed Instance. Batching is one of these optimizations.
+One of the benefits of using Azure SQL Database or Azure SQL Managed Instance is that you don't have to manage the servers that host the database. However, this managed infrastructure also means that you have to think differently about database optimizations. You can no longer look to improve the database hardware or network infrastructure. Microsoft Azure controls those environments. The main area that you can control is how your application interacts with the database. Batching is one of these optimizations.
 
 The first part of this article examines various batching techniques for .NET applications that use Azure SQL Database or Azure SQL Managed Instance. The last two sections cover batching guidelines and scenarios.
 
@@ -304,7 +307,7 @@ For these reasons, the use of XML for batch queries isn't recommended.
 
 ## Batching considerations
 
-The following sections provide more guidance for the use of batching in Azure SQL Database and Azure SQL Managed Instance applications.
+The following sections provide more guidance for the use of batching in your applications.
 
 ### Tradeoffs
 
@@ -644,7 +647,7 @@ For more information, see the documentation and examples for the MERGE statement
 
 The following list provides a summary of the batching recommendations discussed in this article:
 
-- Use buffering and batching to increase the performance and scalability of Azure SQL Database and Azure SQL Managed Instance applications.
+- Use buffering and batching to increase the performance and scalability of cloud applications.
 - Understand the tradeoffs between batching/buffering and resiliency. During a role failure, the risk of losing an unprocessed batch of business-critical data might outweigh the performance benefit of batching.
 - Attempt to keep all calls to the database within a single datacenter to reduce latency.
 - If you choose a single batching technique, table-valued parameters offer the best performance and flexibility.

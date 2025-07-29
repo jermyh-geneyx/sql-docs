@@ -4,27 +4,26 @@ titleSuffix: SQL Server, Azure SQL Database, Azure SQL Managed Instance
 description: Modify a partition scheme
 author: VanMSFT
 ms.author: vanto
-ms.date: "4/22/2022"
+ms.date: 07/29/2025
 ms.service: sql
 ms.topic: how-to
-monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
 # Modify a partition scheme
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
-You can modify a partition scheme in SQL Server, Azure SQL Database, and Azure SQL Managed Instance by designating a filegroup to hold the next partition that is added to a partitioned table using [SQL Server Management Studio (SSMS)](../../ssms/sql-server-management-studio-ssms.md) or [!INCLUDE[tsql](../../includes/tsql-md.md)]. You do this by assigning the NEXT USED property to a filegroup. 
+You can modify a partition scheme by designating a filegroup to hold the next partition that is added to a partitioned table using [SQL Server Management Studio (SSMS)](../../ssms/sql-server-management-studio-ssms.md) or [!INCLUDE[tsql](../../includes/tsql-md.md)]. You do this by assigning the NEXT USED property to a filegroup. 
 
 You can assign the NEXT USED property to an empty filegroup or to one that already holds a partition. In other words, a filegroup can hold more than one partition. Learn more about filegroups and  partitioning strategies in the [Filegroups](partitioned-tables-and-indexes.md#filegroups).
 
-Table partitioning is also available in dedicated SQL pools in Azure Synapse Analytics, with some syntax differences. Learn more in [Partitioning tables in dedicated SQL pool](/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-partition).
- 
 ##  <a name="Restrictions"></a> Limitations
 
 Any filegroup affected by ALTER PARTITION SCHEME must be online.  
 
-> [!NOTE]
-> Azure SQL Database supports only the `PRIMARY` filegroup.  
+Partitioning is fully supported in Azure SQL Database and SQL database in Fabric. All partitions must be placed on the `PRIMARY` filegroup because only the `PRIMARY` filegroup is provided in Azure SQL Database and SQL database in Fabric.
+
+Table partitioning is available in dedicated SQL pools in Azure Synapse Analytics, with some syntax differences. For more information, see [Partitioning tables in dedicated SQL pool](/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-partition).
   
 ## Permissions  
 

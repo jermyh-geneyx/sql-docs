@@ -4,7 +4,7 @@ titleSuffix: SQL Server, Azure SQL Database, Azure SQL Managed Instance
 description: Create partitioned tables and indexes
 author: VanMSFT
 ms.author: vanto
-ms.date: 09/16/2024
+ms.date: 07/29/2025
 ms.service: sql
 ms.topic: how-to
 f1_keywords:
@@ -25,13 +25,13 @@ helpviewer_keywords:
   - "partitioned tables [SQL Server], creating"
   - "partition functions [SQL Server]"
   - "partition schemes [SQL Server]"
-monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current ||=fabric"
 ---
 # Create partitioned tables and indexes
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
-You can create a [partitioned table or index](partitioned-tables-and-indexes.md) in SQL Server, Azure SQL Database, and Azure SQL Managed Instance by using [!INCLUDE [ssManStudioFull](../../includes/ssmanstudiofull-md.md)] or [!INCLUDE [tsql](../../includes/tsql-md.md)]. The data in partitioned tables and indexes is horizontally divided into units that can be spread across more than one filegroup in a database, or stored in a single filegroup. Partitioning can make large tables and indexes more manageable and scalable.
+You can create a [partitioned table or index](partitioned-tables-and-indexes.md) by using [!INCLUDE [ssManStudioFull](../../includes/ssmanstudiofull-md.md)] or [!INCLUDE [tsql](../../includes/tsql-md.md)]. The data in partitioned tables and indexes is horizontally divided into units that can be spread across more than one filegroup in a database, or stored in a single filegroup. Partitioning can make large tables and indexes more manageable and scalable.
 
 Creating a partitioned table or index typically happens in three or four parts:
 
@@ -43,10 +43,8 @@ Creating a partitioned table or index typically happens in three or four parts:
 
 1. Create or alter a table or index and specify the partition scheme as the storage location, along with the column that will serve as the partitioning column.
 
-> [!NOTE]  
-> Partitioning is fully supported in Azure SQL Database. Because only the `PRIMARY` filegroup is supported in Azure SQL Database, all partitions must be placed on the `PRIMARY` filegroup.
-
-Table partitioning is also available in dedicated SQL pools in Azure Synapse Analytics, with some syntax differences. Learn more in [Partitioning tables in dedicated SQL pool](/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-partition).
+- Partitioning is fully supported in Azure SQL Database and SQL database in Fabric. All partitions must be placed on the `PRIMARY` filegroup because only the `PRIMARY` filegroup is provided in Azure SQL Database and SQL database in Fabric.
+- Table partitioning is available in dedicated SQL pools in Azure Synapse Analytics, with some syntax differences. For more information, see [Partitioning tables in dedicated SQL pool](/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-partition).
 
 ## Permissions
 
@@ -62,7 +60,7 @@ Creating a partitioned table requires CREATE TABLE permission in the database an
 
 If you don't need to independently perform backup and restore operations on filegroups, partitioning a table using a single filegroup simplifies management of the partitioned table over time.
 
-This example is suitable for Azure SQL Database, which doesn't support adding files and filegroups. Table partitioning is supported in Azure SQL Database by creating partitions in the `PRIMARY` filegroup. For SQL Server and Azure SQL Managed Instance, you might wish to specify a user-created filegroup, depending on your filegroup and file management practices.
+This example is suitable for Azure SQL Database and SQL database in Fabric, which don't support adding files and filegroups. In SQL Server and Azure SQL Managed Instance, you might wish to specify a user-created filegroup, depending on your filegroup and file management practices.
 
 The example steps through creating a partitioned table in SQL Server Management Studio (SSMS) using Transact-SQL and assigns all partitions to the `PRIMARY` filegroup. The example:
 

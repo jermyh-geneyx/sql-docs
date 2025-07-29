@@ -2,20 +2,20 @@
 title: Detectable types of query performance bottlenecks
 titleSuffix: Azure SQL Database
 description: Learn about types of query performance issues in Azure SQL Database and how to identify and resolve queries with these issues.
-author: NikaKinska
-ms.author: nnikolic
-ms.reviewer: mathoma, wiassaf
-ms.date: 08/23/2024
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: mathoma, nnikolic
+ms.date: 07/28/2025
 ms.service: azure-sql-database
 ms.subservice: performance
 ms.topic: troubleshooting
 ms.custom:
   - azure-sql-split
-monikerRange: "=azuresql||=azuresql-db"
+monikerRange: "=azuresql||=azuresql-db||=fabricsql"
 ---
 
-# Detectable types of query performance bottlenecks in Azure SQL Database
-[!INCLUDE [appliesto-sqldb](../includes/appliesto-sqldb.md)]
+# Detect query performance bottlenecks
+[!INCLUDE [appliesto-sqldb-fabricsqldb](../includes/appliesto-sqldb-fabricsqldb.md)]
 
 > [!div class="op_single_selector"]
 > * [Azure SQL Database](identify-query-performance-issues.md?view=azuresql-db&preserve-view=true)
@@ -156,13 +156,19 @@ A recompilation (or fresh compilation after cache eviction) can still result in 
 
 Slow query performance not related to suboptimal query plans and missing indexes are generally related to insufficient or overused resources. If the query plan is optimal, the query (and the database) might be hitting the resource limits for the database or elastic pool. An example might be excess log write throughput for the service level.
 
-- Detecting resource issues using the Azure portal: To see if resource limits are the problem, see [SQL Database resource monitoring](monitor-tune-overview.md#azure-sql-database-and-azure-sql-managed-instance-resource-monitoring). For single databases and elastic pools, see [Database Advisor performance recommendations](database-advisor-implement-performance-recommendations.md) and [Query Performance Insights](query-performance-insight-use.md).
-- Detecting resource limits using [database watcher](../database-watcher-overview.md).
-- Detecting resource issues using [DMVs](monitoring-with-dmvs.md):
+- Detect performance issues:
+    - For Azure SQL Database, use the Azure portal: To see if resource limits are the problem, see [SQL Database resource monitoring](monitor-tune-overview.md#azure-sql-database-and-azure-sql-managed-instance-resource-monitoring). For single databases and elastic pools, see [Database Advisor performance recommendations](database-advisor-implement-performance-recommendations.md) and [Query Performance Insights](query-performance-insight-use.md).
+    - For SQL database in Microsoft Fabric, use the Fabric portal: Review the [Performance Dashboard](/fabric/database/sql/performance-dashboard) for the performance status of the database and metrics visibility, including configurable alerts, queries, automatic indexing activity, and more.
+
+- Detect resource limits and utilization:
+    - For Azure SQL Database, use [database watcher](../database-watcher-overview.md). Currently, database watcher is available in Azure SQL Database only.
+    - For SQL database in Microsoft Fabric, use the [Microsoft Fabric Capacity Metrics app](/fabric/database/sql/usage-reporting).
+
+- Detect resource issues using [DMVs](monitoring-with-dmvs.md):
 
   - The [sys.dm_db_resource_stats](monitoring-with-dmvs.md#monitor-resource-use) DMV returns CPU, I/O, and memory consumption for the database. One row exists for every 15-second interval, even if there's no activity in the database. Historical data is maintained for one hour.
   - The [sys.resource_stats](monitoring-with-dmvs.md#monitor-resource-use) DMV returns CPU usage and storage data for Azure SQL Database. The data is collected and aggregated in five-minute intervals.
-  - [Many individual queries that cumulatively consume high CPU](monitoring-with-dmvs.md#many-individual-queries-that-cumulatively-consume-high-cpu)
+  - Use DMVs to monitor daatabase activity, including for example looking for [individual queries that cumulatively consume high CPU](monitoring-with-dmvs.md#many-individual-queries-that-cumulatively-consume-high-cpu).
 
 If you identify the problem as insufficient resource, you can upgrade resources to increase the capacity of your database to absorb the CPU requirements. For more information, see [Scale single database resources in Azure SQL Database](single-database-scale.md) and [Scale elastic pool resources in Azure SQL Database](elastic-pool-scale.md).
 
