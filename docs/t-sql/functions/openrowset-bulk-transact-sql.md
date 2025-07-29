@@ -669,7 +669,7 @@ You can use `OPENROWSET(BULK)` to read data directly from files stored in the Fa
 - Native identity enforcement using Microsoft Entra ID
 
 > [!NOTE]
-> Fabric OneLake storage is in [preview](/fabric/fundamentals/preview). See the [limitations](../statements/copy-into-transact-sql.md#limitations-for-onelake-as-source-public-preview] that are applicable both to `COPY INTO` and `OPENROWSET(BULK)`.
+> Fabric OneLake storage is in [preview](/fabric/fundamentals/preview). See the [limitations](../statements/copy-into-transact-sql.md#limitations-for-onelake-as-source-public-preview) that are applicable both to `COPY INTO` and `OPENROWSET(BULK)`.
 
 The supported URI formats are:
 
