@@ -168,7 +168,7 @@ Slow query performance not related to suboptimal query plans and missing indexes
 
   - The [sys.dm_db_resource_stats](monitoring-with-dmvs.md#monitor-resource-use) DMV returns CPU, I/O, and memory consumption for the database. One row exists for every 15-second interval, even if there's no activity in the database. Historical data is maintained for one hour.
   - The [sys.resource_stats](monitoring-with-dmvs.md#monitor-resource-use) DMV returns CPU usage and storage data for Azure SQL Database. The data is collected and aggregated in five-minute intervals.
-  - Use DMVs to monitor daatabase activity, including for example looking for [individual queries that cumulatively consume high CPU](monitoring-with-dmvs.md#many-individual-queries-that-cumulatively-consume-high-cpu).
+  - Use DMVs to monitor database activity, including for example looking for [individual queries that cumulatively consume high CPU](monitoring-with-dmvs.md#many-individual-queries-that-cumulatively-consume-high-cpu).
 
 If you identify the problem as insufficient resource, you can upgrade resources to increase the capacity of your database to absorb the CPU requirements. For more information, see [Scale single database resources in Azure SQL Database](single-database-scale.md) and [Scale elastic pool resources in Azure SQL Database](elastic-pool-scale.md).
 
