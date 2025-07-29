@@ -17,12 +17,6 @@ monikerRange: ">=sql-server-ver15"
 
 [!INCLUDE [SQL Server 2019 and later](../includes/applies-to-version/sqlserver2019-and-later.md)]
 
-Microsoft SQL Server 2019 Big Clusters is an add-on for the SQL Server Platform that allows you to deploy scalable clusters of SQL Server, Spark, and HDFS containers running on Kubernetes. These components are running side by side to enable you to read, write, and process big data using Transact-SQL or Spark libraries, allowing you to easily combine and analyze your high-value relational data with non-relational high-volume big data. Big data clusters also allow you to virtualize data with PolyBase, so that you can query data from external SQL Server, Oracle, Teradata, MongoDB, and other data sources using external tables. The Microsoft SQL Server 2019 Big Clusters add-on provides high availability for the SQL Server master instance and all databases by using Always On availability group technology.
-
-The [!INCLUDE [ssbigdataclusters-ver15](../includes/ssbigdataclusters-ver15.md)] add-on runs on-premises and in the cloud using the Kubernetes platform, for any standard deployment of Kubernetes. Additionally, the [!INCLUDE [ssbigdataclusters-ver15](../includes/ssbigdataclusters-ver15.md)] add-on integrates with Active Directory and includes role-based access control to satisfy security and compliance needs of your enterprise.
-
-## Retirement of the [!INCLUDE [ssbigdataclusters-ver15](../includes/ssbigdataclusters-ver15.md)] add-on
-
 On February 28, 2025, [!INCLUDE [ssbigdataclusters-ver15](../includes/ssbigdataclusters-ver15.md)] retired. **For more information, see [the announcement blog post](https://aka.ms/sqlserver_bigdataclusters).**
 
 ## Changes to PolyBase support in SQL Server
@@ -45,11 +39,11 @@ In [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] and later versions, users 
 
 ## Understand the Big Data Clusters architecture for replacement and migration options
 
-To create your replacement solution for a Big Data storage and processing system, it's important to understand what [!INCLUDE [ssbigdataclusters-ver15](../includes/ssbigdataclusters-ver15.md)] provides, and its architecture can help inform your choices. The architecture of a big data cluster is as follows:
+To create your replacement solution for a Big Data storage and processing system, it's important to understand what [!INCLUDE [ssbigdataclusters-ver15](../includes/ssbigdataclusters-ver15.md)] provided, and its architecture can help inform your choices. The architecture of a big data cluster was:
 
 :::image type="content" source="media/big-data-options/architecture-diagram-overview.png" alt-text="Diagram that shows the SQL Server 2019 Big Data Clusters architecture overview." lightbox="media/big-data-options/architecture-diagram-overview.png":::
 
-This architecture provides the following functionality mapping:
+This architecture provided the following functionality mapping:
 
 | Component | Benefit |
 | :--- | :--- |
