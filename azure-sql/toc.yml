@@ -1917,8 +1917,10 @@
   - name: Feature availability by region
     items: 
     - name: Azure SQL Database
+      displayName: Feature availability by region Azure SQL Database
       href: database/region-availability.md
     - name: Azure SQL Managed Instance
+      displayName: Feature availability by region Azure SQL Managed Instance
       href: managed-instance/region-availability.md
   - name: Monitoring data reference 
     items:  
