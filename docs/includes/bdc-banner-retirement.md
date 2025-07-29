@@ -8,4 +8,4 @@ ms.topic: include
 ---
 
 > [!IMPORTANT]
-> The Microsoft SQL Server 2019 Big Data Clusters is retired. For more information, see [the announcement blog post](https://aka.ms/sqlserver_bigdataclusters) and [Big data options on the Microsoft SQL Server platform](../big-data-cluster/big-data-options.md).
+> Microsoft SQL Server 2019 Big Data Clusters is retired. For more information, see [the announcement blog post](https://aka.ms/sqlserver_bigdataclusters) and [Big data options on the Microsoft SQL Server platform](../big-data-cluster/big-data-options.md).
