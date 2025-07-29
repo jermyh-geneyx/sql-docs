@@ -151,6 +151,10 @@ Any call to `OPENDATASOURCE`, `OPENQUERY`, or `OPENROWSET` in the `FROM` clause 
 
 `OPENROWSET` permissions are determined by the permissions of the user name that is being passed to the data provider.
 
+## Limitations
+
+Not supported with [Microsoft Access Database Engine driver](https://support.microsoft.com/office/download-and-install-microsoft-365-access-runtime-185c5a32-8ba9-491e-ac76-91cbe3ea09c9). 
+
 ## Examples
 
 This section provides general examples to demonstrate how to use OPENROWSET.
