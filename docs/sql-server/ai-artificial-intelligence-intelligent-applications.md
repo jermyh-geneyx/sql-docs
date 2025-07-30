@@ -53,9 +53,9 @@ This section includes key concepts that are critical to implement RAG with Azure
 RAG is a technique that enhances the LLM's ability to produce relevant and informative responses by retrieving additional data from external sources. For example, RAG can query articles or documents that contain domain-specific knowledge related to the user's question or prompt. The LLM can then use this retrieved data as a reference when generating its response. For example, a simple RAG pattern using the SQL Database Engine could be:
 
 1. Insert data into a table.
-1. Link SQL Server to Azure AI Search.
+1. Link your instance to Azure AI Search.
 1. Create an Azure OpenAI GPT4 model and connect it to Azure AI Search.
-1. Chat and ask questions about your data using the trained Azure OpenAI model from your application and from SQL Server.
+1. Chat and ask questions about your data using the trained Azure OpenAI model from your application and from data in your instance.
 
 The RAG pattern, with prompt engineering, serves the purpose of enhancing response quality by offering more contextual information to the model. RAG enables the model to apply a broader knowledgebase by incorporating relevant external sources into the generation process, resulting in more comprehensive and informed responses. For more information on *grounding* LLMs, see [Grounding LLMs - Microsoft Community Hub](https://techcommunity.microsoft.com/blog/fasttrackforazureblog/grounding-llms/3843857).
 
@@ -101,7 +101,7 @@ Vectors in the SQL Database Engine can be efficiently stored and queried, as des
 
 ## Azure OpenAI
 
-Embedding is the process of representing the real world as data. Text, images, or sounds can be converted into embeddings. Azure OpenAI models are able to transform real-world information into embeddings. The models are available as REST endpoints and thus can easily be consumed from the SQL Database Engine using the [`sp_invoke_external_rest_endpoint`](../relational-databases/system-stored-procedures/sp-invoke-external-rest-endpoint-transact-sql.md)system stored procedure:
+Embedding is the process of representing the real world as data. Text, images, or sounds can be converted into embeddings. Azure OpenAI models are able to transform real-world information into embeddings. The models are available as REST endpoints and thus can easily be consumed from the SQL Database Engine using the [sp_invoke_external_rest_endpoint](../relational-databases/system-stored-procedures/sp-invoke-external-rest-endpoint-transact-sql.md) system stored procedure, available starting in SQL Server 2025 (preview) and Azure SQL Managed Instance configured with the [Always-up-to-date update policy](https://learn.microsoft.com/en-us/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy):
 
 ```sql
 DECLARE @retval INT, @response NVARCHAR(MAX);

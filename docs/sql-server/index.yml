@@ -144,8 +144,6 @@ landingContent:
             url: ../ssms/scripting/database-engine-scripting.md
           - text: Synonyms
             url: ../relational-databases/synonyms/synonyms-database-engine.md
-          - text: Synonyms
-            url: ../relational-databases/synonyms/synonyms-database-engine.md
 
 
 
