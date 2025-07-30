@@ -259,6 +259,26 @@ az synapse workspace firewall-rule create --name AllowAllWindowsAzureIps --works
 | [Delete firewall rules](/rest/api/sql/firewall-rules/delete) | Server | Removes server-level IP firewall rules |
 | [Get firewall rules](/rest/api/sql/firewall-rules/get) | Server | Gets server-level IP firewall rules |
 
+## Understanding the latency of firewall updates
+
+The server authentication model has a latency of 5 minutes for all changes to security settings, unless the database is contained and without a failover partner. Changes made to contained databases without a failover partner are instantaneous. For contained databases with a failover partner, each security update is instantaneous on the primary database, but the secondary database can take up to 5 minutes to reflect the changes. 
+
+The following table describes the latency of security settings changes based on database type and failover configuration:
+
+| Authentication model  | Failover configured | Latency for security settings changes | Latent instances |
+|-----------------------|---------------------|--------------------------------------|------------------|
+| Server authentication | Yes                 | 5 minutes                            | all databases     |
+| Server authentication | No                  | 5 minutes                            | all databases     |
+| Contained database    | Yes                 | 5 minutes                            | the secondary database |
+| Contained database    | No                  | none                                 | none             |
+
+## Manually refreshing firewall rules
+
+If you need to see firewall rules updated more quickly than the 5 minute latency, you can manually refresh the firewall rules. Log into the database instance that needs its rules updated, and run DBCC FLUSHAUTHCACHE.  This will cause the database instance to flush its local cache and refresh firewall rules.
+```syntaxsql
+DBCC FLUSHAUTHCACHE[;]
+```
+
 ## Troubleshoot the database firewall
 
 Consider the following points when access to Azure SQL Database doesn't behave as you expect.
