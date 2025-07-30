@@ -1,23 +1,22 @@
 ---
 title: "sys.dm_xe_database_session_targets"
-titleSuffix: Azure SQL Database and Azure SQL Managed Instance
-description: sys.dm_xe_database_session_targets (Azure SQL Database and Azure SQL Managed Instance)
+description: The sys.dm_xe_database_session_targets dynamic management view (DMV) returns information about active database-scoped session targets.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 10/27/2023
+ms.date: 07/29/2025
 ms.service: azure-sql-database
 ms.topic: "reference"
 dev_langs:
   - "TSQL"
-monikerRange: "=azuresqldb-current || =azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current || =azuresqldb-mi-current || =fabric"
 ---
-# sys.dm_xe_database_session_targets (Azure SQL Database and Azure SQL Managed Instance)
+# sys.dm_xe_database_session_targets
+[!INCLUDE [Azure SQL Database and Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/asdb-asmi-fabricsqldb.md)]
 
-[!INCLUDE [Azure SQL Database and Azure SQL Managed Instance](../../includes/applies-to-version/asdb-asdbmi.md)]
+The `sys.dm_xe_database_session_targets` dynamic management view (DMV) returns information about *active* database-scoped session targets. For information about targets for all database-scoped sessions, see [sys.database_event_session_targets](../system-catalog-views/sys-database-event-session-targets-azure-sql-database.md).
 
-Returns information about *active* database-scoped session targets. For information about targets for all database-scoped sessions, see [sys.database_event_session_targets](../system-catalog-views/sys-database-event-session-targets-azure-sql-database.md).
-
-[!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] supports only [database-scoped sessions](/azure/azure-sql/database/xevent-db-diff-from-svr). [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)] supports both database-scoped sessions and [server-scoped sessions](../extended-events/extended-events.md). Server-scoped sessions are recommended for SQL managed instances. For more information, see [CREATE EVENT SESSION](../../t-sql/statements/create-event-session-transact-sql.md#code-examples-can-differ-for-azure-sql-database-and-sql-managed-instance).
+- Azure SQL Database and SQL database in Fabric support only [database-scoped sessions](/azure/azure-sql/database/xevent-db-diff-from-svr). 
+- Azure SQL Managed Instance supports both database-scoped sessions and [server-scoped sessions](../extended-events/extended-events.md). Server-scoped sessions are recommended for SQL managed instances. For more information, see [CREATE EVENT SESSION code examples](../../t-sql/statements/create-event-session-transact-sql.md#code-examples-can-differ-for-azure-sql-database-and-sql-managed-instance).
 
 | Column name | Data type | Description |
 | --- | --- | --- |
@@ -40,7 +39,7 @@ Requires the VIEW DATABASE STATE permission.
 | --- | --- | --- |
 | `sys.dm_xe_database_session_targets.event_session_address` | `sys.dm_xe_database_sessions.address` | Many-to-one |
 
-## Next steps
+## Related content
 
 - [Extended events in Azure SQL Database](/azure/azure-sql/database/xevent-db-diff-from-svr)
 - [Event File target code for extended events in Azure SQL Database and SQL Managed Instance](/azure/azure-sql/database/xevent-code-event-file)

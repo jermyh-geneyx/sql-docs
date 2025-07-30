@@ -64,7 +64,9 @@
       "recommendations": true
     },
     "fileMetadata": {
-      "feedback_system": {},
+      "feedback_system": {
+        "integration-services/**/*.md": "None"
+      },
       "feedback_product_url": {},
       "manager": {
         "**/*.md": "jroth",

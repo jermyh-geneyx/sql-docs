@@ -1,32 +1,31 @@
 ---
 title: "sys.database_event_session_targets"
-titleSuffix: Azure SQL Database and Azure SQL Managed Instance
-description: sys.database_event_session_targets (Azure SQL Database and Azure SQL Managed Instance)
+description: The sys.database_event_session_targets dynamic management view (DMV) returns a row for each event target for a database-scoped event session.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: "4/18/2022"
+ms.date: 07/29/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
 dev_langs:
   - "TSQL"
-monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
-# sys.database_event_session_targets (Azure SQL Database and Azure SQL Managed Instance)
-[!INCLUDE [sqlserver2016-asdb-asdbmi](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi.md)]
+# sys.database_event_session_targets
+[!INCLUDE [sqlserver2016-asdb-asdbmi-fabricsqldb](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-fabricsqldb.md)]
 
+The `sys.database_event_session_targets` dynamic management view (DMV) returns a row for each event target for a database-scoped event session. For information about *active* database-scoped sessions, see [sys.dm_xe_database_session_targets](../system-dynamic-management-views/sys-dm-xe-database-session-targets-azure-sql-database.md).
 
-Returns a row for each event target for a database-scoped event session. For information about *active* database-scoped sessions, see [sys.dm_xe_database_session_targets](../system-dynamic-management-views/sys-dm-xe-database-session-targets-azure-sql-database.md).
+- Azure SQL Database and SQL database in Fabric support only [database-scoped sessions](/azure/azure-sql/database/xevent-db-diff-from-svr). 
+- Azure SQL Managed Instance supports both database-scoped sessions and [server-scoped sessions](../extended-events/extended-events.md). Server-scoped sessions are recommended for SQL managed instances. For more information, see [CREATE EVENT SESSION code examples](../../t-sql/statements/create-event-session-transact-sql.md#code-examples-can-differ-for-azure-sql-database-and-sql-managed-instance).
 
-Azure SQL Database supports only [database-scoped sessions](/azure/azure-sql/database/xevent-db-diff-from-svr). Azure SQL Managed Instance supports both database-scoped sessions and [server-scoped sessions](../extended-events/extended-events.md). Server-scoped sessions are recommended for managed instances: learn more in [CREATE EVENT SESSION](../../t-sql/statements/create-event-session-transact-sql.md#code-examples-can-differ-for-azure-sql-database-and-sql-managed-instance).
-  
 |Column name|Data type|Description|  
 |-----------------|---------------|-----------------|  
-|event_session_id|**int**|The ID of the event session. Is not nullable.|  
-|target_id|**int**|The ID of the target. ID is unique within the event session object. Is not nullable.|  
-|name|**sysname**|The name of the event target. Is not nullable.|  
-|package|**sysname**|The name of the event package that contains the event target. Is not nullable.|  
-|module|**sysname**|The name of the module that contains the event target. Is not nullable.|  
+|`event_session_id`|**int**|The ID of the event session. Is not nullable.|  
+|`target_id`|**int**|The ID of the target. ID is unique within the event session object. Is not nullable.|  
+|`name`|**sysname**|The name of the event target. Is not nullable.|  
+|`package`|**sysname**|The name of the event package that contains the event target. Is not nullable.|  
+|`module`|**sysname**|The name of the module that contains the event target. Is not nullable.|  
   
 ## Permissions  
 
@@ -38,11 +37,9 @@ This view has the following relationship cardinalities.
   
 |From|To|Relationship|  
 |-|-|-|  
-|sys.database_event_session_targets.event_session_id|sys.database_event_sessions.event_session_id|Many to one|  
+|`sys.database_event_session_targets.event_session_id`|`sys.database_event_sessions.event_session_id`|Many to one|  
   
-## Next steps
-
-Learn more about related concepts in the following articles:
+## Related content
 
 - [Extended events in Azure SQL Database](/azure/azure-sql/database/xevent-db-diff-from-svr)
 - [Event File target code for extended events in Azure SQL Database and SQL Managed Instance](/azure/azure-sql/database/xevent-code-event-file)
