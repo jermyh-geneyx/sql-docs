@@ -171,6 +171,14 @@ For **SQL Server on Azure VMs**, Microsoft provides an availability SLA of 99.95
 
 [!INCLUDE [sql-database-create-manage-portal](includes/sql-database-create-manage-portal.md)]
 
+## SQL database in Microsoft Fabric
+
+You can also create a [SQL database in Microsoft Fabric](/sql/sql-server/fabric-database/sql-database-in-fabric). A [SQL database in Microsoft Fabric is distinct from an Azure SQL Database](/fabric/database/sql/decision-guide) or a mirrored database from Azure SQL Database, and each use similar mirroring technology to replicate data into Microsoft Fabric's OneLake. 
+
+With [SQL database in Fabric](/fabric/database/sql/overview), your data is automatically accessible from other Fabric experiences. SQL database in Microsoft Fabric, which uses the same SQL Database Engine as Microsoft SQL Server and is similar to Azure SQL Database, inherits most of the Fabric mirroring capabilities from Azure SQL Database. Your SQL database in Fabric is automatically mirrored to OneLake and presented in a read-only, queryable format. You can use all the different services in Fabric, such as running analytics with Spark, executing notebooks, data engineering, visualizing through Power BI Reports, and more.
+
+For more information, see [SQL database in Microsoft Fabric (Preview)](/sql/sql-server/fabric-database/sql-database-in-fabric).
+
 ## Related content
 
 For overviews: 

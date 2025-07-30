@@ -22,7 +22,7 @@ monikerRange: "=azuresqldb-current"
 ---
 # sys.firewall_rules (Azure SQL Database)
 
-[!INCLUDE[Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/asdb-asdbmi.md)]
+[!INCLUDE[Azure SQL Database](../../includes/applies-to-version/asdb.md)]
 
 Returns information about the server-level firewall settings associated with your [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
