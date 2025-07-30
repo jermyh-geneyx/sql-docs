@@ -5,7 +5,7 @@ description: Learn about the new features and documentation improvements for Azu
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: wiassaf, mathoma
-ms.date: 07/28/2025
+ms.date: 07/29/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: service-overview
 ms.topic: whats-new
@@ -57,6 +57,7 @@ The following table lists features of Azure SQL Managed Instance that have been 
 
 | Feature | GA Month | Details |
 | ---| --- |--- |
+|[Optimized locking](/sql/relational-databases/performance/optimized-locking)| July 2025 | Azure SQL Managed Instance with the [Always-up-to-date](update-policy.md#always-up-to-date-update-policy) update policy now has optimized locking enabled for all user databases. |
 |[UNISTR (Transact-SQL)](/sql/t-sql/functions/unistr-transact-sql) | July 2025 | Azure SQL Managed Instance now supports the `UNISTR` T-SQL syntax for Unicode string literals.|
 |[\|\| (String concatenation)](/sql/t-sql/language-elements/string-concatenation-pipes-transact-sql?view=azuresqldb-current&preserve-view=true) and [\|\|= (Compound assignment)](/sql/t-sql/language-elements/compound-assignment-pipes-transact-sql?view=azuresqldb-current&preserve-view=true) syntax support | July 2025 |Azure SQL Managed Instance now supports [\|\| (String concatenation)](/sql/t-sql/language-elements/string-concatenation-pipes-transact-sql?view=azuresqldb-current&preserve-view=true) and [\|\|= (Compound assignment)](/sql/t-sql/language-elements/compound-assignment-pipes-transact-sql?view=azuresqldb-current&preserve-view=true) Transact-SQL syntax.|
 | [Degrees of parallelism (DOP) feedback](/sql/relational-databases/performance/intelligent-query-processing-degree-parallelism-feedback?view=azuresqldb-mi-current&preserve-view=true) | July 2025|  DOP feedback improves query performance by identifying parallelism inefficiencies for repeating queries, based on elapsed time and waits. For more information, see the [Smarter Parallelism: Degree of parallelism feedback in SQL Server 2025](https://techcommunity.microsoft.com/blog/sqlserver/smarter-parallelism-degree-of-parallelism-feedback-in-sql-server-2025/4431318) blog. |

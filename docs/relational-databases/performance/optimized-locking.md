@@ -4,7 +4,7 @@ description: "Learn about the optimized locking enhancement to the database engi
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest, peskount, praspu, dfurman
-ms.date: 07/07/2025
+ms.date: 07/29/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
@@ -20,9 +20,9 @@ monikerRange: "=azuresqldb-current || =fabric || >=sql-server-ver17 || >=sql-ser
 
 # Optimized locking
 
-[!INCLUDE [sqlserver2025-asdb-fabric.md](../../includes/applies-to-version/sqlserver2025-asdb-fabricsqldb.md)]
+[!INCLUDE [sqlserver2025-asdb-asmi-fabricsqldb.md](../../includes/applies-to-version/sqlserver2025-asdb-asmi-fabricsqldb.md)]
 
-This article introduces optimized locking, a database engine capability that offers an improved transaction locking mechanism to reduce lock memory consumption and blocking for concurrent transactions.
+Optimized locking offers an improved transaction locking mechanism to reduce lock blocking and lock memory consumption for concurrent transactions.
 
 ## What is optimized locking?
 
@@ -49,14 +49,10 @@ The following table summarizes the availability and enabled state of optimized l
 | --- | --- | --- |
 |[!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] | Yes | Yes (always enabled) |
 |[!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)] | Yes | Yes (always enabled) |
-|[!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)]<sup>AUTD</sup>| No | N/A |
-|[!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)]<sup>2022</sup>| No | N/A |
+|[!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)]<sup>[AUTD](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy)</sup>| Yes | Yes (always enabled) |
+|[!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)]<sup>[2022](/azure/azure-sql/managed-instance/update-policy#sql-server-2022-update-policy)</sup>| No | N/A |
 |[!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] | Yes | No (can be enabled per database) |
 |[!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and older versions | No | N/A |
-
-<sup>AUTD</sup> Applies to Azure SQL Managed Instance configured with the [Always-up-to-date update policy](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy).
-
-<sup>2022</sup> Applies to Azure SQL Managed Instance configured with the [SQL Server 2022 update policy](/azure/azure-sql/managed-instance/update-policy#sql-server-2022-update-policy).
 
 ### Enable and disable
 
@@ -67,7 +63,7 @@ Optimized locking builds on other database features:
 - You must enable [accelerated database recovery (ADR)](/azure/azure-sql/accelerated-database-recovery) on a database before you can enable optimized locking. Conversely, to disable ADR, you must disable optimized locking first if it's enabled.
 - For the most benefit from optimized locking, [read committed snapshot isolation (RCSI)](../../t-sql/statements/alter-database-transact-sql-set-options.md?view=azuresqldb-current&preserve-view=true#read_committed_snapshot--on--off--1) should be enabled for the database. The [LAQ](#lock-after-qualification-laq) component of optimized locking is in effect only if RCSI is enabled.
 
-In [!INCLUDE [asdb](../../includes/ssazure-sqldb.md)], ADR is always enabled and RCSI is enabled by default.
+In [!INCLUDE [asdb](../../includes/ssazure-sqldb.md)] and [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)], ADR is always enabled and RCSI is enabled by default.
 
 To verify that these options are enabled for your current database, connect to the database and run the following T-SQL query:
 
@@ -317,7 +313,7 @@ The following improvements help you monitor and troubleshoot blocking and deadlo
     - Under each resource in the deadlock report `<resource-list>`, each `<xactlock>` element reports the underlying resources and specific information for locks of each member of a deadlock. For more information and an example, see [Optimized locking and deadlocks](../sql-server-deadlocks-guide.md#optimized-locking-and-deadlocks).
 - Extended events
     - The `lock_after_qual_stmt_abort` event fires when a statement is internally aborted and restarted because of a conflict with another transaction. For more information, see [Lock after qualification (LAQ)](#lock-after-qualification-laq).
-    - In [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], the `locking_stats` event fires for every database every several minutes and provides aggregate locking statistics for the time interval, such as the number of lock escalations, whether TID locking and LAQ components of optimized locking are enabled, and the number of queries where LAQ wasn't used for various reasons. This event fires even if optimized locking is disabled.
+    - In [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)], the `locking_stats` event fires for every database every several minutes and provides aggregate locking statistics for the time interval, such as the number of lock escalations, whether TID locking and LAQ components of optimized locking are enabled, and the number of queries where LAQ wasn't used for various reasons. This event fires even if optimized locking is disabled.
 
 ## Best practices with optimized locking
 
@@ -381,7 +377,7 @@ In the previous query example, only table `t5` uses the `REPEATABLE READ` isolat
 
 ### Is optimized locking on by default in both new and existing databases?
 
-In [!INCLUDE [Azure SQL Database](../../includes/ssazure-sqldb.md)] and [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)], yes. In [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] optimized locking is disabled by default but can be enabled on any user database that has accelerated database recovery enabled.
+In [!INCLUDE [Azure SQL Database](../../includes/ssazure-sqldb.md)], [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)]<sup>[AUTD](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy)</sup>, and [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)], yes. In [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] optimized locking is disabled by default but can be enabled on any user database that has accelerated database recovery enabled.
 
 ### How can I detect if optimized locking is enabled?
 
