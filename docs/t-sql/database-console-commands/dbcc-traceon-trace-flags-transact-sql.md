@@ -4,7 +4,7 @@ description: "Learn how to set specific server characteristics or to alter a par
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: wiassaf
-ms.date: 07/29/2025
+ms.date: 07/30/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -167,7 +167,7 @@ Trace flag behavior might not be supported in future releases of [!INCLUDE [ssNo
 | <a id="tf3502"></a>**3502** | Used to send checkpoint state changes to the error log.<br /><br />**Applies to:** [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)] and later versions.<br /><br />**Scope:** Global or session. |
 | <a id="tf3605"></a>**3605** | Redirects tracing messages to the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] error log. For example, using trace flags 205 and 8721 require Trace Flag 3605 to be enabled.<br /><br />**Warning:** This is a debugging trace flag and not meant to be enabled continuously in a production environment.<br /><br />**Scope:** Global or session. |
 | <a id="tf3608"></a>**3608** | Prevents [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] from automatically starting and recovering any database except the `master` database. If activities that require `tempdb` are initiated, then `model` is recovered and `tempdb` is created. Other databases are started and recovered when accessed. Some features, such as snapshot isolation and read committed snapshot, might not work. Use for [Move system databases](../../relational-databases/databases/move-system-databases.md) and [Move user databases](../../relational-databases/databases/move-user-databases.md).<br /><br />**Note:** Don't use during normal operation.<br /><br />**Scope:** Global only. |
-| <a id="tf3625"></a>**3625** | Limits the amount of information returned to users who aren't members of the **sysadmin** fixed server role, by masking the parameters of some error messages using `'******'`. This can help prevent disclosure of sensitive information.<br /><br />**Scope:** Global only. |
+| <a id="tf3625"></a>**3625** | Limits the amount of information returned to users who aren't authenticated as members of the **sysadmin** fixed server role, by masking the parameters of some error messages using `'******'`. This can help prevent disclosure of sensitive information.<br /><br />**Scope:** Global only. |
 | <a id="tf3656"></a>**3656** | Enables symbol resolution on stack dumps when the Debugging Tools for Windows are installed.<br /><br />**Warning:** This is a debugging trace flag and not meant for production environment use.<br /><br />**Note:** Starting with [!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)], Trace Flag [2592](#tf2592) must be enabled with Trace Flag 3656 to enable symbol resolution.<br /><br />**Scope:** Global and session. |
 | <a id="tf3880"></a>**3880** | Disable the timer task that checks the state of a resumable index.<br /><br />**Applies to:** [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] and later versions and is intended for high-end systems with high performance workloads.<br /><br />**Scope:** Global or session. |
 | <a id="tf3924"></a>**3924** | Enables automatic removal of orphaned DTC transactions with `SPID = -2`, which is a problem for some third party transaction monitors. For more information, see [KB4519668](https://support.microsoft.com/kb/4519668) and [KB4511816](https://support.microsoft.com/kb/4511816).<br /><br />**Scope:** Global only. |
