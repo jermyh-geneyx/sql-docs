@@ -173,7 +173,7 @@ For an end-to-end sample to build an AI-enabled application using sessions abstr
 - [Using Retrieval Augmented Generation to build a conference session assistant](https://github.com/Azure-Samples/azure-sql-db-session-recommender-v2)
 
 > [!NOTE]
-> Langchan integration and Semantic Kernel integration rely on the [vector data type](../t-sql/data-types/vector-data-type.md), which is available starting with [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] and in Azure SQL Managed Instance configured with the [Always-up-to-date update policy](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy).
+> LangChain integration and Semantic Kernel integration rely on the [vector data type](../t-sql/data-types/vector-data-type.md), which is available starting with [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] and in Azure SQL Managed Instance configured with the [Always-up-to-date update policy](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy).
 
 
 ### LangChain integration
