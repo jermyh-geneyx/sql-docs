@@ -4,7 +4,7 @@ description: "Learn about the optimized locking enhancement to the database engi
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest, peskount, praspu, dfurman
-ms.date: 07/29/2025
+ms.date: 07/30/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
@@ -15,7 +15,7 @@ helpviewer_keywords:
   - "optimized locking"
 dev_langs:
   - "TSQL"
-monikerRange: "=azuresqldb-current || =fabric || >=sql-server-ver17 || >=sql-server-linux-ver17"
+monikerRange: "=azuresqldb-current || =azuresqldb-mi-current || =fabric || >=sql-server-ver17 || >=sql-server-linux-ver17"
 ---
 
 # Optimized locking
