@@ -27,6 +27,8 @@ Only Azure extension for SQL Server agent versions released within the last year
 
 ## July 29, 2025
 
+**Extension version**: `1.1.3119.307`
+
 SQL Server enabled by Azure Arc is generally available in US Government Virginia. For more information, review [SQL Server enabled by Azure Arc in US Government](us-government-region.md).
 
 ## July 2025
