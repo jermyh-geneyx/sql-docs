@@ -242,7 +242,7 @@ After the Azure Arc agent on the SQL Server host has completed its operation, th
 The same syntax for creating Microsoft Entra logins and users on Azure SQL Database and Azure SQL Managed Instance can now be used on SQL Server.
 
 > [!NOTE]  
-> On SQL Server, any account that has the `ALTER ANY LOGIN` or `ALTER ANY USER` permission can create Microsoft Entra logins or users, respectively. The account doesn't need to be a Microsoft Entra login.
+> On SQL Server, any Entra account that has the ALTER ANY LOGIN or ALTER ANY USER permission can create Microsoft Entra logins or users, respectively. Otherwise, only SYSADMINS can create Microsoft Entra logins or users.
 
 To create a login for a Microsoft Entra account, execute the following T-SQL command in the `master` database:
 
