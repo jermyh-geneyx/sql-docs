@@ -266,7 +266,7 @@ Follow the steps in the [Microsoft Entra tutorial](../../sql-server/azure-arc/en
 Consider the following limitations when using a managed identity with SQL Server 2025:
 
 - The managed identity setup for Microsoft Entra authentication is only supported with Azure Arc-enabled SQL Server 2025, running on Windows Server.
-- SQL Server needs access to Azure public cloud to use Microsoft Entra authentication.
+- SQL Server needs access to Azure public cloud to use [Microsoft Entra authentication](/sql/relational-databases/security/authentication-access/azure-ad-authentication-sql-server-overview).
 - Using Microsoft Entra authentication with failover cluster instances isn't supported.
 - Once Microsoft Entra authentication is enabled, disabling isn't advisable. Disabling Microsoft Entra authentication forcefully by deleting registry entries can result in unpredictable behavior with SQL Server 2025.
 - Authenticating to SQL Server on Arc machines through Microsoft Entra authentication using the [FIDO2 method](/azure/active-directory/authentication/howto-authentication-passwordless-faqs) isn't currently supported.
