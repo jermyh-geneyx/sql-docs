@@ -157,7 +157,7 @@ The following are some general principles to consider regarding metadata visibil
 
 - Visibility of subcomponent metadata
 
-### Fixed Roles and Implicit Permissions
+### Fixed roles and implicit permissions
 
 Metadata that can be accessed by fixed roles depends upon their corresponding implicit permissions.
 
