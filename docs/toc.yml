@@ -11,6 +11,8 @@ items:
     href: sql-server/what-is-sql-server.md
   - name: Connect to the Database Engine
     href: sql-server/connect-to-database-engine.md
+  - name: Intelligent applications and AI
+    href: sql-server/ai-artificial-intelligence-intelligent-applications.md
   - name: What's new?
     items:
     - name: SQL Server 2025 Preview
@@ -11261,7 +11263,7 @@ items:
         href: relational-databases/system-catalog-views/sys-availability-read-only-routing-lists-transact-sql.md
       - name: sys.availability_replicas
         href: relational-databases/system-catalog-views/sys-availability-replicas-transact-sql.md
-    - name: Azure SQL Database
+    - name: Azure SQL Database & SQL database in Fabric
       href: relational-databases/system-catalog-views/azure-sql-database-catalog-views.md
       items:
       - name: sys.bandwidth_usage

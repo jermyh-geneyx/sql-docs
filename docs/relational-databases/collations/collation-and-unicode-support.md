@@ -4,7 +4,7 @@ description: Learn about collation and Unicode support in SQL Server.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest
-ms.date: 12/16/2024
+ms.date: 07/29/2025
 ms.service: sql
 ms.topic: conceptual
 helpviewer_keywords:
@@ -35,9 +35,9 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 
 # Collation and Unicode support
 
-[!INCLUDE [SQL Server Azure SQL Database Synapse Analytics PDW](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Synapse Analytics PDW FabricSE FabricDW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw-fabricsqldb.md)]
 
-Collations in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] provide sorting rules, case, and accent sensitivity properties for your data. Collations that are used with character data types, such as **char** and **varchar**, dictate the code page and corresponding characters that can be represented for that data type.
+Collations in the [!INCLUDE [ssdenoversion-md](../../includes/ssdenoversion-md.md)] provide sorting rules, case, and accent sensitivity properties for your data. Collations that are used with character data types, such as **char** and **varchar**, dictate the code page and corresponding characters that can be represented for that data type.
 
 Whether you're installing a new instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], restoring a database backup, or connecting server to client databases, it's important to understand the locale requirements, sorting order, and case and accent sensitivity of the data that you're working with. To list the collations that are available on your instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], see [sys.fn_helpcollations](../system-functions/sys-fn-helpcollations-transact-sql.md).
 
@@ -67,9 +67,6 @@ A collation specifies the bit patterns that represent each character in a datase
 The options associated with a collation are case sensitivity, accent sensitivity, kana sensitivity, width sensitivity, and variation-selector sensitivity. [!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)] introduces an additional option for [UTF-8](https://www.wikipedia.org/wiki/UTF-8) encoding.
 
 You can specify these options by appending them to the collation name. For example, the collation `Japanese_Bushu_Kakusu_100_CS_AS_KS_WS_SC_UTF8` is case-sensitive, accent-sensitive, kana-sensitive, width-sensitive, and UTF-8 encoded. As another example, the collation `Japanese_Bushu_Kakusu_140_CI_AI_KS_WS_VSS` is case-insensitive, accent-insensitive, kana-sensitive, width-sensitive, variation-selector-sensitive, and it uses a legacy code page for **varchar**.
-
-> [!NOTE]  
-> In Microsoft Fabric Data Warehouse, the only collations allowed are: Latin1_General_100_BIN2_UTF8 and Latin1_General_100_CI_AS_KS_WS_SC_UTF8.
 
 The behavior associated with these various options is described in the following table:
 
@@ -411,16 +408,6 @@ SELECT *
 FROM sys.fn_helpcollations();
 ```
 
-### Collations in Azure SQL Database
-
-You can't change or set the logical server collation on Azure SQL Database, but can configure each database's collations both for data and for the catalog. The catalog collation determines the collation for system metadata, such as object identifiers. Both collations can be specified independently when you [create the database in the Azure portal](/azure/azure-sql/database/single-database-create-quickstart?view=azuresql&preserve-view=true&tabs=azure-portal#create-a-single-database), in T-SQL with [CREATE DATABASE](../../t-sql/statements/create-database-transact-sql.md?view=azuresqldb-current&preserve-view=true#collation_name), in PowerShell with [New-AzSqlDatabase](/powershell/module/az.sql/new-azsqldatabase).
-
-### Collations in Azure SQL Managed Instance
-
-Server-level collation in Azure SQL Managed Instance can be specified when the instance is created and can't be changed later.
-
-For more information, see [Set or Change the Server Collation](../../relational-databases/collations/set-or-change-the-server-collation.md#set-the-server-collation-in-azure-sql-managed-instance).
-
 <a id="Database-level-collations"></a>
 
 #### Database-level collations
@@ -626,7 +613,7 @@ Database applications that interact with [!INCLUDE [ssNoVersion](../../includes/
 
 <a id="Japanese_Collations"></a>
 
-## Japanese collations added in SQL Server 2017
+### Japanese collations added in SQL Server 2017
 
 Starting with [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)], new Japanese collation families are supported, with the permutations of various options (`_CS`, `_AS`, `_KS`, `_WS`, and `_VSS`), as well as `_BIN` and `_BIN2`.
 
@@ -642,6 +629,22 @@ WHERE COLLATIONPROPERTY(name, 'Version') = 3;
 All the new collations have built-in support for supplementary characters, so none of the new `140` collations has (or needs) the SC flag.
 
 These collations are supported in [!INCLUDE [ssDE-md](../../includes/ssde-md.md)] indexes, memory-optimized tables, columnstore indexes, and natively compiled modules.
+
+## Collations in Azure SQL Database
+
+You can't change or set the logical server collation on Azure SQL Database, but can configure each database's collations both for data and for the catalog. The catalog collation determines the collation for system metadata, such as object identifiers. Both collations can be specified independently when you [create the database in the Azure portal](/azure/azure-sql/database/single-database-create-quickstart?view=azuresql&preserve-view=true&tabs=azure-portal#create-a-single-database), in T-SQL with [CREATE DATABASE](../../t-sql/statements/create-database-transact-sql.md?view=azuresqldb-current&preserve-view=true#collation_name), in PowerShell with [New-AzSqlDatabase](/powershell/module/az.sql/new-azsqldatabase).
+
+## Collations in Azure SQL Managed Instance
+
+Server-level collation in Azure SQL Managed Instance can be specified when the instance is created and can't be changed later.
+
+For more information, see [Set or Change the Server Collation](../../relational-databases/collations/set-or-change-the-server-collation.md#set-the-server-collation-in-azure-sql-managed-instance).
+
+## Collation in Microsoft Fabric
+
+In Microsoft Fabric Data Warehouse, the only collations allowed are: `Latin1_General_100_BIN2_UTF8` and `Latin1_General_100_CI_AS_KS_WS_SC_UTF8`.
+
+In [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)] (preview), by default the collation is `SQL_Latin1_General_CP1_CI_AS` and currently can't be updated. Collations on individual columns are supported.
 
 <a id="ctp23"></a>
 <a id="utf8"></a>

@@ -4,7 +4,7 @@ titleSuffix: SQL Server, Azure SQL Database, Azure SQL Managed Instance
 description: "Learn about table and index partitioning."
 author: VanMSFT
 ms.author: vanto
-ms.date: 06/30/2025
+ms.date: 07/29/2025
 ms.service: sql
 ms.topic: conceptual
 helpviewer_keywords:
@@ -19,14 +19,7 @@ monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-20
 
 [!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
 
-SQL Server, Azure SQL Database, and Azure SQL Managed Instance support table and index partitioning. The data of partitioned tables and indexes is divided into units that might be spread across more than one filegroup in a database or stored in a single filegroup. When multiple files exist in a filegroup, data is spread across files using the [proportional fill algorithm](../databases/database-files-and-filegroups.md#file-and-filegroup-fill-strategy). The data is partitioned horizontally, so that groups of rows are mapped into individual partitions. All partitions of a single index or table must reside in the same database. The table or index is treated as a single logical entity when queries or updates are performed on the data.
-
-Prior to [!INCLUDE [ssSQL15_md](../../includes/sssql16-md.md)] SP1, partitioned tables and indexes weren't available in every edition of SQL Server. For a list of features supported by the editions of SQL Server, see [Editions and supported features of SQL Server 2022](../../sql-server/editions-and-components-of-sql-server-2022.md). Partitioned tables and indexes are available in all service tiers of Azure SQL Database and Azure SQL Managed Instance.
-
-Table partitioning is also available in dedicated SQL pools in Azure Synapse Analytics, with some syntax differences. Learn more in [Partitioning tables in dedicated SQL pool](/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-partition).
-
-> [!IMPORTANT]  
-> The database engine supports up to 15,000 partitions by default. In versions earlier than [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)], the number of partitions was limited to 1,000 by default.
+The data of partitioned tables and indexes is divided into units that might be spread across more than one filegroup in a database or stored in a single filegroup. When multiple files exist in a filegroup, data is spread across files using the [proportional fill algorithm](../databases/database-files-and-filegroups.md#file-and-filegroup-fill-strategy). The data is partitioned horizontally, so that groups of rows are mapped into individual partitions. All partitions of a single index or table must reside in the same database. The table or index is treated as a single logical entity when queries or updates are performed on the data.
 
 ## Benefits of partitioning
 
@@ -88,9 +81,6 @@ The primary reason for placing your partitions on multiple filegroups is to make
 
 Managing files and filegroups for partitioned tables might add significant complexity to administrative tasks over time. If your backup and restore procedures don't benefit from the use of multiple filegroups, a single filegroup for all partitions is recommended. The same [Rules for designing files and filegroups](../databases/database-files-and-filegroups.md#rules-for-designing-files-and-filegroups) apply to partitioned objects as apply to nonpartitioned objects.
 
-> [!NOTE]  
-> Partitioning isn't fully supported in Azure SQL Database. Because only the `PRIMARY` filegroup is supported in Azure SQL Database, all partitions must be placed on the `PRIMARY` filegroup.
-
 Find example code to create filegroups for SQL Server and Azure SQL Managed Instance in [ALTER DATABASE (Transact-SQL) File and Filegroup Options](../../t-sql/statements/alter-database-transact-sql-file-and-filegroup-options.md).
 
 ### Partitioning column
@@ -139,9 +129,19 @@ Learn more about partition elimination and related concepts in [Query Processing
 
 ## Limitations
 
+- Prior to [!INCLUDE [ssSQL15_md](../../includes/sssql16-md.md)] SP1, partitioned tables and indexes weren't available in every edition of SQL Server. For a list of features supported by the editions of SQL Server, see [Editions and supported features of SQL Server 2022](../../sql-server/editions-and-components-of-sql-server-2022.md). 
+
+- Partitioned tables and indexes are available in all service tiers of Azure SQL Database, SQL database in Fabric, and Azure SQL Managed Instance.
+
+   - In Azure SQL Database and SQL database in Fabric, all partitions must be placed on the `PRIMARY` filegroup because only the `PRIMARY` filegroup is provided.
+
+- Table partitioning is available in dedicated SQL pools in Azure Synapse Analytics, with some syntax differences. Learn more in [Partitioning tables in dedicated SQL pool](/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-tables-partition).
+
 - The scope of a partition function and scheme is limited to the database in which they have been created. Within the database, partition functions reside in a separate namespace from other functions.
 
 - If any rows in a partitioned table have NULLs in the partitioning column, these rows are placed on the left-most partition. However, if NULL is specified as the first boundary value and RANGE RIGHT is specified in the partition function definition, then the left-most partition remains empty, and NULLs are placed in the second partition.
+
+- The database engine supports up to 15,000 partitions by default. In versions earlier than [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)], the number of partitions was limited to 1,000 by default.
 
 ## Performance guidelines
 
@@ -155,7 +155,9 @@ We recommend that you use at least 16 GB of RAM if a large number of partitions 
 
 Memory limitations can affect the performance or ability of the database engine to build a partitioned index. This is especially the case when the index isn't aligned with its base table or isn't aligned with its clustered index, if the table already has a clustered index.
 
-In SQL Server and Azure SQL Managed Instance, you can increase the `index create memory (KB)` Server Configuration Option. For more information, see [Server configuration: index create memory](../../database-engine/configure-windows/configure-the-index-create-memory-server-configuration-option.md). For Azure SQL Database, consider temporarily or permanently increasing the service level objective for the database in the Azure portal to allocate more memory.
+In SQL Server and Azure SQL Managed Instance, you can increase the `index create memory (KB)` Server Configuration Option. For more information, see [Server configuration: index create memory](../../database-engine/configure-windows/configure-the-index-create-memory-server-configuration-option.md). 
+
+For Azure SQL Database, consider temporarily or permanently increasing the service level objective for the database in the Azure portal to allocate more memory.
 
 ### Partitioned index operations
 
@@ -200,7 +202,7 @@ For more information about partition handling in query processing, including par
 
 ## Behavior changes in statistics computation during partitioned index operations
 
-In Azure SQL Database, Azure SQL Managed Instance, and [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)] and higher, statistics aren't created by scanning all the rows in the table when a partitioned index is created or rebuilt. Instead, the query optimizer uses the default sampling algorithm to generate statistics.
+In Azure SQL Database, SQL database in Fabric, Azure SQL Managed Instance, and [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)] and later versions, statistics aren't created by scanning all the rows in the table when a partitioned index is created or rebuilt. Instead, the query optimizer uses the default sampling algorithm to generate statistics.
 
 After upgrading a database with partitioned indexes from a version of SQL Server lower than 2012 (11.x), you might notice a difference in the histogram data for these indexes. This change in behavior might affect query performance. To obtain statistics on partitioned indexes by scanning all the rows in the table, use `CREATE STATISTICS` or `UPDATE STATISTICS` with the `FULLSCAN` clause.
 

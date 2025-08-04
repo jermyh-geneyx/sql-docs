@@ -10,11 +10,11 @@ ms.service: azure-sql
 ms.subservice: performance
 ms.topic: sample
 ms.custom: sqldbrb=1
-monikerRange: "= azuresql || = azuresql-db || = azuresql-mi"
+monikerRange: "= azuresql || = azuresql-db || = azuresql-mi || = fabricsql"
 ---
 # Create an event session with an event_file target in Azure Storage
 
-[!INCLUDE [appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
+[!INCLUDE [appliesto-sqldb-sqlmi-fabricsqldb](../includes/appliesto-sqldb-sqlmi-fabricsqldb.md)]
 
 [!INCLUDE [sql-database-xevents-selectors-1-include](../includes/sql-database-xevents-selectors-1-include.md)]
 
@@ -71,7 +71,7 @@ To read and write event data, the [!INCLUDE [ssde-md](../../docs/includes/ssde-m
 
     # [SQL Database](#tab/sqldb)
 
-    Create a database-scoped [credential](/sql/relational-databases/security/authentication-access/credentials-database-engine). Using a client tool such as SSMS, open a new query window, connect to the database where you create the event session, and paste the following T-SQL batch. Make sure you're connected to your user database, and not to the `master` database.
+    In Azure SQL Database and SQL database in Microsoft Fabric, create a database-scoped [credential](/sql/relational-databases/security/authentication-access/credentials-database-engine). Using a client tool such as SSMS, open a new query window, connect to the database where you create the event session, and paste the following T-SQL batch. Make sure you're connected to your user database, and not to the `master` database.
 
     > [!NOTE]  
     > Executing the following T-SQL batch requires the `CONTROL` database permission, which is held by the database owner (`dbo`), by the members of the `db_owner` database role, and by the administrator of the logical server.
