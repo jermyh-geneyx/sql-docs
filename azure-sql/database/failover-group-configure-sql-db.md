@@ -511,7 +511,9 @@ Be aware of the following limitations:
 - When creating a new failover group, or when adding databases to an existing failover group, you can _only_ designate the databases as [standby replicas](standby-replica-how-to-configure.md) _when using the Azure portal_ - Azure PowerShell and the Azure CLI are not currently available.
 - The Azure portal doesn't support creating failover groups across different subscriptions. Instead, use [PowerShell cmdlets to programmatically manage failover groups](#programmatically-manage-failover-groups).
 
-## <a name="programmatically-managing-failover-groups"></a> Programmatically manage failover groups
+<a name="programmatically-managing-failover-groups"></a> 
+
+## Programmatically manage failover groups
 
 Failover groups can also be managed programmatically by using Azure PowerShell, Azure CLI, and REST API. The following tables describe the set of commands available. Failover groups include a set of Azure Resource Manager APIs for management, including the [Azure SQL Database REST API](/rest/api/sql/) and [Azure PowerShell cmdlets](/powershell/azure/). These APIs require the use of resource groups and support Azure role-based access control (Azure RBAC). For more information on how to implement access roles, see [Azure role-based access control (Azure RBAC)](/azure/role-based-access-control/overview).
 
