@@ -26,9 +26,6 @@ monikerRange: "= azuresqldb-current || = azuresqldb-mi-current || >= sql-server-
 
   Returns the database schema name for schema-scoped objects. For a list of schema-scoped objects, see [sys.objects (Transact-SQL)](../../relational-databases/system-catalog-views/sys-objects-transact-sql.md).  
 
-> [!NOTE]
-> The function `OBJECT_SCHEMA_NAME` is only supported in dedicated SQL pools in [!INCLUDE[ssazuresynapse_md](../../includes/ssazuresynapse-md.md)].
-
  :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md)  
 
 ## Syntax
