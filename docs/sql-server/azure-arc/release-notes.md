@@ -21,13 +21,15 @@ This article lists:
 - High level feature descriptions
 - Links to additional feature documentation
 
-Extension versions are cumulative. Higher extension versions include all of the updates from previous versions. A release might include internal features. If the version release notes don't describe features, then the updates were internal.
+Extension versions are cumulative. Higher extension versions include all of the updates from previous versions. A release might also include internal features.
 
 Only Azure extension for SQL Server agent versions released within the last year are supported.
 
 ## July 29, 2025
 
 **Extension version**: `1.1.3119.307`
+
+This release updates the extension to support specific cloud environments.
 
 ## July 2025
 
