@@ -1,16 +1,16 @@
 ---
-title: Create foreign key relationships
+title: Create Foreign Key Relationships
 description: Create foreign key relationships in SQL Server by using SQL Server Management Studio or Transact-SQL.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: vanto, randolphwest
-ms.date: 07/22/2024
+ms.date: 08/07/2025
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: how-to
 helpviewer_keywords:
   - "relationships [SQL Server], creating"
-monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current ||=fabric"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Create foreign key relationships
 
@@ -40,11 +40,11 @@ Creating a foreign key in an existing table requires [ALTER TABLE](../../t-sql/s
 
 - The [!INCLUDE [ssDE](../../includes/ssde-md.md)] doesn't have a predefined limit on the number of `FOREIGN KEY` constraints a table can contain that reference other tables. The [!INCLUDE [ssDE](../../includes/ssde-md.md)] also doesn't limit the number of `FOREIGN KEY` constraints owned by other tables that reference a specific table. However, the actual number of `FOREIGN KEY` constraints used is limited by the hardware configuration, and by the design of the database and application. A table can reference a maximum of 253 other tables and columns as foreign keys (outgoing references). [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later versions increase the limit for the number of other tables and columns that can reference columns in a single table (incoming references), from 253 to 10,000. (Requires at least 130 compatibility level.) The increase has the following restrictions:
 
-  - Greater than 253 foreign key references are supported for `DELETE` and `UPDATE` DML operations. `MERGE` operations aren't supported.
-
-  - A table with a foreign key reference to itself is still limited to 253 foreign key references.
-
-  - Greater than 253 foreign key references aren't currently available for columnstore indexes, or memory-optimized tables.
+    - Greater than 253 foreign key references are supported for `DELETE` and `UPDATE` DML operations. `MERGE` operations aren't supported.
+    
+    - A table with a foreign key reference to itself is still limited to 253 foreign key references.
+    
+    - Greater than 253 foreign key references aren't currently available for columnstore indexes, or memory-optimized tables.
 
 - `FOREIGN KEY` constraints aren't enforced on temporary tables.
 
@@ -56,23 +56,23 @@ Creating a foreign key in an existing table requires [ALTER TABLE](../../t-sql/s
 
 ### Use SQL Server Management Studio
 
-1. In Object Explorer, right-click the table that will be on the foreign-key side of the relationship and select **Design**.
+1. In Object Explorer, right-click the table that is on the foreign-key side of the relationship and select **Design**.
 
-   The table opens in [Create and update database tables](../../ssms/visual-db-tools/design-tables-visual-database-tools.md).
+    The table opens in [Create and update database tables](../../ssms/visual-db-tools/design-tables-visual-database-tools.md).
 
 1. From the **Table Designer** menu, select **Relationships**. (See the **Table Designer** menu in the header, or, right-click in the empty space of the table definition, then select **Relationships...**.)
 
 1. In the **Foreign-key Relationships** dialog box, select **Add**.
 
-   The relationship appears in the **Selected Relationship** list with a system-provided name in the format `FK_<tablename>_<tablename>`, where the first *tablename* is the name of the foreign key table, and the second *tablename* is the name of the primary key table. This is just a default and common naming convention for the **(Name)** field of the foreign key object.
+    The relationship appears in the **Selected Relationship** list with a system-provided name in the format `FK_<tablename>_<tablename>`, where the first *tablename* is the name of the foreign key table, and the second *tablename* is the name of the primary key table. This is just a default and common naming convention for the **(Name)** field of the foreign key object.
 
 1. Select the relationship in the **Selected Relationship** list.
 1. Select **Tables and Columns Specification** in the grid to the right and select the ellipses (**...**) to the right of the property.
-1. In the **Tables and Columns** dialog box, in the **Primary Key** dropdown list, choose the table that will be on the primary-key side of the relationship.
+1. In the **Tables and Columns** dialog box, in the **Primary Key** dropdown list, choose the table that is on the primary-key side of the relationship.
 
 1. In the grid beneath the dialog box, choose the columns contributing to the table's primary key. In the adjacent grid cell to the right of each column, choose the corresponding foreign-key column of the foreign-key table.
 
-   **Table Designer** suggests a name for the relationship. To change this name, edit the contents of the **Relationship Name** text box.
+    **Table Designer** suggests a name for the relationship. To change this name, edit the contents of the **Relationship Name** text box.
 
 1. Choose **OK** to create the relationship.
 

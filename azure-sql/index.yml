@@ -15,7 +15,7 @@ metadata:
   author: WilliamDAssafMSFT
   ms.author: wiassaf
   ms.reviewer: mathoma
-  ms.date: 09/27/2024
+  ms.date: 08/07/2025
 
 # linkListType: architecture | concept | deploy | download | get-started | how-to-guide | learn | overview | quickstart | reference | tutorial | video | whats-new
 
@@ -32,7 +32,7 @@ landingContent:
             url: database/sql-database-paas-overview.md
       - linkListType: whats-new
         links:
-          - text: What's new? 
+          - text: What's new in Azure SQL Database? 
             url: database/doc-changes-updates-release-notes-whats-new.md
           - text: Try for free
             url: database/free-offer.md
@@ -56,10 +56,10 @@ landingContent:
             url: database/security-overview.md
           - text: Business continuity
             url: database/business-continuity-high-availability-disaster-recover-hadr-overview.md
+          - text: HA/DR checklist
+            url: database/high-availability-disaster-recovery-checklist.md
           - text: Database watcher (Preview)
             url: database-watcher-overview.md
-          - text: T-SQL differences with SQL Server
-            url: database/transact-sql-tsql-differences-sql-server.md
 
 
   # Card 
@@ -71,7 +71,7 @@ landingContent:
             url: managed-instance/sql-managed-instance-paas-overview.md    
       - linkListType: whats-new
         links:
-          - text: What's new? 
+          - text: What's new in Azure SQL Managed Instance? 
             url: managed-instance/doc-changes-updates-release-notes-whats-new.md
           - text: Try for free
             url: managed-instance/free-offer.md
@@ -95,8 +95,6 @@ landingContent:
             url: database/business-continuity-high-availability-disaster-recover-hadr-overview.md
           - text: Database watcher (Preview)
             url: database-watcher-overview.md
-          - text: T-SQL differences with SQL Server
-            url: managed-instance/transact-sql-tsql-differences-sql-server.md
 
 
   # Card 
@@ -112,7 +110,7 @@ landingContent:
             url: virtual-machines/windows/sql-server-iaas-agent-extension-automate-management.md
       - linkListType: whats-new
         links:
-          - text: What's new? 
+          - text: What's new with SQL Server on Azure VMs?
             url: virtual-machines/windows/doc-changes-updates-release-notes-whats-new.md
       - linkListType: quickstart
         links:
@@ -127,7 +125,7 @@ landingContent:
       - linkListType: concept
         links:
           - text: Performance guidelines
-            url: ./virtual-machines/windows/performance-guidelines-best-practices-checklist.md
+            url: virtual-machines/windows/performance-guidelines-best-practices-checklist.md
           - text: High availability & disaster recovery
             url: virtual-machines/windows/business-continuity-high-availability-disaster-recovery-hadr-overview.md
 
@@ -144,7 +142,7 @@ landingContent:
         - text: Azure SQL hands-on labs
           url: https://aka.ms/asqlworkshop
         - text: Azure SQL bootcamp 
-          url: /users/marisabrasile/collections/8oq1i8p0z2qygw
+          url: /collections/8oq1i8p0z2qygw
         - text: Educational SQL resources
           url: /sql/sql-server/educational-sql-resources
 
@@ -157,6 +155,8 @@ landingContent:
             url: database/connect-query-content-reference-guide.md 
           - text: SQL Server Management Studio (SSMS)
             url: database/connect-query-ssms.md
+          - text: Visual Studio Code with the MSSQL extension
+            url: https://aka.ms/mssql-marketplace
           - text: Azure Data Studio
             url: /azure-data-studio/quickstart-sql-database?toc=/azure/azure-sql/toc.json
           - text: Azure portal
@@ -188,11 +188,13 @@ landingContent:
         links:
         - text: SQL Server Management Studio (SSMS)
           url: /sql/ssms/download-sql-server-management-studio-ssms
+        - text: Visual Studio Code 
+          url: https://code.visualstudio.com/download
         - text: Azure Data Studio 
           url: /azure-data-studio/download-azure-data-studio
         - text: SQL Server Data Tools 
           url: /sql/ssdt/download-sql-server-data-tools-ssdt
-        - text: Visual Studio 2019
+        - text: Visual Studio
           url: https://visualstudio.microsoft.com/downloads/
       - linkListType: reference
         links:
@@ -213,7 +215,7 @@ landingContent:
       - linkListType: overview
         links:
           - text: Application development 
-            url:  database/develop-overview.md
+            url: database/develop-overview.md
           - text: Connect apps to Azure SQL 
             url: database/develop-overview.md#client-connections
           - text: Disaster recovery app design

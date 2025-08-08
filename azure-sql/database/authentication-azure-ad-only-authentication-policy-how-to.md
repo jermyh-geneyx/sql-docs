@@ -5,7 +5,7 @@ description: This article guides you through using Azure Policy to enforce Micro
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: wiassaf, vanto, mathoma
-ms.date: 06/30/2025
+ms.date: 08/07/2025
 ms.service: azure-sql
 ms.subservice: security
 ms.topic: how-to
@@ -19,12 +19,12 @@ monikerRange: "=azuresql || =azuresql-db || =azuresql-mi"
 This article guides you through creating an Azure Policy that would enforce Microsoft Entra-only authentication when users create an Azure SQL Managed Instance, or a [logical server](logical-servers.md) for Azure SQL Database. To learn more about Microsoft Entra-only authentication during resource creation, see [Create server with Microsoft Entra-only authentication enabled in Azure SQL](authentication-azure-ad-only-authentication-create-server.md).
 
 > [!NOTE]
-> Although Azure Active Directory (Azure AD) has been [renamed to Microsoft Entra ID](/entra/fundamentals/new-name), Microsoft Entra-only and Azure AD-only authentication are used interchangeably in this article.
+> Azure Active Directory (Azure AD) has been [renamed to Microsoft Entra ID](/entra/fundamentals/new-name).
 
 In this article, you learn how to:
 
 > [!div class="checklist"]
-> - Create an Azure Policy that enforces logical server or managed instance creation with [Microsoft Entra-only authentication](authentication-azure-ad-only-authentication.md) enabled
+> - Create an Azure Policy that enforces logical server or managed instance creation with [Microsoft Entra-only authentication with Azure SQL](authentication-azure-ad-only-authentication.md) enabled
 > - Check Azure Policy compliance
 
 ## Prerequisite
@@ -40,41 +40,38 @@ Start off by creating an Azure Policy enforcing SQL Database or SQL Managed Inst
 1. Under the Authoring settings, select **Definitions**.
 1. In the **Search** box, search for *Microsoft Entra-only authentication*.
 
-   There are a few built-in policies available to enforce Microsoft Entra-only authentication. Look for the one available for your service:
-
-   - Azure SQL Database should have Microsoft Entra-only Authentication enabled
-   - Azure SQL Managed Instance should have Microsoft Entra-only Authentication enabled
+    There are a few built-in policies available to enforce Microsoft Entra-only authentication. Look for the one available for your service:
+    
+    - Azure SQL Database should have Microsoft Entra-only Authentication enabled
+    - Azure SQL Managed Instance should have Microsoft Entra-only Authentication enabled
 
 1. Select the policy name for your service. In this example, we'll use Azure SQL Database. Select **Azure SQL Database should have Microsoft Entra-only authentication enabled**.
 1. Select **Assign policy** in the new menu.
 
-   > [!NOTE]
-   > The JSON script in the menu shows the built-in policy definition that can be used as a template to build a custom Azure Policy for SQL Database. The default is set to `Audit`.
-
-   :::image type="content" source="media/authentication-azure-ad-only-authentication-policy-how-to/assign-policy-azure-ad-only-authentication.png" alt-text="Screenshot of assigning Azure Policy for Microsoft Entra-only authentication." lightbox="media/authentication-azure-ad-only-authentication-policy-how-to/assign-policy-azure-ad-only-authentication.png":::
-
+    > [!NOTE]
+    > The JSON script in the menu shows the built-in policy definition that can be used as a template to build a custom Azure Policy for SQL Database. The default is set to `Audit`.
+    
+    :::image type="content" source="media/authentication-azure-ad-only-authentication-policy-how-to/assign-policy-azure-ad-only-authentication.png" alt-text="Screenshot of assigning Azure Policy for Microsoft Entra-only authentication." lightbox="media/authentication-azure-ad-only-authentication-policy-how-to/assign-policy-azure-ad-only-authentication.png":::
+    
 1. In the **Basics** tab, add a **Scope** by using the selector (**...**) on the side of the box.
 1. In the **Scope** pane, select your **Subscription** from the dropdown list menu, and select a **Resource Group** for this policy. Once you're done, use the **Select** button to save the selection.
 
-   > [!NOTE]
-   > If you don't select a resource group, the policy applies to the whole subscription.
-
-   :::image type="content" source="media/authentication-azure-ad-only-authentication-policy-how-to/adding-scope-policy-azure-ad-only-authentication.png" alt-text="Screenshot of adding Azure Policy scope for Microsoft Entra-only authentication.":::
-
+    > [!NOTE]
+    > If you don't select a resource group, the policy applies to the whole subscription.
+    
+    :::image type="content" source="media/authentication-azure-ad-only-authentication-policy-how-to/adding-scope-policy-azure-ad-only-authentication.png" alt-text="Screenshot of adding Azure Policy scope for Microsoft Entra-only authentication.":::
+    
 1. Once you're back on the **Basics** tab, customize the **Assignment name** and provide an optional **Description**. Make sure the **Policy enforcement** is **Enabled**.
 1. Go over to the **Parameters** tab. Unselect the option **Only show parameters that require input**.
 1. Under **Effect**, select **Deny**. This setting prevents creating a logical server without Microsoft Entra-only authentication enabled.
 
-   :::image type="content" source="media/authentication-azure-ad-only-authentication-policy-how-to/deny-policy-azure-ad-only-authentication.png" alt-text="Screenshot of  Azure Policy effect parameter for Microsoft Entra-only authentication." lightbox="media/authentication-azure-ad-only-authentication-policy-how-to/deny-policy-azure-ad-only-authentication.png":::
+   :::image type="content" source="media/authentication-azure-ad-only-authentication-policy-how-to/deny-policy-azure-ad-only-authentication.png" alt-text="Screenshot of Azure Policy effect parameter for Microsoft Entra-only authentication." lightbox="media/authentication-azure-ad-only-authentication-policy-how-to/deny-policy-azure-ad-only-authentication.png":::
 
 1. In the **Non-compliance messages** tab, you can customize the policy message that displays if a violation of the policy has occurred. The message will let users know what policy was enforced during server creation.
 
-   :::image type="content" source="media/authentication-azure-ad-only-authentication-policy-how-to/non-compliance-message-policy-azure-ad-only-authentication.png" alt-text="Screenshot of Azure Policy noncompliance message for Microsoft Entra-only authentication." lightbox="media/authentication-azure-ad-only-authentication-policy-how-to/non-compliance-message-policy-azure-ad-only-authentication.png":::
-
-1. Select **Review + create**. Review the policy and select the **Create** button.
-
-> [!NOTE]
-> It can take some time for the newly created policy to be enforced.
+    :::image type="content" source="media/authentication-azure-ad-only-authentication-policy-how-to/non-compliance-message-policy-azure-ad-only-authentication.png" alt-text="Screenshot of Azure Policy noncompliance message for Microsoft Entra-only authentication." lightbox="media/authentication-azure-ad-only-authentication-policy-how-to/non-compliance-message-policy-azure-ad-only-authentication.png":::
+    
+1. Select **Review + create**. Review the policy and select the **Create** button. It can take some time for the newly created policy to be enforced.
 
 ## Check policy compliance
 
@@ -86,8 +83,7 @@ Once the logical server is created with Microsoft Entra-only authentication, the
 
 If the resource group that the policy was chosen to cover contains already created servers, the policy report will indicate those resources that are compliant and noncompliant.
 
-> [!NOTE]
-> Updating the compliance report can take some time. Changes related to resource creation or Microsoft Entra-only authentication settings aren't reported immediately.
+Updating the compliance report can take some time. Changes related to resource creation or Microsoft Entra-only authentication settings aren't reported immediately.
 
 ## Provision a server
 

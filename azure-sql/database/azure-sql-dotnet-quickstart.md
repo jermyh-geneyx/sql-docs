@@ -1,17 +1,17 @@
 ---
-title: Connect to and query Azure SQL Database using .NET and the Microsoft.Data.SqlClient library
+title: "Connect to and Query Azure SQL Database Using .NET and the Microsoft.Data.SqlClient Library"
 description: Learn how to connect to a database in Azure SQL Database and query data using .NET
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: alexwolf, mathoma, vanto
-ms.date: 09/17/2024
+ms.date: 08/07/2025
 ms.service: azure-sql-database
 ms.subservice: security
 ms.topic: quickstart
-monikerRange: "=azuresql || =azuresql-db"
 ms.custom:
   - passwordless-dotnet
   - sfi-ropc-nochange
+monikerRange: "=azuresql || =azuresql-db"
 ---
 
 # Connect to and query Azure SQL Database using .NET and the Microsoft.Data.SqlClient library
@@ -123,8 +123,8 @@ Replace the contents of the `Program.cs` file with the following code, which per
 
 - Retrieves the passwordless connection string from `appsettings.json`
 - Creates a `Persons` table in the database during startup (for testing scenarios only)
-- Creates an HTTP GET endpoint to retrieve all records stored in the `Persons` table
-- Creates an HTTP POST endpoint to add new records to the `Persons` table
+- Creates an `HTTP GET` endpoint to retrieve all records stored in the `Persons` table
+- Creates an `HTTP` POST endpoint to add new records to the `Persons` table
 
 ```csharp
 using Microsoft.Data.SqlClient;
@@ -226,9 +226,9 @@ The app is ready to be tested locally. Make sure you're signed in to Visual Stud
 
 1) Modify the sample JSON to include values for the `first` and `last` name. Select **Execute** to add a new record to the database. The API returns a successful response.
 
-    :::image type="content" source="media/passwordless-connections/api-testing-small.png" alt-text="Screenshot showing how to test the API." lightbox="media/passwordless-connections/api-testing.png":::
+   :::image type="content" source="media/azure-sql-dotnet-quickstart/api-testing-small.png" alt-text="Screenshot showing how to test the API." lightbox="media/azure-sql-dotnet-quickstart/api-testing.png":::
 
-1) Expand the **GET** method on the Swagger UI page and select **Try it**. Choose **Execute**, and the person you just created is returned.
+1) Expand the `GET` method on the Swagger UI page and select **Try it**. Choose **Execute**, and the person you just created is returned.
 
 ## Deploy to Azure App Service
 
@@ -240,18 +240,17 @@ The app is ready to be deployed to Azure. Visual Studio can create an Azure App 
 1. For the specific target, select **Azure App Service (Windows)**, and then select **Next**.
 1. Select the **+** icon to create a new App Service to deploy to and enter the following values:
 
-    * **Name**: Leave the default value.
-    * **Subscription name**: Select the subscription to deploy to.
-    * **Resource group**: Select **New** and create a new resource group called *msdocs-dotnet-sql*.
-    * **Hosting Plan**: Select **New** to open the hosting plan dialog. Leave the default values and select **OK**.
-    * Select **Create** to close the original dialog. Visual Studio creates the App Service resource in Azure.
+    - **Name**: Leave the default value.
+    - **Subscription name**: Select the subscription to deploy to.
+    - **Resource group**: Select **New** and create a new resource group called *msdocs-dotnet-sql*.
+    - **Hosting Plan**: Select **New** to open the hosting plan dialog. Leave the default values and select **OK**.
+    - Select **Create** to close the original dialog. Visual Studio creates the App Service resource in Azure.
 
-        :::image type="content" source="media/passwordless-connections/create-app-service-small.png" alt-text="Screenshot showing how to deploy with Visual Studio." lightbox="media/passwordless-connections/create-app-service.png":::
+   :::image type="content" source="media/azure-sql-dotnet-quickstart/create-app-service-small.png" alt-text="Screenshot showing how to deploy with Visual Studio." lightbox="media/azure-sql-dotnet-quickstart/create-app-service.png":::
 
 1. Once the resource is created, make sure it's selected in the list of app services, and then select **Next**.
 1. On the **API Management** step, select the **Skip this step** checkbox at the bottom and then choose **Finish**.
 1. On the Finish step, select **Close** if the dialog doesn't close automatically.
-
 1. Select **Publish** in the upper right of the publishing profile summary to deploy the app to Azure.
 
 When the deployment finishes, Visual Studio launches the browser to display the hosted app, but at this point the app doesn't work correctly on Azure. You still need to configure the secure connection between the App Service and the SQL database to retrieve your data.
@@ -270,19 +269,17 @@ When the deployment finishes, Visual Studio launches the browser to display the 
 
 ## Test the deployed application
 
-1) Select the **Browse** button at the top of App Service overview page to launch the root url of your app.
+1. Select the **Browse** button at the top of App Service overview page to launch the root url of your app.
+1. Append the `/swagger/index.html` path to the URL to load the same Swagger test page you used locally.
+1. Execute test `GET` and POST requests to verify that the endpoints work as expected.
 
-2) Append the `/swagger/index.html` path to the URL to load the same Swagger test page you used locally.
-
-3) Execute test GET and POST requests to verify that the endpoints work as expected.
-
-> [!TIP]  
-> If you receive a 500 Internal Server error while testing, it might be due to your database networking configurations. Verify that your logical server is configured with the settings outlined in the [Configure the database](/azure/azure-sql/database/azure-sql-dotnet-quickstart#configure-the-database) section.
-
+    > [!TIP]  
+    > If you receive a 500 Internal Server error while testing, it might be due to your database networking configurations. Verify that your logical server is configured with the settings outlined in the [Configure the database](/azure/azure-sql/database/azure-sql-dotnet-quickstart#configure-the-database) section.
+    
 Your application is now connected to Azure SQL Database in both local and hosted environments.
 
 [!INCLUDE [passwordless-resource-cleanup](../includes/passwordless-resource-cleanup.md)]
 
 ## Related content
 
-- [Quickstart: Create an Azure SQL Database single database](single-database-create-quickstart.md)
+- [Quickstart: Create a single database - Azure SQL Database](single-database-create-quickstart.md)
