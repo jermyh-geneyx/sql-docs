@@ -147,6 +147,10 @@ The zone-redundant version of the high availability architecture for the General
 |:--|:--|
 |:::image type="content" source="media/high-availability-sla-local-zone-redundancy/two-zone-redundant-general-purpose-service-tier.png" alt-text="Diagram of Zone redundant configuration for General Purpose in a two-zone region." lightbox="media/high-availability-sla-local-zone-redundancy/two-zone-redundant-general-purpose-service-tier.png":::|:::image type="content" source="media/high-availability-sla-local-zone-redundancy/three-zone-redundant-general-purpose-service-tier.png" alt-text="Diagram of Zone redundant configuration for General Purpose in a three-zone region." lightbox="media/high-availability-sla-local-zone-redundancy/three-zone-redundant-general-purpose-service-tier.png":::|
 
+- In two-zone scenarios, the compute is provisioned across two availability zones, but:
+    - For Business Critical storage, locally redundant availability storage for data and log files are synchronized across two availability zones.
+    - For other tiers, backup and storage remain synchronized between all three availability zones in the region. 
+    - Zone-redundant storage is always spread across three availability zones.
 - All Azure regions that have [Availability zone support](/azure/reliability/regions-list) support zone redundant General databases.
 - For zone redundant availability, choosing a [maintenance window](maintenance-window.md) other than the default is currently available in select regions. For more information, see [Maintenance window availability by region for Azure SQL Database](region-availability.md#maintenance-window-availability).
 - Zone-redundancy isn't available for Basic and Standard service tiers in the DTU purchasing model.
