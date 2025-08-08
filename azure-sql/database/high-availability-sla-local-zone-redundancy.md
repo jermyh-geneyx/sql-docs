@@ -5,7 +5,7 @@ description: Learn about the architecture of Azure SQL Database that achieves av
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: rsetlem, mathoma, randolphwest, peskount
-ms.date: 08/05/2025
+ms.date: 08/08/2025
 ms.service: azure-sql-database
 ms.subservice: high-availability
 ms.topic: conceptual
@@ -147,6 +147,13 @@ The zone-redundant version of the high availability architecture for the General
 |:--|:--|
 |:::image type="content" source="media/high-availability-sla-local-zone-redundancy/two-zone-redundant-general-purpose-service-tier.png" alt-text="Diagram of Zone redundant configuration for General Purpose in a two-zone region." lightbox="media/high-availability-sla-local-zone-redundancy/two-zone-redundant-general-purpose-service-tier.png":::|:::image type="content" source="media/high-availability-sla-local-zone-redundancy/three-zone-redundant-general-purpose-service-tier.png" alt-text="Diagram of Zone redundant configuration for General Purpose in a three-zone region." lightbox="media/high-availability-sla-local-zone-redundancy/three-zone-redundant-general-purpose-service-tier.png":::|
 
+- When the compute is provisioned across two availability zones:
+    - Backup and storage are still synchronized across three availability zones in the region.
+    - Zone-redundant storage, as always, is synchronized across three availability zones.
+
+- When the compute is provisioned across three availability zones:
+    - Backup and storage are synchronized across three availability zones in the region.
+
 - All Azure regions that have [Availability zone support](/azure/reliability/regions-list) support zone redundant General databases.
 - For zone redundant availability, choosing a [maintenance window](maintenance-window.md) other than the default is currently available in select regions. For more information, see [Maintenance window availability by region for Azure SQL Database](region-availability.md#maintenance-window-availability).
 - Zone-redundancy isn't available for Basic and Standard service tiers in the DTU purchasing model.
@@ -162,6 +169,15 @@ The zone-redundant version of the high availability architecture for the Busines
 | Two-zone region |  Three-zone region |
 |:--|:--|
 |:::image type="content" source="media/high-availability-sla-local-zone-redundancy/two-zone-redundant-business-critical-service-tier.png" alt-text="Diagram of Zone redundant configuration for the Business Critical service tier in a two-zone region." lightbox="media/high-availability-sla-local-zone-redundancy/two-zone-redundant-business-critical-service-tier.png":::|:::image type="content" source="media/high-availability-sla-local-zone-redundancy/three-zone-redundant-business-critical-service-tier.png" alt-text="Diagram of Zone redundant configuration for Business Critical service tier in a three-zone region." lightbox="media/high-availability-sla-local-zone-redundancy/three-zone-redundant-business-critical-service-tier.png":::|
+
+- When the compute is provisioned across two availability zones:
+    - For Business Critical storage, locally redundant availability storage for data and log files is synchronized across two availability zones.
+    - For other tiers, backup and storage are synchronized across three availability zones in the region.
+    - Zone-redundant storage, as always, is synchronized across three availability zones.
+
+- When the compute is provisioned across three availability zones:
+    - For Business Critical storage, locally redundant availability storage for data and log files is synchronized across three availability zones.
+    - For other tiers, backup and storage are synchronized across three availability zones in the region.
 
 Consider the following when configuring your Premium or Business Critical databases with zone-redundancy:
 
@@ -183,6 +199,13 @@ The following diagrams demonstrate the underlying architecture for zone redundan
 | Two-zone region |  Three-zone region |
 |:--|:--|
 |:::image type="content" source="media/high-availability-sla-local-zone-redundancy/hyperscale-two-zone-redundant-architecture.png" alt-text="Diagram showing the underlying architecture of a two-zone redundant Hyperscale databases." lightbox="media/high-availability-sla-local-zone-redundancy/hyperscale-two-zone-redundant-architecture.png":::|:::image type="content" source="media/high-availability-sla-local-zone-redundancy/hyperscale-three-zone-redundant-architecture.png" alt-text="Diagram showing the underlying architecture of a three-zone redundant Hyperscale databases." lightbox="media/high-availability-sla-local-zone-redundancy/hyperscale-three-zone-redundant-architecture.png":::|
+
+- When the compute is provisioned across two availability zones:
+    - Backup and storage are synchronized across three availability zones in the region.
+    - Zone-redundant storage, as always, is synchronized across three availability zones.
+
+- When the compute is provisioned across three availability zones:
+    - Backup and storage are synchronized across three availability zones in the region.
 
 Consider the following limitations:
 
