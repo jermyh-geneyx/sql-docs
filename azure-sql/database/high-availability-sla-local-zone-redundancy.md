@@ -171,12 +171,12 @@ The zone-redundant version of the high availability architecture for the Busines
 |:::image type="content" source="media/high-availability-sla-local-zone-redundancy/two-zone-redundant-business-critical-service-tier.png" alt-text="Diagram of Zone redundant configuration for the Business Critical service tier in a two-zone region." lightbox="media/high-availability-sla-local-zone-redundancy/two-zone-redundant-business-critical-service-tier.png":::|:::image type="content" source="media/high-availability-sla-local-zone-redundancy/three-zone-redundant-business-critical-service-tier.png" alt-text="Diagram of Zone redundant configuration for Business Critical service tier in a three-zone region." lightbox="media/high-availability-sla-local-zone-redundancy/three-zone-redundant-business-critical-service-tier.png":::|
 
 - When the compute is provisioned across two availability zones:
-    - For Business Critical storage, locally redundant availability storage for data and log files are synchronized across two availability zones.
+    - For Business Critical storage, locally redundant availability storage for data and log files is synchronized across two availability zones.
     - For other tiers, backup and storage are synchronized across three availability zones in the region.
     - Zone-redundant storage, as always, is synchronized across three availability zones.
 
 - When the compute is provisioned across three availability zones:
-    - For Business Critical storage, locally redundant availability storage for data and log files are synchronized across three availability zones.
+    - For Business Critical storage, locally redundant availability storage for data and log files is synchronized across three availability zones.
     - For other tiers, backup and storage are synchronized across three availability zones in the region.
 
 Consider the following when configuring your Premium or Business Critical databases with zone-redundancy:
