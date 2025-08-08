@@ -4,7 +4,7 @@ description: Learn how to grant permissions on a stored procedure in SQL Server 
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: vanto
-ms.date: 09/25/2024
+ms.date: 08/07/2025
 ms.service: sql
 ms.subservice: stored-procedures
 ms.topic: how-to
@@ -12,27 +12,37 @@ ms.custom:
   - "UpdateFrequency5"
 helpviewer_keywords:
   - "stored procedures [SQL Server], permissions"
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Grant Permissions on a Stored Procedure
 
-[!INCLUDE [SQL Server Azure SQL Database Synapse Analytics PDW](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw.md)]
+[!INCLUDE [SQL Server Azure SQL Database Synapse Analytics PDW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
-This article describes how to grant permissions on a stored procedure in [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)] by using [!INCLUDE [ssManStudioFull](../../includes/ssmanstudiofull-md.md)] or [!INCLUDE [tsql](../../includes/tsql-md.md)]. Permissions can be granted to an existing user, database role, or application role in the database.
+This article describes how to grant permissions on a stored procedure by using [!INCLUDE [ssManStudioFull](../../includes/ssmanstudiofull-md.md)] or [!INCLUDE [tsql](../../includes/tsql-md.md)]. Permissions can be granted to an existing user, database role, or application role in the database.
 
-## <a name="Restrictions"></a> Limitations and restrictions
+<a id="Restrictions"></a>
+
+## Limitations
 
 - You can't use [!INCLUDE [ssManStudioFull](../../includes/ssmanstudiofull-md.md)] to grant permissions on system procedures or system functions. Use [GRANT object permissions (Transact-SQL)](../../t-sql/statements/grant-object-permissions-transact-sql.md) instead.
 
-## <a name="Security"></a><a name="Permissions"></a> Permissions
+<a id="Security"></a>
 
-The grantor (or the principal specified with the `AS` option) must have either the permission itself with `GRANT OPTION`, or a higher permission that implies the permission being granted. Requires `ALTER` permission on the schema to which the procedure belongs, or `CONTROL` permission on the procedure. For more information, see [GRANT object permissions](../../t-sql/statements/grant-object-permissions-transact-sql.md).
+<a id="Permissions"></a>
 
-## <a name="SSMSProcedure"></a> Use SQL Server Management Studio
+## Permissions
 
-#### To grant permissions on a stored procedure
+The grantor (or the principal specified with the `AS` option) must have either the permission itself with `GRANT OPTION`, or a higher permission that implies the permission being granted. Requires `ALTER` permission on the schema to which the procedure belongs, or `CONTROL` permission on the procedure. For more information, see [GRANT object permissions (Transact-SQL)](../../t-sql/statements/grant-object-permissions-transact-sql.md).
 
-1. In Object Explorer, connect to an instance of [!INCLUDE [ssDE](../../includes/ssde-md.md)] and then expand that instance.
+<a id="SSMSProcedure"></a>
+
+## Use SQL Server Management Studio
+
+<a id="to-grant-permissions-on-a-stored-procedure"></a>
+
+#### Grant permissions on a stored procedure
+
+1. In **Object Explorer**, connect to an instance of [!INCLUDE [ssDE](../../includes/ssde-md.md)] and then expand that instance.
 
 1. Expand **Databases**, expand the database in which the procedure belongs, and then expand **Programmability**.
 
@@ -50,13 +60,17 @@ The grantor (or the principal specified with the `AS` option) must have either t
 
 Selecting **Grant** indicates the grantee will be given the specified permission. Selecting **Grant With** indicates that the grantee will also be able to grant the specified permission to other principals.
 
-## <a name="TsqlProcedure"></a> Use Transact-SQL
+<a id="TsqlProcedure"></a>
 
-### To grant permissions on a stored procedure
+## Use Transact-SQL
+
+<a id="to-grant-permissions-on-a-stored-procedure"></a>
+
+### Grant permissions on a stored procedure
 
 1. Connect to the [!INCLUDE [ssDE](../../includes/ssde-md.md)].
 
-1. From the Standard bar, select **New Query**.
+1. From the tool bar, select **New Query**.
 
 1. Copy and paste the following example into the query window and select **Execute**. This example grants `EXECUTE` permission on the stored procedure `HumanResources.uspUpdateEmployeeHireInfo` to an application role named `Recruiting11`.
 
@@ -67,7 +81,9 @@ GRANT EXECUTE ON OBJECT::HumanResources.uspUpdateEmployeeHireInfo
 GO
 ```
 
-### To grant permissions on all stored procedures in a schema
+<a id="to-grant-permissions-on-all-stored-procedures-in-a-schema"></a>
+
+### Grant permissions on all stored procedures in a schema
 
 1. Connect to the [!INCLUDE [ssDE](../../includes/ssde-md.md)].
 

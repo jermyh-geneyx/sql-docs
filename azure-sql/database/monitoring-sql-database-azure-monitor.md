@@ -4,24 +4,25 @@ description: Start here to learn how to monitor Azure SQL Database.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: mathoma, dfurman
-ms.date: 08/23/2024
+ms.date: 08/07/2025
 ms.service: azure-sql-database
 ms.subservice: monitoring
-ms.topic: concept-article 
+ms.topic: concept-article
 ms.custom:
   - horz-monitor
 ---
 # Monitor Azure SQL Database
+
 [!INCLUDE [appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
 [!INCLUDE [horz-monitor-intro](~/../azure-sql/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-intro.md)]
 
-The SQL Server database engine has its own monitoring and diagnostic capabilities that Azure SQL Database uses, such as Query Store and dynamic management views (DMVs). For more information, see [Monitor performance by using the Query Store](/sql/relational-databases/performance/monitoring-performance-by-using-the-query-store) and [Monitor Azure SQL Database performance using dynamic management views](monitoring-with-dmvs.md).
+The SQL Server database engine has its own monitoring and diagnostic capabilities that Azure SQL Database uses, such as Query Store and dynamic management views (DMVs). For more information, see [Monitor performance by using the Query Store](/sql/relational-databases/performance/monitoring-performance-by-using-the-query-store) and [Monitor performance using dynamic management views](monitoring-with-dmvs.md).
 
 For a detailed discussion of all monitoring and performance aspects of Azure SQL Database and Azure SQL Managed Instance, see [Monitor and performance tuning in Azure SQL Database and Azure SQL Managed Instance](monitor-tune-overview.md).
 
 > [!IMPORTANT]
-> For a set of recommended alert rules, see [Monitor Azure SQL Database with Azure Monitor metrics and alerts](monitoring-metrics-alerts.md).
+> For a set of recommended alert rules, see [Monitor Azure SQL Database with metrics and alerts](monitoring-metrics-alerts.md).
 
 ## Database watcher (preview)
 
@@ -30,8 +31,8 @@ Database watcher collects in-depth workload monitoring data to give you a detail
 For more information about database watcher, see the following articles:
 
 - [Monitor Azure SQL workloads with database watcher (preview)](../database-watcher-overview.md)
-- [Quickstart: Create a database watcher to monitor Azure SQL (preview)](../database-watcher-quickstart.md)
-- [Create and configure a database watcher (preview)](../database-watcher-manage.md)
+- [Quickstart: Create a watcher to monitor Azure SQL (preview)](../database-watcher-quickstart.md)
+- [Create and configure a watcher (preview)](../database-watcher-manage.md)
 - [Database watcher data collection and datasets (preview)](../database-watcher-data.md)
 - [Analyze database watcher monitoring data (preview)](../database-watcher-analyze.md)
 - [Database watcher FAQ](../database-watcher-faq.yml)
@@ -41,7 +42,8 @@ For more information about database watcher, see the following articles:
 Query performance insight uses the SQL Server Query Store to provide intelligent query analysis and insight on query plan choice and performance for single and pooled databases. For more information, see [Query Performance Insight for Azure SQL Database](query-performance-insight-use.md).
 
 [!INCLUDE [horz-monitor-resource-types](~/../azure-sql/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-resource-types.md)]
-For more information about the resource types for SQL Database, see [SQL Database monitoring data reference](monitoring-sql-database-azure-monitor-reference.md).
+
+For more information about the resource types for SQL Database, see [Azure SQL Database monitoring data reference](monitoring-sql-database-azure-monitor-reference.md).
 
 [!INCLUDE [horz-monitor-data-storage](~/../azure-sql/reusable-content/ce-skilling/azure/includes/azure-monitor/horizontals/horz-monitor-data-storage.md)]
 
@@ -135,7 +137,7 @@ The following table lists common and recommended alert rules for SQL Database. Y
 | Signal name | Operator | Aggregation type  | Threshold value | Description |
 |:---|:---|:---|:---|:---|
 | DTU Percentage | Greater than | Average | 80 | Whenever the average DTU percentage is greater than 80% |
-| Log IO percentage | Greater than | Average | 80 | Whenever the average log io percentage is greater than 80% | 
+| Log I/O percentage | Greater than | Average | 80 | Whenever the average log io percentage is greater than 80% |
 | Deadlocks\* | Greater than | Count | 1 | Whenever the count of deadlocks is greater than 1. |
 | CPU percentage | Greater than | Average | 80 | Whenever the average cpu percentage is greater than 80% | 
 

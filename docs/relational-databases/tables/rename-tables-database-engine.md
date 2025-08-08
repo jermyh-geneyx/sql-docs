@@ -1,9 +1,9 @@
 ---
-title: Rename tables (Database Engine)
+title: "Rename Tables (Database Engine)"
 description: "Learn how to rename a database table."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.date: 07/19/2024
+ms.date: 08/07/2025
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: how-to
@@ -12,7 +12,7 @@ helpviewer_keywords:
   - "table names [SQL Server]"
   - "tables [SQL Server], Visual Database Tools"
   - "renaming tables"
-monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 
 # Rename tables (Database Engine)
@@ -21,20 +21,24 @@ monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||
 
 This article covers how to rename a table in a database.
 
-To rename a table in Azure Synapse Analytics or Parallel Data Warehouse, use [RENAME OBJECT](../../t-sql/statements/rename-transact-sql.md).
+To rename a table in Azure Synapse Analytics or Parallel Data Warehouse, use [RENAME (Transact-SQL)](../../t-sql/statements/rename-transact-sql.md).
 
-## <a id="Restrictions"></a> Limitations
+<a id="Restrictions"></a>
+
+## Limitations
 
 > [!CAUTION]
 > Think carefully before you rename a table. If existing queries, views, user-defined functions, stored procedures, or programs refer to that table, the name modification makes these objects invalid.
 
-Renaming a table doesn't automatically rename references to that table. You must manually modify any objects that reference the renamed table. For example, if you rename a table and that table is referenced in a trigger, you must modify the trigger to reflect the new table name. Use [sys.sql_expression_dependencies](../../relational-databases/system-catalog-views/sys-sql-expression-dependencies-transact-sql.md) to list dependencies on the table before renaming it.
+Renaming a table doesn't automatically rename references to that table. You must manually modify any objects that reference the renamed table. For example, if you rename a table and that table is referenced in a trigger, you must modify the trigger to reflect the new table name. Use [sys.sql_expression_dependencies](../system-catalog-views/sys-sql-expression-dependencies-transact-sql.md) to list dependencies on the table before renaming it.
 
 ## Permissions
 
 Requires ALTER permission on the table.
 
-## <a id="SSMSProcedure"></a> Use SQL Server Management Studio
+<a id="SSMSProcedure"></a>
+
+## Use SQL Server Management Studio
 
 Always use the latest version of [SQL Server Management Studio (SSMS)](../../ssms/download-sql-server-management-studio-ssms.md).
 
@@ -46,7 +50,7 @@ Always use the latest version of [SQL Server Management Studio (SSMS)](../../ssm
 
 1. In the field for the **Name** value in the **Properties** window, type a new name for the table.
 
-1. To cancel this action, press the ESC key before leaving this field.
+1. To cancel this action, press the Escape (ESC) key before leaving this field.
 
 1. From the **File** menu, choose **Save _table name_**.
 
@@ -69,5 +73,5 @@ Always use the latest version of [SQL Server Management Studio (SSMS)](../../ssm
 
 ## Related content
 
-- [sp_rename (Transact-SQL)](../../relational-databases/system-stored-procedures/sp-rename-transact-sql.md)
-- [sys.sql_expression_dependencies](../../relational-databases/system-catalog-views/sys-sql-expression-dependencies-transact-sql.md)
+- [sp_rename (Transact-SQL)](../system-stored-procedures/sp-rename-transact-sql.md)
+- [sys.sql_expression_dependencies](../system-catalog-views/sys-sql-expression-dependencies-transact-sql.md)

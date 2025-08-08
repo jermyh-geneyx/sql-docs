@@ -1,32 +1,34 @@
 ---
-title: Connect to and query Azure SQL Database using Python and the pyodbc library
+title: Connect to and Query Azure SQL Database Using Python and the Pyodbc Library
 description: Learn how to connect to a database in Azure SQL Database and query data using Python and the pyodbc library.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: rotabor, mathoma
-ms.custom: passwordless-python
-ms.date: 03/21/2024
+ms.date: 08/07/2025
 ms.service: azure-sql-database
 ms.subservice: security
 ms.topic: quickstart
-monikerRange: "= azuresql || = azuresql-db"
-content_well_notification: 
-  - AI-contribution
+ms.custom:
+  - passwordless-python
 ai-usage: ai-assisted
+content_well_notification:
+  - AI-contribution
+monikerRange: "=azuresql || =azuresql-db"
 ---
 
 # Connect to and query Azure SQL Database using Python and the pyodbc driver
+
 [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
 This quickstart describes how to connect an application to a database in Azure SQL Database and perform queries using Python and the [Python SQL Driver - pyodbc](/sql/connect/python/pyodbc/python-sql-driver-pyodbc). This quickstart follows the recommended passwordless approach to connect to the database. You can learn more about passwordless connections on the [passwordless hub](/azure/developer/intro/passwordless-overview).
 
 ## Prerequisites
 
-* An [Azure subscription](https://azure.microsoft.com/pricing/purchase-options/azure-account?icid=azurefreeaccountpython/).
-* An Azure SQL database configured with Microsoft Entra authentication. You can create one using the [Create database quickstart](./single-database-create-quickstart.md).
-* The latest version of the [Azure CLI](/cli/azure/get-started-with-azure-cli).
-* Visual Studio Code with the [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python).
-* Python 3.8 or later. If you're using a Linux client machine, see [Install the ODBC driver](/sql/connect/python/pyodbc/step-1-configure-development-environment-for-pyodbc-python-development?tabs=linux#install-the-odbc-driver).
+- An [Azure subscription](https://azure.microsoft.com/pricing/purchase-options/azure-account?icid=azurefreeaccountpython/).
+- An Azure SQL database configured with Microsoft Entra authentication. You can create one using the [Quickstart: Create a single database - Azure SQL Database](single-database-create-quickstart.md).
+- The latest version of the [Azure CLI](/cli/azure/get-started-with-azure-cli).
+- Visual Studio Code with the [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python).
+- Python 3.8 or later. If you're using a Linux client machine, see [Install the ODBC driver](/sql/connect/python/pyodbc/step-1-configure-development-environment-for-pyodbc-python-development?tabs=linux#install-the-odbc-driver).
 
 ## Configure the database
 
@@ -79,7 +81,7 @@ For details and specific instructions for installing the `pyodbc` driver on all 
     azure-identity
     ```
 
-2. Install the requirements.
+1. Install the requirements.
 
     ```console
     pip install -r requirements.txt
@@ -118,7 +120,7 @@ You can get the details to create your connection string from the Azure portal:
 
 1. Go to the Azure SQL Server, select the **SQL databases** page to find your database name, and select the database.
 
-2. On the database, go to the **Connection strings** page to get connection string information. Look under the **ODBC** tab.
+1. On the database, go to the **Connection strings** page to get connection string information. Look under the **ODBC** tab.
 
 > [!NOTE]
 > If you've installed [Azure Arc](/azure/azure-arc/overview) and associated it with your Azure subscription, you can also use the managed identity approach shown for the app deployed to App Service.
@@ -127,11 +129,11 @@ You can get the details to create your connection string from the Azure portal:
 
 In the project folder, create an *app.py* file and add the sample code. This code creates an API that:
 
-* Retrieves an Azure SQL Database connection string from an environment variable.
-* Creates a `Persons` table in the database during startup (for testing scenarios only).
-* Defines a function to retrieve all `Person` records from the database.
-* Defines a function to retrieve one `Person` record from the database.
-* Defines a function to add new `Person` records to the database.
+- Retrieves an Azure SQL Database connection string from an environment variable.
+- Creates a `Persons` table in the database during startup (for testing scenarios only).
+- Defines a function to retrieve all `Person` records from the database.
+- Defines a function to retrieve one `Person` record from the database.
+- Defines a function to add new `Person` records to the database.
 
 ```python
 import os
@@ -145,7 +147,7 @@ from pydantic import BaseModel
 class Person(BaseModel):
     first_name: str
     last_name: Union[str, None] = None
-    
+
 connection_string = os.environ["AZURE_SQL_CONNECTIONSTRING"]
 
 app = FastAPI()
@@ -226,11 +228,11 @@ The app is ready to be tested locally.
 
 1. On the Swagger UI page for the app [http://127.0.0.1:8000/docs](http://127.0.0.1:8000/docs), expand the POST method and select **Try it out**.
 
-    You can also use try */redoc* to see another form of generated documentation for the API.
+    You can also use try `/redoc` to see another form of generated documentation for the API.
 
 1. Modify the sample JSON to include values for the first and last name. Select **Execute** to add a new record to the database. The API returns a successful response.
 
-1. Expand the **GET** method on the Swagger UI page and select **Try it**. Choose **Execute**, and the person you just created is returned.
+1. Expand the `GET` method on the Swagger UI page and select **Try it**. Choose **Execute**, and the person you just created is returned.
 
 ## Deploy to Azure App Service
 
@@ -267,7 +269,7 @@ The app is ready to be deployed to Azure.
         --name <web-app-name>
     ```
 
-    In this quickstart, a system-assigned managed identity is used for demonstration. A user-assigned managed identity is more efficient in a broader range of scenarios. For more information, see [Managed identity best practice recommendations](/azure/active-directory/managed-identities-azure-resources/managed-identity-best-practice-recommendations). For an example of using a user-assigned managed identity with pyodbc, see [Migrate a Python application to use passwordless connections with Azure SQL Database](./azure-sql-passwordless-migration-python.md).
+   In this quickstart, a system-assigned managed identity is used for demonstration. A user-assigned managed identity is more efficient in a broader range of scenarios. For more information, see [Managed identity best practice recommendations](/azure/active-directory/managed-identities-azure-resources/managed-identity-best-practice-recommendations). For an example of using a user-assigned managed identity with pyodbc, see [Migrate a Python application to use passwordless connections with Azure SQL Database](azure-sql-passwordless-migration-python.md).
 
 ## Connect the App Service to Azure SQL Database
 
@@ -314,12 +316,12 @@ Browse to the URL of the app to test that the connection to Azure SQL Database i
 https://<web-app-name>.azurewebsites.net
 ```
 
-Append */docs* to the URL to see the Swagger UI and test the API methods.  
+Append `/docs` to the URL to see the Swagger UI and test the API methods.  
 
 Congratulations! Your application is now connected to Azure SQL Database in both local and hosted environments.
 
 ## Related content
 
-- [Migrate a Python application to use passwordless connections with Azure SQL Database](./azure-sql-passwordless-migration-python.md) - Shows user-assigned managed identity.
+- [Migrate a Python application to use passwordless connections with Azure SQL Database](azure-sql-passwordless-migration-python.md)
 - [Passwordless connections for Azure services](/azure/developer/intro/passwordless-overview)
 - [Managed identity best practice recommendations](/azure/active-directory/managed-identities-azure-resources/managed-identity-best-practice-recommendations)
