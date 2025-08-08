@@ -1,10 +1,10 @@
 ---
-title: "Rename columns (Database Engine)"
+title: "Rename Columns (Database Engine)"
 description: Learn how to rename a table column in the SQL Server Database Engine with SQL Server Management Studio or Transact-SQL.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest
-ms.date: 07/22/2024
+ms.date: 08/07/2025
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: how-to
@@ -12,7 +12,7 @@ helpviewer_keywords:
   - "columns [SQL Server], names"
   - "renaming columns"
   - "column names [SQL Server]"
-monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current||=fabric"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Rename columns (Database Engine)
 
@@ -30,7 +30,9 @@ Renaming a column doesn't automatically update the metadata for any objects whic
 
 Requires `ALTER` permission on the object.
 
-## <a id="SSMSProcedure"></a> Use SQL Server Management Studio
+<a id="SSMSProcedure"></a>
+
+## Use SQL Server Management Studio
 
 ### Rename a column using Object Explorer
 
@@ -46,7 +48,9 @@ Requires `ALTER` permission on the object.
 
 You can also change the name of a column in the **Column Properties** tab. Select the column whose name you want to change and type a new value for **Name**.
 
-## <a id="TsqlProcedure"></a> Use Transact-SQL
+<a id="TsqlProcedure"></a>
+
+## Use Transact-SQL
 
 ### Rename a column
 
