@@ -172,7 +172,7 @@ For information about spatial data types, see [Using Spatial Datatypes](use-spat
 
 ## JSON data type
 
-For information about JSON data type, see [Using JSON Datatype](using-json-datatype.md).
+For information about JSON data type, see [Use JSON Data type](use-json-data-type.md).
 
 ## See also
 

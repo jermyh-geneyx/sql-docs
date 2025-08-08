@@ -2843,8 +2843,8 @@
           href: ../connect/jdbc/supporting-xml-data.md
         - name: SQLXML interface
           href: ../connect/jdbc/sqlxml-interface.md
-        - name: Using JSON data type
-          href: ../connect/jdbc/using-json-datatype.md
+        - name: Use JSON data type
+          href: ../connect/jdbc/use-json-data-type.md
       - name: Using statements with SQL
         href: ../connect/jdbc/using-statements-with-sql.md
         items:

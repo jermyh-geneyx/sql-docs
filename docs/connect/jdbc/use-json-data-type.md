@@ -1,5 +1,5 @@
 ---
-title: Using JSON data type
+title: Use JSON data type
 description: Learn about the JSON data type in the JDBC driver and how it can be used to support various operations.
 author: David-Engel
 ms.author: davidengel
@@ -9,17 +9,17 @@ ms.subservice: connectivity
 ms.topic: conceptual
 ---
 
-# Using JSON data type
+# Use JSON data type
 
 [!INCLUDE[Driver_JDBC_Download](../../includes/driver_jdbc_download.md)]
 
-Starting with version 13.2.0, the Microsoft JDBC Driver for SQL Server supports the JSON data type. This allows Java applications to read from and write to SQL Server columns of type JSON, enabling seamless interaction with semi-structured data.
+Starting with version 13.2.0, the Microsoft JDBC Driver for SQL Server supports the JSON data type. This allows Java applications to read from and write to SQL Server columns of type **json**, enabling seamless interaction with semi-structured data.
 
 Following are examples of ways to interact with JSON data types using the JDBC driver.
 
 ## Populate and retrieve JSON data from a table
 
-To work with JSON data in SQL Server, begin by creating a table with a column of type JSON:
+To work with JSON data in SQL Server, begin by creating a table with a column of type **json**:
 
 ```sql
 CREATE TABLE sampleTable (data JSON);
@@ -58,7 +58,7 @@ try (PreparedStatement stmt = connection.prepareStatement(query);
 
 ## Output JSON from a stored procedure
 
-The following example shows how to return a JSON output parameter from a stored procedure.
+The following example shows how to return a **json** output parameter from a stored procedure.
 
 ```java
 String sql = "CREATE PROCEDURE sampleProc @p0 JSON OUTPUT AS " +
@@ -78,6 +78,7 @@ try (CallableStatement callableStatement = connection.prepareCall("{call sampleP
 ## Table-valued parameters (TVPs) with JSON
 
 This example inserts JSON data using a TVP.
+
 ```java
 String value = "{\"severity\":\"TRACE\",\"duration\":200,\"date\":\"2024-12-17T15:45:56\"}";
 
@@ -95,6 +96,7 @@ try (SQLServerPreparedStatement pstmt = (SQLServerPreparedStatement) connection.
 ## Use SQLServerBulkCopy from source table to destination table with JSON
 
 SQLServerBulkCopy is used to copy data from a source table containing JSON columns into a destination table.
+
 ```java
 try (Statement stmt = con.createStatement()) {
     stmt.executeUpdate("CREATE TABLE destinationTable (data JSON)");
@@ -134,8 +136,8 @@ try (Statement stmt = con.createStatement();
 
 ## Limitations of JSON
 
-For detailed limitations, see [JSON Data Type - Limitations](../../t-sql/data-types/json-data-type.md#limitations).
+For detailed limitations, see [JSON data type limitations](../../t-sql/data-types/json-data-type.md#limitations).
 
-## See also
+## Related content
 
 - [Understanding the JDBC driver data types](understanding-the-jdbc-driver-data-types.md)
