@@ -9272,6 +9272,8 @@ items:
           href: linux/tutorial-sql-server-containers-kubernetes-dh2i.md
         - name: Deploy AGs with DH2i DxOperator
           href: linux/tutorial-sql-server-containers-kubernetes-dxoperator.md
+        - name: Deploy AGs with Rancher Prime and DH2i DxOperator
+          href: linux/tutorial-sql-server-containers-kubernetes-dxoperator-rancher-suse.md
     - name: Security
       items:
       - name: Overview
