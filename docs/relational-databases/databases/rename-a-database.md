@@ -1,10 +1,10 @@
 ---
-title: Rename a database
+title: Rename a Database
 description: Learn how to rename a user-defined database in SQL Server, Azure SQL Database, or Azure SQL Managed Instance.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest
-ms.date: 07/25/2024
+ms.date: 08/07/2025
 ms.service: sql
 ms.topic: how-to
 helpviewer_keywords:
@@ -19,7 +19,7 @@ monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-20
 This article describes how to rename a user-defined database in [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)], [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], or [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)], by using [!INCLUDE [ssManStudioFull](../../includes/ssmanstudiofull-md.md)] (SSMS) or [!INCLUDE [tsql](../../includes/tsql-md.md)] (T-SQL). The name of the database can include any characters that follow the rules for identifiers.
 
 > [!NOTE]  
-> To rename a database in Azure Synapse Analytics or Parallel Data Warehouse, use the [RENAME](../../t-sql/statements/rename-transact-sql.md) statement.
+> To rename a database in Azure Synapse Analytics or Parallel Data Warehouse, use the [RENAME (Transact-SQL)](../../t-sql/statements/rename-transact-sql.md) statement.
 
 ## Limitations
 
@@ -27,11 +27,11 @@ This article describes how to rename a user-defined database in [!INCLUDE [ssnov
 
 - The database name can't be changed while other users are accessing the database.
 
-  - Use SSMS Activity Monitor to find other connections to the database, and close them. For more information, see [Open Activity Monitor in SQL Server Management Studio (SSMS)](../performance-monitor/open-activity-monitor-sql-server-management-studio.md).
+   - Use SSMS Activity Monitor to find other connections to the database, and close them. For more information, see [Open Activity Monitor in SQL Server Management Studio (SSMS)](../performance-monitor/open-activity-monitor-sql-server-management-studio.md).
 
-  - In [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)], you can set a database in single user mode to close any open connections. For more information, see [set the database to single-user mode](set-a-database-to-single-user-mode.md).
+   - In [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)], you can set a database in single user mode to close any open connections. For more information, see [set the database to single-user mode](set-a-database-to-single-user-mode.md).
 
-  - In [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], you must make sure no other users have an open connection to the database to be renamed.
+   - In [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], you must make sure no other users have an open connection to the database to be renamed.
 
 - Renaming a database doesn't change the physical name of the database files on disk, or the logical names of the files. For more information, see [Database Files and Filegroups](database-files-and-filegroups.md#logical-and-physical-file-names).
 

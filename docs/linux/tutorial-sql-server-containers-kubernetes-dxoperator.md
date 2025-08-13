@@ -1,10 +1,10 @@
 ---
 title: Deploy Availability Groups with DH2i DxOperator on AKS
 description: Set up an availability group in SQL Server on Kubernetes using DH2i DxOperator.
-author: aravindmahadevan-ms
-ms.author: armaha
-ms.reviewer: amitkh, randolphwest
-ms.date: 07/03/2025
+author: amitkh-msft
+ms.author: amitkh
+ms.reviewer: randolphwest
+ms.date: 08/11/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: tutorial
@@ -17,12 +17,11 @@ ms.custom:
 
 [!INCLUDE [SQL Server - Linux](../includes/applies-to-version/sql-linux.md)]
 
-This tutorial explains how to configure [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] Always On availability groups (AGs) for [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] Linux based containers deployed to an Azure Kubernetes Service (AKS) Kubernetes cluster, using DH2i DxOperator. These procedures are also applicable to Azure Red Hat OpenShift clusters; the primary distinction is the deployment of an [Azure Red Hat OpenShift cluster](/azure/openshift/quickstart-portal), followed by substituting `kubectl` commands with `oc` in the following steps.
+This tutorial explains how to configure [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] Always On availability groups (AGs) for [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] Linux based containers deployed to an Azure Kubernetes Service (AKS) cluster, using DH2i DxOperator. These procedures are also applicable to Azure Red Hat OpenShift clusters; the primary distinction is the deployment of an [Azure Red Hat OpenShift cluster](/azure/openshift/quickstart-portal), followed by substituting `kubectl` commands with `oc` in the following steps.
 
-> [!NOTE]  
-> Microsoft supports data movement, AG, and [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] components. DH2i is responsible for support of the DxEnterprise product, which includes cluster and quorum management. DxOperator is a software extension to Kubernetes that uses custom resource definitions to automate the deployment of DxEnterprise clusters. DxEnterprise then provides all of the instrumentation to create, configure, manage and provide automatic failover for [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] AG workloads in Kubernetes.
->  
-> You can register for a [free DxEnterprise software license](https://dh2i.com/dxoperator-sql-server-operator-for-kubernetes). For more information, see the [DxOperator Quick Start Guide](https://support.dh2i.com/dxoperator/guides/dxoperator-qsg).
+- Microsoft supports data movement, AG, and [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] components. DH2i is responsible for support of the DxEnterprise product, which includes cluster and quorum management.
+
+- DxOperator is a software extension to Kubernetes that uses custom resource definitions to automate the deployment of DxEnterprise clusters. DxEnterprise then provides all of the instrumentation to create, configure, manage and provide automatic failover for [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] AG workloads in Kubernetes. You can register for a [free DxEnterprise software license](https://dh2i.com/dxoperator-for-sql-server-kubernetes-deployments/). For more information, see the [DxOperator Quick Start Guide](https://support.dh2i.com/docs/guides/dxoperator/dxoperator-qsg/).
 
 Using the steps mentioned in this article, learn how to deploy a StatefulSet and use the DH2i DxOperator to create and configure an AG with three replicas, hosted on AKS.
 
@@ -227,7 +226,7 @@ contoso-sql-2   2/2     Running   0          74m
 
 ## Related content
 
+- [Deploy availability groups on Kubernetes with DH2i DxOperator on Azure Kubernetes Service and Rancher by SUSE](tutorial-sql-server-containers-kubernetes-dxoperator-rancher-suse.md)
 - [Deploy availability groups with DH2i DxEnterprise on Kubernetes](tutorial-sql-server-containers-kubernetes-dh2i.md)
 - [Deploy SQL Server containers on Azure Kubernetes Service](quickstart-sql-server-containers-kubernetes.md)
 - [Deploy SQL Server Linux containers on Kubernetes with StatefulSets](sql-server-linux-kubernetes-best-practices-statefulsets.md)
-- [Tutorial: Configure Active Directory authentication with SQL Server on Linux containers](sql-server-linux-containers-ad-auth-adutil-tutorial.md)

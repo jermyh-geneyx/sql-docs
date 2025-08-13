@@ -1,10 +1,10 @@
 ---
-title: "Create a database"
+title: "Create a Database"
 description: Create a database in SQL Server by using SQL Server Management Studio or Transact-SQL. View recommendations for the procedure.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest
-ms.date: 07/19/2024
+ms.date: 08/07/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: how-to
@@ -41,7 +41,9 @@ Requires `CREATE DATABASE` permission in the `master` database, or requires `CRE
 
 To maintain control over disk use on an instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], permission to create databases is typically limited to a few [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] logins.
 
-## <a id="SSMSProcedure"></a> Use SQL Server Management Studio
+<a id="SSMSProcedure"></a>
+
+## Use SQL Server Management Studio
 
 1. In **Object Explorer**, connect to an instance of the [!INCLUDE [ssDEnoversion](../../includes/ssdenoversion-md.md)] and then expand that instance.
 
@@ -53,8 +55,8 @@ To maintain control over disk use on an instance of [!INCLUDE [ssNoVersion](../.
 
 1. To change the owner name, select (**...**) to select another owner.
 
-   > [!NOTE]  
-   > The **Use full-text indexing** option is always checked and dimmed because all user databases are full-text enabled.
+    > [!NOTE]  
+    > The **Use full-text indexing** option is always checked and dimmed because all user databases are full-text enabled.
 
 1. To change the default values of the primary data and transaction log files, in the **Database files** grid, select the appropriate cell and enter the new value. For more information, see [Add Data or Log Files to a Database](add-data-or-log-files-to-a-database.md).
 
@@ -62,7 +64,7 @@ To maintain control over disk use on an instance of [!INCLUDE [ssNoVersion](../.
 
 1. To change the recovery model, select the **Options** page and select a recovery model from the list.
 
-1. To change database options, select the **Options** page, and then modify the database options. For a description of each option, see [ALTER DATABASE SET options](../../t-sql/statements/alter-database-transact-sql-set-options.md).
+1. To change database options, select the **Options** page, and then modify the database options. For a description of each option, see [ALTER DATABASE SET options (Transact-SQL)](../../t-sql/statements/alter-database-transact-sql-set-options.md).
 
 1. To add a new filegroup, select the **Filegroups** page. Select **Add** and then enter the values for the filegroup.
 
@@ -74,7 +76,9 @@ To maintain control over disk use on an instance of [!INCLUDE [ssNoVersion](../.
 
 1. To create the database, select **OK**.
 
-## <a id="TsqlProcedure"></a> Use Transact-SQL
+<a id="TsqlProcedure"></a>
+
+## Use Transact-SQL
 
 1. Connect to the [!INCLUDE [ssDE](../../includes/ssde-md.md)].
 
