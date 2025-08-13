@@ -1,26 +1,23 @@
 ---
-title: Azure Government Preview
+title: Azure Government
 description: "Describes features and limitations currently available for SQL Server enabled by Azure Arc on US Government region."
 author: AbdullahMSFT
 ms.author: amamun
-ms.reviewer: MikeRayMSFT
+ms.reviewer: mikeray
+ms.date: 08/14/2025
 ms.topic: conceptual #Don't change
-ms.date: 06/09/2025
-
-#customer intent: As a U.S. government agency or organization, I want to manage SQL Server instances outside of Azure from the Azure Government portal so that I can ensure secure and compliant management of my SQL Server estate.
+#customer intent:Understand the features, limitations, and onboarding process for using SQL Server enabled by Azure Arc in US Government regions, specifically to manage their SQL Server resources securely and compliantly within the Azure Government portal.
 
 ---
 
-# SQL Server enabled by Azure Arc in US Government Preview
+# SQL Server enabled by Azure Arc in US Government
 
 This article describes features and limitations currently available for SQL Server enabled by Azure Arc on US Government regions. It also:
 
 - Points to instructions how to on board your SQL Server in US Government regions
 - Lists known issues and options to work around the issues
 
-SQL Server enabled by Azure Arc creates SQL Server Azure Arc resources in US Government. View these resources in the Azure Government portal just like any Azure resource. The portal provides a single pane of glass to monitor and organize your SQL Server estate in the government cloud.  
-
-[!INCLUDE [preview](../../includes/preview.md)]
+You can use SQL Server enabled by Azure Arc to manage SQL Server Azure Arc resources in US Government regions. View these resources in the Azure Government portal just like any Azure resource. The portal provides a single pane of glass to monitor and organize your SQL Server estate in the government cloud.
 
 Currently, these features are only available:
 
@@ -29,7 +26,11 @@ Currently, these features are only available:
 
 With SQL Server enabled by Azure Arc, U.S. government agencies and organizations can manage SQL Server instances outside of Azure from the Azure Government portal, in a secure and compliant manner.
 
-The latest updates are available in the [Release notes - SQL Server enabled by Azure Arc](release-notes.md).
+## Prerequisite
+
+Requires Azure extension for SQL Server version `1.1.3119.307` or later.
+
+The latest updates are available in the [Release notes - SQL Server enabled by Azure Arc](release-notes.md).
 
 ## Onboard your SQL Server
 
@@ -42,29 +43,25 @@ To onboard your SQL Server, complete the following steps from the Azure (US Gov)
 
 Currently, in the US Government Virginia region, SQL Server registration provides the following features:
 
-- [Connect](connect.md) (onboard) a SQL Server instance to Azure Arc.
+- [Connect your SQL Server to Azure Arc](connect.md) (onboard) a SQL Server instance to Azure Arc.
 - [SQL Server inventory](overview.md#manage-your-sql-server-instances-at-scale-from-a-single-point-of-control) which includes the following capabilities in the Azure portal:
-   - View the SQL Server instance as an Azure resource. 
-   - View databases as an Azure resource. 
-   - View the properties for each server. For example, you can view the version, edition, and database for each instance.
+  - View SQL Server instances as Azure resources.
+  - View databases Azure resources.
+  - View the properties for each server. For example, you can view the version, edition, and database for each instance.
+- [Subscribe to Extended Security Updates in a production environment](extended-security-updates.md#subscribe-to-extended-security-updates-in-a-production-environment).
+- [Manage licensing and billing of SQL Server enabled by Azure Arc](manage-license-billing.md). License virtual cores. Review [licensing limitations](#limitations).
 
-[All other features](overview.md#feature-differentiation), including Extended Security Updates (ESU), are not currently available.
+[All other features](overview.md#feature-differentiation) aren't currently available.
 
 ## Limitations
 
-The following SQL Server features are not currently available in any US Government region:
+The following SQL Server features aren't currently available in any US Government region:
 
 - Failover cluster instance (FCI)
 - Availability group (AG)
-- SQL Server services like [!INCLUDE [ssis-md](../../includes/ssis-md.md)], [!INCLUDE [ssrs](../../includes/ssrs.md)], or Power BI Report Server as well.
-
-## Known issues
-
-- In Azure portal, the Arc SQL Server Instance properties page does not show the `licenseType` property value.
-  - **Workaround**: Refer to Arc Server page for accurate and updated license information.
-
-- Resources deleted on-premises might not be immediately deleted from Azure portal. For example, if you delete a database on-premises, the image of the database on the portal remains until a refresh occurs.
-  - **Workaround**: To reflect the change immediately, delete the resource in the portal.
+- SQL Server dependent services like [!INCLUDE [ssis-md](../../includes/ssis-md.md)], [!INCLUDE [ssas-md](../../includes/ssas-md.md)], [!INCLUDE [ssrs](../../includes/ssrs.md)], or Power BI Report Server as well.
+- License physical cores (p-cores) with unlimited virtualization.
+- License physical cores (p-cores) without virtual machines.
 
 ## Related content
 
