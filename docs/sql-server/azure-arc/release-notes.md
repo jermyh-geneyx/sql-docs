@@ -25,6 +25,16 @@ Extension versions are cumulative. Higher extension versions include all of the 
 
 Only Azure extension for SQL Server agent versions released within the last year are supported.
 
+## August
+
+**Extension version**: `1.1.3139.313`
+
+Arc SQL Server | GA | US Gov Virginia region availability - Inventory and Billing Capabilities
+
+Arc SQL MI | Upgrades remove Grafana and Opensearch dashboards (Phase 2)
+
+Arc Data Services | Deprecation | Retire Azure Arc-enabled PostgreSQL server
+
 ## July 29, 2025
 
 **Extension version**: `1.1.3119.307`
