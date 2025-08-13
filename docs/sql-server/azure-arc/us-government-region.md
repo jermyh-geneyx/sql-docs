@@ -51,7 +51,7 @@ Currently, in the US Government Virginia region, SQL Server registration provide
 - [Subscribe to Extended Security Updates in a production environment](extended-security-updates.md#subscribe-to-extended-security-updates-in-a-production-environment).
 - [Manage licensing and billing of SQL Server enabled by Azure Arc](manage-license-billing.md). License virtual cores. Review [licensing limitations](#limitations).
 
-[All other features](overview.md#feature-differentiation), aren't currently available.
+[All other features](overview.md#feature-differentiation) aren't currently available.
 
 ## Limitations
 
