@@ -5,7 +5,7 @@ description: Overview of the outbound firewall rules feature for Azure SQL Datab
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: wiassaf, vanto, mathoma
-ms.date: 06/13/2025
+ms.date: 08/12/2025
 ms.service: azure-sql-database
 ms.subservice: security
 ms.topic: conceptual
@@ -19,7 +19,7 @@ monikerRange: "=azuresql || =azuresql-db"
 
 [!INCLUDE[appliesto-sqldb-asa](../includes/appliesto-sqldb-asa-formerly-sqldw.md)] 
 
-Outbound firewall rules limit network traffic from the [Azure SQL Database logical server](logical-servers.md) to a customer defined list of Azure Storage accounts and Azure SQL Database logical servers. Any attempt to access storage accounts or databases not in this list is denied. The following [Azure SQL Database](sql-database-paas-overview.md) features support this feature:
+Outbound firewall rules limit network traffic from the [Azure SQL Database logical server](logical-servers.md) to a customer defined list of Azure Storage accounts and Azure SQL Database logical servers. Any attempt to access storage accounts or databases not in this list is denied. Traffic is limited only for the following [Azure SQL Database](sql-database-paas-overview.md) features:
 
 - [Auditing](auditing-overview.md?view=azuresql-db&preserve-view=true)
 - [Vulnerability assessment](/azure/defender-for-cloud/sql-azure-vulnerability-assessment-overview)
@@ -27,6 +27,8 @@ Outbound firewall rules limit network traffic from the [Azure SQL Database logic
 - [OPENROWSET](/sql/t-sql/functions/openrowset-transact-sql?view=azuresqldb-current&preserve-view=true)
 - [Bulk Insert](/sql/t-sql/statements/bulk-insert-transact-sql?view=azuresqldb-current&preserve-view=true)
 - [sp_invoke_external_rest_endpoint](/sql/relational-databases/system-stored-procedures/sp-invoke-external-rest-endpoint-transact-sql?view=azuresqldb-current&preserve-view=true)
+
+Outbound traffic from features not on this list isn't affected.
 
 > [!IMPORTANT]
 > - This article applies to both Azure SQL Database and [dedicated SQL pool (formerly SQL DW)](/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-overview-what-is) in Azure Synapse Analytics. These settings apply to all SQL Database and dedicated SQL pool (formerly SQL DW) databases associated with the server. For simplicity, the term 'database' refers to both databases in Azure SQL Database and Azure Synapse Analytics. Likewise, any references to 'server' is referring to the [logical SQL server](logical-servers.md) that hosts Azure SQL Database and dedicated SQL pool (formerly SQL DW) in Azure Synapse Analytics. This article does *not* apply to Azure SQL Managed Instance or dedicated SQL pools in Azure Synapse Analytics workspaces.
