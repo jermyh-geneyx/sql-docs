@@ -10,6 +10,8 @@ ms.service: azure-database-migration-service
 ms.topic: tutorial
 ms.collection:
   - sql-migration-content
+  - migration
+  - onprem-to-azure
 ms.custom: sfi-image-nochange
 ---
 
