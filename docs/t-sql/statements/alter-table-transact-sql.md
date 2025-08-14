@@ -1,10 +1,10 @@
 ---
-title: ALTER TABLE (Transact-SQL)
+title: "ALTER TABLE (Transact-SQL)"
 description: ALTER TABLE modifies a table definition by altering, adding, or dropping columns and constraints. ALTER TABLE also reassigns and rebuilds partitions, or disables and enables constraints and triggers.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 02/11/2025
+ms.date: 08/15/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -66,28 +66,27 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 
 [!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricdw-fabricsqldb](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricdw-fabricsqldb.md)]
 
-Modifies a table definition by altering, adding, or dropping columns and constraints. ALTER TABLE also reassigns and rebuilds partitions, or disables and enables constraints and triggers.
+Modifies a table definition by altering, adding, or dropping columns and constraints. `ALTER TABLE` also reassigns and rebuilds partitions, or disables and enables constraints and triggers.
 
 ::: moniker range="=fabric"
 
-> [!NOTE]
+> [!NOTE]  
 > Currently, `ALTER TABLE` in Fabric Warehouse is only supported for constraints and adding nullable columns. See [Syntax for [!INCLUDE [fabricdw](../../includes/fabric-dw.md)] in [!INCLUDE [fabric](../../includes/fabric.md)]](#syntax-for-warehouse-in-fabric).
-> Currently, memory-optimized tables are not available in [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)].
+> Currently, memory-optimized tables aren't available in [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)].
 
 ::: moniker-end
 
-> [!IMPORTANT]  
-> The syntax for ALTER TABLE is different for disk-based tables and memory-optimized tables. Use the following links to take you directly to the appropriate syntax block for your table types and to the appropriate syntax examples:
-> 
-> - Disk-based tables:
->  
->    - [Syntax](#syntax-for-disk-based-tables)
->    - [Examples](#Example_Top)
->
-> - Memory-optimized tables
->  
->    - [Syntax](#syntax-for-memory-optimized-tables)
->    - [Examples](../../relational-databases/in-memory-oltp/altering-memory-optimized-tables.md)
+The syntax for `ALTER TABLE` is different for disk-based tables and memory-optimized tables. Use the following links to take you directly to the appropriate syntax block for your table types and to the appropriate syntax examples:
+
+**Disk-based tables:**
+
+- [Syntax](#syntax-for-disk-based-tables)
+- [Examples](#Example_Top)
+
+**Memory-optimized tables:**
+
+- [Syntax](#syntax-for-memory-optimized-tables)
+- [Altering Memory-Optimized Tables](../../relational-databases/in-memory-oltp/altering-memory-optimized-tables.md)
 
 For more information about the syntax conventions, see [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md).
 
@@ -114,7 +113,7 @@ ALTER TABLE { database_name.schema_name.table_name | schema_name.table_name | ta
     }
     [ WITH ( ONLINE = ON | OFF ) ]
     | [ WITH { CHECK | NOCHECK } ]
-  
+
     | ADD
     {
         <column_definition>
@@ -156,16 +155,16 @@ ALTER TABLE { database_name.schema_name.table_name | schema_name.table_name | ta
               column_name
           } [ ,...n ]
           | PERIOD FOR SYSTEM_TIME
-     } [ ,...n ]
+     } [ ,...n ] ]
     | [ WITH { CHECK | NOCHECK } ] { CHECK | NOCHECK } CONSTRAINT
         { ALL | constraint_name [ ,...n ] }
-  
+
     | { ENABLE | DISABLE } TRIGGER
         { ALL | trigger_name [ ,...n ] }
-  
+
     | { ENABLE | DISABLE } CHANGE_TRACKING
         [ WITH ( TRACK_COLUMNS_UPDATED = { ON | OFF } ) ]
-  
+
     | SWITCH [ PARTITION source_partition_number_expression ]
         TO target_table
         [ PARTITION target_partition_number_expression ]
@@ -195,10 +194,10 @@ ALTER TABLE { database_name.schema_name.table_name | schema_name.table_name | ta
                       OFF
                     | ON
                         [(  [ FILTER_COLUMN = column_name ]
-                            [, RETENTION_PERIOD = { INFINITE | number {DAY | DAYS | WEEK | WEEKS
-                                    | MONTH | MONTHS | YEAR | YEARS }}]
+                            [, RETENTION_PERIOD = { INFINITE | number { DAY | DAYS | WEEK | WEEKS
+                                    | MONTH | MONTHS | YEAR | YEARS } } ]
                         )]
-                    }
+                    } )
     | REBUILD
       [ [PARTITION = ALL]
         [ WITH ( <rebuild_option> [ ,...n ] ) ]
@@ -206,15 +205,15 @@ ALTER TABLE { database_name.schema_name.table_name | schema_name.table_name | ta
            [ WITH ( <single_partition_rebuild_option> [ ,...n ] ) ]
         ]
       ]
-  
+
     | <table_option>
     | <filetable_option>
     | <stretch_configuration>
 }
 [ ; ]
-  
+
 -- ALTER TABLE options
-  
+
 <column_set_definition> ::=
     column_set_name XML COLUMN_SET FOR ALL_SPARSE_COLUMNS
 
@@ -229,13 +228,13 @@ ALTER TABLE { database_name.schema_name.table_name | schema_name.table_name | ta
     {
         SET ( LOCK_ESCALATION = { AUTO | TABLE | DISABLE } )
     }
-  
+
 <filetable_option> ::=
     {
        [ { ENABLE | DISABLE } FILETABLE_NAMESPACE ]
        [ SET ( FILETABLE_DIRECTORY = directory_name ) ]
     }
-  
+
 <stretch_configuration> ::=
     {
       SET (
@@ -247,21 +246,21 @@ ALTER TABLE { database_name.schema_name.table_name | schema_name.table_name | ta
         }
             )
     }
-  
+
 <table_stretch_options> ::=
     {
      [ FILTER_PREDICATE = { null | table_predicate_function } , ]
        MIGRATION_STATE = { OUTBOUND | INBOUND | PAUSED }
     }
-  
+
 <single_partition_rebuild__option> ::=
 {
       SORT_IN_TEMPDB = { ON | OFF }
     | MAXDOP = max_degree_of_parallelism
-    | DATA_COMPRESSION = { NONE | ROW | PAGE | COLUMNSTORE | COLUMNSTORE_ARCHIVE} }
+    | DATA_COMPRESSION = { NONE | ROW | PAGE | COLUMNSTORE | COLUMNSTORE_ARCHIVE}
     | ONLINE = { ON [( <low_priority_lock_wait> ) ] | OFF }
 }
-  
+
 <low_priority_lock_wait>::=
 {
     WAIT_AT_LOW_PRIORITY ( MAX_DURATION = <time> [ MINUTES ],
@@ -269,14 +268,13 @@ ALTER TABLE { database_name.schema_name.table_name | schema_name.table_name | ta
 }
 ```
 
-> [!NOTE]  
-> For more information, see:
->  
-> - [ALTER TABLE column_constraint](alter-table-column-constraint-transact-sql.md)
-> - [ALTER TABLE column_definition](alter-table-column-definition-transact-sql.md)
-> - [ALTER TABLE computed_column_definition](alter-table-computed-column-definition-transact-sql.md)
-> - [ALTER TABLE index_option](alter-table-index-option-transact-sql.md)
-> - [ALTER TABLE table_constraints](alter-table-table-constraint-transact-sql.md)
+For more information, see:
+
+- [ALTER TABLE column_constraint](alter-table-column-constraint-transact-sql.md)
+- [ALTER TABLE column_definition](alter-table-column-definition-transact-sql.md)
+- [ALTER TABLE computed_column_definition](alter-table-computed-column-definition-transact-sql.md)
+- [ALTER TABLE index_option](alter-table-index-option-transact-sql.md)
+- [ALTER TABLE table_constraint](alter-table-table-constraint-transact-sql.md)
 
 ## Syntax for memory-optimized tables
 
@@ -311,7 +309,7 @@ ALTER TABLE { database_name.schema_name.table_name | schema_name.table_name | ta
       | <table_index>
       | <column_index>
     } [ ,...n ]
-  
+
     | DROP
      [ {
          CONSTRAINT [ IF EXISTS ]
@@ -327,18 +325,18 @@ ALTER TABLE { database_name.schema_name.table_name | schema_name.table_name | ta
               column_name
           } [ ,...n ]
           | PERIOD FOR SYSTEM_TIME
-     } [ ,...n ]
+     } [ ,...n ] ]
     | [ WITH { CHECK | NOCHECK } ] { CHECK | NOCHECK } CONSTRAINT
         { ALL | constraint_name [ ,...n ] }
 
     | { ENABLE | DISABLE } TRIGGER
         { ALL | trigger_name [ ,...n ] }
-  
+
     | SWITCH [ [ PARTITION ] source_partition_number_expression ]
         TO target_table
         [ PARTITION target_partition_number_expression ]
         [ WITH ( <low_priority_lock_wait> ) ]
-    
+
 }
 [ ; ]
 
@@ -360,14 +358,14 @@ ALTER TABLE { database_name.schema_name.table_name | schema_name.table_name | ta
 
 <column_index> ::=
   INDEX index_name
-{ [ NONCLUSTERED ] | [ NONCLUSTERED ] HASH WITH (BUCKET_COUNT = bucket_count)}
+{ [ NONCLUSTERED ] | [ NONCLUSTERED ] HASH WITH (BUCKET_COUNT = bucket_count) }
 
 <table_index> ::=
   INDEX index_name
-{[ NONCLUSTERED ] HASH (column [ ,... n ] ) WITH (BUCKET_COUNT = bucket_count)
+{ [ NONCLUSTERED ] HASH (column [ ,... n ] ) WITH (BUCKET_COUNT = bucket_count)
   | [ NONCLUSTERED ] (column [ ASC | DESC ] [ ,... n ] )
       [ ON filegroup_name | default ]
-  | CLUSTERED COLUMNSTORE [WITH ( COMPRESSION_DELAY = {0 | delay [Minutes]})]
+  | CLUSTERED COLUMNSTORE [ WITH ( COMPRESSION_DELAY = { 0 | delay [MINUTES] } ) ]
       [ ON filegroup_name | default ]
 }
 ```
@@ -375,8 +373,6 @@ ALTER TABLE { database_name.schema_name.table_name | schema_name.table_name | ta
 ## Syntax for Azure Synapse Analytics and Parallel Data Warehouse
 
 ```syntaxsql
--- Syntax for Azure Synapse Analytics and Parallel Data Warehouse
-
 ALTER TABLE { database_name.schema_name.source_table_name | schema_name.source_table_name | source_table_name }
 {
     ALTER COLUMN column_name
@@ -393,9 +389,9 @@ ALTER TABLE { database_name.schema_name.source_table_name | schema_name.source_t
       }
     | { SPLIT | MERGE } RANGE (boundary_value)
     | SWITCH [ PARTITION source_partition_number
-        TO target_table_name [ PARTITION target_partition_number ] [ WITH ( TRUNCATE_TARGET = ON | OFF )
+        TO target_table_name [ PARTITION target_partition_number ] [ WITH ( TRUNCATE_TARGET = ON | OFF ) ] ]
 }
-[;]
+[ ; ]
 
 <column_definition>::=
 {
@@ -427,13 +423,11 @@ ALTER TABLE { database_name.schema_name.source_table_name | schema_name.source_t
 }
 ```
 
-[!INCLUDE[synapse-analytics-od-supported-tables](../../includes/synapse-analytics-od-supported-tables.md)]
+[!INCLUDE [synapse-analytics-od-supported-tables](../../includes/synapse-analytics-od-supported-tables.md)]
 
 ## Syntax for Warehouse in Fabric
 
 ```syntaxsql
--- Syntax for Warehouse om Microsoft Fabric:
-
 ALTER TABLE { database_name.schema_name.table_name | schema_name.table_name | table_name }
 {
   ADD  { column_name <data_type> [COLLATE collation_name] [ <column_options> ] } [ ,...n ]
@@ -494,27 +488,29 @@ Specifies that the named column is to be changed or altered.
 The modified column can't be:
 
 - A column with a **timestamp** data type.
-- The ROWGUIDCOL for the table.
+- The `ROWGUIDCOL` for the table.
 - A computed column or used in a computed column.
-- Used in statistics generated by the CREATE STATISTICS statement. Users need to run DROP STATISTICS to drop the statistics before ALTER COLUMN can succeed.  Run this query to get all the user created statistics and statistics columns for a table.
+- Used in statistics generated by the `CREATE STATISTICS` statement. Users need to run `DROP STATISTICS` to drop the statistics before `ALTER COLUMN` can succeed. Run this query to get all the user created statistics and statistics columns for a table.
 
-   ```sql
-   SELECT s.name AS statistics_name
-         ,c.name AS column_name
-         ,sc.stats_column_id
-   FROM sys.stats AS s
-   INNER JOIN sys.stats_columns AS sc
-       ON s.object_id = sc.object_id AND s.stats_id = sc.stats_id
-   INNER JOIN sys.columns AS c
-       ON sc.object_id = c.object_id AND c.column_id = sc.column_id
-   WHERE s.object_id = OBJECT_ID('<table_name>');
-   ```
+  ```sql
+  SELECT s.name AS statistics_name,
+         c.name AS column_name,
+         sc.stats_column_id
+  FROM sys.stats AS s
+       INNER JOIN sys.stats_columns AS sc
+           ON s.object_id = sc.object_id
+          AND s.stats_id = sc.stats_id
+       INNER JOIN sys.columns AS c
+           ON sc.object_id = c.object_id
+          AND c.column_id = sc.column_id
+  WHERE s.object_id = OBJECT_ID('<table_name>');
+  ```
 
-   > [!NOTE]  
-   > Statistics that are automatically generated by the query optimizer are automatically dropped by ALTER COLUMN.
+  > [!NOTE]  
+  > Statistics that are automatically generated by the query optimizer are automatically dropped by `ALTER COLUMN`.
 
-- Used in a PRIMARY KEY or [FOREIGN KEY] REFERENCES constraint.
-- Used in a CHECK or UNIQUE constraint. But, changing the length of a variable-length column used in a CHECK or UNIQUE constraint is allowed.
+- Used in a `PRIMARY KEY` or `[FOREIGN KEY] REFERENCES` constraint.
+- Used in a `CHECK` or `UNIQUE` constraint. But, changing the length of a variable-length column used in a `CHECK` or `UNIQUE` constraint is allowed.
 - Associated with a default definition. However, the length, precision, or scale of a column can be changed if the data type isn't changed.
 
 The data type of **text**, **ntext**, and **image** columns can be changed only in the following ways:
@@ -523,20 +519,20 @@ The data type of **text**, **ntext**, and **image** columns can be changed only 
 - **ntext** to **varchar(max)**, **nvarchar(max)**, or **xml**
 - **image** to **varbinary(max)**
 
-Some data type changes may cause a change in the data. For example, changing a **nchar** or **nvarchar** column, to **char** or **varchar**, might cause the conversion of extended characters. For more information, see [CAST and CONVERT](../../t-sql/functions/cast-and-convert-transact-sql.md). Reducing the precision or scale of a column can cause data truncation.
+Some data type changes might cause a change in the data. For example, changing a **nchar** or **nvarchar** column, to **char** or **varchar**, might cause the conversion of extended characters. For more information, see [CAST and CONVERT](../functions/cast-and-convert-transact-sql.md). Reducing the precision or scale of a column can cause data truncation.
 
 > [!NOTE]  
 > The data type of a column of a partitioned table can't be changed.
->  
+>
 > The data type of columns included in an index can't be changed unless the column is a **varchar**, **nvarchar**, or **varbinary** data type, and the new size is equal to or larger than the old size.
->  
-> A column included in a primary key constraint, can't be changed from **NOT NULL** to **NULL**.
+>
+> A column included in a primary key constraint can't be changed from `NOT NULL` to `NULL`.
 
-When using Always Encrypted (without secure enclaves), if the column being modified is encrypted with 'ENCRYPTED WITH', you can change the datatype to a compatible datatype (such as INT to BIGINT), but you can't change any encryption settings.
+When using Always Encrypted (without secure enclaves), if the column being modified is encrypted with `ENCRYPTED WITH`, you can change the data type to a compatible data type (such as `INT` to `BIGINT`), but you can't change any encryption settings.
 
 When using Always Encrypted with secure enclaves, you can change any encryption setting, if the column encryption key protecting the column (and the new column encryption key, if you're changing the key) support enclave computations (encrypted with enclave-enabled column master keys). For details, see [Always Encrypted with secure enclaves](../../relational-databases/security/encryption/always-encrypted-enclaves.md).
 
-When you modify a column, the [!INCLUDE [ssde-md](../../includes/ssde-md.md)] keeps track of each modification by adding a row in a system table, and marking the previous column modification as a dropped column. In the rare case that you modify a column too many times, the [!INCLUDE [ssde-md](../../includes/ssde-md.md)] might reach the record size limit. If this happens, you'll get error [511](../../relational-databases/errors-events/mssqlserver-511-database-engine-error.md) or 1708. To avoid these errors, either rebuild the clustered index on the table periodically, or reduce the number of column modifications.
+When you modify a column, the [!INCLUDE [ssde-md](../../includes/ssde-md.md)] keeps track of each modification by adding a row in a system table, and marking the previous column modification as a dropped column. In the rare case that you modify a column too many times, the [!INCLUDE [ssde-md](../../includes/ssde-md.md)] might reach the record size limit. If this happens, you get error [511](../../relational-databases/errors-events/mssqlserver-511-database-engine-error.md) or 1708. To avoid these errors, either rebuild the clustered index on the table periodically, or reduce the number of column modifications.
 
 #### *column_name*
 
@@ -545,33 +541,33 @@ The name of the column to be altered, added, or dropped. The *column_name* maxim
 > [!NOTE]  
 > New columns are added after all existing columns in the table being altered.
 
-#### [ _type\_schema\_name_. ] _type\_name_
+#### [ *type_schema_name*. ] *type_name*
 
 The new data type for the altered column, or the data type for the added column. You can't specify *type_name* for existing columns of partitioned tables. *type_name* can be any one of the following types:
 
-- A [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] system data type.
-- An alias data type based on a [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] system data type. You create alias data types with the CREATE TYPE statement before they can be used in a table definition.
-- A [!INCLUDE[dnprdnshort](../../includes/dnprdnshort-md.md)] user-defined type, and the schema to which it belongs. You create user-defined types with the CREATE TYPE statement before they can be used in a table definition.
+- A [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] system data type.
+- An alias data type based on a [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] system data type. You create alias data types with the `CREATE TYPE` statement before they can be used in a table definition.
+- A [!INCLUDE [dnprdnshort](../../includes/dnprdnshort-md.md)] user-defined type, and the schema to which it belongs. You create user-defined types with the `CREATE TYPE` statement before they can be used in a table definition.
 
 The following are criteria for *type_name* of an altered column:
 
 - The previous data type must be implicitly convertible to the new data type.
 - *type_name* can't be **timestamp**.
-- ANSI_NULL defaults are always on for ALTER COLUMN; if not specified, the column is nullable.
-- ANSI_PADDING padding is always ON for ALTER COLUMN.
+- ANSI_NULL defaults are always on for `ALTER COLUMN`; if not specified, the column is nullable.
+- `ANSI_PADDING` padding is always `ON` for `ALTER COLUMN`.
 - If the modified column is an identity column, *new_data_type* must be a data type that supports the identity property.
-- The current setting for SET ARITHABORT is ignored. ALTER TABLE operates as if ARITHABORT is set to ON.
+- The current setting for `SET ARITHABORT` is ignored. `ALTER TABLE` operates as if `ARITHABORT` is set to `ON`.
 
 > [!NOTE]  
-> If the COLLATE clause isn't specified, changing the data type of a column causes a collation change to the default collation of the database.
+> If the `COLLATE` clause isn't specified, changing the data type of a column causes a collation change to the default collation of the database.
 
 #### *precision*
 
-The precision for the specified data type. For more information about valid precision values, see [Precision, Scale, and Length](../../t-sql/data-types/precision-scale-and-length-transact-sql.md).
+The precision for the specified data type. For more information about valid precision values, see [Precision, scale, and length](../data-types/precision-scale-and-length-transact-sql.md).
 
 #### *scale*
 
-The scale for the specified data type. For more information about valid scale values, see [Precision, Scale, and Length](../../t-sql/data-types/precision-scale-and-length-transact-sql.md).
+The scale for the specified data type. For more information about valid scale values, see [Precision, scale, and length](../data-types/precision-scale-and-length-transact-sql.md).
 
 #### max
 
@@ -579,76 +575,77 @@ Applies only to the **varchar**, **nvarchar**, and **varbinary** data types for 
 
 #### *xml_schema_collection*
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
-Applies only to the **xml** data type for associating an XML schema with the type. Before typing an **xml** column to a schema collection, you first create the schema collection in the database by using [CREATE XML SCHEMA COLLECTION](../../t-sql/statements/create-xml-schema-collection-transact-sql.md).
+Applies only to the **xml** data type for associating an XML schema with the type. Before typing an **xml** column to a schema collection, you first create the schema collection in the database by using [CREATE XML SCHEMA COLLECTION](create-xml-schema-collection-transact-sql.md).
 
-#### COLLATE \< *collation_name* >
+#### COLLATE \<*collation_name*>
 
-Specifies the new collation for the altered column. If not specified, the column is assigned the default collation of the database. Collation name can be either a Windows collation name or a SQL collation name. For a list and more information, see [Windows Collation Name](../../t-sql/statements/windows-collation-name-transact-sql.md) and [SQL Server Collation Name](../../t-sql/statements/sql-server-collation-name-transact-sql.md).
+Specifies the new collation for the altered column. If not specified, the column is assigned the default collation of the database. Collation name can be either a Windows collation name or a SQL collation name. For a list and more information, see [Windows collation name](windows-collation-name-transact-sql.md) and [SQL Server Collation Name](sql-server-collation-name-transact-sql.md).
 
-The COLLATE clause changes the collations only of columns of the **char**, **varchar**, **nchar**, and **nvarchar** data types. To change the collation of a user-defined alias data type column, use separate ALTER TABLE statements to change the column to a [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] system data type. Then, change its collation and change the column back to an alias data type.
+The `COLLATE` clause changes the collations only of columns of the **char**, **varchar**, **nchar**, and **nvarchar** data types. To change the collation of a user-defined alias data type column, use separate `ALTER TABLE` statements to change the column to a [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] system data type. Then, change its collation and change the column back to an alias data type.
 
-ALTER COLUMN can't have a collation change if one or more of the following conditions exist:
+`ALTER COLUMN` can't have a collation change if one or more of the following conditions exist:
 
-- If a CHECK constraint, FOREIGN KEY constraint, or computed columns reference the column changed.
-- If any index, statistics, or full-text index are created on the column. Statistics created automatically on the column changed are dropped if the column collation is changed.
-- If a schema-bound view or function references the column.
+- A `CHECK` constraint, `FOREIGN KEY` constraint, or computed columns reference the column changed.
+- Any index, statistics, or full-text index are created on the column. Statistics created automatically on the column changed are dropped if the column collation is changed.
+- A schema-bound view or function references the column.
 
 For more information on supported collations, see [COLLATE](collations.md).
 
 #### NULL | NOT NULL
 
-Specifies whether the column can accept null values. Columns that don't allow null values are added with ALTER TABLE only if they have a default specified or if the table is empty. You can specify NOT NULL for computed columns only if you have also specified PERSISTED. If the new column allows null values and you don't specify a default, the new column contains a null value for each row in the table. If the new column allows null values and you add a default definition with the new column, you can use WITH VALUES to store the default value in the new column for each existing row in the table.
+Specifies whether the column can accept null values. Columns that don't allow null values are added with `ALTER TABLE` only if they have a default specified or if the table is empty. You can specify `NOT NULL` for computed columns only if you have also specified `PERSISTED`. If the new column allows null values and you don't specify a default, the new column contains a null value for each row in the table. If the new column allows null values and you add a default definition with the new column, you can use `WITH VALUES` to store the default value in the new column for each existing row in the table.
 
-If the new column doesn't allow null values and the table isn't empty, you have to add a DEFAULT definition with the new column. And, the new column automatically loads with the default value in the new columns in each existing row.
+If the new column doesn't allow null values and the table isn't empty, you have to add a `DEFAULT` definition with the new column. And, the new column automatically loads with the default value in the new columns in each existing row.
 
-You can specify NULL in ALTER COLUMN to force a NOT NULL column to allow null values, except for columns in PRIMARY KEY constraints. You can specify NOT NULL in ALTER COLUMN only if the column contains no null values. The null values must be updated to some value before the ALTER COLUMN NOT NULL is allowed, for example:
+You can specify `NULL` in `ALTER COLUMN` to force a `NOT NULL` column to allow null values, except for columns in `PRIMARY KEY` constraints. You can specify `NOT NULL` in `ALTER COLUMN` only if the column contains no null values. The null values must be updated to some value before the `ALTER COLUMN` `NOT NULL` is allowed, for example:
 
 ```sql
 UPDATE MyTable SET NullCol = N'some_value' WHERE NullCol IS NULL;
-ALTER TABLE MyTable ALTER COLUMN NullCOl NVARCHAR(20) NOT NULL;
+
+ALTER TABLE MyTable ALTER COLUMN NullCOl NVARCHAR (20) NOT NULL;
 ```
 
-When you create or alter a table with the CREATE TABLE or ALTER TABLE statements, the database and session settings influence and possibly override the nullability of the data type that's used in a column definition. Be sure that you always explicitly define a column as NULL or NOT NULL for noncomputed columns.
+When you create or alter a table with the `CREATE TABLE` or `ALTER TABLE` statements, the database and session settings influence and possibly override the nullability of the data type that's used in a column definition. Be sure that you always explicitly define a column as `NULL` or `NOT NULL` for noncomputed columns.
 
-If you add a column with a user-defined data type, be sure to define the column with the same nullability as the user-defined data type. And, specify a default value for the column. For more information, see [CREATE TABLE](../../t-sql/statements/create-table-transact-sql.md).
+If you add a column with a user-defined data type, be sure to define the column with the same nullability as the user-defined data type. And, specify a default value for the column. For more information, see [CREATE TABLE](create-table-transact-sql.md).
 
 > [!NOTE]  
-> If NULL or NOT NULL is specified with ALTER COLUMN, *new_data_type* [(*precision* [, *scale* ])] must also be specified. If the data type, precision, and scale are not changed, specify the current column values.
+> If `NULL` or `NOT NULL` is specified with `ALTER COLUMN`, *new_data_type* [(*precision* [, *scale* ])] must also be specified. If the data type, precision, and scale aren't changed, specify the current column values.
 
 #### [ {ADD | DROP} ROWGUIDCOL ]
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
-Specifies that the ROWGUIDCOL property is added to or dropped from the specified column. ROWGUIDCOL indicates that the column is a row GUID column. You can set only one **uniqueidentifier** column per table as the ROWGUIDCOL column. And, you can only assign the ROWGUIDCOL property to a **uniqueidentifier** column. You can't assign ROWGUIDCOL to a column of a user-defined data type.
+Specifies that the `ROWGUIDCOL` property is added to or dropped from the specified column. `ROWGUIDCOL` indicates that the column is a row GUID column. You can set only one **uniqueidentifier** column per table as the `ROWGUIDCOL` column. And, you can only assign the `ROWGUIDCOL` property to a **uniqueidentifier** column. You can't assign `ROWGUIDCOL` to a column of a user-defined data type.
 
-ROWGUIDCOL doesn't enforce uniqueness of the values stored in the column and doesn't automatically generate values for new rows that are inserted into the table. To generate unique values for each column, either use the `NEWID()` or `NEWSEQUENTIALID()` function in `INSERT` statements. Or, specify the `NEWID()` or `NEWSEQUENTIALID()` function as the default for the column. 
+`ROWGUIDCOL` doesn't enforce uniqueness of the values stored in the column and doesn't automatically generate values for new rows that are inserted into the table. To generate unique values for each column, either use the `NEWID()` or `NEWSEQUENTIALID()` function in `INSERT` statements. Or, specify the `NEWID()` or `NEWSEQUENTIALID()` function as the default for the column.
 
 #### [ {ADD | DROP} PERSISTED ]
 
-Specifies that the PERSISTED property is added to or dropped from the specified column. The column must be a computed column that's defined with a deterministic expression. For columns specified as PERSISTED, the [!INCLUDE[ssDE](../../includes/ssde-md.md)] physically stores the computed values in the table and updates the values when any other columns on which the computed column depends are updated. By marking a computed column as PERSISTED, you can create indexes on computed columns defined on expressions that are deterministic, but not precise. For more information, see [Indexes on Computed Columns](../../relational-databases/indexes/indexes-on-computed-columns.md).
+Specifies that the `PERSISTED` property is added to or dropped from the specified column. The column must be a computed column that's defined with a deterministic expression. For columns specified as `PERSISTED`, the [!INCLUDE [ssDE](../../includes/ssde-md.md)] physically stores the computed values in the table and updates the values when any other columns on which the computed column depends are updated. By marking a computed column as `PERSISTED`, you can create indexes on computed columns defined on expressions that are deterministic, but not precise. For more information, see [Indexes on computed columns](../../relational-databases/indexes/indexes-on-computed-columns.md).
 
-`SET QUOTED_IDENTIFIER` must be ON when you're creating or changing indexes on computed columns or indexed views. For more information, see [SET QUOTED_IDENTIFIER (Transact-SQL)](../../t-sql/statements/set-quoted-identifier-transact-sql.md).
+`SET QUOTED_IDENTIFIER` must be `ON` when you're creating or changing indexes on computed columns or indexed views. For more information, see [SET QUOTED_IDENTIFIER](set-quoted-identifier-transact-sql.md).
 
-Any computed column that's used as a partitioning column of a partitioned table must be explicitly marked PERSISTED.
+Any computed column that's used as a partitioning column of a partitioned table must be explicitly marked `PERSISTED`.
 
-> [!NOTE]
-> In Fabric SQL database, computed columns are allowed but currently will not be mirrored to Fabric OneLake.
+> [!NOTE]  
+> In Fabric SQL database, computed columns are allowed, but currently aren't mirrored to Fabric OneLake.
 
 #### DROP NOT FOR REPLICATION
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
 Specifies that values are incremented in identity columns when replication agents carry out insert operations. You can specify this clause only if *column_name* is an identity column.
 
 #### SPARSE
 
-Indicates that the column is a sparse column. The storage of sparse columns is optimized for null values. You can't set sparse columns as NOT NULL. When you convert a column from sparse to nonsparse, or from nonsparse to sparse, this option locks the table for the duration of the command execution. You may need to use the REBUILD clause to reclaim any space savings. For additional restrictions and more information about sparse columns, see [Use Sparse Columns](../../relational-databases/tables/use-sparse-columns.md).
+Indicates that the column is a sparse column. The storage of sparse columns is optimized for null values. You can't set sparse columns as `NOT NULL`. When you convert a column from sparse to nonsparse, or from nonsparse to sparse, this option locks the table for the duration of the command execution. You might need to use the `REBUILD` clause to reclaim any space savings. For additional restrictions and more information about sparse columns, see [Use sparse columns](../../relational-databases/tables/use-sparse-columns.md).
 
-#### ADD MASKED WITH ( FUNCTION = ' *mask_function* ')
+#### ADD MASKED WITH ( FUNCTION = '*mask_function*')
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[sssql16-md](../../includes/sssql16-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later versions, and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
 Specifies a dynamic data mask. *mask_function* is the name of the masking function with the appropriate parameters. Three functions are available:
 
@@ -657,32 +654,43 @@ Specifies a dynamic data mask. *mask_function* is the name of the masking functi
 - partial()
 - random()
 
-Requires ALTER ANY MASK permission.
+Requires `ALTER ANY MASK` permission.
 
-To drop a mask, use `DROP MASKED`. For function parameters, see [Dynamic Data Masking](../../relational-databases/security/dynamic-data-masking.md).
+To drop a mask, use `DROP MASKED`. For function parameters, see [Dynamic data masking](../../relational-databases/security/dynamic-data-masking.md).
 
-Add and drop a mask require **ALTER ANY MASK** permission.
+Add and drop a mask require `ALTER ANY MASK` permission.
 
 #### WITH ( ONLINE = ON | OFF) \<as applies to altering a column>
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[sssql16-md](../../includes/sssql16-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later versions, and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
-Allows many alter column actions to be carried out while the table remains available. Default is OFF. You can run alter column online for column changes related to data type, column length or precision, nullability, sparseness, and collation.
+Allows many alter column actions to be carried out while the table remains available. Default is `OFF`. You can run alter column online for column changes related to data type, column length or precision, nullability, sparseness, and collation.
 
-Online alter column allows user created and autostatistics to reference the altered column for the duration of the ALTER COLUMN operation, which allows queries to run as usual. At the end of the operation, autostats that reference the column are dropped and user-created stats are invalidated. The user must manually update user-generated statistics after the operation is completed. If the column is part of a filter expression for any statistics or indexes then you can't perform an alter column operation.
+Online alter column allows user created and autostatistics to reference the altered column for the duration of the `ALTER COLUMN` operation, which allows queries to run as usual. At the end of the operation, autostats that reference the column are dropped and user-created stats are invalidated. The user must manually update user-generated statistics after the operation is completed. If the column is part of a filter expression for any statistics or indexes then you can't perform an alter column operation.
 
-- While the online alter column operation is running, all operations that could take a dependency on the column (index, views, and so on.) block or fail with an appropriate error. This behavior guarantees that online alter column won't fail because of dependencies introduced while the operation was running.
-- Altering a column from NOT NULL to NULL isn't supported as an online operation when the altered column is referenced by nonclustered indexes.
-- Online ALTER isn't supported when the column is referenced by a check constraint and the ALTER operation is restricting the precision of the column (numeric or datetime).
+- While the online alter column operation is running, any DDL operation that could depend on that column (such as creating or modifying indexes, views, etc.) is blocked, or fails with an appropriate error. This behavior guarantees that online alter column won't fail because of dependencies introduced while the operation was running.
+
+- Altering a column from `NOT NULL` to `NULL` isn't supported as an online operation when the altered column is referenced by nonclustered indexes.
+
+- Online `ALTER` isn't supported when the column is referenced by a check constraint and the `ALTER` operation is restricting the precision of the column (**numeric** or **datetime**).
+
 - The `WAIT_AT_LOW_PRIORITY` option can't be used with online alter column.
+
 - `ALTER COLUMN ... ADD/DROP PERSISTED` isn't supported for online alter column.
+
 - `ALTER COLUMN ... ADD/DROP ROWGUIDCOL/NOT FOR REPLICATION` isn't affected by online alter column.
+
 - Online alter column doesn't support altering a table where change tracking is enabled or that's a publisher of merge replication.
+
 - Online alter column doesn't support altering from or to CLR data types.
+
 - Online alter column doesn't support altering to an XML data type that has a schema collection different than the current schema collection.
+
 - Online alter column doesn't reduce the restrictions on when a column can be altered. References by index/stats, and so on, might cause the alter to fail.
+
 - Online alter column doesn't support altering more than one column concurrently.
-- Online alter column has no effect in a system-versioned temporal table. ALTER column isn't run as online regardless of which value was specified for ONLINE option.
+
+- Online alter column has no effect in a system-versioned temporal table. `ALTER` column isn't run as online regardless of which value was specified for `ONLINE` option.
 
 Online alter column has similar requirements, restrictions, and functionality as online index rebuild, which includes:
 
@@ -692,9 +700,9 @@ Online alter column has similar requirements, restrictions, and functionality as
 
 #### WITH CHECK | WITH NOCHECK
 
-Specifies whether the data in the table is or isn't validated against a newly added or re-enabled FOREIGN KEY or CHECK constraint. If you don't specify, WITH CHECK is assumed for new constraints, and WITH NOCHECK is assumed for re-enabled constraints.
+Specifies whether the data in the table is or isn't validated against a newly added or re-enabled `FOREIGN KEY` or `CHECK` constraint. If you don't specify, `WITH CHECK` is assumed for new constraints, and `WITH NOCHECK` is assumed for re-enabled constraints.
 
-If you don't want to verify new CHECK or FOREIGN KEY constraints against existing data, use WITH NOCHECK. We don't recommend doing this, except in rare cases. The new constraint is evaluated in all later data updates. Any constraint violations that are suppressed by WITH NOCHECK when the constraint is added may cause future updates to fail if they update rows with data that doesn't follow the constraint. The query optimizer doesn't consider constraints that are defined WITH NOCHECK. Such constraints are ignored until they're re-enabled by using `ALTER TABLE table WITH CHECK CHECK CONSTRAINT ALL`. For more information, see [Disable Foreign Key Constraints with INSERT and UPDATE Statements](../../relational-databases/tables/disable-foreign-key-constraints-with-insert-and-update-statements.md).
+If you don't want to verify new `CHECK` or `FOREIGN KEY` constraints against existing data, use `WITH NOCHECK`. We don't recommend doing this, except in rare cases. The new constraint is evaluated in all later data updates. Any constraint violations that are suppressed by `WITH NOCHECK` when the constraint is added might cause future updates to fail if they update rows with data that doesn't follow the constraint. The query optimizer doesn't consider constraints that are defined `WITH NOCHECK`. Such constraints are ignored until they're re-enabled by using `ALTER TABLE table WITH CHECK CHECK CONSTRAINT ALL`. For more information, see [Disable foreign key constraints with INSERT and UPDATE statements](../../relational-databases/tables/disable-foreign-key-constraints-with-insert-and-update-statements.md).
 
 #### ALTER INDEX *index_name*
 
@@ -703,7 +711,7 @@ Specifies that the bucket count for *index_name* is to be changed or altered.
 The syntax `ALTER TABLE ... ADD/DROP/ALTER INDEX` is supported only for memory-optimized tables.
 
 > [!IMPORTANT]  
-> Without using an ALTER TABLE statement, the statements [CREATE INDEX](create-index-transact-sql.md), [DROP INDEX](drop-index-transact-sql.md), [ALTER INDEX](alter-index-transact-sql.md), and [PAD_INDEX](alter-table-index-option-transact-sql.md) are not supported for indexes on memory-optimized tables.
+> Without using an `ALTER TABLE` statement, the statements [CREATE INDEX](create-index-transact-sql.md), [DROP INDEX](drop-index-transact-sql.md), [ALTER INDEX](alter-index-transact-sql.md), and [PAD_INDEX](alter-table-index-option-transact-sql.md) aren't supported for indexes on memory-optimized tables.
 
 #### ADD
 
@@ -713,24 +721,24 @@ Specifies that one or more column definitions, computed column definitions, or t
 > New columns are added after all existing columns in the table being altered.
 
 > [!IMPORTANT]  
-> Without using an ALTER TABLE statement, the statements [CREATE INDEX](create-index-transact-sql.md), [DROP INDEX](drop-index-transact-sql.md), [ALTER INDEX](alter-index-transact-sql.md), and [PAD_INDEX](alter-table-index-option-transact-sql.md) aren't supported for indexes on memory-optimized tables.
+> Without using an `ALTER TABLE` statement, the statements [CREATE INDEX](create-index-transact-sql.md), [DROP INDEX](drop-index-transact-sql.md), [ALTER INDEX](alter-index-transact-sql.md), and [PAD_INDEX](alter-table-index-option-transact-sql.md) aren't supported for indexes on memory-optimized tables.
 
 #### PERIOD FOR SYSTEM_TIME ( system_start_time_column_name, system_end_time_column_name )
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[ssSQL17](../../includes/sssql17-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] and later versions, and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
-Specifies the names of the columns that the system uses to record the period of time for which a record is valid. You can specify existing columns or create new columns as part of the ADD PERIOD FOR SYSTEM_TIME argument. Set up the columns with the datatype of datetime2 and define them as NOT NULL. If you define a period column as NULL, an error results. You can define a [column_constraint](../../t-sql/statements/alter-table-column-constraint-transact-sql.md) and/or [Specify Default Values for Columns](../../relational-databases/tables/specify-default-values-for-columns.md) for the system_start_time and system_end_time columns. See Example A in the following [System Versioning](#system_versioning) examples that demonstrates using a default value for the system_end_time column.
+Specifies the names of the columns that the system uses to record the period of time for which a record is valid. You can specify existing columns or create new columns as part of the `ADD PERIOD FOR SYSTEM_TIME` argument. Set up the columns with the data type of **datetime2** and define them as `NOT NULL`. If you define a period column as `NULL`, an error results. You can define a [column_constraint](alter-table-column-constraint-transact-sql.md) and/or [Specify default values for columns](../../relational-databases/tables/specify-default-values-for-columns.md) for the system_start_time and system_end_time columns. See Example A in the following [System Versioning](#system_versioning) examples that demonstrates using a default value for the system_end_time column.
 
-Use this argument with the SET SYSTEM_VERSIONING argument to make an existing table a temporal table. For more information, see [Temporal Tables](../../relational-databases/tables/temporal-tables.md) and [Getting Started with Temporal Tables in Azure SQL Database](/azure/azure-sql/temporal-tables).
+Use this argument with the `SET SYSTEM_VERSIONING` argument to make an existing table a temporal table. For more information, see [Temporal tables](../../relational-databases/tables/temporal-tables.md) and [Getting started with temporal tables](/azure/azure-sql/temporal-tables).
 
-As of [!INCLUDE[ssSQL17](../../includes/sssql17-md.md)], users can mark one or both period columns with **HIDDEN** flag to implicitly hide these columns such that **SELECT \* FROM \<table_name>** doesn't return a value for the columns. By default, period columns aren't hidden. In order to be used, hidden columns must be explicitly included in all queries that directly reference the temporal table.
+As of [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)], users can mark one or both period columns with `HIDDEN` flag to implicitly hide these columns such that `SELECT * FROM <table_name>` doesn't return a value for the columns. By default, period columns aren't hidden. In order to be used, hidden columns must be explicitly included in all queries that directly reference the temporal table.
 
 #### DROP
 
 Specifies that one or more column definitions, computed column definitions, or table constraints are dropped, or to drop the specification for the columns that the system uses for system versioning.
 
 > [!NOTE]  
-> Columns dropped in ledger tables are only soft deleted. A dropped column remains in the ledger table, but it is marked as a dropped column by setting the `dropped_ledger_table` column in `sys.tables` to `1`. The ledger view of the dropped ledger table is also marked as dropped by setting the `dropped_ledger_view` column in `sys.tables` to `1`. A dropped ledger table, its history table, and its ledger view are renamed by adding a prefix (`MSSQL_DroppedLedgerTable`, `MSSQL_DroppedLedgerHistory`, `MSSQL_DroppedLedgerView`), and appending a GUID to the original name.
+> Columns dropped in ledger tables are only soft deleted. A dropped column remains in the ledger table, but it's marked as a dropped column by setting the `dropped_ledger_table` column in `sys.tables` to `1`. The ledger view of the dropped ledger table is also marked as dropped by setting the `dropped_ledger_view` column in `sys.tables` to `1`. A dropped ledger table, its history table, and its ledger view are renamed by adding a prefix (`MSSQL_DroppedLedgerTable`, `MSSQL_DroppedLedgerHistory`, `MSSQL_DroppedLedgerView`), and appending a GUID to the original name.
 
 #### CONSTRAINT *constraint_name*
 
@@ -738,16 +746,16 @@ Specifies that *constraint_name* is removed from the table. Multiple constraints
 
 You can determine the user-defined or system-supplied name of the constraint by querying the `sys.check_constraint`, `sys.default_constraints`, `sys.key_constraints`, and `sys.foreign_keys` catalog views.
 
-A PRIMARY KEY constraint can't be dropped if an XML index exists on the table.
+A `PRIMARY KEY` constraint can't be dropped if an XML index exists on the table.
 
 #### INDEX *index_name*
 
 Specifies that *index_name* is removed from the table.
 
-The syntax ALTER TABLE ... ADD/DROP/ALTER INDEX is supported only for memory-optimized tables.
+The syntax `ALTER TABLE` ... `ADD`/`DROP`/`ALTER INDEX` is supported only for memory-optimized tables.
 
 > [!IMPORTANT]  
-> Without using an ALTER TABLE statement, the statements [CREATE INDEX](create-index-transact-sql.md), [DROP INDEX](drop-index-transact-sql.md), [ALTER INDEX](alter-index-transact-sql.md), and [PAD_INDEX](alter-table-index-option-transact-sql.md) are not supported for indexes on memory-optimized tables.
+> Without using an `ALTER TABLE` statement, the statements [CREATE INDEX](create-index-transact-sql.md), [DROP INDEX](drop-index-transact-sql.md), [ALTER INDEX](alter-index-transact-sql.md), and [PAD_INDEX](alter-table-index-option-transact-sql.md) aren't supported for indexes on memory-optimized tables.
 
 #### COLUMN *column_name*
 
@@ -755,19 +763,19 @@ Specifies that *constraint_name* or *column_name* is removed from the table. Mul
 
 A column can't be dropped when it's:
 
-- Used in an index, whether as a key column or as an INCLUDE
-- Used in a CHECK, FOREIGN KEY, UNIQUE, or PRIMARY KEY constraint.
-- Associated with a default that's defined with the DEFAULT keyword, or bound to a default object.
+- Used in an index, whether as a key column or as an `INCLUDE`
+- Used in a `CHECK`, `FOREIGN KEY`, `UNIQUE`, or `PRIMARY KEY` constraint.
+- Associated with a default that's defined with the `DEFAULT` keyword, or bound to a default object.
 - Bound to a rule.
 
 > [!NOTE]  
-> Dropping a column doesn't reclaim the disk space of the column. You may have to reclaim the disk space of a dropped column when the row size of a table is near, or has exceeded, its limit. Reclaim space by creating a clustered index on the table or rebuilding an existing clustered index by using [ALTER INDEX](../../t-sql/statements/alter-index-transact-sql.md). For information about the impact of dropping LOB data types, see this [CSS blog entry](/archive/blogs/psssql/how-it-works-gotcha-varcharmax-caused-my-queries-to-be-slower).
+> Dropping a column doesn't reclaim the disk space of the column. You might have to reclaim the disk space of a dropped column when the row size of a table is near, or has exceeded, its limit. Reclaim space by creating a clustered index on the table or rebuilding an existing clustered index by using [ALTER INDEX](alter-index-transact-sql.md). For information about the impact of dropping LOB data types, see this [CSS blog entry](/archive/blogs/psssql/how-it-works-gotcha-varcharmax-caused-my-queries-to-be-slower).
 
 #### PERIOD FOR SYSTEM_TIME
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[sssql16-md](../../includes/sssql16-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later versions, and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
-Drops the specification for the columns that the system will use for system versioning.
+Drops the specification for the columns that the system uses for system versioning.
 
 #### WITH \<drop_clustered_constraint_option>
 
@@ -775,92 +783,98 @@ Specifies that one or more drop clustered constraint options are set.
 
 #### MAXDOP = *max_degree_of_parallelism*
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
-Overrides the **max degree of parallelism** configuration option only for the duration of the operation. For more information, see [Configure the max degree of parallelism Server Configuration Option](../../database-engine/configure-windows/configure-the-max-degree-of-parallelism-server-configuration-option.md).
+Overrides the **max degree of parallelism** configuration option only for the duration of the operation. For more information, see [Server configuration: max degree of parallelism](../../database-engine/configure-windows/configure-the-max-degree-of-parallelism-server-configuration-option.md).
 
-Use the MAXDOP option to limit the number of processors used in parallel plan execution. The maximum is 64 processors.
+Use the `MAXDOP` option to limit the number of processors used in parallel plan execution. The maximum is 64 processors.
 
 *max_degree_of_parallelism* can be one of the following values:
 
 - `1`
 
-    Suppresses parallel plan generation.
+  Suppresses parallel plan generation.
 
 - `>1`
 
-    Restricts the maximum number of processors used in a parallel index operation to the specified number.
+  Restricts the maximum number of processors used in a parallel index operation to the specified number.
 
 - `0` (default)
-Uses the actual number of processors or fewer based on the current system workload.
+
+  Uses the actual number of processors or fewer based on the current system workload.
 
 For more information, see [Configure Parallel Index Operations](../../relational-databases/indexes/configure-parallel-index-operations.md).
 
 > [!NOTE]  
-> Parallel index operations aren't available in every edition of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [Editions and supported features of SQL Server 2022](../../sql-server/editions-and-components-of-sql-server-2022.md).
+> Parallel index operations aren't available in every edition of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [Editions and supported features of SQL Server 2022](../../sql-server/editions-and-components-of-sql-server-2022.md).
 
 #### ONLINE = { ON | OFF } \<as applies to drop_clustered_constraint_option>
 
-Specifies whether underlying tables and associated indexes are available for queries and data modification during the index operation. The default is OFF. You can run REBUILD as an ONLINE operation.
+Specifies whether underlying tables and associated indexes are available for queries and data modification during the index operation. The default is `OFF`. You can run `REBUILD` as an `ONLINE` operation.
 
-ON  
-Long-term table locks aren't held for the duration of the index operation. During the main phase of the index operation, only an Intent Share (IS) lock is held on the source table. This behavior enables queries or updates to the underlying table and indexes to continue. At the start of the operation, a Shared (S) lock is held on the source object for a short time. At the end of the operation, for a short time, an S (Shared) lock is acquired on the source if a nonclustered index is being created. Or, an SCH-M (Schema Modification) lock is acquired when a clustered index is created or dropped online and when a clustered or nonclustered index is being rebuilt. ONLINE can't be set to ON when an index is being created on a local temporary table. Only single-threaded heap rebuild operation is allowed.
+- ON
 
-To run the DDL for **SWITCH** or online index rebuild, all active blocking transactions running on a particular table must be completed. When executing, the **SWITCH** or rebuild operation prevents new transactions from starting and might significantly affect the workload throughput and temporarily delay access to the underlying table.
+  Long-term table locks aren't held for the duration of the index operation. During the main phase of the index operation, only an Intent Share (`IS`) lock is held on the source table. This behavior enables queries or updates to the underlying table and indexes to continue. At the start of the operation, a Shared (S) lock is held on the source object for a short time. At the end of the operation, for a short time, an S (Shared) lock is acquired on the source if a nonclustered index is being created. Or, an Sch-M (Schema Modification) lock is acquired when a clustered index is created or dropped online and when a clustered or nonclustered index is being rebuilt. `ONLINE` can't be set to `ON` when an index is being created on a local temporary table. Only single-threaded heap rebuild operation is allowed.
 
-OFF  
-Table locks apply for the duration of the index operation. An offline index operation that creates, rebuilds, or drops a clustered index, or rebuilds or drops a nonclustered index, acquires a Schema modification (Sch-M) lock on the table. This lock prevents all user access to the underlying table for the duration of the operation. An offline index operation that creates a nonclustered index acquires a Shared (S) lock on the table. This lock prevents updates to the underlying table but allows read operations, such as SELECT statements. Multi-threaded heap rebuild operations are allowed.
+  To run the DDL for `SWITCH` or online index rebuild, all active blocking transactions running on a particular table must be completed. When executing, the `SWITCH` or rebuild operation prevents new transactions from starting and might significantly affect the workload throughput and temporarily delay access to the underlying table.
 
-For more information, see [How Online Index Operations Work](../../relational-databases/indexes/how-online-index-operations-work.md).
+- OFF
 
-> [!NOTE]  
-> Online index operations are not available in every edition of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [Editions and supported features of SQL Server 2022](../../sql-server/editions-and-components-of-sql-server-2022.md).
+  Table locks apply for the duration of the index operation. An offline index operation that creates, rebuilds, or drops a clustered index, or rebuilds or drops a nonclustered index, acquires a Schema modification (Sch-M) lock on the table. This lock prevents all user access to the underlying table for the duration of the operation. An offline index operation that creates a nonclustered index acquires a Shared (S) lock on the table. This lock prevents updates to the underlying table but allows read operations, such as `SELECT` statements. Multi-threaded heap rebuild operations are allowed.
 
-#### MOVE TO { _partition\_scheme\_name_(_column\_name_ [ ,...*n* ] ) | *filegroup* | "default" }
+  For more information, see [How online index operations work](../../relational-databases/indexes/how-online-index-operations-work.md).
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+  > [!NOTE]  
+  > Online index operations aren't available in every edition of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [Editions and supported features of SQL Server 2022](../../sql-server/editions-and-components-of-sql-server-2022.md).
+
+#### MOVE TO { *partition_scheme_name*(*column_name* [ ,...*n* ] ) | *filegroup* | "default" }
+
+**Applies to**: [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
 Specifies a location to move the data rows currently in the leaf level of the clustered index. The table is moved to the new location. This option applies only to constraints that create a clustered index.
 
 > [!NOTE]  
-> In this context, default isn't a keyword. It is an identifier for the default filegroup and must be delimited, as in MOVE TO **"**default**"** or MOVE TO **[**default**]**. If **"**default**"** is specified, the QUOTED_IDENTIFIER option must be ON for the current session. This is the default setting. For more information, see [SET QUOTED_IDENTIFIER](../../t-sql/statements/set-quoted-identifier-transact-sql.md).
+> In this context, `default` isn't a keyword. It's an identifier for the default filegroup and must be delimited, as in `MOVE TO "default"` or `MOVE TO [default]`. If `"default"` is specified, the `QUOTED_IDENTIFIER` option must be `ON` for the current session. This is the default setting. For more information, see [SET QUOTED_IDENTIFIER](set-quoted-identifier-transact-sql.md).
 
 #### { CHECK | NOCHECK } CONSTRAINT
 
-Specifies that *constraint_name* is enabled or disabled. This option can only be used with FOREIGN KEY and CHECK constraints. When NOCHECK is specified, the constraint is disabled and future inserts or updates to the column aren't validated against the constraint conditions. DEFAULT, PRIMARY KEY, and UNIQUE constraints can't be disabled.
+Specifies that *constraint_name* is enabled or disabled. This option can only be used with `FOREIGN KEY` and `CHECK` constraints. When `NOCHECK` is specified, the constraint is disabled and future inserts or updates to the column aren't validated against the constraint conditions. `DEFAULT`, `PRIMARY KEY`, and `UNIQUE` constraints can't be disabled.
 
-ALL  
-Specifies that all constraints are either disabled with the NOCHECK option or enabled with the CHECK option.
+- ALL
+
+  Specifies that all constraints are either disabled with the `NOCHECK` option or enabled with the `CHECK` option.
 
 #### { ENABLE | DISABLE } TRIGGER
 
-Specifies that *trigger_name* is enabled or disabled. When a trigger is disabled, it's still defined for the table. However, when INSERT, UPDATE, or DELETE statements run against the table, the actions in the trigger aren't carried out until the trigger is re-enabled.
+Specifies that *trigger_name* is enabled or disabled. When a trigger is disabled, it's still defined for the table. However, when `INSERT`, `UPDATE`, or `DELETE` statements run against the table, the actions in the trigger aren't carried out until the trigger is re-enabled.
 
-ALL  
-Specifies that all triggers in the table are enabled or disabled.
+- ALL
 
-*trigger_name*  
-Specifies the name of the trigger to disable or enable.
+  Specifies that all triggers in the table are enabled or disabled.
+
+- *trigger_name*
+
+  Specifies the name of the trigger to disable or enable.
 
 #### { ENABLE | DISABLE } CHANGE_TRACKING
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
 Specifies whether change tracking is enabled disabled for the table. By default, change tracking is disabled.
 
-This option is available only when change tracking is enabled for the database. For more information, see [ALTER DATABASE SET Options](../../t-sql/statements/alter-database-transact-sql-set-options.md).
+This option is available only when change tracking is enabled for the database. For more information, see [ALTER DATABASE SET options](alter-database-transact-sql-set-options.md).
 
 To enable change tracking, the table must have a primary key.
 
 #### WITH ( TRACK_COLUMNS_UPDATED = { ON | OFF } )
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
-Specifies whether the [!INCLUDE[ssDE](../../includes/ssde-md.md)] tracks, which change tracked columns were updated. The default value is OFF.
+Specifies whether the [!INCLUDE [ssDE](../../includes/ssde-md.md)] tracks, which change tracked columns were updated. The default value is `OFF`.
 
-#### SWITCH [ PARTITION *source_partition_number_expression* ] TO [ _schema\_name_. ] *target_table* [ PARTITION *target_partition_number_expression* ]
+#### SWITCH [ PARTITION *source_partition_number_expression* ] TO [ *schema_name*. ] *target_table* [ PARTITION *target_partition_number_expression* ]
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
 Switches a block of data in one of the following ways:
 
@@ -872,7 +886,7 @@ If *table* is a partitioned table, you must specify *source_partition_number_exp
 
 When reassigning one partition's data to form a single table, the target table must already exist and it must be empty. Both the source table or partition, and the target table or partition, must be located in the same filegroup. The corresponding indexes, or index partitions, must also be located in the same filegroup. Many additional restrictions apply to switching partitions. *table* and *target_table* can't be the same. *target_table* can be a multi-part identifier.
 
-Both *source_partition_number_expression* and *target_partition_number_expression* are constant expressions that can reference variables and functions. These include user-defined type variables and user-defined functions. They can't reference [!INCLUDE[tsql](../../includes/tsql-md.md)] expressions.
+Both *source_partition_number_expression* and *target_partition_number_expression* are constant expressions that can reference variables and functions. These include user-defined type variables and user-defined functions. They can't reference [!INCLUDE [tsql](../../includes/tsql-md.md)] expressions.
 
 A partitioned table with a clustered columnstore index behaves like a partitioned heap:
 
@@ -880,13 +894,13 @@ A partitioned table with a clustered columnstore index behaves like a partitione
 - A unique index must include the partition key. But, including the partition key with an existing unique index can change the uniqueness.
 - To switch partitions, all nonclustered indexes must include the partition key.
 
-For **SWITCH** restriction when using replication, see [Replicate Partitioned Tables and Indexes](../../relational-databases/replication/publish/replicate-partitioned-tables-and-indexes.md).
+For `SWITCH` restriction when using replication, see [Replicate Partitioned Tables and Indexes](../../relational-databases/replication/publish/replicate-partitioned-tables-and-indexes.md).
 
-Nonclustered columnstore indexes were built in a read-only format before [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and for SQL Database before version V12. You must rebuild nonclustered columnstore indexes to the current format (which is updatable) before any PARTITION operations can be run.
+Nonclustered columnstore indexes were built in a read-only format before [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and for SQL Database before version V12. You must rebuild nonclustered columnstore indexes to the current format (which is updatable) before any `PARTITION` operations can be run.
 
 **Limitations**
 
-If both tables are partitioned identically, including nonclustered indexes, and the target table doesn't have any nonclustered indexes, you may receive a [4907 error](../../relational-databases/errors-events/database-engine-events-and-errors-4000-to-4999.md).
+If both tables are partitioned identically, including nonclustered indexes, and the target table doesn't have any nonclustered indexes, you might receive a [4907 error](../../relational-databases/errors-events/database-engine-events-and-errors-4000-to-4999.md).
 
 Example output:
 
@@ -895,31 +909,31 @@ Msg 4907, Level 16, State 1, Line 38
 'ALTER TABLE SWITCH' statement failed. The table 'MyDB.dbo.PrtTable1' has 4 partitions while index 'MS1' has 6 partitions.
 ```
 
-#### SET ( FILESTREAM_ON = { *partition_scheme_name* \| *filestream_filegroup_name* \| "default" \| "NULL" })
+#### SET ( FILESTREAM_ON = { *partition_scheme_name* | *filestream_filegroup_name* | "default" | "NULL" })
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later). [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] doesn't support `FILESTREAM`.
+**Applies to**: [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)]. [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] doesn't support `FILESTREAM`.
 
 Specifies where FILESTREAM data is stored.
 
-ALTER TABLE with the SET FILESTREAM_ON clause succeeds only if the table has no FILESTREAM columns. You can add FILESTREAM columns by using a second ALTER TABLE statement.
+`ALTER TABLE` with the `SET FILESTREAM_ON` clause succeeds only if the table has no FILESTREAM columns. You can add FILESTREAM columns by using a second `ALTER TABLE` statement.
 
-If you specify *partition_scheme_name*, the rules for [CREATE TABLE](../../t-sql/statements/create-table-transact-sql.md) apply. Be sure the table is already partitioned for row data, and its partition scheme uses the same partition function and columns as the FILESTREAM partition scheme.
+If you specify *partition_scheme_name*, the rules for [CREATE TABLE](create-table-transact-sql.md) apply. Be sure the table is already partitioned for row data, and its partition scheme uses the same partition function and columns as the FILESTREAM partition scheme.
 
-*filestream_filegroup_name* specifies the name of a FILESTREAM filegroup. The filegroup must have one file that's defined for the filegroup by using a [CREATE DATABASE](../../t-sql/statements/create-database-transact-sql.md) or [ALTER DATABASE](../../t-sql/statements/alter-database-transact-sql.md) statement, or an error results.
+*filestream_filegroup_name* specifies the name of a FILESTREAM filegroup. The filegroup must have one file that's defined for the filegroup by using a [CREATE DATABASE](create-database-transact-sql.md) or [ALTER DATABASE](alter-database-transact-sql.md) statement, or you get an error.
 
-**"**default**"** specifies the FILESTREAM filegroup with the DEFAULT property set. If there's no FILESTREAM filegroup, an error results.
+`"default"` specifies the FILESTREAM filegroup with the `DEFAULT` property set. If there's no FILESTREAM filegroup, you get an error.
 
-**"**NULL**"** specifies that all references to FILESTREAM filegroups for the table are removed. All FILESTREAM columns must be dropped first. Use SET FILESTREAM_ON = "**NULL**" to delete all FILESTREAM data that's associated with a table.
+`"NULL"` specifies that all references to FILESTREAM filegroups for the table are removed. All FILESTREAM columns must be dropped first. Use `SET FILESTREAM_ON = "NULL"` to delete all FILESTREAM data that's associated with a table.
 
 #### SET ( SYSTEM_VERSIONING = { OFF | ON [ ( HISTORY_TABLE = schema_name . history_table_name [ , DATA_CONSISTENCY_CHECK = { ON | OFF } ] ) ] } )
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[sssql16-md](../../includes/sssql16-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later versions, and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
-Either disables or enables system versioning of a table. To enable system versioning of a table, the system verifies that the datatype, nullability constraint, and primary key constraint requirements for system versioning are met. The system will record the history of each record in the system-versioned table in a separate history table. If the `HISTORY_TABLE` argument isn't used, the name of this history table will be `MSSQL_TemporalHistoryFor<primary_table_object_id>`. If the history table doesn't exists, the system generates a new history table matching the schema of the current table, creates a link between the two tables, and enables the system to record the history of each record in the current table in the history table. If you use the HISTORY_TABLE argument to create a link to and use an existing history table, the system creates a link between the current table and the specified table. When creating a link to an existing history table, you can choose to do a data consistency check. This data consistency check ensures that existing records don't overlap. Running the data consistency check is the default. Use the `SYSTEM_VERSIONING = ON` argument on a table that is defined with the `PERIOD FOR SYSTEM_TIME` clause to make the existing table a temporal table. For more information, see [Temporal Tables](../../relational-databases/tables/temporal-tables.md).
+Either disables or enables system versioning of a table. To enable system versioning of a table, the system verifies that the data type, nullability constraint, and primary key constraint requirements for system versioning are met. The system records the history of each record in the system-versioned table in a separate history table. If the `HISTORY_TABLE` argument isn't used, the name of this history table is `MSSQL_TemporalHistoryFor<primary_table_object_id>`. If the history table doesn't exists, the system generates a new history table matching the schema of the current table, creates a link between the two tables, and enables the system to record the history of each record in the current table in the history table. If you use the HISTORY_TABLE argument to create a link to and use an existing history table, the system creates a link between the current table and the specified table. When creating a link to an existing history table, you can choose to do a data consistency check. This data consistency check ensures that existing records don't overlap. Running the data consistency check is the default. Use the `SYSTEM_VERSIONING = ON` argument on a table that is defined with the `PERIOD FOR SYSTEM_TIME` clause to make the existing table a temporal table. For more information, see [Temporal tables](../../relational-databases/tables/temporal-tables.md).
 
-#### HISTORY_RETENTION_PERIOD = { INFINITE \| number {DAY \| DAYS \| WEEK \| WEEKS \| MONTH \| MONTHS \| YEAR \| YEARS} }
+#### HISTORY_RETENTION_PERIOD = { INFINITE | number { DAY | DAYS | WEEK | WEEKS | MONTH | MONTHS | YEAR | YEARS } }
 
-**Applies to**: [!INCLUDE[ssSQL17](../../includes/sssql17-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
 Specifies finite or infinite retention for historical data in a temporal table. If omitted, infinite retention is assumed.
 
@@ -929,44 +943,51 @@ Specifies finite or infinite retention for historical data in a temporal table. 
 
 Enables retention policy based cleanup of old or aged data from tables within a database. For more information, see [Enable and Disable Data Retention](/azure/azure-sql-edge/data-retention-enable-disable). The following parameters must be specified for data retention to be enabled.
 
-FILTER_COLUMN = { column_name }  
-Specifies the column, that should be used to determine if the rows in the table are obsolete or not. The following data types are allowed for the filter column.
-  - Date
-  - DateTime
-  - DateTime2
-  - SmallDateTime
-  - DateTimeOffset
+- FILTER_COLUMN = { column_name }
 
-RETENTION_PERIOD = { INFINITE \| number {DAY \| DAYS \| WEEK \| WEEKS \| MONTH \| MONTHS \| YEAR \| YEARS }}  
-Specifies the retention period policy for the table. The retention period is specified as a combination of a positive integer value and the date part unit.
+  Specifies the column that should be used to determine if the rows in the table are obsolete or not. The following data types are allowed for the filter column.
 
-#### SET ( LOCK_ESCALATION = { AUTO \| TABLE \| DISABLE } )
+  - **date**
+  - **datetime**
+  - **datetime2**
+  - **smalldatetime**
+  - **datetimeoffset**
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+- RETENTION_PERIOD = { INFINITE | number { DAY | DAYS | WEEK | WEEKS | MONTH | MONTHS | YEAR | YEARS } }
+
+  Specifies the retention period policy for the table. The retention period is specified as a combination of a positive integer value and the date part unit.
+
+#### SET ( LOCK_ESCALATION = { AUTO | TABLE | DISABLE } )
+
+**Applies to**: [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
 Specifies the allowed methods of lock escalation for a table.
 
-AUTO  
-This option allows [!INCLUDE[ssDEnoversion](../../includes/ssdenoversion-md.md)] to select the lock escalation granularity that's appropriate for the table schema.
+- AUTO
 
-- If the table is partitioned, lock escalation will be allowed to the heap or B-tree (HoBT) granularity. In other words, escalation will be allowed to the partition level. After the lock is escalated to the HoBT level, the lock won't be escalated later to TABLE granularity.
-- If the table isn't partitioned, the lock escalation is done to the TABLE granularity.
+  This option allows [!INCLUDE [ssDEnoversion](../../includes/ssdenoversion-md.md)] to select the lock escalation granularity that's appropriate for the table schema.
 
-TABLE  
-Lock escalation is done at table-level granularity whether the table is partitioned or not partitioned. TABLE is the default value.
+  - If the table is partitioned, lock escalation is allowed to the heap or B-tree (HoBT) granularity. In other words, escalation is allowed to the partition level. After the lock is escalated to the HoBT level, the lock won't be escalated later to `TABLE` granularity.
 
-DISABLE  
-Prevents lock escalation in most cases. Table-level locks aren't completely disallowed. For example, when you're scanning a table that has no clustered index under the serializable isolation level, [!INCLUDE[ssDE](../../includes/ssde-md.md)] must take a table lock to protect data integrity.
+  - If the table isn't partitioned, the lock escalation is done to the `TABLE` granularity.
+
+- TABLE
+
+  Lock escalation is done at table-level granularity whether the table is partitioned or not partitioned. `TABLE` is the default value.
+
+- DISABLE
+
+  Prevents lock escalation in most cases. Table-level locks aren't completely disallowed. For example, when you're scanning a table that has no clustered index under the serializable isolation level, [!INCLUDE [ssDE](../../includes/ssde-md.md)] must take a table lock to protect data integrity.
 
 #### REBUILD
 
-Use the REBUILD WITH syntax to rebuild an entire table including all the partitions in a partitioned table. If the table has a clustered index, the REBUILD option rebuilds the clustered index. REBUILD can be run as an ONLINE operation.
+Use the `REBUILD WITH` syntax to rebuild an entire table including all the partitions in a partitioned table. If the table has a clustered index, the `REBUILD` option rebuilds the clustered index. `REBUILD` can be run as an `ONLINE` operation.
 
-Use the REBUILD PARTITION syntax to rebuild a single partition in a partitioned table.
+Use the `REBUILD PARTITION` syntax to rebuild a single partition in a partitioned table.
 
 #### PARTITION = ALL
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
 Rebuilds all partitions when changing the partition compression settings.
 
@@ -974,109 +995,118 @@ Rebuilds all partitions when changing the partition compression settings.
 
 All options apply to a table with a clustered index. If the table doesn't have a clustered index, the heap structure is only affected by some of the options.
 
-When a specific compression setting isn't specified with the REBUILD operation, the current compression setting for the partition is used. To return the current setting, query the `data_compression` column in the `sys.partitions` catalog view.
+When a specific compression setting isn't specified with the `REBUILD` operation, the current compression setting for the partition is used. To return the current setting, query the `data_compression` column in the `sys.partitions` catalog view.
 
-For complete descriptions of the rebuild options, see [ALTER TABLE index_option](../../t-sql/statements/alter-table-index-option-transact-sql.md).
+For complete descriptions of the rebuild options, see [ALTER TABLE index_option](alter-table-index-option-transact-sql.md).
 
 #### DATA_COMPRESSION
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)]. 
+**Applies to**: [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
 Specifies the data compression option for the specified table, partition number, or range of partitions. The options are as follows:
 
-NONE
-Table or specified partitions aren't compressed. This option doesn't apply to columnstore tables.
+- NONE
 
-ROW
-Table or specified partitions are compressed by using row compression. This option doesn't apply to columnstore tables.
+  Table or specified partitions aren't compressed. This option doesn't apply to columnstore tables.
 
-PAGE
-Table or specified partitions are compressed by using page compression. This option doesn't apply to columnstore tables.
+- ROW
 
-COLUMNSTORE  
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[ssSQL14](../../includes/sssql14-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+  Table or specified partitions are compressed by using row compression. This option doesn't apply to columnstore tables.
 
-Applies only to columnstore tables. COLUMNSTORE specifies to decompress a partition that was compressed with the COLUMNSTORE_ARCHIVE option. When the data is restored, it continues to be compressed with the columnstore compression that's used for all columnstore tables.
+- PAGE
 
-COLUMNSTORE_ARCHIVE  
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[ssSQL14](../../includes/sssql14-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+  Table or specified partitions are compressed by using page compression. This option doesn't apply to columnstore tables.
 
-Applies only to columnstore tables, which are tables stored with a clustered columnstore index. COLUMNSTORE_ARCHIVE will further compress the specified partition to a smaller size. Use this option for archival or other situations that require less storage and can afford more time for storage and retrieval.
+- COLUMNSTORE
 
-To rebuild multiple partitions at the same time, see [index_option](../../t-sql/statements/alter-table-index-option-transact-sql.md). If the table doesn't have a clustered index, changing the data compression rebuilds the heap and the nonclustered indexes. For more information about compression, see [Data Compression](../../relational-databases/data-compression/data-compression.md).
+  **Applies to**: [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)] and later versions, and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
-`ALTER TABLE REBUILD PARTITION WITH DATA COMPRESSION = ROW` or `PAGE` is not allowed on [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)].
+  Applies only to columnstore tables. `COLUMNSTORE` specifies to decompress a partition that was compressed with the `COLUMNSTORE_ARCHIVE` option. When the data is restored, it continues to be compressed with the columnstore compression that's used for all columnstore tables.
+
+- COLUMNSTORE_ARCHIVE
+
+  **Applies to**: [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)] and later versions, and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+
+  Applies only to columnstore tables, which are tables stored with a clustered columnstore index. `COLUMNSTORE_ARCHIVE` further compresses the specified partition to a smaller size. Use this option for archival or other situations that require less storage and can afford more time for storage and retrieval.
+
+  To rebuild multiple partitions at the same time, see [index_option](alter-table-index-option-transact-sql.md). If the table doesn't have a clustered index, changing the data compression rebuilds the heap and the nonclustered indexes. For more information about compression, see [Data compression](../../relational-databases/data-compression/data-compression.md).
+
+  `ALTER TABLE REBUILD PARTITION WITH DATA COMPRESSION = ROW` or `PAGE` isn't allowed on [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)].
 
 #### XML_COMPRESSION
 
-**Applies to**: [!INCLUDE[sssql22-md](../../includes/sssql22-md.md)] and later versions, [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and [!INCLUDE [ssazuremi](../../includes/ssazuremi-md.md)].
+**Applies to**: [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions, [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and [!INCLUDE [ssazuremi](../../includes/ssazuremi-md.md)].
 
 Specifies the XML compression option for any **xml** data type columns in the table. The options are as follows:
 
-ON  
-Columns using the **xml** data type are compressed.
+- ON
 
-OFF  
-Columns using the **xml** data type aren't compressed.
+  Columns using the **xml** data type are compressed.
+
+- OFF
+
+  Columns using the **xml** data type aren't compressed.
 
 #### ONLINE = { ON | OFF } \<as applies to single_partition_rebuild_option>
 
-Specifies whether a single partition of the underlying tables and associated indexes is available for queries and data modification during the index operation. The default is OFF. You can run REBUILD as an ONLINE operation.
+Specifies whether a single partition of the underlying tables and associated indexes is available for queries and data modification during the index operation. The default is `OFF`. You can run `REBUILD` as an `ONLINE` operation.
 
-ON  
-Long-term table locks aren't held for the duration of the index operation. S-lock on the table is required in the beginning of the index rebuild and a Sch-M lock on the table at the end of the online index rebuild. Although both locks are short metadata locks, the Sch-M lock must wait for all blocking transactions to be completed. During the wait time, the Sch-M lock blocks all other transactions that wait behind this lock when accessing the same table.
+- ON
 
-> [!NOTE]  
-> Online index rebuild can set the `low_priority_lock_wait` options described later in this section.
+  Long-term table locks aren't held for the duration of the index operation. S-lock on the table is required in the beginning of the index rebuild and a Sch-M lock on the table at the end of the online index rebuild. Although both locks are short metadata locks, the Sch-M lock must wait for all blocking transactions to be completed. During the wait time, the Sch-M lock blocks all other transactions that wait behind this lock when accessing the same table.
 
-OFF  
-Table locks are applied for the duration of the index operation. This prevents all user access to the underlying table for the duration of the operation.
+  > [!NOTE]  
+  > Online index rebuild can set the `low_priority_lock_wait` options described later in this section.
+
+- OFF
+
+  Table locks are applied for the duration of the index operation. This prevents all user access to the underlying table for the duration of the operation.
 
 #### *column_set_name* XML COLUMN_SET FOR ALL_SPARSE_COLUMNS
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
-The name of the column set. A column set is an untyped XML representation that combines all of the sparse columns of a table into a structured output. A column set can't be added to a table that contains sparse columns. For more information about column sets, see [Use Column Sets](../../relational-databases/tables/use-column-sets.md).
+The name of the column set. A column set is an untyped XML representation that combines all of the sparse columns of a table into a structured output. A column set can't be added to a table that contains sparse columns. For more information about column sets, see [Use column sets](../../relational-databases/tables/use-column-sets.md).
 
 #### { ENABLE | DISABLE } FILETABLE_NAMESPACE
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[ssSQL11](../../includes/sssql11-md.md)] and later).
+**Applies to**: [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
 
 Enables or disables the system-defined constraints on a FileTable. Can only be used with a FileTable.
 
 #### SET ( FILETABLE_DIRECTORY = *directory_name* )
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[ssSQL11](../../includes/sssql11-md.md)] and later). [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] doesn't support `FILETABLE`.
+**Applies to**: [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] doesn't support FileTable.
 
 Specifies the Windows-compatible FileTable directory name. This name should be unique among all the FileTable directory names in the database. Uniqueness comparison is case-insensitive, despite the SQL collation settings. Can only be used with a FileTable.
 
 #### REMOTE_DATA_ARCHIVE
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[ssSQL17](../../includes/sssql17-md.md)] and later).
+**Applies to**: [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] and later versions.
 
 Enables or disables Stretch Database for a table. For more information, see [Stretch Database](/previous-versions/sql/sql-server/stretch-database/stretch-database).
 
 > [!IMPORTANT]  
 > [!INCLUDE [stretch-database-deprecation](../../includes/stretch-database-deprecation.md)]
 
-**Enabling Stretch Database for a table**
+**Enable Stretch Database for a table**
 
 When you enable Stretch for a table by specifying `ON`, you also have to specify `MIGRATION_STATE = OUTBOUND` to begin migrating data immediately, or `MIGRATION_STATE = PAUSED` to postpone data migration. The default value is `MIGRATION_STATE = OUTBOUND`. For more information about enabling Stretch for a table, see [Enable Stretch Database for a table](/previous-versions/sql/sql-server/stretch-database/enable-stretch-database-for-a-table).
 
 **Prerequisites**. Before you enable Stretch for a table, you have to enable Stretch on the server and on the database. For more information, see [Enable Stretch Database for a database](/previous-versions/sql/sql-server/stretch-database/enable-stretch-database-for-a-database).
 
-**Permissions**. Enabling Stretch for a database or a table requires **db_owner** permissions. Enabling Stretch for a table also requires ALTER permissions on the table.
+**Permissions**. Enabling Stretch for a database or a table requires **db_owner** permissions. Enabling Stretch for a table also requires `ALTER` permissions on the table.
 
-**Disabling Stretch Database for a table**
+**Disable Stretch Database for a table**
 
 When you disable Stretch for a table, you have two options for the remote data that's already been migrated to Azure. For more information, see [Disable Stretch Database and bring back remote data](/previous-versions/sql/sql-server/stretch-database/disable-stretch-database-and-bring-back-remote-data).
 
 - To disable Stretch for a table and copy the remote data for the table from Azure back to SQL Server, run the following command. This command can't be canceled.
 
-    ```sql
-    ALTER TABLE <table_name>
-       SET ( REMOTE_DATA_ARCHIVE ( MIGRATION_STATE = INBOUND ) ) ;
-    ```
+  ```sql
+  ALTER TABLE <table_name>
+     SET ( REMOTE_DATA_ARCHIVE ( MIGRATION_STATE = INBOUND ) ) ;
+  ```
 
 This operation incurs data transfer costs, and it can't be canceled. For more information, see [Data Transfers Pricing Details](https://azure.microsoft.com/pricing/details/data-transfers/).
 
@@ -1084,10 +1114,10 @@ After all the remote data has been copied from Azure back to SQL Server, Stretch
 
 - To disable Stretch for a table and abandon the remote data, run the following command.
 
-    ```sql
-    ALTER TABLE <table_name>
-       SET ( REMOTE_DATA_ARCHIVE = OFF_WITHOUT_DATA_RECOVERY ( MIGRATION_STATE = PAUSED ) ) ;
-    ```
+  ```sql
+  ALTER TABLE <table_name>
+     SET ( REMOTE_DATA_ARCHIVE = OFF_WITHOUT_DATA_RECOVERY ( MIGRATION_STATE = PAUSED ) ) ;
+  ```
 
 After you disable Stretch Database for a table, data migration stops and query results no longer include results from the remote table.
 
@@ -1095,155 +1125,165 @@ Disabling Stretch doesn't remove the remote table. If you want to delete the rem
 
 #### [ FILTER_PREDICATE = { null | *predicate* } ]
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[ssSQL17](../../includes/sssql17-md.md)] and later).
+**Applies to**: [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] and later versions.
 
 Optionally specifies a filter predicate to select rows to migrate from a table that contains both historical and current data. The predicate must call a deterministic inline table-valued function. For more information, see [Enable Stretch Database for a table](/previous-versions/sql/sql-server/stretch-database/enable-stretch-database-for-a-table) and [Select rows to migrate by using a filter function - Stretch Database](/previous-versions/sql/sql-server/stretch-database/select-rows-to-migrate-by-using-a-filter-function-stretch-database).
 
 > [!IMPORTANT]  
-> If you provide a filter predicate that performs poorly, data migration also performs poorly. Stretch Database applies the filter predicate to the table by using the CROSS APPLY operator.
+> If you provide a filter predicate that performs poorly, data migration also performs poorly. Stretch Database applies the filter predicate to the table by using the `CROSS APPLY` operator.
 
 If you don't specify a filter predicate, the entire table is migrated.
 
-When you specify a filter predicate, you also have to specify *MIGRATION_STATE*.
+When you specify a filter predicate, you also have to specify `MIGRATION_STATE`.
 
 #### MIGRATION_STATE = { OUTBOUND | INBOUND | PAUSED }
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[ssSQL17](../../includes/sssql17-md.md)] and later).
+**Applies to**: [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] and later versions.
 
 - Specify `OUTBOUND` to migrate data from SQL Server to Azure.
 - Specify `INBOUND` to copy the remote data for the table from Azure back to SQL Server and to disable Stretch for the table. For more information, see [Disable Stretch Database and bring back remote data](/previous-versions/sql/sql-server/stretch-database/disable-stretch-database-and-bring-back-remote-data).
 
-    This operation incurs data transfer costs, and it can't be canceled.
+  This operation incurs data transfer costs, and it can't be canceled.
 
 - Specify `PAUSED` to pause or postpone data migration. For more information, see [Pause and resume data migration - Stretch Database](/previous-versions/sql/sql-server/stretch-database/pause-and-resume-data-migration-stretch-database).
 
 #### WAIT_AT_LOW_PRIORITY
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[ssSQL14](../../includes/sssql14-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)] and later versions, and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
-An online index rebuild has to wait for blocking operations on this table. **WAIT_AT_LOW_PRIORITY** indicates that the online index rebuild operation waits for low-priority locks, allowing other operations to carry on while the online index build operation is waiting. Omitting the **WAIT AT LOW PRIORITY** option is the same as `WAIT_AT_LOW_PRIORITY ( MAX_DURATION = 0 minutes, ABORT_AFTER_WAIT = NONE)`.
+An online index rebuild has to wait for blocking operations on this table. `WAIT_AT_LOW_PRIORITY` indicates that the online index rebuild operation waits for low-priority locks, allowing other operations to carry on while the online index build operation is waiting. Omitting the `WAIT AT LOW PRIORITY` option is the same as `WAIT_AT_LOW_PRIORITY ( MAX_DURATION = 0 minutes, ABORT_AFTER_WAIT = NONE)`.
 
-MAX_DURATION = *time* [**MINUTES** ]  
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[ssSQL14](../../includes/sssql14-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+#### MAX_DURATION = *time* [ MINUTES ]
 
-The wait time, which is an integer value specified in minutes, that the **SWITCH** or online index rebuild locks wait with low priority when running the DDL command. If the operation is blocked for the **MAX_DURATION** time, one of the **ABORT_AFTER_WAIT** actions will run. **MAX_DURATION** time is always in minutes, and you can omit the word **MINUTES**.
+**Applies to**: [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)] and later versions, and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
-#### ABORT_AFTER_WAIT = [NONE | SELF | BLOCKERS } ]
+The wait time, which is an integer value specified in minutes, that the `SWITCH` or online index rebuild locks wait with low priority when running the DDL command. If the operation is blocked for the `MAX_DURATION` time, one of the `ABORT_AFTER_WAIT` actions runs. `MAX_DURATION` time is always in minutes, and you can omit the word `MINUTES`.
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[ssSQL14](../../includes/sssql14-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+#### ABORT_AFTER_WAIT = { NONE | SELF | BLOCKERS }
 
-NONE  
-Continue waiting for the lock with normal (regular) priority.
+**Applies to**: [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)] and later versions, and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
-SELF  
-Exit the **SWITCH** or online index rebuild DDL operation currently being run without taking any action.
+- NONE
 
-BLOCKERS  
-Kill all user transactions that currently block the **SWITCH** or online index rebuild DDL operation so that the operation can continue.
+  Continue waiting for the lock with normal (regular) priority.
 
-Requires **ALTER ANY CONNECTION** permission.
+- SELF
+
+  Exit the `SWITCH` or online index rebuild DDL operation currently being run without taking any action.
+
+- BLOCKERS
+
+  Kill all user transactions that currently block the `SWITCH` or online index rebuild DDL operation so that the operation can continue.
+
+  Requires `ALTER ANY CONNECTION` permission.
 
 #### IF EXISTS
 
-**Applies to**: [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] ([!INCLUDE[sssql16-md](../../includes/sssql16-md.md)] and later) and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later versions, and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
 Conditionally drops the column or constraint only if it already exists.
 
-#### <a id="resumable"></a> RESUMABLE = { ON | OFF}
+<a id="resumable"></a>
 
-**Applies to**: [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later.
+#### RESUMABLE = { ON | OFF}
 
-Specifies whether an `ALTER TABLE ADD CONSTRAINT` operation is resumable. Add table constraint operation is resumable when `ON`. Add table constraint operation isn't resumable when `OFF`. Default is `OFF`. The `RESUMABLE` option can be used as part of the [ALTER TABLE index_option](./alter-table-index-option-transact-sql.md) in the [ALTER TABLE table_constraint](./alter-table-table-constraint-transact-sql.md).
+**Applies to**: [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions.
 
-**MAX_DURATION** when used with `RESUMABLE = ON` (requires `ONLINE = ON`) indicates time (an integer value specified in minutes) that a resumable online add constraint operation is executed before being paused. If not specified, the operation continues until completion.
+Specifies whether an `ALTER TABLE ADD CONSTRAINT` operation is resumable. Add table constraint operation is resumable when `ON`. Add table constraint operation isn't resumable when `OFF`. Default is `OFF`. The `RESUMABLE` option can be used as part of the [ALTER TABLE index_option](alter-table-index-option-transact-sql.md) in the [ALTER TABLE table_constraint](alter-table-table-constraint-transact-sql.md).
 
-For more information on enabling and using resumable `ALTER TABLE ADD CONSTRAINT` operations, see [Resumable table add constraints](../../relational-databases/security/resumable-add-table-constraints.md).
+`MAX_DURATION` when used with `RESUMABLE = ON` (requires `ONLINE = ON`) indicates time (an integer value specified in minutes) that a resumable online add constraint operation is executed before being paused. If not specified, the operation continues until completion.
+
+For more information on enabling and using resumable `ALTER TABLE ADD CONSTRAINT` operations, see [Resumable add table constraints](../../relational-databases/security/resumable-add-table-constraints.md).
 
 ## Remarks
 
-To add new rows of data, use [INSERT](../../t-sql/statements/insert-transact-sql.md). To remove rows of data, use [DELETE](../../t-sql/statements/delete-transact-sql.md) or [TRUNCATE TABLE](../../t-sql/statements/truncate-table-transact-sql.md). To change the values in existing rows, use [UPDATE](../../t-sql/queries/update-transact-sql.md).
+To add new rows of data, use [INSERT](insert-transact-sql.md). To remove rows of data, use [DELETE](delete-transact-sql.md) or [TRUNCATE TABLE](truncate-table-transact-sql.md). To change the values in existing rows, use [UPDATE](../queries/update-transact-sql.md).
 
-If there are any execution plans in the procedure cache that reference the table, ALTER TABLE marks them to be recompiled on their next execution.
+If there are any execution plans in the procedure cache that reference the table, `ALTER TABLE` marks them to be recompiled on their next execution.
 
-In [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)], some table features can be created but will not be [mirrored into the Fabric OneLake](/fabric/database/sql/mirroring-overview). For more information, see [Limitations of Fabric SQL database mirroring](/fabric/database/sql/mirroring-limitations).
+In [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)], some table features can be created but aren't [mirrored into the Fabric OneLake](/fabric/database/sql/mirroring-overview). For more information, see [Limitations for Fabric SQL database mirroring (preview)](/fabric/database/sql/mirroring-limitations).
 
 ## Change the size of a column
 
-You can change the length, precision, or scale of a column by specifying a new size for the column data type. Use the ALTER COLUMN clause. If data exists in the column, the new size can't be smaller than the maximum size of the data. Also, you can't define the column in an index, unless the column is a **varchar**, **nvarchar**, or **varbinary** data type and the index isn't the result of a PRIMARY KEY constraint. See the example in the short section titled [Altering a Column Definition](#alter_column).
+You can change the length, precision, or scale of a column by specifying a new size for the column data type. Use the `ALTER COLUMN` clause. If data exists in the column, the new size can't be smaller than the maximum size of the data. Also, you can't define the column in an index, unless the column is a **varchar**, **nvarchar**, or **varbinary** data type and the index isn't the result of a `PRIMARY KEY` constraint. See the example in the short section titled [Altering a Column Definition](#alter_column).
 
 ## Locks and ALTER TABLE
 
-Changes you specify in ALTER TABLE implement immediately. If the changes require modifications of the rows in the table, ALTER TABLE updates the rows. ALTER TABLE acquires a schema modify (SCH-M) lock on the table to make sure that no other connections reference even the metadata for the table during the change, except online index operations that require a short SCH-M lock at the end. In an `ALTER TABLE...SWITCH` operation, the lock is acquired on both the source and target tables. The modifications made to the table are logged and fully recoverable. Changes that affect all the rows in large tables, such as dropping a column or, on some editions of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], adding a NOT NULL column with a default value, can take a long time to complete and generate many log records. Run these ALTER TABLE statements with the same care as any INSERT, UPDATE, or DELETE statement that affects many rows.
+Changes you specify in `ALTER TABLE` implement immediately. If the changes require modifications of the rows in the table, `ALTER TABLE` updates the rows. `ALTER TABLE` acquires a schema modify (Sch-M) lock on the table to make sure that no other connections reference even the metadata for the table during the change, except online index operations that require a short Sch-M lock at the end. In an `ALTER TABLE...SWITCH` operation, the lock is acquired on both the source and target tables. The modifications made to the table are logged and fully recoverable. Changes that affect all the rows in large tables, such as dropping a column or, on some editions of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], adding a `NOT NULL` column with a default value, can take a long time to complete and generate many log records. Run these `ALTER TABLE` statements with the same care as any `INSERT`, `UPDATE`, or `DELETE` statement that affects many rows.
 
 **Applies to** [!INCLUDE [fabricdw](../../includes/fabric-dw.md)] in [!INCLUDE [fabric](../../includes/fabric.md)].
 
-ALTER TABLE cannot be part of an explicit transaction.
+`ALTER TABLE` can't be part of an explicit transaction.
 
-### XEvents for partition switch
+### Extended Events (XEvents) for partition switch
 
- The following XEvents are related to `ALTER TABLE ... SWITCH PARTITION` and [online index rebuilds](alter-index-transact-sql.md#online---on--off-).
-  
--   lock_request_priority_state
--   process_killed_by_abort_blockers  
--   ddl_with_wait_at_low_priority  
+The following XEvents are related to `ALTER TABLE ... SWITCH PARTITION` and [online index rebuilds](alter-index-transact-sql.md#online---on--off-).
 
-### <a id="adding-not-null-columns-as-an-online-operation"></a> Add NOT NULL columns as an online operation
+- lock_request_priority_state
+- process_killed_by_abort_blockers
+- ddl_with_wait_at_low_priority
 
-Starting with [!INCLUDE[ssSQL11](../../includes/sssql11-md.md)] Enterprise Edition, adding a NOT NULL column with a default value is an online operation when the default value is a *runtime constant*. This means that the operation is completed almost instantaneously despite the number of rows in the table, because the existing rows in the table aren't updated during the operation. Instead, the default value is stored only in the metadata of the table and the value is looked up, as needed, in queries that access these rows. This behavior is automatic. No additional syntax is required to implement the online operation beyond the ADD COLUMN syntax. A runtime constant is an expression that produces the same value at runtime for each row in the table despite its determinism. For example, the constant expression "My temporary data", or the system function GETUTCDATETIME() are runtime constants. In contrast, the functions `NEWID()` or `NEWSEQUENTIALID()` aren't runtime constants, because a unique value is produced for each row in the table. Adding a NOT NULL column with a default value that's not a runtime constant is always run offline and an exclusive (SCH-M) lock is acquired for the duration of the operation.
+<a id="adding-not-null-columns-as-an-online-operation"></a>
 
-While the existing rows reference the value stored in metadata, the default value is stored on the row for any new rows that are inserted and don't specify another value for the column. The default value stored in metadata moves to an existing row when the row is updated (even if the actual column isn't specified in the UPDATE statement), or if the table or clustered index is rebuilt.
+### Add NOT NULL columns as an online operation
 
-Columns of type **varchar(max)**, **nvarchar(max)**, **varbinary(max)**, **xml**, **text**, **ntext**, **image**, **hierarchyid**, **geometry**, **geography**, or CLR UDTS, can't be added in an online operation. A column can't be added online if doing so causes the maximum possible row size to exceed the 8,060-byte limit. The column is added as an offline operation in this case.
+In [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)] Enterprise edition and later versions, adding a `NOT NULL` column with a default value is an online operation when the default value is a *runtime constant*. This means that the operation is completed almost instantaneously despite the number of rows in the table, because the existing rows in the table aren't updated during the operation. Instead, the default value is stored only in the metadata of the table and the value is looked up, as needed, in queries that access these rows. This behavior is automatic. No additional syntax is required to implement the online operation beyond the `ADD COLUMN` syntax. A runtime constant is an expression that produces the same value at runtime for each row in the table despite its determinism. For example, the constant expression `"My temporary data"`, or the system function `GETUTCDATETIME()` are runtime constants. In contrast, the functions `NEWID()` or `NEWSEQUENTIALID()` aren't runtime constants, because a unique value is produced for each row in the table. Adding a `NOT NULL` column with a default value that's not a runtime constant is always run offline and an exclusive (Sch-M) lock is acquired for the duration of the operation.
+
+While the existing rows reference the value stored in metadata, the default value is stored on the row for any new rows that are inserted and don't specify another value for the column. The default value stored in metadata moves to an existing row when the row is updated (even if the actual column isn't specified in the `UPDATE` statement), or if the table or clustered index is rebuilt.
+
+Columns of type **varchar(max)**, **nvarchar(max)**, **varbinary(max)**, **xml**, **text**, **ntext**, **image**, **hierarchyid**, **geometry**, **geography**, or CLR user-defined types can't be added in an online operation. A column can't be added online if doing so causes the maximum possible row size to exceed the 8,060-byte limit. The column is added as an offline operation in this case.
 
 ## Parallel plan execution
 
-In [!INCLUDE [sssql11-md](../../includes/sssql11-md.md)] Enterprise edition and later versions, the number of processors employed to run a single ALTER TABLE ADD (index-based) CONSTRAINT or DROP (clustered index) CONSTRAINT statement is determined by the **max degree of parallelism** configuration option and the current workload. If the [!INCLUDE[ssDE](../../includes/ssde-md.md)] detects that the system is busy, the degree of parallelism of the operation is automatically reduced before statement execution starts. You can manually configure the number of processors that are used to run the statement by specifying the MAXDOP option. For more information, see [Configure the max degree of parallelism Server Configuration Option](../../database-engine/configure-windows/configure-the-max-degree-of-parallelism-server-configuration-option.md).
+In [!INCLUDE [sssql11-md](../../includes/sssql11-md.md)] Enterprise edition and later versions, the number of processors employed to run a single `ALTER TABLE ADD` (index-based) `CONSTRAINT` or `DROP` (clustered index) `CONSTRAINT` statement is determined by the **max degree of parallelism** configuration option and the current workload. If the [!INCLUDE [ssDE](../../includes/ssde-md.md)] detects that the system is busy, the degree of parallelism of the operation is automatically reduced before statement execution starts. You can manually configure the number of processors that are used to run the statement by specifying the `MAXDOP` option. For more information, see [Server configuration: max degree of parallelism](../../database-engine/configure-windows/configure-the-max-degree-of-parallelism-server-configuration-option.md).
 
 ## Partitioned tables
 
-In addition to performing SWITCH operations that involve partitioned tables, use ALTER TABLE to change the state of the columns, constraints, and triggers of a partitioned table just like it's used for nonpartitioned tables. However, this statement can't be used to change the way the table itself is partitioned. To repartition a partitioned table, use [ALTER PARTITION SCHEME](../../t-sql/statements/alter-partition-scheme-transact-sql.md) and [ALTER PARTITION FUNCTION](../../t-sql/statements/alter-partition-function-transact-sql.md). Additionally, you can't change the data type of a column of a partitioned table.
+In addition to performing SWITCH operations that involve partitioned tables, use `ALTER TABLE` to change the state of the columns, constraints, and triggers of a partitioned table just like it's used for nonpartitioned tables. However, this statement can't be used to change the way the table itself is partitioned. To repartition a partitioned table, use [ALTER PARTITION SCHEME](alter-partition-scheme-transact-sql.md) and [ALTER PARTITION FUNCTION](alter-partition-function-transact-sql.md). Additionally, you can't change the data type of a column of a partitioned table.
 
 ## Restrictions on tables with schema-bound views
 
-The restrictions that apply to ALTER TABLE statements on tables with schema-bound views are the same as the restrictions currently applied when modifying tables with a simple index. Adding a column is allowed. However, removing or changing a column that participates in any schema-bound view isn't allowed. If the ALTER TABLE statement requires changing a column used in a schema-bound view, ALTER TABLE fails and the [!INCLUDE[ssDE](../../includes/ssde-md.md)] raises an error message. For more information about schema binding and indexed views, see [CREATE VIEW](../../t-sql/statements/create-view-transact-sql.md).
+The restrictions that apply to `ALTER TABLE` statements on tables with schema-bound views are the same as the restrictions currently applied when modifying tables with a simple index. Adding a column is allowed. However, removing or changing a column that participates in any schema-bound view isn't allowed. If the `ALTER TABLE` statement requires changing a column used in a schema-bound view, `ALTER TABLE` fails and the [!INCLUDE [ssDE](../../includes/ssde-md.md)] raises an error message. For more information about schema binding and indexed views, see [CREATE VIEW](create-view-transact-sql.md).
 
 Adding or removing triggers on base tables isn't affected by creating a schema-bound view that references the tables.
 
 ## Indexes and ALTER TABLE
 
-Indexes created as part of a constraint are dropped when the constraint is dropped. Indexes that were created with CREATE INDEX must be dropped with DROP INDEX. Use The ALTER INDEX statement to rebuild an index part of a constraint definition; the constraint doesn't have to be dropped and added again with ALTER TABLE.
+Indexes created as part of a constraint are dropped when the constraint is dropped. Indexes that were created with `CREATE INDEX` must be dropped with `DROP INDEX`. Use The `ALTER INDEX` statement to rebuild an index part of a constraint definition; the constraint doesn't have to be dropped and added again with `ALTER TABLE`.
 
 All indexes and constraints based on a column must be removed before the column can be removed.
 
-When you delete a constraint that created a clustered index, the data rows that were stored in the leaf level of the clustered index are stored in a nonclustered table. You can drop the clustered index and move the resulting table to another filegroup or partition scheme in a single transaction by specifying the MOVE TO option. The MOVE TO option has the following restrictions:
+When you delete a constraint that created a clustered index, the data rows that were stored in the leaf level of the clustered index are stored in a nonclustered table. You can drop the clustered index and move the resulting table to another filegroup or partition scheme in a single transaction by specifying the `MOVE TO` option. The `MOVE TO` option has the following restrictions:
 
-- MOVE TO isn't valid for indexed views or nonclustered indexes.
+- `MOVE TO` isn't valid for indexed views or nonclustered indexes.
+
 - The partition scheme or filegroup must already exist.
-- If MOVE TO isn't specified, the table is located in the same partition scheme or filegroup as was defined for the clustered index.
 
-When you drop a clustered index, specify the `ONLINE **=** ON` option so the DROP INDEX transaction doesn't block queries and modifications to the underlying data and associated nonclustered indexes.
+- If `MOVE TO` isn't specified, the table is located in the same partition scheme or filegroup as was defined for the clustered index.
 
-ONLINE **=** ON has the following restrictions:
+When you drop a clustered index, specify the `ONLINE = ON` option so the `DROP INDEX` transaction doesn't block queries and modifications to the underlying data and associated nonclustered indexes.
 
-- ONLINE **=** ON isn't valid for clustered indexes that are also disabled. Disabled indexes must be dropped by using ONLINE **=** OFF.
+`ONLINE = ON` has the following restrictions:
+
+- `ONLINE = ON` isn't valid for clustered indexes that are also disabled. Disabled indexes must be dropped by using `ONLINE = OFF`.
 - Only one index at a time can be dropped.
-- ONLINE **=** ON isn't valid for indexed views, nonclustered indexes, or indexes on local temp tables.
-- ONLINE **=** ON isn't valid for columnstore indexes.
+- `ONLINE = ON` isn't valid for indexed views, nonclustered indexes, or indexes on local temp tables.
+- `ONLINE = ON` isn't valid for columnstore indexes.
 
 Temporary disk space equal to the size of the existing clustered index is required to drop a clustered index. This additional space is released as soon as the operation is completed.
 
 > [!NOTE]  
-> The options listed under *\<drop_clustered_constraint_option>* apply to clustered indexes on tables and can't be applied to clustered indexes on views or nonclustered indexes.
+> The options listed under `<drop_clustered_constraint_option>` apply to clustered indexes on tables and can't be applied to clustered indexes on views or nonclustered indexes.
 
 ## Replicate schema changes
 
-When you run ALTER TABLE on a published table at a [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Publisher, by default, that change propagates to all [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Subscribers. This functionality has some restrictions. You can disable it. For more information, see [Make Schema Changes on Publication Databases](../../relational-databases/replication/publish/make-schema-changes-on-publication-databases.md).
+When you run `ALTER TABLE` on a published table at a [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Publisher, by default, that change propagates to all [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Subscribers. This functionality has some restrictions. You can disable it. For more information, see [Make Schema Changes on Publication Databases](../../relational-databases/replication/publish/make-schema-changes-on-publication-databases.md).
 
 ## Data compression
 
-System tables can't be enabled for compression. If the table is a heap, the rebuild operation for ONLINE mode will be single threaded. Use OFFLINE mode for a multi-threaded heap rebuild operation. For a more information about data compression, see [Data Compression](../../relational-databases/data-compression/data-compression.md).
+System tables can't be enabled for compression. If the table is a heap, the rebuild operation for `ONLINE` mode is single threaded. Use `OFFLINE` mode for a multi-threaded heap rebuild operation. For more information about data compression, see [Data compression](../../relational-databases/data-compression/data-compression.md).
 
-To evaluate how changing the compression state will affect a table, an index, or a partition, use the [sp_estimate_data_compression_savings](../../relational-databases/system-stored-procedures/sp-estimate-data-compression-savings-transact-sql.md) system stored procedure.
+To evaluate how changing the compression state affects a table, an index, or a partition, use the [sp_estimate_data_compression_savings](../../relational-databases/system-stored-procedures/sp-estimate-data-compression-savings-transact-sql.md) system stored procedure.
 
 The following restrictions apply to partitioned tables:
 
@@ -1251,17 +1291,17 @@ The following restrictions apply to partitioned tables:
 - The `ALTER TABLE <table> REBUILD PARTITION` ... syntax rebuilds the specified partition.
 - The `ALTER TABLE <table> REBUILD WITH` ... syntax rebuilds all partitions.
 
-## Drop NTEXT columns
+## Drop ntext columns
 
-When dropping columns using the deprecated [NTEXT data type](../data-types/ntext-text-and-image-transact-sql.md), the cleanup of the deleted data occurs as a serialized operation on all rows. The cleanup can require a large amount of time. When dropping an NTEXT column in a table with lots of rows, update the NTEXT column to NULL value first, then drop the column. You can run this option with parallel operations and make it much faster.
+When dropping columns using the deprecated **[ntext](../data-types/ntext-text-and-image-transact-sql.md)** data type, the cleanup of the deleted data occurs as a serialized operation on all rows. The cleanup can require a large amount of time. When dropping an **ntext** column in a table with lots of rows, update the **ntext** column to `NULL` value first, then drop the column. You can run this option with parallel operations and make it much faster.
 
-## Online index REBUILD
+## Online index rebuild
 
-To run the DDL statement for an online index rebuild, all active blocking transactions running on a particular table must be completed. When the online index rebuild launches, it blocks all new transactions that are ready to start running on this table. Although the duration of the lock for online index rebuild is short, waiting for all open transactions on a given table to complete and blocking the new transactions to start, might significantly affect the throughput. This can cause a workload slow-down or timeout and significantly limit access to the underlying table. The **WAIT_AT_LOW_PRIORITY** option allows DBAs to manage the S-lock and Sch-M locks required for online index rebuilds. In all three cases: NONE, SELF, and BLOCKERS, if during the wait time ( `(MAX_DURATION =n [minutes])` ) there are no blocking activities, the online index rebuild is run immediately without waiting and the DDL statement is completed.
+To run the DDL statement for an online index rebuild, all active blocking transactions running on a particular table must be completed. When the online index rebuild launches, it blocks all new transactions that are ready to start running on this table. Although the duration of the lock for online index rebuild is short, waiting for all open transactions on a given table to complete and blocking the new transactions to start, might significantly affect the throughput. This can cause a workload slow-down or timeout and significantly limit access to the underlying table. The `WAIT_AT_LOW_PRIORITY` option allows DBAs to manage the S-lock and Sch-M locks required for online index rebuilds. In all three cases: `NONE`, `SELF`, and `BLOCKERS`, if during the wait time (`(MAX_DURATION = n [minutes])`) there are no blocking activities, the online index rebuild is run immediately without waiting and the DDL statement is completed.
 
 ## Compatibility support
 
-The ALTER TABLE statement supports only two-part (`schema.object`) table names. In [!INCLUDE[ssnoversion](../../includes/ssnoversion-md.md)], specifying a table name using the following formats fails at compile time with error 117.
+The `ALTER TABLE` statement supports only two-part (`schema.object`) table names. In [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)], specifying a table name using the following formats fails at compile time with error 117.
 
 - `server.database.schema.table`
 - `.database.schema.table`
@@ -1273,38 +1313,46 @@ To resolve the problem, remove the use of a four-part prefix.
 
 ## Permissions
 
-Requires ALTER permission on the table.
+Requires `ALTER` permission on the table.
 
-ALTER TABLE permissions apply to both tables involved in an ALTER TABLE SWITCH statement. Any data that's switched inherits the security of the target table.
+`ALTER TABLE` permissions apply to both tables involved in an `ALTER TABLE SWITCH` statement. Any data that's switched inherits the security of the target table.
 
-If you've defined any columns in the ALTER TABLE statement to be of a common language runtime (CLR) user-defined type or alias data type, REFERENCES permission on the type is required.
+If you defined any columns in the `ALTER TABLE` statement to be of a common language runtime (CLR) user-defined type or alias data type, `REFERENCES` permission on the type is required.
 
-Adding or altering a column that updates the rows of the table requires **UPDATE** permission on the table. For example, adding a **NOT NULL** column with a default value or adding an identity column when the table isn't empty.
+Adding or altering a column that updates the rows of the table requires `UPDATE` permission on the table. For example, adding a `NOT NULL` column with a default value or adding an identity column when the table isn't empty.
 
-## <a id="Example_Top"></a> Examples
+<a id="Example_Top"></a>
+
+## Examples
+
+[!INCLUDE [article-uses-adventureworks](../../includes/article-uses-adventureworks.md)]
 
 | Category | Featured syntax elements |
 | --- | --- |
-| [Adding columns and constraints](#add) | ADD * PRIMARY KEY with index options * sparse columns and column sets * |
-| [Dropping columns and constraints](#Drop) | DROP |
-| [Altering a column definition](#alter_column) | change data type * change column size * collation |
-| [Altering a table definition](#alter_table) | DATA_COMPRESSION * SWITCH PARTITION * LOCK ESCALATION * change tracking |
-| [Disabling and enabling constraints and triggers](#disable_enable) | CHECK * NO CHECK * ENABLE TRIGGER * DISABLE TRIGGER |
-| [Online operations](#online) | ONLINE |
-| [System versioning](#system_versioning) | SYSTEM_VERSIONING |
+| [Adding columns and constraints](#add) | `ADD`; `PRIMARY KEY` with index options, sparse columns and column sets |
+| [Dropping columns and constraints](#Drop) | `DROP` |
+| [Altering a column definition](#alter_column) | change data type; change column size; collation |
+| [Altering a table definition](#alter_table) | `DATA_COMPRESSION`; `SWITCH PARTITION`; `LOCK ESCALATION`; change tracking |
+| [Disabling and enabling constraints and triggers](#disable_enable) | `CHECK`; `NO CHECK`; `ENABLE TRIGGER`; `DISABLE TRIGGER` |
+| [Online operations](#online) | `ONLINE` |
+| [System versioning](#system_versioning) | `SYSTEM_VERSIONING` |
 
-### <a id="add"></a> Add columns and constraints
+<a id="add"></a>
+
+### Add columns and constraints
 
 Examples in this section demonstrate adding columns and constraints to a table.
 
 #### A. Add a new column
 
-The following example adds a column that allows null values and has no values provided through a DEFAULT definition. In the new column, each row will have `NULL`.
+The following example adds a column that allows null values and has no values provided through a `DEFAULT` definition. In the new column, each row has `NULL`.
 
 ```sql
-CREATE TABLE dbo.doc_exa (column_a INT) ;
+CREATE TABLE dbo.doc_exa (column_a INT);
 GO
-ALTER TABLE dbo.doc_exa ADD column_b VARCHAR(20) NULL ;
+
+ALTER TABLE dbo.doc_exa
+    ADD column_b VARCHAR (20) NULL;
 GO
 ```
 
@@ -1313,14 +1361,18 @@ GO
 The following example adds a new column with a `UNIQUE` constraint.
 
 ```sql
-CREATE TABLE dbo.doc_exc (column_a INT) ;
+CREATE TABLE dbo.doc_exc (column_a INT);
 GO
-ALTER TABLE dbo.doc_exc ADD column_b VARCHAR(20) NULL
-    CONSTRAINT exb_unique UNIQUE ;
+
+ALTER TABLE dbo.doc_exc
+    ADD column_b VARCHAR (20) NULL
+        CONSTRAINT exb_unique UNIQUE;
 GO
-EXEC sp_help doc_exc ;
+
+EXECUTE sp_help doc_exc;
 GO
-DROP TABLE dbo.doc_exc ;
+
+DROP TABLE dbo.doc_exc;
 GO
 ```
 
@@ -1329,37 +1381,50 @@ GO
 The following example adds a constraint to an existing column in the table. The column has a value that violates the constraint. Therefore, `WITH NOCHECK` is used to prevent the constraint from being validated against existing rows, and to allow for the constraint to be added.
 
 ```sql
-CREATE TABLE dbo.doc_exd (column_a INT) ;
+CREATE TABLE dbo.doc_exd (column_a INT);
 GO
-INSERT INTO dbo.doc_exd VALUES (-1) ;
+
+INSERT INTO dbo.doc_exd VALUES (-1);
 GO
+
 ALTER TABLE dbo.doc_exd WITH NOCHECK
-ADD CONSTRAINT exd_check CHECK (column_a > 1) ;
+    ADD CONSTRAINT exd_check CHECK (column_a > 1);
 GO
-EXEC sp_help doc_exd ;
+
+EXECUTE sp_help doc_exd;
 GO
-DROP TABLE dbo.doc_exd ;
+
+DROP TABLE dbo.doc_exd;
 GO
 ```
 
 #### D. Add a DEFAULT constraint to an existing column
 
-The following example creates a table with two columns and inserts a value into the first column, and the other column remains NULL. A `DEFAULT` constraint is then added to the second column. To verify that the default is applied, another value is inserted into the first column, and the table is queried.
+The following example creates a table with two columns and inserts a value into the first column, and the other column remains `NULL`. A `DEFAULT` constraint is then added to the second column. To verify that the default is applied, another value is inserted into the first column, and the table is queried.
 
 ```sql
-CREATE TABLE dbo.doc_exz (column_a INT, column_b INT) ;
+CREATE TABLE dbo.doc_exz
+(
+    column_a INT,
+    column_b INT
+);
 GO
-INSERT INTO dbo.doc_exz (column_a) VALUES (7) ;
+
+INSERT INTO dbo.doc_exz (column_a) VALUES (7);
 GO
+
 ALTER TABLE dbo.doc_exz
-  ADD CONSTRAINT col_b_def
-  DEFAULT 50 FOR column_b ;
+    ADD CONSTRAINT col_b_def
+        DEFAULT 50 FOR column_b;
 GO
-INSERT INTO dbo.doc_exz (column_a) VALUES (10) ;
+
+INSERT INTO dbo.doc_exz (column_a) VALUES (10);
 GO
-SELECT * FROM dbo.doc_exz ;
+
+SELECT * FROM dbo.doc_exz;
 GO
-DROP TABLE dbo.doc_exz ;
+
+DROP TABLE dbo.doc_exz;
 GO
 ```
 
@@ -1368,80 +1433,86 @@ GO
 The following example adds several columns with constraints defined with the new column. The first new column has an `IDENTITY` property. Each row in the table has new incremental values in the identity column.
 
 ```sql
-CREATE TABLE dbo.doc_exe (column_a INT CONSTRAINT column_a_un UNIQUE) ;
+CREATE TABLE dbo.doc_exe
+(
+    column_a INT
+        CONSTRAINT column_a_un UNIQUE
+);
 GO
-ALTER TABLE dbo.doc_exe ADD
 
--- Add a PRIMARY KEY identity column.
-column_b INT IDENTITY
-CONSTRAINT column_b_pk PRIMARY KEY,
+ALTER TABLE dbo.doc_exe
 
--- Add a column that references another column in the same table.
-column_c INT NULL
-CONSTRAINT column_c_fk
-REFERENCES doc_exe(column_a),
+    -- Add a PRIMARY KEY identity column.
+    ADD column_b INT IDENTITY
+        CONSTRAINT column_b_pk PRIMARY KEY,
 
--- Add a column with a constraint to enforce that
--- nonnull data is in a valid telephone number format.
-column_d VARCHAR(16) NULL
-CONSTRAINT column_d_chk
-CHECK
-(column_d LIKE '[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]' OR
-column_d LIKE
-'([0-9][0-9][0-9]) [0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]'),
+    -- Add a column that references another column in the same table.
+        column_c INT NULL
+            CONSTRAINT column_c_fk FOREIGN KEY REFERENCES doc_exe (column_a),
 
--- Add a nonnull column with a default.
-column_e DECIMAL(3,3)
-CONSTRAINT column_e_default
-DEFAULT .081 ;
+    -- Add a column with a constraint to enforce that
+    -- nonnull data is in a valid telephone number format.
+        column_d VARCHAR (16) NULL
+            CONSTRAINT column_d_chk CHECK (column_d LIKE '[0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]'
+                                       OR column_d LIKE '([0-9][0-9][0-9]) [0-9][0-9][0-9]-[0-9][0-9][0-9][0-9]'),
+
+    -- Add a nonnull column with a default.
+        column_e DECIMAL (3, 3)
+            CONSTRAINT column_e_default DEFAULT .081;
 GO
-EXEC sp_help doc_exe ;
+
+EXECUTE sp_help doc_exe;
 GO
-DROP TABLE dbo.doc_exe ;
+
+DROP TABLE dbo.doc_exe;
 GO
 ```
 
 #### F. Add a nullable column with default values
 
-The following example adds a nullable column with a `DEFAULT` definition, and uses `WITH VALUES` to provide values for each existing row in the table. If WITH VALUES isn't used, each row has the value NULL in the new column.
+The following example adds a nullable column with a `DEFAULT` definition, and uses `WITH VALUES` to provide values for each existing row in the table. If `WITH VALUES` isn't used, each row has the value `NULL` in the new column.
 
 ```sql
-CREATE TABLE dbo.doc_exf (column_a INT) ;
+CREATE TABLE dbo.doc_exf (column_a INT);
 GO
-INSERT INTO dbo.doc_exf VALUES (1) ;
+
+INSERT INTO dbo.doc_exf VALUES (1);
 GO
+
 ALTER TABLE dbo.doc_exf
-ADD AddDate smalldatetime NULL
-CONSTRAINT AddDateDflt
-DEFAULT GETDATE() WITH VALUES ;
+    ADD AddDate SMALLDATETIME
+        CONSTRAINT AddDateDflt DEFAULT GETDATE() WITH VALUES NULL;
 GO
-DROP TABLE dbo.doc_exf ;
+
+DROP TABLE dbo.doc_exf;
 GO
 ```
 
 #### G. Create a PRIMARY KEY constraint with index or data compression options
 
-The following example creates the PRIMARY KEY constraint `PK_TransactionHistoryArchive_TransactionID` and sets the options `FILLFACTOR`, `ONLINE`, and `PAD_INDEX`. The resulting clustered index will have the same name as the constraint.
+The following example creates the `PRIMARY KEY` constraint `PK_TransactionHistoryArchive_TransactionID` and sets the options `FILLFACTOR`, `ONLINE`, and `PAD_INDEX`. The resulting clustered index has the same name as the constraint.
 
-**Applies to**: [!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
 ```sql
-USE AdventureWorks;
+USE AdventureWorks2022;
 GO
+
 ALTER TABLE Production.TransactionHistoryArchive WITH NOCHECK
-ADD CONSTRAINT PK_TransactionHistoryArchive_TransactionID PRIMARY KEY CLUSTERED (TransactionID)
-WITH (FILLFACTOR = 75, ONLINE = ON, PAD_INDEX = ON);
+    ADD CONSTRAINT PK_TransactionHistoryArchive_TransactionID
+        PRIMARY KEY CLUSTERED (TransactionID) WITH (FILLFACTOR = 75, ONLINE = ON, PAD_INDEX = ON);
 GO
 ```
 
 This similar example applies page compression while applying the clustered primary key.
 
 ```sql
-USE AdventureWorks;
+USE AdventureWorks2022;
 GO
+
 ALTER TABLE Production.TransactionHistoryArchive WITH NOCHECK
-ADD CONSTRAINT PK_TransactionHistoryArchive_TransactionID PRIMARY KEY CLUSTERED (TransactionID)
-WITH (DATA_COMPRESSION = PAGE);
+    ADD CONSTRAINT PK_TransactionHistoryArchive_TransactionID
+        PRIMARY KEY CLUSTERED (TransactionID) WITH (DATA_COMPRESSION = PAGE);
 GO
 ```
 
@@ -1450,11 +1521,13 @@ GO
 The following examples show adding and modifying sparse columns in table T1. The code to create table `T1` is as follows.
 
 ```sql
-CREATE TABLE T1 (
-  C1 INT PRIMARY KEY,
-  C2 VARCHAR(50) SPARSE NULL,
-  C3 INT SPARSE NULL,
-  C4 INT) ;
+CREATE TABLE T1
+(
+    C1 INT PRIMARY KEY,
+    C2 VARCHAR (50) SPARSE NULL,
+    C3 INT SPARSE NULL,
+    C4 INT
+);
 GO
 ```
 
@@ -1462,7 +1535,7 @@ To add an additional sparse column `C5`, execute the following statement.
 
 ```sql
 ALTER TABLE T1
-ADD C5 CHAR(100) SPARSE NULL ;
+    ADD C5 CHAR (100) SPARSE NULL;
 GO
 ```
 
@@ -1470,7 +1543,7 @@ To convert the `C4` non-sparse column to a sparse column, execute the following 
 
 ```sql
 ALTER TABLE T1
-ALTER COLUMN C4 ADD SPARSE ;
+    ALTER COLUMN C4 ADD SPARSE;
 GO
 ```
 
@@ -1478,7 +1551,7 @@ To convert the `C4` sparse column to a nonsparse column, execute the following s
 
 ```sql
 ALTER TABLE T1
-ALTER COLUMN C4 DROP SPARSE ;
+    ALTER COLUMN C4 DROP SPARSE;
 GO
 ```
 
@@ -1487,11 +1560,13 @@ GO
 The following examples show adding a column to table `T2`. A column set can't be added to a table that already contains sparse columns. The code to create table `T2` is as follows.
 
 ```sql
-CREATE TABLE T2 (
-  C1 INT PRIMARY KEY,
-  C2 VARCHAR(50) NULL,
-  C3 INT NULL,
-  C4 INT) ;
+CREATE TABLE T2
+(
+    C1 INT PRIMARY KEY,
+    C2 VARCHAR (50) NULL,
+    C3 INT NULL,
+    C4 INT
+);
 GO
 ```
 
@@ -1499,15 +1574,15 @@ The following three statements add a column set named `CS`, and then modify colu
 
 ```sql
 ALTER TABLE T2
-ADD CS XML COLUMN_SET FOR ALL_SPARSE_COLUMNS ;
+    ADD CS XML COLUMN_SET FOR ALL_SPARSE_COLUMNS;
 GO
 
 ALTER TABLE T2
-ALTER COLUMN C2 ADD SPARSE ;
+    ALTER COLUMN C2 ADD SPARSE;
 GO
 
 ALTER TABLE T2
-ALTER COLUMN C3 ADD SPARSE ;
+    ALTER COLUMN C3 ADD SPARSE;
 GO
 ```
 
@@ -1516,11 +1591,13 @@ GO
 The following statement adds an encrypted column named `PromotionCode`.
 
 ```sql
-ALTER TABLE Customers ADD
-    PromotionCode nvarchar(100)
-    ENCRYPTED WITH (COLUMN_ENCRYPTION_KEY = MyCEK,
-    ENCRYPTION_TYPE = RANDOMIZED,
-    ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256') ;
+ALTER TABLE Customers
+    ADD PromotionCode NVARCHAR (100)
+        ENCRYPTED WITH (
+            COLUMN_ENCRYPTION_KEY = MyCEK,
+            ENCRYPTION_TYPE = RANDOMIZED,
+            ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
+        );
 ```
 
 #### K. Add a primary key with resumable operation
@@ -1533,7 +1610,9 @@ ADD CONSTRAINT PK_Constrain PRIMARY KEY CLUSTERED (a)
 WITH (ONLINE = ON, MAXDOP = 2, RESUMABLE = ON, MAX_DURATION = 240);
 ```
 
-### <a id="Drop"></a> Drop columns and constraints
+<a id="Drop"></a>
+
+### Drop columns and constraints
 
 The examples in this section demonstrate dropping columns and constraints.
 
@@ -1542,15 +1621,19 @@ The examples in this section demonstrate dropping columns and constraints.
 The first example modifies a table to remove a column. The second example removes multiple columns.
 
 ```sql
-CREATE TABLE dbo.doc_exb (
-     column_a INT,
-     column_b VARCHAR(20) NULL,
-     column_c DATETIME,
-     column_d INT) ;
+CREATE TABLE dbo.doc_exb
+(
+    column_a INT,
+    column_b VARCHAR (20) NULL,
+    column_c DATETIME,
+    column_d INT
+);
 GO
+
 -- Remove a single column.
-ALTER TABLE dbo.doc_exb DROP COLUMN column_b ;
+ALTER TABLE dbo.doc_exb DROP COLUMN column_b;
 GO
+
 -- Remove multiple columns.
 ALTER TABLE dbo.doc_exb DROP COLUMN column_c, column_d;
 ```
@@ -1560,37 +1643,44 @@ ALTER TABLE dbo.doc_exb DROP COLUMN column_c, column_d;
 The first example removes a `UNIQUE` constraint from a table. The second example removes two constraints and a single column.
 
 ```sql
-CREATE TABLE dbo.doc_exc (column_a INT NOT NULL CONSTRAINT my_constraint UNIQUE) ;
+CREATE TABLE dbo.doc_exc
+(
+    column_a INT NOT NULL
+        CONSTRAINT my_constraint UNIQUE
+);
 GO
 
 -- Example 1. Remove a single constraint.
-ALTER TABLE dbo.doc_exc DROP my_constraint ;
+ALTER TABLE dbo.doc_exc DROP my_constraint;
 GO
 
 DROP TABLE dbo.doc_exc;
 GO
 
-CREATE TABLE dbo.doc_exc ( column_a INT
-                          NOT NULL CONSTRAINT my_constraint UNIQUE
-                          ,column_b INT
-                          NOT NULL CONSTRAINT my_pk_constraint PRIMARY KEY) ;
+CREATE TABLE dbo.doc_exc
+(
+    column_a INT NOT NULL
+        CONSTRAINT my_constraint UNIQUE,
+    column_b INT NOT NULL
+        CONSTRAINT my_pk_constraint PRIMARY KEY
+);
 GO
 
 -- Example 2. Remove two constraints and one column
 -- The keyword CONSTRAINT is optional. The keyword COLUMN is required.
 ALTER TABLE dbo.doc_exc
-DROP CONSTRAINT my_constraint, my_pk_constraint, COLUMN column_b ;
+    DROP CONSTRAINT my_constraint, my_pk_constraint, COLUMN column_b;
 GO
 ```
 
 #### C. Drop a PRIMARY KEY constraint in the ONLINE mode
 
-The following example deletes a PRIMARY KEY constraint with the `ONLINE` option set to `ON`.
+The following example deletes a `PRIMARY KEY` constraint with the `ONLINE` option set to `ON`.
 
 ```sql
 ALTER TABLE Production.TransactionHistoryArchive
-DROP CONSTRAINT PK_TransactionHistoryArchive_TransactionID
-WITH (ONLINE = ON) ;
+    DROP CONSTRAINT PK_TransactionHistoryArchive_TransactionID
+    WITH (ONLINE = ON);
 GO
 ```
 
@@ -1599,65 +1689,89 @@ GO
 The following example creates the table `ContactBackup`, and then alters the table, first by adding a `FOREIGN KEY` constraint that references the table `Person.Person`, then by dropping the `FOREIGN KEY` constraint.
 
 ```sql
-CREATE TABLE Person.ContactBackup
-    (ContactID INT) ;
+CREATE TABLE Person.ContactBackup (ContactID INT);
 GO
 
 ALTER TABLE Person.ContactBackup
-ADD CONSTRAINT FK_ContactBackup_Contact FOREIGN KEY (ContactID)
-    REFERENCES Person.Person (BusinessEntityID) ;
+    ADD CONSTRAINT FK_ContactBackup_Contact
+        FOREIGN KEY (ContactID) REFERENCES Person.Person (BusinessEntityID);
 GO
 
 ALTER TABLE Person.ContactBackup
-DROP CONSTRAINT FK_ContactBackup_Contact ;
+    DROP CONSTRAINT FK_ContactBackup_Contact;
 GO
 
-DROP TABLE Person.ContactBackup ;
+DROP TABLE Person.ContactBackup;
 ```
 
-### <a id="alter_column"></a> Alter a column definition
+<a id="alter_column"></a>
+
+### Alter a column definition
 
 #### A. Change the data type of a column
 
 The following example changes a column of a table from `INT` to `DECIMAL`.
 
 ```sql
-CREATE TABLE dbo.doc_exy (column_a INT) ;
+CREATE TABLE dbo.doc_exy (column_a INT);
 GO
-INSERT INTO dbo.doc_exy (column_a) VALUES (10) ;
+
+INSERT INTO dbo.doc_exy (column_a) VALUES (10);
 GO
-ALTER TABLE dbo.doc_exy ALTER COLUMN column_a DECIMAL (5, 2) ;
+
+ALTER TABLE dbo.doc_exy ALTER COLUMN column_a DECIMAL (5, 2);
 GO
-DROP TABLE dbo.doc_exy ;
+
+DROP TABLE dbo.doc_exy;
 GO
 ```
 
 #### B. Change the size of a column
 
-The following example increases the size of a **varchar** column and the precision and scale of a **decimal** column. Because the columns contain data, the column size can only be increased. Also notice that `col_a` is defined in a unique index. The size of `col_a` can still be increased because the data type is a **varchar** and the index isn't the result of a PRIMARY KEY constraint.
+The following example increases the size of a **varchar** column and the precision and scale of a **decimal** column. Because the columns contain data, the column size can only be increased. Also notice that `col_a` is defined in a unique index. The size of `col_a` can still be increased because the data type is a **varchar** and the index isn't the result of a `PRIMARY KEY` constraint.
 
 ```sql
 -- Create a two-column table with a unique index on the varchar column.
-CREATE TABLE dbo.doc_exy (col_a varchar(5) UNIQUE NOT NULL, col_b decimal (4,2)) ;
+CREATE TABLE dbo.doc_exy
+(
+    col_a VARCHAR (5) UNIQUE NOT NULL,
+    col_b DECIMAL (4, 2)
+);
 GO
-INSERT INTO dbo.doc_exy VALUES ('Test', 99.99) ;
+
+INSERT INTO dbo.doc_exy VALUES ('Test', 99.99);
 GO
+
 -- Verify the current column size.
-SELECT name, TYPE_NAME(system_type_id), max_length, precision, scale
-FROM sys.columns WHERE object_id = OBJECT_ID(N'dbo.doc_exy') ;
+SELECT name,
+       TYPE_NAME(system_type_id),
+       max_length,
+       precision,
+       scale
+FROM sys.columns
+WHERE object_id = OBJECT_ID(N'dbo.doc_exy');
 GO
+
 -- Increase the size of the varchar column.
-ALTER TABLE dbo.doc_exy ALTER COLUMN col_a varchar(25) ;
+ALTER TABLE dbo.doc_exy ALTER COLUMN col_a VARCHAR (25);
 GO
+
 -- Increase the scale and precision of the decimal column.
-ALTER TABLE dbo.doc_exy ALTER COLUMN col_b decimal (10,4) ;
+ALTER TABLE dbo.doc_exy ALTER COLUMN col_b DECIMAL (10, 4);
 GO
+
 -- Insert a new row.
-INSERT INTO dbo.doc_exy VALUES ('MyNewColumnSize', 99999.9999) ;
+INSERT INTO dbo.doc_exy VALUES ('MyNewColumnSize', 99999.9999);
 GO
+
 -- Verify the current column size.
-SELECT name, TYPE_NAME(system_type_id), max_length, precision, scale
-FROM sys.columns WHERE object_id = OBJECT_ID(N'dbo.doc_exy') ;
+SELECT name,
+       TYPE_NAME(system_type_id),
+       max_length,
+       precision,
+       scale
+FROM sys.columns
+WHERE object_id = OBJECT_ID(N'dbo.doc_exy');
 ```
 
 #### C. Change column collation
@@ -1665,11 +1779,13 @@ FROM sys.columns WHERE object_id = OBJECT_ID(N'dbo.doc_exy') ;
 The following example shows how to change the collation of a column. First, a table is created table with the default user collation.
 
 ```sql
-CREATE TABLE T3 (
-  C1 INT PRIMARY KEY,
-  C2 VARCHAR(50) NULL,
-  C3 INT NULL,
-  C4 INT) ;
+CREATE TABLE T3
+(
+    C1 INT PRIMARY KEY,
+    C2 VARCHAR (50) NULL,
+    C3 INT NULL,
+    C4 INT
+);
 GO
 ```
 
@@ -1677,7 +1793,7 @@ Next, column `C2` collation is changed to Latin1_General_BIN. The data type is r
 
 ```sql
 ALTER TABLE T3
-ALTER COLUMN C2 varchar(50) COLLATE Latin1_General_BIN ;
+    ALTER COLUMN C2 VARCHAR (50) COLLATE Latin1_General_BIN;
 GO
 ```
 
@@ -1688,82 +1804,87 @@ The following example shows how to encrypt a column using [Always Encrypted with
 First, a table is created without any encrypted columns.
 
 ```sql
-CREATE TABLE T3 (
-  C1 INT PRIMARY KEY,
-  C2 VARCHAR(50) NULL,
-  C3 INT NULL,
-  C4 INT) ;
+CREATE TABLE T3
+(
+    C1 INT PRIMARY KEY,
+    C2 VARCHAR (50) NULL,
+    C3 INT NULL,
+    C4 INT
+);
 GO
 ```
 
 Next, column 'C2' is encrypted with a column encryption key, named `CEK1`, and randomized encryption. For the following statement to succeed:
 
-- The column encryption key must be enclave-enabled. Meaning, it must be encrypted with a column master key that allows enclave computations.
+- The column encryption key must be enclave-enabled. Meaning, it must be encrypted with a column master key (CMK) that allows enclave computations.
 - The target SQL Server instance must support Always Encrypted with secure enclaves.
 - The statement must be issued over a connection set up for Always Encrypted with secure enclaves, and using a supported client driver.
-- The calling application must have access to the column master key, protecting `CEK1`.
+- The calling application must have access to the CMK, protecting `CEK1`.
 
 ```sql
-ALTER TABLE T3
-ALTER COLUMN C2 VARCHAR(50) ENCRYPTED
-WITH (COLUMN_ENCRYPTION_KEY = [CEK1], ENCRYPTION_TYPE = Randomized, ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256') NULL;
+ALTER TABLE T3 ALTER COLUMN C2 VARCHAR (50)  ENCRYPTED WITH (
+     COLUMN_ENCRYPTION_KEY = [CEK1],
+     ENCRYPTION_TYPE = RANDOMIZED,
+     ALGORITHM = 'AEAD_AES_256_CBC_HMAC_SHA_256'
+    ) NULL;
 GO
 ```
 
-### <a id="alter_table"></a> Alter a table definition
+<a id="alter_table"></a>
+
+### Alter a table definition
 
 The examples in this section demonstrate how to alter the definition of a table.
 
 #### A. Modify a table to change the compression
 
-The following example changes the compression of a nonpartitioned table. The heap or clustered index will be rebuilt. If the table is a heap, all nonclustered indexes will be rebuilt.
+The following example changes the compression of a nonpartitioned table. The heap or clustered index is rebuilt. If the table is a heap, all nonclustered indexes are rebuilt.
 
 ```sql
-ALTER TABLE T1
-REBUILD WITH (DATA_COMPRESSION = PAGE) ;
+ALTER TABLE T1 REBUILD
+    WITH (DATA_COMPRESSION = PAGE);
 ```
 
 The following example changes the compression of a partitioned table. The `REBUILD PARTITION = 1` syntax causes only partition number `1` to be rebuilt.
 
-**Applies to**: [!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)].
 
 ```sql
-ALTER TABLE PartitionTable1
-REBUILD PARTITION = 1 WITH (DATA_COMPRESSION =NONE) ;
+ALTER TABLE PartitionTable1 REBUILD PARTITION = 1
+    WITH (DATA_COMPRESSION = NONE);
 GO
 ```
 
 The same operation using the following alternate syntax causes all partitions in the table to be rebuilt.
 
-**Applies to**: [!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)].
 
 ```sql
-ALTER TABLE PartitionTable1
-REBUILD PARTITION = ALL
-WITH (DATA_COMPRESSION = PAGE ON PARTITIONS(1)) ;
+ALTER TABLE PartitionTable1 REBUILD PARTITION = ALL
+    WITH (DATA_COMPRESSION = PAGE ON PARTITIONS (1));
 ```
 
-For additional data compression examples, see [Data Compression](../../relational-databases/data-compression/data-compression.md).
+For additional data compression examples, see [Data compression](../../relational-databases/data-compression/data-compression.md).
 
 #### B. Modify a columnstore table to change archival compression
 
 The following example further compresses a columnstore table partition by applying an additional compression algorithm. This compression reduces the table to a smaller size, but also increases the time required for storage and retrieval. This is useful for archiving or for situations that require less space and can afford more time for storage and retrieval.
 
-**Applies to**: [!INCLUDE[ssSQL14](../../includes/sssql14-md.md)] and later and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)] and later versions, and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
 ```sql
-ALTER TABLE PartitionTable1
-REBUILD PARTITION = 1 WITH (DATA_COMPRESSION = COLUMNSTORE_ARCHIVE) ;
+ALTER TABLE PartitionTable1 REBUILD PARTITION = 1
+    WITH (DATA_COMPRESSION = COLUMNSTORE_ARCHIVE);
 GO
 ```
 
-The following example decompresses a columnstore table partition that was compressed with COLUMNSTORE_ARCHIVE option. When the data is restored, it will continue to be compressed with the columnstore compression that's used for all columnstore tables.
+The following example decompresses a columnstore table partition that was compressed with `COLUMNSTORE_ARCHIVE` option. When the data is restored, it continues to be compressed with the columnstore compression that's used for all columnstore tables.
 
-**Applies to**: [!INCLUDE[ssSQL14](../../includes/sssql14-md.md)] and later and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)] and later versions, and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
 ```sql
-ALTER TABLE PartitionTable1
-REBUILD PARTITION = 1 WITH (DATA_COMPRESSION = COLUMNSTORE) ;
+ALTER TABLE PartitionTable1 REBUILD PARTITION = 1
+    WITH (DATA_COMPRESSION = COLUMNSTORE);
 GO
 ```
 
@@ -1772,24 +1893,32 @@ GO
 The following example creates a partitioned table, assuming that partition scheme `myRangePS1` is already created in the database. Next, a non-partitioned table is created with the same structure as the partitioned table and on the same filegroup as `PARTITION 2` of table `PartitionTable`. The data of `PARTITION 2` of table `PartitionTable` is then switched into table `NonPartitionTable`.
 
 ```sql
-CREATE TABLE PartitionTable (col1 INT, col2 CHAR(10))
-ON myRangePS1 (col1) ;
+CREATE TABLE PartitionTable
+(
+    col1 INT,
+    col2 CHAR (10)
+) ON myRangePS1 (col1);
 GO
-CREATE TABLE NonPartitionTable (col1 INT, col2 CHAR(10))
-ON test2fg ;
+
+CREATE TABLE NonPartitionTable
+(
+    col1 INT,
+    col2 CHAR (10)
+) ON test2fg;
 GO
-ALTER TABLE PartitionTable SWITCH PARTITION 2 TO NonPartitionTable ;
+
+ALTER TABLE PartitionTable SWITCH PARTITION 2 TO NonPartitionTable;
 GO
 ```
 
 #### D. Allow lock escalation on partitioned tables
 
-The following example enables lock escalation to the partition level on a partitioned table. If the table isn't partitioned, lock escalation is set at the TABLE level.
+The following example enables lock escalation to the partition level on a partitioned table. If the table isn't partitioned, lock escalation is set at the `TABLE` level.
 
-**Applies to**: [!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
 ```sql
-ALTER TABLE dbo.T1 SET (LOCK_ESCALATION = AUTO) ;
+ALTER TABLE dbo.T1 SET (LOCK_ESCALATION = AUTO);
 GO
 ```
 
@@ -1797,64 +1926,68 @@ GO
 
 The following example enables change tracking on the `Person.Person` table.
 
-**Applies to**: [!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
 ```sql
-USE AdventureWorks;
-ALTER TABLE Person.Person
-ENABLE CHANGE_TRACKING ;
+USE AdventureWorks2022;
+
+ALTER TABLE Person.Person ENABLE CHANGE_TRACKING;
 ```
 
 The following example enables change tracking and enables the tracking of the columns that are updated during a change.
 
-**Applies to**: [!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later.
+**Applies to**: [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)].
 
 ```sql
-USE AdventureWorks;
+USE AdventureWorks2022;
 GO
-ALTER TABLE Person.Person
-ENABLE CHANGE_TRACKING
-WITH (TRACK_COLUMNS_UPDATED = ON)
+
+ALTER TABLE Person.Person ENABLE CHANGE_TRACKING
+    WITH (TRACK_COLUMNS_UPDATED = ON);
 ```
 
 The following example disables change tracking on the `Person.Person` table.
 
-**Applies to**: [!INCLUDE[sql2008-md](../../includes/sql2008-md.md)] and later and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
 ```sql
-USE AdventureWorks;
+USE AdventureWorks2022;
 GO
-ALTER TABLE Person.Person
-DISABLE CHANGE_TRACKING ;
+
+ALTER TABLE Person.Person DISABLE CHANGE_TRACKING;
 ```
 
-### <a id="disable_enable"></a> Disable and enable constraints and triggers
+<a id="disable_enable"></a>
+
+### Disable and enable constraints and triggers
 
 #### A. Disable and re-enable a constraint
 
 The following example disables a constraint that limits the salaries accepted in the data. `NOCHECK CONSTRAINT` is used with `ALTER TABLE` to disable the constraint and allow for an insert that would typically violate the constraint. `CHECK CONSTRAINT` re-enables the constraint.
 
 ```sql
-CREATE TABLE dbo.cnst_example (
-  id INT NOT NULL,
-  name VARCHAR(10) NOT NULL,
-  salary MONEY NOT NULL
-  CONSTRAINT salary_cap CHECK (salary < 100000)) ;
+CREATE TABLE dbo.cnst_example
+(
+    id INT NOT NULL,
+    name VARCHAR (10) NOT NULL,
+    salary MONEY NOT NULL
+        CONSTRAINT salary_cap CHECK (salary < 100000)
+);
 
 -- Valid inserts
-INSERT INTO dbo.cnst_example VALUES (1,'Joe Brown',65000) ;
-INSERT INTO dbo.cnst_example VALUES (2,'Mary Smith',75000) ;
+INSERT INTO dbo.cnst_example VALUES (1, 'Joe Brown', 65000);
+INSERT INTO dbo.cnst_example VALUES (2, 'Mary Smith', 75000);
 
 -- This insert violates the constraint.
-INSERT INTO dbo.cnst_example VALUES (3,'Pat Jones',105000) ;
+INSERT INTO dbo.cnst_example VALUES (3, 'Pat Jones', 105000);
 
 -- Disable the constraint and try again.
 ALTER TABLE dbo.cnst_example NOCHECK CONSTRAINT salary_cap;
-INSERT INTO dbo.cnst_example VALUES (3,'Pat Jones',105000) ;
+INSERT INTO dbo.cnst_example VALUES (3, 'Pat Jones', 105000);
 
--- Re-enable the constraint and try another insert; this will fail.
+-- Re-enable the constraint and try another insert; this fails.
 ALTER TABLE dbo.cnst_example CHECK CONSTRAINT salary_cap;
-INSERT INTO dbo.cnst_example VALUES (4,'Eric James',110000) ;
+INSERT INTO dbo.cnst_example VALUES (4, 'Eric James', 110000);
 ```
 
 #### B. Disable and re-enable a trigger
@@ -1862,102 +1995,121 @@ INSERT INTO dbo.cnst_example VALUES (4,'Eric James',110000) ;
 The following example uses the `DISABLE TRIGGER` option of `ALTER TABLE` to disable the trigger and allow for an insert that would typically violate the trigger. `ENABLE TRIGGER` is then used to re-enable the trigger.
 
 ```sql
-CREATE TABLE dbo.trig_example (
-  id INT,
-  name VARCHAR(12),
-  salary MONEY) ;
+CREATE TABLE dbo.trig_example
+(
+    id INT,
+    name VARCHAR (12),
+    salary MONEY
+);
 GO
+
 -- Create the trigger.
-CREATE TRIGGER dbo.trig1 ON dbo.trig_example FOR INSERT
-AS
-IF (SELECT COUNT(*) FROM INSERTED
-WHERE salary > 100000) > 0
-BEGIN
-    print 'TRIG1 Error: you attempted to insert a salary > $100,000'
-    ROLLBACK TRANSACTION
-END ;
+CREATE TRIGGER dbo.trig1
+    ON dbo.trig_example
+    FOR INSERT
+    AS IF (SELECT COUNT(*)
+           FROM INSERTED
+           WHERE salary > 100000) > 0
+           BEGIN
+               PRINT 'TRIG1 Error: you attempted to insert a salary > $100,000';
+               ROLLBACK;
+           END
 GO
+
 -- Try an insert that violates the trigger.
-INSERT INTO dbo.trig_example VALUES (1,'Pat Smith',100001) ;
+INSERT INTO dbo.trig_example VALUES (1, 'Pat Smith', 100001);
 GO
+
 -- Disable the trigger.
-ALTER TABLE dbo.trig_example DISABLE TRIGGER trig1 ;
+ALTER TABLE dbo.trig_example DISABLE TRIGGER trig1;
 GO
+
 -- Try an insert that would typically violate the trigger.
-INSERT INTO dbo.trig_example VALUES (2,'Chuck Jones',100001) ;
+INSERT INTO dbo.trig_example VALUES (2, 'Chuck Jones', 100001);
 GO
+
 -- Re-enable the trigger.
-ALTER TABLE dbo.trig_example ENABLE TRIGGER trig1 ;
+ALTER TABLE dbo.trig_example ENABLE TRIGGER trig1;
 GO
+
 -- Try an insert that violates the trigger.
-INSERT INTO dbo.trig_example VALUES (3,'Mary Booth',100001) ;
+INSERT INTO dbo.trig_example VALUES (3, 'Mary Booth', 100001);
 GO
 ```
 
-### <a id="online"></a> Online operations
+<a id="online"></a>
+
+### Online operations
 
 #### A. Online index rebuild using low-priority wait options
 
 The following example shows how to perform an online index rebuild specifying the low-priority wait options.
 
-**Applies to**: [!INCLUDE[ssSQL14](../../includes/sssql14-md.md)] and later and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)] and later versions, and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
 ```sql
-ALTER TABLE T1
-REBUILD WITH
-(
+ALTER TABLE T1 REBUILD WITH (
     PAD_INDEX = ON,
-    ONLINE = ON ( WAIT_AT_LOW_PRIORITY ( MAX_DURATION = 4 MINUTES,
-                                         ABORT_AFTER_WAIT = BLOCKERS ) )
-) ;
+    ONLINE = ON (
+        WAIT_AT_LOW_PRIORITY (MAX_DURATION = 4 MINUTES, ABORT_AFTER_WAIT = BLOCKERS)
+    )
+);
 ```
 
 #### B. Online alter column
 
-The following example shows how to run an alter column operation with the ONLINE option.
+The following example shows how to run an alter column operation with the `ONLINE` option.
 
-**Applies to**: [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)] and later and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+**Applies to**: [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later versions, and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
 ```sql
-CREATE TABLE dbo.doc_exy (column_a INT) ;
+CREATE TABLE dbo.doc_exy (column_a INT);
 GO
-INSERT INTO dbo.doc_exy (column_a) VALUES (10) ;
+
+INSERT INTO dbo.doc_exy (column_a) VALUES (10);
 GO
+
 ALTER TABLE dbo.doc_exy
-    ALTER COLUMN column_a DECIMAL (5, 2) WITH (ONLINE = ON) ;
+    ALTER COLUMN column_a DECIMAL (5, 2) WITH (ONLINE = ON);
 GO
-sp_help doc_exy;
-DROP TABLE dbo.doc_exy ;
+
+EXECUTE sp_help doc_exy;
+DROP TABLE dbo.doc_exy;
 GO
 ```
 
-### <a id="system_versioning"></a> System versioning
+<a id="system_versioning"></a>
 
-The following four examples will help you become familiar with the syntax for using system versioning. For additional assistance, see [Getting Started with System-Versioned Temporal Tables](../../relational-databases/tables/getting-started-with-system-versioned-temporal-tables.md).
+### System versioning
 
-**Applies to**: [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)] and later and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+The following four examples help you become familiar with the syntax for using system versioning. For additional assistance, see [Get started with system-versioned temporal tables](../../relational-databases/tables/getting-started-with-system-versioned-temporal-tables.md).
+
+**Applies to**: [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later versions, and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
 
 #### A. Add system versioning to existing tables
 
-The following example shows how to add system versioning to an existing table and create a future history table. This example assumes that there's an existing table called `InsurancePolicy` with a primary key defined. This example populates the newly created period columns for system versioning using default values for the start and end times because these values can't be null. This example uses the HIDDEN clause to ensure no impact on existing applications interacting with the current table. It also uses HISTORY_RETENTION_PERIOD that's available on [!INCLUDE[sssds](../../includes/sssds-md.md)] only.
+The following example shows how to add system versioning to an existing table and create a future history table. This example assumes that there's an existing table called `InsurancePolicy` with a primary key defined. This example populates the newly created period columns for system versioning using default values for the start and end times because these values can't be null. This example uses the `HIDDEN` clause to ensure no effect on existing applications interacting with the current table. It also uses `HISTORY_RETENTION_PERIOD` that's available on [!INCLUDE [sssds](../../includes/sssds-md.md)] only.
 
 ```sql
 --Alter non-temporal table to define periods for system versioning
 ALTER TABLE InsurancePolicy
-ADD PERIOD FOR SYSTEM_TIME (ValidFrom, ValidTo),
-ValidFrom datetime2 GENERATED ALWAYS AS ROW START HIDDEN NOT NULL
-    DEFAULT SYSUTCDATETIME(),
-ValidTo datetime2 GENERATED ALWAYS AS ROW END HIDDEN NOT NULL
-    DEFAULT CONVERT(DATETIME2, '9999-12-31 23:59:59.99999999') ;
+    ADD ValidFrom DATETIME2 GENERATED ALWAYS AS ROW START HIDDEN
+            DEFAULT SYSUTCDATETIME() NOT NULL,
+        ValidTo DATETIME2 GENERATED ALWAYS AS ROW END HIDDEN
+            DEFAULT CONVERT (DATETIME2, '9999-12-31 23:59:59.99999999') NOT NULL,
+        PERIOD FOR SYSTEM_TIME (ValidFrom, ValidTo);
 
 --Enable system versioning with 1 year retention for historical data
-ALTER TABLE InsurancePolicy
-SET (SYSTEM_VERSIONING = ON (HISTORY_RETENTION_PERIOD = 1 YEAR)) ;
+ALTER TABLE InsurancePolicy SET (
+    SYSTEM_VERSIONING = ON (
+        HISTORY_RETENTION_PERIOD=1 YEAR
+    )
+);
 ```
 
 #### B. Migrate an existing solution to use system versioning
 
-The following example shows how to migrate to system versioning from a solution that uses triggers to mimic temporal support. The example assumes there's an existing solution that uses a `ProjectTask` table and a `ProjectTaskHistory` table for its existing solution, that's uses the `Changed Date` and `Revised Date` columns for its periods, that these period columns don't use the **datetime2** datatype and that the `ProjectTask` table has a primary key defined.
+The following example shows how to migrate to system versioning from a solution that uses triggers to mimic temporal support. The example assumes there's an existing solution that uses a `ProjectTask` table and a `ProjectTaskHistory` table for its existing solution, that's uses the `Changed Date` and `Revised Date` columns for its periods, that these period columns don't use the **datetime2** data type and that the `ProjectTask` table has a primary key defined.
 
 ```sql
 -- Drop existing trigger
@@ -1965,18 +2117,21 @@ DROP TRIGGER ProjectTask_HistoryTrigger;
 
 -- Adjust the schema for current and history table
 -- Change data types for existing period columns
-ALTER TABLE ProjectTask ALTER COLUMN [Changed Date] datetime2 NOT NULL ;
-ALTER TABLE ProjectTask ALTER COLUMN [Revised Date] datetime2 NOT NULL ;
-ALTER TABLE ProjectTaskHistory ALTER COLUMN [Changed Date] datetime2 NOT NULL ;
-ALTER TABLE ProjectTaskHistory ALTER COLUMN [Revised Date] datetime2 NOT NULL ;
+ALTER TABLE ProjectTask ALTER COLUMN [Changed Date] DATETIME2 NOT NULL;
+ALTER TABLE ProjectTask ALTER COLUMN [Revised Date] DATETIME2 NOT NULL;
+ALTER TABLE ProjectTaskHistory ALTER COLUMN [Changed Date] DATETIME2 NOT NULL;
+ALTER TABLE ProjectTaskHistory ALTER COLUMN [Revised Date] DATETIME2 NOT NULL;
 
 -- Add SYSTEM_TIME period and set system versioning with linking two existing tables
 -- (a certain set of data checks happen in the background)
 ALTER TABLE ProjectTask
-ADD PERIOD FOR SYSTEM_TIME ([Changed Date], [Revised Date])
+    ADD PERIOD FOR SYSTEM_TIME ([Changed Date], [Revised Date]);
 
-ALTER TABLE ProjectTask
-SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE = dbo.ProjectTaskHistory, DATA_CONSISTENCY_CHECK = ON))
+ALTER TABLE ProjectTask SET (
+    SYSTEM_VERSIONING = ON (
+        HISTORY_TABLE=dbo.ProjectTaskHistory, DATA_CONSISTENCY_CHECK=ON
+    )
+);
 ```
 
 #### C. Disable and re-enable system versioning to change table schema
@@ -1990,10 +2145,10 @@ ALTER TABLE Department
     SET (SYSTEM_VERSIONING = OFF) ;
 /* expand table schema for temporal table */
 ALTER TABLE Department
-     ADD Col5 int NOT NULL DEFAULT 0 ;
+     ADD Col5 int DEFAULT NOT NULL 0 ;
 /* Expand table schema for history table */
 ALTER TABLE DepartmentHistory
-    ADD Col5 int NOT NULL DEFAULT 0 ;
+    ADD Col5 int DEFAULT NOT NULL 0 ;
 /* Re-establish versioning again*/
 ALTER TABLE Department
     SET (SYSTEM_VERSIONING = ON (HISTORY_TABLE=dbo.DepartmentHistory,
@@ -2007,26 +2162,29 @@ This example shows how to completely remove system versioning from the Departmen
 
 ```sql
 ALTER TABLE Department
-    SET (SYSTEM_VERSIONING = OFF) ;
+    SET (SYSTEM_VERSIONING = OFF);
+
 ALTER TABLE Department
-DROP PERIOD FOR SYSTEM_TIME ;
-DROP TABLE DepartmentHistory ;
+    DROP PERIOD FOR SYSTEM_TIME;
+
+DROP TABLE DepartmentHistory;
 ```
 
-## Examples: [!INCLUDE[ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] and [!INCLUDE[ssPDW](../../includes/sspdw-md.md)]
+## Examples: Azure Synapse Analytics and Analytics Platform System (PDW)
 
-The following examples A through C use the `FactResellerSales` table in the [!INCLUDE[ssawPDW](../../includes/ssawpdw-md.md)] database.
+The following examples A through C use the `FactResellerSales` table in the [!INCLUDE [ssawPDW](../../includes/ssawpdw-md.md)] database.
 
 ### A. Determine if a table is partitioned
 
 The following query returns one or more rows if the table `FactResellerSales` is partitioned. If the table isn't partitioned, no rows are returned.
 
 ```sql
-SELECT * FROM sys.partitions AS p
-JOIN sys.tables AS t
-    ON p.object_id = t.object_id
+SELECT *
+FROM sys.partitions AS p
+     INNER JOIN sys.tables AS t
+         ON p.object_id = t.object_id
 WHERE p.partition_id IS NOT NULL
-    AND t.name = 'FactResellerSales' ;
+      AND t.name = 'FactResellerSales';
 ```
 
 ### B. Determine boundary values for a partitioned table
@@ -2034,44 +2192,56 @@ WHERE p.partition_id IS NOT NULL
 The following query returns the boundary values for each partition in the `FactResellerSales` table.
 
 ```sql
-SELECT t.name AS TableName, i.name AS IndexName, p.partition_number,
-    p.partition_id, i.data_space_id, f.function_id, f.type_desc,
-    r.boundary_id, r.value AS BoundaryValue
+SELECT t.name AS TableName,
+       i.name AS IndexName,
+       p.partition_number,
+       p.partition_id,
+       i.data_space_id,
+       f.function_id,
+       f.type_desc,
+       r.boundary_id,
+       r.value AS BoundaryValue
 FROM sys.tables AS t
-JOIN sys.indexes AS i
-    ON t.object_id = i.object_id
-JOIN sys.partitions AS p
-    ON i.object_id = p.object_id AND i.index_id = p.index_id
-JOIN  sys.partition_schemes AS s
-    ON i.data_space_id = s.data_space_id
-JOIN sys.partition_functions AS f
-    ON s.function_id = f.function_id
-LEFT JOIN sys.partition_range_values AS r
-    ON f.function_id = r.function_id and r.boundary_id = p.partition_number
-WHERE t.name = 'FactResellerSales' AND i.type <= 1
-ORDER BY p.partition_number ;
+     INNER JOIN sys.indexes AS i
+         ON t.object_id = i.object_id
+     INNER JOIN sys.partitions AS p
+         ON i.object_id = p.object_id
+        AND i.index_id = p.index_id
+     INNER JOIN sys.partition_schemes AS s
+         ON i.data_space_id = s.data_space_id
+     INNER JOIN sys.partition_functions AS f
+         ON s.function_id = f.function_id
+     LEFT OUTER JOIN sys.partition_range_values AS r
+         ON f.function_id = r.function_id
+        AND r.boundary_id = p.partition_number
+WHERE t.name = 'FactResellerSales'
+      AND i.type <= 1
+ORDER BY p.partition_number;
 ```
 
 ### C. Determine the partition column for a partitioned table
 
-The following query returns the name of the partitioning column for table. `FactResellerSales`.
+The following query returns the name of the partitioning column for the `FactResellerSales` table.
 
 ```sql
-SELECT t.object_id AS Object_ID, t.name AS TableName,
-    ic.column_id as PartitioningColumnID, c.name AS PartitioningColumnName
+SELECT t.object_id AS Object_ID,
+       t.name AS TableName,
+       ic.column_id AS PartitioningColumnID,
+       c.name AS PartitioningColumnName
 FROM sys.tables AS t
-JOIN sys.indexes AS i
-    ON t.object_id = i.object_id
-JOIN sys.columns AS c
-    ON t.object_id = c.object_id
-JOIN sys.partition_schemes AS ps
-    ON ps.data_space_id = i.data_space_id
-JOIN sys.index_columns AS ic
-    ON ic.object_id = i.object_id
-    AND ic.index_id = i.index_id AND ic.partition_ordinal > 0
+     INNER JOIN sys.indexes AS i
+         ON t.object_id = i.object_id
+     INNER JOIN sys.columns AS c
+         ON t.object_id = c.object_id
+     INNER JOIN sys.partition_schemes AS ps
+         ON ps.data_space_id = i.data_space_id
+     INNER JOIN sys.index_columns AS ic
+         ON ic.object_id = i.object_id
+        AND ic.index_id = i.index_id
+        AND ic.partition_ordinal > 0
 WHERE t.name = 'FactResellerSales'
-AND i.type <= 1
-AND c.column_id = ic.column_id ;
+      AND i.type <= 1
+      AND c.column_id = ic.column_id;
 ```
 
 ### D. Merge two partitions
@@ -2081,15 +2251,19 @@ The following example merges two partitions on a table.
 The `Customer` table has the following definition:
 
 ```sql
-CREATE TABLE Customer (
+CREATE TABLE Customer
+(
     id INT NOT NULL,
-    lastName VARCHAR(20),
+    lastName VARCHAR (20),
     orderCount INT,
-    orderDate DATE)
-WITH
-    ( DISTRIBUTION = HASH(id),
-    PARTITION ( orderCount RANGE LEFT
-    FOR VALUES (1, 5, 10, 25, 50, 100))) ;
+    orderDate DATE
+)
+WITH (
+    DISTRIBUTION = HASH(id),
+    PARTITION(orderCount RANGE LEFT
+        FOR VALUES (1, 5, 10, 25, 50, 100)
+    )
+);
 ```
 
 The following command combines the 10 and 25 partition boundaries.
@@ -2101,15 +2275,19 @@ ALTER TABLE Customer MERGE RANGE (10);
 The new DDL for the table is:
 
 ```sql
-CREATE TABLE Customer (
+CREATE TABLE Customer
+(
     id INT NOT NULL,
-    lastName VARCHAR(20),
+    lastName VARCHAR (20),
     orderCount INT,
-    orderDate DATE)
-WITH
-    ( DISTRIBUTION = HASH(id),
-    PARTITION ( orderCount RANGE LEFT
-    FOR VALUES (1, 5, 25, 50, 100))) ;
+    orderDate DATE
+)
+WITH (
+    DISTRIBUTION = HASH(id),
+    PARTITION(orderCount RANGE LEFT
+        FOR VALUES (1, 5, 25, 50, 100)
+    )
+);
 ```
 
 ### E. Split a partition
@@ -2121,15 +2299,19 @@ The `Customer` table has the following DDL:
 ```sql
 DROP TABLE Customer;
 
-CREATE TABLE Customer (
+CREATE TABLE Customer
+(
     id INT NOT NULL,
-    lastName VARCHAR(20),
+    lastName VARCHAR (20),
     orderCount INT,
-    orderDate DATE)
-WITH
-    ( DISTRIBUTION = HASH(id),
-    PARTITION ( orderCount RANGE LEFT
-    FOR VALUES (1, 5, 10, 25, 50, 100 ))) ;
+    orderDate DATE
+)
+WITH (
+    DISTRIBUTION = HASH(id),
+    PARTITION(orderCount RANGE LEFT
+        FOR VALUES (1, 5, 10, 25, 50, 100)
+    )
+);
 ```
 
 The following command creates a new partition bound by the value 75, between 50 and 100.
@@ -2158,51 +2340,59 @@ The following example moves the data in a partition of the `Orders` table to a p
 The `Orders` table has the following DDL:
 
 ```sql
-CREATE TABLE Orders (
+CREATE TABLE Orders
+(
     id INT,
     city VARCHAR (25),
     lastUpdateDate DATE,
-    orderDate DATE)
-WITH
-    (DISTRIBUTION = HASH (id),
-    PARTITION ( orderDate RANGE RIGHT
-    FOR VALUES ('2004-01-01', '2005-01-01', '2006-01-01', '2007-01-01'))) ;
+    orderDate DATE
+)
+WITH (
+    DISTRIBUTION = HASH(id),
+    PARTITION(orderDate RANGE RIGHT
+        FOR VALUES ('2004-01-01', '2005-01-01', '2006-01-01', '2007-01-01')
+    )
+);
 ```
 
 In this example, the `Orders` table has the following partitions. Each partition contains data.
 
 | Partition | Has data? | Boundary range |
 | --- | --- | --- |
-| 1 | Yes | OrderDate < '2004-01-01' |
-| 2 | Yes | '2004-01-01' <= OrderDate < '2005-01-01' |
-| 3 | Yes | '2005-01-01' <= OrderDate< '2006-01-01' |
-| 4 | Yes | '2006-01-01'<= OrderDate < '2007-01-01' |
-| 5 | Yes | '2007-01-01' <= OrderDate |
+| 1 | Yes | `OrderDate < '2004-01-01'` |
+| 2 | Yes | `'2004-01-01' <= OrderDate < '2005-01-01'` |
+| 3 | Yes | `'2005-01-01' <= OrderDate< '2006-01-01'` |
+| 4 | Yes | `'2006-01-01'<= OrderDate < '2007-01-01'` |
+| 5 | Yes | `'2007-01-01' <= OrderDate` |
 
-- Partition 1 (has data): OrderDate < '2004-01-01'
-- Partition 2 (has data): '2004-01-01' <= OrderDate < '2005-01-01'
-- Partition 3 (has data): '2005-01-01' <= OrderDate< '2006-01-01'
-- Partition 4 (has data): '2006-01-01'<= OrderDate < '2007-01-01'
-- Partition 5 (has data): '2007-01-01' <= OrderDate
+- Partition 1 (has data): `OrderDate < '2004-01-01'`
+- Partition 2 (has data): `'2004-01-01' <= OrderDate < '2005-01-01'`
+- Partition 3 (has data): `'2005-01-01' <= OrderDate< '2006-01-01'`
+- Partition 4 (has data): `'2006-01-01'<= OrderDate < '2007-01-01'`
+- Partition 5 (has data): `'2007-01-01' <= OrderDate`
 
 The `OrdersHistory` table has the following DDL, which has identical columns and column names as the `Orders` table. Both are hash-distributed on the `id` column.
 
 ```sql
-CREATE TABLE OrdersHistory (
-   id INT,
-   city VARCHAR (25),
-   lastUpdateDate DATE,
-   orderDate DATE)
-WITH
-    (DISTRIBUTION = HASH (id),
-    PARTITION ( orderDate RANGE RIGHT
-    FOR VALUES ('2004-01-01'))) ;
+CREATE TABLE OrdersHistory
+(
+    id INT,
+    city VARCHAR (25),
+    lastUpdateDate DATE,
+    orderDate DATE
+)
+WITH (
+    DISTRIBUTION = HASH(id),
+    PARTITION(orderDate RANGE RIGHT
+        FOR VALUES ('2004-01-01')
+    )
+);
 ```
 
 Although the columns and column names must be the same, the partition boundaries don't need to be the same. In this example, the `OrdersHistory` table has the following two partitions and both partitions are empty:
 
-- Partition 1 (no data): OrderDate < '2004-01-01'
-- Partition 2 (empty): '2004-01-01' <= OrderDate
+- Partition 1 (no data): `OrderDate < '2004-01-01'`
+- Partition 2 (empty): `'2004-01-01' <= OrderDate`
 
 For the previous two tables, the following command moves all rows with `OrderDate < '2004-01-01'` from the `Orders` table to the `OrdersHistory` table.
 
@@ -2214,18 +2404,18 @@ As a result, the first partition in `Orders` is empty and the first partition in
 
 `Orders` table
 
-- Partition 1 (empty): OrderDate < '2004-01-01'
-- Partition 2 (has data): '2004-01-01' <= OrderDate < '2005-01-01'
-- Partition 3 (has data): '2005-01-01' <= OrderDate< '2006-01-01'
-- Partition 4 (has data): '2006-01-01'<= OrderDate < '2007-01-01'
-- Partition 5 (has data): '2007-01-01' <= OrderDate
+- Partition 1 (empty): `OrderDate < '2004-01-01'`
+- Partition 2 (has data): `'2004-01-01' <= OrderDate < '2005-01-01'`
+- Partition 3 (has data): `'2005-01-01' <= OrderDate< '2006-01-01'`
+- Partition 4 (has data): `'2006-01-01'<= OrderDate < '2007-01-01'`
+- Partition 5 (has data): `'2007-01-01' <= OrderDate`
 
 `OrdersHistory` table
 
-- Partition 1 (has data): OrderDate < '2004-01-01'
-- Partition 2 (empty): '2004-01-01' <= OrderDate
+- Partition 1 (has data): `OrderDate < '2004-01-01'`
+- Partition 2 (empty): `'2004-01-01' <= OrderDate`
 
-To clean up the `Orders` table, you can remove the empty partition by merging partitions 1 and 2 as follows:
+To clean up the `Orders` table, you can remove the empty partition by merging partitions `1` and `2` as follows:
 
 ```sql
 ALTER TABLE Orders MERGE RANGE ('2004-01-01');
@@ -2233,12 +2423,12 @@ ALTER TABLE Orders MERGE RANGE ('2004-01-01');
 
 After the merge, the `Orders` table has the following partitions:
 
-  `Orders` table
+`Orders` table
 
-- Partition 1 (has data): OrderDate < '2005-01-01'
-- Partition 2 (has data): '2005-01-01' <= OrderDate< '2006-01-01'
-- Partition 3 (has data): '2006-01-01'<= OrderDate < '2007-01-01'
-- Partition 4 (has data): '2007-01-01' <= OrderDate
+- Partition 1 (has data): `OrderDate < '2005-01-01'`
+- Partition 2 (has data): `'2005-01-01' <= OrderDate< '2006-01-01'`
+- Partition 3 (has data): `'2006-01-01'<= OrderDate < '2007-01-01'`
+- Partition 4 (has data): `'2007-01-01' <= OrderDate`
 
 Suppose another year passes and you're ready to archive the year 2005. You can allocate an empty partition for the year 2005 in the `OrdersHistory` table by splitting the empty partition as follows:
 
@@ -2248,22 +2438,22 @@ ALTER TABLE OrdersHistory SPLIT RANGE ('2005-01-01');
 
 After the split, the `OrdersHistory` table has the following partitions:
 
-  `OrdersHistory` table
+`OrdersHistory` table
 
-- Partition 1 (has data): OrderDate < '2004-01-01'
-- Partition 2 (empty): '2004-01-01' < '2005-01-01'
-- Partition 3 (empty): '2005-01-01' <= OrderDate
+- Partition 1 (has data): `OrderDate < '2004-01-01'`
+- Partition 2 (empty): `'2004-01-01' < '2005-01-01'`
+- Partition 3 (empty): `'2005-01-01' <= OrderDate`
 
 ## Related content
 
 - [sys.tables](../../relational-databases/system-catalog-views/sys-tables-transact-sql.md)
 - [sp_rename](../../relational-databases/system-stored-procedures/sp-rename-transact-sql.md)
 - [sp_help](../../relational-databases/system-stored-procedures/sp-help-transact-sql.md)
-- [EVENTDATA](../../t-sql/functions/eventdata-transact-sql.md)
-- [CREATE TABLE](../../t-sql/statements/create-table-transact-sql.md)
-- [DROP TABLE](../../t-sql/statements/drop-table-transact-sql.md)
-- [ALTER TABLE column_constraint](alter-table-column-constraint-transact-sql.md)
-- [ALTER TABLE column_definition](alter-table-column-definition-transact-sql.md)
-- [ALTER TABLE computed_column_definition](alter-table-computed-column-definition-transact-sql.md)
-- [ALTER TABLE index_option](alter-table-index-option-transact-sql.md)
-- [ALTER TABLE table_constraints](alter-table-table-constraint-transact-sql.md)
+- [EVENTDATA (Transact-SQL)](../functions/eventdata-transact-sql.md)
+- [CREATE TABLE (Transact-SQL)](create-table-transact-sql.md)
+- [DROP TABLE (Transact-SQL)](drop-table-transact-sql.md)
+- [ALTER TABLE column_constraint (Transact-SQL)](alter-table-column-constraint-transact-sql.md)
+- [ALTER TABLE column_definition (Transact-SQL)](alter-table-column-definition-transact-sql.md)
+- [ALTER TABLE computed_column_definition (Transact-SQL)](alter-table-computed-column-definition-transact-sql.md)
+- [ALTER TABLE index_option (Transact-SQL)](alter-table-index-option-transact-sql.md)
+- [ALTER TABLE table_constraint (Transact-SQL)](alter-table-table-constraint-transact-sql.md)
