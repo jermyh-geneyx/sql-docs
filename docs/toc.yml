@@ -4411,6 +4411,8 @@ items:
       href: database-engine/install-windows/install-sql-server-from-the-command-prompt.md
     - name: Configuration File
       href: database-engine/install-windows/install-sql-server-using-a-configuration-file.md
+    - name: Slipstream installation
+      href: database-engine/install-windows/install-sql-server-using-slipstream.md
     - name: SysPrep
       href: database-engine/install-windows/install-sql-server-using-sysprep.md
     - name: PowerShell Desired State Configuration

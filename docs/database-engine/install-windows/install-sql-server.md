@@ -3,7 +3,7 @@ title: "SQL Server Installation Guide"
 description: An index of content that helps you install SQL Server and associated components using options such as the installation wizard, command prompt, or sysprep.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 05/19/2025
+ms.date: 08/21/2025
 ms.service: sql
 ms.subservice: install
 ms.topic: conceptual
@@ -89,6 +89,7 @@ Other [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)] components can 
 | [Install SQL Server on Server Core](install-sql-server-on-server-core.md) | Install [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)] on Windows Server Core. |
 | [Check parameters for the System Configuration Checker](check-parameters-for-the-system-configuration-checker.md) | Discusses the function of the System Configuration Checker (SCC). |
 | [Install SQL Server using a configuration file](install-sql-server-using-a-configuration-file.md) | Sample syntax and installation parameters for running Setup through a configuration file. |
+| [Slipstream installation for SQL Server](install-sql-server-using-slipstream.md) | Sample syntax and installation parameters for installing SQL Server with the latest cumulative update. |
 | [Install SQL Server with SysPrep](install-sql-server-using-sysprep.md) | Sample syntax and installation parameters for running Setup through SysPrep. |
 | [Add Features to an Instance of SQL Server (Setup)](add-features-to-an-instance-of-sql-server-setup.md) | Update components of an existing instance of [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)]. |
 | [SQL Server Failover Cluster Installation](../../sql-server/failover-clusters/install/sql-server-failover-cluster-installation.md) | Install a SQL Server failover cluster instance. |
