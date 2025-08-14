@@ -11,6 +11,7 @@ ms.topic: how-to
 ms.collection:
   - sql-migration-content
 ---
+
 # Migrate from SQL Server: Pre-migration
 
 [!INCLUDE [appliesto-sqlvm-sqldb-sqlmi](../includes/appliesto-sqlvm-sqldb-sqlmi.md)]
