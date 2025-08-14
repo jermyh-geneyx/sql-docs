@@ -10,7 +10,10 @@ ms.subservice: migration-guide
 ms.topic: how-to
 ms.collection:
   - sql-migration-content
+  - migration
+  - onprem-to-azure
 ---
+
 # Migration overview: SQL Server to Azure SQL Database
 
 [!INCLUDE [appliesto-sqldb](../../includes/appliesto-sqldb.md)]
