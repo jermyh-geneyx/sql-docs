@@ -234,7 +234,7 @@ The following table is for [zone-redundant](high-availability-sla-local-zone-red
 | Canada Central | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] |
 | Central US | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] |
 | East US 1 | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] |
-| East US 2 | | | [!INCLUDE [yes](../includes/yes.md)] |
+| East US 2 | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] |
 | South Central US | | | [!INCLUDE [yes](../includes/yes.md)] |
 | West US 2 | | | [!INCLUDE [yes](../includes/yes.md)] |
 | West US 3 | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] | [!INCLUDE [yes](../includes/yes.md)] |
