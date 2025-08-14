@@ -43,9 +43,10 @@ Extended Events can be used to monitor read-only replicas. For more information,
 
 ## Best practices
 
-Adopt the following best practices to use Extended Events reliably and without affecting database engine health and workload performance.
+Adopt the following best practices to use Extended Events securely, reliably, and without affecting database engine health and workload performance.
 
 - If you use the `event_file` target:
+  - Depending on the events added to a session, the files produced by the `event_file` target might contain sensitive data. Carefully review RBAC role assignments and the access control lists (ACL) on the storage account and container, including inherited access, to avoid granting unnecessary read access. Follow the [principle of least privilege](/entra/identity-platform/secure-least-privileged-access).
   - Use a storage account in the same Azure region as the database or managed instance where you create event sessions.
   - Align the redundancy of the storage account with the redundancy of the database, elastic pool, or managed instance. For [locally redundant](high-availability-sla-local-zone-redundancy.md#locally-redundant-availability) resources, use LRS, GRS, or RA-GRS. For [zone-redundant](high-availability-sla-local-zone-redundancy.md#zone-redundant-availability) resources, use ZRS, GZRS, or RA-GZRS. See [Azure Storage redundancy](/azure/storage/common/storage-redundancy) for details.
   - Don't use any [blob access tier](/azure/storage/blobs/access-tiers-overview) other than `Hot`.
