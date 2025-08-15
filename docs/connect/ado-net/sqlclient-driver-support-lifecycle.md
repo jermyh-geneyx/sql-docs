@@ -106,3 +106,7 @@ Microsoft.Data.SqlClient supports all operating systems supported by .NET 6 and 
 
 > [!NOTE]
 > Globalization Invariant mode is currently not supported.
+
+### Support policy for dependency vulnerabilities
+
+Microsoft.Data.SqlClient is updated with secure versions of direct dependencies every minor release. Dependencies with known vulnerabilities are updated in hot fixes of supported versions only when it's possible to update the dependency without causing transitive dependency compatibility breaks. If it's not possible to update a vulnerable dependency in this manner, it's up to applications to update the dependency and ensure they don't have dependency conflicts.
