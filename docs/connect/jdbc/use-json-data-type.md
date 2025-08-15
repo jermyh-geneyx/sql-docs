@@ -1,5 +1,5 @@
 ---
-title: JSON data type
+title: Use JSON Data Type
 description: Learn about the JSON data type in the JDBC driver and how it can be used to support various operations.
 author: David-Engel
 ms.author: davidengel
@@ -9,7 +9,7 @@ ms.subservice: connectivity
 ms.topic: conceptual
 ---
 
-# JSON data type
+# Use JSON data type with the JDBC driver
 
 [!INCLUDE[Driver_JDBC_Download](../../includes/driver_jdbc_download.md)]
 

@@ -172,11 +172,11 @@ For information about spatial data types, see [Using Spatial Datatypes](use-spat
 
 ## JSON data type
 
-For information about JSON data type, see [JSON data type](json-data-type.md).
+For information about JSON data type, see [JSON data type](use-json-data-type.md).
 
 ## Vector data type
 
-For information about vector data type, see [Vector data type](vector-data-type.md).
+For information about vector data type, see [Vector data type](use-vector-data-type.md).
 
 ## See also
 

@@ -1,5 +1,5 @@
 ---
-title: Vector data type
+title: Use Vector Data Type
 description: Learn about the vector data type in the JDBC driver and how it can be used to support various operations.
 author: David-Engel
 ms.author: davidengel
@@ -8,7 +8,7 @@ ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
 ---
-# Vector data type
+# Use vector data type with the JDBC driver
 
 [!INCLUDE[Driver_JDBC_Download](../../includes/driver_jdbc_download.md)]
 
