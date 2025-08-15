@@ -2821,28 +2821,34 @@
             href: ../connect/jdbc/client-certification-authentication-for-loopback-scenarios.md
       - name: Data types
         items:
-        - name: Using basic data types
+        - name: Basic data types
           href: ../connect/jdbc/using-basic-data-types.md
         - name: Understanding data type differences
           href: ../connect/jdbc/understanding-data-type-differences.md
         - name: Understanding data type conversions
           href: ../connect/jdbc/understanding-data-type-conversions.md
-        - name: Using advanced data types
+        - name: Advanced data types
           href: ../connect/jdbc/using-advanced-data-types.md
-        - name: Using SQL_variant data type
+        - name: JSON data type
+          href: ../connect/jdbc/use-json-data-type.md
+        - name: SQL_variant data type
           href: ../connect/jdbc/using-sql-variant-datatype.md
-        - name: Using spatial data types
+        - name: Spatial data types
           href: ../connect/jdbc/use-spatial-datatypes.md
         - name: User defined types
           href: ../connect/jdbc/user-defined-types.md
+        - name: Vector data type
+          href: ../connect/jdbc/use-vector-data-type.md
         - name: Configuring how java.sql.Time values are sent
           href: ../connect/jdbc/configuring-how-java-sql-time-values-are-sent-to-the-server.md
-        - name: Programming with SQLXML
-          href: ../connect/jdbc/programming-with-sqlxml.md
-        - name: Supporting XML data
-          href: ../connect/jdbc/supporting-xml-data.md
-        - name: SQLXML interface
-          href: ../connect/jdbc/sqlxml-interface.md
+        - name: XML data
+          items:
+          - name: Supporting XML data
+            href: ../connect/jdbc/supporting-xml-data.md
+          - name: Programming with SQLXML
+            href: ../connect/jdbc/programming-with-sqlxml.md
+          - name: SQLXML interface
+            href: ../connect/jdbc/sqlxml-interface.md
       - name: Using statements with SQL
         href: ../connect/jdbc/using-statements-with-sql.md
         items:

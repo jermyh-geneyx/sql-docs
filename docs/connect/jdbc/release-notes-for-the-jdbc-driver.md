@@ -43,10 +43,10 @@ Released: Aug 15, 2025
 
 | Feature | Details |
 | :---------- | :----------- |
-| JSON datatype support | Native support for SQL Server’s new JSON data type with APIs for inserts, selects, stored procedures, and bulk copy. |
+| JSON datatype support | Native support for SQL Server’s new JSON data type with APIs for inserts, selects, stored procedures, and bulk copy. For more information, see [JSON data type](use-json-data-type.md). |
 | Order hints for bulk copy operations | Support for specifying order hints when using `SQLServerBulkCopy` to improve bulk copy performance. |
 | Add new trusted AKV URLs for FR and DE | Registered four new Azure Key Vault and Managed HSM endpoints for France and Germany. |
-| Vector datatype support | Native support for SQL Server’s new VECTOR data type with APIs for inserts, selects, stored procedures, and bulk copy. |
+| Vector datatype support | Native support for SQL Server’s new VECTOR data type with APIs for inserts, selects, stored procedures, and bulk copy. For more information, see [Vector data type](use-vector-data-type.md). |
 | New connection options, quotedIdentifier and concatNullYieldsNull | New connection options, quotedIdentifier and concatNullYieldsNull, to control QUOTED_IDENTIFIER and CONCAT_NULL_YIELDS_NULL session settings for both new and pooled connections. |
 | Support for temporal and money datatypes when using bulk copy for batch insert operations | Support for batch inserts of DATETIME, DATE, MONEY, etc., when using the useBulkCopyForBatchInsert option. |
 
