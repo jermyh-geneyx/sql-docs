@@ -1,19 +1,19 @@
 ---
-title: Use JSON data type
+title: JSON data type
 description: Learn about the JSON data type in the JDBC driver and how it can be used to support various operations.
 author: David-Engel
 ms.author: davidengel
-ms.date: 7/28/2025
+ms.date: 08/15/2025
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
 ---
 
-# Use JSON data type
+# JSON data type
 
 [!INCLUDE[Driver_JDBC_Download](../../includes/driver_jdbc_download.md)]
 
-Starting with version 13.2.0, the Microsoft JDBC Driver for SQL Server supports the JSON data type. This allows Java applications to read from and write to SQL Server columns of type **json**, enabling seamless interaction with semi-structured data.
+Starting with version 13.2.0, the Microsoft JDBC Driver for SQL Server supports the JSON data type. This feature allows Java applications to read from and write to SQL Server columns of type **json**, enabling seamless interaction with semi-structured data.
 
 Following are examples of ways to interact with JSON data types using the JDBC driver.
 
@@ -25,14 +25,16 @@ To work with JSON data in SQL Server, begin by creating a table with a column of
 CREATE TABLE sampleTable (data JSON);
 ```
 
-Insert JSON using a statement:
+Insert JSON with a statement:
+
 ```java
 try (Statement stmt = connection.createStatement()) {
     stmt.execute("INSERT INTO sampleTable (data) VALUES ('{\"name\":\"John\",\"skills\":[\"Java\",\"SQL\"]}')");
 }
 ```
 
-Insert JSON using a prepared statement and parameters:
+Insert JSON with a prepared statement and parameters:
+
 ```java
 String json = "{\"name\":\"John\",\"skills\":[\"Java\",\"SQL\"]}";
 String insertSql = "INSERT INTO sampleTable (data) VALUES (?)";
@@ -44,6 +46,7 @@ try (PreparedStatement pstmt = connection.prepareStatement(insertSql)) {
 ```
 
 Read JSON data from the table:
+
 ```java
 String query = "SELECT data FROM sampleTable";
 
@@ -66,6 +69,7 @@ String sql = "CREATE PROCEDURE sampleProc @p0 JSON OUTPUT AS " +
 ```
 
 Retrieve the output JSON by registering the parameter and executing the procedure.
+
 ```java
 try (CallableStatement callableStatement = connection.prepareCall("{call sampleProc (?) }")) {
     callableStatement.registerOutParameter(1, microsoft.sql.Types.JSON);
@@ -77,7 +81,7 @@ try (CallableStatement callableStatement = connection.prepareCall("{call sampleP
 
 ## Table-valued parameters (TVPs) with JSON
 
-This example inserts JSON data using a TVP.
+This example inserts JSON data with a TVP.
 
 ```java
 String value = "{\"severity\":\"TRACE\",\"duration\":200,\"date\":\"2024-12-17T15:45:56\"}";

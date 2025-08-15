@@ -1,23 +1,24 @@
 ---
-title: Using Vector data type
+title: Vector data type
 description: Learn about the vector data type in the JDBC driver and how it can be used to support various operations.
 author: David-Engel
 ms.author: davidengel
-ms.date: 08/07/2025
+ms.date: 08/15/2025
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
 ---
-# Using Vector data type
+# Vector data type
 
 [!INCLUDE[Driver_JDBC_Download](../../includes/driver_jdbc_download.md)]
 
-Starting with version 13.2.0, the JDBC driver supports the vector data type. Vector is also supported when using features such as Table-Valued Parameters and BulkCopy, with some limitations. This page shows various use cases of the Vector data type with the JDBC Driver. For an overview of vector data types, see [Vector Data Type](../../t-sql/data-types/vector-data-type.md).
+Starting with version 13.2.0, the JDBC driver supports the **vector** data type. **Vector** is also supported with features such as Table-Valued Parameters and BulkCopy, with some limitations. This page shows various use cases of the **vector** data type with the JDBC Driver. For an overview of **vector** data types, see [Vector data type](../../t-sql/data-types/vector-data-type.md).
 
-## Creating a vector object
+## Create a vector object
 
-The microsoft.sql.Vector class is a custom implementation designed to represent vector data in the JDBC driver. It provides a structured way to handle high-dimensional data, including serialization and deserialization, while ensuring compatibility with SQL Server's vector datatype.
+The microsoft.sql.Vector class is a custom implementation designed to represent vector data in the JDBC driver. It provides a structured way to handle high-dimensional data, including serialization and deserialization, while ensuring compatibility with SQL Server's **vector** data type.
 The vector object should include the number of elements, type indicator and data.
+
 ```java
 public enum VectorDimensionType {
         FLOAT32 // 32-bit (single precision) float
@@ -27,9 +28,10 @@ private VectorDimensionType vectorType; // The type of values in the data array
 private int dimensionCount; // Number of dimensions in the vector
 private Object[] data; // An array containing the vector's numerical values
 ```
+
 The Microsoft JDBC Driver for SQL Server offers two methods to initialize a vector object, providing flexibility for different use cases and input data.
 
-### Creating a vector object using dimension count and vector type
+### Create a vector object with dimension count and vector type
 
 Constructor:
 
@@ -43,7 +45,7 @@ Example:
 Vector vector = new Vector(3, Vector.VectorDimensionType.FLOAT32, new Float[]{1.0f, 2.0f, 3.0f});
 ```
 
-### Creating a vector object using precision and scale
+### Create a vector object with precision and scale
 
 Constructor:
 
@@ -52,9 +54,10 @@ public Vector(int precision, int scale, Object[] data);
 ```
 
 Where the parameters are:
-- *precision*: The number of dimensions in the vector.
+
+- *precision*: The number of dimensions in the **vector**.
 - *scale*:  The scale value, which represents the number of bytes per dimension. 4 bytes represents a FLOAT32.
-- *data*: A float[] array containing the vector's numerical values.
+- *data*: A float[] array containing the numerical values in the **vector**.
 
 Example:
 
@@ -62,15 +65,15 @@ Example:
 Vector vector = new Vector(3, 4, new Float[]{1.0f, 2.0f, 3.0f});
 ```
 
-## Populating and retrieving a table
+## Populate and retrieve a table
 
-Here are some code examples that populate and retrieve vector data from a database. The examples assume a table with a vector column, defined as follows:
+Here are some code examples that populate and retrieve **vector** data from a database. The examples assume a table with a **vector** column, defined as follows:
 
 ```sql
 CREATE TABLE sampleTable (vector_col vector(3))
 ```
 
-Insert values using a plain INSERT statement:
+Insert values with a plain INSERT statement:
 
 ```java
 try (Statement stmt = connection.createStatement()){
@@ -78,7 +81,7 @@ try (Statement stmt = connection.createStatement()){
 }
 ```
 
-Insert values using a prepared statement with a vector parameter:
+Insert values with a prepared statement and a **vector** parameter:
 
 ```java
 Vector vector = new Vector(3, Vector.VectorDimensionType.FLOAT32, new Float[]{1.0f, 2.0f, 3.0f});
@@ -88,7 +91,7 @@ try (PreparedStatement preparedStatement = con.prepareStatement("insert into sam
 }
 ```
 
-Insert a null value using a prepared statement with a parameter:
+Insert a null value with a prepared statement and a parameter:
 
 ```java
 Vector vector = new Vector(1, Vector.VectorDimensionType.FLOAT32, null);
@@ -105,7 +108,7 @@ try (PreparedStatement preparedStatement = con.prepareStatement("insert into sam
 }
 ```
 
-Read vector values from a table:
+Read **vector** values from a table:
 
 ```java
 try (SQLServerResultSet resultSet = (SQLServerResultSet) stmt.executeQuery("select * from sampleTable")) {
@@ -134,17 +137,17 @@ try (SQLServerResultSet resultSet = (SQLServerResultSet) stmt.executeQuery("sele
 }
 ```
 
-## Using stored procedures with vector
+## Use stored procedures with vector
 
-Using the following stored procedure:
+With the following stored procedure:
 
 ```java
-String sql = "CREATE PROCEDURE " + inputProc + 
-             " @p0 VECTOR(3) OUTPUT AS " + 
+String sql = "CREATE PROCEDURE " + inputProc +
+             " @p0 VECTOR(3) OUTPUT AS " +
              " SELECT TOP 1 @p0 = col_vector FROM sampleTable ";
 ```
 
-Return a vector output parameter using the following example:
+Return a **vector** output parameter with the following example:
 
 ```java
 try (CallableStatement callableStatement = con.prepareCall("{call " + inputProc + " (?) }")) {
@@ -153,7 +156,7 @@ try (CallableStatement callableStatement = con.prepareCall("{call " + inputProc 
 }
 ```
 
-## Using TVP with vector
+## Use TVP with vector
 
 ```java
 Vector vector = new Vector(3, Vector.VectorDimensionType.FLOAT32, new Float[]{1.0f, 2.0f, 3.0f});
@@ -167,7 +170,7 @@ try (SQLServerPreparedStatement preparedStatement = (SQLServerPreparedStatement)
 }
 ```
 
-## Using SQLServerBulkCopy from source table to destination table with vector
+## Use SQLServerBulkCopy from source table to destination table with vector
 
 Vectors can be used in bulk copy commands:
 
@@ -179,11 +182,11 @@ try (Statement stmt = con.createStatement();
         stmt.executeUpdate("create table destinationTable (vector_col vector(3))");
 
         bulkCopy.setDestinationTableName("destinationTable");
-        bulkCopy.writeToServer(vector);  
+        bulkCopy.writeToServer(vector);
     }
 ```
 
-## Using bulkCopy from csv file to destination table with vector
+## Use bulkCopy from csv file to destination table with vector
 
 Vectors can be imported from CSV files.
 
@@ -213,13 +216,13 @@ try (Statement stmt = con.createStatement();
 
 ## Backward compatibility
 
-If an application is not updated to handle the VECTOR data type, the driver provides backward compatibility by allowing vector data types to be read using backward compatible types. This behavior is controlled by using the `vectorTypeSupport` connection string property.
-Supported values are `off` (server sends vector types as string data in JSON format) and `v1` (server sends vector types of FLOAT32 as vector data). The default value is `v1`.
+If an application isn't updated to handle the **vector** data type, the driver provides backward compatibility by allowing **vector** data types to be read as backward compatible types. This behavior is controlled with the `vectorTypeSupport` connection string property.
+Supported values are `off` (server sends **vector** types as string data in JSON format) and `v1` (server sends **vector** types of FLOAT32 as vector data). The default value is `v1`.
 
 ## Limitations of vector
 
-For detailed limitations, see [Vector Data Type - Limitations](../../t-sql/data-types/vector-data-type.md#limitations).
+For detailed limitations, see [Vector data type limitations](../../t-sql/data-types/vector-data-type.md#limitations).
 
-## See also
+## Related content
 
 [Understanding the JDBC driver data types](understanding-the-jdbc-driver-data-types.md)

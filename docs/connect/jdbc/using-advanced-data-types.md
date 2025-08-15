@@ -1,9 +1,9 @@
 ---
-title: "Using advanced data types"
-description: "Learn how to use JDBC advanced data types to convert from SQL Server data types to Java data types using the Microsoft JDBC Driver for SQL Server."
+title: Using advanced data types
+description: Learn how to use JDBC advanced data types to convert from SQL Server data types to Java data types using the Microsoft JDBC Driver for SQL Server.
 author: David-Engel
 ms.author: davidengel
-ms.date: "08/12/2019"
+ms.date: 08/15/2025
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
@@ -172,11 +172,11 @@ For information about spatial data types, see [Using Spatial Datatypes](use-spat
 
 ## JSON data type
 
-For information about JSON data type, see [Use JSON Data type](use-json-data-type.md).
+For information about JSON data type, see [JSON data type](json-data-type.md).
 
 ## Vector data type
 
-For information about vector data type, see [Using Vector Datatype](using-vector-datatype.md).
+For information about vector data type, see [Vector data type](vector-data-type.md).
 
 ## See also
 
