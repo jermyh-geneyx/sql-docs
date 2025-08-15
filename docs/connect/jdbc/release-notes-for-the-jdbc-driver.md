@@ -3,7 +3,7 @@ title: Release notes
 description: This article lists the releases of the Microsoft JDBC Driver for SQL Server. For each release version, the changes are named and described.
 author: David-Engel
 ms.author: davidengel
-ms.date: 06/18/2025
+ms.date: 08/11/2025
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
@@ -12,6 +12,75 @@ ms.custom: sfi-ropc-nochange
 # Release notes for the Microsoft JDBC Driver for SQL Server
 
 This article lists the releases of the _Microsoft JDBC Driver for SQL Server_. For each release version, the changes are named and described.
+
+
+## <a id="131"></a> 13.2
+
+:::image type="icon" source="../../includes/media/download.svg" border="false"::: **[Download Microsoft JDBC Driver 13.2.0 for SQL Server (zip)](https://go.microsoft.com/fwlink/?linkid=2330663)**  
+:::image type="icon" source="../../includes/media/download.svg" border="false"::: **[Download Microsoft JDBC Driver 13.2.0 for SQL Server (tar.gz)](https://go.microsoft.com/fwlink/?linkid=2330477)**
+
+Release number: 13.2.0  
+Released: Aug 15, 2025
+  
+If you need to download the driver in a language other than the one detected for you, you can use these direct links.  
+For the driver in a zip file: [Chinese (Simplified)](https://go.microsoft.com/fwlink/?linkid=2330663&clcid=0x804) | [Chinese (Traditional)](https://go.microsoft.com/fwlink/?linkid=2330663&clcid=0x404) | [English (United States)](https://go.microsoft.com/fwlink/?linkid=2330663&clcid=0x409) | [French](https://go.microsoft.com/fwlink/?linkid=2330663&clcid=0x40c) | [German](https://go.microsoft.com/fwlink/?linkid=2330663&clcid=0x407) | [Italian](https://go.microsoft.com/fwlink/?linkid=2330663&clcid=0x410) | [Japanese](https://go.microsoft.com/fwlink/?linkid=2330663&clcid=0x411) | [Korean](https://go.microsoft.com/fwlink/?linkid=2330663&clcid=0x412) | [Portuguese (Brazil)](https://go.microsoft.com/fwlink/?linkid=2330663&clcid=0x416) | [Russian](https://go.microsoft.com/fwlink/?linkid=2330663&clcid=0x419) | [Spanish](https://go.microsoft.com/fwlink/?linkid=2330663&clcid=0x40a)  
+For the driver in a tar.gz file: [Chinese (Simplified)](https://go.microsoft.com/fwlink/?linkid=2330477&clcid=0x804) | [Chinese (Traditional)](https://go.microsoft.com/fwlink/?linkid=2330477&clcid=0x404) | [English (United States)](https://go.microsoft.com/fwlink/?linkid=2330477&clcid=0x409) | [French](https://go.microsoft.com/fwlink/?linkid=2330477&clcid=0x40c) | [German](https://go.microsoft.com/fwlink/?linkid=2330477&clcid=0x407) | [Italian](https://go.microsoft.com/fwlink/?linkid=2330477&clcid=0x410) | [Japanese](https://go.microsoft.com/fwlink/?linkid=2330477&clcid=0x411) | [Korean](https://go.microsoft.com/fwlink/?linkid=2330477&clcid=0x412) | [Portuguese (Brazil)](https://go.microsoft.com/fwlink/?linkid=2330477&clcid=0x416) | [Russian](https://go.microsoft.com/fwlink/?linkid=2330477&clcid=0x419) | [Spanish](https://go.microsoft.com/fwlink/?linkid=2330477&clcid=0x40a)
+  
+### 13.2 Compliance
+
+| Compliance change | Details |
+| :---------------- | :------ |
+| Download the latest updates for JDBC Driver 13.2. | &bull; &nbsp; [GitHub, 13.2.0](https://github.com/Microsoft/mssql-jdbc/releases/tag/v13.2.0)&bull; &nbsp; [Maven Central](https://search.maven.org/search?q=g:com.microsoft.sqlserver) |
+| Fully compliant with JDBC API Specification 4.2. | The jars in the 13.2 package are named according to Java version compatibility.<br/><br/>For example, the mssql-jdbc-13.2.0.jre11.jar file from the 13.2 package should be used with Java 11 (or higher). |
+| Compatible with Java Development Kit (JDK) version 22.0, 21.0, 17.0, 11.0, and 1.8. | Microsoft JDBC Driver 13.2 for SQL Server is now compatible with Java Development Kit (JDK) version 22.0 in addition to JDK 21.0, 17.0, 11.0 and 1.8. |
+
+### 13.2 Releases
+
+Release number: 13.2.0  
+Released: Aug 15, 2025
+
+### New features in 13.2
+
+| Feature | Details |
+| :---------- | :----------- |
+| JSON datatype support | Native support for SQL Server’s new JSON data type with APIs for inserts, selects, stored procedures, and bulk copy. |
+| Order hints for bulk copy operations | Support for specifying order hints when using `SQLServerBulkCopy` to improve bulk copy performance. |
+| Add new trusted AKV URLs for FR and DE | Registered four new Azure Key Vault and Managed HSM endpoints for France and Germany. |
+| Vector datatype support | Native support for SQL Server’s new VECTOR data type with APIs for inserts, selects, stored procedures, and bulk copy. |
+| New connection options, quotedIdentifier and concatNullYieldsNull | New connection options, quotedIdentifier and concatNullYieldsNull, to control QUOTED_IDENTIFIER and CONCAT_NULL_YIELDS_NULL session settings for both new and pooled connections. |
+| Support for temporal and money datatypes when using bulk copy for batch insert operations | Support for batch inserts of DATETIME, DATE, MONEY, etc., when using the useBulkCopyForBatchInsert option. |
+
+### Changes in 13.2
+
+| Change | Details |
+| :---------- | :----------- |
+| Use sys.all_objects for Accurate Function and Procedure Filtering. | Updated getFunctions() and getProcedures() to use sys.all_objects to give correct results post filtering. |
+
+### Fixes in 13.2
+
+| Fix | Details |
+| :---------- | :----------- |
+| Fix for null handling in temporal types with bulk copy | Properly handle null values for temporal types when sendTemporalDataTypesAsStringForBulkCopy=false. [GitHub Issue #2702](https://github.com/microsoft/mssql-jdbc/issues/2702). |
+| Fix string insertion with bulk copy API when sendStringParametersAsUnicode=false | Resolved issue where strings were inserted as byte arrays in batch bulk copy mode when sendStringParametersAsUnicode is set to false. [GitHub Issue #2704](https://github.com/microsoft/mssql-jdbc/issues/2704). |
+| Session recovery with Entra ID authentication and redirect mode | Redirect information is now followed during session recovery when using Entra ID authentication. [GitHub Issue #2668](https://github.com/microsoft/mssql-jdbc/issues/2668). |
+| Javadoc build warnings | Cleaned up invalid Javadoc syntax. [GitHub Issue #2640](https://github.com/microsoft/mssql-jdbc/issues/2640). |
+| OffsetDateTime formatting in SQLServerDataTable | The OffsetDateTime toString() method was omitting seconds when seconds are zero, which resulted in the server rejecting those records. Used DateTimeFormatter to avoid this invalid format. [GitHub Issue #2652](https://github.com/microsoft/mssql-jdbc/issues/2652). |
+| String comparison in SQLServerDataTable.equals() |Replaced == with .equals() for strings. [GitHub Issue #2653](https://github.com/microsoft/mssql-jdbc/issues/2653). |
+| PreparedStatement metadata caching for encrypted columns | Fixed loss of type metadata across PreparedStatement reuse. [GitHub Issue #2663](https://github.com/microsoft/mssql-jdbc/issues/2663). |
+| Make IBM security module optional | IBM security dependency is now optional. [GitHub Issue #2636](https://github.com/microsoft/mssql-jdbc/issues/2636). |
+| Invalidate enclave session on reconnect | Enclave session cache no longer reused across reconnects to avoid invalid session cache after a failover. [GitHub Issue #2638](https://github.com/microsoft/mssql-jdbc/issues/2638). |
+| File path error handling in ConfigurableRetryLogic | Robust error handling for missing/unreadable retry config files. [GitHub Issue #2650](https://github.com/microsoft/mssql-jdbc/issues/2650). |
+| Batch insert fix for case-sensitive column name mismatch | executeBatch() now respects case sensitivity of collations when matching column names. [GitHub Issue #2695](https://github.com/microsoft/mssql-jdbc/issues/2695). |
+| releaseSavepoint exception type standardized to SQLFeatureNotSupported | SQLServerException replaced with SQLFeatureNotSupportedException to comply with JDBC specification. [GitHub Issue #2583](https://github.com/microsoft/mssql-jdbc/issues/2583). |
+| ActiveDirectoryPassword authentication deprecated | Added deprecation warning for Microsoft Entra ID password authentication method. [GitHub Issue #2624](https://github.com/microsoft/mssql-jdbc/issues/2624). |
+| Include Columnstore indexes in getIndexInfo() | Replaced sp_statistics with a custom query to support all index types. [GitHub Issue #2598](https://github.com/microsoft/mssql-jdbc/issues/2598). |
+| Corrected schema filtering in getSchemas() | What changed: Ensured schemas are properly filtered when a catalog name is provided. [GitHub Issue #2643](https://github.com/microsoft/mssql-jdbc/issues/2643). |
+| Increased redirection limit | Raised maximum redirection hops from 1 to 10. [GitHub Issue #2659](https://github.com/microsoft/mssql-jdbc/issues/2659). |
+| Fix trustStoreType JVM property consultation in SSL connections. | Added comprehensive JVM system property consultation logic that follows the standard Java property resolution hierarchy. [GitHub Issue #2724](https://github.com/microsoft/mssql-jdbc/issues/2724).|
+| Properly Insert Accented Characters When Using Bulk Copy and Non-Unicode Strings | Updated executeBatch() to pass the correct databaseCollation down to the conversion logic. Ensured that byte arrays are converted back to strings using the actual database collation, preventing encoding mismatches. [GitHub Issue #2727](https://github.com/microsoft/mssql-jdbc/issues/2727). |
+| Handle SQL Comments at Start of Query in getGenerateKeys() Method | Replaced the naive INSERT check with the isInsert function to ensure generated keys are fetched even when queries start with comments. [GitHub Issue #2731](https://github.com/microsoft/mssql-jdbc/issues/2731). | 
+
+## Previous releases
 
 ## <a id="130"></a> 12.10
 
@@ -96,8 +165,6 @@ For the driver in a tar.gz file: [Chinese (Simplified)](https://go.microsoft.com
 | Fixed an issue where `SQLServerConnection` could enter an infinite loop | Fixed an infinite loop in `SQLServerConnection` by ensuring all statements in openStatements are closed and removed explicitly, and made bIsClosed and openStatements volatile. [GitHub Issue #2537](https://github.com/microsoft/mssql-jdbc/issues/2537). |
 | Fixed removal of question marks from columns labels (aliases) | Fix to enhance error handling in the `buildExecuteMetaData` method to better manage `SQLServerException`, ensuring that column labels (aliases) with question marks are correctly processed. [GitHub Issue #2535](https://github.com/microsoft/mssql-jdbc/issues/2535). |
 | Fixed the Kerberos authentication mechanism to provide compatibility with Java 17 and above | Fix addresses the deprecation of the `Subject.getSubject()` method by falling back to the replacement API when a deprecation exception is thrown. [GitHub Issue #2524](https://github.com/microsoft/mssql-jdbc/issues/2524). |
-
-## Previous releases
 
 ## <a id="128"></a> 12.8
 
