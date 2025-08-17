@@ -144,8 +144,8 @@ With the .NET templates for Microsoft.Build.Sql projects installed, you can crea
 Use the `-h` option to see all available options.
 
 ```bash
-# install Microsoft.Build.Sql.Templates
-dotnet new sqlproject -n MyDatabaseProject
+# create a new SQL database project
+dotnet new sqlproj -n MyDatabaseProject
 ```
 
 ::: zone-end
