@@ -6,7 +6,7 @@ ms.author: wiassaf
 ms.reviewer: damauri, mikeray
 ms.date: 07/24/2025
 ms.service: sql
-ms.topic: language-reference
+ms.topic: faq
 ms.collection:
   - ce-skilling-ai-copilot
 ms.custom:
@@ -120,3 +120,4 @@ Review the self-paced [Azure SQL Cryptozoology AI Embeddings](https://devblogs.m
 - [CREATE VECTOR INDEX (Transact-SQL)](../../t-sql/statements/create-vector-index-transact-sql.md)
 - [Azure SQL Database Vector Search Samples](https://github.com/Azure-Samples/azure-sql-db-vector-search)
 - [Intelligent applications with Azure SQL Database](/azure/azure-sql/database/ai-artificial-intelligence-intelligent-applications)
+- [Intelligent applications and AI Frequently Asked Questions (FAQ)](../../sql-server/artificial-intelligence-intelligent-applications-faq.md)
