@@ -76,6 +76,8 @@ Only verified feedback is persisted. If the adjusted DOP results in a performanc
 
 ### Degree of parallelism (DOP) feedback considerations
 
+DOP Feedback is `not enabled` by default in [!INCLUDE [SQL Server 2022](../../includes/sssql22-md.md)]. It is also not available in the [SQL Server 2022 update policy](/azure/azure-sql/managed-instance/update-policy#sql-server-2022-update-policy) of the [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)] offering.
+
 Minimum DOP for any query adjusted with DOP feedback is 2. Serial executions are out of scope for DOP feedback.
 
 Feedback information can be tracked using the [sys.query_store_plan_feedback](../system-catalog-views/sys-query-store-plan-feedback.md) catalog view.
