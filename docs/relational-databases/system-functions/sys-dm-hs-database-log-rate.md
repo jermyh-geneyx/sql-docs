@@ -1,10 +1,10 @@
 ---
 title: "sys.dm_hs_database_log_rate (Transact-SQL)"
-description: sys.dm_hs_database_log_rate (Transact-SQL)
+description: The sys.dm_hs_database_log_rate dynamic management function returns information about log generation rate in Azure SQL Database Hyperscale.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: dfurman, atsingh
-ms.date: 12/18/2024
+ms.date: 08/11/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -15,6 +15,8 @@ f1_keywords:
   - "dm_hs_database_log_rate_TSQL"
 helpviewer_keywords:
   - "sys.dm_hs_database_log_rate catalog view"
+  - "sys.dm_hs_database_log_rate function"
+  - "sys.dm_hs_database_log_rate DMF"
 dev_langs:
   - "TSQL"
 monikerRange: "=azuresqldb-current"
@@ -23,16 +25,15 @@ monikerRange: "=azuresqldb-current"
 
 [!INCLUDE [Azure SQL Database](../../includes/applies-to-version/asdb.md)]
 
-Each resultset row returns a component that controls (reduces) log generation rate in a Hyperscale database. There are multiple [components in Hyperscale tier architecture](/azure/azure-sql/database/hyperscale-architecture) that could contribute to the reducing log generation rate.
+The `sys.dm_hs_database_log_rate` dynamic management function (DMF) returns information about log generation rate in Azure SQL Database Hyperscale.
+
+Each row in the result set represents a component that controls (reduces) log generation rate in a Hyperscale database. There are multiple [components in Hyperscale tier architecture](/azure/azure-sql/database/hyperscale-architecture) that could reduce log generation rate to keep database performance stable and balanced.
 
 Certain types of components, such as secondary compute replicas or page servers, can temporarily reduce log generation rate on the primary compute replica to ensure the overall database health and stability.
 
 If log generation rate is not reduced by any component, a row is returned for the primary compute replica component, showing the maximum allowed log generation rate for the database.
 
 This dynamic management function returns rows only when the session is connected to the primary replica.
-
-> [!NOTE]
-> The `sys.dm_hs_database_log_rate` dynamic management function currently applies to Azure SQL Database Hyperscale tier only.
 
 ## Syntax
 
@@ -48,9 +49,9 @@ sys.dm_hs_database_log_rate (
 
 *database_id* is an **integer** representing the database ID, with no default value. Valid inputs are either a database ID or `NULL`.
 
-Specified `database_id`: Returns a row for that specific database.
+When a `database_id` is provided, `sys.dm_hs_database_log_rate` returns a row for that specific database.
 
-`NULL`: For a single database, returns a row for the current database. For a database in an elastic pool, returns rows for all databases in the pool where the caller has sufficient [permissions](#permissions).
+When not provided or when `NULL` is provided, for a single database, returns a row for the current database. For a database in an elastic pool, returns rows for all databases in the pool where the caller has sufficient [permissions](#permissions).
 
 The built-in function [DB_ID](../../t-sql/functions/db-id-transact-sql.md) can be specified.
 
@@ -71,6 +72,8 @@ The built-in function [DB_ID](../../t-sql/functions/db-id-transact-sql.md) can
 | `last_reported_time` | **datetime** | The last time the Hyperscale log service reported values. |
 
 ## Remarks
+
+The `sys.dm_hs_database_log_rate` dynamic management function applies to Azure SQL Database Hyperscale tier only.
 
 In the Hyperscale service tier of Azure SQL Database, the log service ensures that the distributed components don't get far behind in applying transaction log. This is required to maintain the overall system health and stability. When components are behind and their catch-up rate is less than current log generation rate, the log service reduces the log generation rate on the primary. The `sys.dm_hs_database_log_rate()` DMF can be used to understand which component is causing the reduction in log rate and to what extent, and for how long the reduction of log rate might last.
 
@@ -102,7 +105,8 @@ FROM sys.dm_hs_database_log_rate(NULL);
 
 ## Related content
 
-- [sys.dm_database_replica_states (Azure SQL Database)](sys-dm-database-replica-states-azure-sql-database.md?view=azuresqldb-current&preserve-view=true)
+- [sys.dm_database_replica_states (Azure SQL Database) (Transact-SQL)](../system-dynamic-management-views/sys-dm-database-replica-states-azure-sql-database.md?view=azuresqldb-current&preserve-view=true)
+- [sys.dm_hs_database_replicas (Transact-SQL)](sys-dm-hs-database-replicas.md?view=azuresqldb-current&preserve-view=true)
 - [sys.dm_exec_requests (Transact-SQL)](../system-dynamic-management-views/sys-dm-exec-requests-transact-sql.md?view=azuresqldb-current&preserve-view=true)
 - [sys.dm_os_wait_stats (Transact-SQL)](../system-dynamic-management-views/sys-dm-os-wait-stats-transact-sql.md?view=azuresqldb-current&preserve-view=true)
 - [DATABASEPROPERTYEX (Transact-SQL)](../../t-sql/functions/databasepropertyex-transact-sql.md?view=azuresqldb-current&preserve-view=true)
