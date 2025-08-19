@@ -4,7 +4,7 @@ description: This article describes the different types of secondary replicas av
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: atsingh, arvindsh
-ms.date: 11/04/2024
+ms.date: 08/11/2025
 ms.service: azure-sql-database
 ms.subservice: service-overview
 ms.topic: overview
@@ -40,6 +40,15 @@ A High Availability (HA) replica uses the same page servers as the primary repli
 HA replicas use the same server and database name as the primary replica. Their Service Level Objective (SLO) also always the same as for the primary replica. HA replicas aren't visible or manageable as stand-alone resources, from the portal or from any API. They're billed at the same compute rate as the primary replica, but storage costs don't apply to secondary replicas.
 
 There can be zero to four HA replicas. You can specify the number replicas during the creation of a new database, or update the number of replicas for an existing database. You can use the common management endpoints and tools (for example: Azure PowerShell, Azure CLI, Azure portal, REST API) to specify the number of HA replicas. Creating or removing HA replicas doesn't affect active connections on the primary replica.
+
+### Identify replicas
+
+You can identify all the Azure SQL Database Hyperscale replicas and their roles when connected to a primary replica with the [sys.dm_hs_database_replicas (Transact-SQL)](/sql/relational-databases/system-functions/sys-dm-hs-database-replicas) dynamic management view (DMV). For example:
+
+```sql
+SELECT replica_role_desc, replica_server_name, replica_id
+FROM sys.dm_hs_database_replicas(DB_ID(N'Contosodb'));
+```
 
 ### Connect to an HA replica
 

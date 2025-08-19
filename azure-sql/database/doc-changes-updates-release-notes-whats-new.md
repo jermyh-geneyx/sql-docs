@@ -5,7 +5,7 @@ description: Learn about the new features and documentation improvements for Azu
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: mathoma, randolphwest
-ms.date: 07/28/2025
+ms.date: 08/11/2025
 ms.service: azure-sql-database
 ms.subservice: service-overview
 ms.topic: whats-new
@@ -63,6 +63,7 @@ The following table lists features of Azure SQL Database that have been made gen
 
 | Feature | GA Month | Details |
 | --- | --- | --- |
+| **sys.dm_hs_database_replicas** | August 2025 | You can query the details of Azure SQL Database Hyperscale replicas with the new dynamic management view (DMV) [sys.dm_hs_database_replicas](/sql/relational-databases/system-functions/sys-dm-hs-database-replicas).|
 | **UNISTR (Transact-SQL)** | July 2025 | Azure SQL Database now supports the `UNISTR` T-SQL syntax for Unicode string literals. For more information, see [UNISTR (Transact-SQL)](/sql/t-sql/functions/unistr-transact-sql).|
 | **\|\| (String concatenation) and \|\|= (Compound assignment) syntax support** | July 2025 | Azure SQL Database now supports [\|\| (String concatenation)](/sql/t-sql/language-elements/string-concatenation-pipes-transact-sql?view=azuresqldb-current&preserve-view=true) and [\|\|= (Compound assignment)](/sql/t-sql/language-elements/compound-assignment-pipes-transact-sql?view=azuresqldb-current&preserve-view=true) Transact-SQL syntax.|
 | **Degrees of Parallelism (DOP) feedback** | July 2025 | [DOP Feedback](/sql/relational-databases/performance/intelligent-query-processing-degree-parallelism-feedback?view=azuresqldb-current&preserve-view=true) is now generally available for Azure SQL Database. For more information, see [Smarter Parallelism: Degree of parallelism feedback in SQL Server 2025](https://techcommunity.microsoft.com/blog/sqlserver/smarter-parallelism-degree-of-parallelism-feedback-in-sql-server-2025/4431318). |
@@ -86,17 +87,16 @@ The following table lists features of Azure SQL Database that have been made gen
 | **Maintenance window support for named replicas** |August 2024|[Maintenance window](maintenance-window.md) support for named replicas is now generally available. For more information, see [General Availability: Maintenance window support for Azure SQL Database Hyperscale named replica](https://aka.ms/MWsupportforNR).|
 | **Maintenance window support for Hyperscale** | August 2024| [Maintenance window](maintenance-window.md) support for Hyperscale databases is now generally available. |
 | **Automatic backups on secondary replicas** | August 2024 | Mitigate the performance impact on your workload by taking [automated backups from the non-readable secondary replica](automated-backups-overview.md#automatic-backups-on-secondary-replicas) in the Business Critical service tier. |
-| **Database compatibility level 160 is now default** | June 2024 | [Database compatibility level 160](/sql/t-sql/statements/alter-database-transact-sql-compatibility-level?view=azuresqldb-current&preserve-view=true) is now the default for new databases created in Azure SQL Database. For more information on this announcement, see [General availability: Database compatibility level 160 in Azure SQL Database](https://techcommunity.microsoft.com/t5/azure-sql-blog/general-availability-database-compatibility-level-160-in-azure/ba-p/4172039). |
-| **Hyperscale named replica zone redundant support** | June 2024 | [Zone redundancy support for Hyperscale named replicas](https://techcommunity.microsoft.com/blog/azuresqlblog/general-availability-maintenance-window-support-for-azure-sql-database-hyperscal/4207651) is now generally available. For more information, see [Hyperscale secondary replicas](service-tier-hyperscale-replicas.md). |
-| **License-free standby replica** | May 2024 | Save on licensing costs by configuring your [secondary database replica for disaster recovery standby](standby-replica-how-to-configure.md). |
-| **Elastic jobs** | April 2024 | [Elastic jobs, now generally available](https://techcommunity.microsoft.com/t5/azure-sql-blog/general-availability-elastic-jobs-in-azure-sql-database/ba-p/4087140), are the SQL Server Agent replacement for Azure SQL Database. [Elastic jobs](elastic-jobs-overview.md) now support Microsoft Entra ID authentication, private endpoints, management via REST APIs, Azure Alerts, and more new features since preview began. |
-| **Maintenance window advance notifications** | March 2024 | [Advance notifications](advance-notifications.md) are now generally available for databases configured to use a nondefault [maintenance window](maintenance-window.md). |
-| **Azure SQL triggers for Azure Functions** | March 2024 | Azure Functions supports [function triggers for Azure SQL Database](/azure/azure-functions/functions-bindings-azure-sql-trigger). |
-| **Serverless Hyperscale** | February 2024 | Automatically scale your Hyperscale databases up and down based on usage when using the [serverless compute tier](serverless-tier-overview.md). |
 
 ## Documentation changes
 
 Learn about significant changes to the Azure SQL Database documentation. For previous years, see the [What's new archive](doc-changes-updates-release-notes-whats-new-archive.md).
+
+### August 2025
+
+| Changes | Details |
+| --- | --- |
+| **sys.dm_hs_database_replicas** | You can query the details of Azure SQL Database Hyperscale replicas with the new dynamic management view (DMV) [sys.dm_hs_database_replicas](/sql/relational-databases/system-functions/sys-dm-hs-database-replicas).|
 
 ### July 2025
 

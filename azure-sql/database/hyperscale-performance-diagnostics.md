@@ -38,7 +38,7 @@ The following wait types appear in [sys.dm_os_wait_stats](/sql/relational-databa
 | `RBIO_RG_STORAGE_CHECKPOINT` | Delayed log consumption on by a page server due to slow database checkpoint |
 | `RBIO_RG_MIGRATION_TARGET` | Delayed log consumption by the non-Hyperscale database during reverse migration |
 
-The [sys.dm_hs_database_log_rate()](/sql/relational-databases/system-dynamic-management-views/sys-dm-hs-database-log-rate) dynamic management function (DMF) provides additional details to help you understand log rate reduction, if any. For example, it can tell you which specific secondary replica is behind applying log records, and what is the total size of the not yet applied transaction log.
+The [sys.dm_hs_database_log_rate()](/sql/relational-databases/system-functions/sys-dm-hs-database-log-rate) dynamic management function (DMF) provides additional details to help you understand log rate reduction, if any. For example, it can tell you which specific secondary replica is behind applying log records, and what is the total size of the not yet applied transaction log.
 
 ## Page server reads
 

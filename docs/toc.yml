@@ -11284,8 +11284,6 @@ items:
         href: relational-databases/system-catalog-views/sys-database-usage-azure-sql-database.md
       - name: sys.dm_elastic_pool_resource_stats
         href: relational-databases/system-dynamic-management-views/sys-dm-elastic-pool-resource-stats-azure-sql-database.md
-      - name: sys.dm_hs_database_log_rate
-        href: relational-databases/system-dynamic-management-views/sys-dm-hs-database-log-rate.md
       - name: sys.elastic_pool_resource_stats
         href: relational-databases/system-catalog-views/sys-elastic-pool-resource-stats-azure-sql-database.md
       - name: sys.event_log
@@ -12738,6 +12736,12 @@ items:
         href: relational-databases/system-functions/sys-fn-hadr-distributed-ag-replica-transact-sql.md
       - name: sys.fn_hadr_distributed_ag_database_replica
         href: relational-databases/system-functions/sys-fn-hadr-distributed-ag-database-replica-transact-sql.md
+    - name: Azure SQL Database Hyperscale
+      items:
+      - name: sys.dm_hs_database_log_rate
+        href: relational-databases/system-functions/sys-dm-hs-database-log-rate.md
+      - name: sys.dm_hs_database_replicas
+        href: relational-databases/system-functions/sys-dm-hs-database-replicas.md
     - name: Change Data Capture
       href: relational-databases/system-functions/change-data-capture-functions-transact-sql.md
       items:
