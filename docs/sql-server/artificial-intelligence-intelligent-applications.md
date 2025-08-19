@@ -3,8 +3,8 @@ title: Intelligent Applications and AI
 description: "Use AI options such as OpenAI and vectors to build intelligent applications with SQL Server and Azure SQL Managed Instance."
 author: MashaMSFT
 ms.author: mathoma
-ms.reviewer: damauri, josephsack, randolphwest, mathoma
-ms.date: 07/31/2025
+ms.reviewer: damauri, randolphwest, mathoma
+ms.date: 08/14/2025
 ms.update-cycle: 180-days
 ms.service: sql
 ms.topic: conceptual
@@ -15,9 +15,10 @@ ms.custom:
 ---
 # Intelligent applications and AI
 
-[!INCLUDE [sqlserver2025-asdb-asmi-fabricsqldb](../includes/applies-to-version/sqlserver2025-asmi.md)]
+[!INCLUDE [sqlserver2025-asdb-asmi-fabricsqldb](../includes/applies-to-version/sqlserver2025-asdb-asmi-fabricsqldb.md)]
 
 > [!div class="op_single_selector"]
+>
 > * [Azure SQL Database](/azure/azure-sql/database/ai-artificial-intelligence-intelligent-applications)
 > * [SQL Server & Azure SQL Managed Instance](ai-artificial-intelligence-intelligent-applications.md)
 
@@ -115,9 +116,7 @@ EXEC @retval = sp_invoke_external_rest_endpoint @url = 'https://<openai-url>/ope
     @payload = @payload,
     @response = @response OUTPUT;
 
-SELECT CAST([key] AS INT) AS [vector_value_id],
-    CAST([value] AS FLOAT) AS [vector_value]
-FROM OPENJSON(JSON_QUERY(@response, '$.result.data[0].embedding'));
+DECLARE @e VECTOR(1536) = JSON_QUERY(@response, '$.result.data[0].embedding');
 ```
 
 Using a call to a REST service to get embeddings is just one of the integration options you have when working with SQL Managed Instance and OpenAI. You can let any of the [available models](/azure/ai-services/openai/concepts/models) access data stored in the SQL Database Engine to create solutions where your users can interact with the data, such as the following example: 
@@ -201,9 +200,10 @@ An example of how easily Semantic Kernel helps to build AI-enabled solution is h
 
 - [The ultimate chatbot?](https://devblogs.microsoft.com/azure-sql/the-ultimate-chatbot/): Build a chatbot on your own data using both NL2SQL and RAG patterns for the ultimate user experience. 
 
-
 ## Related content
 
+- [Intelligent applications and AI Frequently Asked Questions (FAQ)](artificial-intelligence-intelligent-applications-faq.md)
+- [Vector and embeddings: Frequently asked questions (FAQ)](../relational-databases/vectors/vectors-faq.md)
 - [Create and deploy an Azure OpenAI Service resource](/azure/ai-services/openai/how-to/create-resource?pivots=web-portal)
 - [Embeddings models](/azure/ai-services/openai/concepts/models#embeddings-models)
 - [SQL AI Samples and Examples](https://aka.ms/sqlaisamples)
