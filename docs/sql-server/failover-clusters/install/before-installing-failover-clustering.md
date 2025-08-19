@@ -79,7 +79,7 @@ Before you install or update a [!INCLUDE[ssNoVersion](../../../includes/ssnovers
 
 If the cluster solution includes geographically dispersed cluster nodes, additional items like network latency and shared disk support must be verified.
 
-- For more information about [!INCLUDE[winserver2008](../../../includes/winserver2008-md.md)] and [!INCLUDE[winserver2008r2](../../../includes/winserver2008r2-md.md)], see [Validating Hardware for a failover cluster](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc732035(v=ws.10)) and [Support Policy for Windows Failover Clusters](/troubleshoot/windows-server/high-availability/microsoft-support-policy-failover-clusters).
+- For more information about [!INCLUDE[winserver2008](../../../includes/winserver2008-md.md)] and [!INCLUDE[winserver2008r2](../../../includes/winserver2008r2-md.md)], see [Validating Hardware for a failover cluster](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc732035(v=ws.10)) and [Support Policy for Windows Failover Clusters](https://go.microsoft.com/fwlink/?LinkId=196818).
 
 Verify that the disk where [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] will be installed isn't compressed or encrypted. If you attempt to install [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] to a compressed drive or an encrypted drive, [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] Setup fails.
 
