@@ -8,6 +8,7 @@ ms.date: 08/20/2025
 ms.service: sql
 ms.subservice: release-landing
 ms.topic: conceptual
+ms.update-cycle: 1825-days
 helpviewer_keywords:
   - "objects [SQL Server]"
   - "number capacity specifications [SQL Server]"

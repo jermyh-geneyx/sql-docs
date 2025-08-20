@@ -8,6 +8,7 @@ ms.date: 08/20/2025
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: conceptual
+ms.update-cycle: 1825-days
 ms.custom:
   - ignite-2024
 helpviewer_keywords:

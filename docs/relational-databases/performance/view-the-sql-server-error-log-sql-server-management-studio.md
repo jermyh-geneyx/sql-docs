@@ -7,6 +7,7 @@ ms.date: 08/20/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: how-to
+ms.update-cycle: 1825-days
 helpviewer_keywords:
   - "viewing logs"
   - "displaying logs"

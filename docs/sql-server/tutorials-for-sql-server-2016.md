@@ -6,6 +6,7 @@ ms.author: mikeray
 ms.date: 08/20/2025
 ms.service: sql
 ms.topic: tutorial
+ms.update-cycle: 1825-days
 ---
 # Tutorials for SQL Server
 

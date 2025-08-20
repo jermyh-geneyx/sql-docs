@@ -7,6 +7,7 @@ ms.reviewer: randolphwest
 ms.date: 08/20/2025
 ms.service: sql
 ms.topic: how-to
+ms.update-cycle: 1825-days
 helpviewer_keywords:
   - "change data capture [SQL Server], compared to change tracking"
   - "change data capture vs. change tracking"

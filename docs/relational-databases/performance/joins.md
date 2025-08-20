@@ -7,6 +7,7 @@ ms.date: 08/20/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
+ms.update-cycle: 1825-days
 ms.custom:
   - ignite-2024
 helpviewer_keywords:
@@ -119,9 +120,9 @@ The `SELECT` list for a join can reference all the columns in the joined tables,
 
 Although join conditions usually have equality comparisons (=), other comparison or relational operators can be specified, as can other predicates. For more information, see [Comparison Operators (Transact-SQL)](../../t-sql/language-elements/comparison-operators-transact-sql.md) and [WHERE (Transact-SQL)](../../t-sql/queries/where-transact-sql.md).
 
-When [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] processes joins, the Query Optimizer chooses the most efficient method (out of several possibilities) of processing the join. This includes choosing the most efficient type of physical join, the order in which the tables will be joined, and even using types of logical join operations that can't be directly expressed with [!INCLUDE [tsql](../../includes/tsql-md.md)] syntax, such as **semi joins** and **anti semi joins**. The physical execution of various joins can use many different optimizations and therefore cannot be reliably predicted. For more information on semi joins and anti semi joins, see [Showplan Logical and Physical Operators Reference](../showplan-logical-and-physical-operators-reference.md).
+When [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] processes joins, the Query Optimizer chooses the most efficient method (out of several possibilities) of processing the join. This includes choosing the most efficient type of physical join, the order in which the tables will be joined, and even using types of logical join operations that can't be directly expressed with [!INCLUDE [tsql](../../includes/tsql-md.md)] syntax, such as **semi joins** and **anti semi joins**. The physical execution of various joins can use many different optimizations and therefore can't be reliably predicted. For more information on semi joins and anti semi joins, see [Showplan Logical and Physical Operators Reference](../showplan-logical-and-physical-operators-reference.md).
 
-Columns used in a join condition aren't required to have the same name or be the same data type. However, if the data types are not identical, they must be compatible, or be types that [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] can implicitly convert. If the data types can't be implicitly converted, the join condition must explicitly convert the data type using the `CAST` function. For more information about implicit and explicit conversions, see [Data Type Conversion (Database Engine)](../../t-sql/data-types/data-type-conversion-database-engine.md).
+Columns used in a join condition aren't required to have the same name or be the same data type. However, if the data types aren't identical, they must be compatible, or be types that [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] can implicitly convert. If the data types can't be implicitly converted, the join condition must explicitly convert the data type using the `CAST` function. For more information about implicit and explicit conversions, see [Data Type Conversion (Database Engine)](../../t-sql/data-types/data-type-conversion-database-engine.md).
 
 Most queries using a join can be rewritten using a subquery (a query nested within another query), and most subqueries can be rewritten as joins. For more information about subqueries, see [Subqueries](subqueries.md).
 
@@ -133,11 +134,12 @@ Most queries using a join can be rewritten using a subquery (a query nested with
 <a id="nested_loops"></a>
 
 ## Understand nested loops joins
+
 If one join input is small (fewer than 10 rows) and the other join input is fairly large and indexed on its join columns, an index nested loops join is the fastest join operation because they require the least I/O and the fewest comparisons.
 
 The nested loops join, also called *nested iteration*, uses one join input as the outer input table (shown as the top input in the graphical execution plan) and one as the inner (bottom) input table. The outer loop consumes the outer input table row by row. The inner loop, executed for each outer row, searches for matching rows in the inner input table.
 
-In the simplest case, the search scans an entire table or index; this is called a *naive nested loops join*. If the search exploits an index, it's called an *index nested loops join*. If the index is built as part of the query plan (and destroyed upon completion of the query), it is called a *temporary index nested loops join*. All these variants are considered by the Query Optimizer.
+In the simplest case, the search scans an entire table or index; this is called a *naive nested loops join*. If the search exploits an index, it's called an *index nested loops join*. If the index is built as part of the query plan (and destroyed upon completion of the query), it's called a *temporary index nested loops join*. All these variants are considered by the Query Optimizer.
 
 A nested loops join is particularly effective if the outer input is small and the inner input is preindexed and large. In many small transactions, such as those affecting only a small set of rows, index nested loops joins are superior to both merge joins and hash joins. In large queries, however, nested loops joins are often not the optimal choice.
 
@@ -146,6 +148,7 @@ When the OPTIMIZED attribute of a Nested Loops join operator is set to **True**,
 <a id="merge"></a>
 
 ## Merge joins
+
 If the two join inputs aren't small but are sorted on their join column (for example, if they were obtained by scanning sorted indexes), a merge join is the fastest join operation. If both join inputs are large and the two inputs are of similar sizes, a merge join with prior sorting and a hash join offer similar performance. However, hash join operations are often much faster if the two input sizes differ significantly from each other.
 
 The merge join requires both inputs to be sorted on the merge columns, which are defined by the equality (`ON`) clauses of the join predicate. The query optimizer typically scans an index, if one exists on the proper set of columns, or it places a sort operator below the merge join. In rare cases, there can be multiple equality clauses, but the merge columns are taken from only some of the available equality clauses.
@@ -161,9 +164,10 @@ Merge join itself is very fast, but it can be an expensive choice if sort operat
 <a id="hash"></a>
 
 ## Hash joins
+
 Hash joins can efficiently process large, unsorted, nonindexed inputs. They are useful for intermediate results in complex queries because:
 
--   Intermediate results aren't indexed (unless explicitly saved to disk and then indexed) and often are not suitably sorted for the next operation in the query plan.
+-   Intermediate results aren't indexed (unless explicitly saved to disk and then indexed) and often aren't suitably sorted for the next operation in the query plan.
 -   Query optimizers estimate only intermediate result sizes. Because estimates can be very inaccurate for complex queries, algorithms to process intermediate results not only must be efficient, but also must degrade gracefully if an intermediate result turns out to be much larger than anticipated.
 
 The hash join allows reductions in the use of denormalization. Denormalization is typically used to achieve better performance by reducing join operations, in spite of the dangers of redundancy, such as inconsistent updates. Hash joins reduce the need to denormalize. Hash joins allow vertical partitioning (representing groups of columns from a single table in separate files or indexes) to become a viable option for physical database design.
@@ -177,16 +181,19 @@ The following sections describe different types of hash joins: in-memory hash jo
 <a id="inmem_hash"></a>
 
 ### In-memory hash join
+
 The hash join first scans or computes the entire build input and then builds a hash table in memory. Each row is inserted into a hash bucket depending on the hash value computed for the hash key. If the entire build input is smaller than the available memory, all rows can be inserted into the hash table. This build phase is followed by the probe phase. The entire probe input is scanned or computed one row at a time, and for each probe row, the hash key's value is computed, the corresponding hash bucket is scanned, and the matches are produced.
 
 <a id="grace_hash"></a>
 
 ### Grace hash join
+
 If the build input doesn't fit in memory, a hash join proceeds in several steps. This is known as a grace hash join. Each step has a build phase and probe phase. Initially, the entire build and probe inputs are consumed and partitioned (using a hash function on the hash keys) into multiple files. Using the hash function on the hash keys guarantees that any two joining records must be in the same pair of files. Therefore, the task of joining two large inputs has been reduced to multiple, but smaller, instances of the same tasks. The hash join is then applied to each pair of partitioned files.
 
 <a id="recursive_hash"></a>
 
 ### Recursive hash join
+
 If the build input is so large that inputs for a standard external merge would require multiple merge levels, multiple partitioning steps and multiple partitioning levels are required. If only some of the partitions are large, additional partitioning steps are used for only those specific partitions. In order to make all partitioning steps as fast as possible, large, asynchronous I/O operations are used so that a single thread can keep multiple disk drives busy.
 
 > [!NOTE]  
@@ -202,6 +209,7 @@ If the Query Optimizer anticipates wrongly which of the two inputs is smaller an
 <a id="hash_bailout"></a>
 
 ### Hash bailout
+
 The term hash bailout is sometimes used to describe grace hash joins or recursive hash joins.
 
 > [!NOTE]  
@@ -212,6 +220,7 @@ For more information about hash bailout, see [Hash Warning Event Class](../event
 <a id="adaptive"></a>
 
 ## Adaptive joins
+
 [Batch mode](../../relational-databases/query-processing-architecture-guide.md#batch-mode-execution) Adaptive Joins enable the choice of a [Hash Join](#hash) or [Nested Loops](#nested_loops) join method to be deferred until **after** the first input has been scanned. The Adaptive Join operator defines a threshold that is used to decide when to switch to a Nested Loops plan. A query plan can therefore dynamically switch to a better join strategy during execution without having to be recompiled.
 
 > [!TIP]  
@@ -345,6 +354,7 @@ OPTION (USE HINT('DISABLE_BATCH_MODE_ADAPTIVE_JOINS'));
 <a id="nulls_joins"></a>
 
 ## Null values and joins
+
 When there are null values in the columns of the tables being joined, the null values don't match each other. The presence of null values in a column from one of the tables being joined can be returned only by using an outer join (unless the `WHERE` clause excludes null values).
 
 Here are two tables that each have `NULL` in the column that will participate in the join:

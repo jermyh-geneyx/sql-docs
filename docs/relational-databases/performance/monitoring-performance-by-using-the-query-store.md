@@ -7,6 +7,7 @@ ms.date: 08/20/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: concept-article
+ms.update-cycle: 1825-days
 ms.custom:
   - ignite-2024
   - sfi-image-nochange
