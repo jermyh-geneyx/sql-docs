@@ -147,7 +147,6 @@ You might encounter a wide variety of compatibility issues, depending both on th
 - [Tutorial: Migrate SQL Server to Azure SQL Database (offline)](database-migration-service.md)
 - [About Azure Migrate](/azure/migrate/migrate-services-overview)
 - [What is Azure SQL Database?](/azure/azure-sql/database/sql-database-paas-overview)
-- [Azure Migrate Business case total cost of ownership](/azure/migrate/concepts-business-case-calculation) 
 - [Cloud Adoption Framework for Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/contoso-migration-scale)
 - [Best practices for costing and sizing workloads for migration to Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/migrate-best-practices-costs)
 - [Cloud Migration Resources](https://azure.microsoft.com/migration/resources)

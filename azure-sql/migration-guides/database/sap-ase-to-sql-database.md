@@ -112,9 +112,7 @@ For more information about these issues and the steps to mitigate them, see the 
 
 - For a matrix of Microsoft and third-party services and tools that are available to assist you with various database and data migration scenarios and specialty tasks, see [Service and tools for data migration](/azure/dms/dms-tools-matrix).
 
-- To learn more about Azure SQL Database, see:
-   - [An overview of SQL Database](../../database/sql-database-paas-overview.md)
-   - [Azure Migrate Business case total cost of ownership](/azure/migrate/concepts-business-case-calculation) 
+- To learn more, see [An overview of Azure SQL Database](../../database/sql-database-paas-overview.md)
 
 - To learn more about the framework and adoption cycle for cloud migrations, see:
    -  [Cloud Adoption Framework for Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/contoso-migration-scale)

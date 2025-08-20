@@ -4,7 +4,7 @@ description: This article describes editions, features, and components supported
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: amitkh, vanto
-ms.date: 05/02/2025
+ms.date: 08/20/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -161,7 +161,7 @@ The Developer edition continues to support only one client for [SQL Server Distr
 | Performance data collector | Yes | Yes | Yes | No |
 | Standard performance reports | Yes | Yes | Yes | No |
 | Plan guides and plan freezing for plan guides | Yes | Yes | Yes | No |
-| Direct query of indexed views (using NOEXPAND hint) | Yes | Yes | Yes | Yes |
+| Direct query of indexed views (using `NOEXPAND` hint) | Yes | Yes | Yes | Yes |
 | Automatic indexed views maintenance | Yes | Yes | Yes | No |
 | Distributed partitioned views | Yes | No | No | No |
 | Parallel index operations | Yes | No | No | No |
@@ -180,7 +180,7 @@ The Developer edition continues to support only one client for [SQL Server Distr
 | Temporal | Yes | Yes | Yes | Yes |
 | Native XML support | Yes | Yes | Yes | Yes |
 | XML indexing | Yes | Yes | Yes | Yes |
-| MERGE and UPSERT capabilities | Yes | Yes | Yes | Yes |
+| `MERGE` and UPSERT capabilities | Yes | Yes | Yes | Yes |
 | Date and time data types | Yes | Yes | Yes | Yes |
 | Internationalization support | Yes | Yes | Yes | Yes |
 | Full-text and semantic search | Yes | Yes | Yes | Yes |
@@ -228,6 +228,7 @@ The following features and services aren't available for [!INCLUDE [sssql17](../
 | **Security** | Extensible Key Management (EKM) | |
 | | Windows integrated authentication for linked servers | |
 | | Windows integrated authentication for availability group (AG) endpoints | Create and use certificate based endpoint authentication for availability groups. For more information, see [Configure SQL Server Always On Availability Group for high availability on Linux](sql-server-linux-availability-group-configure-ha.md). |
+| | SQL Server on Linux deployments aren't FIPS compliant | |
 | **Services** | SQL Server Browser | |
 | | SQL Server R services | SQL Server R is supported within [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], but [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] R services as a separate package isn't supported.<br /><br />You can install Machine Learning Services on Linux for [SQL Server 2019](sql-server-linux-setup-machine-learning.md) and [SQL Server 2022](sql-server-linux-setup-machine-learning-sql-2022.md). |
 | | Analysis Services | |
