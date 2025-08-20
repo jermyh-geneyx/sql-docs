@@ -188,6 +188,5 @@ The Data SQL Engineering team developed these resources. This team's core charte
 - [Migration guide: SQL Server to Azure SQL Database](guide.md)
 - [Services and tools available for data migration scenarios](/azure/dms/dms-tools-matrix)
 - [What is Azure SQL Database?](/azure/azure-sql/database/sql-database-paas-overview)
-- [Azure Migrate Business case total cost of ownership](/azure/migrate/concepts-business-case-calculation) 
 - [Cloud Adoption Framework for Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/contoso-migration-scale)
 - [Best practices for costing and sizing workloads migrated to Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/migrate-best-practices-costs)

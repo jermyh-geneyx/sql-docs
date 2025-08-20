@@ -174,9 +174,6 @@ conceptualContent:
         - text: Azure Migrate
           url: /azure/migrate/migrate-services-overview
           itemType: concept
-        - text: Azure Migrate Business case total cost of ownership
-          url: /azure/migrate/concepts-business-case-calculation
-          itemType: reference
         - text: Azure Hybrid Benefit
           url: https://azure.microsoft.com/pricing/hybrid-benefit/
           itemType: reference
