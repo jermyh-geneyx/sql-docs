@@ -4,7 +4,7 @@ description: The ai_generate_chunks table-valued function creates text chunks.
 author: jettermctedder
 ms.author: bspendolini
 ms.reviewer: randolphwest
-ms.date: 06/27/2025
+ms.date: 08/11/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: "reference"
@@ -24,10 +24,10 @@ monikerRange: "=azuresqldb-current || >=sql-server-ver17 || >=sql-server-linux-v
 
 [!INCLUDE [sqlserver2025](../../includes/applies-to-version/sqlserver2025.md)]
 
-> [!NOTE]
-> `AI_GENERATE_CHUNKS` in SQL Server 2025 is currently in **preview**.
-
 `AI_GENERATE_CHUNKS` is a table-valued function that creates "chunks", or fragments of text based on a type, size, and source expression.
+
+> [!NOTE]
+> `AI_GENERATE_CHUNKS` in SQL Server 2025 is currently in **preview**. In order to use this feature, you must enable the `PREVIEW_FEATURES` [database scoped configuration](../statements/alter-database-scoped-configuration-transact-sql.md#preview-features).
 
 #### Compatibility level 170
 

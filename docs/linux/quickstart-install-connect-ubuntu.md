@@ -3,7 +3,7 @@ title: "Ubuntu: Install SQL Server on Linux"
 description: This quickstart shows how to install SQL Server 2017 and later versions on Ubuntu and then create and query a database with sqlcmd.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 05/02/2025
+ms.date: 08/12/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: quickstart
@@ -45,6 +45,9 @@ For more information on supported platforms, see [Release notes for SQL Server 2
 ::: moniker range=">=sql-server-linux-ver17 || >=sql-server-ver17"
 
 In this quickstart, you install [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] on Ubuntu 22.04. Then you can connect with **sqlcmd** to create your first database and run queries.
+
+> [!NOTE]  
+> Ubuntu 24.04 is supported in preview for [!INCLUDE [sssql25-md](../includes/sssql25-md.md)]. Currently, only the 180-day Enterprise Evaluation edition is available.
 
 For more information on supported platforms, see [Release notes for SQL Server 2025 Preview on Linux](sql-server-linux-release-notes-2025.md).
 
@@ -327,6 +330,8 @@ To configure [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Ubunt
 <!--SQL Server 2025 on Linux-->
 ::: moniker range=">=sql-server-linux-ver17 || >=sql-server-ver17"
 
+### [Ubuntu 22.04](#tab/2025ubuntu2204)
+
 1. Download the public key, convert from ASCII to GPG format, and write it to the required location:
 
    ```bash
@@ -372,9 +377,54 @@ To configure [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Ubunt
 
 1. If you plan to connect remotely, you might also need to open the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] TCP port (default 1433) on your firewall.
 
-::: moniker-end
+At this point, [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] is running on your Ubuntu machine and is ready to use.
+
+### [Ubuntu 24.04 (in preview)](#tab/2505ubuntu2404)
+
+1. Download the public key, convert from ASCII to GPG format, and write it to the required location:
+
+   ```bash
+   curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | sudo gpg --dearmor -o /usr/share/keyrings/microsoft-prod.gpg
+   ```
+
+1. Manually download and register the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] Ubuntu repository:
+
+   ```bash
+   curl -fsSL https://packages.microsoft.com/config/ubuntu/24.04/mssql-server-preview.list | sudo tee /etc/apt/sources.list.d/mssql-server-preview.list
+   ```
+
+   > [!TIP]  
+   > If you want to install a different version of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], see the [[!INCLUDE [sssql17-md](../includes/sssql17-md.md)]](quickstart-install-connect-ubuntu.md?view=sql-server-linux-2017&preserve-view=true#install), [[!INCLUDE [sssql19-md](../includes/sssql19-md.md)]](quickstart-install-connect-ubuntu.md?view=sql-server-linux-ver15&preserve-view=true#install), or [[!INCLUDE [sssql22-md](../includes/sssql22-md.md)]](quickstart-install-connect-ubuntu.md?view=sql-server-linux-ver16&preserve-view=true#install) versions of this article.
+
+1. Run the following commands to install [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]:
+
+   ```bash
+   sudo apt-get update
+   sudo apt-get install -y mssql-server
+   ```
+
+1. After the package installation finishes, run `mssql-conf setup` and follow the prompts to set the `sa` password and choose your edition. As a reminder, the following [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] editions are freely licensed: Evaluation, Developer, and Express.
+
+   ```bash
+   sudo /opt/mssql/bin/mssql-conf setup
+   ```
+
+   > [!CAUTION]  
+   > [!INCLUDE [password-complexity](includes/password-complexity.md)]
+
+1. Once the configuration is done, verify that the service is running:
+
+   ```bash
+   systemctl status mssql-server --no-pager
+   ```
+
+1. If you plan to connect remotely, you might also need to open the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] TCP port (default 1433) on your firewall.
 
 At this point, [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] is running on your Ubuntu machine and is ready to use.
+
+---
+
+::: moniker-end
 
 ## Disable the SA account as a best practice
 

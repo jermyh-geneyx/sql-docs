@@ -4,7 +4,7 @@ description: sp_help_log_shipping_primary_database retrieves primary database se
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 06/23/2025
+ms.date: 08/11/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -67,6 +67,8 @@ The ID of the primary database for the log shipping configuration. *@primary_id*
 | `last_backup_date` | The time and date of the last log backup operation. |
 | `last_backup_date_utc` | The time and date of the last transaction log backup operation on the primary database, expressed in Coordinated Universal Time. |
 | `history_retention_period` | The amount of time, in minutes, that log shipping history records are retained for a given primary database before being deleted. |
+| `primary_connection_options` | Additional connection options for the connection made between the log shipping executable and the primary replica instance. <br /><br /> Available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] RC 0 and later.|
+| `monitor_connection_options` | Additional connection options for the connection made between the primary replica instance and the remote monitor. <br /><br /> Available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] RC 0 and later.|
 
 ## Remarks
 

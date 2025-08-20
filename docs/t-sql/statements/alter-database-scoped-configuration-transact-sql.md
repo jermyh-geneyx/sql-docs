@@ -58,7 +58,6 @@ The following settings are supported in [!INCLUDE [ssazure-sqldb](../../includes
 - Specify the number of minutes a paused resumable index operation is paused before it is automatically aborted by the [!INCLUDE [ssDE-md](../../includes/ssde-md.md)].
 - Enable or disable waiting for locks at low priority for asynchronous statistics update.
 - Enable or disable uploading ledger digests to Azure Blob Storage.
-- Enable or disable optimized Halloween protection.
 
 This setting is only available in [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)].
 
@@ -115,8 +114,8 @@ ALTER DATABASE SCOPED CONFIGURATION
     | PARAMETER_SENSITIVE_PLAN_OPTIMIZATION = { ON | OFF }
     | LEDGER_DIGEST_STORAGE_ENDPOINT = { <endpoint URL string> | OFF }
     | OPTIMIZED_SP_EXECUTESQL = { ON | OFF }
-    | OPTIMIZED_HALLOWEEN_PROTECTION = { ON | OFF }
     | OPTIONAL_PARAMETER_PLAN_OPTIMIZATION = { ON | OFF }
+    | PREVIEW_FEATURES = { ON | OFF}
 }
 ```
 
@@ -512,15 +511,6 @@ Enables or disables the compilation serialization behavior of `sp_executesql` wh
 
 When `OPTIMIZED_SP_EXECUTESQL` is `ON`, the first execution of sp_executesql compiles and inserts its compiled plan into the plan cache. Other sessions abort waiting on the compile lock and reuse the plan once it becomes available. This allows `sp_executesql` to behave like objects such as stored procedures and triggers from a compilation perspective.
 
-#### OPTIMIZED_HALLOWEEN_PROTECTION = { ON | OFF }
-
-**Applies to:** [!INCLUDE [sql-server-2025](../../includes/sssql25-md.md)]
-
-Enables or disables [optimized Halloween protection](../../relational-databases/performance/intelligent-query-processing-details.md#optimized-halloween-protection) for data modification language (DML) statements. The default is `ON`. When enabled, provides Halloween protection without using a spool operator in the query plan.
-
-> [!NOTE]  
-> For database compatibility level 160 or lower, this database scoped configuration has no effect.
-
 #### OPTIONAL_PARAMETER_PLAN_OPTIMIZATION = { ON | OFF }
 
 **Applies to:** [!INCLUDE [sql-server-2025](../../includes/sssql25-md.md)]
@@ -535,6 +525,21 @@ When enabled, the adaptive plan optimization generates multiple execution plans 
 The feature can choose a more optimal plan at runtime based on whether the parameter is `NULL`, which improves performance for queries that could otherwise default to suboptimal performance for such query patterns.
 
 The default is `ON` starting in database compatibility level 170.
+
+<a id="preview-features"></a>
+
+#### PREVIEW_FEATURES = { ON | OFF }
+
+**Applies to:** [!INCLUDE [sql-server-2025](../../includes/sssql25-md.md)]
+
+Allows usage of preview features. To learn more, review [Preview features in SQL Server](../../sql-server/sql-server-2025-release-notes.md#preview-features). 
+
+Default is `OFF`.
+
+For an example of how to use this option, see [Using preview features in SQL Server](#n-enable-preview-features). 
+
+> [!CAUTION]
+> Preview features are not recommended for production environments. 
 
 ## Permissions
 
@@ -789,6 +794,20 @@ This example disables uploading ledger digests.
 ```sql
 ALTER DATABASE SCOPED CONFIGURATION
 SET LEDGER_DIGEST_STORAGE_ENDPOINT = OFF;
+```
+
+### N. Enable preview features
+
+Enable the ability to use features in [preview](#preview-features).
+
+```sql
+ALTER DATABASE SCOPED CONFIGURATION 
+SET PREVIEW_FEATURES = ON;
+GO
+
+SELECT * FROM sys.database_scoped_configurations 
+WHERE [name] = 'PREVIEW_FEATURES'
+GO
 ```
 
 ## Additional Resources

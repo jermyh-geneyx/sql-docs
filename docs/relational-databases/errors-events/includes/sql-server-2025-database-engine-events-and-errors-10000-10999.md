@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/15/2025
+ms.date: 08/14/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -140,7 +140,7 @@ ms.topic: include
 | 10333 | 16 | Yes | Failed to obtain ICLRAppDomainResourceMonitor interface from CLR. The error code from CLR was: 0x%x. As a result, resource monitoring won't work for AppDomain with ID %d. |
 | 10334 | 16 | No | Changing the database compatibility level has caused data to be marked as unchecked in one or more objects in database %s. Refer to the column has_unchecked_assembly_data in the sys.tables and sys.views to locate all such objects. |
 | 10335 | 16 | No | The Common Language Runtime (CLR) was loaded in an unsupported manner. This can occur if an extended stored procedure or OLE Automation object running in SQL Server calls into managed code before the CLR integration runtime host loads the CLR. You need to restart SQL Server to use CLR integration features. |
-| 10336 | 10 | No | Failed to enque task to start CLR during SQL server startup. Error code: %u. CLR will be started in an on-demand fashion. |
+| 10336 | 10 | No | Failed to enqueue task to start CLR during SQL Server startup. Error code: %u. CLR will be started in an on-demand fashion. |
 | 10337 | 16 | No | An internal error occurred. |
 | 10338 | 16 | No | Verification of assembly failed. Could not open the physical file '%.\*ls': %ls. |
 | 10339 | 16 | No | Verification of assembly failed. Could not read from the physical file "%.\*ls": %ls. |
@@ -393,15 +393,15 @@ ms.topic: include
 | 10925 | 16 | No | A %S_MSG value was specified more than one time in the pool affinity range list. |
 | 10926 | 16 | No | The %S_MSG range that specifies %S_MSG %d includes at least one %S_MSG that is not available to the current instance. The maximum %S_MSG number that is available to this instance is %d. |
 | 10927 | 16 | No | The operation could not be completed. The specified '%.\*ls' value, %u, causes the sum of minimums on all workload groups using resource pool '%.\*ls' to exceed 100 percent. Reduce the value or modify other workload groups so that the sum is less than or equal to 100. |
-| 10928 | 16 | No | Resource ID : %d. The %ls limit for the database is %d and has been reached. See '[https://learn.microsoft.com/azure/azure-sql/database/resource-limits-logical-server](/azure/azure-sql/database/resource-limits-logical-server)' for assistance. |
-| 10929 | 16 | No | Resource ID : %d. The %ls minimum guarantee is %d, maximum limit is %d and the current usage for the database is %d. However, the server is currently too busy to support %ls greater than %d for this database. See '[https://learn.microsoft.com/azure/azure-sql/database/resource-limits-logical-server](/azure/azure-sql/database/resource-limits-logical-server)' for assistance. Otherwise, please try again later. |
+| 10928 | 16 | No | Resource ID : %d. The %ls limit for the database is %d and has been reached. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323004](https://go.microsoft.com/fwlink/?linkid=2323004). |
+| 10929 | 16 | No | Resource ID : %d. The %ls minimum guarantee is %d, maximum limit is %d and the current usage for the database is %d. However, the server is currently too busy to support %ls greater than %d for this database. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323004](https://go.microsoft.com/fwlink/?linkid=2323004) or try again later. |
 | 10930 | 16 | No | The service is currently too busy. Please try again later. |
 | 10931 | 16 | No | Cannot drop resource pool '%.\*ls' because it is bound to a database. Remove all bindings to this resource pool before dropping it. |
 | 10932 | 16 | No | Resource governor configuration failed, because there is an active database in the resource pool being dropped. Take the database offline and try again. |
 | 10933 | 16 | No | A %S_MSG with id %d does not exist on this system. Use sys.dm_os_schedulers to locate valid %S_MSGs for this system. |
 | 10934 | 16 | No | Requested operation cannot be performed because the external resource pool '%.\*ls' does not exist. |
 | 10935 | 16 | No | External resource pool does not allow more than one processor group. |
-| 10936 | 16 | No | Resource ID : %d. The %ls limit for the elastic pool is %d and has been reached. See '[https://learn.microsoft.com/azure/azure-sql/database/resource-limits-logical-server](/azure/azure-sql/database/resource-limits-logical-server)' for assistance. |
+| 10936 | 16 | No | Resource ID : %d. The %ls limit for the elastic pool is %d and has been reached. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323004](https://go.microsoft.com/fwlink/?linkid=2323004). |
 | 10937 | 16 | No | Default workload group does not allow to alter attribute '%.\*ls'. |
 | 10938 | 16 | No | Contained Availability Group connections do not support Resource Governor DDL. Please retry using the instance connection. |
 | 10961 | 16 | No | The request has been aborted because its CPU usage exceeds the maximum configured limit for the workload group. |
@@ -413,5 +413,5 @@ ms.topic: include
 | 10986 | 10 | No | Load resource governor configuration from replicated master failed to complete. |
 | 10987 | 10 | No | Load resource governor configuration from replicated master failed to start. Unable to submit async task. |
 | 10988 | 16 | No | The %ls limit for the workspace is %d and has been reached. |
-| 10989 | 10 | No | %ls_MAX_TEMPDB_DATA_PERCENT is ignored when MAXSIZE for any tempdb data file is UNLIMITED. Make sure that MAXSIZE is set for each tempdb data file and try again. |
+| 10989 | 10 | Yes | %ls_MAX_TEMPDB_DATA_PERCENT is not in effect because tempdb configuration requirements aren't met. For more information, see [https://go.microsoft.com/fwlink/?linkid=2322219](https://go.microsoft.com/fwlink/?linkid=2322219). |
 | 10990 | 16 | No | The current tempdb space consumption by workload group '%s' exceeds the new configured limit. Increase the configured limit or reduce tempdb space consumption and try again. |

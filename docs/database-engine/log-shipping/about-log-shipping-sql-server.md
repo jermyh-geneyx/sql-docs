@@ -4,7 +4,7 @@ description: Learn about SQL Server log shipping, which sends transaction log ba
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest
-ms.date: 10/05/2023
+ms.date: 08/18/2025
 ms.service: sql
 ms.subservice: log-shipping
 ms.topic: conceptual
@@ -30,6 +30,47 @@ monikerRange: ">=sql-server-2016"
 [!INCLUDE [SQL Server](../../includes/applies-to-version/sqlserver.md)]
 
 [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Log shipping allows you to automatically send transaction log backups from a *primary database* on a *primary server* instance to one or more *secondary databases* on separate *secondary server* instances. The transaction log backups are applied to each of the secondary databases individually. An optional third server instance, known as the *monitor server*, records the history and status of backup and restore operations and, optionally, raises alerts if these operations fail to occur as scheduled.
+
+## <a id="ComponentsAndConcepts"></a> Log shipping overview
+
+Log shipping consists of three operations:
+
+1. Back up the transaction log at the primary server instance.
+1. Copy the transaction log file to the secondary server instance.
+1. Restore the log backup on the secondary server instance.
+
+The log can be shipped to multiple secondary server instances. In such cases, operations 2 and 3 are duplicated for each secondary server instance.
+
+A log shipping configuration does not automatically fail over from the primary server to the secondary server. If the primary database becomes unavailable, any of the secondary databases can be brought online manually.
+
+You can use a secondary database for reporting purposes.
+
+In addition, you can configure alerts for your log shipping configuration.
+
+### A typical log shipping configuration
+
+The following figure shows a log shipping configuration with the primary server instance, three secondary server instances, and a monitor server instance. The figure illustrates the steps performed by backup, copy, and restore jobs, as follows:
+
+1. The primary server instance runs the backup job to back up the transaction log on the primary database. This server instance then places the log backup into a primary log-backup file, which it sends to the backup folder.  In this figure, the backup folder is on a shared directory-the *backup share*.
+
+1. Each of the three secondary server instances runs its own copy job to copy the primary log-backup file to its own local destination folder.
+
+1. Each secondary server instance runs its own restore job to restore the log backup from the local destination folder onto the local secondary database.
+
+The primary and secondary server instances send their own history and status to the monitor server instance.
+
+:::image type="content" source="media/about-log-shipping-sql-server/log-shipping-typical-configuration.png" alt-text="Diagram of configuration showing backup, copy, and restore jobs.":::
+
+## Enforce TLS 1.3 encryption
+
+[!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] introduces [TDS 8.0](../../relational-databases/security/networking/tds-8.md) support for log shipping. The TDS 8.0 protocol provides enhanced security and encryption for data transmitted between the primary and secondary servers of a log shipping topology. Choose between enforcing mandatory or strict encryption for communication between servers. 
+
+In [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], log shipping uses [OLEDB version 19](../../connect/oledb/oledb-driver-for-sql-server.md) as the default version for linked servers, which has a default `Encrypt` value of `Mandatory`. 
+
+To use TLS 1.3 encryption in your existing log shipping configuration, drop and then recreate the topology using the new TLS 1.3 parameters in the [log shipping stored procedures](../../relational-databases/system-stored-procedures/log-shipping-stored-procedures-transact-sql.md).
+
+> [!NOTE]
+> Log shipping monitoring can break if the monitor is a remote [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] instance when other SQL Server instances in the log shipping topology use a previous version. 
 
 ## Benefits
 
@@ -68,36 +109,6 @@ monikerRange: ">=sql-server-2016"
 
   > [!TIP]  
   > For each alert, you need to specify an alert number. Also, be sure to configure the alert to notify an operator when an alert is raised.
-
-## <a id="ComponentsAndConcepts"></a> Log shipping overview
-
-Log shipping consists of three operations:
-
-1. Back up the transaction log at the primary server instance.
-1. Copy the transaction log file to the secondary server instance.
-1. Restore the log backup on the secondary server instance.
-
-The log can be shipped to multiple secondary server instances. In such cases, operations 2 and 3 are duplicated for each secondary server instance.
-
-A log shipping configuration does not automatically fail over from the primary server to the secondary server. If the primary database becomes unavailable, any of the secondary databases can be brought online manually.
-
-You can use a secondary database for reporting purposes.
-
-In addition, you can configure alerts for your log shipping configuration.
-
-### A typical log shipping configuration
-
-The following figure shows a log shipping configuration with the primary server instance, three secondary server instances, and a monitor server instance. The figure illustrates the steps performed by backup, copy, and restore jobs, as follows:
-
-1. The primary server instance runs the backup job to back up the transaction log on the primary database. This server instance then places the log backup into a primary log-backup file, which it sends to the backup folder.  In this figure, the backup folder is on a shared directory-the *backup share*.
-
-1. Each of the three secondary server instances runs its own copy job to copy the primary log-backup file to its own local destination folder.
-
-1. Each secondary server instance runs its own restore job to restore the log backup from the local destination folder onto the local secondary database.
-
-The primary and secondary server instances send their own history and status to the monitor server instance.
-
-:::image type="content" source="media/about-log-shipping-sql-server/log-shipping-typical-configuration.png" alt-text="Diagram of configuration showing backup, copy, and restore jobs.":::
 
 ## Interoperability
 

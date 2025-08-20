@@ -4,7 +4,7 @@ description: An Extended Events session is created in the Database Engine proces
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest
-ms.date: 10/22/2023
+ms.date: 08/07/2025
 ms.service: sql
 ms.subservice: xevents
 ms.topic: conceptual
@@ -14,6 +14,7 @@ helpviewer_keywords:
   - "extend events [SQL Server]"
 monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
 ---
+
 # Extended Events sessions
 
 [!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
@@ -60,6 +61,20 @@ Sessions have the following characteristics:
 *Buffering* refers to how event data is stored while an event session is running. Buffering policies specify how much memory to use for event data, and the loss policy for the events. *Dispatch* refers to the duration of time events stay in buffers before being served to targets for processing.
 
 *Causality tracking* tracks work across multiple tasks. When causality tracking is enabled, each event fired has a unique activity ID across the system. The activity ID is a combination of a GUID value that remains constant across all events for a task, and a sequence number that is incremented each time an event is fired. When one task causes work to be done on another, the activity ID of the parent is sent to the child task. The child task outputs the parent's activity ID the first time it fires an event.
+
+### Time-bound event sessions
+
+Starting with [!INCLUDE [sql-server-2025](../../includes/sssql25-md.md)], you can create an event session that stops automatically after the specified time elapses. This helps avoid situations where sessions might be left running indefinitely by mistake, consuming resources and potentially generating a large amount of data.
+
+When the event data produced by a session is voluminous, time-bound event sessions help you capture smaller, targeted diagnostic data for specific durations of time. You can start a time-bound event session manually or using a scheduled job at the time of your choice and with a guarantee that the session won't be left running indefinitely.
+
+To make an event session time-bound, specify the `MAX_DURATION` argument when creating or modifying the session. For more information, see [CREATE EVENT SESSION](../../t-sql/statements/create-event-session-transact-sql.md#max_duration---time-duration--seconds--minutes--hours--days---unlimited-) and [ALTER EVENT SESSION](../../t-sql/statements/alter-event-session-transact-sql.md).
+
+Just like any event session, you can stop a time-bound session before its maximum duration time elapses using the `ALTER EVENT SESSION ... STATE = STOP` statement. If the session is started again, the entire time duration specified by `MAX_DURATION` must elapse again before the session is stopped automatically.
+
+You can also modify an existing event session using `ALTER EVENT SESSION` and either specify a different maximum duration time, or remove it by specifying `MAX_DURATION = UNLIMITED`. To modify the `MAX_DURATION` setting, the session must be stopped.
+
+If an event session is time-bound, the `max_duration` column the in [sys.server_event_sessions](../system-catalog-views/sys-server-event-sessions-transact-sql.md) catalog view shows the maximum duration of the session in seconds. The event session has unlimited duration if the value is zero.
 
 ## Related content
 

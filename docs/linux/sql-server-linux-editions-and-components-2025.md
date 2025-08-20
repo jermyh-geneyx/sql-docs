@@ -230,7 +230,6 @@ The following features and services aren't available for [!INCLUDE [sssql25](../
 | | Windows integrated authentication for linked servers | |
 | | Windows integrated authentication for availability group (AG) endpoints | Create and use certificate based endpoint authentication for availability groups. For more information, see [Configure SQL Server Always On Availability Group for high availability on Linux](sql-server-linux-availability-group-configure-ha.md). |
 | | Always Encrypted with secure enclaves | |
-| | TLS 1.3 | |
 | | SQL Server on Linux deployments aren't FIPS compliant | |
 | **Services** | SQL Server Browser | |
 | | SQL Server R services | SQL Server R is supported within [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], but [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] R services as a separate package isn't supported.<br /><br />You can install Machine Learning Services on Linux for [SQL Server 2019](sql-server-linux-setup-machine-learning.md) and [SQL Server 2022](sql-server-linux-setup-machine-learning-sql-2022.md). |

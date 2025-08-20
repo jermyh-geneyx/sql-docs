@@ -19,7 +19,8 @@ ms.custom:
 This article describes how to configure [change event streaming (CES)](overview.md) feature introduced in [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)].
 
 > [!NOTE]
-> Change event streaming is currently in **preview** for SQL Server 2025. 
+> Change event streaming is currently in [preview](https://azure.microsoft.com/support/legal/preview-supplemental-terms) for SQL Server 2025 and requires enabling the [preview feature database scoped configuration](../../../t-sql/statements/alter-database-scoped-configuration-transact-sql.md#preview-features). During preview, this feature is subject to change. For current supportability, see [Limitations](configure.md#limitations).
+
 
 ## Overview
 
@@ -41,6 +42,7 @@ To configure change event streaming, you need the following:
 - Azure Event Hubs host name
 - Policy with **Send** access level
 - A login in the [db_owner](../../security/authentication-access/database-level-roles.md#fixed-database-roles) role or that has [CONTROL DATABASE](../../security/permissions-database-engine.md#permissions-database-engine) permission for the database where you intend to enable CES.
+- Set the [database scoped credential preview configuration option](../../../t-sql/statements/alter-database-scoped-configuration-transact-sql.md#preview-features) to yes.
 
 ## Configure Azure Event Hubs
 

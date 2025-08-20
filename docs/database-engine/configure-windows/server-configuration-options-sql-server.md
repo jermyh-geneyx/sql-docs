@@ -166,7 +166,7 @@ The following table lists all available configuration options, the range of poss
 | [optimize for ad hoc workloads](optimize-for-ad-hoc-workloads-server-configuration-option.md) (A) | **Minimum**: `0`<br />**Maximum**: `1`<br />**Default**: `0` | Yes | Yes |
 | [PH timeout](ph-timeout-server-configuration-option.md) (A) | **Minimum**: `1`<br />**Maximum**: `3600`<br />**Default**: `60` | Yes | Yes |
 | [polybase enabled](../../relational-databases/polybase/polybase-installation.md#enable) | **Minimum**: `0`<br />**Maximum**: `1`<br />**Default**: `0` | [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and later versions | No |
-| [polybase network encryption](../../relational-databases/polybase/polybase-installation.md#enable) | **Minimum**: `0`<br />**Maximum**: `1`<br />**Default**: `1` | Yes | Yes |
+| [polybase network encryption](polybase-network-encryption-server-configuration-option.md) | **Minimum**: `0`<br />**Maximum**: `1`<br />**Default**: `1` | Yes | Yes |
 | [precompute rank](../discontinued-database-engine-functionality-in-sql-server.md) (A) | **Minimum**: `0`<br />**Maximum**: `1`<br />**Default**: `0` | Yes | Yes |
 | [priority boost](configure-the-priority-boost-server-configuration-option.md) (A, RR) | **Minimum**: `0`<br />**Maximum**: `1`<br />**Default**: `0` | Yes | No |
 | [query governor cost limit](configure-the-query-governor-cost-limit-server-configuration-option.md) (A) | **Minimum**: `0`<br />**Maximum**: `2147483647`<br />**Default**: `0` | Yes | Yes |

@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/15/2025
+ms.date: 08/14/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -613,7 +613,7 @@ ms.topic: include
 | 15855 | 16 | No | Data conversion error (overflow) for column '%ls'. Underlying data description: %ls. |
 | 15856 | 16 | No | I/O operation against '%ls' failed (details: {Operation = '%ls', HRESULT = '%ls'}). |
 | 15857 | 16 | No | Precision loss occurred for '%ls' in column '%ls'. Set NUMERIC_ROUNDABORT to OFF to ignore the precision loss. |
-| 15858 | 16 | No | Cannot obtain AAD token to access storage. Error message: '%ls'. |
+| 15858 | 16 | No | Cannot obtain a Microsoft Entra ID token to access storage. Error message: '%ls'. |
 | 15859 | 16 | No | Cannot create external table. Provided storage type is not supported for CETAS. |
 | 15860 | 16 | No | External table location path is not valid. Location provided: '%ls' |
 | 15861 | 16 | No | Cannot create statistics on lob type column. |

@@ -4,7 +4,7 @@ description: SQL Server on Linux uses TLS to encrypt data transmitted across a n
 author: amitkh-msft
 ms.author: amitkh
 ms.reviewer: vanto, randolphwest
-ms.date: 11/18/2024
+ms.date: 08/14/2024
 ms.service: sql
 ms.subservice: linux
 ms.topic: how-to
@@ -17,7 +17,12 @@ helpviewer_keywords:
 
 [!INCLUDE [SQL Server - Linux](../includes/applies-to-version/sql-linux.md)]
 
-[!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] on Linux can use Transport Layer Security (TLS) to encrypt data that is transmitted across a network between a client application and an instance of [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)]. [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] supports the same TLS protocols on both Windows and Linux: TLS 1.2, 1.1, and 1.0. However, the steps to configure TLS are specific to the operating system on which [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] is running.
+[!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] on Linux can use Transport Layer Security (TLS) to encrypt data that is transmitted across a network between a client application and an instance of [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)]. [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] supports the same TLS protocols on both Windows and Linux: 1.2, 1.1, and 1.0.
+
+> [!NOTE]  
+> Starting in [!INCLUDE [sssql25-md](../includes/sssql25-md.md)], TLS 1.3 is enabled by default.
+
+The steps to configure TLS are specific to the operating system on which [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] is running.
 
 ## Requirements for certificates
 
@@ -72,12 +77,25 @@ sudo mv mssql.key /etc/ssl/private/
 
 ### Configure SQL Server
 
+For [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] and earlier versions:
+
 ```bash
 systemctl stop mssql-server
 sudo cat /var/opt/mssql/mssql.conf
 sudo /opt/mssql/bin/mssql-conf set network.tlscert /etc/ssl/certs/mssql.pem
 sudo /opt/mssql/bin/mssql-conf set network.tlskey /etc/ssl/private/mssql.key
 sudo /opt/mssql/bin/mssql-conf set network.tlsprotocols 1.2
+sudo /opt/mssql/bin/mssql-conf set network.forceencryption 0
+systemctl restart mssql-server
+```
+
+For [!INCLUDE [sssql25-md](../includes/sssql25-md.md)]:
+
+```bash
+systemctl stop mssql-server
+sudo cat /var/opt/mssql/mssql.conf
+sudo /opt/mssql/bin/mssql-conf set network.tlscert /etc/ssl/certs/mssql.pem
+sudo /opt/mssql/bin/mssql-conf set network.tlskey /etc/ssl/private/mssql.key
 sudo /opt/mssql/bin/mssql-conf set network.forceencryption 0
 systemctl restart mssql-server
 ```
@@ -153,12 +171,25 @@ sudo mv mssql.key /etc/ssl/private/
 
 ### Configure SQL Server
 
+For [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] and earlier versions:
+
 ```bash
 systemctl stop mssql-server
 sudo cat /var/opt/mssql/mssql.conf
 sudo /opt/mssql/bin/mssql-conf set network.tlscert /etc/ssl/certs/mssql.pem
 sudo /opt/mssql/bin/mssql-conf set network.tlskey /etc/ssl/private/mssql.key
 sudo /opt/mssql/bin/mssql-conf set network.tlsprotocols 1.2
+sudo /opt/mssql/bin/mssql-conf set network.forceencryption 1
+systemctl restart mssql-server
+```
+
+For [!INCLUDE [sssql25-md](../includes/sssql25-md.md)]:
+
+```bash
+systemctl stop mssql-server
+sudo cat /var/opt/mssql/mssql.conf
+sudo /opt/mssql/bin/mssql-conf set network.tlscert /etc/ssl/certs/mssql.pem
+sudo /opt/mssql/bin/mssql-conf set network.tlskey /etc/ssl/private/mssql.key
 sudo /opt/mssql/bin/mssql-conf set network.forceencryption 1
 systemctl restart mssql-server
 ```

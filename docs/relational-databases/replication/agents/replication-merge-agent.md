@@ -156,18 +156,23 @@ replmerg [-?]
   
  **-DynamicSnapshotLocation** _dynamic_snapshot_location_  
  Is the location of the filtered data snapshot files when the publication uses parameterized row filters.  
+
+<a id="encryption-level"></a>
   
- **-EncryptionLevel** [ **0** \| **1** \| **2** ]  
+ **-EncryptionLevel** [ **0** \| **1** \| **2** \| **4**]  
  Is the level of Transport Layer Security (TLS), previously known as Secure Sockets Layer (SSL), encryption used by the Merge Agent when making connections.  
   
 |EncryptionLevel value|Description|  
 |---------------------------|-----------------|  
-|**0**|Specifies that TLS is not used.|  
-|**1**|Specifies that TLS is used, but the agent does not verify that the TLS/SSL server certificate is signed by a trusted issuer.|  
-|**2**|Specifies that TLS is used, and that the certificate is verified.|  
+|`0`|Specifies that TLS is not used.|  
+|`1`|Specifies that TLS is used, but the agent does not verify that the TLS/SSL server certificate is signed by a trusted issuer.|  
+|`2`|Specifies that TLS is used, and that the certificate is verified.| 
+|`3`| Not supported, because option `3` is specific for connections towards Azure SQL Managed Instance, and merge replication is not supported with Azure SQL Managed Instance. |
+|`4`| Specifies that for connections from SQL Server 2025 (RC 0 and later) to SQL Server (any supported version), TLS 1.3 is used, and the certificate is verified. Requires installing the certificate on SQL Server hosts that are receiving connections with `EncryptionLevel` set to `4`. |
 
- > [!NOTE]  
- >  A valid TLS/SSL certificate is defined with a fully qualified domain name of the SQL Server. In order for the agent to connect successfully when setting -EncryptionLevel to 2, create an alias on the local SQL Server. The 'Alias Name' parameter should be the server name and the 'Server' parameter should be set to the fully qualified name of the SQL Server.
+[!INCLUDE [sql-25-repl-info](../../../includes/sql-25-repl-info.md)] 
+
+A valid TLS/SSL certificate is defined with a fully qualified domain name of the SQL Server. In order for the agent to connect successfully when setting -EncryptionLevel to 2, create an alias on the local SQL Server. The 'Alias Name' parameter should be the server name and the 'Server' parameter should be set to the fully qualified name of the SQL Server.
 
  For more information, see [View and modify replication security settings](../../../relational-databases/replication/security/view-and-modify-replication-security-settings.md).  
   
@@ -249,7 +254,7 @@ replmerg [-?]
  Specifies the IIS security mode used when connecting to the Web server during Web synchronization. A value of **0** indicates Basic Authentication, and a value of **1** indicates Windows Integrated Authentication (default).  
   
  **-InternetTimeout** _internet_timeout_  
- Is the number of seconds before a connection to the to the [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] replication listener ISAPI DLL times out.  
+ Is the number of seconds before a connection to the [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] replication listener ISAPI DLL times out.  
   
  **-InternetURL** _internet_url_  
  Specifies the URL used to connect to the [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] replication listener ISAPI DLL. This property must be specified.  

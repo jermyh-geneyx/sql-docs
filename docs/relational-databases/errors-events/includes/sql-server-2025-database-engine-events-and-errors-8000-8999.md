@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/15/2025
+ms.date: 08/14/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -76,6 +76,7 @@ ms.topic: include
 | 8067 | 16 | No | The incoming tabular data stream (TDS) remote procedure call (RPC) protocol stream is incorrect. Parameter %d ("%.\*ls"): Encryption type is not supported by this version of SQL Server. |
 | 8068 | 16 | No | The incoming tabular data stream (TDS) remote procedure call (RPC) protocol stream is incorrect. Parameter %d ("%.\*ls"): Column encryption key database id, id or version are out of bounds. |
 | 8069 | 16 | No | The incoming tabular data stream (TDS) remote procedure call (RPC) protocol stream is incorrect. Parameter %d ("%.\*ls"): JSON data type is not supported in TDS on the server side. |
+| 8070 | 16 | No | The incoming tabular data stream (TDS) remote procedure call (RPC) protocol stream is incorrect. Parameter %d ("%.\*ls"): vector data type is not supported in TDS on the server side. |
 | 8101 | 16 | No | An explicit value for the identity column in table '%.\*ls' can only be specified when a column list is used and IDENTITY_INSERT is ON. |
 | 8102 | 16 | No | Cannot update identity column '%.\*ls'. |
 | 8103 | 16 | No | Table '%.\*ls' does not exist or cannot be opened for SET operation. |
@@ -249,7 +250,7 @@ ms.topic: include
 | 8431 | 16 | No | The message type '%.\*ls' is not part of the service contract. |
 | 8432 | 16 | No | The message cannot be sent because the message type '%.\*ls' is marked SENT BY TARGET in the contract, however this service is an Initiator. |
 | 8433 | 16 | No | The message body may not be NULL. A zero-length UNICODE or binary string is allowed. |
-| 8434 | 16 | No | The message cannot be sent because the message type '%.\*ls' is marked SENT BY INTITIATOR in the contract, however this service is a Target. |
+| 8434 | 16 | No | The message cannot be sent because the message type '%.\*ls' is marked SENT BY INITIATOR in the contract, however this service is a Target. |
 | 8435 | 16 | No | The conversation handle "%.\*ls" at position %d is not found. |
 | 8436 | 16 | No | The conversation group "%.\*ls" is not found. |
 | 8437 | 16 | No | The message received was sent by a Target service, but the message type '%.\*ls' is marked SENT BY INITIATOR in the contract. |
@@ -351,15 +352,15 @@ ms.topic: include
 | 8566 | 10 | Yes | Unable to commit a prepared transaction from the Microsoft Distributed Transaction Coordinator (MS DTC). Server will restart the database and MS DTC recovery is expected to resolve any in-doubt transaction. |
 | 8567 | 10 | Yes | Microsoft Distributed Transaction Coordinator (MS DTC) resource manager \[%ls\] has been released. This is an informational message only. No user action is required. |
 | 8568 | 10 | Yes | Microsoft Distributed Transaction Coordinator (MS DTC) failed to reenlist citing that the database RMID does not match the RMID \[%ls\] associated with the transaction. Please manually resolve the transaction. |
-| 8569 | 10 | Yes | SQL Server is unable to connect with Microsoft Distributed Transaction Coordinator (MS DTC). Check MSDTC security settings and, if running Always On, ensure that SQL Server has a firewall rule allowing incoming RPC Dynamic connections. |
+| 8569 | 10 | Yes | SQL Server is unable to connect with Microsoft Distributed Transaction Coordinator (MS DTC). Check MSDTC security settings and, if using Always On availability groups, ensure that SQL Server has a firewall rule allowing incoming RPC Dynamic connections. |
 | 8570 | 10 | Yes | Initializing Microsoft Distributed Transaction Coordinator (MS DTC) resource manager \[%ls\] for database '%ls'. This is an informational message only. No user action is required. |
 | 8571 | 10 | Yes | SQL Server is unable to get outcome from Microsoft Distributed Transaction Coordinator (MS DTC) for the transaction with UOW '%ls' because another resource manager with same RMID already exists. |
 | 8572 | 16 | Yes | DNS lookup for hostname '%ls' failed. |
 | 8573 | 10 | Yes | %ls '%ls' resolves to '%ls' IP address. |
 | 8574 | 16 | Yes | The provided host FQDN '%ls' is invalid. |
 | 8575 | 16 | Yes | NetBIOS hostname extracted from the provided FQDN is invalid. |
-| 8576 | 16 | Yes | RPC Endpoint Mappper on host '%ls' ('%ls') was unreachable. |
-| 8577 | 16 | Yes | DTC for Azure SQL Managed Instance %ls is disabled. To learn how to enable DTC, see: [https://learn.microsoft.com/azure/azure-sql/managed-instance/distributed-transaction-coordinator-dtc](/azure/azure-sql/managed-instance/distributed-transaction-coordinator-dtc). |
+| 8576 | 16 | Yes | RPC Endpoint Mapper on host '%ls' ('%ls') was unreachable. |
+| 8577 | 16 | Yes | DTC for SQL managed instance %ls is disabled. To learn how to enable DTC, see [https://go.microsoft.com/fwlink/?linkid=2323006](https://go.microsoft.com/fwlink/?linkid=2323006). |
 | 8578 | 10 | Yes | %ls test %ls. |
 | 8579 | 10 | Yes | Testing connection to '%ls' ('%ls') succeeded. |
 | 8580 | 16 | Yes | The provided remote transaction manager whereabouts are invalid. |
@@ -480,12 +481,12 @@ ms.topic: include
 | 8740 | 17 | No | The row is too large to be shuffled between distributions. Row Size in Bytes: %d: Max Allowed Row Size in Bytes: %d. Please contact support for assistance. |
 | 8741 | 17 | No | An error occurred when reading data moved from one distribution to another. Additional details: '%s'. Try to run the query again. If the error persists, contact support. |
 | 8742 | 17 | No | An error occurred when attempting to allocate memory in SQL Server by external library. Try to run the query again. If the error persists, contact support. |
-| 8743 | 17 | No | Error 0x%X - Could not allocate tempdb space while transferring data from one distribution to another. Additional details: '%s'. See 'https://aka.ms/monitor-temp-db' for assistance. |
+| 8743 | 17 | No | Error 0x%X - Could not allocate tempdb space while transferring data from one distribution to another. Additional details: '%s'. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323823](https://go.microsoft.com/fwlink/?linkid=2323823). |
 | 8744 | 15 | No | REDISTRIBUTE_PREFIX hint expect the %ld join condition to be an equality comparison of columns with directly comparable types. Modify the query and re-run it. |
 | 8745 | 16 | No | Merge statements with a WHEN NOT MATCHED \[BY TARGET\] clause must target a hash distributed table. |
 | 8746 | 17 | No | Error occurred when serializing source types to move to another distribution. Please try to run the query again. If the error persists, please contact support. |
 | 8747 | 15 | No | The table option XML_COMPRESSION is not allowed when a table specifies a clustered columnstore index. |
-| 8748 | 16 | No | The enable_ordinal argument for %S_MSG only supports constant values (not variables or columns). |
+| 8748 | 16 | No | The %.\*ls argument for %S_MSG only supports constant values (not variables or columns). |
 | 8749 | 16 | No | Get node value from XML DOM failed. |
 | 8750 | 16 | No | Get attribute from XML DOM failed. |
 | 8751 | 16 | No | Get named item from XML DOM failed. |
@@ -493,7 +494,7 @@ ms.topic: include
 | 8753 | 16 | No | Get multiple nodes from XML DOM failed. |
 | 8754 | 16 | No | Error while creating an XML parser instance. |
 | 8755 | 16 | No | Variant type change failed. |
-| 8756 | 16 | No | Loading XML DOM from byte strean failed. Reason:%ls |
+| 8756 | 16 | No | Loading XML DOM from byte stream failed. Reason:%ls |
 | 8757 | 16 | No | Get document element XML DOM failed. |
 | 8758 | 16 | No | Get next node from XML DOM node failed. |
 | 8759 | 16 | No | Get length of node list from XML DOM node failed. |
@@ -538,8 +539,8 @@ ms.topic: include
 | 8904 | 16 | No | Extent %S_PGID in database ID %d is allocated by more than one allocation object. |
 | 8905 | 16 | No | Extent %S_PGID in database ID %d is marked allocated in the GAM, but no SGAM or IAM has allocated it. |
 | 8906 | 16 | No | Page %S_PGID in database ID %d is allocated in the SGAM %S_PGID and PFS %S_PGID, but was not allocated in any IAM. PFS flags '%hs'. |
-| 8907 | 16 | No | The spatial index, XML index or indexed view '%.\*ls' (object ID %d) contains rows that were not produced by the view definition. This does not necessarily represent an integrity issue with the data in this database. For more information about troubleshooting DBCC errors on indexed views, see SQL Server Books Online. |
-| 8908 | 16 | No | The spatial index, XML index or indexed view '%.\*ls' (object ID %d) does not contain all rows that the view definition produces. This does not necessarily represent an integrity issue with the data in this database. For more information about troubleshooting DBCC errors on spatial indexes, XML indexes, and indexed views, see SQL Server Books Online. |
+| 8907 | 16 | No | The spatial index, XML index, JSON index or indexed view '%.\*ls' (object ID %d) contains rows that were not produced by the view definition. This does not necessarily represent an integrity issue with the data in this database. For more information about troubleshooting DBCC errors on indexed views, see SQL Server Books Online. |
+| 8908 | 16 | No | The spatial index, XML index, JSON index or indexed view '%.\*ls' (object ID %d) does not contain all rows that the view definition produces. This does not necessarily represent an integrity issue with the data in this database. For more information about troubleshooting DBCC errors on spatial indexes, XML indexes, and indexed views, see SQL Server Books Online. |
 | 8909 | 16 | No | Table error: Object ID %d, index ID %d, partition ID %I64d, alloc unit ID %I64d (type %.\*ls), page ID %S_PGID contains an incorrect page ID in its page header. The PageId in the page header = %S_PGID. |
 | 8910 | 16 | No | Page %S_PGID in database ID %d is allocated to both object ID %d, index ID %d, partition ID %I64d, alloc unit ID %I64d (type %.\*ls), and object ID %d, index ID %d, partition ID %I64d, alloc unit ID %I64d (type %.\*ls). |
 | 8911 | 10 | No | The error has been repaired. |

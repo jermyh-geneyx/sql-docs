@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/15/2025
+ms.date: 08/14/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -172,7 +172,7 @@ ms.topic: include
 | 19404 | 16 | No | An availability replica '%.\*ls' that is specified in the READ_ONLY_ROUTING_LIST for availability replica '%.\*ls' does not have a value set for READ_ONLY_ROUTING_URL. Ensure a READ_ONLY_ROUTING_URL is set for each availability replica in the availability group. Specify a valid READ_ONLY_ROUTING_URL for each replica that you want to added to the READ_ONLY_ROUTING_LIST. If you are altering availability replicas of an existing availability group, you can get the names of availability replicas in a given availability group, select replica_server_name from sys.availability_replicas and name from sys.availability_groups. For more information, see SQL Server Books Online. |
 | 19405 | 16 | No | Failed to create, join or add replica to availability group '%.\*ls', because node '%.\*ls' is a possible owner for both replica '%.\*ls' and '%.\*ls'. If one replica is failover cluster instance, remove the overlapped node from its possible owners and try again. |
 | 19406 | 10 | No | The state of the local availability replica in availability group '%.\*ls' has changed from '%ls' to '%ls'. %ls. For more information, see the SQL Server error log or cluster log. If this is a Windows Server Failover Clustering (WSFC) availability group, you can also see the WSFC management console. |
-| [19407](../mssqlserver-19407-database-engine-error.md) | 16 | No | The lease between availability group '%.\*ls' and the Windows Server Failover Cluster has expired. A connectivity issue occurred between the instance of SQL Server and the Windows Server Failover Cluster. To determine whether the availability group is failing over correctly, check the corresponding availability group resource in the Windows Server Failover Cluster. |
+| [19407](../mssqlserver-19407-database-engine-error.md) | 16 | No | The lease between availability group '%.\*ls' and the Windows Server Failover Cluster has expired. A connectivity issue occurred between the instance of SQL Server and the Windows Server Failover Cluster. To determine whether the availability group is failing over correctly, check the corresponding availability group resource in the Windows Server Failover Cluster. For more information, see [https://go.microsoft.com/fwlink/?linkid=2322140](https://go.microsoft.com/fwlink/?linkid=2322140). |
 | 19408 | 10 | No | The Windows Server Failover Clustering (WSFC) cluster context of Always On Availability Groups has been changed to the remote WSFC cluster, '%.\*ls'. An ALTER SERVER CONFIGURATION SET HADR CLUSTER CONTEXT = 'remote_wsfc_cluster_name' command switched the cluster context from the local WSFC cluster to this remote WSFC cluster. This is an informational message only. No user action is required. |
 | 19409 | 10 | No | The Windows Server Failover Clustering (WSFC) cluster context of Always On Availability Groups has been changed to the local WSFC cluster. An ALTER SERVER CONFIGURATION SET HADR CLUSTER LOCAL command switched the cluster context from the remote WSFC cluster, '%.\*ls', to the local WSFC cluster. On this local WSFC cluster, availability databases no longer belong to any availability group, and they are transitioning to the RESTORING state. This is an informational message only. No user action is required. |
 | 19410 | 16 | No | An attempt to switch the Windows Server Failover Clustering (WSFC) cluster context of Always On Availability Groups to a remote WSFC cluster failed. This is because one or more availability replicas hosted by the local instance of SQL Server are currently joined to an availability group on the local WSFC cluster. Remove each of the joined replicas from its respective availability group. Then retry your ALTER SERVER CONFIGURATION SET HADR CLUSTER CONTEXT = '%.\*ls' command. |
@@ -184,18 +184,18 @@ ms.topic: include
 | 19416 | 16 | No | One or more databases in availability group '%.\*ls' are not synchronized. On a synchronous-commit availability replica, ALTER AVAILABILITY GROUP \<group_name\> OFFLINE is not allowed when one or more databases are not synchronized. Wait for all databases to reach the SYNCHRONIZED state, and retry the command. |
 | 19417 | 16 | No | An attempt to fail over or create an availability group failed. This operation is not supported when Always On Availability Groups is running under a remote Windows Server Failover Clustering (WSFC) cluster context. Under a remote cluster context, failing over or creating availability groups are not supported. |
 | 19418 | 16 | No | The ALTER SERVER CONFIGURATION SET HADR CLUSTER CONTEXT = '%.\*ls' command failed because the local Windows Server Failover Clustering (WSFC) cluster name,'%.\*ls', was specified. Retry the command, specifying the name of a remote WSFC cluster. |
-| [19419](../mssqlserver-19419-database-engine-error.md) | 16 | No | Windows Server Failover Cluster did not receive a process event signal from SQL Server hosting availability group '%.\*ls' within the lease timeout period. |
+| [19419](../mssqlserver-19419-database-engine-error.md) | 16 | No | Windows Server Failover Cluster did not receive a process event signal from SQL Server hosting availability group '%.\*ls' within the lease timeout period. For more information, see [https://go.microsoft.com/fwlink/?linkid=2322141](https://go.microsoft.com/fwlink/?linkid=2322141). |
 | 19420 | 10 | No | The availability group '%.\*ls' is being asked to stop the lease renewal because the availability group is going offline. This is an informational message only. No user action is required. |
-| [19421](../mssqlserver-19421-database-engine-error.md) | 16 | No | SQL Server hosting availability group '%.\*ls' did not receive a process event signal from the Windows Server Failover Cluster within the lease timeout period. |
+| [19421](../mssqlserver-19421-database-engine-error.md) | 16 | No | SQL Server hosting availability group '%.\*ls' did not receive a process event signal from the Windows Server Failover Cluster within the lease timeout period. For more information, see [https://go.microsoft.com/fwlink/?linkid=2322221](https://go.microsoft.com/fwlink/?linkid=2322221). |
 | 19422 | 16 | No | The renewal of the lease between availability group '%.\*ls' and the Windows Server Failover Cluster failed because SQL Server encountered Windows error with error code ('%d'). |
 | 19423 | 16 | No | The lease of availability group '%.\*ls' lease is no longer valid to start the lease renewal process. |
 | 19424 | 10 | No | The lease worker of availability group '%.\*ls' is now sleeping the excess lease time (%u ms) supplied during online. This is an informational message only. No user action is required. |
 | 19431 | 16 | No | Always On Availability Groups transport for availability database "%.\*ls" has hit flow control boundary with log block whose LSN is %S_LSN. This error happens when secondary replica doesn't have buffer to receive a new message from primary. This is an informational message only. No user action is required. |
 | 19432 | 16 | No | Always On Availability Groups transport has detected a missing log block for availability database "%.\*ls". LSN of last applied log block is %S_LSN. Log scan will be restarted to fix the issue. This is an informational message only. No user action is required. |
-| 19433 | 16 | No | Always On: AG integrity check failed to find AG name to ID map entry with matching group ID for AG '%.\*ls' (expected: '%.\*ls'; found '%.\*ls'). |
-| 19434 | 16 | No | Always On: AG integrity check failed to find AG name to ID map entry with matching resource ID for AG '%.\*ls' (expected: '%.\*ls'; found '%.\*ls'). |
-| 19435 | 16 | No | Always On: AG integrity check failed for AG '%.\*ls' with error %d, severity %d, state %d. |
-| 19436 | 16 | No | Always On: A failure \[%d\] was encountered while waiting for LSN %S_LSN to be hardened on the Commit Manager \[%d\] for database ID \[%d\] on partner ID \[%s\]. |
+| 19433 | 16 | No | Always On Availability Groups: AG integrity check failed to find AG name to ID map entry with matching group ID for AG '%.\*ls' (expected: '%.\*ls'; found '%.\*ls'). |
+| 19434 | 16 | No | Always On Availability Groups: AG integrity check failed to find AG name to ID map entry with matching resource ID for AG '%.\*ls' (expected: '%.\*ls'; found '%.\*ls'). |
+| 19435 | 16 | No | Always On Availability Groups: AG integrity check failed for AG '%.\*ls' with error %d, severity %d, state %d. |
+| 19436 | 16 | No | Always On Availability Groups: A failure \[%d\] was encountered while waiting for LSN %S_LSN to be hardened on the Commit Manager \[%d\] for database ID \[%d\] on partner ID \[%s\]. |
 | 19437 | 16 | No | Cannot set READ_ONLY_ROUTING_URL to NONE for availability replica '%.\*ls' as it is being used in READ_ONLY_ROUTING_LIST of replica '%.\*ls'. Please remove the replica from the READ_ONLY_ROUTING_LIST and retry. For more information, see SQL Server Books Online. |
 | 19450 | 16 | No | Failed to open a cluster network interface object: '%ls'. The WSFC cluster control API returned error code %d. The WSFC service may not be running or may be inaccessible in its current state. For information about this error code, see "System Error Codes" in the Windows Development documentation. |
 | 19451 | 16 | No | '%.\*ls' and '%.\*ls' belong to the same subnet. Only one IPv4 and/or one IPv6 address from each subnet is allowed. For an advanced configuration, see the Windows Server Failover Clustering (WSFC) administrator to create a customized configuration through the Cluster Manager. |
@@ -238,7 +238,7 @@ ms.topic: include
 | 19488 | 16 | No | The attempt to create the network name and IP address for the listener failed, and the attempt to roll back the resources for the Network Name and IP Address resources has also failed. If this is a WSFC availability group, the WSFC service may not be running or may be inaccessible in its current state, or the values provided for the network name and IP address may be incorrect. Check the state of the WSFC cluster and validate the network name and IP address with the network administrator. Ensure that no Network Name or IP Address resource from this operation still exists in the cluster. Otherwise, contact your primary support provider. |
 | 19489 | 16 | No | The attempt to create FILESTREAM RsFx endpoint failed with HRESULT 0x%x. |
 | 19490 | 16 | No | The attempt to delete FILESTREAM RsFx endpoint failed with HRESULT 0x%x. |
-| 19491 | 10 | No | Always On: The Windows Server Failover Clustering (WSFC) service was started using /forcequorum. This is an informational message only. No user action is required. |
+| 19491 | 10 | No | Always On Availability Groups: The Windows Server Failover Clustering (WSFC) service was started using /forcequorum. This is an informational message only. No user action is required. |
 | 19492 | 16 | No | The availability database %ls in availability group %ls is in an invalid state to perform an internal operation. Refer to the error code for more details. If this condition persists, contact the system administrator. |
 | 19493 | 16 | No | Corrupt secondary replica %ls causing start scan to fail for database with ID %d. Refer to the SQL Server error log for information about the errors that were encountered. If this condition persists, contact the system administrator. |
 | 19494 | 10 | No | Automatic seeding of availability database '%ls' in availability group '%.\*ls' failed with a transient error. The operation will be retried. |
@@ -256,7 +256,7 @@ ms.topic: include
 | 19507 | 16 | No | Cannot create a distributed availability replica for availability group '%.\*ls'. There is an already existing distributed availability group on top of the same replicas. |
 | 19508 | 16 | No | 'ALTER AVAILABILITY GROUP MODIFY AVAILABILITY GROUP' command failed. Participant availability replica '%.\*ls' not found in the distributed availability group '%.\*ls'. |
 | 19509 | 16 | No | Cannot create a distributed availability group '%.\*ls'. An availability group with the same name already exists. |
-| 19510 | 16 | No | Distributed availability group '%.\*ls' not found. Rerun the command with an existing distributed availbility group. |
+| 19510 | 16 | No | Distributed availability group '%.\*ls' not found. Rerun the command with an existing distributed availability group. |
 | 19511 | 16 | No | Cannot join distributed availability group '%.\*ls'. The local availability group '%.\*ls' contains one or more databases. Remove all the databases or create an empty availability group to join a distributed availability group. |
 | 19512 | 16 | No | The requested operation only applies to distributed availability group, and is not supported on the specified availability group '%.\*ls'. Please make sure you are specifying the correct availability group name. |
 | 19513 | 16 | No | Cannot create a distributed availability replica for availability group '%.\*ls'. Distributed availability group cannot be built on top of basic local availability group. Please make sure you are specifying the correct local availability group name. |
@@ -285,12 +285,27 @@ ms.topic: include
 | 19536 | 10 | No | The default startup routine of database '%.\*ls' that belongs to an availability group (Group ID: %d) cannot be skipped because SQL Server did not initialize the Availability Replica Manager. This is an informational message only. No user action is required. |
 | 19537 | 10 | No | The WSFC is already taking action against availability group '%.\*ls'. SQL Server will attempt to online the availability group without interfering with the WSFC action. This is an informational message. No user action is required. |
 | 19538 | 10 | No | Availability group commit time has been set to %d millisecond(s). This value will take effect when the current replica is primary. |
-| 19539 | 16 | No | Unexpected error %d severity %d, state %d occurred while creating distributed availability group '%.\*ls'. Cleanup distributed availability group and try again. |
-| 19540 | 16 | No | Unexpected error occurred while dropping distributed availability group '%.\*ls'. Cleanup distributed availability group and try again. |
-| 19541 | 16 | No | Cannot create distributed availability group '%.\*ls' on top of availability group '%.\*ls'. An availability replica of the specified availability group with same endpoint url already exists. Verify that the specified endpoint url is correct and unique, then retry the operation. |
-| 19542 | 16 | No | An error occurred while adding database '%.\*ls' to availability group '%.\*ls' used by Managed Instance link '%.\*ls'. Please remove the database from the availability group and try again. |
-| 19543 | 16 | No | An error occurred while removing database '%.\*ls' from availability group '%.\*ls' used by Managed Instance link '%.\*ls'. Please try again. |
+| 19539 | 16 | No | Unexpected error %d severity %d, state %d occurred while creating distributed availability group '%.\*ls' with SQL Managed Instance. Drop the distributed availability group and try again. |
+| 19540 | 16 | No | Unexpected error occurred while handling distributed availability group. |
+| 19541 | 16 | No | Cannot create distributed availability group '%.\*ls' with SQL Managed Instance on top of availability group '%.\*ls'. An availability replica of the specified availability group with same endpoint URL already exists. Verify that the specified endpoint URL is correct and unique, then retry the operation. |
+| 19542 | 16 | No | Unexpected error %d severity %d, state %d occurred while adding database '%.\*ls' to availability group '%.\*ls' participating in distributed availability group '%.\*ls' with SQL Managed Instance. Please remove the database from the availability group and try again. |
+| 19543 | 16 | No | Unexpected error %d severity %d, state %d occurred while removing database '%.\*ls' from availability group '%.\*ls' participating in distributed availability group '%.\*ls' with SQL Managed Instance. Please try again. |
 | 19544 | 16 | No | Attempting to create an availability group with cluster_type set to NONE or EXTERNAL, with a name that is longer than 64 characters, is not supported. Please change the name of availability group '%.\*ls' to be 64 characters or less and try again. |
+| 19545 | 16 | No | 'ALTER AVAILABILITY GROUP' command failed for internal distributed availability group '%.\*ls'. Altering internal distributed availability groups is not supported. |
+| 19546 | 16 | No | 'ALTER DATABASE SET HADR' command failed for database '%.\*ls'. This command is not supported for databases participating in distributed availability group with SQL Managed Instance. |
+| 19547 | 16 | No | The integrity check for distributed availability group '%.\*ls' with SQL Managed Instance failed with error cause: '%S_MSG'. Corrective action: '%S_MSG'. |
+| 19548 | 16 | No | The integrity check for distributed availability group '%.\*ls' with SQL Managed Instance failed with error cause: 'An availability database '%.\*ls' not participating in any internal distributed availability group.'. Corrective action: 'Remove the availability database from the availability group and add it back again.'. |
+| 19549 | 16 | No | Provided distributed availability group name '%.\*ls' is invalid. Please provide a name of a distributed availability group with SQL Managed Instance. |
+| 19550 | 16 | No | Distributed availability group with managed instance does not support having multiple databases. |
+| 19551 | 16 | No | The CLUSTER_CONNECTION_OPTIONS argument can only be specified when the availability group uses a Windows Server failover cluster. Remove CLUSTER_CONNECTION_OPTIONS and try again. |
+| 19552 | 16 | No | The current value of HostNameInCertificate is too long. Current length: %ld characters, maximum length: %ld characters. |
+| 19553 | 16 | No | The current value of ServerCertificate is too long. Current length: %ld characters, maximum length: %ld characters. |
+| 19554 | 16 | No | Invalid key '%.\*ls' in the %.\*ls argument. For more information, see %.\*ls. |
+| 19555 | 16 | No | The format of the '%.\*ls' argument is invalid. The expected format is '\<key=value\>;\<key=value\>;...'. Spaces and semicolons in keys or values are not allowed. For more information, see %.\*ls. |
+| 19556 | 16 | No | Invalid value '%.\*ls' for Encrypt. Valid values are Strict, Mandatory or Optional. For more information, see %.\*ls. |
+| 19557 | 16 | No | Invalid value '%.\*ls' for TrustServerCertificate. Valid values are Yes or No. For more information, see %.\*ls. |
+| 19558 | 16 | No | Duplicate key '%.\*ls' in %.\*ls. |
+| 19559 | 16 | No | The key 'Encrypt' must be specified in %.\*ls. |
 | 19601 | 16 | No | System error. |
 | 19602 | 16 | No | System error. |
 | 19603 | 16 | No | System error. |
@@ -449,7 +464,7 @@ ms.topic: include
 | 19836 | 16 | No | Unable to execute CREATE, ALTER, or DROP for a security policy on user tables because the warehouse is in user's identity mode for OneLake access. To use these statements, switch the warehouse or SQL endpoint to delegated identity mode. |
 | 19837 | 16 | No | CODEPAGEs different than 65001 and 1200 are not supported when JSON/JSONL format is specified. |
 | 19838 | 16 | No | CODEPAGE different than 65001 is not supported when JSON/JSONL format is specified. |
-| 19901 | 20 | No | An internal error occured. |
+| 19901 | 20 | No | An internal error occurred. |
 | 20001 | 10 | No | There is no nickname for article '%s' in publication '%s'. |
 | 20002 | 10 | No | The filter '%s' already exists for article '%s' in publication '%s'. |
 | 20003 | 10 | No | Could not generate nickname for '%s'. |
@@ -665,7 +680,7 @@ ms.topic: include
 | 20628 | 16 | No | Failed to generate dynamic snapshot. |
 | 20629 | 16 | No | Failed to get partition id information. |
 | 20630 | 16 | No | Cannot create partitioned snapshot job. A job already exists for publication '%ls' that uses the values you specified for the @suser_sname and/or @host_name parameters of sp_adddynamicsnapshot_job. If the job that already exists is not working correctly, use sp_dropdynamicsnapshot_job to drop it and create a new one using sp_adddynamicsnapshot_job. |
-| 20631 | 16 | No | Cannot find a location in which to generate a partitioned snapshot. Verify that the there is a valid snapshot folder specified for the publication. This can be the default folder associated with the Distributor or an alternate folder associated with the publication. |
+| 20631 | 16 | No | Cannot find a location in which to generate a partitioned snapshot. Verify that there is a valid snapshot folder specified for the publication. This can be the default folder associated with the Distributor or an alternate folder associated with the publication. |
 | 20632 | 16 | No | Failed to create a dynamic snapshot job to generate the dynamic snapshot. |
 | 20633 | 16 | No | Cannot start the partitioned snapshot job. Verify that SQL Server Agent is running on the Distributor. |
 | 20634 | 16 | No | The root publication information could not be found on the republisher. |

@@ -118,7 +118,7 @@ Initial release.
 ## 15.0.8264.8408, 2022/08/19
 *(Product Version: 15.0.1111.106)*
 
-Release Candidate 0 (RC0)
+Release Candidate 0 (RC 0)
 
 - New portal experience with performance improvements using Angular.
 - Accessibility fixes to many parts of the Portal.

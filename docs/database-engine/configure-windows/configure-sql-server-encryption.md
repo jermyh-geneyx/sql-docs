@@ -1,15 +1,15 @@
 ---
-title: Configure SQL Server Database Engine for encryption
-description: This article describes how to configure a SQL Server instance to enable encrypted connections.
+title: Encrypt connections by importing a certificate
+description: This article describes how to configure a SQL Server instance to enable encrypted connections by importing a certificate.
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: sureshka, randolphwest
-ms.date: 10/11/2024
+ms.date: 08/15/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: how-to
 ---
-# Configure SQL Server Database Engine for encrypting connections
+# Encrypt connections to SQL Server by importing a certificate 
 
 [!INCLUDE [sql-windows-only](../../includes/applies-to-version/sql-windows-only.md)]
 
@@ -24,10 +24,13 @@ This article describes how to configure [!INCLUDE [ssnoversion-md](../../include
 
 To configure [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] to use the certificates described in [Certificate requirements for SQL Server](certificate-requirements.md#certificate-requirements-for-sql-server-encryption), follow these steps:
 
-1. Install the certificate on the computer that's running [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)].
+1. Install the certificate on the computer that's running [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)]. If your SQL Server instance is part of an Always On availability group, or a failover cluster instance, then install the certificate on every replica of the availability group, or on every node of the failover cluster.
 1. Configure [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] to use the installed certificate.
 
 Depending on the version of [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] Configuration Manager you have access to on the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] computer, use one of the following procedures to install and configure the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] instance.
+
+> [!NOTE]
+> Certificate names that don't match the host name must be [imported manually](certificate-requirements.md#importing-a-certificate-with-a-different-name-to-the-hostname) to the local certificate store. 
 
 ### Computers with SQL Server Configuration Manager for SQL Server 2019 and later versions
 
@@ -54,7 +57,7 @@ If you use [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] or an earlier v
 1. If you require all the connections to [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] to be encrypted, see [Step 2: Configure encryption settings in SQL Server](#step-2-configure-encryption-settings-in-sql-server). If you only want to enable encryption for specific clients, restart the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] service and see [Special cases for encrypting connections to SQL Server](special-cases-for-encrypting-connections-sql-server.md).
 
 > [!NOTE]  
-> To install certificates in the availability group configuration, repeat the previous procedure on each node in your availability group, starting with the primary node.
+> To install certificates in the availability group configuration, repeat the previous procedure on each replica of your availability group, starting with the primary replica.
 
 > [!IMPORTANT]  
 > The [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] service account must have read permissions on the certificate used to force encryption on the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] instance. For a non-privileged service account, read permissions must be added to the certificate. Failure to do so can cause the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] service restart to fail.
@@ -85,7 +88,7 @@ This key contains a property of the certificate known as a thumbprint, which ide
 Wildcard certificate can't be selected by using [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] Configuration Manager. To use a wildcard certificate, you must edit the `HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SQL Server\MSSQL12.MSSQLSERVER\MSSQLServer\SuperSocketNetLib` registry key, and enter the thumbprint of the certificate, without spaces, to the **Certificate** value.
 
 > [!NOTE]  
-> To use encryption with a failover cluster, you must install the server certificate with the fully qualified DNS name of the virtual server on all nodes in the failover cluster. You can set the value of the **ForceEncryption** option on the **Protocols for virtsql** property box of **SQL Server Network Configuration** to **Yes**.
+> To use encryption with a failover cluster, you must install the server certificate with the hostname, or fully qualified DNS name (FQDN) of the virtual server on all nodes in the failover cluster. You can set the value of the **Force Encryption** option on the **Protocols for virtsql** property box of **SQL Server Network Configuration** to **Yes**.
 
 When creating encrypted connections for an Azure Search indexer to [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] on an Azure Virtual Machine, see [Indexer connections to a SQL Server instance on an Azure virtual machine](/azure/search/search-howto-connecting-azure-sql-iaas-to-azure-search-using-indexers).
 
@@ -94,19 +97,18 @@ When creating encrypted connections for an Azure Search indexer to [!INCLUDE [ss
 The following steps are only required if you want to force encrypted communications for all the clients:
 
 1. In [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] Configuration Manager, expand **SQL Server Network Configuration**, right-click **Protocols for \<server instance>**, and then select **Properties**.
-1. On the **Flags** tab, in the **ForceEncryption** box, select **Yes**, and then select **OK** to close the dialog box.
+1. On the **Flags** tab, in the **Force Encryption** box, select **Yes**, and then select **OK** to close the dialog box. Starting with [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], you also have the option to [force strict encryption](../../relational-databases/security/networking/connect-with-strict-encryption.md#force-strict-encryption-with-sql-server-configuration-manager). 
 1. Restart the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] service.
 
 > [!NOTE]  
 > Some certificate scenarios might require you to implement additional steps on the client computer and in your client application to ensure encrypted connections between the client and server. For more information, see [Special cases for encrypting connections to SQL Server](special-cases-for-encrypting-connections-sql-server.md).
 
-## More information
 
-### Login packet encryption vs. data packet encryption
+## Login packet encryption vs. data packet encryption
 
 At a high level, there are two types of packets in the network traffic between a [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] client application and [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)]: credential packets (login packets) and data packets. When you configure encryption (either server-side or client-side), both these packet types are always encrypted. But, even when you don't configure encryption, the credentials (in the login packet) that are transmitted when a client application connects to [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] are always encrypted. [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] uses a certificate that meets the certificate requirements from a trusted certification authority if available. This certificate is either manually configured by the system administrator, using one of the procedures previously discussed in the article, or present in the certificate store on the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] computer.
 
-### SQL Server-generated self-signed certificates
+## SQL Server-generated self-signed certificates
 
 [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] uses a certificate from a trusted certification authority if available for encrypting login packets. If a trusted certificate isn't installed, [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] generates a self-signed certificate (fallback certificate) during startup and use that self-signed certificate to encrypt the credentials. This self-signed certificate helps increase security, but it doesn't protect against identity spoofing by the server. If the self-signed certificate is used, and the value of the **ForceEncryption** option is set to **Yes**, all data transmitted across a network between [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and the client application is encrypted using the self-signed certificate.
 
@@ -122,7 +124,7 @@ In these environments, if you're using the automatically generated self-signed c
 - Since you now understand the reason for the flag, you can ignore the message (not recommended).
 - Upgrade to [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] or a later version that uses a stronger hash algorithm (SHA256) for self-signed certificates.
 
-### PowerShell script to create self-signed certificate for SQL Server
+## PowerShell script to create self-signed certificate for SQL Server
 
 The following code snippet can be used to create a self-signed certificate on a computer running [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)]. The certificate meets requirements for encryption for a stand-alone [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] instance and is saved in the local computer's certificate store (PowerShell must be launched as an administrator):
 
@@ -146,7 +148,8 @@ $certificateParams = @{
 New-SelfSignedCertificate @certificateParams
 ```
 
-### Verify network encryption
+
+## Verify network encryption
 
 To verify that network encryption is configured and enabled successfully, run the following Transact-SQL query:
 
@@ -162,7 +165,7 @@ GO
 
 The `encrypt_option` column is a Boolean value indicating whether encryption is enabled for this connection. If the value is `TRUE`, the connection is securely encrypted. If the value is `FALSE`, the connection isn't encrypted.
 
-### SQL Server certificate behavior with permissions
+## SQL Server certificate behavior with permissions
 
 The SQL Server service detects and uses the certificate automatically for encryption if all of the following conditions are true:
 
@@ -193,7 +196,12 @@ To learn more, see [SQL Server certificate requirements](certificate-requirement
 > [!NOTE]
 > SQL Server Configuration Manager only displays certificates imported through the registry if the thumbprint in the registry is an exact match for the thumbprint of the certificate, including case sensitivity. If the thumbprint doesn't match the case exactly, the certificate isn't displayed in SQL Server Configuration Manager, but the certificate is still loaded and used by SQL Server.
 
+## Next step
+
+Connect to a SQL Server instance with [strict encryption](../../relational-databases/security/networking/connect-with-strict-encryption.md). 
 
 ## Related content
 
 - [Certificate requirements for SQL Server](certificate-requirements.md)
+- [TDS 8.0](../../relational-databases/security/networking/tds-8.md)
+- [TLS 1.3](../../relational-databases/security/networking/tls-1-3.md)

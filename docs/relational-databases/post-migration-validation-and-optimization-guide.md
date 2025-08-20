@@ -88,9 +88,12 @@ Incorrect or missing indexes cause extra I/O that leads to extra memory and CPU 
 > [!NOTE]  
 > For [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] to [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] migrations, if this issue existed in the source [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)], migrating to a newer version of [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] as-is will not address this scenario.
 
-[!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] Query Optimizer can only account for information that is known at compile time. If a workload relies on predicates that can only be known at execution time, then the potential for a poor plan choice increases. For a better-quality plan, predicates must be **SARGable**, or **S**earch **Arg**ument**able**.
+[!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] Query Optimizer can only account for information that is known at compile time. If a workload relies on predicates that can only be known at execution time, then the potential for a poor plan choice increases. For a better-quality plan, predicates must be *SARGable*.
 
-Some examples of non-SARGable predicates:
+> [!NOTE]  
+> [!INCLUDE [search-argument](../includes/paragraph-content/search-argument.md)]
+
+Some examples of non-*SARGable* predicates:
 
 - Implicit data conversions, like **varchar** to **nvarchar**, or **int** to **varchar**. Look for runtime `CONVERT_IMPLICIT` warnings in the Actual Execution Plans. Converting from one type to another can also cause a loss of precision.
 - Complex undetermined expressions such as `WHERE UnitPrice + 1 < 3.975`, but not `WHERE UnitPrice < 320 * 200 * 32`.
@@ -124,7 +127,7 @@ Some examples of non-SARGable predicates:
 Table Valued Functions return a table data type that can be an alternative to views. While views are limited to a single `SELECT` statement, user-defined functions can contain additional statements that allow more logic than is possible in views.
 
 > [!IMPORTANT]  
-> Since the output table of an multi-statement table valued function (MSTVF) isn't created at compile time, the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] Query Optimizer relies on heuristics, and not actual statistics, to determine row estimations.
+> Since the output table of a multi-statement table valued function (MSTVF) isn't created at compile time, the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] Query Optimizer relies on heuristics, and not actual statistics, to determine row estimations.
 > Even if indexes are added to the base table(s), this isn't going to help.
 > For MSTVFs, [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] uses a fixed estimation of 1 for the number of rows expected to be returned by an MSTVF (starting with [!INCLUDE [ssSQL14](../includes/sssql14-md.md)] that fixed estimation is 100 rows).
 

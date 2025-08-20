@@ -3,7 +3,8 @@ title: "CREATE EVENT SESSION (Transact-SQL)"
 description: CREATE EVENT SESSION creates an Extended Events session that identifies the source of the events, the event session targets, and the event session options.
 author: markingmyname
 ms.author: maghan
-ms.date: "05/15/2024"
+ms.reviewer: dfurman
+ms.date: 07/23/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -20,9 +21,10 @@ helpviewer_keywords:
 dev_langs:
   - "TSQL"
 ---
+
 # CREATE EVENT SESSION (Transact-SQL)
 
-[!INCLUDE [SQL Server SQL Database](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [sql-asdb-asdbmi](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
 
 Creates an Extended Events session that identifies the source of the events, the event session targets, and the event session options.
 
@@ -86,13 +88,14 @@ ON { SERVER | DATABASE }
 
 <event_session_options>::=
 {  
-    [    MAX_MEMORY = size [ KB | MB ] ]
+    [     MAX_MEMORY = size [ KB | MB ] ]
     [ [,] EVENT_RETENTION_MODE = { ALLOW_SINGLE_EVENT_LOSS | ALLOW_MULTIPLE_EVENT_LOSS | NO_EVENT_LOSS } ]
     [ [,] MAX_DISPATCH_LATENCY = { seconds SECONDS | INFINITE } ]
     [ [,] MAX_EVENT_SIZE = size [ KB | MB ] ]
     [ [,] MEMORY_PARTITION_MODE = { NONE | PER_NODE | PER_CPU } ]
     [ [,] TRACK_CAUSALITY = { ON | OFF } ]
     [ [,] STARTUP_STATE = { ON | OFF } ]
+    [ [,] MAX_DURATION = { <time duration> { SECONDS | MINUTES | HOURS | DAYS } | UNLIMITED } ]
 }
 ```
 
@@ -171,7 +174,7 @@ WHERE column_type = 'customizable'
 ```
 
 > [!IMPORTANT]
-> If you are using the ring buffer target, we recommend that you set the `MAX_MEMORY` *target* parameter (distinct from the `MAX_MEMORY` session parameter) to 1024 kilobytes (KB) or less to help avoid possible data truncation of the XML output.
+> If you are using the ring buffer target, we recommend that you set the `MAX_MEMORY` *target* parameter (distinct from the `MAX_MEMORY` session parameter) to 1,024 kilobytes (KB) or less to help avoid possible data truncation of the XML output.
 
 For more information about target types, see [Targets for Extended Events in SQL Server](../../relational-databases/extended-events/targets-for-extended-events-in-sql-server.md).
 
@@ -242,6 +245,20 @@ The event session is started at startup.
 **OFF**
 The event session isn't started at startup.
 
+#### MAX_DURATION = { *time duration* { SECONDS | MINUTES | HOURS | DAYS } | **UNLIMITED** }
+
+**Applies to**: [!INCLUDE [sql-server-2025](../../includes/sssql25-md.md)]
+
+**UNLIMITED**
+
+Creates an event session that runs indefinitely once started, until stopped using the `ALTER EVENT SESSION ... STATE = STOP` statement. This is the default if `MAX_DURATION` isn't specified.
+
+*time duration* SECONDS | MINUTES | HOURS | DAYS
+
+Creates an event session that stops automatically after the specified time elapses after the session start. The maximum supported duration is 2,147,483 seconds, or 35,792 minutes, or 596 hours, or 24 days.
+
+For more information, see [Time-bound event sessions](../../relational-databases/extended-events/sql-server-extended-events-sessions.md#time-bound-event-sessions).
+
 ## Remarks
 
 The order of precedence for the logical operators is `NOT` (highest), followed by `AND`, followed by `OR`.
@@ -253,7 +270,7 @@ On SQL Server and SQL Managed Instance, requires the `CREATE ANY EVENT SESSION` 
 On SQL Database, requires the `ALTER ANY DATABASE EVENT SESSION` permission in the database.
 
 > [!TIP]
-> SQL Server 2022 introduced a number of new more granular permissions for Extended Events, for more information see [Blog: New granular permissions for SQL Server 2022 and Azure SQL to improve adherence with PoLP](https://techcommunity.microsoft.com/t5/sql-server-blog/new-granular-permissions-for-sql-server-2022-and-azure-sql-to/ba-p/3607507).
+> SQL Server 2022 introduced new, more granular permissions for Extended Events. For more information, see [Blog: New granular permissions for SQL Server 2022 and Azure SQL to improve adherence with PoLP](https://techcommunity.microsoft.com/t5/sql-server-blog/new-granular-permissions-for-sql-server-2022-and-azure-sql-to/ba-p/3607507).
 
 ## Examples
 
@@ -277,7 +294,7 @@ GO
 
 ### Azure SQL example
 
-In [!INCLUDE[ssazuremi-md](../../includes/ssazuremi-md.md)] or [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], store .xel files in Azure Blob Storage. You can use `sys.fn_xe_file_target_read_file` to read from extended event sessions you create yourself and store in Azure Blob Storage. For example walkthrough, review [Event File target code for extended events in Azure SQL Database and Azure SQL Managed Instance](/azure/azure-sql/database/xevent-code-event-file).
+In [!INCLUDE[ssazuremi-md](../../includes/ssazuremi-md.md)] or [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], store .xel files in Azure Blob Storage. You can use `sys.fn_xe_file_target_read_file` to read from extended event sessions you create yourself and store in Azure Blob Storage. For example walkthrough, review [Create an event session with an event_file target in Azure Storage](/azure/azure-sql/database/xevent-code-event-file).
 
 ### Code examples can differ for Azure SQL Database and SQL Managed Instance
 

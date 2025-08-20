@@ -55,6 +55,8 @@ Upgrading a replication topology is a multi-step process. We recommend attemptin
 
 When you have a distribution database in a failover cluster instance, make sure that all participating nodes use the same build. We don't recommend a setup in which one node is a SQL Server version earlier than [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] SP2-CU3 or [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] CU6 and the other node is a SQL Server version later than [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] SP2-CU3 or [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] CU6. Beginning in [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] SP2-CU3 and [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] CU6, support is added for using a distribution database in an AG and for new objects (tables, stored procedures) in distribution databases. If your distribution database is in a failover cluster instance and you're doing a phased migration (and you can't upgrade all nodes to the same version of SQL Server), for the narrow migration timeframe, we recommend that you do account tasks like adding a new subscriber, subscription, publisher, or publication on the node that has the later version of SQL Server.
 
+[!INCLUDE [sql-25-repl-info](../../includes/sql-25-repl-info.md)]
+
 ## Replication matrix
 
 ### Transactional and snapshot replication compatibility matrix

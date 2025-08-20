@@ -153,17 +153,17 @@ Returns:
 WordUK                         WordUS                         Distance
 ------------------------------ ------------------------------ -----------
 Practice                       Practice                       0
-Travelling                     Traveling                      0.01999998
-Neighbour                      Neighbor                       0.02222222
-Aluminium                      Aluminum                       0.02222222
-Theatre                        Theater                        0.02857143
-Flavour                        Flavor                         0.02857143
-Centre                         Center                         0.03333336
-Colour                         Color                          0.03333336
-Honour                         Honor                          0.03333336
-Catalogue                      Catalog                        0.04444444
-Programme                      Program                        0.04444444
-Metre                          Meter                          0.04666668
+Travelling                     Traveling                      0.02
+Neighbour                      Neighbor                       0.0222222222222223
+Aluminium                      Aluminum                       0.0222222222222223
+Theatre                        Theater                        0.0285714285714286
+Flavour                        Flavor                         0.0285714285714286
+Centre                         Center                         0.0333333333333333
+Colour                         Color                          0.0333333333333333
+Honour                         Honor                          0.0333333333333333
+Catalogue                      Catalog                        0.0444444444444444
+Programme                      Program                        0.0444444444444444
+Metre                          Meter                          0.0466666666666667
 ```
 
 ### Example *JARO_WINKLER_SIMILARITY*
@@ -171,7 +171,7 @@ Metre                          Meter                          0.04666668
 ```sql
 SELECT WordUK, WordUS, JARO_WINKLER_SIMILARITY(WordUK, WordUS) AS Similarity
 FROM WordPairs
-WHERE JARO_WINKLER_SIMILARITY(WordUK, WordUS) > 0.9
+WHERE JARO_WINKLER_SIMILARITY(WordUK, WordUS) > 90
 ORDER BY  Similarity DESC;
 ```
 
@@ -180,22 +180,22 @@ Returns:
 ```output
 WordUK                         WordUS                         Similarity
 ------------------------------ ------------------------------ -----------
-Practice                       Practice                       1
-Travelling                     Traveling                      0.98
-Neighbour                      Neighbor                       0.9777778
-Aluminium                      Aluminum                       0.9777778
-Flavour                        Flavor                         0.9714286
-Theatre                        Theater                        0.9714286
-Centre                         Center                         0.9666666
-Colour                         Color                          0.9666666
-Honour                         Honor                          0.9666666
-Catalogue                      Catalog                        0.9555556
-Programme                      Program                        0.9555556
-Metre                          Meter                          0.9533333
-Organise                       Organize                       0.95
-Practise                       Practice                       0.95
-Defence                        Defense                        0.9428572
-Analyse                        Analyze                        0.9428572
+Practice                       Practice                       100
+Aluminium                      Aluminum                       98
+Neighbour                      Neighbor                       98
+Travelling                     Traveling                      98
+Colour                         Color                          97
+Flavour                        Flavor                         97
+Centre                         Center                         97
+Theatre                        Theater                        97
+Honour                         Honor                          97
+Catalogue                      Catalog                        96
+Programme                      Program                        96
+Metre                          Meter                          95
+Organise                       Organize                       95
+Practise                       Practice                       95
+Analyse                        Analyze                        94
+Defence                        Defense                        94
 ```
 
 ### Example query with all functions
@@ -209,7 +209,7 @@ SELECT	T.source_string,
 		JARO_WINKLER_DISTANCE(T.source_string, T.target_string) as JW_Distance,
 
 		EDIT_DISTANCE_SIMILARITY(T.source_string, T.target_string) as ED_Similarity,
-		CAST(JARO_WINKLER_SIMILARITY(T.source_string, T.target_string)*100 as int) as JW_Similarity
+		JARO_WINKLER_SIMILARITY(T.source_string, T.target_string) as JW_Similarity
 FROM (VALUES('Black', 'Red'),
 			('Colour', 'Yellow'),
 			('Colour', 'Color'),
@@ -220,13 +220,13 @@ FROM (VALUES('Black', 'Red'),
 Returns:
 
 ```output
-source_string  target_string  ED_Distance    JW_Distance    ED_Similarity  JW_Similarity
--------------- -------------- -------------- -------------- -------------- -------------- 
-Black	        Red	            5	           1	            0	        0
-Colour	        Yellow	        5	           0.4444444	    17	        55
-Colour	        Color	        1	           0.03333336	    83	        96
-Microsoft	    Msft	        5	           0.4916667	    44	        50
-Regex	        Regex	        0	           0	            100	        100
+source_string  target_string  ED_Distance    JW_Distance           ED_Similarity  JW_Similarity
+-------------- -------------- -------------- --------------------- -------------- -------------- 
+Black	        Red	            5	           1	                   0	        0
+Colour	        Yellow	        5	           0.444444444444445 	   17	        55
+Colour	        Color	        1	           0.0333333333333333 	   83	        96
+Microsoft	    Msft	        5	           0.491666666666667 	   44	        50
+Regex	        Regex	        0	           0	                   100	        100
 ```
 
 ## Clean up

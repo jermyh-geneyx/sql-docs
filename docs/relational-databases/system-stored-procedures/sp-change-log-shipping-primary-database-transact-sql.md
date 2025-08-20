@@ -4,7 +4,7 @@ description: "Changes the primary database settings."
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 06/23/2025
+ms.date: 08/11/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -40,6 +40,7 @@ sp_change_log_shipping_primary_database
     [ , [ @threshold_alert_enabled = ] 'threshold_alert_enabled' ]
     [ , [ @history_retention_period = ] 'history_retention_period' ]
     [ , [ @backup_compression = ] backup_compression_option ]
+    [ , [ @monitor_connection_options = ] '<key_value_pairs>;[...]' ]
 [ ; ]
 ```
 
@@ -108,6 +109,20 @@ Specifies whether a log shipping configuration uses [backup compression](../back
 - `1`: Enabled. Always compress log backups
 
 - `2` (default): Use the [backup compression default](../../database-engine/configure-windows/view-or-configure-the-backup-compression-default-server-configuration-option.md) server configuration option.
+
+#### [ @monitor_connection_options = ] *'<key_value_pairs>;[...]'*
+**Applies to**: [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] RC 0 and later
+
+Specifies additional connectivity options for the linked server connection when utilizing a remote monitor, in the form of key value pairs. **@monitor_connection_options** is **nvarchar(4000)** and has the default of `NULL`. 
+
+The following table lists the available connectivity options:
+
+| `Key` | `Value` |
+|-----------|-----------------|
+| `Encrypt` | `strict`, `mandatory`, `optional`, `true`, `false` |
+| `TrustServerCertificate` | `true`, `false`, `yes`, `no` |
+| `ServerCertificate` | Path on the filesystem to the server certificate. This has a maximum length of 260 characters. |
+| `HostNameInCertificate` | Hostname override for the certificate. This has a maximum length of 255 characters. |
 
 ## Return code values
 

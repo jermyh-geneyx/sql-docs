@@ -61,6 +61,8 @@ items:
       href: sql-server/sql-server-2012-release-notes.md
     - name: SQL Server 2008 R2 SP2
       href: sql-server/sql-server-2008-r2-sp2-release-notes.md
+    - name: Preview features FAQ
+      href: sql-server/preview-features-faq.md
   expanded: true
 - name: Business continuity
   items:
@@ -4336,6 +4338,8 @@ items:
       href: database-engine/deprecated-database-engine-features-in-sql-server-2017.md
     - name: Deprecated in SQL Server 2016
       href: database-engine/deprecated-database-engine-features-in-sql-server-2016.md
+    - name: Breaking changes in SQL Server 2025 Preview
+      href: database-engine/breaking-changes-to-database-engine-features-in-sql-server-2025.md
     - name: Breaking changes in SQL Server 2019
       href: database-engine/breaking-changes-to-database-engine-features-in-sql-server-2019.md
     - name: Breaking changes in SQL Server 2017
@@ -4610,8 +4614,10 @@ items:
         href: database-engine/configure-windows/ft-crawl-bandwidth-server-configuration-option.md
       - name: ft notify bandwidth
         href: database-engine/configure-windows/ft-notify-bandwidth-server-configuration-option.md
-      - name: PolyBase Connectivity Configuration (T-SQL)
+      - name: PolyBase connectivity configuration
         href: database-engine/configure-windows/polybase-connectivity-configuration-transact-sql.md
+      - name: PolyBase network encryption
+        href: database-engine/configure-windows/polybase-network-encryption-server-configuration-option.md
       - name: in-doubt xact resolution
         href: database-engine/configure-windows/in-doubt-xact-resolution-server-configuration-option.md
       - name: Configure the index create memory
@@ -4744,20 +4750,6 @@ items:
         href: database-engine/configure-windows/configure-a-server-to-listen-on-a-specific-tcp-port.md
       - name: Configure a server to listen on an alternate pipe
         href: database-engine/configure-windows/configure-a-server-to-listen-on-an-alternate-pipe.md
-      - name: Encrypt connections to SQL Server
-        items:
-        - name: Certificate overview
-          href: database-engine/configure-windows/certificate-overview.md
-        - name: Certificate requirements for SQL Server
-          href: database-engine/configure-windows/certificate-requirements.md
-        - name: Configure SQL Server for encryption
-          href: database-engine/configure-windows/configure-sql-server-encryption.md
-        - name: Special cases for encrypting connections to SQL Server
-          href: database-engine/configure-windows/special-cases-for-encrypting-connections-sql-server.md
-        - name: Certificate procedures
-          href: database-engine/configure-windows/certificate-procedures.md
-        - name: SQL Server and client encryption summary
-          href: database-engine/configure-windows/sql-server-and-client-encryption-summary.md
       - name: Connect to SQL Server through a proxy server
         href: database-engine/configure-windows/connect-to-sql-server-through-a-proxy-server-sql-server-configuration-manager.md
       - name: Configure a Windows Firewall for Database Engine access
@@ -7095,6 +7087,8 @@ items:
             href: relational-databases/polybase/polybase-configuration.md
         - name: Azure Blob Storage
           href: relational-databases/polybase/polybase-configure-azure-blob-storage.md
+        - name: Use Managed Identity with Azure storage
+          href: relational-databases/polybase/managed-identity.md
         - name: SQL Server
           href: relational-databases/polybase/polybase-configure-sql-server.md
         - name: Oracle
@@ -7818,6 +7812,20 @@ items:
         href: relational-databases/security/authentication-access/azure-ad-authentication-sql-server-linked-server.md
     - name: Encryption
       items:
+      - name: Encrypt connections to SQL Server
+        items:
+        - name: Certificate requirements for SQL Server
+          href: database-engine/configure-windows/certificate-requirements.md
+        - name: Configure SQL Server for encryption
+          href: database-engine/configure-windows/configure-sql-server-encryption.md
+        - name: Special cases for encrypting connections to SQL Server
+          href: database-engine/configure-windows/special-cases-for-encrypting-connections-sql-server.md
+        - name: Certificate procedures
+          href: database-engine/configure-windows/certificate-procedures.md
+        - name: Connect using strict connection encryption
+          href: relational-databases/security/networking/connect-with-strict-encryption.md
+        - name: Connect with TLS 1.3
+          href: relational-databases/security/networking/connect-with-tls-1-3.md
       - name: Always Encrypted
         items:
         - name: Configure Always Encrypted using PowerShell
@@ -7980,12 +7988,6 @@ items:
         href: relational-databases/security/ledger/ledger-how-to-enable-automatic-digest-storage.md?view=sql-server-ver16&preserve-view=true
       - name: Verify ledger database for tampering
         href: relational-databases/security/ledger/ledger-verify-database.md?view=sql-server-ver16&preserve-view=true
-    - name: Networking
-      items:
-      - name: Connect using strict connection encryption
-        href: relational-databases/security/networking/connect-with-strict-encryption.md
-      - name: Connect with TLS 1.3
-        href: relational-databases/security/networking/connect-with-tls-1-3.md
   - name: Concepts
     items:
     - name: Protecting SQL Server Intellectual Property
@@ -8051,6 +8053,16 @@ items:
         items:
         - name: Bring your own key >
           href: /azure/sql-database/transparent-data-encryption-byok-azure-sql
+      - name: Encrypt connections to SQL Server
+        items:
+        - name: Certificate overview
+          href: database-engine/configure-windows/certificate-overview.md
+        - name: SQL Server and client encryption summary
+          href: database-engine/configure-windows/sql-server-and-client-encryption-summary.md
+        - name: TDS 8.0
+          href: relational-databases/security/networking/tds-8.md
+        - name: TLS 1.3
+          href: relational-databases/security/networking/tls-1-3.md 
       - name: Always Encrypted
         href: relational-databases/security/encryption/always-encrypted-database-engine.md
         items:
@@ -8102,12 +8114,12 @@ items:
         href: relational-databases/security/ledger/ledger-how-to-recover-after-tampering.md?view=sql-server-ver16&preserve-view=true
       - name: Ledger limitations
         href: relational-databases/security/ledger/ledger-limits.md?view=sql-server-ver16&preserve-view=true
-    - name: Networking
-      items:
-      - name: TDS 8.0
-        href: relational-databases/security/networking/tds-8.md
-      - name: TLS 1.3
-        href: relational-databases/security/networking/tls-1-3.md
+
+
+
+
+
+
   - name: Tutorials
     items:
     - name: Always Encrypted

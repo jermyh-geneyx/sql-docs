@@ -4,7 +4,7 @@ description: "Sets up the primary database for a log shipping configuration, inc
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 06/23/2025
+ms.date: 08/11/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -44,6 +44,8 @@ sp_add_log_shipping_primary_database
     [ , [ @backup_job_id = ] backup_job_id OUTPUT ]
     [ , [ @primary_id = ] primary_id OUTPUT ]
     [ , [ @backup_compression = ] backup_compression_option ]
+    [ , [ @primary_connection_options = ] '<key_value_pairs>;[...]' ]
+    [ , [ @monitor_connection_options = ] '<key_value_pairs>;[...]' ]
 [ ; ]
 ```
 
@@ -122,6 +124,34 @@ Specifies whether a log shipping configuration uses [backup compression](../back
 - `1`: Enabled. Always compress log backups.
 - `2` (default): Use the [backup compression default](../../database-engine/configure-windows/view-or-configure-the-backup-compression-default-server-configuration-option.md) server configuration option.
 
+#### [ @primary_connection_options = ] *'<key_value_pairs>;[...]'*
+**Applies to**: [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] RC 0 and later
+
+ Specifies additional connectivity options when connecting to the primary, in the form of key value pairs. **@primary_connection_options** is **nvarchar(4000)** and has the default of `NULL`. 
+
+The following table lists the available connectivity options:
+
+|Key|Value|
+|-----------|-----------------|
+|`Encrypt`|`strict`, `mandatory`, `optional`, `true`, `false`|
+|`TrustServerCertificate`|`true`, `false`, `yes`, `no`|
+|`ServerCertificate`|Path on the filesystem to the server certificate. This has a maximum length of 260 characters.|
+|`HostNameInCertificate`|Hostname override for the certificate. This has a maximum length of 255 characters.|
+
+#### [ @monitor_connection_options = ] *'<key_value_pairs>;[...]'*
+**Applies to**: [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] RC 0 and later
+
+Specifies additional connectivity options for the linked server connection when utilizing a remote monitor, in the form of key value pairs. **@monitor_connection_options** is **nvarchar(4000)** and has the default of `NULL`.
+
+The following table lists the available connectivity options:
+
+|Key|Value|
+|-----------|-----------------|
+|`Encrypt`|`strict`, `mandatory`, `optional`, `true`, `false`|
+|`TrustServerCertificate`|`true`, `false`, `yes`, `no`|
+|`ServerCertificate`|Path on the filesystem to the server certificate. This has a maximum length of 260 characters.|
+|`HostNameInCertificate`|Hostname override for the certificate. This has a maximum length of 255 characters.|
+
 ## Return code values
 
 `0` (success) or `1` (failure).
@@ -159,10 +189,10 @@ DECLARE @LS_PrimaryId AS UNIQUEIDENTIFIER;
 EXECUTE master.dbo.sp_add_log_shipping_primary_database
     @database = N'AdventureWorks',
     @backup_directory = N'c:\lsbackup',
-    @backup_share = N'\\tribeca\lsbackup',
+    @backup_share = N'\\backupshare\lsbackup',
     @backup_job_name = N'LSBackup_AdventureWorks',
     @backup_retention_period = 1440,
-    @monitor_server = N'rockaway',
+    @monitor_server = N'monitor-server',
     @monitor_server_security_mode = 1,
     @backup_threshold = 60,
     @threshold_alert = 0,
@@ -172,6 +202,33 @@ EXECUTE master.dbo.sp_add_log_shipping_primary_database
     @primary_id = @LS_PrimaryId OUTPUT,
     @overwrite = 1,
     @backup_compression = 0;
+GO
+```
+
+This example adds the database [!INCLUDE [ssSampleDBobject](../../includes/sssampledbobject-md.md)] as the primary database in a log shipping configuration and instructs log shipping to use the strict encryption options for both the connection to the primary instance from the log shipping executable and from the primary instance to the remote monitor instance `monitor-server`.
+
+```sql
+DECLARE @LS_BackupJobId AS UNIQUEIDENTIFIER;
+DECLARE @LS_PrimaryId AS UNIQUEIDENTIFIER;
+
+EXECUTE master.dbo.sp_add_log_shipping_primary_database
+    @database = N'AdventureWorks',
+    @backup_directory = N'c:\lsbackup',
+    @backup_share = N'\\backupshare\lsbackup',
+    @backup_job_name = N'LSBackup_AdventureWorks',
+    @backup_retention_period = 1440,
+    @monitor_server = N'monitor-server',
+    @monitor_server_security_mode = 1,
+    @backup_threshold = 60,
+    @threshold_alert = 0,
+    @threshold_alert_enabled = 0,
+    @history_retention_period = 1440,
+    @backup_job_id = @LS_BackupJobId OUTPUT,
+    @primary_id = @LS_PrimaryId OUTPUT,
+    @overwrite = 1,
+    @backup_compression = 0,
+    @primary_connection_options = N'Encrypt=Strict;',
+    @monitor_connection_options = N'Encrypt=Strict;';
 GO
 ```
 
