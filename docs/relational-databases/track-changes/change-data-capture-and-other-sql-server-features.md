@@ -9,11 +9,12 @@ ms.service: sql
 ms.topic: how-to
 helpviewer_keywords:
   - "change data capture, other features and"
+monikerRange: ">=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
 ---
 # Change data capture and other features
 [!INCLUDE [SQL Server - ASDBMI](../../includes/applies-to-version/sql-asdbmi.md)]
 
-This article describes how the following features interact with change data capture for SQL Server and Azure SQL Managed Instance. For Azure SQL Database, see [CDC with Azure SQL Database](/azure/azure-sql/database/change-data-capture-overview).  
+This article describes how the following features interact with change data capture for SQL Server and Azure SQL Managed Instance. For Azure SQL Database, see [CDC with Azure SQL Database](/azure/azure-sql/database/change-data-capture-overview?view=azuresql-db&preserve-view=true).  
     
 ##  <a name="ChangeTracking"></a> Change tracking  
  Change data capture and [change tracking](about-change-tracking-sql-server.md) can be enabled on the same database. No special considerations are required. For more information, see [Work with Change Tracking](work-with-change-tracking-sql-server.md).  
