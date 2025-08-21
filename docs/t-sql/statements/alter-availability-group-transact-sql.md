@@ -261,9 +261,11 @@ The only valid parameter is 'SECONDARY', and this SET option is only valid in Di
 
 **Applies to:** [!INCLUDE[sssql25-md](../../includes/sssql25-md.md)] RC 0 and later versions
 
-Use the `CLUSTER_CONNECTION_OPTIONS` clause to enforce [TLS 1.3](../../relational-databases/security/networking/tls-1-3.md) encryption for your availability group connections. The options are specified as a list of key-value pairs, separated by semicolons. The key-value pairs are used to configure connection string encryption for the availability group.
+Use the `CLUSTER_CONNECTION_OPTIONS` clause to enforce [TLS 1.3](../../relational-databases/security/networking/tls-1-3.md) encryption for communication between the Windows Server Failover Cluster and your availability group replicas. The options are specified as a list of key-value pairs, separated by semicolons. The key-value pairs are used to configure connection string encryption for the availability group.
 
 To revert back to default encryption, set the `CLUSTER_CONNECTION_OPTIONS` clause to an empty string. [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] defaults to `Encrypt=Mandatory`, and `TrustServerCertificate=Yes` for connections to availability group replicas and listeners.
+
+For more information, review [connect to an availability group with strict encryption](../../relational-databases/security/networking/connect-with-strict-encryption.md#connect-to-an-always-on-availability-group) and [TDS 8.0](../../relational-databases/security/networking/tds-8.md).
 
 The following table describes the key-value pairs that you can use in the `CLUSTER_CONNECTION_OPTIONS` clause:
 
@@ -277,8 +279,6 @@ The following table describes the key-value pairs that you can use in the `CLUST
 
 Check the [examples](#c-force-encryption-in-connections-to-the-availability-group) to learn how to use the `CLUSTER_CONNECTION_OPTIONS` clause.
 
-For more information, review [connect to an availability group with strict encryption](../../relational-databases/security/networking/connect-with-strict-encryption.md#connect-to-an-always-on-availability-group) and [TDS 8.0](../../relational-databases/security/networking/tds-8.md).
-  
 #### ADD DATABASE *database_name*
 Specifies a list of one or more user databases that you want to add to the availability group. These databases must reside on the instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] that hosts the current primary replica. You can specify multiple databases for an availability group, but each database can belong to only one availability group. For information about the type of databases that an availability group can support, see [Prerequisites, Restrictions, and Recommendations for Always On Availability Groups &#40;SQL Server&#41;](../../database-engine/availability-groups/windows/prereqs-restrictions-recommendations-always-on-availability.md). To find out which local databases already belong to an availability group, see the **replica_id** column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view.
   

@@ -24,6 +24,12 @@ ms.custom:
 
 [!INCLUDE [appliesto-sqldb-sqlmi-asa](../includes/appliesto-sqldb-sqlmi-asa.md)]
 
+> [!div class="op_single_selector"]
+> - [SQL Server 2022](/sql/sql-server/azure-arc/entra-authentication-setup-tutorial)
+> - [SQL Server 2025 Preview](/sql/sql-server/azure-arc/managed-identity)
+> - [Azure SQL Database & Azure SQL Managed Instance](authentication-aad-configure.md)
+> - [SQL Server on Azure VMs](../virtual-machines/windows/configure-azure-ad-authentication-for-sql-vm.md)
+
 This article shows you how to use [Microsoft Entra ID for authentication](authentication-aad-overview.md) with [Azure SQL Database](sql-database-paas-overview.md), [Azure SQL Managed Instance](../managed-instance/sql-managed-instance-paas-overview.md), and [Azure Synapse Analytics](/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-overview-what-is).
 
 [!INCLUDE [entra-id](../includes/entra-id.md)]

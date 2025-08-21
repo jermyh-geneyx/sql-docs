@@ -55,9 +55,9 @@ Currently, the following operating systems support TLS 1.3:
 - [Always On availability groups](connect-with-strict-encryption.md#connect-to-an-always-on-availability-group)
 - [Always On failover cluster instances (FCI)](connect-with-strict-encryption.md#connect-to-a-failover-cluster-instance)
 - [Linked servers](../../linked-servers/linked-servers-database-engine.md#sql-server-2025-and-msoledbsql-version-19)
-- [Transactional replication](../../replication/transactional/transactional-replication.md#enforce-strict-tls-13-encryption)
-- [Merge replication](../../replication/merge/merge-replication.md#enforce-strict-tls-13-encryption)
-- [Snapshot replication](../../replication/snapshot-replication.md#enforce-strict-tls-13-encryption)
+- [Transactional replication](../../replication/transactional/transactional-replication.md#configure-tls-13-encryption)
+- [Merge replication](../../replication/merge/merge-replication.md#configure-tls-13-encryption)
+- [Snapshot replication](../../replication/snapshot-replication.md#configure-tls-13-encryption)
 - [Log shipping](../../../database-engine/log-shipping/about-log-shipping-sql-server.md#enforce-tls-13-encryption)
 
 ## Related content

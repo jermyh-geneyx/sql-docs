@@ -13,6 +13,12 @@ ms.topic: how-to
 # Enable Microsoft Entra authentication for SQL Server on Azure VMs
 [!INCLUDE[appliesto-sqlvm](../../includes/appliesto-sqlvm.md)]
 
+> [!div class="op_single_selector"]
+> - [SQL Server 2022](/sql/sql-server/azure-arc/entra-authentication-setup-tutorial)
+> - [SQL Server 2025 Preview](/sql/sql-server/azure-arc/managed-identity)
+> - [Azure SQL Database & Azure SQL Managed Instance](../../database/authentication-aad-configure.md)
+> - [SQL Server on Azure VMs](configure-azure-ad-authentication-for-sql-vm.md)
+
 This article teaches you to enable authentication with Microsoft Entra ID ([formerly Azure Active Directory](/entra/fundamentals/new-name)) for your SQL Server on Azure virtual machines (VMs).
 
 > [!NOTE]
