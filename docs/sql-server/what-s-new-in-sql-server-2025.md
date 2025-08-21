@@ -281,9 +281,19 @@ The [intelligent query processing (IQP)](../relational-databases/performance/int
 | **[bcp utility](../tools/bcp-utility.md)** | Authentication enhancements |
 | **[sqlcmd utility](../tools/sqlcmd/sqlcmd-utility.md)** | Authentication enhancements |
 
-## Additional information
+## Fabric mirroring
 
-This section provides additional information for the features highlighted previously.
+- You can configure SQL Server resource governor to manage resource usage for Mirroring in Fabric for [!INCLUDE [sssql25-md](../includes/sssql25-md.md)]. Each workload group is for a specific phase of mirroring.
+
+   For an example and to get started, see [Configure resource governor for Fabric mirroring](/fabric/database/mirrored-database/sql-server-performance#resource-governor-for-sql-server-mirroring). For more information, see [Resource governor workload group](../relational-databases/resource-governor/resource-governor-workload-group.md). 
+
+- You can enable and configure the autoreseed feature for Fabric mirroring to prevent the transaction log from filling in [!INCLUDE [sssql25-md](../includes/sssql25-md.md)].
+
+   For an example and to get started, see [Configure resource governor for Fabric mirroring](/fabric/database/mirrored-database/sql-server-configure-automatic-reseed).
+
+- You can configure a maximum and lower bound of transactions to be processed by Fabric Mirroring in [!INCLUDE [sssql25-md](../includes/sssql25-md.md)].
+
+   For an example and to get started, see [Configure resource governor for Fabric mirroring](/fabric/database/mirrored-database/sql-server-performance#control-scan-performance).
 
 ## SQL Server Analysis Services
 
