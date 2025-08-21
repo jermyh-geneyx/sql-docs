@@ -18,7 +18,9 @@ monikerRange: "=azuresqldb-mi-current||>=sql-server-2016"
 
 [!INCLUDE[sql-asdb-asdbmi](../../../includes/applies-to-version/sql-asdb-asdbmi.md)]
 
-Transactional replication typically starts with a snapshot of the publication database objects and data. As soon as the initial snapshot is taken, subsequent data changes and schema modifications made at the Publisher are usually delivered to the Subscriber as they occur (in near real time). The data changes are applied to the Subscriber in the same order and within the same transaction boundaries as they occurred at the Publisher; therefore, within a publication, transactional consistency is guaranteed.  
+This article introduces Transactional replication for SQL Server. Transactional replication typically starts with a snapshot of the publication database objects and data. As soon as the initial snapshot is taken, subsequent data changes and schema modifications made at the Publisher are usually delivered to the Subscriber as they occur (in near real time). The data changes are applied to the Subscriber in the same order and within the same transaction boundaries as they occurred at the Publisher; therefore, within a publication, transactional consistency is guaranteed.  
+
+## Overview
   
  Transactional replication is typically used in server-to-server environments and is appropriate in each of the following cases:  
   
@@ -35,6 +37,12 @@ Transactional replication typically starts with a snapshot of the publication da
  By default, Subscribers to transactional publications should be treated as read-only, because changes aren't propagated back to the Publisher. However, transactional replication does offer options that allow updates at the Subscriber.  
 
 [!INCLUDE[azure-sql-db-replication-supportability-note](../../../includes/azure-sql-db-replication-supportability-note.md)]
+
+## Enforce strict TLS 1.3 encryption
+
+[!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] RC 0 introduces [TDS 8.0](../../security/networking/tds-8.md) support for transactional replication. Replication now defaults to OLEDB version 19 for inter-instance communication, and enforces TLS 1.3 with `Encrypt=Strict` by default. 
+
+[!INCLUDE [sql-25-repl-info](../../../includes/sql-25-repl-info.md)]
 
 <a name="HowWorks"></a> 
 

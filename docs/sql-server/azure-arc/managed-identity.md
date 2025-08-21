@@ -38,7 +38,7 @@ When using managed identity with SQL Server enabled by Azure Arc, consider the f
   - `Inbound connections` are logins and users connecting to SQL Server. Inbound connections can also be achieved by using [App registration](entra-authentication-setup-tutorial.md), starting in [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)].
   - `Outbound connections` are SQL Server connections to Azure resources, like backup to URL, or connecting to Azure Key Vault.
 - App Registration **can't** enable a SQL Server to make outbound connections. Outbound connections need a primary managed identity assigned to the SQL Server.
-- For SQL Server 2025 and later, we recommend that you use managed identity based Microsoft Entra setup, as detailed in this article. Alternatively, you can configure an [app registration for SQL Server 2025.](/sql/relational-databases/security/authentication-access/microsoft-entra-authentication-sql-server-enable-without-arc)
+- For SQL Server 2025 and later, we recommend that you use managed identity based Microsoft Entra setup, as detailed in this article. Alternatively, you can configure an [app registration for SQL Server 2025.](../../relational-databases/security/authentication-access/microsoft-entra-authentication-sql-server-enable-without-arc.md)
 
 ## Prerequisites
 
@@ -267,7 +267,7 @@ Follow the steps in the [Microsoft Entra tutorial](../../sql-server/azure-arc/en
 Consider the following limitations when using a managed identity with SQL Server 2025:
 
 - The managed identity setup for Microsoft Entra authentication is only supported with Azure Arc-enabled SQL Server 2025, running on Windows Server.
-- SQL Server needs access to Azure public cloud to use [Microsoft Entra authentication](/sql/relational-databases/security/authentication-access/azure-ad-authentication-sql-server-overview).
+- SQL Server needs access to Azure public cloud to use [Microsoft Entra authentication](../../relational-databases/security/authentication-access/azure-ad-authentication-sql-server-overview.md).
 - Using Microsoft Entra authentication with failover cluster instances isn't supported.
 - Once Microsoft Entra authentication is enabled, disabling isn't advisable. Disabling Microsoft Entra authentication forcefully by deleting registry entries can result in unpredictable behavior with SQL Server 2025.
 - Authenticating to SQL Server on Arc machines through Microsoft Entra authentication using the [FIDO2 method](/azure/active-directory/authentication/howto-authentication-passwordless-faqs) isn't currently supported.

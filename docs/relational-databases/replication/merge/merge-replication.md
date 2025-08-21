@@ -4,7 +4,7 @@ description: Merge replication uses a snapshot of the publication database objec
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 07/18/2025
+ms.date: 08/11/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: conceptual
@@ -41,6 +41,12 @@ To track changes, merge replication (and transactional replication with queued u
 The following diagram shows the components used in merge replication.
 
 :::image type="content" source="media/merge-replication/merge.png" alt-text="Diagram of merge replication components and data flow.":::
+
+## Enforce strict TLS 1.3 encryption
+
+[!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] RC 0 introduces [TDS 8.0](../../security/networking/tds-8.md) support for merge replication. Replication now defaults to OLEDB version 19 for inter-instance communication, and enforces TLS 1.3 with `Encrypt=Strict` by default.
+
+[!INCLUDE [sql-25-repl-info](../../../includes/sql-25-repl-info.md)]
 
 ## In this section
 

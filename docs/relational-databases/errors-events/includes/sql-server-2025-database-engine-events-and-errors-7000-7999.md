@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/15/2025
+ms.date: 08/14/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -168,16 +168,16 @@ ms.topic: include
 | 7438 | 16 | Yes | The 32-bit OLE DB provider "%ls" cannot be loaded in-process on a 64-bit SQL Server. |
 | 7439 | 16 | No | Failed to read required information about %S_MSG pool %S_MSG. |
 | 7440 | 10 | No | Remote execution status: "%ls" . |
-| 7441 | 16 | Yes | Linked server query execution failed due to an internal error related to AAD authentication. |
-| 7442 | 16 | Yes | Linked Server use self mode AAD authentication functionality is disabled on the service side and therefore cannot be used. |
-| 7443 | 16 | Yes | AAD use-self authentication to Linked Server "%ls" failed because it is not part of any Server trust group that contains current server. Use documentation to join two servers into a Server trust group: [https://learn.microsoft.com/azure/azure-sql/managed-instance/server-trust-group-overview](/azure/azure-sql/managed-instance/server-trust-group-overview). |
-| 7444 | 16 | Yes | Linked Server access token mode AAD authentication functionality is disabled on the service side and therefore cannot be used. |
-| 7445 | 16 | Yes | AAD token for accessing linked server cannot be obtained. Error message: '%ls'. |
-| 7446 | 16 | Yes | Linked Server use MSI mode AAD authentication functionality is disabled on the service side and therefore cannot be used. |
-| 7447 | 16 | Yes | Linked Server AAD authentication using username and password is disabled on the service side and therefore cannot be used. |
-| 7448 | 16 | Yes | Linked Server login mapping with "useself" property set is not allowed when using AAD '%ls' authentication mode. |
-| 7449 | 16 | Yes | Linked Server User-assigned MSI mode AAD authentication functionality is not supported on the service side. Use system-assigned identity instead. |
-| 7450 | 16 | Yes | Querying linked server '%ls' failed. Either login for Linked Server AAD '%ls' authentication mode does not exist or login's 'useself' attribute is set to true. |
+| 7441 | 16 | Yes | Linked server query execution failed due to an internal error related to Microsoft Entra ID authentication. |
+| 7442 | 16 | Yes | Linked Server use self mode Microsoft Entra ID authentication functionality is disabled on the service side and therefore cannot be used. |
+| 7443 | 16 | Yes | Microsoft Entra ID use self mode authentication to linked server "%ls" failed because it is not part of any server trust group that contains the current server. For more information about joining servers into a server trust group, see [https://go.microsoft.com/fwlink/?linkid=2323200](https://go.microsoft.com/fwlink/?linkid=2323200). |
+| 7444 | 16 | Yes | Linked Server access token mode Microsoft Entra ID authentication functionality is disabled on the service side and therefore cannot be used. |
+| 7445 | 16 | Yes | A Microsoft Entra ID token for accessing linked server cannot be obtained. Error message: '%ls'. |
+| 7446 | 16 | Yes | Linked Server use MSI mode Microsoft Entra ID authentication functionality is disabled on the service side and therefore cannot be used. |
+| 7447 | 16 | Yes | Linked Server Microsoft Entra ID authentication using username and password is disabled on the service side and therefore cannot be used. |
+| 7448 | 16 | Yes | Linked Server login mapping with "useself" property set is not allowed when using Microsoft Entra ID '%ls' authentication mode. |
+| 7449 | 16 | Yes | Linked Server User-assigned MSI mode Microsoft Entra ID authentication functionality is not supported on the service side. Use system-assigned identity instead. |
+| 7450 | 16 | Yes | Querying linked server '%ls' failed. Either login for Linked Server Microsoft Entra ID '%ls' authentication mode does not exist or login's 'useself' attribute is set to true. |
 | 7451 | 16 | Yes | Retrieval of the MWC Token for Onelake/DFS access failed with error '%ls'. |
 | 7452 | 16 | Yes | Initialization of the MWC Token Cache failed. Lock Mode: %.\*ls. |
 | 7453 | 16 | Yes | Sending of statistics request failed with error '%lu'. |

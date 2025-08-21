@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/15/2025
+ms.date: 08/14/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -308,7 +308,7 @@ ms.topic: include
 | 27420 | 16 | No | Cannot update synchronization attribute because version is older. |
 | 27421 | 16 | No | Cannot create HTTP client for attribute synchronization. |
 | 27422 | 16 | No | Invalid JSON format for reference fetch response. |
-| 27423 | 16 | No | Could not execute a reference fetch because the AAD token could not be created. |
+| 27423 | 16 | No | Could not execute a reference fetch because a Microsoft Entra ID token could not be created. |
 | 27424 | 10 | No | An object was not found during an external governance operation. |
 | 27425 | 10 | No | No more attribute events for the specified token. |
 | 27426 | 16 | Yes | External governance synchronization task failed to acquire lock while trying to synchronize attributes. |
@@ -324,7 +324,7 @@ ms.topic: include
 | 27506 | 16 | No | An add request header HTTP error occurred. |
 | 27507 | 16 | No | A send request HTTP error occurred. |
 | 27508 | 16 | No | A get response code HTTP error occurred. |
-| 27509 | 16 | No | A response code unauthrozied HTTP error occurred. |
+| 27509 | 16 | No | A response code unauthorized HTTP error occurred. |
 | 27510 | 16 | No | A response code throttled HTTP error occurred. |
 | 27511 | 16 | No | A response code client error HTTP error occurred. |
 | 27512 | 16 | No | A response code server error HTTP error occurred. |
@@ -344,10 +344,17 @@ ms.topic: include
 | 27526 | 16 | No | A set security flags HTTP error occurred. |
 | 27527 | 16 | No | A receive response HTTP error occurred. |
 | 27528 | 16 | No | A 'NotModified' response HTTP error occurred. |
-| 27600 | 16 | No | The response was in a bad format while obtaining label information from Microsoft Information Protection. |
-| 27601 | 16 | Yes | Internal error occurred while obtaining Microsoft Information Protection label information from API endpoint. Substate: '%ls', status: 0x%08x. |
-| 27602 | 16 | No | An internal error occurred while assinging an Information Protection Label. Please try the assignment again. |
-| 27603 | 16 | No | The response was in a bad format while obtaining information from Microsoft Information Protection API. |
+| 27600 | 16 | No | The response was in a bad format while obtaining label information from Microsoft Purview Information Protection. |
+| 27601 | 16 | Yes | Internal error occurred while obtaining Microsoft Purview Information Protection label information from API endpoint. Substate: '%ls', status: 0x%08x. |
+| 27602 | 16 | No | An internal error occurred while assigning an Microsoft Purview Information Protection Label. Try the assignment again. |
+| 27603 | 16 | No | The response was in a bad format while obtaining information from Microsoft Purview Information Protection API. |
+| 27604 | 16 | No | Your organization Microsoft Purview Information Protection label publishing policy requires a justification when the label assigned to the column is being changed to a different label with lower priority. Provide a valid justification. For more information, see https://aka.ms/SQLPurviewLabeling. |
+| 27605 | 16 | No | The label with ID '%.\*ls' is not a valid label in Microsoft Purview Information Protection. Provide a valid label ID. For more information, see https://aka.ms/SQLPurviewLabeling. |
+| 27606 | 16 | No | Microsoft Purview Information Protection label can only be assigned or changed by Microsoft Entra user. Use a valid Microsoft Entra user to execute this query. For more information, see https://aka.ms/SQLPurviewLabeling. |
+| 27607 | 16 | No | Microsoft Purview Information Protection labels cannot be assigned when the database has existing labels assigned via the SQL Data Discovery and Classification feature. Remove any existing labels from the database prior to assigning Microsoft Purview Information Protection labels. For more information, see https://aka.ms/SQLPurviewLabeling. |
+| 27608 | 16 | No | Labels via the SQL Data Discovery and Classification feature cannot be assigned when the database has existing Microsoft Purview Information Protection labels assigned to it. Remove any existing labels from the database and then try again. For more information, see https://aka.ms/SQLPurviewLabeling. |
+| 27609 | 10 | Yes | Internal error occurred while running billing background task. Major error code: %d, Minor error code: %d, State: %d. |
+| 27610 | 16 | No | Unable to access Microsoft Purview Information Protection on your behalf because your session has expired. Reconnect to SQL database and try again. |
 | 27801 | 10 | Yes | Successfully initialize HPC environment from provider '%ld', device type '%ld' DLL version %ld, and find %ld device(s), %ld of them are used. |
 | 27802 | 16 | Yes | Failed to initialize HPC environment. |
 | 27803 | 10 | Yes | Message reported from (%.\*s) device on device Id (%I64d), code : %d, message : %.\*s . |

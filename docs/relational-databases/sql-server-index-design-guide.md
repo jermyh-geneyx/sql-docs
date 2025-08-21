@@ -119,13 +119,18 @@ When you design an index, consider the following database guidelines:
 
 When you design an index, consider the following query guidelines:
 
-- Create nonclustered indexes on the columns that are frequently used in predicates and join conditions in queries. These are your SARGable<sup>1</sup> columns. However, you should avoid adding unnecessary columns. Adding too many index columns can adversely affect disk space and index maintenance performance.
+<a id="sargable"></a>
+
+- Create nonclustered indexes on the columns that are frequently used in predicates and join conditions in queries. These are your *SARGable* columns. However, you should avoid adding unnecessary columns. Adding too many index columns can adversely affect disk space and index maintenance performance.
+
+  > [!NOTE]  
+  > [!INCLUDE [search-argument](../includes/paragraph-content/search-argument.md)]
 
 - Covering indexes can improve query performance because all the data needed to meet the requirements of the query exists within the index itself. That is, only the index pages, and not the data pages of the table or clustered index, are required to retrieve the requested data; therefore, reducing overall disk I/O. For example, a query of columns `A` and `B` on a table that has a composite index created on columns `A`, `B`, and `C` can retrieve the specified data from the index alone.
 
   Covering indexes are the designation for a [nonclustered index](#nonclustered-index-architecture) that resolves one or several similar query results directly with no access to its base table, and without incurring in lookups.
 
-  Such indexes have all the necessary non-[SARGable](#sargable) columns in its leaf level. This means that the columns returned by either the `SELECT` clause and all the `WHERE` and `JOIN` arguments are covered by the index.
+  Such indexes have all the necessary non-*[SARGable](#sargable)* columns in its leaf level. This means that the columns returned by either the `SELECT` clause and all the `WHERE` and `JOIN` arguments are covered by the index.
 
   There's potentially much less I/O to execute the query, if the index is narrow enough when compared to the rows and columns in the table itself, meaning it's a real subset of the total columns.
 
@@ -134,10 +139,6 @@ When you design an index, consider the following query guidelines:
 - Write queries that insert or modify as many rows as possible in a single statement, instead of using multiple queries to update the same rows. By using only one statement, optimized index maintenance could be exploited.
 
 - Evaluate the query type and how columns are used in the query. For example, a column used in an exact-match query type would be a good candidate for a nonclustered or clustered index.
-
-<a id="sargable"></a>
-
-<sup>1</sup> The term *SARGable* in relational databases refers to a **S**earch **ARG**ument**able** predicate that can use an index to speed up the execution of the query.
 
 ### Column considerations
 

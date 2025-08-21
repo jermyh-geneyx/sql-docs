@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/15/2025
+ms.date: 08/14/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -59,6 +59,7 @@ ms.topic: include
 | 16216 | 15 | No | Invalid column reference. Expressions are not allowed in the index definition. |
 | 16217 | 16 | No | Conflicting query hints and/or internal configuration settings forcing both single node and distributed plans were detected |
 | 16218 | 15 | No | '%.\*ls' option is not supported when creating index on expression. |
+| 16219 | 16 | No | The value for %.\*ls is out of range. The value must be greater than or equal to %I64u and less than or equal to %I64u. |
 | 16310 | 16 | No | '%.\*ls' is not supported in this version of Azure SQL Edge. |
 | 16401 | 16 | No | Page id not hosted by the current page server. |
 | 16501 | 16 | No | %ls is not supported with this set of options. |
@@ -339,6 +340,7 @@ ms.topic: include
 | 17074 | 16 | Yes | Assertion "%ls" with message "%ls" at \<%ls\>:%ld failed. |
 | 17075 | 16 | Yes | Assertion "%ls" at \<%ls\>:%ld failed. |
 | 17076 | 21 | Yes | Error spawning System Health Monitor thread: %ls |
+| 17077 | 21 | Yes | Error spawning Heartbeat Monitor thread: %ls |
 | 17101 | 10 | Yes | (c) Microsoft Corporation. |
 | 17102 | 16 | Yes | Failed to initialize Distributed COM (CoInitializeEx returned %lx). Heterogeneous queries and remote procedure calls are disabled. Check the DCOM configuration using Component Services in Control Panel. |
 | 17103 | 10 | Yes | All rights reserved. |
@@ -358,7 +360,7 @@ ms.topic: include
 | 17117 | 10 | Yes | The tempdb database has %ld data file(s). |
 | 17118 | 10 | Yes | Database Instant File Initialization: %S_MSG. For security and performance considerations see the topic 'Database Instant File Initialization' in SQL Server Books Online. This is an informational message only. No user action is required. |
 | 17119 | 10 | Yes | The number of concurrent user connections was reduced to %ld, because it exceeded the allowable limit for this edition of SQL Server. To avoid this message in the future, use sp_configure to permanently adjust the number of user connections within the licensed limit. |
-| [17120](../mssqlserver-17120-database-engine-error.md) | 16 | Yes | SQL Server could not spawn %s thread. Check the SQL Server error log and the operating system error log for information about possible related problems. |
+| [17120](../mssqlserver-17120-database-engine-error.md) | 16 | Yes | SQL Server could not spawn %s thread. Check the SQL Server error log and the operating system error log for information about possible related problems. For more information, see [https://go.microsoft.com/fwlink/?linkid=2322142](https://go.microsoft.com/fwlink/?linkid=2322142). |
 | 17121 | 10 | Yes | SQL Server is started with trace flag %d, this may cause user to see some error messages masked using '%ls'. |
 | 17122 | 10 | Yes | Trace flag %d is discontinued. Use the options provided with ALTER DATABASE. |
 | 17123 | 10 | Yes | Logging to event log is disabled. Startup option '-%c' is supplied, either from the registry or the command prompt. |
@@ -414,7 +416,7 @@ ms.topic: include
 | 17178 | 10 | Yes | Warning: Enterprise Server/CAL license used for this instance. This edition limits SQL Engine CPU utilization to 20 physical cores, or 40 logical cores with Hyper-threading enabled. |
 | 17179 | 10 | Yes | SQL Server detected %d sockets with %d cores per socket and %d logical processors per socket, %d total logical processors; using %d logical processors based on SQL Server licensing. |
 | 17181 | 16 | Yes | SNIInitializeListener() failed with error 0x%lx. |
-| [17182](../mssqlserver-17182-database-engine-error.md) | 16 | Yes | TDSSNIClient initialization failed with error 0x%lx, status code 0x%lx. Reason: %S_MSG %.\*ls |
+| [17182](../mssqlserver-17182-database-engine-error.md) | 16 | Yes | TDSSNIClient initialization failed with error 0x%lx, status code 0x%lx. Reason: %S_MSG %.\*ls. For more information, see [https://go.microsoft.com/fwlink/?linkid=2322222](https://go.microsoft.com/fwlink/?linkid=2322222). |
 | 17183 | 10 | Yes | Attempting to cycle error log. This is an informational message only; no user action is required. |
 | 17184 | 10 | Yes | The error log has been reinitialized. See the previous log for older entries. |
 | 17185 | 16 | Yes | Unable to update password policy. |
@@ -443,10 +445,10 @@ ms.topic: include
 | 17208 | 16 | Yes | %s: File '%s' has an incorrect size. It is listed as %d MB, but should be %d MB. Diagnose and correct disk failures, and restore the database from backup. |
 | 17209 | 10 | Yes | File %ls, file number %d for dbid %d: File size is not configured multiple of the minimum size of a large page for Hybrid Buffer Pool. |
 | 17253 | 10 | Yes | SQL Server cannot use the NO_BUFFERING option during I/O on this file, because the sector size for file '%s', %d, is invalid. Move the file to a disk with a valid sector size. |
-| 17255 | 10 | Yes | Secondary TempDB file '%.\*ls' resides on a removable drive and therefore will not be attached during startup. |
-| 17256 | 10 | Yes | Secondary TempDB file '%.\*ls' will not be attached during TempDB startup; Drive check failed with error '%ld'. |
+| 17255 | 10 | Yes | Secondary tempdb file '%.\*ls' resides on a removable drive and therefore will not be attached during startup. |
+| 17256 | 10 | Yes | Secondary tempdb file '%.\*ls' will not be attached during tempdb startup; Drive check failed with error '%ld'. |
 | 17257 | 10 | Yes | System error while trying to initialize disk info; Error '%ld' |
-| 17258 | 10 | Yes | No free space in the TempDB database |
+| 17258 | 10 | Yes | No free space in the tempdb database |
 | 17259 | 10 | Yes | Dedicated admin connection support was established for listening locally on named pipe \[ %s \]. |
 | 17260 | 10 | Yes | Dedicated admin connection support was established for listening remotely on named pipe \[ %s \]. |
 | 17261 | 16 | Yes | initdata: No shared memory for kernel buffers. |
@@ -456,7 +458,7 @@ ms.topic: include
 | [17300](../mssqlserver-17300-database-engine-error.md) | 16 | Yes | SQL Server was unable to run a new system task, either because there is insufficient memory or the number of configured sessions exceeds the maximum allowed in the server. Verify that the server has adequate memory. Use sp_configure with option 'user connections' to check the maximum number of user connections allowed. Use sys.dm_exec_sessions to check the current number of sessions, including user processes. |
 | 17303 | 16 | Yes | The session with SPID %d was found to be invalid during termination, possibly because of corruption in the session structure. Contact Product Support Services. |
 | 17305 | 16 | Yes | SQL server is started in a safe boot mode. No new connections can be created. This is informational message. |
-| 17306 | 16 | Yes | Failed to exit safe mode either becuase we are not in safe mode or due to an error. |
+| 17306 | 16 | Yes | Failed to exit safe mode either because we are not in safe mode or due to an error. |
 | 17307 | 16 | Yes | Failed to boot database in safe mode. |
 | 17308 | 16 | Yes | %s: Process %d generated an access violation. SQL Server is terminating this process. |
 | 17310 | 20 | Yes | A user request from the session with SPID %d generated a fatal exception. SQL Server is terminating this session. Contact Product Support Services with the dump produced in the log directory. |
@@ -529,12 +531,12 @@ ms.topic: include
 | 17812 | 10 | Yes | Dedicated administrator connection has been disconnected. This is an informational message only. No user action is required. |
 | 17813 | 20 | Yes | The requested service has been stopped or disabled and is unavailable at this time. The connection has been closed.%.\*ls |
 | 17816 | 20 | No | Login to remote SQL Server failed with error %d: %.\*ls |
-| 17817 | 20 | No | Unsupport login ack packet response received when opening client connection.%.\*ls |
+| 17817 | 20 | No | Unsupported login ack packet response received when opening client connection.%.\*ls |
 | 17818 | 20 | No | Connection to remote SQL Server failed with error %d. |
 | 17819 | 20 | No | The SQL Server or the endpoint is configured to accept only strict (TDS 8.0 and above) connections. The connection has been closed. |
 | 17821 | 20 | No | A valid TLS certificate is not configured to accept strict (TDS 8.0 and above) connections. The connection has been closed. |
 | 17825 | 18 | Yes | Could not close network endpoint, or could not shut down network library. The cause is an internal error in a network library. Review the error log: the entry listed after this error contains the error code from the network library. |
-| [17826](../mssqlserver-17826-database-engine-error.md) | 18 | Yes | Could not start the network library because of an internal error in the network library. To determine the cause, review the errors immediately preceding this one in the error log. |
+| [17826](../mssqlserver-17826-database-engine-error.md) | 18 | Yes | Could not start the network library because of an internal error in the network library. To determine the cause, review the errors immediately preceding this one in the error log. For more information, see [https://go.microsoft.com/fwlink/?linkid=2322072](https://go.microsoft.com/fwlink/?linkid=2322072). |
 | 17827 | 20 | Yes | There was a failure while attempting to encrypt a password. The connection has been closed.%.\*ls |
 | 17828 | 20 | Yes | The prelogin packet used to open the connection is structurally invalid; the connection has been closed. Please contact the vendor of the client library.%.\*ls |
 | 17829 | 20 | Yes | A network error occurred while establishing a connection; the connection has been closed.%.\*ls |
@@ -550,7 +552,7 @@ ms.topic: include
 | [17887](../mssqlserver-17887-database-engine-error.md) | 10 | Yes | IO Completion Listener (0x%lx) Worker 0x%p appears to be non-yielding on Node %ld. Approx CPU Used: kernel %I64d ms, user %I64d ms, Interval: %I64d. |
 | 17888 | 10 | Yes | All schedulers on Node %d appear deadlocked due to a large number of worker threads waiting on %ls. Process Utilization %d%%. |
 | 17889 | 16 | Yes | A new connection was rejected because the maximum number of connections on session ID %d has been reached. Close an existing connection on this session and retry.%.\*ls |
-| [17890](../mssqlserver-17890-database-engine-error.md) | 10 | Yes | A significant part of sql server process memory has been paged out. This may result in a performance degradation. Duration: %d seconds. Working set (KB): %I64d, committed (KB): %I64d, memory utilization: %d%%. |
+| [17890](../mssqlserver-17890-database-engine-error.md) | 10 | Yes | A significant part of SQL Server process memory has been paged out. This may result in a performance degradation. Duration: %d seconds. Working set (KB): %I64d, committed (KB): %I64d, memory utilization: %d%%. |
 | 17891 | 10 | Yes | Resource Monitor (0x%lx) Worker 0x%p appears to be non-yielding on Node %ld. Memory freed: %I64d KB. Last wait: %ls. Last clerk: type %ls, name %ls. Approx CPU Used: kernel %I64d ms, user %I64d ms, Interval: %I64d. |
 | [17892](../mssqlserver-17892-database-engine-error.md) | 20 | Yes | Logon failed for login '%.\*ls' due to trigger execution.%.\*ls |
 | 17893 | 20 | Yes | Failed to get client host address while preparing to execute LOGON triggers. |

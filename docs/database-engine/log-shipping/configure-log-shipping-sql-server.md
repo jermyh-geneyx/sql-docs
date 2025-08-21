@@ -3,7 +3,7 @@ title: "Configure Log Shipping (SQL Server)"
 description: Learn how to configure log shipping by using SQL Server Management Studio or Transact-SQL in SQL Server.
 author: MikeRayMSFT
 ms.author: mikeray
-ms.date: "03/14/2017"
+ms.date: "08/11/2025"
 ms.service: sql
 ms.subservice: log-shipping
 ms.topic: how-to
@@ -17,39 +17,32 @@ helpviewer_keywords:
   
 > [!NOTE]  
 >  [!INCLUDE[ssEnterpriseEd10](../../includes/ssenterpriseed10-md.md)] and later versions support backup compression. When creating a log shipping configuration, you can control the backup compression behavior of log backups. For more information, see [Backup Compression &#40;SQL Server&#41;](../../relational-databases/backup-restore/backup-compression-sql-server.md).  
+ 
+<a name="Prerequisites"></a> 
   
- **In This Topic**  
-  
--   **Before you begin:**  
-  
-     [Prerequisites](#Prerequisites)  
-  
-     [Security](#Security)  
-  
--   **To configure log shipping, using:**  
-  
-     [SQL Server Management Studio](#SSMSProcedure)  
-  
-     [Transact-SQL](#TsqlProcedure)  
-  
--   [Related Tasks](#RelatedTasks)  
-  
-##  <a name="BeforeYouBegin"></a> Before You Begin  
-  
-###  <a name="Prerequisites"></a> Prerequisites  
+## Prerequisites  
   
 -   The primary database must use the full or bulk-logged recovery model; switching the database to simple recovery will cause log shipping to stop functioning.  
   
 -   Before you configure log shipping, you must create a share to make the transaction log backups available to the secondary server. This is a share of the directory where the transaction log backups will be generated. For example, if you back up your transaction logs to the directory c:\data\tlogs\\, you could create the \\\\*primaryserver*\tlogs share of that directory.  
   
-###  <a name="Security"></a> Security  
+> [!IMPORTANT] 
+> - [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] uses [OLEDB version 19](../../connect/oledb/oledb-driver-for-sql-server.md) as the default version for linked servers, which has a default `Encrypt` value of `Mandatory`. Changes to the linked server configuration might be required when adding a [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] instance as a replica or monitor. 
+> - Log shipping monitoring can break if the monitor is a remote [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] instance when other SQL Server instances in the log shipping topology use a previous version.
+
+<a name="Permissions"></a>
   
-####  <a name="Permissions"></a> Permissions  
- The log-shipping stored procedures require membership in the **sysadmin** fixed server role.  
-  
-##  <a name="SSMSProcedure"></a> Using SQL Server Management Studio  
-  
-#### To configure log shipping  
+## Permissions  
+
+The log shipping stored procedures require membership in the **sysadmin** fixed server role.  
+
+## Configure log shipping
+
+You can configure log shipping by using either [!INCLUDE[ssManStudio](../../includes/ssmanstudio-md.md)] or [!INCLUDE[tsql](../../includes/tsql-md.md)]. The tabs in this section describe how to configure log shipping by using each method.
+
+### [SQL Server Management Studio](#tab/ssms)
+
+To configure log shopping by using [!INCLUDE[ssManStudio](../../includes/ssmanstudio-md.md)], follow these steps:  
   
 1.  Right-click the database you want to use as your primary database in the log shipping configuration, and then click **Properties**.  
   
@@ -72,11 +65,11 @@ helpviewer_keywords:
   
 9. [!INCLUDE[ssnoversion](../../includes/ssnoversion-md.md)] supports [backup compression](../../relational-databases/backup-restore/backup-compression-sql-server.md). When creating a log shipping configuration, you can control the backup compression behavior of log backups by choosing one of the following options: **Use the default server setting**, **Compress backup**, or **Do not compress backup**. For more information, see [Log Shipping Transaction Log Backup Settings](../../relational-databases/databases/log-shipping-transaction-log-backup-settings.md).  
   
-10. Click **OK**.  
+10. Select **OK**.  
   
 11. Under **Secondary server instances and databases**, click **Add**.  
   
-12. Click **Connect** and connect to the instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] that you want to use as your secondary server.  
+12. Select **Connect** and connect to the instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] that you want to use as your secondary server.  
   
 13. In the **Secondary Database** box, choose a database from the list or type the name of the database you want to create.  
   
@@ -90,6 +83,7 @@ helpviewer_keywords:
 16. Note the copy schedule listed in the **Schedule** box under **Copy job**. If you want to customize the schedule for your installation, click **Schedule** and then adjust the [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Agent schedule as needed. This schedule should approximate the backup schedule.  
   
 17. On the **Restore** tab, under **Database state when restoring backups**, choose the **No recovery mode** or **Standby mode** option.  
+ 
     > [!IMPORTANT]  
     > **Standby mode** is only an option when the version of the primary and secondary server are the same. When the major version of the secondary server is higher than the primary, only **No recovery mode** is allowed
   
@@ -101,26 +95,25 @@ helpviewer_keywords:
   
 21. Note the restore schedule listed in the **Schedule** box under **Restore job**. If you want to customize the schedule for your installation, click **Schedule** and then adjust the [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Agent schedule as needed. This schedule should approximate the backup schedule.  
   
-22. Click **OK**.  
+22. Select **OK**.  
   
 23. Under **Monitor server instance**, select the **Use a monitor server instance** check box, and then click **Settings**.  
   
     > [!IMPORTANT]  
     >  To monitor this log shipping configuration, you must add the monitor server now. To add the monitor server later, you would need to remove this log shipping configuration and then replace it with a new configuration that includes a monitor server.  
   
-24. Click **Connect** and connect to the instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] that you want to use as your monitor server.  
+24. Select **Connect** and connect to the instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] that you want to use as your monitor server.  
   
 25. Under **Monitor connections**, choose the connection method to be used by the backup, copy, and restore jobs to connect to the monitor server.  
   
 26. Under **History retention**, choose the length of time you want to retain a record of your log shipping history.  
   
-27. Click **OK**.  
+27. Select **OK**.  
   
 28. On the **Database Properties** dialog box, click **OK** to begin the configuration process.  
   
-##  <a name="TsqlProcedure"></a> Using Transact-SQL  
-  
-#### To configure log shipping  
+### [Transact-SQL](#tab/tsql)
+
   
 1.  Initialize the secondary database by restoring a full backup of the primary database on the secondary server.  
   
@@ -142,24 +135,23 @@ helpviewer_keywords:
   
 10. On the secondary server, enable the copy and restore jobs. For more information, see [Disable or Enable a Job](../../ssms/agent/disable-or-enable-a-job.md).  
   
-##  <a name="RelatedTasks"></a> Related Tasks  
+---
+
+<a name="RelatedTasks"></a>
+
+## Related Tasks  
   
 -   [Upgrading Log Shipping to SQL Server 2016 &#40;Transact-SQL&#41;](../../database-engine/log-shipping/upgrading-log-shipping-to-sql-server-2016-transact-sql.md)  
-  
 -   [Add a Secondary Database to a Log Shipping Configuration &#40;SQL Server&#41;](../../database-engine/log-shipping/add-a-secondary-database-to-a-log-shipping-configuration-sql-server.md)  
-  
 -   [Remove a Secondary Database from a Log Shipping Configuration &#40;SQL Server&#41;](../../database-engine/log-shipping/remove-a-secondary-database-from-a-log-shipping-configuration-sql-server.md)  
-  
 -   [Remove Log Shipping &#40;SQL Server&#41;](../../database-engine/log-shipping/remove-log-shipping-sql-server.md)  
-  
 -   [View the Log Shipping Report &#40;SQL Server Management Studio&#41;](../../database-engine/log-shipping/view-the-log-shipping-report-sql-server-management-studio.md)  
-  
 -   [Monitor Log Shipping &#40;Transact-SQL&#41;](../../database-engine/log-shipping/monitor-log-shipping-transact-sql.md)  
-  
 -   [Fail Over to a Log Shipping Secondary &#40;SQL Server&#41;](../../database-engine/log-shipping/fail-over-to-a-log-shipping-secondary-sql-server.md)  
-  
-## See Also  
- [About Log Shipping &#40;SQL Server&#41;](../../database-engine/log-shipping/about-log-shipping-sql-server.md)   
- [Log Shipping Tables and Stored Procedures](../../database-engine/log-shipping/log-shipping-tables-and-stored-procedures.md)  
+
+ 
+## Related content  
+- [About Log Shipping &#40;SQL Server&#41;](../../database-engine/log-shipping/about-log-shipping-sql-server.md)   
+- [Log Shipping Tables and Stored Procedures](../../database-engine/log-shipping/log-shipping-tables-and-stored-procedures.md)  
   
   

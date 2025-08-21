@@ -4,7 +4,7 @@ description: Linked servers enable SQL Server and Azure SQL Managed Instance to 
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: vanto, randolphwest
-ms.date: 06/12/2025
+ms.date: 08/19/2025
 ms.service: sql
 ms.topic: conceptual
 helpviewer_keywords:
@@ -66,14 +66,14 @@ The following illustration shows the basics of a linked server configuration.
 
 Typically, linked servers are used to handle distributed queries. When a client application executes a distributed query through a linked server, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] parses the command and sends requests to OLE DB. The rowset request might be in the form of executing a query against the provider or opening a base table from the provider.
 
-> [!NOTE]  
-> For a data source to return data through a linked server, the OLE DB provider (DLL) for that data source must be present on the same server as the instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
+For a data source to return data through a linked server, the OLE DB provider (DLL) for that data source must be present on the same server as the instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
+
+Linked servers support Active Directory pass-through authentication when using full delegation. Starting with [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] CU17, pass-through authentication with constrained delegation is also supported; however, [resource-based constrained delegation](/windows-server/security/kerberos/kerberos-constrained-delegation-overview) isn't supported.
 
 > [!IMPORTANT]  
 > When an OLE DB provider is used, the account under which the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] service runs must have read and execute permissions for the directory, and all subdirectories, in which the provider is installed. This includes Microsoft-released providers, and any third-party providers.
 
-> [!NOTE]  
-> Linked servers support Active Directory pass-through authentication when using full delegation. Starting with [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] CU17, pass-through authentication with constrained delegation is also supported; however, [resource-based constrained delegation](/windows-server/security/kerberos/kerberos-constrained-delegation-overview) isn't supported.
+
 
 <a id="managing-providers"></a>
 
@@ -128,35 +128,65 @@ The following limitations apply to Microsoft Entra authentication for linked ser
 - Microsoft Entra authentication isn't supported for SQL managed instances in different Microsoft Entra tenants.
 - Microsoft Entra authentication for linked servers is supported only with OLE DB driver version 18.2.1 and higher.
 
-### MSOLEDBSQL19 and linked servers
+## SQL Server 2025 and MSOLEDBSQL version 19
 
-Currently, MSOLEDBSQL19 prevents the creation of linked servers without encryption and a trusted certificate (a self-signed certificate is insufficient). If linked servers are required, use the existing supported version of MSOLEDBSQL.
+Beginning with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] RC 0, MSOLEDBSQL provider uses Microsoft OLE DB Driver 19 by default. This updated driver introduces significant security enhancements, including support for [TDS 8.0](../security/networking/tds-8.md) and [TLS 1.3](../security/networking/tls-1-3.md).
 
-Starting in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], you can use Microsoft OLE DB Driver version 19 with linked servers. This updated driver introduces significant security enhancements, including support for [TDS 8.0](../security/networking/tds-8.md). TDS 8 introduces a breaking change: you must set the `Encryption` parameter in your provider string.
+TDS 8.0 improves security by adding a new encryption option and introduces a breaking change: the `Encryption` parameter is no longer optional. It must be set in your connection string when targeting another SQL Server instance. 
+
+> [!NOTE]
+> Without the `Encrypt` parameter, linked servers in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] default to `Encrypt=Yes` and require a valid certificate. Connections without a valid certificate fail. 
 
 The `Encryption` parameter offers three distinct settings:
 
-- `Yes`/`True`/`Mandatory`
-- `No`/`False`/`Optional`
+- `Yes`, or `True`, or `Mandatory`
+- `No`, or `False`, or `Optional`
 - `Strict`
 
 The `Strict` option mandates the usage of TDS 8.0, and requires a server certificate for secure connections. For `Yes`/`True`/`Mandatory`, a trusted certificate is expected. You can't use a self-signed certificate.
 
 | OLE DB version | Encryption parameter | Possible values | Default value |
 | --- | --- | --- | --- |
-| OLE DB 18 | Optional | True/Mandatory, False/No | False/No |
-| OLE DB 19 | Required | No/False, Yes/Mandatory, Strict (new) | Yes/Mandatory |
+| OLE DB 18 | **Optional** | `True` or `Mandatory`, `False` or `No` | `No` |
+| OLE DB 19 | **Required** | `No` or `False`, `Yes` or `Mandatory`, `Strict` (new) | `Yes` |
 
-The `TrustServerCertificate` parameter is supported, but not recommended. **Trust Server Certificate** disables certificate validation, weakening the security of encrypted connections.
+The `TrustServerCertificate` parameter is supported, but not recommended. Setting **Trust Server Certificate** to `Yes` disables certificate validation, weakening the security of encrypted connections. To use **Trust Server Certificate** the client must also enable it in the machine registry. For information about enabling **Trust Server Certificate**, see [Registry settings](../../connect/oledb/features/registry-settings.md). Setting `TrustServerCertificate=Yes` is not recommended for production environments. 
+
+When using `Encrypt=False` or `Encrypt=Optional`:
+- No certificate is required.
+- If a trusted certificate is provided, it is not validated.
+- Does not provide any connection encryption.
+
+When using `Encrypt=True` or `Encrypt=Mandatory` and not using `TrustServerCertificate=Yes`: 
+- Requires a valid CA-signed certificate.
+- The certificate must match the server's FQDN.
+- If the alternate name in the certificate differs from the SQL Server Host name, then `HostNameInCertificate` must be set to the FQDN.
+- The certificate must be installed in the **Trusted Root Certification Authorities** store on the client machine.
+
+When using `Encrypt=Strict`: 
+- Enforces TDS 8.0. 
+- Requires a valid CA-signed certificate with FQDN match. 
+- `HostNameInCertificate` must be set to the FQDN. 
+- The certificate must be trusted by the client system. 
+- `TrustServerCertificate` configuration is not supported. This means a valid certificate must be present. 
 
 | Trust Server Certificate client setting | Connection string/connection attribute Trust Server Certificate | Certificate validation |
 | --- | --- | --- |
-| 0 | No (default) | Yes |
-| 0 | Yes | Yes |
-| 1 | No (default) | Yes |
-| 1 | Yes | No |
+| 0 | `No` (default) | Yes |
+| 0 | `Yes` | Yes |
+| 1 | `No` (default) | Yes |
+| 1 | `Yes` | No |
 
-These settings must be correctly specified in the provider string when configuring linked server connections, to ensure compatibility and security with the new driver.
+These settings must be correctly specified in the connection string when configuring linked server connections, to ensure compatibility and security with the new driver.
+
+#### Updating from previous OLEDB versions
+**Applies to:** [!INCLUDE[sssql25-md](../../includes/sssql25-md.md)] RC 0 and later versions
+
+When you migrate from previous editions of SQL Server to [!INCLUDE[sssql25-md](../../includes/sssql25-md.md)] with Microsoft OLE DB Driver 19, existing linked server configurations might fail. Different default values for the encryption parameter might cause this failure unless a valid certificate is provided.
+
+Alternatively, you can recreate the linked server and include `Encrypt=Optional` in the connection string. If you can't modify the linked server configuration, enable trace flag `17600` to maintain OLE DB 18 behavior and defaults.
+
+In the SQL Server Managed Studio (SSMS) Linked Server Creation Wizard, the option **Other Data Sources** must be used to manually configure the linked server Encryption options.
 
 For more information about OLE DB 19 and encryption, certificate and Trust Server Certificate behavior for OLE DB 19, see [Encryption and certificate validation in OLE DB](../../connect/oledb/features/encryption-and-certificate-validation.md).
 

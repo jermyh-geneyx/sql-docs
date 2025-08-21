@@ -67,18 +67,18 @@ Specifies the name of the account to be used when connecting outside the server.
 
 | **Authentication** | **T-SQL** | **Supported** | **Notes** |
 |---|---|---|---|
-| **Shared Access Signature (SAS)** | `CREATE DATABASE SCOPED CREDENTIAL <credential_name> WITH IDENTITY = 'SHARED ACCESS SIGNATURE', SECRET = 'secret';` | SQL Server 2022, Azure SQL Managed Instance, Azure Synapse Analytics, Azure SQL Database | |
-| **Managed Identity** | `CREATE DATABASE SCOPED CREDENTIAL <credential_name> WITH IDENTITY = 'MANAGED IDENTITY';` | Azure SQL Database, SQL Managed Identity | |
+| **Shared Access Signature (SAS)** | `CREATE DATABASE SCOPED CREDENTIAL <credential_name> WITH IDENTITY = 'SHARED ACCESS SIGNATURE', SECRET = 'secret';` | SQL Server 2022 and later, Azure SQL Managed Instance, Azure Synapse Analytics, Azure SQL Database | |
+| **Managed Identity** | `CREATE DATABASE SCOPED CREDENTIAL <credential_name> WITH IDENTITY = 'MANAGED IDENTITY';` | Azure SQL Database, Azure SQL Managed Instance, SQL Server 2025 with Azure Arc| To enable Azure Arc, see [Managed identity (preview) for SQL Server enabled by Azure Arc](../../sql-server/azure-arc/managed-identity.md)|
 | **Microsoft Entra pass-through authentication via User Identity** | `CREATE DATABASE SCOPED CREDENTIAL <credential_name> WITH IDENTITY = 'USER IDENTITY';` | Azure SQL Database | In Azure Synapse, see [Microsoft Entra Connect: Pass-through Authentication](/entra/identity/hybrid/connect/how-to-connect-pta) |
-| **S3 Access Key Basic authentication** | `CREATE DATABASE SCOPED CREDENTIAL <credential_name> WITH IDENTITY = 'S3 ACCESS KEY', SECRET = '<accesskey>:<secretkey>';` | SQL Server 2022 | |
-| **Kerberos (Windows Active Directory or MIT KDC) or for ODBC data sources** | `CREATE DATABASE SCOPED CREDENTIAL <credential_name> WITH IDENTITY = '<identity_name>', SECRET = '<secret>'`; | | Hadoop-only versions of SQL |
+| **S3 Access Key Basic authentication** | `CREATE DATABASE SCOPED CREDENTIAL <credential_name> WITH IDENTITY = 'S3 ACCESS KEY', SECRET = '<accesskey>:<secretkey>';` | SQL Server 2022 and later| |
+|**ODBC Data sources or Kerberos (MIT KDC)**| `CREATE DATABASE SCOPED CREDENTIAL <credential_name> WITH IDENTITY = '<identity_name>', SECRET = '<secret>'`; | SQL Server 2019 and later||
 
 #### SECRET = '*secret*'
 
 Specifies the secret required for outgoing authentication. `SECRET` is required to import a file from Azure Blob storage. To load from Azure Blob storage into Azure Synapse Analytics or Parallel Data Warehouse, the Secret must be the Azure Storage Key.
 
 > [!WARNING]
-> The SAS key value might begin with a '?' (question mark). When you use the SAS key, you must remove the leading '?'. Otherwise your efforts might be blocked.
+> The SAS key value might begin with a question mark (`?`). When you use the SAS key, remove the leading `?`.
 
 ## Remarks
 
@@ -165,8 +165,21 @@ CREATE MASTER KEY ENCRYPTION BY PASSWORD='<EnterStrongPasswordHere>';
 CREATE DATABASE SCOPED CREDENTIAL ADL_User
 WITH
     IDENTITY = '<client_id>@<OAuth_2.0_Token_EndPoint>',
-    SECRET = '<key>'
-;
+    SECRET = '<key>';
+```
+
+### D. Create a database scoped credential using Managed Identity
+
+**Applies to:** [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)]
+
+[!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] introduces support for [Microsoft Entra managed identities](/entra/identity/managed-identities-azure-resources/overview). For information on how to use a managed identity with SQL Server enabled by Azure Arc, see [Managed Identity](../../sql-server/azure-arc/managed-identity.md).
+
+```sql
+SP_CONFIGURE 'allow server scoped db credentials',1; 
+RECONFIGURE;  
+
+CREATE DATABASE SCOPED CREDENTIAL [managed_id] 
+WITH IDENTITY = 'Managed Identity'; 
 ```
 
 ## Related content

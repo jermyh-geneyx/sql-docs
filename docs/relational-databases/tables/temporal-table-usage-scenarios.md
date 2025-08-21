@@ -137,7 +137,10 @@ WHERE EmployeeId = 1000;
 
 Using `AT TIME ZONE` is helpful in all other scenarios where system-versioned tables are used.
 
-Filtering conditions specified in temporal clauses with `FOR SYSTEM_TIME` are SARG-able. SARG stands for *search argument*, and SARG-able means that SQL Server can use the underlying clustered index to perform a seek instead of a scan operation. For more information, see [SQL Server Index Architecture and Design Guide](../sql-server-index-design-guide.md#query-considerations).
+Filtering conditions specified in temporal clauses with `FOR SYSTEM_TIME` are *SARGable*.
+
+> [!NOTE]  
+> [!INCLUDE [search-argument](../../includes/paragraph-content/search-argument.md)]
 
 If you query the history table directly, make sure that your filtering condition is also SARG-able by specifying filters in form of `<period column> { < | > | =, ... } date_condition AT TIME ZONE 'UTC'`.
 

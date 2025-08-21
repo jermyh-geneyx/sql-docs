@@ -70,6 +70,8 @@ The password of the **distributor_admin** login. *@password* is **sysname**, wit
 
 `sp_adddistributor` is used in snapshot replication, transactional replication, and merge replication.
 
+[!INCLUDE [sql-25-repl-info](../../includes/sql-25-repl-info.md)]
+
 ## Examples
 
 :::code language="sql" source="../replication/codesnippet/tsql/sp-adddistributor-transa_1.sql":::

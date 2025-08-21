@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/15/2025
+ms.date: 08/14/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -508,10 +508,10 @@ ms.topic: include
 | 13661 | 16 | No | JSON data type is not supported in CDC tracked table. |
 | 13662 | 16 | No | JSON data type is not supported in transactional replication. |
 | 13663 | 16 | No | JSON data type is not supported in generic replication features. |
-| 13664 | 16 | No | JSON path not valid for Json index. |
+| 13664 | 16 | No | JSON path not valid for JSON index. |
 | 13665 | 16 | No | %s not yet supported for JSON native data type. |
 | 13666 | 16 | No | %s does not support CLR type as parameters |
-| 13667 | 16 | No | Json aggregates do not support order-by within group when specified with grouping sets, cubes and rollups. Try your query without order-by within group. |
+| 13667 | 16 | No | JSON aggregates do not support order-by within group when specified with grouping sets, cubes and rollups. Try your query without order-by within group. |
 | 13668 | 16 | No | JSON_QUERY using WITH ARRAY WRAPPER will cause a buffer overflow. Please cast the document to a LOB. |
 | 13670 | 16 | No | Input JSON is not a valid Vector : '%ls'. |
 | 13671 | 16 | No | Given Vector size is not supported. Maximum allowed size '%ld'. |
@@ -525,12 +525,14 @@ ms.topic: include
 | 13680 | 16 | No | Column '%.\*ls' on table '%.\*ls' is not of JSON data type, which is required to create a JSON index on it. |
 | 13681 | 16 | No | A JSON index '%.\*ls' already exists on column '%.\*ls' on table '%.\*ls', and multiple JSON indexes per column are not allowed. |
 | 13682 | 16 | No | Cannot create JSON index '%.\*ls' on table '%.\*ls', column '%.\*ls', because the column is computed. |
-| 13683 | 16 | No | Invalid Json paths in Json index. |
+| 13683 | 16 | No | Invalid JSON paths in JSON index. |
 | 13684 | 16 | No | String conversion from UTF-8 to UTF-16 failed. |
 | 13685 | 16 | No | A JSON index '%.\*ls' cannot be found on column '%.\*ls' on table '%.\*ls'. |
 | 13686 | 16 | No | Json_Contains matches pattern as LIKE. The pattern should be no longer than 8000 (varchar) or 4000 (nvarchar) characters. |
 | 13687 | 16 | No | JSON data type is not supported in merge replication. |
-| 13688 | 16 | No | Could not create the JSON index on table '%.\*ls' because it is a partitioned table. |
+| 13688 | 16 | No | One or more of the specified ALTER INDEX options is invalid for a JSON index. |
+| 13689 | 16 | No | DATA_COMPRESSION is not compatible with JSON index '%.\*ls'. Please drop it and recreate it. |
+| 13690 | 16 | No | JSON index '%.\*ls' cannot be rebuilt. Drop and recreate it. |
 | 13701 | 16 | No | System-versioned table schema modification failed because history table '%.\*ls' has custom unique keys defined. Consider dropping all unique keys and trying again. |
 | 13702 | 16 | No | System-versioned table schema modification failed because history table '%.\*ls' has foreign keys defined. Consider dropping all foreign keys and trying again. |
 | 13703 | 16 | No | System-versioned table schema modification failed because history table '%.\*ls' has table or column constraints defined. Consider dropping all table and column constraints and trying again. |
@@ -567,7 +569,7 @@ ms.topic: include
 | 13734 | 16 | No | System-versioned table schema modification failed because online alter is not supported on system-versioned memory optimized table '%.\*ls'. |
 | 13735 | 16 | No | Cannot alter HIDDEN attribute on column '%.\*ls' in table '%.\*ls' because this column is not a generated always column. |
 | 13736 | 16 | No | ALTER TABLE SWITCH statement failed on table '%.\*ls' because column '%.\*ls' does not have the same GENERATED ALWAYS attribute in target and source tables. |
-| 13738 | 16 | No | History table '%.\*ls' can not be memory optimized table. |
+| 13738 | 16 | No | History table '%.\*ls' can not be a memory-optimized table. |
 | 13739 | 16 | No | Memory optimized temporal table '%.\*ls' must be created with DURABILITY set to SCHEMA_AND_DATA. |
 | 13740 | 16 | No | The row size limit of %d bytes for memory optimized system versioned tables has been exceeded. Please simplify the table definition. |
 | 13741 | 16 | No | Cannot create UNIQUE index on temporal history table '%.\*ls'. |
@@ -656,6 +658,8 @@ ms.topic: include
 | 13833 | 16 | No | Multiple paths are only allowed from the same storage account and container. |
 | 13834 | 16 | No | Bulk load data conversion error (NULL in non-nullable column) for row %ls%I64d, column %d (%ls) in %ls. |
 | 13835 | 16 | No | ERRORFILE path '%ls' must be in the same storage account as the '%ls', that has to be in private container. |
+| 13836 | 16 | No | For onelake container paths, only files in '\<Workspace\>/\<Artifact\>/Files' directory are allowed. |
+| 13837 | 16 | No | ERRORFILE path '%ls' and data path '%ls' must have the same onelake endpoint, workspace, artifact and folder. |
 | 13900 | 16 | No | Identifier '%.\*ls' in a MATCH clause could not be bound. |
 | 13901 | 16 | No | Identifier '%.\*ls' in a MATCH clause is not a node table or an alias for a node table. |
 | 13902 | 16 | No | Identifier '%.\*ls' in a MATCH clause is not an edge table or an alias for an edge table. |

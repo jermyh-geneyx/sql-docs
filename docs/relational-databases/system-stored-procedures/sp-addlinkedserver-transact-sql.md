@@ -3,8 +3,8 @@ title: "sp_addlinkedserver (Transact-SQL)"
 description: "sp_addlinkedserver (Transact-SQL)"
 author: markingmyname
 ms.author: maghan
-ms.reviewer: wiassaf, randolphwest
-ms.date: 06/23/2025
+ms.reviewer: wiassaf, randolphwest, mikeray
+ms.date: 08/08/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -58,6 +58,10 @@ The unique programmatic identifier (PROGID) of the OLE DB provider that correspo
 - In [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and earlier versions, if *@provider* is omitted, `SQLNCLI` is used. Using `SQLNCLI` will redirect [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] to the latest version of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Native Client OLE DB Provider. The OLE DB provider is expected to be registered with the specified PROGID in the registry. Instead of `SQLNCLI`, `MSOLEDBSQL` is recommended.
 
 - Starting with [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], you must specify a provider name. `MSOLEDBSQL` is recommended. If you omit *@provider*, you can experience unexpected behavior.
+
+- Starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], `MSOLEDBSQL` uses Microsoft OLE DB Driver version 19, which adds support for [TDS 8.0](../security/networking/tds-8.md). However, this driver introduces a breaking change. You must now specify the `encrypt` parameter. Use `encrypt` to define whether or not encryption is mandatory. You must provide a valid CA-signed certificate to encrypt your connection to another SQL Server instance, or assign `encrypt=optional` in the *@provstr* argument. For details, review [Server configuration: polybase network encryption](../../database-engine/configure-windows/polybase-network-encryption-server-configuration-option.md).
+
+   For details about encryption properties, review [Major version differences](../../connect/oledb/major-version-differences.md).
 
 > [!IMPORTANT]  
 > [!INCLUDE [snac-removed-oledb-only](../../includes/snac-removed-oledb-only.md)]
@@ -172,13 +176,46 @@ EXECUTE sp_addlinkedserver N'SEATTLESales', N'SQL Server';
 GO
 ```
 
-The following example creates a linked server `S1_instance1` on an instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] by using the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] OLE DB driver.
+The following example creates a linked server `S1_instance1` on an instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] by using the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] OLE DB driver 18 and earlier versions.
 
 ```sql
 EXECUTE sp_addlinkedserver
     @server = N'S1_instance1',
     @srvproduct = N'',
     @provider = N'MSOLEDBSQL',
+    @datasrc = N'S1\instance1';
+```
+
+The following shows the above example using Microsoft OLE DB Driver Version 19, in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], with `encrypt=optional`.
+
+```sql
+EXECUTE sp_addlinkedserver
+    @server = N'S1_instance1',
+    @srvproduct = N'',
+    @provider = N'MSOLEDBSQL',
+    @provstr = N'encrypt=optional',
+    @datasrc = N'S1\instance1';
+```
+
+The following shows the above example using Microsoft OLE DB Driver Version 19, in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], with `encrypt=mandatory`.
+
+```sql
+EXECUTE sp_addlinkedserver
+    @server = N'S1_instance1',
+    @srvproduct = N'',
+    @provider = N'MSOLEDBSQL',
+    @provstr = N'encrypt=mandatory',
+    @datasrc = N'S1\instance1';
+```
+
+The following shows the above example using Microsoft OLE DB Driver Version 19, in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], with `encrypt=strict` for TDS 8.0 support.
+
+```sql
+EXECUTE sp_addlinkedserver
+    @server = N'S1_instance1',
+    @srvproduct = N'',
+    @provider = N'MSOLEDBSQL',
+    @provstr = N'encrypt=strict',
     @datasrc = N'S1\instance1';
 ```
 
@@ -387,7 +424,7 @@ EXECUTE master.dbo.sp_addlinkedsrvlogin
 
 To enable authentication with managed identities, a managed identity assigned to the Azure SQL Managed Instance needs to be added as a login to the remote managed instance. Both system-assigned and user-assigned managed identities are supported.
 
-If a primary identity is set, it is used, otherwise the system-assigned managed identity is used. If the managed identity is recreated with the same name, the login on the remote instance also needs to be recreated, because the new managed identity Application ID and SQL Managed Instance service principal SID no longer match. To verify these two values match, convert SID to application ID with following query.
+If a primary identity is set, it's used, otherwise the system-assigned managed identity is used. If the managed identity is recreated with the same name, the login on the remote instance also needs to be recreated, because the new managed identity Application ID and SQL Managed Instance service principal SID no longer match. To verify these two values match, convert SID to application ID with following query.
 
 ```sql
 SELECT CONVERT (UNIQUEIDENTIFIER, sid) AS MSEntraApplicationID

@@ -3,7 +3,7 @@ title: TLS 1.3 support
 description: This article discusses TLS 1.3 support with SQL Server 2022 and Azure SQL Database.
 author: srdan-bozovic-msft
 ms.author: srbozovi
-ms.date: 07/31/2024
+ms.date: 08/15/2025
 ms.service: sql
 ms.subservice: security
 ms.topic: conceptual
@@ -46,6 +46,19 @@ Currently, the following operating systems support TLS 1.3:
 
 - [Windows 11](/windows/win32/secauthn/tls-cipher-suites-in-windows-11)
 - [Windows Server 2022](/windows/win32/secauthn/tls-cipher-suites-in-windows-server-2022)
+
+## SQL Server 2025 support
+
+[!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] introduces TLS 1.3 support for the following features: 
+
+- [SQL Server Agent](/ssms/agent/sql-server-agent#tds-80-and-strict-encryption-support)
+- [Always On availability groups](connect-with-strict-encryption.md#connect-to-an-always-on-availability-group)
+- [Always On failover cluster instances (FCI)](connect-with-strict-encryption.md#connect-to-a-failover-cluster-instance)
+- [Linked servers](../../linked-servers/linked-servers-database-engine.md#sql-server-2025-and-msoledbsql-version-19)
+- [Transactional replication](../../replication/transactional/transactional-replication.md#enforce-strict-tls-13-encryption)
+- [Merge replication](../../replication/merge/merge-replication.md#enforce-strict-tls-13-encryption)
+- [Snapshot replication](../../replication/snapshot-replication.md#enforce-strict-tls-13-encryption)
+- [Log shipping](../../../database-engine/log-shipping/about-log-shipping-sql-server.md#enforce-tls-13-encryption)
 
 ## Related content
 

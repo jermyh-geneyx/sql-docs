@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/15/2025
+ms.date: 08/14/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -66,8 +66,8 @@ ms.topic: include
 | 23623 | 16 | No | The feature switch enabling support for using Event Hub with change streams is disabled. |
 | 23624 | 16 | No | The caller does not have permission to configure Change Streams. |
 | 23625 | 16 | No | The argument '%s' failed validation. |
-| 23626 | 16 | No | An error occured. The error/state returned was %d/%d: '%s'. |
-| 23627 | 16 | No | An error occured when configuring change feed. |
+| 23626 | 16 | No | An error occurred. The error/state returned was %d/%d: '%s'. |
+| 23627 | 16 | No | An error occurred when configuring change feed. |
 | 23628 | 16 | No | The argument '%s' failed validation. Expects: 'schemaName.objectName' |
 | 23629 | 16 | No | The configuration already exists in '%s'. |
 | 23630 | 16 | No | Change Streams could not create the object configuration. |
@@ -106,7 +106,13 @@ ms.topic: include
 | 23663 | 16 | No | Cannot truncate the table because it is being used for Change Streams. |
 | 23664 | 16 | No | Cannot add a primary key constraint because the table '%.\*ls' is being used for Change Streams. |
 | 23665 | 16 | No | Cannot drop a primary key constraint because the table '%.\*ls' is being used for Change Streams. |
-| 23666 | 16 | No | Change Streams encountered an exception during event delivery. Error: '%ls'. |
+| 23666 | 16 | No | The expected value for argument '%s' is between '%d' and '%s', inclusive. |
+| 23667 | 16 | No | Change Streams event delivery error : '%ls'. |
+| 23668 | 16 | No | User table '%s' has reached the max number of Change Event Streaming destinations. |
+| 23669 | 10 | No | Microsoft Fabric Mirroring cannot be enabled on Linux. |
+| 23670 | 10 | No | No primary system assigned managed identity found. |
+| 23671 | 10 | No | Microsoft Fabric Mirroring is not supported on Azure VM. |
+| 23672 | 10 | No | Microsoft Fabric Mirroring is not supported with Arc user assigned managed identity. Please use Arc system assigned managed identity. |
 | 23701 | 16 | No | Database '%ls' went to suspect state. Backup cannot be performed on a database that is in suspect state. |
 | 23702 | 16 | No | Backup on participant is not allowed in SDA failover. |
 | 23996 | 16 | No | The request could not be performed because of an device I/O error. |
@@ -134,7 +140,7 @@ ms.topic: include
 | 24520 | 16 | No | The metadata log for the database '%.\*ls' is corrupted at Block '%I64d' RecordId '%I64d'. |
 | 24521 | 16 | No | The metadata log Block '%I64d' for the database '%.\*ls' is not valid. |
 | 24522 | 16 | No | Read of the metadata log Block '%I64d' for the database '%.\*ls' failed. Check errorlog for more info. |
-| 24523 | 16 | No | The metadata log Block was flushed to disk but the trnasaction aborted. |
+| 24523 | 16 | No | The metadata log Block was flushed to disk but the transaction aborted. |
 | 24524 | 16 | No | Failed to read or write the Max ASN data (HRESULT = 0x%x). |
 | 24525 | 16 | No | Internal error. Unable to interact with an internal metadata table. Please try the operation again and contact Customer Support Services if this persists. |
 | 24526 | 16 | No | Internal error. Unable to properly update physical metadata. Please try the operation again and contact Customer Support Services if this persists. |
@@ -206,7 +212,7 @@ ms.topic: include
 | 24604 | 17 | No | Error occurred when distribution %d wrote metadata for distribution %d. Please try to run the query again. If the error persists, please contact support. |
 | 24605 | 17 | No | The storage entity does not exist when transferring data from one distribution to another. If the error persists, please contact support. |
 | 24606 | 17 | No | The storage entity already exists when transferring data from one distribution to another. If the error persists, please contact support. |
-| 24607 | 17 | No | Error occured when setting the owner for the storage location '%ls'. If the error persists, please contact support. |
+| 24607 | 17 | No | Error occurred when setting the owner for the storage location '%ls'. If the error persists, please contact support. |
 | 24608 | 17 | No | Storage location for transfering data to another distribution is not defined. If the error persists, please contact support. |
 | 24609 | 17 | No | Error 0x%X occurred while trying to access data exceeding the permitted limit. If the error persists, please contact support. |
 | 24610 | 17 | No | Unsupported data movement functionality was used. If the error persists, please contact support. |
@@ -253,7 +259,7 @@ ms.topic: include
 | 24740 | 16 | No | VORDER is supported only for warehouse databases. |
 | 24741 | 16 | No | Identity column '%.\*ls' must be of data type BIGINT. |
 | 24742 | 16 | No | Identity column '%.\*ls' does not support specifying SEED or INCREMENT. |
-| 24743 | 16 | No | An error occured while attempting to update discovered table properties. |
+| 24743 | 16 | No | An error occurred while attempting to update discovered table properties. |
 | 24744 | 16 | No | StringCchCopyNW failed with HRESULT = 0x%x. |
 | 24745 | 18 | No | Found column mapping properties, but no column mapping values. |
 | 24746 | 18 | No | The `MaxColumnId` value %u is less than the number of column mappings %lu. |
@@ -264,8 +270,8 @@ ms.topic: include
 | 24751 | 18 | No | Found duplicate column mapping id = %lu. |
 | 24752 | 18 | No | Found duplicate column mapping logical name = '%ls'. |
 | 24753 | 18 | No | Found duplicate column mapping physical name = '%ls'. |
-| 24754 | 16 | No | An internal error occured when truncating table '%.\*ls'. |
-| 24755 | 16 | No | An internal error occured when truncating user table. |
+| 24754 | 16 | No | An internal error occurred when truncating table '%.\*ls'. |
+| 24755 | 16 | No | An internal error occurred when truncating user table. |
 | 24756 | 16 | No | The query failed because handling end of file happened before whole IO buffer was populated: %ls. |
 | 24757 | 16 | No | Could not create table '%.\*ls' because the type (collation) of the column '%.\*ls' is not supported in a table with Data Clustering. |
 | 24758 | 16 | No | sp_cleanup_dropped_table_metadata is unable to clean up internal metadata for the trident DW table. |
@@ -312,6 +318,17 @@ ms.topic: include
 | 24799 | 16 | No | Cloning an external table is not supported. |
 | 24801 | 18 | No | Internal error. Unable to interact with the internal metadata of an external table due to the following reason: %ls |
 | 24802 | 16 | No | Table snapshot generation failure during file elimination using file-level statistics. NaN and Infinity are not supported. |
+| 24803 | 18 | No | Encountered failure during database upgrade of internal tables. |
+| 24804 | 16 | No | This stored procedure supports only one-part or two-part names. Please use either \[table\] or \[schema\].\[table\]. |
+| 24805 | 16 | No | Column '%s' of type '%s' could not be validated with the underlying table. Reason: %s. |
+| 24806 | 16 | No | Unexpected JSON data during parsing attempt in column type inference. Underlying data description: '%ls' |
+| 24807 | 16 | No | Cannot parse unquoted JSON value in the property '%ls'. Valid unquoted values can be true, false, null, and numbers. Underlying data description: '%ls' |
+| 24808 | 16 | No | Cannot convert a string value found in the JSON text to binary value because it is not Base64 encoded. |
+| 24809 | 16 | No | One or more log or checkpoint files have been deleted or overwritten. No operations can be performed on the external table. Please recreate the external table. |
+| 24810 | 16 | No | Updating source database is not supported. |
+| 24811 | 16 | No | SOURCE_DATABASE can only be altered only for warehouse snapshots in LIVE mode. |
+| 24812 | 18 | No | Setting SOURCE_DATABASE failed. |
+| 24813 | 16 | No | Specifying an explicit value for the identity column '%.\*ls' in table '%.\*ls' is not supported. |
 | 25002 | 16 | No | The specified Publisher is not enabled as a remote Publisher at this Distributor. Ensure the value specified for the parameter @publisher is correct, and that the Publisher is enabled as a remote Publisher at the Distributor. |
 | 25003 | 16 | No | Upgrade of the distribution database MSmerge_subscriptions table failed. Rerun the upgrade procedure in order to upgrade the distribution database. |
 | 25005 | 16 | No | It is invalid to drop the default constraint on the rowguid column that is used by merge replication. |
@@ -349,6 +366,11 @@ ms.topic: include
 | 25038 | 16 | No | User needs to have VIEW SERVER STATE permission to assign @subscriber as the listener name of the availability group. |
 | 25039 | 16 | No | Assigning listener name for @subscriber parameter is not a supported scenario for Managed Instance. |
 | 25040 | 16 | No | Assigning the default value to "%ls": %ls. |
+| 25100 | 17 | No | Storage is unavailable. |
+| 25101 | 16 | No | Provided lease is broken. |
+| 25102 | 16 | No | Lease was already released. |
+| 25103 | 16 | No | Incompatible lease mode. |
+| 25104 | 16 | No | Invalid parameter. |
 | 25507 | 16 | No | Invalid number of arguments passed to unit test '%ls'. |
 | 25601 | 17 | No | The Extended Event engine is out of memory. |
 | 25602 | 17 | No | The %S_MSG, "%.\*ls", encountered a configuration error during initialization. Object cannot be added to the event session. %ls |
@@ -383,7 +405,7 @@ ms.topic: include
 | 25650 | 16 | No | For %S_MSG, "%.\*ls" the customizable attribute, "%ls", was specified multiple times. |
 | 25651 | 16 | No | For %S_MSG, "%.\*ls", the value specified for customizable attribute, "%ls", did not match the expected type, "%ls". |
 | 25653 | 16 | No | The %S_MSG, "%.\*ls", does not exist in the event session. Object cannot be dropped from the event session. |
-| 25654 | 16 | No | Insuficient buffer space to copy error message. |
+| 25654 | 16 | No | Insufficient buffer space to copy error message. |
 | 25655 | 16 | No | Internal Extended Event error: invalid message code. |
 | 25656 | 16 | No | Error validating action. %ls |
 | 25657 | 16 | No | Error validating predicate. %ls |

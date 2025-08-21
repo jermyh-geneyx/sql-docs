@@ -22,7 +22,7 @@ helpviewer_keywords:
   
 ```  
   
-sqllogship -server instance_name { -backup primary_id | -copy secondary_id | -restore secondary_id } [ -verboselevel level ] [ -logintimeout timeout_value ] [ -querytimeout timeout_value ]  
+sqllogship -server instance_name { -backup primary_id | -copy secondary_id | -restore secondary_id } [ -verboselevel level ] [ -logintimeout timeout_value ] [ -querytimeout timeout_value ] [-connectionoptions "<key_value_pairs>;[...]"]
 ```  
   
 ## Arguments  
@@ -60,7 +60,22 @@ sqllogship -server instance_name { -backup primary_id | -copy secondary_id | -re
   
  **-querytimeout** _timeout_value_  
  Specifies the amount of time allotted for starting the specified operation before the attempt times out. The default is no timeout period. *timeout_value* is **int**_._  
-  
+
+**-connectionoptions** _"<key_value_pairs>;[...]"_
+**Applies to**: [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] RC 0 and later
+
+Specifies additional connectivity options in the form of key value pairs. 
+
+
+The following table lists the available connectivity options:
+
+|Key|Value|
+|-----------|-----------------|
+|`Encrypt`|`strict`, `mandatory`, `optional`, `true`, `false`|
+|`TrustServerCertificate`|`true`, `false`, `yes`, `no`|
+|`ServerCertificate`|Path on the filesystem to the server certificate. This has a maximum length of 260 characters.|
+|`HostNameInCertificate`|Hostname override for the certificate. This has a maximum length of 255 characters.|
+
 ## Remarks  
  We recommend that you use the backup, copy, and restore jobs to perform the backup, copy and restore when possible. To start these jobs from a batch operation or other application, call the [sp_start_job](../relational-databases/system-stored-procedures/sp-start-job-transact-sql.md) stored procedure.  
   

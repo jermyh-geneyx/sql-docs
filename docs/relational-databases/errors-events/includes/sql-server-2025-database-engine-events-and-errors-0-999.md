@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/15/2025
+ms.date: 08/14/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -494,7 +494,7 @@ ms.topic: include
 | 683 | 22 | No | An internal error occurred while trying to convert between variable-length and fixed-length decimal formats. Run DBCC CHECKDB to check for any database corruption. |
 | 684 | 22 | No | An internal error occurred while attempting to convert between compressed and uncompressed storage formats. Run DBCC CHECKDB to check for any corruption. |
 | 685 | 22 | No | An internal error occurred while attempting to retrieve a backpointer for a heap forwarded record. |
-| 686 | 22 | No | The maximum level of the B-Tree for rowset %I64d has been reached. SQL Server only supports upto 255 levels. |
+| 686 | 22 | No | The maximum level of the B-Tree for rowset %I64d has been reached. SQL Server only supports up to 255 levels. |
 | 687 | 16 | No | Cannot compress a nchar or nvarchar column that has an odd number of bytes. |
 | 688 | 16 | No | Operation not allowed due to an active online index build. |
 | 689 | 16 | No | Operation not allowed because of pending cleanup of online index build. Wait for cleanup to complete and re-run the operation. |
@@ -508,6 +508,7 @@ ms.topic: include
 | 699 | 16 | No | Failure to read data expected in Azure Block Blob Storage. Error code 0x%X. |
 | [701](../mssqlserver-701-database-engine-error.md) | 19 | Yes | There is insufficient system memory in resource pool '%ls' to run this query. |
 | 708 | 10 | Yes | Server is running low on virtual address space or machine is running low on virtual memory. Reserved memory used %d times since startup. Cancel query and re-run, decrease server load, or cancel other applications. |
+| 709 | 10 | No | The available memory for this SQL Server instance (%I64u MB) is lower than the configured maximum server memory (%I64u MB). This might occur because of external memory pressure or faulty hardware. If the operating system does not have sufficient memory for this SQL Server instance, consider reducing the configured maximum server memory to avoid this message on instance startup. |
 | 801 | 20 | Yes | A buffer was encountered with an unexpected status of 0x%x. |
 | [802](../mssqlserver-802-database-engine-error.md) | 17 | No | There is insufficient memory available in the buffer pool. |
 | 803 | 10 | Yes | simulated failure (DEBUG only) |
@@ -595,7 +596,7 @@ ms.topic: include
 | 909 | 21 | Yes | Database '%.\*ls' cannot be started in this edition of SQL Server because part or all of object '%.\*ls' is enabled with data compression or vardecimal storage format. Data compression and vardecimal storage format are only supported on SQL Server Enterprise Edition. |
 | 910 | 10 | No | Database '%.\*ls' is upgrading script '%.\*ls' from level %d to level %d. |
 | 911 | 16 | No | Database '%.\*ls' does not exist. Make sure that the name is entered correctly. |
-| [912](../mssqlserver-912-database-engine-error.md) | 21 | No | Script level upgrade for database '%.\*ls' failed because upgrade step '%.\*ls' encountered error %d, state %d, severity %d. This is a serious error condition which might interfere with regular operation and the database will be taken offline. If the error happened during upgrade of the 'master' database, it will prevent the entire SQL Server instance from starting. Examine the previous errorlog entries for errors, take the appropriate corrective actions and re-start the database so that the script upgrade steps run to completion. |
+| [912](../mssqlserver-912-database-engine-error.md) | 21 | No | Script level upgrade for database '%.\*ls' failed because upgrade step '%.\*ls' encountered error %d, state %d, severity %d. This is a serious error condition which might interfere with regular operation and the database will be taken offline. If the error happened during upgrade of the 'master' database, it will prevent the entire SQL Server instance from starting. Examine the previous errorlog entries for errors, take the appropriate corrective actions and re-start the database so that the script upgrade steps run to completion. For more information, see [https://go.microsoft.com/fwlink/?linkid=2322071](https://go.microsoft.com/fwlink/?linkid=2322071). |
 | 913 | 22 | Yes | Could not find database ID %d. Database may not be activated yet or may be in transition. Reissue the query once the database is available. If you do not think this error is due to a database that is transitioning its state and this error continues to occur, contact your primary support provider. Please have available for review the Microsoft SQL Server error log and any additional information relevant to the circumstances when the error occurred. |
 | 914 | 21 | No | Script level upgrade for database '%.\*ls' failed because upgrade step '%.\*ls' was aborted before completion. If the abort happened during upgrade of the 'master' database, it will prevent the entire SQL Server instance from starting. Examine the previous errorlog entries for errors, take the appropriate corrective actions and re-start the database so that the script upgrade steps run to completion. |
 | 915 | 21 | No | Unable to obtain the current script level for database '%.\*ls'. If the error happened during startup of the 'master' database, it will prevent the entire SQL Server instance from starting. Examine the previous errorlog entries for errors, take the appropriate corrective actions and re-start the database so that script upgrade may run to completion. |
@@ -620,7 +621,7 @@ ms.topic: include
 | 934 | 21 | Yes | SQL Server cannot load database '%.\*ls' because Change Data Capture is enabled. The currently installed edition of SQL Server does not support Change Data Capture. Either restore database without KEEP_CDC option, or upgrade the instance to one that supports Change Data Capture. |
 | 935 | 21 | Yes | The script level for '%.\*ls' in database '%.\*ls' cannot be downgraded from %d to %d, which is supported by this server. This usually implies that a future database was attached and the downgrade path is not supported by the current installation. Install a newer version of SQL Server and re-try opening the database. |
 | 938 | 21 | Yes | The target database version %d is not supported by the current code version %d. Change target version to a supported level and restart the server. |
-| 939 | 16 | Yes | Database '%.\*ls' cannot be started because it failed to initialize the persistent version store due to error %d. Refer to previous errors in the error log to identify the cause and correct any associated problems. |
+| 939 | 16 | Yes | Database '%.\*ls' cannot be started because Persistent Version Store initialization failed with error %d. Refer to previous errors in the error log to identify the cause and correct any associated problems. |
 | 941 | 16 | No | Database '%.\*ls' cannot be opened because it is not started. Retry when the database is started. |
 | 942 | 14 | No | Database '%.\*ls' cannot be opened because it is offline. |
 | 943 | 14 | No | Database '%.\*ls' cannot be opened because its version (%d) is later than the current server version (%d). |

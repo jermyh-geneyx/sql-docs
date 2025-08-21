@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/15/2025
+ms.date: 08/14/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -482,7 +482,7 @@ ms.topic: include
 | 21546 | 16 | No | Cannot replicate the ALTER TABLE command. It contains multiple DROP commands, including a DROP command for a column that is not included in all subscriptions to this article. Use a single DROP command in each ALTER TABLE command. |
 | 21547 | 16 | No | Encountered server error %d while restoring the log for database %s. |
 | 21548 | 16 | No | Cannot execute sp_change_subscription_properties. This stored procedure can only be used for publications that have at least one pull subscription. |
-| 21549 | 16 | No | Cannot add the computed column '%s' to the publication. You must first add all columns on which this column depends; you cannot filter any of these colunmns from the article. |
+| 21549 | 16 | No | Cannot add the computed column '%s' to the publication. You must first add all columns on which this column depends; you cannot filter any of these columns from the article. |
 | 21550 | 16 | No | Before you drop the column from the publication, all computed columns that depend on column '%s' must be dropped. |
 | 21551 | 16 | No | Only members of the sysadmin or db_owner or db_ddladmin roles can perform this operation. |
 | 21552 | 16 | No | Merge data definition language (DDL) error: Dropping a column used in a row filter or a join filter is not allowed. To drop a column used in a row filter, first change the row filter using sp_changemergearticle. To drop a column used in a join filter, first drop the join filter using sp_dropmergefilter. |
@@ -586,7 +586,7 @@ ms.topic: include
 | 21679 | 16 | No | Peer-to-peer publications only support a '%s' parameter value of %s. |
 | 21680 | 16 | No | The Distribution Agent was unable to update the cached log sequence numbers (LSNs) for Originator %s, OriginatorDB %s, OriginatorDBVersion %d, OriginatorPublicationID %d. Stop and restart the Distribution Agent. If the problem persists, contact Customer Support Services. |
 | 21681 | 16 | No | The current user '%s' does not have a valid linked server login mapping for non-SQL Server Publisher \[%s\]. Replication connects to the Publisher through a linked server; use the stored procedure sp_addlinkedsrvlogin to map the user's login to this linked server. |
-| 21682 | 16 | No | Cannot publish table \[%s\].\[%s\]. The replication administraive user requires an explicit SELECT grant, or a SELECT grant through PUBLIC, in order to publish this table. A role-based SELECT grant, if one exists, is not sufficient. |
+| 21682 | 16 | No | Cannot publish table \[%s\].\[%s\]. The replication administrative user requires an explicit SELECT grant, or a SELECT grant through PUBLIC, in order to publish this table. A role-based SELECT grant, if one exists, is not sufficient. |
 | 21683 | 16 | No | Cannot verify administrator login privileges for Oracle Publisher %s. Verify connection information and ensure that you can connect to the Publisher through a tool like SQL\*PLUS. |
 | 21684 | 16 | No | The replication administrative user for Oracle Publisher "%s" has insufficient permissions. Refer to the script /MSSQL/Install/oracleadmin.sql for the required permissions. |
 | 21685 | 16 | No | Request '%s' for Oracle schema filter for Oracle publisher '%s' failed. |
@@ -597,7 +597,7 @@ ms.topic: include
 | 21690 | 10 | No | The subscriber db cannot be the same as the publisher db when the subscriber is the same as the publisher |
 | 21691 | 10 | No | sp_mergesubscription_cleanup should be called on the subscription database |
 | 21692 | 16 | No | Failed to script the subscriber stored procedures for article '%s' in publication '%s' |
-| 21694 | 16 | No | %s cannot be null or empty when %s is set to 0 (SQL Server Authentication), 2 (AAD Password Authentication, or 4 (AAD Service Principal Authentication). Specify a login or set security mode to 1 (Integrated Authentication) or 3 (AAD Integrated Authentication). |
+| 21694 | 16 | No | %s cannot be null or empty when %s is set to 0 (SQL Server Authentication), 2 (Microsoft Entra Password Authentication, or 4 (Microsoft Entra Service Principal Authentication). Specify a login or set security mode to 1 (Integrated Authentication) or 3 (Microsoft Entra Integrated Authentication). |
 | 21695 | 10 | No | The replication agent job '%s' was not removed because it has a non-standard name; manually remove the job when it is no longer in use. |
 | 21696 | 16 | No | The stored procedure only applies to Oracle Publishers. The Publisher '%s' is a %s Publisher. |
 | 21698 | 16 | No | The parameter '%s' is no longer supported. |
@@ -621,7 +621,7 @@ ms.topic: include
 | 21720 | 16 | No | Cannot find a job that matches the ID or name specified in the parameters @dynamic_snapshot_jobid or @dynamic_snapshot_jobname. Verify the values specified for those parameters. |
 | 21721 | 10 | No | UserScripts |
 | 21722 | 16 | No | Failed to add an extended trigger for replicating the '%.\*ls' event. |
-| 21723 | 16 | No | The value specified for the @pubid parameter of procedure '%s' is not valid or is NULL. Verify that the Merge Agent is running correctly. Reinitalize the subscription if the problem persists. |
+| 21723 | 16 | No | The value specified for the @pubid parameter of procedure '%s' is not valid or is NULL. Verify that the Merge Agent is running correctly. Reinitialize the subscription if the problem persists. |
 | 21724 | 10 | No | Cannot add the foreign key %s with the CASCADE option because table %s is published. Add the NOT FOR REPLICATION clause to the foreign key definition. |
 | 21725 | 16 | No | Cannot alter the view. An indexed view replicated as a table cannot be altered to a nonindexed view. Drop the view from the publication before attempting to alter it. |
 | 21727 | 14 | No | Cannot complete the replication operation. The security check for the current user is failing. Only members of the sysadmin fixed server role, or db_owner or db_ddladmin fixed database roles can perform this operation. |

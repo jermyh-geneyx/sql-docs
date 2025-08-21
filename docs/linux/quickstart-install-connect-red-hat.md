@@ -4,7 +4,7 @@ titleSuffix: SQL Server
 description: This quickstart shows how to install SQL Server on Red Hat Enterprise Linux (RHEL) and then create and query a database with sqlcmd.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 05/02/2025
+ms.date: 08/12/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: quickstart
@@ -47,6 +47,9 @@ For more information on supported platforms, see [Release notes for SQL Server 2
 ::: moniker range=">=sql-server-linux-ver17 || >=sql-server-ver17"
 
 In this quickstart, you install [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] on Red Hat Enterprise Linux (RHEL) 9.x. Then you can connect with **sqlcmd** to create your first database and run queries.
+
+> [!NOTE]  
+> Red Hat 9 includes support for [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] and TLS 1.3, which is enabled by default.
 
 If you would like to automate your installation using Ansible, see [Quickstart: Deploy SQL Server on Linux using an Ansible playbook](sql-server-linux-deploy-ansible.md).
 
