@@ -205,9 +205,11 @@ The time-out value for how long the SQL Server Database Engine resource DLL shou
 **ClusterConnectionOptions = '<key_value_pairs>[;...]'**   
 **Applies to:** [!INCLUDE[sssql25-md](../../includes/sssql25-md.md)] RC 0 and later versions
 
-Use the `CLUSTER_CONNECTION_OPTIONS` clause to enforce [TLS 1.3](../../relational-databases/security/networking/tls-1-3.md) encryption for your failover cluster instance connections. The options are specified as a list of key-value pairs, separated by semicolons. The key-value pairs are used to configure connection string encryption for the failover cluster instance.
+Use the `CLUSTER_CONNECTION_OPTIONS` clause to enforce [TLS 1.3](../../relational-databases/security/networking/tls-1-3.md) encryption for communication between the Windows Server Failover Cluster and your failover cluster instance. The options are specified as a list of key-value pairs, separated by semicolons. The key-value pairs are used to configure connection string encryption for the failover cluster instance.
 
 To revert back to default encryption, set the `CLUSTER_CONNECTION_OPTIONS` clause to an empty string. [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] defaults to `Encrypt=Mandatory`, and `TrustServerCertificate=Yes` for connections to the failover cluster instance. 
+
+For more information, review [connect to a failover cluster instance with strict encryption](../../relational-databases/security/networking/connect-with-strict-encryption.md#connect-to-a-failover-cluster-instance) and [TDS 8.0](../../relational-databases/security/networking/tds-8.md).
 
 The following table describes the key-value pairs that you can use in the `CLUSTER_CONNECTION_OPTIONS` clause:
 
@@ -220,8 +222,6 @@ The following table describes the key-value pairs that you can use in the `CLUST
 | `CLUSTER_CONNECTION_OPTIONS` | Empty string (`''`) | Clears the existing configuration and reverts to default encryption settings of `Encrypt=Mandatory` and `TrustServerCertificate=Yes`. | 
 
 Check the [examples](#e-enforce-strict-encryption-to-your-failover-cluster-instance) to learn how to use the `CLUSTER_CONNECTION_OPTIONS` clause.
-
-For more information, review [connect to a failover cluster instance with strict encryption](../../relational-databases/security/networking/connect-with-strict-encryption.md#connect-to-a-failover-cluster-instance) and [TDS 8.0](../../relational-databases/security/networking/tds-8.md).
 
 **\<hadr_cluster_context> ::=**  
   

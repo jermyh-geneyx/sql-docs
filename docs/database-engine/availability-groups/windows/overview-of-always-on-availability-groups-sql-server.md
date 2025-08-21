@@ -59,9 +59,9 @@ The following illustration shows an availability group that contains one primary
 
 :::image type="content" source="media/overview-of-always-on-availability-groups-sql-server/availability-group-introduction.png" alt-text="Diagram of an availability group with five replicas.":::
 
-## Enforce TLS 1.3 encryption
+## Configure TLS 1.3 encryption
 
-[!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] RC 0 introduces [TDS 8.0](../../../relational-databases/security/networking/tds-8.md) support, which allows enforcing [TLS 1.3](../../../relational-databases/security/networking/tls-1-3.md) encryption for connections to your Always On availability group replicas and listener, including from the Windows Server Failover Cluster.
+[!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] RC 0 introduces [TDS 8.0](../../../relational-databases/security/networking/tds-8.md) support, which allows enforcing [TLS 1.3](../../../relational-databases/security/networking/tls-1-3.md) encryption for communication between the Windows Server Failover Cluster and your Always On availability group replicas.
 To get started, review [Connect with strict encryption](../../../relational-databases/security/networking/connect-with-strict-encryption.md#connect-to-an-always-on-availability-group).
 
 <a id="TermsAndDefinitions"></a>

@@ -135,7 +135,7 @@ Beginning with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] RC 0, MSOLE
 TDS 8.0 improves security by adding a new encryption option and introduces a breaking change: the `Encryption` parameter is no longer optional. It must be set in your connection string when targeting another SQL Server instance. 
 
 > [!NOTE]
-> Without the `Encrypt` parameter, linked servers in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] default to `Encrypt=Yes` and require a valid certificate. Connections without a valid certificate fail. 
+> Without the `Encrypt` parameter, linked servers in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] default to `Encrypt=Mandatory` and require a valid certificate. Connections without a valid certificate fail. 
 
 The `Encryption` parameter offers three distinct settings:
 

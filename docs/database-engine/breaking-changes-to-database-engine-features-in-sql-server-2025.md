@@ -31,7 +31,7 @@ For information about how to connect securely to [!INCLUDE [sssql25-md](../inclu
 
 ## Replication
 
-[!INCLUDE [sssql25-md](../includes/sssql25-md.md)] includes changes to [encryption](../relational-databases/security/networking/tds-8.md) that introduce a breaking change to [transactional replication](../relational-databases/replication/transactional/transactional-replication.md#enforce-strict-tls-13-encryption), [snapshot replication](../relational-databases/replication/snapshot-replication.md#enforce-strict-tls-13-encryption) and [merge replication](../relational-databases/replication/merge/merge-replication.md#enforce-strict-tls-13-encryption). 
+[!INCLUDE [sssql25-md](../includes/sssql25-md.md)] includes changes to [encryption](../relational-databases/security/networking/tds-8.md) that introduce a breaking change to [Transactional](../relational-databases/replication/transactional/transactional-replication.md#configure-tls-13-encryption), [Snapshot](../relational-databases/replication/snapshot-replication.md#configure-tls-13-encryption), [Peer to peer](../relational-databases/replication/transactional/peer-to-peer-transactional-replication.md#configure-tls-13-encryption) and [Merge](../relational-databases/replication/merge/merge-replication.md#configure-tls-13-encryption) replication. 
 
 In [!INCLUDE [sssql25-md](../includes/sssql25-md.md)]: 
 - [In-place upgrades to SQL Server 2025 Preview for instances with a remote distributor can fail](../sql-server/sql-server-2025-release-notes.md#in-place-upgrade-fails-due-to-replication)

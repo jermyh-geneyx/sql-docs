@@ -243,7 +243,9 @@ The external orchestrator is responsible to ensure the external lease renewal pr
 
 **Applies to:** [!INCLUDE[sssql25-md](../../includes/sssql25-md.md)] RC 0 and later versions
 
-Use the `CLUSTER_CONNECTION_OPTIONS` clause to enforce [TLS 1.3](../../relational-databases/security/networking/tls-1-3.md) encryption for your availability group connections. The options are specified as a list of key-value pairs, separated by semicolons. The key-value pairs are used to configure connection string encryption for the availability group.
+Use the `CLUSTER_CONNECTION_OPTIONS` clause to enforce [TLS 1.3](../../relational-databases/security/networking/tls-1-3.md) encryption for communication between the Windows Server Failover Cluster and your availability group replicas. The options are specified as a list of key-value pairs, separated by semicolons. The key-value pairs are used to configure connection string encryption for the availability group.
+
+For more information, review [connect to an availability group with strict encryption](../../relational-databases/security/networking/connect-with-strict-encryption.md#connect-to-an-always-on-availability-group) and [TDS 8.0](../../relational-databases/security/networking/tds-8.md).
 
 The following table describes the key-value pairs that you can use in the `CLUSTER_CONNECTION_OPTIONS` clause:
 
@@ -255,8 +257,6 @@ The following table describes the key-value pairs that you can use in the `CLUST
 |`ServerCertificate` | Path to your certificate | If do not want to use `HostNameInCertificate`, you can pass the path to your certificate. The cluster service account must have permission to read the certificate from the given location.<br /><br />  **This key value pair is optional.** | 
 
 Check the [examples](#b-enforce-encryption-in-connections-to-an-availability-group) to learn how to use the `CLUSTER_CONNECTION_OPTIONS` clause.
-
-For more information, review [connect to an availability group with strict encryption](../../relational-databases/security/networking/connect-with-strict-encryption.md#connect-to-an-always-on-availability-group) and [TDS 8.0](../../relational-databases/security/networking/tds-8.md).
 
 #### DATABASE *database_name*  
 

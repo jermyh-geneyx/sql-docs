@@ -58,9 +58,9 @@ TCP handshake :arrow_right: TLS handshake :arrow_right: TDS prelogin (encrypted)
 - [Always On availability groups](connect-with-strict-encryption.md#connect-to-an-always-on-availability-group)
 - [Always On failover cluster instance (FCI)](connect-with-strict-encryption.md#connect-to-a-failover-cluster-instance)
 - [Linked servers](../../linked-servers/linked-servers-database-engine.md#sql-server-2025-and-msoledbsql-version-19)<sup>1</sup>
-- [Transactional replication](../../replication/transactional/transactional-replication.md#enforce-strict-tls-13-encryption)<sup>1</sup>
-- [Merge replication](../../replication/merge/merge-replication.md#enforce-strict-tls-13-encryption)<sup>1</sup>
-- [Snapshot replication](../../replication/snapshot-replication.md#enforce-strict-tls-13-encryption)<sup>1</sup>
+- [Transactional replication](../../replication/transactional/transactional-replication.md#configure-tls-13-encryption)<sup>1</sup>
+- [Merge replication](../../replication/merge/merge-replication.md#configure-tls-13-encryption)<sup>1</sup>
+- [Snapshot replication](../../replication/snapshot-replication.md#configure-tls-13-encryption)<sup>1</sup>
 - [Log shipping](../../../database-engine/log-shipping/about-log-shipping-sql-server.md#enforce-tls-13-encryption)<sup>1</sup>
 
 <sup>1</sup>TDS 8.0 support introduces [breaking changes](../../../database-engine/breaking-changes-to-database-engine-features-in-sql-server-2025.md) to these features. 
