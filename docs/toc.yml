@@ -4458,8 +4458,8 @@ items:
       href: database-engine/install-windows/upgrade-sql-server-management-tools.md
     - name: Installation Wizard (Setup)
       href: database-engine/install-windows/upgrade-sql-server-using-the-installation-wizard-setup.md
-    - name: Upgrade edition
-      href: database-engine/install-windows/upgrade-to-a-different-edition-of-sql-server-setup.md
+    - name: Change edition
+      href: database-engine/install-windows/upgrade-downgrade-sql-server-edition-setup.md
     - name: Upgrade Database Engine
       items:
       - name: Overview

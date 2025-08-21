@@ -67593,6 +67593,11 @@
       "source_path": "docs/relational-databases/system-dynamic-management-views/sys-dm-hs-database-log-rate.md",
       "redirect_url": "/sql/relational-databases/system-functions/sys-dm-hs-database-log-rate",
       "redirect_document_id": false
+    },
+    {
+      "source_path": "docs/database-engine/install-windows/upgrade-to-a-different-edition-of-sql-server-setup.md",
+      "redirect_url": "/sql/database-engine/install-windows/upgrade-downgrade-sql-server-edition-setup",
+      "redirect_document_id": true
     }
   ]
 }

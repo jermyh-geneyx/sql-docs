@@ -1,15 +1,17 @@
 ---
-title: Upgrade to a Different Edition of SQL Server
-description: SQL Server Setup supports edition upgrade among various editions of SQL Server. Before you begin an edition upgrade, review the resources in this article.
+title: In-place change of SQL Server edition
+description: SQL Server Setup supports edition upgrade among various editions of SQL Server. Before you begin an edition upgrade, review the resources in this article. You can also perform an edition downgrade, which is also described in this article.
 author: rwestMSFT
 ms.author: randolphwest
 ms.date: 06/03/2025
+ms.reviewer: jopilov
 ms.service: sql
 ms.subservice: install
 ms.topic: install-set-up-deploy
 monikerRange: ">=sql-server-2016"
 ---
-# Upgrade to a different edition of SQL Server (Setup)
+
+# In-place change of a SQL Server edition (Setup)
 
 [!INCLUDE [SQL Server -Windows Only](../../includes/applies-to-version/sql-windows-only.md)]
 
@@ -17,23 +19,25 @@ monikerRange: ">=sql-server-2016"
 
 [!INCLUDE [editions-supported-features-windows](../../includes/editions-supported-features-windows.md)]
 
+This article also provides steps on how you can do an edition downgrade. For example, if you need to downgrade from Enterprise edition to Standard edition of [!INCLUDE [ssNoversion](../../includes/ssnoversion-md.md)], follow the steps outlined in this article.
+
+## Remarks
+
 Before you initiate the edition upgrade of an instance of [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)], review the following articles:
 
 - [Compute capacity limits by edition of SQL Server](../../sql-server/compute-capacity-limits-by-edition-of-sql-server.md)
 - [Hardware and software requirements for SQL Server 2022](../../sql-server/install/hardware-and-software-requirements-for-installing-sql-server-2022.md)
 
-## Remarks
-
-For [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] on a failover cluster instance, running edition upgrade on one of the nodes of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] failover cluster instance is sufficient. This node can be either active or passive, and the engine doesn't bring the resources offline during the edition upgrade. After the edition upgrade, you must either restart the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] instance, or fail over to a different node.
+For [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] on a failover cluster instance (FCI), running edition upgrade on one of the FCI nodes is sufficient. This node can be either active or passive, and the Database Engine doesn't bring the resources offline during the edition upgrade. After the edition upgrade, you must either restart the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] instance, or fail over to a different node.
 
 ## Prerequisites
 
 For local installations, you must run Setup as an administrator. If you install [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] from a remote share, you must use a domain account that has read permissions on the remote share.
 
 > [!IMPORTANT]  
-> For the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] edition change to be activated, Setup must restart [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] services. This will result in application down time while services are offline.
+> For the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] edition change to be activated, Setup must restart [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] services. This results in application down time while services are offline.
 
-## Upgrade process
+## Upgrade an edition
 
 1. Insert the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] installation media. From the root folder, double-click `setup.exe` or launch the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Installation Center from Configuration Tools. To install from a network share, locate the root folder on the share, and then double-click `setup.exe`.
 
@@ -78,6 +82,29 @@ If the procedure fails on `Engine_SqlEngineHealthCheck` rule, then you can use t
 ```cmd
 setup.exe /q /ACTION=editionupgrade /InstanceName=MSSQLSERVER /PID=<appropriatePid> /SkipRules=Engine_SqlEngineHealthCheck
 ```
+
+## Downgrade an edition
+
+To downgrade the edition of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], you must completely uninstall the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] instance, and install it again with the desired edition setup media.
+
+> [!WARNING]
+> Uninstalling and reinstalling [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] incurs additional downtime.
+
+You can downgrade the edition of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] by following these steps:
+
+1. Back up all databases, including system databases. For a list of which database to back up, see the table in [Back up and restore: System databases (SQL Server)](../../relational-databases/backup-restore/back-up-and-restore-of-system-databases-sql-server.md).
+
+1. Move the system databases files (`master`, `model`, and `msdb`) to a new directory location.
+
+1. Completely uninstall [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] and all associated services. For more information, see [Uninstall an existing instance of SQL Server (Setup)](../../sql-server/install/uninstall-an-existing-instance-of-sql-server-setup.md).
+
+1. Restart the computer. A new installation requires this step.
+
+1. Install [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] using the media with the desired edition of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. Be sure to use the same [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] instance name that was used previously.
+
+1. Install the latest service packs and cumulative updates where applicable. For more information, see [Latest updates and version history for SQL Server](/troubleshoot/sql/releases/download-and-install-latest-updates).
+
+1. Replace the new system databases that were created during installation with the system databases that you previously moved to a different directory location.
 
 ## Related content
 
