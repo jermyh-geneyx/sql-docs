@@ -419,7 +419,7 @@ Use the **General** page of the **Foreach Loop Editor** dialog box to name and d
  **Browse**  
  Select the SMO enumeration.  
   
- **Related Topics:** [Select SMO Enumeration Dialog Box]()  
+ **Related Topics:** Select SMO Enumeration Dialog Box
   
 ####  <a name="ForeachHDFSFile"></a> Enumerator = Foreach HDFS File Enumerator  
  The **Foreach HDFS File Enumerator** enables an SSIS package to enumerate HDFS files in the specified HDFS location. The name of each  HDFS file can be stored in a variable and used in tasks inside the Foreach Loop Container.  

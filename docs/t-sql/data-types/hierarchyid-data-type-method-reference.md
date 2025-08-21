@@ -83,6 +83,6 @@ Bi-directional replication includes transactional replication with updating subs
 -   Row filtering is supported as long as the filter does not include a **hierarchyid** column.  
   
 ## See also
+
 [Hierarchical Data &#40;SQL Server&#41;](../../relational-databases/hierarchical-data-sql-server.md)  
-[hierarchyid Data Type Method Reference]()
   
