@@ -4,7 +4,7 @@ description: Learn about new features for SQL Server 2025 (17.x), which gives yo
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: wiassaf, randolphwest
-ms.date: 08/19/2025
+ms.date: 08/21/2025
 ms.service: sql
 ms.subservice: release-landing
 ms.topic: whats-new
@@ -86,7 +86,7 @@ In addition to features announced previously, RC 0 adds the following changes an
 - Log shipping
    - Configure [TLS 1.3](../relational-databases/security/networking/tls-1-3.md) encryption between servers in a [log shipping topology](../database-engine/log-shipping/about-log-shipping-sql-server.md#enforce-tls-13-encryption) with [TDS 8.0](../relational-databases/security/networking/tds-8.md) support.
 - Fabric
-   - Support for [resource governor](../relational-databases/resource-governor/resource-governor-workload-group.md)
+   - See [Fabric](#microsoft-fabric).
 - [!INCLUDE [ssrs-power-bi-consolidation](../reporting-services/includes/ssrs-power-bi-consolidation.md)]
 
 
@@ -97,7 +97,6 @@ In addition to features announced previously, RC 0 adds the following changes an
 The following sections identify features that are improved or introduced in [!INCLUDE [sssql22-md](../includes/sssql25-md.md)].
 
 - [AI](#ai)
-- [Fabric](#fabric)
 - [Developer](#developer)
 - [Analytics](#analytics)
 - [Availability](#availability-and-disaster-recovery)
@@ -106,6 +105,7 @@ The following sections identify features that are improved or introduced in [!IN
 - [Query Store and intelligent query processing](#query-store-and-intelligent-query-processing)
 - [Language](#language)
 - [Tools](#tools)
+- [Fabric](#microsoft-fabric)
 
 ## AI
 
@@ -116,12 +116,6 @@ The following sections identify features that are improved or introduced in [!IN
 | [Vector functions](../t-sql/functions/vector-functions-transact-sql.md) | New scalar functions perform operations on vectors in binary format, allowing applications to store and manipulate vectors in the SQL Database Engine. |
 | [Vector index](../relational-databases/vectors/vectors-sql-server.md#vector-search) | Create and manage approximate vector index to quickly and efficiently find similar vectors to a given reference vector.<br /><br />Query vector indexes from [sys.vector_indexes](../relational-databases/system-catalog-views/sys-vector-indexes-transact-sql.md). |
 | [Manage external AI models](../t-sql/statements/create-external-model-transact-sql.md) | Manage external AI model objects for embedding tasks (creating vector arrays) accessing REST AI inference endpoints. |
-
-## Fabric
-
-| New feature or update | Details |
-| --- | --- |
-| [Mirroring in Fabric](/fabric/database/mirrored-database/overview) | Continuously replicate data to Microsoft Fabric from SQL Server 2025 on-premises, as well as SQL Server 2025 on VMs. Microsoft Fabric already includes mirroring from a variety of sources, including Azure SQL Database and Azure SQL Managed Instance. For more information on SQL Server 2025 database mirroring to Fabric, see [Mirrored SQL Server databases in Microsoft Fabric](/fabric/database/mirrored-database/sql-server). |
 
 ## Developer
 
@@ -283,7 +277,9 @@ The [intelligent query processing (IQP)](../relational-databases/performance/int
 | **[bcp utility](../tools/bcp-utility.md)** | Authentication enhancements |
 | **[sqlcmd utility](../tools/sqlcmd/sqlcmd-utility.md)** | Authentication enhancements |
 
-## Fabric mirroring
+## Microsoft Fabric
+
+### Fabric mirroring for SQL Server 2025 (Preview)
 
 - You can configure SQL Server resource governor to manage resource usage for Mirroring in Fabric for [!INCLUDE [sssql25-md](../includes/sssql25-md.md)]. Each workload group is for a specific phase of mirroring.
 
