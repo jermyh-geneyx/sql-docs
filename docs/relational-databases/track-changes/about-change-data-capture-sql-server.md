@@ -13,6 +13,7 @@ helpviewer_keywords:
   - "change data capture"
   - "change data capture for SQL Server"
   - "change data capture for Azure SQL Managed Instance"
+monikerRange: ">=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
 ---
 
 # What is change data capture (CDC)?
@@ -20,7 +21,7 @@ helpviewer_keywords:
 
 > [!div class="op_single_selector"]
 > * [SQL Server & Azure SQL Managed Instance](about-change-data-capture-sql-server.md)
-> * [Azure SQL Database](/azure/azure-sql/database/change-data-capture-overview)
+> * [Azure SQL Database](/azure/azure-sql/database/change-data-capture-overview?view=azuresql-db&preserve-view=true)
 
 In this article, learn about change data capture (CDC), which records activity on a database when tables and rows have been modified.  
 

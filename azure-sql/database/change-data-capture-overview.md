@@ -265,9 +265,15 @@ When you enable CDC, you might observe higher transaction log utilization. You m
 > [!TIP]  
 > If your workload demands higher overall performance due to higher transaction log throughput and faster transaction commit times, use the [Hyperscale service tier](service-tier-hyperscale.md).
 
-## Online DDL statements are unsupported
+## Online operations
 
-[Online DDL statements](/sql/t-sql/statements/alter-table-transact-sql#with--online--on--off-as-applies-to-altering-a-column) are unsupported when change change data capture is enabled on a database. 
+### Online DDL statements are unsupported
+
+[Online DDL statements](/sql/t-sql/statements/alter-table-transact-sql?view=azuresqldb-current&preserve-view=true#with--online--on--off-as-applies-to-altering-a-column) are unsupported when change change data capture is enabled on a database. 
+
+### Online index operations are unsupported
+
+[Online index operations](/sql/relational-databases/indexes/perform-index-operations-online?view=azuresqldb-current&preserve-view=true) are unsupported when change data capture is enabled on a database.
 
 ### Capture and cleanup customization
 
@@ -305,10 +311,10 @@ If you enable CDC on your database as a Microsoft Entra user, it's not possible 
 
 This section provides guidance and troubleshooting steps associated with CDC on Azure SQL Database. CDC-related errors might obstruct the proper functioning of the capture process and lead to the expansion of the database transaction log.
 
-To examine these errors, you can query the dynamic management view [sys.dm_cdc_errors](/sql/relational-databases/system-dynamic-management-views/change-data-capture-sys-dm-cdc-errors). If the `sys.dm_cdc_errors` dynamic management view returns any errors,  refer to the following section to understand the mitigation steps.
+To examine these errors, you can query the dynamic management view [sys.dm_cdc_errors](/sql/relational-databases/system-dynamic-management-views/change-data-capture-sys-dm-cdc-errors?view=azuresqldb-current&preserve-view=true). If the `sys.dm_cdc_errors` dynamic management view returns any errors,  refer to the following section to understand the mitigation steps.
 
 > [!NOTE]  
-> For more information on a particular error code, see [Database Engine events and errors](/sql/relational-databases/errors-events/database-engine-events-and-errors).
+> For more information on a particular error code, see [Database Engine events and errors](/sql/relational-databases/errors-events/database-engine-events-and-errors?view=azuresqldb-current&preserve-view=true).
 
 These are the different troubleshooting categories included in this section:
 
@@ -327,7 +333,7 @@ These are the different troubleshooting categories included in this section:
 - **Recommendation**: To address this problem, you need to disable and re-enable CDC for your database. When enabling change data capture for a database, it creates the cdc schema, cdc user, metadata tables, and other system objects for the database. You'll need to manually re-enable [CDC for individual tables](#enable-cdc-for-a-table) after CDC is enabled for the database.
 
 > [!NOTE]  
-> Objects found in the [sys.objects](/sql/relational-databases/system-catalog-views/sys-objects-transact-sql) system catalog view with `is_ms_shipped=1` and `schema_name=cdc` shouldn't be altered or dropped.
+> Objects found in the [sys.objects](/sql/relational-databases/system-catalog-views/sys-objects-transact-sql?view=azuresqldb-current&preserve-view=true) system catalog view with `is_ms_shipped=1` and `schema_name=cdc` shouldn't be altered or dropped.
 
 #### Error 1202 - Database principal doesn't exist, or user is not a member
 
@@ -345,7 +351,7 @@ These are the different troubleshooting categories included in this section:
 
 - **Cause**: This error happens when the SQL Server database engine can't find or access the replication system table '%s.' The table might be missing or unreachable. For CDC to function properly, don't manually modify any CDC metadata, such as the `CDC schema`, change tables, CDC system stored procedures, default `cdc user` permissions (`sys.database_principals`) or rename the `cdc user`.
 
-- **Recommendation**: Verify that the system table exists and is accessible by querying the table directly. Query the [sys.objects](/sql/relational-databases/system-catalog-views/sys-objects-transact-sql) system catalog, set predicate clause with `is_ms_shipped=1` and `schema_name=cdc` to list all CDC-related objects. If the query doesn't return any objects, you should disable and then re-enable CDC for your database. Enabling change data capture for a database creates the `cdc schema`, `cdc user`, metadata tables, and other system objects for the database. You'll need to manually re-enable [CDC for individual tables](#enable-cdc-for-a-table) after CDC is enabled for the database.
+- **Recommendation**: Verify that the system table exists and is accessible by querying the table directly. Query the [sys.objects](/sql/relational-databases/system-catalog-views/sys-objects-transact-sql?view=azuresqldb-current&preserve-view=true) system catalog, set predicate clause with `is_ms_shipped=1` and `schema_name=cdc` to list all CDC-related objects. If the query doesn't return any objects, you should disable and then re-enable CDC for your database. Enabling change data capture for a database creates the `cdc schema`, `cdc user`, metadata tables, and other system objects for the database. You'll need to manually re-enable [CDC for individual tables](#enable-cdc-for-a-table) after CDC is enabled for the database.
 
 #### Error 21050 - Only members of the sysadmin or db_owner fixed server role can perform this operation
 
@@ -377,7 +383,9 @@ These are the different troubleshooting categories included in this section:
 > [!IMPORTANT]  
 > For detailed information about Azure SQL Database (single database) compute sizes (SLO) see [Resource limits for elastic pools using the vCore purchasing model](resource-limits-vcore-elastic-pools.md) and [Resource limits for elastic pools using the DTU purchasing model](resource-limits-dtu-elastic-pools.md).
 
-#### CDC limitation
+<a id="cdc-limitation"></a>
+
+### CDC limitations
 
 #### Error 2628 - string or binary data would be truncated in table
 
@@ -409,7 +417,7 @@ These are the different troubleshooting categories included in this section:
   - Enable CDC
   - Re-enable the trigger
 
-For more information, see [DISABLE TRIGGER](/sql/t-sql/statements/disable-trigger-transact-sql).
+For more information, see [DISABLE TRIGGER](/sql/t-sql/statements/disable-trigger-transact-sql?view=azuresqldb-current&preserve-view=true).
 
 #### Error 913 - CDC capture job fails when processing changes for a table with system CLR data type
 
@@ -455,7 +463,7 @@ EXEC sp_addrolemember 'db_owner' , 'cdc';
 
 ## Related content
 
-- [Work with Change Data](/sql/relational-databases/track-changes/work-with-change-data-sql-server)
-- [Track data changes (SQL Server)](/sql/relational-databases/track-changes/track-data-changes-sql-server)
-- [Administer and monitor change data capture](/sql/relational-databases/track-changes/administer-and-monitor-change-data-capture-sql-server)
-- [Temporal tables](/sql/relational-databases/tables/temporal-tables)
+- [Work with Change Data](/sql/relational-databases/track-changes/work-with-change-data-sql-server?view=azuresqldb-current&preserve-view=true)
+- [Track data changes (SQL Server)](/sql/relational-databases/track-changes/track-data-changes-sql-server?view=azuresqldb-current&preserve-view=true)
+- [Administer and monitor change data capture](/sql/relational-databases/track-changes/administer-and-monitor-change-data-capture-sql-server?view=azuresqldb-current&preserve-view=true)
+- [Temporal tables](/sql/relational-databases/tables/temporal-tables?view=azuresqldb-current&preserve-view=true)

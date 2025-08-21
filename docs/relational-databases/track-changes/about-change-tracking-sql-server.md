@@ -13,13 +13,13 @@ helpviewer_keywords:
   - "change tracking [SQL Server], about change tracking"
   - "change tracking [SQL Server]"
   - "data [SQL Server], changing"
-monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
 ms.custom:
   - build-2025
+monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
 # About Change Tracking (SQL Server)
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 This article describes the change tracking feature for SQL Server, which is a lightweight solution that provides an efficient change tracking mechanism for applications. 
 
