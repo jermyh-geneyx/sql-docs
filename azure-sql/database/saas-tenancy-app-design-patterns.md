@@ -1,13 +1,15 @@
 ---
-title: Multitenant SaaS patterns
+title: Multitenant SaaS Patterns
 description: Learn about the requirements and common data architecture patterns of multitenant software as a service (SaaS) database applications that run in the Azure cloud environment.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
+ms.date: 08/21/2025
 ms.service: azure-sql-database
 ms.subservice: scenario
 ms.topic: concept-article
-ms.date: 05/02/2025
-ms.custom: sqldbrb=1
+ms.custom:
+  - sqldbrb=1
+ms.update-cycle: 1095-days
 ---
 
 # Multitenant SaaS database tenancy patterns
@@ -64,7 +66,7 @@ The tenancy discussion is focused on the *data* layer. But consider for a moment
 
 In this model, the whole application is installed repeatedly, once for each tenant. Each instance of the app is a standalone instance, so it never interacts with any other standalone instance. Each instance of the app has only one tenant, and therefore needs only one database. The tenant has the database all to itself.
 
-![Design of standalone app with exactly one single-tenant database.][image-standalone-app-st-db-111a]
+:::image type="content" source="media/saas-tenancy-app-design-patterns/saas-standalone-app-single-tenant-database.png" alt-text="Diagram of the design of a standalone app with exactly one single-tenant database." lightbox="media/saas-tenancy-app-design-patterns/saas-standalone-app-single-tenant-database.png":::
 
 Each app instance is installed in a separate Azure resource group. Either the software vendor or the tenant could own the subscription that owns the resource group. In either case, the vendor can manage the software for the tenant. Each application instance is configured to connect to its corresponding database.
 
@@ -72,13 +74,13 @@ Each tenant database is deployed as a single database. This model provides the g
 
 ### Vendor management
 
-The vendor can access all the databases in all the standalone app instances, even if the app instances are installed in different tenant subscriptions. The access is achieved via SQL connections. This cross-instance access can enable the vendor to centralize schema management and cross-database query for reporting or analytics purposes. If this kind of centralized management is desired, a catalog must be deployed that maps tenant identifiers to database uniform resource identifiers (URIs). Azure SQL Database provides a sharding library that is used together to provide a catalog. The sharding library is formally named the [Elastic Database Client Library][docu-elastic-db-client-library-536r].
+The vendor can access all the databases in all the standalone app instances, even if the app instances are installed in different tenant subscriptions. The access is achieved via SQL connections. This cross-instance access can enable the vendor to centralize schema management and cross-database query for reporting or analytics purposes. If this kind of centralized management is desired, a catalog must be deployed that maps tenant identifiers to database uniform resource identifiers (URIs). Azure SQL Database provides a sharding library that is used together to provide a catalog. The sharding library is formally named the [Elastic Database Client Library](elastic-database-client-library.md).
 
 ## D. Multitenant app with database-per-tenant
 
 This next pattern uses a multitenant application with many databases, all being single-tenant databases. A new database is provisioned for each new tenant. The application tier is scaled *up* vertically by adding more resources per node. Or the app is scaled *out* horizontally by adding more nodes. The scaling is based on workload, and is independent of the number or scale of the individual databases.
 
-![Design of multi-tenant app with database-per-tenant.][image-mt-app-db-per-tenant-132d]
+:::image type="content" source="media/saas-tenancy-app-design-patterns/saas-multi-tenant-app-database-per-tenant.png" alt-text="Diagram of the design of a multi-tenant app with database-per-tenant.":::
 
 ### Customize for a tenant
 
@@ -90,7 +92,7 @@ With database-per-tenant, customizing the schema for one or more individual tena
 
 When databases are deployed in the same resource group, they can be grouped into elastic pools. The pools provide a cost-effective way of sharing resources across many databases. This pool option is cheaper than requiring each database to be large enough to accommodate the usage peaks that it experiences. Even though pooled databases share access to resources they can still achieve a high degree of performance isolation.
 
-![Design of multi-tenant app with database-per-tenant, using elastic pool.][image-mt-app-db-per-tenant-pool-153p]
+:::image type="content" source="media/saas-tenancy-app-design-patterns/saas-multi-tenant-app-database-per-tenant-pool.png" alt-text="Diagram of the design of multi-tenant app with database-per-tenant, using elastic pool.":::
 
 Azure SQL Database provides the tools necessary to configure, monitor, and manage the sharing. Both pool-level and database-level performance metrics are available in the Azure portal, and through Azure Monitor logs. The metrics can give great insights into both aggregate and tenant-specific performance. Individual databases can be moved between pools to provide reserved resources to a specific tenant. These tools enable you to ensure good performance in a cost effective manner.
 
@@ -98,7 +100,7 @@ Azure SQL Database provides the tools necessary to configure, monitor, and manag
 
 Azure SQL Database has many management features designed to manage large numbers of databases at scale, such as well over 100,000 databases. These features make the database-per-tenant pattern plausible.
 
-For example, suppose a system has a 1000-tenant database as its only one database. The database might have 20 indexes. If the system converts to having 1,000 single-tenant databases, the quantity of indexes rises to 20,000. In Azure SQL Database as part of [Automatic tuning][docu-sql-db-automatic-tuning-771a], the automatic indexing features are enabled by default. Automatic indexing manages for you all 20,000 indexes and their ongoing create and drop optimizations. These automated actions occur within an individual database, and they aren't coordinated or restricted by similar actions in other databases. Automatic indexing treats indexes differently in a busy database than in a less busy database. This type of index management customization would be impractical at the database-per-tenant scale if this huge management task had to be done manually.
+For example, suppose a system has a 1000-tenant database as its only one database. The database might have 20 indexes. If the system converts to having 1,000 single-tenant databases, the quantity of indexes rises to 20,000. In Azure SQL Database as part of [Automatic database tuning](automatic-tuning-overview.md), the automatic indexing features are enabled by default. Automatic indexing manages for you all 20,000 indexes and their ongoing create and drop optimizations. These automated actions occur within an individual database, and they aren't coordinated or restricted by similar actions in other databases. Automatic indexing treats indexes differently in a busy database than in a less busy database. This type of index management customization would be impractical at the database-per-tenant scale if this huge management task had to be done manually.
 
 Other management features that scale well include the following:
 
@@ -119,7 +121,7 @@ Another available pattern is to store many tenants in a multitenant database. Th
 
 ### Tenant isolation is sacrificed
 
-*Data:*&nbsp; A multitenant database necessarily sacrifices tenant isolation. The data of multiple tenants is stored together in one database. During development, ensure that queries never expose data from more than one tenant. SQL Database supports [row-level security][docu-sql-svr-db-row-level-security-947w], which can enforce that data returned from a query be scoped to a single tenant.
+*Data:*&nbsp; A multitenant database necessarily sacrifices tenant isolation. The data of multiple tenants is stored together in one database. During development, ensure that queries never expose data from more than one tenant. SQL Database supports [row-level security](/sql/relational-databases/security/row-level-security), which can enforce that data returned from a query be scoped to a single tenant.
 
 *Processing:*&nbsp; A multitenant database shares compute and storage resources across all its tenants. The database as a whole can be monitored to ensure it's performing acceptably. However, the Azure system has no built-in way to monitor or manage the use of these resources by an individual tenant. Therefore, the multitenant database carries an increased risk of encountering noisy neighbors, where the workload of one overactive tenant impacts the performance experience of other tenants in the same database. More application-level monitoring could monitor tenant-level performance.
 
@@ -139,7 +141,7 @@ Management operations that are focused on individual tenants are more complex to
 
 Most SaaS applications access the data of only one tenant at a time. This access pattern allows tenant data to be distributed across multiple databases or shards, where all the data for any one tenant is contained in one shard. Combined with a multitenant database pattern, a sharded model allows almost limitless scale.
 
-![Design of multi-tenant app with sharded multi-tenant databases.][image-mt-app-sharded-mt-db-174s]
+:::image type="content" source="media/saas-tenancy-app-design-patterns/saas-multi-tenant-app-sharded-multi-tenant-databases.png" alt-text="Diagram of the design of a multi-tenant app with sharded multi-tenant databases.":::
 
 ### Manage shards
 
@@ -189,21 +191,3 @@ The following table summarizes the differences between the main tenancy models.
 ## Related content
 
 - [Azure Architecture Center: Starter web app for SaaS development](/azure/architecture/example-scenario/apps/saas-starter-web-app)
-
-<!--  Article link references.  -->
-
-[docu-sql-svr-db-row-level-security-947w]: /sql/relational-databases/security/row-level-security
-
-[docu-elastic-db-client-library-536r]:elastic-database-client-library.md
-
-[docu-sql-db-automatic-tuning-771a]:automatic-tuning-overview.md
-
-<!--  Image references.  -->
-
-[image-standalone-app-st-db-111a]: media/saas-tenancy-app-design-patterns/saas-standalone-app-single-tenant-database-11.png "Design of standalone app with exactly one single-tenant database."
-
-[image-mt-app-db-per-tenant-132d]: media/saas-tenancy-app-design-patterns/saas-multi-tenant-app-database-per-tenant-13.png "Design of multitenant app with database-per-tenant."
-
-[image-mt-app-db-per-tenant-pool-153p]: media/saas-tenancy-app-design-patterns/saas-multi-tenant-app-database-per-tenant-pool-15.png "Design of multitenant app with database-per-tenant, using elastic pool."
-
-[image-mt-app-sharded-mt-db-174s]: media/saas-tenancy-app-design-patterns/saas-multi-tenant-app-sharded-multi-tenant-databases-17.png "Design of multitenant app with sharded multitenant databases."
