@@ -372,7 +372,7 @@ cd C:\onnx_runtime
 mkdir model
 ```
 
-This example uses the [all-MiniLM-L6-v2-onnx model](https://huggingface.co/nsense/all-MiniLM-L6-v2-onnx) model from Hugging Face, which [can be downloaded here](https://huggingface.co/nsense/all-MiniLM-L6-v2-onnx).
+This example uses the `all-MiniLM-L6-v2-onnx` model, which can be downloaded from [Hugging Face](https://huggingface.co/nsense/all-MiniLM-L6-v2-onnx).
 
 Clone the repository into the `C:\onnx_runtime\model` directory with the following [git](https://git-scm.com/downloads) command:
 

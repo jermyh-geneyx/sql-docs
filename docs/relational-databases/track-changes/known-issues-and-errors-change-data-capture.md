@@ -134,7 +134,7 @@ Using variables with partition switching on databases or tables with change data
 
 ### Online index operations are unsupported
 
-[Online index operations](../indexes/perform-index-operations-online.md) are unsupported when change data capture is enabled on a database.
+[Online index operations](../indexes/perform-index-operations-online.md) are unsupported when change data capture is enabled on a database. You can encounter Error 18773, "Could not locate text information records for the column "%.*ls", ID %d during command construction.". 
 
 <a id="troubleshooting-errors"></a>
 

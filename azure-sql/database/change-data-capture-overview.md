@@ -4,7 +4,7 @@ description: "Learn about change data capture (CDC) in Azure SQL Database, which
 author: croblesm
 ms.author: roblescarlos
 ms.reviewer: mathoma, randolphwest
-ms.date: 12/04/2024
+ms.date: 08/22/2025
 ms.service: azure-sql-database
 ms.subservice: replication
 ms.topic: how-to
@@ -273,7 +273,7 @@ When you enable CDC, you might observe higher transaction log utilization. You m
 
 ### Online index operations are unsupported
 
-[Online index operations](/sql/relational-databases/indexes/perform-index-operations-online?view=azuresqldb-current&preserve-view=true) are unsupported when change data capture is enabled on a database.
+[Online index operations](/sql/relational-databases/indexes/perform-index-operations-online?view=azuresqldb-current&preserve-view=true) are unsupported when change data capture is enabled on a database. You can encounter Error 18773, "Could not locate text information records for the column "%.*ls", ID %d during command construction.". 
 
 ### Capture and cleanup customization
 
