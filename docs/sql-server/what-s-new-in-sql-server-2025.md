@@ -28,9 +28,13 @@ This article summarizes the new features and enhancements for [!INCLUDE [sql-ser
 
 ## Get SQL Server 2025
 
-[Get SQL Server 2025 Preview](https://info.microsoft.com/ww-landing-sql-server-2025.html). Build number: 17.0.800.3.
+[Get SQL Server 2025 Preview](https://info.microsoft.com/ww-landing-sql-server-2025.html).
 
-For more information and known issues, see [SQL Server 2025 Preview release notes](sql-server-2025-release-notes.md).
+Review:
+
+- [Known issues](sql-server-2025-release-notes.md#known-issues)
+- [Build number](sql-server-2025-release-notes.md#build-number)
+- [Breaking changes](../database-engine/breaking-changes-to-database-engine-features-in-sql-server-2025.md)
 
 For the best experience with [!INCLUDE [sql-server-2025](../includes/sssql25-md.md)], use the [latest tools](../tools/overview-sql-tools.md).
 
