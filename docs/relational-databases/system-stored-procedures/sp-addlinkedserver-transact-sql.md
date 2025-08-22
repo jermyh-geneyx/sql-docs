@@ -4,7 +4,7 @@ description: "sp_addlinkedserver (Transact-SQL)"
 author: markingmyname
 ms.author: maghan
 ms.reviewer: wiassaf, randolphwest, mikeray
-ms.date: 08/08/2025
+ms.date: 08/21/2025
 ms.service: sql
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -186,7 +186,7 @@ EXECUTE sp_addlinkedserver
     @datasrc = N'S1\instance1';
 ```
 
-The following shows the above example using Microsoft OLE DB Driver Version 19, in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], with `encrypt=optional`.
+The following example creates the linked server `S1_instance1` but uses the Microsoft OLE DB Driver Version 19 in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], with the `encrypt=optional` parameter: 
 
 ```sql
 EXECUTE sp_addlinkedserver
@@ -197,7 +197,7 @@ EXECUTE sp_addlinkedserver
     @datasrc = N'S1\instance1';
 ```
 
-The following shows the above example using Microsoft OLE DB Driver Version 19, in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], with `encrypt=mandatory`.
+The following example creates the linked server `S1_instance1` using the Microsoft OLE DB Driver Version 19 in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], with the `encrypt=mandatory` parameter. This option requires a valid certificate, the self-signed certificate is not accepted.
 
 ```sql
 EXECUTE sp_addlinkedserver
@@ -208,7 +208,18 @@ EXECUTE sp_addlinkedserver
     @datasrc = N'S1\instance1';
 ```
 
-The following shows the above example using Microsoft OLE DB Driver Version 19, in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], with `encrypt=strict` for TDS 8.0 support.
+The following example creates the linked server `S1_instance1` using the Microsoft OLE DB Driver Version 19 in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], with `encrypt=mandatory` and `trustservercertificate=yes`. Because  **Trust Server Certificate** is set to `yes`, self-signed certificates are accepted.
+
+```sql
+EXECUTE sp_addlinkedserver
+    @server = N'S1_instance1',
+    @srvproduct = N'',
+    @provider = N'MSOLEDBSQL',
+    @provstr = N'encrypt=mandatory;trustservercertificate=yes',
+    @datasrc = N'S1\instance1';
+```
+
+The following example creates the linked server `S1_instance1` using the Microsoft OLE DB Driver Version 19 [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], with `encrypt=strict` for TDS 8.0 support.
 
 ```sql
 EXECUTE sp_addlinkedserver
