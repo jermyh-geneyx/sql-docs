@@ -4,7 +4,7 @@ description: "Enable applications to determine the DML changes (insert, update, 
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest
-ms.date: 08/20/2025
+ms.date: 08/21/2025
 ms.service: sql
 ms.topic: how-to
 ms.update-cycle: 1825-days
@@ -51,9 +51,9 @@ The following table lists the feature differences between change data capture an
 
 | Feature | Change data capture | Change tracking |
 | --- | --- | --- |
-| **Tracked changes** |  |  |
+| **Tracked changes** | | |
 | DML changes | Yes | Yes |
-| **Tracked information** |  |  |
+| **Tracked information** | | |
 | Historical data | Yes | No |
 | Whether column was changed | Yes | Yes |
 | DML type | Yes | Yes |
@@ -64,7 +64,7 @@ The following table lists the feature differences between change data capture an
 
 Change data capture provides historical change information for a user table by capturing both the fact that DML changes were made and the actual data that was changed. Changes are captured by using an asynchronous process that reads the transaction log and has a low impact on the system.
 
-As shown in the following illustration, the changes that were made to user tables are captured in corresponding change tables. These change tables provide a historical view of the changes over time. The [Change data capture](../system-functions/change-data-capture-functions-transact-sql.md) functions that [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] provides enable the change data to be consumed easily and systematically.
+As shown in the following illustration, the changes that were made to user tables are captured in corresponding change tables. These change tables provide a historical view of the changes over time. The [Change Data Capture Functions](../system-functions/change-data-capture-functions-transact-sql.md) functions that [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] provides enable the change data to be consumed easily and systematically.
 
 :::image type="content" source="media/track-data-changes-sql-server/concept-change-data-capture.png" alt-text="Diagram showing the concept of change data capture.":::
 
@@ -74,7 +74,7 @@ This section describes the change data capture security model.
 
 #### Configuration and administration
 
-To either enable or disable change data capture for a database, the caller of [sys.sp_cdc_enable_db (Transact-SQL)](../system-stored-procedures/sys-sp-cdc-enable-db-transact-sql.md) or [sys.sp_cdc_disable_db (Transact-SQL)](../system-stored-procedures/sys-sp-cdc-disable-db-transact-sql.md) must be a member of the fixed server **sysadmin** role. Enabling and disabling change data capture at the table level requires the caller of [sys.sp_cdc_enable_table (Transact-SQL)](../system-stored-procedures/sys-sp-cdc-enable-table-transact-sql.md) and [sys.sp_cdc_disable_table (Transact-SQL)](../system-stored-procedures/sys-sp-cdc-disable-table-transact-sql.md) to either be a member of the sysadmin role or a member of the database **database db_owner** role.
+To either enable or disable change data capture for a database, the caller of [sys.sp_cdc_enable_db](../system-stored-procedures/sys-sp-cdc-enable-db-transact-sql.md) or [sys.sp_cdc_disable_db](../system-stored-procedures/sys-sp-cdc-disable-db-transact-sql.md) must be a member of the fixed server **sysadmin** role. Enabling and disabling change data capture at the table level requires the caller of [sys.sp_cdc_enable_table](../system-stored-procedures/sys-sp-cdc-enable-table-transact-sql.md) and [sys.sp_cdc_disable_table](../system-stored-procedures/sys-sp-cdc-disable-table-transact-sql.md) to either be a member of the sysadmin role or a member of the database **database db_owner** role.
 
 Use of the stored procedures to support the administration of change data capture jobs is restricted to members of the server **sysadmin** role and members of the **database db_owner** role.
 
@@ -114,13 +114,13 @@ A database that is enabled for change data capture can be mirrored. To ensure th
 
 1. Ensure that [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Agent is running on the mirror.
 
-1. Create the capture job and cleanup job on the mirror after the principal has failed over to the mirror. To create the jobs, use the stored procedure [sys.sp_cdc_add_job (Transact-SQL)](../system-stored-procedures/sys-sp-cdc-add-job-transact-sql.md).
+1. Create the capture job and cleanup job on the mirror after the principal has failed over to the mirror. To create the jobs, use the stored procedure [sys.sp_cdc_add_job](../system-stored-procedures/sys-sp-cdc-add-job-transact-sql.md).
 
 For more information about database mirroring, see [Database Mirroring (SQL Server)](../../database-engine/database-mirroring/database-mirroring-sql-server.md).
 
 #### Transactional replication
 
-Change data capture and transactional replication can coexist in the same database, but population of the change tables is handled differently when both features are enabled. Change data capture and transactional replication always use the same procedure, [Sp_replcmds](../system-stored-procedures/sp-replcmds-transact-sql.md), to read changes from the transaction log. When change data capture is enabled on its own, a [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Agent job calls `sp_replcmds`. When both features are enabled on the same database, the Log Reader Agent calls `sp_replcmds`. This agent populates both the change tables and the `distribution` database tables. For more information, see [Replication Log Reader Agent](../replication/agents/replication-log-reader-agent.md).
+Change data capture and transactional replication can coexist in the same database, but population of the change tables is handled differently when both features are enabled. Change data capture and transactional replication always use the same procedure, [sp_replcmds](../system-stored-procedures/sp-replcmds-transact-sql.md), to read changes from the transaction log. When change data capture is enabled on its own, a [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Agent job calls `sp_replcmds`. When both features are enabled on the same database, the Log Reader Agent calls `sp_replcmds`. This agent populates both the change tables and the `distribution` database tables. For more information, see [Replication Log Reader Agent](../replication/agents/replication-log-reader-agent.md).
 
 Consider a scenario in which change data capture is enabled on the [!INCLUDE [ssSampleDBobject](../../includes/sssampledbobject-md.md)] database, and two tables are enabled for capture. To populate the change tables, the capture job calls `sp_replcmds`. The database is enabled for transactional replication, and a publication is created. Now, the Log Reader Agent is created for the database and the capture job is deleted. The Log Reader Agent continues to scan the log from the last log sequence number that was committed to the change table. This ensures data consistency in the change tables. If transactional replication is disabled in this database, the Log Reader Agent is removed, and the capture job is re-created.
 
@@ -135,7 +135,7 @@ Consider a scenario in which change data capture is enabled on the [!INCLUDE [ss
 
 - If a database is restored to another server, by default change data capture is disabled, and all related metadata is deleted.
 
-  To retain change data capture, use the `KEEP_CDC` option when restoring the database. For more information about this option, see [RESTORE](../../t-sql/statements/restore-statements-transact-sql.md).
+  To retain change data capture, use the `KEEP_CDC` option when restoring the database. For more information about this option, see [RESTORE Statements](../../t-sql/statements/restore-statements-transact-sql.md).
 
 - If a database is detached and attached to the same server or another server, change data capture remains enabled.
 
@@ -163,7 +163,7 @@ The following illustration shows a synchronization scenario that would benefit b
 
 For more information about change tracking and [!INCLUDE [sql_sync_long](../../includes/sql-sync-long-md.md)], use the following links:
 
-- [About change tracking (SQL Server)](about-change-tracking-sql-server.md)
+- [About Change Tracking (SQL Server)](about-change-tracking-sql-server.md)
 
   Describes change tracking, provides a high-level overview of how change tracking works, and describes how change tracking interacts with other [!INCLUDE [ssDEnoversion](../../includes/ssdenoversion-md.md)] features.
 

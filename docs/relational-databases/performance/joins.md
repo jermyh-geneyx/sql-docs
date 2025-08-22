@@ -3,7 +3,7 @@ title: "Joins (SQL Server)"
 description: Learn about the types of join operations that SQL Server employs. SQL Server supports vertical table partitioning, or columnar storage, using join operations.
 author: MikeRayMSFT
 ms.author: mikeray
-ms.date: 08/20/2025
+ms.date: 08/21/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
@@ -23,25 +23,27 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 
 [!INCLUDE [SQL Server Azure SQL Database Synapse Analytics PDW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
-[!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] performs sort, intersect, union, and difference operations using in-memory sorting and hash join technology. Using this type of query plan, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] supports vertical table partitioning.
+[!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] uses joins to retrieve data from multiple tables based on logical relationships between them. Joins are fundamental to relational database operations and enable you to combine data from two or more tables into a single result set.
 
-[!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] implements logical join operations, as determined by [!INCLUDE [tsql](../../includes/tsql-md.md)] syntax:
+[!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] implements both logical join operations (defined by Transact-SQL syntax) and physical join operations (the actual algorithms used to execute the joins). Understanding both aspects helps you write efficient queries and optimize database performance.
 
--   Inner join
--   Left outer join
--   Right outer join
--   Full outer join
--   Cross join
+Logical join operations include:
+
+- Inner joins
+- Left, right, and full outer joins
+- Cross joins
+
+Physical join operations include:
+
+- Nested Loops joins
+- Merge joins
+- Hash joins
+- Adaptive joins ([!INCLUDE [ssas-appliesto-sql2017](../../includes/ssas-appliesto-sql2017.md)] and later)
+
+This article explains how joins work, when to use different join types, and how the Query Optimizer selects the most efficient join algorithm based on factors like table size, available indexes, and data distribution.
 
 > [!NOTE]  
-> For more information on join syntax, see [FROM clause plus JOIN, APPLY, PIVOT (Transact-SQL)](../../t-sql/queries/from-transact-sql.md).
-
-[!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] employs four types of physical join operations to carry out the logical join operations:
-
--   Nested Loops joins
--   Merge joins
--   Hash joins
--   Adaptive joins (starting with [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)])
+> For more information on join syntax, see [FROM clause plus JOIN, APPLY, PIVOT](../../t-sql/queries/from-transact-sql.md).
 
 <a id="fundamentals"></a>
 
@@ -51,16 +53,16 @@ By using joins, you can retrieve data from two or more tables based on logical r
 
 A join condition defines the way two tables are related in a query by:
 
--   Specifying the column from each table to be used for the join. A typical join condition specifies a foreign key from one table and its associated key in the other table.
--   Specifying a logical operator (for example, = or <>,) to be used in comparing values from the columns.
+- Specifying the column from each table to be used for the join. A typical join condition specifies a foreign key from one table and its associated key in the other table.
+- Specifying a logical operator (for example, = or <>,) to be used in comparing values from the columns.
 
 Joins are expressed logically using the following [!INCLUDE [tsql](../../includes/tsql-md.md)] syntax:
 
--   INNER `JOIN`
--   LEFT [ OUTER ] `JOIN`
--   RIGHT [ OUTER ] `JOIN`
--   FULL [ OUTER ] `JOIN`
--   `CROSS JOIN`
+- INNER `JOIN`
+- LEFT [ OUTER ] `JOIN`
+- RIGHT [ OUTER ] `JOIN`
+- FULL [ OUTER ] `JOIN`
+- `CROSS JOIN`
 
 **Inner joins** can be specified in either the `FROM` or `WHERE` clauses. **Outer joins** and **cross joins** can be specified in the `FROM` clause only. The join conditions combine with the `WHERE` and `HAVING` search conditions to control the rows that are selected from the base tables referenced in the `FROM` clause.
 
@@ -118,17 +120,17 @@ WHERE pv.BusinessEntityID=v.BusinessEntityID
 
 The `SELECT` list for a join can reference all the columns in the joined tables, or any subset of the columns. The `SELECT` list isn't required to contain columns from every table in the join. For example, in a three-table join, only one table can be used to bridge from one of the other tables to the third table, and none of the columns from the middle table have to be referenced in the select list. This is also called an **anti semi join**.
 
-Although join conditions usually have equality comparisons (=), other comparison or relational operators can be specified, as can other predicates. For more information, see [Comparison Operators (Transact-SQL)](../../t-sql/language-elements/comparison-operators-transact-sql.md) and [WHERE (Transact-SQL)](../../t-sql/queries/where-transact-sql.md).
+Although join conditions usually have equality comparisons (=), other comparison or relational operators can be specified, as can other predicates. For more information, see [Comparison Operators](../../t-sql/language-elements/comparison-operators-transact-sql.md) and [WHERE](../../t-sql/queries/where-transact-sql.md).
 
-When [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] processes joins, the Query Optimizer chooses the most efficient method (out of several possibilities) of processing the join. This includes choosing the most efficient type of physical join, the order in which the tables will be joined, and even using types of logical join operations that can't be directly expressed with [!INCLUDE [tsql](../../includes/tsql-md.md)] syntax, such as **semi joins** and **anti semi joins**. The physical execution of various joins can use many different optimizations and therefore can't be reliably predicted. For more information on semi joins and anti semi joins, see [Showplan Logical and Physical Operators Reference](../showplan-logical-and-physical-operators-reference.md).
+When [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] processes joins, the Query Optimizer chooses the most efficient method (out of several possibilities) of processing the join. This includes choosing the most efficient type of physical join, the order in which the tables will be joined, and even using types of logical join operations that can't be directly expressed with [!INCLUDE [tsql](../../includes/tsql-md.md)] syntax, such as **semi joins** and **anti semi joins**. The physical execution of various joins can use many different optimizations and therefore can't be reliably predicted. For more information on semi joins and anti semi joins, see [Logical and physical showplan operator reference](../showplan-logical-and-physical-operators-reference.md).
 
-Columns used in a join condition aren't required to have the same name or be the same data type. However, if the data types aren't identical, they must be compatible, or be types that [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] can implicitly convert. If the data types can't be implicitly converted, the join condition must explicitly convert the data type using the `CAST` function. For more information about implicit and explicit conversions, see [Data Type Conversion (Database Engine)](../../t-sql/data-types/data-type-conversion-database-engine.md).
+Columns used in a join condition aren't required to have the same name or be the same data type. However, if the data types aren't identical, they must be compatible, or be types that [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] can implicitly convert. If the data types can't be implicitly converted, the join condition must explicitly convert the data type using the `CAST` function. For more information about implicit and explicit conversions, see [Data type conversion (Database Engine)](../../t-sql/data-types/data-type-conversion-database-engine.md).
 
-Most queries using a join can be rewritten using a subquery (a query nested within another query), and most subqueries can be rewritten as joins. For more information about subqueries, see [Subqueries](subqueries.md).
+Most queries using a join can be rewritten using a subquery (a query nested within another query), and most subqueries can be rewritten as joins. For more information about subqueries, see [Subqueries (SQL Server)](subqueries.md).
 
 > [!NOTE]  
 > Tables can't be joined directly on ntext, text, or image columns. However, tables can be joined indirectly on ntext, text, or image columns by using `SUBSTRING`.
-> For example, `SELECT * FROM t1 JOIN t2 ON SUBSTRING(t1.textcolumn, 1, 20) = SUBSTRING(t2.textcolumn, 1, 20)` performs a two-table inner join on the first 20 characters of each text column in tables `t1` and `t2`.  
+> For example, `SELECT * FROM t1 JOIN t2 ON SUBSTRING(t1.textcolumn, 1, 20) = SUBSTRING(t2.textcolumn, 1, 20)` performs a two-table inner join on the first 20 characters of each text column in tables `t1` and `t2`.
 > In addition, another possibility for comparing ntext or text columns from two tables is to compare the lengths of the columns with a `WHERE` clause, for example: `WHERE DATALENGTH(p1.pr_info) = DATALENGTH(p2.pr_info)`
 
 <a id="nested_loops"></a>
@@ -167,8 +169,8 @@ Merge join itself is very fast, but it can be an expensive choice if sort operat
 
 Hash joins can efficiently process large, unsorted, nonindexed inputs. They are useful for intermediate results in complex queries because:
 
--   Intermediate results aren't indexed (unless explicitly saved to disk and then indexed) and often aren't suitably sorted for the next operation in the query plan.
--   Query optimizers estimate only intermediate result sizes. Because estimates can be very inaccurate for complex queries, algorithms to process intermediate results not only must be efficient, but also must degrade gracefully if an intermediate result turns out to be much larger than anticipated.
+- Intermediate results aren't indexed (unless explicitly saved to disk and then indexed) and often aren't suitably sorted for the next operation in the query plan.
+- Query optimizers estimate only intermediate result sizes. Because estimates can be very inaccurate for complex queries, algorithms to process intermediate results not only must be efficient, but also must degrade gracefully if an intermediate result turns out to be much larger than anticipated.
 
 The hash join allows reductions in the use of denormalization. Denormalization is typically used to achieve better performance by reducing join operations, in spite of the dangers of redundancy, such as inconsistent updates. Hash joins reduce the need to denormalize. Hash joins allow vertical partitioning (representing groups of columns from a single table in separate files or indexes) to become a viable option for physical database design.
 
@@ -228,8 +230,8 @@ For more information about hash bailout, see [Hash Warning Event Class](../event
 
 The runtime decision is based on the following steps:
 
--  If the row count of the build join input is small enough that a Nested Loops join would be more optimal than a Hash join, the plan switches to a Nested Loops algorithm.
--  If the build join input exceeds a specific row count threshold, no switch occurs and your plan continues with a Hash join.
+- If the row count of the build join input is small enough that a Nested Loops join would be more optimal than a Hash join, the plan switches to a Nested Loops algorithm.
+- If the build join input exceeds a specific row count threshold, no switch occurs and your plan continues with a Hash join.
 
 The following query is used to illustrate an Adaptive Join example:
 
@@ -283,11 +285,11 @@ If an Adaptive Join switches to a Nested Loops operation, it uses the rows alrea
 
 The Adaptive Join operator has the following plan operator attributes:
 
-|Plan attribute|Description|
-|---|---|
-|AdaptiveThresholdRows|Shows the threshold use to switch from a hash join to nested loop join.|
-|EstimatedJoinType|What the join type is likely to be.|
-|ActualJoinType|In an actual plan, shows what join algorithm was ultimately chosen based on the threshold.|
+| Plan attribute | Description |
+| --- | --- |
+| AdaptiveThresholdRows | Shows the threshold use to switch from a hash join to nested loop join. |
+| EstimatedJoinType | What the join type is likely to be. |
+| ActualJoinType | In an actual plan, shows what join algorithm was ultimately chosen based on the threshold. |
 
 The estimated plan shows the Adaptive Join plan shape, along with a defined Adaptive Join threshold and estimated join type.
 
@@ -400,7 +402,7 @@ GO
 
 [!INCLUDE [ssResult](../../includes/ssresult-md.md)]
 
-```
+```output
 a           b      c           d
 ----------- ------ ----------- ------
 NULL        three  NULL        NULL

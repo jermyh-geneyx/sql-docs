@@ -3,7 +3,7 @@ title: "Clustered and Nonclustered Indexes"
 description: Describes clustered and nonclustered indexes.
 author: MikeRayMSFT
 ms.author: mikeray
-ms.date: 08/20/2025
+ms.date: 08/21/2025
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: conceptual
@@ -37,7 +37,7 @@ A table or view can contain the following types of indexes:
 
   - You can add nonkey columns to the leaf level of the nonclustered index to bypass existing index key limits, and execute fully covered queries. For more information, see [Create indexes with included columns](create-indexes-with-included-columns.md). For details about index key limits, see [Maximum capacity specifications for SQL Server](../../sql-server/maximum-capacity-specifications-for-sql-server.md).
 
-Both clustered and nonclustered indexes can be unique. With a unique index, no two rows can have the same value for the index key. Otherwise, the index isn't unique and multiple rows can share the same key value. For more information, see [Create unique indexes](create-unique-indexes.md).
+Both clustered and nonclustered indexes can be unique. With a unique index, no two rows can have the same value for the index key. Otherwise, the index isn't unique and multiple rows can share the same key value. For more information, see [Create a unique index](create-unique-indexes.md).
 
 Indexes are automatically maintained for a table or view whenever the table data is modified.
 

@@ -3,7 +3,7 @@ title: "Subqueries (SQL Server)"
 description: Look at an example of a subquery, which is a query that is nested in a SELECT, INSERT, UPDATE, or DELETE statement, or inside another subquery in SQL Server.
 author: MikeRayMSFT
 ms.author: mikeray
-ms.date: 08/20/2025
+ms.date: 08/21/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
@@ -292,7 +292,7 @@ Subqueries can be specified in many places:
 - In `UPDATE`, `DELETE`, and `INSERT` statements. For more information, see [Subqueries in UPDATE, DELETE, and INSERT Statements](#upsert).
 - With comparison operators. For more information, see [Subqueries with comparison operators](#comparison).
 - With `ANY`, `SOME`, or `ALL`. For more information, see [Comparison operators modified by ANY, SOME, or ALL](#comparison_modified).
-- With `IS [NOT] DISTINCT FROM`. For more information, see [IS [NOT] `DISTINCT FROM` (Transact-SQL)](../../t-sql/queries/is-distinct-from-transact-sql.md).
+- With `IS [NOT] DISTINCT FROM`. For more information, see [IS &#91;NOT&#93; DISTINCT FROM (Transact-SQL)](../../t-sql/queries/is-distinct-from-transact-sql.md).
 - With `EXISTS` or `NOT EXISTS`. For more information, see [Subqueries with EXISTS](#exists) and [Subqueries with NOT EXISTS](#notexists).
 - In place of an expression. For more information, see [Subqueries used in place of an expression](#expression).
 
@@ -628,7 +628,7 @@ GO
 
 ### Comparison operators modified by `ANY`, `SOME`, or `ALL`
 
-Comparison operators that introduce a subquery can be modified by the keywords `ALL` or `ANY`. `SOME` is an ISO standard equivalent for `ANY`. For more information on these comparison operators, see [SOME | ANY](../../t-sql/language-elements/some-any-transact-sql.md).
+Comparison operators that introduce a subquery can be modified by the keywords `ALL` or `ANY`. `SOME` is an ISO standard equivalent for `ANY`. For more information on these comparison operators, see [SOME &#124; ANY](../../t-sql/language-elements/some-any-transact-sql.md).
 
 Subqueries introduced with a modified comparison operator return a list of zero or more values and can include a `GROUP BY` or `HAVING` clause. These subqueries can be restated with `EXISTS`.
 
