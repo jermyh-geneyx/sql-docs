@@ -41,7 +41,7 @@ The following table describes the encryption and validation outcome for encrypti
 | False | True | Yes | Encryption of all network traffic occurs, and the certificate isn't validated. |
 | True **(new default)** | False (default) | N/A | Encryption of all network traffic occurs only if there's a verifiable server certificate, otherwise the connection attempt fails. |
 | True **(new default)** | True | N/A | Encryption of all network traffic occurs, but the certificate isn't validated. |
-| Strict (added in version 5.0) | N/A | N/A | Encryption of all network traffic occurs using TDS 8 only if there's a verifiable server certificate, otherwise the connection attempt fails. |
+| Strict (added in version 5.0) | N/A | N/A | Encryption of all network traffic occurs using TDS 8.0 only if there's a verifiable server certificate, otherwise the connection attempt fails. |
 
 > [!CAUTION]
 > The preceding table only provides a guide on the system behavior under different configurations. For secure connectivity, ensure that the client and server both require encryption. Also ensure that the server has a verifiable certificate, and that the `TrustServerCertificate` setting on the client is set to `False`.

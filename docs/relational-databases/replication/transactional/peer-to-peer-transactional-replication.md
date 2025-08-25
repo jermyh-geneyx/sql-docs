@@ -89,6 +89,14 @@ Each location has a database and an application server, which are used by the su
 
 Configuring a peer-to-peer replication topology is similar to configuring a series of standard transactional publications and subscriptions. The steps described in the following articles show the configuration of a three-node system, similar to the configuration shown on the left in the previous illustration that shows peer-to-peer topology.  
   
+## Configure TLS 1.3 encryption
+
+[!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] RC 0 introduces [TDS 8.0](../../security/networking/tds-8.md) support for peer-to-peer replication, which includes:
+- Configuring replication agents to use [TLS 1.3 encryption](../../security/networking/tls-1-3.md) between instances of [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] and also between [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] and Azure SQL Managed Instance. 
+- Default encryption for inter-instance linked server communication between [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] instances in a replication topology. Linked servers in [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] use the OLE DB v19 driver, which defaults to `Encrypt=Mandatory` encryption.
+
+[!INCLUDE [sql-25-repl-info](../../../includes/sql-25-repl-info.md)]
+
 ## Considerations for Using Peer-to-Peer Replication  
 
 This section provides information and guidelines to consider when you use peer-to-peer replication.  

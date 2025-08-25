@@ -161,9 +161,7 @@ The Data SQL Engineering team developed these resources. This team's core charte
 
 - For Microsoft and third-party services and tools to assist you with various database and data migration scenarios, see [Service and tools for data migration](/azure/dms/dms-tools-matrix).
 
-- To learn more about Azure SQL Managed Instance, see:
-   - [An overview of SQL Managed Instance](../../managed-instance/sql-managed-instance-paas-overview.md)
-   - [Azure Migrate Business case total cost of ownership](/azure/migrate/concepts-business-case-calculation) 
+- To learn more, see [An overview of Azure SQL Managed Instance](../../managed-instance/sql-managed-instance-paas-overview.md)
 
 
 - To learn more about the framework and adoption cycle for cloud migrations, see:

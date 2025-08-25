@@ -1,10 +1,10 @@
 ---
 title: "CREATE SCHEMA (Transact-SQL)"
-description: CREATE SCHEMA (Transact-SQL)
+description: CREATE SCHEMA creates a schema in the current database.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 08/06/2025
+ms.date: 08/18/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -25,7 +25,7 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 ---
 # CREATE SCHEMA (Transact-SQL)
 
-[!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw.md)]
+[!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw-fabricsqldb(../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw-fabricsqldb.md)]
 
 Creates a schema in the current database. The `CREATE SCHEMA` transaction can also create tables and views within the new schema, and set `GRANT`, `DENY`, or `REVOKE` permissions on those objects.
 
@@ -33,7 +33,7 @@ Creates a schema in the current database. The `CREATE SCHEMA` transaction can al
 
 ## Syntax
 
-Syntax for SQL Server and Azure SQL Database.
+Syntax for SQL Server, Azure SQL Database, and SQL database in Microsoft Fabric.
 
 ```syntaxsql
 CREATE SCHEMA schema_name_clause [ <schema_element> [ ...n ] ]
@@ -145,6 +145,10 @@ To create an object specified within the `CREATE SCHEMA` statement, the user mus
 To specify another user as the owner of the schema being created, the caller must have `IMPERSONATE` permission on that user. If a database role is specified as the owner, the caller must have one of the following: membership in the role or `ALTER` permission on the role.
 
 For the backward-compatible syntax, no permissions to `CREATE SCHEMA` are checked because no schema is being created.
+
+### Permissions in Fabric Data Warehouse
+
+In Fabric Data Warehouse, in addition to the `CREATE SCHEMA` permission, the user must be a member of the Admin, Member, or Contributor [workspace role](/fabric/fundamentals/roles-workspaces).
 
 ## Examples
 

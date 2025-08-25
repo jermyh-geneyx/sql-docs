@@ -242,7 +242,14 @@ A full backup is taken in the following scenarios:
 - Before initial seeding starts when you create a failover group. 
 - After a failover. 
 
-A full backup is a size of data operation that can't be skipped or deferred, and can take some time complete. The time it takes to complete depends on the size of data, the number of databases, and the workload intensity on the primary databases. A full backup can noticeably delay initial seeding, and can either delay or prevent a failover operation on a new instance shortly after a failover. 
+A full backup is a size of data operation that can't be skipped or deferred, and can take some time complete. The time it takes to complete depends on the size of data, the number of databases, and the workload intensity on the primary databases. A full backup can noticeably delay initial seeding, and can either delay or prevent a failover operation on a new instance shortly after a failover.
+
+Consider the following:
+
+- Databases hosted on the secondary instance of a failover group are not backed up until that instance becomes primary after a failover, or until the failover group is dropped.
+- After a database changes to the primary role after a failover, or becomes standalone after a failover group is dropped, a full database backup is automatically initiated to facilitate point-in-time restores. 
+- A database can't be restored from an instance to a point in time when that instance was a secondary replica in a failover group. To restore to a point in time, you must restore the database from the instance that was primary during that point in time.
+- To recreate a dropped failover group on the same pair of SQL managed instances, all user databases need to be removed from the intended secondary after the failover group is dropped. A database is only fully removed after all pending backup operations complete, including a full backup if one wasn't taken (which is size-of-data operation). Allow time to clean up the secondary instance after dropping a failover group with very large databases, as each database will have a pending full backup operation in progress. 
 
 ### Log Replay Service 
 

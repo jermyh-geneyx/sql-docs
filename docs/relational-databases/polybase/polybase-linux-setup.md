@@ -234,6 +234,10 @@ exec sp_configure @configname = 'polybase enabled', @configvalue = 1;
 RECONFIGURE WITH OVERRIDE;
 ```
 
+### SQL Server 2025 Preview RC 0 known issue
+
+[!INCLUDE [polybase-release-candidate-0](../../includes/polybase-release-candidate-0.md)]
+
 ### Trace flag
 
 **Applies to:** [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions

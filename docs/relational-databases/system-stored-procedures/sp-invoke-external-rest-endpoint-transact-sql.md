@@ -4,7 +4,7 @@ description: The sp_invoke_external_rest_endpoint stored procedure invokes an HT
 author: jettermctedder
 ms.author: bspendolini
 ms.reviewer: randolphwest
-ms.date: 06/23/2025
+ms.date: 07/31/2025
 ms.service: sql
 ms.topic: "reference"
 ms.custom:
@@ -56,6 +56,7 @@ EXECUTE @returnValue = sp_invoke_external_rest_endpoint
   [ , [ @timeout = ] seconds ]
   [ , [ @credential = ] credential ]
   [ , @response OUTPUT ]
+  [ , [ @retry_count = ] # of retries if there are errors ] 
 ```
 
 ## Arguments
@@ -82,6 +83,8 @@ HTTP method for calling the URL. Must be one of the following values: `GET`, `PO
 
 Time in seconds allowed for the HTTPS call to run. If the full HTTP request and response can't be sent and received within the defined timeout in seconds, the stored procedure execution is halted, and an exception is raised. Timeout starts when the HTTP connection starts and ends when the response, and payload included if any, has been received. *@timeout* is a positive **smallint** with a default value 30. Accepted values: 1 to 230.
 
+If the *@retry_count* parameter is specified, the *@timeout* parameter acts as the cumulative timeout for the procedure.
+
 #### [ @credential = ] *credential*
 
 Indicate which DATABASE SCOPED CREDENTIAL object is used to inject authentication info in the HTTPS request. *@credential* is **sysname** with no default value.
@@ -89,6 +92,10 @@ Indicate which DATABASE SCOPED CREDENTIAL object is used to inject authenticatio
 #### @response OUTPUT
 
 Allow the response received from the called endpoint to be passed into the specified variable. *@response* is **nvarchar(max)**.
+
+#### [ @retry_count = ] # of retries if there are errors
+
+Specifies how many times the stored procedure retries connecting to the specified endpoint if there's an error. *@retry_count* is a positive **tinyint** with a default value of 0. Accepted values: 0 to 10, with 0 bypassing all retry logic. The retry interval is determined using the `Retry-After` header if it is present. If the header is absent, the system applies an exponential backoff strategy for specific error codes. In all other cases, a default delay of 200 milliseconds is used.
 
 ## Return value
 
@@ -352,6 +359,15 @@ Both system-assigned and user-assigned managed identities are supported:
 
 - If there's more than one user-assigned managed identity assigned, only the primary identity is used.
 
+#### Managed Identity and SQL Server 2025
+
+To use [Managed Identity](/entra/identity/managed-identities-azure-resources/overview) for authentication on SQL Server 2025, you must enable the option by using `sp_configure` with a user that is [granted the ALTER SETTINGS server-level permission](../../relational-databases/system-stored-procedures/sp-configure-transact-sql.md#permissions).
+
+```sql
+EXECUTE sp_configure 'allow server scoped db credentials', 1;
+RECONFIGURE WITH OVERRIDE;
+```
+
 ---
 
 ### Credential name rules
@@ -432,6 +448,21 @@ For more information on text header types, see the [text type registry at IANA](
 
 > [!NOTE]  
 > If you're testing invocation of the REST endpoint with other tools, like [cURL](https://curl.se/) or any modern REST client like [Insomnia](https://insomnia.rest/), make sure to include the same headers that are automatically injected by `sp_invoke_external_rest_endpoint` to have the same behavior and results.
+
+## Retry count logic
+
+If setting the *@retry_count* parameter, the request will be retried when the following errors are encountered:
+
+### HTTP Errors
+
+| HTTP Status Code | Error | Description |
+|-------------|------------|-------------|
+| 408 | Request Timeout | The client didn't produce a request within the server’s time limit or the server timed out waiting. |
+| 429 | Too Many Requests | The client is being rate-limited. Retry time based on the “Retry-After” header value if provided. |
+| 500 | Internal Server Error | Generic server error. |
+| 502 | Bad Gateway | The server received an invalid response from a backend. |
+| 503 | Service Unavailable | Indicates a temporary overload or downtime. |
+| 504 | Gateway Timeout | The server didn't get a timely response. |
 
 ## Best practices
 

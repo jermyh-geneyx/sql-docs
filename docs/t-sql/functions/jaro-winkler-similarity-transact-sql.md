@@ -1,6 +1,6 @@
 ---
 title: "JARO_WINKLER_SIMILARITY (Transact-SQL)"
-description: JARO_WINKLER_SIMILARITY calculates a similarity value ranging from 0 (indicating no match) to 1 (indicating full match).
+description: JARO_WINKLER_SIMILARITY calculates a similarity value ranging from 0 (indicating no match) to 100 (indicating full match).
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: abhtiwar, wiassaf, randolphwest
@@ -21,7 +21,7 @@ ms.custom:
 
 [!INCLUDE [preview](../../includes/preview.md)]
 
-Calculates a similarity value ranging from 0 (indicating no match) to 1 (indicating full match). 
+Calculates a similarity value ranging from 0 (indicating no match) to 100 (indicating full match).
 
 > [!NOTE]
 > - `JARO_WINKLER_SIMILARITY` is currently in preview. 
@@ -45,7 +45,7 @@ An alphanumeric expression of character data. *character_expression* can be a co
 
 ## Return value
 
-**real**
+**int**
 
 ## Remarks
 
@@ -66,7 +66,7 @@ Returns:
 ```output
 WordUK WordUS Similarity
 ------ ------ -------------
-Colour Color  0.9666666
+Colour Color  97
 ```
 
 For additional examples, see [Example *JARO_WINKLER_SIMILARITY*](../../relational-databases/fuzzy-string-match/overview.md#example-jaro_winkler_similarity).

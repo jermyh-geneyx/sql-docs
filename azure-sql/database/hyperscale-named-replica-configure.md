@@ -235,7 +235,7 @@ It is recommended to configure the named replica with the same compute size (vCo
 
 If you choose to create the named replica with a different compute size (vCores) than the primary, monitor the log IO rate on the primary over time. This helps estimate the minimal compute size required for the named replica to sustain the replication load. For more information, consider the following objects:
 
-- The [sys.dm_hs_database_log_rate()](/sql/relational-databases/system-dynamic-management-views/sys-dm-hs-database-log-rate) dynamic management function (DMF) provides additional details to help understand log rate reduction, if any. It can indicate which specific secondary replica is behind in applying log records and the total size of the unapplied transaction log.
+- The [sys.dm_hs_database_log_rate()](/sql/relational-databases/system-functions/sys-dm-hs-database-log-rate) dynamic management function (DMF) provides additional details to help understand log rate reduction, if any. It can indicate which specific secondary replica is behind in applying log records and the total size of the unapplied transaction log.
 - To retrieve historical log IO data, use [sys.resource_stats](/sql/relational-databases/system-catalog-views/sys-resource-stats-azure-sql-database) view.
 - For recent log IO data with higher granularity that better reflects short-term spikes, use [sys.dm_db_resource_stats](/sql/relational-databases/system-dynamic-management-views/sys-dm-db-resource-stats-azure-sql-database).
 

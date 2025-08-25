@@ -45,7 +45,7 @@ An alphanumeric expression of character data. *character_expression* can be a co
 
 ## Return value
 
-**real**
+**float**
 
 ## Remarks
 
@@ -65,8 +65,8 @@ Returns:
 
 ```output
 WordUK WordUS Distance
------- ------ -------------
-Colour Color  0.03333336
+------ ------ ------------------
+Colour Color  0.0333333333333333
 ```
 
 For additional examples, see [Example *JARO_WINKLER_DISTANCE*](../../relational-databases/fuzzy-string-match/overview.md#example-jaro_winkler_distance).

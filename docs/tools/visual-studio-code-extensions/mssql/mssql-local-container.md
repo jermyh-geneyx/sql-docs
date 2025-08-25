@@ -4,7 +4,7 @@ description: Learn how to use the MSSQL extension for Visual Studio Code to crea
 author: croblesm
 ms.author: roblescarlos
 ms.reviewer: randolphwest
-ms.date: 06/18/2025
+ms.date: 08/20/2025
 ms.service: sql
 ms.subservice: vs-code-sql-extensions
 ms.topic: overview
@@ -13,7 +13,7 @@ ms.collection:
 ai-usage: ai-assisted
 ---
 
-# Local SQL Server container (Preview)
+# Local SQL Server container
 
 The Local SQL Server container feature in the MSSQL extension for Visual Studio Code simplifies local development by allowing developers to spin up fully configured SQL Server containers without writing a single Docker command. You can deploy and manage containers directly from the Connections view. This new capability is perfect for prototyping, developing, or testing workloads using the same database engine available in production environments.
 
@@ -142,13 +142,13 @@ This feature makes local SQL Server container ideal for:
 - Make sure your computer has sufficient resources, or adjust Docker's memory allocation and the container's resource limits via Docker settings to ensure stable performance.
 - Memory requirements:
   - SQL Server needs at least 2 GB of memory to start a Linux-based container.
-  - By default, SQL Server on Linux will use approximately 80% of the memory available to the container.
+  - By default, SQL Server on Linux uses approximately 80% of the memory available to the container.
 
 ## Related content
 
 - [Quickstart: Connect to and query a database with the MSSQL extension for Visual Studio Code](connect-database-visual-studio-code.md)
 - [GitHub Copilot for MSSQL extension for Visual Studio Code](../github-copilot/overview.md)
-- [Schema designer (Preview)](mssql-schema-designer.md)
-- [Schema Compare (Preview)](mssql-schema-compare.md)
+- [Schema Designer](mssql-schema-designer.md)
+- [Schema Compare](mssql-schema-compare.md)
 - [Learn more about Visual Studio Code](https://code.visualstudio.com/docs)
 - [MSSQL Extension GitHub repo](https://github.com/Microsoft/vscode-mssql)

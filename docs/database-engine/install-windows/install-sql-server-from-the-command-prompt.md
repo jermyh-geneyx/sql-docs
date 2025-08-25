@@ -3,7 +3,7 @@ title: "Install and Configure SQL Server on Windows from the Command Prompt"
 description: This article describes command prompt parameters for SQL Server installation on Windows. You can specify features to install and configure.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 04/30/2025
+ms.date: 08/21/2025
 ms.service: sql
 ms.subservice: install
 ms.topic: install-set-up-deploy
@@ -1050,6 +1050,7 @@ The instance-aware components are installed to the following locations:
 
 ## Related content
 
+- [Slipstream installation for SQL Server](install-sql-server-using-slipstream.md)
 - [Install SQL Server from the Installation Wizard (Setup)](install-sql-server-from-the-installation-wizard-setup.md)
 - [SQL Server Failover Cluster Installation](../../sql-server/failover-clusters/install/sql-server-failover-cluster-installation.md)
 - [Install SQL Server Business Intelligence Features](../../sql-server/install/install-sql-server-business-intelligence-features.md)

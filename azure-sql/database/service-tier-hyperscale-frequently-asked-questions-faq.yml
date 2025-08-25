@@ -11,7 +11,7 @@ metadata:
   author: WilliamDAssafMSFT
   ms.author: wiassaf
   ms.reviewer: dfurman, mathoma, dinethi, blakhani, adbadram
-  ms.date: 06/30/2025
+  ms.date: 08/11/2025
 title: Azure SQL Database Hyperscale FAQ
 summary: |
   [!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
@@ -549,10 +549,18 @@ sections:
           Yes. The [Column Master Key](/sql/t-sql/statements/create-column-master-key-transact-sql?view=azuresqldb-current&preserve-view=true) is stored in the user database and can be validated by executing the query `SELECT * FROM sys.column_master_keys`. Named replicas and high availability secondary replicas read data from the same page servers/storage layer as the primary Hyperscale database. Both types of replicas are synchronized with the primary Hyperscale database via the log service. A key change is considered a transaction and is automatically replicated to all secondary replicas.
 
       - question: |
-          Can I determine the name of a named replica associated with a value in the replica_id column in sys.dm_database_replica_states?
+          How do I query information about Hyperscale database secondary replicas?
 
         answer: |
-          Not when you query `sys.dm_database_replica_states` on the primary replica. However, you can connect to a named replica to determine its replica ID and other details using the following sample query:
+
+          You can connect to the primary replica and determine its replica ID and the details of other secondary replicas using the `sys.dm_hs_database_replicas` DMF. For more information, see [sys.dm_hs_database_replicas](/sql/relational-databases/system-functions/sys-dm-hs-database-replicas). The following example returns a row for each replica of a Hyperscale database named `Contosodb`. 
+
+          ```sql
+          SELECT replica_role_desc, replica_server_name, replica_id
+          FROM sys.dm_hs_database_replicas(DB_ID(N'Contosodb'));
+          ```
+
+          You can also connect to a secondary replica to determine its replica ID and other details. The following sample query of [sys.dm_database_replica_states](/sql/relational-databases/system-dynamic-management-views/sys-dm-database-replica-states-azure-sql-database) shows the details for the current replica context:
 
           ```sql
             SELECT replica_id,

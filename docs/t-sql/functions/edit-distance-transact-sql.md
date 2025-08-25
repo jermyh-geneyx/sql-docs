@@ -61,7 +61,7 @@ The following example compares two words and returns the `EDIT_DISTANCE()` value
 
 ```sql
 SELECT 'Colour' AS WordUK, 
-       'Color' AS Word US, 
+       'Color' AS WordUS, 
        EDIT_DISTANCE('Colour', 'Color') AS Distance;
 ```
 

@@ -1,10 +1,10 @@
 ---
 title: "VECTOR_SEARCH (Transact-SQL)"
 description: "VECTOR_SEARCH search for vectors similar to a given query vectors using an approximate nearest neighbors vector search algorithm."
-author: WilliamDAssafMSFT
-ms.author: wiassaf
-ms.reviewer: damauri
-ms.date: 07/24/2025
+author: yorek
+ms.author: damauri
+ms.reviewer: damauri, mikeray
+ms.date: 08/11/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -18,47 +18,44 @@ helpviewer_keywords:
   - "vector, search"
 dev_langs:
   - "TSQL"
-monikerRange: "=sql-server-ver17 || =sql-server-linux-ver17   "
+monikerRange: "=sql-server-ver17 || =sql-server-linux-ver17"
 ---
 
 # VECTOR_SEARCH (Transact-SQL) (Preview)
 
 [!INCLUDE [sqlserver2025](../../includes/applies-to-version/sqlserver2025.md)]
 
-Use `VECTOR_SEARCH` to search for vectors similar to a given query vectors using an approximate nearest neighbors vector search algorithm. To learn more about how vector indexing and vector search works, and the differences between exact and approximate search, refer to [Overview of vector search and vector indexes in the SQL Database Engine](../../relational-databases/vectors/vectors-sql-server.md).
+Search for vectors similar to a given query vectors using an approximate nearest neighbors vector search algorithm. To learn more about how vector indexing and vector search works, and the differences between exact and approximate search, refer to [Vectors in the SQL Database Engine](../../relational-databases/vectors/vectors-sql-server.md).
 
 ## Preview feature
 
-> [!NOTE]
-> This function is in preview and is subject to change. Make sure to read preview usage terms in [Service Level Agreements (SLA) for Online Services](https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services).
+> [!NOTE]  
+> This function is in preview and is subject to change. In order to use this feature, you must enable the `PREVIEW_FEATURES` [database scoped configuration](../statements/alter-database-scoped-configuration-transact-sql.md).
 
-This feature is in preview. In order to use this feature, you must enable the following [trace flags](../database-console-commands/dbcc-traceon-transact-sql.md):
-
-```sql
-DBCC TRACEON(466, 474, 13981, -1)
-```
+> [!WARNING]  
+> The trace flags (466, 474, 13981) that were required in previous CTP version are no longer necessary and should be avoided, as their use will prevent vector index functionality from working correctly.
 
 Make sure to check out the [current limitations](#limitations) before using it.
 
 ## Syntax
 
-:::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md)  
+:::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../language-elements/transact-sql-syntax-conventions-transact-sql.md)
 
 ```syntaxsql
 VECTOR_SEARCH(
-    TABLE = object [AS source_table_alias]
+    TABLE = object [ AS source_table_alias ]
     , COLUMN = vector_column
     , SIMILAR_TO = query_vector
     , METRIC = { 'cosine' | 'dot' | 'euclidean' }
     , TOP_N = k
-) [AS result_table_alias]
-```  
+) [ AS result_table_alias ]
+```
 
 ## Arguments
 
 ### *TABLE = object [AS source_table_alias]*
 
-Table on which perform the search. It must be a base table. Views, temporary tables, both local and global, are not supported.
+Table on which perform the search. It must be a base table. Views, temporary tables, both local and global, aren't supported.
 
 ### *COLUMN = vector_column*
 
@@ -74,11 +71,11 @@ The distance metric used to calculate the distance between the query vector and 
 
 ### *TOP_N = \<k>*
 
-The maximum number of similar vectors that must be returned. It must be a positive **integer**. 
+The maximum number of similar vectors that must be returned. It must be a positive **integer**.
 
 ### *result_table_alias*
 
-The alias is used to reference the result set. 
+The alias is used to reference the result set.
 
 ## Return result set
 
@@ -88,22 +85,24 @@ The returned result set has all the columns from the table specified in TABLE ar
 
 The current preview has the following limitations:
 
-### Post-filtering only
+<a id="post-filtering-only"></a>
 
-Vector search happens before applying any predicate. Additional predicates are applied only after the most similar vectors are returned. The following sample returns the top 10 rows with embeddings most similar to the query vector `@qv`, then applies the predicate specified in the `WHERE` clause. If none of the 10 rows associated with the vectors returned by the vector search have the `accepted` column equal to 1, the result is empty. 
+### Post-filter only
+
+Vector search happens before applying any predicate. Additional predicates are applied only after the most similar vectors are returned. The following sample returns the top 10 rows with embeddings most similar to the query vector `@qv`, then applies the predicate specified in the `WHERE` clause. If none of the 10 rows associated with the vectors returned by the vector search have the `accepted` column equal to 1, the result is empty.
 
 ```sql
 SELECT
-  s.id, 
+  s.id,
   s.title,
   r.distance
 FROM
   VECTOR_SEARCH(
-    TABLE = dbo.sessions AS s, 
-    COLUMN = embedding, 
-    SIMILAR_TO = @qv, 
-    METRIC = 'cosine', 
-    TOP_N = 10 
+    TABLE = dbo.sessions AS s,
+    COLUMN = embedding,
+    SIMILAR_TO = @qv,
+    METRIC = 'cosine',
+    TOP_N = 10
   ) AS r
 WHERE
   accepted = 1
@@ -111,9 +110,9 @@ ORDER BY
   r.distance
 ```
 
-### VECTOR_SEARCH cannot be used in views
+### VECTOR_SEARCH can't be used in views
 
-`VECTOR_SEARCH` cannot be used in the body of a view.
+`VECTOR_SEARCH` can't be used in the body of a view.
 
 ## Examples
 
@@ -122,15 +121,15 @@ ORDER BY
 The following example finds the 10 most similar articles to the `Pink Floyd music style` in the `wikipedia_articles_embeddings` table.
 
 ```sql
-DECLARE @qv VECTOR(1536) = AI_GENERATE_EMBEDDINGS(N'Pink Floyd music style' USE MODEL Ada2Embeddings);
-SELECT 
+DECLARE @qv VECTOR(1536) = AI_GENERATE_EMBEDDING(N'Pink Floyd music style' USE MODEL Ada2Embeddings);
+SELECT
     t.id, s.distance, t.title
 FROM
     VECTOR_SEARCH(
-        TABLE = [dbo].[wikipedia_articles_embeddings] as t, 
-        COLUMN = [content_vector], 
-        SIMILAR_TO = @qv, 
-        METRIC = 'cosine', 
+        TABLE = [dbo].[wikipedia_articles_embeddings] as t,
+        COLUMN = [content_vector],
+        SIMILAR_TO = @qv,
+        METRIC = 'cosine',
         TOP_N = 10
     ) AS s
 ORDER BY s.distance
@@ -142,36 +141,36 @@ Same as example 1, but this time the query vectors are taking from another table
 
 ```sql
 CREATE TABLE #t (
-  id INT, 
+  id INT,
   q NVARCHAR(MAX),
   v VECTOR(1536)
 );
-INSERT INTO 
+INSERT INTO
   #t
-SELECT 
+SELECT
     id, q, ai_generate_embeddings(q USE MODEL Ada2Embeddings)
 FROM
-    (VALUES 
+    (VALUES
         (1, N'four legged furry animal'),
         (2, N'pink floyd music style')
     ) S(id, q)
 ;
 
-SELECT 
+SELECT
     t.id, s.distance, t.title
 FROM
     #t AS qv
 CROSS APPLY
     VECTOR_SEARCH(
-        TABLE = [dbo].[wikipedia_articles_embeddings] as t, 
-        COLUMN = [content_vector], 
-        SIMILAR_TO = qv.v, 
-        METRIC = 'cosine', 
+        TABLE = [dbo].[wikipedia_articles_embeddings] as t,
+        COLUMN = [content_vector],
+        SIMILAR_TO = qv.v,
+        METRIC = 'cosine',
         TOP_N = 10
     ) AS s
 WHERE
   qv.id = 2
-ORDER BY 
+ORDER BY
   s.distance
 ```
 
@@ -189,17 +188,19 @@ The following code block demonstrates the `VECTOR_SEARCH` function with mock emb
 
 ```sql
 -- Step 0: Enable Preview Feature
-DBCC TRACEON(466, 474, 13981, -1);
+ALTER DATABASE SCOPED CONFIGURATION
+SET PREVIEW_FEATURES = ON;
 GO
 
 -- Step 1: Create a sample table with a VECTOR(5) column
-CREATE TABLE dbo.Articles 
+CREATE TABLE dbo.Articles
 (
     id INT PRIMARY KEY,
     title NVARCHAR(100),
     content NVARCHAR(MAX),
     embedding VECTOR(5) -- mocked embeddings
 );
+GO
 
 -- Step 2: Insert sample data
 INSERT INTO Articles (id, title, content, embedding)
@@ -209,10 +210,12 @@ VALUES
 (3, 'Neural Networks', 'Neural networks are powerful models.', '[0.3, 0.3, 0.2, 0.5, 0.1]'),
 (4, 'Machine Learning Basics', 'ML basics for beginners.', '[0.4, 0.5, 0.1, 0.2, 0.3]'),
 (5, 'Advanced AI', 'Exploring advanced AI techniques.', '[0.5, 0.4, 0.6, 0.1, 0.2]');
+GO
 
 -- Step 3: Create a vector index on the embedding column
 CREATE VECTOR INDEX vec_idx ON Articles(embedding)
 WITH (metric = 'cosine', type = 'diskann');
+GO
 
 -- Step 4: Perform a vector similarity search
 DECLARE @qv VECTOR(5) = '[0.3, 0.3, 0.3, 0.3, 0.3]';
@@ -234,7 +237,7 @@ ORDER BY s.distance, t.title;
 
 ## Related content
 
-- [Overview of vector search and vector indexes in the SQL Database Engine](../../relational-databases/vectors/vectors-sql-server.md)
+- [Overview of vectors in the SQL Database Engine](../../relational-databases/vectors/vectors-sql-server.md)
 - [Vector data type](../data-types/vector-data-type.md)
 - [CREATE VECTOR INDEX (Transact-SQL)](../statements/create-vector-index-transact-sql.md)
 - [Azure SQL Database Vector Search Samples](https://github.com/Azure-Samples/azure-sql-db-vector-search)

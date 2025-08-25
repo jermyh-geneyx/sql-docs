@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/15/2025
+ms.date: 08/14/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -108,7 +108,7 @@ ms.topic: include
 | 1099 | 15 | No | The ON clause is not valid for this statement. |
 | [1101](../mssqlserver-1101-database-engine-error.md) | 17 | Yes | Could not allocate a new page for database '%.\*ls' because the '%.\*ls' filegroup is full due to lack of storage space or database files reaching the maximum allowed size. Note that UNLIMITED files are still limited to 16TB. Create the necessary space by dropping objects in the filegroup, adding additional files to the filegroup, or setting autogrowth on for existing files in the filegroup. |
 | 1102 | 22 | Yes | IAM page %S_PGID for object ID %ld is incorrect. The %S_MSG ID on page is %ld; should be %ld. |
-| 1104 | 17 | No | TEMPDB ran out of space during spilling. Create space by dropping objects and/or rewrite the query to consume fewer rows. If the issue still persists, consider upgrading to a higher service level objective. |
+| 1104 | 17 | No | Tempdb ran out of space during spilling. Create space by dropping objects and/or rewrite the query to consume fewer rows. If the issue still persists, consider upgrading to a higher service level objective. |
 | [1105](../mssqlserver-1105-database-engine-error.md) | 17 | Yes | Could not allocate space for object '%.\*ls'%.\*ls in database '%.\*ls' because the '%.\*ls' filegroup is full due to lack of storage space or database files reaching the maximum allowed size. Note that UNLIMITED files are still limited to 16TB. Create the necessary space by dropping objects in the filegroup, adding additional files to the filegroup, or setting autogrowth on for existing files in the filegroup. |
 | 1119 | 16 | No | Removing IAM page %S_PGID failed because someone else is using the object that this IAM page belongs to. |
 | 1121 | 17 | No | Space allocator cannot allocate page in database %d. |
@@ -120,7 +120,7 @@ ms.topic: include
 | 1127 | 14 | No | Table error: Page %S_PGID. Test (%ls) failed. Values are %ld and %ld. |
 | 1128 | 14 | No | Table error: Page (%d:%d), row %d. Test (%.\*ls) failed. Values are %ld and %ld. |
 | 1129 | 16 | No | Could not cleanup deferred deallocations from filegroup '%.\*ls'. |
-| 1130 | 10 | Yes | Error while allocating extent for a worktable. Extent %S_PGID in TEMPDB may have been lost. |
+| 1130 | 10 | Yes | Error while allocating extent for a worktable. Extent %S_PGID in tempdb may have been lost. |
 | 1131 | 10 | Yes | Failed to truncate AppendOnlyStorageUnit 0x%p. Will retry next time. This is an informational message only. No user action is required. |
 | 1132 | 16 | Yes | The elastic pool has reached its storage limit. The storage usage for the elastic pool cannot exceed (%d) MBs. |
 | 1133 | 17 | Yes | The managed instance has reached its storage limit. The storage usage for the managed instance cannot exceed (%d) MBs. |
@@ -128,7 +128,7 @@ ms.topic: include
 | 1135 | 17 | Yes | Cannot restore database with log file size larger than max allowed log file size of (%d) MB on Azure SQL. |
 | 1136 | 17 | Yes | The tempdb has reached its storage service limit. The storage usage of the tempdb on the current tier cannot exceed (%d) MBs. |
 | 1137 | 17 | Yes | The number of database files for Next-Gen General Purpose instances cannot exceed (%d). |
-| 1138 | 17 | Yes | Could not allocate a new page for database 'tempdb' because that would exceed the limit set for workload group '%ls'. |
+| 1138 | 17 | No | Could not allocate a new page for database 'tempdb' because that would exceed the limit set for workload group '%ls', group_id %d. |
 | 1202 | 16 | No | The database-principal '%.\*ls' does not exist or user is not a member. |
 | [1203](../mssqlserver-1203-database-engine-error.md) | 20 | Yes | Process ID %d attempted to unlock a resource it does not own: %.\*ls. Retry the transaction, because this error may be caused by a timing condition. If the problem persists, contact the database administrator. |
 | [1204](../mssqlserver-1204-database-engine-error.md) | 19 | Yes | The instance of the SQL Server Database Engine cannot obtain a LOCK resource at this time. Rerun your statement when there are fewer active users. Ask the database administrator to check the lock and memory configuration for this instance, or to check for long-running transactions. |
@@ -239,9 +239,9 @@ ms.topic: include
 | 1479 | 16 | No | The mirroring connection to "%.\*ls" has timed out for database "%.\*ls" after %d seconds without a response. Check the service and network connections. |
 | 1480 | 10 | No | The %S_MSG database "%.\*ls" is changing roles from "%ls" to "%ls" because the mirroring session or availability group failed over due to %S_MSG. This is an informational message only. No user action is required. |
 | 1481 | 10 | No | Database mirroring could not repair physical page %S_PGID in database "%.\*ls". The mirroring partner could not be contacted or did not provide a copy of the page. Possible reasons include a lack of network connectivity or that the copy of the page kept by the partner is also corrupted. To learn whether the partners are currently connected, view the mirroring_state_desc column of the sys.database_mirroring catalog view. If they are connected, for information about why the partner could not provide a copy of the page, examine its error log entries from around the time when this message was reported. Try to resolve the error and resume mirroring. |
-| 1482 | 10 | No | Database mirroring failed to get snapshot synchrinization lock. |
+| 1482 | 10 | No | Database mirroring failed to get snapshot synchronization lock. |
 | 1483 | 10 | No | State information for database '%.\*ls' - Hardened Lsn: '%S_LSN' Commit LSN: '%S_LSN' Commit Time: '%S_DATE' |
-| 1484 | 16 | No | Database Mirroring cannot be set for database '%.\*ls' because the database has Accelerated Database Recovery enabled or there are still versions in the Persisted Version Store. If Accelerated Database Recovery is disabled, please run sys.sp_persistent_version_cleanup '\<db_name\>' to clean up previous versions.. |
+| 1484 | 16 | No | Database Mirroring cannot be enabled for database '%.\*ls' because the database has Accelerated Database Recovery enabled, or because there are still versions in Persisted Version Store. If Accelerated Database Recovery is disabled, execute sys.sp_persistent_version_cleanup to clean Persistent Version Store. |
 | 1485 | 10 | No | Database mirroring has been enabled on this instance of SQL Server. |
 | 1486 | 10 | No | Database Mirroring Transport is disabled in the endpoint configuration. |
 | 1487 | 10 | No | Database mirroring is starting %d parallel redo thread(s) with database '%.\*ls' as the mirror copy. This is an informational message only. No user action is required. |
@@ -482,7 +482,7 @@ ms.topic: include
 | 1993 | 16 | No | Cannot partition an index on a table variable or return table definition in table valued function. |
 | 1994 | 16 | No | Cannot create or update statistics on view "%.\*ls" because both FULLSCAN and NORECOMPUTE options are required. |
 | 1995 | 16 | No | Cannot rebuild hypothetical index '%.\*ls' online. |
-| 1996 | 16 | No | Could not create index enforcing primary key constraint '%.\*ls' using DROP_EXISTING option because table has an XML or spatial index. Drop the XML or spatial index, create the primary key contstraint, and recreate the XML or spatial index. |
+| 1996 | 16 | No | Could not create index enforcing primary key constraint '%.\*ls' using DROP_EXISTING option because table has an XML or spatial index. Drop the XML or spatial index, create the primary key constraint, and recreate the XML or spatial index. |
 | 1997 | 16 | No | Could not convert the XML or spatial index '%.\*ls' to a relational index by using the DROP_EXISTING option. Drop the XML or spatial index and create a relational index with the same name. |
 | 1998 | 10 | No | Warning: Clustered index '%.\*ls' on view '%.\*ls' referencing table '%.\*ls' was disabled as a result of disabling the index '%.\*ls'. |
 | 1999 | 16 | No | Column '%.\*ls' in table '%.\*ls' is of a type that is invalid for use as included column in an index. |

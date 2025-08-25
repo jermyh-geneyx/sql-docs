@@ -338,7 +338,6 @@ The Data SQL Engineering team developed these resources. This team's core charte
 - To learn more about Azure SQL, see:
   - [Deployment options](../../azure-sql-iaas-vs-paas-what-is-overview.md)
   - [SQL Server on Azure Virtual Machines](../../virtual-machines/windows/sql-server-on-azure-vm-iaas-what-is-overview.md)
-  - [Azure Migrate Business case total cost of ownership](/azure/migrate/concepts-business-case-calculation) 
 
 - To learn more about the framework and adoption cycle for cloud migrations, see:
   - [Cloud Adoption Framework for Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/contoso-migration-scale)

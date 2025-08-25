@@ -37,7 +37,7 @@ Database backups are an essential part of any business continuity and disaster r
 
 Use these backups to restore your database to a specific point in time within the configured retention period, up to 35 days. However, if your data protection rules require that your backups are available for an extended time (up to 10 years), you can configure [long-term retention (LTR)](../database/long-term-retention-overview.md) policies per each database.
 
-### Backup frequency
+## Backup frequency
 
 Azure SQL Managed Instance creates:
 
@@ -54,7 +54,7 @@ A tail log backup is taken every time before a database or SQL managed instance 
 
 The system databases are automatically backed up (excluding the physical `master` database), but these backups aren't currently logged in `msdb`.
 
-### Backup storage redundancy
+## Backup storage redundancy
 
 By default, Azure SQL Managed Instance stores backups in geo-redundant [storage blobs](/azure/storage/common/storage-redundancy) that are replicated to a [paired region](/azure/reliability/cross-region-replication-azure). Geo-redundancy helps protect against outages that affect backup storage in the primary region. It also allows you to restore your instance to a different region in the event of a disaster.
 
@@ -91,7 +91,6 @@ You can choose one of the following storage redundancies for backups:
    :::image type="content" source="media/automated-backups-overview/multi-paired-gzrs.svg" alt-text="Diagram showing the geo-zone-redundant storage (GZRS) option.":::
 
 > [!WARNING]  
->  
 > - [Geo-restore](recovery-using-backups.md#geo-restore) is disabled as soon as a database is updated to use locally redundant or zone-redundant storage.
 > - The storage redundancy diagrams all show regions with multiple availability zones (multi-az). However, there are [some regions](/azure/storage/common/redundancy-regions-zrs) which provide only a single availability zone and don't support ZRS or GZRS.
 

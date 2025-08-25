@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/15/2025
+ms.date: 08/14/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -15,9 +15,9 @@ ms.topic: include
 | 22006 | 16 | No | Version cleanup was aborted for database id '%d' due to database exclusive waiter. |
 | 22007 | 16 | No | Version cleanup was aborted for database id '%d' due to planned failover. |
 | 22008 | 16 | No | Aborted versions belonging to this filegroup could not be cleaned up. |
-| 22010 | 16 | No | Cannot change the READONLY property of the filegroup containing Persistent Version Store which is required for Accelerated Database Recovery. |
+| 22010 | 16 | No | Cannot change the READONLY property of the filegroup that contains Persistent Version Store, required for Accelerated Database Recovery. |
 | 22011 | 16 | No | Invalid IAM chain encountered while dropping allocation unit. |
-| 22012 | 16 | No | Persistent version store is enabled on the database '%.\*ls' but the version store manager could not be initialized. |
+| 22012 | 16 | No | Persistent Version Store is enabled on database '%.\*ls', but the version store manager could not be initialized. |
 | 22013 | 16 | No | \[DbId: %d\]\[FileId: %d\] Could not obtain file add/remove latch to purge invalid file ranges before shrinking the file. |
 | 22014 | 10 | No | Lock ordinal population was aborted due to database exclusive waiter. |
 | 22015 | 10 | No | Forwarding of row \[FileId: %d\]\[PageInFile: %d\]\[SlotId: %d\] during logical revert failed due to insufficient space. |
@@ -53,7 +53,7 @@ ms.topic: include
 | 22122 | 16 | No | Change Tracking autocleanup failed on side table of "%s". If the failure persists, use sp_flush_CT_internal_table_on_demand to clean up expired records from its side table. |
 | 22123 | 16 | No | Change Tracking autocleanup is blocked on side table of "%s". If the failure persists, check if the table "%s" is blocked by any process . |
 | 22124 | 16 | No | Change Tracking manual cleanup is blocked on side table of "%s". If the failure persists, check if the table "%s" is blocked by any process . |
-| 22125 | 16 | No | Change tracking autocleanup is currently not able to maintain retention for database ID %d. Number of expired records: %d. If this warning persists, check the following resource: [https://learn.microsoft.com/sql/relational-databases/track-changes/cleanup-and-troubleshoot-change-tracking-sql-server](../../track-changes/cleanup-and-troubleshoot-change-tracking-sql-server.md) |
+| 22125 | 16 | No | Change tracking auto cleanup is currently not able to maintain retention for database ID %d. Number of expired records: %d. If this warning persists or for more information, see [https://go.microsoft.com/fwlink/?linkid=2323007](https://go.microsoft.com/fwlink/?linkid=2323007). |
 | 22126 | 10 | No | Change tracking auto cleanup encountered an error when getting list of large side table IDs |
 | 22127 | 10 | No | Change tracking autocleanup encountered an invalid side table object id |
 | 22128 | 16 | No | Could not allocate memory for Change Tracking operation. Verify that SQL Server has sufficient memory for all operations. Check the memory settings on the server and examine memory usage to see if another application is excessively consuming memory. |
@@ -68,9 +68,9 @@ ms.topic: include
 | 22209 | 16 | No | Internal error. Unable to populate instance member list. |
 | 22210 | 16 | No | Internal error. Unable to get instance member. |
 | 22211 | 16 | No | Internal error. Invalid instance member state. |
-| 22212 | 21 | No | An error occurred while reading remote column store segment HoBt 0x%I64X, Object %d, Column %d, Type %d in database %d. The segement could not be decrypted. |
+| 22212 | 21 | No | An error occurred while reading remote column store segment HoBt 0x%I64X, Object %d, Column %d, Type %d in database %d. The segment could not be decrypted. |
 | 22213 | 16 | No | Internal error. Unable to get catalog information via the sp. |
-| 22214 | 16 | No | Internal error. Unable to initialise XODBC Connection Manager. |
+| 22214 | 16 | No | Internal error. Unable to initialize XODBC Connection Manager. |
 | 22215 | 16 | No | Internal error. Unable to get catalog information. |
 | 22216 | 16 | No | Internal error. Protected buffer failure. |
 | 22217 | 16 | No | Internal error. Persist lru cost info failure. |
@@ -88,7 +88,7 @@ ms.topic: include
 | 22229 | 22 | No | Remote storage columnstore data checksum mismatch. Expected checksum from blob is %lu, actual check sum from read buffers is %lu. |
 | 22230 | 16 | No | Failure to copy remote consolidated rowgroup blob HoBt id 0x%I64X, rowgroup id %d in database %d to Azure Block Blob Storage. Error code 0x%X. |
 | 22231 | 17 | No | : Encountered an unexpected error while trying to access a lob row (HRESULT = 0x%x). |
-| 22232 | 21 | No | An error occurred while writing remote column store segment HoBt 0x%I64X, Object %d, Column %d, Type %d in database %d. The segement could not be encrypted. |
+| 22232 | 21 | No | An error occurred while writing remote column store segment HoBt 0x%I64X, Object %d, Column %d, Type %d in database %d. The segment could not be encrypted. |
 | 22233 | 17 | No | : Encountered an unexpected error while trying to access/update remote object (HRESULT = 0x%x). |
 | 22234 | 21 | No | An error occurred while writing remote rowgroup metadata HoBt 0x%I64X, Rowgroup %d,in database %d. The metadata could not be encrypted. |
 | 22235 | 16 | No | Could not process request due to internal error encountered during control node communication |
@@ -199,7 +199,7 @@ ms.topic: include
 | 22408 | 16 | No | A severe error occurred. Error:%d, State:%d. |
 | 22409 | 16 | No | Table '%.\*ls' does not exist. |
 | 22410 | 16 | No | Validations failed for the internal task handler. |
-| 22411 | 16 | No | Transaction got aborted due to unexpect situation. |
+| 22411 | 16 | No | Transaction got aborted due to an unexpected situation. |
 | 22412 | 16 | No | Transaction Manager fail to create schema |
 | 22413 | 16 | No | Resource manager lock acquisition failure |
 | 22414 | 16 | No | Resource manager not found. |
@@ -234,7 +234,7 @@ ms.topic: include
 | 22444 | 16 | No | ALTER TABLE RANGE statement failed. The specified range must not be 'NULL'. |
 | 22445 | 16 | No | This DML statement is not supported in this database version. |
 | 22446 | 16 | No | DeltaForce encountered an operational exception. |
-| 22447 | 16 | No | Internal table IQ_CATATLOG_OBJECTS_TABLE error. |
+| 22447 | 16 | No | Internal table IQ_CATALOG_OBJECTS_TABLE error. |
 | 22448 | 10 | No | An error occurred while updating the data encryption key. |
 | 22449 | 10 | No | The reencryption task encountered a blob that was already encrypted. |
 | 22450 | 10 | No | An error occurred with clone with message '%ls'. |
@@ -372,7 +372,7 @@ ms.topic: include
 | 22583 | 16 | No | Article '%s' cannot be added or modified in publication '%s'. The replication of FILESTREAM columns is not supported for articles that have a 'schema_option' set to 0x20000000. This converts large object data types to data types that are supported on earlier versions of Microsoft SQL Server. Remove this 'schema_option' setting by using sp_addmergepublication or sp_changemergepublication, or partition the article vertically so that the FILESTREAM column is not replicated. |
 | 22584 | 10 | No | Warning: Values of some of the flags specified in the 'schema_option' property are not compatible with the publication's compatibility level. The modified schema_option value of '%s' will be used instead. |
 | 22585 | 10 | No | The schema option to script out the FILESTREAM attribute on varbinary(max) columns has been enabled for article '%s'. Enabling this option after the article is created can cause replication to fail when the data in a FILESTREAM column exceeds 2GB and there is a conflict during replication. If you want FILESTREAM data to be replicated, drop and re-create the article, and specify the appropriate schema option when you re-create the article. |
-| 22586 | 16 | No | Column '%s' cannot be added or modified in article '%s' of publication '%s'. The DDL operatoin on hierarchyid and FILESTREAM columns is not supported for publications that have a 'sync_mode' of 1 (character mode) or with a lower than 90RTM backward compatibility level. |
+| 22586 | 16 | No | Column '%s' cannot be added or modified in article '%s' of publication '%s'. The DDL operation on hierarchyid and FILESTREAM columns is not supported for publications that have a 'sync_mode' of 1 (character mode) or with a lower than 90RTM backward compatibility level. |
 | 22587 | 16 | No | Non-SQL Server Publishers and Subscribers are supported only on Windows. The platform detected is %s. |
 | 22588 | 16 | No | Publications on non-Windows platforms cannot support updateable subscriptions. The platform detected is %s. The values of @allow_sync_tran and @allow_queued_tran must be 'false' or NULL. |
 | 22601 | 16 | No | This SQL Database can only be mirrored once across Fabric workspaces |
@@ -418,6 +418,7 @@ ms.topic: include
 | 22641 | 16 | No | Disabling of mirroring for the table '%.\*ls' failed. Please retry this operation later. |
 | 22642 | 16 | No | Can not enable Fabric Mirroring on a table where primary key (if there exists no primary key then applies to unique key) uses columns of the following types: user-defined types, geometry, geography, hierarchyid, sql_variant or timestamp, datetime2(7), DateTimeOffset(7) and Time(7). |
 | 22643 | 16 | No | Publishing a drop table notification to Fabric OneLake failed. Retry this operation later. |
+| 22645 | 16 | No | Fabric Mirroring cannot be enabled on a table where its primary key, or if no primary key exists, its clustered index, includes any of the following column types: user-defined types, geometry, geography, hierarchyid, sql_variant, timestamp, datetime2(7), datetimeoffset(7), or time(7). |
 | 22697 | 16 | No | Cannot enable fabric link on the database because the metadata tables are corrupted. |
 | 22698 | 16 | No | Cannot add encrypted column on table '%.\*ls' in SQL Database on the 'Microsoft Fabric' platform |
 | 22699 | 16 | No | Cannot alter column '%.\*ls' on table '%.\*ls' in SQL Database on the 'Microsoft Fabric' platform |
@@ -427,7 +428,7 @@ ms.topic: include
 | 22704 | 16 | No | Could not enable Change Feed for database '%s'. Change Feed can not be enabled on a DB with Change Data Capture or transactional replication publishing. |
 | 22705 | 16 | No | Could not enable Change Feed for database '%s' as it is already enabled. |
 | 22706 | 16 | No | Change Feed or Fabric Link is not enabled on database '%s'. |
-| 22707 | 16 | No | The specified database scoped credential name can't be found. It must have the identity of 'SHARED ACCESS SIGNATURE' |
+| 22707 | 16 | No | The specified database scoped credential name can't be found. |
 | 22708 | 16 | No | The specified database scoped credential name does not match the landing zone URL path |
 | 22709 | 16 | No | Parameter '%s' cannot be null or empty. Specify a value for the named parameter and retry the operation. |
 | 22710 | 16 | No | Could not update the metadata. The failure occurred when executing the command '%s'. The error/state returned was %d/%d: '%s'. Use the action and error to determine the cause of the failure and resubmit the request. |
@@ -519,6 +520,7 @@ ms.topic: include
 | 22796 | 16 | No | Error %d occurred while interacting with the destination. |
 | 22797 | 16 | No | Cannot enable Synapse Link on the database as Synapse Link has been discontinued in this version of SQL Server. Use Mirroring in Fabric instead. |
 | 22798 | 16 | No | Synapse Link is now discontinued on this version of SQL Server. Disabling Synapse Link on the database. |
+| 22799 | 16 | No | Fabric Mirroring cannot be enabled on database '%s' due to the reason: %S_MSG |
 | 22801 | 16 | No | Starting the Change Data Capture Collection Agent job. To report on the progress of the operation, query the sys.dm_cdc_log_scan_sessions dynamic management view. |
 | 22802 | 16 | No | Starting the Change Data Capture Cleanup Agent job using low watermark %s. |
 | 22803 | 16 | No | Change Data Capture has scanned the log from LSN{%s} to LSN{%s}, %d transactions with %d commands have been extracted. To report on the progress of the operation, query the sys.dm_cdc_log_scan_sessions dynamic management view. |
@@ -551,7 +553,7 @@ ms.topic: include
 | 22831 | 16 | No | Could not update the metadata that indicates database %s is not enabled for Change Data Capture. The failure occurred when executing the command '%s'. The error returned was %d: '%s'. Use the action and error to determine the cause of the failure and resubmit the request. |
 | 22832 | 16 | No | Could not update the metadata that indicates table %s is enabled for Change Data Capture. The failure occurred when executing the command '%s'. The error returned was %d: '%s'. Use the action and error to determine the cause of the failure and resubmit the request. |
 | 22833 | 16 | No | Could not update the metadata that indicates table %s is not enabled for Change Data Capture. The failure occurred when executing the command '%s'. The error returned was %d: '%s'. Use the action and error to determine the cause of the failure and resubmit the request. |
-| 22834 | 16 | No | Could not modify the the verbose logging status for table %s. The failure occurred when executing the command '%s'. The error returned was %d: '%s'. Use the action and error to determine the cause of the failure and resubmit the request. |
+| 22834 | 16 | No | Could not modify the verbose logging status for table %s. The failure occurred when executing the command '%s'. The error returned was %d: '%s'. Use the action and error to determine the cause of the failure and resubmit the request. |
 | 22835 | 16 | No | Could not update the metadata for database %s to indicate that a Change Data Capture job has been dropped. The failure occurred when executing the command '%s'. The error returned was %d: '%s'. Use the action and error to determine the cause of the failure and resubmit the request. |
 | 22836 | 16 | No | Could not update the metadata for database %s to indicate that a Change Data Capture job has been added. The failure occurred when executing the command '%s'. The error returned was %d: '%s'. Use the action and error to determine the cause of the failure and resubmit the request. |
 | 22837 | 16 | No | Could not delete table entries or drop objects associated with capture instance '%s'. The failure occurred when executing the command '%s'. The error returned was %d: '%s'. Use the action and error to determine the cause of the failure and resubmit the request. |

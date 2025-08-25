@@ -4,7 +4,7 @@ description: "The sys.sp_change_feed_reseed_db_init system internal stored proce
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: imotiwala, ajayj, randolphwest
-ms.date: 06/23/2025
+ms.date: 08/18/2025
 ms.service: fabric
 ms.subservice: system-objects
 ms.topic: "reference"
@@ -52,9 +52,25 @@ Internal use only.
 
 `0` (success) or non-zero (failure).
 
+## Remarks
+
+A reseed stops the current mirrored database and reinitializes the mirroring. This involves generating a new initial snapshot of the tables configured for mirroring and then incremental changes are replicated. During reseed, the old mirrored database item in Microsoft Fabric is still available but does not receive incremental changes. 
+
 ## Permissions
 
 A user with [CONTROL database permissions](../security/permissions-database-engine.md), **db_owner** database role membership, or **sysadmin** server role membership can execute this procedure.
+
+## Examples
+
+### A. Initiate manual reseed event
+
+As a best practice, test manual reseed for a specific database to understand the impact before turning on the automatic reseed functionality.
+
+```sql
+USE <Mirrored database name>
+GO
+EXECUTE sp_change_feed_reseed_db_init @is_init_needed = 1;
+```
 
 ## Related content
 

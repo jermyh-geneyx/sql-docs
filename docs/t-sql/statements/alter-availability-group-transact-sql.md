@@ -3,7 +3,7 @@ title: "ALTER AVAILABILITY GROUP (Transact-SQL)"
 description: ALTER AVAILABILITY GROUP (Transact-SQL)
 author: "MikeRayMSFT"
 ms.author: "mikeray"
-ms.date: 05/19/2025
+ms.date: 08/15/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -65,6 +65,7 @@ ALTER AVAILABILITY GROUP group_name
   | DTC_SUPPORT  = { PER_DB | NONE }  
   | REQUIRED_SYNCHRONIZED_SECONDARIES_TO_COMMIT = { integer }
   | ROLE = SECONDARY
+  | CLUSTER_CONNECTION_OPTIONS = 'key_value_pairs>[;...]'
   
 <server_instance> ::=   
  { 'system_name[\instance_name]' | 'FCI_network_name[\instance_name]' }  
@@ -254,7 +255,30 @@ Beginning with [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], you can se
 
 #### ROLE
 The only valid parameter is 'SECONDARY', and this SET option is only valid in Distributed Availability Groups.  It's used to fail over a distributed availability group as documented here: [ALTER AVAILABILITY GROUP](../../database-engine/availability-groups/windows/configure-distributed-availability-groups.md)
-  
+
+
+#### CLUSTER_CONNECTION_OPTIONS
+
+**Applies to:** [!INCLUDE[sssql25-md](../../includes/sssql25-md.md)] RC 0 and later versions
+
+Use the `CLUSTER_CONNECTION_OPTIONS` clause to enforce [TLS 1.3](../../relational-databases/security/networking/tls-1-3.md) encryption for communication between the Windows Server Failover Cluster and your availability group replicas. The options are specified as a list of key-value pairs, separated by semicolons. The key-value pairs are used to configure connection string encryption for the availability group.
+
+To revert back to default encryption, set the `CLUSTER_CONNECTION_OPTIONS` clause to an empty string. [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] defaults to `Encrypt=Mandatory`, and `TrustServerCertificate=Yes` for connections to availability group replicas and listeners.
+
+For more information, review [connect to an availability group with strict encryption](../../relational-databases/security/networking/connect-with-strict-encryption.md#connect-to-an-always-on-availability-group) and [TDS 8.0](../../relational-databases/security/networking/tds-8.md).
+
+The following table describes the key-value pairs that you can use in the `CLUSTER_CONNECTION_OPTIONS` clause:
+
+| Key | Supported Values | Description |
+|---|---|---|
+| `Encrypt` | `Mandatory`, `Strict`, `Optional` | Specifies how encryption to the availability group is enforced. If the server does not support encryption, the connection fails. If encrypt is set to `Mandatory`, then `TrustServerCertificate` must be set to yes. If encrypt is set to `Strict` then `TrustServerCertificate` is ignored. <br /><br />  **This key value pair is required.**|
+| `HostNameInCertificate` | Replica name or AG listener name | Specifies the replica name or availability group listener name in the certificate that is used for encryption. This value must match the value in the **Subject Alternative Name** of the certificate. If the server name is listed in the certificate, then you can omit the `HostNameInCertificate` key-value pair. If the server name is not listed in the certificate, then you must specify the `HostNameInCertificate` key-value pair with the server name. <br /><br />  **This key value pair is optional.***|
+| `TrustServerCertificate` | `Yes`, `No` | Set to `yes` to specify that the driver doesn't validate the server TLS/SSL certificate. If `no`, the driver validates the certificate. For more information, review [TDS 8.0](../../relational-databases/security/networking/tds-8.md#additional-changes-to-connection-string-encryption-properties). <br /><br />  **This key value pair is optional.***  |    
+|`ServerCertificate` | Path to your certificate | If do not want to use `HostNameInCertificate`, you can pass the path to your certificate. The cluster service account must have permission to read the certificate from the given location. <br /><br />  **This key value pair is optional.** | 
+| `CLUSTER_CONNECTION_OPTIONS` | Empty string (`''`) | Clears the existing configuration and reverts to default encryption settings of `Encrypt=Mandatory` and `TrustServerCertificate=Yes`. | 
+
+Check the [examples](#c-force-encryption-in-connections-to-the-availability-group) to learn how to use the `CLUSTER_CONNECTION_OPTIONS` clause.
+
 #### ADD DATABASE *database_name*
 Specifies a list of one or more user databases that you want to add to the availability group. These databases must reside on the instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] that hosts the current primary replica. You can specify multiple databases for an availability group, but each database can belong to only one availability group. For information about the type of databases that an availability group can support, see [Prerequisites, Restrictions, and Recommendations for Always On Availability Groups &#40;SQL Server&#41;](../../database-engine/availability-groups/windows/prereqs-restrictions-recommendations-always-on-availability.md). To find out which local databases already belong to an availability group, see the **replica_id** column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view.
   
@@ -652,15 +676,16 @@ For more information, see [Take an Availability Group Offline &#40;SQL Server&#4
  For information about prerequisites and restrictions on availability replicas and on their host server instances and computers, see [Prerequisites, Restrictions, and Recommendations for Always On Availability Groups &#40;SQL Server&#41;](../../database-engine/availability-groups/windows/prereqs-restrictions-recommendations-always-on-availability.md).  
   
  For information about restrictions on the AVAILABILITY GROUP Transact-SQL statements, see [Overview of Transact-SQL Statements for Always On Availability Groups &#40;SQL Server&#41;](../../database-engine/availability-groups/windows/transact-sql-statements-for-always-on-availability-groups.md).  
+
   
-## Security  
-  
-### Permissions  
+## Permissions  
  Requires ALTER AVAILABILITY GROUP permission on the availability group, CONTROL AVAILABILITY GROUP permission, ALTER ANY AVAILABILITY GROUP permission, or CONTROL SERVER permission.  Also requires ALTER ANY DATABASE permission.   
   
 ## Examples  
   
-###  <a name="Join_Secondary_Replica"></a> A. Joining a secondary replica to an availability group  
+<a name="Join_Secondary_Replica"></a>
+
+###  A. Joining a secondary replica to an availability group  
  The following example joins a secondary replica to which you're connected to the `AccountsAG` availability group.  
   
 ```SQL  
@@ -668,14 +693,48 @@ ALTER AVAILABILITY GROUP AccountsAG JOIN;
 GO  
 ```  
   
-###  <a name="Force_Failover"></a> B. Forcing failover of an availability group  
+<a name="Force_Failover"></a>
+
+###  B. Forcing failover of an availability group  
  The following example forces the `AccountsAG` availability group to fail over to the secondary replica to which you're connected.  
   
 ```SQL
 ALTER AVAILABILITY GROUP AccountsAG FORCE_FAILOVER_ALLOW_DATA_LOSS;  
 GO  
 ```  
-  
+
+### C. Force encryption in connections to the availability group 
+
+The examples in this section [forces encryption](#cluster_connection_options) in connections to the `AccountsAG` availability group. 
+
+If the server name is listed in each certificate as defined by either [method](../../database-engine/configure-windows/certificate-requirements.md#always-on-availability-group), you can omit the `HostNameInCertificate` option: 
+
+```sql
+ALTER AVAILABILITY GROUP [AccountsAG]
+   SET (
+   CLUSTER_CONNECTION_OPTIONS = 'Encrypt=Strict')  
+```
+
+
+If you followed [method 1](../../database-engine/configure-windows/certificate-requirements.md#always-on-availability-group), and your server name is not listed as a **Subject Alternative Name** in the certificate, then you must specify whatever value you do have listed in the **Subject Alternative Name** in the `HostNameInCertificate` option. 
+
+```sql
+ALTER AVAILABILITY GROUP [AccountsAG]
+   SET (
+   CLUSTER_CONNECTION_OPTIONS = 'Encrypt=Strict;HostNameInCertificate=<Subject Alternative Name>')
+```
+
+If you followed [method 1](../../database-engine/configure-windows/certificate-requirements.md#always-on-availability-group), and you want to utilize the `ServerCertificate` property instead of providing a value for `HostNameInCertificate`: 
+
+```sql
+ALTER AVAILABILITY GROUP [AccountsAG]
+   SET (
+   CLUSTER_CONNECTION_OPTIONS = 'Encrypt=Strict;ServerCertificate=C:\Users\admin\SqlAGCertificate.cer')
+```
+
+
+
+
 ## See Also  
  [CREATE AVAILABILITY GROUP &#40;Transact-SQL&#41;](../../t-sql/statements/create-availability-group-transact-sql.md)   
  [ALTER DATABASE SET HADR &#40;Transact-SQL&#41;](../../t-sql/statements/alter-database-transact-sql-set-hadr.md)   

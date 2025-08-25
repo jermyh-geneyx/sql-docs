@@ -4,7 +4,7 @@ description: Learn how Always On failover cluster instances provide local high a
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 06/25/2025
+ms.date: 08/15/2025
 ms.service: sql
 ms.subservice: failover-cluster-instance
 ms.topic: conceptual
@@ -33,6 +33,10 @@ An FCI can use [Always On availability groups](../../../database-engine/availabi
 [!INCLUDE [ssnoversion-md](../../../includes/ssnoversion-md.md)] failover cluster instances support Storage Spaces Direct (S2D) for cluster storage resources, introduced in Windows Server 2016 Datacenter edition. For more information, see [Storage Spaces Direct in Windows Server](/windows-server/storage/storage-spaces/storage-spaces-direct-overview).
 
 Failover cluster instances also support clustered shared volumes (CSV). For more information, see [Understanding cluster shared volumes in a failover cluster](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/dd759255(v=ws.11)).
+
+> [!NOTE]
+> [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] introduces support to [enforce strict connections](../../../relational-databases/security/networking/connect-with-strict-encryption.md#connect-to-a-failover-cluster-instance) to your failover cluster instance. 
+
 
 <a id="Benefits"></a>
 
@@ -114,6 +118,12 @@ After the FCI starts successfully, the WSFC service monitors both the health of 
 For more information, see [Failover Policy for Failover Cluster Instances](failover-policy-for-failover-cluster-instances.md).
 
 <a id="FCIelements"></a>
+
+## Configure TLS 1.3 encryption
+
+[!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] RC 0 introduces [TDS 8.0](../../../relational-databases/security/networking/tds-8.md) support, which allows enforcing [TLS 1.3](../../../relational-databases/security/networking/tls-1-3.md) encryption for communication between the Windows Server Failover Cluster and your failover cluster instances. 
+
+To get started, review [Connect with strict encryption](../../../relational-databases/security/networking/connect-with-strict-encryption.md#connect-to-a-failover-cluster-instance).
 
 ## Elements of a failover cluster instance
 

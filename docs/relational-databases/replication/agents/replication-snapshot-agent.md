@@ -120,21 +120,20 @@ snapshot [ -?]
  **-DynamicSnapshotLocation** _dynamic_snapshot_location_  
  Is the location where the dynamic snapshot should be generated.  
   
-<a id="encryptionlevel"></a>
+<a id="encryption-level"></a>
 
  **-EncryptionLevel** [ **0** | **1** | **2** | **3** | **4**]  
  Is the level of Transport Layer Security (TLS), previously known as Secure Sockets Layer (SSL), encryption used by the Snapshot Agent when making connections.  
   
 |EncryptionLevel value|Description|
 |---------------------------|-----------------|
-|`0`|Specifies that TLS is not used.|
-|`1`|Specifies that TLS 1.2 is used, but the agent does not verify that the TLS/SSL server certificate is signed by a trusted issuer.|
-|`2`|Specifies that TLS 1.2 is used, and that the certificate is verified.| 
-| `3` | Specifies that for connections from Azure SQL Managed Instance to Azure SQL Managed Instance, TLS 1.3 is used, and the certificate is verified. For connections between Azure SQL Managed Instance and SQL Server, TLS 1.3 is not enforced. |
-| `4` | Specifies that for connections from Azure SQL Managed Instance to Azure SQL Managed Instance, TLS 1.3 is used, and the certificate is verified. For connections from Azure SQL Managed Instance to SQL Server, TLS 1.3 is used, and the certificate is verified. Requires installing the certificate on SQL Server hosts. |
-
- > [!NOTE]  
- >  A valid TLS/SSL certificate is defined with a fully qualified domain name of the SQL Server. In order for the agent to connect successfully when setting -EncryptionLevel to 2, create an alias on the local SQL Server. The 'Alias Name' parameter should be the server name and the 'Server' parameter should be set to the fully qualified name of the SQL Server.
+| `0` |Specifies that TLS is not used.|
+| `1` |Specifies that TLS 1.2 is used, but the agent does not verify that the TLS/SSL server certificate is signed by a trusted issuer.|
+| `2` |Specifies that TLS 1.2 is used, and that the certificate is verified.| 
+| `3` | Specifies that for connections from Azure SQL Managed Instance or SQL Server 2025 (RC 0 and later) to Azure SQL Managed Instance, TLS 1.3 is used, and the certificate is verified. For connections to SQL Server (any supported version), TLS 1.3 is not enforced with option `3`. |
+| `4` | Specifies that for connections from Azure SQL Managed Instance or SQL Server 2025 (RC 0 and later) to Azure SQL Managed Instance, TLS 1.3 is used, and the certificate is verified. For connections from Azure SQL Managed Instance or SQL Server 2025 (RC 0 and later) to SQL Server (any supported version), TLS 1.3 is used, and the certificate is verified. Requires installing the certificate on SQL Server hosts that are receiving connections with `EncryptionLevel` set to `4`. |
+ 
+A valid TLS/SSL certificate is defined with a fully qualified domain name of the SQL Server. In order for the agent to connect successfully when setting -EncryptionLevel to 2, create an alias on the local SQL Server. The 'Alias Name' parameter should be the server name and the 'Server' parameter should be set to the fully qualified name of the SQL Server.
   
  For more information, see [View and modify replication security settings](../../../relational-databases/replication/security/view-and-modify-replication-security-settings.md).  
   

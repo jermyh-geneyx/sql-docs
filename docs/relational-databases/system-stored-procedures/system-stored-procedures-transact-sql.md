@@ -31,7 +31,7 @@ In [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)], many administrati
 
 | Category | Description |
 | --- | --- |
-| [Active Geo-Replication stored procedures]() | Used to manage Active Geo-Replication configurations in Azure SQL Database |
+| [Active Geo-Replication stored procedures (Azure SQL Database)](/azure/azure-sql/database/active-geo-replication-overview) | Used to manage Active Geo-Replication and Auto-Failover Group configurations in Azure SQL Database. |
 | [Catalog stored procedures](catalog-stored-procedures-transact-sql.md) | Used to implement ODBC data dictionary functions and isolate ODBC applications from changes to underlying system tables. |
 | [Change Data Capture stored procedures](change-data-capture-stored-procedures-transact-sql.md) | Used to enable, disable, or report on change data capture objects. |
 | [Cursor stored procedures](cursor-stored-procedures-transact-sql.md) | Used to implements cursor variable functionality. |

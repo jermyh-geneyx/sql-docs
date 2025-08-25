@@ -52,7 +52,7 @@ You can use SQL Database auditing to:
 - Folder structure change for read-only replicas:
   - Read-only database replicas previously had their logs stored in a read-only folder. Those logs will now be written into the `master` folder. You can retrieve these logs by filtering on the new column `is_secondary_replica_true`.
 - Permissions required to view Audit logs:
-  - Only **Server admin** principals can view audit logs stored in the `master` folder.
+  - `VIEW DATABASE SECURITY AUDIT` permission in user database
 
 ## Auditing limitations
 
