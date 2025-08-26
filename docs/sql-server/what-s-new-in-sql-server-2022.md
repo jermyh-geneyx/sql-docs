@@ -43,7 +43,7 @@ For the best experience with [!INCLUDE [sql-server-2022](../includes/sssql22-md.
 
 ## Feature highlights
 
-The following sections identify features that are improved our introduced in [!INCLUDE [sssql22-md](../includes/sssql22-md.md)].
+The following sections identify features that are improved or introduced in [!INCLUDE [sssql22-md](../includes/sssql22-md.md)].
 
 - [Analytics](#analytics)
 - [Availability](#availability)
