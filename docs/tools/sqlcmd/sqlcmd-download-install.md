@@ -4,7 +4,7 @@ description: Learn how to download, install, or find the sqlcmd utility preinsta
 author: dlevy-msft
 ms.author: dlevy
 ms.reviewer: randolphwest
-ms.date: 07/02/2025
+ms.date: 08/27/2025
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
@@ -182,9 +182,9 @@ The command line tools are General Availability (GA), however they are also rele
 #### System requirements
 
 - Windows 10 and later versions
-- Windows Server and later versions
+- Windows Server 2016 and later versions
 
-This component requires both the built-in [Windows Installer 5](/windows/win32/msi/what-s-new-in-windows-installer-5-0) and the [Microsoft ODBC Driver 17 for SQL Server](../../connect/odbc/download-odbc-driver-for-sql-server.md).
+This component requires the latest [Microsoft ODBC Driver 17 for SQL Server](../../connect/odbc/download-odbc-driver-for-sql-server.md#version-17).
 
 ### [macOS](#tab/mac)
 
