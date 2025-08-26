@@ -4,7 +4,7 @@ description: "Describes features and limitations currently available for SQL Ser
 author: AbdullahMSFT
 ms.author: amamun
 ms.reviewer: mikeray
-ms.date: 08/14/2025
+ms.date: 08/15/2025
 ms.topic: conceptual #Don't change
 #customer intent:Understand the features, limitations, and onboarding process for using SQL Server enabled by Azure Arc in US Government regions, specifically to manage their SQL Server resources securely and compliantly within the Azure Government portal.
 

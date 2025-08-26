@@ -72,7 +72,7 @@ The source table name
 | `table_id` | **uniqueidentifier** | The source table identifier. |
 | `destination_location` | **nvarchar(512)** | URL string of the landing zone folder. |
 | `workspace_id` | **nvarchar(247)** | The related Synapse workspace Azure resource ID. |
-| `state` | **nvarchar(50)** | The current state of the table. |
+| `state` | **tinyint** | The current state of the table. Valid state values:<br /><br />`1` - Enabled.<br />`2` - Exporting.<br />`3` - Exported.<br />`4` - Active.<br />`5` - Disabled.<br />`6` - Pending Disablement.<br />`7` - Reseeding.<br />`8` - Reseed Notified. |
 | `table_object_id` | **int** | The object ID of the change feed table. |
 
 ## Permissions

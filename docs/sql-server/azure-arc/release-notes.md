@@ -4,7 +4,7 @@ description: Latest release notes for SQL Server enabled by Azure Arc
 author: anosov1960
 ms.author: sashan
 ms.reviewer: mikeray, randolphwest
-ms.date: 08/14/2025
+ms.date: 08/15/2025
 ms.topic: conceptual
 ms.custom:
   - ignite-2023
@@ -24,6 +24,10 @@ This article lists:
 Extension versions are cumulative. Higher extension versions include all of the updates from previous versions. A release might also include internal features.
 
 Only Azure extension for SQL Server agent versions released within the last year are supported.
+
+## August
+
+**Extension version**: `1.1.3139.313`
 
 ## August 14, 2025
 
