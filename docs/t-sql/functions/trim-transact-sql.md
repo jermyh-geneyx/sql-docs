@@ -138,7 +138,7 @@ SELECT TRIM(LEADING '.,! ' FROM  '     .#     test    .') AS Result;
 [!INCLUDE [ssResult_md](../../includes/ssresult-md.md)]
 
 ```output
-# test .
+#     test    .
 ```
 
 ### D. Remove specified characters from the end of a string
