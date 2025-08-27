@@ -1,9 +1,9 @@
 ---
-title: "Change the password of the accounts used (SQL Server Configuration Manager)"
+title: "Change the Password of the Accounts Used (SQL Server Configuration Manager)"
 description: Find out how to change the password of the accounts that the Database Engine and the SQL Server Agent use. Learn when it's important to change the password.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 01/23/2025
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: how-to
@@ -37,7 +37,9 @@ It's also possible to automate password management through [group-managed servic
 
 You must be an administrator of the computer to change the password used by a service.
 
-## <a id="SSMSProcedure"></a> Use SQL Server Configuration Manager
+<a id="SSMSProcedure"></a>
+
+## Use SQL Server Configuration Manager
 
 #### Change the password used by the SQL Server (Database Engine) service
 
@@ -68,7 +70,7 @@ You must be an administrator of the computer to change the password used by a se
 
 1. In the **SQL Server Agent (**\<instancename>**) Properties** dialog box, on the Log On tab, for the account listed in the **Account Name** box, type the new password in the **Password** and **Confirm Password** boxes, and then select **OK**.
 
-     On a stand-alone instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], the password takes effect immediately, without restarting [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. On a clustered instance, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] might take the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] resource offline, and require a restart.
+   On a stand-alone instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], the password takes effect immediately, without restarting [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. On a clustered instance, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] might take the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] resource offline, and require a restart.
 
 ## Related content
 

@@ -4,7 +4,7 @@ description: This article describes the requirements for SQL Server encryption a
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 08/15/2025
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
@@ -20,7 +20,7 @@ For using Transport Layer Security (TLS) for [!INCLUDE [ssnoversion-md](../../in
 
 - The certificate must be in either the local computer certificate store or the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] service account certificate store. We recommend local computer certificate store as it avoids reconfiguring certificates with [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] startup account changes.
 
-- The [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] service account must have the necessary permission to access the TLS certificate. For more information, see [Configure SQL Server Database Engine for encrypting connections](configure-sql-server-encryption.md).
+- The [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] service account must have the necessary permission to access the TLS certificate. For more information, see [Encrypt connections to SQL Server by importing a certificate](configure-sql-server-encryption.md).
 
 - The current system time must be after the value of the property **Valid from** and before the value of the property **Valid to** of the certificate. For more information, see [Expired Certificates](#expired-certificates).
 
@@ -29,7 +29,7 @@ For using Transport Layer Security (TLS) for [!INCLUDE [ssnoversion-md](../../in
 
 - The certificate must be created using the `KeySpec` option of `AT_KEYEXCHANGE`. This requires a certificate that uses a [legacy Cryptographic Storage Provider](/windows/win32/seccertenroll/cryptoapi-cryptographic-service-providers) to store the private key. Usually, the certificate's key usage property (**KEY_USAGE**) also includes key encipherment (`CERT_KEY_ENCIPHERMENT_KEY_USAGE`) and a digital signature (`CERT_DIGITAL_SIGNATURE_KEY_USAGE`).
 
-- The **Subject Alternative Name** should include all the names your clients might use to connect to a [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] instance. 
+- The **Subject Alternative Name** should include all the names your clients might use to connect to a [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] instance.
 
 The client must be able to verify the ownership of the certificate used by the server. If the client has the public key certificate of the certification authority that signed the server certificate, no further configuration is necessary. Microsoft Windows includes the public key certificates of many certification authorities. If the server certificate was signed by a public or private certification authority for which the client doesn't have the public key certificate, you must install the public key certificate of the certification authority that signed the server certificate on each client that is going to connect to [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)].
 
@@ -105,7 +105,7 @@ You can use one of the following methods to check the validity of the certificat
 
 - **sqlcheck tool**: `sqlcheck` is a command-line tool that examines the current computer and service account settings and produce a text report to the Console window that is useful for troubleshooting various connection errors. The output has the following information regarding certificates:
 
-  ```Output
+  ```output
   Details for SQL Server Instance: This Certificate row in this section provides more details regarding the certificate being used by SQL Server (Self-generated, hard-coded thumbprint value, etc.).
 
   Certificates in the Local Computer MY Store: This section shows detailed information regarding all the certificates found in the computer certificate store.
@@ -117,15 +117,17 @@ You can use one of the following methods to check the validity of the certificat
 
 - **Certificates snap-in**: You can also use the **Certificates snap-in** window to view more information about certificates in various certificate stores on the computer. But this tool doesn't show `KeySpec` information. For more information on how to view certificates with the MMC snap-in, see [How to: View certificates with the MMC snap-in](/dotnet/framework/wcf/feature-details/how-to-view-certificates-with-the-mmc-snap-in).
 
-## Importing a certificate with a different name to the hostname 
+<a id="importing-a-certificate-with-a-different-name-to-the-hostname"></a>
 
-Currently, you can only import a certificate using the SQL Server Configuration Manager if the subject name of the certificate matches the hostname of the computer. 
+## Import a certificate with a different name to the hostname
 
-If you want to use a certificate with a different subject name, follow these steps: 
+Currently, you can only import a certificate using the SQL Server Configuration Manager if the subject name of the certificate matches the hostname of the computer.
+
+If you want to use a certificate with a different subject name, follow these steps:
 
 1. Import the certificate to the local computer certificate store using the [Certificates snap-in](/dotnet/framework/wcf/feature-details/how-to-view-certificates-with-the-mmc-snap-in).
 1. In SQL Server Configuration Manager, expand **SQL Server Network Configuration** right-click the instance of SQL Server, and then choose Properties to open the **Protocols for <instance_name> Properties** dialog box.
-1. On the **Certificate** tab, select the certificate you imported to the certificate store from the **Certificate** dropdown list: 
+1. On the **Certificate** tab, select the certificate you imported to the certificate store from the **Certificate** dropdown list:
 
    :::image type="content" source="media/certificate-requirements/certificate.png" alt-text="Screenshot of the certificate tab of the properties dialog box in SQL Server Configuration Manager.":::
 
@@ -134,14 +136,14 @@ Importing a certificate with a different name to the hostname results in the fol
 ```text
 The selected certificate name does not match FQDN of this hostname. This property is required by SQL Server
 Certificate name: random-name
-Computer name: sqlserver.domain.com 
+Computer name: sqlserver.domain.com
 ```
 
 ## Expired certificates
 
 [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] only checks the validity of the certificates at the time of configuration. For example, you can't use SQL Server Configuration Manager on [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and later versions, to provision an expired certificate. [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] continues to run without problems if the certificate expires after it's already provisioned. But, some client applications like Power BI check the validity of the certificate on each connection and raise an error if the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] instance is configured to use an expired certificate for encryption. We recommend that you don't use an expired certificate for [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] encryption.
 
-## Next step 
+## Next step
 
 - [Configure the SQL Server Database Engine to encrypt connections](configure-sql-server-encryption.md) by importing a certificate. 
 

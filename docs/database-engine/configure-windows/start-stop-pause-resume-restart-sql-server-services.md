@@ -3,7 +3,7 @@ title: Start, Stop, Pause, Resume, and Restart SQL Server Services
 description: Find out how to start, stop, pause, resume, or restart various SQL Server services. See how to use Transact-SQL, PowerShell, and other tools for these actions.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 07/10/2025
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
@@ -61,7 +61,7 @@ If you pause the [!INCLUDE [ssDE](../../includes/ssde-md.md)] service, users who
 The SQL Server Configuration Manager and SSMS display the current status of services by using the following icons.
 
 | | SQL Server Configuration Manager | SQL Server Management Studio (SSMS) |
-| ---: | :--- | :--- |
+| ---: | --- | --- |
 | **Started** | A green arrow on the icon next to the service name | A white arrow on a green circle icon next to the service name |
 | **Stopped** | A red square on the icon next to the service name | A white square on a red circle icon next to the service name |
 | **Paused** | Two vertical blue lines on the icon next to the service name | Two vertical white lines on a blue circle icon next to the service name |

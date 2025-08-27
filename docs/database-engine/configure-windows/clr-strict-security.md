@@ -63,9 +63,10 @@ The following permissions are required to create a CLR assembly when `CLR strict
 The following example first displays the current setting of the `clr strict security` option, and then sets the option value to `1` (enabled).
 
 ```sql
-EXEC sp_configure 'clr strict security';
+EXECUTE sp_configure 'clr strict security';
 GO
-EXEC sp_configure 'clr strict security' , '1';
+
+EXECUTE sp_configure 'clr strict security', '1';
 RECONFIGURE;
 GO
 ```

@@ -34,12 +34,15 @@ This change takes effect immediately.
 The following example enables this setting.
 
 ```sql
-EXEC sp_configure 'show advanced options', 1;
+EXECUTE sp_configure 'show advanced options', 1;
 GO
+
 RECONFIGURE;
 GO
-EXEC sp_configure 'allow polybase export', 1;
+
+EXECUTE sp_configure 'allow polybase export', 1;
 GO
+
 RECONFIGURE;
 GO
 ```

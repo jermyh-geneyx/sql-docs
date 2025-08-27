@@ -3,7 +3,7 @@ title: "Soft-NUMA (SQL Server)"
 description: Learn about soft-NUMA in SQL Server 2014 SP2 and newer versions. See how to use automatic soft-NUMA and how to manually configure SQL Server to use soft-NUMA.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 01/27/2025
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
@@ -53,7 +53,7 @@ To manually configure [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]
 > [!WARNING]  
 > [!INCLUDE [ssNoteRegistry](../../includes/ssnoteregistry-md.md)]
 
-Consider the example of a computer with eight CPUs that doesn't have hardware NUMA. Three soft-NUMA nodes are configured.  
+Consider the example of a computer with eight CPUs that doesn't have hardware NUMA. Three soft-NUMA nodes are configured.
 [!INCLUDE [ssDE](../../includes/ssde-md.md)] instance A is configured to use CPUs 0 through 3. A second instance of the [!INCLUDE [ssDE](../../includes/ssde-md.md)] is installed and configured to use CPUs 4 through 7. The example can be visually represented as:
 
 ```output
@@ -64,7 +64,7 @@ SQL Server  <instance A><instance B>
 
 Instance A, which experiences significant I/O, now has two I/O threads and one lazy writer thread. Instance B, which performs processor-intensive operations, has only one I/O thread and one lazy writer thread. Differing amounts of memory can be assigned to the instances, but unlike hardware NUMA, they both receive memory from the same operating system memory block, and there's no memory-to-processor affinity.
 
-The lazy writer thread is tied to the SQLOS view of the physical NUMA memory nodes. Therefore, whatever the hardware presents as the number of physical NUMA nodes, this is the number of lazy writer threads that are created. For more information, see [How It Works: Soft NUMA, I/O Completion Thread, Lazy Writer Workers and Memory Nodes](https://techcommunity.microsoft.com/t5/sql-server-support/how-it-works-soft-numa-i-o-completion-thread-lazy-writer-workers/ba-p/316044).
+The lazy writer thread is tied to the SQLOS view of the physical NUMA memory nodes. Therefore, whatever the hardware presents as the number of physical NUMA nodes, this is the number of lazy writer threads that are created. For more information, see [How It Works: Soft NUMA, I/O Completion Thread, Lazy Writer Workers and Memory Nodes](https://techcommunity.microsoft.com/blog/sqlserversupport/how-it-works-soft-numa-io-completion-thread-lazy-writer-workers-and-memory-nodes/316044).
 
 > [!NOTE]  
 > The **Soft-NUMA** registry keys aren't copied when you upgrade an instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
@@ -129,7 +129,7 @@ You can use the following DMVs to view the current state and configuration of so
 
 - [sys.dm_os_sys_info (Transact-SQL)](../../relational-databases/system-dynamic-management-views/sys-dm-os-sys-info-transact-sql.md): The     `softnuma_configuration` and `softnuma_configuration_desc` columns display the current configuration values.
 
-While you can view the running value for automatic soft-NUMA using [sp_configure (Transact-SQL)](../../relational-databases/system-stored-procedures/sp-configure-transact-sql.md), you can't change its value using `sp_configure`. You must use the [ALTER SERVER CONFIGURATION (Transact-SQL)](../../t-sql/statements/alter-server-configuration-transact-sql.md) statement with the `SET SOFTNUMA` argument.
+While you can view the running value for automatic soft-NUMA using [sp_configure](../../relational-databases/system-stored-procedures/sp-configure-transact-sql.md), you can't change its value using `sp_configure`. You must use the [ALTER SERVER CONFIGURATION](../../t-sql/statements/alter-server-configuration-transact-sql.md) statement with the `SET SOFTNUMA` argument.
 
 ## Related content
 

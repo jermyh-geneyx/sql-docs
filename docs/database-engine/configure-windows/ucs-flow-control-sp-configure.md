@@ -4,13 +4,13 @@ description: "Learn about UCS flow control with the max ucs send boxcars configu
 author: sergten
 ms.author: sergeyten
 ms.reviewer: randolphwest
-ms.date: 05/19/2025
+ms.date: 08/26/2025
 ms.service: sql
 ms.topic: concept-article
-helpviewer_keywords:
-  - "max ucs send boxcars"
 ms.custom:
   - build-2025
+helpviewer_keywords:
+  - "max ucs send boxcars"
 ---
 
 # Server configuration: max ucs send boxcars
@@ -96,6 +96,6 @@ The internal error code for the message is `33338`. The message isn't logged if 
 
 ## Related content
 
-- [Server configuration options](../../database-engine/configure-windows/server-configuration-options-sql-server.md)
-- [Monitor and troubleshoot availability groups](../../database-engine/availability-groups/windows/always-on-availability-groups-troubleshooting-and-monitoring-guide.md)
-- [Add a secondary replica to an Always On Availability Group](../../database-engine/availability-groups/windows/add-a-secondary-replica-to-an-availability-group-sql-server.md)
+- [Server configuration options](server-configuration-options-sql-server.md)
+- [Monitor and troubleshoot availability groups](../availability-groups/windows/always-on-availability-groups-troubleshooting-and-monitoring-guide.md)
+- [Add a secondary replica to an Always On Availability Group](../availability-groups/windows/add-a-secondary-replica-to-an-availability-group-sql-server.md)

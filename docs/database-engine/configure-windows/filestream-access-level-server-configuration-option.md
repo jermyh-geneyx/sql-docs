@@ -1,9 +1,9 @@
 ---
-title: "filestream access level (server configuration option)"
+title: "Server Configuration: filestream access level"
 description: "Become familiar with the filestream_access_level option. See how it changes the FILESTREAM access level for an instance of SQL Server."
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 10/02/2023
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
@@ -11,14 +11,13 @@ helpviewer_keywords:
   - "FILESTREAM [SQL Server], access level"
   - "filestream access level"
 ---
-# FILESTREAM access level (server configuration option)
+# Server configuration: filestream access level
 
 [!INCLUDE [SQL Server](../../includes/applies-to-version/sqlserver.md)]
 
-Use the `filestream_access_level` option to change the FILESTREAM access level for this instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
+Use the `filestream access level` option to change the FILESTREAM access level for this instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
 
-> [!NOTE]  
-> Before this option has any effect, the Windows administration settings for FILESTREAM must be enabled. You can enable these settings when you install [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] or by using [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Configuration Manager.
+Before this option has any effect, the Windows administration settings for FILESTREAM must be enabled. You can enable these settings when you install [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] or by using [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Configuration Manager.
 
 | Value | Definition |
 | --- | --- |

@@ -1,10 +1,10 @@
 ---
-title: Configure persistent memory (PMEM) - Windows
+title: "Configure Persistent Memory (PMEM) - Windows"
 description: Learn how to configure persistent memory (PMEM) for SQL Server on Windows, and how to create namespaces for PMEM devices.
-author: briancarrig
-ms.author: brcarrig
+author: rwestMSFT
+ms.author: randolphwest
 ms.reviewer: mikeray
-ms.date: 09/21/2022
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: how-to
@@ -12,13 +12,13 @@ ms.topic: how-to
 
 # Configure persistent memory (PMEM) for SQL Server on Windows
 
-This article describes how to configure the persistent memory (PMEM) for [!INCLUDE[sqlv14](../../includes/sssql16-md.md)] and above on Windows.
+This article describes how to configure the persistent memory (PMEM) for [!INCLUDE [sqlv14](../../includes/sssql16-md.md)] and above on Windows.
 
 ## Overview
 
-[!INCLUDE[sqlv15](../../includes/sssql19-md.md)] has several in-memory database features that rely on persistent memory. This document covers the steps required to configure persistent memory for SQL Server on Windows.
+[!INCLUDE [sqlv15](../../includes/sssql19-md.md)] has several in-memory database features that rely on persistent memory. This document covers the steps required to configure persistent memory for SQL Server on Windows.
 
-> [!NOTE]
+> [!NOTE]  
 > The term _enlightenment_ was introduced to convey the concept of working with a persistent memory aware file system. Direct access (DAX) extensions to the NTFS file system provide the ability to memory map files from kernel space to user space. When a file is memory mapped into user space the application can issue load/store instructions directly to the memory mapped file, bypassing the kernel I/O stack completely. This is considered an "enlightened" file access method. As of Windows Server 2022, this _enlightenment_ functionality is available on both Windows and Linux platforms.
 
 ## Configure the devices
@@ -47,37 +47,30 @@ Get-PmemUnusedRegion
 
 ### BTT and DAX
 
-By default, `New-PmemDisk` will use the desired `FSDax` mode. Atomicity is set to the default of `None` rather than `BlockTranslationTable`. From a support perspective, BTT must be enabled for the transaction log, to mimic required sector mode semantics. Although use of [BTT](/azure-stack/hci/concepts/deploy-persistent-memory#block-translation-table) with NTFS is generally recommended, BTT is not recommended when using large pages, such as required for [DAX](/windows-server/storage/storage-spaces/persistent-memory-direct-access#dax-and-block-translation-table-btt).
+By default, `New-PmemDisk` will use the desired `FSDax` mode. Atomicity is set to the default of `None` rather than `BlockTranslationTable`. From a support perspective, BTT must be enabled for the transaction log, to mimic required sector mode semantics. Although use of [BTT](/azure-stack/hci/concepts/deploy-persistent-memory#block-translation-table) with NTFS is generally recommended, BTT isn't recommended when using large pages, such as required for [DAX](/windows-server/storage/storage-spaces/persistent-memory-direct-access#dax-and-block-translation-table-btt).
 
 ```powershell
 Get-PmemUnusedRegion | New-PmemDisk -Atomicity None
 ```
 
-### Formatting the NTFS volume(s)
+### Format the NTFS volumes
 
 ```powershell
-
-#Initialize PMEM Disk(s)
+#Initialize PMEM disks
 Get-PmemDisk | Initialize-Disk -PartitionStyle GPT
 
-#Create New Partition(s) and Format the Volume(s) with DAX Mode
-Get-PmemDisk[0] | `
-New-Partition `
-    -UseMaximumSize `
-    -AssignDriveLetter `
-    -Offset 2097152 `
-    -Alignment 2097152 | `
-Format-Volume `
-    -FileSystem NTFS `
-    -IsDAX:$True `
-    -AllocationUnitSize 2097152
+#Create new partitions and format the volumes with DAX Mode
+$partition = @{ UseMaximumSize = $true; AssignDriveLetter = $true; Offset = 2097152; Alignment = 2097152 }
+$volume = @{ FileSystem = 'NTFS'; IsDAX = $true; AllocationUnitSize = 2097152 }
+Get-PmemDisk[0] | New-Partition @partition | Format-Volume @volume
 ```
+
 ## File alignment and offset
 
-### Check partition offset(s)
+### Check partition offsets
 
 ```powershell
-Get-Partition | Select-Object DiskNumber, DriveLetter, IsDAX, Offset, Size, PartitionNumber | fl
+Get-Partition | Select-Object DiskNumber, DriveLetter, IsDAX, Offset, Size, PartitionNumber | Format-List
 ```
 
 Check the file alignment of a particular file using `fsutil`. Our file size must be a modulo of 2 MB.
@@ -86,19 +79,20 @@ Check the file alignment of a particular file using `fsutil`. Our file size must
 fsutil dax queryFileAlignment A:\AdventureWorks2022_A.mdf
 ```
 
-## Replacing PMEM
+## Replace PMEM
 
 ### Reprovision PMEM disks
 
 Whenever a PMEM module is replaced, it needs to be reprovisioned.
 
-> [!NOTE]
+> [!NOTE]  
 > Removing a PMEM disk will result in the loss of data on that disk.
 
 ```powershell
 # Remove all PMEM disks
 Get-PmemDisk | Remove-PmemDisk -Confirm:$false
 ```
+
 ### Erase PMEM modules
 
 To permanently erase data from PMEM modules, use the `Initialize-PmemPhysicalDevice` PowerShell cmdlet.
@@ -108,6 +102,6 @@ To permanently erase data from PMEM modules, use the `Initialize-PmemPhysicalDev
 Get-PmemPhysicalDevice | Initialize-PmemPhysicalDevice -Confirm:$false
 ```
 
-## See also
+## Related content
 
-For other cmdlets for manipulating PMEM, see [PersistentMemory](/powershell/module/persistentmemory/) in the PowerShell reference documentation.
+- [PersistentMemory](/powershell/module/persistentmemory/)

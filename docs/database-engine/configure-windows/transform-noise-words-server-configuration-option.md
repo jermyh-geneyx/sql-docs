@@ -3,7 +3,7 @@ title: "Server Configuration: transform noise words"
 description: "Learn about the transform noise words option. See how it can be useful in some SQL Server full-text queries that include noise words (stopwords)."
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 05/27/2025
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual

@@ -1,17 +1,17 @@
 ---
-title: "Server configuration: backup compression algorithm"
+title: "Server Configuration: backup compression algorithm"
 description: "Find out about the backup compression algorithm option. See how it determines the algorithm to use for backup compression, and learn how to set it."
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest, wiassaf, dinethi
-ms.date: 05/19/2025
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
-helpviewer_keywords:
-  - "backup compression algorithm [SQL Server], backup compression algorithm Option"
 ms.custom:
   - build-2025
+helpviewer_keywords:
+  - "backup compression algorithm [SQL Server], backup compression algorithm option"
 ---
 
 # Server configuration: backup compression algorithm
@@ -34,21 +34,21 @@ Execute permissions on `sp_configure` with no parameters or with only the first 
 ## Backup compression algorithms
 
 You can use the `backup compression algorithm` option to specify the algorithm used for backup compression. The following algorithms are available:
-- **MS_XPRESS**: The default backup compression algorithm in all editions of SQL Server.
-- **Intel QAT**: The [Intel QuickAssist Technology (QAT) based algorithm](../../relational-databases/integrated-acceleration/use-integrated-acceleration-and-offloading.md) backup compression algorithm. This algorithm is available in [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions.
-- **ZSTD**: The backup compression algorithm that uses the faster and more effective Zstandard (ZSTD) compression algorithm. This algorithm is available in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions.
 
+- **MS_XPRESS**: The default backup compression algorithm in all editions of SQL Server.
+- **Intel QAT**: The [Intel QuickAssist Technology (QAT)](../../relational-databases/integrated-acceleration/use-integrated-acceleration-and-offloading.md) backup compression algorithm. This algorithm is available in [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions.
+- **ZSTD**: The backup compression algorithm that uses the faster and more effective Zstandard (ZSTD) compression algorithm. This algorithm is available in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions.
 
 ## View the backup compression algorithm option
 
-> [!NOTE]
-> There's currently a [known issue](../../sql-server/sql-server-2025-release-notes.md#setting-the-backup-compression-algorithm-to-zstd) with setting the `backup compression algorithm` to ZSTD. 
+> [!NOTE]  
+> There's currently a [known issue](../../sql-server/sql-server-2025-release-notes.md#setting-the-backup-compression-algorithm-to-zstd) with setting the `backup compression algorithm` to ZSTD.
 
 1. In [!INCLUDE [ssmanstudiofull-md](../../includes/ssmanstudiofull-md.md)], connect to the [!INCLUDE [ssDE](../../includes/ssde-md.md)].
 
 1. From the Standard bar, select **New Query**.
 
-1. Copy and paste the following example into the query window and select **Execute**. This example queries the [sys.configurations](../../relational-databases/system-catalog-views/sys-configurations-transact-sql.md) catalog view to determine the value for `backup compression algorithm`: 
+1. Copy and paste the following example into the query window and select **Execute**. This example queries the [sys.configurations](../../relational-databases/system-catalog-views/sys-configurations-transact-sql.md) catalog view to determine the value for `backup compression algorithm`:
    - `0` = Backup compression is off, specified by the [backup compression default](view-or-configure-the-backup-compression-default-server-configuration-option.md) option.
    - `1` = SQL Server uses the MS_XPRESS backup compression algorithm (default).
    - `2` = SQL Server uses the Intel&reg; QAT backup compression algorithm.
@@ -76,7 +76,7 @@ You can use the `backup compression algorithm` option to specify the algorithm u
    ```
 
    To change the compression algorithm back to the ZSTD algorithm (new in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)]), use the following script:
-   
+
    ```sql
    EXECUTE sp_configure 'backup compression algorithm', 3;
 

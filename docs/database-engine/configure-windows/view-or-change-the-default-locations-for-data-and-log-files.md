@@ -46,25 +46,29 @@ The best practice for protecting your data files and log files is to ensure that
    ```sql
    USE [master];
    GO
-   EXEC xp_instance_regwrite
-       N'HKEY_LOCAL_MACHINE', N'Software\Microsoft\MSSQLServer\MSSQLServer',
+
+   EXECUTE xp_instance_regwrite
+       N'HKEY_LOCAL_MACHINE',
+       N'Software\Microsoft\MSSQLServer\MSSQLServer',
        N'BackupDirectory',
        REG_SZ,
-       N'<path_to_database_backup_files>'
+       N'<path_to_database_backup_files>';
    GO
-   EXEC xp_instance_regwrite
+
+   EXECUTE xp_instance_regwrite
        N'HKEY_LOCAL_MACHINE',
        N'Software\Microsoft\MSSQLServer\MSSQLServer',
        N'DefaultData',
        REG_SZ,
-       N'<path_to_data_files>'
+       N'<path_to_data_files>';
    GO
-   EXEC xp_instance_regwrite
+
+   EXECUTE xp_instance_regwrite
        N'HKEY_LOCAL_MACHINE',
        N'Software\Microsoft\MSSQLServer\MSSQLServer',
        N'DefaultLog',
        REG_SZ,
-       N'<path_to_log_files>'
+       N'<path_to_log_files>';
    GO
    ```
 

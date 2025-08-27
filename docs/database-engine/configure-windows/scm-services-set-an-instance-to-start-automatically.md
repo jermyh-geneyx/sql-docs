@@ -1,9 +1,9 @@
 ---
-title: "Set an instance to start automatically (SQL Server Configuration Manager)"
+title: "Set an Instance to Start Automatically (SQL Server Configuration Manager)"
 description: Find out how to set an instance of SQL Server to start automatically. Learn about the default configuration, and see how to set the start mode to automatic.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 07/26/2024
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: how-to
@@ -18,9 +18,11 @@ helpviewer_keywords:
 
 This article describes how to set an instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] to start automatically in [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)] by using SQL Server Configuration Manager. During setup, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] is normally configured to start automatically. If this was not done, you can change that setting at any time.
 
-## <a id="SSMSProcedure"></a> Use SQL Server Configuration Manager
+<a id="SSMSProcedure"></a>
 
-#### <a id="to-set-an-instance-of-sql-server-to-start-automatically"></a> Set an instance of SQL Server to start automatically
+## Use SQL Server Configuration Manager
+
+#### Set an instance of SQL Server to start automatically
 
 1. On the **Start** menu, point to **All Programs**, point to [!INCLUDE [ssCurrentUI](../../includes/sscurrentui-md.md)], point to **Configuration Tools**, and then select **SQL Server Configuration Manager**.
 

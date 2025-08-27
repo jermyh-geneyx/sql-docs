@@ -1,10 +1,10 @@
 ---
-title: "Server Configuration: Max Degree of Parallelism"
+title: "Server Configuration: max degree of parallelism"
 description: Learn about the max degree of parallelism (MAXDOP) option. See how to use it to limit the number of processors that SQL Server uses in parallel plan execution.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: derekw, randolphwest
-ms.date: 08/07/2025
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
@@ -69,7 +69,7 @@ In [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later versions, use
 
 NUMA node in the previous table refers to soft-NUMA nodes automatically created by [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and higher versions, or hardware-based NUMA nodes if soft-NUMA is disabled.
 
-Use these same guidelines when you set the max degree of parallelism option for Resource Governor workload groups. For more information, see [CREATE WORKLOAD GROUP (Transact-SQL)](../../t-sql/statements/create-workload-group-transact-sql.md).
+Use these same guidelines when you set the max degree of parallelism option for Resource Governor workload groups. For more information, see [CREATE WORKLOAD GROUP](../../t-sql/statements/create-workload-group-transact-sql.md).
 
 #### SQL Server 2014 and earlier versions
 

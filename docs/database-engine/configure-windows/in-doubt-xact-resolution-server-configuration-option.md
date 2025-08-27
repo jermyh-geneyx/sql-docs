@@ -29,16 +29,21 @@ The following table lists the possible outcome values for resolving an in-doubt 
 To minimize the possibility of extended down time, an administrator might choose to configure this option either to presume commit or presume abort, as shown in the following example.
 
 ```sql
-sp_configure 'show advanced options', 1;
+EXECUTE sp_configure 'show advanced options', 1;
 GO
+
 RECONFIGURE;
 GO
-sp_configure 'in-doubt xact resolution', 2; -- presume abort
+
+EXECUTE sp_configure 'in-doubt xact resolution', 2; -- presume abort
 GO
+
 RECONFIGURE;
 GO
-sp_configure 'show advanced options', 0;
+
+EXECUTE sp_configure 'show advanced options', 0;
 GO
+
 RECONFIGURE;
 GO
 ```
@@ -46,21 +51,30 @@ GO
 Alternatively, the administrator might want to leave the default (no presumption) and allow recovery to fail in order to be made aware of a DTC failure, as shown in the following example.
 
 ```sql
-sp_configure 'show advanced options', 1;
+EXECUTE sp_configure 'show advanced options', 1;
 GO
+
 RECONFIGURE;
 GO
-sp_configure 'in-doubt xact resolution', 1; -- presume commit
+
+EXECUTE sp_configure 'in-doubt xact resolution', 1; -- presume commit
 GO
-RECONFIGURE
+
+RECONFIGURE;
 GO
+
 ALTER DATABASE pubs SET ONLINE -- run recovery again
+;
 GO
-sp_configure 'in-doubt xact resolution', 0 -- back to no assumptions
+
+EXECUTE sp_configure 'in-doubt xact resolution', 0 -- back to no assumptions
+;
 GO
-sp_configure 'show advanced options', 0
+
+EXECUTE sp_configure 'show advanced options', 0;
 GO
-RECONFIGURE
+
+RECONFIGURE;
 GO
 ```
 

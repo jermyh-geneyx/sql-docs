@@ -1,15 +1,15 @@
 ---
-title: Encrypt connections by importing a certificate
+title: Encrypt Connections by Importing a Certificate
 description: This article describes how to configure a SQL Server instance to enable encrypted connections by importing a certificate.
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: sureshka, randolphwest
-ms.date: 08/15/2025
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: how-to
 ---
-# Encrypt connections to SQL Server by importing a certificate 
+# Encrypt connections to SQL Server by importing a certificate
 
 [!INCLUDE [sql-windows-only](../../includes/applies-to-version/sql-windows-only.md)]
 
@@ -29,8 +29,8 @@ To configure [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] to us
 
 Depending on the version of [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] Configuration Manager you have access to on the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] computer, use one of the following procedures to install and configure the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] instance.
 
-> [!NOTE]
-> Certificate names that don't match the host name must be [imported manually](certificate-requirements.md#importing-a-certificate-with-a-different-name-to-the-hostname) to the local certificate store. 
+> [!NOTE]  
+> Certificate names that don't match the host name must be [imported manually](certificate-requirements.md#importing-a-certificate-with-a-different-name-to-the-hostname) to the local certificate store.
 
 ### Computers with SQL Server Configuration Manager for SQL Server 2019 and later versions
 
@@ -97,12 +97,11 @@ When creating encrypted connections for an Azure Search indexer to [!INCLUDE [ss
 The following steps are only required if you want to force encrypted communications for all the clients:
 
 1. In [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] Configuration Manager, expand **SQL Server Network Configuration**, right-click **Protocols for \<server instance>**, and then select **Properties**.
-1. On the **Flags** tab, in the **Force Encryption** box, select **Yes**, and then select **OK** to close the dialog box. Starting with [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], you also have the option to [force strict encryption](../../relational-databases/security/networking/connect-with-strict-encryption.md#force-strict-encryption-with-sql-server-configuration-manager). 
+1. On the **Flags** tab, in the **Force Encryption** box, select **Yes**, and then select **OK** to close the dialog box. Starting with [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], you also have the option to [force strict encryption](../../relational-databases/security/networking/connect-with-strict-encryption.md#force-strict-encryption-with-sql-server-configuration-manager).
 1. Restart the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] service.
 
 > [!NOTE]  
 > Some certificate scenarios might require you to implement additional steps on the client computer and in your client application to ensure encrypted connections between the client and server. For more information, see [Special cases for encrypting connections to SQL Server](special-cases-for-encrypting-connections-sql-server.md).
-
 
 ## Login packet encryption vs. data packet encryption
 
@@ -148,7 +147,6 @@ $certificateParams = @{
 New-SelfSignedCertificate @certificateParams
 ```
 
-
 ## Verify network encryption
 
 To verify that network encryption is configured and enabled successfully, run the following Transact-SQL query:
@@ -183,17 +181,17 @@ To override this behavior, either:
 
 - Remove the SQL Server service account permissions to the undesired certificate
 
-## Certificate precedence 
+## Certificate precedence
 
 The SQL Server service loads the server certificate in the following order of precedence:
 
 1. The certificate configured with SQL Server Configuration Manager or specified in the registry key `Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SQL Server\<instance_name>\MSSQLServer\SuperSocketNetLib\Certificate`.
 1. If there's no explicitly configured certificate, the SQL Server service loads the certificate from the certificate store as described in the [Certificate behavior](#sql-server-certificate-behavior-with-permissions) section.
-1. If there is no trusted or valid certificate available, SQL Server uses a self-generated certificate as described in the [self-signed certificate](#sql-server-generated-self-signed-certificates) section.
+1. If there's no trusted or valid certificate available, SQL Server uses a self-generated certificate as described in the [self-signed certificate](#sql-server-generated-self-signed-certificates) section.
 
-To learn more, see [SQL Server certificate requirements](certificate-requirements.md).
+To learn more, see [Certificate requirements for SQL Server](certificate-requirements.md).
 
-> [!NOTE]
+> [!NOTE]  
 > SQL Server Configuration Manager only displays certificates imported through the registry if the thumbprint in the registry is an exact match for the thumbprint of the certificate, including case sensitivity. If the thumbprint doesn't match the case exactly, the certificate isn't displayed in SQL Server Configuration Manager, but the certificate is still loaded and used by SQL Server.
 
 ## Next step

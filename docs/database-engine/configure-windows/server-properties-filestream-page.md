@@ -3,7 +3,7 @@ title: "SQL Server Properties (FILESTREAM Page)"
 description: Get acquainted with FILESTREAM settings in SQL Server. Learn how to turn on FILESTREAM, and see how to configure remote client access and other properties.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 09/28/2023
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual

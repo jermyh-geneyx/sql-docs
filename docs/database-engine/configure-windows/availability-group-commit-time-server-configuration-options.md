@@ -4,7 +4,7 @@ description: "Learn to modify the commit time for an availability group replica 
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 05/19/2025
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
@@ -15,14 +15,14 @@ ms.custom:
 
 [!INCLUDE [SQL Server](../../includes/applies-to-version/_ss2025.md)]
 
-Use the `availability group commit time` server configuration option to specify the group commit time, in milliseconds, for an [Always On availability group replica](../../database-engine/availability-groups/windows/overview-of-always-on-availability-groups-sql-server.md).
+Use the `availability group commit time` server configuration option to specify the group commit time, in milliseconds, for an [Always On availability group](../availability-groups/windows/overview-of-always-on-availability-groups-sql-server.md).
 
 > [!NOTE]  
 > The `availability group commit time` server configuration option is available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)].
 
 ## Overview
 
-Changes made inside a transaction aren't visible outside of the transaction until the transaction is committed. The definition of a committed transaction for an Always On availability group involves all synchronous secondary replicas in the availability group acknowledging the hardened commit. After a commit is issued on the primary replica, that fact needs to be propagated quickly across the network to all secondary replicas. 
+Changes made inside a transaction aren't visible outside of the transaction until the transaction is committed. The definition of a committed transaction for an Always On availability group involves all synchronous secondary replicas in the availability group acknowledging the hardened commit. After a commit is issued on the primary replica, that fact needs to be propagated quickly across the network to all secondary replicas.
 
 Since SQL Server relies on [write-ahead transaction logging](../../relational-databases/sql-server-transaction-log-architecture-and-management-guide.md#WAL) to maintain ACID properties of a transaction, changes are first recorded to the transaction log in the form of [log blocks](../../relational-databases/sql-server-transaction-log-architecture-and-management-guide.md#log-blocks). These log blocks are sent, and then applied, to the transaction log of all the secondary replicas.
 
@@ -41,9 +41,9 @@ For business scenarios where the default value of 10 milliseconds is too long, y
 
 - The default value of `0` indicates that [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] uses the default value of 10 ms for the availability group commit time.
 
-- The `availability group commit time` server configuration option is available when [show advanced options](../../database-engine/configure-windows/show-advanced-options-server-configuration-option.md) is set to `1`.
+- The `availability group commit time` server configuration option is available when [show advanced options](show-advanced-options-server-configuration-option.md) is set to `1`.
 
 ## Related content
 
-- [Server configuration options](../../database-engine/configure-windows/server-configuration-options-sql-server.md)
+- [Server configuration options](server-configuration-options-sql-server.md)
 - [sp_configure (Transact-SQL)](../../relational-databases/system-stored-procedures/sp-configure-transact-sql.md)

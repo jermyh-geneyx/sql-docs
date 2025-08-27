@@ -3,7 +3,7 @@ title: "Server Network Configuration"
 description: Become familiar with SQL Server network configuration tasks. View information on enabling protocols, configuring encryption, registering SPNs, and other actions.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 07/04/2025
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
@@ -26,7 +26,7 @@ Network configuration for [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.
 
 ## Protocols
 
-Use [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Configuration Manager to enable or disable the protocols used by [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], and to configure the options available for the protocols. More than one protocol can be enabled. You must enable all protocols that you want clients to use. All protocols have equal access to the server. For information about which protocols you should use, see [Enable or disable a server network protocol](enable-or-disable-a-server-network-protocol.md) and [Default SQL Server Network Protocol Configuration](default-sql-server-network-protocol-configuration.md).
+Use [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Configuration Manager to enable or disable the protocols used by [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], and to configure the options available for the protocols. More than one protocol can be enabled. You must enable all protocols that you want clients to use. All protocols have equal access to the server. For information about which protocols you should use, see [Enable or disable a server network protocol](enable-or-disable-a-server-network-protocol.md) and [Default SQL Server network protocol configuration](default-sql-server-network-protocol-configuration.md).
 
 ### Change a port
 
@@ -36,11 +36,11 @@ When configured for dynamic ports, the port used by [!INCLUDE [ssNoVersion](../.
 
 ### Change a named pipe
 
-You can configure the named pipe protocol to listen on a designated named pipe. By default, the default instance of [!INCLUDE [ssDEnoversion](../../includes/ssdenoversion-md.md)] listens on pipe \\\\.\pipe\sql\query for the default instance and \\\\.\pipe\MSSQL$*\<instancename>*\sql\query for a named instance. The [!INCLUDE [ssDE](../../includes/ssde-md.md)] can only listen on one named pipe, but you can change the pipe to another name if you wish. The [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Browser service helps clients identify the pipe when they connect. For more information, see [Configure a Server to Listen on an Alternate Pipe](configure-a-server-to-listen-on-an-alternate-pipe.md).
+You can configure the named pipe protocol to listen on a designated named pipe. By default, the default instance of [!INCLUDE [ssDEnoversion](../../includes/ssdenoversion-md.md)] listens on pipe \\\\.\pipe\sql\query for the default instance and \\\\.\pipe\MSSQL$*\<instancename>*\sql\query for a named instance. The [!INCLUDE [ssDE](../../includes/ssde-md.md)] can only listen on one named pipe, but you can change the pipe to another name if you wish. The [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Browser service helps clients identify the pipe when they connect. For more information, see [Configure a server to listen on an alternate pipe](configure-a-server-to-listen-on-an-alternate-pipe.md).
 
 ## Force encryption
 
-The [!INCLUDE [ssDE](../../includes/ssde-md.md)] can be configured to require encryption when communicating with client applications. For more information, see [Configure SQL Server Database Engine for encrypting connections](configure-sql-server-encryption.md).
+The [!INCLUDE [ssDE](../../includes/ssde-md.md)] can be configured to require encryption when communicating with client applications. For more information, see [Encrypt connections to SQL Server by importing a certificate](configure-sql-server-encryption.md).
 
 ## Extended protection for authentication
 
@@ -62,9 +62,9 @@ The [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Browser service r
 
 ## Hide SQL Server
 
-When running, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Browser responds to queries, with the name, version, and connection information for each installed instance. For [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], the **HideInstance** flag, indicates that [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Browser shouldn't respond with information about this server instance. Client applications can still connect, but they must know the required connection information. For more information, see [Hide an Instance of SQL Server Database Engine](hide-an-instance-of-sql-server-database-engine.md).
+When running, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Browser responds to queries, with the name, version, and connection information for each installed instance. For [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], the **HideInstance** flag, indicates that [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Browser shouldn't respond with information about this server instance. Client applications can still connect, but they must know the required connection information. For more information, see [Hide an instance of SQL Server Database Engine](hide-an-instance-of-sql-server-database-engine.md).
 
 ## Related content
 
-- [Client Network Configuration](client-network-configuration.md)
+- [Client network configuration](client-network-configuration.md)
 - [Manage the Database Engine services](manage-the-database-engine-services.md)

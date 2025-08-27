@@ -36,8 +36,9 @@ The following table lists the possible values for the remote admin connections o
 The following example enables the DAC from a remote computer:
 
 ```sql
-EXEC sp_configure 'remote admin connections', 1;
+EXECUTE sp_configure 'remote admin connections', 1;
 GO
+
 RECONFIGURE;
 GO
 ```

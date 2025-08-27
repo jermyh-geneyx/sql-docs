@@ -32,7 +32,7 @@ Execute permissions on `sp_configure` with no parameters or with only the first 
 
 1. Select the **Advanced** tab.
 
-1. In the `default language` box, choose the language in which [!INCLUDE [msCoName](../../includes/msconame-md.md)] [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] should display system messages.
+1. In the `default language` box, choose the language in which [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] should display system messages.
 
    The default language is English.
 

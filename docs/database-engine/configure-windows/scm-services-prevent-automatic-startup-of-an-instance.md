@@ -1,9 +1,9 @@
 ---
-title: "Prevent automatic startup of an instance (SQL Server Configuration Manager)"
+title: "Prevent Automatic Startup of an Instance (SQL Server Configuration Manager)"
 description: Find out how to prevent an instance of SQL Server from starting automatically. See how to set the start mode to manual to accomplish this task.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 07/26/2024
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: how-to
@@ -21,9 +21,11 @@ helpviewer_keywords:
 
 This article describes how to prevent an instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] from starting automatically in [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)] by using SQL Server Configuration Manager. [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] is normally configured to start automatically. You can change that by setting the start mode for the instance to manual.
 
-## <a id="SSMSProcedure"></a> Use SQL Server Configuration Manager
+<a id="SSMSProcedure"></a>
 
-#### <a id="to-prevent-automatic-startup-of-an-instance-of-sql-server"></a> Prevent automatic startup of an instance of SQL Server
+## Use SQL Server Configuration Manager
+
+#### Prevent automatic startup of an instance of SQL Server
 
 1. On the **Start** menu, point to **All Programs**, point to [!INCLUDE [ssCurrentUI](../../includes/sscurrentui-md.md)], point to **Configuration Tools**, and then select **SQL Server Configuration Manager**.
 

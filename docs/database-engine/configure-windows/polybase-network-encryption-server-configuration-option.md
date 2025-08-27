@@ -4,7 +4,7 @@ description: Set the configuration option for PolyBase network encryption in SQL
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: hudequei, randolphwest
-ms.date: 08/09/2025
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: polybase
 ms.topic: conceptual
@@ -43,12 +43,15 @@ This change takes effect immediately.
 The following example enables this setting.
 
 ```sql
-EXEC sp_configure 'show advanced options', 1;
+EXECUTE sp_configure 'show advanced options', 1;
 GO
+
 RECONFIGURE;
 GO
-EXEC sp_configure 'polybase network encryption', 1;
+
+EXECUTE sp_configure 'polybase network encryption', 1;
 GO
+
 RECONFIGURE;
 GO
 ```
@@ -58,12 +61,15 @@ GO
 The following example disables this setting.
 
 ```sql
-EXEC sp_configure 'show advanced options', 1;
+EXECUTE sp_configure 'show advanced options', 1;
 GO
+
 RECONFIGURE;
 GO
-EXEC sp_configure 'polybase network encryption', 0;
+
+EXECUTE sp_configure 'polybase network encryption', 0;
 GO
+
 RECONFIGURE;
 GO
 ```
@@ -89,7 +95,8 @@ After the certificate is installed on the server, update the SQL Server instance
    WHERE [key] = '<CertificateSerialNumber>'
    AND [id] = `<Server Name>`
    ```
-1. Enable PolyBase Network Encryption through sp_configure.
+
+1. Enable PolyBase Network Encryption through `sp_configure`.
 
 1. Restart the SQL Services.
 
@@ -101,8 +108,9 @@ Requires `ALTER SETTINGS` server-level permission or membership in the **sysadmi
 
 ## SQL Server 2025 Preview RC 0 known issue
 
-[!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] RC 0 has the following known PolyBase issues: 
-- PolyBase services on [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] won't work unless there is a trusted certificate, or if PolyBase network encryption is set to `0`.
+[!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] RC 0 has the following known PolyBase issues:
+
+- PolyBase services on [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] won't work unless there's a trusted certificate, or if PolyBase network encryption is set to `0`.
 - SQL Server on Linux currently only supports PolyBase network encryption set to `0`.
 
 ## Related content
@@ -110,4 +118,4 @@ Requires `ALTER SETTINGS` server-level permission or membership in the **sysadmi
 - [Exporting data](../../relational-databases/polybase/polybase-configure-hadoop.md#exporting-data)
 - [Data virtualization with PolyBase in SQL Server](../../relational-databases/polybase/polybase-guide.md)
 - [CREATE EXTERNAL TABLE AS SELECT (CETAS) (Transact-SQL)](../../t-sql/statements/create-external-table-as-select-transact-sql.md)
-- [PolyBase Errors and Possible Solution](../../relational-databases/polybase/polybase-errors-and-possible-solutions.md)
+- [PolyBase errors and possible solutions](../../relational-databases/polybase/polybase-errors-and-possible-solutions.md)

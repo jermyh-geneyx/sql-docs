@@ -3,7 +3,7 @@ title: Create or Delete a Server Alias for Use by a Client
 description: Find out how to create and delete an alias, an alternate name you can use when you connect to an instance of SQL Server. Learn about the benefits of aliases.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 02/19/2025
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: how-to
@@ -21,7 +21,7 @@ This article describes how to create or delete a server alias in [!INCLUDE [ssno
 
 An alias is an alternate name that can be used to make a connection. The alias encapsulates the required elements of a connection string, and exposes them with a name chosen by the user. Aliases can be used with any client application. By creating server aliases, your client computer can connect to multiple servers using different network protocols, without having to specify the protocol and connection details for each one. In addition, you can also have different network protocols enabled all the time, even if you only need to use them occasionally. If you have configured the server to listen on a non-default port number or named pipe, and you have disabled the SQL Server Browser service, create an alias that specifies the new port number or named pipe.
 
-> [!NOTE]
+> [!NOTE]  
 > Aliases for SQL Server are a client side configuration. Each client computer that uses the alias must have an identical alias configuration, and SQL Server Configuration Manager isn't the only tool that can be used to create or manage aliases.
 >
 > [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions don't support creating aliases using SQL Server Configuration Manager. To create an alias for [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions, use the [SQL Server Client Network Utility tool](/previous-versions/windows/desktop/odbc/dn170508(v=vs.85)).

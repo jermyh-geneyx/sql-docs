@@ -3,7 +3,7 @@ title: "SQL Server Browser Service (Database Engine and SSAS)"
 description: Learn about SQL Server Browser. This service listens for requests for SQL Server resources and provides information about installed SQL Server instances.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 07/04/2025
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
@@ -103,7 +103,7 @@ The SQL Server Browser service is uninstalled when the last instance of [!INCLUD
 
 SQL Server Browser can be started from the command prompt for troubleshooting by using the `-c` switch:
 
-```cmd
+```console
 <drive>\<path>\sqlbrowser.exe -c
 ```
 

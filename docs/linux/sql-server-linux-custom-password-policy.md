@@ -113,7 +113,7 @@ Run the following **mssql-conf** commands to set each policy configuration prope
 1. Set the minimum password length to 14 characters, adhering to the complexity requirements outlined in the [Password Policy](../relational-databases/security/password-policy.md).
 
    ```bash
-   sudo /opt/mssql/bin/mssql-conf set passwordpolicy.minimumpasswordlength 14
+   sudo /opt/mssql/bin/mssql-conf set passwordpolicy.passwordminimumlength 14
    ```
 
 1. Set the minimum password age to one day. Users can change their password after one day.

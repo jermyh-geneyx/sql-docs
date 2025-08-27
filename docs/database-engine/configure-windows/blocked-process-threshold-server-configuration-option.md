@@ -32,13 +32,13 @@ The setting takes effect immediately without a server stop and restart.
 The following example sets the `blocked process threshold` to `20` seconds, generating a blocked process report for each task that is blocked.
 
 ```sql
-sp_configure 'show advanced options', 1;
+EXECUTE sp_configure 'show advanced options', 1;
 GO
 
 RECONFIGURE;
 GO
 
-sp_configure 'blocked process threshold', 20;
+EXECUTE sp_configure 'blocked process threshold', 20;
 GO
 
 RECONFIGURE;

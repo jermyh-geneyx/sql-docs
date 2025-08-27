@@ -3,7 +3,7 @@ title: Change Server Authentication Mode
 description: Learn how to change the server authentication mode in SQL Server. You can use either SQL Server Management Studio or Transact-SQL for this task.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 05/19/2025
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: how-to
@@ -76,9 +76,12 @@ The permissions required to change the authentication mode are [sysadmin](../../
    USE [master];
    GO
 
-   EXECUTE xp_instance_regwrite N'HKEY_LOCAL_MACHINE',
+   EXECUTE xp_instance_regwrite
+       N'HKEY_LOCAL_MACHINE',
        N'Software\Microsoft\MSSQLServer\MSSQLServer',
-       N'LoginMode', REG_DWORD, 1;
+       N'LoginMode',
+       REG_DWORD,
+       1;
    GO
    ```
 
@@ -110,15 +113,18 @@ The permissions required to change the authentication mode are [sysadmin](../../
 1. Change server authentication to mixed mode:
 
    ```sql
-   EXECUTE xp_instance_regwrite N'HKEY_LOCAL_MACHINE',
+   EXECUTE xp_instance_regwrite
+       N'HKEY_LOCAL_MACHINE',
        N'Software\Microsoft\MSSQLServer\MSSQLServer',
-       N'LoginMode', REG_DWORD, 2;
+       N'LoginMode',
+       REG_DWORD,
+       2;
    GO
    ```
 
 ## Related content
 
 - [Strong Passwords](../../relational-databases/security/strong-passwords.md)
-- [Security Considerations for a SQL Server Installation](../../sql-server/install/security-considerations-for-a-sql-server-installation.md)
+- [Security considerations for a SQL Server installation](../../sql-server/install/security-considerations-for-a-sql-server-installation.md)
 - [ALTER LOGIN (Transact-SQL)](../../t-sql/statements/alter-login-transact-sql.md)
 - [Connect to SQL Server when system administrators are locked out](connect-to-sql-server-when-system-administrators-are-locked-out.md)

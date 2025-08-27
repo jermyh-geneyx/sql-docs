@@ -12,7 +12,7 @@ ms.topic: conceptual
 
 [!INCLUDE [SQL Server](../../includes/applies-to-version/sqlserver.md)]
 
-Introduced in [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)], the buffer pool extension provides the seamless integration of a nonvolatile random access memory (that is, solid-state drive) extension to the [!INCLUDE [ssDE](../../includes/ssde-md.md)] buffer pool to significantly improve I/O throughput. The buffer pool extension isn't available in every [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] edition. For more information, see [Features Supported by the Editions of SQL Server 2016](~/sql-server/editions-and-supported-features-for-sql-server-2016.md).
+Introduced in [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)], the buffer pool extension provides the seamless integration of a nonvolatile random access memory (that is, solid-state drive) extension to the [!INCLUDE [ssDE](../../includes/ssde-md.md)] buffer pool to significantly improve I/O throughput. The buffer pool extension isn't available in every [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] edition. For more information, see [Editions and supported features of SQL Server 2022](../../sql-server/editions-and-components-of-sql-server-2022.md).
 
 ## Benefits of the buffer pool extension
 
@@ -59,9 +59,9 @@ When enabled, the buffer pool extension specifies the size and file path of the 
 
 ## Capacity limitations
 
-SQL Server Enterprise edition allows a maximum buffer pool extension size of 32 times the value of `max server memory`.
+SQL Server Enterprise edition allows a maximum buffer pool extension size of 32 times the value of `max server memory (MB)`.
 
-SQL Server Standard edition allows a maximum buffer pool extension size of four times the value of `max server memory`.
+SQL Server Standard edition allows a maximum buffer pool extension size of four times the value of `max server memory (MB)`.
 
 ## Best practices
 
@@ -69,7 +69,7 @@ We recommend that you follow these best practices.
 
 - After you enable buffer pool extension for the first time, you should restart the SQL Server instance to get the maximum performance benefits.
 
-- Set the buffer pool extension so the ratio between the size of the physical memory (`max server memory`) and the size of the buffer pool extension of 1:16 or less. A lower ratio in the range of 1:4 to 1:8 might be optimal. For information about setting the `max server memory` option, see [Server memory configuration options](server-memory-server-configuration-options.md).
+- Set the buffer pool extension so the ratio between the size of the physical memory (`max server memory (MB)`) and the size of the buffer pool extension of 1:16 or less. A lower ratio in the range of 1:4 to 1:8 might be optimal. For information about setting the `max server memory (MB)` option, see [Server memory configuration options](server-memory-server-configuration-options.md).
 
 - Test the buffer pool extension thoroughly before implementing in a production environment. Once in production, avoid making configuration changes to the file or turning off the feature. These activities might have a negative effect on server performance because the buffer pool is significantly reduced in size when the feature is disabled. When disabled, the memory used to support the feature isn't reclaimed until the instance of SQL Server is restarted. However, if the feature is re-enabled, the memory is reused without restarting the instance.
 

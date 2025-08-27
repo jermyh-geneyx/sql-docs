@@ -398,7 +398,7 @@ Table hints other than `INDEX`, `FORCESCAN`, and `FORCESEEK` are disallowed as q
 
 **Applies to**: [!INCLUDE [fabric-dw](../../includes/fabric-dw.md)] in [!INCLUDE [fabric](../../includes/fabric.md)]
 
-Use the `TIMESTAMP` syntax in the `OPTION` clause to query data as it existed in the past, part of the time travel feature in Synapse Data Warehouse in Microsoft Fabric.
+Use the `TIMESTAMP` syntax in the `OPTION` clause to query data as it existed in the past, part of the time travel feature in Microsoft Fabric Data Warehouse.
 
 Specify the *point_in_time* in the format `yyyy-MM-ddTHH:mm:ss[.fff]` to return data as it appeared at that time. The time zone is always in UTC. Use the `CONVERT` syntax for the necessary datetime format with [style 126](../functions/cast-and-convert-transact-sql.md?view=fabric&preserve-view=true#date-and-time-styles).
 

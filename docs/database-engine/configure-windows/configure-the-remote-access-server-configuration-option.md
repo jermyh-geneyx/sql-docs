@@ -3,7 +3,7 @@ title: "Server Configuration: remote access"
 description: Learn about alternatives to the deprecated remote access option. View other sources for troubleshooting issues with SQL Server connections.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 06/05/2025
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
@@ -16,7 +16,7 @@ helpviewer_keywords:
 
 This article is about the `remote access` configuration option, which is a deprecated [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] to [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] communication feature.
 
-For information about linked servers, see [Linked Servers (Database Engine)](../../relational-databases/linked-servers/linked-servers-database-engine.md).
+For information about linked servers, see [Linked servers (Database Engine)](../../relational-databases/linked-servers/linked-servers-database-engine.md).
 
 This option affects servers that are added by using [sp_addserver](../../relational-databases/system-stored-procedures/sp-addserver-transact-sql.md) and [sp_addlinkedserver](../../relational-databases/system-stored-procedures/sp-addlinkedserver-transact-sql.md). You should leave `remote access` enabled (the default) if you use [linked servers](../../relational-databases/linked-servers/linked-servers-database-engine.md).
 
@@ -78,6 +78,7 @@ To execute `sp_configure` with both parameters to change a configuration option,
 ```sql
 EXECUTE sp_configure 'remote access', 0;
 GO
+
 RECONFIGURE;
 GO
 ```
@@ -86,7 +87,7 @@ For more information, see [Server configuration options](server-configuration-op
 
 ## Related content
 
-- [Linked Servers (Database Engine)](../../relational-databases/linked-servers/linked-servers-database-engine.md)
+- [Linked servers (Database Engine)](../../relational-databases/linked-servers/linked-servers-database-engine.md)
 - [RECONFIGURE (Transact-SQL)](../../t-sql/language-elements/reconfigure-transact-sql.md)
 - [Server configuration options](server-configuration-options-sql-server.md)
 - [sp_configure (Transact-SQL)](../../relational-databases/system-stored-procedures/sp-configure-transact-sql.md)

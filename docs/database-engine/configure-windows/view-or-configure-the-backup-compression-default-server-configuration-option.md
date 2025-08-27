@@ -1,9 +1,9 @@
 ---
-title: "Server configuration: backup compression default"
+title: "Server Configuration: backup compression default"
 description: "Find out about the backup compression default option. See how it determines whether SQL Server creates compressed backups by default, and learn how to set it."
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 10/18/2024
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
@@ -15,7 +15,7 @@ helpviewer_keywords:
 
 [!INCLUDE [SQL Server](../../includes/applies-to-version/sqlserver.md)]
 
-This article describes how to view or configure the `backup compression default` server configuration option in [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)] by using [!INCLUDE [ssManStudioFull](../../includes/ssmanstudiofull-md.md)] or [!INCLUDE [tsql](../../includes/tsql-md.md)]. 
+This article describes how to view or configure the `backup compression default` server configuration option in [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)] by using [!INCLUDE [ssManStudioFull](../../includes/ssmanstudiofull-md.md)] or [!INCLUDE [tsql](../../includes/tsql-md.md)].
 
 The `backup compression default` option determines whether the server instance creates compressed backups.
 
@@ -23,7 +23,7 @@ The `backup compression default` option determines whether the server instance c
 
 Backup compression isn't available in all editions of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. For more information, see [Editions and supported features of SQL Server 2022](../../sql-server/editions-and-components-of-sql-server-2022.md).
 
-By default, compression significantly increases CPU usage, and the additional CPU consumed by the compression process might adversely affect concurrent operations. Therefore, you might want to create low-priority compressed backups in a session whose CPU usage is limited by [Resource Governor](../../relational-databases/resource-governor/resource-governor.md). For more information, see [Use Resource Governor to Limit CPU Usage by Backup Compression](../../relational-databases/backup-restore/use-resource-governor-to-limit-cpu-usage-by-backup-compression-transact-sql.md).
+By default, compression significantly increases CPU usage, and the additional CPU consumed by the compression process might adversely affect concurrent operations. Therefore, you might want to create low-priority compressed backups in a session whose CPU usage is limited by [Resource governor](../../relational-databases/resource-governor/resource-governor.md). For more information, see [Use Resource Governor to Limit CPU Usage by Backup Compression](../../relational-databases/backup-restore/use-resource-governor-to-limit-cpu-usage-by-backup-compression-transact-sql.md).
 
 ## Recommendations
 
@@ -32,10 +32,11 @@ When you're creating an individual backup, configuring a log shipping configurat
 Backup compression is supported for both disk backup devices and tape backup devices.
 
 The `backup compression default` option accepts the following values:
-- `0` (off) - The server instance takes uncompressed backups. (Default)
-- `1` (on) - The server instance takes compressed backups. 
 
-If you enable backup compression default, you can then use [backup compression algorithm](view-or-configure-the-backup-compression-algorithm-server-configuration-option.md) to specify the compression algorithm used for backups. 
+- `0` (off) - The server instance takes uncompressed backups. (Default)
+- `1` (on) - The server instance takes compressed backups.
+
+If you enable backup compression default, you can then use [backup compression algorithm](view-or-configure-the-backup-compression-algorithm-server-configuration-option.md) to specify the compression algorithm used for backups.
 
 ## Permissions
 
