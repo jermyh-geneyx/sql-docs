@@ -7,8 +7,12 @@ ms.reviewer: mathoma, randolphwest
 ms.date: 05/21/2024
 ms.service: azure-sql-managed-instance
 ms.subservice: deployment-configuration
-ms.custom: ignite-2023, devx-track-azurecli, devx-track-azurepowershell
 ms.topic: how-to
+ms.custom:
+  - ignite-2023
+  - devx-track-azurecli
+  - devx-track-azurepowershell
+  - sfi-image-nochange
 ---
 
 # Stop and start an instance - Azure SQL Managed Instance
@@ -75,7 +79,7 @@ Stopped instances don't get billed for vCores and the SQL license, they're charg
 
 ### Azure Hybrid Benefit
 
-The [Azure Hybrid Benefit (AHB)](../azure-hybrid-benefit.md) is applied per resource. If your instance is using the Azure Hybrid Benefit to save on licensing costs, to apply that benefit to another resource when the instance is in a stopped state, you must first disable AHB on the instance, and then stop the instance. Similarly, after you restart the instance, you have to reenable AHB on it to apply the licensing benefit.
+The [Azure Hybrid Benefit (AHB)](../azure-hybrid-benefit.md) is applied per resource. If your instance is using the Azure Hybrid Benefit for the discount on licensing costs, to apply that benefit to another resource when the instance is in a stopped state, you must first disable AHB on the instance, and then stop the instance. Similarly, after you restart the instance, you have to reenable AHB on it to apply the licensing benefit.
 
 ### Reservation pricing
 

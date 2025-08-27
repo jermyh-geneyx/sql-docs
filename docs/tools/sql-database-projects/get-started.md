@@ -10,9 +10,10 @@ ms.subservice: sql-database-projects
 ms.topic: get-started
 ms.collection:
   - data-tools
+zone_pivot_groups: sq1-sql-projects-tools
 ms.custom:
   - ignite-2024
-zone_pivot_groups: sq1-sql-projects-tools
+  - sfi-ropc-nochange
 ---
 
 # Get started with SQL database projects
@@ -130,7 +131,7 @@ With the .NET templates for Microsoft.Build.Sql projects installed, you can crea
 Use the `-h` option to see all available options.
 
 ```bash
-# install Microsoft.Build.Sql.Templates
+# create a new SQL database project
 dotnet new sqlproj -n MyDatabaseProject
 ```
 

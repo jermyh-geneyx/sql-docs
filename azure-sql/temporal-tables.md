@@ -8,10 +8,11 @@ ms.date: 06/13/2025
 ms.service: azure-sql
 ms.subservice: performance
 ms.topic: how-to
+monikerRange: "=azuresql || =azuresql-db || =azuresql-mi || =fabricsql"
 ms.custom:
   - sqldbrb=2
   - ignite-2024
-monikerRange: "=azuresql || =azuresql-db || =azuresql-mi || =fabricsql"
+  - sfi-image-nochange
 ---
 # Getting started with temporal tables
 
@@ -34,7 +35,7 @@ Fortunately, you don't need to put any effort in your app to maintain this activ
 Depending on whether you're starting new development or upgrading existing application, you'll either create temporal tables or modify existing ones by adding temporal attributes. In general case, your scenario can be a mix of these two options. Perform these action using [SQL Server Management Studio](/sql/ssms/download-sql-server-management-studio-ssms) (SSMS), [SQL Server Data Tools](/sql/ssdt/download-sql-server-data-tools-ssdt) (SSDT), the [mssql extension](https://aka.ms/mssql-marketplace) for [Visual Studio Code](https://code.visualstudio.com/docs), or any other Transact-SQL development tool.
 
 > [!IMPORTANT]
-> It is recommended that you always use the latest version of SQL Server Management Studio to remain synchronized with updates to Azure SQL Database and Azure SQL Managed Instance. [Update SQL Server Management Studio](/sql/ssms/download-sql-server-management-studio-ssms).
+> Always use the latest version of [SQL Server Management Studio](/sql/ssms/download-sql-server-management-studio-ssms).
 
 ### Create new table
 
@@ -115,7 +116,7 @@ UPDATE WebsiteUserInfo  SET [PagesVisited] = 5
 WHERE [UserID] = 1;
 ```
 
-It's important to notice that the update query doesn't need to know the exact time when the actual operation occurred nor how historical data will be preserved for future analysis. Both aspects are automatically handled by Azure SQL Database and Azure SQL Managed Instance. The following diagram illustrates how history data is being generated on every update.
+It's important to notice that the update query doesn't need to know the exact time when the actual operation occurred nor how historical data will be preserved for future analysis. Both aspects are automatically handled. The following diagram illustrates how history data is being generated on every update.
 
 :::image type="content" source="media/temporal-tables/temporal-table-architecture.png" alt-text="Diagram of the temporal table architecture." lightbox="media/temporal-tables/temporal-table-architecture.png":::
 
@@ -197,7 +198,7 @@ Alternatively, use latest [SSDT](/sql/ssdt/download-sql-server-data-tools-ssdt) 
 
 ## Control retention of historical data
 
-With system-versioned temporal tables, the history table might increase the database size more than regular tables. A large and ever-growing history table can become an issue both due to pure storage costs as well as imposing a performance tax on temporal querying. Hence, developing a data retention policy for managing data in the history table is an important aspect of planning and managing the lifecycle of every temporal table. With Azure SQL Database and Azure SQL Managed Instance, you have the following approaches for managing historical data in the temporal table:
+With system-versioned temporal tables, the history table might increase the database size more than regular tables. A large and ever-growing history table can become an issue both due to pure storage costs as well as imposing a performance tax on temporal querying. Hence, developing a data retention policy for managing data in the history table is an important aspect of planning and managing the lifecycle of every temporal table. Consider the following approaches for managing historical data in the temporal table:
 
 - [Table Partitioning](/sql/relational-databases/tables/manage-retention-of-historical-data-in-system-versioned-temporal-tables#using-table-partitioning-approach)
 - [Custom Cleanup Script](/sql/relational-databases/tables/manage-retention-of-historical-data-in-system-versioned-temporal-tables#using-custom-cleanup-script-approach)

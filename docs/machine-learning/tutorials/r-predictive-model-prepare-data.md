@@ -10,6 +10,7 @@ ms.service: sql
 ms.subservice: machine-learning
 ms.topic: tutorial
 monikerRange: ">=sql-server-2016||>=sql-server-linux-ver15||=azuresqldb-mi-current"
+ms.custom: sfi-ropc-blocked
 ---
 # Tutorial: Prepare data to train a predictive model in R with SQL machine learning
 [!INCLUDE [SQL Server 2016 SQL MI](../../includes/applies-to-version/sqlserver2016-asdbmi.md)]
@@ -70,7 +71,7 @@ str(rentaldata)
 
 You should see results similar to the following.
 
-```results
+```output
    Year  Month  Day  RentalCount  WeekDay  Holiday  Snow
 1  2014    1     20      445         2        1      0
 2  2014    2     13       40         5        0      0
@@ -109,7 +110,7 @@ str(rentaldata);
 
 You should see results similar to the following.
 
-```results
+```output
 data.frame':      453 obs. of  7 variables:
 $ Year       : int  2014 2014 2013 2014 2014 2015 2013 2014 2013 2015 ...
 $ Month      : num  1 2 3 3 4 2 4 3 4 3 ...

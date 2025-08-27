@@ -1,15 +1,16 @@
 ---
-title: "Ledger overview"
+title: "Ledger Overview"
 description: Learn the basics of the ledger feature.
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: mathoma
-ms.date: 11/14/2023
+ms.date: 08/07/2025
 ms.service: azure-sql-database
 ms.subservice: security
-ms.custom: ignite-2023
 ms.topic: conceptual
-monikerRange: "= azuresqldb-current||>= sql-server-ver16||>= sql-server-linux-ver16||=azuresqldb-mi-current"
+ms.custom:
+  - ignite-2023
+monikerRange: "=azuresqldb-current || >=sql-server-ver16 || >=sql-server-linux-ver16 || =azuresqldb-mi-current"
 ---
 
 # Ledger overview
@@ -48,9 +49,8 @@ Ledger provides a solution for these networks. Participants can verify the integ
 
 #### Customer success
 
-- Learn how [Lenovo is reinforcing customer trust using ledger in Azure SQL Database](https://customers.microsoft.com/story/1497685499820529889-lenovo-manufacturing-azure-SQL-database-ledger) by watching this [video](https://videos.microsoft.com/customer-stories/watch/xEenNHQerYdRyYqwdYLyXi).
-- [RTGS.global using ledger in Azure SQL Database to establish trust with banks around the world](https://customers.microsoft.com/story/1379614319255768839-rtgs-partner-professional-services-azure-sql).
-- [Qode Health Solutions secures COVID-19 vaccination records with the ledger feature in Azure SQL Database](https://customers.microsoft.com/en-us/story/1595119379301789552-qode-professional-services-azure-sql-database) 
+- Learn how [Lenovo is reinforcing customer trust using ledger in Azure SQL Database](https://videos.microsoft.com/customer-stories/watch/xEenNHQerYdRyYqwdYLyXi).
+- [Qode Health Solutions secures COVID-19 vaccination records with the ledger feature in Azure SQL Database](https://customers.microsoft.com/story/1595119379301789552-qode-professional-services-azure-sql-database) 
 
 ### Trusted off-chain storage for blockchain
 
@@ -102,8 +102,8 @@ The hash of the latest block in the database ledger is called the [database dige
 When a block is formed, its associated database digest is published and stored outside the database in tamper-proof storage. Because database digests represent the state of the database at the time that they were generated, protecting the digests from tampering is paramount. An attacker who has access to modify the digests would be able to:
 
 1. Tamper with the data in the database.
-2. Generate the hashes that represent the database with those changes.
-3. Modify the digests to represent the updated hash of the transactions in the block.
+1. Generate the hashes that represent the database with those changes.
+1. Modify the digests to represent the updated hash of the transactions in the block.
 
 Ledger provides the ability to automatically generate and store the database digests in [immutable storage](/azure/storage/blobs/immutable-storage-overview) or [Azure Confidential Ledger](/azure/confidential-ledger/index), to prevent tampering. Alternatively, users can manually generate database digests and store them in the location of their choice. Database digests are used for later verifying that the data stored in ledger tables hasn't been tampered with.
 
@@ -115,13 +115,10 @@ The [ledger verification](ledger-database-verification.md) process takes as inpu
 
 ## Related content
 
-- [What is the database ledger](ledger-database-ledger.md)
+- [What is the database ledger?](ledger-database-ledger.md)
 - [Create and use append-only ledger tables](ledger-how-to-append-only-ledger-tables.md)
 - [Create and use updatable ledger tables](ledger-how-to-updatable-ledger-tables.md)
 - [Enable automatic digest storage](ledger-how-to-enable-automatic-digest-storage.md)
 - [Configure a ledger database](ledger-how-to-configure-ledger-database.md)
 - [Verify a ledger table to detect tampering](ledger-verify-database.md)
-
-## See also
-
 - [Bringing the power of blockchain to Azure SQL Database and SQL Server with ledger | Data Exposed](/shows/data-exposed/bringing-the-power-of-blockchain-to-azure-sql-database-and-sql-server-with-ledger-data-exposed)

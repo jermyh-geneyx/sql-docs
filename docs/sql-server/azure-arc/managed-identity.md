@@ -4,7 +4,7 @@ description: Learn how to use a managed identity with SQL Server 2025.
 author: PratimDasgupta
 ms.author: prdasgu
 ms.reviewer: mikeray, randolphwest, mathoma, vanto
-ms.date: 07/06/2025
+ms.date: 07/28/2025
 ms.service: sql
 ms.topic: how-to
 ms.custom:
@@ -15,6 +15,12 @@ monikerRange: ">=sql-server-ver17"
 # Managed identity (preview) for SQL Server enabled by Azure Arc
 
 [!INCLUDE [sqlserver2025](../../includes/applies-to-version/sqlserver2025.md)]
+
+> [!div class="op_single_selector"]
+> - [SQL Server 2022](entra-authentication-setup-tutorial.md)
+> - [SQL Server 2025 Preview](managed-identity.md)
+> - [Azure SQL Database & Azure SQL Managed Instance](/azure/azure-sql/database/authentication-aad-configure)
+> - [SQL Server on Azure VMs](/azure/azure-sql/virtual-machines/windows/configure-azure-ad-authentication-for-sql-vm)
 
 This article describes how to configure a managed identity for SQL Server enabled by Azure Arc.
 
@@ -38,6 +44,7 @@ When using managed identity with SQL Server enabled by Azure Arc, consider the f
   - `Inbound connections` are logins and users connecting to SQL Server. Inbound connections can also be achieved by using [App registration](entra-authentication-setup-tutorial.md), starting in [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)].
   - `Outbound connections` are SQL Server connections to Azure resources, like backup to URL, or connecting to Azure Key Vault.
 - App Registration **can't** enable a SQL Server to make outbound connections. Outbound connections need a primary managed identity assigned to the SQL Server.
+- For SQL Server 2025 and later, we recommend that you use managed identity based Microsoft Entra setup, as detailed in this article. Alternatively, you can configure an [app registration for SQL Server 2025.](../../relational-databases/security/authentication-access/microsoft-entra-authentication-sql-server-enable-without-arc.md)
 
 ## Prerequisites
 
@@ -92,7 +99,7 @@ Add the SQL Server service account (default: `NT Service\MSSQLSERVER` or for nam
 
 ### Update the registry
 
-> [!WARNING]  
+> [!WARNING]
 > Incorrectly editing the registry can severely damage your system. Before making changes to the registry, we recommend you back up any valued data on the computer.
 
 In the registry, update the **\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SQL Server\MSSQL17.MSSQLSERVER\MSSQLServer\FederatedAuthentication** subkey.
@@ -182,9 +189,15 @@ For details, review [How to add, modify, or delete registry subkeys and values b
 
 ## Grant application permissions to the identity
 
-The system-assigned managed identity, which uses the Arc-enabled machine name, must have the following Microsoft Graph application permissions (app roles): `User.Read.All`, `GroupMember.Read.All`, and `Application.Read.All`.
+> [!IMPORTANT]
+> Only a [Privileged Role Administrator](/entra/identity/role-based-access-control/permissions-reference#privileged-role-administrator) or higher role can grant these permissions.
 
-You can use PowerShell to grant required permissions to the managed identity. Alternatively, you can [create a role-assignable group](/entra/identity/role-based-access-control/groups-create-eligible). After the group is created, assign the **Directory readers** role to the group, and add all system-assigned managed identities for your Arc-enabled machines to the group.
+The system-assigned managed identity, which uses the Arc-enabled machine name, must have the following Microsoft Graph application permissions (app roles):
+- [User.Read.All](/graph/permissions-reference#user-permissions): Allows access to Microsoft Entra user information.
+- [GroupMember.Read.All](/graph/permissions-reference#group-permissions): Allows access to Microsoft Entra group information.
+- [Application.Read.ALL](/graph/permissions-reference#application-resource-permissions): Allows access to Microsoft Entra service principal (application) information.
+
+You can use PowerShell to grant required permissions to the managed identity. Alternatively, you can [create a role-assignable group](/entra/identity/role-based-access-control/groups-create-eligible). After the group is created, assign the **Directory readers** role or the `User.Read.All`, `GroupMember.Read.All`, and `Application.Read.All` permissions to the group, and add all system-assigned managed identities for your Azure Arc-enabled machines to the group. We do not recommend using the **Directory Readers** role in your production environment. 
 
 The following PowerShell script grants the required permissions to the managed identity. Make sure this script is run on PowerShell 7.5 or a later version, and has the `Microsoft.Graph` module 2.28 or later installed.
 
@@ -259,9 +272,9 @@ Follow the steps in the [Microsoft Entra tutorial](../../sql-server/azure-arc/en
 
 Consider the following limitations when using a managed identity with SQL Server 2025:
 
-- Microsoft Entra authentication is only supported with Arc enabled SQL Server 2025 running on Windows Server.
+- The managed identity setup for Microsoft Entra authentication is only supported with Azure Arc-enabled SQL Server 2025, running on Windows Server.
+- SQL Server needs access to Azure public cloud to use [Microsoft Entra authentication](../../relational-databases/security/authentication-access/azure-ad-authentication-sql-server-overview.md).
 - Using Microsoft Entra authentication with failover cluster instances isn't supported.
-- The identity you choose to authenticate to SQL Server has to have either the **Directory Readers** role in Microsoft Entra ID or the following three Microsoft Graph application permissions (app roles): `User.Read.All`, `GroupMember.Read.All`, and `Application.Read.All`.
 - Once Microsoft Entra authentication is enabled, disabling isn't advisable. Disabling Microsoft Entra authentication forcefully by deleting registry entries can result in unpredictable behavior with SQL Server 2025.
 - Authenticating to SQL Server on Arc machines through Microsoft Entra authentication using the [FIDO2 method](/azure/active-directory/authentication/howto-authentication-passwordless-faqs) isn't currently supported.
 - [OPENROWSET BULK](../../t-sql/functions/openrowset-bulk-transact-sql.md) operations can also read the tokens folder `C:\ProgramData\AzureConnectedMachineAgent\Tokens\`. The `BULK` option requires either `ADMINISTER BULK OPERATIONS` or `ADMINISTER DATABASE BULK OPERATIONS` permissions. These permissions should be treated as equivalent to **[sysadmin](../../relational-databases/security/authentication-access/server-level-roles.md)**.
@@ -271,3 +284,4 @@ Consider the following limitations when using a managed identity with SQL Server
 - [Microsoft Entra authentication for SQL Server](../../relational-databases/security/authentication-access/azure-ad-authentication-sql-server-overview.md)
 - [What are managed identities for Azure resources?](/entra/identity/managed-identities-azure-resources/overview)
 - [Enable Microsoft Entra authentication for SQL Server on Azure VMs](/azure/azure-sql/virtual-machines/windows/configure-azure-ad-authentication-for-sql-vm)
+

@@ -44,7 +44,7 @@ Not all messages in the transmission queue are caused by errors:
 
 The **is_conversation_error** column indicates whether the message has encountered an error.
 
-For more information about **sys.transmission_queue**, see [Sys.transmission_queue (Transact-SQL)](../../relational-databases/system-catalog-views/sys-transmission-queue-transact-sql.md).
+For more information about **sys.transmission_queue**, see [sys.transmission_queue (Transact-SQL)](../../relational-databases/system-catalog-views/sys-transmission-queue-transact-sql.md).
 
 ## Service Broker SQL Trace Events
 

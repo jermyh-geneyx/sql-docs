@@ -136,6 +136,10 @@ The following diagram illustrates the architecture of [!INCLUDE [ssazurearc](../
 
 [!INCLUDE [supported-configurations](includes/supported-configurations.md)]
 
+## Settings
+
+[!INCLUDE [settings](includes/settings.md)]
+
 ## Unsupported configurations
 
 [!INCLUDE [unsupported-configurations](includes/unsupported-configurations.md)]

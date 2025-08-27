@@ -1,9 +1,9 @@
 ---
-title: "Server Properties (General Page) - SQL Server Management Studio"
+title: "Server Properties (General Page)"
 description: Become familiar with read-only properties in SQL Server. Examples include the server name, the operating system, the collation, and the SQL Server version.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 05/27/2025
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
@@ -12,50 +12,62 @@ f1_keywords:
   - "sql13.swb.serverproperties.activedirectory.f1"
   - "sql13.swb.serverproperties.prodinfo.f1"
 ---
-# Server Properties - General Page
+# Server Properties (General page)
 
 [!INCLUDE [SQL Server](../../includes/applies-to-version/sqlserver.md)]
 
-Use this page to view read-only information about your [!INCLUDE [msCoName](../../includes/msconame-md.md)] [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] installation.
+Use this page to view read-only information about your [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] installation.
 
-## Property Grid
+## Property grid
 
 View properties for the selected server, such as the server name, server operating system, or number of processors.
 
-**Name**  
+#### Name
+
 Displays the name of the server instance.
 
-**Product**  
+#### Product
+
 Displays the edition of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] currently running.
 
-**Operating System**  
-Displays the [!INCLUDE [msCoName](../../includes/msconame-md.md)] Windows operating system currently running.
+#### Operating System
 
-**Platform**  
+Displays the Windows operating system currently running.
+
+#### Platform
+
 Describes the operating system and hardware running [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
 
-**Version**  
+#### Version
+
 Displays the version number of the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] edition currently running.
 
-**Language**  
+#### Language
+
 Displays the language supported by the running instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
 
-**Memory**  
+#### Memory
+
 Lists the amount of RAM installed on the server.
 
-**Processors**  
+#### Processors
+
 Displays the number of CPUs installed.
 
-**Root Directory**  
+#### Root Directory
+
 Displays the path to the location of the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] instance, typically C:\Program Files\Microsoft SQL Server\\.
 
-**Server Collation**  
+#### Server Collation
+
 Displays the collation supported by the server. A collation specifies the particular code page and sort order to use for Unicode and non-Unicode data.
 
-**Is Clustered**  
+#### Is Clustered
+
 Displays **True** if the server instance is configured in a [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] failover cluster or **False** if the server instance isn't clustered.
 
-**Is HADR Enabled**  
+#### Is HADR Enabled
+
 Displays **True** if the [!INCLUDE [ssHADR](../../includes/sshadr-md.md)] feature is enabled or **False** if the [!INCLUDE [ssHADR](../../includes/sshadr-md.md)] feature is disabled. For information about enabling or disabling [!INCLUDE [ssHADR](../../includes/sshadr-md.md)], see [Enable or disable Always On availability group feature](../availability-groups/windows/enable-and-disable-always-on-availability-groups-sql-server.md).
 
 ## Description Field

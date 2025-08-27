@@ -12,6 +12,7 @@ ms.custom:
   - azure-sql-split
   - devx-track-azurepowershell
   - build-2024
+  - sfi-image-nochange
 ---
 # Configure a failover group for Azure SQL Managed Instance
 
@@ -36,7 +37,7 @@ Be sure to review the [limitations](#limitations) before creating your secondary
 To configure a failover group between a primary and secondary SQL Managed Instance, consider the following requirements:
 
 - The secondary managed instance must be empty, without any user databases.
-- The two instances need to be the same service tier, and have the same storage size. While not required, it's strongly recommended that both instances have equal compute sizes to ensure the secondary instance can sustainably process changes replicated from the primary instance, including during periods of peak activity.
+- The configuration of your primary and secondary instance should be the same to ensure the secondary instance can sustainably process changes replicated from the primary instance, including during periods of peak activity. This includes the compute size, storage size, and service tier.
 - The IP [address range](#create-virtual-network) for the virtual network of the primary instance must not overlap with the address range of the virtual network for the secondary managed instance, or any other virtual network peered with either the primary or secondary virtual network.
 - Both instances must be in the same DNS zone. When you create your secondary managed instance, you must specify the primary instance's DNS zone ID. If you don't, the zone ID is generated as a random string when the first instance is created in each virtual network and the same ID is assigned to all other instances in the same subnet. Once assigned, the DNS zone can't be modified.
 - Network Security Groups (NSG) rules for the subnets of both instances must have open inbound and outbound TCP connections for port 5022 and port range 11000-11999 to facilitate communication between the two instances.
@@ -384,7 +385,9 @@ You can create a failover group between SQL Managed Instances in two different s
 > [!IMPORTANT]  
 > Creating a failover group between two instances in different resource groups or subscriptions is only supported with Azure PowerShell, or the REST API, and not the Azure portal or the Azure CLI.
 
-## <a name="preventing-the-loss-of-critical-data"></a> Prevent loss of critical data
+<a name="preventing-the-loss-of-critical-data"></a>
+
+## Prevent loss of critical data
 
 <!--
 There is some overlap in the following content, be sure to update all that's necessary:  
@@ -394,8 +397,10 @@ There is some overlap in the following content, be sure to update all that's nec
 
 Due to the high latency of wide area networks, geo-replication uses an asynchronous replication mechanism. Asynchronous replication makes the possibility of data loss unavoidable if the primary fails. To protect critical transactions from data loss, an application developer can call the [sp_wait_for_database_copy_sync](/sql/relational-databases/system-stored-procedures/sp-wait-for-database-copy-sync-transact-sql) stored procedure immediately after committing the transaction. Calling `sp_wait_for_database_copy_sync` blocks the calling thread until the last committed transaction has been transmitted and hardened in the transaction log of the secondary database. However, it doesn't wait for the transmitted transactions to be replayed (redone) on the secondary. `sp_wait_for_database_copy_sync` is scoped to a specific geo-replication link. Any user with the connection rights to the primary database can call this procedure.
 
+To prevent data loss during user-initiated, planned geo-failover, replication automatically and temporarily changes to synchronous replication, then performs a failover. Replication then returns to asynchronous mode after the geo-failover is complete.
+
 > [!NOTE]  
-> `sp_wait_for_database_copy_sync` prevents data loss after geo-failover for specific transactions, but does not guarantee full synchronization for read access. The delay caused by a `sp_wait_for_database_copy_sync` procedure call can be significant and depends on the size of the not yet transmitted transaction log on the primary at the time of the call.
+> `sp_wait_for_database_copy_sync` prevents data loss after geo-failover for specific transactions, but doesn't guarantee full synchronization for read access. The delay caused by a `sp_wait_for_database_copy_sync` procedure call can be significant and depends on the size of the not yet transmitted transaction log on the primary at the time of the call.
 
 ## Change the secondary region
 
@@ -468,13 +473,17 @@ This section is duplicated in /managed-instance/failover-group-sql-mi.md.. Pleas
 
 The configuration of your primary and secondary instance should be the same. This includes the compute size, storage size, and service tier. If you need to change the configuration of your failover group, you can do so by scaling each instance to the same configuration accordingly. 
 
-You can scale the primary and secondary instance up or down to a different compute size within the same service tier or to a different service tier. Consider the following:
+To avoid problems from a lower service tier or under-resourced geo-secondary getting overloaded, or having to reseed during an upgrade or downgrade process, consider the following: 
+
+- You can scale the primary and secondary instance up or down to a different compute size within the same service tier or to a different service tier. 
 - When scaling up within the same service tier, scale up the geo-secondary first, and then scale up the primary.
 - When scaling down within the same service tier, reverse the order: scale down the primary first, and then scale down the secondary. 
- 
-Follow the same sequence when you scale an instance to a different service tier, or when you [change the memory allocation](resource-limits.md#flexible-memory-preview) of your [Next-gen General Purpose](service-tiers-next-gen-general-purpose-use.md) instance.
+- The same sequence is enforced when you scale an instance to a different service tier, or when you [change the memory allocation](resource-limits.md#flexible-memory-preview) of your [Next-gen General Purpose](service-tiers-next-gen-general-purpose-use.md) instance. 
+- The sequence of operations is also enforced when you scale storage, as well as modify the number of vCores.
 
-This sequence is recommended to avoid problems from the lower SKU geo-secondary, getting overloaded and having to reseed during an upgrade or downgrade process.
+> [!IMPORTANT] 
+> - For instances inside of a failover group, changing the service tier to, or from, the Next-gen General Purpose tier is not supported. You must first delete the failover group before modifying either replica, and then re-create the failover group after the change takes effect.
+
 
 ## Permissions
 
@@ -501,7 +510,7 @@ When creating a new failover group, consider the following limitations:
 - A failover group can't be created between two instances that belong to different Azure tenants.
 - Creating a failover group between two instances in different resource groups or subscriptions is only supported with Azure PowerShell, or the REST API, and not the Azure portal or the Azure CLI. Once the failover group is created, it's visible in the Azure portal, and all operations are supported in the Azure portal or with the Azure CLI. 
 - If initial seeding of all databases doesn't complete within 7 days, creating the failover group fails and all successfully replicated databases are deleted from the secondary instance. 
-- Creating a failover group with an instance configured with a [managed instance link](managed-instance-link-feature-overview.md) is currently unsupported. 
+- Creating a failover group with an instance configured with a [Managed Instance link](managed-instance-link-feature-overview.md) is currently unsupported. 
 - Failover groups can't be created between instances if any of them are in an instance pool.
 - Databases migrated to Azure SQL Managed Instance by using the [Log Replay Service (LRS)](log-replay-service-overview.md) can't be added to a failover group until the cutover step is executed.
 

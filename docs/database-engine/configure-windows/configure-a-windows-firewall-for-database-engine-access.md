@@ -3,7 +3,7 @@ title: "Configure Windows Firewall for Database Engine Access"
 description: Find out how to configure Windows Firewall so that client computers can access an instance of the SQL Server Database Engine through the firewall.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 05/19/2025
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: install-set-up-deploy
@@ -28,13 +28,13 @@ The principal steps to allow access are:
 
 The [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Browser service lets users connect to instances of the [!INCLUDE [ssDE](../../includes/ssde-md.md)] that aren't listening on port 1433 without knowing the port number. To use [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Browser, you must open UDP port 1434. To promote the most secure environment, leave the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Browser service stopped, and configure clients to connect using the port number.
 
-By default, [!INCLUDE [msCoName](../../includes/msconame-md.md)] Windows enables the Windows Firewall, which closes port 1433 to prevent Internet computers from connecting to a default instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] on your computer. Connections to the default instance using TCP/IP aren't possible unless you open port 1433. The basic steps to configure the Windows Firewall are provided in the following procedures. For more information, see the Windows documentation.
+By default, Windows enables the Windows Firewall, which closes port 1433 to prevent Internet computers from connecting to a default instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] on your computer. Connections to the default instance using TCP/IP aren't possible unless you open port 1433. The basic steps to configure the Windows Firewall are provided in the following procedures. For more information, see the Windows documentation.
 
 As an alternative to configuring [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] to listen on a fixed port and opening the port, you can list the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] executable (Sqlservr.exe) as an exception to the blocked programs. Use this method when you want to continue to use dynamic ports. Only one instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] can be accessed in this way.
 
 ## Security
 
-Opening ports in your firewall can leave your server exposed to malicious attacks. Make sure that you understand firewall systems before you open ports. For more information, see [Security Considerations for a SQL Server Installation](../../sql-server/install/security-considerations-for-a-sql-server-installation.md).
+Opening ports in your firewall can leave your server exposed to malicious attacks. Make sure that you understand firewall systems before you open ports. For more information, see [Security considerations for a SQL Server installation](../../sql-server/install/security-considerations-for-a-sql-server-installation.md).
 
 <a id="SSMSProcedure"></a>
 

@@ -1,13 +1,15 @@
 ---
 title: "CREATE VECTOR INDEX (Transact-SQL)"
-description: "CREATE VECTOR INDEX creates an index on vector data to allow approximate nearest neighbor search"
-author: WilliamDAssafMSFT
-ms.author: wiassaf
-ms.reviewer: damauri
-ms.date: 07/08/2025
+description: "CREATE VECTOR INDEX creates an index on vector data to allow approximate nearest neighbor search."
+author: yorek
+ms.author: damauri
+ms.reviewer: damauri, mikeray
+ms.date: 08/11/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - build-2025
 f1_keywords:
   - "VECTOR INDEX"
   - "CREATE VECTOR INDEX"
@@ -22,44 +24,39 @@ helpviewer_keywords:
 dev_langs:
   - "TSQL"
 monikerRange: "=sql-server-ver17 || =sql-server-linux-ver17"
-ms.custom:
-  - build-2025
 ---
 
 # CREATE VECTOR INDEX (Transact-SQL)
 
-[!INCLUDE [SQL Server 2025](../../includes/applies-to-version/_ss2025.md)]
+[!INCLUDE [sqlserver2025](../../includes/applies-to-version/sqlserver2025.md)]
 
 Create an approximate index on a vector column to improve performances of nearest neighbors search. To learn more about how vector indexing and vector search works, and the differences between exact and approximate search, refer to [Vectors in the SQL Database Engine](../../relational-databases/vectors/vectors-sql-server.md).
 
 ## Preview feature
 
-> [!NOTE]
-> This feature in preview and is subject to change. Make sure to read preview usage terms in [Service Level Agreements (SLA) for Online Services](https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services).
+> [!NOTE]  
+> This function is in preview and is subject to change. In order to use this feature, you must enable the `PREVIEW_FEATURES` [database scoped configuration](alter-database-scoped-configuration-transact-sql.md).
 
-This feature is in preview. In order to use this feature you must enable the following [trace flags](../database-console-commands/dbcc-traceon-transact-sql.md):
-
-```sql
-DBCC TRACEON(466, 474, 13981, -1)
-```
+> [!WARNING]  
+> The trace flags (466, 474, 13981) that were required in previous CTP version are no longer necessary and should be avoided, as their use will prevent vector index functionality from working correctly.
 
 Make sure to check out the [current limitations](#limitations) before using it.
 
 ## Syntax
 
-:::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../../t-sql/language-elements/transact-sql-syntax-conventions-transact-sql.md)  
+:::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../language-elements/transact-sql-syntax-conventions-transact-sql.md)
 
 ```syntaxsql
 CREATE VECTOR INDEX index_name
-ON object ( vector_column )  
+ON object ( vector_column )
 [ WITH (
-    [,] METRIC = { 'cosine' | 'dot' | 'euclidean' }
-    [ [,] TYPE = 'DiskANN' ]
-    [ [,] MAXDOP = max_degree_of_parallelism ]
+    [ , ] METRIC = { 'cosine' | 'dot' | 'euclidean' }
+    [ [ , ] TYPE = 'DiskANN' ]
+    [ [ , ] MAXDOP = max_degree_of_parallelism ]
 ) ]
 [ ON { filegroup_name | "default" } ]
 [;]
-```  
+```
 
 ## Arguments
 
@@ -108,7 +105,7 @@ Overrides the **max degree of parallelism** configuration option for the index o
 For more information, see [Configure Parallel Index Operations](../../relational-databases/indexes/configure-parallel-index-operations.md).
 
 > [!NOTE]  
-> Parallel index operations aren't available in every edition of [!INCLUDE[msCoName](../../includes/msconame-md.md)] [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. For a list of features that are supported by the editions of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], see [Editions and supported features of SQL Server 2022](../../sql-server/editions-and-components-of-sql-server-2022.md) or [Editions and supported features of SQL Server 2025 Preview](../../sql-server/editions-and-components-of-sql-server-2025.md).
+> Parallel index operations aren't available in every edition of [!INCLUDE [msCoName](../../includes/msconame-md.md)] [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. For a list of features that are supported by the editions of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], see [Editions and supported features of SQL Server 2022](../../sql-server/editions-and-components-of-sql-server-2022.md) or [Editions and supported features of SQL Server 2025 Preview](/sql/sql-server/editions-and-components-of-sql-server-2025).
 
 ## Limitations
 
@@ -131,14 +128,13 @@ Examples assume the existence of a table named `wikipedia_articles` with a colum
 
 For more examples, including end-to-end solutions, go to the [Azure SQL Database Vector Search Samples GitHub repo](https://github.com/Azure-Samples/azure-sql-db-vector-search).
 
-
 ### Example 1
 
 The following example creates a vector index on the `title_vector` column using the `cosine` metric.
 
 ```sql
-CREATE VECTOR INDEX vec_idx ON [dbo].[wikipedia_articles]([title_vector]) 
-WITH (METRIC = 'cosine', TYPE = 'diskann'); 
+CREATE VECTOR INDEX vec_idx ON [dbo].[wikipedia_articles]([title_vector])
+WITH (METRIC = 'cosine', TYPE = 'diskann');
 ```
 
 ### Example 2
@@ -146,7 +142,7 @@ WITH (METRIC = 'cosine', TYPE = 'diskann');
 The following example creates a vector index on the `title_vector` column using the (negative) `dot` product metric, limiting the parallelism to 8 and storing the vector in the `SECONDARY` filegroup.
 
 ```sql
-CREATE VECTOR INDEX vec_idx ON [dbo].[wikipedia_articles]([title_vector]) 
+CREATE VECTOR INDEX vec_idx ON [dbo].[wikipedia_articles]([title_vector])
 WITH (METRIC = 'cosine', TYPE = 'diskann', MAXDOP = 8)
 ON [SECONDARY]
 ```
@@ -165,11 +161,12 @@ The following code block creates mock embeddings with the following steps:
 
 ```sql
 -- Step 0: Enable Preview Feature
-DBCC TRACEON(466, 474, 13981, -1);
+ALTER DATABASE SCOPED CONFIGURATION
+SET PREVIEW_FEATURES = ON;
 GO
 
 -- Step 1: Create a sample table with a VECTOR(5) column
-CREATE TABLE dbo.Articles 
+CREATE TABLE dbo.Articles
 (
     id INT PRIMARY KEY,
     title NVARCHAR(100),
@@ -212,6 +209,6 @@ ORDER BY s.distance, t.title;
 
 - [Overview of vectors in the SQL Database Engine](../../relational-databases/vectors/vectors-sql-server.md)
 - [Vector data type](../data-types/vector-data-type.md)
-- [VECTOR_SEARCH (Transact-SQL)](../functions/vector-search-transact-sql.md)
+- [VECTOR_SEARCH (Transact-SQL) (Preview)](../functions/vector-search-transact-sql.md)
 - [sys.vector_indexes (Transact-SQL)](../../relational-databases/system-catalog-views/sys-vector-indexes-transact-sql.md)
 - [Azure SQL Database Vector Search Samples](https://github.com/Azure-Samples/azure-sql-db-vector-search)

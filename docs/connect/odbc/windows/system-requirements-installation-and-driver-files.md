@@ -65,7 +65,7 @@ The following matrix indicates driver version support for Windows operating syst
 | 18.2 | | Yes | Yes | Yes | Yes | | | Yes | Yes | | | |
 | 18.1 | | Yes | Yes | Yes | Yes | Yes | | Yes | Yes | Yes | | |
 | 18.0 | | Yes | Yes | Yes | Yes | Yes | | Yes | Yes | Yes | | |
-| 17.10 | | Yes | Yes | Yes | Yes | Yes | | Yes | Yes | Yes | | |
+| 17.10 | Yes | Yes | Yes | Yes | Yes | Yes | | Yes | Yes | Yes | | |
 | 17.9 | | Yes | Yes | Yes | Yes | Yes | | Yes | Yes | Yes | | |
 | 17.8 | | | Yes | Yes | Yes | Yes | | | Yes | Yes | | |
 | 17.7 | | | Yes | Yes | Yes | Yes | | | Yes | Yes | | |

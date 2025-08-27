@@ -25,7 +25,7 @@ To achieve full business continuity, adding regional database redundancy is only
 Failover groups support two failover policies:
 
 - **Customer managed (recommended)** - Customers can perform a failover of a group when they notice an unexpected outage impacting one or more databases in the failover group. When using command line tools such as PowerShell, the Azure CLI, or the Rest API, the failover policy value for customer managed is `manual`. 
-- **Microsoft managed** - In the event of a widespread outage that impacts a primary region, Microsoft initiates failover of all impacted failover groups that have their failover policy configured to be Microsoft-managed. Microsoft managed failover won't be initiated for individual failover groups or a subset of failover groups in a region. When using command line tools such as PowerShell, the Azure CLI, or the Rest API, the failover policy value for Microsoft-managed is `automatic`. 
+- **Microsoft managed** - In the event of a widespread outage that impacts a primary region, Microsoft initiates failover of *all* impacted failover groups that have their failover policy configured to be Microsoft-managed. Microsoft managed failover won't be initiated for individual failover groups or a subset of failover groups in a region. When using command line tools such as PowerShell, the Azure CLI, or the Rest API, the failover policy value for Microsoft-managed is `automatic`. 
 
 Each failover policy has a unique set of use cases and corresponding expectations on the failover scope and data loss, as the following table summarizes: 
 
@@ -36,7 +36,7 @@ Each failover policy has a unique set of use cases and corresponding expectation
 
 ### Customer managed
 
-On rare occasions, the built-in [availability or high availability](../database/high-availability-sla-local-zone-redundancy.md) isn't enough to mitigate an outage, and your databases in a failover group might be unavailable for a duration that isn't acceptable to the service level agreement (SLA) of the applications using the databases. Databases can be unavailable due to a localized issue impacting just a few databases, or it could be at the datacenter, availability zone, or region level. In any of these cases, to restore business continuity, you can initiate a forced failover.
+On rare occasions, the built-in [availability or high availability](../database/high-availability-sla-local-zone-redundancy.md) isn't enough to mitigate an outage, and your databases in a failover group might be unavailable for a duration that isn't acceptable to the service level agreement (SLA) of the applications that use the databases. Databases can be unavailable due to a localized issue impacting just a few databases, or it could be at the datacenter, availability zone, or region level. In any of these cases, to restore business continuity, you can initiate a forced failover.
 
 _Setting your failover policy to customer managed is highly recommended_, as it keeps you in control of when to initiate a failover and restore business continuity. You can initiate a failover when you notice an unexpected outage impacting one or more databases in the failover group.
 
@@ -50,17 +50,17 @@ With a Microsoft managed failover policy, disaster recovery responsibility is de
 When these conditions are met, the Azure SQL service initiates forced failovers for all failover groups in the region that have the failover policy set to Microsoft managed. 
 
 > [!IMPORTANT]
-> Use customer managed failover policy to test and implement your disaster recovery plan. **Do not** rely on Microsoft managed failover, which might only be executed by Microsoft in extreme circumstances.
-> A Microsoft managed failover would be initiated for all failover groups in the region that have  failover policy set to Microsoft managed. It can't be initiated for individual failover group. If you need the ability to selectively failover your failover group, use customer managed failover policy. 
+> Use the customer managed failover policy to test and implement your disaster recovery plan. **Do not** rely on Microsoft managed failover, which might only be executed by Microsoft in extreme circumstances.
+> A Microsoft managed failover is initiated for all failover groups in the region that have their failover policy set to Microsoft managed. It can't be initiated for individual failover groups. If you need to selectively fail over your failover group, use customer managed failover policy.
 
 Set the failover policy to Microsoft managed only when:
 
 - You want to delegate disaster recovery responsibility to the Azure SQL service. 
 - The application is tolerant to your database being unavailable for at least one hour or more.
-- It's acceptable to trigger forced failovers some time after the grace period expires as the actual time for the forced failover can vary significantly. 
+- It's acceptable to trigger forced failovers some time after the grace period expires, as the actual time for the forced failover can vary significantly. 
 - It's acceptable that all databases within the failover group fail over, regardless of their zone redundancy configuration or availability status. Although databases configured for zone redundancy are resilient to zonal failures and might not be impacted by an outage, they'll still be failed over if they're part of a failover group with a Microsoft managed failover policy.  
 - It's acceptable to have forced failovers of databases in the failover group without taking into consideration the application's dependency on other Azure services or components used by the application, which can cause performance degradation or unavailability of the application.
 - It's acceptable to incur an unknown amount of data loss, as the exact time of forced failover can't be controlled, and ignores the synchronization status of the secondary databases.
-- All the primary and secondary database(s) in the failover group and any geo replication relationships have the same service tier, compute tier (provisioned or serverless) & compute size (DTUs or vCores). If the service level objective (SLO) of all the databases don't match, then the failover policy will be eventually updated from Microsoft Managed to Customer Managed by Azure SQL service. 
+- The primary and secondary replicas in the failover group have the same service tier, compute tier, and compute size.
 
 When a failover is triggered by Microsoft, an entry for the operation name **Failover Azure SQL failover group** is added to the [Azure Monitor activity log](/azure/azure-monitor/essentials/activity-log). The entry includes the name of the failover group under **Resource**, and **Event initiated by** displays a single hyphen (-) to indicate the failover was initiated by Microsoft.  This information can also be found on the **Activity log** page of the new primary server or instance in the Azure portal. 

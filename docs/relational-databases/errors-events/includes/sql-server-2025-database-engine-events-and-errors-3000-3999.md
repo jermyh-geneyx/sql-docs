@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/15/2025
+ms.date: 08/14/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -78,7 +78,7 @@ ms.topic: include
 | 3073 | 16 | No | The option WITH FILE_SNAPSHOT is only permitted if all database files are in Azure Storage. |
 | 3074 | 16 | No | Failed while getting attributes for the file snapshot %.\*ls. Error code %ld. |
 | 3075 | 16 | No | Device name '%.\*ls' is not a valid MOVE target when restoring from a File Snapshot Backup. |
-| 3076 | 16 | No | File Snapshot Backup is only permitted with a single backup device and no additonal mirrored devices. |
+| 3076 | 16 | No | File Snapshot Backup is only permitted with a single backup device and no additional mirrored devices. |
 | 3077 | 10 | No | File snapshot %.\*ls not found. |
 | 3078 | 16 | No | The file name "%ls" is invalid as a backup device name for the specified device type. Reissue the BACKUP statement with a valid file name and device type. |
 | 3079 | 16 | No | Could not find the blob file %.\*ls. Please make sure that the file name points to a valid blob file. |
@@ -306,7 +306,7 @@ ms.topic: include
 | [3414](../mssqlserver-3414-database-engine-error.md) | 10 | Yes | An error occurred during recovery, preventing the database '%ls' (%d:%d) from restarting. Diagnose the recovery errors and fix them, or restore from a known good backup. If errors are not corrected or expected, contact Technical Support. |
 | 3415 | 16 | Yes | Database '%.\*ls' cannot be upgraded because it is read-only, has read-only files or the user does not have permissions to modify some of the files. Make the database or files writeable, and rerun recovery. |
 | 3416 | 16 | Yes | The server contains read-only files that must be made writable before the server can be recollated. |
-| [3417](../mssqlserver-3417-database-engine-error.md) | 21 | Yes | Cannot recover the master database. SQL Server is unable to run. Restore master from a full backup, repair it, or rebuild it. For more information about how to rebuild the master database, see SQL Server Books Online. |
+| [3417](../mssqlserver-3417-database-engine-error.md) | 21 | Yes | Cannot recover the master database. SQL Server is unable to run. Restore master from a full backup, repair it, or rebuild it. For more information, see [https://go.microsoft.com/fwlink/?linkid=2322220](https://go.microsoft.com/fwlink/?linkid=2322220). |
 | 3418 | 10 | Yes | Recovery is unable to defer error %d. Errors can only be deferred in databases using the full recovery model and an active backup log chain. |
 | 3419 | 16 | Yes | Recovery for database '%.\*ls' is being skipped because it requires an upgrade but is marked for Standby. Use RESTORE DATABASE WITH NORECOVERY to take the database back to a Restoring state and continue the restore sequence. |
 | 3420 | 21 | Yes | Database snapshot '%ls' has failed an IO operation and is marked suspect. It must be dropped and recreated. |
@@ -491,11 +491,11 @@ ms.topic: include
 | 3904 | 21 | No | Cannot unsplit logical page %S_PGID in object '%.\*ls', in database '%.\*ls'. Both pages together contain more data than will fit on one page. |
 | 3905 | 16 | No | The number of nested transactions has reached the maximum allowed value of 4294967296. |
 | 3906 | 16 | No | Failed to update database "%.\*ls" because the database is read-only. |
-| 3907 | 16 | No | Transaction aborted when accessing versioned row in table '%.\*ls' in database '%.\*ls'. Requested versioned row was not found in persistent version store. Your database is probably out of space. Please refer to BOL on how to configure database size. |
+| 3907 | 16 | No | Transaction aborted when accessing a versioned row in table '%.\*ls' in database '%.\*ls'. Requested row version was not found in Persistent Version Store. The database might be out of space. |
 | 3908 | 16 | No | Could not run BEGIN TRANSACTION in database '%.\*ls' because the database is in emergency mode or is damaged and must be restarted. |
 | 3909 | 16 | No | Session binding token is invalid. |
 | 3910 | 16 | No | Transaction context in use by another session. |
-| 3911 | 16 | Yes | Persistent version store is full. New version(s) could not be added. A transaction that needs to access the version store may be rolled back. Please refer to BOL on how to increase database max size. |
+| 3911 | 16 | Yes | Persistent Version Store is full. New versions cannot be added. Transactions that need to access Persistent Version Store might be rolled back. Increase the maximum database size or make space available in the database. |
 | 3912 | 16 | No | Cannot bind using an XP token while the server is not in an XP call. |
 | 3913 | 16 | Yes | TDS reset connection protocol error. Client driver requested both ResetConnectionKeepLocalXact and ResetConnectionKeepDTCXact at the same time. This is not expected in server. |
 | 3914 | 16 | No | The data type "%s" is invalid for transaction names or savepoint names. Allowed data types are char, varchar, nchar, varchar(max), nvarchar, and nvarchar(max). |

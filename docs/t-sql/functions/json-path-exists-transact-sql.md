@@ -4,7 +4,7 @@ description: JSON_PATH_EXISTS tests whether a specified SQL/JSON path exists in 
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest, umajay, jovanpop
-ms.date: 04/30/2025
+ms.date: 07/23/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -17,9 +17,9 @@ monikerRange: "=azuresqldb-current || >=sql-server-ver16 || >=sql-server-linux-v
 ---
 # JSON_PATH_EXISTS (Transact-SQL)
 
-[!INCLUDE [sqlserver2022-asdb-asmi-asa-fabricse-fabricdw](../../includes/applies-to-version/sqlserver2022-asdb-asmi-asa-fabricse-fabricdw.md)]
+[!INCLUDE [sqlserver2022-asdb-asmi-asa-fabricse-fabricdw-fabricsqldb](../../includes/applies-to-version/sqlserver2022-asdb-asmi-asa-fabricse-fabricdw-fabricsqldb.md)]
 
-Tests whether a specified SQL/JSON path exists in the input JSON string.
+The `JSON_PATH_EXISTS` syntax tests whether a specified SQL/JSON path exists in the input JSON string.
 
 :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../language-elements/transact-sql-syntax-conventions-transact-sql.md)
 
@@ -90,11 +90,7 @@ The following example uses `JSON_PATH_EXISTS()` with a wildcard:
 ```sql
 DECLARE @jsonInfo AS NVARCHAR (MAX);
 
- 
-
 SET @jsonInfo = N'{"info":{"address":[{"town":"Paris"},{"town":"London"}]}}';
-
- 
 
 SELECT JSON_PATH_EXISTS(@jsonInfo, '$.info.address[*].town'); -- Returns: 1
 ```
@@ -110,8 +106,6 @@ The following looks for at least one element in array has an object with key `to
 ```sql
 SET @jsonInfo = N'{"info":{"address":[{"town":"Paris"},{"city":"London"}]}}';
 
- 
-
 SELECT JSON_PATH_EXISTS(@jsonInfo, '$.info.address[*].town'); -- Returns: 1  (at least one element in array has an object with key "town")
 ```
 
@@ -126,8 +120,6 @@ The following looks for at least one element in array has an object with key `to
 ```sql
 SET @jsonInfo = N'{"info":{"address":[{"city":"Paris"},{"city":"London"}]}}';
 
- 
-
 SELECT JSON_PATH_EXISTS(@jsonInfo, '$.info.address[*].town'); -- Returns: 0 (no elements in array has an object with key "town")
 ```
 
@@ -136,7 +128,6 @@ SELECT JSON_PATH_EXISTS(@jsonInfo, '$.info.address[*].town'); -- Returns: 0 (no 
 ```output
 0
 ```
-
 
 ## Related content
 

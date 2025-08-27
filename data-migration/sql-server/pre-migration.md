@@ -11,6 +11,7 @@ ms.topic: how-to
 ms.collection:
   - sql-migration-content
 ---
+
 # Migrate from SQL Server: Pre-migration
 
 [!INCLUDE [appliesto-sqlvm-sqldb-sqlmi](../includes/appliesto-sqlvm-sqldb-sqlmi.md)]
@@ -176,11 +177,7 @@ For specific Azure SQL migration target tutorials, see:
 
 The [Azure SQL migration extension for Azure Data Studio](/azure-data-studio/extensions/azure-sql-migration-extension) and [Azure Migrate](https://azure.microsoft.com/services/azure-migrate) can perform scaled assessments and consolidate assessment reports for analysis.
 
-If you have multiple servers and databases that need to be assessed and analyzed at scale to provide a wider view of the data estate, see the following links to learn more:
-
-- [Migrate databases at scale using automation with DMS (Preview)](/azure/dms/migration-dms-powershell-cli)
-- [Performing scaled assessments using PowerShell - Azure Migrate](/sql/dma/dma-consolidatereports)
-- [Analyzing assessment reports using Power BI - Azure Migrate](/sql/dma/dma-consolidatereports#dma-reports)
+If you have multiple servers and databases that need to be assessed and analyzed at scale to provide a wider view of the data estate, see [Migrate databases at scale using automation with DMS (Preview)](/azure/dms/migration-dms-powershell-cli).
 
 You can automate the process by using scripts with one of the following options. To learn more about using scripting, see [Migrate databases at scale using automation (Preview)](/azure/dms/migration-dms-powershell-cli).
 

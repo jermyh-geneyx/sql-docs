@@ -70,30 +70,35 @@ qrdrsvc [-?]
   
  **-DistributorSecurityMode** [ **0**\| **1**]  
  Specifies the security mode of the Distributor. A value of **0** indicates [!INCLUDE[ssNoVersion](../../../includes/ssnoversion-md.md)] Authentication Mode (default), and a value of **1** indicates Windows Authentication Mode.  
-  
- **-EncryptionLevel** [ **0** \| **1** \| **2** ]  
+
+<a id="encryption-level"></a>
+
+ **-EncryptionLevel** [ **0** \| **1** \| **2** \| **4**]  
  Is the level of Transport Layer Security (TLS), previously known as Secure Sockets Layer (SSL), encryption used by the Queue Reader Agent when making connections.  
   
-|EncryptionLevel value|Description|  
+|`EncryptionLevel` value|Description|  
 |---------------------------|-----------------|  
-|**0**|Specifies that TLS is not used.|  
-|**1**|Specifies that TLS is used, but the agent does not verify that the TLS/SSL server certificate is signed by a trusted issuer.|  
-|**2**|Specifies that TLS is used, and that the certificate is verified.|  
+|`0`|Specifies that TLS is not used.|  
+|`1`|Specifies that TLS is used, but the agent does not verify that the TLS/SSL server certificate is signed by a trusted issuer.|  
+|`2`|Specifies that TLS is used, and that the certificate is verified.|
+|`3`| Not supported, because option `3` is specific for connections towards Azure SQL Managed Instance, and queue reader agent is not supported with Azure SQL Managed Instance. |
+|`4`| Specifies that for connections from SQL Server 2025 (RC 0 and later) to SQL Server (any supported version), TLS 1.3 is used, and the certificate is verified. Requires installing the certificate on SQL Server hosts that are receiving connections with `EncryptionLevel` set to `4`. |
 
- > [!NOTE]  
- >  A valid TLS/SSL certificate is defined with a fully qualified domain name of the SQL Server. In order for the agent to connect successfully when setting -EncryptionLevel to 2, create an alias on the local SQL Server. The 'Alias Name' parameter should be the server name and the 'Server' parameter should be set to the fully qualified name of the SQL Server.
+[!INCLUDE [sql-25-repl-info](../../../includes/sql-25-repl-info.md)]
+
+A valid TLS/SSL certificate is defined with a fully qualified domain name of the SQL Server. In order for the agent to connect successfully when setting `-EncryptionLevel` to `2`, create an alias on the local SQL Server. The 'Alias Name' parameter should be the server name and the 'Server' parameter should be set to the fully qualified name of the SQL Server.
   
  For more information, see [View and modify replication security settings](../../../relational-databases/replication/security/view-and-modify-replication-security-settings.md).  
   
  **-HistoryVerboseLevel** [ **0**\| **1**\| **2**\| **3**]  
- Specifies the amount of history logged during a queue reader operation. You can minimize the effect of history logging on performance by selecting **1**.  
+ Specifies the amount of history logged during a queue reader operation. You can minimize the effect of history logging on performance by selecting `1`.  
   
-|HistoryVerboseLevel value|Description|  
+|`HistoryVerboseLevel` value|Description|  
 |-------------------------------|-----------------|  
-|**0**|No history logging (not recommended).|  
-|**1**|Default. Always update a previous history message of the same status (startup, progress, success, and so on). If no previous record with the same status exists, insert a new record.|  
-|**2**|Insert new history records, including idle messages or long-running job messages.|  
-|**3**|Insert new history records that include additional details that may be useful for troubleshooting.|  
+|`0`|No history logging (not recommended).|  
+|`1`|Default. Always update a previous history message of the same status (startup, progress, success, and so on). If no previous record with the same status exists, insert a new record.|  
+|`2`|Insert new history records, including idle messages or long-running job messages.|  
+|`3`|Insert new history records that include additional details that may be useful for troubleshooting.|  
   
  **-LoginTimeOut** _login_time_out_seconds_  
  Is the number of seconds before the login times out. The default is 15 seconds.  

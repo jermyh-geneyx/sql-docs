@@ -4,8 +4,8 @@ description: "An introduction to the concepts that are central for configuring a
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest, vanto
-ms.date: 06/23/2025
 ms.update-cycle: 1825-days
+ms.date: 08/15/2025
 ms.service: sql
 ms.subservice: availability-groups
 ms.topic: concept-article
@@ -58,6 +58,11 @@ In an HA configuration, a cluster role is created for every availability group t
 The following illustration shows an availability group that contains one primary replica and four secondary replicas. Up to eight secondary replicas are supported, including one primary replica and four synchronous-commit secondary replicas.
 
 :::image type="content" source="media/overview-of-always-on-availability-groups-sql-server/availability-group-introduction.png" alt-text="Diagram of an availability group with five replicas.":::
+
+## Configure TLS 1.3 encryption
+
+[!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] RC 0 introduces [TDS 8.0](../../../relational-databases/security/networking/tds-8.md) support, which allows enforcing [TLS 1.3](../../../relational-databases/security/networking/tls-1-3.md) encryption for communication between the Windows Server Failover Cluster and your Always On availability group replicas.
+To get started, review [Connect with strict encryption](../../../relational-databases/security/networking/connect-with-strict-encryption.md#connect-to-an-always-on-availability-group).
 
 <a id="TermsAndDefinitions"></a>
 
@@ -207,8 +212,11 @@ You can provide client connectivity to the primary replica of a given availabili
 
 An availability group listener is associated with a unique DNS name that serves as a virtual network name (VNN), one or more virtual IP addresses (VIPs), and a TCP port number. For more information, see [Connect to an Always On availability group listener](listeners-client-connectivity-application-failover.md).
 
-> [!TIP]  
-> If an availability group possesses only two availability replicas and isn't configured to allow read-access to the secondary replica, clients can connect to the primary replica by using a [database mirroring connection string](../../database-mirroring/connect-clients-to-a-database-mirroring-session-sql-server.md). This approach can be useful temporarily after you migrate a database from database mirroring to [!INCLUDE [ssHADR](../../../includes/sshadr-md.md)]. Before you add additional secondary replicas, you'll need to create an availability group listener for the availability group and update your applications to use the network name of the listener.
+If an availability group possesses only two availability replicas and isn't configured to allow read-access to the secondary replica, clients can connect to the primary replica by using a [database mirroring connection string](../../database-mirroring/connect-clients-to-a-database-mirroring-session-sql-server.md). This approach can be useful temporarily after you migrate a database from database mirroring to [!INCLUDE [ssHADR](../../../includes/sshadr-md.md)]. Before you add additional secondary replicas, you'll need to create an availability group listener for the availability group and update your applications to use the network name of the listener.
+
+> [!NOTE]
+> [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] introduces [TDS 8.0](../../../relational-databases/security/networking/tds-8.md) support, which allows enforcing strict [TLS 1.3](../../../relational-databases/security/networking/tls-1-3.md) encryption for connections to your Always On availability group replicas and listener. To get started, review [Connect with strict encryption](../../../relational-databases/security/networking/connect-with-strict-encryption.md#connect-to-an-always-on-availability-group).
+
 
 <a id="ActiveSecondaries"></a>
 
@@ -263,6 +271,7 @@ For more information, see [Automatic Page Repair (Availability Groups: Database 
 - [SQL Server Agent](../../../ssms/agent/sql-server-agent.md)
 - [Reporting Services with Always On Availability Groups (SQL Server)](reporting-services-with-always-on-availability-groups-sql-server.md)
 - [Resource governor](../../../relational-databases/resource-governor/resource-governor.md)
+- [TDS 8.0](../../../relational-databases/security/networking/tds-8.md), starting with [!INCLUDE [ssSQL25](../../../includes/sssql25-md.md)]
 
 ## Related tasks
 

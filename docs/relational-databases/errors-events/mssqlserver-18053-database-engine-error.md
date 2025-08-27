@@ -3,7 +3,6 @@ title: "MSSQLSERVER_18053"
 description: "MSSQLSERVER_18053"
 author: pijocoder
 ms.author: jopilov
-ms.reviewer: pijocoder
 ms.date: 12/18/2024
 ms.service: sql
 ms.subservice: supportability

@@ -1,10 +1,10 @@
 ---
-title: "What is Azure SQL?"
+title: "What Is Azure SQL?"
 description: "Learn about the different options within the Azure SQL family of services: Azure SQL Database, Azure SQL Managed Instance, and SQL Server on Azure VM."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: mathoma
-ms.date: 09/27/2024
+ms.date: 08/07/2025
 ms.service: azure-sql
 ms.subservice: service-overview
 ms.topic: overview
@@ -32,7 +32,7 @@ Learn how each product fits into Microsoft's Azure SQL data platform to match th
 
 If you're new to Azure SQL, check out the *What is Azure SQL* video from our in-depth [Azure SQL video series](/shows/Azure-SQL-for-Beginners/?WT.mc_id=azuresql4beg_azuresql-ch9-niner):
 
-<br/>
+<br />
 
 > [!VIDEO https://learn.microsoft.com/shows/Azure-SQL-for-Beginners/What-is-Azure-SQL-3-of-61/player]
 
@@ -65,7 +65,7 @@ There are several factors that can influence your decision to choose between the
 
 ## Service comparison
 
-   :::image type="content" source="media/azure-sql-iaas-vs-paas-what-is-overview/SQLIAAS_SQL_Server_Cloud_Continuum.png" alt-text="Diagram of cloud SQL Server options: SQL Server on IaaS, or SaaS SQL Database in the cloud." lightbox="media/azure-sql-iaas-vs-paas-what-is-overview/SQLIAAS_SQL_Server_Cloud_Continuum.png":::
+:::image type="content" source="media/azure-sql-iaas-vs-paas-what-is-overview/hybrid-cloud-sql-server.png" alt-text="Diagram of hybrid cloud SQL Server options: SQL Server on IaaS, or SaaS SQL Database in the cloud." lightbox="media/azure-sql-iaas-vs-paas-what-is-overview/hybrid-cloud-sql-server.png":::
 
 As seen in the diagram, each service offering can be characterized by the level of administration you have over the infrastructure, and by the degree of cost efficiency.
 
@@ -110,10 +110,10 @@ In general, SQL Database and SQL Managed Instance can dramatically increase the 
 
 | Azure SQL Database | Azure SQL Managed Instance | SQL Server on Azure VMs |
 | :--- | :--- | :--- |
-| Supports most on-premises database-level capabilities. The most commonly used SQL Server features are available.<br />99.995% availability guaranteed.<br />Built-in backups, patching, recovery.<br />Latest stable Database Engine version.<br />Ability to assign necessary resources (CPU/storage) to individual databases.<br />Built-in advanced intelligence and security.<br />Online change of resources (CPU/storage). | Supports almost all on-premises instance-level and database-level capabilities. High compatibility with SQL Server.<br />99.99% availability guaranteed.<br />Built-in backups, patching, recovery.<br />Latest stable Database Engine version.<br />Easy migration from SQL Server.<br />Private IP address within Azure Virtual Network.<br />Built-in advanced intelligence and security.<br />Online change of resources (CPU/storage). | You have full control over the SQL Server engine. Supports all on-premises capabilities.<br />Up to 99.99% availability.<br />Full parity with the matching version of on-premises SQL Server.<br />Easy migration from SQL Server.<br />Private IP address within Azure Virtual Network.<br />You have the ability to deploy application or services on the host where SQL Server is placed.<br />Manage your SQL Server VM from the Azure portal and unlock a number of additional benefits when you register with the [SQL Server IaaS agent extension](virtual-machines/windows/sql-server-iaas-agent-extension-automate-management.md). |
+| Supports most on-premises database-level capabilities. The most commonly used SQL Server features are available.<br />99.995% availability guaranteed.<br />Built-in backups, patching, recovery.<br />Latest stable Database Engine version.<br />Ability to assign necessary resources (CPU/storage) to individual databases.<br />Built-in advanced intelligence and security.<br />Online change of resources (CPU/storage). | Supports almost all on-premises instance-level and database-level capabilities. High compatibility with SQL Server.<br />99.99% availability guaranteed.<br />Built-in backups, patching, recovery.<br />Latest stable Database Engine version.<br />Easy migration from SQL Server.<br />Private IP address within Azure Virtual Network.<br />Built-in advanced intelligence and security.<br />Online change of resources (CPU/storage). | You have full control over the SQL Server engine. Supports all on-premises capabilities.<br />Up to 99.99% availability.<br />Full parity with the matching version of on-premises SQL Server.<br />Easy migration from SQL Server.<br />Private IP address within Azure Virtual Network.<br />You have the ability to deploy application or services on the host where SQL Server is placed.<br />Manage your SQL Server VM from the Azure portal and unlock a number of additional benefits when you register with the [Windows SQL Server IaaS Agent extension](virtual-machines/windows/sql-server-iaas-agent-extension-automate-management.md). |
 | Migration from SQL Server might be challenging.<br />Some SQL Server features aren't available.<br />Configurable [maintenance windows](database/maintenance-window.md).<br />Compatibility with the SQL Server version can be achieved only using database compatibility levels.<br />Private IP address support with [Azure Private Link](database/private-endpoint-overview.md). | There's still some minimal number of SQL Server features that aren't available.<br />Configurable [maintenance windows](database/maintenance-window.md).<br />Compatibility with the SQL Server version can be achieved only using database compatibility levels. | You might use [manual or automated backups](virtual-machines/windows/backup-restore.md).<br />You need to implement your own High-Availability solution.<br />There's a downtime while changing the resources(CPU/storage) |
 | Databases of up to 128 TB. | Up to 16 TB. | SQL Server instances with up to 256 TB of storage. The instance can support as many databases as needed. |
-| On-premises application can access data in Azure SQL Database. | [Native virtual network implementation](managed-instance/vnet-existing-add-subnet.md) and connectivity to your on-premises environment using Azure Express Route or VPN Gateway. | With SQL virtual machines, you can have applications that run partly in the cloud and partly on-premises. For example, you can extend your on-premises network and Active Directory Domain to the cloud via [Azure Virtual Network](/azure/virtual-network/virtual-networks-overview). For more information on hybrid cloud solutions, see [Extending on-premises data solutions to the cloud](/azure/architecture/data-guide/scenarios/hybrid-on-premises-and-cloud). |
+| On-premises application can access data in Azure SQL Database. | [Configure an existing virtual network for Azure SQL Managed Instance](managed-instance/vnet-existing-add-subnet.md) and connectivity to your on-premises environment using Azure Express Route or VPN Gateway. | With SQL virtual machines, you can have applications that run partly in the cloud and partly on-premises. For example, you can extend your on-premises network and Active Directory Domain to the cloud via [Azure Virtual Network](/azure/virtual-network/virtual-networks-overview). For more information on hybrid cloud solutions, see [Extending on-premises data solutions to the cloud](/azure/architecture/data-guide/scenarios/hybrid-on-premises-and-cloud). |
 
 ## Cost
 
@@ -123,7 +123,7 @@ In this section, learn about the billing and licensing basics in Azure associate
 
 ### Billing and licensing basics
 
-Currently, both **SQL Database** and **SQL Managed Instance** are sold as a service and are available with several options and in several service tiers with different prices for resources, all of which are billed hourly at a fixed rate based on the service tier and compute size you choose. For the latest information on the current supported service tiers, compute sizes, and storage amounts, see [DTU-based purchasing model](database/service-tiers-dtu.md) and [vCore-based purchasing model for both SQL Database and SQL Managed Instance](database/service-tiers-vcore.md).
+Currently, both **Azure SQL Database** and **Azure SQL Managed Instance** are sold as a service and are available with several options and in several service tiers with different prices for resources, all of which are billed hourly at a fixed rate based on the service tier and compute size you choose. For the latest information on the current supported service tiers, compute sizes, and storage amounts, see [DTU-based purchasing model overview for Azure SQL Database](database/service-tiers-dtu.md) and [vCore-based purchasing model for both SQL Database and SQL Managed Instance](database/service-tiers-vcore.md).
 
 - With SQL Database, you can choose a purchasing model, service tier and compute tier that fits your needs from a wide range of prices starting from $5/month for the Basic tier and you can create [elastic pools](database/elastic-pool-overview.md) to share resources among databases to reduce costs and accommodate usage spikes.
 - With SQL Managed Instance, you can choose a service tier that fits your needs and create an [instance pool](managed-instance/instance-pools-overview.md) to share resources among instance to reduce costs and accommodate usage spikes. 
@@ -134,9 +134,11 @@ In addition, you're billed for outgoing Internet traffic at regular [data transf
 
 With **SQL Database** and **SQL Managed Instance**, the database software is automatically configured, patched, and upgraded by Azure, which reduces your administration costs. In addition, its [built-in backup](database/automated-backups-overview.md) capabilities help you achieve significant cost savings, especially when you have a large number of databases.
 
-With **SQL Server on Azure VMs**, you can use any of the platform-provided SQL Server images, or self-install SQL Server to an Azure VM and then register with the [SQL IaaS Agent extension](virtual-machines/windows/sql-server-iaas-agent-extension-automate-management.md) for additional benefits. All the supported SQL Server versions (2016, 2017, 2019, 2022, 2025) and editions (Developer, Express, Web, Standard, Enterprise) are available.  When using the Azure provided images, the operational cost depends on the VM size and the edition of SQL Server you choose. Regardless of VM size or SQL Server edition, you pay per-minute licensing cost of SQL Server and the Windows or Linux Server, along with the Azure Storage cost for the VM disks. The per-minute billing option allows you to use SQL Server for as long as you need without buying addition SQL Server licenses. 
+With **SQL Server on Azure VMs**, you can use any of the platform-provided SQL Server images, or self-install SQL Server to an Azure VM and then register with the [Windows SQL Server IaaS Agent extension](virtual-machines/windows/sql-server-iaas-agent-extension-automate-management.md) for additional benefits. All the supported SQL Server versions (2016, 2017, 2019, 2022, 2025) and editions (Developer, Express, Web, Standard, Enterprise) are available. When using the Azure provided images, the operational cost depends on the VM size and the edition of SQL Server you choose. Regardless of VM size or SQL Server edition, you pay per-minute licensing cost of SQL Server and the Windows or Linux Server, along with the Azure Storage cost for the VM disks. The per-minute billing option allows you to use SQL Server for as long as you need without buying addition SQL Server licenses. 
 
-#### <a id="calculating-the-total-application-cost"></a> Calculate the total application cost
+<a id="calculating-the-total-application-cost"></a>
+
+#### Calculate the total application cost
 
 When you start using a cloud platform, the cost of running your application includes the cost for new development and ongoing administration costs, plus the public cloud platform service costs.
 
@@ -161,15 +163,25 @@ For both **Azure SQL Database** and **Azure SQL Managed Instance**, Microsoft pr
 
 For **SQL Server on Azure VMs**, Microsoft provides an availability SLA of 99.95% for two virtual machines in an availability set, or 99.99% for two virtual machines in different availability zones. This means that at least one of the two virtual machines is available for the given SLA, but it doesn't cover the processes (such as SQL Server) running on the VM. For the latest information, see the [VM SLA](https://azure.microsoft.com/support/legal/sla/virtual-machines/). For database high availability (HA) within VMs, you should configure one of the supported high availability options in SQL Server, such as [Always On availability groups](virtual-machines/windows/availability-group-azure-portal-configure.md). Using a supported high availability option doesn't provide an additional SLA, but allows you to achieve >99.99% database availability.
 
-## <a id="market"></a> Time to move to Azure
+<a id="market"></a> 
 
-**Azure SQL Database** is the right solution for cloud-designed applications when developer productivity and fast time-to-market for new solutions are critical. With programmatic DBA-like functionality, it's perfect for cloud architects and developers as it lowers the need for managing the underlying operating system and database.
+## Time to move to Azure
 
-**Azure SQL Managed Instance** greatly simplifies the migration of existing applications to Azure, enabling you to bring migrated database applications to market in Azure quickly.
+**Azure SQL Database** is the right solution for cloud-designed applications when developer productivity and fast time-to-market for new solutions are critical. With programmatic DBA-like functionality, it's perfect for cloud architects and developers as it lowers the need for managing the underlying operating system and database. For more information, see [High availability and disaster recovery checklist - Azure SQL Database](database/high-availability-disaster-recovery-checklist.md).
 
-**SQL Server on Azure VMs** is perfect if your existing or new applications require large databases or access to all features in SQL Server or Windows/Linux, and you want to avoid the time and expense of acquiring new on-premises hardware. It's also a good fit when you want to migrate existing on-premises applications and databases to Azure as-is - in cases where SQL Database or SQL Managed Instance aren't a good fit. Since you don't need to change the presentation, application, and data layers, you save time and budget on having to rearchitect your existing solution. Instead, you can focus on migrating all your solutions to Azure and in doing some performance optimizations that might be required by the Azure platform. For more information, see [Performance Best Practices for SQL Server on Azure VMs](virtual-machines/windows/performance-guidelines-best-practices-checklist.md).
+**Azure SQL Managed Instance** greatly simplifies the migration of existing applications to Azure, enabling you to bring migrated database applications to market in Azure quickly. For more information, see [High availability and disaster recovery checklist - Azure SQL Managed Instance](managed-instance/high-availability-disaster-recovery-checklist.md).
+
+**SQL Server on Azure VMs** is perfect if your existing or new applications require large databases or access to all features in SQL Server or Windows/Linux, and you want to avoid the time and expense of acquiring new on-premises hardware. It's also a good fit when you want to migrate existing on-premises applications and databases to Azure as-is. Since you don't need to change the presentation, application, and data layers, you save time and budget on having to rearchitect your existing solution. Instead, you can focus on migrating all your solutions to Azure and in doing some performance optimizations that might be required by the Azure platform. For more information, see [Checklist: Best practices for SQL Server on Azure VMs](virtual-machines/windows/performance-guidelines-best-practices-checklist.md).
 
 [!INCLUDE [sql-database-create-manage-portal](includes/sql-database-create-manage-portal.md)]
+
+## SQL database in Microsoft Fabric
+
+You can also create a [SQL database in Microsoft Fabric](/sql/sql-server/fabric-database/sql-database-in-fabric). A [SQL database in Microsoft Fabric is distinct from an Azure SQL Database](/fabric/database/sql/decision-guide) or a mirrored database from Azure SQL Database, and each use similar mirroring technology to replicate data into Microsoft Fabric's OneLake. 
+
+With [SQL database in Fabric](/fabric/database/sql/overview), your data is automatically accessible from other Fabric experiences. SQL database in Microsoft Fabric, which uses the same SQL Database Engine as Microsoft SQL Server and is similar to Azure SQL Database, inherits most of the Fabric mirroring capabilities from Azure SQL Database. Your SQL database in Fabric is automatically mirrored to OneLake and presented in a read-only, queryable format. You can use all the different services in Fabric, such as running analytics with Spark, executing notebooks, data engineering, visualizing through Power BI Reports, and more.
+
+For more information, see [SQL database in Microsoft Fabric (Preview)](/sql/sql-server/fabric-database/sql-database-in-fabric).
 
 ## Related content
 
@@ -190,4 +202,3 @@ For pricing:
 
 To migrate:
 - [Migrate to Azure SQL](migration-guides/index.yml)
-- [Identify the right SKU for your on-premises database](/sql/dma/dma-sku-recommend-sql-db/)

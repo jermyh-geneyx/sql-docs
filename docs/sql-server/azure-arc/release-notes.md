@@ -4,7 +4,7 @@ description: Latest release notes for SQL Server enabled by Azure Arc
 author: anosov1960
 ms.author: sashan
 ms.reviewer: mikeray, randolphwest
-ms.date: 07/16/2025
+ms.date: 08/15/2025
 ms.topic: conceptual
 ms.custom:
   - ignite-2023
@@ -21,9 +21,28 @@ This article lists:
 - High level feature descriptions
 - Links to additional feature documentation
 
-Extension versions are cumulative. Higher extension versions include all of the updates from previous versions. A release might include internal features. If the version release notes don't describe features, then the updates were internal.
+Extension versions are cumulative. Higher extension versions include all of the updates from previous versions. A release might also include internal features.
 
 Only Azure extension for SQL Server agent versions released within the last year are supported.
+
+## August
+
+**Extension version**: `1.1.3139.313`
+
+## August 14, 2025
+
+SQL Server enabled by Azure Arc is generally available in US Government Virginia. For more information, review [SQL Server enabled by Azure Arc in US Government](us-government-region.md). In addition to features announced earlier, you can:
+
+- [Subscribe to Extended Security Updates in a production environment](extended-security-updates.md#subscribe-to-extended-security-updates-in-a-production-environment)
+- [Manage licensing and billing](manage-license-billing.md)
+
+This release announces the feature is generally available. It doesn't update extension version or other components of any agent or extension.
+
+## July 29, 2025
+
+**Extension version**: `1.1.3119.307`
+
+This release updates the extension to support specific cloud environments.
 
 ## July 2025
 

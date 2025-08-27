@@ -4,12 +4,14 @@ description: Learn how to connect to a database in Azure SQL Database and query 
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: alexwolf, mathoma, vanto, randolphwest
-ms.date: 04/10/2025
+ms.date: 08/07/2025
 ms.service: azure-sql-database
 ms.subservice: security
 ms.topic: quickstart
 ms.custom:
   - passwordless-dotnet
+  - sfi-image-nochange
+  - sfi-ropc-nochange
 monikerRange: "=azuresql || =azuresql-db"
 ---
 
@@ -217,7 +219,7 @@ To update the database schema to match your data model using Entity Framework Co
 
    ---
 
-3. A `Migrations` folder should appear in your project directory, along with a file called `InitialCreate` with unique numbers prepended. Run the migration to create the database using the following command:
+3. A `Migrations` folder should appear in your project directory, along with a file called `InitialCreate` with unique numbers prepended. Run the migration to create the database using the following command, and the Entity Framework Core tooling creates the database schema in Azure defined by the `PersonDbContext` class.
 
    ## [Visual Studio](#tab/visual-studio)
 
@@ -233,8 +235,6 @@ To update the database schema to match your data model using Entity Framework Co
 
    ---
 
-   The Entity Framework Core tooling creates the database schema in Azure defined by the `PersonDbContext` class.
-
 ## Test the app locally
 
 The app is ready to be tested locally. Make sure you're signed in to Visual Studio or the Azure CLI with the same account you set as the admin for your database.
@@ -245,9 +245,9 @@ The app is ready to be tested locally. Make sure you're signed in to Visual Stud
 
 1. Modify the sample JSON to include values for the first name and family name. Select **Execute** to add a new record to the database. The API returns a successful response.
 
-   :::image type="content" source="media/passwordless-connections/api-testing-small.png" alt-text="Screenshot showing how to test the API." lightbox="media/passwordless-connections/api-testing.png":::
+   :::image type="content" source="media/azure-sql-dotnet-entity-framework-core-quickstart/api-testing-small.png" alt-text="Screenshot showing how to test the API." lightbox="media/azure-sql-dotnet-entity-framework-core-quickstart/api-testing.png":::
 
-1. Expand the **GET** method on the Swagger UI page and select **Try it**. Select **Execute**, and the person you just created is returned.
+1. Expand the `GET` method on the Swagger UI page and select **Try it**. Select **Execute**, and the person you just created is returned.
 
 ## Deploy to Azure App Service
 
@@ -259,13 +259,13 @@ The app is ready to be deployed to Azure. Visual Studio can create an Azure App 
 1. For the specific target, select **Azure App Service (Windows)**, and then select **Next**.
 1. Select the green **+** icon to create a new App Service to deploy to and enter the following values:
 
-   - **Name**: Leave the default value.
-   - **Subscription name**: Select the subscription to deploy to.
-   - **Resource group**: Select **New** and create a new resource group called *msdocs-dotnet-sql*.
-   - **Hosting Plan**: Select **New** to open the hosting plan dialog. Leave the default values and select **OK**.
-   - Select **Create** to close the original dialog. Visual Studio creates the App Service resource in Azure.
-
-     :::image type="content" source="media/passwordless-connections/create-app-service-small.png" alt-text="Screenshot showing how to deploy with Visual Studio." lightbox="media/passwordless-connections/create-app-service.png":::
+    - **Name**: Leave the default value.
+    - **Subscription name**: Select the subscription to deploy to.
+    - **Resource group**: Select **New** and create a new resource group called *msdocs-dotnet-sql*.
+    - **Hosting Plan**: Select **New** to open the hosting plan dialog. Leave the default values and select **OK**.
+    - Select **Create** to close the original dialog. Visual Studio creates the App Service resource in Azure.
+    
+    :::image type="content" source="media/azure-sql-dotnet-entity-framework-core-quickstart/create-app-service-small.png" alt-text="Screenshot showing how to deploy with Visual Studio." lightbox="media/azure-sql-dotnet-entity-framework-core-quickstart/create-app-service.png":::
 
 1. Once the resource is created, make sure you select in the list of app services, and then select **Next**.
 
@@ -339,7 +339,7 @@ The Azure portal allows you to work with managed identities and run queries agai
    GO
    ```
 
-   :::image type="content" source="media/passwordless-connections/query-editor-small.png" alt-text="Screenshot showing how to use the Azure Query editor." lightbox="media/passwordless-connections/query-editor.png":::
+   :::image type="content" source="media/azure-sql-dotnet-entity-framework-core-quickstart/query-editor-small.png" alt-text="Screenshot showing how to use the Azure Query editor." lightbox="media/azure-sql-dotnet-entity-framework-core-quickstart/query-editor.png":::
 
    This SQL script creates a SQL database user that maps back to the managed identity of your App Service instance. It also assigns the necessary SQL roles to the user to allow your app to read, write, and modify the data and schema of your database. After this step is completed, your services are connected.
 

@@ -4,7 +4,7 @@ description: Learn how to configure the client computer and application for encr
 author: suresh-kandoth
 ms.author: sureshka
 ms.reviewer: randolphwest, vanto
-ms.date: 01/30/2025
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: how-to
@@ -17,8 +17,8 @@ A client computer must trust the server certificate so that the client can reque
 - Forces encryption for all incoming client connections to [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)].
 - Use certificates from a public commercial certification authority that Windows already trusts. The corresponding root certificate for the CA is installed in the [Trusted Root Certification Authorities certificate store](/windows-hardware/drivers/install/trusted-root-certification-authorities-certificate-store) on all the computers in your network.
 
-In this scenario, you don't need to perform extra steps for successful encryption after configuring [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] for encryption as per the procedure described in [Configure SQL Server Database Engine for encrypting connections](configure-sql-server-encryption.md).
-This article provides the procedures for encrypting connections to [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] for less common scenarios that aren't covered in [Configure SQL Server Database Engine for encrypting connections](configure-sql-server-encryption.md).
+In this scenario, you don't need to perform extra steps for successful encryption after configuring [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] for encryption as per the procedure described in [Encrypt connections to SQL Server by importing a certificate](configure-sql-server-encryption.md).
+This article provides the procedures for encrypting connections to [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] for less common scenarios that aren't covered in [Encrypt connections to SQL Server by importing a certificate](configure-sql-server-encryption.md).
 
 > [!NOTE]  
 > For a complete list of participants in the Microsoft Trusted Root Program, see [List of Participants - Microsoft Trusted Root Program](/security/trusted-root/participants-list).
@@ -33,7 +33,7 @@ This article provides the procedures for encrypting connections to [!INCLUDE [ss
 
 ### Scenario 1: You want to encrypt all the connections to SQL Server
 
-After completing both the procedures documented in [Step 1: Configure SQL Server to use certificates](configure-sql-server-encryption.md#step-1-configure-sql-server-to-use-certificates) and [Step 2: Configure encryption settings in SQL Server](configure-sql-server-encryption.md#step-2-configure-encryption-settings-in-sql-server) in the article [Configure SQL Server Database Engine for encrypting connections](configure-sql-server-encryption.md), use one of the following options to configure your client application for encryption.
+After completing both the procedures documented in [Step 1: Configure SQL Server to use certificates](configure-sql-server-encryption.md#step-1-configure-sql-server-to-use-certificates) and [Step 2: Configure encryption settings in SQL Server](configure-sql-server-encryption.md#step-2-configure-encryption-settings-in-sql-server) in the article [Encrypt connections to SQL Server by importing a certificate](configure-sql-server-encryption.md), use one of the following options to configure your client application for encryption.
 
 <a id="scenario1option1"></a>
 
@@ -49,7 +49,7 @@ After completing both the procedures documented in [Step 1: Configure SQL Server
 
 ### Scenario 2: Only some clients need encrypted connections
 
-After you configure the certificate for [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] use as documented in [Step 1](configure-sql-server-encryption.md#step-1-configure-sql-server-to-use-certificates) in [Configure SQL Server Database Engine for encrypting connections](configure-sql-server-encryption.md), use one of the following options to configure your client application for encryption:
+After you configure the certificate for [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] use as documented in [Step 1](configure-sql-server-encryption.md#step-1-configure-sql-server-to-use-certificates) in [Encrypt connections to SQL Server by importing a certificate](configure-sql-server-encryption.md), use one of the following options to configure your client application for encryption:
 
 <a id="scenario2option1"></a>
 
@@ -71,7 +71,7 @@ For more information about server certificates and encryption, see [Using TrustS
 
 ### Scenario 1: You want to encrypt all incoming connections to SQL Server
 
-1. Enable encryption on [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] using the procedure [Step 2: Configure encryption settings in SQL Server](configure-sql-server-encryption.md#step-2-configure-encryption-settings-in-sql-server) documented in [Configure SQL Server Database Engine for encrypting connections](configure-sql-server-encryption.md).
+1. Enable encryption on [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] using the procedure [Step 2: Configure encryption settings in SQL Server](configure-sql-server-encryption.md#step-2-configure-encryption-settings-in-sql-server) documented in [Encrypt connections to SQL Server by importing a certificate](configure-sql-server-encryption.md).
 
 1. Configure client applications to trust the server certificate. Trusting the server certificate causes the client to skip the step that validates the server certificate and continue with the encryption process. For example, if you're using [!INCLUDE [ssmanstudiofull-md](../../includes/ssmanstudiofull-md.md)] (SSMS) 20 and later versions, you can select **Trust Server Certificate** on the **Login** page (or on the **Options** page in earlier versions).
 

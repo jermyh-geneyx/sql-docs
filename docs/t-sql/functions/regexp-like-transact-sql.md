@@ -62,11 +62,22 @@ Boolean value. `true` or `false`.
 
 ## Remarks
 
+### SARGability support
+
+`REGEXP_LIKE` supports *SARGability* when the pattern begins with anchor `^` and also the patterns that include quantifiers such as `*`, `+`, `?`, `{m}`, `{m,}`, and `{m,n}`, for example, `^ab+` or `^ab*` etc. This allows the query optimizer to use index seek operations, improving query performance. However, regular expressions do not honor collation rules, which may lead to differences in behavior when compared to other string comparison functions like `LIKE`, especially on indexed columns with language-specific collations.
+
+> [!NOTE]  
+> [!INCLUDE [search-argument](../../includes/paragraph-content/search-argument.md)]
+
+For example, in Turkish collation, the characters `i` and `I` are treated distinctly even in the case-insensitive collation due to language-specific rules.
+
+### Cardinality estimation
+
 To enhance the accuracy of [cardinality estimation](../../relational-databases/performance/cardinality-estimation-sql-server.md) for the `REGEXP_LIKE` function, you can use the `ASSUME_FIXED_MIN_SELECTIVITY_FOR_REGEXP` and `ASSUME_FIXED_MAX_SELECTIVITY_FOR_REGEXP` query hints to adjust the default selectivity values. For more information, see [Query hints](../queries/hints-transact-sql-query.md#use_hint).
 
-These query hints are also integrated with [Cardinality estimation (CE) feedback](../../relational-databases/performance/intelligent-query-processing-cardinality-estimation-feedback.md). The CE feedback model automatically identifies queries using `REGEXP_LIKE` function where there is a significant difference between estimated and actual row counts. It then applies the appropriate selectivity hint at the query level to improve plan quality without requiring manual input. 
- 
-To disable this automatic feedback-based behavior, enable Trace Flag 16268.
+These query hints are also integrated with [Cardinality estimation (CE) feedback](../../relational-databases/performance/intelligent-query-processing-cardinality-estimation-feedback.md). The CE feedback model automatically identifies queries using `REGEXP_LIKE` function where there is a significant difference between estimated and actual row counts. It then applies the appropriate selectivity hint at the query level to improve plan quality without requiring manual input.
+
+To disable the automatic feedback behavior, enable Trace Flag 16268.
 
 ## Examples
 
@@ -102,6 +113,41 @@ CREATE TABLE EMPLOYEES (
     CHECK (REGEXP_LIKE (Phone_Number, '^(\d{3})-(\d{3})-(\d{4})$'))  
 );
 ```
+
+Here's an example that demonstrates SARGable vs non-SARGable use of the `REGEXP_LIKE` function with Turkish collation.
+
+```sql
+-- Create a temporary table with Turkish collation and and an index
+CREATE TABLE #Users (
+    Username NVARCHAR(100) COLLATE Turkish_100_CI_AS_SC_UTF8 NOT NULL,
+    INDEX idx_username (Username)
+);
+
+-- Insert sample data
+INSERT INTO #Users (Username)
+VALUES (N'i'),    -- lowercase i
+       (N'I'),    -- uppercase dotless I
+       (N'İ'),    -- uppercase dotted İ
+       (N'abc');
+
+-- SARGable pattern: starts with ^ and uses quantifier
+-- This will use index seek if applicable, but REGEXP_LIKE ignores collation
+-- So 'i' and 'I' are treated as different characters
+SELECT 'SARGable' AS PatternType, * 
+FROM #Users
+WHERE REGEXP_LIKE(Username, '^i');
+
+-- Non-SARGable pattern: does not start with ^
+-- REGEXP_LIKE performs full scan, and matches are case-insensitive since 'i' flag is supplied
+-- So both 'i' and 'I' will match
+SELECT 'Non-SARGable' AS PatternType, * 
+FROM #Users
+WHERE REGEXP_LIKE(Username, 'i','i');
+
+-- Cleanup
+DROP TABLE #Users;
+```
+
 
 ## Related content
 

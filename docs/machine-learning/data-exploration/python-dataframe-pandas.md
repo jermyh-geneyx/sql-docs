@@ -8,10 +8,11 @@ ms.date: 07/23/2020
 ms.service: sql
 ms.subservice: machine-learning
 ms.topic: how-to
-monikerRange: ">=sql-server-2017||>=sql-server-linux-ver15||=azuresqldb-mi-current||=azuresqldb-current"
+monikerRange: ">=sql-server-2017||>=sql-server-linux-ver15||=azuresqldb-mi-current||=azuresqldb-current||=fabric"
+ms.custom: sfi-ropc-blocked
 ---
 # Insert data from a SQL table into a Python pandas dataframe
-[!INCLUDE[SQL Server SQL DB SQL MI](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE[SQL Server SQL DB SQL MI FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 This article describes how to insert SQL data into a [pandas](https://pandas.pydata.org/) dataframe using the [pyodbc](../../connect/python/pyodbc/python-sql-driver-pyodbc.md) package in Python. The rows and columns of data contained within the dataframe can be used for further data exploration.
 

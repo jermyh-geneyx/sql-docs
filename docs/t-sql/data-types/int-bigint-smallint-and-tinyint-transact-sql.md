@@ -4,7 +4,7 @@ description: "Transact-SQL reference for int, bigint, smallint, and tinyint data
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest
-ms.date: 09/24/2024
+ms.date: 08/21/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: "reference"
@@ -33,7 +33,7 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 
 [!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw-fabricsqldb](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricse-fabricdw-fabricsqldb.md)]
 
-Exact-number data types that use integer data. To save space in the database, use the smallest data type that can reliably contain all possible values. For example, **tinyint** would be sufficient for a person's age, because no one lives to be more than 255 years old. But **tinyint** isn't sufficient for a building's age, because a building can be more than 255 years old.
+Exact-number data types that use integer data. To save space in the database, use the smallest data type that can reliably contain all possible values. For example, **tinyint** would be sufficient for a small lookup table with status values, because it can store as many as 256 rows. But **tinyint** isn't sufficient for a list of employees, because your company could have hundreds or thousands of employees.
 
 | Data type | Range | Range expression | Storage |
 | --- | --- | --- | --- |
@@ -52,7 +52,7 @@ Functions return **bigint** only if the parameter expression is a **bigint** dat
 
 ### Conversion and parameterization
 
-When you use the `+`, `-`, `*`, `/`, or `%` arithmetic operators to perform implicit or explicit conversion of **int**, **smallint**, **tinyint**, or **bigint** constant values to the **float**, **real**, **decimal** or **numeric** data types, the rules that [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] applies when it calculates the data type and precision of the expression results differ depending on whether the query is autoparameterized or not.  
+When you use the `+`, `-`, `*`, `/`, or `%` arithmetic operators to perform implicit or explicit conversion of **int**, **smallint**, **tinyint**, or **bigint** constant values to the **float**, **real**, **decimal**, or **numeric** data types, the rules that [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] applies when it calculates the data type and precision of the expression results differ depending on whether the query is autoparameterized or not.  
 
 Therefore, similar expressions in queries can sometimes produce different results. When a query isn't autoparameterized, the constant value is first converted to **decimal**, whose precision is just large enough to hold the value of the constant, before converting to the specified data type. For example, the constant value `1` is converted to **decimal(1,0)**, and the constant value `250` is converted to **decimal(3,0)**.  
 
@@ -67,7 +67,8 @@ When integers are implicitly converted to a character data type, if the integer 
 Integer constants greater than 2,147,483,647 are converted to the **decimal** data type, not the **bigint** data type. The following example shows that when the threshold value is exceeded, the data type of the result changes from an **int** to a **decimal**.
 
 ```sql
-SELECT 2147483647 / 2 AS Result1, 2147483649 / 2 AS Result2;
+SELECT 2147483647 / 2 AS Result1,
+       2147483649 / 2 AS Result2;
 ```
 
 [!INCLUDE [ssResult](../../includes/ssresult-md.md)]
@@ -80,10 +81,11 @@ Result1      Result2
 
 ## Examples
 
-The following example creates a table using the **bigint**, **int**, **smallint**, and **tinyint** data types. Values are inserted into each column and returned in the SELECT statement.
+The following example creates a table using the **bigint**, **int**, **smallint**, and **tinyint** data types. Values are inserted into each column and returned in the `SELECT` statement.
 
 ```sql
-CREATE TABLE dbo.MyTable (
+CREATE TABLE dbo.MyTable
+(
     MyBigIntColumn BIGINT,
     MyIntColumn INT,
     MySmallIntColumn SMALLINT,
@@ -92,12 +94,7 @@ CREATE TABLE dbo.MyTable (
 GO
 
 INSERT INTO dbo.MyTable
-VALUES (
-    9223372036854775807,
-    2147483647,
-    32767,
-    255
-);
+VALUES (9223372036854775807, 2147483647, 32767, 255);
 GO
 
 SELECT MyBigIntColumn,

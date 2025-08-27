@@ -8,6 +8,7 @@ ms.date: 04/29/2024
 ms.service: azure-sql-managed-instance
 ms.subservice: performance
 ms.topic: how-to
+ms.custom: sfi-image-nochange
 ---
 # Create alerts for Azure SQL Managed Instance using the Azure portal
 [!INCLUDE [appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
@@ -47,7 +48,7 @@ You can configure and get information about alert rules using:
 - [PowerShell](/azure/azure-monitor/alerts/alerts-create-rule-cli-powershell-arm#create-a-new-alert-rule-using-powershell)
 - [Command-line interface (CLI)](/azure/azure-monitor/alerts/alerts-create-rule-cli-powershell-arm#create-a-new-alert-rule-using-the-cli)
 - [ARM template](/azure/azure-monitor/alerts/alerts-create-rule-cli-powershell-arm#create-a-new-alert-rule-using-an-arm-template)
-- [Azure Monitor REST API](/rest/api/monitor/alertrules)
+- [Azure Monitor REST API](/rest/api/monitor/alertsmanagement/alert-processing-rules)
 
 ### <a id="alerting-metrics-available-for-managed-instance"></a> Alert metrics available for Azure SQL Managed Instance
 

@@ -5,7 +5,7 @@ description: Learn about the new features and documentation improvements for Azu
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: mathoma, randolphwest
-ms.date: 07/09/2025
+ms.date: 08/11/2025
 ms.service: azure-sql-database
 ms.subservice: service-overview
 ms.topic: whats-new
@@ -55,9 +55,7 @@ The following table lists the features of Azure SQL Database that are currently 
 | **Network Security Perimeter** | [Azure Network Security Perimeter](network-security-perimeter.md) allows organizations to define a logical network isolation boundary for PaaS resources (for example, Azure Storage and SQL Database) that are deployed outside your organization's virtual networks. It restricts public network access to PaaS resources outside of the perimeter, and access can be exempted by using explicit access rules for public inbound and outbound. |
 | **Query editor in the Azure portal** | The [query editor in the Azure portal](query-editor.md) allows you to run queries against your Azure SQL Database directly from a web browser. |
 | **Regular expression functions** | Regular expression (REGEX) functions return text based on values in a search pattern. [Regular expressions](/sql/relational-databases/regular-expressions/overview). |
-| **UNISTR (Transact-SQL)** | Azure SQL Database now supports the `UNISTR` T-SQL syntax for Unicode string literals. For more information, see [UNISTR (Transact-SQL)](/sql/t-sql/functions/unistr-transact-sql).|
 | **Vector data type and functions** | Working with vector data is now easier in Azure SQL Database with the introduction of a new [vector data type](/sql/t-sql/data-types/vector-data-type?view=azuresqldb-current&preserve-view=true) and [vector functions](/sql/t-sql/functions/vector-functions-transact-sql?view=azuresqldb-current&preserve-view=true). For more information, see [Intelligent applications with Azure SQL Database](ai-artificial-intelligence-intelligent-applications.md#vectors).|
-| **\|\| (String concatenation) and \|\|= (Compound assignment) syntax support** | Azure SQL Database now supports [\|\| (String concatenation)](/sql/t-sql/language-elements/string-concatenation-pipes-transact-sql?view=azuresqldb-current&preserve-view=true) and [\|\|= (Compound assignment)](/sql/t-sql/language-elements/compound-assignment-pipes-transact-sql?view=azuresqldb-current&preserve-view=true) Transact-SQL syntax.|
 
 ## General availability (GA)
 
@@ -65,6 +63,9 @@ The following table lists features of Azure SQL Database that have been made gen
 
 | Feature | GA Month | Details |
 | --- | --- | --- |
+| **sys.dm_hs_database_replicas** | August 2025 | You can query the details of Azure SQL Database Hyperscale replicas with the new dynamic management view (DMV) [sys.dm_hs_database_replicas](/sql/relational-databases/system-functions/sys-dm-hs-database-replicas).|
+| **UNISTR (Transact-SQL)** | July 2025 | Azure SQL Database now supports the `UNISTR` T-SQL syntax for Unicode string literals. For more information, see [UNISTR (Transact-SQL)](/sql/t-sql/functions/unistr-transact-sql).|
+| **\|\| (String concatenation) and \|\|= (Compound assignment) syntax support** | July 2025 | Azure SQL Database now supports [\|\| (String concatenation)](/sql/t-sql/language-elements/string-concatenation-pipes-transact-sql?view=azuresqldb-current&preserve-view=true) and [\|\|= (Compound assignment)](/sql/t-sql/language-elements/compound-assignment-pipes-transact-sql?view=azuresqldb-current&preserve-view=true) Transact-SQL syntax.|
 | **Degrees of Parallelism (DOP) feedback** | July 2025 | [DOP Feedback](/sql/relational-databases/performance/intelligent-query-processing-degree-parallelism-feedback?view=azuresqldb-current&preserve-view=true) is now generally available for Azure SQL Database. For more information, see [Smarter Parallelism: Degree of parallelism feedback in SQL Server 2025](https://techcommunity.microsoft.com/blog/sqlserver/smarter-parallelism-degree-of-parallelism-feedback-in-sql-server-2025/4431318). |
 | **Audit re-architecture** | July 2025 | Increased availability and reliability of server audits through a re-architecture of auditing in Azure SQL Database that is closely aligned with SQL Server and Azure SQL Managed Instance. For more information, see [Auditing](auditing-overview.md#enhancements-to-performance-availability-and-reliability-in-server-auditing-for-azure-sql-database-july-2025-ga).|
 | **Hyperscale increased log generation rate** | May 2025 | The transaction log generation rate in Azure SQL Database Hyperscale single databases has been increased from 100 MiB/s to 150 MiB/s for premium-series and premium-series memory optimized hardware. For more information, read [Blog: Enhancements to Azure SQL Database Hyperscale](https://aka.ms/HSenhancements).|
@@ -86,22 +87,23 @@ The following table lists features of Azure SQL Database that have been made gen
 | **Maintenance window support for named replicas** |August 2024|[Maintenance window](maintenance-window.md) support for named replicas is now generally available. For more information, see [General Availability: Maintenance window support for Azure SQL Database Hyperscale named replica](https://aka.ms/MWsupportforNR).|
 | **Maintenance window support for Hyperscale** | August 2024| [Maintenance window](maintenance-window.md) support for Hyperscale databases is now generally available. |
 | **Automatic backups on secondary replicas** | August 2024 | Mitigate the performance impact on your workload by taking [automated backups from the non-readable secondary replica](automated-backups-overview.md#automatic-backups-on-secondary-replicas) in the Business Critical service tier. |
-| **Database compatibility level 160 is now default** | June 2024 | [Database compatibility level 160](/sql/t-sql/statements/alter-database-transact-sql-compatibility-level?view=azuresqldb-current&preserve-view=true) is now the default for new databases created in Azure SQL Database. For more information on this announcement, see [General availability: Database compatibility level 160 in Azure SQL Database](https://techcommunity.microsoft.com/t5/azure-sql-blog/general-availability-database-compatibility-level-160-in-azure/ba-p/4172039). |
-| **Hyperscale named replica zone redundant support** | June 2024 | [Zone redundancy support for Hyperscale named replicas](https://techcommunity.microsoft.com/blog/azuresqlblog/general-availability-maintenance-window-support-for-azure-sql-database-hyperscal/4207651) is now generally available. For more information, see [Hyperscale secondary replicas](service-tier-hyperscale-replicas.md). |
-| **License-free standby replica** | May 2024 | Save on licensing costs by configuring your [secondary database replica for disaster recovery standby](standby-replica-how-to-configure.md). |
-| **Elastic jobs** | April 2024 | [Elastic jobs, now generally available](https://techcommunity.microsoft.com/t5/azure-sql-blog/general-availability-elastic-jobs-in-azure-sql-database/ba-p/4087140), are the SQL Server Agent replacement for Azure SQL Database. [Elastic jobs](elastic-jobs-overview.md) now support Microsoft Entra ID authentication, private endpoints, management via REST APIs, Azure Alerts, and more new features since preview began. |
-| **Maintenance window advance notifications** | March 2024 | [Advance notifications](advance-notifications.md) are now generally available for databases configured to use a nondefault [maintenance window](maintenance-window.md). |
-| **Azure SQL triggers for Azure Functions** | March 2024 | Azure Functions supports [function triggers for Azure SQL Database](/azure/azure-functions/functions-bindings-azure-sql-trigger). |
-| **Serverless Hyperscale** | February 2024 | Automatically scale your Hyperscale databases up and down based on usage when using the [serverless compute tier](serverless-tier-overview.md). |
 
 ## Documentation changes
 
 Learn about significant changes to the Azure SQL Database documentation. For previous years, see the [What's new archive](doc-changes-updates-release-notes-whats-new-archive.md).
 
+### August 2025
+
+| Changes | Details |
+| --- | --- |
+| **sys.dm_hs_database_replicas** | You can query the details of Azure SQL Database Hyperscale replicas with the new dynamic management view (DMV) [sys.dm_hs_database_replicas](/sql/relational-databases/system-functions/sys-dm-hs-database-replicas).|
+
 ### July 2025
 
 | Changes | Details |
 | --- | --- |
+| **UNISTR** | Azure SQL Database now supports the `UNISTR`. This syntax is now generally available. For more information, see [UNISTR (Transact-SQL)](/sql/t-sql/functions/unistr-transact-sql). |
+| **\| \| and \| \| = string concatenation support** | Azure SQL Database now supports \| \| and \| \| = compound assignment T-SQL syntax. This syntax is now generally available. For more information, see [&#124;&#124; (String concatenation)](/sql/t-sql/language-elements/string-concatenation-pipes-transact-sql) and [&#124;&#124;= (Compound assignment)](/sql/t-sql/language-elements/compound-assignment-pipes-transact-sql). |
 | **Degrees of Parallelism (DOP) feedback** | [DOP Feedback](/sql/relational-databases/performance/intelligent-query-processing-degree-parallelism-feedback?view=azuresqldb-current&preserve-view=true) is now generally available for Azure SQL Database. For more information, see [Smarter Parallelism: Degree of parallelism feedback in SQL Server 2025](https://techcommunity.microsoft.com/blog/sqlserver/smarter-parallelism-degree-of-parallelism-feedback-in-sql-server-2025/4431318). |
 | **Convert to Hyperscale with geo-replicas (preview)** |The ability to [convert a geo-replicated database non-Hyperscale database to Hyperscale](convert-to-hyperscale.md) using T-SQL, REST API, PowerShell, or Azure CLI is currently a preview feature. For more information, see [Blog: Hyperscale conversion support for geo-replicas](https://aka.ms/hs-conversion-geodr-preview). |
 | **Audit re-architecture GA** | Enhancements to performance, availability, and reliability in server auditing for Azure SQL Database. For more information, see [Auditing](auditing-overview.md#enhancements-to-performance-availability-and-reliability-in-server-auditing-for-azure-sql-database-july-2025-ga). |

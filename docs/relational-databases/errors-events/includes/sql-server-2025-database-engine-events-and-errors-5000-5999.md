@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/15/2025
+ms.date: 08/14/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -85,7 +85,7 @@ ms.topic: include
 | 5081 | 16 | No | The value for change tracking option '%ls' is not valid. The value must be a positive number. |
 | 5082 | 16 | No | Cannot change the versioning state on database "%.\*ls" together with another database state. |
 | 5083 | 16 | No | The termination option is not supported when making versioning state changes. |
-| 5084 | 10 | Yes | Setting database option %ls to %ls for database '%.\*ls'. |
+| 5084 | 10 | Yes | Setting database option %ls to %ls for database '%.\*ls'.%ls |
 | 5085 | 16 | No | Alter database command failed because SQL Server was started with one or more undocumented trace flags that prevent enabling/disabling database for versioning. |
 | 5086 | 16 | No | Cannot disable vardecimal storage format for database "%.\*ls" because there are one or more tables that have vardecimal storage format enabled. Disable the vardecimal storage format on all tables before disabling the vardecimal storage format for the database. |
 | 5087 | 16 | No | The file content type mismatches with the content type of the filegroup. |
@@ -160,7 +160,7 @@ ms.topic: include
 | 5182 | 10 | Yes | New log file '%.\*ls' was created. |
 | 5183 | 16 | No | Cannot create the file "%ls". Use WITH MOVE to specify a usable physical file name. Use WITH REPLACE to overwrite an existing file. |
 | 5184 | 16 | No | Cannot use file '%.\*ls' for clustered server. Only formatted files on which the cluster resource of the server has a dependency can be used. Either the disk resource containing the file is not present in the cluster group or the cluster resource of the Sql Server does not have a dependency on it. |
-| 5185 | 16 | No | Cannot find the matching log file for FILESTRAM file '%.\*ls'. |
+| 5185 | 16 | No | Cannot find the matching log file for FILESTREAM file '%.\*ls'. |
 | 5186 | 16 | No | Encountered an error (NT status code 0x%x) while attempting to start the Transactional File System Resource Manager '%.\*ls'. |
 | 5188 | 16 | No | Encountered error (NT status code 0x%x) while attempting to perform redo for transactional file system resource manager '%.\*ls'. |
 | 5189 | 16 | No | Encountered error (NT status code 0x%x) while attempting to perform undo for transactional file system resource manager '%.\*ls'. |
@@ -203,7 +203,7 @@ ms.topic: include
 | 5227 | 10 | No | %.\*ls: Page %d:%d (type BULK_OPERATION_PAGE) could not be deallocated. |
 | [5228](../mssqlserver-5228-database-engine-error.md) | 16 | No | Table error: object ID %d, index ID %d, partition ID %I64d, alloc unit ID %I64d (type %.\*ls), page %S_PGID, row %d. DBCC detected incomplete cleanup from an online index build operation. (The anti-matter column value is %d.) |
 | [5229](../mssqlserver-5229-database-engine-error.md) | 16 | No | Table error: Object ID %d, index ID %d, partition ID %I64d, alloc unit ID %I64d (type %.\*ls) contains an anti-matter column, but is not a nonclustered index. |
-| 5230 | 10 | No | The check statement was aborted. DBCC CHECKCATALOG cannot be run on TEMPDB. |
+| 5230 | 10 | No | The check statement was aborted. DBCC CHECKCATALOG cannot be run on tempdb. |
 | [5231](../mssqlserver-5231-database-engine-error.md) | 10 | No | Object ID %ld (object '%.\*ls'): A deadlock occurred while trying to lock this object for checking. This object has been skipped and will not be processed. |
 | 5232 | 10 | No | DBCC CHECKDB will not check SQL Server catalog or Service Broker consistency because a database snapshot could not be created or because WITH TABLOCK was specified. |
 | [5233](../mssqlserver-5233-database-engine-error.md) | 16 | No | Table error: alloc unit ID %I64d, page %S_PGID. The test (%.\*ls) failed. The values are %ld and %ld. |
@@ -226,7 +226,7 @@ ms.topic: include
 | [5250](../mssqlserver-5250-database-engine-error.md) | 16 | No | Database error: %ls page %S_PGID for database '%.\*ls' (database ID %d) is invalid. This error cannot be repaired. You must restore from backup. |
 | 5251 | 10 | No | %.\*ls: Heap page %d:%d could not be moved because maintaining NC indexes associated with the heap failed. |
 | 5252 | 10 | No | File ID %d of database ID %d cannot be shrunk to the expected size. The high concurrent workload is leading to too many deadlocks during the shrink operation. Re-run the shrink operation when the workload is lower. |
-| 5253 | 10 | No | The check statement was aborted. DBCC CHECKALLOC cannot be run on TEMPDB. |
+| 5253 | 10 | No | The check statement was aborted. DBCC CHECKALLOC cannot be run on tempdb. |
 | 5254 | 10 | No | %.\*ls: Heap page %d:%d could not be moved because the table to which it belonged was building the heap by another process. |
 | 5255 | 10 | No | %.\*ls: Page %d:%d could not be moved because it is a sort page. |
 | [5256](../mssqlserver-5256-database-engine-error.md) | 16 | No | Table error: alloc unit ID %I64d, page %S_PGID contains an incorrect page ID in its page header. The PageId in the page header = %S_PGID. |
@@ -354,6 +354,7 @@ ms.topic: include
 | 5380 | 16 | No | The specified column '%ls' contains unsupported character ('\[' or '\]'). |
 | 5381 | 16 | No | Internal error during Index On Expression creation for index: '%.\*s'. |
 | 5382 | 16 | No | Cannot drop index '%.\*s' because it contains $expression_index column and the 'Index on Expression' feature is OFF. |
+| 5383 | 16 | No | Cannot reference Index on Expression column '%.\*s' during index creation. |
 | 5501 | 16 | No | The FILESTREAM filegroup was dropped before the table can be created. |
 | 5502 | 16 | No | The FILESTREAM container is inaccessible. |
 | 5503 | 10 | No | Unable to find entry in sys.database_files for FILESTREAM file '%.\*ls'. |

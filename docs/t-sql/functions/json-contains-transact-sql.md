@@ -43,7 +43,7 @@ An expression that returns a SQL scalar value or **json** type value to search i
 
 A SQL/JSON path that specifies the search target in the JSON document. This parameter is optional.
 
-You can provide a variable as the value of *path*. The JSON path can specify lax or strict mode for parsing. If you don't specify the parsing mode, lax mode is the default. For more info, see [JSON Path Expressions (SQL Server)](../../relational-databases/json/json-path-expressions-sql-server.md).
+You can provide a variable as the value of *path*. The JSON path can specify lax or strict mode for parsing. If you don't specify the parsing mode, lax mode is the default. For more info, see [JSON Path Expressions](../../relational-databases/json/json-path-expressions-sql-server.md).
 
 The default value for *path* is `$`. As a result, if you don't provide a value for *path*, `JSON_CONTAINS` searches for the value in the entire JSON document.
 
@@ -177,5 +177,5 @@ is_value_found
 
 ## Related content
 
-- [JSON Path Expressions (SQL Server)](../../relational-databases/json/json-path-expressions-sql-server.md)
+- [JSON Path Expressions](../../relational-databases/json/json-path-expressions-sql-server.md)
 - [JSON data in SQL Server](../../relational-databases/json/json-data-sql-server.md)

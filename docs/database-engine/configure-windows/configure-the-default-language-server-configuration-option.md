@@ -1,9 +1,9 @@
 ---
-title: "Server configuration: default language"
+title: "Server Configuration: default language"
 description: Find out about the default language option. See how to configure it to specify the default language that SQL Server uses for all newly created logins.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 10/18/2024
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
@@ -32,7 +32,7 @@ Execute permissions on `sp_configure` with no parameters or with only the first 
 
 1. Select the **Advanced** tab.
 
-1. In the `default language` box, choose the language in which [!INCLUDE [msCoName](../../includes/msconame-md.md)] [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] should display system messages.
+1. In the `default language` box, choose the language in which [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] should display system messages.
 
    The default language is English.
 

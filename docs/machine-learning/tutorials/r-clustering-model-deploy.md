@@ -10,6 +10,7 @@ ms.service: sql
 ms.subservice: machine-learning
 ms.topic: tutorial
 monikerRange: ">=sql-server-2016||>=sql-server-linux-ver15||=azuresqldb-mi-current"
+ms.custom: sfi-ropc-blocked
 ---
 # Tutorial: Deploy a clustering model in R with SQL machine learning
 [!INCLUDE [SQL Server 2016 SQL MI](../../includes/applies-to-version/sqlserver2016-asdbmi.md)]
@@ -196,7 +197,9 @@ SELECT TOP (5) *
 FROM customer_return_clusters;
 ```
 
-```result
+[!INCLUDE [ssresult-md](../../includes/ssresult-md.md)]
+
+```output
 cluster  customer  orderRatio  itemsRatio  monetaryRatio  frequency
 1        29727     0           0           0              0
 4        26429     0           0           0.041979       1

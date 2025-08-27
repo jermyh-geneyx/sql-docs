@@ -4,15 +4,16 @@ description: Learn how the Schema Compare feature simplifies comparing databases
 author: tauseefsiddique10
 ms.author: tsiddique
 ms.reviewer: roblescarlos, randolphwest
-ms.date: 06/18/2025
+ms.date: 08/20/2025
 ms.service: sql
 ms.subservice: vs-code-sql-extensions
 ms.topic: overview
 ms.collection:
   - data-tools
+ai-usage: ai-assisted
 ---
 
-# Schema Compare (Preview)
+# Schema Compare
 
 This article provides an overview of the Schema Compare feature for the MSSQL extension in Visual Studio Code. Schema Compare compares two database definitions, and applies the differences from the source to the target, including active database connections, `.dacpac` files, and SQL projects.
 
@@ -30,9 +31,6 @@ Schema Compare provides the following features:
 - Save the comparison.
 
 :::image type="content" source="media/mssql-schema-compare/schema-compare-main-view.png" alt-text="Screenshot of the main view of Schema Compare showing differences between source and target." lightbox="media/mssql-schema-compare/schema-compare-main-view.png":::
-
-> [!NOTE]  
-> All features of Schema Compare are available in the preview version. You can provide feedback through [GitHub](https://aka.ms/vscode-mssql-schema-feedback).
 
 ## Install the MSSQL extension
 
@@ -80,6 +78,6 @@ To compare schemas, open the Schema Compare dialog box. To do so, follow these s
 
 - [Quickstart: Connect to and query a database with the MSSQL extension for Visual Studio Code](connect-database-visual-studio-code.md)
 - [GitHub Copilot for MSSQL extension for Visual Studio Code](../github-copilot/overview.md)
-- [Schema designer (Preview)](mssql-schema-designer.md)
+- [Schema Designer](mssql-schema-designer.md)
 - [Learn more about Visual Studio Code](https://code.visualstudio.com/docs)
 - [Learn more about contributing to the MSSQL extension](https://github.com/Microsoft/vscode-mssql/wiki)

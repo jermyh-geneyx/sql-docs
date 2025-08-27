@@ -10,6 +10,7 @@ ms.subservice: machine-learning
 ms.topic: tutorial
 ms.devlang: python
 monikerRange: ">=sql-server-2017||>=sql-server-linux-ver15||=azuresqldb-mi-current"
+ms.custom: sfi-ropc-blocked
 ---
 # Python tutorial: Prepare data to categorize customers with SQL machine learning
 [!INCLUDE [SQL Server 2017 SQL MI](../../includes/applies-to-version/sqlserver2017-asdbmi.md)]
@@ -127,7 +128,9 @@ Now display the beginning of the data frame to verify it looks correct.
 print("Data frame:", customer_data.head(n=5))
 ```
 
-```results
+[!INCLUDE [ssresult-md](../../includes/ssresult-md.md)]
+
+```output
 Rows Read: 37336, Total Rows Processed: 37336, Total Chunk Time: 0.172 seconds
 Data frame:     customer  orderRatio  itemsRatio  monetaryRatio  frequency
 0    29727.0    0.000000    0.000000       0.000000          0

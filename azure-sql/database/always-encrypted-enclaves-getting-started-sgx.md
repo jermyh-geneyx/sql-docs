@@ -4,12 +4,13 @@ description: Tutorial on how to create a basic environment for Always Encrypted 
 author: Pietervanhove
 ms.author: pivanho
 ms.reviewer: vanto, mathoma
-ms.date: 06/10/2025
+ms.date: 08/11/2025
 ms.service: azure-sql-database
 ms.subservice: security
 ms.topic: tutorial
 ms.custom:
   - devx-track-azurepowershell
+  - sfi-image-nochange
 ---
 # Tutorial: Getting started using Always Encrypted with Intel SGX enclaves in Azure SQL Database
 
@@ -186,6 +187,12 @@ In this step, you'll create and configure an attestation provider in Microsoft A
            && [ type=="x-ms-sgx-svn", value>= 2 ]
            && [ type=="x-ms-sgx-mrsigner", value=="e31c9e505f37a58de09335075fc8591254313eb20bb1a27e5443cc450b6e33e5"] 
        => permit();
+
+          [ type=="x-ms-sgx-is-debuggable", value==false ]
+           && [ type=="x-ms-sgx-product-id", value==4639 ]
+           && [ type=="x-ms-sgx-svn", value>= 2 ]
+           && [ type=="x-ms-sgx-mrsigner", value=="a0f8e7f72092fb6a5d5752ffccd47fb3af7027ffb589b24e921e81f5703f3a9a"]
+       => permit();
    };
    ```
 
@@ -203,13 +210,18 @@ In this step, you'll create and configure an attestation provider in Microsoft A
    version= 1.0;
    authorizationrules 
    {
-       [ type=="x-ms-sgx-is-debuggable", value==false ]
-        && [ type=="x-ms-sgx-product-id", value==4639 ]
-        && [ type=="x-ms-sgx-svn", value>= 2 ]
-        && [ type=="x-ms-sgx-mrsigner", value=="e31c9e505f37a58de09335075fc8591254313eb20bb1a27e5443cc450b6e33e5"] 
-    => permit();
-   };
+          [ type=="x-ms-sgx-is-debuggable", value==false ]
+           && [ type=="x-ms-sgx-product-id", value==4639 ]
+           && [ type=="x-ms-sgx-svn", value>= 2 ]
+           && [ type=="x-ms-sgx-mrsigner", value=="e31c9e505f37a58de09335075fc8591254313eb20bb1a27e5443cc450b6e33e5"] 
+       => permit();
 
+          [ type=="x-ms-sgx-is-debuggable", value==false ]
+           && [ type=="x-ms-sgx-product-id", value==4639 ]
+           && [ type=="x-ms-sgx-svn", value>= 2 ]
+           && [ type=="x-ms-sgx-mrsigner", value=="a0f8e7f72092fb6a5d5752ffccd47fb3af7027ffb589b24e921e81f5703f3a9a"]
+       => permit();
+   };
    ```
 
 1. Create an attestation provider.

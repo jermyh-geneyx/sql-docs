@@ -4,7 +4,7 @@ description: CREATE EXTERNAL MODEL (Transact-SQL) for creating an external model
 author: jettermctedder
 ms.author: bspendolini
 ms.reviewer: randolphwest
-ms.date: 06/27/2025
+ms.date: 08/15/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: "reference"
@@ -41,9 +41,10 @@ WITH
   (   LOCATION = '<prefix>://<path>[:<port>]'
     , API_FORMAT = '<OpenAI, Azure OpenAI, etc>'
     , MODEL_TYPE = EMBEDDINGS
-    , MODEL = 'text-embedding-ada-002'
+    , MODEL = 'text-embedding-model-name'
     [ , CREDENTIAL = <credential_name> ]
     [ , PARAMETERS = '{"valid":"JSON"}' ]
+    [ , LOCAL_RUNTIME_PATH = 'path to the ONNX runtime files' ]
   );
 ```
 
@@ -70,6 +71,7 @@ Accepted values are:
 - `Azure OpenAI`
 - `OpenAI`
 - `Ollama`
+- `ONNX Runtime`
 
 ### MODEL_TYPE
 
@@ -92,8 +94,12 @@ Indicate which `DATABASE SCOPED CREDENTIAL` object is used with the AI model inf
 A valid JSON string that contains runtime parameters to be appended to the AI model inference endpoint request message. For example:
 
 ```text
-'{ "Dimensions": 1536 }'
+'{ "dimensions": 1536 }'
 ```
+
+### LOCAL_RUNTIME_PATH
+
+`LOCAL_RUNTIME_PATH` specifies the directory on the local SQL Server where the ONNX runtime executables are located.
 
 ## Permissions
 
@@ -143,7 +149,7 @@ For example, to set the `retry_count` to 3, you would write the following JSON s
 Retry count can also be combined with other parameters as long as it's a valid JSON string.
 
 ```json
-{ "Dimensions": 725, "sql_rest_options": { "retry_count": 5 } }
+{ "dimensions": 725, "sql_rest_options": { "retry_count": 5 } }
 ```
 
 ## Remarks
@@ -217,13 +223,13 @@ Dropping views created with `SCHEMABINDING` and referencing an `EXTERNAL MODEL` 
 
 ## Catalog View
 
-External Model metadata is viewed by querying the `sys.external_models` catalog view. Note, you must have access to a model to be able to view the metadata.
+External Model metadata can be viewed with querying the `sys.external_models` catalog view. Note, you must have access to a model to be able to view the metadata.
 
 ```sql
 SELECT * FROM sys.external_models;
 ```
 
-## Examples
+## Examples with remote endpoints
 
 ### Create an EXTERNAL MODEL with Azure OpenAI using Managed Identity
 
@@ -252,7 +258,7 @@ WITH (
 
 ### Create an EXTERNAL MODEL with Azure OpenAI using API keys and parameters
 
-This example creates an `EXTERNAL MODEL` of the `EMBEDDINGS` type using Azure OpenAI and uses API Keys for authentication. The example also uses `PARAMETERS` to set the Dimensions parameter at the endpoint to 725.
+This example creates an `EXTERNAL MODEL` of the `EMBEDDINGS` type using Azure OpenAI and uses API Keys for authentication. The example also uses `PARAMETERS` to set the dimensions parameter at the endpoint to 725.
 
 ```sql
 -- Create access credentials to Azure OpenAI using a key:
@@ -269,7 +275,7 @@ WITH (
       MODEL_TYPE = EMBEDDINGS,
       MODEL = 'text-embedding-3-small',
       CREDENTIAL = [https://my-azure-openai-endpoint.openai.azure.com/],
-      PARAMETERS = '{"Dimensions":725}'
+      PARAMETERS = '{"dimensions":725}'
 );
 ```
 
@@ -309,6 +315,180 @@ WITH (
       CREDENTIAL = [https://openai.com]
 );
 ```
+
+## Example with a local ONNX runtime
+
+This example guides you through setting up SQL Server 2025 with an ONNX runtime to enable local AI-powered text embedding generation. It only applies on Windows.
+
+[ONNX Runtime](https://onnxruntime.ai/) is an open-source inference engine that allows you to run machine learning models locally, making it ideal for integrating AI capabilities into SQL Server environments.
+
+> [!IMPORTANT]
+> This feature requires that [SQL Server Machine Learning Services](../../machine-learning/install/sql-machine-learning-services-windows-install.md) is installed.
+
+### Step 1: Enable developer preview features on SQL Server 2025
+
+Run the following SQL command to enable SQL Server 2025 preview features in the database you would like use for this example:
+
+```sql
+ALTER DATABASE SCOPED CONFIGURATION  
+SET PREVIEW_FEATURES = ON;
+```
+
+### Step 2: Enable the local AI runtime on SQL Server 2025
+
+Enable external AI runtimes by running the following SQL:
+
+```sql
+EXEC sp_configure 'external AI runtimes enabled', 1;  
+RECONFIGURE WITH OVERRIDE;
+```
+
+### Step 3: Set up the ONNX runtime library
+
+Create a directory on the SQL Server to hold the ONNX runtime library files. In this example, `C:\onnx_runtime` is used.
+
+You can use the following commands to create the directory:
+
+```powershell
+cd C:\
+mkdir onnx_runtime
+```
+
+Next, [Download](https://github.com/microsoft/onnxruntime/releases) the ONNX Runtime (version ≥ 1.19) that is appropriate for your operating system. After unzipping the download, copy the `onnxruntime.dll` (located in the lib directory) to the `C:\onnx_runtime` directory that was created.
+
+### Step 4: Set up the tokenization library
+
+Download and build [the `tokenizers-cpp` library](https://github.com/mlc-ai/tokenizers-cpp/tree/main) from GitHub. Once the dll is created, place the tokenizer in the `C:\onnx_runtime` directory.
+
+> [!NOTE]
+> Ensure the created dll is named **tokenizers_cpp.dll**
+
+### Step 5: Download the ONNX model
+
+Start by creating the `model` directory in `C:\onnx_runtime\`.
+
+```powershell
+cd C:\onnx_runtime
+mkdir model
+```
+
+This example uses the `all-MiniLM-L6-v2-onnx` model, which can be downloaded from [Hugging Face](https://huggingface.co/nsense/all-MiniLM-L6-v2-onnx).
+
+Clone the repository into the `C:\onnx_runtime\model` directory with the following [git](https://git-scm.com/downloads) command:
+
+*If not installed, you can download git from the following [download link](https://git-scm.com/downloads) or via winget (winget install Microsoft.Git)*
+
+```cmd
+cd C:\onnx_runtime\model
+git clone https://huggingface.co/nsense/all-MiniLM-L6-v2-onnx
+```
+
+### Step 6: Set directory permissions
+
+Use the following PowerShell script to provide the MSSQLLaunchpad user access to the ONNX runtime directory:
+
+```powershell
+$AIExtPath = "C:\onnx_runtime";  
+$Acl = Get-Acl -Path $AIExtPath  
+$AccessRule = New-Object System.Security.AccessControl.FileSystemAccessRule("MSSQLLaunchpad", "FullControl", "ContainerInherit,ObjectInherit", "None","Allow")  
+$Acl.AddAccessRule($AccessRule)  
+Set-Acl -Path $AIExtPath -AclObject $Acl
+```
+
+### Step 7: Create the external model
+
+Run the following SQL to register your ONNX model as an external model object:
+
+***The 'PARAMETERS' value used here is a placeholder needed for SQL Server 2025 RC 0.***
+
+```sql
+CREATE EXTERNAL MODEL myLocalOnnxModel  
+WITH (  
+  LOCATION = 'C:\onnx_runtime\model\all-MiniLM-L6-v2-onnx',  
+  API_FORMAT = 'ONNX Runtime',  
+  MODEL_TYPE = EMBEDDINGS,  
+  MODEL = 'allMiniLM',  
+  PARAMETERS = '{"valid":"JSON"}',  
+  LOCAL_RUNTIME_PATH = 'C:\onnx_runtime\'  
+);
+```
+
+> [!IMPORTANT]
+> `LOCATION` should point to the directory containing model.onnx and tokenizer.json files.
+>
+> `LOCAL_RUNTIME_PATH` should point to directory containing onnxruntime.dll and tokenizer_cpp.dll files.
+
+### Step 8: Generate embeddings
+
+Use the `ai_generate_embeddings` function to test the model by running the following SQL:
+
+```sql
+SELECT ai_generate_embeddings (N'Test Text' USE MODEL myLocalOnnxModel);
+```
+
+This command launches the `AIRuntimeHost`, load the required DLLs, and processes the input text.
+
+The result from the SQL statement is an array of embeddings:
+
+[0.320098,0.568766,0.154386,0.205526,-0.027379,-0.149689,-0.022946,-0.385856,-0.039183...]
+
+### Enable XEvent telemetry
+
+Run the following SQL to enable telemetry for troubleshooting.
+
+```sql
+CREATE EVENT SESSION newevt
+ON SERVER
+ADD EVENT ai_generate_embeddings_airuntime_trace
+(
+    ACTION (sqlserver.sql_text, sqlserver.session_id)
+)
+ADD TARGET package0.ring_buffer
+WITH (MAX_MEMORY = 4096 KB, EVENT_RETENTION_MODE = ALLOW_SINGLE_EVENT_LOSS, MAX_DISPATCH_LATENCY = 30 SECONDS, TRACK_CAUSALITY = ON, STARTUP_STATE = OFF);
+GO
+
+ALTER EVENT SESSION newevt ON SERVER STATE = START;
+GO
+```
+
+Next, use this SQL query see the captured telemetry:
+
+```sql
+SELECT  
+    event_data.value('(@name)[1]', 'varchar(100)') AS event_name,
+    event_data.value('(@timestamp)[1]', 'datetime2') AS [timestamp],
+    event_data.value('(data[@name="model_name"]/value)[1]', 'nvarchar(200)') AS model_name,
+    event_data.value('(data[@name="phase_name"]/value)[1]', 'nvarchar(100)') AS phase,
+    event_data.value('(data[@name="message"]/value)[1]', 'nvarchar(max)') AS message,
+    event_data.value('(data[@name="request_id"]/value)[1]', 'nvarchar(max)') AS session_id,
+    event_data.value('(data[@name="error_code"]/value)[1]', 'bigint') AS error_code
+FROM (
+    SELECT CAST(target_data AS XML) AS target_data
+    FROM sys.dm_xe_sessions AS s
+    JOIN sys.dm_xe_session_targets AS t  
+        ON s.address = t.event_session_address
+    WHERE s.name = 'newevt'
+      AND t.target_name = 'ring_buffer'
+) AS data
+CROSS APPLY target_data.nodes('//RingBufferTarget/event') AS XEvent(event_data);
+```
+
+### Clean up
+
+To remove the external model object, run the following SQL:
+
+```sql
+DROP EXTERNAL MODEL myLocalOnnxModel;
+```
+
+To remove the directory permissions, run the following PowerShell commands:
+
+```powershell
+$Acl.RemoveAccessRule($AccessRule)  
+Set-Acl -Path $AIExtPath -AclObject $Acl
+```
+
+Finally, delete the `C:/onnx_runtime` directory.
 
 ## Related content
 

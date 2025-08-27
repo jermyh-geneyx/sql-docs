@@ -11,6 +11,7 @@ ms.subservice: migration-guide
 ms.topic: how-to
 ms.collection:
   - sql-migration-content
+ms.custom: sfi-image-nochange
 ---
 # Migration guide: Oracle to SQL Server on Azure Virtual Machines
 
@@ -337,14 +338,13 @@ The Data SQL Engineering team developed these resources. This team's core charte
 - To learn more about Azure SQL, see:
   - [Deployment options](../../azure-sql-iaas-vs-paas-what-is-overview.md)
   - [SQL Server on Azure Virtual Machines](../../virtual-machines/windows/sql-server-on-azure-vm-iaas-what-is-overview.md)
-  - [Azure Migrate Business case total cost of ownership](/azure/migrate/concepts-business-case-calculation) 
 
 - To learn more about the framework and adoption cycle for cloud migrations, see:
   - [Cloud Adoption Framework for Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/contoso-migration-scale)
   - [Best practices to cost and size workloads migrated to Azure](/azure/cloud-adoption-framework/migrate/azure-best-practices/migrate-best-practices-costs)
 
 - For information about licensing, see:
-  - [Bring your own license with the Azure Hybrid Benefit](../../virtual-machines/windows/licensing-model-azure-hybrid-benefit-ahb-change.md)
+  - [Allocate your own license with the Azure Hybrid Benefit](../../virtual-machines/windows/licensing-model-azure-hybrid-benefit-ahb-change.md)
   - [Get free extended support for SQL Server](../../virtual-machines/windows/sql-server-extend-end-of-support.md)
 
 - To assess the application access layer, use [Data Access Migration Toolkit Preview](https://marketplace.visualstudio.com/items?itemName=ms-databasemigration.data-access-migration-toolkit).

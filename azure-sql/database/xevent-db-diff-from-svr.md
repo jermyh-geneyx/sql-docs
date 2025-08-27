@@ -10,12 +10,12 @@ ms.service: azure-sql
 ms.subservice: performance
 ms.topic: reference
 ms.custom: sqldbrb=1
-monikerRange: "= azuresql || = azuresql-db || = azuresql-mi"
+monikerRange: "= azuresql || = azuresql-db || = azuresql-mi || = fabricsql"
 ---
 
 # Extended Events in Azure SQL Database and Azure SQL Managed Instance
 
-[!INCLUDE [appliesto-sqldb-sqlmi](../includes/appliesto-sqldb-sqlmi.md)]
+[!INCLUDE [appliesto-sqldb-sqlmi-fabricsqldb](../includes/appliesto-sqldb-sqlmi-fabricsqldb.md)]
 
 [!INCLUDE [sql-database-xevents-selectors-1-include](../includes/sql-database-xevents-selectors-1-include.md)]
 
@@ -24,17 +24,17 @@ For an introduction to Extended Events, see:
 - [Extended Events](/sql/relational-databases/extended-events/extended-events)
 - [Quick Start: Extended events](/sql/relational-databases/extended-events/quick-start-extended-events-in-sql-server)
 
-The feature set, functionality, and usage scenarios for Extended Events in Azure SQL Database and Azure SQL Managed Instance are similar to what is available in SQL Server. The main differences are:
+The feature set, functionality, and usage scenarios for Extended Events in Azure SQL Database, SQL database in Fabric, and Azure SQL Managed Instance are similar to what is available in SQL Server. The main differences are:
 
 - The `event_file` target always uses blobs in Azure Storage, rather than files on disk.
-- In Azure SQL Database, event sessions are always database-scoped. This means that:
+- In Azure SQL Database and SQL database in Fabric, event sessions are always database-scoped. This means that:
   - An event session in one database can't collect events from another database.
   - An event must occur in the context of a user database to be included in a session.
 - In Azure SQL Managed Instance, you can create both server-scoped and database-scoped event sessions. We recommend using server-scoped event sessions for most scenarios.
 
 ## Get started
 
-There are two examples to help you get started with Extended Events in Azure SQL Database and Azure SQL Managed Instance quickly:
+There are two examples to help you get started with Extended Events quickly:
 
 - [Create a session with an event_file target in Azure Storage](xevent-code-event-file.md). This example shows you how to capture event data in a file (blob) in Azure Storage using the `event_file` target, and includes [troubleshooting guidance](xevent-code-event-file.md#troubleshoot-event-sessions-with-an-event_file-target-in-azure-storage) for common errors. Use this if you need to persist captured event data, or if you want to use event viewer in SQL Server Management Studio (SSMS) to analyze captured data.
 - [Create a session with a ring_buffer target in memory](xevent-code-ring-buffer.md). This example shows you how to capture the latest events from an event session in memory using the `ring_buffer` target. Use this as a quick way to look at recent events during ad hoc investigations or troubleshooting, without having to store captured event data.
@@ -43,9 +43,10 @@ Extended Events can be used to monitor read-only replicas. For more information,
 
 ## Best practices
 
-Adopt the following best practices to use Extended Events in Azure SQL Database and Azure SQL Managed Instance reliably and without affecting database engine health and workload performance.
+Adopt the following best practices to use Extended Events securely, reliably, and without affecting database engine health and workload performance.
 
 - If you use the `event_file` target:
+  - Depending on the events added to a session, the files produced by the `event_file` target might contain sensitive data. Carefully review RBAC role assignments and the access control lists (ACL) on the storage account and container, including inherited access, to avoid granting unnecessary read access. Follow the [principle of least privilege](/entra/identity-platform/secure-least-privileged-access).
   - Use a storage account in the same Azure region as the database or managed instance where you create event sessions.
   - Align the redundancy of the storage account with the redundancy of the database, elastic pool, or managed instance. For [locally redundant](high-availability-sla-local-zone-redundancy.md#locally-redundant-availability) resources, use LRS, GRS, or RA-GRS. For [zone-redundant](high-availability-sla-local-zone-redundancy.md#zone-redundant-availability) resources, use ZRS, GZRS, or RA-GZRS. See [Azure Storage redundancy](/azure/storage/common/storage-redundancy) for details.
   - Don't use any [blob access tier](/azure/storage/blobs/access-tiers-overview) other than `Hot`.

@@ -1,5 +1,5 @@
 ---
-title: "Set up Microsoft Entra authentication for SQL Server enabled by Azure Arc"
+title: "Set up Microsoft Entra authentication"
 description: Tutorial on how to set up Microsoft Entra authentication for SQL Server enabled by Azure Arc.
 author: MikeRayMSFT
 ms.author: mikeray
@@ -12,7 +12,12 @@ monikerRange: ">=sql-server-ver16||>= sql-server-linux-ver16"
 ---
 
 # Tutorial: Set up Microsoft Entra authentication for SQL Server enabled by Azure Arc
-
 [!INCLUDE [SQL Server 2022](../../includes/applies-to-version/sqlserver2022.md)]
+
+> [!div class="op_single_selector"]
+> - [SQL Server 2022](entra-authentication-setup-tutorial.md)
+> - [SQL Server 2025 Preview](managed-identity.md)
+> - [Azure SQL Database & Azure SQL Managed Instance](/azure/azure-sql/database/authentication-aad-configure)
+> - [SQL Server on Azure VMs](/azure/azure-sql/virtual-machines/windows/configure-azure-ad-authentication-for-sql-vm)
 
 [!INCLUDE [entra-id-tutorial](../../includes/entra-id-tutorial.md)]

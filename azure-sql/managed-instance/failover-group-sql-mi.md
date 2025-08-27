@@ -194,18 +194,7 @@ Instances in a failover group remain separate Azure resources, and no changes ma
 
 ## Scale instances
 
-<!--
-This section is duplicated in /managed-instance/failover-group-configure-sql-mi.md. Please ensure changes are made to both documents.
--->
-
-You can scale up or scale down the primary and secondary instance to a different compute size within the same service tier or to a different service tier. When scaling up within the same service tier, we recommend that you scale up the geo-secondary first, and then scale up the primary. When scaling down within the same service tier, reverse the order: scale down the primary first, and then scale down the secondary. When you scale instance to a different service tier, this recommendation is enforced. The sequence of operations is enforced when scaling the service tier and vCores, as well as storage.
-
-The sequence is recommended specifically to avoid the problem where the geo-secondary at a lower SKU gets overloaded and must be reseeded during an upgrade or downgrade process.
-
-> [!IMPORTANT] 
-> - For instances inside of a failover group, changing the service tier to, or from, the Next-gen General Purpose tier is not supported. You must first delete the failover group before modifying either replica, and then re-create the failover group after the change takes effect.
-> - There's a [known issue](doc-changes-updates-known-issues.md#temporary-instance-inaccessibility-using-the-failover-group-listener-during-scaling-operation) which can impact accessibility of the instance being scaled using the associated failover group listener. 
-
+The configuration of your primary and secondary instance should be the same. This includes the compute size, storage size, and service tier. If you need to change the configuration of your failover group, you can do so by scaling each instance to the same configuration accordingly. To learn more, review [Scaling instances in a failover group](failover-group-configure-sql-mi.md#scaling-instances).
 
 ## Prevent loss of critical data
 
@@ -215,12 +204,7 @@ There's some overlap in the following content, be sure to update all that's nece
 /azure-sql/managed-instance/failover-group-sql-mi.md
 -->
 
-Due to the high latency of wide area networks, geo-replication uses an asynchronous replication mechanism. Asynchronous replication makes the possibility of data loss unavoidable if the primary fails. To protect critical transactions from data loss, an application developer can call the [sp_wait_for_database_copy_sync](/sql/relational-databases/system-stored-procedures/sp-wait-for-database-copy-sync-transact-sql) stored procedure immediately after committing the transaction. Calling `sp_wait_for_database_copy_sync` blocks the calling thread until the last committed transaction has been transmitted and hardened in the transaction log of the secondary database. However, it doesn't wait for the transmitted transactions to be replayed (redone) on the secondary. `sp_wait_for_database_copy_sync` is scoped to a specific geo-replication link. Any user with the connection rights to the primary database can call this procedure.
-
-To prevent data loss during user-initiated, planned geo-failover, replication automatically and temporarily changes to synchronous replication, then performs a failover. Replication then returns to asynchronous mode after the geo-failover is complete.
-
-> [!NOTE]  
-> `sp_wait_for_database_copy_sync` prevents data loss after geo-failover for specific transactions, but doesn't guarantee full synchronization for read access. The delay caused by a `sp_wait_for_database_copy_sync` procedure call can be significant and depends on the size of the not yet transmitted transaction log on the primary at the time of the call.
+Due to the high latency of wide area networks, geo-replication uses an asynchronous replication mechanism. Asynchronous replication makes the possibility of data loss unavoidable if the primary fails. To learn how you can protect your data, review [Prevent data loss](failover-group-configure-sql-mi.md#prevent-loss-of-critical-data).
 
 ## Failover group status
 
@@ -242,7 +226,14 @@ A full backup is taken in the following scenarios:
 - Before initial seeding starts when you create a failover group. 
 - After a failover. 
 
-A full backup is a size of data operation that can't be skipped or deferred, and can take some time complete. The time it takes to complete depends on the size of data, the number of databases, and the workload intensity on the primary databases. A full backup can noticeably delay initial seeding, and can either delay or prevent a failover operation on a new instance shortly after a failover. 
+A full backup is a size of data operation that can't be skipped or deferred, and can take some time complete. The time it takes to complete depends on the size of data, the number of databases, and the workload intensity on the primary databases. A full backup can noticeably delay initial seeding, and can either delay or prevent a failover operation on a new instance shortly after a failover.
+
+Consider the following:
+
+- Databases hosted on the secondary instance of a failover group are not backed up until that instance becomes primary after a failover, or until the failover group is dropped.
+- After a database changes to the primary role after a failover, or becomes standalone after a failover group is dropped, a full database backup is automatically initiated to facilitate point-in-time restores. 
+- A database can't be restored from an instance to a point in time when that instance was a secondary replica in a failover group. To restore to a point in time, you must restore the database from the instance that was primary during that point in time.
+- To recreate a dropped failover group on the same pair of SQL managed instances, all user databases need to be removed from the intended secondary after the failover group is dropped. A database is only fully removed after all pending backup operations complete, including a full backup if one wasn't taken (which is size-of-data operation). Allow time to clean up the secondary instance after dropping a failover group with very large databases, as each database will have a pending full backup operation in progress. 
 
 ### Log Replay Service 
 

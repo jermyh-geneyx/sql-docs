@@ -4,7 +4,7 @@ description: Optional parameter plan optimization improvement.
 author: thesqlsith
 ms.author: derekw
 ms.reviewer: randolphwest
-ms.date: 06/11/2025
+ms.date: 08/19/2025
 ms.service: sql
 ms.topic: concept-article
 ms.custom:
@@ -23,8 +23,8 @@ The term *optional parameters* refers to a specific variation of the [parameter-
 SELECT column1,
        column2
 FROM Table1
-WHERE column1 = @p
-      OR @p IS NULL;
+WHERE (column1 = @p
+      OR @p IS NULL);
 ```
 
 In this example, SQL Server always chooses a plan that scans table `Table1`, even if there's an index on `Table1(col1)`. A seek plan might not be possible with NULLs. Query hinting techniques, like `OPTIMIZE FOR`, might not be useful for this type of PSP problem because there isn't currently an operator that dynamically changes an index seek into a scan during execution. This kind of seek->scan combination at runtime might also not be effective, because the cardinality estimates on top of that operator would likely be inaccurate. The result is inefficient plan choices and excessive memory grants for more complex queries with similar query patterns.
@@ -45,8 +45,8 @@ As part of the adaptive plan optimization feature family which includes [Paramet
 - Dynamic search
 
   ```sql
-  WHERE column1 = @p1 OR @p1 IS NULL
-    AND column2 = @p2 OR @p2 IS NOT NULL
+  WHERE (column1 = @p1 OR @p1 IS NULL)
+    AND (column2 = @p2 OR @p2 IS NOT NULL)
   ```
 
 ## Terminology and how it works

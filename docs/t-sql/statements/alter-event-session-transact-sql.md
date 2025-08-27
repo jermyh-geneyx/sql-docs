@@ -3,7 +3,8 @@ title: "ALTER EVENT SESSION (Transact-SQL)"
 description: ALTER EVENT SESSION (Transact-SQL)
 author: markingmyname
 ms.author: maghan
-ms.date: "05/15/2024"
+ms.reviewer: dfurman
+ms.date: 07/23/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -17,8 +18,10 @@ helpviewer_keywords:
 dev_langs:
   - "TSQL"
 ---
+
 # ALTER EVENT SESSION (Transact-SQL)
-[!INCLUDE [SQL Server](../../includes/applies-to-version/sql-asdbmi.md)]
+
+[!INCLUDE [sql-asdb-asdbmi](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
 
   Starts or stops an event session or changes an event session configuration.  
   
@@ -95,13 +98,14 @@ ON SERVER
   
 <event_session_options>::=  
 {  
-    [    MAX_MEMORY = size [ KB | MB] ]  
+    [     MAX_MEMORY = size [ KB | MB] ]  
     [ [,] EVENT_RETENTION_MODE = { ALLOW_SINGLE_EVENT_LOSS | ALLOW_MULTIPLE_EVENT_LOSS | NO_EVENT_LOSS } ]  
     [ [,] MAX_DISPATCH_LATENCY = { seconds SECONDS | INFINITE } ]  
     [ [,] MAX_EVENT_SIZE = size [ KB | MB ] ]  
     [ [,] MEMORY_PARTITION_MODE = { NONE | PER_NODE | PER_CPU } ]  
     [ [,] TRACK_CAUSALITY = { ON | OFF } ]  
     [ [,] STARTUP_STATE = { ON | OFF } ]  
+    [ [,] MAX_DURATION = { <time duration> { SECONDS | MINUTES | HOURS | DAYS } | UNLIMITED } ]
 }  
 ```  
   
@@ -130,6 +134,7 @@ ON SERVER
 |MEMORY_PARTITION_MODE = { **NONE** &#124; PER_NODE &#124; PER_CPU }|Specifies the location where event buffers are created.<br /><br /> **NONE**<br /> A single set of buffers is created within the [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] instance.<br /><br /> PER NODE - A set of buffers is created for each NUMA node.<br /><br /> PER CPU - A set of buffers is created for each CPU.|  
 |TRACK_CAUSALITY = { ON &#124; **OFF** }|Specifies whether or not causality is tracked. If enabled, causality allows related events on different server connections to be correlated together.|  
 |STARTUP_STATE = { ON &#124; **OFF** }|Specifies whether or not to start this event session automatically when [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] starts.<br /><br /> If STARTUP_STATE=ON the event session only starts if  [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] is stopped and then restarted.<br /><br /> ON= Event session is started at startup.<br /><br /> **OFF** = Event session is NOT started at startup.|  
+| MAX_DURATION = { *time duration* { SECONDS &#124; MINUTES &#124; HOURS &#124; DAYS } &#124; **UNLIMITED** } | **Applies to**: [!INCLUDE [sql-server-2025](../../includes/sssql25-md.md)]<br /><br />**UNLIMITED** - causes an event session to run indefinitely once started, until stopped using the `ALTER EVENT SESSION ... STATE = STOP` statement.<br /><br />*time duration* SECONDS &#124; MINUTES &#124; HOURS &#124; DAYS - causes an event session to stop automatically after the specified time elapses after the session start. The maximum supported duration is 2,147,483 seconds, or 35,792 minutes, or 596 hours, or 24 days.<br /><br /> For more information, see [Time-bound event sessions](../../relational-databases/extended-events/sql-server-extended-events-sessions.md#time-bound-event-sessions). |
   
 ## Remarks  
  The `ADD` and `DROP` arguments can't be used in the same statement.  

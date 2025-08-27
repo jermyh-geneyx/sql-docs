@@ -1,57 +1,58 @@
 ---
-title: "Ole Automation Procedures (server configuration option)"
+title: "Server Configuration: Ole Automation Procedures"
 description: "Learn about the Ole Automation Procedures option. See how it specifies whether SQL Server can instantiate OLE Automation objects within Transact-SQL batches."
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: "03/02/2017"
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
 helpviewer_keywords:
   - "Ole Automation Procedures option"
 ---
-# Ole Automation Procedures (server configuration option)
- [!INCLUDE [SQL Server](../../includes/applies-to-version/sqlserver.md)]
+# Server configuration: Ole Automation Procedures
 
-  Use the **Ole Automation Procedures** option to specify whether OLE Automation objects can be instantiated within [!INCLUDE[tsql](../../includes/tsql-md.md)] batches. This option can also be configured using the Policy-Based Management or the **sp_configure** stored procedure. For more information, see [Surface Area Configuration](../../relational-databases/security/surface-area-configuration.md).  
-  
- The **Ole Automation Procedures** option can be set to the following values.  
-  
- 0  
- OLE Automation Procedures are disabled. Default for new instances of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)].  
-  
- 1  
- OLE Automation Procedures are enabled.  
-  
- When OLE Automation Procedures are enabled, a call to **sp_OACreate** will start the OLE shared execution environment.  
-  
- The current value of the **Ole Automation Procedures** option can be viewed and changed by using the **sp_configure** system stored procedure.  
-  
-## Examples  
- The following example shows how to view the current setting of OLE Automation procedures.  
-  
-```  
-EXEC sp_configure 'Ole Automation Procedures';  
-GO  
-```  
-  
- The following example shows how to enable OLE Automation procedures.  
-  
-```  
-sp_configure 'show advanced options', 1;  
-GO  
-RECONFIGURE;  
-GO  
-sp_configure 'Ole Automation Procedures', 1;  
-GO  
-RECONFIGURE;  
-GO  
-```  
-  
-## See Also  
- [sp_configure &#40;Transact-SQL&#41;](../../relational-databases/system-stored-procedures/sp-configure-transact-sql.md)   
- [RECONFIGURE &#40;Transact-SQL&#41;](../../t-sql/language-elements/reconfigure-transact-sql.md)   
- [Surface Area Configuration](../../relational-databases/security/surface-area-configuration.md)   
- [Server Configuration Options &#40;SQL Server&#41;](../../database-engine/configure-windows/server-configuration-options-sql-server.md)  
-  
-  
+[!INCLUDE [SQL Server](../../includes/applies-to-version/sqlserver.md)]
+
+Use the `Ole Automation Procedures` option to specify whether OLE Automation objects can be instantiated within [!INCLUDE [tsql](../../includes/tsql-md.md)] batches. This option can also be configured using the Policy-Based Management or the `sp_configure` stored procedure. For more information, see [Surface area configuration](../../relational-databases/security/surface-area-configuration.md).
+
+The `Ole Automation Procedures` option can be set to the following values.
+
+- `0`: OLE Automation Procedures are disabled. Default for new instances of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
+- `1`: OLE Automation Procedures are enabled.
+
+When OLE Automation Procedures are enabled, a call to `sp_OACreate` starts the OLE shared execution environment.
+
+The current value of the `Ole Automation Procedures` option can be viewed and changed by using the `sp_configure` system stored procedure.
+
+## Examples
+
+The following example shows how to view the current setting of OLE Automation procedures.
+
+```sql
+EXECUTE sp_configure 'Ole Automation Procedures';
+GO
+```
+
+The following example shows how to enable OLE Automation procedures.
+
+```sql
+EXECUTE sp_configure 'show advanced options', 1;
+GO
+
+RECONFIGURE;
+GO
+
+EXECUTE sp_configure 'Ole Automation Procedures', 1;
+GO
+
+RECONFIGURE;
+GO
+```
+
+## Related content
+
+- [sp_configure (Transact-SQL)](../../relational-databases/system-stored-procedures/sp-configure-transact-sql.md)
+- [RECONFIGURE (Transact-SQL)](../../t-sql/language-elements/reconfigure-transact-sql.md)
+- [Surface area configuration](../../relational-databases/security/surface-area-configuration.md)
+- [Server configuration options](server-configuration-options-sql-server.md)

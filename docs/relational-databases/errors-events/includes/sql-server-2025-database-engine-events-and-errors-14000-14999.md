@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/15/2025
+ms.date: 08/14/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -95,7 +95,7 @@ ms.topic: include
 | 14096 | 16 | No | The path and name of the table creation script must be specified if the @pre_creation_cmd parameter value is 'drop'. |
 | 14097 | 16 | No | The 'status' value must be 'no column names', 'include column names', 'string literals', 'parameters', 'DTS horizontal partitions' or 'no DTS horizontal partitions'. |
 | 14098 | 16 | No | Cannot drop Distribution Publisher '%s'. The remote Publisher is using '%s' as Distributor. Disable publishing at the Publisher before attempting to drop this relationship. |
-| 14099 | 16 | No | The server '%s' is already defined as a Distributor. To reconfigure the server as a Distributor, you must first uninstall the exisiting Distributor. Use the stored procedure sp_dropdistributor, or use the Disable Publishing and Distribution Wizard. |
+| 14099 | 16 | No | The server '%s' is already defined as a Distributor. To reconfigure the server as a Distributor, you must first uninstall the existing Distributor. Use the stored procedure sp_dropdistributor, or use the Disable Publishing and Distribution Wizard. |
 | 14100 | 16 | No | Specify all articles when subscribing to a publication using concurrent snapshot processing. |
 | 14101 | 16 | No | The publication '%s' already has a Snapshot Agent defined. |
 | 14102 | 16 | No | Specify all articles when unsubscribing from a publication using concurrent snapshot processing. |
@@ -122,8 +122,8 @@ ms.topic: include
 | 14126 | 16 | No | You do not have the required permissions to complete the operation. |
 | 14128 | 16 | No | Invalid @subscription_type parameter value. Valid options are 'push' or 'pull'. |
 | 14129 | 16 | No | The @status parameter value must be NULL for 'automatic' sync_type when you add subscriptions to an immediate_sync publication. |
-| 14130 | 10 | No | WARNING: The database '%s' does not contain database master key. Create database master key and update replication secrets in this database. For more information, see https://aka.ms/sql-tr-dmk-warning-troubleshooting. |
-| 14131 | 16 | No | The database '%s' does not contain database master key. Create database master key and repeat the procedure. For more information, see https://aka.ms/sql-tr-dmk-error-troubleshooting. |
+| 14130 | 10 | No | WARNING: The database '%s' does not contain database master key. Create database master key and update replication secrets in this database. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323726](https://go.microsoft.com/fwlink/?linkid=2323726). |
+| 14131 | 16 | No | The database '%s' does not contain database master key. Create database master key and repeat the procedure. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323726](https://go.microsoft.com/fwlink/?linkid=2323726). |
 | 14135 | 16 | No | There is no subscription on Publisher '%s', publisher database '%s', publication '%s'. |
 | 14136 | 16 | No | The keyword 'all' is reserved by replication stored procedures. |
 | 14137 | 16 | No | The @value parameter value must be either 'true' or 'false'. |
@@ -216,13 +216,13 @@ ms.topic: include
 | 14255 | 16 | No | The owner ('%s') of this job is either an invalid login, or is not a valid user of database '%s'. |
 | 14256 | 16 | No | Cannot start the job "%s" (ID %s) because it does not have any job server or servers defined. Associate the job with a job server by calling sp_add_jobserver. |
 | 14257 | 16 | No | Cannot stop the job "%s" (ID %s) because it does not have any job server or servers defined. Associate the job with a job server by calling sp_add_jobserver. |
-| 14258 | 16 | No | Cannot perform this operation while SQLServerAgent is starting. Try again later. |
+| 14258 | 16 | No | Cannot perform this operation while SQL Server Agent is starting. Try again later. |
 | 14260 | 16 | No | You do not have sufficient permission to run this command. Contact your system administrator. |
 | 14261 | 16 | No | The specified %s ('%s') already exists. |
 | 14262 | 16 | No | The specified %s ('%s') does not exist. |
 | 14263 | 16 | No | Target server '%s' is already a member of group '%s'. |
 | 14264 | 16 | No | Target server '%s' is not a member of group '%s'. |
-| [14265](../mssqlserver-14265-database-engine-error.md) | 24 | Yes | The MSSQLServer service terminated unexpectedly. Check the SQL Server error log and operating system error logs for possible causes. |
+| [14265](../mssqlserver-14265-database-engine-error.md) | 24 | Yes | The SQL Server service terminated unexpectedly. Check the SQL Server error log and operating system error logs for possible causes. |
 | 14266 | 16 | No | The specified '%s' is invalid (valid values are: %s). |
 | 14267 | 16 | No | Cannot add a job to the '%s' job category. |
 | 14268 | 16 | No | There are no jobs at this server that originated from server '%s'. |
@@ -401,7 +401,7 @@ ms.topic: include
 | 14576 | 10 | No | @freq_interval must be between 1 and 10 (1 = Sunday .. 7 = Saturday, 8 = Day, 9 = Weekday, 10 = Weekend-day) for a monthly-relative job. |
 | 14577 | 10 | No | @freq_recurrence_factor must be at least 1. |
 | 14578 | 10 | No | Starts whenever the CPU usage has remained below %ld percent for %ld seconds. |
-| 14579 | 10 | No | Automatically starts when SQLServerAgent starts. |
+| 14579 | 10 | No | Automatically starts when SQL Server Agent starts. |
 | 14580 | 10 | No | job |
 | 14581 | 10 | No | Replication Transaction Queue Reader Subsystem |
 | 14582 | 16 | No | Only a sysadmin can specify '@output_file_name' parameter for a jobstep. |
@@ -511,7 +511,7 @@ ms.topic: include
 | 14689 | 16 | No | A collection set cannot start if the management data warehouse is not configured. Run the instmdw.sql script to create and configure the management data warehouse. |
 | 14690 | 16 | No | Cannot perform this procedure when the collector is enabled. Disable the collector and then try again. |
 | 14691 | 16 | No | The status of the collector cannot be null. This may indicate an internal corruption in the collector configuration data. |
-| 14692 | 16 | No | Insufficient priveleges to start collection set: '%s'. Only a member of the 'sysadmin' fixed server role can start a collection set without a SQL Server Agent proxy. Attach a SQL Server Agent proxy to the collection set before retrying. |
+| 14692 | 16 | No | Insufficient privileges to start collection set: '%s'. Only a member of the 'sysadmin' fixed server role can start a collection set without a SQL Server Agent proxy. Attach a SQL Server Agent proxy to the collection set before retrying. |
 | 14693 | 16 | No | A collection set cannot start without a schedule. Specify a schedule for the collection set. |
 | 14694 | 16 | No | Cannot upload data on-demand for the collection set '%s' in non-cached mode. |
 | 14695 | 16 | No | Cannot collect data on-demand for the collection set '%s' in cached mode. |
@@ -543,7 +543,7 @@ ms.topic: include
 | 14801 | 16 | No | Multiple REMOTE_DATA_ARCHIVE definition. |
 | 14802 | 16 | No | Cannot disable REMOTE_DATA_ARCHIVE because the database contains at least one table having REMOTE_DATA_ARCHIVE enabled. |
 | 14803 | 16 | No | Cannot alter REMOTE_DATA_ARCHIVE option for table '%.\*ls' because REMOTE_DATA_ARCHIVE is not enabled for the database. |
-| 14804 | 16 | No | The database credential '%s' cannot be found or the user doesn't have premission to access the credential. |
+| 14804 | 16 | No | The database credential '%s' cannot be found or the user doesn't have permission to access the credential. |
 | 14806 | 16 | No | The identity specified for the database credential '%s' is invalid. The identity must be a valid username for the remote stretch server administrator. |
 | 14807 | 16 | No | The secret specified for the database credential '%s' is invalid. The secret must be a valid password for the remote stretch server administrator. |
 | 14808 | 16 | No | Cannot disable REMOTE_DATA_ARCHIVE when migration is enabled. |
@@ -588,7 +588,7 @@ ms.topic: include
 | 14847 | 16 | No | Cannot re-authorize database '%.\*ls' because it is already authorized and connected to a remote database. |
 | 14848 | 16 | No | Attempted Migration failed. Remote insert failed. Error : %d. |
 | 14849 | 16 | No | Attempted Migration failed. Remote insert failed to insert all the rows. Expected rows : %d, Actual remote rows inserted: %d. |
-| 14850 | 16 | No | Attempted Migration failed. Incrementation of the batch ID failed. Expected batch ID : %I64d, Current batch ID : %I64d. |
+| 14850 | 16 | No | Attempted Migration failed. Incrementing of the batch ID failed. Expected batch ID : %I64d, Current batch ID : %I64d. |
 | 14851 | 16 | No | Attempted Reconciliation failed. The new max remote batch IDs is not less than the initial. Initial: %I64d, New: %I64d |
 | 14852 | 16 | No | Cannot query table '%.\*ls' because data reconciliation is in progress. This is part of the automatic recovery process for a remote data archive enabled table. You may check the status of this operation in sys.remote_data_archive_tables. |
 | 14853 | 16 | No | Function '%.\*ls' cannot be used as Stretch filter predicate because it does not meet necessary requirements. |
@@ -603,11 +603,11 @@ ms.topic: include
 | 14862 | 16 | No | Cannot rename index '%ls'. Indexes on tables with REMOTE_DATA_ARCHIVE option enabled cannot be renamed. |
 | 14863 | 16 | No | Stretch was disabled after migration started. Please enable stretch and retry. |
 | 14864 | 16 | No | Attempted inbound migration failed. Local insert failed. Error : %d. |
-| 14865 | 16 | No | Attempted inbound migration failed. Decrementation of the batch ID failed. Expected batch ID : %I64d, Current batch ID : %I64d. |
+| 14865 | 16 | No | Attempted inbound migration failed. Decrementing of the batch ID failed. Expected batch ID : %I64d, Current batch ID : %I64d. |
 | 14866 | 16 | No | Attempted unlinking of the stretched table failed. If this table isn't dropped, please retry the operation of setting REMOTE_DATA_ARCHIVE to OFF on the table. |
 | 14867 | 16 | No | User does not have permission to enable REMOTE_DATA_ARCHIVE with FEDERATED_SERVICE_ACCOUNT = ON. |
 | 14868 | 16 | No | Inbound migration is in progress or paused. Migration direction outbound cannot be set at this time. Please retry after inbound migration is complete. |
-| 14869 | 16 | No | Must be DB OWNER to use the REMOTA_DATA_ARCHIVE_OVERRIDE hint. |
+| 14869 | 16 | No | Must be DB OWNER to use the REMOTE_DATA_ARCHIVE_OVERRIDE hint. |
 | 14870 | 16 | No | REMOTE_DATA_ARCHIVE_OVERRIDE hint is not allowed inside a user transaction. |
 | 14871 | 16 | No | REMOTE_DATA_ARCHIVE_OVERRIDE hint is not allowed inside an implicit transaction. |
 | 14872 | 16 | No | REMOTE_DATA_ARCHIVE_OVERRIDE hint not permitted on INSERT statements. |

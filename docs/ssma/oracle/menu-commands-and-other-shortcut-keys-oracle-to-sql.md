@@ -10,7 +10,9 @@ ms.topic: conceptual
 ms.collection:
   - sql-migration-content
 ---
-# Menu commands and other shortcut keys(Oracle To SQL)
+
+# Menu commands and other shortcut keys (Oracle To SQL)
+
 The following sections describe the keyboard shortcuts to access menu commands and other shortcut keys used in various dialog boxes of SSMA for Oracle application.  
   
 ## File menu commands  
@@ -191,4 +193,4 @@ To access Context menu for the selected object in Object explorer, the keyboard 
 |Go to declaration.|F12|  
   
 ## See Also  
-[Shortcut Keys&#40;Oracle To SQL&#41;]()
+[SQL Server Migration Assistant for Oracle (OracleToSQL)](sql-server-migration-assistant-for-oracle-oracletosql.md)

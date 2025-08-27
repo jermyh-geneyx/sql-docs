@@ -9,6 +9,7 @@ ms.service: sql
 ms.subservice: machine-learning
 ms.topic: tutorial
 monikerRange: ">=sql-server-2017||>=sql-server-linux-ver15||=azuresqldb-mi-current"
+ms.custom: sfi-ropc-blocked
 ---
 # Python Tutorial: Prepare data to train a linear regression model with SQL machine learning
 [!INCLUDE [SQL Server 2017 SQL MI](../../includes/applies-to-version/sqlserver2017-asdbmi.md)]
@@ -65,7 +66,7 @@ print("Data frame:", df)
 
 You should see results similar to the following.
 
-```results
+```output
 Data frame:      Year  Month  Day  Rentalcount  WeekDay  Holiday  Snow
 0    2014      1   20          445        2        1     0
 1    2014      2   13           40        5        0     0
@@ -94,7 +95,7 @@ print("Training set:", df[columns])
 
 Note the data the training set will have access to:
 
-```results
+```output
 Training set:      Month  Day  Weekday  Holiday  Snow
 1        2   13        5        0     0
 3        3   31        2        0     0

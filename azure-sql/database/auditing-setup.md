@@ -9,6 +9,7 @@ ms.date: 05/07/2025
 ms.service: azure-sql-database
 ms.subservice: security
 ms.topic: how-to
+ms.custom: sfi-image-nochange
 ---
 # Set up Auditing for Azure SQL Database and Azure Synapse Analytics
 
@@ -25,8 +26,6 @@ The default auditing policy includes the following set of action groups, which a
 - FAILED_DATABASE_AUTHENTICATION_GROUP
 
 To configure auditing for different types of actions and action groups using PowerShell, see [Manage Azure SQL Database Auditing using APIs](auditing-manage-using-api.md).
-
-Azure SQL Database and Azure Synapse Analytics Audit can store 4,000 characters of data for character fields in an audit record. When the **statement** or the **data_sensitivity_information** values returned from an auditable action contain more than 4000 characters, any data beyond the first 4000 characters are **truncated and not audited**.
 
 The following section describes the Auditing configuration using the Azure portal.
 

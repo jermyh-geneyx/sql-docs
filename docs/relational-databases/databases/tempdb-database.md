@@ -262,7 +262,6 @@ If there is I/O contention between `tempdb` and user databases, put `tempdb` fil
 
 - `Tempdb` space resource governance enforces a limit on the total amount of `tempdb` space consumed by an application or user workload. This improves reliability and avoids outages by preventing runaway queries or workloads from consuming a large amount of space in `tempdb`. For more information, see [Tempdb space resource governance](../resource-governor/tempdb-space-resource-governance.md).
 - [Accelerated database recovery](../accelerated-database-recovery-concepts.md) is supported in `tempdb`, providing instant transaction rollback and aggressive log truncation for transactions in `tempdb`.
-- [Optimized Halloween protection](../performance/intelligent-query-processing-details.md#optimized-halloween-protection) reduces space usage in `tempdb` by not using a Halloween protection spool for data modification language (DML) statements.
 
 #### Introduced in [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)]
 

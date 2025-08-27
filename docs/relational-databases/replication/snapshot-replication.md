@@ -4,7 +4,7 @@ description: Snapshot replication distributes data as it appears at a moment in 
 author: "MashaMSFT"
 ms.author: "mathoma"
 ms.reviewer: randolphwest
-ms.date: 09/25/2024
+ms.date: 08/11/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: conceptual
@@ -35,7 +35,9 @@ Snapshot replication is most appropriate when data changes are substantial but i
 
 Snapshot replication has a lower continuous overhead on the Publisher than transactional replication, because incremental changes aren't tracked. However, if the data set being replicated is large, it requires substantial resources to generate and apply the snapshot. Consider the size of the entire data set and the frequency of changes to the data when evaluating whether to utilize snapshot replication.
 
-## <a id="HowWorks"></a> How snapshot replication works
+<a id="HowWorks"></a>
+
+## How snapshot replication works
 
 By default, all three types of replication use a snapshot to initialize Subscribers. The [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Snapshot Agent always generates the snapshot files, but the agent that delivers the files differs depending on the type of replication being used. Snapshot replication and transactional replication use the Distribution Agent to deliver the files, whereas merge replication uses the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Merge Agent. The Snapshot Agent runs at the Distributor. The Distribution Agent and Merge Agent run at the Distributor for push subscriptions, or at Subscribers for pull subscriptions.
 
@@ -47,7 +49,17 @@ The following illustration shows the principal components of snapshot replicatio
 
 :::image type="content" source="media/snapshot-replication/snapshot.png" alt-text="Screenshot of Snapshot replication components and data flow.":::
 
-## <a id="SnapshotAgent"></a> Snapshot Agent
+## Configure TLS 1.3 encryption
+
+[!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] RC 0 introduces [TDS 8.0](../security/networking/tds-8.md) support for snapshot replication, which includes:
+- Configuring replication agents to use [TLS 1.3 encryption](../security/networking/tls-1-3.md) between instances of [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and also between [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and Azure SQL Managed Instance. 
+- Default encryption for inter-instance linked server communication between [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] instances in a replication topology. Linked servers in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] use the OLE DB v19 driver, which defaults to `Encrypt=Mandatory` encryption.
+
+[!INCLUDE [sql-25-repl-info](../../includes/sql-25-repl-info.md)]
+
+<a id="SnapshotAgent"></a>
+
+## Snapshot Agent
 
 For merge replication, a snapshot is generated every time the Snapshot Agent runs. For transactional replication, snapshot generation depends on the setting of the publication property `immediate_sync`. If the property is set to `true` (the default when using the New Publication Wizard), a snapshot is generated every time the Snapshot Agent runs, and it can be applied to a Subscriber at any time. If the property is set to `false` (the default when using `sp_addpublication`), the snapshot is generated only if a new subscription was added since the last Snapshot Agent run; Subscribers must wait for the Snapshot Agent to complete before they can synchronize.
 
@@ -73,7 +85,9 @@ The Snapshot Agent performs the following steps:
 
 During snapshot generation, you can't make schema changes on published tables. After the snapshot files are generated, you can view them in the snapshot folder using Windows Explorer.
 
-## <a id="DistAgent"></a> Distribution Agent and Merge Agent
+<a id="DistAgent"></a>
+
+## Distribution Agent and Merge Agent
 
 For snapshot publications, each time the Distribution Agent runs for the publication, it moves a new snapshot to each Subscriber that:
 

@@ -1,9 +1,9 @@
 ---
-title: "Server configuration: remote proc trans"
+title: "Server Configuration: remote proc trans"
 description: "Find out about the remote proc trans option. See how it helps protect the actions of a server-to-server procedure through an MS DTC transaction."
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 10/18/2024
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
@@ -28,7 +28,7 @@ Remote server connections must be allowed before this value can be set.
 
 ## Recommendations
 
-This option is provided for compatibility with earlier versions of [!INCLUDE [msCoName](../../includes/msconame-md.md)] [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] for applications that use remote stored procedures. Instead of issuing remote stored procedure calls, use distributed queries that reference linked servers, which are defined by using [sp_addlinkedserver](../../relational-databases/system-stored-procedures/sp-addlinkedserver-transact-sql.md).
+This option is provided for compatibility with earlier versions of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] for applications that use remote stored procedures. Instead of issuing remote stored procedure calls, use distributed queries that reference linked servers, which are defined by using [sp_addlinkedserver](../../relational-databases/system-stored-procedures/sp-addlinkedserver-transact-sql.md).
 
 ## Permissions
 

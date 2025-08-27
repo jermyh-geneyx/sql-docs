@@ -4,7 +4,7 @@ description: "Removes the space character or other specified characters from the
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest
-ms.date: 10/27/2023
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -138,7 +138,7 @@ SELECT TRIM(LEADING '.,! ' FROM  '     .#     test    .') AS Result;
 [!INCLUDE [ssResult_md](../../includes/ssresult-md.md)]
 
 ```output
-# test .
+#     test    .
 ```
 
 ### D. Remove specified characters from the end of a string
@@ -157,7 +157,7 @@ SELECT TRIM(TRAILING '.,! ' FROM '     .#     test    .') AS Result;
 [!INCLUDE [ssResult_md](../../includes/ssresult-md.md)]
 
 ```output
-.#     test
+     .#     test
 ```
 
 ### E. Remove specified characters from the beginning and end of a string

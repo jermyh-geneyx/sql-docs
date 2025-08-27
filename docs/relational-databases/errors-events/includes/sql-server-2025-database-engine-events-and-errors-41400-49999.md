@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/15/2025
+ms.date: 08/14/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -68,7 +68,7 @@ ms.topic: include
 | 41623 | 20 | No | The Database Mirroring endpoint port is unavailable. Verify that the DBM endpoint is created. |
 | 41624 | 16 | No | Drop database '%ls' (ID %d) of Windows Fabric partition '%ls' (partition ID '%ls') has failed. SQL Server has failed to drop the database. If this condition persists, contact the system administrator. |
 | 41625 | 20 | No | The internal buffer for the replication URL is insufficient. |
-| 41626 | 10 | No | Failed to retrieve service desription from Windows Fabric for partition '%ls' (Windows Fabric error 0x%08x). If this condition persists, contact the system administrator. |
+| 41626 | 10 | No | Failed to retrieve service description from Windows Fabric for partition '%ls' (Windows Fabric error 0x%08x). If this condition persists, contact the system administrator. |
 | 41627 | 10 | No | An error has occurred while Dropping %ls database (SQL Error Code: %d). Refer to the SQL error code for more details. If this condition persists, contact the system administrator. |
 | 41628 | 10 | No | Drop database Timer task encountered an error (SQL Error Code: %d). Refer to the SQL error code for more details. If this condition persists, contact the system administrator. |
 | 41629 | 10 | No | Fabric replica publisher encountered an error (SQL Error Code: %d, State: %d) while publishing event '%ls' to subscriber of type '%ls' on Fabric partition '%ls' (partition ID: '%ls'). Refer to the SQL error code for more details. If this condition persists, contact the system administrator. |
@@ -96,7 +96,7 @@ ms.topic: include
 | 41651 | 16 | No | Invalid partition id in replica manager |
 | 41652 | 17 | No | The replica manager is unavailable or not ready. |
 | 41653 | 21 | No | Database '%.\*ls' encountered an error (error type: %d '%.\*ls') causing failure of the availability group '%.\*ls'. Refer to the SQL Server error log for information about the errors that were encountered. If this condition persists, contact the system administrator. |
-| 41654 | 17 | No | Failed to start the clean up nonexistant DBs thread during replica manager startup. |
+| 41654 | 17 | No | Failed to start the clean up nonexistent DBs thread during replica manager startup. |
 | 41655 | 10 | No | Could not submit logical reseeding task for '%ls' (URI: '%ls', partition id: '%ls') . Encountered error (error code: 0x%08X). |
 | 41656 | 17 | No | Failed to start the windows fabric load balancer reporting thread during replica manager startup. |
 | 41657 | 16 | No | Database '%ls' (ID %d) of Windows Fabric partition '%ls' (partition ID '%ls') failed the call to UseDB. |
@@ -238,7 +238,7 @@ ms.topic: include
 | 41927 | 16 | No | The file name 'XTP' is reserved for the files containing In-Memory OLTP data. |
 | 41928 | 16 | No | The filegroup name 'XTP' is reserved for the filegroup containing In-Memory OLTP data. |
 | 41929 | 16 | No | One or more files are not in online state after the restore. |
-| 41930 | 16 | No | Modifying number of files and max size for TempDb is not yet supported in SQL Database Managed Instance. |
+| 41930 | 16 | No | Modifying number of files and max size for tempdb is not yet supported in SQL Managed Instance. |
 | 41931 | 10 | No | Warning: New name of managed database '%.\*ls' is same as the old one. |
 | 41932 | 16 | No | Cannot rename managed database '%.\*ls' because it's currently in use. |
 | 41933 | 21 | No | Failed to initialize detours and local time for Managed Instance. %ls |
@@ -247,20 +247,20 @@ ms.topic: include
 | 41936 | 16 | No | This feature is not supported in the Hyperscale edition of SQL Database Managed Instance. |
 | 41937 | 16 | No | BACKUP WITH COPY_ONLY cannot be performed until after the next automatic BACKUP LOG operation |
 | 41938 | 16 | No | BACKUP WITH COPY_ONLY cannot be performed since database encryption key for the database '%.\*ls' still exists. Retry command after you drop database encryption key. |
-| 41939 | 16 | No | The Persistent Version Store filegroup must be set to the PRIMARY filegroup in order to be restored on SQL Database Managed Instance. |
+| 41939 | 16 | No | To restore the database in Azure SQL Managed Instance, the Persistent Version Store must be stored on the PRIMARY filegroup. |
 | 41940 | 16 | No | Cross-db xact outcome cleanup failed due to unavailable/inaccessible databases. |
 | 41941 | 10 | No | Changing recovery model for database with ID %lu is not supported and corresponding error has been suppressed as per server configuration. See [https://go.microsoft.com/fwlink/?linkid=2112920](https://go.microsoft.com/fwlink/?linkid=2112920) for more information. |
 | 41942 | 16 | No | Renaming local instance is not allowed in SQL Database Managed Instance. |
 | 41943 | 16 | No | SQL Database Managed Instance does not support creating route with TRANSPORT or MIRROR address. |
 | 41944 | 16 | No | Cannot change the recovery model in Managed Instance Azure Arc environment |
 | 41945 | 16 | No | Cannot rename managed database '%.\*ls' to an empty name. |
-| 41946 | 16 | No | SQL Database Managed Instance does not support modifying default size of TempDb files. |
+| 41946 | 16 | No | SQL Managed Instance does not support modifying the default size of tempdb files. |
 | 41947 | 16 | No | Memory-optimized filegroup must be empty on the SQL Server source database when replicated to Azure SQL Managed Instance with service tier not supporting In-memory OLTP capabilities. Consider using Managed Instance service tier that supports In-memory OLTP capabilities. |
 | 41948 | 16 | No | Azure SQL Managed Instance link data replication requires source database on SQL Server to have a single log file instead of multiple log files. Consider using a single log file on the source database and try again. |
 | 41949 | 16 | No | Managed Instance link cannot replicate data because maximum number of %u files were reached on Azure SQL Managed Instance. Consider reducing the number of files on the source and try again. |
 | 41950 | 16 | No | Source database on SQL Server must not use FileStream or FileTables for data replication to Azure SQL Managed Instance. Consider removing FileStream and FileTables on the source database on SQL Server and try again. |
 | 41951 | 16 | No | Azure SQL Managed Instance link cannot be created with source database '%.\*ls' on SQL Server, because the database contains files in DEFUNCT state. Remove the faulty files and retry again. |
-| 41952 | 16 | No | Azure SQL Managed Instance link cannot be created with source database '%.\*ls' on SQL Server, bacause the database contains unsupported feature '%.\*ls'. |
+| 41952 | 16 | No | Azure SQL Managed Instance link cannot be created with source database '%.\*ls' on SQL Server because the database contains unsupported feature '%.\*ls'. |
 | 41953 | 16 | No | Functionality cannot be used as it is not available on Azure SQL Managed Instance. |
 | 41954 | 21 | No | Transient error occurred on database '%.\*ls' while trying to change managed instance role to primary. The system will automatically retry the operation. If the issue persists, contact Microsoft Support for Azure SQL Managed Instance. |
 | 41955 | 21 | No | Transient error occurred while trying to retrieve backup metadata for database '%.\*ls'. The system will automatically retry the operation. If the issue persists, contact Microsoft Support for Azure SQL Managed Instance. |
@@ -270,7 +270,7 @@ ms.topic: include
 | 41959 | 21 | No | Transient error occurred while reading from backup metadata for database '%.\*ls' due to error %u. The system will automatically retry the operation. If the issue persists, contact Microsoft Support for Azure SQL Managed Instance. |
 | 41960 | 21 | No | Transient error occurred while writing to backup metadata for database '%.\*ls' due to error %u. The system will automatically retry the operation. If the issue persists, contact Microsoft Support for Azure SQL Managed Instance. |
 | 41961 | 21 | No | Transient error occurred during the instance role change to primary. The system will automatically retry the operation. If the issue persists, contact Microsoft Support for Azure SQL Managed Instance. |
-| [41962](../mssqlserver-41962-database-engine-error.md) | 16 | No | Operation was aborted as replication between SQL Server and Azure SQL Managed Instance did not start within %u minutes since it was initiated. Please verify the network connectivity and firewall rules are configured according to the guidelines described at https://aka.ms/mi-link-troubleshooting, and retry the operation. |
+| [41962](../mssqlserver-41962-database-engine-error.md) | 16 | No | Operation was aborted as replication between SQL Server and Azure SQL Managed Instance did not start within %u minutes since it was initiated. Please verify the network connectivity and firewall rules are configured and retry the operation. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323827](https://go.microsoft.com/fwlink/?linkid=2323827). |
 | 41963 | 16 | No | Certificate cannot be created as it is already used with '%.\*ls' feature. Consider using a different certificate. |
 | 41964 | 16 | No | The '%.\*ls' operation cannot be completed as there exists a database in the process of creation through Azure SQL Managed Instance link. Please wait for the link creation to complete, or alternatively delete the link and retry the operation again. |
 | 41965 | 16 | No | Setting the role cannot be applied as Azure SQL Managed Instance is already in the requested role. |
@@ -299,7 +299,7 @@ ms.topic: include
 | 41990 | 16 | No | %s cannot be null or empty when %s is set to 0 (SQL Server Authentication). |
 | 41991 | 16 | No | Unable to make database %s on SQL Managed Instance %s accessible because the instance role in failover group changed from %s to %s while the database was in the inaccessible state. Please restore the original database role by executing geo-failover and try again. |
 | 41992 | 16 | No | Unable to make database %s on SQL Managed Instance %s accessible due to ongoing geodr operation. Please wait until the conflicting operation completes and try again. |
-| 41993 | 16 | No | Cannot execute failover of Managed Instance link '%s' because the replica of database '%s' on SQL MI is in the inaccessible state. Please refer to https://aka.ms/sqlmi-inaccessible-database-troubleshooting to understand and correct the database inaccessibility root cause and retry executing link failover. |
+| 41993 | 16 | No | Cannot execute failover of Managed Instance link '%s' because the replica of database '%s' on the managed instance is in an inaccessible state. |
 | 42001 | 16 | No | Failed to parse XML configuration. The operating system returned error %ls. |
 | 42002 | 16 | No | Failed to parse XML configuration. The parser returned error %.\*ls |
 | 42003 | 16 | No | Failed to parse XML configuration. A required attribute '%ls' is missing. |
@@ -338,8 +338,8 @@ ms.topic: include
 | 42036 | 16 | No | %ls operation has been cancelled. |
 | 42037 | 16 | No | Initialization of http session handle for fetching cert public keys for MWC token signature validation during signature validation service initialization. |
 | 42038 | 16 | No | Initialization of http connect handle for fetching cert public keys for MWC token signature validation during signature validation service initialization. |
-| 42101 | 10 | No | Reason: Unable to create or update firewall rules since Deny Public Network Access is set to Yes. Please set Deny Public Network Access to No and retry the operation ([https://learn.microsoft.com/azure/azure-sql/database/connectivity-settings#deny-public-network-access](/azure/azure-sql/database/connectivity-settings#deny-public-network-access)). |
-| 42102 | 10 | No | Reason: Unable to set Deny Public Network Access to Yes since there is no private endpoint enabled to access the server. Please set up private endpoints and retry the operation ([https://learn.microsoft.com/azure/sql-database/sql-database-private-endpoint-overview#how-to-set-up-private-link-for-azure-sql-database](/azure/sql-database/sql-database-private-endpoint-overview#how-to-set-up-private-link-for-azure-sql-database)). |
+| 42101 | 10 | No | Reason: Unable to create or update firewall rules because Deny Public Network Access is set to Yes. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323205](https://go.microsoft.com/fwlink/?linkid=2323205). |
+| 42102 | 10 | No | Reason: Unable to set Deny Public Network Access to Yes because there is no private endpoint to access the server. Set up a private endpoint and try again. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323206](https://go.microsoft.com/fwlink/?linkid=2323206). |
 | 42103 | 16 | No | The SQL Pool '%.\*ls' already exists. Please choose a new name. |
 | 42104 | 16 | No | Could not create SQL Pool '%.\*ls'. Please try again later. |
 | 42105 | 16 | No | The server role '%.\*ls' already exists. Please choose a new name. |
@@ -388,7 +388,7 @@ ms.topic: include
 | 42214 | 16 | No | Could not create the vector index on object '%.\*ls', because the object is not a user table. |
 | 42215 | 16 | No | Could not create the vector index on the column '%.\*ls' on table '%.\*ls', because it is not of type vector. |
 | 42216 | 16 | No | Internal error occurred while creating the vector index. Please run DBCC CHECKCATALOG and retry if it does not report any error. Please contact support in case of error. |
-| 42217 | 16 | No | The base table doesn't have a single column, non NULLABLE and unique Key Clustered Index. |
+| 42217 | 16 | No | Table '%.\*ls' must have a clustered primary key on a single 4 byte INT column to create a vector index. |
 | 42218 | 16 | No | Failed to fetch metadata for the vector index. Please retry and contact support if the error persists. |
 | 42219 | 16 | No | Failed to create internal table %d for the vector index. |
 | 42220 | 16 | No | Cannot create the vector index on temp objects. '%.\*ls' is identified as a temp object. |
@@ -396,7 +396,7 @@ ms.topic: include
 | 42222 | 16 | No | Vector data type is not supported in CDC tracked table. |
 | 42223 | 16 | No | Vector data type is not supported in transactional replication. |
 | 42224 | 16 | No | Vector data type is not supported in generic replication features. |
-| 42225 | 16 | No | VECTOR column(s) cannot be natively imported through BULK INSERT or OPENROWSET(BULK) statement. Please use a format file to explicitly specify the type of the VECTOR column(s) and specify the format file in the BULK INSERT or OPENROWSET(BULK) statement. |
+| 42225 | 16 | No | VECTOR column(s) cannot be natively imported through BULK INSERT or OPENROWSET(BULK) statement. |
 | 42226 | 16 | No | The column '%.\*ls' is not of vector type. Vector search cannot be performed on a non-vector column. |
 | 42227 | 16 | No | Cannot find a vector index with metric '%.\*ls' on column '%.\*ls'. |
 | 42228 | 16 | No | Cannot create vector index on a partitioned table. |
@@ -412,6 +412,11 @@ ms.topic: include
 | 42238 | 16 | No | Conversion of vector from data type %ls to %ls is not allowed. |
 | 42239 | 10 | No | Vector index background cleaner cleaned the inbuild vector index ID %d on object ID %d in database ID %d. |
 | 42240 | 16 | No | Vector data type is not supported in merge replication. |
+| 42241 | 16 | No | Input JSON contains out-of-range values for %ls. |
+| 42242 | 16 | No | Input JSON contains %ls type which is not supported in ARM64 architecture. |
+| 42243 | 16 | No | VECTOR_DISTANCE function does not support different base types for vector arguments. |
+| 42244 | 16 | No | A vector index cannot be created on tables with security policies. Table '%.\*ls' has security policy '%.\*ls'. |
+| 42245 | 16 | No | Drop and recreate the incompatible vector index ID %d on object ID %d. |
 | 42299 | 16 | No | Vector Internal error. |
 | 42301 | 16 | No | Could not create the semantic index on object '%.\*ls', because the object is not a user table. |
 | 42302 | 16 | No | Could not create the semantic index on the column '%.\*ls' on table '%.\*ls', because it is not of supported type. |
@@ -462,15 +467,10 @@ ms.topic: include
 | 43104 | 16 | No | Could not parse the JSON package since it does not conform to the defined format. |
 | 43105 | 16 | No | Error converting a JSON value to %ls. The result would be truncated. |
 | 43107 | 16 | No | Unexpected status code received from the external endpoint. HTTP Status Code: %d. |
-| 43201 | 16 | No | The value %ld is invalid for %.\*ls. Value must be between %d and %d. |
-| 43202 | 16 | No | The value %ld is invalid for %.\*ls. Value must be greater than %d. |
+| 43201 | 16 | No | The value %I64d is invalid for %.\*ls. Value must be between %d and %d. |
+| 43202 | 16 | No | The value %I64d is invalid for %.\*ls. Value must be greater than %d. |
 | 43203 | 16 | No | The specified %.\*ls '%.\*ls' is not supported. |
 | 43204 | 16 | No | An unexpected error has occurred. |
-| 43205 | 16 | No | The function '%.\*ls' expects parameters in the form of 'name = value'. |
-| 43206 | 16 | No | The parameter '%.\*ls' is supplied out of order for function '%.\*ls'. |
-| 43207 | 16 | No | The function '%.\*ls' has too many arguments supplied. |
-| 43208 | 16 | No | The specified %.\*ls '%.\*hs' is not supported. |
-| 43209 | 16 | No | The %.\*ls argument only supports constant values and variables (not columns). |
 | 45001 | 16 | No | %ls operation failed. Specified federation name does not exist. |
 | 45002 | 16 | No | %ls operation failed. Specified federation distribution name %.\*ls is not valid. |
 | 45003 | 16 | No | %ls operation failed. Specified data type is not supported as a federation distribution. |
@@ -660,9 +660,9 @@ ms.topic: include
 | 45325 | 16 | No | The operation could not be completed because the Azure Key Vault Key name is null or empty. |
 | 45326 | 16 | No | The operation could not be completed because the Azure Key Vault Key name '%ls' does not exist. |
 | 45327 | 16 | No | The operation could not be completed because the Azure Key Vault Key name '%ls' is currently set as server encryption protector. |
-| 45328 | 16 | No | The server identity is not correctly configured on server '%ls'. Follow the steps in "Assign an Azure AD identity to your server" (https://aka.ms/sqltdebyoksetup) |
+| 45328 | 16 | No | The server identity is not correctly configured on server '%ls'. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323731](https://go.microsoft.com/fwlink/?linkid=2323731). |
 | 45329 | 16 | No | An invalid response from Azure Key Vault. Please use a valid Azure Key Vault URI. |
-| 45330 | 16 | No | The server '%ls' requires the 'Key Vault Crypto Service Encryption User' permission for the RBAC policy or following Azure Key Vault permissions: '%ls'. Please grant the missing permissions to the service principal with ID '%ls'. Ensure the key is active, not expired or disabled, set with the key activation date no later than the current date, and that trusted Microsoft services can bypass the firewall if applicable. (https://aka.ms/sqltdebyoksetup) |
+| 45330 | 16 | No | The server '%ls' requires the 'Key Vault Crypto Service Encryption User' RBAC role assignment, or the following Azure Key Vault permissions: '%ls'. Grant the missing permissions to the service principal with ID '%ls'. Ensure the key is active, is not expired or disabled, set with the key activation date no later than the current date, and that trusted Microsoft services can bypass the firewall if applicable. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323731](https://go.microsoft.com/fwlink/?linkid=2323731). |
 | 45331 | 16 | No | The operation could not be completed because the read scale value specified is not supported for a '%ls' database. |
 | 45332 | 16 | No | The operation could not be completed because the read scale value specified is invalid. |
 | 45333 | 16 | No | The service request timed out. %ls. |
@@ -709,15 +709,15 @@ ms.topic: include
 | 45374 | 16 | No | HardwareGeneration '%ls' is not valid. Please specify a valid HardwareGeneration value. |
 | 45375 | 16 | No | vCore value (%d) and HardwareGeneration '%ls' is not a valid combination. Please specify a valid vCore and HardwareGeneration value. |
 | 45376 | 16 | No | Managed Instance cannot be joined to a classic virtual network. Please provide a Resource Manager vnet to join. |
-| 45377 | 16 | No | The provided Key Vault uri '%ls' is not valid. Please ensure the key vault has been configured with soft-delete and purge protection. (https://aka.ms/sqltdebyoksoftdelete) |
+| 45377 | 16 | No | The provided Key Vault uri '%ls' is not valid. Please ensure the key vault has been configured with soft-delete and purge protection. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323732](https://go.microsoft.com/fwlink/?linkid=2323732). |
 | 45378 | 16 | No | geo-redundant-backup not supported for the current edition. |
 | 45379 | 16 | No | geo-redundant-backup value is not allowed to update |
 | 45380 | 16 | No | The edition %.\*ls is not a valid edition. Edition cannot be changed by update. |
 | 45381 | 16 | No | SKU Name '%ls' is not valid. Please specify a valid SKU Name. |
 | 45382 | 16 | No | Read or write operations are not allowed on the storage account '%ls'. |
 | 45383 | 16 | No | The storage account '%ls' is disabled. |
-| 45384 | 16 | No | The encryption protectors for all servers linked by GeoDR must be in the same region as their respective servers. Please upload key '%ls' to a Key Vault in the region '%ls' as server '%ls'. (https://aka.ms/sqltdebyokgeodr) |
-| 45385 | 16 | No | Unexpected Key Vault region found in the response for Key Vault '%ls' associated with server '%ls'. Expected region: '%ls', Region receieved in response: '%ls'. (https://aka.ms/sqltdebyokgeodr) |
+| 45384 | 16 | No | The encryption protectors for all servers linked by GeoDR must be in the same region as their respective servers. Please upload key '%ls' to a Key Vault in the region '%ls' as server '%ls'. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323436](https://go.microsoft.com/fwlink/?linkid=2323436). |
+| 45385 | 16 | No | Unexpected Key Vault region found in the response for Key Vault '%ls' associated with server '%ls'. Expected region: '%ls', Region receieved in response: '%ls'. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323436](https://go.microsoft.com/fwlink/?linkid=2323436). |
 | 45386 | 16 | No | The key vault provided '%ls' on server '%ls' uses unsupported RSA Key Size or Key Type. The supported RSA Key Size is 2048 and Key Type is RSA and RSA-HSM. |
 | 45387 | 16 | No | Invalid hardware generation. It isn't allowed to have both Gen4 and Gen5. |
 | 45388 | 16 | No | Target subnet has associated Network Security Group (NSG). Remove %ls. ([https://go.microsoft.com/fwlink/?linkid=871071](https://go.microsoft.com/fwlink/?linkid=871071)) |
@@ -772,7 +772,7 @@ ms.topic: include
 | 45437 | 16 | No | The operation could not be completed. Replication is not enabled for the server. |
 | 45438 | 16 | No | The timezone cannot be changed on Managed Instance. |
 | 45439 | 16 | No | Cannot create a Managed Instance with timezone '%.\*ls'. Please use timezone 'UTC' instead. |
-| 45440 | 16 | No | Cannot perform creation/scaling of the managed instance as there are not enough available IP addresses in the subnet for performing the operation. For more details visit 'https://aka.ms/determine-subnet-size'. |
+| 45440 | 16 | No | Cannot perform creation/scaling of the managed instance as there are not enough available IP addresses in the subnet for performing the operation. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323437](https://go.microsoft.com/fwlink/?linkid=2323437). |
 | 45441 | 16 | No | Elastic server restore verification is not supported. |
 | 45442 | 16 | No | The operation failed because the requested update mode '%ls' did not match the chosen one '%ls'. Please try again later or use a different update mode specification. |
 | 45443 | 16 | No | Storage Auto Grow is not supported . |
@@ -803,22 +803,22 @@ ms.topic: include
 | 45468 | 16 | No | Cannot fetch SQL Managed Instance available timezones because the functionality is not supported.. |
 | 45469 | 16 | No | The operation could not be completed because an Azure Active Directory error was encountered. The error message from Active Directory Authentication library (ADAL) is '%ls'. |
 | 45470 | 16 | No | Managed instance deletion failed since there are resource(s) preventing its deletion: %ls ([https://go.microsoft.com/fwlink/?linkid=2109712](https://go.microsoft.com/fwlink/?linkid=2109712)). |
-| 45471 | 16 | No | The server identity is incorrectly configured on server '%ls'. Follow steps in "Assign an Azure AD identity to your server" (https://aka.ms/'%ls'byoksetup) |
+| 45471 | 16 | No | The server identity is incorrectly configured on server '%ls'. For more information, see https://aka.ms/'%ls'byoksetup. |
 | 45472 | 16 | No | The server '%ls' requires the following Azure Key Vault permissions: '%ls'. Please grant the missing permissions to the service principal with ID '%ls'. Additionally ensure the key is not expired and is not disabled. For expired key, please extend the key expiry time so that SQL can use it to perform wrap and unwrap operations. If your key vault is behind a virtual network or firewall, ensure you select the 'Allow trusted Microsoft services to bypass this firewall' option. (https://aka.ms/'%ls'byoksetup) |
 | 45473 | 16 | No | The provided Key Vault uri '%ls' is not valid. Please ensure the key vault has been configured with soft-delete and purge protection. (https://aka.ms/'%ls'byoksetup) |
 | 45474 | 16 | No | '%ls' server configuration does not support Data Encryption feature. For information about supported configurations please visit https://aka.ms/'%ls'byoksetup. |
-| 45475 | 16 | No | AAD login '%s' cannot be added because a non AAD login exists with the same name. |
+| 45475 | 16 | No | A Microsoft Entra ID login '%s' cannot be added because a non Microsoft Entra ID login exists with the same name. |
 | 45476 | 16 | No | The operation could not be completed because managed instance %ls contains databases that are in the Inaccessible state. Please either drop inaccessible databases or fix the issues with access to the customer-managed TDE protector key for managed instance before retrying operation. [https://go.microsoft.com/fwlink/?linkid=2111623](https://go.microsoft.com/fwlink/?linkid=2111623) |
 | 45477 | 16 | No | Changing the hardware generation to deprecated %ls generation is not possible. |
 | 45478 | 16 | No | '%ls' |
 | 45479 | 16 | No | Backup storage type parameter is not allowed in the instance update operation. |
-| 45480 | 16 | No | The Azure SQL DB Service Management API surface has been deprecated. Please update callers to the Resource Management API surface. For more information, please see https://aka.ms/sqldbsmretirement. |
+| 45480 | 16 | No | The Azure SQL Database Service Management API surface has been retired. Please update callers to the Resource Management API. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323733](https://go.microsoft.com/fwlink/?linkid=2323733). |
 | 45481 | 16 | No | The login for '%ls' was not able to be provisioned on sql instance '%ls' |
 | 45482 | 16 | No | The login for '%ls' was not able to be dropped on sql instance '%ls', it is currently in state '%ls' |
 | 45483 | 16 | No | The login for '%ls' was not able to be dropped on sql instance '%ls', rollback of drop is not supported. |
 | 45484 | 16 | No | Configuring backup storage account type to '%s' failed during Database create or update. |
 | 45485 | 16 | No | Managed Instance%ls deployment failed as provided subnet '%ls' was not delegated to Microsoft.Sql/managedInstances. Information on how to set subnet delegation for Managed Instance could be found at ([https://go.microsoft.com/fwlink/?linkid=2123307](https://go.microsoft.com/fwlink/?linkid=2123307)). |
-| 45486 | 16 | No | Submitted request could not be accepted as maximum number of '%ls' concurrent management operations would be exceeded. Terminate some of the ongoing operations or try again later. For more details check: (https://aka.ms/mierror-man-op-limit) |
+| 45486 | 16 | No | Submitted request could not be accepted as the maximum number of '%ls' concurrent management operations would be exceeded. Terminate some of the ongoing operations or try again later. |
 | 45487 | 16 | No | Vulnerability Assessment scan was canceled. |
 | 45488 | 16 | No | Vulnerability Assessment failed to read archived blob. |
 | 45489 | 16 | No | Vulnerability Assessment storage account is on VNET or have firewalls. |
@@ -854,7 +854,7 @@ ms.topic: include
 | 45520 | 16 | No | Property with name DatabaseSurfaceAreaVersion is specified but not available in managed instance create operation. Please remove it from operation request and submit operation again. |
 | 45521 | 16 | No | A user assigned managed identity must be specified when identity type is set to 'UserAssigned' or 'SystemAssigned,UserAssigned'. Please specify the user assigned managed identity to be assigned to the server '%ls' or change the identity type to a different value. |
 | 45522 | 16 | No | The primary user assigned managed identity '%ls' must be a part of the managed identities being assigned to the server '%ls' or already assigned to the server. |
-| 45523 | 16 | No | One or more identity id(s) provided are not valid ARM resource id(s). Please input valid id(s) and try again. For more details, go to https://aka.ms/sqltdebyokcreateserver |
+| 45523 | 16 | No | One or more identity id(s) provided are not valid ARM resource id(s). Please provide valid id(s) and try again. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323438](https://go.microsoft.com/fwlink/?linkid=2323438). |
 | 45524 | 16 | No | ZoneRedundant feature is not supported for the selected service tier. For more details visit aka.ms/sqlmi-service-tier-characteristics. |
 | 45525 | 16 | No | Enabling zoneRedundant feature is not possible once managed instance is created. For more details visit aka.ms/sqlmi-high-availability. |
 | 45526 | 16 | No | Disabling zoneRedundant feature is not possible once managed instance is created. For more details visit aka.ms/sqlmi-high-availability. |
@@ -863,14 +863,14 @@ ms.topic: include
 | 45529 | 16 | No | You have reached the maximum number of %ls active user certificates for the hybrid link. Please reduce the number of active certificates and try again. |
 | 45530 | 16 | No | The operation was not allowed because of the outbound firewall rule configuration for '%ls'. |
 | 45531 | 16 | No | The specified server name cannot be used. Name is available, but still present in the collection due to recent usage. It can take up to 7 days to remove the name from the collection. Please submit operation again using different server name or try again later. |
-| 45532 | 16 | No | The managed identity with ID '%ls' requires the following Azure Key Vault permissions: '%ls' to the key '%ls'. Please grant the missing permissions to the identity. Additionally ensure the key is not expired and is not disabled. For expired key, please extend the key expiry time so that SQL can use it to perform wrap and unwrap operations. If your key vault is behind a virtual network or firewall, ensure you select the 'Allow trusted Microsoft services to bypass this firewall' option. (https://aka.ms/sqltdebyokcreateserver) |
+| 45532 | 16 | No | The managed identity with ID '%ls' requires the following Azure Key Vault permissions: '%ls' on the key '%ls'. Grant the missing permissions to the identity and ensure the key is not expired and is not disabled. For an expired key, extend the key expiry time to enable its use for wrap and unwrap operations. If your key vault is in a virtual network or behind a firewall, enable the 'Allow trusted Microsoft services to bypass this firewall' option. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323438](https://go.microsoft.com/fwlink/?linkid=2323438). |
 | 45533 | 16 | No | A primary user assigned managed identity has not been specified. Please specify the primary managed identity that you would like to use for the server '%ls'. |
 | 45534 | 16 | No | Changing managed instance subnet is not supported operation. Please remove this parameter from the request. |
 | 45535 | 16 | No | Selected subnet is in another Virtual Network. Moving managed instance to another Virtual Network is not possible. Please provide subnet from Virtual Network '%ls'. |
 | 45536 | 16 | No | Provided subnet is having different DNS zone from the current. Changing instance DNS zone is not supported. Please provide subnet with same DNS zone, create a new subnet or provide empty one. |
 | 45537 | 16 | No | It is not possible to update subnet while running on Gen4 hardware as it is being deprecated. Please upgrade your hardware from Gen4 to Gen5 as part of the changing managed instance subnet operation by specifying both parameters at the same time: destination subnet and hardware generation. |
-| 45538 | 16 | No | Please specify primary user-assigned managed identity having the following Azure Key Vault permissions '%ls' to access the key '%ls'. Additionally ensure the key is not expired and is not disabled. For expired key, please extend the key expiry time so that SQL can use it to perform wrap and unwrap operations. If your key vault is behind a virtual network or firewall, ensure you select the 'Allow trusted Microsoft services to bypass this firewall' option. (https://aka.ms/sqltdebyokcreateserver) |
-| 45539 | 16 | No | Please change identity type to 'UserAssigned' or 'SystemAssigned,UserAssigned' and assign a primary user-assigned managed identity having the following Azure Key Vault permissions '%ls' to access the key '%ls'. Additionally ensure the key is not expired and is not disabled. For expired key, please extend the key expiry time so that SQL can use it to perform wrap and unwrap operations. If your key vault is behind a virtual network or firewall, ensure you select the 'Allow trusted Microsoft services to bypass this firewall' option. (https://aka.ms/sqltdebyokcreateserver) |
+| 45538 | 16 | No | Specify the primary user-assigned managed identity having the following Azure Key Vault permissions '%ls' to access the key '%ls'. Ensure the key is not expired and is not disabled. For an expired key, extend the key expiry time to enable its use for wrap and unwrap operations. If your key vault is in a virtual network or behind a firewall, enable the 'Allow trusted Microsoft services to bypass this firewall' option. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323438](https://go.microsoft.com/fwlink/?linkid=2323438) |
+| 45539 | 16 | No | Change identity type to 'UserAssigned' or 'SystemAssigned,UserAssigned' and assign a primary user-assigned managed identity having the following Azure Key Vault permissions '%ls' to access the key '%ls'. Ensure the key is not expired and is not disabled. For an expired key, extend the key expiry time to enable its use for wrap and unwrap operations. If your key vault is in a virtual network or behind a firewall, enable the 'Allow trusted Microsoft services to bypass this firewall' option. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323438](https://go.microsoft.com/fwlink/?linkid=2323438) |
 | 45540 | 16 | No | Cross '%ls' '%ls' operation is not supported. |
 | 45541 | 16 | No | The source database, '%ls', has not yet accomplished its first backup in order to support restore operations. Please retry the restore request later. |
 | 45542 | 16 | No | User attempted to failover or force-terminate a geo-link while the secondary is in checkpoint-only mode due to insufficient memory and so cannot enter the primary role. Consider upgrading the database service level objective of the geo-secondary to increase available memory. |
@@ -913,18 +913,18 @@ ms.topic: include
 | 45579 | 16 | No | Failed to update the backup storage. Contact Microsoft Support for assistance. |
 | 45580 | 16 | Yes | The elastic pool has reached its storage limit. The storage allocated for the elastic pool cannot exceed (%d) MB. (%d) MB storage has been allocated and the operation requires (%d) MB more storage to be allocated. See 'http://aka.ms/file-space-manage' for assistance. |
 | 45581 | 16 | No | Native restore backup contains files in forbidden states. |
-| 45582 | 16 | No | Subnet currently used by managed instance and provided destination subnet are part of the virtual networks that are not connected with virtual network peering, or have peering established but don't have allowed traffic. In order to move managed instance from one subnet to another, virtual network peering needs to be established from both source and target virtual network. Please configure virtual network requirements and then try the operation again. Learn more [https://learn.microsoft.com/azure/virtual-network/tutorial-connect-virtual-networks-portal#peer-virtual-networks](/azure/virtual-network/tutorial-connect-virtual-networks-portal#peer-virtual-networks). |
+| 45582 | 16 | No | The subnet currently used by the managed instance and the provided destination subnet are in virtual networks that are not connected with virtual network peering, or have peering established but don't have traffic allowed. To move a managed instance from one subnet to another, virtual network peering needs to be established from both source and target virtual networks. Configure virtual networks according to requirements and try again. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323005](https://go.microsoft.com/fwlink/?linkid=2323005). |
 | 45583 | 16 | No | Subnet provided for managed instance deployment is located on subscription different than the one submitted for managed instance. Managed instance and subnet used for deploying the instance must be on the same subscription. Please provide another subnet or switch to the subnet subscription and then try the operation again. |
 | 45584 | 16 | No | Parameter '%s' cannot be null or empty. Specify a value for the named parameter and retry the operation. |
 | 45585 | 16 | No | The parameter '%ls' is invalid. '%ls' |
-| 45586 | 16 | No | The restored database is too large for the requested service level objective '%s'. Submit a new restore request to a target service level objective which has sufficient storage larger than the the max size of the database, %s bytes. After restore, a shrink database operation can be performed to to reclaim unused space before scaling the DB size to the originally requested service level objective. |
+| 45586 | 16 | No | The restored database is too large for the requested service level objective '%s'. Submit a new restore request to a target service level objective which has sufficient storage larger than the max size of the database, %s bytes. After restore, a shrink database operation can be performed to to reclaim unused space before scaling the DB size to the originally requested service level objective. |
 | 45587 | 16 | No | The attempted create/update/delete operation of Start/Stop schedule on the Azure SQL Managed Instance failed. The schedule was either not created or couldn't be updated/deleted as it was busy with an ongoing scheduled operation. Please retry your request later. |
-| 45588 | 16 | No | Cannot create Managed Instance in the subnet '%ls' because subnet is too small. Minimal allowed size of a subnet is %d IP addresses. See https://aka.ms/move-managed-instance on how to move your instance to a larger subnet. |
-| 45589 | 16 | No | Subnet selected for managed instance migration has address range that overlaps with address range of subnet that holds geo replicated secondary instance. Please verify that your subnet is configured according to guidelines in https://aka.ms/move-managed-instance. |
-| 45590 | 16 | No | Subnet selected for managed instance migration is not configured to enable communication with a geo replicated secondary instance. Please check if all of the required ports are open. To properly configure your subnet read the guidelines in https://aka.ms/move-managed-instance. |
+| 45588 | 16 | No | Cannot create Managed Instance in the subnet '%ls' because subnet is too small. Minimal allowed size of a subnet is %d IP addresses. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323734](https://go.microsoft.com/fwlink/?linkid=2323734). |
+| 45589 | 16 | No | The subnet selected for managed instance migration has an address range that overlaps with the address range of the subnet that holds the geo replicated secondary instance. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323734](https://go.microsoft.com/fwlink/?linkid=2323734). |
+| 45590 | 16 | No | The subnet selected for managed instance migration is not configured to enable communication with the geo replicated secondary instance. Check if all of the required ports are open. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323734](https://go.microsoft.com/fwlink/?linkid=2323734). |
 | 45591 | 16 | No | The database can't be restored into the resource pool due to the remaining storage capacity in the pool. The database required {0} bytes, while the pool has only {1} bytes of storage available. Please restore as a single database outside resource pool or increase resources for the pool. |
-| 45592 | 16 | No | The largest database file size of database '{0}' exceeds data file size limit {1} for General Purpose SQL Managed Instance service tier. See: [https://learn.microsoft.com/azure/azure-sql/managed-instance/resource-limits#service-tier-characteristics](/azure/azure-sql/managed-instance/resource-limits#service-tier-characteristics). |
-| 45593 | 16 | No | Storage account limit {0} for General Purpose SQL Managed Instance '{1}' exceeded. See: [https://learn.microsoft.com/azure/azure-sql/managed-instance/resource-limits#service-tier-characteristics](/azure/azure-sql/managed-instance/resource-limits#service-tier-characteristics). |
+| 45592 | 16 | No | The largest database file size of database '{0}' exceeds the data file size limit {1} for the General Purpose service tier. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323104](https://go.microsoft.com/fwlink/?linkid=2323104). |
+| 45593 | 16 | No | Storage account limit {0} for the SQL managed instance '{1}' in the General Purpose service tier exceeded. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323104](https://go.microsoft.com/fwlink/?linkid=2323104). |
 | 45594 | 16 | No | Unable to add keys to the Azure SQL Server due to CryptographicException. Error details: Exponent: '%ls', Modulus: %ls'. For additional support, contact your system administrator or Microsoft Customer Support Services |
 | 45595 | 16 | No | The key vault provided '%ls' on server '%ls' uses unsupported RSA Key Exponent. Exponent value: '%ls'. For additional support, contact your system administrator or Microsoft Customer Support Services |
 | 45596 | 16 | No | Database restore is not supported when Database-level CMK is configured in preview. |
@@ -1002,7 +1002,7 @@ ms.topic: include
 | 45668 | 16 | No | The database backup contains incompatible physical layout. Multiple log files are not supported. |
 | 45669 | 16 | No | Database '%ls' operation failed because there is no network connectivity between source instance '%ls' and target instance '%ls'. |
 | 45670 | 16 | No | Database '%ls' operation failed because there is no connectivity between source and target Azure SQL Managed Instance. This is because the target instance subnet has an overlapping address range with the subnet of the source instance. |
-| 45671 | 16 | No | Microsoft Distributed Transaction Coordinator (MS DTC) cannot be enabled because required outbound traffic on port 445 to the MS DTC log on a remote storage cannot be enabled due to a conflict with an existing route. Please check the route table for the subnet hosting the instance to identify and solve the conflict. See [https://learn.microsoft.com/azure/azure-sql/managed-instance/doc-changes-updates-known-issues](/azure/azure-sql/managed-instance/doc-changes-updates-known-issues) for more information. |
+| 45671 | 16 | No | Microsoft Distributed Transaction Coordinator (MS DTC) cannot be enabled because required outbound traffic on port 445 to the MS DTC log on a remote storage cannot be enabled due to a conflict with an existing route. Check the route table for the subnet hosting the instance to identify and solve the conflict. |
 | 45672 | 16 | No | Cross subscription '%ls' operation, from subscription id '%ls' to subscription id '%ls' is not allowed because these two subscriptions don't belong to the same Azure tenant ID. |
 | 45673 | 16 | No | Cannot perform delete operation because of the following resource lock: '%ls'. Please remove the lock and try again. |
 | 45674 | 16 | No | Cannot drop database because a database '%ls' operation is completing. |
@@ -1044,20 +1044,20 @@ ms.topic: include
 | 45711 | 16 | No | Database-level CMK is not supported when Long-term Backup Retention is enabled on the database. |
 | 45712 | 16 | No | Database-level encryption protector does not exist. |
 | 45713 | 16 | No | Database-level encryption protector can only be reverted to the server level encryption when the server is configured with Microsoft Managed Key. |
-| 45714 | 16 | No | Cross tenant CMK can only be configured when the server is configured with a User Assigned Managed Identity. Refer to https://aka.ms/sqltdebyokumi to configure User Assigned Managed Identity. |
+| 45714 | 16 | No | Cross tenant CMK can only be configured when the server is configured with a User Assigned Managed Identity. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323438](https://go.microsoft.com/fwlink/?linkid=2323438). |
 | 45715 | 16 | No | The preferredEnclaveType is not supported for dedicated SQL Pools. |
 | 45716 | 16 | No | Configuring the 'VBS' preferredEnclaveType for databases using the DC-series hardware configuration is not supported. DC-series databases are pre-configured with Intel SGX enclaves. Virtualization based security (VBS) enclaves are not supported. |
 | 45717 | 16 | No | Database-level encryption protector must be set on the target database while attempting to copy or replicate a database encrypted with a database level key. |
 | 45718 | 16 | No | While attempting to replicate a database configured with database level encryption protector, the current keys being used by the primary must be passed to the secondary database. |
 | 45719 | 16 | No | The geo-primary database must be configured with a database level encryption protector before setting a database level encryption protector on the geo-secondary. |
-| 45720 | 16 | No | The database {0} on server {1} cannot be safely dropped because it is encrypted with a customer managed key that is no longer accessible to take the last backup before drop. Please restore Azure Key Vault Access on the server and revalidate the keys to make this database accessible and then proceed with the drop. For details see https://aka.ms/tdecmkrestorability |
+| 45720 | 16 | No | The database {0} on server {1} cannot be safely dropped because it is encrypted with a customer managed key that is no longer accessible to take the last backup before drop. Please restore Azure Key Vault Access on the server and revalidate the keys to make this database accessible and then proceed with the drop. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323436](https://go.microsoft.com/fwlink/?linkid=2323436). |
 | 45722 | 16 | No | Virtualization-based security (VBS) enclaves are not supported for elastic pools. |
 | 45723 | 16 | No | Configuring geo-replication is not supported for databases using different values of the preferredEnclaveType property. The primary '{0}' database on the '{1}' server uses the '{2}' preferredEnclaveType, whereas the specified preferredEnclaveType for the secondary '{3}' database on the '{4}' server is '{5}'. |
 | 45724 | 16 | No | Planned failover between primary and secondary database with different preferredEnclaveType is not supported for Virtualization-based security (VBS) enclaves. |
 | 45725 | 16 | No | The geo-primary database must not be configured with a database level encryption protector when failing over to a geo-secondary without a database level encryption protector. |
 | 45726 | 16 | No | Operation on job agent is in progress. Please wait a gew minutes before retrying again. |
 | 45727 | 16 | No | The create database operation can not be performed at this time due to ongoing Transparent Data Encryption (TDE) key rotation on the server. Please try the operation again later. |
-| 45728 | 16 | No | Adding a database with '{0}' preferredEnclaveType to an elastic pool '{1}' with '{2}' preferredEnclaveType is not supported. Before adding the database to the elastic pool, ensure that the preferredEnclaveType is the same for both the database and the elastic pool. More information can be found on https://aka.ms/AlwaysEncryptedEnableSecureEnclaves |
+| 45728 | 16 | No | Adding a database with '{0}' preferredEnclaveType to an elastic pool '{1}' with '{2}' preferredEnclaveType is not supported. Before adding the database to the elastic pool, ensure that preferredEnclaveType is the same for both the database and the elastic pool. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323828](https://go.microsoft.com/fwlink/?linkid=2323828). |
 | 45731 | 16 | No | The elastic pool contains inaccessible databases which have lost Azure Key Vault access required for TDE configuration. Please move the accessible databases to a different pool for scaling or restore the lost Azure Key Vault access for the inaccessible databases. |
 | 45735 | 16 | No | Elastic job agent '%.\*ls' SLO's assignment is in progress |
 | 45736 | 16 | No | The given SLO is not supported for job agent. Please retry with the supported SLO. |
@@ -1089,29 +1089,29 @@ ms.topic: include
 | 45785 | 16 | No | ElasticPool: {0}, on server: {1}, in resource group: {2}, in subscription: {3}, was not found. |
 | 45786 | 16 | No | ElasticPool: {0}, on server: {1}, in resource group: {2}, in subscription: {3}, does not have UpgradeMeNow enabled. |
 | 45787 | 16 | No | ElasticPool: {0}, on server: {1}, in resource group: {2}, in subscription: {3}, does not contain any database. |
-| 45788 | 16 | No | The operation cannot be performed since the database '%ls' is geo-replicated and is in secondary role. Database size limit updates are not allowed on a geo-secondary. Please try updating the primary database instead. See '[https://learn.microsoft.com/sql/t-sql/statements/alter-database-transact-sql-file-and-filegroup-options](../../../t-sql/statements/alter-database-transact-sql-file-and-filegroup-options.md)' for more information. |
+| 45788 | 16 | No | The operation cannot be performed since the database '%ls' is geo-replicated and is in the secondary role. Database size limit changes are not allowed on a geo-secondary replica. Change the limit on the primary replica instead. |
 | 45789 | 16 | No | The limit of one free database offer for subscription '%.\*ls' has been reached. Drop the existing free database or use a different subscription to continue. |
 | 45790 | 16 | No | Operation on Long Term Retention backup failed because the backup is immutable. |
 | 45791 | 16 | No | Server '%.\*ls' cannot be moved out of subscription '%.\*ls' because it contains a free database. Drop or upgrade the existing free database to continue. |
 | 45792 | 16 | No | Standby Replication limit reached. The database '%ls' cannot have more than %d standby replicas. |
 | 45793 | 16 | No | You cannot create Freemium SQL Managed Instance with {0} {1}. For more details visit aka.ms/SQLMIFreemium. |
 | 45794 | 16 | No | You cannot create Freemium SQL Managed Instance on this region. For more details check aka.ms/SQLMIfreemium. |
-| 45795 | 16 | No | The operation could not be completed because there is an ongoing maintenance on your Managed Instance subnet. All Managed Instance create/update operations for this subnet are prohibited until the maintenance is completed. Please, retry the operation after the current maintenance window is closed. See '[https://learn.microsoft.com/azure/azure-sql/database/maintenance-window](/azure/azure-sql/database/maintenance-window)' for details on maintenance windows. |
+| 45795 | 16 | No | The operation could not be completed because there is an ongoing maintenance on your SQL managed instance subnet. All Managed Instance create/update operations for this subnet are prohibited until the maintenance is completed. Retry the operation after the current maintenance window is closed. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323009](https://go.microsoft.com/fwlink/?linkid=2323009). |
 | 45796 | 16 | No | A data-file max size consistency error was detected during Hyperscale migration. %ls |
 | 45797 | 16 | No | Freemium is not enabled for this subscription. For more details check aka.ms/SQLMIfreemium. |
 | 45798 | 16 | No | The specified edition %ls is not consistent with the instance pool edition %ls. |
 | 45799 | 16 | No | The specified subnet %ls is not consistent with the instance pool subnet %ls. |
 | 45900 | 16 | No | The specified hardware family %ls is not consistent with the instance pool hardware family %ls. |
 | 45901 | 16 | No | The specified license type %ls is not consistent with the instance pool icense type %ls. |
-| 45902 | 16 | No | Changing the database format from '{0}' to '{1}' is not supported. Check the database format property value specified and visit https://aka.ms/sqlmidatabaseformat for more details. |
-| 45903 | 16 | No | Changing the database format from '{0}' to '{1}' is not supported. Check the database format property value specified and visit https://aka.ms/sqlmidatabaseformat for more details. |
-| 45904 | 16 | No | Changing the database format is not supported for this managed instance. Check the database format property value specified and visit https://aka.ms/sqlmi-fwnov2022 for more details. |
+| 45902 | 16 | No | Changing the database format from '{0}' to '{1}' is not supported. Check the database format property value specified. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323829](https://go.microsoft.com/fwlink/?linkid=2323829). |
+| 45903 | 16 | No | Changing the database format from '{0}' to '{1}' is not supported. Check the database format property value specified. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323829](https://go.microsoft.com/fwlink/?linkid=2323829). |
+| 45904 | 16 | No | Changing the database format is not supported for this managed instance. Check the database format property value specified. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323829](https://go.microsoft.com/fwlink/?linkid=2323829). |
 | 45905 | 16 | No | Specifying the database format property value is not supported at this time. |
 | 45906 | 16 | No | A freemium instance can not be created in the specified subnet %ls. |
 | 45907 | 16 | No | GeoDR links are not supported for managed instances inside managed instance pool. |
 | 45908 | 16 | No | Moving Azure SQL Managed Instance with existing auto-failover group configured into an instance pool is not supported. Remove auto-failover group from this instance, and attempt moving to the instance pool again. |
-| 45909 | 16 | No | Creation of ZoneRedundant SQL MI is temporarily disabled on this region. You can create Zone Redundant SQL Managed Instances in many other regions in Azure. [https://learn.microsoft.com/azure/azure-sql/managed-instance/high-availability-sla](/azure/azure-sql/managed-instance/high-availability-sla) |
-| 45910 | 16 | No | Creation of ZoneRedundant SQL MI is temporarily disabled for this hardware generation on this region. You can create Zone Redundant SQL Managed Instances with different harware generation on this region or many other regions in Azure. [https://learn.microsoft.com/azure/azure-sql/managed-instance/high-availability-sla](/azure/azure-sql/managed-instance/high-availability-sla) |
+| 45909 | 16 | No | Creation of zone-redundant SQL managed instances is temporarily disabled for this Azure region. You can create zone-redundant SQL managed instances in other Azure regions. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323105](https://go.microsoft.com/fwlink/?linkid=2323105). |
+| 45910 | 16 | No | Creation of zone-redundant SQL managed instances is temporarily disabled for this hardware generation in this Azure region. You can create zone-redundant SQL managed instances using a different hardware generation in this region, or use other Azure regions. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323105](https://go.microsoft.com/fwlink/?linkid=2323105). |
 | 45911 | 16 | No | Failover group cannot be created because database format of the primary instance is not compatible with the database format of the secondary instance. See [https://go.microsoft.com/fwlink/?linkid=2251601](https://go.microsoft.com/fwlink/?linkid=2251601) for more details. |
 | 45912 | 16 | No | Database format change must be performed on the secondary instance of the failover group first. See [https://go.microsoft.com/fwlink/?linkid=2251601](https://go.microsoft.com/fwlink/?linkid=2251601) for more details. |
 | 45913 | 16 | No | Operation cannot be performed because database format of the source instance is not compatible with the database format of the destination instance. See [https://go.microsoft.com/fwlink/?linkid=2251601](https://go.microsoft.com/fwlink/?linkid=2251601) for more details. |
@@ -1128,7 +1128,7 @@ ms.topic: include
 | 45925 | 16 | No | Deploying managed instances and instance pools into private subnets is not supported. |
 | 45926 | 16 | No | Deploying failover group is not supported with the free Azure SQL Managed Instance offer. |
 | 45927 | 16 | No | Unable to determine target service level objective. If restoring from a long-term retention backup of a database that was in an elastic pool, either target elastic pool name or target service level objective must be supplied. If the source database was dropped, use Azure Powershell to specify the target service level objective. |
-| 45928 | 16 | No | The server '%ls' already exists in this subscription in a soft-deleted state. You cannot create a server named '%ls' until the existing soft-deleted server is removed. If you are trying to recover this server or force-delete it to create a new empty server of the same name, please refer to https://aka.ms/restoredeletedazuresqlserver. Please contact Microsoft support if further assistance is needed. |
+| 45928 | 16 | No | The server '%ls' already exists in this subscription in a soft-deleted state. You cannot create a server named '%ls' until the existing soft-deleted server is removed. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323735](https://go.microsoft.com/fwlink/?linkid=2323735) or contact Microsoft support. |
 | 45929 | 16 | No | Operation '{0}' could not be completed because the minimum TLS version required is 1.2 or higher. Earlier versions of TLS are no longer supported as they are considered deprecated. |
 | 45930 | 16 | No | The limit of free databases for subscription '%.\*ls' has been reached as part of the free database offer. To continue using for free, drop an existing free database. |
 | 45931 | 16 | No | Cannot resume continuous copy if Db getting resumed is already a geo-secondary for another link or DB getting resumed is in a FG and the link being resumed is NOT a FG link. |
@@ -1140,9 +1140,10 @@ ms.topic: include
 | 45937 | 16 | No | Operation '{0}' could not be completed because the maximum allowed TLS version is {1}. |
 | 45938 | 16 | No | Managed Instance geo-failover cannot be executed at this time. Reason: '%.\*ls'. |
 | 45939 | 16 | No | One or more databases on SQL Managed Instance '{0}' cannot be made accessible because the corresponding inaccessibility root causes have not been mitigated. Please mitigate the inaccessibility root causes for all currently inaccessible databases and retry the operation. |
-| 45940 | 16 | No | The backup {0} cannot be deleted because there is a legal hold placed on it. Delete the legal hold to delete the backup. ErrorOwner: sqldataintegration ErrorCause: User tried to delete or modify an immutable Long Term Retention backup |
+| 45940 | 16 | No | The backup {0} cannot be deleted because there is a legal hold placed on it. Remove the legal hold and retry. backup. ErrorOwner: sqldataintegration ErrorCause: User tried to delete or modify an immutable Long Term Retention backup |
 | 45941 | 16 | No | The operation could not be completed as the backup is not configured for immutability. |
 | 45942 | 16 | No | The operation could not be completed as the backup is immutable and locked. |
+| 45943 | 16 | No | The long-term retention backup with the desired legal hold value already exists backup file backup. ErrorOwner: sqldataintegration |
 | 46501 | 15 | No | External table references '%S_MSG' that does not exist. |
 | 46502 | 15 | No | Type with name '%.\*ls' already exists. |
 | 46503 | 15 | No | Invalid format for option '%S_MSG'. |
@@ -1172,7 +1173,7 @@ ms.topic: include
 | 46527 | 15 | No | Altering the '%S_MSG' property is not permitted for an external data source of type %ls. |
 | 46528 | 15 | No | SHARDED DISTRIBUTION is allowed for SHARD_MAP_MANGER data source only. |
 | 46529 | 15 | No | Allowed integer values for FIRST_ROW are between and including 1-101 |
-| 46530 | 15 | No | External data sources are not supported with type %S_MSG. |
+| 46530 | 15 | No | External data sources are not supported with type %S_MSG. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323208](https://go.microsoft.com/fwlink/?linkid=2323208). |
 | 46531 | 15 | No | Support for external data sources of type HADOOP is not enabled. To enable, set 'hadoop connectivity' to desired value. |
 | 46532 | 15 | No | Sp_rename is not supported for data pool external table. |
 | 46533 | 15 | No | Internal error occurred during distributed operation. |
@@ -1202,6 +1203,7 @@ ms.topic: include
 | 46557 | 16 | No | Argument '%.\*ls' is invalid. Please provide a valid Json document. |
 | 46558 | 16 | No | Option '%S_MSG' is not supported for external tables. |
 | 46559 | 16 | No | Local temporary external tables are not supported in this edition of SQL Server. |
+| 46560 | 16 | No | External Table Location option must be a valid OneLake path. |
 | 46601 | 16 | No | REJECT_TYPE |
 | 46602 | 16 | No | FILE_FORMAT |
 | 46603 | 16 | No | REJECT_VALUE |
@@ -1425,7 +1427,7 @@ ms.topic: include
 | 47028 | 10 | No | Reason: This FedAuth library is not supported by the security layer for authentication. |
 | 47029 | 10 | No | Reason: This FedAuth Ticket type is not supported by the security layer for authentication. |
 | 47030 | 10 | No | Reason: The Feature Switch for this FedAuth protocol is OFF. |
-| 47031 | 10 | No | Reason: There was a failure in acquiring the max heap memory limit from config during AAD group expansion. |
+| 47031 | 10 | No | Reason: There was a failure in acquiring the max heap memory limit from config during Microsoft Entra ID group expansion. |
 | 47032 | 10 | No | Reason: There is a user error in FedAuth token parsing. There should be a separate XEvent called 'fedauth_webtoken_failure' which indicate the actual error code |
 | 47033 | 10 | No | Reason: There is a System error in FedAuth token parsing. There should be a separate XEvent called 'fedauth_webtoken_failure' which indicate the actual error code |
 | 47034 | 10 | No | Reason: Authentication was successful, but database is in Recovering state. |
@@ -1467,7 +1469,7 @@ ms.topic: include
 | 47070 | 10 | No | Reason: Azure Active Directory only authentication is enabled. Please contact your system administrator. |
 | 47071 | 10 | No | Reason: Login failed because login token present in the feature extension is invalid. |
 | 47072 | 10 | No | Reason: Login failed due to client TLS version being less than minimal TLS version allowed by the server. |
-| 47073 | 10 | No | Reason: An instance-specific error occurred while establishing a connection to SQL Server. Connection was denied since Deny Public Network Access is set to Yes ([https://learn.microsoft.com/azure/azure-sql/database/connectivity-settings#deny-public-network-access](/azure/azure-sql/database/connectivity-settings#deny-public-network-access)). To connect to this server, use the Private Endpoint from inside your virtual network ([https://learn.microsoft.com/azure/sql-database/sql-database-private-endpoint-overview#how-to-set-up-private-link-for-azure-sql-database](/azure/sql-database/sql-database-private-endpoint-overview#how-to-set-up-private-link-for-azure-sql-database)). |
+| 47073 | 10 | No | Reason: An instance-specific error occurred while establishing a connection to SQL Server. Connection was denied because Deny Public Network Access is set to Yes. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323206](https://go.microsoft.com/fwlink/?linkid=2323206). |
 | 47074 | 10 | No | The login was denied since the target is not part of a Network Security Perimeter. |
 | 47075 | 10 | No | Connections to this database are no longer allowed. |
 | 47076 | 10 | No | Server access failure due to RBAC Deny. |
@@ -1483,7 +1485,7 @@ ms.topic: include
 | 47086 | 14 | No | Could not verify credentials on connected endpoint. |
 | 47087 | 10 | No | Reason: Azure Active Directory only authentication is enabled. Please contact your system administrator. |
 | 47088 | 10 | No | Reason: Login failed because of invalid feature extension offset. |
-| 47089 | 10 | No | Reason: Login failed because Azure Dns Caching feature extension is malformed. |
+| 47089 | 10 | No | Reason: Login failed because Azure DNS Caching feature extension is malformed. |
 | 47090 | 10 | No | Internal API Error. Result %d, File Name %s, Line Number %d |
 | 47091 | 10 | No | Reason: Login failed because login does not have CONNECT permission on the specified SQL Pool. |
 | 47092 | 10 | No | Reason: Login failed because login to Datawarehouse Reserved Databases are not allowed. |
@@ -1525,7 +1527,7 @@ ms.topic: include
 | 47129 | 16 | No | Creating Distributed availability group '%.\*ls' has failed. Cannot create Distributed Availability Group on top of Contained Availability Group. Verify Availability Group's name, then retry the operation. |
 | 47130 | 16 | No | Creating contained availability group '%.\*ls' failed. When creating contained availability group, both master database and msdb database must be included in contained availability group. Include master and msdb in CREATE AVAILABILITY GROUP statement and retry the operation. |
 | 47131 | 16 | No | Creating or joining availability group '%.\*ls' failed because there is a contained availability group. Remove contained availability group, then retry the operation. |
-| 47132 | 16 | No | Joining availability group '%.\*ls' with rebuilding contained system DB has failed because rebuilding contained MSDB has failed. This is caused by contained MSDB is still used. Retry the operation later. |
+| 47132 | 16 | No | Joining availability group '%.\*ls' with rebuilding contained system DB has failed because rebuilding contained msdb has failed. This is caused by contained msdb being in use. Retry the operation later. |
 | 47133 | 16 | No | Joining availability group '%.\*ls' with rebuilding contained system databases has failed because rebuilding contained availability group master database has failed. This is caused by contained availability group master database still being used. Reconnect to master database at SQL Server instance level and retry the operation later. |
 | 47134 | 16 | No | Joining availability group '%.\*ls' with 'REBUILD_SYSTEM_DATABASES' has failed. 'REBUILD_SYSTEM_DATABASES' is only valid for joining contained availability group. Remove the option and retry the operation. |
 | 47135 | 16 | No | Contained availability group system database '%.\*ls' cannot be removed from contained availability group '%.\*ls'. |
@@ -1568,7 +1570,7 @@ ms.topic: include
 | 47403 | 16 | No | MSDTC operation %s on transaction %s failed, %s |
 | 47404 | 16 | No | Resetting MSDTC log failed, %s. |
 | 47405 | 16 | No | MSDTC WMI Error, %ls. |
-| 47406 | 16 | No | WMI cannot connnect, it may not be installed. |
+| 47406 | 16 | No | WMI cannot connect, it might not be installed. |
 | 47407 | 16 | No | Unexpected internal error related to MS DTC. |
 | 47500 | 16 | No | Manual seeding is not supported option for secondary AG '%.\*ls' configuration when secondary participant in distributed availability group is Azure SQL Managed Instance. |
 | 47501 | 16 | No | Synchronous commit is not supported option for the initial secondary AG '%.\*ls' configuration when secondary participant in distributed availability group is Azure SQL Managed Instance. |
@@ -1594,13 +1596,13 @@ ms.topic: include
 | [47521](../mssqlserver-47521-database-engine-error.md) | 16 | No | Secondary replica could not be built as the replica request was not received from the primary, or not processed correctly. Check the state of the primary server and ensure that Availability Group on this server is not empty, and that it contains healthy databases. |
 | 47522 | 16 | No | Database '%.\*ls' has been removed from availability group which participates in Azure SQL Managed Instance link. |
 | 47523 | 16 | No | 'ALTER AVAILABILITY GROUP MODIFY AVAILABILITY GROUP' command failed. Specified option is not supported for altering distributed availability group in which secondary participant is Azure SQL Managed Instance. |
-| 47600 | 10 | No | Reason: Windows Authentication for Azure AD Principals is not enabled on this instance. |
-| 47601 | 10 | No | Reason: There was an internal error while attempting Windows Authentication for Azure AD Principals. |
-| 47602 | 16 | No | When auto-rotation of TDE Protector is enabled, both primary and secondary servers must be connected to the same key vault. Please add key '%ls' (from the same key vault connected to primary server) to the secondary server '%ls'. (https://aka.ms/sqltdeautorotation) |
-| 47603 | 16 | No | All servers linked by GeoDr should have the same key material as the encryption protector of the primary server. Please add the key '%ls' with the same key material to the secondary server '%ls'. (https://aka.ms/sqltdebyokgeodr) |
+| 47600 | 10 | No | Reason: Windows Authentication for Microsoft Entra ID principals is not enabled on this instance. |
+| 47601 | 10 | No | Reason: There was an internal error while attempting Windows Authentication for Microsoft Entra ID principals. |
+| 47602 | 16 | No | When auto-rotation of TDE Protector is enabled, both primary and secondary servers must be connected to the same key vault. Add key '%ls' from the key vault connected to primary server to the secondary server '%ls'. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323439](https://go.microsoft.com/fwlink/?linkid=2323439). |
+| 47603 | 16 | No | All servers linked by GeoDr should have the same key material as the encryption protector of the primary server. Add the key '%ls' with the same key material to the secondary server '%ls'. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323436](https://go.microsoft.com/fwlink/?linkid=2323436). |
 | 47604 | 10 | No | Service principal is disabled. |
 | 47605 | 10 | No | Service principal has insufficient permissions. |
-| 47606 | 10 | No | Reason: There was an user error while attempting Windows Authentication for Azure AD Principals. |
+| 47606 | 10 | No | Reason: There was an user error while attempting Windows Authentication for Microsoft Entra ID principals. |
 | 47607 | 10 | No | Reason: Login failure in mpdw |
 | 47608 | 10 | No | Reason: Login ack failure in mpdw |
 | 47609 | 10 | No | Conditional Access Policy is blocking usage of Service Principal. |
@@ -1614,6 +1616,7 @@ ms.topic: include
 | 47617 | 10 | No | Reason: Mwc max user connection is reached. |
 | 47618 | 10 | No | Reason: Mwc max system connection is reached. |
 | 47619 | 10 | No | Reason: Validation of user's permissions failed. Verify the user has the Read item permission. For more information, see [https://go.microsoft.com/fwlink/?linkid=2281595](https://go.microsoft.com/fwlink/?linkid=2281595). |
+| 47700 | 10 | No | Reason: The External Provider Access Token used for authenticating to the SQL Server is Blocklisted. |
 | 49301 | 16 | No | One or more errors occurred during a native external table operation. The last error code was 0x%08x. See previous error messages (if any) for further details. |
 | 49302 | 16 | No | One or more SQL Server host errors occurred during a native external table operation. The last error was %d. See previous error messages (if any) for further details. |
 | 49303 | 16 | No | Operation not implemented or not supported: '%s'. \[0x%8x\]\[%d\] '%s'(), %s: %u. |
@@ -1659,10 +1662,10 @@ ms.topic: include
 | 49428 | 16 | Yes | Could not access datafile during upgrade. |
 | 49501 | 16 | No | DBCC SHRINKFILE for %.\*ls is aborted. Sbs flat files are not supported |
 | 49502 | 10 | No | %.\*ls: Page %d:%d could not be moved because it is an sbs flat file page or the destination is an sbs flat file page. |
-| 49503 | 10 | No | %.\*ls: Page %d:%d could not be moved because it is an off-row persistent version store page. Page holdup reason: %ls. Page holdup timestamp: %I64d. |
+| 49503 | 10 | No | %.\*ls: Page %d:%d could not be moved because it is an off-row Persistent Version Store page. Page holdup reason: %ls. Page holdup timestamp: %I64d. |
 | 49504 | 10 | No | Error updating failover proc. |
 | 49505 | 16 | No | Registering extended stored procedure failed because it is not valid to use UNC path for DLL name. Use local path for DLL name instead. |
-| 49506 | 16 | No | The DBCC operation failed because it is not supported in an explicit transaction when Accelerated Database Recovery is enabled on the database. Commit or rollback the current transaction and run the operation again. |
+| 49506 | 16 | No | The DBCC operation failed because it is not supported in an explicit transaction when Accelerated Database Recovery is enabled on the database. Commit or roll back the current transaction and try again. |
 | 49507 | 16 | No | Object ID %d, index ID %d, partition ID %I64d, alloc unit ID %I64d (type %.\*ls), page %S_PGID, row %d: Row is aborted. |
 | 49508 | 16 | No | DBCC SHRINKFILE for data files is not supported in this version of SQL Server. Contact Customer Support Services for more information. |
 | 49509 | 16 | No | DBCC SHRINKFILE for PMM files is not supported in this version of SQL Server. |
@@ -1694,6 +1697,8 @@ ms.topic: include
 | 49535 | 16 | No | DBCC SHRINKFILE for fileId %d completed, initial size (%I64d KB), current size (%I64d KB). Please retry DBCC SHRINKFILE with target size well above minimum supported hyperscale database size |
 | 49536 | 10 | No | Cleanup of Index Repair cache entries failed for database ID %d, object ID %d, index ID %d. No new entries will be added to the cache. |
 | 49537 | 16 | No | The shrink operation was aborted because a page to be moved by shrink is in use by an active transaction on the primary replica or on one or more secondary replicas. Retry shrink later. |
+| 49538 | 16 | No | The dynamic space management force reset operation was aborted because the connected server is not a page server. |
+| 49539 | 10 | No | The dynamic space management force reset operation has failed for database ID %d, mode ID %d, failure name %ls. |
 | 49600 | 22 | No | SQL tiered storage table schema is corrupt. |
 | 49602 | 16 | No | Failure waiting for %ls latch in '%ls'. |
 | 49603 | 16 | No | CREATE FILE encountered operating system error %ls while attempting to copy the physical file '%.\*ls'. |
@@ -1794,8 +1799,8 @@ ms.topic: include
 | 49963 | 10 | No | ERROR: '%s' is a directory. Cannot continue. |
 | 49964 | 10 | No | ERROR: Setup failed to create the system data directory '%s': %s |
 | 49965 | 10 | No | Unable to load cluster root CA certificate due to OSError:'%s'. |
-| 49966 | 16 | No | Unable to install the AAD Cert. Verify that '%s' exists and is in the correct PFX format. Error state \[%d\]. |
-| 49967 | 16 | No | Unable to install the AAD Cert. Cannot load cert path from registry. Error state \[%d\]. |
+| 49966 | 16 | No | Unable to install the Microsoft Entra ID certificate. Verify that '%s' exists and is in the correct PFX format. Error state \[%d\]. Status \[%d\]. |
+| 49967 | 16 | No | Unable to install the Microsoft Entra ID certificate. Cannot load cert path from registry. Error state \[%d\]. Status \[%d\]. |
 | 49968 | 10 | Yes | SQL Server shutdown has been initiated with exit code %d. |
 | 49969 | 16 | No | Could not perform the operation because the region is under high capacity pressure. Please wait for %d hours before retrying the operation. |
 | 49972 | 16 | No | Cannot add tempdb remote file to local tempdb filegroup in transition to primary. |

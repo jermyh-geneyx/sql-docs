@@ -1,9 +1,9 @@
 ---
-title: "Server configuration: clr strict security"
+title: "Server Configuration: clr strict security"
 description: Learn to configure common language runtime (CLR) strict security in SQL Server. Control the interpretation of the SAFE, EXTERNAL ACCESS, and UNSAFE permissions.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 08/02/2024
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
@@ -19,7 +19,7 @@ helpviewer_keywords:
 
 [!INCLUDE [SQL Server](../../includes/applies-to-version/sqlserver.md)]
 
-Controls the interpretation of the `SAFE`, `EXTERNAL_ACCESS`, or `UNSAFE` permission in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. For more information about these permissions, see [Designing assemblies](../../relational-databases/clr-integration/assemblies-designing.md).
+Controls the interpretation of the `SAFE`, `EXTERNAL_ACCESS`, or `UNSAFE` permission in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. For more information about these permissions, see [Design assemblies](../../relational-databases/clr-integration/assemblies-designing.md).
 
 | Value | Description |
 | --- | --- |
@@ -63,9 +63,10 @@ The following permissions are required to create a CLR assembly when `CLR strict
 The following example first displays the current setting of the `clr strict security` option, and then sets the option value to `1` (enabled).
 
 ```sql
-EXEC sp_configure 'clr strict security';
+EXECUTE sp_configure 'clr strict security';
 GO
-EXEC sp_configure 'clr strict security' , '1';
+
+EXECUTE sp_configure 'clr strict security', '1';
 RECONFIGURE;
 GO
 ```

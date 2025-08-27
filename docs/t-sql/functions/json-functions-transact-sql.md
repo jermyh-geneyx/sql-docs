@@ -3,22 +3,22 @@ title: "JSON Functions (Transact-SQL)"
 description: Use JSON functions to validate or change JSON text, or to extract simple or complex values.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: jovanpop, randolphwest
-ms.date: 08/20/2024
+ms.reviewer: jovanpop, umajay, randolphwest
+ms.date: 07/23/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - build-2024
 helpviewer_keywords:
   - "JSON functions"
 dev_langs:
   - "TSQL"
-ms.custom:
-  - build-2024
 monikerRange: "=azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # JSON functions (Transact-SQL)
 
-[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-fabricse-fabricdw](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-fabricse-fabricdw.md)]
+[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-fabricse-fabricdw-fabricsqldb](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-fabricse-fabricdw-fabricsqldb.md)]
 
 Use the functions described in this article support querying, manipulating, and construction JSON data. Use JSON functions to validate or change JSON documents, or to extract basic or complex values.
 
@@ -40,5 +40,5 @@ For more info about the built-in support for JSON in [!INCLUDE [ssNoVersion](../
 ## Related content
 
 - [Validate, query, and change JSON data with built-in functions (SQL Server)](../../relational-databases/json/validate-query-and-change-json-data-with-built-in-functions-sql-server.md)
-- [JSON Path Expressions (SQL Server)](../../relational-databases/json/json-path-expressions-sql-server.md)
+- [JSON Path Expressions](../../relational-databases/json/json-path-expressions-sql-server.md)
 - [JSON data in SQL Server](../../relational-databases/json/json-data-sql-server.md)

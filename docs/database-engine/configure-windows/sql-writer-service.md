@@ -25,7 +25,7 @@ helpviewer_keywords:
 
 The SQL Writer service provides added functionality for backup and restore of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] through the Volume Shadow Copy Service framework.
 
-The SQL Writer service is installed automatically. It must be running when the Volume Shadow Copy Service (VSS) application requests a backup or restore. To configure the service, use the [!INCLUDE [msCoName](../../includes/msconame-md.md)] Windows Services applet. The SQL Writer service installs on all Windows operating systems.
+The SQL Writer service is installed automatically. It must be running when the Volume Shadow Copy Service (VSS) application requests a backup or restore. To configure the service, use the Windows Services applet. The SQL Writer service installs on all Windows operating systems.
 
 ## Purpose
 

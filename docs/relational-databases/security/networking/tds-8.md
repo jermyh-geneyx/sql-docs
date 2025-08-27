@@ -4,7 +4,7 @@ description: This article discusses TDS 8.0, the application layer protocol used
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 05/19/2025
+ms.date: 08/18/2025
 ms.service: sql
 ms.subservice: security
 ms.topic: conceptual
@@ -47,13 +47,23 @@ TCP handshake :arrow_right: TLS handshake :arrow_right: TDS prelogin (encrypted)
 
 ## SQL Server 2025 support
 
-[!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] introduces TDS 8.0 support for the following command-line tools:
+[!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] introduces TDS 8.0 support for the following command-line tools and SQL Server features:
 
+- [SQL Server Agent](/ssms/agent/sql-server-agent#tds-80-and-strict-encryption-support)
 - [sqlcmd utility](../../../tools/sqlcmd/sqlcmd-utility.md#tds-80-support)
 - [bcp utility](../../../tools/bcp-utility.md#tds-80-support)
 - [SQL VSS Writer](../../../database-engine/configure-windows/sql-writer-service.md)
 - [SQL CEIP service](../../../sql-server/usage-and-diagnostic-data-configuration-for-sql-server.md)
-- [Polybase](../../polybase/polybase-guide.md)
+- [Polybase](../../polybase/polybase-guide.md#sql-server-2025-polybase-enhancements)
+- [Always On availability groups](connect-with-strict-encryption.md#connect-to-an-always-on-availability-group)
+- [Always On failover cluster instance (FCI)](connect-with-strict-encryption.md#connect-to-a-failover-cluster-instance)
+- [Linked servers](../../linked-servers/linked-servers-database-engine.md#sql-server-2025-and-msoledbsql-version-19)<sup>1</sup>
+- [Transactional replication](../../replication/transactional/transactional-replication.md#configure-tls-13-encryption)<sup>1</sup>
+- [Merge replication](../../replication/merge/merge-replication.md#configure-tls-13-encryption)<sup>1</sup>
+- [Snapshot replication](../../replication/snapshot-replication.md#configure-tls-13-encryption)<sup>1</sup>
+- [Log shipping](../../../database-engine/log-shipping/about-log-shipping-sql-server.md#enforce-tls-13-encryption)<sup>1</sup>
+
+<sup>1</sup>TDS 8.0 support introduces [breaking changes](../../../database-engine/breaking-changes-to-database-engine-features-in-sql-server-2025.md) to these features. 
 
 ## Strict connection encryption
 
@@ -74,13 +84,7 @@ The `Force Strict Encryption` option added with TDS 8.0 in SQL Server Network Co
 
 The following features or tools still use previous version of drivers that don't support TDS 8.0, and as such, might not work with the `strict` connection encryption:
 
-- Always On availability groups
-- Always On failover cluster instance (FCI)
-- SQL Server Replication
-- Log Shipping
-- SQL Server Agent
-- Database Mail
-- Linked Servers
+- Database mail
 
 ## Additional changes to connection string encryption properties
 
@@ -88,9 +92,9 @@ The following additions are added to connection strings for encryption:
 
 | Keyword | Default | Description |
 | --- | --- | --- |
-| `Encrypt` | *false* | **Existing behavior**<br /><br />When `true`, SQL Server uses TLS encryption for all data sent between the client and server if the server has a certificate installed. Recognized values are `true`, `false`, `yes`, and `no`. For more information, see [Connection String Syntax](/dotnet/framework/data/adonet/connection-string-syntax).<br /><br />**Change of behavior**<br /><br />When set to `strict`, SQL Server uses TDS 8.0 for all data sent between the client and server.<br /><br />When set to `mandatory`, `true`, or `yes`, SQL Server uses TDS 7.x with TLS/SSL encryption for all data sent between the client and server if the server has a certificate installed.<br /><br />When set to `optional`, `false`, or `no`, the connection uses TDS 7.x and would be encrypted only if required by the SQL Server. |
-| `TrustServerCertificate` | *false* | **Existing behavior**<br /><br />Set to `true` to specify that the driver doesn't validate the server TLS/SSL certificate. If `true`, the server TLS/SSL certificate is automatically trusted when the communication layer is encrypted using TLS.<br /><br />If `false`, the driver validates the server TLS/SSL certificate. If the server certificate validation fails, the driver raises an error and closes the connection. The default value is `false`. Make sure the value passed to `serverName` exactly matches the `Common Name (CN)` or DNS name in the `Subject Alternate Name` in the server certificate for a TLS/SSL connection to succeed.<br /><br />**Change of behavior for Microsoft ODBC Driver 18 for SQL Server**<br /><br />If `Encrypt` is set to `strict`, this setting specifies the location of the certificate to be used for server certificate validation (exact match). The driver supports PEM, DER, and CER file extensions.<br /><br />If `Encrypt` is set to `true` or `false`, and the `TrustServerCertificate` property is unspecified or set to `null`, `true`, or `false`, the driver uses the `ServerName` property value on the connection URL as the host name to validate the SQL Server TLS/SSL certificate. |
-| `HostNameInCertificate` | *null* | The host name to be used in validating the SQL Server TLS/SSL certificate. If the `HostNameInCertificate` property is unspecified or set to `null`, the driver uses the `ServerName` property value as the host name to validate the SQL Server TLS/SSL certificate. |
+| `Encrypt` | `false` | **Existing behavior**<br /><br />When `true`, SQL Server uses TLS encryption for all data sent between the client and server if the server has a certificate installed. Recognized values are `true`, `false`, `yes`, and `no`. For more information, see [Connection String Syntax](/dotnet/framework/data/adonet/connection-string-syntax).<br /><br />**Change of behavior**<br /><br />When set to `strict`, SQL Server uses TDS 8.0 for all data sent between the client and server.<br /><br />When set to `mandatory`, `true`, or `yes`, SQL Server uses TDS 7.x with TLS/SSL encryption for all data sent between the client and server if the server has a certificate installed.<br /><br />When set to `optional`, `false`, or `no`, the connection uses TDS 7.x and would be encrypted only if required by the SQL Server. |
+| `TrustServerCertificate` | `false` | **Existing behavior**<br /><br />Set to `true` to specify that the driver doesn't validate the server TLS/SSL certificate. If `true`, the server TLS/SSL certificate is automatically trusted when the communication layer is encrypted using TLS.<br /><br />If `false`, the driver validates the server TLS/SSL certificate. If the server certificate validation fails, the driver raises an error and closes the connection. The default value is `false`. Make sure the value passed to `serverName` exactly matches the `Common Name (CN)` or DNS name in the `Subject Alternative Name` in the server certificate for a TLS/SSL connection to succeed.<br /><br />**Change of behavior for Microsoft ODBC Driver 18 for SQL Server**<br /><br />If `Encrypt` is set to `strict`, this setting specifies the location of the certificate to be used for server certificate validation (exact match). The driver supports PEM, DER, and CER file extensions.<br /><br />If `Encrypt` is set to `true` or `false`, and the `TrustServerCertificate` property is unspecified or set to `null`, `true`, or `false`, the driver uses the `ServerName` property value on the connection URL as the host name to validate the SQL Server TLS/SSL certificate. |
+| `HostNameInCertificate` | `null` | The host name to be used in validating the SQL Server TLS/SSL certificate. If the `HostNameInCertificate` property is unspecified or set to `null`, the driver uses the `ServerName` property value as the host name to validate the SQL Server TLS/SSL certificate. |
 
 ## Related content
 

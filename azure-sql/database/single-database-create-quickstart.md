@@ -1,10 +1,10 @@
 ---
-title: Create a single database
+title: Create a Single Database
 description: Create a single database in Azure SQL Database using the Azure portal, PowerShell, or the Azure CLI.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: mathoma, randolphwest
-ms.date: 09/17/2024
+ms.date: 08/07/2025
 ms.service: azure-sql-database
 ms.subservice: deployment-configuration
 ms.topic: quickstart
@@ -13,15 +13,14 @@ ms.custom:
   - devx-track-azurepowershell
   - mode-ui
   - references-regions
+  - sfi-image-nochange
 ---
 # Quickstart: Create a single database - Azure SQL Database
 
 In this quickstart, you create a [single database](single-database-overview.md) in Azure SQL Database using either the Azure portal, a PowerShell script, or an Azure CLI script. You then query the database using **Query editor** in the Azure portal.
 
-
 Watch this video in the [Azure SQL Database essentials series](/shows/azure-sql-database-essentials/) for an overview of the deployment process: 
 > [!VIDEO https://learn-video.azurefd.net/vod/player?id=0c5d0700-b422-4a46-99bd-84c09ba65804]
-
 
 ## Prerequisites
 
@@ -53,31 +52,31 @@ To create a single database in the Azure portal, this quickstart starts at the A
 1. For **Resource group**, select **Create new**, enter *myResourceGroup*, and select **OK**.
 1. For **Database name**, enter *mySampleDatabase*.
 1. For **Server**, select **Create new**, and fill out the **New server** form with the following values:
-   - **Server name**: Enter *mysqlserver*, and add some characters for uniqueness. We can't provide an exact server name to use because server names must be globally unique for all servers in Azure, not just unique within a subscription. So enter something like `mysqlserver12345`, and the portal lets you know if it's available or not.
 
-   - **Location**: Select a location from the dropdown list.
-   - **Authentication method**: Select **Use SQL authentication**.
-   - **Server admin login**: Enter *azureuser*.
-   - **Password**: Enter a password that meets requirements, and enter it again in the **Confirm password** field.
-
+    - **Server name**: Enter *mysqlserver*, and add some characters for uniqueness. We can't provide an exact server name to use because server names must be globally unique for all servers in Azure, not just unique within a subscription. The Azure portal lets you know if the name you type is available or not.
+    - **Location**: Select a location from the dropdown list.
+    - **Authentication method**: Select **Use SQL authentication**.
+    - **Server admin login**: Enter *azureuser*.
+    - **Password**: Enter a password that meets requirements, and enter it again in the **Confirm password** field.
+    
    Select **OK**.
 
 1. Leave **Want to use SQL elastic pool** set to **No**.
 1. For **Workload environment**, specify **Development** for this exercise.
 
-   The Azure portal provides a **Workload environment** option that helps to preset some configuration settings. These settings can be overridden. This option applies to the **Create SQL Database** portal page only. Otherwise, the **Workload environment** option has no impact on licensing or other database configuration settings.
+The Azure portal provides a **Workload environment** option that helps to preset some configuration settings. These settings can be overridden. This option applies to the **Create SQL Database** portal page only. Otherwise, the **Workload environment** option has no impact on licensing or other database configuration settings.
 
    - Choosing the **development** workload environment sets a few options, including: 
-      - **Backup storage redundancy** option is locally redundant storage. Locally redundant storage incurs less cost and is appropriate for pre-production environments that do not require the redundance of zone- or geo-replicated storage. 
-      - **Compute + storage** is General Purpose, Serverless with a single vCore. By default, there is a [one-hour auto-pause delay](serverless-tier-overview.md?view=azuresql&preserve-view=true&tabs=general-purpose#performance-configuration).
+   - **Backup storage redundancy** option is locally redundant storage. Locally redundant storage incurs less cost and is appropriate for pre-production environments that do not require the redundance of zone- or geo-replicated storage. 
+   - **Compute + storage** is General Purpose, Serverless with a single vCore. By default, there is a [one-hour auto-pause delay](serverless-tier-overview.md?view=azuresql&preserve-view=true&tabs=general-purpose#performance-configuration).
    - Choosing the **Production** workload environment sets: 
-      - **Backup storage redundancy** is geo-redundant storage, the default. 
-      - **Compute + storage** is General Purpose, Provisioned with 2 vCores and 32 GB of storage. This can be further modified in the next step.
+   - **Backup storage redundancy** is geo-redundant storage, the default. 
+   - **Compute + storage** is General Purpose, Provisioned with 2 vCores and 32 GB of storage. This can be further modified in the next step.
 
 1. Under **Compute + storage**, select **Configure database**.
 1. This quickstart uses a serverless database, so leave **Service tier** set to **General Purpose (Most budget-friendly, serverless compute)** and set **Compute tier** to **Serverless**. Select **Apply**.
 1. Under **Backup storage redundancy**, choose a redundancy option for the storage account where your backups will be saved. To learn more, see [backup storage redundancy](automated-backups-overview.md#backup-storage-redundancy).
-1. Select **Next: Networking** at the bottom of the page.
+1. Select **Next: Networking**.
 
    :::image type="content" source="media/single-database-create-quickstart/new-sql-database-basics.png" alt-text="Screenshot of the Create SQL Database page, Basic tab from the Azure portal." lightbox="media/single-database-create-quickstart/new-sql-database-basics.png":::
 
@@ -87,14 +86,14 @@ To create a single database in the Azure portal, this quickstart starts at the A
    :::image type="content" source="media/single-database-create-quickstart/networking.png" alt-text="Screenshot of the Azure portal showing the networking tab for firewall rules." lightbox="media/single-database-create-quickstart/networking.png":::
 
 1. Under **Connection policy**, choose the **Default** [connection policy](connectivity-architecture.md#connection-policy), and leave the **Minimum TLS version** at the default of TLS 1.2.
-1. Select **Next: Security** at the bottom of the page.
+1. Select **Next: Security**.
 
    :::image type="content" source="media/single-database-create-quickstart/networking-connections.png" alt-text="Screenshot that shows the networking tab for policy and encryption." lightbox="media/single-database-create-quickstart/networking-connections.png":::
 
-1. On the **Security** page, you can choose to start a free trial of [Microsoft Defender for SQL](azure-defender-for-sql.md), as well as configure [Ledger](/sql/relational-databases/security/ledger/ledger-overview), [Managed identities](/azure/active-directory/managed-identities-azure-resources/overview) and [Azure SQL transparent data encryption with customer-managed key](transparent-data-encryption-byok-overview.md) if you desire.  Select **Next: Additional settings** at the bottom of the page.
+1. On the **Security** page, you can choose to start a free trial of [Microsoft Defender for SQL](azure-defender-for-sql.md), as well as configure [Ledger](/sql/relational-databases/security/ledger/ledger-overview), [Managed identities](/azure/active-directory/managed-identities-azure-resources/overview) and [Azure SQL transparent data encryption with customer-managed key](transparent-data-encryption-byok-overview.md) if you desire. Select **Next: Additional settings**.
 1. On the **Additional settings** tab, in the **Data source** section, for **Use existing data**, select **Sample**. This creates an `AdventureWorksLT` sample database so there's some tables and data to query and experiment with, as opposed to an empty blank database. You can also configure [database collation](/sql/t-sql/statements/collations) and a [maintenance window](maintenance-window.md).
 
-1. Select **Review + create** at the bottom of the page:
+1. Select **Review + create**.
 
    :::image type="content" source="media/single-database-create-quickstart/additional-settings.png" alt-text="Screenshot of the Azure portal showing the Additional settings tab." lightbox="media/single-database-create-quickstart/additional-settings.png":::
 
@@ -262,7 +261,7 @@ Once your database is created, you can use the **Query editor (preview)** in the
 
     [!INCLUDE [entra-id](../includes/entra-id.md)]
 
-   :::image type="content" source="media/single-database-create-quickstart/query-editor-login.png" alt-text="Screenshot of the Query editor sign-in page in the Azure portal." lightbox="media/single-database-create-quickstart/query-editor-login.png":::
+    :::image type="content" source="media/single-database-create-quickstart/query-editor-login.png" alt-text="Screenshot of the Query editor sign-in page in the Azure portal." lightbox="media/single-database-create-quickstart/query-editor-login.png":::
 
 1. Enter the following query in the **Query editor** pane.
 
@@ -275,7 +274,7 @@ Once your database is created, you can use the **Query editor (preview)** in the
 
 1. Select **Run**, and then review the query results in the **Results** pane.
 
-   :::image type="content" source="media/single-database-create-quickstart/query-editor-results.png" alt-text="Screenshot of Query editor results." lightbox="media/single-database-create-quickstart/query-editor-results.png":::
+    :::image type="content" source="media/single-database-create-quickstart/query-editor-results.png" alt-text="Screenshot of Query editor results." lightbox="media/single-database-create-quickstart/query-editor-results.png":::
 
 1. Close the **Query editor** page, and select **OK** when prompted to discard your unsaved edits.
 
@@ -321,6 +320,6 @@ Want to optimize and save on your cloud spending?
 ## Related content
 
 - [Connect and query your database](connect-query-content-reference-guide.md)
-- [Quickstart: Use SSMS to connect to and query Azure SQL Database or Azure SQL Managed Instance](connect-query-ssms.md)
+- [Quickstart: Use SSMS to connect to and query Azure SQL Database](connect-query-ssms.md)
+- [Connect and with the MSSQL extension for Visual Studio Code](/sql/tools/visual-studio-code-extensions/mssql/connect-database-visual-studio-code)
 - [Connect and query using Azure Data Studio](/azure-data-studio/quickstart-sql-database?toc=/azure/sql-database/toc.json)
-

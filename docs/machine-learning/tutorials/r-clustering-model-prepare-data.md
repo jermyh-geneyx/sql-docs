@@ -10,6 +10,7 @@ ms.service: sql
 ms.subservice: machine-learning
 ms.topic: tutorial
 monikerRange: ">=sql-server-2016||>=sql-server-linux-ver15||=azuresqldb-mi-current"
+ms.custom: sfi-ropc-blocked
 ---
 # Tutorial: Prepare data to perform clustering in R with SQL machine learning
 [!INCLUDE [SQL Server 2016 SQL MI](../../includes/applies-to-version/sqlserver2016-asdbmi.md)]
@@ -142,7 +143,7 @@ head(customer_data, n = 5);
 
 You should see results similar to the following.
 
-```results
+```output
   customer orderRatio itemsRatio monetaryRatio frequency
 1    29727          0          0      0.000000         0
 2    26429          0          0      0.041979         1

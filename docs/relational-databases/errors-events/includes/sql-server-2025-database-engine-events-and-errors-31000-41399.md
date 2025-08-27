@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/15/2025
+ms.date: 08/14/2025
 ms.topic: include
 ---
 > [!NOTE]
@@ -38,7 +38,8 @@ ms.topic: include
 | 31204 | 16 | No | Operation %ls is not supported on the %ls platform. |
 | 31205 | 16 | No | The import population for database %ls (id: %d), catalog id: %d is being cancelled because of a fatal error ('%ls'). Fix the errors that are logged in the full-text crawl log. Then resume the import either by detaching the database and re-attaching it, or by taking the database offline and bringing it back online. If the error is not recoverable, rebuild the full-text catalog. |
 | 31206 | 16 | No | Failed to schedule asynchronous resume fulltext crawl task for database id %d with error %d. |
-| 31207 | 16 | No | Invalid value for Full-Text index version is specifed. Valid values are 1 or 2. |
+| 31207 | 16 | No | Invalid value for Full-Text index version is specified. Valid values are 1 or 2. |
+| 31208 | 16 | No | A fulltext fragment table is missing. |
 | 31601 | 16 | No | The size of the provided %ls is %u bytes, which exceeds the maximum allowed size of %u bytes. |
 | 31602 | 10 | No | Received param '%.\*ls' successfully. |
 | 31603 | 10 | No | Received param '%d' successfully. |
@@ -60,8 +61,8 @@ ms.topic: include
 | 31619 | 16 | No | The %ls could not be parsed. jsonError = %d. |
 | 31620 | 16 | No | The %ls is not a json object datatype. |
 | 31621 | 16 | No | One of the %ls values could not be parsed. |
-| 31622 | 16 | No | An unexpected error occurred during validating that the connection is allowed to the hostname. See 'https://aka.ms/sqldb_httpinvoke_errordetails' for assistance. |
-| 31624 | 16 | No | Connection to the external endpoint IP is not allowed. URL contains a hostname that is resolved to a blocked IP. See 'https://aka.ms/sqldb_httpinvoke_errordetails' for assistance. |
+| 31622 | 16 | No | An unexpected error occurred while validating that the connection to the hostname is allowed. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323727](https://go.microsoft.com/fwlink/?linkid=2323727). |
+| 31624 | 16 | No | Connection to the external endpoint IP is not allowed. URL contains a hostname that is resolved to a blocked IP. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323727](https://go.microsoft.com/fwlink/?linkid=2323727). |
 | 31625 | 16 | No | DNS resolution of the hostname has failed with windows sockets error %d. |
 | 31627 | 16 | No | An out of memory exception has occurred during external endpoint invocation. |
 | 31628 | 16 | No | The database scoped credential '%.\*ls' has an invalid identity '%.\*ls' for use with an external rest endpoint. |
@@ -80,6 +81,7 @@ ms.topic: include
 | 31641 | 16 | No | The charset value of the response's Content-Type header is not supported. |
 | 31642 | 16 | No | The value of one of the key-value pairs in the %ls is empty. |
 | 31643 | 16 | No | '%ls' is disabled on this instance of SQL Server. Use sp_configure 'external rest endpoint enabled' to enable it. |
+| 31644 | 16 | No | Server Managed Identity is disabled for this instance of SQL Server. Use sp_configure 'allow server scoped db credentials' to enable it. For more information, see [https://go.microsoft.com/fwlink/?linkid=2325611](https://go.microsoft.com/fwlink/?linkid=2325611). |
 | 31701 | 16 | No | Parameter '%ls' must be specified. This parameter cannot be NULL. |
 | 31703 | 17 | No | Missing JSON key %ls |
 | 31704 | 17 | No | Unable to parse JSON |
@@ -97,7 +99,7 @@ ms.topic: include
 | 31716 | 16 | No | The model parameter '%.\*ls' is required for invocation. |
 | 31717 | 16 | No | Extensibility function is not allowed in system database. |
 | 31718 | 17 | No | An internal error has occurred. Please retry the operation. If the issue persists, contact support for assistance. |
-| 31719 | 16 | No | The API_FORMAT '%.\*ls' is not supported. See 'https://aka.ms/aigenembeddings_errordetails' for assistance. |
+| 31719 | 16 | No | The API_FORMAT '%.\*ls' is not supported. For more information, see [https://go.microsoft.com/fwlink/?linkid=2325940](https://go.microsoft.com/fwlink/?linkid=2325940). |
 | 31720 | 17 | No | Fabric functions service response is inconsistent. |
 | 31721 | 17 | No | Failed to run Fabric function with error %d %ls. |
 | 31723 | 17 | No | Failed to fetch service endpoint. |
@@ -111,6 +113,13 @@ ms.topic: include
 | 31731 | 16 | No | The provided JSON parameters (e.g., '%.\*ls') are not allowed. |
 | 31732 | 16 | No | '%.\*ls' must be a valid JSON object. |
 | 31733 | 16 | No | The '%ls' with Local ONNX provider is not enabled. |
+| 31734 | 16 | No | The value '%I64d' is not within range for the %ls parameter. |
+| 31735 | 16 | No | The JSON value for the JSON key '%ls' must be '%.\*ls' type. |
+| 31736 | 17 | No | An error occurred during the execution of the function. |
+| 31737 | 16 | No | The size of the provided %ls would be at least %u bytes after converting to UTF-8, which exceeds the maximum allowed size of %u bytes. |
+| 31738 | 17 | No | Initialization of the '%ls' process with session ID '%ls' failed with HRESULT 0x%08x. |
+| 31739 | 17 | No | Generating embeddings from '%ls' process with session ID '%ls' failed with HRESULT 0x%08x. |
+| 31740 | 17 | No | An internal error has occurred in AI runtime with session ID '%ls'. Retry the operation, if the issue persists, contact support for assistance. |
 | 32001 | 10 | No | Log shipping backup log job for %s. |
 | 32002 | 10 | No | Log shipping copy job for %s:%s. |
 | 32003 | 10 | No | Log shipping restore log job for %s:%s. |
@@ -331,7 +340,7 @@ ms.topic: include
 | 33164 | 16 | No | Cannot drop the credential '%.\*ls' because it is used by an external data source. |
 | 33165 | 16 | No | Cannot drop the external %ls '%.\*ls' because it is used by an external %ls. |
 | 33166 | 16 | No | dbManager permission check failed. |
-| 33167 | 16 | No | This command is not supported for Azure AD users. Execute this command as a SQL Authenticated user. |
+| 33167 | 16 | No | This command is not supported for Microsoft Entra ID authenticated users. Execute this command as a SQL authenticated user. |
 | 33168 | 16 | No | TYPE option cannot be used along with FOR/FROM LOGIN, CERTIFICATE, ASYMMETRIC KEY, EXTERNAL PROVIDER, WITHOUT LOGIN or WITH PASSWORD, in this version of SQL Server. |
 | 33169 | 16 | No | User name cannot have backslash character, when using the TYPE option. |
 | 33170 | 16 | No | SID option cannot be used along with FOR/FROM LOGIN, CERTIFICATE, ASYMMETRIC KEY, EXTERNAL PROVIDER, WITHOUT LOGIN or WITH PASSWORD, in this version of SQL Server. |
@@ -349,7 +358,7 @@ ms.topic: include
 | 33182 | 16 | No | The command must be executed on the target database '%.\*ls'. |
 | 33183 | 16 | No | The Azure Key Vault client encountered an error with message '%s'. |
 | 33184 | 16 | No | An error occurred while obtaining information for the Azure Key Vault client with message '%s'. |
-| 33185 | 16 | No | An error ocurred while attempting to copy the encrypted DEK from the DBTable. |
+| 33185 | 16 | No | An error occurred while attempting to copy the encrypted DEK from the DBTable. |
 | 33186 | 16 | No | Cannot alter the credential '%.\*ls' because it is being used by an active audit session ('%.\*ls'). |
 | 33187 | 16 | Yes | Internal enclave error. Enclave failed to decrypt a column value or parameter - invalid authentication tag. For more information, contact Customer Support Services. |
 | 33189 | 16 | Yes | Internal enclave error: Enclave is out of session resources. For more information, contact Customer Support Services. |
@@ -544,8 +553,8 @@ ms.topic: include
 | 33446 | 16 | No | The FILESTREAM database configuration cannot be changed for database '%.\*s'. The database is either a mirror database in Database Mirroring, or is in a secondary replica of an Always On availability group. Connect to the server instance that hosts the primary database replica, and retry the operation. |
 | 33447 | 16 | No | Cannot access file_stream column in FileTable '%.\*ls', because FileTable doesn't support row versioning. Either set transaction level to something other than READ COMMITTED SNAPSHOT or SNAPSHOT, or use READCOMMITTEDLOCK table hint. |
 | 33448 | 16 | No | Cannot disable clustered index '%.\*ls' on FileTable '%.\*ls' because the FILETABLE_NAMESPACE is enabled. |
-| 33449 | 10 | No | FILESTREAM File I/O access is enabled, but no listener for the availability group is created. A FILESTREAM PathName will be unable to refer to a virtual network name (VNN) and, instead, will need to refer to a physical Windows Server Failover Clustering (WSFC) node. This might limit the usability of FILESTEAM File I/0 access after an availability group failover. Therefore, we recommend that you create a listener for each availability group. For information about how to create an availability group listener, see SQL Server Books Online. |
-| 33450 | 10 | No | FILESTREAM File I/O access is enabled. One or more availability groups ('%ls') currently do not have a listener. A FILESTREAM PathName will be unable to refer to a virtual network name (VNN) and, instead, will need to refer to a physical Windows Server Failover Clustering (WSFC) node. This might limit the usability of FILESTEAM File I/0 access after an availability group failover. Therefore, we recommend that you create a listener for each availability group. For information about how to create an availability group listener, see SQL Server Books Online. |
+| 33449 | 10 | No | FILESTREAM File I/O access is enabled, but no listener for the availability group is created. A FILESTREAM PathName will be unable to refer to a virtual network name (VNN) and, instead, will need to refer to a physical Windows Server Failover Clustering (WSFC) node. This might limit the usability of FILESTREAM File I/0 access after an availability group failover. Therefore, we recommend that you create a listener for each availability group. For information about how to create an availability group listener, see SQL Server Books Online. |
+| 33450 | 10 | No | FILESTREAM File I/O access is enabled. One or more availability groups ('%ls') currently do not have a listener. A FILESTREAM PathName will be unable to refer to a virtual network name (VNN) and, instead, will need to refer to a physical Windows Server Failover Clustering (WSFC) node. This might limit the usability of FILESTREAM File I/0 access after an availability group failover. Therefore, we recommend that you create a listener for each availability group. For information about how to create an availability group listener, see SQL Server Books Online. |
 | 33451 | 16 | No | Cannot enable Change Feed on the FileTable '%ls'. Change Feed is not supported for FileTable objects. |
 | 33501 | 16 | No | Security predicates cannot be added on tables that contain filestream data. Column '%.\*ls' on table '%.\*ls' contains filestream data. |
 | 33502 | 16 | No | The column '%.\*ls' could not be added to table '%.\*ls' because the column contains filestream data and the table is referenced by one or more security policies. Filestream columns are not allowed on tables that are referenced by security policies. |
@@ -629,10 +638,10 @@ ms.topic: include
 | 33580 | 16 | No | Operation supported by enclaves invoked on data encrypted with randomized encryption where the keys are not enclave-enabled. Please clear the proc cache. |
 | 33581 | 16 | No | Cannot alter column '%.\*ls'. The statement attempts to encrypt, decrypt or re-encrypt the column in-place using a secure enclave, but this is not supported for memory-optimized tables. |
 | 33582 | 16 | No | Cannot create the module. Executing the module requires keys in a secure enclave, but this is not supported for memory-optimized tables. |
-| 33583 | 16 | No | Could not find Azure AD principal mapping to Windows principal '%ls'. |
-| 33584 | 16 | No | Found multiple Azure AD principals mapping to Windows principal '%ls'. |
-| 33585 | 16 | No | Windows principal '%ls' does not map to provided Azure AD principal '%ls', please use a different Azure AD principal. |
-| 33586 | 10 | No | Warning: Index or statistic '%.\*ls.%.\*ls' has an enclave-enabled key column, however Accelerated Database Recovery is not enabled for database '%.\*ls'. Enabling it is strongly recommended to increase the database availability during recovery. |
+| 33583 | 16 | No | Could not find a Microsoft Entra ID principal mapping to Windows principal '%ls'. |
+| 33584 | 16 | No | Found multiple Microsoft Entra ID principals mapping to Windows principal '%ls'. |
+| 33585 | 16 | No | Windows principal '%ls' does not map to provided Microsoft Entra ID principal '%ls', please use a different Microsoft Entra ID principal. |
+| 33586 | 10 | No | Warning: Index or statistic '%.\*ls.%.\*ls' has an enclave-enabled key column, however Accelerated Database Recovery is not enabled for database '%.\*ls'. Enabling Accelerated Database Recovery is strongly recommended to increase database availability during recovery. |
 | 33587 | 16 | No | Security predicates cannot be added to external table '%.\*ls' because it does not contain a credential. |
 | 33588 | 16 | No | Invalid encryption algorithm. Always Encrypted with secure enclaves requires data to be encrypted with the AEAD_AES_256_CBC_HMAC_SHA_256 algorithm. |
 | 33589 | 17 | No | Internal enclave error. Enclave was provided with an invalid expression handle. For more information, contact Customer Support Services. |
@@ -754,7 +763,7 @@ ms.topic: include
 | 35264 | 10 | No | Always On Availability Groups data movement for database '%.\*ls' has been suspended for the following reason: "%S_MSG" (Source ID %d; Source string: '%.\*ls'). To resume data movement on the database, you will need to resume the database manually. For information about how to resume an availability database, see SQL Server Books Online. |
 | 35265 | 10 | No | Always On Availability Groups data movement for database '%.\*ls' has been resumed. This is an informational message only. No user action is required. |
 | 35266 | 10 | No | Always On Availability Groups connection with %S_MSG database established for %S_MSG database '%.\*ls' on the availability replica '%.\*ls' with Replica ID: {%.8x-%.4x-%.4x-%.2x%.2x-%.2x%.2x%.2x%.2x%.2x%.2x}. This is an informational message only. No user action is required. |
-| [35267](../mssqlserver-35267-database-engine-error.md) | 10 | No | Always On Availability Groups connection with %S_MSG database terminated for %S_MSG database '%.\*ls' on the availability replica '%.\*ls' with Replica ID: {%.8x-%.4x-%.4x-%.2x%.2x-%.2x%.2x%.2x%.2x%.2x%.2x}. This is an informational message only. No user action is required. |
+| [35267](../mssqlserver-35267-database-engine-error.md) | 10 | No | Always On Availability Groups connection with %S_MSG database terminated for %S_MSG database '%.\*ls' on the availability replica '%.\*ls' with Replica ID: {%.8x-%.4x-%.4x-%.2x%.2x-%.2x%.2x%.2x%.2x%.2x%.2x}. This is an informational message only. No user action is required. For more information, see [https://go.microsoft.com/fwlink/?linkid=2322143](https://go.microsoft.com/fwlink/?linkid=2322143). |
 | 35268 | 16 | Yes | Synchronization of a secondary database, '%.\*ls', was interrupted, leaving the database in an inconsistent state. The database will enter the RESTORING state. To complete recovery and bring the database online, use current log backups from the primary database to restore the log records past LSN %S_LSN. Alternatively, drop this secondary database, and prepare a new one by restoring a full database backup of the primary database followed by all subsequent log backups. |
 | 35269 | 21 | Yes | Synchronization of a secondary database, '%.\*ls', was interrupted, leaving the database in an inconsistent state. The database will be marked SUSPECT. To return the database to a consistent state, restore it from a clean database backup followed by all subsequent log backups. |
 | 35270 | 10 | No | Received a corrupt FileStream transport message. The '%ls' message section is invalid. |
@@ -872,15 +881,15 @@ ms.topic: include
 | 35383 | 16 | No | The use of user-defined functions is not allowed in default constraints when adding columns to a columnstore index. |
 | 35384 | 16 | No | The statement failed because column '%.\*ls' on table '%.\*ls' is a lob column. Non clustered index with lob column as included column cannot co-exist with clustered columnstore index. |
 | 35385 | 16 | No | DROP ORDER failed because columnstore index '%.\*ls' on table '%.\*ls.%.\*ls' is not ordered. |
-| 35386 | 17 | No | Unable to allocate %I64d KB for columnstore compression because it exceeds the remaining memory from total allocated for current resource class and DWU. Please rerun query at a higher resource class, and also consider increasing DWU. See 'https://aka.ms/sqldw_columnstore_memory' for assistance. |
-| 35387 | 17 | No | TEMPDB ran out of space during spilling. Verify that data is evenly distributed and/or rewrite the query to consume fewer rows. If the issue still persists, consider upgrading to a higher service level objective. |
+| 35386 | 17 | No | Unable to allocate %I64d KB for columnstore compression because it exceeds the remaining memory from total allocated for current resource class and DWU. Please rerun query at a higher resource class, and also consider increasing DWU. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323728](https://go.microsoft.com/fwlink/?linkid=2323728). |
+| 35387 | 17 | No | Tempdb ran out of space during spilling. Verify that data is evenly distributed and/or rewrite the query to consume fewer rows. If the issue still persists, consider upgrading to a higher service level objective. |
 | 35388 | 15 | No | The statement failed because column '%.\*ls' on table '%.\*ls' is a persisted computed column. Adding persisted computed columns to an existing clustered columnstore index is not supported. |
 | 35389 | 15 | No | The statement failed because column '%.\*ls' on table '%.\*ls' is a computed column of a LOB type. Columnstore indexes cannot include computed columns of LOB types. |
 | 35390 | 16 | No | Computed columns in columnstore indexes are temporarily disabled. Please rewrite your query to exclude computed columns. |
-| 35391 | 16 | No | Could not build or rebuild clustered columnstore index '%.\*ls' online, because the the table has secondary indexes. Please perform the operation offline, or remove the secondary indexes and try again. |
+| 35391 | 16 | No | Could not build or rebuild clustered columnstore index '%.\*ls' online, because the table has secondary indexes. Please perform the operation offline, or remove the secondary indexes and try again. |
 | 35392 | 15 | No | The statement failed because column '%.\*ls' on table '%.\*ls' is a computed column. Nonclustered index with computed column as key or included column cannot be created on a table that has a clustered columnstore index. |
 | 35393 | 16 | No | Columnstore tuple mover unit tests can't be run under master database. |
-| 35394 | 16 | No | Transaction %d reached %I64u log used bytes and %I64d reserved log bytes. In order to minimize log usage %d suboptimal rowgroups were created, which is not allowed since it compromises index quality. Please re-run query at a higher resource class, and also consider increasing DWU. See 'https://aka.ms/sqldw_columnstore_memory' for assistance. |
+| 35394 | 16 | No | Transaction %d reached %I64u log used bytes and %I64d reserved log bytes. In order to minimize log usage %d suboptimal rowgroups were created, which is not allowed since it compromises index quality. Please re-run query at a higher resource class, and also consider increasing DWU. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323728](https://go.microsoft.com/fwlink/?linkid=2323728). |
 | 35395 | 16 | No | Transaction %d reached %I64u log used bytes and %I64d reserved log bytes. In order to minimize log usage, %d suboptimal rowgroups were created, which is not allowed since it compromises index quality. Please re-run the query with more memory (change your Resource Governor settings or upgrade to a higher SLO) or target fewer partitions in the load if your target table is partitioned. |
 | 35396 | 17 | No | Effective DOP of %u is too high for columnstore compression on table id %d because each thread only has %I64d KB for compression. Please retry using the MAXDOP hint to use a lower DOP. |
 | 35397 | 16 | No | %S_MSG statement failed because the operation cannot be performed resumably on a table with a columnstore index. Perform the operation without specifying the RESUMABLE option or drop (or disable) the columnstore index before performing the operation using the RESUMABLE option. |
@@ -941,7 +950,7 @@ ms.topic: include
 | 35461 | 10 | No | it contains one or more clustered columnstore indexes. Consider dropping these indexes or creating clustered B-tree indexes instead, and trying again |
 | 35462 | 10 | No | referencing |
 | 35463 | 10 | No | referenced |
-| 35464 | 10 | No | columnstore indexes are not supported in the current SQL Server edition. See SQL Server Books Online for supported editions |
+| 35464 | 10 | No | Columnstore indexes are not supported in the current SQL Server edition. See SQL Server Books Online for supported editions |
 | 35465 | 17 | No | Unable to allocate the recovery thread |
 | 35466 | 16 | No | Exception in the recovery thread |
 | 35467 | 16 | No | Already linked to a partition host |
@@ -1017,6 +1026,12 @@ ms.topic: include
 | 35538 | 10 | No | columnstore index |
 | 35539 | 15 | No | vector base type |
 | 35540 | 10 | No | external model |
+| 35541 | 10 | No | ai_generate_chunks |
+| 35542 | 10 | No | Drop and re-create the distributed availability group with SQL Managed Instance. |
+| 35543 | 10 | No | Stored procedure called on invalid distributed availability group type or on non-existing distributed availability group. |
+| 35544 | 10 | No | Empty internal distributed availability group. |
+| 35545 | 10 | No | Internal distributed availability group naming inconsistency. |
+| 35546 | 10 | No | An internal distributed availability group detected with more than one associated availability database. |
 | 36001 | 16 | No | %s '%s' already exists in the database. |
 | 36002 | 16 | No | instance_id already exists in the database. |
 | 36003 | 16 | No | %s '%s' already exists for the given DAC instance. |
@@ -1092,8 +1107,8 @@ ms.topic: include
 | 37338 | 16 | No | Error occurred while generating the hash for a ledger transaction. Return code: '%d'. |
 | 37339 | 16 | No | Error occurred while generating a hash for the MERKLE_TREE_AGG aggregate function. Return code: '%d'. |
 | 37340 | 16 | Yes | Failed to generate the Ledger Blocks in the database with ID %d due to error %d. Check the errorlog for more information. |
-| 37341 | 16 | No | Azure Active Directory Administrator is not enabled for this server. Please set up the AAD Admin on this server and try again. |
-| 37342 | 16 | No | The logical server AAD tenant ID does not match the given devops AAD tenant ID. |
+| 37341 | 16 | No | A Microsoft Entra ID Administrator is not enabled for this server. Please set up a Microsoft Entra ID Administrator on this server and try again. |
+| 37342 | 16 | No | The logical server Microsoft Entra tenant ID does not match the given DevOps Microsoft Entra tenant ID. |
 | 37343 | 16 | No | Unexpected data type for encrypted column while generating ledger hash. |
 | 37344 | 16 | No | CREATE TABLE failed because column '%.\*ls' in table '%.\*ls' exceeds the maximum of %d columns allowed for ledger tables. |
 | 37345 | 16 | No | Table cannot have more than one 'GENERATED ALWAYS AS %ls' column. |
@@ -1104,7 +1119,7 @@ ms.topic: include
 | 37350 | 16 | No | LEDGER = ON cannot be specified with SYSTEM_VERSIONING = ON and APPEND_ONLY = ON. |
 | 37351 | 16 | No | LEDGER = ON cannot be specified with PERIOD FOR SYSTEM_TIME and APPEND_ONLY = ON. |
 | 37352 | 16 | No | APPEND_ONLY = ON cannot be specified with generated always end columns. |
-| 37353 | 16 | No | Server identity does not have Azure Active Directory Readers permission. Please follow the steps here : [https://learn.microsoft.com/azure/azure-sql/database/authentication-aad-service-principal](/azure/azure-sql/database/authentication-aad-service-principal) |
+| 37353 | 16 | No | Server identity does not have the Microsoft Entra Directory Readers permission. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323204](https://go.microsoft.com/fwlink/?linkid=2323204). |
 | 37354 | 16 | No | LEDGER = ON cannot be specified with system versioning retention period. |
 | 37355 | 16 | No | An existing History Table cannot be specified with LEDGER=ON. |
 | 37356 | 16 | No | System Versioning cannot be altered for Ledger Tables. |
@@ -1205,16 +1220,16 @@ ms.topic: include
 | 37452 | 16 | No | Error while trying to invoke external policy pull task. |
 | 37453 | 16 | No | '%ls' is not a valid option for the @type parameter. Enter 'update' or 'reload'. |
 | 37454 | 10 | No | Encountered Internal Error while calling %ls. Error code %ld, State %ld. |
-| 37455 | 16 | No | Server identity does not have permissions to access MS Graph. Please follow the steps here: https://aka.ms/SQLServer-AAD-Permissions. |
+| 37455 | 16 | No | Server identity does not have permissions to access MS Graph. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323824](https://go.microsoft.com/fwlink/?linkid=2323824). |
 | 37457 | 16 | No | DDL statement executed on the database is not allowed because Azure Active Directory only authentication is enabled on the server. |
 | 37458 | 16 | No | Posted digest is not globally committed in Azure Confidential Ledger. Ledger URL '%ls' and error code %ld. |
 | 37459 | 16 | No | Encountered Internal Error while calling Azure Confidential Ledger. Ledger URL '%ls' and error code %ld. |
 | 37460 | 16 | No | Failed to parse response from Identity Service. Ledger URL '%ls' and error code %ld. |
-| 37461 | 16 | No | Encountered error while trying to retrieve AAD Token to call Azure Confidential Ledger. Ledger URL '%ls' and error code %ld. |
+| 37461 | 16 | No | Encountered error while trying to retrieve a Microsoft Entra ID token to call Azure Confidential Ledger. Ledger URL '%ls' and error code %ld. |
 | 37462 | 16 | No | Encountered error while trying to retrieve Network Certificate from Identity Service. Ledger URL '%ls' and error code %ld. |
 | 37463 | 16 | No | Service Principal or Managed Identity is not authorized to call Azure Confidential Ledger. Ledger URL '%ls' and error code %ld. |
-| 37464 | 10 | Yes | AAD Authentication is enabled. This is an informational message only; no user action is required. |
-| 37465 | 16 | No | Server identity does not have the required permissions to access the MS graph. Please follow the steps here : https://aka.ms/UMI-AzureSQL-permissions |
+| 37464 | 10 | Yes | Microsoft Entra ID authentication is enabled. This is an informational message only; no user action is required. |
+| 37465 | 16 | No | Server identity does not have the required permissions to access the MS graph. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323434](https://go.microsoft.com/fwlink/?linkid=2323434). |
 | 37466 | 16 | No | Endpoint is required. |
 | 37467 | 20 | No | The server encountered an unexpected exception. |
 | 37468 | 16 | No | The source and target table names provided as parameters to 'sp_copy_data_in_batches' must be valid table names and cannot be null or empty. |
@@ -1283,7 +1298,7 @@ ms.topic: include
 | 37532 | 16 | No | Ledger table '%.\*ls' cannot contain check constraints, filtered indexes and statistics or computed columns that reference columns using a multi-part identifier. |
 | 37533 | 16 | No | Computed column '%.\*ls' cannot be added to ledger table '%.\*ls'. Ledger tables do not support computed columns that use CLR functions or types. |
 | 37534 | 16 | No | Error while trying to read database information from master metadata. Transaction is not active anymore. |
-| 37535 | 16 | No | Principal name with object id '%ls' must begin with original principal name followed by a user-defined suffix to differentiate between the names. (https://aka.ms/AADUserNonUniqueDisplayName) |
+| 37535 | 16 | No | Principal name with object id '%ls' must begin with the original principal name followed by a user-defined suffix to differentiate between the names. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323825](https://go.microsoft.com/fwlink/?linkid=2323825). |
 | 37536 | 16 | Yes | Internal error occurred while obtaining version information from IMDS endpoint. Substate: '%ls', status: 0x%08x. |
 | 37537 | 16 | Yes | Internal error occurred while obtaining version information from IMDS endpoint. Error code: '%ls'. Error message: '%ls'. Return code: '0x%08x'. |
 | 37538 | 16 | Yes | Internal error occurred while obtaining version information from IMDS endpoint. Return code: '0x%08x'. |
@@ -1297,21 +1312,21 @@ ms.topic: include
 | 37546 | 16 | No | Can only specify object_id when creating user from external provider. |
 | 37547 | 16 | No | The user attempting to perform this operation does not have permission as it is currently logged in as a member of an Azure Active Directory (AAD) group but does not have an associated database user account. A user account is necessary when creating an object to assign ownership of that object. To resolve this error, either create an Azure AD user from external provider, or alter the AAD group to assign the DEFAULT_SCHEMA as dbo, then rerun the statement. |
 | 37548 | 16 | No | The user attempting to perform this operation does not have permission as it is currently logged in as a member of an Azure Active Directory (AAD) group but does not have an associated database user account. A user account is necessary when setting the ownership of an object. To resolve this error, create an Azure AD user from external provider, then rerun the statement. |
-| 37549 | 16 | No | Cannot open session for %S_MSG '%.\*ls'. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
-| 37550 | 16 | No | Cannot initialize cryptographic provider. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
-| 37551 | 16 | No | Cannot create key '%.\*ls' in the provider. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
-| 37552 | 16 | No | Cannot export %S_MSG from the provider. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
-| 37553 | 16 | No | Invalid algorithm '%.\*ls'. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
-| 37554 | 16 | No | Key with %S_MSG '%.\*ls' does not exist in the provider or access is denied. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
-| 37555 | 16 | No | Invalid algorithm id: %d. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
-| 37556 | 16 | No | Key validation failed since an attempt to get algorithm info for that key failed. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
+| 37549 | 16 | No | Cannot open session for %S_MSG '%.\*ls'. Provider error code: %d. (%.\*ls). For more information, see [https://go.microsoft.com/fwlink/?linkid=2323435](https://go.microsoft.com/fwlink/?linkid=2323435). |
+| 37550 | 16 | No | Cannot initialize cryptographic provider. Provider error code: %d. (%.\*ls). For more information, see [https://go.microsoft.com/fwlink/?linkid=2323435](https://go.microsoft.com/fwlink/?linkid=2323435). |
+| 37551 | 16 | No | Cannot create key '%.\*ls' in the provider. Provider error code: %d. (%.\*ls). For more information, see [https://go.microsoft.com/fwlink/?linkid=2323435](https://go.microsoft.com/fwlink/?linkid=2323435). |
+| 37552 | 16 | No | Cannot export %S_MSG from the provider. Provider error code: %d. (%.\*ls). For more information, see [https://go.microsoft.com/fwlink/?linkid=2323435](https://go.microsoft.com/fwlink/?linkid=2323435). |
+| 37553 | 16 | No | Invalid algorithm '%.\*ls'. Provider error code: %d. (%.\*ls). For more information, see [https://go.microsoft.com/fwlink/?linkid=2323435](https://go.microsoft.com/fwlink/?linkid=2323435). |
+| 37554 | 16 | No | Key with %S_MSG '%.\*ls' does not exist in the provider or access is denied. Provider error code: %d. (%.\*ls). For more information, see [https://go.microsoft.com/fwlink/?linkid=2323435](https://go.microsoft.com/fwlink/?linkid=2323435). |
+| 37555 | 16 | No | Invalid algorithm id: %d. Provider error code: %d. (%.\*ls). For more information, see [https://go.microsoft.com/fwlink/?linkid=2323435](https://go.microsoft.com/fwlink/?linkid=2323435). |
+| 37556 | 16 | No | Key validation failed since an attempt to get algorithm info for that key failed. Provider error code: %d. (%.\*ls). For more information, see [https://go.microsoft.com/fwlink/?linkid=2323435](https://go.microsoft.com/fwlink/?linkid=2323435). |
 | 37557 | 16 | No | A server principal with the object ID '%ls' already exists with the name '%ls'. |
 | 37558 | 16 | No | A login with the object ID '%ls' already has an account with the user name '%ls'. |
 | 37559 | 16 | No | Object_id is not a valid option |
 | 37560 | 16 | No | Encryption scan cannot be suspended because it is already in suspended state. |
 | 37561 | 16 | No | Database encryption key cannot be altered because the database is not encrypted. |
 | 37562 | 16 | No | When key change is in progress, only suspend and resume operations are allowed. |
-| 37563 | 16 | Yes | The primary managed identity is not selected for this server. If the server is an Azure VM, enable the primary managed identity for Microsoft Entra authentication. For more information, visit ([https://learn.microsoft.comhttps://aka.ms/sql-server-managed-identity-doc](https://aka.ms/sql-server-managed-identity-doc)). If the server is not an Azure VM, connect your SQL Server to Azure Arc instead. For more information, visit ([https://learn.microsoft.com/sql/sql-server/azure-arc/automatically-connect](/sql/sql-server/azure-arc/automatically-connect)). |
+| 37563 | 16 | Yes | The primary managed identity is not selected for this SQL Server instance. If the SQL Server instance is in an Azure VM, enable the managed identity of the VM to use Microsoft Entra authentication. For more information, see [[https://go.microsoft.com/fwlink/?linkid=2323210](https://go.microsoft.com/fwlink/?linkid=2323210](https://go.microsoft.com/fwlink/?linkid=2323210](https://go.microsoft.com/fwlink/?linkid=2323210)). If the SQL Server instance is not in an Azure VM, connect it to Azure Arc. For more information, see https://go.microsoft.com/fwlink/?linkid=2323209. |
 | 37564 | 10 | Yes | The managed identity with Client_ID/Application_ID '%ls', is the primary identity assigned for this server. |
 | 37565 | 16 | Yes | Microsoft Graph is currently experiencing a high volume of requests. Please wait for %d seconds and try again. |
 | 37566 | 16 | No | Operations on customer managed key '%s' are not allowed because the key has been disabled in Azure Key Vault '%s'. Please enable the key. For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting. |
@@ -1324,9 +1339,10 @@ ms.topic: include
 | 37573 | 16 | No | Connection to Azure Key Vault '%s' could not be established. Please review network settings for Managed Instance '%s'. For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting. |
 | 37574 | 16 | No | Azure Key Vault URI '%s' could not be resolved. Please ensure the key vault URI is valid and that your network settings for Managed Instance '%s' are not blocking access to Azure Public DNS. For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting. |
 | 37575 | 17 | No | SQL Server Audit \[%ls\] could not write to the Otel (OpenTelemetry) Audit Target (Error Code: %d). |
-| 37576 | 16 | No | The current SQL Server Connector version for Microsoft Azure Key Vault does not support the managed identity (see https://aka.ms/sql-server-managed-identity-doc). Upgrade the SQL Server Connector to its latest version (see https://www.microsoft.com/en-us/download/details.aspx?id=45344&msockid=2aa7acc4c900647e098ebfb5c8ba6506). |
+| 37576 | 16 | No | The current version of SQL Server Connector for Microsoft Azure Key Vault does not support managed identity. Upgrade the SQL Server Connector to the latest version and try again. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323730](https://go.microsoft.com/fwlink/?linkid=2323730). |
 | 37577 | 16 | No | Current scenario is blocked for Fabric DW. |
 | 37578 | 16 | No | An internal error has occurred. Please retry the operation. If the issue persists, contact support for assistance. |
+| 37579 | 16 | No | The security policy '%.\*ls' cannot reference tables with vector indexes. Table '%.\*ls' has a vector index. |
 | 37601 | 17 | Yes | \[Auditing\]\[%ls\] Could not allocate memory for %ls. |
 | 37602 | 16 | Yes | \[Auditing\]\[%ls\] Error while reading AuditPolicy from WinFab property. \[ErrorCode: %d\]. |
 | 37603 | 16 | Yes | \[Auditing\]\[%ls\] The 'State' in AuditPolicy is 'UNKNOWN'. \[ErrorCode: %d\]. |
@@ -1343,9 +1359,9 @@ ms.topic: include
 | 37614 | 16 | Yes | \[Auditing\]\[%ls\] Could not inject query parameter. \[Parameter: %ls\] \[Value: %ls\] \[ErrorCode: %d\]. |
 | 37615 | 16 | Yes | \[Auditing\]\[%ls\] Could not get query template. \[auditQueryType: %ls\] \[ErrorCode: %d\]. |
 | 37616 | 16 | Yes | \[Auditing\]\[%ls\] Could not inject parameters into audit query template. \[auditQueryType: %ls\] \[ErrorCode: %d\]. |
-| 37617 | 16 | Yes | \[Auditing\]\[%ls\] Error occured while constructing %ls \[ErrorCode: %d\]. |
+| 37617 | 16 | Yes | \[Auditing\]\[%ls\] Error occurred while constructing %ls \[ErrorCode: %d\]. |
 | 37618 | 16 | Yes | \[Auditing\]\[%ls\] Could not generate audit query to execute. \[auditQueryType: %ls\] \[ErrorCode: %d\]. |
-| 37619 | 16 | Yes | An unexpected error occured. Please try again after some time. If the error persists, please contact Customer Support. |
+| 37619 | 16 | Yes | An unexpected error occurred. Please try again after some time. If the error persists, please contact Customer Support. |
 | 37620 | 16 | Yes | StartTimeFilter is not in a supported format. Please either use DEFAULT or a UTC based timestamp in this format - 'YYYY-MM-DDThh:mm:ssZ'. For example - '2020-12-31T15:30:00Z'. |
 | 37621 | 16 | Yes | EndTimeFilter is not in a supported format. Please either use DEFAULT or a UTC based timestamp in this format - 'YYYY-MM-DDThh:mm:ssZ'. For example - '2020-12-31T15:30:00Z'. |
 | 38001 | 16 | No | Cannot find the file id %d in the database '%s'. |
@@ -1370,7 +1386,7 @@ ms.topic: include
 | 39018 | 16 | No | Parameter '%.\*ls' uses a data type that is not supported by the runtime for '%.\*s' script. Unsupported types are timestamp, datetime2, datetimeoffset, time, text, ntext, image, hierarchyid, xml, sql_variant and user-defined type. External script request id is %ls. |
 | 39019 | 10 | No | An external script error occurred: %.\*ls%.\*ls |
 | 39020 | 16 | No | Feature 'Advanced Analytics Extensions' is not installed. Consult Books Online for more information on this feature. |
-| 39021 | 16 | No | Unable to launch runtime for '%.\*s' script for request id: %ls. Check the configuration of the '%.\*s' runtime. See '[https://learn.microsoft.com/sql/machine-learning/install/sql-machine-learning-services-windows-install-sql-2022](../../../machine-learning/install/sql-machine-learning-services-windows-install-sql-2022.md)' for setup instructions. |
+| 39021 | 16 | No | Unable to launch runtime for '%.\*s' script for request id: %ls. Check the configuration of the '%.\*s' runtime. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323008](https://go.microsoft.com/fwlink/?linkid=2323008). |
 | 39022 | 10 | No | STDERR messages from external script: %.\*ls%.\*ls |
 | 39023 | 16 | No | 'sp_execute_external_script' is disabled on this instance of SQL Server. Use sp_configure 'external scripts enabled' to enable it. |
 | 39024 | 16 | No | Parallel execution of 'sp_execute_external_script' failed. Specify WITH RESULT SETS clause with output schema. |
@@ -1673,7 +1689,7 @@ ms.topic: include
 | 40312 | 16 | No | Inconsistent index build state. |
 | 40313 | 16 | No | Not all rowsets could be deleted. |
 | 40314 | 16 | No | Identity column not found on object %ld. |
-| 40401 | 16 | No | Requires AAD login for managing T-SQL streaming jobs. |
+| 40401 | 16 | No | Requires a Microsoft Entra ID login for managing T-SQL streaming jobs. |
 | 40402 | 16 | No | Error creating the streaming job request with service auth issue. |
 | 40403 | 16 | No | Error creating the streaming job request. |
 | 40404 | 16 | No | Error sending the streaming job request. |
@@ -1734,7 +1750,7 @@ ms.topic: include
 | 40548 | 16 | No | Granting CONNECT permission to the guest user in database '%.\*ls' is not permitted. |
 | 40549 | 16 | No | Session is terminated because you have a long running transaction. Try shortening your transaction. |
 | 40550 | 16 | No | The session has been terminated because it has acquired too many locks. Try reading or modifying fewer rows in a single transaction. |
-| 40551 | 16 | No | The session has been terminated because of excessive TEMPDB usage. Try modifying your query to reduce temporary table space usage. |
+| 40551 | 16 | No | The session has been terminated because of excessive tempdb usage. Try modifying your query to reduce tempdb space usage. |
 | 40552 | 16 | No | The session has been terminated because of excessive transaction log space usage. Try modifying fewer rows in a single transaction. |
 | 40553 | 16 | No | The session has been terminated because of excessive memory usage. Try modifying your query to process fewer rows. |
 | 40554 | 10 | No | Exiting because of XEvent %ls. |
@@ -1797,7 +1813,7 @@ ms.topic: include
 | 40620 | 16 | No | The login failed for user "%.\*ls". The password change failed. Password change during login is not supported in this version of SQL Server. |
 | 40621 | 16 | No | metric type |
 | 40622 | 16 | No | metric data |
-| 40623 | 20 | No | Reauthentication failed for login "%.\*ls". Within the past reauthentification interval, the login has become invalid due to a password change, a dropped login, or other cause. Please retry login. |
+| 40623 | 20 | No | Reauthentication failed for login "%.\*ls". Within the past reauthentication interval, the login has become invalid due to a password change, a dropped login, or other cause. Please retry login. |
 | 40624 | 16 | No | Operation is not allowed because server '%.\*ls' is disabled. |
 | 40625 | 17 | No | Provisioning (creating, altering, or dropping) Azure SQL Database servers and databases is currently disabled. This most frequently occurs for brief periods during system maintenance. |
 | 40626 | 20 | No | The ALTER DATABASE command is in process. Please wait at least five minutes before logging into database '%.\*ls', in order for the command to complete. Some system catalogs may be out of date until the command completes. If you have altered the database name, use the NEW database name for future activity. |
@@ -2005,7 +2021,7 @@ ms.topic: include
 | 40916 | 16 | No | The Failover Group '%.\*ls' already exists on server '%.\*ls' |
 | 40917 | 16 | No | The Failover Group '%.\*ls' does not exist on server '%.\*ls' |
 | 40918 | 16 | No | The Failover Group '%.\*ls' is busy with another operation and cannot perform the '%.\*ls' operation. Please try again later |
-| 40919 | 16 | No | The server '%.\*ls' is currently the primary server in the Failover Group and cannot initate failover |
+| 40919 | 16 | No | The server '%.\*ls' is currently the primary server in the Failover Group and cannot initiate failover |
 | 40920 | 16 | No | The database '%.\*ls' is already included in another Failover Group |
 | 40921 | 16 | No | The operation to add database '%.\*ls' to Failover Group is in progress, please wait for this operation to finish |
 | 40922 | 16 | No | The operation to remove database '%.\*ls' from Failover Group is in progress, please wait for this operation to finish |
@@ -2036,8 +2052,8 @@ ms.topic: include
 | 40947 | 16 | No | The Table Auditing or Security Enabled Access feature cannot be turned on for a database that is located on a server with a Server DNS Alias. |
 | 40948 | 16 | No | A Server DNS Alias cannot be created for the server '%.\*ls' because the Table Auditing feature is enabled for this server. |
 | 40949 | 16 | No | A Server DNS Alias cannot be created for the server '%.\*ls' because the database '%.\*ls' has the Table Auditing or Security Enabled Access feature enabled. |
-| 40950 | 16 | No | The Dns Alias '%.\*ls' already exists for the elastic pool '%.\*ls' on server '%.\*ls'. |
-| 40951 | 16 | No | The Dns Alias '%.\*ls' does not exist for the elastic pool '%.\*ls' on server '%.\*ls'. |
+| 40950 | 16 | No | The DNS Alias '%.\*ls' already exists for the elastic pool '%.\*ls' on server '%.\*ls'. |
+| 40951 | 16 | No | The DNS Alias '%.\*ls' does not exist for the elastic pool '%.\*ls' on server '%.\*ls'. |
 | 40952 | 16 | No | A Server DNS Alias cannot be created because server '%.\*ls' would exceed the allowed Server DNS Aliases quota of %d. |
 | 40953 | 16 | No | A Failover Group cannot be created because server '%.\*ls' would exceed the allowed Failover Groups quota of %d. |
 | 40954 | 16 | No | The Table Auditing feature cannot be turned on for a server that contains Server Dns Aliases. Please try Blob Auditing instead. |
@@ -2069,7 +2085,7 @@ ms.topic: include
 | 40980 | 16 | No | Partner managed server's managed server/failover group has been dropped. |
 | 40981 | 16 | No | Database '%.\*ls' is not accessible due to Azure Key Vault critical error. |
 | 40982 | 16 | No | Instance failover group cannot be created because the secondary instance has user databases. |
-| 40983 | 16 | No | Replication to the partner managed instance could not be established. Verify that connectivity between the Virtual Networks of the primary and secondary managed servers has been established correctly according to guidelines in https://aka.ms/instanceFailoverGroups. |
+| 40983 | 16 | No | Replication to the partner managed instance could not be established. Verify that connectivity between the Virtual Networks of the primary and secondary managed servers has been established. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323826](https://go.microsoft.com/fwlink/?linkid=2323826). |
 | 40984 | 16 | No | Restore and GeoRestore target cannot be free database. |
 | 40985 | 16 | No | Restore and GeoRestore are not supported for free database. |
 | 40986 | 16 | No | Source database '%.\*ls' dropped on '%.\*ls' does not exist on server '%.\*ls' within the supported recovery period. |
@@ -2144,10 +2160,10 @@ ms.topic: include
 | 41055 | 10 | Yes | Always On Availability Groups: Local Windows Server Failover Clustering node is online. This is an informational message only. No user action is required. |
 | 41056 | 16 | No | Availability replica '%.\*ls' of availability group '%.\*ls' cannot be brought online on this SQL Server instance. Another replica of the same availability group is already online on the node. Each node can host only one replica of an availability group, regardless of the number of SQL Server instances on the node. Use the ALTER AVAILABILITY GROUP command to correct the availability group configuration. Then, if the other replica is no longer being hosted on this node, restart this instance of SQL Server to bring the local replica of the availability group online. |
 | 41057 | 16 | No | Failed to create the Windows Server Failover Clustering (WSFC) resource with name '%ls'. The WSFC resource with the specified name already exists. Retry the operation with a resource name that is unique in the cluster. |
-| 41058 | 10 | No | Always On: The local replica of availability group '%.\*ls' is starting. This is an informational message only. No user action is required. |
-| 41059 | 10 | No | Always On: Availability group '%.\*ls' was removed while the availability replica on this instance of SQL Server was offline. The local replica will be removed now. This is an informational message only. No user action is required. |
+| 41058 | 10 | No | Always On Availability Groups: The local replica of availability group '%.\*ls' is starting. This is an informational message only. No user action is required. |
+| 41059 | 10 | No | Always On Availability Groups: Availability group '%.\*ls' was removed while the availability replica on this instance of SQL Server was offline. The local replica will be removed now. This is an informational message only. No user action is required. |
 | 41060 | 16 | No | The Cyclic Redundancy Check (CRC) value generated for the retrieved availability group configuration data does not match that stored with the data for the availability group with ID '%.\*ls'. If this is a WSFC availability group, the availability group data in the WSFC store may have been modified outside SQL Server, or the data is corrupt. If the error persists, you may need to drop and recreate the availability group. |
-| 41061 | 10 | No | Always On: The local replica of availability group '%.\*ls' is stopping. This is an informational message only. No user action is required. |
+| 41061 | 10 | No | Always On Availability Groups: The local replica of availability group '%.\*ls' is stopping. This is an informational message only. No user action is required. |
 | 41062 | 16 | No | The ID of availability group '%.\*ls' in local data store is inconsistent with that in the Windows Server Failover Clustering (WSFC) data store. The availability group may have been dropped and recreated while the SQL Server instance was offline, or while the WSFC node was down. To resolve this error, drop the availability group and then recreate it. |
 | 41063 | 16 | No | Windows Server Failover Clustering (WSFC) detected that the availability group resource with ID '%.\*ls' was online when the availability group was not actually online. The attempt to synchronize the WSFC resource state with the availability group state failed (Error code: %d). For information about this error code, see "System Error Codes" in the Windows Development documentation. |
 | 41064 | 16 | No | Failed to set local node as sole preferred owner for the Windows Server Failover Clustering (WSFC) group with ID '%.\*ls' (Error code: %d). The WSFC group might be in state that cannot accept the request. For information about this error code, see "System Error Codes" in the Windows Development documentation. |
@@ -2160,9 +2176,9 @@ ms.topic: include
 | 41071 | 16 | No | Cannot read the persisted configuration of Always On availability group with corresponding resource ID '%.\*ls'. The persisted configuration is written by a higher-version SQL Server that hosts the primary availability replica. Upgrade the local SQL Server instance to allow the local availability replica to become a secondary replica. |
 | 41072 | 16 | No | The ID of availability group '%.\*ls' in local data store does not exist in the Windows Server Failover Clustering (WSFC) data store. The availability group may have been dropped but the current WSFC node was not notified. To resolve this error, try to recreate the availability group. |
 | 41073 | 16 | No | The database '%.\*ls' cannot be removed from availability group '%.\*ls'. This database does not belong to the availability group. |
-| 41074 | 10 | No | Always On: The local replica of availability group '%.\*ls' is preparing to transition to the primary role. This is an informational message only. No user action is required. |
-| 41075 | 10 | No | Always On: The local replica of availability group '%.\*ls' is preparing to transition to the resolving role. This is an informational message only. No user action is required. |
-| 41076 | 10 | No | Always On: Availability group '%.\*ls' is going offline because it is being removed. This is an informational message only. No user action is required. |
+| 41074 | 10 | No | Always On Availability Group: The local replica of availability group '%.\*ls' is preparing to transition to the primary role. This is an informational message only. No user action is required. |
+| 41075 | 10 | No | Always On Availability Group: The local replica of availability group '%.\*ls' is preparing to transition to the resolving role. This is an informational message only. No user action is required. |
+| 41076 | 10 | No | Always On Availability Group: Availability group '%.\*ls' is going offline because it is being removed. This is an informational message only. No user action is required. |
 | 41077 | 16 | No | Cannot bring the Windows Server Failover Clustering (WSFC) group (ID '%.\*ls') online at this time. The WSFC group is not in a state that could accept the request. Please wait for the WSFC group to enter a terminal state and then retry the operation. For information about this error, see error code 5023 in "System Error Codes" in the Windows Development documentation. |
 | 41078 | 16 | No | Failed to delete the Windows Server Failover Clustering (WSFC) registry value corresponding to name '%.\*ls', because a registry entry with the specified name does not exist. Check that the registry value name is correct, and retry the operation. |
 | 41079 | 16 | No | Cannot drop the Windows Server Failover Clustering (WSFC) group (ID or name '%.\*ls'), because the WSFC group does not exist. Specify a valid WSFC group ID or name and retry the operation. For information about this error, see error code 5013 in "System Error Codes" in the Windows Development documentation. |
@@ -2177,27 +2193,27 @@ ms.topic: include
 | 41088 | 16 | No | Failed to determine if the Windows Server Failover Clustering (WSFC) service is in Force Quorum state. The prerequisite hotfix, KB 2494036, might not yet be installed on your Windows Server 2008/Windows Server 2008 R2 systems. For more information, see Microsoft Knowledge Base article KB 2494036 ("A hotfix is available to let you configure a cluster node that does not have quorum votes in Windows Server 2008 and in Windows Server 2008 R2"). |
 | 41089 | 10 | Yes | Always On Availability Groups startup has been cancelled, because SQL Server is shutting down. This is an informational message only. No user action is required. |
 | 41090 | 10 | No | Failed to update Replica status due to exception %d. |
-| 41091 | 10 | No | Always On: The local replica of availability group '%.\*ls' is going offline because either the lease expired or lease renewal failed. This is an informational message only. No user action is required. |
-| 41092 | 10 | No | Always On: The availability replica manager is going offline because %ls. This is an informational message only. No user action is required. |
-| 41093 | 10 | No | Always On: The local replica of availability group '%.\*ls' is going offline because the corresponding resource in the Windows Server Failover Clustering (WSFC) cluster is no longer online. This is an informational message only. No user action is required. |
-| 41094 | 10 | No | Always On: The local replica of availability group '%.\*ls' is restarting because the existing primary replica restarted or the availability group failed over to a new primary replica. This is an informational message only. No user action is required. |
-| 41095 | 10 | No | Always On: Explicitly transitioning the state of the Windows Server Failover Clustering (WSFC) resource that corresponds to availability group '%.\*ls' to Failed. The resource state is not consistent with the availability group state in the instance of SQL Server. The WSFC resource state indicates that the local availability replica is the primary replica, but the local replica is not in the primary role. This is an informational message only. No user action is required. |
-| 41096 | 10 | No | Always On: The local replica of availability group '%.\*ls' is being removed. The instance of SQL Server failed to validate the integrity of the availability group configuration in the Windows Server Failover Clustering (WSFC) store. This is expected if the availability group has been removed from another instance of SQL Server. This is an informational message only. No user action is required. |
-| 41097 | 10 | No | Always On: The local replica of availability group '%.\*ls' is going offline. This replica failed to read the persisted configuration because of a version mismatch. This is an informational message only. No user action is required. |
-| 41098 | 10 | No | Always On: The local replica of availability group '%.\*ls' is restarting, because it failed to read the persisted configuration. This is an informational message only. No user action is required. |
-| 41099 | 10 | No | Always On: The local replica of availability group '%.\*ls' is going offline. This replica failed to read the persisted configuration, and it has exhausted the maximum for restart attempts. This is an informational message only. No user action is required. |
+| 41091 | 10 | No | Always On Availability Groups: The local replica of availability group '%.\*ls' is going offline because either the lease expired or lease renewal failed. This is an informational message only. No user action is required. |
+| 41092 | 10 | No | Always On Availability Groups: The availability replica manager is going offline because %ls. This is an informational message only. No user action is required. |
+| 41093 | 10 | No | Always On Availability Groups: The local replica of availability group '%.\*ls' is going offline because the corresponding resource in the Windows Server Failover Clustering (WSFC) cluster is no longer online. This is an informational message only. No user action is required. |
+| 41094 | 10 | No | Always On Availability Groups: The local replica of availability group '%.\*ls' is restarting because the existing primary replica restarted or the availability group failed over to a new primary replica. This is an informational message only. No user action is required. |
+| 41095 | 10 | No | Always On Availability Groups: Explicitly transitioning the state of the Windows Server Failover Clustering (WSFC) resource that corresponds to availability group '%.\*ls' to Failed. The resource state is not consistent with the availability group state in the instance of SQL Server. The WSFC resource state indicates that the local availability replica is the primary replica, but the local replica is not in the primary role. This is an informational message only. No user action is required. |
+| 41096 | 10 | No | Always On Availability Groups: The local replica of availability group '%.\*ls' is being removed. The instance of SQL Server failed to validate the integrity of the availability group configuration in the Windows Server Failover Clustering (WSFC) store. This is expected if the availability group has been removed from another instance of SQL Server. This is an informational message only. No user action is required. |
+| 41097 | 10 | No | Always On Availability Groups: The local replica of availability group '%.\*ls' is going offline. This replica failed to read the persisted configuration because of a version mismatch. This is an informational message only. No user action is required. |
+| 41098 | 10 | No | Always On Availability Groups: The local replica of availability group '%.\*ls' is restarting, because it failed to read the persisted configuration. This is an informational message only. No user action is required. |
+| 41099 | 10 | No | Always On Availability Groups: The local replica of availability group '%.\*ls' is going offline. This replica failed to read the persisted configuration, and it has exhausted the maximum for restart attempts. This is an informational message only. No user action is required. |
 | 41100 | 16 | No | The availability group '%.\*ls' and/or its local availability replica does not exist. Verify that the specified availability group name is correct, and that the local availability replica has joined the availability group, then retry the operation. |
 | 41101 | 16 | No | The availability group with Windows Server Failover Clustering resource ID '%.\*ls' and/or its local availability replica does not exist. Verify that the specified availability resource ID is correct, and that the local availability replica has joined the availability group, then retry the operation. |
 | 41102 | 10 | No | Failed to persist configuration data of availability group '%.\*ls'. The local availability replica either is not the primary replica or is shutting down. |
 | 41103 | 10 | No | Startup of the Always On Availability Replica Manager has been terminated, because the 'FixQuorum' property of Windows Server Failover Clustering (WSFC) is not present. The prerequisite Hotfix, KB 2494036, might not yet be installed on your Windows Server 2008/Windows Server 2008 R2 systems. For more information, see Microsoft Knowledge Base article KB 2494036 ("A hotfix is available to let you configure a cluster node that does not have quorum votes in Windows Server 2008 and in Windows Server 2008 R2"). |
 | 41104 | 16 | No | Failover of the availability group '%.\*ls' to the local replica failed because the availability group resource did not come online due to a previous error. To identify that error, check the SQL Server error log, cluster logs and system event logs. For information about how to view events and logs for a Windows Server Failover Clustering (WSFC) cluster, see Windows Server documentation. |
-| 41105 | 16 | No | Failed to create the Windows Server Failover Clustering (WSFC) resource with name '%s' and type '%s'. The resource type is not registered in the WSFC cluster. The WSFC cluster many have been destroyed and created again. To register the resource type in the WSFC cluster, disable and then enable Always On in the SQL Server Configuration Manager. |
+| 41105 | 16 | No | Failed to create the Windows Server Failover Clustering (WSFC) resource with name '%s' and type '%s'. The resource type is not registered in the WSFC cluster. The WSFC cluster many have been destroyed and created again. To register the resource type in the WSFC cluster, disable and then enable Always On Availability Groups in the SQL Server Configuration Manager. |
 | 41106 | 16 | No | Cannot create an availability replica for availability group '%.\*ls'. An availability replica of the specified availability group already exists on this instance of SQL Server. Verify that the specified availability group name is correct and unique, then retry the operation. To remove the existing availability replica, run DROP AVAILABILITY GROUP command. |
 | 41107 | 16 | No | Availability group '%.\*ls' failed to create necessary events for the WSFC Lease mechanism. Windows returned error code (%d) when obtaining handles for Lease events. Resolve the windows error and retry the availability group operation. |
 | 41108 | 16 | No | An error occurred while removing availability group '%.\*ls'. The DROP AVAILABILITY GROUP command removed the availability group configuration from the local metadata. However, the attempt to remove this configuration from the Windows Server Failover Clustering (WSFC) cluster failed because the Always On Availability Groups manager is not online (SQL Server error: %d). To remove the availability group configuration from the WSFC cluster, re-enter the command. |
 | 41109 | 17 | No | Could not enqueue a task (SQL OS error: 0x%x) for process actions for the availability group '%.\*ls'. Most likely, the instance of SQL Server is low on resources. Check the SQL Server error log to determine the cause of the failure. Retry the operation later, and if this condition persists, contact your database administrator. |
-| 41110 | 10 | No | Always On: The availability replica manager is starting. This is an informational message only. No user action is required. |
-| 41111 | 10 | No | Always On: The availability replica manager is waiting for the instance of SQL Server to allow client connections. This is an informational message only. No user action is required. |
+| 41110 | 10 | No | Always On Availability Groups: The availability replica manager is starting. This is an informational message only. No user action is required. |
+| 41111 | 10 | No | Always On Availability Groups: The availability replica manager is waiting for the instance of SQL Server to allow client connections. This is an informational message only. No user action is required. |
 | 41112 | 16 | No | A Windows Server Failover Clustering (WSFC) API required by availability groups has not been loaded. Always On Availability Groups replica manager is not enabled on the local instance SQL Server. If the server instance is running an edition of SQL Server that supports Always On Availability Groups, you can enable the it by using the SQL Server Configuration Manager. |
 | 41113 | 16 | No | Cannot failover availability group '%.\*ls' to this instance of SQL Server because a failover command is already pending on the local replica of this availability group. Wait for the pending failover command to complete before issuing another command on the local replica of this availability group. |
 | 41114 | 16 | No | Cannot create an availability group named '%.\*ls' because it already exists in a system table. |

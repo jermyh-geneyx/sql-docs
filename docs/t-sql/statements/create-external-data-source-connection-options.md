@@ -4,7 +4,7 @@ description: The CONNECTION_OPTIONS argument provides connection options for CRE
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest, hudequei, wiassaf
-ms.date: 06/17/2025
+ms.date: 08/08/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -22,7 +22,7 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 
 This article provides additional detail for `CONNECTION_OPTIONS` depending on the provider. The [CREATE EXTERNAL DATA SOURCE](create-external-data-source-transact-sql.md) `CONNECTION_OPTIONS` argument can vary depending on the external data provider.
 
-The `CONNECTION_OPTIONS` argument for [CREATE EXTERNAL DATA SOURCE](create-external-data-source-transact-sql.md) was first introduced in [!INCLUDE[sssql19-md](../../includes/sssql19-md.md)]. This document applies to [!INCLUDE[sssql19-md](../../includes/sssql19-md.md)] for Windows and Linux, as well as [!INCLUDE[ssbigdataclusters-ss-nover](../../includes/ssbigdataclusters-ver15.md)].
+The `CONNECTION_OPTIONS` argument for [CREATE EXTERNAL DATA SOURCE](create-external-data-source-transact-sql.md) was first introduced in [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)]. This document applies to [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] for Windows and Linux, as well as [!INCLUDE [ssbigdataclusters-ss-nover](../../includes/ssbigdataclusters-ver15.md)].
 
 - The `key_value_pair` is the keyword and the value for a specific connection option.
 - To use multiple connection options, separate them by a semi-colon.
@@ -36,17 +36,6 @@ You can only specify the key-value pairs that have an entry in [DSN and Connecti
 
 > [!NOTE]  
 > PolyBase supports only the Microsoft ODBC Driver version 17 and 18. For more information, see [Change the SQL Server driver version for PolyBase](../../relational-databases/polybase/polybase-change-odbc-driver.md).
-
-Connection string keywords and options for Microsoft OLE DB providers:
-
-- Microsoft OLE DB Driver for SQL Server: [Using Connection String Keywords with OLE DB Driver for SQL Server](../../connect/oledb/applications/using-connection-string-keywords-with-oledb-driver-for-sql-server.md)
-
-- SQL Native Client (deprecated) [Using Connection String Keywords with SQL Server Native Client](../../relational-databases/native-client/applications/using-connection-string-keywords-with-sql-server-native-client.md)
-
-Connection string keywords and options for Microsoft ODBC DB providers:
-
-- Microsoft ODBC Driver for SQL Server: [DSN and Connection String Keywords and Attributes](../../connect/odbc/dsn-connection-string-attribute.md)
-- SQL Native Client (deprecated) [ODBC Driver connection string keywords](../../relational-databases/native-client/applications/using-connection-string-keywords-with-sql-server-native-client.md#odbc-driver-connection-string-keywords)
 
 ## Oracle
 
@@ -83,7 +72,7 @@ You can only specify the key-value pairs that have an entry in the Oracle wire p
 | CredentialsWalletEntry (CWE) | None |
 | CredentialsWalletPassword (CWPWD) | None |
 | CredentialsWalletPath (CWPATH) | None |
-| CryptoProtocolVersion (CPV) | TLSv1.2,TLSv1.1,TLSv1 |
+| CryptoProtocolVersion (CPV) | TLSv1.2, TLSv1.1, TLSv1 |
 | CryptoLibName (CLN) | Empty string |
 | DataIntegrityLevel (DIL) | 1 (Accepted) |
 | DataIntegrityTypes (DIT) | MD5, SHA1, SHA256, SHA384, SHA512 |
@@ -167,11 +156,11 @@ You can only specify the key-value pairs that have an entry in the connector con
 You can only specify the key-value pairs that have an entry in the following driver configuration options.
 
 | Key name | Default | Required | Description |
-|:--|:--|:--|:--|
+| :--- | :--- | :--- | :--- |
 | `DefaultStringColumnLength` | 255 | No | The maximum number of characters that can be contained in `STRING` columns. The maximum value that you can set for this option is 2147483647. |
-| `noCursorTimeout` | False | No | This option specifies whether the driver allows active cursors on the data source server to expire. When `FALSE`, the data source server will time out idle cursors after the threshold inactivity period set on the server. When set to `TRUE`, the driver prevents the data source server from timing out idle cursors, and there's a risk that if the driver should quit or lose the connection to the server unexpectedly, the cursor remains open on the server indefinitely. You can adjust the threshold for idle cursor timeouts on the MongoDB server, see [MongoDB Server Parameters for a Self-Managed Deployment](https://docs.mongodb.com/v3.0/reference/parameters/) for details. |
-| `SamplingLimit` | 100 | No | The maximum number of records that the driver can sample to generate a temporary schema definition. When this option is set to 0, the driver samples every document in the database.<br /><br />Make sure to configure the driver to sample all the necessary data. Documents that aren't sampled don't get included in the schema definition, and thus don't become available in ODBC applications.<br /><br />Typically, sampling a large number of documents results in a schema definition that is more accurate and better able to represent all the data in the database. However, the sampling process might take longer than expected when many documents are sampled, especially if the database contains complex, nested data structures. |
-| `SamplingStrategy` | Forward | No | This option specifies how the driver samples data when generating a temporary schema definition.<br /><br />**Forward**: The driver samples data starting from the first record in the database, then samples the next record, and so on.<br /><br />**Backward**: The driver samples data starting from the last record in the database, then samples the preceding record, and so on.<br /><br />**Random**: The driver selects sample records from the data source at random until the SamplingLimit is reached. |
+| `noCursorTimeout` | False | No | This option specifies whether the driver allows active cursors on the data source server to expire. When `FALSE`, the data source server will time out idle cursors after the threshold inactivity period set on the server. When set to `TRUE`, the driver prevents the data source server from timing out idle cursors, and there's a risk that if the driver should quit or lose the connection to the server unexpectedly, the cursor remains open on the server indefinitely. You can adjust the threshold for idle cursor timeouts on the MongoDB server, see [MongoDB Server Parameters for a Self-Managed Deployment](https://www.mongodb.com/docs/manual/reference/parameters) for details. |
+| `SamplingLimit` | 100 | No | The maximum number of records that the driver can sample to generate a temporary schema definition. When this option is set to 0, the driver samples every document in the database.<br /><br />Make sure to configure the driver to sample all the necessary data. Documents that aren't sampled don't get included in the schema definition, and thus don't become available in ODBC applications.<br />Typically, sampling a large number of documents results in a schema definition that is more accurate and better able to represent all the data in the database. However, the sampling process might take longer than expected when many documents are sampled, especially if the database contains complex, nested data structures. |
+| `SamplingStrategy` | Forward | No | This option specifies how the driver samples data when generating a temporary schema definition.<br /><br />**Forward**: The driver samples data starting from the first record in the database, then samples the next record, and so on.<br />**Backward**: The driver samples data starting from the last record in the database, then samples the preceding record, and so on.<br />**Random**: The driver selects sample records from the data source at random until the SamplingLimit is reached. |
 | `SSL` | Clear (`0`) | No | This option specifies whether the driver uses SSL to connect to the server.<br /><br />**Enabled** (1): The driver uses SSL to connect to the server.<br />**Disabled** (0): The driver doesn't use SSL to connect to the server. |
 
 ## Generic ODBC

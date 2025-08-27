@@ -19,12 +19,8 @@ landingContent:
     linkLists:
     - linkListType: overview
       links:
-      - text: Data Migration Assistant (DMA)
-        url: ../../dma/dma-overview.md
-    - linkListType: download
-      links:
-      - text: Data Migration Assistant (DMA)
-        url: https://www.microsoft.com/download/details.aspx?id=53595
+      - text: SQL Server migration component in SQL Server Management Studio
+        url: /ssms/migrate-sql-server-component
 
   - title: Non-SQL to SQL & Azure
     linkLists:
@@ -59,8 +55,6 @@ landingContent:
       links:        
       - text: Database Migration Service (DMS)
         url: /azure/dms/
-      - text: Data Migration Assistant (DMA)
-        url: ../../dma/dma-overview.md
     - linkListType: concept
       links:
       - text: Broader migration process

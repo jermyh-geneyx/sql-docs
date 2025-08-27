@@ -4,7 +4,7 @@ description: This article explains different targets for Extended Events session
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest
-ms.date: 05/29/2025
+ms.date: 08/13/2025
 ms.service: sql
 ms.subservice: xevents
 ms.topic: conceptual
@@ -114,6 +114,9 @@ The `event_file` target writes event session output from buffer to a disk file o
 - The file name you choose is used by the system as a prefix to which a date-time based long integer is appended, followed by the `xel` extension.
 - You can optionally specify the `MAX_FILE_SIZE` parameter. It defines the maximum size in megabytes (MB) to which the file can grow. 
 - You also have the choice to use the `MAX_ROLLOVER_FILES` option to specify the maximum number of files to retain in the file system in addition to the current file. The default value is UNLIMITED. When `MAX_ROLLOVER_FILES` is evaluated, if the number of files exceeds the `MAX_ROLLOVER_FILES` setting, the oldest file is deleted. For more information, see [MAX_ROLLOVER_FILES](../../t-sql/statements/create-server-audit-transact-sql.md#max_rollover_files---integer--unlimited-). 
+
+> [!IMPORTANT]
+> Depending on the events added to a session, the files produced by the `event_file` target might contain sensitive data. Carefully review the file system and share permissions on the directory and individual `.xel` files, including inherited access, to avoid granting unnecessary read access. Follow the [principle of least privilege](/entra/identity-platform/secure-least-privileged-access).
 
 ::: moniker range="= azuresqldb-current || = azuresqldb-mi-current "
 

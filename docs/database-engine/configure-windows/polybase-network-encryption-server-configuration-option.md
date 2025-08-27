@@ -1,0 +1,121 @@
+---
+title: "Server Configuration: PolyBase Network Encryption"
+description: Set the configuration option for PolyBase network encryption in SQL Server settings.
+author: MikeRayMSFT
+ms.author: mikeray
+ms.reviewer: hudequei, randolphwest
+ms.date: 08/26/2025
+ms.service: sql
+ms.subservice: polybase
+ms.topic: conceptual
+---
+
+# Server configuration: polybase network encryption
+
+[!INCLUDE [appliesto-ss-xxxx-xxxx-pdw-md](../../includes/appliesto-ss-xxxx-xxxx-pdw-md.md)]
+
+Display or changes the global configuration settings for PolyBase network encryption. This configuration option controls whether PolyBase encrypts the communication channels between the SQL Server instance and the PolyBase Engine, which runs in the same server.
+
+The possible values are described in the following table:
+
+| Value | Meaning |
+| --- | --- |
+| `0` | Disabled |
+| `1` (default) | Enabled |
+
+Enabled is the default setting in SQL Server versions for security compliance.
+
+When enabled, the communication between SQL Server and PolyBase components is encrypted.
+
+Beginning with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], a valid certificate is required to encrypt the communication between PolyBase services and SQL Server.
+
+When disabled:
+
+- Communication isn't encrypted
+- No certificate or extra checks are required.
+
+Disabled encryption configuration can be suitable for environments that are fully trusted, isolated or when no certificate can be provided.
+
+This change takes effect immediately.
+
+## Enable network encryption
+
+The following example enables this setting.
+
+```sql
+EXECUTE sp_configure 'show advanced options', 1;
+GO
+
+RECONFIGURE;
+GO
+
+EXECUTE sp_configure 'polybase network encryption', 1;
+GO
+
+RECONFIGURE;
+GO
+```
+
+## Disable network encryption
+
+The following example disables this setting.
+
+```sql
+EXECUTE sp_configure 'show advanced options', 1;
+GO
+
+RECONFIGURE;
+GO
+
+EXECUTE sp_configure 'polybase network encryption', 0;
+GO
+
+RECONFIGURE;
+GO
+```
+
+## Additional configuration requirement
+
+Beginning with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], a valid certificate is required for secure connections.
+
+To encrypt the communication between PolyBase components and SQL Server, you need:
+
+- The certificate must be signed by a trusted Certificate Authority (CA).
+- Its Subject Name or Subject Alternative Name should match the SQL Server's Fully Qualified Domain Name (FQDN).
+
+After the certificate is installed on the server, update the SQL Server instance as follows.
+
+1. Add the certificate to the PolyBase configuration table.
+
+   To add the certificate to the configuration table, update the following example for your instance run the query:
+
+   ```sql
+   UPDATE DWConfiguration.[dbo].[configuration_properties]
+   SET value =  '<CertificateSerialNumber>'
+   WHERE [key] = '<CertificateSerialNumber>'
+   AND [id] = `<Server Name>`
+   ```
+
+1. Enable PolyBase Network Encryption through `sp_configure`.
+
+1. Restart the SQL Services.
+
+## Permissions
+
+All users can execute `sp_configure` with no parameters or the `@configname` parameter.
+
+Requires `ALTER SETTINGS` server-level permission or membership in the **sysadmin** fixed server role to change a configuration value or to run `RECONFIGURE`.
+
+## SQL Server 2025 Preview RC 0 known issue
+
+[!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] RC 0 has the following known PolyBase issues:
+
+- PolyBase services on [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] won't work unless there's a trusted certificate, or if PolyBase network encryption is set to `0`.
+- SQL Server on Linux currently only supports PolyBase network encryption set to `0`.
+
+## Related content
+
+- [Exporting data](../../relational-databases/polybase/polybase-configure-hadoop.md#exporting-data)
+- [Data virtualization with PolyBase in SQL Server](../../relational-databases/polybase/polybase-guide.md)
+- [CREATE EXTERNAL TABLE AS SELECT (CETAS) (Transact-SQL)](../../t-sql/statements/create-external-table-as-select-transact-sql.md)
+- [PolyBase errors and possible solutions](../../relational-databases/polybase/polybase-errors-and-possible-solutions.md)

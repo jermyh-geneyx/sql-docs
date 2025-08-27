@@ -84,10 +84,6 @@ Use `sp_configure` to display or change server-level settings. To change databas
 
 Some server configuration options are only available through [ALTER SERVER CONFIGURATION](../../t-sql/statements/alter-server-configuration-transact-sql.md).
 
-### SQL Server Big Data Clusters
-
-[!INCLUDE [big-data-clusters-master-instance-ha-endpoint-requirement](../../includes/big-data-clusters-master-instance-ha-endpoint-requirement.md)]
-
 ## Update the running configuration value
 
 When you specify a new *@configvalue* for a *@configname*, the result set shows this value in the `config_value` column. This value initially differs from the value in the `run_value` column, which shows the currently running configuration value. To update the running configuration value in the `run_value` column, the system administrator must run either `RECONFIGURE` or `RECONFIGURE WITH OVERRIDE`.

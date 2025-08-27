@@ -3,7 +3,7 @@ title: "CREATE AVAILABILITY GROUP (Transact-SQL)"
 description: Creates a new availability group, if the instance of SQL Server is enabled for availability groups feature.
 author: "MikeRayMSFT"
 ms.author: "mikeray"
-ms.date: 06/19/2025
+ms.date: 08/15/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -58,6 +58,7 @@ CREATE AVAILABILITY GROUP group_name
   | REQUIRED_SYNCHRONIZED_SECONDARIES_TO_COMMIT = { integer }
   | CLUSTER_TYPE = { WSFC | EXTERNAL | NONE } 
   | WRITE_LEASE_VALIDITY = { seconds }
+  | CLUSTER_CONNECTION_OPTIONS = 'key_value_pairs>[;...]`
   
 <add_replica_spec>::=  
   <server_instance> WITH  
@@ -237,6 +238,25 @@ Used to identify if the availability group is on a Windows Server Failover Clust
 Specifies the lease time (in seconds) before it expires or needs renewal. This monitors the health and communication between local cluster orchestrator and SQL Server instance processes. The lease validity mechanism uses *heartbeat* signals to the availability group primary SQL Server instance. If the primary fails to send or receive a lease renewal within the lease validity period, it's considered unresponsive, and the primary will go offline. This mechanism prevents split-brain situations when the cluster orchestrator cannot notify SQL Server to stop being primary when a new primary is elected by a failover. It is applicable only for `CLUSTER_TYPE = EXTERNAL`, when the cluster is managed by a cluster manager that isn't a Windows Server failover cluster, like Linux Pacemaker.
 
 The external orchestrator is responsible to ensure the external lease renewal process is consistently stable. If the lease renew message is unexpectedly missed, the current AG replica is set offline, which causes AG availability loss.
+
+#### CLUSTER_CONNECTION_OPTIONS
+
+**Applies to:** [!INCLUDE[sssql25-md](../../includes/sssql25-md.md)] RC 0 and later versions
+
+Use the `CLUSTER_CONNECTION_OPTIONS` clause to enforce [TLS 1.3](../../relational-databases/security/networking/tls-1-3.md) encryption for communication between the Windows Server Failover Cluster and your availability group replicas. The options are specified as a list of key-value pairs, separated by semicolons. The key-value pairs are used to configure connection string encryption for the availability group.
+
+For more information, review [connect to an availability group with strict encryption](../../relational-databases/security/networking/connect-with-strict-encryption.md#connect-to-an-always-on-availability-group) and [TDS 8.0](../../relational-databases/security/networking/tds-8.md).
+
+The following table describes the key-value pairs that you can use in the `CLUSTER_CONNECTION_OPTIONS` clause:
+
+| Key | Supported values | Description |
+|--|--|--|
+| `Encrypt` | `Mandatory`, `Strict`, `Optional` | Specifies how encryption to the availability group is enforced. If the server does not support encryption, the connection fails. If encrypt is set to `Mandatory`, then `TrustServerCertificate` must be set to yes. If encrypt is set to `Strict` then `TrustServerCertificate` is ignored. <br /><br />  **This key value pair is required.**|
+| `HostNameInCertificate` | Replica name or AG listener name | Specifies the replica name or availability group listener name in the certificate that is used for encryption. This value must match the value in the **Subject Alternative Name** of the certificate. If the server name is listed in the certificate, then you can omit the `HostNameInCertificate` key-value pair. If the server name is not listed in the certificate, then you must specify the `HostNameInCertificate` key-value pair with the server name. <br /><br />  **This key value pair is optional.***|
+| `TrustServerCertificate` | `Yes`, `No` | Set to `yes` to specify that the driver doesn't validate the server TLS/SSL certificate. If `no`, the driver validates the certificate. For more information, review [TDS 8.0](../../relational-databases/security/networking/tds-8.md#additional-changes-to-connection-string-encryption-properties). <br /><br />  **This key value pair is optional.***  |    
+|`ServerCertificate` | Path to your certificate | If do not want to use `HostNameInCertificate`, you can pass the path to your certificate. The cluster service account must have permission to read the certificate from the given location.<br /><br />  **This key value pair is optional.** | 
+
+Check the [examples](#b-enforce-encryption-in-connections-to-an-availability-group) to learn how to use the `CLUSTER_CONNECTION_OPTIONS` clause.
 
 #### DATABASE *database_name*  
 
@@ -683,7 +703,38 @@ ALTER AVAILABILITY GROUP [MyAg]
   ADD LISTENER 'MyAgListenerIvP6' ( WITH IP ( ('2001:db88:f0:f00f::cf3c'),('2001:4898:e0:f213::4ce2') ) , PORT = 60173 );   
 GO  
 ```  
-  
+
+### B. Enforce encryption in connections to an availability group
+
+The examples in this section [forces encryption](#cluster_connection_options) in connections to the `AccountsAG` availability group. 
+
+If the server name is listed in each certificate as defined by either [method](../../database-engine/configure-windows/certificate-requirements.md#always-on-availability-group), you can omit the `HostNameInCertificate` option: 
+
+```sql
+CREATE AVAILABILITY GROUP [AccountsAG]
+   SET (
+   CLUSTER_CONNECTION_OPTIONS = 'Encrypt=Strict')
+```
+
+If you followed [method 1](../../database-engine/configure-windows/certificate-requirements.md#always-on-availability-group), and your server name is not listed as a **Subject Alternative Name** in the certificate, then you must specify whatever value you do have listed in the **Subject Alternative Name** in the `HostNameInCertificate` option. 
+
+
+```sql
+CREATE AVAILABILITY GROUP [AccountsAG]
+   SET (
+   CLUSTER_CONNECTION_OPTIONS = 'Encrypt=Strict;HostNameInCertificate=<Subject Alternative Name>')
+```
+
+If you followed [method 1](../../database-engine/configure-windows/certificate-requirements.md#always-on-availability-group), and you want to utilize the `ServerCertificate` property instead of providing a value for `HostNameInCertificate`: 
+
+```sql
+CREATE AVAILABILITY GROUP [AccountsAG]
+   SET (
+   CLUSTER_CONNECTION_OPTIONS = 'Encrypt=Strict;ServerCertificate=C:\Users\admin\SqlAGCertificate.cer')
+```
+
+
+
 ##  <a name="RelatedTasks"></a> Related tasks  
   
 -   [Create an availability group &#40;Transact-SQL&#41;](../../database-engine/availability-groups/windows/create-an-availability-group-transact-sql.md)  

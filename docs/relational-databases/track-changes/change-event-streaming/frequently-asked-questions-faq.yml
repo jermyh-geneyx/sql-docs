@@ -18,12 +18,10 @@ summary: |
 sections:
   - name: Compatibility and requirements
     questions:
-      - question: What editions of SQL Server support change event streaming (CES)?
-        answer: CES is supported on the Developer, Standard, and Enterprise editions of SQL Server 2025.
       - question: Is the full recovery model required for CES?
         answer: Yes. CES relies on reading the transaction log, so the SQL Server database must be configured with the full recovery model.
       - question: What is the cost of using CES?
-        answer: CES is free on supported SQL Server editions. However, Azure Event Hubs usage is billed at standard rates. Ingress and egress charges also apply.
+        answer: For CES, Azure Event Hubs usage is billed at standard rates. Ingress and egress charges also apply.
 
   - name: Performance and impact
     questions:

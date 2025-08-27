@@ -7,6 +7,7 @@ ms.date: 01/24/2025
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
+ms.custom: sfi-ropc-nochange
 ---
 # Introduction to Microsoft.Data.SqlClient namespace
 
@@ -158,7 +159,7 @@ SqlBulkCopy has a new property `RowsCopied64` which supports `long` value types.
 
 Example usage:
 
-```C#
+```csharp
     using (SqlConnection srcConn = new SqlConnection(srcConstr))
     using (SqlCommand srcCmd = new SqlCommand("select top 5 * from employees", srcConn))
     {
@@ -320,15 +321,15 @@ The affected classes and enums are:
 
 ### New features in 5.0
 
-- Added support for `TDS8`. To use TDS 8, users should specify Encrypt=Strict in the connection string. [#1608](https://github.com/dotnet/SqlClient/pull/1608) [Read more](#tds-8-enhanced-security)
+- Added support for `TDS8`. To use TDS 8, users should specify Encrypt=Strict in the connection string. [#1608](https://github.com/dotnet/SqlClient/pull/1608) [Read more](#tds-80-enhanced-security)
 - Added support for specifying Server SPN and Failover Server SPN on the connection. [#1607](https://github.com/dotnet/SqlClient/pull/1607) [Read more](#server-spn)
 - Added support for aliases when targeting .NET Core on Windows. [#1588](https://github.com/dotnet/SqlClient/pull/1588) [Read more](#support-for-sql-aliases)
 - Added SqlDataSourceEnumerator. [#1430](https://github.com/dotnet/SqlClient/pull/1430), [Read more](#sql-data-source-enumerator-support)
 - Added a new AppContext switch to suppress insecure TLS warnings. [#1457](https://github.com/dotnet/SqlClient/pull/1457), [Read more](#suppress-insecure-tls-warnings)
 
-### TDS 8 enhanced security
+### TDS 8.0 enhanced security
 
-To use TDS 8, specify Encrypt=Strict in the connection string. Strict mode disables TrustServerCertificate (always treated as False in Strict mode). HostNameInCertificate has been added to help some Strict mode scenarios. TDS 8 begins and continues all server communication inside a secure, encrypted TLS connection.
+To use TDS 8.0, specify Encrypt=Strict in the connection string. Strict mode disables TrustServerCertificate (always treated as False in Strict mode). HostNameInCertificate has been added to help some Strict mode scenarios. TDS 8.0 begins and continues all server communication inside a secure, encrypted TLS connection.
 
 New Encrypt values have been added to clarify connection encryption behavior. `Encrypt=Mandatory` is equivalent to `Encrypt=True` and encrypts connections during the TDS connection negotiation. `Encrypt=Optional` is equivalent to `Encrypt=False` and only encrypts the connection if the server tells the client that encryption is required during the TDS connection negotiation.
 

@@ -3,8 +3,8 @@ title: "How FOR JSON Converts SQL Server Data Types to JSON Data Types"
 description: "The FOR JSON clause uses the following rules to convert SQL Server data types to JSON types in the JSON output."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: jovanpop
-ms.date: 03/06/2025
+ms.reviewer: jovanpop, umajay
+ms.date: 07/23/2025
 ms.service: sql
 ms.topic: conceptual
 ms.custom:
@@ -15,7 +15,7 @@ monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-20
 ---
 # How FOR JSON converts SQL Server data types to JSON data types
 
-[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricse-fabricdw](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricse-fabricdw.md)]
+[!INCLUDE [sqlserver2016-asdb-asdbmi-asa-serverless-pool-only-fabricse-fabricdw-fabricsqldb](../../includes/applies-to-version/sqlserver2016-asdb-asdbmi-asa-svrless-only-fabricse-fabricdw-fabricsqldb.md)]
 
   The `FOR JSON` clause uses the following rules to convert SQL Server data types to JSON types in the JSON output.
 
@@ -31,7 +31,7 @@ monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-20
 
 ## Learn more about JSON in the SQL Database Engine
 
-For a visual introduction to the built-in JSON support in SQL Server and Azure SQL Database, see the following videos:
+For a visual introduction to the built-in JSON support, see the following videos:
 
 - [JSON as a bridge between NoSQL and relational worlds](/shows/datadriven-sqlserver2016/json-as-bridge-betwen-nosql-relational-worlds)
 

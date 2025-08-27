@@ -4,7 +4,7 @@ description: "Explains the max RPC request params instance configuration setting
 author: dimitri-furman
 ms.author: dfurman
 ms.reviewer: randolphwest
-ms.date: 05/28/2025
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
@@ -20,7 +20,7 @@ The `max RPC request params (KB)` server configuration option limits the amount 
 
 By default, the server memory that is used for the parameters of batched RPC calls is unlimited. When the total memory consumed by RPC parameters is excessively large, the current server process might be terminated because of insufficient memory.
 
-When the `max RPC request params (KB)` configuration is set to a nonzero value, the memory used by a *single* batched RPC call is limited to the specified value. If the RPC call exceeds the memory limit, it is terminated with error 701, severity 17, state 21, message: `There is insufficient system memory in resource pool 'resource-pool-name' to run this query.` Terminating the RPC call releases the memory consumed by the RPC parameters and avoids the risk of server process termination. For more information, see [MSSQLSERVER_701](../../relational-databases/errors-events/mssqlserver-701-database-engine-error.md).
+When the `max RPC request params (KB)` configuration is set to a nonzero value, the memory used by a *single* batched RPC call is limited to the specified value. If the RPC call exceeds the memory limit, it's terminated with error 701, severity 17, state 21, message: `There is insufficient system memory in resource pool 'resource-pool-name' to run this query.` Terminating the RPC call releases the memory consumed by the RPC parameters and avoids the risk of server process termination. For more information, see [MSSQLSERVER_701](../../relational-databases/errors-events/mssqlserver-701-database-engine-error.md).
 
 ## Availability
 
@@ -49,10 +49,12 @@ The following example sets the maximum RPC parameter memory a single RPC call ca
 
 ```sql
 EXECUTE sp_configure 'show advanced options', 1;
+
 RECONFIGURE;
 GO
 
 EXECUTE sp_configure 'max RPC request params (KB)', 1024;
+
 RECONFIGURE;
 GO
 ```

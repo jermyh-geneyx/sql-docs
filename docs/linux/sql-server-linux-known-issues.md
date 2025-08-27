@@ -4,7 +4,7 @@ description: This article contains the known issues for SQL Server running on Li
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: amitkh, vanto
-ms.date: 05/19/2025
+ms.date: 08/12/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: troubleshooting-known-issue
@@ -85,11 +85,14 @@ To work around this issue, do one of the following options:
 
 - Enable IPv6 in the kernel by removing `ipv6.disable=1` from the boot command line. The method depends on the Linux distribution and the bootloader, such as **grub**. If you want IPv6 to be disabled, you can still disable it by setting `net.ipv6.conf.all.disable_ipv6 = 1` in the `sysctl` configuration (for example, `/etc/sysctl.conf`). Although this setting prevents the system's network adapter from getting an IPv6 address, it allows the `sqlservr` features to work.
 
-### TLS 1.3 not supported
+### TLS 1.3 not supported on SQL Server 2022
 
 **Applies to:** [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] only.
 
 Although TLS 1.3 is supported on [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] for Windows, you must use TLS 1.2 on Linux.
+
+> [!NOTE]  
+> TLS 1.3 is supported for [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] on Ubuntu 22.04, Ubuntu 24.04 (in preview), and RHEL 9. TLS 1.3 is enabled by default.
 
 ### Network File System (NFS)
 
@@ -245,6 +248,54 @@ For Ubuntu 22.04, you should reach out to Canonical directly for the exact steps
    Once you have enabled `cgroup-v1` for Ubuntu 22.04, follow the steps in [Install SQL Server 2022 Machine Learning Services (Python and R) on Linux](sql-server-linux-setup-machine-learning-sql-2022.md#install-runtimes-and-packages), to install and enable SQL Machine Learning Service for [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] packages on Ubuntu 22.04.
 
 ---
+
+## Known issues in SQL Server 2025 Release Candidate (RC) 0
+
+The following issues affect [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] Release Candidate (RC) 0.
+
+### SLES support for SQL Server 2025 Preview
+
+Packages for SUSE Linux Enterprise Server (SLES) aren't currently available on [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] RC 0.
+
+### TLS configuration with mssql-conf
+
+You might encounter the following error when configuring TLS settings (such as `network.tlsprotocols` or `network.tlsciphers`) using the **mssql-conf** utility.
+
+```output
+OSError: libssl.so: cannot open shared object file: No such file or directory.
+```
+
+There are two possible workarounds for this issue, depending on your distribution.
+
+1. Install `openssl-devel` using your distribution's package manager.
+
+1. Manually update the `mssql.conf` file as follows:
+
+   ```ini
+   [network]
+   tlsprotocols = 1.3,1.2
+   tlsciphers = TLS_AES_256_GCM_SHA384:TLS_CHACHA20_POLY1305_SHA256:TLS_AES_128_GCM_SHA256:ECDHE-ECDSA-AES128-GCM-SHA256:ECDHE-ECDSA-AES256-GCM-SHA384:ECDHE-RSA-AES128-GCM-SHA256:ECDHE-RSA-AES256-GCM-SHA384:ECDHE-ECDSA-AES128-SHA256:ECDHE-ECDSA-AES256-SHA384:ECDHE-ECDSA-AES256-SHA:ECDHE-ECDSA-AES128-SHA:AES256-GCM-SHA384:AES128-GCM-SHA256:AES256-SHA256:AES128-SHA256:AES256-SHA:AES128-SHA:!DHE-RSA-AES256-GCM-SHA384:!DHE-RSA-AES128-GCM-SHA256:!DHE-RSA-AES256-SHA:!DHE-RSA-AES128-SHA
+   ```
+
+### SQL Server on Linux fails to start on machines with hybrid CPU architecture
+
+**Issue**: SQL Server instances on Linux might fail to start if the machine uses an Intel 12th Gen or later hybrid architecture CPU, and the host operating system is Linux.
+
+You might see an error message similar to the following output:
+
+```output
+Reason: 0x00000004 Message: ASSERT: Expression=(result * DrtlGetProcessorCoreCount() == DrtlGetProcessorCount()) File=LibOS\Windows\Kernel\SQLPal\common\dk\sos\src\sosnumap.cpp Line=208
+```
+
+If you want to use a Linux host operating system, you can work around the issue by disabling efficiency cores (E-cores) in your BIOS. If you use containers, or a hypervisor like Hyper-V on Windows (including WSL), you aren't affected.
+
+### Linux PolyBase Network encryption enabled fails
+
+[!INCLUDE [polybase-release-candidate-0](../includes/polybase-release-candidate-0.md)]
+
+### Local ONNX models not supported on Linux operating systems
+
+[CREATE EXTERNAL MODEL](../t-sql/statements/create-external-model-transact-sql.md) local ONNX models hosted directly on the SQL Server aren't currently available for Linux on [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] RC 0.
 
 ## Related content
 

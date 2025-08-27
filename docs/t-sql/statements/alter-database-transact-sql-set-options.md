@@ -298,7 +298,7 @@ SET
   | ANSI_PADDING { ON | OFF }
   | ANSI_WARNINGS { ON | OFF }
   | ARITHABORT { ON | OFF }
-  | COMPATIBILITY_LEVEL = { 160 | 150 | 140 | 130 | 120 | 110 | 100 }
+  | COMPATIBILITY_LEVEL = { 170 | 160 | 150 | 140 | 130 | 120 | 110 | 100 }
   | CONCAT_NULL_YIELDS_NULL { ON | OFF }
   | NUMERIC_ROUNDABORT { ON | OFF }
   | QUOTED_IDENTIFIER { ON | OFF }
@@ -1381,7 +1381,7 @@ You can determine this option's status by examining the `is_ansi_warnings_on` co
 
 You can determine this option's status by examining the `is_arithabort_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsArithmeticAbortEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
-#### COMPATIBILITY_LEVEL = { 160 | 150 | 140 | 130 | 120 | 110 | 100 }
+#### COMPATIBILITY_LEVEL = { 170 | 160 | 150 | 140 | 130 | 120 | 110 | 100 }
 
 For more information, see [ALTER DATABASE compatibility level](alter-database-transact-sql-compatibility-level.md).
 
@@ -2289,7 +2289,7 @@ Controls whether cleanup is automatically activated when the total amount of dat
 
 - OFF
 
-  Size-based cleanup aren't automatically activated.
+  Size-based cleanup isn't automatically activated.
 
 - AUTO
 
@@ -2515,7 +2515,7 @@ You can determine this option's status by examining the `is_ansi_warnings_on` co
 
 You can determine this option's status by examining the `is_arithabort_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsArithmeticAbortEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
-#### COMPATIBILITY_LEVEL = { 160 | 150 | 140 | 130 | 120 | 110 | 100 }
+#### COMPATIBILITY_LEVEL = { 170 | 160 | 150 | 140 | 130 | 120 | 110 | 100 }
 
 For more information, see [ALTER DATABASE compatibility level](alter-database-transact-sql-compatibility-level.md).
 
@@ -2986,7 +2986,7 @@ SET
   | ANSI_PADDING { ON | OFF }
   | ANSI_WARNINGS { ON | OFF }
   | ARITHABORT { ON | OFF }
-  | COMPATIBILITY_LEVEL = { 160 | 150 | 140 | 130 | 120 | 110 | 100 }
+  | COMPATIBILITY_LEVEL = { 170 | 160 | 150 | 140 | 130 | 120 | 110 | 100 }
   | CONCAT_NULL_YIELDS_NULL { ON | OFF }
   | NUMERIC_ROUNDABORT { ON | OFF }
   | QUOTED_IDENTIFIER { ON | OFF }
@@ -3339,7 +3339,7 @@ Determines the transaction isolation level.
 
   Turns off the Snapshot option at the database level. Transactions can't specify the SNAPSHOT transaction isolation level.
 
-When you set ALLOW_SNAPSHOT_ISOLATION to a new state (from ON to OFF, or from OFF to ON), ALTER DATABASE doesn't return control to the caller until all existing transactions in the database are committed. If the database is already in the state specified in the ALTER DATABASE statement, control is returned to the caller immediately. If the ALTER DATABASE statement doesn't return quickly, use [sys.dm_tran_active_snapshot_database_transactions](../../relational-databases/system-dynamic-management-views/sys-dm-tran-active-snapshot-database-transactions-transact-sql.md) to determine whether there are long-running transactions. If the ALTER DATABASE statement is canceled, the database remains in the state it was in when ALTER DATABASE was started. The [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view indicates the state of snapshot-isolation transactions in the database. If **snapshot_isolation_state_desc** = IN_TRANSITION_TO_ON, the statement `ALTER DATABASE ... ALLOW_SNAPSHOT_ISOLATION OFF` pauses six seconds and retry the operation.
+When you set ALLOW_SNAPSHOT_ISOLATION to a new state (from ON to OFF, or from OFF to ON), ALTER DATABASE doesn't return control to the caller until all existing transactions in the database are committed. If the database is already in the state specified in the ALTER DATABASE statement, control is returned to the caller immediately. If the ALTER DATABASE statement doesn't return quickly, use [sys.dm_tran_active_snapshot_database_transactions](../../relational-databases/system-dynamic-management-views/sys-dm-tran-active-snapshot-database-transactions-transact-sql.md) to determine whether there are long-running transactions. If the ALTER DATABASE statement is canceled, the database remains in the state it was in when ALTER DATABASE was started. The [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view indicates the state of snapshot-isolation transactions in the database. If `snapshot_isolation_state_desc = IN_TRANSITION_TO_ON`, the statement `ALTER DATABASE ... ALLOW_SNAPSHOT_ISOLATION OFF` pauses six seconds and retries the operation.
 
 You can't change the state of ALLOW_SNAPSHOT_ISOLATION if the database is OFFLINE.
 
@@ -3475,11 +3475,11 @@ You can determine this option's status by examining the `is_ansi_warnings_on` co
   A warning message is displayed when one of these errors occurs. The query, batch, or transaction continues to process as if no error occurred even if a warning is displayed.
 
 > [!IMPORTANT]  
-> SET ARITHABORT must be set to ON when you create or make changes to indexes on computed columns or indexed views.
+> `SET ARITHABORT` must be enabled (ON) when you create or make changes to indexes on computed columns or indexed views.
 
 You can determine this option's status by examining the `is_arithabort_on` column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view. You can also determine the status by examining the `IsArithmeticAbortEnabled` property of the [DATABASEPROPERTYEX](../functions/databasepropertyex-transact-sql.md) function.
 
-#### COMPATIBILITY_LEVEL = { 160 | 150 | 140 | 130 | 120 | 110 | 100 }
+#### COMPATIBILITY_LEVEL = { 170 | 160 | 150 | 140 | 130 | 120 | 110 | 100 }
 
 For more information, see [ALTER DATABASE compatibility level](alter-database-transact-sql-compatibility-level.md).
 

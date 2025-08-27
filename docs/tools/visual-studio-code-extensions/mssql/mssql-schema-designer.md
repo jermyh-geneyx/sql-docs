@@ -3,8 +3,8 @@ title: Schema Designer in Visual Studio Code with MSSQL
 description: Learn how to use the schema designer in Visual Studio Code with MSSQL to visualize existing schemas, and design and manage databases directly, without needing to write Transact-SQL statements.
 author: yoleichen
 ms.author: yoleichen
-ms.reviewer: randolphwest
-ms.date: 06/18/2025
+ms.reviewer: roblescarlos, randolphwest
+ms.date: 08/20/2025
 ms.service: sql
 ms.subservice: vs-code-sql-extensions
 ms.topic: overview
@@ -13,7 +13,7 @@ ms.collection:
 ai-usage: ai-assisted
 ---
 
-# Schema designer (Preview)
+# Schema Designer
 
 The schema designer in the MSSQL extension for Visual Studio Code simplifies complex schema designs, and provides a more intuitive understanding of your database structures. It integrates database diagram functionality to visualize existing schemas, and allows developers to design and manage databases directly in a graphical environment without needing to write Transact-SQL (T-SQL) statements.
 
@@ -32,7 +32,7 @@ Schema designer offers these features:
 
 ## Open schema designer
 
-Right-click on the database in the object explorer and select **Design Schema (Preview)** from the menu. This opens the schema designer view, which then allows you to see the visual database diagram.
+Right-click on the database in the object explorer and select **Design Schema** from the menu. This opens the schema designer view, which then allows you to see the visual database diagram.
 
 :::image type="content" source="media/mssql-schema-designer/schema-designer-entry-point.png" alt-text="Screenshot of the entry point to open the schema designer in Visual Studio Code MSSQL extension." lightbox="media/mssql-schema-designer/schema-designer-entry-point.png":::
 
@@ -112,6 +112,6 @@ Review the report carefully, and check the confirmation box to acknowledge and a
 
 - [Quickstart: Connect to and query a database with the MSSQL extension for Visual Studio Code](connect-database-visual-studio-code.md)
 - [GitHub Copilot for MSSQL extension for Visual Studio Code](../github-copilot/overview.md)
-- [Schema Compare (Preview)](mssql-schema-compare.md)
+- [Schema Compare](mssql-schema-compare.md)
 - [Learn more about Visual Studio Code](https://code.visualstudio.com/docs)
 - [Learn more about contributing to the MSSQL extension](https://github.com/Microsoft/vscode-mssql/wiki)

@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/15/2025
+ms.date: 08/14/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -146,7 +146,7 @@ ms.topic: include
 | 11297 | 16 | No | A corrupted message has been received. The private variable data segment offset is incorrect. |
 | 11298 | 16 | No | A corrupted message has been received. The public variable data segment offset is incorrect. |
 | 11299 | 10 | No | A corrupted message has been received. An unsequenced message had a non-zero sequence number. This occurred in the message with Conversation ID '%.\*ls', Initiator: %d, and Message sequence number: %I64d. |
-| 11300 | 10 | Yes | Error while committing a readonly or a TEMPDB XDES, shutting down the server. |
+| 11300 | 10 | Yes | Error while committing a readonly or a tempdb XDES, shutting down the server. |
 | 11301 | 10 | Yes | Error while performing transaction notification for object %p event %d. |
 | 11302 | 10 | Yes | Error during rollback. Shutting down database (location: %d). |
 | 11303 | 10 | Yes | Error releasing reserved log space: %ls space %I64d, code %d, state %d. |
@@ -195,7 +195,7 @@ ms.topic: include
 | 11430 | 16 | No | Cannot enable change data capture on column '%.\*ls'. Change data capture is not supported for encrypted columns. |
 | 11431 | 15 | No | The %S_MSG option is not permitted as the %S_MSG option is not turned '%ls'. |
 | 11432 | 15 | No | %S_MSG = %d is not a valid value; %S_MSG must be greater than 0 and less than %d. |
-| 11433 | 15 | No | '%.\*ls' with %S_MSG option is not suppported on %S_MSG '%.\*ls'. |
+| 11433 | 15 | No | '%.\*ls' with %S_MSG option is not supported on %S_MSG '%.\*ls'. |
 | 11434 | 15 | No | The %S_MSG option is not supported for the disabled index '%.\*ls' on %S_MSG '%.\*ls'. |
 | 11435 | 15 | No | The %S_MSG option is not supported for Heaps at %S_MSG '%.\*ls'. |
 | 11436 | 16 | No | Cannot alter table '%.\*ls' because non-nullable column '%.\*ls' cannot be declared as hidden without either a DEFAULT constraint, the GENERATED ALWAYS attribute, or the IDENTITY attribute. |
@@ -211,6 +211,7 @@ ms.topic: include
 | 11446 | 16 | No | ALTER TABLE SWITCH statement failed. Source and target partitions have different values for the XML_COMPRESSION option. |
 | 11447 | 16 | No | The ALTER TABLE SWITCH statement failed because table '%.\*ls' has %d distribution key(s) but table '%.\*ls' has %d distribution keys. |
 | 11448 | 16 | No | Transaction with read committed snapshot isolation failed in database '%.\*ls' because the object accessed by the statement has been modified by a DDL statement in another concurrent transaction since the start of this snapshot. A concurrent update to metadata can lead to inconsistency if mixed with read committed snapshot isolation. |
+| 11449 | 16 | No | ALTER TABLE SWITCH statement failed because the table '%.\*ls' has %S_MSG on it. |
 | 11501 | 16 | No | The batch could not be analyzed because of compile errors. |
 | 11502 | 16 | No | The type for parameter '%.\*ls' cannot be deduced in this context. |
 | 11503 | 16 | No | The parameter type cannot be deduced because a single expression contains two untyped parameters, '%.\*ls' and '%.\*ls'. |
@@ -409,31 +410,32 @@ ms.topic: include
 | 12117 | 16 | No | Cannot free the plan because a plan was not found in the database plan cache that corresponds to the specified plan handle. Specify a cached plan handle for the database. For a list of cached plan handles, query the sys.dm_exec_query_stats dynamic management view. |
 | 12118 | 16 | No | The ADD FILE operation failed because the requested file ID '%d' is invalid. |
 | 12119 | 16 | No | The ADD FILE operation failed because there is an ongoing ADD FILE operation. |
-| 12120 | 16 | No | Accelerated Database Recovery cannot be enabled until the Persistent Version Store is cleaned of previous versions. Please use the procedure sys.sp_persistent_version_cleanup '%.\*ls' to clean the Persistent Version Store. |
+| 12120 | 16 | No | Accelerated Database Recovery cannot be enabled until Persistent Version Store is cleaned of previous versions. Use the sys.sp_persistent_version_cleanup stored procedure in the '%.\*ls' database to clean Persistent Version Store. |
 | 12121 | 15 | No | Time value %d used with PAUSED_RESUMABLE_INDEX_ABORT_DURATION_MINUTES is not a valid value; PAUSED_RESUMABLE_INDEX_ABORT_DURATION_MINUTES wait time must be greater or equal to 0 and less or equal to %d. |
 | 12122 | 16 | No | %ls cannot be enabled or disabled on system databases. |
 | 12123 | 10 | No | \[DbId:%d\] ADR enabled for the database. |
 | 12124 | 10 | No | \[DbId:%d\] ADR disabled for the database. |
-| 12125 | 16 | No | Accelerated Database Recovery has already been enabled on the database, '%.\*ls'. To change the persistent version store filegroup, please disable Accelerated Database Recovery and ensure that the persistent version store is drained before retrying the command. |
-| 12126 | 16 | No | Accelerated Database Recovery cannot be enabled while database mirroring is enabled. |
+| 12125 | 16 | No | Accelerated Database Recovery has already been enabled on database '%.\*ls'. To change the Persistent Version Store filegroup, disable Accelerated Database Recovery, ensure that Persistent Version Store is cleaned, and try again. |
+| 12126 | 16 | No | Accelerated Database Recovery cannot be enabled while Database Mirroring is enabled. |
 | 12127 | 16 | No | Accelerated Database Recovery cannot be disabled as it is not enabled using DDL. |
-| 12128 | 16 | No | Accelerated Database Recovery cannot be enabled on Express edition. |
-| 12129 | 16 | No | The internal tables required for Accelerated Database Recovery feature that stores versions of data rows are not created for the database '%.\*ls'. Accelerated Database Recovery feature can't be enabled on this database. |
+| 12128 | 16 | No | Accelerated Database Recovery cannot be enabled in the Express edition of SQL Server. |
+| 12129 | 16 | No | Internal tables required for Accelerated Database Recovery are not created for database '%.\*ls'. Accelerated Database Recovery cannot be enabled on this database. |
 | 12130 | 16 | No | Task has been aborted, but %S_MSG of the %S_MSG '%.\*ls' may continue in the background. Please check whether the %S_MSG has finished successfully. |
 | 12131 | 16 | No | ALTER DATABASE SCOPED CONFIGURATION SET DW_COMPATIBILITY_LEVEL statement failed. |
 | 12132 | 16 | No | Compatibility Level '%d' is not supported. Supported compat levels are: \[%s\] |
-| 12133 | 16 | No | Optimized Locking cannot be enabled for the database as Accelerated Database Recovery is not enabled for the database. |
-| 12134 | 16 | No | Optimized Locking is enabled for this database. Please disable Optimized Locking first and then disable Accelerated Database Recovery. |
-| 12135 | 16 | No | The Metadata needed for Optimized Locking is not populated yet. Please retry the operation. |
+| 12133 | 16 | No | Optimized Locking cannot be enabled for this database because Accelerated Database Recovery is not enabled. Enable Accelerated Database Recovery and try again. |
+| 12134 | 16 | No | Optimized Locking is enabled for this database. To disable Accelerated Database Recovery, disable Optimized Locking and try again. |
+| 12135 | 16 | No | The metadata required for Optimized Locking is not populated yet. Try again later. |
 | 12136 | 16 | No | The specified digest storage endpoint is invalid. It must be an Azure blob storage endpoint. |
-| 12137 | 16 | No | Optimized Locking is not yet available in this Azure region. Please visit the Microsoft documentation for more details. |
+| 12137 | 16 | No | Optimized Locking cannot be enabled at this time. |
 | 12138 | 16 | No | Cannot alter database options for database '%ls' because it is not ONLINE. |
-| 12139 | 16 | No | Optimized Halloween Protection is enabled for this database. Please disable Optimized Halloween Protection first in database scoped config and then disable Accelerated Database Recovery. |
-| 12140 | 16 | No | Metadata Snapshot cannot be enabled for the database as Accelerated Database Recovery is not enabled for the database. |
-| 12141 | 16 | No | Metadata Snapshot is enabled for this database. Please disable Metadata Snapshot first and then disable Accelerated Database Recovery. |
-| 12142 | 16 | No | Automatic Index Compaction cannot be enabled for database '%ls' because Accelerated Database Recovery is not enabled. |
-| 12143 | 16 | No | Automatic Index Compaction is enabled for database '%ls'. To disable Accelerated Database Recovery, disable Automatic Index Compaction first. |
+| 12140 | 16 | No | Metadata Snapshot cannot be enabled for this database because Accelerated Database Recovery is not enabled. Enable Accelerated Database Recovery and try again. |
+| 12141 | 16 | No | Metadata Snapshot is enabled for this database. To disable Accelerated Database Recovery, disable Metadata Snapshot and try again. |
+| 12142 | 16 | No | Automatic Index Compaction cannot be enabled for database '%ls' because Accelerated Database Recovery is not enabled. Enable Accelerated Database Recovery and try again. |
+| 12143 | 16 | No | Automatic Index Compaction is enabled for database '%ls'. To disable Accelerated Database Recovery, disable Automatic Index Compaction and try again. |
 | 12144 | 16 | No | Automatic Index Compaction cannot be enabled at this time. |
+| 12145 | 16 | No | Cannot disable the PREVIEW_FEATURES database-scoped configuration while the '%ls' preview feature is active. |
+| 12146 | 16 | No | Database '%.\*ls' cannot be renamed while Mirroring to Microsoft Fabric is enabled. Disable Mirroring and retry rename operation. |
 | [12300](../mssqlserver-12300-database-engine-error.md) | 15 | No | Computed columns are not supported with %S_MSG. |
 | [12301](../mssqlserver-12301-database-engine-error.md) | 15 | No | Nullable columns in the index key are not supported with %S_MSG. |
 | [12302](../mssqlserver-12302-database-engine-error.md) | 15 | No | Updating columns that are part of the PRIMARY KEY constraint is not supported with %S_MSG. |
@@ -499,7 +501,7 @@ ms.topic: include
 | 12404 | 16 | No | The command failed because the query store is not in read-write mode for database (%ld). Make sure that the query store is in read-write mode and rerun the command. |
 | 12405 | 16 | No | The command failed because the query store is not enabled for database (%ld). Make sure that the query store is enabled for the database and rerun the command. |
 | 12406 | 11 | No | Query plan with provided plan_id (%ld) is not found in the Query Store for query (%ld). Check the plan_id value and rerun the command. |
-| 12407 | 18 | No | The global instance of the the Query Store Manager is not available. |
+| 12407 | 18 | No | The global instance of the Query Store Manager is not available. |
 | 12408 | 16 | No | An operation to read/write to the Query Store failed. Check the error logs to correct the source of the read/write failure |
 | 12409 | 17 | No | Query Store cannot create system task |
 | 12410 | 23 | No | Cannot load the Query Store metadata. Try turning the Query Store on manually, or contact customer support to get this addressed. |
@@ -556,6 +558,10 @@ ms.topic: include
 | 12464 | 16 | No | Query plan with plan_id (%ld) cannot be forced for replica group id (%ld) |
 | 12465 | 16 | No | The query with query id (%ld) cannot be removed from Query Store since it's referenced by one or more query variants. Remove the associated query variant(s) before removing the parent query. |
 | 12466 | 16 | No | The query plan with plan id (%ld) cannot be removed from Query Store since it's referenced by one or more query variants. Remove the associated query variant(s) before removing the dispatcher plan. |
+| 12467 | 16 | No | The feature_id %d is invalid. |
+| 12468 | 16 | No | Removing feedback for feature_id %d is not supported. |
+| 12469 | 16 | No | Removing feedback for a specific plan is not supported. |
+| 12470 | 16 | No | Removing plan feedback is disabled. |
 | 12500 | 16 | No | SELECT INTO not allowed in the CREATE TABLE or CREATE EXTERNAL TABLE statements. |
 | 12501 | 16 | No | Different number of columns in CREATE TABLE or CREATE EXTERNAL TABLE and SELECT query. |
 | 12502 | 16 | No | Data types cannot be defined using CREATE TABLE AS SELECT or CREATE EXTERNAL TABLE AS SELECT syntax. |
@@ -582,6 +588,7 @@ ms.topic: include
 | 12523 | 16 | No | The specified point-in-time is invalid. The timestamp must not be after the current snapshot time. |
 | 12524 | 16 | No | The specified point-in-time is invalid. Physical metadata is not available at this timestamp. Please specify a later time. |
 | 12525 | 18 | No | Internal error. Unable to find physical metadata for a table. Please try the operation again and contact Customer Support Services if this persists. |
+| 12526 | 18 | No | An internal error occurred while cloning the specified warehouse. |
 | 12600 | 16 | No | DBCC CLONEDATABASE is not allowed on this server. |
 | 12601 | 16 | No | DBCC CLONEDATABASE is not allowed within a transaction. |
 | 12602 | 16 | No | DBCC CLONEDATABASE cannot be executed through MARS connection. |

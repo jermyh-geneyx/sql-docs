@@ -4,7 +4,7 @@ description: Learn about the steps required to encrypt all connections to the SQ
 author: suresh-kandoth
 ms.author: sureshka
 ms.reviewer: randolphwest, maghan
-ms.date: 05/30/2025
+ms.date: 08/26/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: concept-article
@@ -46,7 +46,8 @@ Alternatively, you can check the encryption status of [!INCLUDE [ssnoversion-md]
 1. Execute the following T-SQL command to check the value of `encrypt_option` column. For encrypted connections the value will be `TRUE`.
 
   ```sql
-  SELECT * FROM sys.dm_exec_connections;
+  SELECT *
+  FROM sys.dm_exec_connections;
   ```
 
 ## Related content
@@ -55,4 +56,4 @@ Alternatively, you can check the encryption status of [!INCLUDE [ssnoversion-md]
 - [Securing SQL Server](../../relational-databases/security/securing-sql-server.md)
 - [SQL Server encryption](../../relational-databases/security/encryption/sql-server-encryption.md)
 - [SQL Server fails to start with error 17182](/troubleshoot/sql/security/fails-start-error-17182)
-- [Configure SQL Server Database Engine for encrypting connections](configure-sql-server-encryption.md)
+- [Encrypt connections to SQL Server by importing a certificate](configure-sql-server-encryption.md)

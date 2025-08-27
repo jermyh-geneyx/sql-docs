@@ -11,6 +11,12 @@ items:
     href: sql-server/what-is-sql-server.md
   - name: Connect to the Database Engine
     href: sql-server/connect-to-database-engine.md
+  - name: AI
+    items:
+    - name: Intelligent applications and AI
+      href: sql-server/artificial-intelligence-intelligent-applications.md
+    - name: Intelligent applications and AI FAQ
+      href: sql-server/artificial-intelligence-intelligent-applications-faq.md
   - name: What's new?
     items:
     - name: SQL Server 2025 Preview
@@ -55,6 +61,8 @@ items:
       href: sql-server/sql-server-2012-release-notes.md
     - name: SQL Server 2008 R2 SP2
       href: sql-server/sql-server-2008-r2-sp2-release-notes.md
+    - name: Preview features FAQ
+      href: sql-server/preview-features-faq.md
   expanded: true
 - name: Business continuity
   items:
@@ -1912,7 +1920,7 @@ items:
       - name: Cleanup and troubleshooting
         href: relational-databases/track-changes/cleanup-and-troubleshoot-change-tracking-sql-server.md
     - name: Change event streaming
-      items: 
+      items:
       - name: Overview
         href: relational-databases/track-changes/change-event-streaming/overview.md
       - name: Configure
@@ -2217,8 +2225,12 @@ items:
         href: relational-databases/xml/xml-system-stored-procedures.md
       - name: Use the value() & nodes() Methods with OPENXML
         href: relational-databases/xml/use-the-value-and-nodes-methods-with-openxml.md
-  - name: Vectors and Embeddings
-    href: relational-databases/vectors/vectors-sql-server.md    
+  - name: Vectors and embeddings
+    items:
+      - name: Vectors and embeddings
+        href: relational-databases/vectors/vectors-sql-server.md    
+      - name: Vectors and embeddings FAQ
+        href: relational-databases/vectors/vectors-faq.md    
 - name: Development
   items:
   - name: Code a client program >
@@ -4326,6 +4338,8 @@ items:
       href: database-engine/deprecated-database-engine-features-in-sql-server-2017.md
     - name: Deprecated in SQL Server 2016
       href: database-engine/deprecated-database-engine-features-in-sql-server-2016.md
+    - name: Breaking changes in SQL Server 2025 Preview
+      href: database-engine/breaking-changes-to-database-engine-features-in-sql-server-2025.md
     - name: Breaking changes in SQL Server 2019
       href: database-engine/breaking-changes-to-database-engine-features-in-sql-server-2019.md
     - name: Breaking changes in SQL Server 2017
@@ -4397,6 +4411,8 @@ items:
       href: database-engine/install-windows/install-sql-server-from-the-command-prompt.md
     - name: Configuration File
       href: database-engine/install-windows/install-sql-server-using-a-configuration-file.md
+    - name: Slipstream installation
+      href: database-engine/install-windows/install-sql-server-using-slipstream.md
     - name: SysPrep
       href: database-engine/install-windows/install-sql-server-using-sysprep.md
     - name: PowerShell Desired State Configuration
@@ -4444,8 +4460,8 @@ items:
       href: database-engine/install-windows/upgrade-sql-server-management-tools.md
     - name: Installation Wizard (Setup)
       href: database-engine/install-windows/upgrade-sql-server-using-the-installation-wizard-setup.md
-    - name: Upgrade edition
-      href: database-engine/install-windows/upgrade-to-a-different-edition-of-sql-server-setup.md
+    - name: Change edition
+      href: database-engine/install-windows/upgrade-downgrade-sql-server-edition-setup.md
     - name: Upgrade Database Engine
       items:
       - name: Overview
@@ -4549,7 +4565,7 @@ items:
       - name: allow updates
         href: database-engine/configure-windows/allow-updates-server-configuration-option.md
       - name: availability group commit time
-        href: database-engine/configure-windows/availability-group-commit-time-server-configuration-options.md     
+        href: database-engine/configure-windows/availability-group-commit-time-server-configuration-options.md
       - name: backup checksum default
         href: database-engine/configure-windows/backup-checksum-default.md
       - name: backup compression algorithm
@@ -4600,8 +4616,10 @@ items:
         href: database-engine/configure-windows/ft-crawl-bandwidth-server-configuration-option.md
       - name: ft notify bandwidth
         href: database-engine/configure-windows/ft-notify-bandwidth-server-configuration-option.md
-      - name: PolyBase Connectivity Configuration (T-SQL)
+      - name: PolyBase connectivity configuration
         href: database-engine/configure-windows/polybase-connectivity-configuration-transact-sql.md
+      - name: PolyBase network encryption
+        href: database-engine/configure-windows/polybase-network-encryption-server-configuration-option.md
       - name: in-doubt xact resolution
         href: database-engine/configure-windows/in-doubt-xact-resolution-server-configuration-option.md
       - name: Configure the index create memory
@@ -4621,7 +4639,7 @@ items:
       - name: Configure the max worker threads
         href: database-engine/configure-windows/configure-the-max-worker-threads-server-configuration-option.md
       - name: Configure ucs flow control
-        href: database-engine/configure-windows/ucs-flow-control-sp-configure.md   
+        href: database-engine/configure-windows/ucs-flow-control-sp-configure.md
       - name: Configure the media retention
         href: database-engine/configure-windows/configure-the-media-retention-server-configuration-option.md
       - name: Configure the min memory per query
@@ -4734,20 +4752,6 @@ items:
         href: database-engine/configure-windows/configure-a-server-to-listen-on-a-specific-tcp-port.md
       - name: Configure a server to listen on an alternate pipe
         href: database-engine/configure-windows/configure-a-server-to-listen-on-an-alternate-pipe.md
-      - name: Encrypt connections to SQL Server
-        items:
-        - name: Certificate overview
-          href: database-engine/configure-windows/certificate-overview.md
-        - name: Certificate requirements for SQL Server
-          href: database-engine/configure-windows/certificate-requirements.md
-        - name: Configure SQL Server for encryption
-          href: database-engine/configure-windows/configure-sql-server-encryption.md
-        - name: Special cases for encrypting connections to SQL Server
-          href: database-engine/configure-windows/special-cases-for-encrypting-connections-sql-server.md
-        - name: Certificate procedures
-          href: database-engine/configure-windows/certificate-procedures.md
-        - name: SQL Server and client encryption summary
-          href: database-engine/configure-windows/sql-server-and-client-encryption-summary.md
       - name: Connect to SQL Server through a proxy server
         href: database-engine/configure-windows/connect-to-sql-server-through-a-proxy-server-sql-server-configuration-manager.md
       - name: Configure a Windows Firewall for Database Engine access
@@ -6008,57 +6012,6 @@ items:
         href: relational-databases/import-export/use-a-format-file-to-skip-a-data-field-sql-server.md
       - name: Use a format file to map table columns to data-file fields
         href: relational-databases/import-export/use-a-format-file-to-map-table-columns-to-data-file-fields-sql-server.md
-  - name: Database Experimentation Assistant (DEA)
-    href: dea/database-experimentation-assistant-overview.md
-    items:
-    - name: Workload comparison overview
-      href: dea/database-experimentation-assistant-get-started.md
-    - name: Configure replay
-      href: dea/database-experimentation-assistant-configure-replay.md
-    - name: Capture trace
-      href: dea/database-experimentation-assistant-capture-trace.md
-    - name: Replay trace
-      href: dea/database-experimentation-assistant-replay-trace.md
-    - name: Create reports
-      href: dea/database-experimentation-assistant-create-report.md
-    - name: Review reports
-      href: dea/database-experimentation-assistant-view-report.md
-    - name: Run at command prompt
-      href: dea/database-experimentation-assistant-run-command-prompt.md
-  - name: Database Migration Assistant (DMA)
-    items:
-    - name: Overview
-      href: dma/dma-overview.md
-    - name: Usage and diagnostic data
-      href: dma/dma-diagnostic-data-collection.md
-    - name: What's new
-      href: dma/dma-whats-new.md
-    - name: Assess SQL Server Integration Services (SSIS)
-      href: dma/dma-assess-ssis.md
-    - name: Save and load assessments
-      href: dma/dma-save-load-assessments.md
-    - name: Identify target Azure SQL SKU
-      href: dma/dma-sku-recommend-sql-db.md
-    - name: Upgrade SQL Server to a later version
-      href: dma/dma-migrateonpremsql.md
-    - name: Migrate SQL Server to Azure SQL Database
-      href: dma/dma-migrateonpremsqltosqldb.md
-    - name: Migrate SQL Server logins
-      href: dma/dma-migrateserverlogins.md
-    - name: Best practices
-      href: dma/dma-bestpractices.md
-    - name: Run from the command-line
-      href: dma/dma-commandline.md
-    - name: Configure settings
-      href: dma/dma-configurationsettings.md
-    - name: Assess Azure SQL DB readiness
-      items:
-      - name: Create assessment
-        href: dma/dma-assesssqlonprem.md
-      - name: Use DMA GUI
-        href: dma/dma-assess-sql-data-estate-to-sqldb.md
-      - name: Use DMA command-line
-        href: dma/dma-assess-sql-data-estate-to-sqldb-commandline.md
   - name: SQL Server Migration Assistant (SSMA)
     href: ssma/toc.yml
   - name: Azure Synapse Pathway
@@ -7136,6 +7089,8 @@ items:
             href: relational-databases/polybase/polybase-configuration.md
         - name: Azure Blob Storage
           href: relational-databases/polybase/polybase-configure-azure-blob-storage.md
+        - name: Use Managed Identity with Azure storage
+          href: relational-databases/polybase/managed-identity.md
         - name: SQL Server
           href: relational-databases/polybase/polybase-configure-sql-server.md
         - name: Oracle
@@ -7859,6 +7814,20 @@ items:
         href: relational-databases/security/authentication-access/azure-ad-authentication-sql-server-linked-server.md
     - name: Encryption
       items:
+      - name: Encrypt connections to SQL Server
+        items:
+        - name: Certificate requirements for SQL Server
+          href: database-engine/configure-windows/certificate-requirements.md
+        - name: Configure SQL Server for encryption
+          href: database-engine/configure-windows/configure-sql-server-encryption.md
+        - name: Special cases for encrypting connections to SQL Server
+          href: database-engine/configure-windows/special-cases-for-encrypting-connections-sql-server.md
+        - name: Certificate procedures
+          href: database-engine/configure-windows/certificate-procedures.md
+        - name: Connect using strict connection encryption
+          href: relational-databases/security/networking/connect-with-strict-encryption.md
+        - name: Connect with TLS 1.3
+          href: relational-databases/security/networking/connect-with-tls-1-3.md
       - name: Always Encrypted
         items:
         - name: Configure Always Encrypted using PowerShell
@@ -8021,12 +7990,6 @@ items:
         href: relational-databases/security/ledger/ledger-how-to-enable-automatic-digest-storage.md?view=sql-server-ver16&preserve-view=true
       - name: Verify ledger database for tampering
         href: relational-databases/security/ledger/ledger-verify-database.md?view=sql-server-ver16&preserve-view=true
-    - name: Networking
-      items:
-      - name: Connect using strict connection encryption
-        href: relational-databases/security/networking/connect-with-strict-encryption.md
-      - name: Connect with TLS 1.3
-        href: relational-databases/security/networking/connect-with-tls-1-3.md
   - name: Concepts
     items:
     - name: Protecting SQL Server Intellectual Property
@@ -8092,6 +8055,16 @@ items:
         items:
         - name: Bring your own key >
           href: /azure/sql-database/transparent-data-encryption-byok-azure-sql
+      - name: Encrypt connections to SQL Server
+        items:
+        - name: Certificate overview
+          href: database-engine/configure-windows/certificate-overview.md
+        - name: SQL Server and client encryption summary
+          href: database-engine/configure-windows/sql-server-and-client-encryption-summary.md
+        - name: TDS 8.0
+          href: relational-databases/security/networking/tds-8.md
+        - name: TLS 1.3
+          href: relational-databases/security/networking/tls-1-3.md 
       - name: Always Encrypted
         href: relational-databases/security/encryption/always-encrypted-database-engine.md
         items:
@@ -8143,12 +8116,12 @@ items:
         href: relational-databases/security/ledger/ledger-how-to-recover-after-tampering.md?view=sql-server-ver16&preserve-view=true
       - name: Ledger limitations
         href: relational-databases/security/ledger/ledger-limits.md?view=sql-server-ver16&preserve-view=true
-    - name: Networking
-      items:
-      - name: TDS 8.0
-        href: relational-databases/security/networking/tds-8.md
-      - name: TLS 1.3
-        href: relational-databases/security/networking/tls-1-3.md
+
+
+
+
+
+
   - name: Tutorials
     items:
     - name: Always Encrypted
@@ -9020,7 +8993,7 @@ items:
     - name: Ownership Chains & Context Switching
       href: relational-databases/tutorial-ownership-chains-and-context-switching.md
     - name: Use Azure Blob Storage with SQL Server databases
-      href: relational-databases/tutorial-use-azure-blob-storage-service-with-sql-server-2016.md
+      href: relational-databases/tutorial-use-azure-blob-storage-service-with-sql-server.md
   - name: Writing T-SQL Statements
     href: t-sql/tutorial-writing-transact-sql-statements.md
     items:
@@ -9076,7 +9049,7 @@ items:
         href: linux/sql-server-linux-editions-and-components-2019.md
       - name: SQL Server 2017
         href: linux/sql-server-linux-editions-and-components-2017.md
-    - name: FAQ
+    - name: Linux FAQ
       href: linux/sql-server-linux-faq.yml
     - name: Known issues
       href: linux/sql-server-linux-known-issues.md
@@ -9317,6 +9290,8 @@ items:
           href: linux/tutorial-sql-server-containers-kubernetes-dh2i.md
         - name: Deploy AGs with DH2i DxOperator
           href: linux/tutorial-sql-server-containers-kubernetes-dxoperator.md
+        - name: Deploy AGs with Rancher Prime and DH2i DxOperator
+          href: linux/tutorial-sql-server-containers-kubernetes-dxoperator-rancher-suse.md
     - name: Security
       items:
       - name: Overview
@@ -9503,7 +9478,7 @@ items:
         href: sql-server/azure-arc/migration-inventory.md
       - name: Migrate to Azure SQL Managed Instance
         href: sql-server/azure-arc/migrate-to-azure-sql-managed-instance.md
-    - name: FAQ
+    - name: SQL Server enabled by Azure Arc FAQ
       href: sql-server/azure-arc/faq.yml
     - name: Data collection & reporting
       href: sql-server/azure-arc/data-collection.md
@@ -10135,6 +10110,8 @@ items:
           href: relational-databases/errors-events/mssqlserver-945-database-engine-error.md
         - name: "948"
           href: relational-databases/errors-events/mssqlserver-948-database-engine-error.md
+        - name: "988"
+          href: relational-databases/errors-events/mssqlserver-988-database-engine-error.md
       - name: Errors 1,000 to 1,999
         items:
         - name: Overview
@@ -11306,7 +11283,7 @@ items:
         href: relational-databases/system-catalog-views/sys-availability-read-only-routing-lists-transact-sql.md
       - name: sys.availability_replicas
         href: relational-databases/system-catalog-views/sys-availability-replicas-transact-sql.md
-    - name: Azure SQL Database
+    - name: Azure SQL Database & SQL database in Fabric
       href: relational-databases/system-catalog-views/azure-sql-database-catalog-views.md
       items:
       - name: sys.bandwidth_usage
@@ -11321,8 +11298,6 @@ items:
         href: relational-databases/system-catalog-views/sys-database-usage-azure-sql-database.md
       - name: sys.dm_elastic_pool_resource_stats
         href: relational-databases/system-dynamic-management-views/sys-dm-elastic-pool-resource-stats-azure-sql-database.md
-      - name: sys.dm_hs_database_log_rate
-        href: relational-databases/system-dynamic-management-views/sys-dm-hs-database-log-rate.md
       - name: sys.elastic_pool_resource_stats
         href: relational-databases/system-catalog-views/sys-elastic-pool-resource-stats-azure-sql-database.md
       - name: sys.event_log
@@ -12015,7 +11990,7 @@ items:
       - name: sys.xml_schema_wildcard_namespaces
         href: relational-databases/system-catalog-views/sys-xml-schema-wildcard-namespaces-transact-sql.md
       - name: sys.xml_schema_wildcards
-        href: relational-databases/system-catalog-views/sys-xml-schema-wildcards-transact-sql.md    
+        href: relational-databases/system-catalog-views/sys-xml-schema-wildcards-transact-sql.md
   - name: System compatibility views
     href: relational-databases/system-compatibility-views/system-compatibility-views-transact-sql.md
     items:
@@ -12155,7 +12130,7 @@ items:
       - name: sys.sp_add_object_to_event_stream_group
         href: relational-databases/system-stored-procedures/sys-sp-add-object-to-event-stream-group-transact-sql.md
       - name: sys.sp_remove_object_from_event_stream_group
-        href: relational-databases/system-stored-procedures/sys-sp-remove-object-from-event-stream-group-transact-sql.md                      
+        href: relational-databases/system-stored-procedures/sys-sp-remove-object-from-event-stream-group-transact-sql.md
     - name: Common Language Runtime
       href: relational-databases/system-dynamic-management-views/common-language-runtime-related-dynamic-management-views-transact-sql.md
       items:
@@ -12775,6 +12750,12 @@ items:
         href: relational-databases/system-functions/sys-fn-hadr-distributed-ag-replica-transact-sql.md
       - name: sys.fn_hadr_distributed_ag_database_replica
         href: relational-databases/system-functions/sys-fn-hadr-distributed-ag-database-replica-transact-sql.md
+    - name: Azure SQL Database Hyperscale
+      items:
+      - name: sys.dm_hs_database_log_rate
+        href: relational-databases/system-functions/sys-dm-hs-database-log-rate.md
+      - name: sys.dm_hs_database_replicas
+        href: relational-databases/system-functions/sys-dm-hs-database-replicas.md
     - name: Change Data Capture
       href: relational-databases/system-functions/change-data-capture-functions-transact-sql.md
       items:
@@ -14407,7 +14388,7 @@ items:
       - name: sp_help_change_feed_table_groups
         href: relational-databases/system-stored-procedures/sp-help-change-feed-table-groups.md
       - name: Internal only mirroring stored procedures
-        items: 
+        items:
         - name: sp_change_feed_create_table_group
           href: relational-databases/system-stored-procedures/sp-change-feed-create-table-group.md
         - name: sp_change_feed_disable_table
@@ -14434,7 +14415,6 @@ items:
           href: relational-databases/system-stored-procedures/sp-has-change-feed-permissions.md
         - name: sp_MSchange_feed_ddl_event
           href: relational-databases/system-stored-procedures/sp-mschange-feed-ddl-event.md
-          
     - name: SQL Server Agent
       href: relational-databases/system-stored-procedures/sql-server-agent-stored-procedures-transact-sql.md
       items:

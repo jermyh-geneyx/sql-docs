@@ -3,7 +3,7 @@ title: Driver history for Microsoft SQL Server
 description: This page describes Microsoft's historical data connection technologies for connecting to SQL Server and other legacy sources.
 author: David-Engel
 ms.author: davidengel
-ms.date: 09/01/2023
+ms.date: 08/13/2025
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
@@ -132,6 +132,28 @@ Here's a list of the supportability scenarios of past MDAC/WDAC releases, starti
 * **Windows Data Access Components (WDAC):** MDAC changed its name to WDAC - "Windows Data Access Components" starting with Windows Vista and Windows Server 2008. WDAC is included as part of the operating system and isn't available separately for redistribution. Serviceability for WDAC is subject to the life cycle of the operating system.
 
   32-bit and 64-bit versions of WDAC are released with the 32-bit and 64-bit versions of the Windows operating systems, respectively.
+
+
+## SQL Server versions and ODBC and OLE DB drivers
+
+The following table shows SQL Server versions over time and the corresponding ODBC and OLE DB drivers that shipped with that SQL Server version
+
+| **SQL Server Version** | **ODBC Driver** | **OLE DB Provider** | **Notes** |
+| --- | --- | --- | --- |
+| SQL Server 2000 | SQL Server ODBC Driver (legacy) | SQL Server OLE DB Provider (legacy) | Deprecated |
+| SQL Server 2005 | SQL Native Client (SNAC 2005) | SQL Native Client (SNAC 2005) | Introduced SNAC |
+| SQL Server 2008 / R2 | SQL Native Client (SNAC 2008) | SQL Native Client (SNAC 2008) | Updated SNAC |
+| SQL Server 2012 | SQL Native Client 11.0 | SQL Native Client 11.0 | Last version of SNAC |
+| SQL Server 2014 | Microsoft ODBC Driver 11 for SQL Server |   SQL Native Client 11.0 (deprecated) |   SNAC/OLE DB deprecated |
+| SQL Server 2016 |   Microsoft ODBC Driver 13 |   SQL Native Client 11.0 (deprecated) |   ODBC maintained  OLE DB deprecated |
+| SQL Server 2017 | Microsoft ODBC Driver 13.1 (14) | SQL Native Client 11.0 (deprecated) | OLE DB deprecated |
+| SQL Server 2019 | Microsoft ODBC Driver 17 | Microsoft OLE DB Driver (MSOLEDBSQL) |   OLE DB undeprecated/reintroduced  <br>Actively maintained |
+| SQL Server 2022 |   Microsoft ODBC Driver 17 | Microsoft OLE DB Driver (MSOLEDBSQL) |   Actively maintained |
+| SQL Server 2025 |   Microsoft ODBC Driver 18 |   Microsoft OLE DB Driver 19 (MSOLEDBSQL19) | Actively maintained |
+
+Don't uninstall the drivers that ship with SQL Server, as they are used by various components for connectivity. Examples of such components include Linked Servers, Replication, SQL Server Agent, Database Mail, Polybase, and others.
+
+
 
 ## Obsolete data access technologies
 

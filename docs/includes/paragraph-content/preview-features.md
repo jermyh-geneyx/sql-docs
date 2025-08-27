@@ -1,0 +1,20 @@
+---
+author: MikeRayMSFT
+ms.author: mikeray
+ms.date: 08/14/2025
+ms.service: sql
+ms.topic: include
+---
+
+The following table identifies features originally released as preview their current status:
+
+| Feature | Current status | Version of latest update | Description |
+| --- | --- | --- | --- |
+| [AI_GENERATE_CHUNKS](../../t-sql/functions/ai-generate-chunks-transact-sql.md) | Preview | RC 0 | Generate chunks of text from a given input text using an AI model. |
+| [Change event streaming](../../relational-databases/track-changes/change-event-streaming/overview.md) | Preview | RC 0 | Stream changes from SQL Server to Azure Event Hubs. |
+| [CREATE VECTOR INDEX](../../t-sql/statements/create-vector-index-transact-sql.md) | Preview | RC 0 | Create an approximate index on a vector column to improve performances of nearest neighbors search. |
+| [VECTOR_SEARCH](../../t-sql/functions/vector-search-transact-sql.md) | Preview | RC 0 | Search for vectors similar to a given query vector using an approximate nearest neighbors vector search algorithm. |
+| [CREATE EXTERNAL MODEL](../../t-sql/statements/create-external-model-transact-sql.md) | Preview | RC 0 | Supports local ONNX models hosted directly on the SQL Server file system. |
+
+> [!CAUTION]  
+> Preview features aren't recommended for production environments.

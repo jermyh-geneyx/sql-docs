@@ -13,10 +13,10 @@ helpviewer_keywords:
   - "tracking data changes [SQL Server]"
   - "change tracking [SQL Server], configuring"
   - "data [SQL Server], changing"
-monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current||=fabric"
 ---
 # Enable and Disable Change Tracking (SQL Server)
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
   This topic describes how to enable and disable change tracking for a database and a table.  
   

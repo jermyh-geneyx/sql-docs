@@ -9,6 +9,7 @@ ms.service: sql
 ms.subservice: machine-learning-services
 ms.topic: troubleshooting
 monikerRange: ">=sql-server-2016||>=sql-server-linux-ver15"
+ms.custom: sfi-ropc-nochange
 ---
 # Known issues for Python and R in SQL Server Machine Learning Services
 
@@ -511,7 +512,7 @@ Ordered factors are treated the same as factors in all RevoScaleR analysis funct
 
 Using `data.table` as an `OutputDataSet` in R isn't supported in [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] Cumulative Update 13 (CU 13) and earlier. The following message might appear:
 
-``` text
+```output
 Msg 39004, Level 16, State 20, Line 2
 A 'R' script error occurred during execution of
 'sp_execute_external_script' with HRESULT 0x80004004.

@@ -505,6 +505,8 @@
         href: database/business-continuity-high-availability-disaster-recover-hadr-overview.md
       - name: High availability
         href: database/high-availability-sla-local-zone-redundancy.md
+      - name: Enable zone redundancy
+        href: database/enable-zone-redundancy.md
       - name: HA/DR checklist
         href: database/high-availability-disaster-recovery-checklist.md
       - name: Automated backups
@@ -990,7 +992,7 @@
     - name: Try for free
       href: managed-instance/free-offer.md
     - name: Intelligent applications and AI
-      href: managed-instance/ai-artificial-intelligence-intelligent-applications.md
+      href: /sql/sql-server/ai-artificial-intelligence-intelligent-applications
     - name: Frequently asked questions
       displayName: faq
       href: managed-instance/frequently-asked-questions-faq.yml
@@ -1915,8 +1917,10 @@
   - name: Feature availability by region
     items: 
     - name: Azure SQL Database
+      displayName: Feature availability by region Azure SQL Database
       href: database/region-availability.md
     - name: Azure SQL Managed Instance
+      displayName: Feature availability by region Azure SQL Managed Instance
       href: managed-instance/region-availability.md
   - name: Monitoring data reference 
     items:  

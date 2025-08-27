@@ -4,7 +4,7 @@ description: This Release Notes document describes known issues that you should 
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest
-ms.date: 03/06/2025
+ms.date: 08/21/2025
 ms.service: sql
 ms.subservice: release-landing
 ms.topic: release-notes
@@ -68,7 +68,7 @@ This section identifies issues which might occur after you apply [!INCLUDE [sssq
 
 ### R Services using specific algorithms, streaming, or partitioning
 
-- **Issue**: The following limitations apply on [!INCLUDE [sssql16-md](../includes/sssql16-md.md)] with runtime upgrade configured using [Change the default R or Python language runtime version](../machine-learning/install/change-default-language-runtime-version.md) or with SP3 slipstream install. This issue applies to Enterprise Edition.
+- **Issue**: The following limitations apply on [!INCLUDE [sssql16-md](../includes/sssql16-md.md)] with runtime upgrade configured using [Change the default R or Python language runtime version](../machine-learning/install/change-default-language-runtime-version.md) or with SP3 [slipstream](../database-engine/install-windows/install-sql-server-using-slipstream.md) install. This issue applies to Enterprise Edition.
 
   - Parallelism: `RevoScaleR` and `MicrosoftML` algorithm thread parallelism for scenarios are limited to maximum of 2 threads.
 

@@ -4,12 +4,13 @@ description: Query performance monitoring identifies the most CPU-consuming and 
 author: NikaKinska
 ms.author: nnikolic
 ms.reviewer: wiassaf, mathoma, randolphwest
-ms.date: 08/16/2024
+ms.date: 08/07/2025
 ms.service: azure-sql-database
 ms.subservice: performance
 ms.topic: how-to
 ms.custom:
   - sqldbrb=1
+  - sfi-image-nochange
 ---
 # Query Performance Insight for Azure SQL Database
 
@@ -49,7 +50,7 @@ Query Performance Insight is easy to use:
 
 1. On the first tab, review the list of top resource-consuming queries.
 1. Select an individual query to view its details.
-1. Open **Intelligent Performance** > **Performance recommendations** and check if any performance recommendations are available. For more information on built-in performance recommendations, see [Azure SQL Database Advisor](database-advisor-implement-performance-recommendations.md).
+1. Open **Intelligent Performance** > **Performance recommendations** and check if any performance recommendations are available. For more information on built-in performance recommendations, see [Database Advisor performance recommendations for Azure SQL Database](database-advisor-implement-performance-recommendations.md).
 1. Use sliders or zoom icons to change the observed interval.
 
    :::image type="content" source="media/query-performance-insight-use/performance.png" alt-text="Screenshot of the Performance dashboard in the Azure portal." lightbox="media/query-performance-insight-use/performance.png":::
@@ -58,7 +59,7 @@ Query Performance Insight is easy to use:
 > For Azure SQL Database to render the information in Query Performance Insight, Query Store needs to capture a couple hours of data. If the database has no activity or if Query Store was not active during a certain period, the charts will be empty when Query Performance Insight displays that time range. You can enable Query Store at any time if it's not running. For more information, see [Best practices with Query Store](/sql/relational-databases/performance/best-practice-with-the-query-store).
 >
 
-For database performance recommendations, select [Recommendations](database-advisor-implement-performance-recommendations.md) on the Query Performance Insight navigation pane.
+For database performance recommendations, select [Database Advisor performance recommendations for Azure SQL Database](database-advisor-implement-performance-recommendations.md) on the Query Performance Insight navigation pane.
 
 :::image type="content" source="media/query-performance-insight-use/ia.png" alt-text="Screenshot of the Recommendations tab in the Azure portal.":::
 
@@ -89,10 +90,10 @@ By default, Query Performance Insight shows the top five CPU-consuming queries w
 
    The bottom grid shows aggregated information for the visible queries:
 
-   * Query ID, which is a unique identifier for the query in the database.
-   * CPU per query during an observable interval, which depends on the aggregation function.
-   * Duration per query, which also depends on the aggregation function.
-   * Total number of executions for a specific query.
+   - Query ID, which is a unique identifier for the query in the database.
+   - CPU per query during an observable interval, which depends on the aggregation function.
+   - Duration per query, which also depends on the aggregation function.
+   - Total number of executions for a specific query.
 
 1. If your data becomes stale, select the **Refresh** button.
 
@@ -102,10 +103,10 @@ By default, Query Performance Insight shows the top five CPU-consuming queries w
 
 1. Optionally, you can select the **Custom** tab to customize the view for:
 
-   * Metric (CPU, duration, execution count).
-   * Time interval (last 24 hours, past week, or past month).
-   * Number of queries.
-   * Aggregation function.
+   - Metric (CPU, duration, execution count).
+   - Time interval (last 24 hours, past week, or past month).
+   - Number of queries.
+   - Aggregation function.
 
    :::image type="content" source="media/query-performance-insight-use/custom-tab.png" alt-text="Screenshot of the custom tab in the Azure portal." lightbox="media/query-performance-insight-use/custom-tab.png":::
 
@@ -133,9 +134,9 @@ To view query details:
 
 1. Select the chart features for details.
 
-   * The top chart shows a line with the overall database DTU percentage. The bars are the CPU percentage that the selected query consumed.
-   * The second chart shows the total duration of the selected query.
-   * The bottom chart shows the total number of executions by the selected query.
+   - The top chart shows a line with the overall database DTU percentage. The bars are the CPU percentage that the selected query consumed.
+   - The second chart shows the total duration of the selected query.
+   - The bottom chart shows the total number of executions by the selected query.
 
    :::image type="content" source="media/query-performance-insight-use/query-details.png" alt-text="Screenshot of the Query details in the Azure portal." lightbox="media/query-performance-insight-use/query-details.png":::
 
@@ -151,7 +152,7 @@ To view query details:
 
 Two metrics in Query Performance Insight can help you find potential bottlenecks: duration and execution count.
 
-Long-running queries have the greatest potential for locking resources longer, blocking other users, and limiting scalability. They're also the best candidates for optimization. For more information, see [Understand and resolve Azure SQL blocking problems](understand-resolve-blocking.md).
+Long-running queries have the greatest potential for locking resources longer, blocking other users, and limiting scalability. They're also the best candidates for optimization. For more information, see [Understand and resolve blocking problems](understand-resolve-blocking.md).
 
 To identify long-running queries:
 
@@ -160,9 +161,9 @@ To identify long-running queries:
 1. Select the number of queries and the observation interval.
 1. Select the aggregation function:
 
-   * **Sum** adds up all query execution time for the whole observation interval.
-   * **Max** finds queries in which execution time was maximum for the whole observation interval.
-   * **Avg** finds the average execution time of all query executions and shows you the top ones for these averages.
+   - **Sum** adds up all query execution time for the whole observation interval.
+   - **Max** finds queries in which execution time was maximum for the whole observation interval.
+   - **Avg** finds the average execution time of all query executions and shows you the top ones for these averages.
 
    :::image type="content" source="media/query-performance-insight-use/top-duration.png" alt-text="Screenshot showing the query duration in the Azure portal." lightbox="media/query-performance-insight-use/top-duration.png":::
 
@@ -174,10 +175,10 @@ To identify long-running queries:
    > To understand database DTU consumption with more detail (up to one minute), consider creating a custom chart in the Azure portal:
    >  
    > 1. Select **Azure SQL Database** > **Monitoring**.
-   > 2. Select **Metrics**.
-   > 3. Select **+Add chart**.
-   > 4. Select the DTU percentage on the chart.
-   > 5. In addition, select **Last 24 hours** on the upper-left menu and change it to one minute.
+   > 1. Select **Metrics**.
+   > 1. Select **+Add chart**.
+   > 1. Select the DTU percentage on the chart.
+   > 1. In addition, select **Last 24 hours** on the upper-left menu and change it to one minute.
    >  
    > We recommend that you use the custom DTU chart to compare with the query performance chart.
    >
@@ -203,7 +204,7 @@ To identify frequently executed ("chatty") queries:
 
 While exploring your workload in Query Performance Insight, you might notice icons with a vertical line on top of the chart.
 
-These icons are annotations. They show performance recommendations from [Azure SQL Database Advisor](database-advisor-implement-performance-recommendations.md). By hovering over an annotation, you can get summarized information on performance recommendations.
+These icons are annotations. They show performance recommendations from [Database Advisor performance recommendations for Azure SQL Database](database-advisor-implement-performance-recommendations.md). By hovering over an annotation, you can get summarized information on performance recommendations.
 
    :::image type="content" source="media/query-performance-insight-use/annotation.png" alt-text="Screenshot of query annotation in the Azure portal.":::
 
@@ -234,7 +235,7 @@ The second case happens when Query Store is not enabled, or parameters are not s
 
 There are two types of retention policies:
 
-- **Size based**: If this policy is set to **AUTO**, it will clean data automatically when near maximum size is reached.
+- **Size based**: If this policy is set to `AUTO`, it will clean data automatically when near maximum size is reached.
 - **Time based**: By default, this policy is set to 30 days. If Query Store runs out of space, it will delete query information older than 30 days.
 
 You can set the capture policy to:
@@ -243,7 +244,7 @@ You can set the capture policy to:
 - **Auto**: Query Store ignores infrequent queries and queries with insignificant compile and execution duration. Thresholds for execution count, compile duration, and runtime duration are internally determined. This is the default option.
 - **None**: Query Store stops capturing new queries, but runtime statistics for already captured queries are still collected.
 
-We recommend setting all policies to **AUTO** and the cleaning policy to 30 days by executing the following commands from [SSMS](/sql/ssms/download-sql-server-management-studio-ssms) or the Azure portal. (Replace `YourDB` with the database name.)
+We recommend setting all policies to `AUTO` and the cleaning policy to 30 days by executing the following commands from [SSMS](/sql/ssms/download-sql-server-management-studio-ssms) or the Azure portal. (Replace `YourDB` with the database name.)
 
 ```sql
     ALTER DATABASE [YourDB]
@@ -275,4 +276,4 @@ Applying these settings will eventually make Query Store collect telemetry for n
 ## Next step
 
 > [!div class="nextstepaction"]
-> [Database watcher](../database-watcher-overview.md)
+> [Monitor Azure SQL workloads with database watcher](../database-watcher-overview.md)
