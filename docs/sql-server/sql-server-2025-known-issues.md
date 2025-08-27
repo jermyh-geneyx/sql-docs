@@ -4,7 +4,7 @@ description: "Known issues, causes, and workarounds for SQL Server 2025 Preview 
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest
-ms.date: 08/27/2025
+ms.date: 08/28/2025
 ms.service: sql
 ms.subservice: release-landing
 ms.topic: troubleshooting-known-issue
@@ -33,6 +33,7 @@ This article describes known issues for [!INCLUDE [sssql25-md](../includes/sssql
 - [SQL Server on Linux fails to start on machines with hybrid CPU architecture](#sql-server-on-linux-fails-to-start-on-machines-with-hybrid-cpu-architecture)
 - [Linux PolyBase Network encryption enabled fails](#linux-polybase-network-encryption-enabled-fails)
 - [Local ONNX models not supported on Linux operating systems](#local-onnx-models-not-supported-on-linux-operating-systems)
+- [PBKDF2 hashing algorithm can affect login performance](#pbkdf2-hashing-algorithm-can-affect-login-performance)
 
 ## Windows Arm64 not supported
 
@@ -199,7 +200,7 @@ PolyBase components can fail to start after upgrading to, or installing a new in
 
 ## PolyBase connections fail to external SQL Server source
 
-[!INCLUDE [sssql25-md](../includes/sssql25-md.md)] PolyBase connections can fail to external SQL Server sources if the external data source was not [properly configured](../t-sql/statements/create-external-data-source-transact-sql.md#syntax-for-sql-server-2025-and-later-versions). Review the [PolyBase network encryption](../relational-databases/polybase/polybase-installation.md#polybase-network-encryption) documentation for more information.
+[!INCLUDE [sssql25-md](../includes/sssql25-md.md)] PolyBase connections can fail to external SQL Server sources if the external data source isn't [properly configured](../t-sql/statements/create-external-data-source-transact-sql.md#syntax-for-sql-server-2025-and-later-versions). Review the [PolyBase network encryption](../relational-databases/polybase/polybase-installation.md#polybase-network-encryption) documentation for more information.
 
 ## SQL Server on Linux fails to start on machines with hybrid CPU architecture
 
@@ -220,6 +221,12 @@ If you want to use a Linux host operating system, you can work around the issue 
 ## Local ONNX models not supported on Linux operating systems
 
 [CREATE EXTERNAL MODEL](../t-sql/statements/create-external-model-transact-sql.md) local ONNX models hosted directly on the SQL Server aren't currently available for Linux on [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] RC 0.
+
+## PBKDF2 hashing algorithm can affect login performance
+
+In [!INCLUDE [sssql25-md](../includes/sssql25-md.md)], password-based authentication uses PBKDF2 (RFC2898) as the default hashing algorithm. This enhancement improves password security by applying 100,000 iterations of SHA-512 hashing. The increased computational cost of PBKDF2 means slightly longer SQL Authentication login time. This effect is especially noticeable in environments without connection pooling, or where login latency is closely monitored. In pooled environments, the effect is typically minimal.
+
+For more information, see [CREATE LOGIN](../t-sql/statements/create-login-transact-sql.md) and [Support for Iterated and Salted Hash Password Verifiers in SQL Server 2022 CU12](https://techcommunity.microsoft.com/blog/azuresqlblog/support-for-iterated-and-salted-hash-password-verifiers-in-sql-server-2022-cu12/4087155).
 
 ## Related content
 
