@@ -159,7 +159,7 @@ Follow these steps to set up the variables needed to hard-delete the soft-delete
    Invoke-AzRestMethod -Path $path -Method GET
    ```
 
-1. Update the API request body to update the retentionDays parameter.
+1. Update the API request body to update the retentionDays parameter. The value `0` means immediate deletion with no retention period.
 
    ```powershell
     $body={
