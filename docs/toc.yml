@@ -63,6 +63,10 @@ items:
       href: sql-server/sql-server-2008-r2-sp2-release-notes.md
     - name: Preview features FAQ
       href: sql-server/preview-features-faq.md
+  - name: Known issues
+    items:
+    - name: SQL Server 2025 Preview
+      href: sql-server/sql-server-2025-known-issues.md?view=sql-server-ver16&preserve-view=true
   expanded: true
 - name: Business continuity
   items:
