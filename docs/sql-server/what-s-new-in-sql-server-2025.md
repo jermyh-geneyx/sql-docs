@@ -32,9 +32,9 @@ This article summarizes the new features and enhancements for [!INCLUDE [sql-ser
 
 Review:
 
-- [Known issues](sql-server-2025-release-notes.md#known-issues)
-- [Build number](sql-server-2025-release-notes.md#build-number)
+- [Release notes](sql-server-2025-release-notes.md)
 - [Breaking changes](../database-engine/breaking-changes-to-database-engine-features-in-sql-server-2025.md)
+- [Known issues](sql-server-2025-known-issues.md)
 
 For the best experience with [!INCLUDE [sql-server-2025](../includes/sssql25-md.md)], use the [latest tools](../tools/overview-sql-tools.md).
 
@@ -353,5 +353,6 @@ None at this time.
 - [SQL Server PowerShell](/powershell/sql-server/sql-server-powershell)
 - [SQL Server Workshops](https://aka.ms/sqlworkshops)
 - [SQL Server 2025 Preview release notes](sql-server-2025-release-notes.md)
+- [SQL Server 2025 Preview known issues](sql-server-2025-known-issues.md)
 
 [!INCLUDE [get-help-options](../includes/paragraph-content/get-help-options.md)]
