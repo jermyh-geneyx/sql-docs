@@ -33,7 +33,7 @@ The maximum network packet size for encrypted connections is 16,383 bytes.
 
 ## Recommendations
 
-This option is an advanced option and should be changed only by an experienced database administrator or certified [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] professional.
+This option is an advanced option, and should be changed only by an experienced database professional.
 
 If an application does bulk copy operations or sends or receives large amounts of text or image data, a packet size larger than the default might improve efficiency because it results in fewer network read-and-write operations. If an application sends and receives small amounts of information, the packet size can be set to 512 bytes, which is sufficient for most data transfers.
 

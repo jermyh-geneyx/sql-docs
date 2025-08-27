@@ -26,7 +26,7 @@ The run value for this option doesn't exceed the actual amount of memory that ca
 
 ## Recommendations
 
-This option is an advanced option and should be changed only by an experienced database administrator or certified [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] professional.
+This option is an advanced option, and should be changed only by an experienced database professional.
 
 The `index create memory` option is self-configuring and usually works without requiring adjustment. However, if you experience difficulties creating indexes, consider increasing the value of this option from its run value.
 

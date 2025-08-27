@@ -20,7 +20,7 @@ This article describes how to configure the `query governor cost limit` server c
 
 ## Recommendations
 
-This option is an advanced option and should be changed only by an experienced database administrator or certified [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] professional.
+This option is an advanced option, and should be changed only by an experienced database professional.
 
 To change the value query governor cost limit on a per-connection basis, use the [SET QUERY_GOVERNOR_COST_LIMIT](../../t-sql/statements/set-query-governor-cost-limit-transact-sql.md) statement.
 

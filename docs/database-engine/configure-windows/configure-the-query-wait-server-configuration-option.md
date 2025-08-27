@@ -23,7 +23,7 @@ This article describes how to configure the **query wait** server configuration 
 
 ## Recommendations
 
-This option is an advanced option and should be changed only by an experienced database administrator or certified [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] professional.
+This option is an advanced option, and should be changed only by an experienced database professional.
 
 ## Permissions
 

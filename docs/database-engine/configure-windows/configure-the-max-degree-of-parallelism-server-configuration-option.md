@@ -30,7 +30,7 @@ For more on `MAXDOP` in [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.m
 
 ## Considerations
 
-This option is an advanced option and should be changed only by an experienced database administrator or certified [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] professional.
+This option is an advanced option, and should be changed only by an experienced database professional.
 
 If the affinity mask option isn't set to the default, it might restrict the number of processors available to [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] on symmetric multiprocessing (SMP) systems.
 

@@ -24,7 +24,7 @@ If you use the backup medium before the set number of days has passed, [!INCLUDE
 
 ## Recommendations
 
-This option is an advanced option and should be changed only by an experienced database administrator or certified [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] professional.
+This option is an advanced option, and should be changed only by an experienced database professional.
 
 The `media retention` option can be overridden by using the `RETAINDAYS` clause of the [BACKUP](../../t-sql/statements/backup-transact-sql.md) statement.
 

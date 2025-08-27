@@ -24,7 +24,7 @@ The accuracy of the query optimizer to determine an estimate for the number of r
 
 ## Recommendations
 
-This option is an advanced option and should be changed only by an experienced database administrator or certified [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] professional.
+This option is an advanced option, and should be changed only by an experienced database professional.
 
 If you set `cursor threshold` to `-1`, all keysets are generated synchronously, which benefits small cursor sets. If you set `cursor threshold` to `0`, all cursor keysets are generated asynchronously. With other values, the query optimizer compares the number of expected rows in the cursor set and builds the keyset asynchronously if it exceeds the number set in `cursor threshold`. Don't set `cursor threshold` too low, because small result sets are better built synchronously.
 

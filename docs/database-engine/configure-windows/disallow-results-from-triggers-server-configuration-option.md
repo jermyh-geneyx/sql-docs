@@ -41,7 +41,7 @@ SELECT [name], value_in_use
 FROM sys.configurations
 WHERE [name] LIKE 'disallow results from triggers';
 
--- Set the disallow results from triggers option to 1. This is an advanced option so that must be enabled first
+-- Set the disallow results from triggers option to 1. This option is an advanced option so that must be enabled first
 EXECUTE sp_configure 'show advanced options', 1;
 
 RECONFIGURE;

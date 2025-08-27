@@ -23,7 +23,7 @@ The value of the `default full-text language` option is used in a full-text inde
 
 ## Recommendations
 
-This option is an advanced option and should be changed only by an experienced database administrator or certified [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] professional.
+This option is an advanced option, and should be changed only by an experienced database professional.
 
 The `default full-text language` option requires a locale identifier (LCID) value. For a list of supported LCIDs and their related languages, see [sys.fulltext_languages](../../relational-databases/system-catalog-views/sys-fulltext-languages-transact-sql.md). Other languages might also be available from independent software vendors, for example. If no specific language is found, the Full-Text Engine automatically switches to the primary language.
 

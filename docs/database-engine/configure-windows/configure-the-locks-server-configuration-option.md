@@ -21,7 +21,7 @@ This article describes how to configure the `locks` server configuration option 
 
 ## Recommendations
 
-This option is an advanced option and should be changed only by an experienced database administrator or certified [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] professional.
+This option is an advanced option, and should be changed only by an experienced database professional.
 
 When the server is started with `locks` set to `0`, the lock manager acquires sufficient memory from the [!INCLUDE [ssDE](../../includes/ssde-md.md)] for an initial pool of 2,500 lock structures. As the lock pool is exhausted, more memory is acquired for the pool.
 
