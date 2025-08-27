@@ -20,13 +20,13 @@ ms.devlang: azurecli
 > Azure has announced that support for older TLS versions (TLS 1.0, and 1.1) ends August 31, 2025. For more information, see [TLS 1.0 and 1.1 deprecation](https://azure.microsoft.com/updates/azure-support-tls-will-end-by-31-october-2024-2/).
 > Starting November 2024, you'll no longer be able to set the minimal TLS version for Azure SQL Managed Instance client connections below TLS 1.2.
 
-The Minimal [Transport Layer Security (TLS)](/troubleshoot/sql/database-engine/connect/tls-1-2-support-microsoft-sql-server) version setting allows customers to control the version of TLS used by their Azure SQL Managed Instance.
+The minimum [Transport Layer Security (TLS)](/troubleshoot/sql/database-engine/connect/tls-1-2-support-microsoft-sql-server) version setting allows customers to control the version of TLS used by their Azure SQL Managed Instance.
 
-Setting **Minimum TLS version** to 1.2 is currently enforced for SQL Managed Instance. Setting a Minimal TLS version ensures that subsequent, newer TLS versions are supported. Only connections using TLS 1.2 or above are accepted.
+Setting **Minimum TLS version** to 1.2 is currently enforced for SQL Managed Instance. Setting a minimum TLS version ensures that subsequent, newer TLS versions are supported. Only connections using TLS 1.2 or above are accepted.
 
 For more information, see [TLS considerations for SQL Database connectivity](../database/connect-query-content-reference-guide.md#tls-considerations-for-database-connectivity).
 
-After setting the Minimal TLS version, login attempts from clients that are using a TLS version lower than the Minimal TLS version of the server will fail with following error:
+After setting the Minimum TLS version, login attempts from clients that are using a TLS version lower than the minimum TLS version of the server will fail with following error:
 
 ```output
 Error 47072
@@ -34,7 +34,8 @@ Login failed with invalid TLS version
 ```
 
 > [!NOTE]
-> When you configure a minimum TLS version, that minimum version is enforced at the application layer. Tools that attempt to determine TLS support at the protocol layer might return TLS versions in addition to the minimum required version when run directly against the managed instance endpoint.
+> - When you configure a minimum TLS version, that minimum version is enforced at the application layer. Tools that attempt to determine TLS support at the protocol layer might return TLS versions in addition to the minimum required version when run directly against the managed instance endpoint.
+> - TLS 1.0 and 1.1 is [retired](#upcoming-tls-10-and-11-retirement-changes-faq) and no longer available. 
 
 ## Set minimal TLS version via PowerShell
 
@@ -71,6 +72,10 @@ az sql mi show -n sql-instance-name -g resource-group --query "minimalTlsVersion
 # Update setting for Minimal TLS Version
 az sql mi update -n sql-instance-name -g resource-group --set minimalTlsVersion="1.2"
 ```
+
+## Upcoming TLS 1.0 and 1.1 retirement changes FAQ
+
+[!INCLUDE [tls-deprecation](../includes/tls-deprecation.md)]
 
 ## Related content
 
