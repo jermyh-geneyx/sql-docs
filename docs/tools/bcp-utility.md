@@ -4,7 +4,7 @@ description: The bulk copy program (bcp) utility bulk copies data between an ins
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: davidengel, markingmyname
-ms.date: 05/19/2025
+ms.date: 08/27/2025
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: how-to
@@ -81,8 +81,8 @@ For instructions on installing **sqlcmd** and **bcp** on Linux and macOS, see [I
 
 ### [Windows](#tab/windows)
 
-- Windows 8, Windows 8.1, Windows 10, Windows 11
-- Windows Server 2016, Windows Server 2019, Windows Server 2022
+- Windows 10 and later versions
+- Windows Server 2016 and later versions
 
 This component requires the latest [Microsoft ODBC Driver 17 for SQL Server](../connect/odbc/download-odbc-driver-for-sql-server.md#version-17).
 
