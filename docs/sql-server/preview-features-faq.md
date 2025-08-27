@@ -25,6 +25,22 @@ Preview features that become generally available in a subsequent cumulative upda
 
 `PREVIEW_FEATURES` is a database-scoped configuration that lets you try out new SQL Server features before they're generally available. This option is intended for development and testing environments and shouldn't be used in production.
 
+## How do I enable the PREVIEW_FEATURES option ?
+
+`PREVIEW_FEATURES` is a `DATABASE SCOPED CONFIGURATION` option, therefore you can enable it by executing the following code:
+
+```sql
+ALTER DATABASE SCOPED CONFIGURATION 
+SET PREVIEW_FEATURES = ON;
+GO
+
+SELECT * FROM sys.database_scoped_configurations 
+WHERE [name] = 'PREVIEW_FEATURES'
+GO
+```
+
+Read more details in the [`DATABASE SCOPED CONFIGURATION`](../t-sql/statements/alter-database-scoped-configuration-transact-sql.md#preview_features---on--off-) page.
+
 ## Do I need to enable PREVIEW_FEATURES to use AI functionalities in SQL Server 2025?
 
 No, most AI features in SQL Server 2025 are already generally available (GA), including `AI_GENERATE_EMBEDDINGS`, `CREATE EXTERNAL MODEL`, and the **vector** data type and related functions. Only the features explicitly listed in the release notes document require the `PREVIEW_FEATURES` option to be enabled.
