@@ -4,7 +4,7 @@ description: "The COMPRESS function compresses the input expression, using the G
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 03/09/2023
+ms.date: 08/28/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: "reference"
@@ -15,7 +15,7 @@ helpviewer_keywords:
   - "COMPRESS function"
 dev_langs:
   - "TSQL"
-monikerRange: "= azuresqldb-current || = azuresqldb-mi-current || >= sql-server-2016 || >= sql-server-linux-2017 || = azuresqledge-current || = azure-sqldw-latest||=fabric"
+monikerRange: "=azuresqldb-current || =azuresqldb-mi-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqledge-current || =azure-sqldw-latest || =fabric"
 ---
 # COMPRESS (Transact-SQL)
 
@@ -33,7 +33,7 @@ COMPRESS ( expression )
 
 ## Arguments
 
-### *expression*  
+### *expression*
 
 An expression of one of the following data types:
 
@@ -47,9 +47,9 @@ An expression of one of the following data types:
 - **varchar(max)**
 - **varchar(*n*)**
 
-For more information, see [Expressions (Transact-SQL)](../../t-sql/language-elements/expressions-transact-sql.md).
+For more information, see [Expressions](../language-elements/expressions-transact-sql.md).
 
-## Return type
+## Return types
 
 **varbinary(max)**, representing the compressed content of the input.
 
@@ -57,7 +57,7 @@ For more information, see [Expressions (Transact-SQL)](../../t-sql/language-elem
 
 Compressed data can't be indexed.
 
-The `COMPRESS` function compresses the input expression data. You must invoke this function for each data section to compress. For more information about automatic data compression during storage at the row or page level, see [Data Compression](../../relational-databases/data-compression/data-compression.md).
+The `COMPRESS` function compresses the input expression data. You must invoke this function for each data section to compress. For more information about automatic data compression during storage at the row or page level, see [Data compression](../../relational-databases/data-compression/data-compression.md).
 
 ## Examples
 
@@ -70,23 +70,23 @@ INSERT INTO player (
     name,
     surname,
     info
-    )
+)
 VALUES (
     N'Ovidiu',
     N'Cracium',
-    COMPRESS(N'{"sport":"Tennis","age": 28,"rank":1,"points":15258, turn":17}')
-    );
+    COMPRESS(N'{"sport":"Tennis","age": 28,"rank":1,"points":15258, "turn":17}')
+);
 
 INSERT INTO player (
     name,
     surname,
     info
-    )
+)
 VALUES (
     N'Michael',
     N'Raheem',
     COMPRESS(@info)
-    );
+);
 ```
 
 ### B. Archive compressed version of deleted rows
@@ -94,9 +94,9 @@ VALUES (
 This statement first deletes old player records from the `player` table. To save space, it then stores the records in the `inactivePlayer` table, in a compressed format.
 
 ```sql
-DELETE
-FROM player
-OUTPUT deleted.id,
+DELETE FROM player
+OUTPUT
+    deleted.id,
     deleted.name,
     deleted.surname,
     deleted.datemodifier,
@@ -105,7 +105,7 @@ INTO dbo.inactivePlayers
 WHERE datemodified < @startOfYear;
 ```
 
-## See also
+## Related content
 
-- [String Functions (Transact-SQL)](../../t-sql/functions/string-functions-transact-sql.md)
-- [DECOMPRESS (Transact-SQL)](../../t-sql/functions/decompress-transact-sql.md)
+- [String Functions (Transact-SQL)](string-functions-transact-sql.md)
+- [DECOMPRESS (Transact-SQL)](decompress-transact-sql.md)
