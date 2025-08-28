@@ -7,7 +7,7 @@ ms.service: sql
 ms.topic: include
 ---
 
-This article describes a step-by-step process to set up authentication with Microsoft Entra ID, and demonstrates how to use different Microsoft Entra authentication methods.
+This article describes a step-by-step process to set up authentication with Microsoft Entra ID with app registration, and demonstrates how to use different Microsoft Entra authentication methods.
 
 [!INCLUDE [entra-id](entra-id.md)]
 

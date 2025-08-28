@@ -532,7 +532,7 @@ The default is `ON` starting in database compatibility level 170.
 
 **Applies to:** [!INCLUDE [sql-server-2025](../../includes/sssql25-md.md)]
 
-Allows usage of preview features. To learn more, review [Preview features in SQL Server](../../sql-server/sql-server-2025-release-notes.md#preview-features). 
+Allows usage of preview features. To learn more, review [Preview features in SQL Server](../../sql-server/sql-server-2025-release-notes.md#preview-features).
 
 Default is `OFF`.
 

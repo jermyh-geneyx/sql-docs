@@ -95,7 +95,7 @@ The following tasks make up our recommended strategy for designing indexes:
 
 ## General index design guidelines
 
-Experienced database administrators can design a good set of indexes, but this task is complex, time-consuming, and error-prone even for moderately complex databases and workloads. Understanding the characteristics of your database, queries, and data columns can help you design optimal indexes.
+Experienced database professionals can design a good set of indexes, but this task is complex, time-consuming, and error-prone even for moderately complex databases and workloads. Understanding the characteristics of your database, queries, and data columns can help you design optimal indexes.
 
 ### Database considerations
 

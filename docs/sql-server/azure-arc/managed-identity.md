@@ -22,7 +22,7 @@ monikerRange: ">=sql-server-ver17"
 > - [Azure SQL Database & Azure SQL Managed Instance](/azure/azure-sql/database/authentication-aad-configure)
 > - [SQL Server on Azure VMs](/azure/azure-sql/virtual-machines/windows/configure-azure-ad-authentication-for-sql-vm)
 
-This article describes how to configure a managed identity for SQL Server enabled by Azure Arc.
+This article describes how to configure Microsoft Entra ID managed identity for SQL Server enabled by Azure Arc.
 
 [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] includes managed identity support for SQL Server on Windows. Use a managed identity to interact with resources in Azure by using Microsoft Entra authentication.
 

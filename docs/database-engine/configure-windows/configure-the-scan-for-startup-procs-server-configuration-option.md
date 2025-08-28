@@ -18,7 +18,7 @@ This article describes how to configure the `scan for startup procs` server conf
 
 ## Recommendations
 
-This option is an advanced option and should be changed only by an experienced database administrator or certified [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] professional.
+This option is an advanced option, and should be changed only by an experienced database professional.
 
 The value for this option can be set by using `sp_configure`; however, the option is set automatically if you use `sp_procoption`, which is used to mark or unmark automatically run stored procedures. When `sp_procoption` is used to mark the first stored procedure as an autoproc, this option is set automatically to a value of `1`. When `sp_procoption` is used to unmark the last stored procedure as an autoproc, this option is automatically set to a value of `0`. If you use `sp_procoption` to mark and unmark autoprocs, and if you always unmark autoprocs before dropping them, there's no need to set this option manually.
 

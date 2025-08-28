@@ -56,7 +56,9 @@ The `max worker threads` server configuration option doesn't limit all threads t
 
 ## Recommendations
 
-This option is an advanced option and should be changed only by an experienced database administrator or certified [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] professional. If you suspect that there's a performance problem, it's probably not the availability of worker threads. The cause is more likely related to activities that occupy the worker threads and don't release them. Examples include long-running queries or bottlenecks on the system (I/O, blocking, latch waits, network waits) that cause long-waiting queries. It's best to find the root cause of a performance issue before you change the max worker threads setting. For more information on assessing performance, see [Monitor and Tune for Performance](../../relational-databases/performance/monitor-and-tune-for-performance.md).
+This option is an advanced option, and should be changed only by an experienced database professional.
+
+If you suspect that there's a performance problem, it's probably not the availability of worker threads. The cause is more likely related to activities that occupy the worker threads and don't release them. Examples include long-running queries or bottlenecks on the system (I/O, blocking, latch waits, network waits) that cause long-waiting queries. It's best to find the root cause of a performance issue before you change the max worker threads setting. For more information on assessing performance, see [Monitor and Tune for Performance](../../relational-databases/performance/monitor-and-tune-for-performance.md).
 
 Thread pooling helps optimize performance when a large number of clients connect to the server. Usually, a separate operating system thread is created for each query request. However, with hundreds of connections to the server, using one thread per query request can consume large amounts of system resources. The `max worker threads` option enables [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] to create a pool of worker threads to service a larger number of query requests, which improves performance.
 

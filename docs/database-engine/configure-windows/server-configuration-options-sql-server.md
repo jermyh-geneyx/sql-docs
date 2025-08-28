@@ -38,7 +38,7 @@ ms.custom:
 You can manage and optimize [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)] resources through configuration options by using [!INCLUDE [ssManStudioFull](../../includes/ssmanstudiofull-md.md)] or the `sp_configure` system stored procedure. The most commonly used server configuration options are available through [!INCLUDE [ssManStudioFull](../../includes/ssmanstudiofull-md.md)]; all configuration options are accessible through `sp_configure`. Consider the effects on your system carefully before setting these options. For more information, see [View or change server properties (SQL Server)](view-or-change-server-properties-sql-server.md).
 
 > [!IMPORTANT]
-> Advanced options should be changed only by an experienced database administrator.
+> Advanced options should be changed only by an experienced database professional.
 
 ## Categories of configuration options
 
@@ -81,7 +81,7 @@ For a configuration option that isn't dynamic there's no way to tell if the `REC
 
 The following table lists all available configuration options, the range of possible settings, the default values, and the supported product ([!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] or [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)]). Configuration options are marked with letter codes as follows:
 
-- **A** = Advanced options, which should be changed only by an experienced database administrator or a certified SQL Server professional, and which require setting `show advanced options` to `1`.
+- **A** = Advanced options, which should be changed only by an experienced database professional, and which require setting `show advanced options` to `1`.
 
 - **RR** = Options requiring a restart of the [!INCLUDE [ssDE](../../includes/ssde-md.md)].
 
