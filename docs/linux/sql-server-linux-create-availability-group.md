@@ -4,7 +4,7 @@ description: This tutorial shows how to create and configure availability groups
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: vanto
-ms.date: 07/03/2025
+ms.date: 08/28/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: install-set-up-deploy
@@ -608,23 +608,15 @@ After an availability group is created in [!INCLUDE [ssnoversion-md](../includes
 
 The AG resource you created is a type of resource called a *clone*. The AG resource essentially has copies on each node, and there's one controlling resource called the *master*. The master is associated with the server hosting the primary replica. The other resources host secondary replicas (regular or configuration-only) and can be promoted to master in a failover.
 
-[!INCLUDE [bias-sensitive-term-t](../includes/bias-sensitive-term-t.md)]
-
 ### [Red Hat Enterprise Linux (RHEL) and Ubuntu](#tab/ru)
 
 1. Create the AG resource with the following syntax:
 
    ```bash
-   sudo pcs resource create <NameForAGResource> ocf:mssql:ag ag_name=<AGName> meta failure-timeout=30s --master meta notify=true
+   sudo pcs resource create <NameForAGResource> ocf:mssql:ag ag_name=<AGName> meta failure-timeout=30s promotable notify=true
    ```
 
    Where `NameForAGResource` is the unique name given to this cluster resource for the AG, and `AGName` is the name of the AG that was created.
-
-   On RHEL 7.7 and Ubuntu 18.04, and later versions, you might encounter a warning with the use of `--master`, or an error like `sqlag_monitor_0 on ag1 'not configured' (6): call=6, status=complete, exitreason='Resource must be configured with notify=true'`. To avoid this situation, use:
-
-   ```bash
-   sudo pcs resource create <NameForAGResource> ocf:mssql:ag ag_name=<AGName> meta failure-timeout=30s master notify=true
-   ```
 
 1. Create the IP address resource for the AG that will be associated with the listener functionality.
 
@@ -637,7 +629,7 @@ The AG resource you created is a type of resource called a *clone*. The AG resou
 1. To ensure that the IP address and the AG resource are running on the same node, a colocation constraint must be configured.
 
    ```bash
-   sudo pcs constraint colocation add <NameForIPResource> <NameForAGResource>-master INFINITY with-rsc-role=Master
+   sudo pcs constraint colocation add <NameForIPResource> with promoted <NameForAGResource>-clone INFINITY
    ```
 
    Where `NameForIPResource` is the name for the IP resource, and `NameForAGResource` is the name for the AG resource.
@@ -645,7 +637,7 @@ The AG resource you created is a type of resource called a *clone*. The AG resou
 1. Create an ordering constraint to ensure that the AG resource is up and running before the IP address. While the colocation constraint implies an ordering constraint, this enforces it.
 
    ```bash
-   sudo pcs constraint order promote <NameForAGResource>-master then start <NameForIPResource>
+   sudo pcs constraint order promote <NameForAGResource>-clone then start <NameForIPResource>
    ```
 
    Where `NameForIPResource` is the name for the IP resource, and `NameForAGResource` is the name for the AG resource.
@@ -664,12 +656,11 @@ The AG resource you created is a type of resource called a *clone*. The AG resou
    op promote timeout=60s \
    op demote timeout=10s \
    op monitor timeout=60s interval=10s \
-   op monitor timeout=60s interval=11s role="Master" \
-   op monitor timeout=60s interval=12s role="Slave" \
+   op monitor timeout=60s interval=11s role="Promoted" \
    op notify timeout=60s
-   ms ms-ag_cluster <NameForAGResource> \
-   meta master-max="1" master-node-max="1" clone-max="3" \
-   clone-node-max="1" notify="true" \
+   clone ms-ag_cluster <NameForAGResource> \
+   meta promoted-max="1" promoted-node-max="1" clone-max="3" \
+       promotable="true" clone-node-max="1" notify="true" \
    commit
    ```
 
@@ -691,7 +682,7 @@ The AG resource you created is a type of resource called a *clone*. The AG resou
 
    ```bash
    crm configure <NameForConstraint> inf: \
-   <NameForIPResource> <NameForAGResource>:Master
+   <NameForIPResource> <NameForAGResource>:Promoted
    commit
    ```
 
@@ -701,7 +692,7 @@ The AG resource you created is a type of resource called a *clone*. The AG resou
 
    ```bash
    crm configure \
-   order <NameForConstraint> inf: <NameForAGResource>:promote <NameForIPResource>:start
+   order <NameForConstraint> Mandatory: <NameForAGResource>:promote <NameForIPResource>:start
    commit
    ```
 
