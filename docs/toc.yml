@@ -9462,7 +9462,7 @@ items:
         href: sql-server/azure-arc/managed-identity-extensible-key-management.md
       - name: Set up Microsoft Entra authentication | Azure Arc
         href: sql-server/azure-arc/entra-authentication-setup-tutorial.md
-      - name: Configure managed identity (preview)
+      - name: Configure managed identity
         href: sql-server/azure-arc/managed-identity.md
       - name: Register Purview
         href: /purview/register-scan-azure-arc-enabled-sql-server?toc=/sql/toc.json&bc=/sql/breadcrumb/toc.json
