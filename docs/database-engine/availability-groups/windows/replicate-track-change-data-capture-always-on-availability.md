@@ -90,7 +90,7 @@ The log reader agent has the following changes.
 
 <a id="CDC"></a>
 
-### Change data capture
+## Change data capture
 
 Databases enabled for change data capture (CDC) are able to use [!INCLUDE [ssHADR](../../../includes/sshadr-md.md)] in order to ensure not only that the database remains available in the event of failure, but that changes to the database tables continue to be monitored and deposited in the CDC change tables. The order in which CDC and [!INCLUDE [ssHADR](../../../includes/sshadr-md.md)] are configured isn't important. CDC enabled databases can be added to [!INCLUDE [ssHADR](../../../includes/sshadr-md.md)], and databases that are members of an availability group can be enabled for CDC. In both cases, however, CDC configuration is always performed on the current or intended primary replica. CDC uses the log reader agent and has the same limitations as described in the [Log reader agent modifications](#log-reader-agent-modifications) section earlier in this article.
 
@@ -119,7 +119,7 @@ Databases enabled for change data capture (CDC) are able to use [!INCLUDE [ssHAD
   ```
 
   > [!NOTE]  
-  > You should create the jobs at the new primary replica after failover. The CDC jobs running at the old primary database should be disabled when the local database becomes a secondary database. Post this if the replica becomes primary again, you need to reenable the CDC jobs on the replica. To disable and enable jobs, use the *\@enabled* option of [sp_update_job](../../../relational-databases/system-stored-procedures/sp-update-job-transact-sql.md). For more information about creating CDC jobs, see [sys.sp_cdc_add_job](../../../relational-databases/system-stored-procedures/sys-sp-cdc-add-job-transact-sql.md).
+  > You should create the jobs at the new primary replica after failover. The CDC jobs running at the old primary database should be disabled when the local database becomes a secondary database. If the original replica becomes primary again, you need to reenable the CDC jobs on that replica` replica. To disable and enable jobs, use the *\@enabled* option of [sp_update_job](../../../relational-databases/system-stored-procedures/sp-update-job-transact-sql.md). For more information about creating CDC jobs, see [sys.sp_cdc_add_job](../../../relational-databases/system-stored-procedures/sys-sp-cdc-add-job-transact-sql.md).
 
 - **Adding CDC roles to a primary database replica**
 
@@ -193,7 +193,7 @@ Databases enabled for change data capture (CDC) are able to use [!INCLUDE [ssHAD
 
 <a id="CT"></a>
 
-### Change tracking
+## Change tracking
 
 A database enabled for change tracking (CT) can be part of an availability group. No more configuration is needed. Change tracking client applications that use the CDC table-valued functions (TVFs) to access change data need the ability to locate the primary replica after failover. If the client application connects through the availability group listener name, connection requests are always appropriately directed to the current primary replica.
 
@@ -252,7 +252,7 @@ Supported combinations of replication on [!INCLUDE [ssHADR](../../../includes/ss
 
 - Metadata and objects that exist outside the database aren't propagated to the secondary replicas, including logins, jobs, linked servers. If you require the metadata and objects at the new primary database after failover, you must copy them manually. For more information, see [Manage logins for jobs using databases in an Always On availability group](logins-and-jobs-for-availability-group-databases.md).
 
-### Distributed availability groups
+## Distributed availability groups
 
 The publisher, or distribution database in an Availability Group can't be configured as part of a Distributed Availability Group. The publisher database in an Availability Group and the distribution database in an Availability Group both require a listener endpoint for proper configuration and usage. However, it isn't possible to configure a listener endpoint for a Distributed Availability group.
 

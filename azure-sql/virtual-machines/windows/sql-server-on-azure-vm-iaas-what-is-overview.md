@@ -30,6 +30,8 @@ If you're new to SQL Server on Azure VMs, check out the *SQL Server on Azure VM 
 
 Azure virtual machines run in many different [geographic regions](https://azure.microsoft.com/regions/) around the world. They also offer various [machine sizes](/azure/virtual-machines/sizes). The virtual machine image gallery allows you to create a SQL Server VM with the right version, edition, and operating system. This makes virtual machines a good option for many different SQL Server workloads.
 
+**Ready to get started?** Jump to our [quickstart guide](sql-vm-create-portal-quickstart.md) to create your first SQL Server VM, or explore the [feature benefits](#feature-benefits) you'll unlock by registering with the SQL IaaS Agent extension.
+
 ## Feature benefits
 
 When you register your SQL Server on Azure VM with the [SQL IaaS Agent extension](sql-server-iaas-agent-extension-automate-management.md) you unlock a number of feature benefits. Registering with the extension is completely free.
@@ -42,7 +44,7 @@ The following table details the benefits unlocked by the extension:
 
 To get started with SQL Server on Azure VMs, review the following resources:
 
-- **Create SQL VM**: To create your SQL Server on Azure VM, review the Quickstarts using the [Azure portal](sql-vm-create-portal-quickstart.md), [Azure PowerShell](sql-vm-create-powershell-quickstart.md) or an [ARM template](create-sql-vm-resource-manager-template.md). For more thorough guidance, review the [Provisioning guide](create-sql-vm-portal.md).
+- **Create your first SQL Server VM**: Get up and running quickly with our step-by-step quickstarts for the [Azure portal](sql-vm-create-portal-quickstart.md), [Azure PowerShell](sql-vm-create-powershell-quickstart.md), or [ARM template](create-sql-vm-resource-manager-template.md). For comprehensive setup guidance, see the complete [provisioning guide](create-sql-vm-portal.md).
 - **Connect to SQL VM**: To connect to your SQL Server on Azure VMs, review the [ways to connect](ways-to-connect-to-sql.md).
 - **Unlock feature benefits**: Registering your SQL Server VM with the [SQL IaaS Agent extension](sql-server-iaas-agent-extension-automate-management.md) unlocks a number of feature benefits, such as automated backup and patching. 
 - **Manage SQL VM from the portal**: You can manage SQL Server settings directly from the Azure portal by using the [SQL virtual machines](manage-sql-vm-portal.md) resource.
