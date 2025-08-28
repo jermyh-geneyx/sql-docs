@@ -1,66 +1,64 @@
 ---
-title: Configure replication between managed instances
+title: Configure Replication Between Instances
 titleSuffix: Azure SQL Managed Instance
 description: This tutorial teaches you to configure transactional replication between an Azure SQL Managed Instance publisher/distributor and a SQL Managed Instance subscriber.
 author: sasapopo
 ms.author: sasapopo
 ms.reviewer: mathoma
-ms.date: 11/16/2022
+ms.date: 08/26/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: replication
 ms.topic: tutorial
+ms.update-cycle: 365-days
 ms.custom:
   - sqldbrb=1
   - sfi-ropc-blocked
 ---
-# Tutorial: Configure replication between two managed instances
+# Tutorial: Configure replication between two SQL managed instances
 
-[!INCLUDE[appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
+[!INCLUDE [appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
 
-Transactional replication allows you to replicate data from one database to another hosted on either SQL Server or [Azure SQL Managed Instance](sql-managed-instance-paas-overview.md). SQL Managed Instance can be a publisher, distributor or subscriber in the replication topology. See [transactional replication configurations](replication-transactional-overview.md#common-configurations) for available configurations. 
+Transactional replication allows you to replicate data from one database to another hosted on either SQL Server or [Azure SQL Managed Instance](sql-managed-instance-paas-overview.md). SQL Managed Instance can be a publisher, distributor, or subscriber in the replication topology. See [transactional replication configurations](replication-transactional-overview.md#common-configurations) for available configurations.
 
 In this tutorial, you learn how to:
 
 > [!div class="checklist"]
 >
-> - Configure a managed instance as a replication publisher and distributor.
-> - Configure a managed instance as a replication subscriber.
+> - Configure a SQL managed instance as a replication publisher and distributor.
+> - Configure a SQL managed instance as a replication subscriber.
 
-![Replicate between two managed instances](./media/replication-between-two-instances-configure-tutorial/sqlmi-sqlmi-repl.png)
+![Diagram showing replication between two SQL managed instances.](./media/replication-between-two-instances-configure-tutorial/sqlmi-sqlmi-repl.png)
 
-This tutorial is intended for an experienced audience and assumes that the user is familiar with deploying and connecting to both managed instances and SQL Server VMs within Azure. 
-
+This tutorial is intended for an experienced audience and assumes that the user is familiar with deploying and connecting to both SQL managed instances and SQL Server VMs within Azure.
 
 > [!NOTE]
-> - This article describes the use of [transactional replication](/sql/relational-databases/replication/transactional/transactional-replication) in Azure SQL Managed Instance. It is unrelated to [failover groups](failover-group-sql-mi.md), an Azure SQL Managed Instance feature that allows you to create complete readable replicas of individual instances. There are additional considerations when configuring [transactional replication with failover groups](replication-transactional-overview.md#with-failover-groups).
-
-
+> This article describes the use of [transactional replication](/sql/relational-databases/replication/transactional/transactional-replication) in Azure SQL Managed Instance. It's unrelated to [failover groups](failover-group-sql-mi.md), an Azure SQL Managed Instance feature that allows you to create complete readable replicas of individual instances. There are other considerations when configuring [transactional replication with failover groups](replication-transactional-overview.md#with-failover-groups).
 
 ## Requirements
 
 Configuring SQL Managed Instance to function as a publisher and/or a distributor requires:
 
-- That the publisher managed instance is on the same virtual network as the distributor and the subscriber, or [VNet peering](/azure/virtual-network/tutorial-connect-virtual-networks-portal) or [VPN gateways](/azure/vpn-gateway/vpn-gateway-howto-vnet-vnet-resource-manager-portal) have been configured between the virtual networks of all three entities.
+- The publisher SQL managed instance is on the same virtual network as the distributor and the subscriber, or [VNet peering](/azure/virtual-network/tutorial-connect-virtual-networks-portal) or [VPN gateways](/azure/vpn-gateway/vpn-gateway-howto-vnet-vnet-resource-manager-portal) have been configured between the virtual networks of all three entities.
 - Connectivity uses SQL Authentication between replication participants.
 - An Azure storage account share for the replication working directory.
-- Port 445 (TCP outbound) is open in the security rules of NSG for the managed instances to access the Azure file share.  If you encounter the error `failed to connect to azure storage <storage account name> with os error 53`, you will need to add an outbound rule to the NSG of the appropriate SQL Managed Instance subnet.
+- Port 445 (TCP outbound) is open in the security rules of NSG for the SQL managed instances to access the Azure file share. If you encounter the error `failed to connect to azure storage <storage account name> with os error 53`, you'll need to add an outbound rule to the NSG of the appropriate SQL Managed Instance subnet.
 
 ## 1 - Create a resource group
 
-Use the [Azure portal](https://portal.azure.com) to create a resource group with the name `SQLMI-Repl`.  
+Use the [Azure portal](https://portal.azure.com) to create a resource group with the name `SQLMI-Repl`.
 
-## 2 - Create managed instances
+## 2 - Create SQL managed instances
 
-Use the [Azure portal](https://portal.azure.com) to create two [SQL Managed Instances](instance-create-quickstart.md) on the same virtual network and subnet. For example, name the two managed instances:
+Use the [Azure portal](https://portal.azure.com) to create two [SQL managed instances](instance-create-quickstart.md) on the same virtual network and subnet. For example, name the two SQL managed instances:
 
-- `sql-mi-pub` (along with some characters for randomization)
-- `sql-mi-sub` (along with some characters for randomization)
+- `sql-mi-publisher` (along with some characters for randomization)
+- `sql-mi-subscriber` (along with some characters for randomization)
 
-You will also need to [configure an Azure VM to connect](connect-vm-instance-configure.md) to your managed instances. 
+You'll also need to [Configure an Azure VM to connect](connect-vm-instance-configure.md) to your SQL managed instances.
 
 ## 3 - Create an Azure storage account
 
-[Create an Azure storage account](/azure/storage/common/storage-account-create#create-a-storage-account) for the working directory, and then create a [file share](/azure/storage/files/storage-how-to-create-file-share) within the storage account. 
+[Create an Azure storage account](/azure/storage/common/storage-account-create#create-a-storage-account) for the working directory, and then create a [file share](/azure/storage/files/storage-how-to-create-file-share) within the storage account.
 
 Copy the file share path in the format of:
 `\\storage-account-name.file.core.windows.net\file-share-name`
@@ -71,13 +69,13 @@ Copy the storage access keys in the format of:
 `DefaultEndpointsProtocol=https;AccountName=<Storage-Account-Name>;AccountKey=****;EndpointSuffix=core.windows.net`
 
 Example:
-`DefaultEndpointsProtocol=https;AccountName=replstorage;AccountKey=dYT5hHZVu9aTgIteGfpYE64cfis0mpKTmmc8+EP53GxuRg6TCwe5eTYWrQM4AmQSG5lb3OBskhg==;EndpointSuffix=core.windows.net`
+`DefaultEndpointsProtocol=https;AccountName=replstorage;AccountKey=123456789aBcDeFgHiJkLmNoPqRsTuVwXyZ==;EndpointSuffix=core.windows.net`
 
-For more information, see [Manage storage account access keys](/azure/storage/common/storage-account-keys-manage). 
+For more information, see [Manage storage account access keys](/azure/storage/common/storage-account-keys-manage).
 
 ## 4 - Create a publisher database
 
-Connect to your `sql-mi-pub` managed instance using SQL Server Management Studio and run the following Transact-SQL (T-SQL) code to create your publisher database:
+Connect to your publisher SQL managed instance (`sql-mi-publisher`) using SQL Server Management Studio, and run the following Transact-SQL (T-SQL) code to create your publisher database:
 
 ```sql
 USE [master]
@@ -95,7 +93,6 @@ CREATE TABLE ReplTest (
 )
 GO
 
-
 USE [ReplTran_PUB]
 GO
 
@@ -111,7 +108,7 @@ GO
 
 ## 5 - Create a subscriber database
 
-Connect to your `sql-mi-sub` managed instance using SQL Server Management Studio and run the following T-SQL code to create your empty subscriber database:
+Connect to your subscriber SQL managed instance (`sql-mi-subscriber`) using SQL Server Management Studio, and run the following T-SQL code to create your empty subscriber database:
 
 ```sql
 USE [master]
@@ -132,7 +129,7 @@ GO
 
 ## 6 - Configure distribution
 
-Connect to your `sql-mi-pub` managed instance using SQL Server Management Studio and run the following T-SQL code to configure your distribution database.
+Connect to your publisher SQL managed instance (`sql-mi-publisher`) using SQL Server Management Studio, and run the following T-SQL code to configure your distribution database.
 
 ```sql
 USE [master]
@@ -145,7 +142,7 @@ GO
 
 ## 7 - Configure publisher to use distributor
 
-On your publisher SQL Managed Instance `sql-mi-pub`, change the query execution to [SQLCMD](/sql/ssms/scripting/edit-sqlcmd-scripts-with-query-editor) mode and run the following code to register the new distributor with your publisher.
+On your publisher SQL managed instance (`sql-mi-publisher`), change the query execution to [SQLCMD](/sql/ssms/scripting/edit-sqlcmd-scripts-with-query-editor) mode, and run the following code to register the new distributor with your publisher.
 
 ```sql
 :setvar username loginUsedToAccessSourceManagedInstance
@@ -153,7 +150,7 @@ On your publisher SQL Managed Instance `sql-mi-pub`, change the query execution 
 :setvar file_storage "\\storage-account-name.file.core.windows.net\file-share-name"
 -- example: file_storage "\\replstorage.file.core.windows.net\replshare"
 :setvar file_storage_key "DefaultEndpointsProtocol=https;AccountName=<Storage-Account-Name>;AccountKey=****;EndpointSuffix=core.windows.net"
--- example: file_storage_key "DefaultEndpointsProtocol=https;AccountName=replstorage;AccountKey=dYT5hHZVu9aTgIteGfpYE64cfis0mpKTmmc8+EP53GxuRg6TCwe5eTYWrQM4AmQSG5lb3OBskhg==;EndpointSuffix=core.windows.net"
+-- example: file_storage_key "DefaultEndpointsProtocol=https;AccountName=replstorage;AccountKey=123456789aBcDeFgHiJkLmNoPqRsTuVwXyZ==;EndpointSuffix=core.windows.net"
 
 USE [master]
 EXEC sp_adddistpublisher
@@ -166,10 +163,10 @@ EXEC sp_adddistpublisher
   @storage_connection_string = N'$(file_storage_key)'; -- Remove this parameter for on-premises publishers
 ```
 
-   > [!NOTE]
+   > [!NOTE]  
    > Be sure to use only backslashes (`\`) for the file_storage parameter. Using a forward slash (`/`) can cause an error when connecting to the file share.
 
-This script configures a local publisher on the managed instance, adds a linked server, and creates a set of jobs for the SQL Server agent.
+This script configures a local publisher on the SQL managed instance, adds a linked server, and creates a set of jobs for the SQL Server agent.
 
 ## 8 - Create publication and subscriber
 
@@ -183,7 +180,7 @@ Using [SQLCMD](/sql/ssms/scripting/edit-sqlcmd-scripts-with-query-editor) mode, 
 :setvar publication_name PublishData
 :setvar object ReplTest
 :setvar schema dbo
-:setvar target_server "sql-mi-sub.wdec33262scj9dr27.database.windows.net"
+:setvar target_server "sql-mi-subscriber.wdec33262scj9dr27.database.windows.net"
 :setvar target_username targetLogin
 :setvar target_password targetPassword
 :setvar target_db ReplTran_SUB
@@ -199,7 +196,6 @@ EXEC sp_replicationdboption
 EXEC sp_addpublication
   @publication = N'$(publication_name)',
   @status = N'active';
-
 
 -- Configure your log reader agent
 EXEC sp_changelogreader_agent
@@ -247,7 +243,7 @@ EXEC sp_addpushsubscription_agent
 
 -- Initialize the snapshot
 EXEC sp_startpublication_snapshot
-  @publication = N'$(publication_name)';
+@publication = N'$(publication_name)';
 ```
 
 ## 9 - Modify agent parameters
@@ -262,7 +258,7 @@ update msdb..sysjobsteps set command = command + N' -LoginTimeout 150'
 where subsystem in ('Distribution','LogReader','Snapshot') and command not like '%-LoginTimeout %'
 ```
 
-Run the following T-SQL command again to set the login timeout back to the default value, should you need to do so:
+Run the following T-SQL command again if needed to set the login timeout back to the default value:
 
 ```sql
 -- Increase login timeout to 30
@@ -270,11 +266,11 @@ update msdb..sysjobsteps set command = command + N' -LoginTimeout 30'
 where subsystem in ('Distribution','LogReader','Snapshot') and command not like '%-LoginTimeout %'
 ```
 
-Restart all three agents to apply these changes.
+To apply these changes restart all three agents.
 
 ## 10 - Test replication
 
-Once replication has been configured, you can test it by inserting new items on the publisher and watching the changes propagate to the subscriber.
+Once replication is configured, you can test it by inserting new items on the publisher and watching the changes propagate to the subscriber.
 
 Run the following T-SQL snippet to view the rows on the subscriber:
 
@@ -282,7 +278,7 @@ Run the following T-SQL snippet to view the rows on the subscriber:
 select * from dbo.ReplTest
 ```
 
-Run the following T-SQL snippet to insert additional rows on the publisher, and then check the rows again on the subscriber.
+Run the following T-SQL snippet to insert more rows on the publisher, and then check the rows again on the subscriber.
 
 ```sql
 INSERT INTO ReplTest (ID, c1) VALUES (15, 'pub')
@@ -317,9 +313,9 @@ EXEC sp_dropdistributor @no_checks = 1
 GO
 ```
 
-You can clean up your Azure resources by [deleting the SQL Managed Instance resources from the resource group](/azure/azure-resource-manager/management/manage-resources-portal#delete-resources) and then deleting the resource group `SQLMI-Repl`. 
+You can clean up your Azure resources by [deleting the SQL Managed Instance resources from the resource group](/azure/azure-resource-manager/management/manage-resources-portal#delete-resources) and then deleting the resource group `SQLMI-Repl`.
 
-## Next steps
+## Related content
 
-You can also learn more information about [transactional replication with Azure SQL Managed Instance](replication-transactional-overview.md) or learn to 
-configure replication between a [SQL Managed Instance publisher/distributor and a SQL on Azure VM subscriber](replication-two-instances-and-sql-server-configure-tutorial.md).
+- [Transactional replication with Azure SQL Managed Instance](replication-transactional-overview.md)
+- [Tutorial: Configure transactional replication between Azure SQL Managed Instance and SQL Server](replication-two-instances-and-sql-server-configure-tutorial.md)

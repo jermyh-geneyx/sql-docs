@@ -1,25 +1,24 @@
 ---
-title: "Quickstart: Create managed instance with Terraform"
-description: Learn how to create and deploy SQL Managed Instance with Terraform
+title: "Quickstart: Create Instance with Terraform"
+description: Learn how to create and deploy Azure SQL Managed Instance with Terraform
 author: vladai78
 ms.author: vladiv
 ms.reviewer: mathoma
-ms.date: 12/06/2022
+ms.date: 08/26/2025
 ms.service: azure-sql-managed-instance
 ms.topic: quickstart
-ms.custom: devx-track-terraform
+ms.custom:
+  - devx-track-terraform
 ---
 
 # Quickstart: Create instance with Terraform - Azure SQL Managed Instance
-
 
 Article tested with the following Terraform and Terraform provider versions:
 
 - [Terraform v1.3.5](https://releases.hashicorp.com/terraform/)
 - [AzureRM Provider v.3.0.0](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs)
 
-
-This article shows how to deploy an Azure SQL Managed Instance in a virtual network (vNet) and a subnet associated with a route table and a network security group by using Terraform.
+This article shows how use Terraform to deploy an Azure SQL Managed Instance in a virtual network and a subnet associated with a route table and a network security group.
 
 [!INCLUDE [Terraform abstract](~/../azure-dev-docs-pr/articles/terraform/includes/abstract.md)]
 
@@ -29,32 +28,29 @@ In this article, you learn how to:
 * Create all supporting services for SQL Managed Instance to run on
 * Deploy SQL Managed Instance
 
-
-> [!NOTE]
+> [!NOTE]  
 > The example code in this article is located in the [Azure Terraform GitHub repo](https://github.com/Azure/terraform/tree/master/quickstart/101-managed-instance). See more [articles and sample code showing how to use Terraform to manage Azure resources](/azure/terraform)
 
 ## Prerequisites
 
 [!INCLUDE [open-source-devops-prereqs-azure-subscription.md](~/../azure-dev-docs-pr/articles/includes/open-source-devops-prereqs-azure-subscription.md)]
 
-- An Azure subscription. If you don't have an Azure subscription, [create a free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?icid=azurefreeaccount)
 - In the general case, your user needs to have the role [SQL Managed Instance Contributor](/azure/role-based-access-control/built-in-roles#sql-managed-instance-contributor) assigned at subscription scope.
-- If provisioning in a subnet that is already delegated to Azure SQL Managed Instance, your user only needs the Microsoft.Sql/managedInstances/write permission assigned at subscription scope.
+- If provisioning in a subnet that is already delegated to Azure SQL Managed Instance, your user only needs the **Microsoft.Sql/managedInstances/write** permission assigned at subscription scope.
 - [Install and configure Terraform](/azure/developer/terraform/quickstart-configure)
 
 ## Implement the Terraform code
 
 1. Create a directory in which to test and run the sample Terraform code and make it the current directory.
 
-2. Create a file named `providers.tf` and insert the following code:
+1. Create a file named `providers.tf` and insert the following code:
    [!code-terraform[master](~/../terraform_scripts/quickstart/101-managed-instance/providers.tf)]
 
-3. Create a file named `main.tf` and insert the following code:
+1. Create a file named `main.tf` and insert the following code:
    [!code-terraform[master](~/../terraform_scripts/quickstart/101-managed-instance/main.tf)]
 
-4. Create a file named `variables.tf` and insert the following code:
+1. Create a file named `variables.tf` and insert the following code:
    [!code-terraform[master](~/../terraform_scripts/quickstart/101-managed-instance/variables.tf)]
-   
 
 ## Initialize Terraform
 
@@ -70,8 +66,7 @@ In this article, you learn how to:
 
 ## Verify the results
 
-To verify the results within the Azure portal, browse to the new resource group. The new instance will be in the new resource group after it has been deployed. To see the deployment progress keep your PowerShell open or navigate to the Azure portal, search for SQL Managed Instance and then
-filter all instances by status). 
+To verify the results within the Azure portal, browse to the new resource group. The new instance will be in the new resource group after it's deployed. To see the deployment progress keep your PowerShell open or navigate to the Azure portal, search for SQL Managed Instance and then filter all instances by status.
 
 ## Clean up resources
 
@@ -81,7 +76,7 @@ filter all instances by status).
 
 [Troubleshoot common problems when using Terraform on Azure](/azure/developer/terraform/troubleshoot)
 
-## Next steps
+## Next step
 
 > [!div class="nextstepaction"]
 > [Learn more about Azure SQL Managed Instance](index.yml)

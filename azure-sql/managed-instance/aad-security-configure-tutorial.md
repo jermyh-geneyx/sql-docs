@@ -1,32 +1,34 @@
 ---
-title: Secure with Microsoft Entra logins
+title: Secure with Microsoft Entra Logins
 description: Learn about techniques and features to secure Azure SQL Managed Instance, and use Microsoft Entra server principals (logins)
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: vanto, mathoma
-ms.date: 09/27/2023
+ms.date: 08/26/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: security
 ms.topic: tutorial
-ms.custom: sqldbrb=1
+ms.update-cycle: 365-days
+ms.custom:
+  - sqldbrb=1
 ---
-# Tutorial: Secure with Microsoft Entra logins - Azure SQL Managed Instance 
-[!INCLUDE[appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
+# Tutorial: Secure with Microsoft Entra logins - Azure SQL Managed Instance
+
+[!INCLUDE [appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
 
 In this article, learn to use server principals (logins) backed by Microsoft Entra ID ([formerly Azure Active Directory](/entra/fundamentals/new-name)) to secure an [Azure SQL Managed Instance](sql-managed-instance-paas-overview.md).
-
 
 In this tutorial, you learn how to:
 
 > [!div class="checklist"]
 >
-> - Create a Microsoft Entra login for a managed instance
-> - Grant permissions to logins in a managed instance
-> - Create Microsoft Entra users from logins
-> - Assign permissions to users and manage database security
-> - Use impersonation with users
-> - Use cross-database queries with users
-> - Learn about security features, such as threat protection, auditing, data masking, and encryption
+> - Create a Microsoft Entra login for a SQL managed instance.
+> - Grant permissions to logins in a SQL managed instance.
+> - Create Microsoft Entra users from logins.
+> - Assign permissions to users, and manage database security.
+> - Use impersonation with users.
+> - Use cross-database queries with users.
+> - Learn about security features, such as threat protection, auditing, data masking, and encryption.
 
 [!INCLUDE [entra-id](../includes/entra-id.md)]
 
@@ -35,300 +37,300 @@ In this tutorial, you learn how to:
 To complete the tutorial, make sure you have the following prerequisites:
 
 - [SQL Server Management Studio (SSMS)](/sql/ssms/download-sql-server-management-studio-ssms)
-- A managed instance
-  - Follow this article: [Quickstart: Create a managed instance](instance-create-quickstart.md)
-- Able to access your managed instance and [provisioned a Microsoft Entra administrator for the managed instance](../database/authentication-aad-configure.md#provision-azure-ad-admin-sql-managed-instance). To learn more, see:
-  - [Connect your application to a managed instance](connect-application-instance.md)
+- A SQL managed instance
+  - Follow this article: [Quickstart: Create a SQL managed instance](instance-create-quickstart.md)
+- Able to access your SQL managed instance and [provisioned a Microsoft Entra administrator for the SQL managed instance](../database/authentication-aad-configure.md#provision-azure-ad-admin-sql-managed-instance). To learn more, see:
+  - [Connect your application to a SQL managed instance](connect-application-instance.md)
   - [SQL Managed Instance connectivity architecture](connectivity-architecture-overview.md)
   - [Configure and manage Microsoft Entra authentication with SQL](../database/authentication-aad-configure.md)
 
-## Limit access 
+## Limit access
 
-Managed instances can be accessed through a private IP address. Much like an isolated SQL Server environment, applications or users need access to the SQL Managed Instance network (VNet) before a connection can be established. For more information, see [Connect your application to SQL Managed Instance](connect-application-instance.md).
+SQL managed instances can be accessed through a private IP address. Much like an isolated SQL Server environment, applications or users need access to the SQL Managed Instance network (VNet) before a connection can be established. For more information, see [Connect your application to SQL Managed Instance](connect-application-instance.md).
 
-It is also possible to configure a service endpoint on a managed instance, which allows for public connections in the same fashion as for Azure SQL Database.
+It's also possible to configure a service endpoint on a SQL managed instance, which allows for public connections in the same fashion as for Azure SQL Database.
 For more information, see [Configure public endpoint in Azure SQL Managed Instance](public-endpoint-configure.md).
 
-<a name='create-an-azure-ad-server-principal-login-using-ssms'></a>
+<a id="create-an-azure-ad-server-principal-login-using-ssms"></a>
 
 ## Create a Microsoft Entra login using SSMS
 
-The first Microsoft Entra login can be created by the SQL admin, or the Microsoft Entra admin created during provisioning. For more information, see [Provision a Microsoft Entra administrator for SQL Managed Instance](../database/authentication-aad-configure.md#provision-azure-ad-admin-sql-managed-instance).
+The SQL administrator can create the first Microsoft Entra login, or the Microsoft Entra admin created during provisioning. For more information, see [Provision a Microsoft Entra administrator for SQL Managed Instance](../database/authentication-aad-configure.md#provision-azure-ad-admin-sql-managed-instance).
 
 See the following articles for examples of connecting to SQL Managed Instance:
 
 - [Quickstart: Configure Azure VM to connect to SQL Managed Instance](connect-vm-instance-configure.md)
 - [Quickstart: Configure a point-to-site connection to SQL Managed Instance from on-premises](point-to-site-p2s-configure.md)
 
-1. Connect to your managed instance with either a `sysadmin` SQL login or the Microsoft Entra admin by using [SQL Server Management Studio (SSMS)](point-to-site-p2s-configure.md#connect-with-ssms).
+1. Connect to your SQL managed instance with either a **sysadmin** SQL login or the Microsoft Entra admin by using [SQL Server Management Studio (SSMS)](point-to-site-p2s-configure.md#connect-with-ssms).
 
-2. In **Object Explorer**, right-click the server and choose **New Query**.
+1. In **Object Explorer**, right-click the server and choose **New Query**.
 
-3. In the query window, use the following syntax to create a login for a local Microsoft Entra account:
+1. In the query window, use the following syntax to create a login for a local Microsoft Entra account:
 
-    ```sql
-    USE master
-    GO
-    CREATE LOGIN login_name FROM EXTERNAL PROVIDER
-    GO
-    ```
+   ```sql
+   USE master
+   GO
+   CREATE LOGIN login_name FROM EXTERNAL PROVIDER
+   GO
+   ```
 
-    This example creates a login for the account nativeuser@aadsqlmi.onmicrosoft.com.
+   This example creates a login for the account `nativeuser@aadsqlmi.onmicrosoft.com`.
 
-    ```sql
-    USE master
-    GO
-    CREATE LOGIN [nativeuser@aadsqlmi.onmicrosoft.com] FROM EXTERNAL PROVIDER
-    GO
-    ```
+   ```sql
+   USE master
+   GO
+   CREATE LOGIN [nativeuser@aadsqlmi.onmicrosoft.com] FROM EXTERNAL PROVIDER
+   GO
+   ```
 
-4. On the toolbar, select **Execute** to create the login.
+1. On the toolbar, select **Execute** to create the login.
 
-5. Check the newly added login, by executing the following T-SQL command:
+1. Check the newly added login by executing the following T-SQL command:
 
-    ```sql
-    SELECT *  
-    FROM sys.server_principals;  
-    GO
-    ```
+   ```sql
+   SELECT *
+   FROM sys.server_principals;
+   GO
+   ```
 
-    ![Screenshot of the Results tab in the S S M S Object Explorer showing the name, principal_id, sid, type, and type_desc of the newly added login.](./media/aad-security-configure-tutorial/native-login.png)
+   ![Screenshot of the Results tab in the SSMS Object Explorer showing the name, principal_id, sid, type, and type_desc of the newly added login.](./media/aad-security-configure-tutorial/native-login.png)
 
 For more information, see [CREATE LOGIN](/sql/t-sql/statements/create-login-transact-sql?view=azuresqldb-mi-current&preserve-view=true).
 
 ## Grant permissions to create logins
 
-Existing logins must have appropriate permissions or be part of appropriate server roles to create other Microsoft Entra logins. 
+Existing logins must have appropriate permissions or be part of appropriate server roles to create other Microsoft Entra logins.
 
 ### SQL auth logins
 
-- If the login is a SQL auth-based server principal, it must be assigned the `sysadmin` role to create logins for Microsoft Entra accounts.
+If the login is a SQL auth-based server principal, it must be assigned the **sysadmin** role to create logins for Microsoft Entra accounts.
 
-<a name='azure-ad-authentication'></a>
+<a id="azure-ad-authentication"></a>
 
 ### Microsoft Entra auth logins
 
-- If the login is a Microsoft Entra server principal, it must be assigned either the `sysadmin` or `securityadmin` server role to create logins for other Microsoft Entra users, groups, and applications.
-- At a minimum, the **ALTER ANY LOGIN** permission must be granted to create other Microsoft Entra logins.
-- By default, the standard permissions granted to newly created Microsoft Entra logins in `master` are: **CONNECT SQL** and **VIEW ANY DATABASE**.
-- The `sysadmin` server role can be granted to many Microsoft Entra logins within a managed instance.
+- If the login is a Microsoft Entra server principal, it must be assigned either the **sysadmin** or **securityadmin** server role to create logins for other Microsoft Entra users, groups, and applications.
+- At a minimum, the `ALTER ANY LOGIN` permission must be granted to create other Microsoft Entra logins.
+- By default, the standard permissions granted to newly created Microsoft Entra logins in `master` are `CONNECT SQL` and `VIEW ANY DATABASE`.
+- The **sysadmin** server role can be granted to many Microsoft Entra logins within a SQL managed instance.
 
-To add the login to the `sysadmin` server role:
+To add the login to the **sysadmin** server role:
 
-1. Log into the managed instance again, or use the existing connection with the Microsoft Entra admin or SQL principal that is a `sysadmin`.
+1. Log in to the SQL managed instance again, or use the existing connection with the Microsoft Entra admin or SQL principal that is a **sysadmin**.
 
 1. In **Object Explorer**, right-click the server and choose **New Query**.
 
-1. Grant the Microsoft Entra login the `sysadmin` server role by using the following T-SQL syntax:
+1. Grant the Microsoft Entra login the **sysadmin** server role by using the following T-SQL syntax:
 
-    ```sql
-    ALTER SERVER ROLE sysadmin ADD MEMBER login_name
-    GO
-    ```
+   ```sql
+   ALTER SERVER ROLE sysadmin ADD MEMBER login_name
+   GO
+   ```
 
-    The following example grants the `sysadmin` server role to the login nativeuser@aadsqlmi.onmicrosoft.com
+   The following example grants the **sysadmin** server role to the login `nativeuser@aadsqlmi.onmicrosoft.com`:
 
-    ```sql
-    ALTER SERVER ROLE sysadmin ADD MEMBER [nativeuser@aadsqlmi.onmicrosoft.com]
-    GO
-    ```
+   ```sql
+   ALTER SERVER ROLE sysadmin ADD MEMBER [nativeuser@aadsqlmi.onmicrosoft.com]
+   GO
+   ```
 
-<a name='create-additional-azure-ad-server-principals-logins-using-ssms'></a>
+<a id="create-additional-azure-ad-server-principals-logins-using-ssms"></a>
 
 ## Create additional Microsoft Entra logins using SSMS
 
-Once the Microsoft Entra login has been created and granted `sysadmin` privileges, that login can create additional logins using the **FROM EXTERNAL PROVIDER** clause with **CREATE LOGIN**.
+Once the Microsoft Entra login has been created and granted **sysadmin** privileges, that login can create additional logins using the `FROM EXTERNAL PROVIDER` clause with `CREATE LOGIN`.
 
-1. Connect to the managed instance with the Microsoft Entra login by selecting **Connect to Server** in SQL Server Management Studio (SSMS). 
-    1. Enter your SQL Managed Instance host name in **Server name**. 
-    2. For **Authentication**, select **Active Directory - Universal with MFA support** to bring up a multifactor authentication login window. Sign in. For more information, see [Universal Authentication (SSMS support for multifactor authentication)](../database/authentication-mfa-ssms-overview.md).
+1. Connect to the SQL managed instance with the Microsoft Entra login by selecting **Connect to Server** in SQL Server Management Studio (SSMS).
+   1. Enter your SQL Managed Instance host name in **Server name**.
+   1. For **Authentication**, select **Microsoft Entra MFA** to bring up a multifactor authentication login window. Sign in. For more information, see [Universal Authentication (SSMS support for multifactor authentication)](../database/authentication-mfa-ssms-overview.md).
 1. In **Object Explorer**, right-click the server and choose **New Query**.
 1. In the query window, use the following syntax to create a login for another Microsoft Entra account:
 
-    ```sql
-    USE master
-    GO
-    CREATE LOGIN login_name FROM EXTERNAL PROVIDER
-    GO
-    ```
+   ```sql
+   USE master
+   GO
+   CREATE LOGIN login_name FROM EXTERNAL PROVIDER
+   GO
+   ```
 
-    This example creates a login for the Microsoft Entra user bob@aadsqlmi.net, whose domain aadsqlmi.net is [federated](/azure/active-directory/hybrid/connect/whatis-fed) with the Microsoft Entra aadsqlmi.onmicrosoft.com domain.
+   This example creates a login for the Microsoft Entra user `bob@aadsqlmi.net`, whose domain `aadsqlmi.net` is [federated](/azure/active-directory/hybrid/connect/whatis-fed) with the Microsoft Entra `aadsqlmi.onmicrosoft.com` domain.
 
-    Execute the following T-SQL command. Federated Microsoft Entra accounts are the SQL Managed Instance replacements for on-premises Windows logins and users.
+   Execute the following T-SQL command. Federated Microsoft Entra accounts are the SQL Managed Instance replacements for on-premises Windows logins and users.
 
-    ```sql
-    USE master
-    GO
-    CREATE LOGIN [bob@aadsqlmi.net] FROM EXTERNAL PROVIDER
-    GO
-    ```
+   ```sql
+   USE master
+   GO
+   CREATE LOGIN [bob@aadsqlmi.net] FROM EXTERNAL PROVIDER
+   GO
+   ```
 
-1. Create a database in the managed instance using the [CREATE DATABASE](/sql/t-sql/statements/create-database-transact-sql?view=azuresqldb-mi-current&preserve-view=true) syntax. This database will be used to test user logins in the next section.
-    1. In **Object Explorer**, right-click the server and choose **New Query**.
-    1. In the query window, use the following syntax to create a database named **MyMITestDB**.
-
-        ```sql
-        CREATE DATABASE MyMITestDB;
-        GO
-        ```
-
-1. Create a SQL Managed Instance login for a group in Microsoft Entra ID. The group needs to exist in Microsoft Entra ID before adding the login to SQL Managed Instance. See [Create a basic group and add members using Microsoft Entra ID](/azure/active-directory/fundamentals/active-directory-groups-create-azure-portal). Create a group _mygroup_ and add members to this group.
-
-1. Open a new query window in SQL Server Management Studio.
-
-    This example assumes there exists a group called _mygroup_ in Microsoft Entra ID. Execute the following command:
-
-    ```sql
-    USE master
-    GO
-    CREATE LOGIN [mygroup] FROM EXTERNAL PROVIDER
-    GO
-    ```
-
-1. As a test, log into the managed instance with the newly created login or group. Open a new connection to the managed instance, and use the new login when authenticating.
-1. In **Object Explorer**, right-click the server and choose **New Query** for the new connection.
-1. Check server permissions for the newly created Microsoft Entra login by executing the following command:
+1. Create a database in the SQL managed instance using the [CREATE DATABASE](/sql/t-sql/statements/create-database-transact-sql?view=azuresqldb-mi-current&preserve-view=true) syntax. This database will be used to test user logins in the next section.
+   1. In **Object Explorer**, right-click the server and choose **New Query**.
+   1. In the query window, use the following syntax to create a database named **MyMITestDB**.
 
       ```sql
-      SELECT * FROM sys.fn_my_permissions (NULL, 'DATABASE')
+      CREATE DATABASE MyMITestDB;
       GO
       ```
 
+1. Create a SQL Managed Instance login for a group in Microsoft Entra ID. The group needs to exist in Microsoft Entra ID before adding the login to SQL Managed Instance. See [Create a basic group and add members using Microsoft Entra ID](/azure/active-directory/fundamentals/active-directory-groups-create-azure-portal). Create a group *mygroup*, and add members to this group.
+
+1. Open a new query window in SQL Server Management Studio.
+
+   This example assumes there exists a group called *mygroup* in Microsoft Entra ID. Execute the following command:
+
+   ```sql
+   USE master
+   GO
+   CREATE LOGIN [mygroup] FROM EXTERNAL PROVIDER
+   GO
+   ```
+
+1. As a test, log in to the SQL managed instance with the newly created login or group. Open a new connection to the SQL managed instance, and use the new login when authenticating.
+1. In **Object Explorer**, right-click the server and choose **New Query** for the new connection.
+1. Check server permissions for the newly created Microsoft Entra login by executing the following command:
+
+   ```sql
+   SELECT * FROM sys.fn_my_permissions (NULL, 'DATABASE')
+   GO
+   ```
+
 Azure SQL's support of Microsoft Entra principals as users and logins extends to [Microsoft Entra External ID](/entra/external-id/user-properties) internal and external guest users. Guest users, both individually and as part of a group, can be used the same as any other Microsoft Entra user in Azure SQL. If you want guest users to be able to create other Microsoft Entra server logins or database users, they must have permissions to read other identities in the Microsoft Entra directory. This permission is configured at the directory-level. For more information, see [guest access permissions in Microsoft Entra ID](/entra/identity/users/users-restrict-guest-permissions).
 
-<a name='create-an-azure-ad-user-from-the-azure-ad-server-principal-login'></a>
+<a id="create-an-azure-ad-user-from-the-azure-ad-server-principal-login"></a>
 
 ## Create a Microsoft Entra user from the Microsoft Entra login
 
-Authorization to individual databases works much the same way in SQL Managed Instance as with databases in SQL Server.  You can create user from an existing login in a database that is granted permissions to that database, or added to a database role.
+Authorization to individual databases works much the same way in SQL Managed Instance as with databases in SQL Server. You can create a user from an existing login in a database that's granted permissions to that database or added to a database role.
 
-Now that we've created a database called **MyMITestDB**, and a login that only has default permissions, the next step is to create a user from that login. At the moment, the login can connect to the managed instance, and see all the databases, but can't interact with the databases. If you sign in with the Microsoft Entra account that has the default permissions, and try to expand the newly created database, you'll see the following error:
+Now that we've created a database called **MyMITestDB** and a login that only has default permissions, the next step is to create a user from that login. At the moment, the login can connect to the SQL managed instance and see all the databases, but it can't interact with the databases. If you sign in with the Microsoft Entra account that has the default permissions and try to expand the newly created database, you'll see the following error:
 
-![Screenshot of an error message from the the S S M S Object Explorer that reads "The database MyMITestDB is not accessible. (ObjectExplorer)".](./media/aad-security-configure-tutorial/ssms-db-not-accessible.png)
+![Screenshot of an error message from the the SSMS Object Explorer that reads "The database MyMITestDB is not accessible. (ObjectExplorer)".](./media/aad-security-configure-tutorial/ssms-db-not-accessible.png)
 
 For more information on granting database permissions, see [Getting Started with Database Engine Permissions](/sql/relational-databases/security/authentication-access/getting-started-with-database-engine-permissions).
 
-<a name='create-an-azure-ad-user-and-create-a-sample-table'></a>
+<a id="create-an-azure-ad-user-and-create-a-sample-table"></a>
 
 ### Create a Microsoft Entra user and create a sample table
 
-> [!NOTE]
+> [!NOTE]  
 > There are some limitations when a user signs in as part of a Microsoft Entra group.
-> For example, a call to `SUSER_SID` returns `NULL`, since the given Microsoft Entra user is not part of the `sys.server_principals` table.
-> Therefore, access to certain stored procedures or a list of granted permissions may be limited in this case.
+> For example, a call to `SUSER_SID` returns `NULL`, since the given Microsoft Entra user isn't part of the [sys.server_principals](/sql/relational-databases/system-catalog-views/sys-server-principals-transact-sql) table.
+> Therefore, access to certain stored procedures or a list of granted permissions might be limited in this case.
 
-1. Log into your managed instance using a `sysadmin` account using SQL Server Management Studio.
+1. Log in to your SQL managed instance with a **sysadmin** account in SQL Server Management Studio.
 1. In **Object Explorer**, right-click the server and choose **New Query**.
 1. In the query window, use the following syntax to create a user from a Microsoft Entra login:
 
-    ```sql
-    USE <Database Name> -- provide your database name
-    GO
-    CREATE USER user_name FROM LOGIN login_name
-    GO
-    ```
+   ```sql
+   USE <Database Name> -- provide your database name
+   GO
+   CREATE USER user_name FROM LOGIN login_name
+   GO
+   ```
 
-    The following example creates a user bob@aadsqlmi.net from the login bob@aadsqlmi.net:
+   The following example creates a user `bob@aadsqlmi.net` from the login `bob@aadsqlmi.net`:
 
-    ```sql
-    USE MyMITestDB
-    GO
-    CREATE USER [bob@aadsqlmi.net] FROM LOGIN [bob@aadsqlmi.net]
-    GO
-    ```
+   ```sql
+   USE MyMITestDB
+   GO
+   CREATE USER [bob@aadsqlmi.net] FROM LOGIN [bob@aadsqlmi.net]
+   GO
+   ```
 
 1. It's also supported to create a Microsoft Entra user from a Microsoft Entra login that is a group.
 
-    The following example creates a login for the Microsoft Entra group _mygroup_ that  exists in your Microsoft Entra tenant.
+   The following example creates a login for the Microsoft Entra group *mygroup* that exists in your Microsoft Entra tenant:
 
-    ```sql
-    USE MyMITestDB
-    GO
-    CREATE USER [mygroup] FROM LOGIN [mygroup]
-    GO
-    ```
+   ```sql
+   USE MyMITestDB
+   GO
+   CREATE USER [mygroup] FROM LOGIN [mygroup]
+   GO
+   ```
 
-    All users that belong to *mygroup* can access the **MyMITestDB** database.
+   All users that belong to *mygroup* can access the **MyMITestDB** database.
 
-    > [!IMPORTANT]
-    > When creating a **USER** from a Microsoft Entra login, specify the user_name as the same login_name from **LOGIN**.
+   > [!IMPORTANT]  
+   > When creating a **USER** from a Microsoft Entra login, specify the user_name as the same login_name from `LOGIN`.
 
-    For more information, see [CREATE USER](/sql/t-sql/statements/create-user-transact-sql?view=azuresqldb-mi-current&preserve-view=true).
+   For more information, see [CREATE USER](/sql/t-sql/statements/create-user-transact-sql?view=azuresqldb-mi-current&preserve-view=true).
 
 1. In a new query window, create a test table using the following T-SQL command:
 
-    ```sql
-    USE MyMITestDB
-    GO
-    CREATE TABLE TestTable
-    (
-    AccountNum varchar(10),
-    City varchar(255),
-    Name varchar(255),
-    State varchar(2)
-    );
-    ```
+   ```sql
+   USE MyMITestDB
+   GO
+   CREATE TABLE TestTable
+   (
+   AccountNum varchar(10),
+   City varchar(255),
+   Name varchar(255),
+   State varchar(2)
+   );
+   ```
 
-1. Create a connection in SSMS with the user that was created. You'll notice that you cannot see the table **TestTable** that was created by the `sysadmin` earlier. We need to provide the user with permissions to read data from the database.
+1. Create a connection in SSMS with the user that was created. You'll notice that you can't see the table **TestTable** that was created by the **sysadmin** earlier. We need to provide the user with permissions to read data from the database.
 
 1. You can check the current permission the user has by executing the following command:
 
-    ```sql
-    SELECT * FROM sys.fn_my_permissions('MyMITestDB','DATABASE')
-    GO
-    ```
+   ```sql
+   SELECT * FROM sys.fn_my_permissions('MyMITestDB','DATABASE')
+   GO
+   ```
 
 ### Add users to database-level roles
 
 For the user to see data in the database, we can provide [database-level roles](/sql/relational-databases/security/authentication-access/database-level-roles) to the user.
 
-1. Log into your managed instance using a `sysadmin` account using SQL Server Management Studio.
+1. Log in to your SQL managed instance with a **sysadmin** account using SQL Server Management Studio.
 
 1. In **Object Explorer**, right-click the server and choose **New Query**.
 
-1. Grant the Microsoft Entra user the `db_datareader` database role by using the following T-SQL syntax:
+1. Grant the Microsoft Entra user the **db_datareader** database role by using the following T-SQL syntax:
 
-    ```sql
-    Use <Database Name> -- provide your database name
-    ALTER ROLE db_datareader ADD MEMBER user_name
-    GO
-    ```
+   ```sql
+   Use <Database Name> -- provide your database name
+   ALTER ROLE db_datareader ADD MEMBER user_name
+   GO
+   ```
 
-    The following example provides the user bob@aadsqlmi.net and the group _mygroup_ with `db_datareader` permissions on the **MyMITestDB** database:
+   The following example provides the user `bob@aadsqlmi.net` and the group *mygroup* with **db_datareader** permissions on the **MyMITestDB** database:
 
-    ```sql
-    USE MyMITestDB
-    GO
-    ALTER ROLE db_datareader ADD MEMBER [bob@aadsqlmi.net]
-    GO
-    ALTER ROLE db_datareader ADD MEMBER [mygroup]
-    GO
-    ```
+   ```sql
+   USE MyMITestDB
+   GO
+   ALTER ROLE db_datareader ADD MEMBER [bob@aadsqlmi.net]
+   GO
+   ALTER ROLE db_datareader ADD MEMBER [mygroup]
+   GO
+   ```
 
-1. Check the Microsoft Entra user that was created in the database exists by executing the following command:
+1. Check that the Microsoft Entra user that was created in the database exists by executing the following command:
 
-    ```sql
-    SELECT * FROM sys.database_principals
-    GO
-    ```
+   ```sql
+   SELECT * FROM sys.database_principals
+   GO
+   ```
 
-1. Create a new connection to the managed instance with the user that has been added to the `db_datareader` role.
+1. Create a new connection to the SQL managed instance with the user that has been added to the **db_datareader** role.
 1. Expand the database in **Object Explorer** to see the table.
 
-    ![Screenshot from Object Explorer in S S M S showing the folder structure for Tables in MyMITestDB. The dbo.TestTable folder is highlighted.](./media/aad-security-configure-tutorial/ssms-test-table.png)
+   ![Screenshot from Object Explorer in SSMS showing the folder structure for Tables in MyMITestDB. The dbo.TestTable folder is highlighted.](./media/aad-security-configure-tutorial/ssms-test-table.png)
 
-1. Open a new query window and execute the following SELECT statement:
+1. Open a new query window and execute the following `SELECT` statement:
 
-    ```sql
-    SELECT *
-    FROM TestTable
-    ```
+   ```sql
+   SELECT *
+   FROM TestTable
+   ```
 
-    Are you able to see data from the table? You should see the columns being returned.
+   Are you able to see data from the table? You should see the columns being returned as demonstrated in the following screenshot: 
 
-    ![Screenshot of the Results tab in the S S M S Object Explorer showing the table column headers AccountNum, City, Name, and State.](./media/aad-security-configure-tutorial/ssms-test-table-query.png)
+   ![Screenshot of the Results tab in the SSMS Object Explorer showing the table column headers AccountNum, City, Name, and State.](./media/aad-security-configure-tutorial/ssms-test-table-query.png)
 
-<a name='impersonate-azure-ad-server-level-principals-logins'></a>
+<a id="impersonate-azure-ad-server-level-principals-logins"></a>
 
 ## Impersonate Microsoft Entra logins
 
@@ -336,113 +338,104 @@ SQL Managed Instance supports the impersonation of Microsoft Entra logins.
 
 ### Test impersonation
 
-1. Log into your managed instance using a `sysadmin` account using SQL Server Management Studio.
+1. Log in to your SQL managed instance with a **sysadmin** account using SQL Server Management Studio.
 
 1. In **Object Explorer**, right-click the server and choose **New Query**.
 
 1. In the query window, use the following command to create a new stored procedure:
 
-    ```sql
-    USE MyMITestDB
-    GO  
-    CREATE PROCEDURE dbo.usp_Demo  
-    WITH EXECUTE AS 'bob@aadsqlmi.net'  
-    AS  
-    SELECT user_name();  
-    GO
-    ```
+   ```sql
+   USE MyMITestDB
+   GO
+   CREATE PROCEDURE dbo.usp_Demo
+   WITH EXECUTE AS 'bob@aadsqlmi.net'
+   AS
+   SELECT user_name();
+   GO
+   ```
 
-1. Use the following command to see that the user you're impersonating when executing the stored procedure is **bob\@aadsqlmi.net**.
+1. Use the following command to see that the user you're impersonating when executing the stored procedure is `bob@aadsqlmi.net`.
 
-    ```sql
-    Exec dbo.usp_Demo
-    ```
+   ```sql
+   Exec dbo.usp_Demo
+   ```
 
-1. Test impersonation by using the EXECUTE AS LOGIN statement:
+1. Test impersonation by using the `EXECUTE AS LOGIN` statement:
 
-    ```sql
-    EXECUTE AS LOGIN = 'bob@aadsqlmi.net'
-    GO
-    SELECT SUSER_SNAME()
-    REVERT
-    GO
-    ```
+   ```sql
+   EXECUTE AS LOGIN = 'bob@aadsqlmi.net'
+   GO
+   SELECT SUSER_SNAME()
+   REVERT
+   GO
+   ```
 
-> [!NOTE]
-> Only SQL server-level logins that are part of the `sysadmin` role can execute the following operations targeting Microsoft Entra principals:
+> [!NOTE]  
+> Only SQL server-level logins that are part of the **sysadmin** role can execute the following operations targeting Microsoft Entra principals:
 >
-> - EXECUTE AS USER
-> - EXECUTE AS LOGIN
+> - `EXECUTE AS USER`
+> - `EXECUTE AS LOGIN`
 
 ## Use cross-database queries
 
 Cross-database queries are supported for Microsoft Entra accounts with Microsoft Entra logins. To test a cross-database query with a Microsoft Entra group, we need to create another database and table. You can skip creating another database and table if one already exists.
 
-1. Log into your managed instance using a `sysadmin` account using SQL Server Management Studio.
+1. Log in to your SQL managed instance with a **sysadmin** account using SQL Server Management Studio.
 1. In **Object Explorer**, right-click the server and choose **New Query**.
 1. In the query window, use the following command to create a database named **MyMITestDB2** and table named **TestTable2**:
 
-    ```sql
-    CREATE DATABASE MyMITestDB2;
-    GO
-    USE MyMITestDB2
-    GO
-    CREATE TABLE TestTable2
-    (
-    EmpId varchar(10),
-    FirstName varchar(255),
-    LastName varchar(255),
-    Status varchar(10)
-    );
-    ```
+   ```sql
+   CREATE DATABASE MyMITestDB2;
+   GO
+   USE MyMITestDB2
+   GO
+   CREATE TABLE TestTable2
+   (
+   EmpId varchar(10),
+   FirstName varchar(255),
+   LastName varchar(255),
+   Status varchar(10)
+   );
+   ```
 
-1. In a new query window, execute the following command to create the user _mygroup_ in the new database **MyMITestDB2**, and grant SELECT permissions on that database to _mygroup_:
+1. In a new query window, execute the following command to create the user *mygroup* in the new database **MyMITestDB2**, and grant `SELECT` permissions on that database to *mygroup*:
 
-    ```sql
-    USE MyMITestDB2
-    GO
-    CREATE USER [mygroup] FROM LOGIN [mygroup]
-    GO
-    GRANT SELECT TO [mygroup]
-    GO
-    ```
+   ```sql
+   USE MyMITestDB2
+   GO
+   CREATE USER [mygroup] FROM LOGIN [mygroup]
+   GO
+   GRANT SELECT TO [mygroup]
+   GO
+   ```
 
-1. Sign into the managed instance using SQL Server Management Studio as a member of the Microsoft Entra group _mygroup_. Open a new query window and execute the cross-database SELECT statement:
+1. Sign into the SQL managed instance using SQL Server Management Studio as a member of the Microsoft Entra group *mygroup*. Open a new query window and execute the cross-database `SELECT` statement:
 
-    ```sql
-    USE MyMITestDB
-    SELECT * FROM MyMITestDB2..TestTable2
-    GO
-    ```
+   ```sql
+   USE MyMITestDB
+   SELECT * FROM MyMITestDB2..TestTable2
+   GO
+   ```
 
-    You should see the table results from **TestTable2**.
+   You should see the table results from **TestTable2**.
 
 ## Additional supported scenarios
 
 - SQL Agent management and job executions are supported for Microsoft Entra logins.
-- Database backup and restore operations can be executed by Microsoft Entra logins.
+- Microsoft Entra logins can execute database backup and restore operations.
 - [Auditing](auditing-configure.md) of all statements related to Microsoft Entra logins and authentication events.
-- Dedicated administrator connection for Microsoft Entra logins that are members of the `sysadmin` server-role.
+- Dedicated administrator connection for Microsoft Entra logins that are members of the **sysadmin** server-role.
 - Microsoft Entra logins are supported with using the [sqlcmd utility](/sql/tools/sqlcmd-utility) and [SQL Server Management Studio](/sql/ssms/download-sql-server-management-studio-ssms) tool.
 - Logon triggers are supported for logon events coming from Microsoft Entra logins.
 - Service Broker and DB mail can be setup using Microsoft Entra logins.
 
-## Next steps
+## Related content
 
-### Enable security features
-
-See the [SQL Managed Instance security features](sql-managed-instance-paas-overview.md#security-features) article for a comprehensive list of ways to secure your database. The following security features are discussed:
-
-- [SQL Managed Instance auditing](auditing-configure.md)
+- [SQL Managed Instance security features](sql-managed-instance-paas-overview.md#security-features)
+- [Get started with Azure SQL Managed Instance auditing](auditing-configure.md)
 - [Always Encrypted](/sql/relational-databases/security/encryption/always-encrypted-database-engine)
-- [Threat detection](threat-detection-configure.md)
+- [Configure Advanced Threat Protection in Azure SQL Managed Instance](threat-detection-configure.md)
 - [Dynamic data masking](/sql/relational-databases/security/dynamic-data-masking)
 - [Row-level security](/sql/relational-databases/security/row-level-security)
 - [Transparent data encryption (TDE)](/sql/relational-databases/security/encryption/transparent-data-encryption-azure-sql)
-
-### SQL Managed Instance capabilities
-
-For a complete overview of SQL Managed Instance capabilities, see:
-
-> [!div class="nextstepaction"]
-> [SQL Managed Instance capabilities](sql-managed-instance-paas-overview.md)
+- [What is Azure SQL Managed Instance?](sql-managed-instance-paas-overview.md)

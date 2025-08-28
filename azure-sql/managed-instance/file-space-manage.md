@@ -1,16 +1,17 @@
 ---
-title: Database file space management
+title: Database File Space Management
 description: This page describes how to manage file space with databases in Azure SQL Managed Instance.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: mathoma, blakhani
-ms.date: 07/22/2025
+ms.date: 08/26/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: deployment-configuration
 ms.topic: best-practice
-monikerRange: "= azuresql-mi"
+monikerRange: "=azuresql-mi"
 ---
 # Manage file space for databases in Azure SQL Managed Instance
+
 [!INCLUDE [appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
 
 > [!div class="op_single_selector"]
@@ -50,52 +51,56 @@ SELECT file_id, type_desc,
 FROM sys.database_files;
 ```
 
-## <a id="MonitorSpaceUse"></a> Monitor log space use
+<a id="MonitorSpaceUse"></a>
 
-Monitor log space use by using [sys.dm_db_log_space_usage](/sql/relational-databases/system-dynamic-management-views/sys-dm-db-log-space-usage-transact-sql?view=azuresqldb-mi-current&preserve-view=true). This DMV returns information about the amount of log space currently used, and indicates when the transaction log needs truncation. 
+## Monitor log space use
 
-For information about the current log file size, its maximum size, and the autogrow option for the file, use the `size`, `max_size`, and `growth` columns for that log file in [sys.database_files](/sql/relational-databases/system-catalog-views/sys-database-files-transact-sql?view=azuresqldb-mi-current&preserve-view=true).  
+Monitor log space use by using [sys.dm_db_log_space_usage](/sql/relational-databases/system-dynamic-management-views/sys-dm-db-log-space-usage-transact-sql?view=azuresqldb-mi-current&preserve-view=true). This DMV returns information about the amount of log space currently used, and indicates when the transaction log needs truncation.
 
-Storage space metrics displayed in the Azure Resource Manager based metrics APIs only measure the size of used data pages. For examples, see PowerShell [get-metrics](/powershell/module/az.monitor/get-azmetric).
+For information about the current log file size, its maximum size, and the autogrow option for the file, use the `size`, `max_size`, and `growth` columns for that log file in [sys.database_files](/sql/relational-databases/system-catalog-views/sys-database-files-transact-sql?view=azuresqldb-mi-current&preserve-view=true).
 
-## <a id="ShrinkSize"></a> Shrink log file size
+Storage space metrics displayed in the Azure Resource Manager based metrics APIs only measure the size of used data pages. For examples, see PowerShell [Get-AZMetric](/powershell/module/az.monitor/get-azmetric).
+
+<a id="ShrinkSize"></a>
+
+## Shrink log file size
 
 To reduce the physical size of a physical log file by removing unused space, shrink the log file. A shrink only makes a difference when a transaction log file contains unused space. If the log file is full, likely because of open transactions, investigate [what is preventing transaction log truncation](troubleshoot-transaction-log-errors-issues.md?view=azuresqldb-mi-current&preserve-view=true#prevented-transaction-log-truncation).
 
-> [!CAUTION]
-> Shrink operations shouldn't be considered a regular maintenance operation. Data and log files that grow due to regular, recurring business operations don't require shrink operations. Shrink commands impact database performance while running, and if possible should be run during periods of low usage. It's not recommended to shrink data files if regular application workload will cause the files to grow to the same allocated size again.
+> [!CAUTION]  
+> Shrink operations shouldn't be considered a regular maintenance operation. Data and log files that grow due to regular, recurring business operations don't require shrink operations. Shrink commands impact database performance while running, and if possible should be run during periods of low usage. Shrinking data files isn't recommended if the regular application workload causes the files to grow to the same allocated size again.
 
-Be aware of the potential negative performance impact of shrinking database files, see [Index maintenance after shrink](#index-maintenance-after-shrink). In rare cases, shrink operations can be affected by [automated database backups](automated-backups-overview.md). If necessary, retry the shrink operation.
- 
-Before shrinking the transaction log, keep in mind [Factors that can delay log truncation](/sql/relational-databases/logs/the-transaction-log-sql-server?view=azuresqldb-mi-current&preserve-view=true#FactorsThatDelayTruncation). If the storage space is required again after a log shrink, the transaction log grows again and by doing that, introduces performance overhead during log growth operations. For more information, see the [Recommendations](#Recommendations).
+Be aware of the potential negative performance impact of shrinking database files. For more information, see [index maintenance after shrink](#index-maintenance-after-shrink). In rare cases, [automated database backups](automated-backups-overview.md) can affect shrink operations. If necessary, retry the shrink operation.
 
-You can shrink a log file only while the database is online, and at least one [virtual log file (VLF)](/sql/relational-databases/sql-server-transaction-log-architecture-and-management-guide?view=azuresqldb-mi-current&preserve-view=true#physical_arch) is free. In some cases, shrinking the log might not be possible until after the next log truncation.  
-  
-Factors, such as a long-running transaction, can keep [VLFs](/sql/relational-databases/sql-server-transaction-log-architecture-and-management-guide?view=azuresqldb-mi-current&preserve-view=true#physical_arch) active for an extended period, can restrict log shrinkage, or even prevent the log from shrinking at all. For information, see [Factors that can delay log truncation](/sql/relational-databases/logs/the-transaction-log-sql-server?view=azuresqldb-mi-current&preserve-view=true#FactorsThatDelayTruncation).  
-  
+Before shrinking the transaction log, keep in mind [factors that can delay log truncation](/sql/relational-databases/logs/the-transaction-log-sql-server?view=azuresqldb-mi-current&preserve-view=true#FactorsThatDelayTruncation). If the storage space is required again after a log shrink, the transaction log grows again and by doing that, introduces performance overhead during log growth operations. For more information, see the [recommendations](#Recommendations) section.
+
+You can shrink a log file only while the database is online, and at least one [virtual log file (VLF)](/sql/relational-databases/sql-server-transaction-log-architecture-and-management-guide?view=azuresqldb-mi-current&preserve-view=true#physical_arch) is free. In some cases, shrinking the log might not be possible until after the next log truncation.
+
+Factors, such as a long-running transaction, can keep [VLFs](/sql/relational-databases/sql-server-transaction-log-architecture-and-management-guide?view=azuresqldb-mi-current&preserve-view=true#physical_arch) active for an extended period, can restrict log shrinkage, or even prevent the log from shrinking at all. For information, see [Factors that can delay log truncation](/sql/relational-databases/logs/the-transaction-log-sql-server?view=azuresqldb-mi-current&preserve-view=true#FactorsThatDelayTruncation).
+
 Shrinking a log file removes one or more [VLFs](/sql/relational-databases/sql-server-transaction-log-architecture-and-management-guide?view=azuresqldb-mi-current&preserve-view=true#physical_arch) that hold no part of the logical log (that is, *inactive VLFs*). When you shrink a transaction log file, inactive VLFs are removed from the end of the log file to reduce the log to approximately the target size.
 
-For more information on shrink operations, review the following:
+For more information on shrink operations, review the following documentation:
 
- **Shrink a log file (without shrinking database files)**  
-  
--   [DBCC SHRINKFILE (Transact-SQL)](/sql/t-sql/database-console-commands/dbcc-shrinkfile-transact-sql?view=azuresqldb-mi-current&preserve-view=true)  
-  
--   [Shrink a File](/sql/relational-databases/databases/shrink-a-file)  
-  
- **Monitor log-file shrink events**  
-  
--   [Log File Auto Shrink Event Class](/sql/relational-databases/event-classes/log-file-auto-shrink-event-class).  
-  
- **Monitor log space**  
-  
--   [sys.dm_db_log_space_usage (Transact-SQL)](/sql/relational-databases/system-dynamic-management-views/sys-dm-db-log-space-usage-transact-sql?view=azuresqldb-mi-current&preserve-view=true)  
-  
--   [sys.database_files (Transact-SQL)](/sql/relational-databases/system-catalog-views/sys-database-files-transact-sql?view=azuresqldb-mi-current&preserve-view=true) (See the `size`, `max_size`, and `growth` columns for the log file or files.)  
+**Shrink a log file (without shrinking database files)**
+
+- [DBCC SHRINKFILE (Transact-SQL)](/sql/t-sql/database-console-commands/dbcc-shrinkfile-transact-sql?view=azuresqldb-mi-current&preserve-view=true)
+
+- [Shrink a File](/sql/relational-databases/databases/shrink-a-file)
+
+**Monitor log-file shrink events**
+
+- [Log File Auto Shrink Event Class](/sql/relational-databases/event-classes/log-file-auto-shrink-event-class).
+
+**Monitor log space**
+
+- [sys.dm_db_log_space_usage (Transact-SQL)](/sql/relational-databases/system-dynamic-management-views/sys-dm-db-log-space-usage-transact-sql?view=azuresqldb-mi-current&preserve-view=true)
+
+- [sys.database_files (Transact-SQL)](/sql/relational-databases/system-catalog-views/sys-database-files-transact-sql?view=azuresqldb-mi-current&preserve-view=true) (See the `size`, `max_size`, and `growth` columns for the log file or files.)
 
 ### Index maintenance after shrink
 
-After a shrink operation is completed against data files, indexes can become fragmented. This reduces their performance optimization effectiveness for certain workloads, such as queries using large scans. If performance degradation occurs after the shrink operation is complete, consider index maintenance to rebuild indexes. Keep in mind that index rebuilds require free space in the database, and hence might cause the allocated space to increase, counteracting the effect of shrink.
+After a shrink operation is completed against data files, indexes can become fragmented. Fragmentation reduces the performance optimization effectiveness of an index for certain workloads, such as queries using large scans. If performance degradation occurs after the shrink operation is complete, consider index maintenance to rebuild indexes. Keep in mind that index rebuilds require free space in the database, and hence might cause the allocated space to increase, counteracting the effect of shrink.
 
 For more information about index maintenance, see [Optimize index maintenance to improve query performance and reduce resource consumption](/sql/relational-databases/indexes/reorganize-and-rebuild-indexes?view=azuresqldb-mi-current&preserve-view=true).
 
@@ -116,7 +121,7 @@ SELECT OBJECT_SCHEMA_NAME(ips.object_id) AS schema_name,
        ips.alloc_unit_type_desc,
        ips.ghost_record_count
 FROM sys.dm_db_index_physical_stats(DB_ID(), default, default, default, 'SAMPLED') AS ips
-INNER JOIN sys.indexes AS i 
+INNER JOIN sys.indexes AS i
 ON ips.object_id = i.object_id
    AND
    ips.index_id = i.index_id
@@ -125,10 +130,10 @@ ORDER BY page_count DESC;
 
 If there are indexes with high page count that have page density lower than 60-70%, consider rebuilding or reorganizing these indexes before shrinking data files.
 
-> [!NOTE]
-> For larger databases, the query to determine page density can take a long time (hours) to complete. Additionally, rebuilding or reorganizing large indexes also requires substantial time and resource usage. There is a tradeoff between spending extra time on increasing page density on one hand, and reducing shrink duration and achieving higher space savings on another.
+> [!NOTE]  
+> For larger databases, the query to determine page density can take a long time (hours) to complete. Additionally, rebuilding or reorganizing large indexes also requires substantial time and resource usage. There's a tradeoff between spending extra time on increasing page density on one hand, and reducing shrink duration and achieving higher space savings on another.
 
-If there are multiple indexes with low page density, you might be able to rebuild them in parallel on multiple database sessions to speed up the process. However, make sure that you aren't approaching database resource limits by doing so, and leave sufficient resource headroom for application workloads. Monitor resource consumption (CPU, Data IO, Log IO) in Azure portal or using the [sys.dm_db_resource_stats](/sql/relational-databases/system-dynamic-management-views/sys-dm-db-resource-stats-azure-sql-database?view=azuresqldb-mi-current&preserve-view=true) view, and start additional parallel rebuilds only if resource utilization on each of these dimensions remains substantially lower than 100%. If CPU, Data IO, or Log IO utilization is at 100%, you can scale up the database to have more CPU cores and increase IO throughput, allowing for additional parallel rebuilds to complete the process faster.
+If there are multiple indexes with low page density, you might be able to rebuild them in parallel on multiple database sessions to speed up the process. However, make sure that you aren't approaching database resource limits by doing so, and leave sufficient resource headroom for application workloads. Monitor resource consumption (CPU, Data IO, Log IO) in Azure portal, or by using the [sys.dm_db_resource_stats](/sql/relational-databases/system-dynamic-management-views/sys-dm-db-resource-stats-azure-sql-database?view=azuresqldb-mi-current&preserve-view=true) view. Start further parallel rebuilds only if resource utilization on each of these dimensions remains substantially lower than 100%. If CPU, Data IO, or Log IO utilization is at 100%, you can scale up the database to have more CPU cores and increase IO throughput, allowing for more parallel rebuilds to complete the process faster.
 
 #### Sample index rebuild command
 
@@ -136,18 +141,18 @@ Following is a sample command to rebuild an index and increase its page density,
 
 ```sql
 ALTER INDEX [index_name] ON [schema_name].[table_name]
-REBUILD WITH (FILLFACTOR = 100, MAXDOP = 8, 
-ONLINE = ON (WAIT_AT_LOW_PRIORITY (MAX_DURATION = 5 MINUTES, ABORT_AFTER_WAIT = NONE)), 
+REBUILD WITH (FILLFACTOR = 100, MAXDOP = 8,
+ONLINE = ON (WAIT_AT_LOW_PRIORITY (MAX_DURATION = 5 MINUTES, ABORT_AFTER_WAIT = NONE)),
 RESUMABLE = ON);
 ```
 
-This command initiates an online and resumable index rebuild. This lets concurrent workloads continue using the table while the rebuild is in progress, and lets you resume the rebuild if it gets interrupted for any reason. However, this type of rebuild is slower than an offline rebuild, which blocks access to the table. If no other workloads need to access the table during rebuild, set the `ONLINE` and `RESUMABLE` options to `OFF` and remove the `WAIT_AT_LOW_PRIORITY` clause.
+This command initiates an online and resumable index rebuild. This type of rebuild lets concurrent workloads continue using the table while the rebuild is in progress, and lets you resume the rebuild if it gets interrupted for any reason. However, this type of rebuild is slower than an offline rebuild, which blocks access to the table. If no other workloads need to access the table during rebuild, set the `ONLINE` and `RESUMABLE` options to `OFF` and remove the `WAIT_AT_LOW_PRIORITY` clause.
 
 To learn more about index maintenance, see [Optimize index maintenance to improve query performance and reduce resource consumption](/sql/relational-databases/indexes/reorganize-and-rebuild-indexes?view=azuresqldb-mi-current&preserve-view=true).
 
 ### Shrink multiple data files
 
-As noted earlier, shrink with data movement is a long-running process. If the database has multiple data files, you can speed up the process by shrinking multiple data files in parallel. You do this by opening multiple database sessions, and using `DBCC SHRINKFILE` on each session with a different `file_id` value. Similar to rebuilding indexes earlier, make sure you have sufficient resource headroom (CPU, Data IO, Log IO) before starting each new parallel shrink command.
+As noted earlier, shrink with data movement is a long-running process. If the database has multiple data files, you can speed up the process by shrinking multiple data files in parallel. You do this operation by opening multiple database sessions, and using `DBCC SHRINKFILE` on each session with a different `file_id` value. Similar to rebuilding indexes earlier, make sure you have sufficient resource headroom (CPU, Data IO, Log IO) before starting each new parallel shrink command.
 
 The following sample command shrinks data file with `file_id` 4, attempting to reduce its allocated size to 52,000 MB by moving pages within the file:
 
@@ -192,52 +197,56 @@ ON r.database_id = d.database_id
 WHERE r.command IN ('DbccSpaceReclaim','DbccFilesCompact','DbccLOBCompact','DBCC');
 ```
 
-> [!NOTE]
-> Shrink progress can be non-linear, and the value in the `percent_complete` column might remain virtually unchanged for long periods of time, even though shrink is still in progress.
+> [!NOTE]  
+> Shrink progress can be nonlinear, and the value in the `percent_complete` column might remain unchanged for long periods of time, even though shrink is still in progress.
 
-Once shrink completes for all data files, use the [space usage query](#query-a-single-database-for-file-space-information) to determine the resulting reduction in allocated storage size. If there is still a large difference between used space and allocated space, you can [rebuild indexes](#sample-index-rebuild-command). This can temporarily increase allocated space further, however shrinking data files again after rebuilding indexes should result in a deeper reduction in allocated space.
+Once shrink completes for all data files, use the [space usage query](#query-a-single-database-for-file-space-information) to determine the resulting reduction in allocated storage size. If there's still a large difference between used space and allocated space, you can [rebuild indexes](#sample-index-rebuild-command). Rebuilding can temporarily increase allocated space further, however shrinking data files again after rebuilding indexes should result in a deeper reduction in allocated space.
 
 ## Enlarge a log file
 
-In Azure SQL Managed Instance, you can add space to a log file by enlarging the existing log file, if disk space permits. Adding a log file to the database is not supported. One transaction log file is sufficient unless log space is running out and disk space is also running out on the volume that holds the log file.
-  
+In Azure SQL Managed Instance, you can add space to a log file by enlarging the existing log file, if disk space permits. Adding a log file to the database isn't supported. One transaction log file is sufficient unless log space is running out and disk space is also running out on the volume that holds the log file.
+
 To enlarge the log file, use the `MODIFY FILE` clause of the `ALTER DATABASE` statement, and specify the `SIZE` and `MAXSIZE` syntax. For more information, see [ALTER DATABASE (Transact-SQL) File and Filegroup options](/sql/t-sql/statements/alter-database-transact-sql-file-and-filegroup-options?view=azuresqldb-mi-current&preserve-view=true).
 
 For more information, see the [Recommendations](#Recommendations).
- 
-## <a id="ControlGrowth"></a> Control transaction log file growth
 
- Use the [ALTER DATABASE (Transact-SQL) File and Filegroup options](/sql/t-sql/statements/alter-database-transact-sql-file-and-filegroup-options?view=azuresqldb-mi-current&preserve-view=true) statement to manage the growth of a transaction log file. Note the following:  
-  
-- Use the `SIZE` option to change the current file size in KB, MB, GB, and TB units.  
-- Use the `FILEGROWTH` option to change the growth increment. A value of 0 indicates that automatic growth is set to off and no additional space is permitted.  
-- Use the `MAXSIZE` option to control the maximum size of a log file in KB, MB, GB, and TB units or to set growth to UNLIMITED.  
+<a id="ControlGrowth"></a>
 
-## <a id="Recommendations"></a> Recommendations
+## Control transaction log file growth
+
+To manage the growth of a transaction log file, use the [ALTER DATABASE (Transact-SQL) File and Filegroup options](/sql/t-sql/statements/alter-database-transact-sql-file-and-filegroup-options?view=azuresqldb-mi-current&preserve-view=true) statement. Note the following options:
+
+- Use the `SIZE` option to change the current file size in KB, MB, GB, and TB units.
+- Use the `FILEGROWTH` option to change the growth increment. A value of 0 indicates that automatic growth is set to off and no additional space is permitted.
+- Use the `MAXSIZE` option to control the maximum size of a log file in KB, MB, GB, and TB units or to set growth to `UNLIMITED`.
+
+<a id="Recommendations"></a>
+
+## Recommendations
 
 When you work with transaction log files, consider the following recommendations:
 
 - Set the automatic growth (autogrow) increment of the transaction log, as configured by the `FILEGROWTH` option, to be large enough to meet the needs of your workload transactions. Make the file growth increment on a log file sufficiently large to avoid frequent expansion. You can properly size a transaction log by monitoring the amount of log occupied during:
-    - The time required to execute a full backup, because log backups can't occur until it finishes.
-    - The time required for the largest index maintenance operations.
-    - The time required to execute the largest batch in a database.
+  - The time required to execute a full backup, because log backups can't occur until it finishes.
+  - The time required for the largest index maintenance operations.
+  - The time required to execute the largest batch in a database.
 
 - Set **autogrow** for data and log files using the `FILEGROWTH` option in `size` instead of `percentage`, to allow better control on the growth ratio, as percentage is an ever-growing amount.
-    - In Azure SQL Managed Instance, instant file initialization can benefit transaction log growth events up to 64 MB. The default autogrowth size increment for new databases is 64 MB. Transaction log file autogrowth events larger than 64 MB can't benefit from instant file initialization.
-    - As a best practice, don't set the `FILEGROWTH` option value above 1,024 MB for transaction logs. 
+  - In Azure SQL Managed Instance, instant file initialization can benefit transaction log growth events up to 64 MB. The default autogrowth size increment for new databases is 64 MB. Transaction log file autogrowth events larger than 64 MB can't benefit from instant file initialization.
+  - As a best practice, don't set the `FILEGROWTH` option value above 1,024 MB for transaction logs.
 
 - Avoid setting a small autogrowth increment because it can generate too many small [VLFs](/sql/relational-databases/sql-server-transaction-log-architecture-and-management-guide?view=azuresqldb-mi-current&preserve-view=true#physical_arch) and reduce performance. To determine the optimal VLF distribution for the current transaction log size of all databases in a given instance, and the required growth increments to achieve the required size, see this [script for analyzing and fixing VLFs, provided by the SQL Tiger Team](https://github.com/Microsoft/tigertoolbox/tree/master/Fixing-VLFs).
 
 - Avoid setting a large autogrowth increment because it can cause two problems:
-    - The database can pause while the new space is allocated, potentially causing query timeouts.
-    - It can generate too few and large [VLFs](/sql/relational-databases/sql-server-transaction-log-architecture-and-management-guide?view=azuresqldb-mi-current&preserve-view=true#physical_arch) and can also affect performance. To determine the optimal VLF distribution for the current transaction log size of all databases in a given instance, and the required growth increments to achieve the required size, see this [script for analyzing and fixing VLFs, provided by the SQL Tiger Team](https://github.com/Microsoft/tigertoolbox/tree/master/Fixing-VLFs).
+  - The database can pause while the new space is allocated, potentially causing query timeouts.
+  - It can generate too few and large [VLFs](/sql/relational-databases/sql-server-transaction-log-architecture-and-management-guide?view=azuresqldb-mi-current&preserve-view=true#physical_arch) and can also affect performance. To determine the optimal VLF distribution for the current transaction log size of all databases in a given instance, and the required growth increments to achieve the required size, see this [script for analyzing and fixing VLFs, provided by the SQL Tiger Team](https://github.com/Microsoft/tigertoolbox/tree/master/Fixing-VLFs).
 
 - Even with autogrow enabled, you can receive a message that the transaction log is full if it can't grow fast enough to satisfy the needs of your query. For more information on changing the growth increment, see [ALTER DATABASE (Transact-SQL) File and Filegroup options](/sql/t-sql/statements/alter-database-transact-sql-file-and-filegroup-options?view=azuresqldb-mi-current&preserve-view=true).
 
 - You can set log files to shrink automatically. However this practice is **not recommended**, and the **auto_shrink** database property is set to FALSE by default. If you set **auto_shrink** to TRUE, automatic shrinking reduces the size of a file only when more than 25 percent of its space is unused.
-    - The file is shrunk either to the size at which only 25 percent of the file is unused space or to the original size of the file, whichever is larger. 
-    - For information about changing the setting of the **auto_shrink** property, see [View or Change the Properties of a Database](/sql/relational-databases/databases/view-or-change-the-properties-of-a-database?view=azuresqldb-mi-current&preserve-view=true) and [ALTER DATABASE SET Options (Transact-SQL)](/sql/t-sql/statements/alter-database-transact-sql-set-options?view=azuresqldb-mi-current&preserve-view=true).
-  
+  - The file is shrunk to the size at which only 25 percent of the file is unused space or shrunk to the original size of the file, whichever is larger.
+  - For information about changing the setting of the **auto_shrink** property, see [View or Change the Properties of a Database](/sql/relational-databases/databases/view-or-change-the-properties-of-a-database?view=azuresqldb-mi-current&preserve-view=true) and [ALTER DATABASE SET Options (Transact-SQL)](/sql/t-sql/statements/alter-database-transact-sql-set-options?view=azuresqldb-mi-current&preserve-view=true).
+
 ## Related content
 
 - [Automated backups in Azure SQL Managed Instance](automated-backups-overview.md)

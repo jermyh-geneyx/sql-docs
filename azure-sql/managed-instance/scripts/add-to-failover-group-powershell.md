@@ -1,7 +1,7 @@
 ---
-title: "PowerShell: Add a managed instance to a failover group"
+title: "PowerShell: Add a SQL managed instance to a failover group"
 titleSuffix: Azure SQL Managed Instance
-description: Azure PowerShell example script to create a managed instance, add it to a failover group, and test failover.
+description: Azure PowerShell example script to create a SQL managed instance, add it to a failover group, and test failover.
 author: Stralle
 ms.author: strrodic
 ms.reviewer: mathoma
@@ -14,7 +14,7 @@ ms.custom:
   - devx-track-azurepowershell
 ms.devlang: powershell
 ---
-# Use PowerShell to add a managed instance to a failover group 
+# Use PowerShell to add a SQL managed instance to a failover group
 
 [!INCLUDE[appliesto-sqldb](../../includes/appliesto-sqlmi.md)]
 
@@ -22,8 +22,7 @@ ms.devlang: powershell
 > * [Azure SQL Database](../../database/scripts/add-database-to-failover-group-powershell.md?view=azuresql-db&preserve-view=true)
 > * [Azure SQL Managed Instance](add-to-failover-group-powershell.md?view=azuresql-mi&preserve-view=true)
 
-
-This PowerShell script example creates two managed instances, adds them to a failover group, and then tests failover from the primary managed instance to the secondary managed instance. 
+This PowerShell script example creates two SQL managed instances, adds them to a failover group, and then tests failover from the primary SQL managed instance to the secondary SQL managed instance.
 
 [!INCLUDE [quickstarts-free-trial-note](../../includes/quickstarts-free-trial-note.md)]
 [!INCLUDE [updated-for-az](../../includes/updated-for-az.md)]
@@ -48,11 +47,11 @@ If you choose to install and use PowerShell locally, this tutorial requires Azur
 
 ## Create both managed instances
 
-First, create the primary managed instance: 
+First, create the primary SQL managed instance: 
 
 :::code language="powershell" source="~/../azure_powershell_scripts/azure-sql/managed-instance/failover-groups/add-managed-instance-to-failover-group-az-ps.ps1" id="CreatePrimaryInstance":::
 
-Then, create the secondary managed instance: 
+Then, create the secondary SQL managed instance: 
 
 :::code language="powershell" source="~/../azure_powershell_scripts/azure-sql/managed-instance/failover-groups/add-managed-instance-to-failover-group-az-ps.ps1" id="CreateSecondaryInstance":::
 
@@ -73,7 +72,7 @@ Then, create the secondary managed instance:
 | 13. [Get-AzRouteTable](/powershell/module/az.network/get-azroutetable) | Gets route tables. | 
 | 14. [Add-AzRouteConfig](/powershell/module/az.network/add-azrouteconfig) | Add a route to a route table. |
 | 15. [Set-AzRouteTable](/powershell/module/az.network/set-azroutetable) | Update a route table.  |
-| 16. [New-AzSqlInstance](/powershell/module/az.sql/new-azsqlinstance) | Create a managed instance. When creating the secondary instance, be sure to provide the `-DnsZonePartner` to link the secondary instance to your primary instance. |
+| 16. [New-AzSqlInstance](/powershell/module/az.sql/new-azsqlinstance) | Create a SQL managed instance. When creating the secondary instance, be sure to provide the `-DnsZonePartner` to link the secondary instance to your primary instance. |
 
 ## Configure virtual network peering 
 
@@ -127,7 +126,7 @@ Use the  [Switch-AzSqlDatabaseInstanceFailoverGroup](/powershell/module/az.sql/s
 
 ## Clean up deployment
 
-Use the following command to remove  the resource group and all resources associated with it. You'll need to remove the resource group twice. Removing the resource group the first time will remove the managed instance and virtual clusters but will then fail with the error message `Remove-AzResourceGroup : Long running operation failed with status 'Conflict'`. Run the Remove-AzResourceGroup command a second time to remove any residual resources as well as the resource group.
+Use the following command to remove  the resource group and all resources associated with it. You'll need to remove the resource group twice. Removing the resource group the first time will remove the SQL managed instance and virtual clusters but will then fail with the error message `Remove-AzResourceGroup : Long running operation failed with status 'Conflict'`. Run the Remove-AzResourceGroup command a second time to remove any residual resources as well as the resource group.
 
 ```powershell
 Remove-AzResourceGroup -ResourceGroupName $resourceGroupName
@@ -157,7 +156,7 @@ This script uses the following commands. Each command in the table links to comm
 | [Set-AzNetworkSecurityGroup](/powershell/module/az.network/set-aznetworksecuritygroup) | Updates a network security group.  | 
 | [Add-AzRouteConfig](/powershell/module/az.network/add-azrouteconfig) | Adds a route to a route table. |
 | [Set-AzRouteTable](/powershell/module/az.network/set-azroutetable) | Updates a route table.  |
-| [New-AzSqlInstance](/powershell/module/az.sql/new-azsqlinstance) | Creates a managed instance.  |
+| [New-AzSqlInstance](/powershell/module/az.sql/new-azsqlinstance) | Creates a SQL managed instance.  |
 | [Get-AzSqlInstance](/powershell/module/az.sql/get-azsqlinstance)| Returns information about Azure SQL Managed Instance. |
 | [New-AzPublicIpAddress](/powershell/module/az.network/new-azpublicipaddress) | Creates a public IP address.  | 
 | [New-AzVirtualNetworkGatewayIpConfig](/powershell/module/az.network/new-azvirtualnetworkgatewayipconfig) | Creates an IP Configuration for a Virtual Network Gateway |

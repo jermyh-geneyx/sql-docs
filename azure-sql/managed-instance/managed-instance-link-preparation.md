@@ -1,11 +1,11 @@
 ---
-title: Prepare environment for link
+title: Prepare Environment for Link
 titleSuffix: Azure SQL Managed Instance
-description: Learn how to prepare your environment to create a link between SQL Server and Azure SQL Managed Instance
+description: Learn how to prepare your environment to create a link between SQL Server and Azure SQL Managed Instance.
 author: djordje-jeremic
 ms.author: djjeremi
 ms.reviewer: mathoma, danil, randolphwest
-ms.date: 10/03/2024
+ms.date: 08/27/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: data-movement
 ms.topic: how-to
@@ -18,7 +18,7 @@ ms.custom:
 
 [!INCLUDE [appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
 
-This article teaches you how to prepare your environment for a [Managed Instance link](managed-instance-link-feature-overview.md) so that you can replicate between SQL Server installed to Windows or Linux and Azure SQL Managed Instance. 
+This article teaches you how to prepare your environment for a [Managed Instance link](managed-instance-link-feature-overview.md) so that you can replicate between SQL Server installed to Windows or Linux and Azure SQL Managed Instance.
 
 > [!NOTE]  
 > You can automate preparing your environment for the Managed Instance link by using a downloadable script. For more information, see the [Automating link setup blog](https://techcommunity.microsoft.com/t5/modernization-best-practices-and/automating-the-setup-of-azure-sql-managed-instance-link/ba-p/3696961).
@@ -28,13 +28,13 @@ This article teaches you how to prepare your environment for a [Managed Instance
 To create a link between SQL Server and Azure SQL Managed Instance, you need the following prerequisites:
 
 - An active Azure subscription. If you don't have one, [create a free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?icid=azurefreeaccount).
-- [Supported version of SQL Server](managed-instance-link-feature-overview.md#prerequisites) with the required service update.
-- Azure SQL Managed Instance. [Get started](instance-create-quickstart.md) if you don't have it. 
-- Decide which server you intend to be the initial primary to determine where you should create the link from. 
-    - Configuring a link *from* SQL Managed Instance primary to SQL Server secondary is only supported starting with [SQL Server 2022 CU10](/troubleshoot/sql/releases/sqlserver-2022/cumulativeupdate10) and by instances configured with the [SQL Server 2022 update policy](update-policy.md#sql-server-2022-update-policy). 
+- A [Supported version of SQL Server](managed-instance-link-feature-overview.md#prerequisites) with the required service update.
+- Azure SQL Managed Instance. [Get started](instance-create-quickstart.md) if you don't have one.
+- A server that you intend to be the initial primary. This choice determines where you should create the link from.
+  - Configuring a link *from* a SQL Managed Instance primary to a SQL Server secondary is only supported starting with [SQL Server 2022 CU10](/troubleshoot/sql/releases/sqlserver-2022/cumulativeupdate10) and by SQL managed instances configured with the [SQL Server 2022 update policy](update-policy.md#sql-server-2022-update-policy).
 
 > [!CAUTION]  
-> When you create your SQL managed instance to use with the link feature, take into account the memory requirements for any In-Memory OLTP features SQL Server uses. For more information, see [Overview of Azure SQL Managed Instance resource limits](resource-limits.md).
+> When you create your SQL managed instance to use with the link feature, take into account the memory requirements for any In-Memory OLTP (Online Transaction Processing) features SQL Server uses. For more information, see [Overview of Azure SQL Managed Instance resource limits](resource-limits.md).
 
 ## Permissions
 
@@ -57,8 +57,8 @@ For Azure SQL Managed Instance, you should be a member of the [SQL Managed Insta
 To prepare your SQL Server instance, you need to validate that:
 
 - You're on the minimum supported version.
-- You've enabled the availability groups feature.
-- You've added the proper trace flags at startup.
+- You enabled the availability groups feature.
+- You added the proper trace flags at startup.
 - Your databases are in the full recovery model and backed up.
 
 You need to restart SQL Server for these changes to take effect.
@@ -77,7 +77,7 @@ GO
 SELECT @@VERSION as 'SQL Server version';
 ```
 
-### Create a database master key in the `master` database
+### Create a database master key in the master database
 
 Create database master key in the `master` database, if one isn't already present. Insert your password in place of `<strong_password>` in the following script, and keep it in a confidential and secure place. Run this T-SQL script on SQL Server:
 
@@ -102,7 +102,7 @@ SELECT * FROM sys.symmetric_keys WHERE name LIKE '%DatabaseMasterKey%';
 
 The link feature relies on the Always On availability groups feature, which is disabled by default. For more information, see [Enable the Always On availability groups feature](/sql/database-engine/availability-groups/windows/enable-and-disable-always-on-availability-groups-sql-server).
 
-> [!NOTE]
+> [!NOTE]  
 > For SQL Server on Linux, see [Enable Always On availability groups](/sql/linux/sql-server-linux-create-availability-group#enable-the-availability-groups-feature).
 
 To confirm the availability groups feature is enabled, run the following T-SQL script on SQL Server:
@@ -122,11 +122,11 @@ SELECT
 ```
 
 > [!IMPORTANT]  
-> For [!INCLUDE [sssql16-md](../../docs/includes/sssql16-md.md)], if you need to enable the availability groups feature, you will need to complete extra steps documented in [Prepare SQL Server 2016 prerequisites - Azure SQL Managed Instance link](managed-instance-link-preparation-wsfc.md). These extra steps are not required for [!INCLUDE [sssql19-md](../../docs/includes/sssql19-md.md)] and later versions supported by the link.
+> For [!INCLUDE [sssql16-md](../../docs/includes/sssql16-md.md)], if you need to enable the availability groups feature, you must complete the extra steps documented in [Prepare SQL Server 2016 prerequisites - Azure SQL Managed Instance link](managed-instance-link-preparation-wsfc.md). These extra steps aren't required for [!INCLUDE [sssql19-md](../../docs/includes/sssql19-md.md)] and later versions supported by the link.
 
 If the availability groups feature isn't enabled, follow these steps to enable it:
 
-1. Open SQL Server Configuration Manager.
+1. Open [SQL Server Configuration Manager](/sql/tools/configuration-manager/sql-server-configuration-manager).
 1. Select **SQL Server Services** from the left pane.
 1. Right-click the SQL Server service, and then select **Properties**.
 
@@ -137,7 +137,7 @@ If the availability groups feature isn't enabled, follow these steps to enable i
 
    :::image type="content" source="media/managed-instance-link-preparation/always-on-availability-groups-properties.png" alt-text="Screenshot that shows the properties for Always On availability groups.":::
 
-   - If using [!INCLUDE [sssql16-md](../../docs/includes/sssql16-md.md)], and if **Enable Always On Availability Groups** option is disabled with message `This computer is not a node in a failover cluster.`, follow extra steps described in [Prepare SQL Server 2016 prerequisites - Azure SQL Managed Instance link](managed-instance-link-preparation-wsfc.md). Once you've completed these other steps, come back and retry this step again.
+   - If using [!INCLUDE [sssql16-md](../../docs/includes/sssql16-md.md)], and if **Enable Always On Availability Groups** option is disabled with the message `This computer is not a node in a failover cluster.`, follow the extra steps described in [Prepare SQL Server 2016 prerequisites - Azure SQL Managed Instance link](managed-instance-link-preparation-wsfc.md). Once you complete these other steps, come back and retry this step again.
 
 1. Select **OK** in the dialog.
 1. Restart the SQL Server service.
@@ -149,8 +149,7 @@ To optimize the performance of your link, we recommend enabling the following tr
 - `-T1800`: This trace flag optimizes performance when the log files for the primary and secondary replicas in an availability group are hosted on disks with different sector sizes, such as 512 bytes and 4 KB. If both primary and secondary replicas have a disk sector size of 4 KB, this trace flag isn't required. For more information, see [KB3009974](https://support.microsoft.com/help/3009974).
 - `-T9567`: This trace flag enables compression of the data stream for availability groups during automatic seeding. The compression increases the load on the processor but can significantly reduce transfer time during seeding.
 
-
-> [!NOTE]
+> [!NOTE]  
 > For SQL Server on Linux, see [Enable trace flags](/sql/linux/sql-server-linux-configure-mssql-conf#traceflags).
 
 To enable these trace flags at startup, use the following steps:
@@ -177,7 +176,7 @@ After you've ensured that you're on a supported version of SQL Server, enabled t
 1. Select **SQL Server Services** from the left pane.
 1. Right-click the SQL Server service, and then select **Restart**.
 
-    :::image type="content" source="media/managed-instance-link-preparation/sql-server-configuration-manager-sql-server-restart.png" alt-text="Screenshot that shows the SQL Server restart command call.":::
+   :::image type="content" source="media/managed-instance-link-preparation/sql-server-configuration-manager-sql-server-restart.png" alt-text="Screenshot that shows the SQL Server restart command call.":::
 
 After the restart, run the following T-SQL script on SQL Server to validate the configuration of your SQL Server instance:
 
@@ -195,26 +194,26 @@ GO
 DBCC TRACESTATUS;
 ```
 
-Your SQL Server version should be one of the supported versions applied with the appropriate service updates, the Always On availability groups feature should be enabled, and you should have the trace flags `-T1800` and `-T9567` enabled. The following screenshot is an example of the expected outcome for a SQL Server instance that's been properly configured:
+Your SQL Server version should be one of the supported versions applied with the appropriate service updates, the Always On availability groups feature should be enabled, and you should have the trace flags `-T1800` and `-T9567` enabled. The following screenshot is an example of the expected outcome for a properly configured SQL Server instance:
 
 :::image type="content" source="media/managed-instance-link-preparation/ssms-results-expected-outcome.png" alt-text="Screenshot that shows the expected outcome in S S M S.":::
 
 ## Configure network connectivity
 
-For the link to work, you must have network connectivity between SQL Server and SQL Managed Instance. The network option that you choose depends on whether or not your SQL Server instance is on an Azure network. 
+For the link to work, you must have network connectivity between SQL Server and SQL Managed Instance. The network option that you choose depends on whether or not your SQL Server instance is on an Azure network.
 
 ### SQL Server on Azure Virtual Machines
 
 Deploying SQL Server on Azure Virtual Machines in the same Azure virtual network that hosts SQL Managed Instance is the simplest method, because network connectivity will automatically exist between the two instances. For more information, see [Quickstart: Configure an Azure VM to connect to Azure SQL Managed Instance](connect-vm-instance-configure.md).
 
-If your SQL Server on Azure Virtual Machines instance is in a different virtual network from your managed instance, you need to make a connection between both virtual networks. The virtual networks don't have to be in the same subscription for this scenario to work.
+If your SQL Server on Azure Virtual Machines instance is in a different virtual network from your SQL managed instance, you need to make a connection between both virtual networks. The virtual networks don't have to be in the same subscription for this scenario to work.
 
 There are two options for connecting virtual networks:
 
 - [Azure virtual network peering](/azure/virtual-network/virtual-network-peering-overview)
 - VNet-to-VNet VPN gateway ([Azure portal](/azure/vpn-gateway/vpn-gateway-howto-vnet-vnet-resource-manager-portal), [PowerShell](/azure/vpn-gateway/vpn-gateway-vnet-vnet-rm-ps), [Azure CLI](/azure/vpn-gateway/vpn-gateway-howto-vnet-vnet-cli))
 
-Peering is preferable because it uses the Microsoft backbone network, so from the connectivity perspective, there's no noticeable difference in latency between virtual machines in a peered virtual network and in the same virtual network. Virtual network peering is supported between the networks in the same region. Global virtual network peering is supported for instances hosted in subnets created after September 22, 2020. For more information, see [Frequently asked questions (FAQ)](frequently-asked-questions-faq.yml#does-sql-managed-instance-support-global-vnet-peering).
+Peering is preferable because it uses the Microsoft backbone network. So, from the connectivity perspective, there's no noticeable difference in latency between virtual machines in a peered virtual network and in the same virtual network. Virtual network peering is supported between the networks in the same region. Global virtual network peering is supported for instances hosted in subnets created after September 22, 2020. For more information, see [Frequently asked questions (FAQ)](frequently-asked-questions-faq.yml#does-sql-managed-instance-support-global-vnet-peering).
 
 ### SQL Server outside Azure
 
@@ -230,7 +229,7 @@ If your SQL Server instance is hosted outside Azure, establish a VPN connection 
 
 Regardless of the connectivity mechanism, there are requirements that must be met for the network traffic to flow between the environments:
 
-The Network Security Group (NSG) rules on the subnet hosting managed instance needs to allow:
+The Network Security Group (NSG) rules on the subnet hosting SQL Managed Instance needs to allow:
 
 - Inbound port 5022 and port range 11000-11999 to receive traffic from the source SQL Server IP
 - Outbound port 5022 to send traffic to the destination SQL Server IP
@@ -240,17 +239,17 @@ All firewalls on the network hosting SQL Server, and the host OS needs to allow:
 - Inbound port 5022 opened to receive traffic from the source IP range of the MI subnet /24 (for example 10.0.0.0/24)
 - Outbound ports 5022, and the port range 11000-11999 opened to send traffic to the destination IP range of MI subnet (example 10.0.0.0/24)
 
-:::image type="content" source="media/managed-instance-link-preparation/link-networking-requirements.png" alt-text="Diagram showing network requirements to set up the link between SQL Server and managed instance.":::
+:::image type="content" source="media/managed-instance-link-preparation/link-networking-requirements.png" alt-text="Diagram showing network requirements to set up the link between SQL Server and SQL managed instance.":::
 
 The following table describes port actions for each environment:
 
 | Environment | What to do |
 | :--- | :--- |
-| SQL Server (in Azure) | Open both inbound and outbound traffic on port 5022 for the network firewall to the entire subnet IP range of SQL Managed Instance. If necessary, do the same on the SQL Server host OS (Windows/Linux) firewall. To allow communication on port 5022, create a network security group (NSG) rule in the virtual network that hosts the VM. |
+| SQL Server (in Azure) | Open both inbound and outbound traffic on port 5022 for the network firewall to the entire subnet IP range of SQL Managed Instance. If necessary, do the same on the SQL Server host OS (Windows/Linux) firewall. To allow communication on port 5022, create a network security group (NSG) rule in the virtual network that hosts the virtual machine (VM). |
 | SQL Server (outside Azure) | Open both inbound and outbound traffic on port 5022 for the network firewall to the entire subnet IP range of SQL Managed Instance. If necessary, do the same on the SQL Server host OS (Windows/Linux) firewall. |
-| SQL Managed Instance | [Create an NSG rule](/azure/virtual-network/manage-network-security-group#create-a-security-rule) in Azure portal to allow inbound and outbound traffic from the IP address and the networking hosting SQL Server on port 5022 and port range 11000-11999. |
+| SQL Managed Instance | [Create an NSG rule](/azure/virtual-network/manage-network-security-group#create-a-security-rule) in the Azure portal to allow inbound and outbound traffic from the IP address and the networking that hosts SQL Server on port 5022 and port range 11000-11999. |
 
-Use the following PowerShell script on the Windows host OS of the SQL Server instance, to open ports in Windows Firewall:
+To open ports in Windows Firewall, use the following PowerShell script on the Windows host OS of the SQL Server instance:
 
 ```powershell
 New-NetFirewallRule -DisplayName "Allow TCP port 5022 inbound" -Direction inbound -Profile Any -Action Allow -LocalPort 5022 -Protocol TCP
@@ -259,27 +258,26 @@ New-NetFirewallRule -DisplayName "Allow TCP port 5022 outbound" -Direction outbo
 
 The following diagram shows an example of an on-premises network environment, indicating that *all firewalls in the environment need to have open ports*, including the OS firewall hosting the SQL Server, and any corporate firewalls and/or gateways:
 
-:::image type="content" source="media/managed-instance-link-preparation/link-networking-infrastructure.png" alt-text="Diagram showing network infrastructure to set up the link between SQL Server and managed instance.":::
+:::image type="content" source="media/managed-instance-link-preparation/link-networking-infrastructure.png" alt-text="Diagram showing network infrastructure to set up the link between SQL Server and SQL managed instance.":::
 
 > [!IMPORTANT]  
-> - Ports need to be open in every firewall in the networking environment, including the host server, as well as any corporate firewalls or gateways on the network. In corporate environments, you might need to show your network administrator the information in this section to help open additional ports in the corporate networking layer.
+> - Ports need to be open in every firewall in the networking environment, including the host server, and any corporate firewalls or gateways on the network. In corporate environments, you might need to show your network administrator the information in this section to help open additional ports in the corporate networking layer.
 > - While you can choose to customize the endpoint on the SQL Server side, port numbers for SQL Managed Instance can't be changed or customized.
 > - IP address ranges of subnets hosting managed instances, and SQL Server must not overlap.
 
 ### Add URLs to allowlist
 
-Depending on your network security settings, it might be necessary to add URLs for the SQL Managed Instance FQDN and some of the Resource Management endpoints used by Azure to your allowlist. 
+Depending on your network security settings, it might be necessary to add URLs to your allowlist for the SQL Managed Instance FQDN and some of the Resource Management endpoints used by Azure.
 
-The following lists the resources that should be added to your allowlist: 
+The following lists the resources that should be added to your allowlist:
 
-- The fully qualified domain name (FQDN) of your SQL Managed Instance. For example: *managedinstance1.6d710bcf372b.database.windows.net*.
+- The fully qualified domain name (FQDN) of your SQL Managed Instance. For example: `managedinstance1.6d710bcf372b.database.windows.net`.
 - Microsoft Entra Authority
 - Microsoft Entra Endpoint Resource ID
 - Resource Manager Endpoint
-- Service Endpoint 
+- Service Endpoint
 
 Follow the steps in the [Configure SSMS for government clouds](#configure-ssms-for-government-clouds) section to access the **Tools** interface in SQL Server Management Studio (SSMS) and identify the specific URLs for the resources within your cloud you need to add to your allowlist.
-
 
 ## Test network connectivity
 
@@ -287,12 +285,12 @@ Follow the steps in the [Configure SSMS for government clouds](#configure-ssms-f
 
 ## Migrate a certificate of a TDE-protected database (optional)
 
-If you're linking a SQL Server database protected by Transparent Data Encryption (TDE) to a managed instance, you must migrate the corresponding encryption certificate from the on-premises or Azure VM SQL Server instance to the managed instance before using the link. For detailed steps, see [Migrate a certificate of a TDE-protected database to Azure SQL Managed Instance](tde-certificate-migrate.md).
+If you're linking a SQL Server database protected by Transparent Data Encryption (TDE) to a SQL managed instance, you must migrate the corresponding encryption certificate from the on-premises or Azure VM SQL Server instance to the SQL managed instance before using the link. For detailed steps, see [Migrate a certificate of a TDE-protected database to Azure SQL Managed Instance](tde-certificate-migrate.md).
 
-SQL Managed Instance databases that are encrypted with service-managed TDE keys can't be linked to SQL Server. You can link an encrypted database to SQL Server only if it was encrypted with a customer-managed key and the destination server has access to the same key that's used to encrypt the database. For more information, see [Set up SQL Server TDE with Azure Key Vault](/sql/relational-databases/security/encryption/setup-steps-for-extensible-key-management-using-the-azure-key-vault). 
+SQL Managed Instance databases that are encrypted with service-managed TDE keys can't be linked to SQL Server. You can only link an encrypted database to SQL Server if it was encrypted with a customer-managed key and the destination server has access to the same key used to encrypt the database. For more information, see [Set up SQL Server TDE with Azure Key Vault](/sql/relational-databases/security/encryption/setup-steps-for-extensible-key-management-using-the-azure-key-vault).
 
-> [!NOTE]
-> Azure Key Vault is supported by SQL Server on Linux starting with [SQL Server 2022 CU 14](/troubleshoot/sql/releases/sqlserver-2022/cumulativeupdate14). 
+> [!NOTE]  
+> Azure Key Vault is supported by SQL Server on Linux starting with [Cumulative Update 14 for SQL Server 2022](/troubleshoot/sql/releases/sqlserver-2022/cumulativeupdate14).
 
 ## Install SSMS
 
@@ -317,16 +315,18 @@ To update your SSMS settings, follow these steps:
 
 If you want to go back to the public cloud, choose **AzureCloud** from the dropdown list.
 
-## Related content 
+## Related content
 
-To use the link: 
+To use the link:
+
 - [Configure link between SQL Server and SQL Managed instance with SSMS](managed-instance-link-configure-how-to-ssms.md)
 - [Configure link between SQL Server and SQL Managed instance with scripts](managed-instance-link-configure-how-to-scripts.md)
 - [Fail over the link](managed-instance-link-failover-how-to.md)
 - [Migrate with the link](managed-instance-link-migrate.md)
 - [Best practices for maintaining the link](managed-instance-link-best-practices.md)
 
-To learn more about the link: 
+To learn more about the link:
+
 - [Managed Instance link overview](managed-instance-link-feature-overview.md)
 - [Disaster recovery with Managed Instance link](managed-instance-link-disaster-recovery.md)
 

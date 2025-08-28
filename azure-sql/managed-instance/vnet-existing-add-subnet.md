@@ -1,18 +1,21 @@
 ---
-title: Configure an existing virtual network
+title: Configure an Existing Virtual Network
 titleSuffix: Azure SQL Managed Instance
 description: This article describes how to configure an existing virtual network and subnet where you can deploy Azure SQL Managed Instance.
 author: zoran-rilak-msft
 ms.author: zoranrilak
 ms.reviewer: mathoma, bonova
-ms.date: 03/17/2020
+ms.date: 08/26/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: deployment-configuration
 ms.topic: how-to
-ms.custom: sqldbrb=1
+ms.update-cycle: 1825-days
+ms.custom:
+  - sqldbrb=1
 ---
 # Configure an existing virtual network for Azure SQL Managed Instance
-[!INCLUDE[appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
+
+[!INCLUDE [appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
 
 Azure SQL Managed Instance must be deployed within an Azure [virtual network](/azure/virtual-network/virtual-networks-overview) and the subnet dedicated for managed instances only. You can use the existing virtual network and subnet if they're configured according to the [SQL Managed Instance virtual network requirements](connectivity-architecture-overview.md#network-requirements).
 
@@ -22,14 +25,14 @@ If one of the following cases applies to you, you can validate and modify your n
 - You're not sure that the subnet is aligned with the [requirements](connectivity-architecture-overview.md#network-requirements).
 - You want to check that the subnet still complies with the [network requirements](connectivity-architecture-overview.md#network-requirements) after you made changes.
 
-> [!Note]
-> You can create a managed instance only in virtual networks created through the Azure Resource Manager deployment model. Azure virtual networks created through the classic deployment model are not supported. Calculate subnet size by following the guidelines in the [Determine the size of subnet for SQL Managed Instance](vnet-subnet-determine-size.md) article. You can't resize the subnet after you deploy the resources inside.
+> [!NOTE]  
+> Calculate subnet size by following the guidelines in the [Determine the size of subnet for SQL Managed Instance](vnet-subnet-determine-size.md) article. You can't resize the subnet after you deploy the resources inside.
 >
-> After the managed instance is created, you can [move the instance to another subnet inside the same Vnet or across vNets](vnet-subnet-move-instance.md), but moving the instance or VNet to another resource group or subscription is not supported.
+> After the SQL managed instance is created, you can [Move the instance to another subnet inside the same vNet or across vNets](vnet-subnet-move-instance.md), but moving the instance or VNet to another resource group or subscription isn't supported.
 
 ## Validate and modify an existing virtual network
 
-If you want to create a managed instance inside an existing subnet, we recommend the following PowerShell script to prepare the subnet:
+If you want to create a SQL managed instance inside an existing subnet, we recommend the following PowerShell script to prepare the subnet:
 
 ```powershell
 $scriptUrlBase = 'https://raw.githubusercontent.com/Microsoft/sql-server-samples/master/samples/manage/azure-sql-db-managed-instance/delegate-subnet'
@@ -46,12 +49,12 @@ Invoke-Command -ScriptBlock ([Scriptblock]::Create((iwr ($scriptUrlBase+'/delega
 
 The script prepares the subnet in three steps:
 
-1. Validate: It validates the selected virtual network and subnet for SQL Managed Instance networking requirements.
-2. Confirm: It shows the user a set of changes that need to be made to prepare the subnet for SQL Managed Instance deployment. It also asks for consent.
-3. Prepare: It properly configures the virtual network and subnet.
+1. **Validate**: It validates the selected virtual network and subnet for SQL Managed Instance networking requirements.
+1. **Confirm**: It shows the user a set of changes that need to be made to prepare the subnet for SQL Managed Instance deployment. It also asks for consent.
+1. **Prepare**: It properly configures the virtual network and subnet.
 
-## Next steps
+## Related content
 
-- For an overview, see [What is SQL Managed Instance?](sql-managed-instance-paas-overview.md).
-- For a tutorial that shows how to create a virtual network, create a managed instance, and restore a database from a database backup, see [Create a managed instance](instance-create-quickstart.md).
-- For DNS issues, see [Resolving private DNS names in Azure SQL Managed Instance](resolve-private-domain-names.md).
+- [What is Azure SQL Managed Instance?](sql-managed-instance-paas-overview.md)
+- [Quickstart: Create Azure SQL Managed Instance](instance-create-quickstart.md)
+- [Resolve private domain names in Azure SQL Managed Instance](resolve-private-domain-names.md)
