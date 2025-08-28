@@ -225,3 +225,5 @@ If you want to use a Linux host operating system, you can work around the issue 
 
 - [What's new in SQL Server 2025 Preview](what-s-new-in-sql-server-2025.md)
 - [SQL Server 2025 Preview release notes](sql-server-2025-release-notes.md)
+- [Breaking changes to Database Engine features in SQL Server 2025](../database-engine/breaking-changes-to-database-engine-features-in-sql-server-2025.md)
+- 
