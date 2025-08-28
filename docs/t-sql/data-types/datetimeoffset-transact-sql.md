@@ -4,7 +4,7 @@ description: "Defines a date that is combined with a time of a day based on a 24
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest, wiassaf
-ms.date: 09/24/2024
+ms.date: 08/28/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: "reference"
@@ -65,7 +65,7 @@ Defines a date that is combined with a time of a day based on a 24-hour clock li
 
 ## Supported string literal formats for datetimeoffset
 
-The following table lists the supported ISO 8601 string literal formats for **datetimeoffset**. For information about alphabetical, numeric, unseparated, and time formats for the date and time parts of **datetimeoffset**, see [date (Transact-SQL)](date-transact-sql.md) and [time (Transact-SQL)](time-transact-sql.md).
+The following table lists the supported ISO 8601 string literal formats for **datetimeoffset**. For information about alphabetical, numeric, unseparated, and time formats for the date and time parts of **datetimeoffset**, see [date](date-transact-sql.md) and [time](time-transact-sql.md).
 
 | ISO 8601 | Description |
 | --- | --- |
@@ -75,13 +75,13 @@ The following table lists the supported ISO 8601 string literal formats for **da
 The following example compares the results of casting a string to each **date** and **time** data type.
 
 ```sql
-SELECT CAST('2007-05-08 12:35:29. 1234567 +12:15' AS TIME(7)) AS 'time',
-    CAST('2007-05-08 12:35:29. 1234567 +12:15' AS DATE) AS 'date',
-    CAST('2007-05-08 12:35:29.123' AS SMALLDATETIME) AS 'smalldatetime',
-    CAST('2007-05-08 12:35:29.123' AS DATETIME) AS 'datetime',
-    CAST('2007-05-08 12:35:29.1234567+12:15' AS DATETIME2(7)) AS 'datetime2',
-    CAST('2007-05-08 12:35:29.1234567 +12:15' AS DATETIMEOFFSET(7)) AS 'datetimeoffset',
-    CAST('2007-05-08 12:35:29.1234567+12:15' AS DATETIMEOFFSET(7)) AS 'datetimeoffset IS08601';
+SELECT CAST ('2007-05-08 12:35:29. 1234567 +12:15' AS TIME (7)) AS 'time',
+       CAST ('2007-05-08 12:35:29. 1234567 +12:15' AS DATE) AS 'date',
+       CAST ('2007-05-08 12:35:29.123' AS SMALLDATETIME) AS 'smalldatetime',
+       CAST ('2007-05-08 12:35:29.123' AS DATETIME) AS 'datetime',
+       CAST ('2007-05-08 12:35:29.1234567+12:15' AS DATETIME2 (7)) AS 'datetime2',
+       CAST ('2007-05-08 12:35:29.1234567 +12:15' AS DATETIMEOFFSET (7)) AS 'datetimeoffset',
+       CAST ('2007-05-08 12:35:29.1234567+12:15' AS DATETIMEOFFSET (7)) AS 'datetimeoffset ISO8601';
 ```
 
 [!INCLUDE [ssResult](../../includes/ssresult-md.md)]
@@ -94,7 +94,7 @@ SELECT CAST('2007-05-08 12:35:29. 1234567 +12:15' AS TIME(7)) AS 'time',
 | `datetime` | `2007-05-08 12:35:29.123` |
 | `datetime2` | `2007-05-08 12:35:29.1234567` |
 | `datetimeoffset` | `2007-05-08 12:35:29.1234567 +12:15` |
-| `datetimeoffset IS08601` | `2007-05-08 12:35:29.1234567 +12:15` |
+| `datetimeoffset ISO8601` | `2007-05-08 12:35:29.1234567 +12:15` |
 
 ## Time zone offset
 
@@ -137,14 +137,13 @@ Some down-level clients don't support the **time**, **date**, **datetime2**, and
 
 ## Microsoft Fabric support
 
-In Microsoft Fabric, currently you cannot create columns with the **datetimeoffset** data type, but you can use **datetimeoffset** for converting data with the [AT TIME ZONE (Transact-SQL)](../queries/at-time-zone-transact-sql.md) function, for example:
+In Microsoft Fabric, currently you can't create columns with the **datetimeoffset** data type, but you can use **datetimeoffset** for converting data with the [AT TIME ZONE](../queries/at-time-zone-transact-sql.md) function, for example:
 
 ```sql
-SELECT
-CAST(CAST('2024-07-03 00:00:00' AS DATETIMEOFFSET) AT TIME ZONE 'Pacific Standard Time' AS datetime2) AS PST
+SELECT CAST (CAST ('2024-07-03 00:00:00' AS DATETIMEOFFSET) AT TIME ZONE 'Pacific Standard Time' AS DATETIME2) AS PST;
 ```
 
-In Microsoft Fabric SQL database: precision of 7 digits can be used, but mirrored data into Fabric OneLake would have the time zone and seventh time decimal trimmed. This column type cannot be used as a primary key in tables in Fabric SQL database.
+In Microsoft Fabric SQL database: precision of 7 digits can be used, but mirrored data into Fabric OneLake would have the time zone and seventh time decimal trimmed. This column type can't be used as a primary key in tables in Fabric SQL database.
 
 ## Convert date and time data
 
@@ -165,7 +164,7 @@ The following example uses the [AT TIME ZONE](../queries/at-time-zone-transact-s
 In the `UPDATE` statement, the `AT TIME ZONE` syntax first adds UTC time zone offset to the existing `AuditCreated` column data, then converts the data from UTC to `Pacific Standard Time`, correctly adjusting the historical data for each past daylight saving time range in the United States.
 
 ```sql
-CREATE TABLE dbo.Audit (AuditCreated DATETIME2(0) NOT NULL);
+CREATE TABLE dbo.Audit (AuditCreated DATETIME2 (0) NOT NULL);
 GO
 
 INSERT INTO dbo.Audit (AuditCreated)
@@ -179,10 +178,10 @@ VALUES ('12/1/2024 12:00:00');
 GO
 
 ALTER TABLE dbo.Audit
-ADD AuditCreatedOffset DATETIMEOFFSET(0) NULL;
+ADD AuditCreatedOffset DATETIMEOFFSET (0) NULL;
 GO
 
-DECLARE @TimeZone VARCHAR(50);
+DECLARE @TimeZone AS VARCHAR (50);
 
 SELECT @TimeZone = [name]
 FROM sys.time_zone_info
@@ -215,8 +214,8 @@ This section describes what occurs when a **datetimeoffset** data type is conver
 When you convert to **date**, the year, month, and day are copied. The following code shows the results of converting a **datetimeoffset(4)** value to a **date** value.
 
 ```sql
-DECLARE @datetimeoffset DATETIMEOFFSET(4) = '12-10-25 12:32:10 +01:00';
-DECLARE @date DATE = @datetimeoffset;
+DECLARE @datetimeoffset AS DATETIMEOFFSET (4) = '12-10-25 12:32:10 +01:00';
+DECLARE @date AS DATE = @datetimeoffset;
 
 SELECT @datetimeoffset AS '@datetimeoffset', @date AS 'date';
 ```
@@ -232,8 +231,8 @@ SELECT @datetimeoffset AS '@datetimeoffset', @date AS 'date';
 If the conversion is to **time(*n*)**, the hour, minute, second, and fractional seconds are copied. The time zone value is truncated. When the precision of the **datetimeoffset(*n*)** value is greater than the precision of the **time(*n*)** value, the value is rounded up. The following code shows the results of converting a **datetimeoffset(4)** value to a **time(3)** value.
 
 ```sql
-DECLARE @datetimeoffset DATETIMEOFFSET(4) = '12-10-25 12:32:10.1237 +01:0';
-DECLARE @time TIME(3) = @datetimeoffset;
+DECLARE @datetimeoffset AS DATETIMEOFFSET (4) = '12-10-25 12:32:10.1237 +01:0';
+DECLARE @time AS TIME (3) = @datetimeoffset;
 
 SELECT @datetimeoffset AS '@datetimeoffset ', @time AS 'time';
 ```
@@ -249,8 +248,8 @@ SELECT @datetimeoffset AS '@datetimeoffset ', @time AS 'time';
 When you convert to **datetime**, the date and time values are copied, and the time zone is truncated. When the fractional precision of the **datetimeoffset(*n*)** value is greater than three digits, the value is truncated. The following code shows the results of converting a **datetimeoffset(4)** value to a **datetime** value.
 
 ```sql
-DECLARE @datetimeoffset DATETIMEOFFSET(4) = '12-10-25 12:32:10.1237 +01:0';
-DECLARE @datetime DATETIME = @datetimeoffset;
+DECLARE @datetimeoffset AS DATETIMEOFFSET (4) = '12-10-25 12:32:10.1237 +01:0';
+DECLARE @datetime AS DATETIME = @datetimeoffset;
 
 SELECT @datetimeoffset AS '@datetimeoffset ', @datetime AS 'datetime';
 ```
@@ -266,8 +265,8 @@ SELECT @datetimeoffset AS '@datetimeoffset ', @datetime AS 'datetime';
 For conversions to **smalldatetime**, the date and hours are copied. The minutes are rounded up with respect to the seconds value and seconds are set to 0. The following code shows the results of converting a **datetimeoffset(3)** value to a **smalldatetime** value.
 
 ```sql
-DECLARE @datetimeoffset DATETIMEOFFSET(3) = '1912-10-25 12:24:32 +10:0';
-DECLARE @smalldatetime SMALLDATETIME = @datetimeoffset;
+DECLARE @datetimeoffset AS DATETIMEOFFSET (3) = '1912-10-25 12:24:32 +10:0';
+DECLARE @smalldatetime AS SMALLDATETIME = @datetimeoffset;
 
 SELECT @datetimeoffset AS '@datetimeoffset', @smalldatetime AS '@smalldatetime';
 ```
@@ -283,8 +282,8 @@ SELECT @datetimeoffset AS '@datetimeoffset', @smalldatetime AS '@smalldatetime';
 If the conversion is to **datetime2(*n*)**, the date and time are copied to the **datetime2** value, and the time zone is truncated. When the precision of the **datetime2(*n*)** value is greater than the precision of the **datetimeoffset(*n*)** value, the fractional seconds are truncated to fit. The following code shows the results of converting a **datetimeoffset(4)** value to a **datetime2(3)** value.
 
 ```sql
-DECLARE @datetimeoffset DATETIMEOFFSET(4) = '1912-10-25 12:24:32.1277 +10:0';
-DECLARE @datetime2 DATETIME2(3) = @datetimeoffset;
+DECLARE @datetimeoffset AS DATETIMEOFFSET (4) = '1912-10-25 12:24:32.1277 +10:0';
+DECLARE @datetime2 AS DATETIME2 (3) = @datetimeoffset;
 
 SELECT @datetimeoffset AS '@datetimeoffset', @datetime2 AS '@datetime2';
 ```
@@ -311,7 +310,7 @@ Conversions from string literals to date and time types are permitted if all par
 | `TIMEZONE` only | Default values are supplied |
 | `DATE + TIME` | The `TIMEZONE` defaults to `+00:00` |
 | `DATE + TIMEZONE` | Not allowed |
-| `TIME + TIMEZONE` | The DATE part defaults to `1900-1-1` |
+| `TIME + TIMEZONE` | The `DATE` part defaults to `1900-1-1` |
 | `DATE + TIME + TIMEZONE` | Trivial |
 
 ## Related content
