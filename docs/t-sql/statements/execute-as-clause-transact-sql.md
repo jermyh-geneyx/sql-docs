@@ -4,7 +4,7 @@ description: Define the execution context of functions (except inline table-valu
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest
-ms.date: 01/02/2024
+ms.date: 08/28/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -24,7 +24,7 @@ helpviewer_keywords:
 dev_langs:
   - "TSQL"
 ---
-# EXECUTE AS Clause (Transact-SQL)
+# EXECUTE AS clause (Transact-SQL)
 
 [!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
 
@@ -63,7 +63,6 @@ Queues:
 ```syntaxsql
 { EXEC | EXECUTE } AS { SELF | OWNER | 'user_name' }
 ```
-
 
 ## [Azure SQL Database](#tab/sqldb)
 
@@ -172,6 +171,7 @@ When the following `CREATE PROCEDURE` statement is run, the `CompanyDomain\SqlUs
 ```sql
 USE Sales;
 GO
+
 CREATE PROCEDURE dbo.usp_Demo
 WITH EXECUTE AS 'CompanyDomain\SqlUser1'
 AS
@@ -191,8 +191,10 @@ WITH EXECUTE AS 'SqlUser1'
 AS
 SELECT USER_NAME(); -- Shows execution context is set to SqlUser1.
 EXECUTE AS CALLER;
+
 SELECT USER_NAME(); -- Shows execution context is set to SqlUser2, the caller of the module.
 REVERT;
+
 SELECT USER_NAME(); -- Shows execution context is set to SqlUser1.
 GO
 ```
@@ -201,7 +203,7 @@ GO
 
 Specifying an execution context for a module can be useful when you want to define custom permission sets. For example, some actions, such as `TRUNCATE TABLE` don't have grantable permissions. By incorporating the `TRUNCATE TABLE` statement within a module and specifying that module execute as a user who has permissions to alter the table, you can extend the permissions to truncate the table to the user to whom you grant `EXECUTE` permissions on the module.
 
-To view the definition of the module with the specified execution context, use the [sys.sql_modules (Transact-SQL)](../../relational-databases/system-catalog-views/sys-sql-modules-transact-sql.md) catalog view.
+To view the definition of the module with the specified execution context, use the [sys.sql_modules](../../relational-databases/system-catalog-views/sys-sql-modules-transact-sql.md) catalog view.
 
 ## Best practice
 
@@ -213,7 +215,7 @@ To execute a module specified with `EXECUTE AS`, the caller must have `EXECUTE` 
 
 To execute a CLR module specified with `EXECUTE` AS that accesses resources in another database or server, the target database or server must trust the authenticator of the database from which the module originates (the source database).
 
-To specify the `EXECUTE AS` clause when you create or modify a module, you must have `IMPERSONATE` permissions on the specified  principal and also permissions to create the module. You can always impersonate yourself. When no execution context is specified or `EXECUTE AS CALLER` is specified, `IMPERSONATE` permissions aren't required.
+To specify the `EXECUTE AS` clause when you create or modify a module, you must have `IMPERSONATE` permissions on the specified principal and also permissions to create the module. You can always impersonate yourself. When no execution context is specified or `EXECUTE AS CALLER` is specified, `IMPERSONATE` permissions aren't required.
 
 To specify a *login_name* or *user_name* that has implicit access to the database through a Windows group membership, you must have `CONTROL` permissions on the database.
 
@@ -222,23 +224,22 @@ To specify a *login_name* or *user_name* that has implicit access to the databas
 The following example creates a stored procedure in the [!INCLUDE [ssSampleDBnormal](../../includes/sssampledbnormal-md.md)] database and assigns the execution context to `OWNER`.
 
 ```sql
-CREATE PROCEDURE HumanResources.uspEmployeesInDepartment @DeptValue INT
-    WITH EXECUTE AS OWNER
+CREATE PROCEDURE HumanResources.uspEmployeesInDepartment
+@DeptValue INT
+WITH EXECUTE AS OWNER
 AS
 SET NOCOUNT ON;
-
 SELECT e.BusinessEntityID,
-    c.LastName,
-    c.FirstName,
-    e.JobTitle
+       c.LastName,
+       c.FirstName,
+       e.JobTitle
 FROM Person.Person AS c
-INNER JOIN HumanResources.Employee AS e
-    ON c.BusinessEntityID = e.BusinessEntityID
-INNER JOIN HumanResources.EmployeeDepartmentHistory AS edh
-    ON e.BusinessEntityID = edh.BusinessEntityID
+     INNER JOIN HumanResources.Employee AS e
+         ON c.BusinessEntityID = e.BusinessEntityID
+     INNER JOIN HumanResources.EmployeeDepartmentHistory AS edh
+         ON e.BusinessEntityID = edh.BusinessEntityID
 WHERE edh.DepartmentID = @DeptValue
-ORDER BY c.LastName,
-    c.FirstName;
+ORDER BY c.LastName, c.FirstName;
 GO
 
 -- Execute the stored procedure by specifying department 5.

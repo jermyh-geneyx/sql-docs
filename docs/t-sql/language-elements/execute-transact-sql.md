@@ -3,10 +3,13 @@ title: "EXECUTE (Transact-SQL)"
 description: Execute a command string or character string within a Transact-SQL batch, or other modules.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 12/19/2024
+ms.date: 08/28/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
+ms.custom:
+  - ignite-2024
+  - sfi-ropc-nochange
 f1_keywords:
   - "EXEC"
   - "EXECUTE_TSQL"
@@ -28,9 +31,6 @@ helpviewer_keywords:
 dev_langs:
   - "TSQL"
 monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
-ms.custom:
-  - ignite-2024
-  - sfi-ropc-nochange
 ---
 
 # EXECUTE (Transact-SQL)
@@ -424,19 +424,19 @@ Specifies that *command_string* is executed against *data_source_name* and resul
 
   | Term | Definition |
   | --- | --- |
-  | { column_name data_type <br />[ COLLATE collation_name ]<br />[NULL &#124; NOT NULL] } | See the following table. |
+  | { column_name data_type<br />[ COLLATE collation_name ]<br />[NULL &#124; NOT NULL] } | See the following table. |
   | db_name | The name of the database containing the table, view, or table valued function. |
   | schema_name | The name of the schema owning the table, view, or table valued function. |
   | table_name &#124; view_name &#124; table_valued_function_name | Specifies that the columns returned are those specified in the table, view, or table valued function named. Table variables, temporary tables, and synonyms aren't supported in the AS object syntax. |
   | AS TYPE [ schema_name. ]table_type_name | Specifies that the columns returned are those specified in the table type. |
-  | AS FOR XML | Specifies that the XML results from the statement or stored procedure called by the `EXECUTE` statement are converted into the format as though they were produced by a `SELECT ... FOR XML ...` statement. All formatting from the type directives in the original statement is removed, and the results returned are as though no type directive was specified. AS FOR XML doesn't convert non-XML tabular results from the executed statement or stored procedure into XML. |  
+  | AS FOR XML | Specifies that the XML results from the statement or stored procedure called by the `EXECUTE` statement are converted into the format as though they were produced by a `SELECT ... FOR XML ...` statement. All formatting from the type directives in the original statement is removed, and the results returned are as though no type directive was specified. `AS FOR XML` doesn't convert non-XML tabular results from the executed statement or stored procedure into XML. |
 
   | Term | Definition |
   | --- | --- |
   | column_name | The names of each column. If the number of columns differs from the result set, an error occurs and the batch is aborted. If the name of a column differs from the result set, the column name returned will be set to the name defined. |
   | data_type | The data types of each column. If the data types differ, an implicit conversion to the defined data type is performed. If the conversion fails the batch is aborted |
   | COLLATE collation_name | The collation of each column. If there's a collation mismatch, an implicit collation is attempted. If that fails, the batch is aborted. |
-  | NULL &#124; NOT NULL | The nullability of each column. If the defined nullability is `NOT NULL` and the data returned contains nulls, an error occurs and the batch is aborted. If not specified, the default value conforms to the setting of the `ANSI_NULL_DFLT_ON` and `ANSI_NULL_DFLT_OFF` options. |  
+  | NULL &#124; NOT NULL | The nullability of each column. If the defined nullability is `NOT NULL` and the data returned contains nulls, an error occurs and the batch is aborted. If not specified, the default value conforms to the setting of the `ANSI_NULL_DFLT_ON` and `ANSI_NULL_DFLT_OFF` options. |
 
   The actual result set being returned during execution can differ from the result defined using the `WITH RESULT SETS` clause in one of the following ways: number of result sets, number of columns, column name, nullability, and data type. If the number of result sets differs, an error occurs and the batch is aborted.
 
@@ -500,6 +500,8 @@ Specify a login or user that has the least privileges required to perform the op
 
 Permissions aren't required to run the `EXECUTE` statement. However, permissions are required on the securables that are referenced within the `EXECUTE` string. For example, if the string contains an `INSERT` statement, the caller of the `EXECUTE` statement must have `INSERT` permission on the target table. Permissions are checked at the time `EXECUTE` statement is encountered, even if the `EXECUTE` statement is included within a module.
 
+How the [!INCLUDE [ssDE](../../includes/ssde-md.md)] evaluates permissions on the objects that are referenced in the module depends on the [ownership chain](../statements/execute-as-clause-transact-sql.md#remarks) that exists between calling objects and referenced objects.
+
 `EXECUTE` permissions for a module default to the owner of the module, who can transfer them to other users. When a module is run that executes a string, permissions are checked in the context of the user who executes the module, not in the context of the user who created the module. However, if the same user owns the calling module and the module being called, `EXECUTE` permission checking isn't performed for the second module.
 
 If the module accesses other database objects, execution succeeds when you have `EXECUTE` permission on the module and one of the following conditions is true:
@@ -537,11 +539,11 @@ GO
 If the following is the first statement in a batch or a **sqlcmd** script, `EXECUTE` isn't required.
 
 ```sql
-dbo.uspGetEmployeeManagers 6;
+EXECUTE dbo.uspGetEmployeeManagers 6;
 GO
 
 --Or
-dbo.uspGetEmployeeManagers @EmployeeID = 6;
+EXECUTE dbo.uspGetEmployeeManagers @EmployeeID = 6;
 GO
 ```
 
@@ -678,7 +680,8 @@ GO
 The following example executes the `Proc_Test_Defaults` stored procedure and forces a new query plan to be compiled, used, and discarded after the module is executed.
 
 ```sql
-EXECUTE dbo.Proc_Test_Defaults @p2 = 'A' WITH RECOMPILE;
+EXECUTE dbo.Proc_Test_Defaults @p2 = 'A'
+WITH RECOMPILE;
 GO
 ```
 
@@ -791,18 +794,17 @@ CREATE PROCEDURE Production.ProductList
 @ProdName NVARCHAR (50)
 AS
 -- First result set
-SELECT
-    ProductID,
-    Name,
-    ListPrice
+SELECT ProductID,
+       Name,
+       ListPrice
 FROM Production.Product
 WHERE Name LIKE @ProdName;
 -- Second result set
 SELECT Name,
-    COUNT(S.ProductID) AS NumberOfOrders
+       COUNT(S.ProductID) AS NumberOfOrders
 FROM Production.Product AS P
-    INNER JOIN Sales.SalesOrderDetail AS S
-        ON P.ProductID = S.ProductID
+     INNER JOIN Sales.SalesOrderDetail AS S
+         ON P.ProductID = S.ProductID
 WHERE Name LIKE @ProdName
 GROUP BY Name;
 GO
@@ -811,14 +813,11 @@ GO
 EXECUTE Production.ProductList '%tire%' WITH RESULT SETS
 (
     -- first result set definition starts here
-    (ProductID INT,
-    [Name] NAME,
-    ListPrice MONEY)
+    (ProductID INT, [Name] NAME, ListPrice MONEY)
     -- comma separates result set definitions
     ,
     -- second result set definition starts here
-    ([Name] NAME,
-    NumberOfOrders INT)
+    ([Name] NAME, NumberOfOrders INT)
 );
 ```
 
@@ -968,7 +967,7 @@ GO
 
 - [&#x40;&#x40;NESTLEVEL (Transact-SQL)](../functions/nestlevel-transact-sql.md)
 - [DECLARE @local_variable (Transact-SQL)](declare-local-variable-transact-sql.md)
-- [EXECUTE AS Clause (Transact-SQL)](../statements/execute-as-clause-transact-sql.md)
+- [EXECUTE AS clause (Transact-SQL)](../statements/execute-as-clause-transact-sql.md)
 - [osql Utility](../../tools/osql-utility.md)
 - [Principals (Database Engine)](../../relational-databases/security/authentication-access/principals-database-engine.md)
 - [REVERT (Transact-SQL)](../statements/revert-transact-sql.md)
