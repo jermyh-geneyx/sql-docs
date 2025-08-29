@@ -43,9 +43,9 @@ The following table lists the type of dialog security for each valid combination
 
 ## Related content
 
-- [How to: Configure Initiating Services for Anonymous Dialog Security (Transact-SQL)](how-to-configure-initiating-services-for-anonymous-dialog-security-transact-sql.md)
-- [How to: Configure Initiating Services for Full Dialog Security (Transact-SQL)](how-to-configure-initiating-services-for-full-dialog-security-transact-sql.md)
+- [How to: Configure initiating services for anonymous dialog security (Transact-SQL)](how-to-configure-initiating-services-for-anonymous-dialog-security-transact-sql.md)
+- [How to: Configure initiating services for full dialog security (Transact-SQL)](how-to-configure-initiating-services-for-full-dialog-security-transact-sql.md)
 - [How to: Configure Target Services for Anonymous Dialog Security (Transact-SQL)](how-to-configure-target-services-for-anonymous-dialog-security-transact-sql.md)
 - [How to: Configure Target Services for Full Dialog Security (Transact-SQL)](how-to-configure-target-services-for-full-dialog-security-transact-sql.md)
-- [How to: Configure Permissions for a Local Service (Transact-SQL)](how-to-configure-permissions-for-a-local-service-transact-sql.md)
+- [How to: Configure permissions for a local service (Transact-SQL)](how-to-configure-permissions-for-a-local-service-transact-sql.md)
 - [Service Broker Communication Protocols](service-broker-communication-protocols.md)

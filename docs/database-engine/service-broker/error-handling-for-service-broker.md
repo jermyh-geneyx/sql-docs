@@ -20,7 +20,7 @@ Error handling in an application that uses Service Broker has two distinct aspec
 
 | Article | Description |
 | --- | --- |
-| [Handling Transact-SQL Errors (Service Broker)](handling-transact-sql-errors.md) | Describes strategies for working with Transact-SQL errors while maintaining transactional messaging. |
+| [Handle Transact-SQL errors (Service Broker)](handling-transact-sql-errors.md) | Describes strategies for working with Transact-SQL errors while maintaining transactional messaging. |
 | [Handle Service Broker error messages](handling-service-broker-error-messages.md) | Describes strategies for handling error messages delivered by Service Broker. |
 | [Handle poison messages](handling-poison-messages.md) | Describes strategies for recovering from poison messages. |
 
