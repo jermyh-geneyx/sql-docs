@@ -4,13 +4,13 @@ description: "The application developer is responsible for designing the Service
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: mikeray, maghan
-ms.date: 05/27/2025
+ms.date: 08/29/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
 ---
 
-# Developer Responsibilities for Service Broker
+# Developer responsibilities for Service Broker
 
 [!INCLUDE [sql-asdbmi](../../includes/applies-to-version/sql-asdbmi.md)]
 
@@ -28,9 +28,9 @@ The tasks involved in creating an individual application depend on the needs of 
 
 1. Create a contract for each conversation. The contract identifies the message types that each endpoint can use in the conversation.
 
-1. Create a queue to store the messages that will be received by the application.
+1. Create a queue to store the messages that the application will receive.
 
-1. Create a service to expose the functionality defined by the contract, and implemented by the stored procedure, that you created. When creating a service, you associate it with the queue you created in the previous step. This step tells Service Broker that all messages that arrive addressed to that service are to be placed in the identified queue.
+1. Create a service to expose the functionality defined by the contract and implemented by the stored procedure that you created. When creating a service, you associate it with the queue you created in the previous step. This step tells Service Broker that all messages that arrive addressed to that service are to be placed in the identified queue.
 
 1. Review the priority plans that you established in step 1. Create conversation priorities that cover all conversation endpoints that are designed to use priority levels other than the default. If the priority levels should be used when messages are transmitted from a database, ensure that the `HONOR_BROKER_PRIORITY` option in that database is set to `ON`.
 
@@ -40,7 +40,7 @@ The tasks involved in creating an individual application depend on the needs of 
 
 1. Identify the services that use the service that you just created. If any of these services exist outside of the local SQL Server instance, create routes for them.
 
-1. Review the remote services that you identified in the previous step, and determine the security requirements for communications with them. If necessary, create certificates to enforce these requirements, and then create database users for the certificates. Associate the certificates with these logins. The administrators or developers of the other services must create remote service bindings to enable dialog security on traffic to this service.
+1. Review the remote services that you identified in the previous step and determine the security requirements for communications with them. If necessary, create certificates to enforce these requirements, then create database users for the certificates. Associate the certificates with these users. The administrators or developers of the other services must create remote service bindings to enable dialog security on traffic to this service.
 
 1. During development and testing, it's often convenient for an application to work with the user names that the application uses in production. However, you should associate those user names with certificates that are used only in the development and test environment. When the application moves into production, use certificates created for the production environment. By using different certificates, you can reduce the effort involved in deploying the application while still maintaining security between the development environment and the production environment.
 
