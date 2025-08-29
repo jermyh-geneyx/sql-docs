@@ -68,7 +68,7 @@ Change data capture isn't supported in [contained databases](../databases/contai
   
 ## <a name="AlwaysOn"></a> Availability groups  
  
-When you use Always On availability groups, change enumeration should be done on the secondary replica to reduce disk load on the primary.  
+When you use Always On availability groups, change enumeration should be done on the [secondary replica](../../database-engine/availability-groups/windows/replicate-track-change-data-capture-always-on-availability.md#change-data-capture) to reduce disk load on the primary.  
 
 ## Columnstore indexes
 

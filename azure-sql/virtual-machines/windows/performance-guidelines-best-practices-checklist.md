@@ -14,9 +14,15 @@ tags: azure-service-management
 
 [!INCLUDE [appliesto-sqlvm](../../includes/appliesto-sqlvm.md)]
 
-This article provides a quick checklist as a series of best practices and guidelines to optimize performance of your SQL Server on Azure Virtual Machines (VMs).
+This article provides checklists as part of a series of best practices and guidelines to optimize performance of your SQL Server on Azure Virtual Machines (VMs). Use this guide to improve your VM configuration, storage setup, security posture, and troubleshoot common performance issues.
 
-For comprehensive details, see the other articles in this series: [VM size](performance-guidelines-best-practices-vm-size.md), [Storage](performance-guidelines-best-practices-storage.md), [Security](security-considerations-best-practices.md), [HADR configuration](hadr-cluster-best-practices.md), [Collect baseline](performance-guidelines-best-practices-collect-baseline.md).
+The checklists in this article provide a brief overview of the more comprehensive details found in the following articles of this series:
+
+- [VM size](performance-guidelines-best-practices-vm-size.md)
+- [Storage](performance-guidelines-best-practices-storage.md)
+- [Security](security-considerations-best-practices.md)
+- [HADR configuration](hadr-cluster-best-practices.md)
+- [Collect baseline](performance-guidelines-best-practices-collect-baseline.md).
 
 Enable [SQL Assessment for SQL Server on Azure VMs](sql-assessment-for-sql-vm.md) and your SQL Server will be evaluated against known best practices with results  on the [SQL VM management page](manage-sql-vm-portal.md) of the Azure portal.
 
@@ -35,11 +41,15 @@ For videos about the latest features to optimize SQL Server VM performance and a
 
 While running SQL Server on Azure Virtual Machines, continue using the same database performance tuning options that are applicable to SQL Server in on-premises server environments. However, the performance of a relational database in a public cloud depends on many factors, such as the size of a virtual machine, and the configuration of the data disks.
 
-There's typically a trade-off between optimizing for costs and optimizing for performance. This performance best practices series is focused on getting the *best* performance for SQL Server on Azure Virtual Machines. If your workload is less demanding, you might not require every recommended optimization. Consider your performance needs, costs, and workload patterns as you evaluate these recommendations.
+There's typically a trade-off between optimizing for costs and optimizing for performance. This performance best practices series is focused on getting the *best* performance for SQL Server on Azure Virtual Machines. 
+
+**Next steps:** Start with the first [VM size recommendations](#vm-size) section, then proceed through [Storage](#storage), [Security](#security), and [SQL Server features](#sql-server-features) sections for a complete optimization approach.
+
+If your workload is less demanding, you might not require every recommended optimization. Consider your performance needs, costs, and workload patterns as you evaluate these recommendations.
 
 ## Manually install SQL Server to an Azure VM 
 
-If you plan to manually install SQL Server on an Azure VM, consider the following:
+If you plan to manually install SQL Server on an Azure VM, follow these essential steps to avoid common configuration issues:
 
 - Make sure you have a product key ready for your installation. 
 - Avoid [unsupported](performance-guidelines-best-practices-vm-size.md#supportability) configurations such as: 
@@ -124,7 +134,7 @@ The checklist in this section covers the [HADR best practices](hadr-cluster-best
 
 ## Performance troubleshooting
 
-The following is a list of resources that help you further troubleshoot SQL Server performance issues.
+When you encounter SQL Server performance issues, use these diagnostic resources to identify and resolve specific problems:
 
 - [Troubleshoot high-CPU-usage issues](/troubleshoot/sql/database-engine/performance/troubleshoot-high-cpu-usage-issues)
 - [Understand and resolve blocking problems](/troubleshoot/sql/database-engine/performance/understand-resolve-blocking)
@@ -136,12 +146,14 @@ The following is a list of resources that help you further troubleshoot SQL Serv
 
 ## Related content
 
-- [VM size](performance-guidelines-best-practices-vm-size.md)
-- [Storage](performance-guidelines-best-practices-storage.md)
-- [Security](security-considerations-best-practices.md)
-- [HADR settings](hadr-cluster-best-practices.md)
-- [Collect baseline](performance-guidelines-best-practices-collect-baseline.md)
+For detailed guidance on each optimization area:
 
-Consider enabling [SQL Assessment for SQL Server on Azure VMs](sql-assessment-for-sql-vm.md).
+- **[VM size](performance-guidelines-best-practices-vm-size.md)** - Choose the right VM series and configuration
+- **[Storage](performance-guidelines-best-practices-storage.md)** - Optimize disk configuration and performance
+- **[Security](security-considerations-best-practices.md)** - Implement security best practices
+- **[HADR settings](hadr-cluster-best-practices.md)** - Configure high availability and disaster recovery
+- **[Collect baseline](performance-guidelines-best-practices-collect-baseline.md)** - Establish performance baselines
+
+**Recommended tool:** [Enable SQL Assessment for SQL Server on Azure VMs](sql-assessment-for-sql-vm.md) to automatically evaluate your configuration against these best practices.
 
 Review other SQL Server Virtual Machine articles at [SQL Server on Azure Virtual Machines Overview](sql-server-on-azure-vm-iaas-what-is-overview.md). If you have questions about SQL Server virtual machines, see the [Frequently Asked Questions](frequently-asked-questions-faq.yml).
