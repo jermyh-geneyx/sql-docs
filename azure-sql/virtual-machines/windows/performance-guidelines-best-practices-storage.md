@@ -14,7 +14,7 @@ tags: azure-service-management
 
 [!INCLUDE[appliesto-sqlvm](../../includes/appliesto-sqlvm.md)]
 
-This article provides storage best practices and guidelines to optimize performance for your SQL Server on Azure Virtual Machines (VM).
+This article provides storage best practices and guidelines to optimize performance for your SQL Server on Azure Virtual Machines (VM). Learn how to select the right disk types, configure storage pools, and implement caching strategies to maximize your database performance.
 
 There's typically a trade-off between optimizing for costs and optimizing for performance. This performance best practices series is focused on getting the *best* performance for SQL Server on Azure VMs. If your workload is less demanding, you might not require every recommended optimization. Consider your performance needs, costs, and workload patterns as you evaluate these recommendations.
 

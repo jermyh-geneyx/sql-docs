@@ -33,7 +33,7 @@ helpviewer_keywords:
 -   The database administrator might have suspended data synchronization for maintenance purposes.  
   
 ## Possible Solution  
- Resume data synchronization. If the issue persists, check the availability group in the Event log, and then diagnose why the system suspended data movement.  
+ Resume data synchronization by right-clicking the availability group and selecting **Resume Data Movement**. If the issue persists, check the availability group in the Event log, and then diagnose why the system suspended data movement.  
   
 ## See Also  
  [Overview of Always On Availability Groups &#40;SQL Server&#41;](../../../database-engine/availability-groups/windows/overview-of-always-on-availability-groups-sql-server.md)   
