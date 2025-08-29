@@ -1,9 +1,9 @@
 ---
-title: What is SQL Server Language Extensions?
+title: What Is SQL Server Language Extensions?
 description: "Language Extensions is a feature of SQL Server used for executing external code. In SQL Server, Java, C#, Python, and R are supported. Relational data can be used in the external code using the extensibility framework."
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 04/29/2024
+ms.date: 08/28/2025
 ms.service: sql
 ms.subservice: language-extensions
 ms.topic: overview

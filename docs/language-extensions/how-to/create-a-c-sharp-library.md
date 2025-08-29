@@ -1,9 +1,9 @@
 ---
-title: Create a .NET DLL from a C# project
+title: "Create a .NET DLL from a C# Project"
 description: Package your .NET project into a DLL file when using SQL Server Language Extensions to execute C# code.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 04/29/2024
+ms.date: 08/28/2025
 ms.service: sql
 ms.subservice: language-extensions
 ms.topic: how-to

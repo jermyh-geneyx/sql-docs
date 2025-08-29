@@ -4,8 +4,8 @@ titleSuffix: SQL Server Language Extensions
 description: Learn how to install the SQL Server Java Language Extension feature on Windows.
 author: rwestMSFT
 ms.author: randolphwest
-ms.reviewer: monamaki, randolphwest
-ms.date: 04/29/2024
+ms.reviewer: monamaki
+ms.date: 08/28/2025
 ms.service: sql
 ms.subservice: language-extensions
 ms.topic: how-to
@@ -43,7 +43,9 @@ Learn how to install the [Java Language Extension](../java-overview.md) componen
 > [!IMPORTANT]  
 > After setup is complete, be sure to complete the post-configuration steps described in this article. These steps include enabling SQL Server to use external code, and adding accounts required for SQL Server to run Java code on your behalf. Configuration changes generally require a restart of the instance, or a restart of the Launchpad service.
 
-## <a id="java-jre-jdk"></a> Java JRE or JDK
+<a id="java-jre-jdk"></a>
+
+## Java JRE or JDK
 
 > [!NOTE]  
 > Feature capabilities and installation options vary between versions of SQL Server. Use the version selector dropdown list to choose the appropriate version of SQL Server.
@@ -132,7 +134,7 @@ For local installations, you must run Setup as an administrator. If you install 
 
    Note the location of the folder under the path `..\Setup Bootstrap\Log` where the configuration files are stored. When setup is complete, you can review the installed components in the Summary file.
 
-5. After setup is complete, if you're instructed to restart the computer, do so now. It's important to read the message from the Installation Wizard when you finish with Setup. For more information, see [View and Read SQL Server Setup Log Files](../../database-engine/install-windows/view-and-read-sql-server-setup-log-files.md).
+5. After setup is complete, if you're instructed to restart the computer, do so now. It's important to read the message from the Installation Wizard when you finish with Setup. For more information, see [View and read SQL Server Setup log files](../../database-engine/install-windows/view-and-read-sql-server-setup-log-files.md).
 
 ## Add the JRE_HOME variable
 
@@ -199,7 +201,9 @@ For local installations, you must run Setup as an administrator. If you install 
 
 ::: moniker-end
 
-## <a id="perms-nonwindows"></a> Grant access to non-default JRE folder
+<a id="perms-nonwindows"></a>
+
+## Grant access to non-default JRE folder
 
 ::: moniker range="=sql-server-ver15"
 If you didn't install the default Java that was included with SQL Server and didn't install the Java under `/Program Files`, you need to perform the following steps.
@@ -214,7 +218,7 @@ Run the **icacls** commands from an *elevated* line to grant access to the **SQL
 
    For a named instance, append the instance name to **SQLRUsergroup** (for example, `SQLRUsergroupINSTANCENAME`).
 
-   ```cmd
+   ```console
    icacls "<PATH to JRE>" /grant "SQLRUsergroup":(OI)(CI)RX /T
    ```
 
@@ -222,7 +226,7 @@ Run the **icacls** commands from an *elevated* line to grant access to the **SQL
 
 1. Give AppContainer permissions. This command grants permissions to the computer SID `S-1-15-2-1`, which is equivalent to `ALL APPLICATION PACKAGES` on an English version of Windows. Alternatively, you can use `icacls "<PATH to JRE>" /grant "ALL APPLICATION PACKAGES":(OI)(CI)RX /T` on an English version of Windows.
 
-   ```cmd
+   ```console
    icacls "<PATH to JRE>" /grant *S-1-15-2-1:(OI)(CI)RX /T
    ```
 
@@ -239,7 +243,7 @@ You can restart the service using the right-click **Restart** command for the in
 1. Open [!INCLUDE [ssManStudioFull](../../includes/ssmanstudiofull-md.md)]. Connect to the instance where you installed Language Extensions, select **New Query** to open a query window, and run the following command:
 
    ```sql
-   EXEC sp_configure;
+   EXECUTE sp_configure;
    ```
 
    The feature is off (`value` is `0`) by default, and must be explicitly enabled by an administrator before you can run Java code.
@@ -247,9 +251,11 @@ You can restart the service using the right-click **Restart** command for the in
 1. To enable the external scripting feature, run the following statement:
 
    ```sql
-   EXEC sp_configure 'external scripts enabled', 1
+   EXECUTE sp_configure 'external scripts enabled', 1;
    GO
-   RECONFIGURE WITH OVERRIDE
+
+   RECONFIGURE WITH OVERRIDE;
+   GO
    ```
 
    If you already enabled the feature for Machine Learning Services, don't run reconfigure a second time for Language Extensions. The underlying extensibility platform supports both.
@@ -277,7 +283,7 @@ Use the following steps to verify that all components used to launch external sc
 1. In SQL Server Management Studio or Azure Data Studio, open a new query window, and run the following statement:
 
    ```sql
-   EXEC sp_configure 'external scripts enabled';
+   EXECUTE sp_configure 'external scripts enabled';
    ```
 
    The `run_value` is now set to 1.
@@ -294,7 +300,7 @@ At the instance level, extra configuration might include:
 
 - [Firewall configuration for SQL Server Machine Learning Services](../../machine-learning/security/firewall-configuration.md)
 - [Enable or disable a server network protocol](../../database-engine/configure-windows/enable-or-disable-a-server-network-protocol.md)
-- [Configure remote access (server configuration option)](../../database-engine/configure-windows/configure-the-remote-access-server-configuration-option.md)
+- [Server configuration: remote access](../../database-engine/configure-windows/configure-the-remote-access-server-configuration-option.md)
 - [Create a login for SQLRUserGroup](../../machine-learning/security/create-a-login-for-sqlrusergroup.md)
 
 On the database, you might need the following configuration updates:

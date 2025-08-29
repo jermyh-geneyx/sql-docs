@@ -1,10 +1,10 @@
 ---
-title: Call Java runtime
+title: Call Java Runtime
 titleSuffix: SQL Server Language Extensions
 description: Learn how to call Java classes from a SQL Server stored procedures using SQL Server Language Extensions.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 04/29/2024
+ms.date: 08/28/2025
 ms.service: sql
 ms.subservice: language-extensions
 ms.topic: how-to
@@ -29,7 +29,9 @@ There are two methods for calling Java classes in SQL Server:
 > [!NOTE]  
 > As a general recommendation, use `.jar` files and not individual `.class` files. This is common practice in Java and will make the overall experience easier. See also, [Create a Java .jar file from class files](create-a-java-jar-file-from-class-files.md).
 
-## <a id="classpath"></a> Use Classpath
+<a id="classpath"></a>
+
+## Use the classpath
 
 ### Basic principles
 
@@ -54,17 +56,18 @@ The [sp_execute_external_script](../../relational-databases/system-stored-proced
 > You don't need to define which method to call. By default, a method called `execute` is called. This means that you need to follow the [Microsoft Extensibility SDK for Java for SQL Server](extensibility-sdk-java-sql-server.md) and implement an execute method in your Java class.
 
 ```sql
-DECLARE @param1 INT
+DECLARE @param1 AS INT;
 
-SET @param1 = 3
+SET @param1 = 3;
 
-EXEC sp_execute_external_script @language = N'Java',
+EXECUTE sp_execute_external_script
+    @language = N'Java',
     @script = N'<packageName>.<ClassName>',
     @input_data_1 = N'<Input Query>',
     @param1 = @param1;
 ```
 
-<a name="set-classpath"></a>
+<a id="set-classpath"></a>
 
 ### Set CLASSPATH
 
@@ -72,13 +75,15 @@ Once you compile your Java class or classes, and created a `.jar` file in your J
 
 1. Use external libraries
 
-    The easiest option is to make SQL Server automatically find your classes by creating external libraries and pointing the library to a jar. [Use external libraries for Java](#external-library)
+   The easiest option is to make SQL Server automatically find your classes by creating external libraries and pointing the library to a jar. [Use external libraries for Java](#external-library)
 
 1. Register a system environment variable
 
-    You can create a system environment variable and provide the paths to your `.jar` file that contains the classes. Create a system environment variable called `CLASSPATH`.
+   You can create a system environment variable and provide the paths to your `.jar` file that contains the classes. Create a system environment variable called `CLASSPATH`.
 
-## <a id="external-library"></a> Use external library
+<a id="external-library"></a>
+
+## Use external library
 
 In [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and later versions, you can use external libraries for the Java language on Windows and Linux. You can compile your classes into a `.jar` file and upload the `.jar` file and other dependencies into the database using the [CREATE EXTERNAL LIBRARY](../../t-sql/statements/create-external-library-transact-sql.md) DDL.
 
@@ -86,8 +91,8 @@ Example of how to upload a `.jar` file with external library:
 
 ```sql
 CREATE EXTERNAL LIBRARY myJar
-FROM (CONTENT = '<local path to .jar file>')
-WITH (LANGUAGE = 'Java');
+    FROM (CONTENT = '<local path to .jar file>')
+    WITH (LANGUAGE = 'Java');
 GO
 ```
 
@@ -96,7 +101,7 @@ When it creates an external library, SQL Server automatically has access to the 
 The following code is an example of calling a method in a class from a package, uploaded as an external library:
 
 ```sql
-EXEC sp_execute_external_script
+EXECUTE sp_execute_external_script
     @language = N'Java',
     @script = N'MyPackage.MyCLass',
     @input_data_1 = N'SELECT * FROM MYTABLE'

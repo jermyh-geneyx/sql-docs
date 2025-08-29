@@ -1,10 +1,10 @@
 ---
-title: Call .NET runtime
+title: "Call .NET Runtime"
 titleSuffix: SQL Server Language Extensions
 description: Learn how to call C# code from a SQL Server stored procedures using SQL Server Language Extensions.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 04/29/2024
+ms.date: 08/28/2025
 ms.service: sql
 ms.subservice: language-extensions
 ms.topic: how-to
@@ -45,18 +45,20 @@ The [sp_execute_external_script](../../relational-databases/system-stored-proced
 > You don't need to define which method to call. By default, a method called `Execute` is called. This means that you need to follow the [Microsoft Extensibility SDK for C# for SQL Server](extensibility-sdk-c-sharp-sql-server.md) and implement an `Execute` method in your C# class.
 
 ```sql
-DECLARE @param1 INT;
+DECLARE @param1 AS INT;
 
 SET @param1 = 3;
 
-EXEC sp_execute_external_script
+EXECUTE sp_execute_external_script
     @language = N'dotnet',
     @script = N'<PackageName>.<ClassName>',
     @input_data_1 = N'<Input Query>',
     @param1 = @param1;
 ```
 
-## <a id="external-library"></a> Use external library
+<a id="external-library"></a>
+
+## Use external library
 
 In [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and later versions, you can use external libraries for the C# language on Windows. You can compile your classes into a DLL file and upload the DLL and other dependencies into the database using the [CREATE EXTERNAL LIBRARY](../../t-sql/statements/create-external-library-transact-sql.md) DDL.
 
@@ -64,8 +66,8 @@ Example of how to upload a DLL file with external library:
 
 ```sql
 CREATE EXTERNAL LIBRARY [dotnetlibrary]
-FROM (CONTENT = '<local path to .dll file>')
-WITH (LANGUAGE = 'dotnet');
+    FROM (CONTENT = '<local path to .dll file>')
+    WITH (LANGUAGE = 'dotnet');
 GO
 ```
 
@@ -74,11 +76,11 @@ When it creates an external library, SQL Server automatically has access to the 
 The following code is an example of calling the `Execute` method in class `MyClass` from a package `MyPackage`, uploaded as an external library:
 
 ```sql
-EXEC sp_execute_external_script
+EXECUTE sp_execute_external_script
     @language = N'dotnet',
     @script = N'MyPackage.MyClass',
     @input_data_1 = N'SELECT * FROM MYTABLE'
-WITH RESULT SETS((column1 INT));
+WITH RESULT SETS ((column1 INT));
 ```
 
 For more information, see [CREATE EXTERNAL LIBRARY](../../t-sql/statements/create-external-library-transact-sql.md).

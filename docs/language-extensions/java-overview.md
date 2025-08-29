@@ -1,10 +1,10 @@
 ---
-title: What is the Java Language Extension?
+title: What Is the Java Language Extension?
 titleSuffix: SQL Server Language Extensions
 description: The Java Language Extension is a feature of SQL Server used for executing external Java code. Relational data can be used in the external Java code using the extensibility framework.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 04/29/2024
+ms.date: 08/28/2025
 ms.service: sql
 ms.subservice: language-extensions
 ms.topic: overview

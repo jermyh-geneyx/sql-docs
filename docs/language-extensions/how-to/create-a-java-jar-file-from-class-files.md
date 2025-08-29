@@ -1,9 +1,9 @@
 ---
-title: Create a Java .jar file from class files
+title: "Create a Java .jar File from Class Files"
 description: Package your class files into a .jar file when using SQL Server Language Extensions to execute Java code.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 04/29/2024
+ms.date: 08/28/2025
 ms.service: sql
 ms.subservice: language-extensions
 ms.topic: how-to
@@ -19,13 +19,13 @@ Learn how to package your class files into a `.jar` file, when using [SQL Server
 
 To create a `.jar` from class files, navigate to the folder containing your class file and run this command:
 
-```cmd
+```console
 jar -cf <MyJar.jar> *.class
 ```
 
 Make sure the path to `jar.exe` is part of the system path variable. Alternatively, specify the full path to **jar** which can be found under `/bin` in the JDK folder. For example:
 
-```cmd
+```console
 C:\Users\MyUser\Desktop\jdk1.8.0_201\bin\jar -cf <MyJar.jar> *.class
 ```
 

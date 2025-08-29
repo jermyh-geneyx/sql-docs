@@ -1,9 +1,9 @@
 ---
-title: "Tutorial: Regex string search in Java"
+title: "Tutorial: Regex String Search in Java"
 description: This tutorial shows you how to use SQL Server Language Extensions and run Java code that search a string with regular expressions (regex).
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 04/29/2024
+ms.date: 08/28/2025
 ms.service: sql
 ms.subservice: language-extensions
 ms.topic: tutorial
@@ -42,21 +42,17 @@ GO
 USE javatest;
 GO
 
-CREATE TABLE testdata (
+CREATE TABLE testdata
+(
     [id] INT NOT NULL,
-    [text] NVARCHAR(100) NOT NULL
+    [text] NVARCHAR (100) NOT NULL
 );
 GO
 
 -- Insert data into test table
-INSERT INTO testdata ([id], [text])
-VALUES (1, 'This sentence contains java');
-
-INSERT INTO testdata ([id], [text])
-VALUES (2, 'This sentence does not');
-
-INSERT INTO testdata ([id], [text])
-VALUES (3, 'I love Java!');
+INSERT INTO testdata ([id], [text]) VALUES (1, 'This sentence contains java');
+INSERT INTO testdata ([id], [text]) VALUES (2, 'This sentence does not');
+INSERT INTO testdata ([id], [text]) VALUES (3, 'I love Java!');
 GO
 ```
 
@@ -187,17 +183,17 @@ If you're using Windows, follow these steps to create an external language for J
 
 1. Create a .zip file containing the extension.
 
-    As part of the SQL Server setup on Windows, the Java extension `.zip` file is installed in this location: `[SQL Server install path]\MSSQL\Binn\java-lang-extension.zip`. This zip file contains the `javaextension.dll`.
+   As part of the SQL Server setup on Windows, the Java extension `.zip` file is installed in this location: `[SQL Server install path]\MSSQL\Binn\java-lang-extension.zip`. This zip file contains the `javaextension.dll`.
 
 1. Create an external language Java from the .zip file:
 
-    ```sql
-    CREATE EXTERNAL LANGUAGE Java
-    FROM
-    (CONTENT = N'[SQL Server install path]\MSSQL\Binn\java-lang-extension.zip', FILE_NAME = 'javaextension.dll',
-    ENVIRONMENT_VARIABLES = N'{"JRE_HOME":"<path to JRE>"}' );
-    GO
-    ```
+   ```sql
+   CREATE EXTERNAL LANGUAGE Java
+   FROM
+   (CONTENT = N'[SQL Server install path]\MSSQL\Binn\java-lang-extension.zip', FILE_NAME = 'javaextension.dll',
+   ENVIRONMENT_VARIABLES = N'{"JRE_HOME":"<path to JRE>"}' );
+   GO
+   ```
 
 ### Create external language on Linux
 
@@ -227,11 +223,11 @@ In this sample, you create two external libraries. One for the SDK and one for t
 
 1. The SDK jar file `mssql-java-lang-extension.jar` is installed as part of [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and later versions, on both Windows and Linux.
 
-    - Default installation path on Windows: `<instance installation home directory>\MSSQL\Binn\mssql-java-lang-extension.jar`
+   - Default installation path on Windows: `<instance installation home directory>\MSSQL\Binn\mssql-java-lang-extension.jar`
 
-    - Default installation path on Linux: `/opt/mssql/lib/mssql-java-lang-extension.jar`
+   - Default installation path on Linux: `/opt/mssql/lib/mssql-java-lang-extension.jar`
 
-    The code is also open sourced and can be found on the [SQL Server Language Extensions GitHub repository](https://github.com/microsoft/sql-server-language-extensions). For more information, see [Microsoft Extensibility SDK for Java for SQL Server](../how-to/extensibility-sdk-java-sql-server.md).
+   The code is also open sourced and can be found on the [SQL Server Language Extensions GitHub repository](https://github.com/microsoft/sql-server-language-extensions). For more information, see [Microsoft Extensibility SDK for Java for SQL Server](../how-to/extensibility-sdk-java-sql-server.md).
 
 1. Create an external library for the SDK.
 
@@ -276,11 +272,13 @@ The entire tree must have permissions, from root parent to the last sub folder.
    1. Select **Locations** to select the local computer name at the top of the list.
 1. Enter **SQLRUserGroup**, check the name, and select **OK** to add the group.
 1. Enter **ALL APPLICATION PACKAGES**, check the name, and select **OK** to add.
-    If the name doesn't resolve, revisit the Locations step. The SID is local to your machine.
+   If the name doesn't resolve, revisit the Locations step. The SID is local to your machine.
 
 Make sure both security identities have **Read and Execute** permissions on the folder and the `pkg` sub folder.
 
-## <a id="call-method"></a> Call the Java class
+<a id="call-method"></a>
+
+## Call the Java class
 
 Create a stored procedure that calls `sp_execute_external_script` to call the Java code from SQL Server. In the `script` parameter, define which `package.class` you want to call. In the following code, the class belongs to a package called `pkg` and a class file called `RegexSample.java`.
 
@@ -290,27 +288,29 @@ Create a stored procedure that calls `sp_execute_external_script` to call the Ja
 The stored procedure takes an input query (input dataset) and a regular expression and returns the rows that fulfilled the given regular expression. It uses a regular expression `[Jj]ava` that checks if a text contains the word `Java` or `java`.
 
 ```sql
-CREATE OR ALTER PROCEDURE [dbo].[java_regex]
-    @expr NVARCHAR(200), @query NVARCHAR(400)
+CREATE OR ALTER PROCEDURE [dbo].[java_regex] (
+    @expr NVARCHAR (200),
+    @query NVARCHAR (400)
+)
 AS
 BEGIN
     --Call the Java program by giving the package.className in @script
     --The method invoked in the Java code is always the "execute" method
-    EXEC sp_execute_external_script @language = N'Java',
+    EXECUTE sp_execute_external_script
+        @language = N'Java',
         @script = N'pkg.RegexSample',
         @input_data_1 = @query,
         @params = N'@regexExpr nvarchar(200)',
         @regexExpr = @expr
-    WITH result sets((
-        ID INT,
-        TEXT NVARCHAR(100)
-    ));
+        WITH RESULT SETS
+    (
+            (ID INT, TEXT NVARCHAR (100))
+    );
 END
 GO
 
 --Now execute the above stored procedure and provide the regular expression and an input query
-EXECUTE [dbo].[java_regex] N'[Jj]ava',
-    N'SELECT id, text FROM testdata'
+EXECUTE [dbo].[java_regex] N'[Jj]ava', N'SELECT id, text FROM testdata';
 GO
 ```
 

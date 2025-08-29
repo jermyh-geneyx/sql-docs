@@ -1,10 +1,10 @@
 ---
-title: C# data types
+title: C# Data Types
 titleSuffix: SQL Server Language Extensions
 description: Map data types from C# .NET to SQL Server for input and output data structures, and for input parameters on the sp_execute_external_script.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 04/29/2024
+ms.date: 08/28/2025
 ms.service: sql
 ms.subservice: language-extensions
 ms.topic: conceptual

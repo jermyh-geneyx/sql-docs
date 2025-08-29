@@ -1,11 +1,11 @@
 ---
-title: Install .NET Language Extension on Windows
+title: "Install .NET Language Extension on Windows"
 titleSuffix: SQL Server Language Extensions
 description: Learn how to install the SQL Server .NET Language Extension feature on Windows.
 author: rwestMSFT
 ms.author: randolphwest
-ms.reviewer: monamaki, randolphwest
-ms.date: 04/29/2024
+ms.reviewer: monamaki
+ms.date: 08/28/2025
 ms.service: sql
 ms.subservice: language-extensions
 ms.topic: how-to
@@ -45,7 +45,7 @@ Learn how to install the [.NET Language Extension](../csharp-overview.md) compon
 
 ## .NET runtime
 
-.NET 6 long-term support (LTS) is the earliest supported runtime. You can [download the .NET runtime](https://dotnet.microsoft.com/en-us/download/dotnet) for Windows. Linux isn't supported.
+.NET 6 long-term support (LTS) is the earliest supported runtime. You can [download the .NET runtime](https://dotnet.microsoft.com/download/dotnet) for Windows. Linux isn't supported.
 
 If you want to use the latest LTS release of the .NET runtime, you must recompile the .NET Language Extension.
 
@@ -76,7 +76,7 @@ For local installations, you must run Setup as an administrator. If you install 
 
    Note the location of the folder under the path `..\Setup Bootstrap\Log` where the configuration files are stored. When setup is complete, you can review the installed components in the Summary file.
 
-1. After setup is complete, if you're instructed to restart the computer, do so now. It's important to read the message from the Installation Wizard when you finish with Setup. For more information, see [View and Read SQL Server Setup Log Files](../../database-engine/install-windows/view-and-read-sql-server-setup-log-files.md).
+1. After setup is complete, if you're instructed to restart the computer, do so now. It's important to read the message from the Installation Wizard when you finish with Setup. For more information, see [View and read SQL Server Setup log files](../../database-engine/install-windows/view-and-read-sql-server-setup-log-files.md).
 
 ## Register the language extension
 
@@ -114,7 +114,7 @@ You can restart the service using the right-click **Restart** command for the in
 1. Open [!INCLUDE [ssManStudioFull](../../includes/ssmanstudiofull-md.md)]. Connect to the instance where you installed Language Extensions, select **New Query** to open a query window, and run the following command:
 
    ```sql
-   EXEC sp_configure;
+   EXECUTE sp_configure;
    ```
 
    The feature is off (`value` is `0`) by default, and must be explicitly enabled by an administrator before you can run C# code.
@@ -122,9 +122,11 @@ You can restart the service using the right-click **Restart** command for the in
 1. To enable the external scripting feature, run the following statement:
 
    ```sql
-   EXEC sp_configure 'external scripts enabled', 1;
+   EXECUTE sp_configure 'external scripts enabled', 1;
    GO
-   RECONFIGURE WITH OVERRIDE
+
+   RECONFIGURE WITH OVERRIDE;
+   GO
    ```
 
    If you already enabled the feature for Machine Learning Services, don't run reconfigure a second time for Language Extensions. The underlying extensibility platform supports both.
@@ -152,7 +154,7 @@ Use the following steps to verify that all components used to launch external sc
 1. In SQL Server Management Studio or Azure Data Studio, open a new query window, and run the following statement:
 
    ```sql
-   EXEC sp_configure 'external scripts enabled';
+   EXECUTE sp_configure 'external scripts enabled';
    ```
 
    The `run_value` is now set to `1`.
@@ -169,7 +171,7 @@ At the instance level, extra configuration might include:
 
 - [Firewall configuration for SQL Server Machine Learning Services](../../machine-learning/security/firewall-configuration.md)
 - [Enable or disable a server network protocol](../../database-engine/configure-windows/enable-or-disable-a-server-network-protocol.md)
-- [Configure remote access (server configuration option)](../../database-engine/configure-windows/configure-the-remote-access-server-configuration-option.md)
+- [Server configuration: remote access](../../database-engine/configure-windows/configure-the-remote-access-server-configuration-option.md)
 - [Create a login for SQLRUserGroup](../../machine-learning/security/create-a-login-for-sqlrusergroup.md)
 
 On the database, you might need the following configuration updates:

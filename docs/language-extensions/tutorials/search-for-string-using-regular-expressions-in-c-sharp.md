@@ -1,9 +1,9 @@
 ---
-title: "Tutorial: Regex string search in C#"
+title: "Tutorial: Regex String Search in C#"
 description: This tutorial shows you how to use SQL Server Language Extensions and run C# code that search a string with regular expressions (regex).
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 04/29/2024
+ms.date: 08/28/2025
 ms.service: sql
 ms.subservice: language-extensions
 ms.topic: tutorial
@@ -36,21 +36,23 @@ Command-line compilation using `dotnet build` is sufficient for this tutorial.
 First, create a new database and populate a `testdata` table with `ID` and `text` columns.
 
 ```sql
-CREATE DATABASE csharptest
-GO
-USE csharptest
+CREATE DATABASE csharptest;
 GO
 
-CREATE TABLE testdata (
+USE csharptest;
+GO
+
+CREATE TABLE testdata
+(
     [id] INT,
-    [text] VARCHAR(100),
-)
+    [text] VARCHAR (100)
+);
 GO
 
-INSERT INTO testdata(id, "text") VALUES (4, 'This sentence contains C#')
-INSERT INTO testdata(id, "text") VALUES (1, 'This sentence does not')
-INSERT INTO testdata(id, "text") VALUES (3, 'I love c#!')
-INSERT INTO testdata(id, "text") VALUES (2, NULL)
+INSERT INTO testdata (id, "text") VALUES (4, 'This sentence contains C#');
+INSERT INTO testdata (id, "text") VALUES (1, 'This sentence does not');
+INSERT INTO testdata (id, "text") VALUES (3, 'I love c#!');
+INSERT INTO testdata (id, "text") VALUES (2, NULL);
 GO
 ```
 
@@ -199,7 +201,9 @@ WITH (LANGUAGE = 'Dotnet');
 GO
 ```
 
-## <a id="call-method"></a> Call the C# class
+<a id="call-method"></a>
+
+## Call the C# class
 
 Call the stored procedure `sp_execute_external_script` to invoke the C# code from SQL Server. In the script parameter, define which `libraryname;namespace.classname` you want to call. You can also define which `namespace.classname` you want to call without specifying the library name. The extension will find the first library that has the matched `namespace.classname`. In the following code, the class belongs to a namespace called `UserExecutor` and a class called `CSharpRegexExecutor`.
 
@@ -208,21 +212,22 @@ The code doesn't define which method to call. By default, the `Execute` method w
 The stored procedure takes an input query (input dataset) and a regular expression and returns the rows that fulfilled the given regular expression. It uses a regular expression `[Cc]#` that checks if a text contains the word `C#` or `c#`.
 
 ```sql
-DECLARE @rowsCount INT;
-DECLARE @regexExpr VARCHAR(200);
+DECLARE @rowsCount AS INT;
+DECLARE @regexExpr AS VARCHAR (200);
 
 SET @regexExpr = N'[Cc]#';
 
-EXEC sp_execute_external_script @language = N'dotnet',
+EXECUTE sp_execute_external_script
+    @language = N'dotnet',
     @script = N'regex.dll;UserExecutor.CSharpRegexExecutor',
     @input_data_1 = N'SELECT * FROM testdata',
     @params = N'@regexExpr VARCHAR(200) OUTPUT, @rowsCount INT OUTPUT',
     @regexExpr = @regexExpr OUTPUT,
     @rowsCount = @rowsCount OUTPUT
-WITH result sets((
-            id INT,
-            TEXT VARCHAR(100)
-            ));
+    WITH RESULT SETS
+(
+        (id INT, TEXT VARCHAR (100))
+);
 
 SELECT @rowsCount AS rowsCount, @regexExpr AS message;
 ```

@@ -1,9 +1,9 @@
 ---
-title: Extensibility architecture in SQL Server Language Extensions
+title: Extensibility Architecture in SQL Server Language Extensions
 description: "Learn about the extensibility architecture used for SQL Server Language Extensions, which allows you to run external code in SQL Server. Starting in SQL Server 2019, Java, Python and R are supported. The code executes in a language runtime environment as an extension to the core database engine."
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 03/11/2024
+ms.date: 08/28/2025
 ms.service: sql
 ms.subservice: language-extensions
 ms.topic: conceptual
@@ -26,17 +26,17 @@ Any supported external language can be run by calling a stored procedure and the
 
 The architecture is designed such that external code run in a separate process from SQL Server, but with components that internally manage the chain of requests for data and operations on SQL Server.
 
-  ***Component architecture in Windows:***
+***Component architecture in Windows:***
 
-  :::image type="content" source="../media/extensibility-framework/generic-architecture-windows.png" alt-text="Diagram of component architecture on Windows.":::
+:::image type="content" source="../media/extensibility-framework/generic-architecture-windows.png" alt-text="Diagram of component architecture on Windows.":::
 
-  ***Component architecture in Linux:***
+***Component architecture in Linux:***
 
-  :::image type="content" source="../media/extensibility-framework/generic-architecture-linux.png" alt-text="Diagram of Component architecture on Linux.":::
+:::image type="content" source="../media/extensibility-framework/generic-architecture-linux.png" alt-text="Diagram of Component architecture on Linux.":::
 
 Components include a **Launchpad** service used to invoke external runtimes (for example, Java) and library-specific logic for loading interpreters and libraries.
 
-<a name="launchpad"></a>
+<a id="launchpad"></a>
 
 ## Launchpad
 
