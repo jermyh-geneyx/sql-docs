@@ -58,6 +58,10 @@ When using Wireshark the following is expected:
 
 When connection pooling is enabled, the driver manages SQL connections by keeping them open in a pool for reuse, rather than closing them. This can lead to a scenario where a connection is reused after a *security cache* invalidation, causing the *Kerberos ticket* to be revalidated. If the connection has been in the pool for more than five minutes, the ticket is treated as expired, resulting in a connection failure. To prevent this, set the *connection lifetime* to less than five minutes in the connection string. This change ensures that connections older than the specified lifetime are not reused from the pool.
 
+## Proxy throttling with Windows Authentication and CLR assembly
+
+When using Windows Authentication, connections are routed through a proxy by design. High connection volume, proxy throttling, and connection failures can occur from an unsafe CLR assembly invoked to collect data from non-SQL targets across subnets within the same virtual network. 
+
 ## Related content
 
 Learn more about implementing Windows Authentication for Microsoft Entra principals on Azure SQL Managed Instance:
