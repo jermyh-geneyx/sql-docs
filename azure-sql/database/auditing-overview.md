@@ -63,6 +63,8 @@ You can use SQL Database auditing to:
 - Auditing for **Azure Synapse SQL pools** supports default audit action groups **only**.
 - When you configure auditing for a [logical server in Azure](logical-servers.md) or Azure SQL Database with the log destination as a storage account, the authentication mode must match the configuration for that storage account. If using storage access keys as the authentication type, the target storage account must be enabled with access to the storage account keys. If the storage account is configured to only use authentication with Microsoft Entra ID ([formerly Azure Active Directory](/entra/fundamentals/new-name)), auditing can be configured to use managed identities for authentication.
 
+- Auditing is not supported on databases with names that contain the `?` character. This applies to both **server-level** and **database-level** auditing, as databases with `?` in their names are *no longer supported on Azure*.
+
 ## Remarks
 
 - **Premium storage** with **BlockBlobStorage** is supported. Standard storage is supported. However, for audit to write to a storage account behind a virtual network or firewall, you must have a **general-purpose v2 storage account**. If you have a general-purpose v1 or Blob Storage account, [upgrade to a general-purpose v2 storage account](/azure/storage/common/storage-account-upgrade). For specific instructions see, [Write audit to a storage account behind VNet and firewall](audit-write-storage-account-behind-vnet-firewall.md). For more information, see [Types of storage accounts](/azure/storage/common/storage-account-overview#types-of-storage-accounts).
@@ -84,4 +86,5 @@ You can use SQL Database auditing to:
 - [What's New in Azure SQL Auditing](/shows/data-exposed/server-audit-redesign-for-azure-sql-database-data-exposed)
 - [Get started with Azure SQL Managed Instance auditing](../managed-instance/auditing-configure.md)
 - [Auditing for SQL Server](/sql/relational-databases/security/auditing/sql-server-audit-database-engine)
+
 - [Set up Auditing for Azure SQL Database and Azure Synapse Analytics](auditing-setup.md)
