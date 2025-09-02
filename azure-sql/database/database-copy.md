@@ -47,15 +47,17 @@ Regardless of the target server, all database users, permissions, and security i
 
 If you use server level logins for data access and copy the database to a different server, the login-based access might not work. This can happen because the logins don't exist on the target logical server, or because those passwords and security identifiers (SIDs) are different. For more information about managing logins when you copy a database to a different server, see [Configure and manage Azure SQL Database security for geo-restore or failover](active-geo-replication-security-configure.md). After the copy operation to a different logical server succeeds, and before other users are remapped, only the login associated with the database owner, or the server administrator can sign in to the copied database. To resolve logins and establish data access after the copying operation is complete, see [Resolve logins](#resolve-logins).
 
-## Copy using the Azure portal
+
+## Copy a database
+
+### [Azure portal](#tab/azure-portal)
+
+You can copy a database by using PowerShell, the Azure CLI, and Transact-SQL (T-SQL). 
 
 To copy a database by using the Azure portal, open the page for your database, and then choose **Copy** to open the **Create SQL Database - Copy database** page. Fill in the values for the target logical server where you want to copy your database to.
 
 :::image type="content" source="media/database-copy/database-copy.png" alt-text="Screenshot of Azure portal, showing Database copy option highlighted on the database overview page." lightbox="media/database-copy/database-copy.png":::
 
-## Copy a database
-
-You can copy a database by using PowerShell, the Azure CLI, and Transact-SQL (T-SQL). 
 
 ### [PowerShell](#tab/azure-powershell)
 
@@ -82,11 +84,19 @@ az sql db copy --dest-name "CopyOfMySampleDatabase" --dest-resource-group "myRes
 
 The database copy is an asynchronous operation but the target database is created immediately after the request is accepted. If you need to cancel the copy operation while still in progress, drop the target database using the [az sql db delete](/cli/azure/sql/db#az-sql-db-delete) command.
 
-### [Transact-SQL](#tab/tsql)
+---
 
-Sign in to the `master` database with the server administrator login or the login that created the database you want to copy. For database copy to succeed, logins that aren't the server administrator must be members of the **dbmanager** role. For more information about logins and connecting to the logical server, see [Authorize database access(logins-create-manage.md).
+## Copy a database with Transact-SQL
+
+Sign in to the `master` database with the server administrator login or the login that created the database you want to copy. For database copy to succeed, logins that aren't the server administrator must be members of the **dbmanager** role. For more information about logins and connecting to the logical server, see [Authorize database access](logins-create-manage.md).
 
 Start copying the source database with the [CREATE DATABASE ... AS COPY OF](/sql/t-sql/statements/create-database-transact-sql?view=azuresqldb-current&preserve-view=true#copy-a-database) statement. The T-SQL statement continues running until the database copy operation is complete.
+
+This section provides Transact-SQL commands for the following operations:
+- [Copy to the same logical server](#copy-to-the-same-logical-server)
+- [Copy to an elastic pool](#copy-to-an-elastic-pool)
+- [Copy to a different logical server](#copy-to-a-different-logical-server)
+- [Copy to a different subscription](#copy-to-a-different-subscription)
 
 > [!NOTE]  
 > Terminating the T-SQL statement doesn't terminate the database copy operation. To terminate the operation, drop the target database.
@@ -216,8 +226,6 @@ AS COPY OF source_server_name.source_database_name;
 
 > [!TIP]  
 > Copying a database from a subscription in a different Azure tenant is only supported when using T-SQL and a SQL authentication login to sign in to the target logical server. Creating a database copy on a logical server in a different Azure tenant is not supported with [Microsoft Entra authentication for Azure SQL](authentication-aad-overview.md).
-
----
 
 
 ## Monitor progress of the copy operation
