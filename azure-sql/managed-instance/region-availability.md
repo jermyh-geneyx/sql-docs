@@ -48,6 +48,7 @@ Supports for the memory-optimized premium-series hardware and the premium-series
 - Canada Central
 - Canada East
 - Central US
+- East US
 - East US 2
 - North Central US
 - South Central US
