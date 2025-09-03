@@ -1,10 +1,10 @@
 ---
-title: "T-SQL Tutorial: Write Transact-SQL statements"
+title: "T-SQL Tutorial: Write Transact-SQL Statements"
 description: This tutorial is intended for users who are new to writing SQL statements. It helps new users get started by reviewing some basic statements for creating tables and inserting data.
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest
-ms.date: 04/19/2023
+ms.date: 09/02/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: quickstart
@@ -19,54 +19,50 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 ---
 # Tutorial: Write Transact-SQL statements
 
-[!INCLUDE[sql-asdb-asdbmi-pdw-fabricsqldb](../includes/applies-to-version/sql-asdb-asdbmi-pdw-fabricsqldb.md)]
+[!INCLUDE [sql-asdb-asdbmi-pdw-fabricsqldb](../includes/applies-to-version/sql-asdb-asdbmi-pdw-fabricsqldb.md)]
 
 > [!NOTE]  
 > The [Get Started Querying with Transact-SQL](/training/paths/get-started-querying-with-transact-sql/) learning path provides more in-depth content, along with practical examples.
 
-Welcome to the Writing [!INCLUDE[tsql](../includes/tsql-md.md)] Statements tutorial. This tutorial is intended for users who are new to writing SQL statements. It helps new users get started by reviewing some basic statements for creating tables and inserting data. This tutorial uses [!INCLUDE[tsql](../includes/tsql-md.md)], the [!INCLUDE[msCoName](../includes/msconame-md.md)] implementation of the SQL standard.
+Welcome to the Writing [!INCLUDE [tsql](../includes/tsql-md.md)] Statements tutorial. This tutorial is intended for users who are new to writing SQL statements. It helps new users get started by reviewing some basic statements for creating tables and inserting data. This tutorial uses [!INCLUDE [tsql](../includes/tsql-md.md)], the [!INCLUDE [msCoName](../includes/msconame-md.md)] implementation of the SQL standard.
 
-This tutorial is intended as a brief introduction to the [!INCLUDE[tsql](../includes/tsql-md.md)] language and not as a replacement for a [!INCLUDE[tsql](../includes/tsql-md.md)] class. The statements in this tutorial are intentionally simple, and aren't meant to represent the complexity found in a typical production database.
+This tutorial is intended as a brief introduction to the [!INCLUDE [tsql](../includes/tsql-md.md)] language and not as a replacement for a [!INCLUDE [tsql](../includes/tsql-md.md)] class. The statements in this tutorial are intentionally simple, and aren't meant to represent the complexity found in a typical production database.
 
 > [!NOTE]  
-> If you are a beginner you might find it easier to use [!INCLUDE[ssManStudioFull](../includes/ssmanstudiofull-md.md)] instead of writing [!INCLUDE[tsql](../includes/tsql-md.md)] statements.
+> If you're a beginner you might find it easier to use [!INCLUDE [ssManStudioFull](../includes/ssmanstudiofull-md.md)] instead of writing [!INCLUDE [tsql](../includes/tsql-md.md)] statements.
 
 ## Find more information
 
-To find more information about any specific statement, either search for the statement by name, or use the contents to browse the language elements listed alphabetically under [Transact-SQL Reference (Database Engine)](./language-reference.md). Another good strategy for finding information is to search for key words that are related to the subject matter you are interested in. For example, if you want to know how to return a part of a date (such as the month), search the index for **dates [SQL Server]**, and then select **dateparts**. This takes you to the article [DATEPART (Transact-SQL)](../t-sql/functions/datepart-transact-sql.md). As another example, to find out how to work with strings, search for **string functions**. This takes you to the article [String Functions (Transact-SQL)](../t-sql/functions/string-functions-transact-sql.md).
+To find more information about any specific statement, either search for the statement by name, or use the contents to browse the language elements listed alphabetically under [Transact-SQL reference (Database Engine)](language-reference.md). Another good strategy for finding information is to search for key words that are related to the subject matter you're interested in. For example, if you want to know how to return a part of a date (such as the month), search the index for **dates [SQL Server]**, and then select **dateparts**. This takes you to the article [DATEPART](functions/datepart-transact-sql.md). As another example, to find out how to work with strings, search for **string functions**. This takes you to the article [String Functions](functions/string-functions-transact-sql.md).
 
-## What you will learn
+## What you'll learn
 
-This tutorial shows you how to create a database, create a table in the database, insert data into the table, update the data, read the data, delete the data, and then delete the table. You will create views and stored procedures and configure a user to the database and the data.
+This tutorial shows you how to create a database, create a table in the database, insert data into the table, update the data, read the data, delete the data, and then delete the table. You'll create views and stored procedures and configure a user to the database and the data.
 
 This tutorial is divided into three lessons:
 
-- [Lesson 1: Creating Database Objects](../t-sql/lesson-1-creating-database-objects.md)
+- [Lesson 1: Create and query database objects](lesson-1-creating-database-objects.md)
 
   In this lesson, you create a database, create a table in the database, insert data into the table, update the data, and read the data.
 
-- [Lesson 2: Configuring Permissions on Database Objects](../t-sql/lesson-2-configuring-permissions-on-database-objects.md)
+- [Lesson 2: Configure permissions on database objects](lesson-2-configuring-permissions-on-database-objects.md)
 
-  In this lesson, you create a login and user. You will also create a view and a stored procedure, and then grant the user permission to the stored procedure.
+  In this lesson, you create a login and user. You'll also create a view and a stored procedure, and then grant the user permission to the stored procedure.
 
-- [Lesson 3: Deleting Database Objects](../t-sql/lesson-3-deleting-database-objects.md)
+- [Lesson 3: Delete database objects](lesson-3-deleting-database-objects.md)
 
   In this lesson, you remove access to data, delete data from a table, delete the table, and then delete the database.
 
 ## Requirements
 
-To complete this tutorial, you don't have to know the SQL language, but you should understand basic database concepts such as tables. During this tutorial, you will create a database and create a Windows user. These tasks require a high level of permissions; therefore, you should log in to the computer as an administrator.
+To complete this tutorial, you don't have to know the SQL language, but you should understand basic database concepts such as tables. During this tutorial, you'll create a database and create a Windows user. These tasks require a high level of permissions; therefore, you should log in to the computer as an administrator.
 
 Your system must have the following installed:
 
-- Any edition of [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)].
+- Any edition of [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)].
 
 - [SQL Server Management Studio](../ssms/download-sql-server-management-studio-ssms.md)
 
-## Next steps
+## Related content
 
-The next article teaches you how to create database objects.
-
-Go to the next article to learn more:
-> [!div class="nextstepaction"]
-> [Lesson 1: Create and query database objects](../t-sql/lesson-1-creating-database-objects.md)
+- [Lesson 1: Create and query database objects](lesson-1-creating-database-objects.md)

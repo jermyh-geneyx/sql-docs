@@ -1,10 +1,10 @@
 ---
-title: "Display an actual execution plan"
+title: "Display an Actual Execution Plan"
 description: Learn how to generate actual graphical execution plans by using SQL Server Management Studio. An actual graphical execution plan contains runtime information.
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest
-ms.date: 07/08/2024
+ms.date: 09/02/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: how-to
@@ -42,7 +42,7 @@ To use this feature, users must have the appropriate permissions to execute the 
 
    :::image type="content" source="media/display-an-actual-execution-plan/actual-execution-plan.png" alt-text="Screenshot from SQL Server Management Studio showing a graphical Actual Execution Plan." lightbox="media/display-an-actual-execution-plan/actual-execution-plan.png":::
 
-1. Pause the mouse over the logical and physical operators to view the description and properties of the operators in the displayed ToolTip, including properties of the overall execution plan, by selecting the root node operator (the SELECT node in the picture above).
+1. Pause the mouse over the logical and physical operators to view the description and properties of the operators in the displayed ToolTip, including properties of the overall execution plan, by selecting the root node operator (the `SELECT` node in the picture above).
 
    Alternatively, you can view operator properties in the **Properties** window. If **Properties** isn't visible, right-click an operator and select **Properties**. Select an operator to view its properties.
 
