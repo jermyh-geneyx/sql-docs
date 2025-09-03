@@ -194,6 +194,9 @@ Thread pooling helps optimize performance when large numbers of clients are conn
 
 ### Use of the lightweight pooling option
 
+> [!IMPORTANT]
+> Starting with [!INCLUDE [sql-server-2025](../includes/sssql25-md.md)], the **fiber mode** feature enabled by the `lightweight pooling` option is deprecated, and is planned for removal in a future version of [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)]. Because of known stability and compatibility issues, Microsoft recommends that you avoid using this feature in any version of [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)].
+
 The overhead involved in switching thread contexts may not be very large. Most instances of [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)] don't see any performance differences between setting the **lightweight pooling** option to 0 or 1. The only instances of [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)] that might benefit from [lightweight pooling](../database-engine/configure-windows/lightweight-pooling-server-configuration-option.md) are those that run on a computer having the following characteristics:
 
 - A large multi-CPU server
@@ -221,7 +224,7 @@ If you are running multiple instances of [!INCLUDE[ssNoVersion](../includes/ssno
 ## Hot add CPU
 
 > [!IMPORTANT]
-> Starting with [!INCLUDE [sql-server-2025](../includes/sssql25-md.md)], the hot add CPU feature is deprecated, and is planned to be removed in a future version of [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)]. Because of known stability issues, Microsoft recommends that you avoid using this feature in [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)] administration in any version of [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)].
+> Starting with [!INCLUDE [sql-server-2025](../includes/sssql25-md.md)], the hot add CPU feature is deprecated, and is planned for removal in a future version of [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)]. Because of known stability issues, Microsoft recommends that you avoid using this feature in [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)] administration in any version of [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)].
 
 Hot add CPU is the ability to dynamically add CPUs to a running system. Adding CPUs can occur physically by adding new hardware, logically by online hardware partitioning, or virtually through a virtualization layer.
 

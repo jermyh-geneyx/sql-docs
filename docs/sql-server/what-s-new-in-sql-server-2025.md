@@ -83,7 +83,7 @@ In addition to features announced previously, RC 0 adds the following changes an
 - Availability
    - Configure [TLS 1.3](../relational-databases/security/networking/tls-1-3.md) encryption for communication between the Windows Server Failover Cluster and replicas in an [Always On availability group](../relational-databases/security/networking/connect-with-strict-encryption.md#connect-to-an-always-on-availability-group) or [Always On failover cluster instances (FCI)](../relational-databases/security/networking/connect-with-strict-encryption.md#connect-to-a-failover-cluster-instance) with [TDS 8.0](../relational-databases/security/networking/tds-8.md) support.
 - Linked servers
-   - Default `Encrypt=Mandatory` encryption for [linked servers](../relational-databases/linked-servers/linked-servers-database-engine.md#related-content) with [TDS 8.0](../relational-databases/security/networking/tds-8.md) and [TLS 1.3](../relational-databases/security/networking/tls-1-3.md) support. The `Encrypt` parameter is now required and must be used when connecting through a linked server to an instance of [!INCLUDE [sssql25-md](../includes/sssql25-md.md)].
+   - Use the `Encrypt=Strict` option for TDS 8.0 and TLS 1.3 support. When no `Encrypt` parameter is provided, the linked server defaults to the driver behavior, which is `Encrypt=Mandatory`. For details, review [linked servers](../relational-databases/linked-servers/linked-servers-database-engine.md).
 - Replication
    - Configure [TLS 1.3](../relational-databases/security/networking/tls-1-3.md) encryption for [Transactional](../relational-databases/replication/transactional/transactional-replication.md#configure-tls-13-encryption), [Merge](../relational-databases/replication/merge/merge-replication.md#configure-tls-13-encryption), [Peer-to-peer](../relational-databases/replication/transactional/peer-to-peer-transactional-replication.md#configure-tls-13-encryption) and [Snapshot](../relational-databases/replication/snapshot-replication.md#configure-tls-13-encryption) with [TDS 8.0](../relational-databases/security/networking/tds-8.md) replication support. 
    - Default `Encrypt=Mandatory` encryption for inter-instance linked server communication between [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] instances in a replication topology. 
@@ -330,6 +330,8 @@ For changes related to SQL Server Integration Services, see [What's New in SQL S
 **Synapse Link** is discontinued in this version of [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)]. Use [Mirroring in Fabric](/fabric/database/mirrored-database/overview) instead. For more information, see [Mirroring in Fabric – What's new](https://aka.ms/IntroMirroringSQL).
 
 The [Hot add CPU](../relational-databases/thread-and-task-architecture-guide.md#hot-add-cpu) feature is deprecated in this version of [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)], and is planned to be removed in a future version.
+
+The [lightweight pooling](../database-engine/configure-windows/lightweight-pooling-server-configuration-option.md) configuration option and the corresponding **fiber mode** feature is deprecated in this version of [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)], and is planned for removal in a future version.
 
 **Purview access policies** (DevOps policies and data owner policies) are discontinued in this version of SQL Server. Use [Fixed server roles](../relational-databases/security/authentication-access/server-level-roles.md#fixed-server-level-roles-introduced-in-sql-server-2022) instead.
 

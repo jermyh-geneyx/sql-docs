@@ -25,6 +25,9 @@ helpviewer_keywords:
 
 Use the `lightweight pooling` option (also called *fiber mode*) to provide a means of reducing the system overhead associated with the excessive context switching sometimes seen in symmetric multiprocessing (SMP) environments. When excessive context switching is present, lightweight pooling might provide better throughput by performing the context switching inline, thus helping to reduce user/kernel ring transitions.
 
+> [!IMPORTANT]
+> Starting with [!INCLUDE [sql-server-2025](../../includes/sssql25-md.md)], the **fiber mode** feature enabled by the `lightweight pooling` option is deprecated, and is planned for removal in a future version of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. Because of known stability and compatibility issues, Microsoft recommends that you avoid using this feature in any version of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)].
+
 ## Limitations
 
 Common language runtime (CLR) execution isn't supported under lightweight pooling. Disable one of two options: `clr enabled` or `lightweight pooling`. Features that rely upon CLR and that don't work properly in fiber mode include the [hierarchyid data type](../../t-sql/data-types/hierarchyid-data-type-method-reference.md), [replication](../../relational-databases/replication/sql-server-replication.md), and [Monitor and Enforce Best Practices by Using Policy-Based Management](../../relational-databases/policy-based-management/monitor-and-enforce-best-practices-by-using-policy-based-management.md).
