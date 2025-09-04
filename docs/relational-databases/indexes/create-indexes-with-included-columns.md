@@ -1,10 +1,10 @@
 ---
-title: "Create indexes with included columns"
+title: "Create Indexes with Included Columns"
 description: Create indexes with included columns
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: vanto
-ms.date: 09/17/2024
+ms.date: 09/03/2025
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: how-to
@@ -34,9 +34,11 @@ This article describes how to add included (or nonkey) columns to extend the fun
 An index with nonkey columns can significantly improve query performance when all columns in the query are included in the index either as key or nonkey columns. Performance gains are achieved because the query optimizer can locate all the column values within the index; table or clustered index data isn't accessed resulting in fewer disk I/O operations.
 
 > [!NOTE]  
-> When an index contains all the columns referenced by a query it is typically referred to as *covering the query*.
+> When an index contains all the columns referenced by a query it's typically referred to as *covering the query*.
 
-## <a name="DesignRecs"></a> Design Recommendations
+<a id="DesignRecs"></a>
+
+## Design Recommendations
 
 - Redesign nonclustered indexes that have a large index key size so that only columns used for searching and lookups are key columns. Make all other columns that cover the query into nonkey columns. In this way, you'll have all columns needed to cover the query, but the index key itself is small and efficient.
 
@@ -46,7 +48,9 @@ An index with nonkey columns can significantly improve query performance when al
 
 - Avoid very wide nonclustered indexes where the included columns don't represent a narrow enough subset of the underlying table columns. If adding wide indexes, always verify if the cost of updating one extra wide index offsets the cost of reading directly from the table.
 
-## <a name="Restrictions"></a> Limitations and restrictions
+<a id="Restrictions"></a>
+
+## Limitations
 
 - Nonkey columns can only be defined on nonclustered indexes.
 
@@ -60,17 +64,25 @@ An index with nonkey columns can significantly improve query performance when al
 
 - Nonkey columns can't be changed, except to do the following:
 
-    - Change the nullability of the column from NOT NULL to NULL.
+  - Change the nullability of the column from `NOT NULL` to `NULL`.
 
-    - Increase the length of **varchar**, **nvarchar**, or **varbinary** columns.
+  - Increase the length of **varchar**, **nvarchar**, or **varbinary** columns.
 
-## <a name="Security"></a> Security
+<a id="Security"></a>
 
-### <a name="Permissions"></a> Permissions
+## Security
 
-Requires ALTER permission on the table or view. User must be a member of the **sysadmin** fixed server role or the **db_ddladmin** and **db_owner** fixed database roles.
+<a id="Permissions"></a>
 
-## <a name="SSMSProcedure"></a> Using SQL Server Management Studio to create an index with nonkey columns
+### Permissions
+
+Requires `ALTER` permission on the table or view. User must be a member of the **sysadmin** fixed server role or the **db_ddladmin** and **db_owner** fixed database roles.
+
+<a id="SSMSProcedure"></a>
+
+<a id="using-sql-server-management-studio-to-create-an-index-with-nonkey-columns"></a>
+
+## Use SQL Server Management Studio to create an index with nonkey columns
 
 1. In Object Explorer, select the plus sign to expand the database that contains the table on which you want to create an index with nonkey columns.
 
@@ -96,7 +108,11 @@ Requires ALTER permission on the table or view. User must be a member of the **s
 
 1. In the **New Index** dialog box, select **OK**.
 
-## <a name="TsqlProcedure"></a> Using Transact-SQL to create an index with nonkey columns
+<a id="TsqlProcedure"></a>
+
+<a id="using-transact-sql-to-create-an-index-with-nonkey-columns"></a>
+
+## Use Transact-SQL to create an index with nonkey columns
 
 1. In **Object Explorer**, connect to an instance of [!INCLUDE [ssDE](../../includes/ssde-md.md)].
 
@@ -104,17 +120,17 @@ Requires ALTER permission on the table or view. User must be a member of the **s
 
 1. Copy and paste the following example into the query window and select **Execute**.
 
-    ```sql
-    USE AdventureWorks2022;
-    GO
-    -- Creates a nonclustered index on the Person.Address table with four included (nonkey) columns.
-    -- index key column is PostalCode and the nonkey columns are
-    -- AddressLine1, AddressLine2, City, and StateProvinceID.
-    CREATE NONCLUSTERED INDEX IX_Address_PostalCode
-    ON Person.Address (PostalCode)
-    INCLUDE (AddressLine1, AddressLine2, City, StateProvinceID);
-    GO
-    ```
+   ```sql
+   USE AdventureWorks2022;
+   GO
+   -- Creates a nonclustered index on the Person.Address table with four included (nonkey) columns.
+   -- index key column is PostalCode and the nonkey columns are
+   -- AddressLine1, AddressLine2, City, and StateProvinceID.
+   CREATE NONCLUSTERED INDEX IX_Address_PostalCode
+   ON Person.Address (PostalCode)
+   INCLUDE (AddressLine1, AddressLine2, City, StateProvinceID);
+   GO
+   ```
 
 ## Related content
 

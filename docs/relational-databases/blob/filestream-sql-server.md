@@ -4,7 +4,7 @@ description: Learn about FILESTREAM, a SQL Server feature that stores data in th
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest
-ms.date: 10/02/2023
+ms.date: 09/03/2025
 ms.service: sql
 ms.subservice: filestream
 ms.topic: conceptual
@@ -61,14 +61,16 @@ Because FILESTREAM is implemented as a **varbinary(max)** column and integrated 
 In [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], FILESTREAM data is secured just like other data is secured: by granting permissions at the table or column levels. If a user has permission to the FILESTREAM column in a table, the user can open the associated files.
 
 > [!NOTE]  
-> Encryption is not supported on FILESTREAM data.
+> Encryption isn't supported on FILESTREAM data.
 
 Only the account under which the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] service account runs is granted permissions to the FILESTREAM container. We recommend that no other account is granted permissions on the data container.
 
 > [!NOTE]  
 > SQL logins will not work with FILESTREAM containers. Only NTFS or ReFS authentication will work with FILESTREAM containers.
 
-## <a id="dual"></a> Access BLOB Data with Transact-SQL and File System Streaming Access
+<a id="dual"></a>
+
+## Access BLOB Data with Transact-SQL and File System Streaming Access
 
 After you store data in a FILESTREAM column, you can access the files by using [!INCLUDE [tsql](../../includes/tsql-md.md)] transactions or by using Win32 APIs.
 
@@ -77,7 +79,7 @@ After you store data in a FILESTREAM column, you can access the files by using [
 By using [!INCLUDE [tsql](../../includes/tsql-md.md)], you can insert, update, and delete FILESTREAM data:
 
 - You can use an insert operation to prepopulate a FILESTREAM field with a null value, empty value, or relatively short inline data. However, a large amount of data is more efficiently streamed into a file that uses Win32 interfaces.
-- When you update a FILESTREAM field, you modify the underlying BLOB data in the file system. When a FILESTREAM field is set to NULL, the BLOB data associated with the field is deleted. You can't use a [!INCLUDE [tsql](../../includes/tsql-md.md)] chunked update, implemented as UPDATE**.**Write(), to perform partial updates to the data.
+- When you update a FILESTREAM field, you modify the underlying BLOB data in the file system. When a FILESTREAM field is set to `NULL`, the BLOB data associated with the field is deleted. You can't use a [!INCLUDE [tsql](../../includes/tsql-md.md)] chunked update, implemented as `UPDATE`.**Write(), to perform partial updates to the data.
 - When you delete a row or delete or truncate a table that contains FILESTREAM data, you delete the underlying BLOB data in the file system.
 
 ### File System Streaming Access
@@ -87,19 +89,19 @@ The Win32 streaming support works in the context of a [!INCLUDE [ssNoVersion](..
 Because file operations are transactional, you can't delete or rename FILESTREAM files through the file system.
 
 > [!WARNING]  
-> The FILESTREAM container is a folder managed by [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)]. Do not add or remove files in the FILESTREAM folder manually or through other applications. If you do, this will result in backup and inconsistency errors. For more information, see [MSSQLSERVER_3056](../errors-events/mssqlserver-3056-database-engine-error.md), [MSSQLSERVER_7908](../errors-events/mssqlserver-7908-database-engine-error.md), and [MSSQLSERVER_7906](../errors-events/mssqlserver-7906-database-engine-error.md).
+> The FILESTREAM container is a folder managed by [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)]. Don't add or remove files in the FILESTREAM folder manually or through other applications. If you do, this will result in backup and inconsistency errors. For more information, see [MSSQLSERVER_3056](../errors-events/mssqlserver-3056-database-engine-error.md), [MSSQLSERVER_7908](../errors-events/mssqlserver-7908-database-engine-error.md), and [MSSQLSERVER_7906](../errors-events/mssqlserver-7906-database-engine-error.md).
 
 #### Statement model
 
-The FILESTREAM file system access models a [!INCLUDE [tsql](../../includes/tsql-md.md)] statement by using file open and close. The statement starts when a file handle is opened and ends when the handle is closed. For example, when a write handle is closed, any possible AFTER trigger that is registered on the table, fires as if an UPDATE statement is completed.
+The FILESTREAM file system access models a [!INCLUDE [tsql](../../includes/tsql-md.md)] statement by using file open and close. The statement starts when a file handle is opened and ends when the handle is closed. For example, when a write handle is closed, any possible `AFTER` trigger that is registered on the table, fires as if an `UPDATE` statement is completed.
 
 #### Storage namespace
 
-In FILESTREAM, the [!INCLUDE [ssDE](../../includes/ssde-md.md)] controls the BLOB physical file system namespace. A new intrinsic function, [PathName](../../relational-databases/system-functions/pathname-transact-sql.md), provides the logical UNC path of the BLOB that corresponds to each FILESTREAM cell in the table. The application uses this logical path to obtain the Win32 handle and operate on the BLOB data by using regular Win32 file system interfaces. The function returns NULL if the value of the FILESTREAM column is NULL.
+In FILESTREAM, the [!INCLUDE [ssDE](../../includes/ssde-md.md)] controls the BLOB physical file system namespace. A new intrinsic function, [PathName](../system-functions/pathname-transact-sql.md), provides the logical UNC path of the BLOB that corresponds to each FILESTREAM cell in the table. The application uses this logical path to obtain the Win32 handle and operate on the BLOB data by using regular Win32 file system interfaces. The function returns `NULL` if the value of the FILESTREAM column is `NULL`.
 
 #### Transacted file system access
 
-A new intrinsic function, [GET_FILESTREAM_TRANSACTION_CONTEXT()](../../t-sql/functions/get-filestream-transaction-context-transact-sql.md), provides the token that represents the current transaction that the session is associated with. The transaction must have been started and not yet aborted or committed. By obtaining a token, the application binds the FILESTREAM file system streaming operations with a started transaction. The function returns NULL in case of no explicitly started transaction.
+A new intrinsic function, [GET_FILESTREAM_TRANSACTION_CONTEXT](../../t-sql/functions/get-filestream-transaction-context-transact-sql.md), provides the token that represents the current transaction that the session is associated with. The transaction must have been started and not yet aborted or committed. By obtaining a token, the application binds the FILESTREAM file system streaming operations with a started transaction. The function returns `NULL` in case of no explicitly started transaction.
 
 All file handles must be closed before the transaction commits or aborts. If a handle is left open beyond the transaction scope, additional reads against the handle cause a failure; additional writes against the handle succeed, but the actual data isn't be written to disk. Similarly, if the database or instance of the [!INCLUDE [ssDE](../../includes/ssde-md.md)] shuts down, all open handles are invalidated.
 
@@ -127,16 +129,16 @@ When a file system API can't open a file because of an isolation violation, an E
 | Open for read. | Open for write. | Both succeed. Write operations under transaction 2 don't affect read operations performed in transaction 1. | Both succeed. Write operations under transaction 2 don't affect read operations performed in transaction 1. |
 | Open for write. | Open for read. | Open for transaction 2 fails with an ERROR_SHARING_VIOLATION exception. | Both succeed. |
 | Open for write. | Open for write. | Open for transaction 2 fails with an ERROR_SHARING_VIOLATION exception. | Open for transaction 2 fails with an ERROR_SHARING_VIOLATION exception. |
-| Open for read. | Open for SELECT. | Both succeed. | Both succeed. |
-| Open for read. | Open for UPDATE or DELETE. | Both succeed. Write operations under transaction 2 don't affect read operations performed in transaction 1. | Both succeed. Write operations under transaction 2 don't affect read operations performed in transaction 1. |
-| Open for write. | open for SELECT. | Transaction 2 blocks until transaction 1 commits or ends the transaction, or the transaction lock times out. | Both succeed. |
-| Open for write. | Open for UPDATE or DELETE. | Transaction 2 blocks until transaction 1 commits or ends the transaction, or the transaction lock times out. | Transaction 2 blocks until transaction 1 commits or ends the transaction, or the transaction lock times out. |
-| Open for SELECT. | Open for read. | Both succeed. | Both succeed. |
-| Open for SELECT. | Open for write. | Both succeed. Write operations under transaction 2 don't affect transaction 1. | Both succeed. Write operations under transaction 2 don't affect transaction 1. |
-| Open for UPDATE or DELETE. | Open for read. | The open operation on transaction 2 fails with an ERROR_SHARING_VIOLATION exception. | Both succeed. |
-| Open for UPDATE or DELETE. | Open for write. | The open operation on transaction 2 fails with an ERROR_SHARING_VIOLATION exception. | The open operation on transaction 2 fails with an ERROR_SHARING_VIOLATION exception. |
-| Open for SELECT with repeatable read. | Open for read. | Both succeed. | Both succeed. |
-| Open for SELECT with repeatable read. | Open for write. | The open operation on transaction 2 fails with an ERROR_SHARING_VIOLATION exception. | The open operation on transaction 2 fails with an ERROR_SHARING_VIOLATION exception. |
+| Open for read. | Open for `SELECT`. | Both succeed. | Both succeed. |
+| Open for read. | Open for `UPDATE` or `DELETE`. | Both succeed. Write operations under transaction 2 don't affect read operations performed in transaction 1. | Both succeed. Write operations under transaction 2 don't affect read operations performed in transaction 1. |
+| Open for write. | open for `SELECT`. | Transaction 2 blocks until transaction 1 commits or ends the transaction, or the transaction lock times out. | Both succeed. |
+| Open for write. | Open for `UPDATE` or `DELETE`. | Transaction 2 blocks until transaction 1 commits or ends the transaction, or the transaction lock times out. | Transaction 2 blocks until transaction 1 commits or ends the transaction, or the transaction lock times out. |
+| Open for `SELECT`. | Open for read. | Both succeed. | Both succeed. |
+| Open for `SELECT`. | Open for write. | Both succeed. Write operations under transaction 2 don't affect transaction 1. | Both succeed. Write operations under transaction 2 don't affect transaction 1. |
+| Open for `UPDATE` or `DELETE`. | Open for read. | The open operation on transaction 2 fails with an ERROR_SHARING_VIOLATION exception. | Both succeed. |
+| Open for `UPDATE` or `DELETE`. | Open for write. | The open operation on transaction 2 fails with an ERROR_SHARING_VIOLATION exception. | The open operation on transaction 2 fails with an ERROR_SHARING_VIOLATION exception. |
+| Open for `SELECT` with repeatable read. | Open for read. | Both succeed. | Both succeed. |
+| Open for `SELECT` with repeatable read. | Open for write. | The open operation on transaction 2 fails with an ERROR_SHARING_VIOLATION exception. | The open operation on transaction 2 fails with an ERROR_SHARING_VIOLATION exception. |
 
 #### Write-through from remote clients
 
@@ -146,7 +148,7 @@ Creating memory mapped views (memory mapped I/O) by using a FILESTREAM handle is
 
 ## Recommendations and guidelines for improving FILESTREAM performance
 
-The [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] FILESTREAM feature allows you to store varbinary(max) binary large object data as files in the file system. When you have a large number of rows in FILESTREAM containers, which are the underlying storage for both FILESTREAM columns and FileTables, you can end up with a file system volume that contains large number of files. To achieve best performance when processing the integrated data from the database and the file system, it is important to ensure the file system is tuned optimally. The following are some of the tuning options that are available from a file system perspective:
+The [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] FILESTREAM feature allows you to store varbinary(max) binary large object data as files in the file system. When you have a large number of rows in FILESTREAM containers, which are the underlying storage for both FILESTREAM columns and FileTables, you can end up with a file system volume that contains large number of files. To achieve best performance when processing the integrated data from the database and the file system, it's important to ensure the file system is tuned optimally. The following are some of the tuning options that are available from a file system perspective:
 
 - Altitude check for the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] FILESTREAM filter driver (for example, `rsfx0100.sys`). Evaluate all the filter drivers loaded for the storage stack associated with a volume where the FILESTREAM feature stores files and make sure that rsfx driver is located at the bottom of the stack. You can use the FLTMC.EXE control program to enumerate the filter drivers for a specific volume. Here's a sample output from the FLTMC utility: `C:\Windows\System32>fltMC.exe` filters
 
@@ -159,16 +161,16 @@ The [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] FILESTREAM fea
   | RsFx0103 | 1 | 41001.03 | 0 |
 
 - Check that the server has the "last access time" property disabled for the files. This file system attribute is maintained in the registry:
-Key Name: `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem`  
-Name: NtfsDisableLastAccessUpdate  
-Type: REG_DWORD  
-Value: 1
+  Key Name: `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem`
+  Name: NtfsDisableLastAccessUpdate
+  Type: REG_DWORD
+  Value: 1
 
 - Check that the server has 8.3 naming disabled. This file system attribute is maintained in the registry:
-Key Name: `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem`  
-Name: NtfsDisable8dot3NameCreation  
-Type: REG_DWORD  
-Value: 1
+  Key Name: `HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\FileSystem`
+  Name: NtfsDisable8dot3NameCreation
+  Type: REG_DWORD
+  Value: 1
 
 - Check that the FILESTREAM directory containers don't have file system encryption or file system compression enabled, as these can introduce a level of overhead when accessing these files.
 
@@ -176,7 +178,7 @@ Value: 1
 
 - Check that FILESTREAM directory containers don't have more than 300,000 files. You can use the information from `sys.database_files` catalog view to find out which directories in the file system store `FILESTREAM-related` files. This can be prevented by having multiple containers. (See the next bullet item for more information.)
 
-- With only one FILESTREAM filegroup, all data files are created under the same folder. File creation of very large numbers of files may be affected by large NTFS indices, which can also become fragmented.
+- With only one FILESTREAM filegroup, all data files are created under the same folder. File creation of very large numbers of files might be affected by large NTFS indices, which can also become fragmented.
 
   - Having multiple filegroups generally should help with this (the application uses partitioning or has multiple tables, each going to its own filegroup).
 
@@ -184,11 +186,11 @@ Value: 1
 
 - Backup and restore can become faster with multiple FILESTREAM containers, if multiple volumes storing containers are used.
 
-  [!INCLUDE [sssql11-md](../../includes/sssql11-md.md)] supports multiple containers per filegroup and can make things easier. No complicated partitioning schemes may be needed to manage larger number of files.
+  [!INCLUDE [sssql11-md](../../includes/sssql11-md.md)] supports multiple containers per filegroup and can make things easier. No complicated partitioning schemes might be needed to manage larger number of files.
 
 - When there are a very large number of FILESTREAM containers in a SQL instance, starting the databases with many FILESTREAM containers might take a long time to register them in the FILESTREAM filter driver. Spreading them in multiple different volumes helps with improving database startup time.
 
-- The NTFS MFT may become fragmented, and that can cause performance issues. The MFT reserved size does depend on volume size, so you may or may not encounter this.
+- The NTFS MFT might become fragmented, and that can cause performance issues. The MFT reserved size does depend on volume size, so you might or might not encounter this.
 
   - You can check the MFT fragmentation with `defrag /A /V C:` (change C: to the actual volume name).
 
@@ -218,6 +220,6 @@ Value: 1
 ## Related content
 
 - [FILESTREAM compatibility with other SQL Server features](filestream-compatibility-with-other-sql-server-features.md)
-- [FILESTREAM and FileTable Dynamic Management Views (Transact-SQL)](../system-dynamic-management-views/filestream-and-filetable-dynamic-management-views-transact-sql.md)
-- [FILESTREAM and FileTable Catalog Views (Transact-SQL)](../system-catalog-views/filestream-and-filetable-catalog-views-transact-sql.md)
+- [FILESTREAM and FileTable dynamic management views (Transact-SQL)](../system-dynamic-management-views/filestream-and-filetable-dynamic-management-views-transact-sql.md)
+- [FILESTREAM and FileTable catalog views (Transact-SQL)](../system-catalog-views/filestream-and-filetable-catalog-views-transact-sql.md)
 - [FILESTREAM and FileTable system stored procedures (Transact-SQL)](../system-stored-procedures/filestream-and-filetable-system-stored-procedures.md)
