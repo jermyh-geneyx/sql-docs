@@ -1,10 +1,10 @@
 ---
-title: FOR XML (SQL Server)
+title: "FOR XML (SQL Server)"
 description: Learn how to retrieve formal results of a SQL query as XML by specifying the FOR XML clause in the query.
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest
-ms.date: 05/24/2024
+ms.date: 09/03/2025
 ms.service: sql
 ms.subservice: xml
 ms.topic: conceptual
@@ -41,7 +41,7 @@ The `AUTO` mode generates nesting in the resulting XML by using heuristics based
 
 The `EXPLICIT` mode allows more control over the shape of the XML. You can mix attributes and elements at will in deciding the shape of the XML. It requires a specific format for the resulting rowset that is generated because of query execution. This rowset format is then mapped into XML shape. The power of `EXPLICIT` mode is to mix attributes and elements at will, create wrappers and nested complex properties, create space-separated values (for example, the `OrderID` attribute might have a list of order ID values), and mixed contents.
 
-However, writing `EXPLICIT` mode queries can be cumbersome. You can use some of the new `FOR XML` capabilities, such as writing nested `FOR XML RAW`, `AUTO`, or `PATH` mode queries and the `TYPE` directive, instead of using `EXPLICIT` mode to generate the hierarchies. The nested `FOR XML` queries can produce any XML that you can generate by using the `EXPLICIT` mode. For more information, see [Use Nested FOR XML Queries](use-nested-for-xml-queries.md) and [TYPE Directive in FOR XML Queries](type-directive-in-for-xml-queries.md).
+However, writing `EXPLICIT` mode queries can be cumbersome. You can use some of the new `FOR XML` capabilities, such as writing nested `FOR XML RAW`, `AUTO`, or `PATH` mode queries and the `TYPE` directive, instead of using `EXPLICIT` mode to generate the hierarchies. The nested `FOR XML` queries can produce any XML that you can generate by using the `EXPLICIT` mode. For more information, see [Use nested FOR XML queries](use-nested-for-xml-queries.md) and [TYPE directive in FOR XML queries](type-directive-in-for-xml-queries.md).
 
 The `PATH` mode together with the nested `FOR XML` query capability provides the flexibility of the `EXPLICIT` mode in a simpler manner.
 
@@ -107,10 +107,10 @@ Now the disambiguated query returns the following text:
 
 ## Related content
 
-- [Basic Syntax of the FOR XML Clause](basic-syntax-of-the-for-xml-clause.md)
-- [Use RAW Mode with FOR XML](use-raw-mode-with-for-xml.md)
-- [Use AUTO Mode with FOR XML](use-auto-mode-with-for-xml.md)
-- [Use EXPLICIT Mode with FOR XML](use-explicit-mode-with-for-xml.md)
-- [Use PATH Mode with FOR XML](use-path-mode-with-for-xml.md)
+- [Basic syntax of the FOR XML clause](basic-syntax-of-the-for-xml-clause.md)
+- [Use RAW mode with FOR XML](use-raw-mode-with-for-xml.md)
+- [Use AUTO mode with FOR XML](use-auto-mode-with-for-xml.md)
+- [Use EXPLICIT mode with FOR XML](use-explicit-mode-with-for-xml.md)
+- [Use PATH mode with FOR XML](use-path-mode-with-for-xml.md)
 - [OPENXML (SQL Server)](openxml-sql-server.md)
-- [Add Namespaces to Queries with WITH XMLNAMESPACES](add-namespaces-to-queries-with-with-xmlnamespaces.md)
+- [Add namespaces to queries using WITH XMLNAMESPACES](add-namespaces-to-queries-with-with-xmlnamespaces.md)
