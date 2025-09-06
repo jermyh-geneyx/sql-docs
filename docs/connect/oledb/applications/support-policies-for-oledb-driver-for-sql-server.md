@@ -3,7 +3,7 @@ title: "Support policies for OLE DB Driver for SQL Server"
 description: "Learn about the support policies for OLE DB Driver for SQL Server and what operating systems and SQL database versions are supported with each driver version."
 author: David-Engel
 ms.author: davidengel
-ms.date: "05/09/2025"
+ms.date: "09/09/2025"
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: "reference"
@@ -19,15 +19,15 @@ This article discusses how various data-access components can be used with OLE D
 
 OLE DB Driver for SQL Server is tested with and supports connections to the following versions of SQL Server.
 
-| Database version&nbsp;&#8594;<br />&#8595; Driver version | Azure SQL Database | Azure Synapse Analytics | Azure SQL Managed Instance | SQL Server 2022 | SQL Server 2019 | SQL Server 2017 | SQL Server 2016 | SQL Server 2014 | SQL Server 2012 |
-|----|---|---|---|---|---|---|---|---|---|
-|19.3.5+|Yes|Yes|Yes|Yes|Yes|Yes|Yes|   |   |
-|19.3.3+|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|   |
-|19.0+|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|
-|18.7.4+|Yes|Yes|Yes|Yes|Yes|Yes|Yes|   |   |
-|18.6+|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|
-|18.2+|Yes|Yes|Yes|   |Yes|Yes|Yes|Yes|Yes|
-|18.0+|Yes|Yes|Yes|   |   |Yes|Yes|Yes|Yes|
+| Database version&nbsp;&#8594;<br />&#8595; Driver version | Azure SQL Database | Azure Synapse Analytics | Azure SQL Managed Instance | SQL Server 2025 | SQL Server 2022 | SQL Server 2019 | SQL Server 2017 | SQL Server 2016 | SQL Server 2014 | SQL Server 2012 |
+|----|---|---|---|---|---|---|---|---|---|---|
+|19.3.5+|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|   |   |
+|19.3.3+|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|   |
+|19.0+|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|
+|18.7.4+|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|   |   |
+|18.6+|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|
+|18.2+|Yes|Yes|Yes|   |   |Yes|Yes|Yes|Yes|Yes|
+|18.0+|Yes|Yes|Yes|   |   |   |Yes|Yes|Yes|Yes|
 
 ## Supported operating system versions  
 
