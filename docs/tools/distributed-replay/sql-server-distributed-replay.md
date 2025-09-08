@@ -4,8 +4,8 @@ titleSuffix: SQL Server Distributed Replay
 description: The SQL Server Distributed Replay feature helps you assess the effect of future upgrades to SQL Server, hardware, and operating system, and SQL Server tuning.
 author: rwestMSFT
 ms.author: randolphwest
-ms.reviewer: mikeray, randolphwest
-ms.date: 12/08/2023
+ms.reviewer: mikeray
+ms.date: 09/07/2025
 ms.service: sql
 ms.subservice: distributed-replay
 ms.topic: concept-article
@@ -23,7 +23,7 @@ The Microsoft [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Distrib
 
 ## Distributed Replay deprecation in SQL Server 2022
 
-Distributed Replay is deprecated as of [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], as noted in [Deprecated database engine features in SQL Server 2022 (16.x)](../../database-engine/deprecated-database-engine-features-in-sql-server-2022.md). Distributed Replay has a dependency on [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Native Client (SNAC), which was removed from [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)]. This change is documented in [Support Policies for SQL Server Native Client](../../relational-databases/native-client/applications/support-policies-for-sql-server-native-client.md). In addition, Distributed Replay relies on `.trc` files, which are captured with [SQL Trace](../../relational-databases/sql-trace/sql-trace.md) and SQL Server Profiler, both of which are also deprecated.
+Distributed Replay is deprecated as of [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], as noted in [Deprecated Database Engine features in SQL Server 2022 (16.x)](../../database-engine/deprecated-database-engine-features-in-sql-server-2022.md). Distributed Replay has a dependency on [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Native Client (SNAC), which was removed from [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)]. This change is documented in [Support Policies for SQL Server Native Client](../../relational-databases/native-client/applications/support-policies-for-sql-server-native-client.md). In addition, Distributed Replay relies on `.trc` files, which are captured with [SQL Trace](../../relational-databases/sql-trace/sql-trace.md) and SQL Server Profiler, both of which are also deprecated.
 
 The Distributed Replay Controller has been removed from [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] Setup, and the Distributed Replay Client is no longer available in SQL Server Management Studio (SSMS) starting with version 18. To obtain the Distributed Replay Controller, you must install [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] or an earlier version. To obtain the Distributed Replay Client, you must install [SSMS 17.9.1](../../ssms/release-notes-ssms.md#1791).
 
@@ -173,7 +173,7 @@ The following table lists the supported versions of trace data, and for each, th
 
 ### Operating system requirements
 
-Supported operating systems for running the administration tool and the controller and client services is the same as your [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] instance. For more information about which operating systems are supported for your [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] instance, see [SQL Server 2016 and 2017: Hardware and software requirements](../../sql-server/install/hardware-and-software-requirements-for-installing-sql-server.md).
+Supported operating systems for running the administration tool and the controller and client services is the same as your [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] instance. For more information about which operating systems are supported for your [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] instance, see [Hardware and software requirements for SQL Server 2016 and SQL Server 2017](../../sql-server/install/hardware-and-software-requirements-for-installing-sql-server.md).
 
 Distributed Replay features are supported on both x86-based and x64-based operating systems. For x64-based operating systems, only Windows on Windows (WOW) mode is supported.
 

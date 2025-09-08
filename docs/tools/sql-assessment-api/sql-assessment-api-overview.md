@@ -3,8 +3,7 @@ title: SQL Server Assessment API
 description: Learn about the SQL Assessment API that provides a mechanism to evaluate the configuration of your SQL Server for best practices.
 author: rwestMSFT
 ms.author: randolphwest
-ms.reviewer: randolphwest
-ms.date: 01/18/2023
+ms.date: 09/07/2025
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
@@ -24,17 +23,12 @@ The SQL Assessment API is useful when you want to make sure your SQL Server conf
 The API can be used to assess:
 
 - SQL Server on Azure Virtual Machines
-
 - Azure SQL Managed Instance
-
 - SQL Server 2012 and higher
-
 - SQL Server on [Linux-based systems and containers](../../linux/sql-server-linux-sql-assessment-api.md)
 
-The API is also used by SQL Server Assessment Extension for Azure Data Studio (ADS).
-
 > [!NOTE]  
-> The SQL Assessment API provides assessment on a variety of areas, but it does not go deeply into security. We recommend you use [SQL Vulnerability Assessment](../../relational-databases/security/sql-vulnerability-assessment.md) to proactively improve your database security.
+> The SQL Assessment API provides assessment on a variety of areas, but it doesn't go deeply into security. We recommend you use the [Vulnerability assessment for SQL Server](../../relational-databases/security/sql-vulnerability-assessment.md) to proactively improve your database security.
 
 ## Rules
 
@@ -48,34 +42,19 @@ The Microsoft's shipped ruleset is available on GitHub. You can view the [entire
 
 The SQL Assessment API is available and can be used through managed code as part of any of these components:
 
-- [Azure Data Studio (ADS)](/azure-data-studio/what-is-azure-data-studio)
-
-  Release version as of June 2020 and higher.
-
-- [SQL Server Management Objects (SMO)](../../relational-databases/server-management-objects-smo/installing-smo.md)
-
-  Release version as of July 2019 and higher.
-
-- [SQL Server PowerShell module](/powershell/sql-server/download-sql-server-ps-module)
-
-  Release version as of July 2019 and higher.
+- [SQL Server Management Objects (SMO)](../../relational-databases/server-management-objects-smo/installing-smo.md) (Release version as of July 2019 and later)
+- [SQL Server PowerShell module](/powershell/sql-server/download-sql-server-ps-module) (Release version as of July 2019 and later)
 
 Before you start using the SQL Assessment API itself, make sure to install either of these:
 
-- [Install ADS](https://techcommunity.microsoft.com/t5/sql-server/released-sql-server-assessment-extension-for-azure-data-studio/ba-p/1470603)
-
-- [Install SMO](../../relational-databases/server-management-objects-smo/installing-smo.md)
-
+- [Installing SMO](../../relational-databases/server-management-objects-smo/installing-smo.md)
 - [Install SQL Server PowerShell module](/powershell/sql-server/download-sql-server-ps-module)
-
 - [Install via NuGet](https://www.nuget.org/packages/Microsoft.SqlServer.Assessment/)
 
 The SMO Framework is supplemented by the SQL Assessment API extension that provides the following methods:
 
 - `GetAssessmentItems`: Returns available checks for a particular SQL object (`IEnumerable<...>`)
-
 - `GetAssessmentResults`: Synchronously evaluates assessment and returns results and errors if any (`IEnumerable<...>`)
-
 - `GetAssessmentResultsList`: Asynchronously evaluates assessment and returns results and errors if any (`Task<...>`)
 
 ### Use the API via PowerShell
@@ -83,7 +62,6 @@ The SMO Framework is supplemented by the SQL Assessment API extension that provi
 If you would like to invoke the SQL Assessment API via PowerShell, you must [install SQL Server PowerShell module](/powershell/sql-server/download-sql-server-ps-module). The `SqlServer` module provides two cmdlets that work with the SQL Assessment API:
 
 - `Get-SqlAssessmentItem`: Provides a list of available assessment checks for a SQL Server object
-
 - `Invoke-SqlAssessment`: Provides results of an assessment
 
 ## Get started using SQL Assessment cmdlets
@@ -155,9 +133,9 @@ You can combine rulesets by adding one or more JSON files as parameters to your 
 > [!IMPORTANT]  
 > We urge you not to use rulesets that come from untrusted sources, until you thoroughly review them to make sure they are safe.
 
-## Next steps
+## Related content
 
-- [SQL Server Management Objects (SMO)](../../relational-databases/server-management-objects-smo/overview-smo.md)
+- [Overview (SMO)](../../relational-databases/server-management-objects-smo/overview-smo.md)
 - [PowerShell](/powershell/sql-server/download-sql-server-ps-module)
-- [SQL Vulnerability Assessment](../../relational-databases/security/sql-vulnerability-assessment.md)
+- [Vulnerability assessment for SQL Server](../../relational-databases/security/sql-vulnerability-assessment.md)
 - [Use SQL Assessment API for SQL Server on Linux](../../linux/sql-server-linux-sql-assessment-api.md)

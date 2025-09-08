@@ -131,9 +131,9 @@ When you select a conversion mode in the **Mode** box, SSMA applies the followin
 
 ### Convert foreign keys with SET NULL referential action on column that is NOT NULL
 
-Db2 allows creating foreign key constraints, where a SET `NULL` action couldn't possibly be performed because NULLs aren't permitted in the referenced column. [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] doesn't allow such foreign key configuration.
+Db2 allows creating foreign key constraints, where a `SET NULL` action couldn't possibly be performed because NULLs aren't permitted in the referenced column. [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] doesn't allow such foreign key configuration.
 
-- If you select **Yes**, SSMA generates referential actions as in Db2, but you need to make manual changes before loading the constraint to [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. For example, you can choose NO ACTION instead of SET `NULL`.
+- If you select **Yes**, SSMA generates referential actions as in Db2, but you need to make manual changes before loading the constraint to [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. For example, you can choose NO ACTION instead of `SET NULL`.
 
 - If you select **No**, the constraint is marked as an error.
 
@@ -224,7 +224,7 @@ When you select a conversion mode in the **Mode** box, SSMA applies the followin
 
 SSMA can convert PL/SQL subtypes in two ways:
 
-- If you select **Yes**, SSMA creates [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] user-defined type from a subtype and use it for each variable of this subtype.
+- If you select **Yes**, SSMA creates [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] user-defined type from a subtype and uses it for each variable of this subtype.
 
 - If you select **No**, SSMA substitutes all source declarations of the subtype with the underlying type and convert the result as usual. In this case, no extra types are created in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]
 

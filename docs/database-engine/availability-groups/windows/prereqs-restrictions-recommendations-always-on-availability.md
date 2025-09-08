@@ -342,9 +342,9 @@ When creating or reconfiguring an availability group configuration, ensure that 
 
 | Task | Required Permissions |
 | --- | --- |
-| Creating an availability group | Requires membership in the **sysadmin** fixed server role and either `CREATE AVAILABILITY GROUP` server permission, `ALTER ANY AVAILABILITY` GROUP permission, or `CONTROL SERVER` permission. |
-| Altering an availability group | Requires `ALTER AVAILABILITY GROUP` permission on the availability group, `CONTROL AVAILABILITY` GROUP permission, `ALTER ANY AVAILABILITY` GROUP permission, or `CONTROL SERVER` permission.<br /><br />In addition, joining a database to an availability group requires membership in the **db_owner** fixed database role. |
-| Dropping/deleting an availability group | Requires `ALTER AVAILABILITY` GROUP permission on the availability group, `CONTROL AVAILABILITY` GROUP permission, `ALTER ANY AVAILABILITY` GROUP permission, or `CONTROL SERVER` permission. To drop an availability group that isn't hosted on the local replica location you need `CONTROL SERVER` permission or `CONTROL` permission on that availability group. |
+| Creating an availability group | Requires membership in the **sysadmin** fixed server role and either `CREATE AVAILABILITY GROUP` server permission, `ALTER ANY AVAILABILITY GROUP` permission, or `CONTROL SERVER` permission. |
+| Altering an availability group | Requires `ALTER AVAILABILITY GROUP` permission on the availability group, `CONTROL AVAILABILITY GROUP` permission, `ALTER ANY AVAILABILITY GROUP` permission, or `CONTROL SERVER` permission.<br /><br />In addition, joining a database to an availability group requires membership in the **db_owner** fixed database role. |
+| Dropping/deleting an availability group | Requires `ALTER AVAILABILITY GROUP` permission on the availability group, `CONTROL AVAILABILITY GROUP` permission, `ALTER ANY AVAILABILITY GROUP` permission, or `CONTROL SERVER` permission. To drop an availability group that isn't hosted on the local replica location you need `CONTROL SERVER` permission or `CONTROL` permission on that availability group. |
 
 <a id="RelatedTasksAGs"></a>
 
@@ -402,9 +402,9 @@ To be eligible to be added to an availability group, a database must:
 
   - **[!INCLUDE [ssAoNewAgWiz](../../../includes/ssaonewagwiz-md.md)]/[!INCLUDE [ssAoAddDbWiz](../../../includes/ssaoadddbwiz-md.md)]:** The **Full** option isn't supported (on the [Select Initial Data Synchronization Page (Always On Availability Group Wizards)](select-initial-data-synchronization-page-always-on-availability-group-wizards.md) page),
 
-  - **RESTORE WITH MOVE:** To create the secondary databases, the database files must be RESTORED `WITH MOVE` on each instance of [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] that hosts a secondary replica.
+  - **RESTORE WITH MOVE:** To create the secondary databases, the database files must be restored `WITH MOVE` on each instance of [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] that hosts a secondary replica.
 
-  - **Impact on add-file operations:** A later add-file operation on the primary replica might fail on the secondary databases. This failure could cause the secondary databases to be suspended. This, in turn, causes the secondary replicas to enter the `NOT` SYNCHRONIZING state.
+  - **Impact on add-file operations:** A later add-file operation on the primary replica might fail on the secondary databases. This failure could cause the secondary databases to be suspended. This, in turn, causes the secondary replicas to enter the `NOT SYNCHRONIZING` state.
 
     > [!NOTE]  
     > For information about responding to a failed ad-file operation, see [Troubleshoot a Failed Add-File Operation (Always On availability groups)](troubleshoot-a-failed-add-file-operation-always-on-availability-groups.md).

@@ -1,9 +1,9 @@
 ---
-title: Create a system-versioned temporal table
+title: Create a System-Versioned Temporal Table
 description: Learn how to create a system-versioned temporal table in three ways.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 07/29/2024
+ms.date: 09/07/2025
 ms.service: sql
 ms.subservice: table-view-index
 ms.topic: how-to
@@ -31,7 +31,7 @@ Creating a temporal table with an *anonymous* history table is a convenient opti
 CREATE TABLE Department
 (
     DeptID INT NOT NULL PRIMARY KEY CLUSTERED,
-    DeptName VARCHAR(50) NOT NULL,
+    DeptName VARCHAR (50) NOT NULL,
     ManagerID INT NULL,
     ParentDeptID INT NULL,
     ValidFrom DATETIME2 GENERATED ALWAYS AS ROW START NOT NULL,
@@ -69,7 +69,7 @@ Creating a temporal table with a *default* history table is a convenient option 
 CREATE TABLE Department
 (
     DeptID INT NOT NULL PRIMARY KEY CLUSTERED,
-    DeptName VARCHAR(50) NOT NULL,
+    DeptName VARCHAR (50) NOT NULL,
     ManagerID INT NULL,
     ParentDeptID INT NULL,
     ValidFrom DATETIME2 GENERATED ALWAYS AS ROW START NOT NULL,
@@ -99,7 +99,7 @@ Creating a temporal table with *user-defined* history table is a convenient opti
 CREATE TABLE DepartmentHistory
 (
     DeptID INT NOT NULL,
-    DeptName VARCHAR(50) NOT NULL,
+    DeptName VARCHAR (50) NOT NULL,
     ManagerID INT NULL,
     ParentDeptID INT NULL,
     ValidFrom DATETIME2 NOT NULL,
@@ -107,16 +107,17 @@ CREATE TABLE DepartmentHistory
 );
 GO
 
-CREATE CLUSTERED COLUMNSTORE INDEX IX_DepartmentHistory ON DepartmentHistory;
+CREATE CLUSTERED COLUMNSTORE INDEX IX_DepartmentHistory
+    ON DepartmentHistory;
 
 CREATE NONCLUSTERED INDEX IX_DepartmentHistory_ID_Period_Columns
-ON DepartmentHistory (ValidTo, ValidFrom, DeptID);
+    ON DepartmentHistory(ValidTo, ValidFrom, DeptID);
 GO
 
 CREATE TABLE Department
 (
-    DeptID int NOT NULL PRIMARY KEY CLUSTERED,
-    DeptName VARCHAR(50) NOT NULL,
+    DeptID INT NOT NULL PRIMARY KEY CLUSTERED,
+    DeptName VARCHAR (50) NOT NULL,
     ManagerID INT NULL,
     ParentDeptID INT NULL,
     ValidFrom DATETIME2 GENERATED ALWAYS AS ROW START NOT NULL,
@@ -161,8 +162,8 @@ ALTER TABLE InsurancePolicy ADD
 ValidFrom DATETIME2 GENERATED ALWAYS AS ROW START HIDDEN
     CONSTRAINT DF_InsurancePolicy_ValidFrom DEFAULT SYSUTCDATETIME(),
 ValidTo DATETIME2 GENERATED ALWAYS AS ROW END HIDDEN
-    CONSTRAINT DF_InsurancePolicy_ValidTo DEFAULT CONVERT(DATETIME2, '9999-12-31 23:59:59.9999999'),
-PERIOD FOR SYSTEM_TIME(ValidFrom, ValidTo);
+    CONSTRAINT DF_InsurancePolicy_ValidTo DEFAULT CONVERT (DATETIME2, '9999-12-31 23:59:59.9999999'),
+PERIOD FOR SYSTEM_TIME (ValidFrom, ValidTo);
 GO
 
 ALTER TABLE InsurancePolicy
@@ -198,20 +199,11 @@ If your existing solution uses single table to store actual and historical rows,
 DROP TRIGGER ProjectCurrent_OnUpdateDelete;
 
 /* Make sure that future period columns are non-nullable */
-ALTER TABLE ProjectTaskCurrent
-ALTER COLUMN [ValidFrom] DATETIME2 NOT NULL;
-
-ALTER TABLE ProjectTaskCurrent
-ALTER COLUMN [ValidTo] DATETIME2 NOT NULL;
-
-ALTER TABLE ProjectTaskHistory
-ALTER COLUMN [ValidFrom] DATETIME2 NOT NULL;
-
-ALTER TABLE ProjectTaskHistory
-ALTER COLUMN [ValidTo] DATETIME2 NOT NULL;
-
-ALTER TABLE ProjectTaskCurrent ADD PERIOD
-FOR SYSTEM_TIME([ValidFrom], [ValidTo]);
+ALTER TABLE ProjectTaskCurrent ALTER COLUMN [ValidFrom] DATETIME2 NOT NULL;
+ALTER TABLE ProjectTaskCurrent ALTER COLUMN [ValidTo] DATETIME2 NOT NULL;
+ALTER TABLE ProjectTaskHistory ALTER COLUMN [ValidFrom] DATETIME2 NOT NULL;
+ALTER TABLE ProjectTaskHistory ALTER COLUMN [ValidTo] DATETIME2 NOT NULL;
+ALTER TABLE ProjectTaskCurrent ADD PERIOD FOR SYSTEM_TIME ([ValidFrom], [ValidTo]);
 
 ALTER TABLE ProjectTaskCurrent SET (
     SYSTEM_VERSIONING = ON (

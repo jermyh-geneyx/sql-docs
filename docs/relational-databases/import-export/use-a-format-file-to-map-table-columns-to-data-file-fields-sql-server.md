@@ -1,9 +1,9 @@
 ---
-title: "Map table columns to data-file fields with a format file"
+title: "Map Table Columns to Data-File Fields with a Format File"
 description: In SQL Server, non-XML and XML format files can accommodate a data file whose fields are arranged in a different order from the table columns.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 10/28/2024
+ms.date: 09/07/2025
 ms.service: sql
 ms.subservice: data-movement
 ms.topic: how-to
@@ -18,7 +18,7 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || >=sql-server-2016 || >=s
 
 A data file can contain fields arranged in a different order from the corresponding columns in the table. This article presents both non-XML and XML format files that are modified to accommodate a data file whose fields are arranged in a different order from the table columns. The modified format file maps the data fields to their corresponding table columns. Review [Create a format file with bcp (SQL Server)](create-a-format-file-sql-server.md) for additional information.
 
-Either a non-XML or XML format file can be used to bulk import a data file into the table, using a [bcp utility](../../tools/bcp-utility.md) command, [BULK INSERT](../../t-sql/statements/bulk-insert-transact-sql.md) statement, or [OPENROWSET (BULK)](../../t-sql/functions/openrowset-bulk-transact-sql.md) statement. For more information, see [Use a format file to bulk import data (SQL Server)](use-a-format-file-to-bulk-import-data-sql-server.md).
+Either a non-XML or XML format file can be used to bulk import a data file into the table, using a [bcp utility](../../tools/bcp-utility.md) command, [BULK INSERT](../../t-sql/statements/bulk-insert-transact-sql.md) statement, or [OPENROWSET BULK](../../t-sql/functions/openrowset-bulk-transact-sql.md) statement. For more information, see [Use a format file to bulk import data (SQL Server)](use-a-format-file-to-bulk-import-data-sql-server.md).
 
 > [!NOTE]  
 > This syntax, including bulk insert, isn't supported in Azure Synapse Analytics. [!INCLUDE [Use ADF or PolyBase instead of Synapse Bulk Insert](includes/bulk-insert-synapse.md)]
@@ -79,7 +79,7 @@ The simplest method to create the format file is by using the [bcp utility](../.
 
 ### Create a non-XML format file
 
-Review [Use Non-XML format files (SQL Server)](non-xml-format-files-sql-server.md) for detailed information. The following command uses the [bcp utility](../../tools/bcp-utility.md) to generate a non-XML format file, `myRemap.fmt`, based on the schema of `myRemap`. In addition, the qualifier `c` is used to specify character data, `t,` is used to specify a comma as a field terminator, and `T` is used to specify a trusted connection using integrated security. At a command prompt, enter the following command:
+Review [Use non-XML format files (SQL Server)](non-xml-format-files-sql-server.md) for detailed information. The following command uses the [bcp utility](../../tools/bcp-utility.md) to generate a non-XML format file, `myRemap.fmt`, based on the schema of `myRemap`. In addition, the qualifier `c` is used to specify character data, `t,` is used to specify a comma as a field terminator, and `T` is used to specify a trusted connection using integrated security. At a command prompt, enter the following command:
 
 ```cmd
 bcp TestDatabase.dbo.myRemap format nul -c -f D:\BCP\myRemap.fmt -t, -T
@@ -130,7 +130,7 @@ The modified format file now reflects:
 
 ### Create an XML format file
 
-Review [XML Format Files (SQL Server)](xml-format-files-sql-server.md) for detailed information. The following command uses the [bcp utility](../../tools/bcp-utility.md) to create an xml format file, `myRemap.xml`, based on the schema of `myRemap`. In addition, the qualifier `c` is used to specify character data, `t,` is used to specify a comma as a field terminator, and `T` is used to specify a trusted connection using integrated security. The `x` qualifier must be used to generate an XML-based format file. At a command prompt, enter the following command:
+Review [XML format files (SQL Server)](xml-format-files-sql-server.md) for detailed information. The following command uses the [bcp utility](../../tools/bcp-utility.md) to create an xml format file, `myRemap.xml`, based on the schema of `myRemap`. In addition, the qualifier `c` is used to specify character data, `t,` is used to specify a comma as a field terminator, and `T` is used to specify a trusted connection using integrated security. The `x` qualifier must be used to generate an XML-based format file. At a command prompt, enter the following command:
 
 ```cmd
 bcp TestDatabase.dbo.myRemap format nul -c -x -f D:\BCP\myRemap.xml -t, -T
@@ -146,7 +146,7 @@ Review [Schema syntax for XML format files](../../relational-databases/import-ex
 
 1. Ensure the `<FIELD>` ID attribute values are sequential.
 
-1. The order of the `<COLUMN>` elements in the \<ROW> element defines the order in which the bulk operation sends them to the target. The XML format file assigns each `<COLUMN>` element a local name that has no relationship to the column in the target table of a bulk import operation. The order of the `<COLUMN>` elements is independent of the order of `<FIELD>` elements in a \<RECORD> definition. Each `<COLUMN>` element corresponds to a `<FIELD>` element (whose ID is specified in the SOURCE attribute of the `<COLUMN>` element). Thus, the values for `<COLUMN>` SOURCE are the only attributes that require revision. Reverse the order for `<COLUMN>` SOURCE attributes 2 and 3.
+1. The order of the `<COLUMN>` elements in the `<ROW>` element defines the order in which the bulk operation sends them to the target. The XML format file assigns each `<COLUMN>` element a local name that has no relationship to the column in the target table of a bulk import operation. The order of the `<COLUMN>` elements is independent of the order of `<FIELD>` elements in a `<RECORD>` definition. Each `<COLUMN>` element corresponds to a `<FIELD>` element (whose ID is specified in the SOURCE attribute of the `<COLUMN>` element). Thus, the values for `<COLUMN>` SOURCE are the only attributes that require revision. Reverse the order for `<COLUMN>` SOURCE attributes 2 and 3.
 
 Compare the changes:
 

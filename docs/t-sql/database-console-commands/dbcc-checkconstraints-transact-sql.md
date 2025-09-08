@@ -92,7 +92,7 @@ The query data is stored in a temp table. After all requested tables or constrai
 
 **Applies to**: [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)] and later versions
 
-If *table_name* or *table_id* is specified and it is enabled for system versioning, `DBCC CHECKCONSTRAINTS` also performs temporal data consistency checks on the specified table. When *NO_INFOMSGS* isn't specified, this command will return each consistency violation in the output on a separate line. The format of the output will be `([pkcol1], [pkcol2]..) = (<pkcol1_value>, <pkcol2_value>...)` AND `<what is wrong with temporal table record>`.
+If *table_name* or *table_id* is specified and it is enabled for system versioning, `DBCC CHECKCONSTRAINTS` also performs temporal data consistency checks on the specified table. When *NO_INFOMSGS* isn't specified, this command will return each consistency violation in the output on a separate line. The format of the output will be `([pkcol1], [pkcol2]..) = (<pkcol1_value>, <pkcol2_value>...) AND <what is wrong with temporal table record>`.
 
 | Check | Additional info in output if check failed |
 | --- | --- |

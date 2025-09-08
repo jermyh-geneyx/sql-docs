@@ -3,7 +3,7 @@ title: ODBC DSN and connection string keywords
 description: How to connect using the ODBC driver. Find keywords for connection strings and DSNs, and connection attributes for SQLSetConnectAttr and SQLGetConnectAttr.
 author: David-Engel
 ms.author: davidengel
-ms.date: 08/23/2024
+ms.date: 09/08/2025
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
@@ -298,7 +298,7 @@ The most general (match-all) rule is placed at the end, to allow the two more sp
 
 ## ClientCertificate
 
-Specifies the certificate to be used for authentication. The options are:
+Specifies the certificate to be used for authentication with loopback connections (only available in SQL Server on Linux). The options are:
 
 | Option Value | Description |
 |-|-|

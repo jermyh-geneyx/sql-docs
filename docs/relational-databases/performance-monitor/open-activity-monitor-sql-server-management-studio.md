@@ -23,7 +23,7 @@ helpviewer_keywords:
 
 ## Permissions
 
-To view actual activity, you must have VIEW `SERVER STATE` permission. To view the Data File I/O section of Activity Monitor, you must have `CREATE DATABASE`, `ALTER` ANY `DATABASE`, or VIEW ANY `DEFINITION` permission in addition to VIEW `SERVER STATE`.
+To view actual activity, you must have `VIEW SERVER STATE` permission. To view the Data File I/O section of Activity Monitor, you must have `CREATE DATABASE`, `ALTER ANY DATABASE`, or `VIEW ANY DEFINITION` permission in addition to `VIEW SERVER STATE`.
 
 To `KILL` a process, a user must be a member of the `sysadmin` or `processadmin` fixed server roles.
 

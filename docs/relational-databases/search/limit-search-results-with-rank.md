@@ -1,10 +1,10 @@
 ---
-title: Limit search results with RANK
-description: Limit search results with RANK
+title: Limit Search Results with RANK
+description: Limit search results with the RANK column.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: mikeray
-ms.date: 02/12/2024
+ms.date: 09/07/2025
 ms.service: sql
 ms.subservice: search
 ms.topic: how-to
@@ -22,7 +22,7 @@ monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-20
 
 [!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
 
-The [CONTAINSTABLE](../../relational-databases/system-functions/containstable-transact-sql.md) and [FREETEXTTABLE](../../relational-databases/system-functions/freetexttable-transact-sql.md) functions return a column named `RANK` that contains ordinal values from 0 through 1000 (rank values). These values are used to rank the rows returned according to how well they match the selection criteria. The rank values indicate only a relative order of relevance of the rows in the result set, with a lower value indicating lower relevance. The actual values are unimportant and typically differ each time the query is run.
+The [CONTAINSTABLE](../system-functions/containstable-transact-sql.md) and [FREETEXTTABLE](../system-functions/freetexttable-transact-sql.md) functions return a column named `RANK` that contains ordinal values from 0 through 1000 (rank values). These values are used to rank the rows returned according to how well they match the selection criteria. The rank values indicate only a relative order of relevance of the rows in the result set, with a lower value indicating lower relevance. The actual values are unimportant and typically differ each time the query is run.
 
 > [!NOTE]  
 > The `CONTAINS` and `FREETEXT` predicates don't return any rank values.
@@ -31,7 +31,9 @@ The number of items matching a search condition is often large. To prevent `CONT
 
 [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] orders the matches by rank and returns only up to the specified number of rows. This choice can result in a dramatic increase in performance. For example, a query that would normally return 100,000 rows from a table of 1,000,000 rows are processed more quickly if only the top 100 rows are requested.
 
-## <a id="examples"></a> Examples of Using RANK to limit search results
+<a id="examples"></a>
+
+## Examples of Using RANK to limit search results
 
 ### Example A: Searching for only the top three matches
 
@@ -42,13 +44,13 @@ USE AdventureWorks2022;
 GO
 
 SELECT K.RANK,
-    AddressLine1,
-    City
+       AddressLine1,
+       City
 FROM Person.Address AS A
-INNER JOIN CONTAINSTABLE(Person.Address, AddressLine1, 'ISABOUT ("des*",
+     INNER JOIN CONTAINSTABLE (Person.Address, AddressLine1, 'ISABOUT ("des*",
     Rue WEIGHT(0.5),
     Bouchers WEIGHT(0.9))', 3) AS K
-    ON A.AddressID = K.[KEY];
+     ON A.AddressID = K.[KEY];
 GO
 ```
 
@@ -71,16 +73,18 @@ USE AdventureWorks2022;
 GO
 
 SELECT FT_TBL.ProductDescriptionID,
-    FT_TBL.Description,
-    KEY_TBL.RANK
+       FT_TBL.Description,
+       KEY_TBL.RANK
 FROM Production.ProductDescription AS FT_TBL
-INNER JOIN CONTAINSTABLE(Production.ProductDescription,
-    Description, '(light NEAR aluminum) OR (lightweight NEAR aluminum)', 5) AS KEY_TBL
-        ON FT_TBL.ProductDescriptionID = KEY_TBL.[KEY];
+     INNER JOIN CONTAINSTABLE (Production.ProductDescription,
+         Description, '(light NEAR aluminum) OR (lightweight NEAR aluminum)', 5) AS KEY_TBL
+         ON FT_TBL.ProductDescriptionID = KEY_TBL.[KEY];
 GO
 ```
 
-## <a id="how"></a> How search query results are ranked
+<a id="how"></a>
+
+## How search query results are ranked
 
 Full-text search in [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] can generate an optional score (or rank value) that indicates the relevance of the data returned by a full-text query. This rank value is calculated on every row and can be used as an ordering criteria to sort the result set of a given query by relevance. The rank values indicate only a relative order of relevance of the rows in the result set. The actual values are unimportant and typically differ each time the query is run. The rank value doesn't hold any significance across queries.
 
@@ -124,9 +128,9 @@ Statistics such as **IndexRowCount** can vary widely. For example, if a catalog 
 262144, 370727, 524288, 741455, 1048576, 2097152, 4194304 };
 ```
 
-### <a id="ranking-of-containstable"></a> Rank of CONTAINSTABLE
+### Rank of CONTAINSTABLE
 
-[CONTAINSTABLE](../../relational-databases/system-functions/containstable-transact-sql.md) ranking uses the following algorithm:
+[CONTAINSTABLE](../system-functions/containstable-transact-sql.md) ranking uses the following algorithm:
 
 ```text
 StatisticalWeight = Log2( ( 2 + IndexedRowCount ) / KeyRowCount )
@@ -135,13 +139,17 @@ Rank = min( MaxQueryRank, HitCount * 16 * StatisticalWeight / MaxOccurrence )
 
 Phrase matches are ranked just like individual keys except that **KeyRowCount** (the number of rows containing the phrase) is estimated and can be inaccurate and higher than the actual number.
 
-#### <a id="ranking-of-near"></a> Rank of NEAR
+<a id="ranking-of-near"></a>
+
+#### Rank of NEAR
 
 `CONTAINSTABLE` supports querying for two or more search terms in proximity to each other by using the `NEAR` option. The rank value of each returned row is based on several parameters. One major ranking factor is the total number of matches (or *hits*) relative to the length of the document. Thus, for example, if a 100-word document and a 900-word document contain identical matches, the 100-word document is ranked higher.
 
 The total length of each hit in a row also contributes to the ranking of that row, based on the distance between the first and last search terms of that hit. The smaller the distance, the more the hit contributes to the rank value of the row. If a full-text query doesn't specify an integer as the maximum distance, a document that contains only hits whose distances are greater than 100 logical terms apart, has a ranking of 0.
 
-#### <a id="ranking-of-isabout"></a> Rank of ISABOUT
+<a id="ranking-of-isabout"></a>
+
+#### Rank of ISABOUT
 
 `CONTAINSTABLE` supports querying for weighted terms by using the `ISABOUT` option. `ISABOUT` is a vector-space query in traditional information retrieval terminology. The default ranking algorithm used is Jaccard, a widely known formula. The ranking is computed for each term in the query and then combined, as described in the following algorithm.
 
@@ -153,9 +161,9 @@ Rank =  ( MaxQueryRank * WeightedSum ) / ( ( Σ[key=1 to n] ContainsRankKey^2 )
       + ( Σ[key=1 to n] WeightKey^2 ) - ( WeightedSum ) )
 ```
 
-### <a id="ranking-of-freetexttable"></a> Rank of FREETEXTTABLE
+### Rank of FREETEXTTABLE
 
-[FREETEXTTABLE](../../relational-databases/system-functions/freetexttable-transact-sql.md) ranking is based on the OKAPI BM25 ranking formula. `FREETEXTTABLE` queries add words to the query via inflectional generation (inflected forms of the original query words); these words are treated as separate words, with no special relationship to the words from which they were generated. Synonyms generated from the Thesaurus feature are treated as separate, equally weighted terms. Each word in the query contributes to the rank.
+[FREETEXTTABLE](../system-functions/freetexttable-transact-sql.md) ranking is based on the OKAPI BM25 ranking formula. `FREETEXTTABLE` queries add words to the query via inflectional generation (inflected forms of the original query words); these words are treated as separate words, with no special relationship to the words from which they were generated. Synonyms generated from the Thesaurus feature are treated as separate, equally weighted terms. Each word in the query contributes to the rank.
 
 ```text
 Rank = Σ[Terms in Query] w ( ( ( k1 + 1 ) tf ) / ( K + tf ) ) * ( ( k3 + 1 ) qtf / ( k3 + qtf ) ) )

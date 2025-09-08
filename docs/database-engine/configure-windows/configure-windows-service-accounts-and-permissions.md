@@ -479,9 +479,9 @@ Windows Management Instrumentation (WMI) must be able to connect to the [!INCLUD
 The SQL WMI provider requires the following minimal permissions:
 
 - Membership in the **db_ddladmin** or **db_owner** fixed database roles in the `msdb` database.
-- `CREATE` DDL `EVENT NOTIFICATION` permission in the server.
-- `CREATE` TRACE `EVENT NOTIFICATION` permission in the [!INCLUDE [ssDE](../../includes/ssde-md.md)].
-- **VIEW ANY `DATABASE` server-level permission.
+- `CREATE DDL EVENT NOTIFICATION` permission in the server.
+- `CREATE TRACE EVENT NOTIFICATION` permission in the [!INCLUDE [ssDE](../../includes/ssde-md.md)].
+- `VIEW ANY DATABASE` server-level permission.
 
   SQL Server setup creates a SQL WMI namespace and grants read permission to the SQL Server Agent service-SID.
 
@@ -543,7 +543,7 @@ The per-service SID of the SQL Server Agent service is provisioned as a [!INCLUD
 
 #### Always On availability groups and SQL failover cluster instance and privileges
 
-When installing the [!INCLUDE [ssDE](../../includes/ssde-md.md)] as a [!INCLUDE [ssHADR](../../includes/sshadr-md.md)] or SQL failover cluster instance (SQL FCI), `LOCAL SYSTEM` is provisioned in the [!INCLUDE [ssDE](../../includes/ssde-md.md)]. The `LOCAL SYSTEM` login is granted the `ALTER ANY AVAILABILITY GROUP` permission (for [!INCLUDE [ssHADR](../../includes/sshadr-md.md)]) and the **VIEW `SERVER STATE` permission (for SQL FCI).
+When installing the [!INCLUDE [ssDE](../../includes/ssde-md.md)] as a [!INCLUDE [ssHADR](../../includes/sshadr-md.md)] or SQL failover cluster instance (SQL FCI), `LOCAL SYSTEM` is provisioned in the [!INCLUDE [ssDE](../../includes/ssde-md.md)]. The `LOCAL SYSTEM` login is granted the `ALTER ANY AVAILABILITY GROUP` permission (for [!INCLUDE [ssHADR](../../includes/sshadr-md.md)]) and the `VIEW SERVER STATE` permission (for SQL FCI).
 
 <a id="Writer"></a>
 

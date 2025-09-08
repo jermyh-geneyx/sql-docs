@@ -38,7 +38,7 @@ Physical join operations include:
 - Nested Loops joins
 - Merge joins
 - Hash joins
-- Adaptive joins ([!INCLUDE [ssas-appliesto-sql2017](../../includes/ssas-appliesto-sql2017.md)] and later)
+- Adaptive joins (**Applies to:** [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] and later versions)
 
 This article explains how joins work, when to use different join types, and how the Query Optimizer selects the most efficient join algorithm based on factors like table size, available indexes, and data distribution.
 
@@ -58,10 +58,10 @@ A join condition defines the way two tables are related in a query by:
 
 Joins are expressed logically using the following [!INCLUDE [tsql](../../includes/tsql-md.md)] syntax:
 
-- INNER `JOIN`
-- LEFT [ OUTER ] `JOIN`
-- RIGHT [ OUTER ] `JOIN`
-- FULL [ OUTER ] `JOIN`
+- `INNER JOIN`
+- `LEFT [ OUTER ] JOIN`
+- `RIGHT [ OUTER ] JOIN`
+- `FULL [ OUTER ] JOIN`
 - `CROSS JOIN`
 
 **Inner joins** can be specified in either the `FROM` or `WHERE` clauses. **Outer joins** and **cross joins** can be specified in the `FROM` clause only. The join conditions combine with the `WHERE` and `HAVING` search conditions to control the rows that are selected from the base tables referenced in the `FROM` clause.
@@ -351,7 +351,7 @@ OPTION (USE HINT('DISABLE_BATCH_MODE_ADAPTIVE_JOINS'));
 ```
 
 > [!NOTE]  
-> A `USE` HINT query hint takes precedence over a database scoped configuration or trace flag setting.
+> A `USE HINT` query hint takes precedence over a database scoped configuration or trace flag setting.
 
 <a id="nulls_joins"></a>
 
