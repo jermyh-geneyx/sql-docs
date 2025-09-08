@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/30/2025
+ms.date: 09/11/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -262,7 +262,7 @@ ms.topic: include
 | 41959 | 21 | No | Transient error occurred while reading from backup metadata for database '%.\*ls' due to error %u. The system will automatically retry the operation. If the issue persists, contact Microsoft Support for Azure SQL Managed Instance. |
 | 41960 | 21 | No | Transient error occurred while writing to backup metadata for database '%.\*ls' due to error %u. The system will automatically retry the operation. If the issue persists, contact Microsoft Support for Azure SQL Managed Instance. |
 | 41961 | 21 | No | Transient error occurred during the instance role change to primary. The system will automatically retry the operation. If the issue persists, contact Microsoft Support for Azure SQL Managed Instance. |
-| [41962](../mssqlserver-41962-database-engine-error.md) | 16 | No | Operation was aborted as replication to Azure SQL Managed Instance did not start within %u minutes since it was initiated. Please verify the network connectivity and firewall rules are configured according to the guidelines described at https://aka.ms/mi-link-troubleshooting, and retry the operation. |
+| [41962](../mssqlserver-41962-database-engine-error.md) | 16 | No | Operation was aborted as replication between SQL Server and Azure SQL Managed Instance did not start within %u minutes since it was initiated. Please verify the network connectivity and firewall rules are configured and retry the operation. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323827](https://go.microsoft.com/fwlink/?linkid=2323827). |
 | 41963 | 16 | No | Certificate cannot be created as it is already used with '%.\*ls' feature. Consider using a different certificate. |
 | 41964 | 16 | No | The '%.\*ls' operation cannot be completed as there exists a database in the process of creation through Azure SQL Managed Instance link. Please wait for the link creation to complete, or alternatively delete the link and retry the operation again. |
 | 41965 | 16 | No | Setting the role cannot be applied as Azure SQL Managed Instance is already in the requested role. |
@@ -568,9 +568,9 @@ ms.topic: include
 | 45325 | 16 | No | The operation could not be completed because the Azure Key Vault Key name is null or empty. |
 | 45326 | 16 | No | The operation could not be completed because the Azure Key Vault Key name '%ls' does not exist. |
 | 45327 | 16 | No | The operation could not be completed because the Azure Key Vault Key name '%ls' is currently set as server encryption protector. |
-| 45328 | 16 | No | The server identity is not correctly configured on server '%ls'. Follow the steps in "Assign an Azure AD identity to your server" (https://aka.ms/sqltdebyoksetup) |
+| 45328 | 16 | No | The server identity is not correctly configured on server '%ls'. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323731](https://go.microsoft.com/fwlink/?linkid=2323731). |
 | 45329 | 16 | No | An invalid response from Azure Key Vault. Please use a valid Azure Key Vault URI. |
-| 45330 | 16 | No | The server '%ls' requires the following Azure Key Vault permissions: '%ls'. Please grant the missing permissions to the service principal with ID '%ls'. (https://aka.ms/sqltdebyoksetup) |
+| 45330 | 16 | No | The server '%ls' requires the 'Key Vault Crypto Service Encryption User' RBAC role assignment, or the following Azure Key Vault permissions: '%ls'. Grant the missing permissions to the service principal with ID '%ls'. Ensure the key is active, is not expired or disabled, set with the key activation date no later than the current date, and that trusted Microsoft services can bypass the firewall if applicable. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323731](https://go.microsoft.com/fwlink/?linkid=2323731). |
 | 45331 | 16 | No | The operation could not be completed because the read scale value specified is not supported for a '%ls' database. |
 | 45332 | 16 | No | The operation could not be completed because the read scale value specified is invalid. |
 | 45333 | 16 | No | The service request timed out. %ls. |
@@ -617,15 +617,15 @@ ms.topic: include
 | 45374 | 16 | No | HardwareGeneration '%ls' is not valid. Please specify a valid HardwareGeneration value. |
 | 45375 | 16 | No | vCore value (%d) and HardwareGeneration '%ls' is not a valid combination. Please specify a valid vCore and HardwareGeneration value. |
 | 45376 | 16 | No | Managed Instance cannot be joined to a classic virtual network. Please provide a Resource Manager vnet to join. |
-| 45377 | 16 | No | The provided Key Vault uri '%ls' is not valid. Please ensure the key vault has been configured with soft-delete and purge protection. (https://aka.ms/sqltdebyoksoftdelete) |
+| 45377 | 16 | No | The provided Key Vault uri '%ls' is not valid. Please ensure the key vault has been configured with soft-delete and purge protection. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323732](https://go.microsoft.com/fwlink/?linkid=2323732). |
 | 45378 | 16 | No | geo-redundant-backup not supported for the current edition. |
 | 45379 | 16 | No | geo-redundant-backup value is not allowed to update |
 | 45380 | 16 | No | The edition %.\*ls is not a valid edition. Edition cannot be changed by update. |
 | 45381 | 16 | No | SKU Name '%ls' is not valid. Please specify a valid SKU Name. |
 | 45382 | 16 | No | Read or write operations are not allowed on the storage account '%ls'. |
 | 45383 | 16 | No | The storage account '%ls' is disabled. |
-| 45384 | 16 | No | The encryption protectors for all servers linked by GeoDR must be in the same region as their respective servers. Please upload key '%ls' to a Key Vault in the region '%ls' as server '%ls'. (https://aka.ms/sqltdebyokgeodr) |
-| 45385 | 16 | No | Unexpected Key Vault region found in the response for Key Vault '%ls' associated with server '%ls'. Expected region: '%ls', Region receieved in response: '%ls'. (https://aka.ms/sqltdebyokgeodr) |
+| 45384 | 16 | No | The encryption protectors for all servers linked by GeoDR must be in the same region as their respective servers. Please upload key '%ls' to a Key Vault in the region '%ls' as server '%ls'. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323436](https://go.microsoft.com/fwlink/?linkid=2323436). |
+| 45385 | 16 | No | Unexpected Key Vault region found in the response for Key Vault '%ls' associated with server '%ls'. Expected region: '%ls', Region receieved in response: '%ls'. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323436](https://go.microsoft.com/fwlink/?linkid=2323436). |
 | 45386 | 16 | No | The key vault provided '%ls' on server '%ls' uses unsupported RSA Key Size or Key Type. The supported RSA Key Size is 2048 and Key Type is RSA and RSA-HSM. |
 | 45387 | 16 | No | Invalid hardware generation. It isn't allowed to have both Gen4 and Gen5. |
 | 45388 | 16 | No | Target subnet has associated Network Security Group (NSG). Remove %ls. ([https://go.microsoft.com/fwlink/?linkid=871071](https://go.microsoft.com/fwlink/?linkid=871071)) |
@@ -680,7 +680,7 @@ ms.topic: include
 | 45437 | 16 | No | The operation could not be completed. Replication is not enabled for the server. |
 | 45438 | 16 | No | The timezone cannot be changed on Managed Instance. |
 | 45439 | 16 | No | Cannot create a Managed Instance with timezone '%.\*ls'. Please use timezone 'UTC' instead. |
-| 45440 | 16 | No | Cannot perform creation/scaling of the managed instance as there are not enough available IP addresses in the subnet for performing the operation. For more details visit 'https://aka.ms/determine-subnet-size'. |
+| 45440 | 16 | No | Cannot perform creation/scaling of the managed instance as there are not enough available IP addresses in the subnet for performing the operation. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323437](https://go.microsoft.com/fwlink/?linkid=2323437). |
 | 45441 | 16 | No | Elastic server restore verification is not supported. |
 | 45442 | 16 | No | The operation failed because the requested update mode '%ls' did not match the chosen one '%ls'. Please try again later or use a different update mode specification. |
 | 45443 | 16 | No | Storage Auto Grow is not supported . |
@@ -720,13 +720,13 @@ ms.topic: include
 | 45477 | 16 | No | Changing the hardware generation to deprecated %ls generation is not possible. |
 | 45478 | 16 | No | '%ls' |
 | 45479 | 16 | No | Backup storage type parameter is not allowed in the instance update operation. |
-| 45480 | 16 | No | The Azure SQL DB Service Management API surface has been deprecated. Please update callers to the Resource Management API surface. For more information, please see https://aka.ms/sqldbsmretirement. |
+| 45480 | 16 | No | The Azure SQL Database Service Management API surface has been retired. Please update callers to the Resource Management API. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323733](https://go.microsoft.com/fwlink/?linkid=2323733). |
 | 45481 | 16 | No | The login for '%ls' was not able to be provisioned on sql instance '%ls' |
 | 45482 | 16 | No | The login for '%ls' was not able to be dropped on sql instance '%ls', it is currently in state '%ls' |
 | 45483 | 16 | No | The login for '%ls' was not able to be dropped on sql instance '%ls', rollback of drop is not supported. |
 | 45484 | 16 | No | Configuring backup storage account type to '%s' failed during Database create or update. |
 | 45485 | 16 | No | Managed Instance%ls deployment failed as provided subnet '%ls' was not delegated to Microsoft.Sql/managedInstances. Information on how to set subnet delegation for Managed Instance could be found at ([https://go.microsoft.com/fwlink/?linkid=2123307](https://go.microsoft.com/fwlink/?linkid=2123307)). |
-| 45486 | 16 | No | Submitted request could not be accepted as maximum number of '%ls' concurrent management operations would be exceeded. Terminate some of the ongoing operations or try again later. For more details check: (https://aka.ms/mierror-man-op-limit) |
+| 45486 | 16 | No | Submitted request could not be accepted as the maximum number of '%ls' concurrent management operations would be exceeded. Terminate some of the ongoing operations or try again later. |
 | 45487 | 16 | No | Vulnerability Assessment scan was canceled. |
 | 45488 | 16 | No | Vulnerability Assessment failed to read archived blob. |
 | 45489 | 16 | No | Vulnerability Assessment storage account is on VNET or have firewalls. |
@@ -762,7 +762,7 @@ ms.topic: include
 | 45520 | 16 | No | Property with name DatabaseSurfaceAreaVersion is specified but not available in managed instance create operation. Please remove it from operation request and submit operation again. |
 | 45521 | 16 | No | A user assigned managed identity must be specified when identity type is set to 'UserAssigned' or 'SystemAssigned,UserAssigned'. Please specify the user assigned managed identity to be assigned to the server '%ls' or change the identity type to a different value. |
 | 45522 | 16 | No | The primary user assigned managed identity '%ls' must be a part of the managed identities being assigned to the server '%ls' or already assigned to the server. |
-| 45523 | 16 | No | One or more identity id(s) provided are not valid ARM resource id(s). Please input valid id(s) and try again. For more details, go to https://aka.ms/sqltdebyokcreateserver |
+| 45523 | 16 | No | One or more identity id(s) provided are not valid ARM resource id(s). Please provide valid id(s) and try again. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323438](https://go.microsoft.com/fwlink/?linkid=2323438). |
 | 45524 | 16 | No | ZoneRedundant feature is not supported for the selected service tier. For more details visit aka.ms/sqlmi-service-tier-characteristics. |
 | 45525 | 16 | No | Enabling zoneRedundant feature is not possible once managed instance is created. For more details visit aka.ms/sqlmi-high-availability. |
 | 45526 | 16 | No | Disabling zoneRedundant feature is not possible once managed instance is created. For more details visit aka.ms/sqlmi-high-availability. |
@@ -771,14 +771,14 @@ ms.topic: include
 | 45529 | 16 | No | You have reached the maximum number of %ls active user certificates for the hybrid link. Please reduce the number of active certificates and try again. |
 | 45530 | 16 | No | The operation was not allowed because of the outbound firewall rule configuration for '%ls'. |
 | 45531 | 16 | No | The specified server name cannot be used. Name is available, but still present in the collection due to recent usage. It can take up to 7 days to remove the name from the collection. Please submit operation again using different server name or try again later. |
-| 45532 | 16 | No | The managed identity with ID '%ls' requires the following Azure Key Vault permissions: '%ls' to the key '%ls'. Please grant the missing permissions to the identity. (https://aka.ms/sqltdebyokcreateserver) |
+| 45532 | 16 | No | The managed identity with ID '%ls' requires the following Azure Key Vault permissions: '%ls' on the key '%ls'. Grant the missing permissions to the identity and ensure the key is not expired and is not disabled. For an expired key, extend the key expiry time to enable its use for wrap and unwrap operations. If your key vault is in a virtual network or behind a firewall, enable the 'Allow trusted Microsoft services to bypass this firewall' option. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323438](https://go.microsoft.com/fwlink/?linkid=2323438). |
 | 45533 | 16 | No | A primary user assigned managed identity has not been specified. Please specify the primary managed identity that you would like to use for the server '%ls'. |
 | 45534 | 16 | No | Changing managed instance subnet is not supported operation. Please remove this parameter from the request. |
 | 45535 | 16 | No | Selected subnet is in another Virtual Network. Moving managed instance to another Virtual Network is not possible. Please provide subnet from Virtual Network '%ls'. |
 | 45536 | 16 | No | Provided subnet is having different DNS zone from the current. Changing instance DNS zone is not supported. Please provide subnet with same DNS zone, create a new subnet or provide empty one. |
 | 45537 | 16 | No | It is not possible to update subnet while running on Gen4 hardware as it is being deprecated. Please upgrade your hardware from Gen4 to Gen5 as part of the changing managed instance subnet operation by specifying both parameters at the same time: destination subnet and hardware generation. |
-| 45538 | 16 | No | Please specify primary user-assigned managed identity having the following Azure Key Vault permissions '%ls' to access the key '%ls'. (https://aka.ms/sqltdebyokcreateserver) |
-| 45539 | 16 | No | Please change identity type to 'UserAssigned' or 'SystemAssigned,UserAssigned' and assign a primary user-assigned managed identity having the following Azure Key Vault permissions '%ls' to access the key '%ls'. (https://aka.ms/sqltdebyokcreateserver) |
+| 45538 | 16 | No | Specify the primary user-assigned managed identity having the following Azure Key Vault permissions '%ls' to access the key '%ls'. Ensure the key is not expired and is not disabled. For an expired key, extend the key expiry time to enable its use for wrap and unwrap operations. If your key vault is in a virtual network or behind a firewall, enable the 'Allow trusted Microsoft services to bypass this firewall' option. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323438](https://go.microsoft.com/fwlink/?linkid=2323438) |
+| 45539 | 16 | No | Change identity type to 'UserAssigned' or 'SystemAssigned,UserAssigned' and assign a primary user-assigned managed identity having the following Azure Key Vault permissions '%ls' to access the key '%ls'. Ensure the key is not expired and is not disabled. For an expired key, extend the key expiry time to enable its use for wrap and unwrap operations. If your key vault is in a virtual network or behind a firewall, enable the 'Allow trusted Microsoft services to bypass this firewall' option. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323438](https://go.microsoft.com/fwlink/?linkid=2323438) |
 | 45540 | 16 | No | Cross '%ls' '%ls' operation is not supported. |
 | 45541 | 16 | No | No restore point available |
 | 45542 | 16 | No | User attempted to failover or force-terminate a geo-link while the secondary is in checkpoint-only mode due to insufficient memory and so cannot enter the primary role. Consider upgrading the database service level objective of the geo-secondary to increase available memory. |
@@ -827,9 +827,9 @@ ms.topic: include
 | 45585 | 16 | No | The parameter '%ls' is invalid. '%ls' |
 | 45586 | 16 | No | The restored database is too large for the requested service level objective '%s'. Submit a new restore request to a target service level objective which has sufficient storage larger than the the max size of the database, %s bytes. After restore, a shrink database operation can be performed to to reclaim unused space before scaling the DB size to the originally requested service level objective. |
 | 45587 | 16 | No | The attempted CRUD operation of Start/Stop schedule on the Azure SQL Managed Instance '%ls' cannot be executed. The schedule does not exist for a given managed instance. |
-| 45588 | 16 | No | Cannot create Managed Instance in the subnet '%ls' because subnet is too small. Minimal allowed size of a subnet is %d IP addresses. See https://aka.ms/move-managed-instance on how to move your instance to a larger subnet. |
-| 45589 | 16 | No | Subnet selected for managed instance migration has address range that overlaps with address range of subnet that holds geo replicated secondary instance. Please verify that your subnet is configured according to guidelines in https://aka.ms/move-managed-instance. |
-| 45590 | 16 | No | Subnet selected for managed instance migration is not configured to enable communication with a geo replicated secondary instance. Please check if all of the required ports are open. To properly configure your subnet read the guidelines in https://aka.ms/move-managed-instance. |
+| 45588 | 16 | No | Cannot create Managed Instance in the subnet '%ls' because subnet is too small. Minimal allowed size of a subnet is %d IP addresses. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323734](https://go.microsoft.com/fwlink/?linkid=2323734). |
+| 45589 | 16 | No | The subnet selected for managed instance migration has an address range that overlaps with the address range of the subnet that holds the geo replicated secondary instance. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323734](https://go.microsoft.com/fwlink/?linkid=2323734). |
+| 45590 | 16 | No | The subnet selected for managed instance migration is not configured to enable communication with the geo replicated secondary instance. Check if all of the required ports are open. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323734](https://go.microsoft.com/fwlink/?linkid=2323734). |
 | 45591 | 16 | No | The database can't be restored into the resource pool due to the remaining storage capacity in the pool. The database required {0} bytes, while the pool has only {1} bytes of storage available. Please restore as a single database outside resource pool or increase resources for the pool. |
 | 45592 | 16 | No | The largest database file size of database '{0}' exceeds data file size limit {1} for General Purpose SQL Managed Instance service tier. See: [https://learn.microsoft.com/azure/azure-sql/managed-instance/resource-limits#service-tier-characteristics](/azure/azure-sql/managed-instance/resource-limits#service-tier-characteristics). |
 | 45593 | 16 | No | Storage account limit {0} for General Purpose SQL Managed Instance '{1}' exceeded. See: [https://learn.microsoft.com/azure/azure-sql/managed-instance/resource-limits#service-tier-characteristics](/azure/azure-sql/managed-instance/resource-limits#service-tier-characteristics). |
@@ -1305,8 +1305,8 @@ ms.topic: include
 | 47522 | 16 | No | Database '%.\*ls' has been removed from availability group which participates in Azure SQL Managed Instance link. |
 | 47600 | 10 | No | Reason: Windows Authentication for Azure AD Principals is not enabled on this instance. |
 | 47601 | 10 | No | Reason: There was an internal error while attempting Windows Authentication for Azure AD Principals. |
-| 47602 | 16 | No | When auto-rotation of TDE Protector is enabled, both primary and secondary servers must be connected to the same key vault. Please add key '%ls' (from the same key vault connected to primary server) to the secondary server '%ls'. (https://aka.ms/sqltdeautorotation) |
-| 47603 | 16 | No | All servers linked by GeoDr should have the same key material as the encryption protector of the primary server. Please add the key '%ls' with the same key material to the secondary server '%ls'. (https://aka.ms/sqltdebyokgeodr) |
+| 47602 | 16 | No | When auto-rotation of TDE Protector is enabled, both primary and secondary servers must be connected to the same key vault. Add key '%ls' from the key vault connected to primary server to the secondary server '%ls'. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323439](https://go.microsoft.com/fwlink/?linkid=2323439). |
+| 47603 | 16 | No | All servers linked by GeoDr should have the same key material as the encryption protector of the primary server. Add the key '%ls' with the same key material to the secondary server '%ls'. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323436](https://go.microsoft.com/fwlink/?linkid=2323436). |
 | 47604 | 10 | No | Service principal is disabled. |
 | 47605 | 10 | No | Service principal has insufficient permissions. |
 | 47606 | 10 | No | Reason: There was an user error while attempting Windows Authentication for Azure AD Principals. |

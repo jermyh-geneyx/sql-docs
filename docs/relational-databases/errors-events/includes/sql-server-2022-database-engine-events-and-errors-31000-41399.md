@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/30/2025
+ms.date: 09/11/2025
 ms.topic: include
 ---
 > [!NOTE]
@@ -59,8 +59,8 @@ ms.topic: include
 | 31619 | 16 | No | The %ls could not be parsed. jsonError = %d. |
 | 31620 | 16 | No | The %ls is not a json object datatype. |
 | 31621 | 16 | No | One of the %ls values could not be parsed. |
-| 31622 | 16 | No | An unexpected error occurred during validating that the connection is allowed to the hostname. See 'https://aka.ms/sqldb_httpinvoke_errordetails' for assistance. |
-| 31624 | 16 | No | Connection to the external endpoint IP is not allowed. URL contains a hostname that is resolved to a blocked IP. See 'https://aka.ms/sqldb_httpinvoke_errordetails' for assistance. |
+| 31622 | 16 | No | An unexpected error occurred while validating that the connection to the hostname is allowed. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323727](https://go.microsoft.com/fwlink/?linkid=2323727). |
+| 31624 | 16 | No | Connection to the external endpoint IP is not allowed. URL contains a hostname that is resolved to a blocked IP. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323727](https://go.microsoft.com/fwlink/?linkid=2323727). |
 | 31625 | 16 | No | DNS resolution of the hostname has failed with windows sockets error %d. |
 | 31627 | 16 | No | An out of memory exception has occurred during external endpoint invocation. |
 | 31628 | 16 | No | The database scoped credential '%.\*ls' has an invalid identity '%.\*ls' for use with an external rest endpoint. |
@@ -829,7 +829,7 @@ ms.topic: include
 | 35382 | 16 | No | The specified COMPRESSION_DELAY option value %d is invalid. The valid range for disk-based table is between (0, 10080) minutes and for memory-optimized table is 0 or between (60, 10080) minutes. |
 | 35383 | 16 | No | The use of user-defined functions is not allowed in default constraints when adding columns to a columnstore index. |
 | 35384 | 16 | No | The statement failed because column '%.\*ls' on table '%.\*ls' is a lob column. Non clustered index with lob column as included column cannot co-exist with clustered columnstore index. |
-| 35386 | 17 | No | Unable to allocate %I64d KB for columnstore compression because it exceeds the remaining memory from total allocated for current resource class and DWU. Please rerun query at a higher resource class, and also consider increasing DWU. See 'https://aka.ms/sqldw_columnstore_memory' for assistance. |
+| 35386 | 17 | No | Unable to allocate %I64d KB for columnstore compression because it exceeds the remaining memory from total allocated for current resource class and DWU. Please rerun query at a higher resource class, and also consider increasing DWU. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323728](https://go.microsoft.com/fwlink/?linkid=2323728). |
 | 35387 | 17 | No | TEMPDB ran out of space during spilling. Verify that data is evenly distributed and/or rewrite the query to consume fewer rows. If the issue still persists, consider upgrading to a higher service level objective. |
 | 35388 | 15 | No | The statement failed because column '%.\*ls' on table '%.\*ls' is a persisted computed column. Adding persisted computed columns to an existing clustered columnstore index is not supported. |
 | 35389 | 15 | No | The statement failed because column '%.\*ls' on table '%.\*ls' is a computed column of a LOB type. Columnstore indexes cannot include computed columns of LOB types. |
@@ -837,7 +837,7 @@ ms.topic: include
 | 35391 | 16 | No | Could not build or rebuild clustered columnstore index '%.\*ls' online, because the the table has secondary indexes. Please perform the operation offline, or remove the secondary indexes and try again. |
 | 35392 | 15 | No | The statement failed because column '%.\*ls' on table '%.\*ls' is a computed column. Nonclustered index with computed column as key or included column cannot be created on a table that has a clustered columnstore index. |
 | 35393 | 16 | No | Columnstore tuple mover unit tests can't be run under master database. |
-| 35394 | 16 | No | Transaction %d reached %I64u log used bytes and %I64d reserved log bytes. In order to minimize log usage %d suboptimal rowgroups were created, which is not allowed since it compromises index quality. Please re-run query at a higher resource class, and also consider increasing DWU. See 'https://aka.ms/sqldw_columnstore_memory' for assistance. |
+| 35394 | 16 | No | Transaction %d reached %I64u log used bytes and %I64d reserved log bytes. In order to minimize log usage %d suboptimal rowgroups were created, which is not allowed since it compromises index quality. Please re-run query at a higher resource class, and also consider increasing DWU. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323728](https://go.microsoft.com/fwlink/?linkid=2323728). |
 | 35395 | 16 | No | Transaction %d reached %I64u log used bytes and %I64d reserved log bytes. In order to minimize log usage, %d suboptimal rowgroups were created, which is not allowed since it compromises index quality. Please re-run the query with more memory (change your Resource Governor settings or upgrade to a higher SLO) or target fewer partitions in the load if your target table is partitioned. |
 | 35396 | 17 | No | Effective DOP of %u is too high for columnstore compression on table id %d because each thread only has %I64d KB for compression. Please retry using the MAXDOP hint to use a lower DOP. |
 | 35397 | 16 | No | %S_MSG statement failed because the operation cannot be performed resumably on a table with a columnstore index. Perform the operation without specifying the RESUMABLE option or drop (or disable) the columnstore index before performing the operation using the RESUMABLE option. |
@@ -1153,7 +1153,7 @@ ms.topic: include
 | 37452 | 16 | No | Error while trying to invoke external policy pull task. |
 | 37453 | 16 | No | '%ls' is not a valid option for the @type parameter. Enter 'update' or 'reload'. |
 | 37454 | 10 | No | Encountered Internal Error while calling %ls. Error code %ld, State %ld. |
-| 37455 | 16 | No | Server identity does not have permissions to access MS Graph. Please follow the steps here: https://aka.ms/SQLServer-AAD-Permissions. |
+| 37455 | 16 | No | Server identity does not have permissions to access MS Graph. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323824](https://go.microsoft.com/fwlink/?linkid=2323824). |
 | 37457 | 16 | No | DDL statement executed on the database is not allowed because Azure Active Directory only authentication is enabled on the server. |
 | 37458 | 16 | No | Posted digest is not globally committed in Azure Confidential Ledger. Ledger URL '%ls' and error code %ld. |
 | 37459 | 16 | No | Encountered Internal Error while calling Azure Confidential Ledger. Ledger URL '%ls' and error code %ld. |
@@ -1162,7 +1162,7 @@ ms.topic: include
 | 37462 | 16 | No | Encountered error while trying to retrieve Network Certificate from Identity Service. Ledger URL '%ls' and error code %ld. |
 | 37463 | 16 | No | Service Principal or Managed Identity is not authorized to call Azure Confidential Ledger. Ledger URL '%ls' and error code %ld. |
 | 37464 | 10 | Yes | AAD Authentication is enabled. This is an informational message only; no user action is required. |
-| 37465 | 16 | No | Server identity does not have the required permissions to access the MS graph. Please follow the steps here : https://aka.ms/UMI-AzureSQL-permissions |
+| 37465 | 16 | No | Server identity does not have the required permissions to access the MS graph. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323434](https://go.microsoft.com/fwlink/?linkid=2323434). |
 | 37466 | 16 | No | Endpoint is required. |
 | 37467 | 20 | No | The server encountered an unexpected exception. |
 | 37468 | 16 | No | The source and target table names provided as parameters to 'sp_copy_data_in_batches' must be valid table names and cannot be null or empty. |
@@ -1231,7 +1231,7 @@ ms.topic: include
 | 37532 | 16 | No | Ledger table '%.\*ls' cannot contain check constraints, filtered indexes and statistics or computed columns that reference columns using a multi-part identifier. |
 | 37533 | 16 | No | Computed column '%.\*ls' cannot be added to ledger table '%.\*ls'. Ledger tables do not support computed columns that use CLR functions or types. |
 | 37534 | 16 | No | Error while trying to read database information from master metadata. Transaction is not active anymore. |
-| 37535 | 16 | No | Principal name with object id '%ls' must begin with original principal name followed by a user-defined suffix to differentiate between the names. (https://aka.ms/AADUserNonUniqueDisplayName) |
+| 37535 | 16 | No | Principal name with object id '%ls' must begin with the original principal name followed by a user-defined suffix to differentiate between the names. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323825](https://go.microsoft.com/fwlink/?linkid=2323825). |
 | 37536 | 16 | Yes | Internal error occurred while obtaining version information from IMDS endpoint. Substate: '%ls', status: 0x%08x. |
 | 37537 | 16 | Yes | Internal error occurred while obtaining version information from IMDS endpoint. Error code: '%ls'. Error message: '%ls'. Return code: '0x%08x'. |
 | 37538 | 16 | Yes | Internal error occurred while obtaining version information from IMDS endpoint. Return code: '0x%08x'. |
@@ -1242,14 +1242,14 @@ ms.topic: include
 | 37543 | 10 | No | The trust of the certificate imported could not be verified with the Certificate Authority (CA) or verified through the Internet. Most likely the host operating system where SQL Server is hosted is missing the latest root certificate updates, or access to the Internet. In case this certificate is used for authentication when partner server rotates the certificate, the authentication will fail unless the issue has been resolved on the host OS. Please ensure that the host OS has the latest root certificate updates, or access to the Internet to reach out to remote CA. Error code: 0x%lx. |
 | 37545 | 16 | No | '%ls' is not a valid object id for '%ls' or you do not have permission. |
 | 37546 | 16 | No | Can only specify object_id when creating user from external provider. |
-| 37549 | 16 | No | Cannot open session for %S_MSG '%.\*ls'. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
-| 37550 | 16 | No | Cannot initialize cryptographic provider. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
-| 37551 | 16 | No | Cannot create key '%.\*ls' in the provider. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
-| 37552 | 16 | No | Cannot export %S_MSG from the provider. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
-| 37553 | 16 | No | Invalid algorithm '%.\*ls'. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
-| 37554 | 16 | No | Key with %S_MSG '%.\*ls' does not exist in the provider or access is denied. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
-| 37555 | 16 | No | Invalid algorithm id: %d. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
-| 37556 | 16 | No | Key validation failed since an attempt to get algorithm info for that key failed. Provider error code: %d. (%.\*ls). For more information, see https://aka.ms/sql-ekm-connector-troubleshooting |
+| 37549 | 16 | No | Cannot open session for %S_MSG '%.\*ls'. Provider error code: %d. (%.\*ls). For more information, see [https://go.microsoft.com/fwlink/?linkid=2323435](https://go.microsoft.com/fwlink/?linkid=2323435). |
+| 37550 | 16 | No | Cannot initialize cryptographic provider. Provider error code: %d. (%.\*ls). For more information, see [https://go.microsoft.com/fwlink/?linkid=2323435](https://go.microsoft.com/fwlink/?linkid=2323435). |
+| 37551 | 16 | No | Cannot create key '%.\*ls' in the provider. Provider error code: %d. (%.\*ls). For more information, see [https://go.microsoft.com/fwlink/?linkid=2323435](https://go.microsoft.com/fwlink/?linkid=2323435). |
+| 37552 | 16 | No | Cannot export %S_MSG from the provider. Provider error code: %d. (%.\*ls). For more information, see [https://go.microsoft.com/fwlink/?linkid=2323435](https://go.microsoft.com/fwlink/?linkid=2323435). |
+| 37553 | 16 | No | Invalid algorithm '%.\*ls'. Provider error code: %d. (%.\*ls). For more information, see [https://go.microsoft.com/fwlink/?linkid=2323435](https://go.microsoft.com/fwlink/?linkid=2323435). |
+| 37554 | 16 | No | Key with %S_MSG '%.\*ls' does not exist in the provider or access is denied. Provider error code: %d. (%.\*ls). For more information, see [https://go.microsoft.com/fwlink/?linkid=2323435](https://go.microsoft.com/fwlink/?linkid=2323435). |
+| 37555 | 16 | No | Invalid algorithm id: %d. Provider error code: %d. (%.\*ls). For more information, see [https://go.microsoft.com/fwlink/?linkid=2323435](https://go.microsoft.com/fwlink/?linkid=2323435). |
+| 37556 | 16 | No | Key validation failed since an attempt to get algorithm info for that key failed. Provider error code: %d. (%.\*ls). For more information, see [https://go.microsoft.com/fwlink/?linkid=2323435](https://go.microsoft.com/fwlink/?linkid=2323435). |
 | 37559 | 16 | No | Object_id is not a valid option |
 | 37563 | 16 | Yes | The primary managed identity is not selected for this server. Enable the primary managed identity for Microsoft Entra authentication for this server. For more information see (https://aka.ms/sql-server-managed-identity-doc). |
 | 37564 | 10 | Yes | The managed identity with Client_ID/Application_ID '%ls', is the primary identity assigned for this server. |
@@ -1262,7 +1262,7 @@ ms.topic: include
 | 37572 | 16 | No | Customer managed key '%s' was not found in Azure Key Vault '%s'. If it was recently deleted, recovery could be possible if 'soft-delete' protection is enabled on the key vault. For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting. |
 | 37573 | 16 | No | Connection to Azure Key Vault '%s' could not be established. Please review network settings for Managed Instance '%s'. For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting. |
 | 37574 | 16 | No | Azure Key Vault URI '%s' could not be resolved. Please ensure the key vault URI is valid and that your network settings for Managed Instance '%s' are not blocking access to Azure Public DNS. For help resolving this issue, please see https://aka.ms/sqlmi-tde-troubleshooting. |
-| 37576 | 16 | No | The current SQL Server Connector version for Microsoft Azure Key Vault does not support the managed identity (see https://aka.ms/sql-server-managed-identity-doc). Upgrade the SQL Server Connector to its latest version (see https://www.microsoft.com/en-us/download/details.aspx?id=45344&msockid=2aa7acc4c900647e098ebfb5c8ba6506). |
+| 37576 | 16 | No | The current version of SQL Server Connector for Microsoft Azure Key Vault does not support managed identity. Upgrade the SQL Server Connector to the latest version and try again. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323730](https://go.microsoft.com/fwlink/?linkid=2323730). |
 | 38001 | 16 | No | Cannot find the file id %d in the database '%s'. |
 | 38002 | 16 | No | Only users having %s permission can execute this stored procedure. |
 | 39001 | 16 | No | Only SELECT statement is supported for input data query to 'sp_execute_external_script' stored procedure. |
@@ -1981,7 +1981,7 @@ ms.topic: include
 | 40980 | 16 | No | Partner managed server's managed server/failover group has been dropped. |
 | 40981 | 16 | No | Database '%.\*ls' is not accessible due to Azure Key Vault critical error. |
 | 40982 | 16 | No | Instance failover group cannot be created because the secondary instance has user databases. |
-| 40983 | 16 | No | Replication to the partner managed instance could not be established. Verify that connectivity between the Virtual Networks of the primary and secondary managed servers has been established correctly according to guidelines in https://aka.ms/instanceFailoverGroups. |
+| 40983 | 16 | No | Replication to the partner managed instance could not be established. Verify that connectivity between the Virtual Networks of the primary and secondary managed servers has been established. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323826](https://go.microsoft.com/fwlink/?linkid=2323826). |
 | 40984 | 16 | No | Restore and GeoRestore target cannot be free database. |
 | 40985 | 16 | No | Restore and GeoRestore are not supported for free database. |
 | 40986 | 16 | No | Source database '%.\*ls' dropped on '%.\*ls' does not exist on server '%.\*ls' within the supported recovery period. |
