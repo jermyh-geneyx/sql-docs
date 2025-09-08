@@ -1,17 +1,18 @@
 ---
-title: Migrate availability group
+title: Migrate Availability Group
 titleSuffix: SQL Server on Azure VMs
 description: Learn how to lift and shift your Always On availability group high availability solution to SQL Server on Azure VMs using Azure Migrate.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: mathoma
-ms.date: 06/26/2024
+ms.date: 09/07/2025
 ms.service: azure-vm-sql-server
 ms.subservice: migration-guide
 ms.topic: how-to
 ms.collection:
   - sql-migration-content
-ms.custom: sfi-image-nochange
+ms.custom:
+  - sfi-image-nochange
 ---
 # Migrate an availability group to SQL Server on Azure VM
 
@@ -43,7 +44,7 @@ Before you begin this tutorial, you should complete the following prerequisites:
 Prepare Azure for migration with the [Server Migration tool](/azure/migrate/migrate-services-overview#azure-migrate-server-migration-tool).
 
 | Task | Details |
-|--- | --- |
+| --- | --- |
 | **Create an Azure Migrate project** | Your Azure account needs Contributor or Owner permissions to [create a new project](/azure/migrate/create-manage-projects). |
 | **Verify permissions for your Azure account** | Your Azure account needs Contributor or Owner permissions on the Azure subscription, permissions to register apps in Microsoft Entra ID ([formerly Azure Active Directory](/entra/fundamentals/new-name)), and User Access Administrator permissions on the Azure subscription to create a Key Vault, to create a VM, and to write to an Azure managed disk. |
 | **Set up an Azure virtual network** | [Setup](/azure/virtual-network/virtual-networks-overview) an Azure virtual network (VNet). When you replicate to Azure, Azure VMs are created and joined to the Azure VNet that you specify when you set up migration. |
@@ -139,7 +140,7 @@ To install the Mobility service, follow these steps:
 
 1. Connect to the machine and extract the contents of the installer file to a local folder (such as c:\temp). Run this in an admin command prompt:
 
-   ```cmd
+   ```console
    ren Microsoft-ASR_UA*Windows*release.exe MobilityServiceInstaller.exe
    MobilityServiceInstaller.exe /q /x:C:\Temp\Extracted
    cd C:\Temp\Extracted
@@ -147,13 +148,13 @@ To install the Mobility service, follow these steps:
 
 1. Run the Mobility Service Installer:
 
-   ```cmd
+   ```console
    UnifiedAgent.exe /Role "MS" /Platform "VmWare" /Silent
    ```
 
 1. Register the agent with the replication appliance:
 
-   ```cmd
+   ```console
    cd C:\Program Files (x86)\Microsoft Azure Site Recovery\agent
    UnifiedAgentConfigurator.exe  /CSEndPoint <replication appliance IP address> /PassphraseFilePath <Passphrase File Path>
    ```

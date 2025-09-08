@@ -201,7 +201,7 @@ GO
 
 ### B. Clear all plans from the plan cache
 
-The following example clears all elements from the plan cache. The WITH `NO_INFOMSGS` clause is specified to prevent the information message from being displayed.
+The following example clears all elements from the plan cache. The `WITH NO_INFOMSGS` clause is specified to prevent the information message from being displayed.
 
 ```sql
 DBCC FREEPROCCACHE WITH NO_INFOMSGS;

@@ -562,12 +562,12 @@ To build and run the example:
     ds.setDatabaseName("demo"); // replace with your database name
     ```
 
-1. Locate the following lines of code. Replace the value of `principalId` with the Application ID / Client ID of the Microsoft Entra service principal that you want to connect as. Replace the value of `clientCertificate` with the location of the service principal certificate.
+1. Locate the following lines of code. Replace the value of `principalId` with the Application ID / Client ID of the Microsoft Entra service principal that you want to connect as. Replace the value of `clientCertificate` with the file path to the service principal certificate.
 
     ```java
     String principalId = "<service_principal_guid>"; // Replace with your Microsoft Entra service principal ID.
 
-    String clientCertificate = "..."; // Replace with the location for your Microsoft Entra service principal certificate.
+    String clientCertificate = "..."; // Replace with the path to your Microsoft Entra service principal certificate.
     ```
 
 1. If the previously mentioned certificate needs a password, set the principal Secret using `setPassword` in version 10.2 and up or `setAADSecurePrincipalSecret` in version 9.4 and below.
@@ -586,7 +586,7 @@ import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 public class MSEntraServicePrincipalCertificate {
     public static void main(String[] args) throws Exception{
         String principalId = "<service_principal_guid>"; // Replace with your Microsoft Entra service principal ID.
-        String clientCertificate = "..."; // Replace with the location of your service principal certificate.
+        String clientCertificate = "..."; // Replace with the path to your service principal certificate.
 
         SQLServerDataSource ds = new SQLServerDataSource();
         ds.setServerName("msentra-managed-demo.database.windows.net"); // Replace with your server name

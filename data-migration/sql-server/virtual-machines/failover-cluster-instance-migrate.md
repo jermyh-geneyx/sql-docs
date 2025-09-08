@@ -1,11 +1,11 @@
 ---
-title: Migrate failover cluster instance
+title: Migrate Failover Cluster Instance
 titleSuffix: SQL Server on Azure VMs
 description: Learn how to lift and shift your Always On failover cluster instance high availability solution to SQL Server on Azure VMs using Azure Migrate.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: mathoma
-ms.date: 06/26/2024
+ms.date: 09/07/2025
 ms.service: azure-vm-sql-server
 ms.subservice: migration-guide
 ms.topic: how-to
@@ -136,7 +136,7 @@ To install the Mobility service, follow these steps:
 
 1. Connect to the machine and extract the contents of the installer file to a local folder (such as c:\temp). Run this in an admin command prompt:
 
-   ```cmd
+   ```console
    ren Microsoft-ASR_UA*Windows*release.exe MobilityServiceInstaller.exe
    MobilityServiceInstaller.exe /q /x:C:\Temp\Extracted
    cd C:\Temp\Extracted
@@ -144,13 +144,13 @@ To install the Mobility service, follow these steps:
 
 1. Run the Mobility Service Installer:
 
-   ```cmd
+   ```console
    UnifiedAgent.exe /Role "MS" /Platform "VmWare" /Silent
    ```
 
 1. Register the agent with the replication appliance:
 
-   ```cmd
+   ```console
    cd C:\Program Files (x86)\Microsoft Azure Site Recovery\agent
    UnifiedAgentConfigurator.exe  /CSEndPoint <replication appliance IP address> /PassphraseFilePath <Passphrase File Path>
    ```
@@ -164,9 +164,8 @@ It might take some time after installation for discovered machines to appear in 
 To prepare source machines, you need information from the cluster.
 
 > [!CAUTION]  
->  
-> - Maintain disk ownership throughout the replication process until the final cutover. If there's a change in disk ownership, there's a chance that the volumes could be corrupted and replication would need to be to retriggered. Set the preferred owner for each disk to avoid transfer of ownership during the replication process.
->  
+> - Maintain disk ownership throughout the replication process until the final cutover. If there's a change in disk ownership, there's a chance that the volumes could be corrupted and replication would need to be retriggered. Set the preferred owner for each disk to avoid transfer of ownership during the replication process.
+>
 > - Avoid patching activities and system restarts during the replication process to avoid transfer of disk ownership.
 
 To prepare source machines, do the following:
@@ -370,7 +369,7 @@ Your SQL Server failover cluster instance is ready.
   - Deploy [Azure Disk Encryption](/azure/security/fundamentals/azure-disk-encryption-vms-vmss) to help secure disks, and keep data safe from theft and unauthorized access.
   - Read more about [securing IaaS resources](https://azure.microsoft.com/services/virtual-machines/secure-well-managed-iaas/), and visit the [Microsoft Defender for Cloud](https://azure.microsoft.com/services/security-center/).
 - For monitoring and management:
-  - Consider deploying [Azure Cost Management](/azure/cost-management-billing/cost-management-billing-overview) to monitor resource usage and spending.
+  - Consider deploying [Microsoft Cost Management](/azure/cost-management-billing/cost-management-billing-overview) to monitor resource usage and spending.
 
 ## Related content
 

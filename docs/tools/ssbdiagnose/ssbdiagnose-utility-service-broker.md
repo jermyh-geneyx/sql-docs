@@ -3,8 +3,7 @@ title: "ssbdiagnose Utility (Service Broker)"
 description: The ssbdiagnose utility reports issues in Service Broker conversations or the configuration of Service Broker services.
 author: rwestMSFT
 ms.author: randolphwest
-ms.reviewer: randolphwest
-ms.date: 09/25/2024
+ms.date: 09/07/2025
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
@@ -35,7 +34,7 @@ The **ssbdiagnose** utility reports issues in [!INCLUDE [ssSB](../../includes/ss
 
 ## Syntax
 
-```cmd
+```console
 ssbdiagnose
 [ [ -XML ]
     [ -LEVEL { ERROR | WARNING | INFO } ]
@@ -246,7 +245,7 @@ Specifies the password for the `-U` login ID. Passwords are case sensitive. If t
 > [!CAUTION]  
 > When you type a `SET SQLCMDPASSWORD` command, your password will be visible to anyone who can see your screen.
 
-If the `-P` option is specified without a password, **ssbdiagnose** uses the default password (NULL).
+If the `-P` option is specified without a password, **ssbdiagnose** uses the default password (`NULL`).
 
 > [!IMPORTANT]  
 > [!INCLUDE [ssNoteStrongPass](../../includes/ssnotestrongpass-md.md)] For more information, see [Strong Passwords](../../relational-databases/security/strong-passwords.md).
@@ -486,7 +485,7 @@ ON CONTRACT TextContract
 
 The following example shows how to request that **ssbdiagnose** generate its output as an XML file that is redirected to a file. The TestDiag.xml file can then be opened by an application to analyze or report **ssbdiagnose** XML files. Or, you can view it from a general XML editor such as XML Notepad.
 
-```cmd
+```console
 ssbdiagnose -XML -E -d MyDatabase CONFIGURATION FROM SERVICE
 /test/initiator TO SERVICE /test/target > c:\MyDiagnostics\TestDiag.xml
 ```

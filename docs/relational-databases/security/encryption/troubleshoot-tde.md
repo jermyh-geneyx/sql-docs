@@ -1,10 +1,10 @@
 ---
-title: Common errors with customer-managed keys in Azure Key Vault
+title: Common Errors with Customer-Managed Keys in Azure Key Vault
 description: Learn how to identify and resolve access issues and common errors with transparent data encryption (TDE) and customer-managed keys in Azure Key Vault.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: vanto
-ms.date: 08/07/2024
+ms.date: 09/07/2025
 ms.service: sql
 ms.subservice: security
 ms.topic: conceptual
@@ -58,14 +58,15 @@ In this section, we list troubleshooting steps for the most common errors.
 
 **Error message**
 
-_401 AzureKeyVaultNoServerIdentity_ - The server identity is not correctly configured on server. Please contact support.
+```output
+401 AzureKeyVaultNoServerIdentity - The server identity is not correctly configured on server. Please contact support.
+```
 
 **Detection**
 
 Use the following cmdlet or command to ensure that an identity has been assigned to the server:
 
 - Azure PowerShell: [Get-AzSqlServer](/powershell/module/Az.Sql/Get-AzSqlServer)
-
 - Azure CLI: [az-sql-server-show](/cli/azure/sql/server#az-sql-server-show)
 
 **Mitigation**
@@ -73,7 +74,6 @@ Use the following cmdlet or command to ensure that an identity has been assigned
 Use the following cmdlet or command to configure a user-assigned or system-assigned managed identity for the server:
 
 - Azure PowerShell: [Set-AzSqlServer](/powershell/module/az.sql/set-azsqlserver) with the `-AssignIdentity` option.
-
 - Azure CLI: [az sql server update](/cli/azure/sql/server#az-sql-server-update) with the `--assign_identity` option.
 
 In the Azure portal, go to the key vault, and then go to **Access policies**. Complete these steps:
@@ -91,7 +91,9 @@ To learn more, see [Assign a managed identity to your server](/azure/sql-databas
 
 **Error message**
 
-_503 AzureKeyVaultConnectionFailed - The operation could not be completed on the server because attempts to connect to Azure Key Vault have failed._
+```output
+503 AzureKeyVaultConnectionFailed - The operation could not be completed on the server because attempts to connect to Azure Key Vault have failed.
+```
 
 **Detection**
 
@@ -99,15 +101,13 @@ To identify the key URI and the key vault:
 
 1. Use the following cmdlet or command to get the key URI of a specific server instance:
 
-    - Azure PowerShell: [Get-AzSqlServerKeyVaultKey](/powershell/module/az.sql/get-azsqlserverkeyvaultkey)
-
-    - Azure CLI: [az-sql-server-tde-key-show](/cli/azure/sql/server/tde-key#az-sql-server-tdekey-show)
+   - Azure PowerShell: [Get-AzSqlServerKeyVaultKey](/powershell/module/az.sql/get-azsqlserverkeyvaultkey)
+   - Azure CLI: [az-sql-server-tde-key-show](/cli/azure/sql/server/tde-key#az-sql-server-tdekey-show)
 
 1. Use the key URI to identify the key vault:
 
-    - Azure PowerShell: You can inspect the properties of the $MyServerKeyVaultKey variable to get details about the key vault.
-
-    - Azure CLI: Inspect the returned server encryption protector for details about the key vault.
+   - Azure PowerShell: You can inspect the properties of the $MyServerKeyVaultKey variable to get details about the key vault.
+   - Azure CLI: Inspect the returned server encryption protector for details about the key vault.
 
 **Mitigation**
 
@@ -121,9 +121,13 @@ Confirm that the key vault is available:
 
 **Error messages**
 
-_404 ServerKeyNotFound - The requested server key was not found on the current subscription._
+```output
+404 ServerKeyNotFound - The requested server key was not found on the current subscription.
+```
 
-_409 ServerKeyDoesNotExists - The server key does not exist._
+```output
+409 ServerKeyDoesNotExists - The server key does not exist.
+```
 
 **Detection**
 
@@ -142,7 +146,9 @@ Confirm that the TDE protector is present in Key Vault:
 
 **Error messages**
 
-*The server `<server_name>` requires the Key Vault Crypto Service Encryption User permission for the RBAC policy or following Azure Key Vault permissions: Get, WrapKey, UnwrapKey. Please grant the missing permissions to the service principal with ID `<akv_key>`. Ensure the key is active, not expired or disabled, set with the key activation date no later than the current date, and that trusted Microsoft services can bypass the firewall if applicable.*
+```output
+The server <server_name> requires the Key Vault Crypto Service Encryption User permission for the RBAC policy or following Azure Key Vault permissions: Get, WrapKey, UnwrapKey. Please grant the missing permissions to the service principal with ID <akv_key>. Ensure the key is active, not expired or disabled, set with the key activation date no later than the current date, and that trusted Microsoft services can bypass the firewall if applicable.
+```
 
 **Detection**
 
@@ -169,7 +175,9 @@ For more information, see [Inaccessible TDE protector](/azure/azure-sql/database
 
 **Error message**
 
-_401 AzureKeyVaultMissingPermissions - The server is missing required permissions on the Azure Key Vault._
+```output
+401 AzureKeyVaultMissingPermissions - The server is missing required permissions on the Azure Key Vault.
+```
 
 **Detection**
 
@@ -185,7 +193,7 @@ Confirm that the server has permissions to the key vault and the correct permiss
 - If the server identity is present, ensure that it has the following key permissions: Get, WrapKey, and UnwrapKey.
 - If the server identity isn't present, add it by using the **Add New** button.
 
-## Getting TDE status from the Activity log
+## Get TDE status from the Activity log
 
 To allow for monitoring of the database status due to Azure Key Vault key access issues, the following events will be logged to the [Activity Log](/azure/service-health/alerts-activity-log-service-notifications) for the resource ID based on the Azure Resource Manager URL.
 
@@ -284,5 +292,5 @@ Description: Access to Azure Key Vault Key has been re-established, operation to
 
 ## Related content
 
-- Learn about [Azure Resource Health](/azure/service-health/resource-health-overview).
-- Set up [Action Groups](/azure/azure-monitor/platform/action-groups) to receive notifications and alerts based on your preferences, for example, Email/SMS/Push/Voice, Logic App, Webhook, ITSM, or Automation Runbook.
+- [Azure Resource Health](/azure/service-health/resource-health-overview)
+- [Action Groups](/azure/azure-monitor/platform/action-groups)

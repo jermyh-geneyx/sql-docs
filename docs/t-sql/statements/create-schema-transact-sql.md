@@ -74,7 +74,7 @@ Specifies a `CREATE TABLE` statement that creates a table within the schema. The
 
 #### *view_definition*
 
-Specifies a `CREATE` VIEW statement that creates a view within the schema. The principal executing this statement must have `CREATE` VIEW permission on the current database.
+Specifies a `CREATE VIEW` statement that creates a view within the schema. The principal executing this statement must have `CREATE VIEW` permission on the current database.
 
 #### *grant_statement*
 

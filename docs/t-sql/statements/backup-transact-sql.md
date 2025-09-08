@@ -298,7 +298,7 @@ Specifies that all read/write filegroups be backed up in the partial backup. If 
 
 #### TO \<backup_device> [ , ...*n* ]
 
-Indicates that the accompanying set of [backup devices](../../relational-databases/backup-restore/backup-devices-sql-server.md) is either an unmirrored media set or the first of the mirrors within a mirrored media set (for which one or more MIRROR `TO` clauses are declared).
+Indicates that the accompanying set of [backup devices](../../relational-databases/backup-restore/backup-devices-sql-server.md) is either an unmirrored media set or the first of the mirrors within a mirrored media set (for which one or more `MIRROR TO` clauses are declared).
 
 #### \<backup_device>
 
@@ -347,12 +347,12 @@ For more information, see [Backup Devices (SQL Server)](../../relational-databas
 
 #### MIRROR TO <backup_device> [ , ...*n* ]
 
-Specifies a set of up to three secondary backup devices, each of which mirrors the backups devices specified in the `TO` clause. The MIRROR `TO` clause must specify the same type and number of the backup devices as the `TO` clause. The maximum number of MIRROR `TO` clauses is three.
+Specifies a set of up to three secondary backup devices, each of which mirrors the backups devices specified in the `TO` clause. The `MIRROR TO` clause must specify the same type and number of the backup devices as the `TO` clause. The maximum number of `MIRROR TO` clauses is three.
 
 This option is available only in the Enterprise edition of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
 
 > [!NOTE]  
-> For `MIRROR TO = DISK`, `BACKUP` automatically determines the appropriate block size for disk devices based on the sector size of the disk. If the MIRROR `TO` disk is formatted with a different sector size than the disk specified as the primary backup device, the backup command fails. In order to mirror backups to devices that have different sector sizes, the `BLOCKSIZE` parameter must be specified, and should be set to the highest sector size among all the target devices. For more information about block size, see "`BLOCKSIZE`" later in this article.
+> For `MIRROR TO = DISK`, `BACKUP` automatically determines the appropriate block size for disk devices based on the sector size of the disk. If the `MIRROR TO` disk is formatted with a different sector size than the disk specified as the primary backup device, the backup command fails. In order to mirror backups to devices that have different sector sizes, the `BLOCKSIZE` parameter must be specified, and should be set to the highest sector size among all the target devices. For more information about block size, see "`BLOCKSIZE`" later in this article.
 
 #### \<backup_device>
 
@@ -360,13 +360,13 @@ See "\<backup_device>," earlier in this section.
 
 - *n*
 
-  A placeholder that indicates that up to 64 backup devices might be specified in a comma-separated list. The number of devices in the MIRROR `TO` clause must equal the number of devices in the `TO` clause.
+  A placeholder that indicates that up to 64 backup devices might be specified in a comma-separated list. The number of devices in the `MIRROR TO` clause must equal the number of devices in the `TO` clause.
 
   For more information, see [Media families in mirrored media sets](#media-families-in-mirrored-media-sets) later in this article.
 
 - [ *next-mirror-to* ]
 
-  A placeholder that indicates that a single `BACKUP` statement can contain up to three MIRROR `TO` clauses, in addition to the single `TO` clause.
+  A placeholder that indicates that a single `BACKUP` statement can contain up to three `MIRROR TO` clauses, in addition to the single `TO` clause.
 
 ### WITH options
 

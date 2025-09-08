@@ -54,7 +54,7 @@ The name of the column in the table to be added for replication. *@column* is **
 
 #### [ @typetext = ] N'*typetext*'
 
-The definition of the column being added. *@typetext* is **nvarchar(3000)**, with no default. For example, if the column order_filled is being added, and it's a single character field, not `NULL`, and has a default value of **N**, order_filled would be the *column* parameter, while the definition of the column, **char(1) NOT `NULL` CONSTRAINT constraint_name DEFAULT 'N'** would be the *@typetext* parameter value.
+The definition of the column being added. *@typetext* is **nvarchar(3000)**, with no default. For example, if the column order_filled is being added, and it's a single character field, not null, and has a default value of **N**, order_filled would be the *column* parameter, while the definition of the column, **char(1) NOT NULL CONSTRAINT constraint_name DEFAULT 'N'** would be the *@typetext* parameter value.
 
 #### [ @publication_to_add = ] N'*publication_to_add*'
 

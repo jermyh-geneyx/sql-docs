@@ -1,9 +1,9 @@
 ---
-title: Prerequisites for minimal logging in bulk import
+title: Prerequisites for Minimal Logging in Bulk Import
 description: In a simple recovery or bulk-logged recovery model, minimal logging of bulk-import operations reduces the possibility that an operation fills the log space.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 05/09/2023
+ms.date: 09/07/2025
 ms.service: sql
 ms.subservice: data-movement
 ms.topic: conceptual
@@ -29,10 +29,10 @@ Minimal logging requires that the target table meets the following conditions:
 
 - The table isn't being replicated.
 
-- Table locking is specified (using TABLOCK).
+- Table locking is specified (using `TABLOCK`).
 
   > [!NOTE]  
-  > Although data insertions are not logged in the transaction log during a minimally logged bulk-import operation, the [!INCLUDE[ssDE](../../includes/ssde-md.md)] still logs extent allocations each time a new extent is allocated to the table.
+  > Although data insertions aren't logged in the transaction log during a minimally logged bulk-import operation, the [!INCLUDE [ssDE](../../includes/ssde-md.md)] still logs extent allocations each time a new extent is allocated to the table.
 
 - The table isn't a memory-optimized table.
 
@@ -46,28 +46,29 @@ Whether minimal logging can occur for a table also depends on whether the table 
 
   - If the table is non-empty, index pages are fully logged.
 
-  - If one of the indexes has IGNORE_DUP_KEY = ON, index and data pages are fully logged.
+  - If one of the indexes has `IGNORE_DUP_KEY = ON`, index and data pages are fully logged.
 
-- If the table has a clustered index and is empty, both data and index pages are minimally logged. In contrast, if a table has a B-tree based clustered index and is non-empty, data pages and index pages are both fully logged regardless of the recovery model. If you start with an empty rowstore table and bulk import the data in batches, both index and data pages are minimally logged for the first batch, but from the second batch onwards, only data pages are bulk logged.
+- If the table has a clustered index and is empty, both data and index pages are minimally logged. In contrast, if a table has a B-tree based clustered index and is non-empty, data pages and index pages are both fully logged regardless of the recovery model. If you start with an empty rowstore table and bulk import the data in batches, both index and data pages are minimally logged for the first batch, but from the second batch onward, only data pages are bulk logged.
 
   [!INCLUDE [sql-b-tree](../../includes/sql-b-tree.md)]
 
 - For information about logging for a clustered columnstore index (CCI), see [Columnstore index data loading guidance](../indexes/columnstore-indexes-data-loading-guidance.md#plan-bulk-load-sizes-to-minimize-delta-rowgroups).
 
 > [!NOTE]  
-> When transactional replication is enabled, BULK INSERT operations are fully logged even under the bulk logged recovery model.
+> When transactional replication is enabled, `BULK INSERT` operations are fully logged even under the bulk logged recovery model.
 
-## See also
+## Related tasks
 
-- [Recovery Models (SQL Server)](../../relational-databases/backup-restore/recovery-models-sql-server.md)
+- [Recovery models (SQL Server)](../backup-restore/recovery-models-sql-server.md)
 - [bcp Utility](../../tools/bcp-utility.md)
 - [BULK INSERT (Transact-SQL)](../../t-sql/statements/bulk-insert-transact-sql.md)
 - [OPENROWSET (Transact-SQL)](../../t-sql/functions/openrowset-transact-sql.md)
 - [BACKUP (Transact-SQL)](../../t-sql/statements/backup-transact-sql.md)
 - [ALTER DATABASE (Transact-SQL)](../../t-sql/statements/alter-database-transact-sql.md)
-- [Table Hints (Transact-SQL)](../../t-sql/queries/hints-transact-sql-table.md)
+- [Table hints (Transact-SQL)](../../t-sql/queries/hints-transact-sql-table.md)
 - [INSERT (Transact-SQL)](../../t-sql/statements/insert-transact-sql.md)
 
-## Next steps
+## Next step
 
-- [View or Change the Recovery Model of a Database (SQL Server)](../../relational-databases/backup-restore/view-or-change-the-recovery-model-of-a-database-sql-server.md)
+> [!div class="nextstepaction"]
+> [View or change the recovery model of a database (SQL Server)](../backup-restore/view-or-change-the-recovery-model-of-a-database-sql-server.md)

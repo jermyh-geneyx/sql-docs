@@ -300,7 +300,7 @@ In the following example, **sqlcmd** is used to connect to a server that has a b
 
 ```cmd
 C:\Temp\>sqlcmd -S ServerName -A
-1> SELECT session_id, blocking_session_id FROM `sys.dm_exec_requests` WHERE blocking_session_id <> 0;
+1> SELECT session_id, blocking_session_id FROM sys.dm_exec_requests WHERE blocking_session_id <> 0;
 2> GO
 ```
 

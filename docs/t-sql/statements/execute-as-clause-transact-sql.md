@@ -213,7 +213,7 @@ Specify a login or user that has the least privileges required to perform the op
 
 To execute a module specified with `EXECUTE AS`, the caller must have `EXECUTE` permissions on the module.
 
-To execute a CLR module specified with `EXECUTE` AS that accesses resources in another database or server, the target database or server must trust the authenticator of the database from which the module originates (the source database).
+To execute a CLR module specified with `EXECUTE AS` that accesses resources in another database or server, the target database or server must trust the authenticator of the database from which the module originates (the source database).
 
 To specify the `EXECUTE AS` clause when you create or modify a module, you must have `IMPERSONATE` permissions on the specified principal and also permissions to create the module. You can always impersonate yourself. When no execution context is specified or `EXECUTE AS CALLER` is specified, `IMPERSONATE` permissions aren't required.
 

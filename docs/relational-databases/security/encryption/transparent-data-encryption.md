@@ -1,13 +1,15 @@
 ---
-title: Transparent data encryption (TDE)
+title: "Transparent Data Encryption (TDE)"
 description: Learn about transparent data encryption, which encrypts SQL Server, Azure SQL Database, and Azure Synapse Analytics data, known as encrypting data at rest.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: vanto
-ms.date: 10/28/2024
+ms.date: 09/07/2025
 ms.service: sql
 ms.subservice: security
 ms.topic: conceptual
+ms.custom:
+  - sfi-image-nochange
 helpviewer_keywords:
   - "Transparent data encryption"
   - "database encryption key, about"
@@ -17,7 +19,6 @@ helpviewer_keywords:
   - "Transparent data encryption, about"
   - "encryption [SQL Server], Transparent data encryption"
 monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
-ms.custom: sfi-image-nochange
 ---
 # Transparent data encryption (TDE)
 
@@ -42,7 +43,7 @@ TDE protects data at rest, which is the data and log files. It lets you follow m
 > [!NOTE]  
 > TDE isn't available for system databases. It can't be used to encrypt `master`, `model`, or `msdb`. `tempdb` is automatically encrypted when a user database enabled TDE, but can't be encrypted directly.
 
-TDE doesn't provide encryption across communication channels. For more information about how to encrypt data across communication channels, see [Configure SQL Server Database Engine for encrypting connections](../../../database-engine/configure-windows/configure-sql-server-encryption.md).
+TDE doesn't provide encryption across communication channels. For more information about how to encrypt data across communication channels, see [Encrypt connections to SQL Server by importing a certificate](../../../database-engine/configure-windows/configure-sql-server-encryption.md).
 
 **Related topics:**
 
@@ -57,11 +58,11 @@ TDE doesn't provide encryption across communication channels. For more informati
 
 Encryption of a database file is done at the page level. The pages in an encrypted database are encrypted before they're written to disk and are decrypted when read into memory. TDE doesn't increase the size of the encrypted database.
 
-### Information applicable to [!INCLUDE [ssSDS](../../../includes/sssds-md.md)]
+### Information applicable to SQL Database
 
 When you use TDE with Azure SQL Database, SQL Database automatically creates the server-level certificate stored in the `master` database. To move a TDE database on [!INCLUDE [ssSDS](../../../includes/sssds-md.md)], you don't have to decrypt the database for the move operation. For more information on using TDE with [!INCLUDE [ssSDS](../../../includes/sssds-md.md)], see [transparent data encryption with Azure SQL Database](/azure/azure-sql/database/transparent-data-encryption-tde-overview).
 
-### Information applicable to [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)]
+### Information applicable to SQL Server
 
 After you secure a database, you can restore it by using the correct certificate. For more information about certificates, see [SQL Server Certificates and Asymmetric Keys](../sql-server-certificates-and-asymmetric-keys.md).
 
@@ -96,7 +97,7 @@ The following example shows encryption and decryption of the [!INCLUDE [sssample
 USE master;
 GO
 
-CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<UseStrongPasswordHere>';
+CREATE MASTER KEY ENCRYPTION BY PASSWORD= '<password>';
 GO
 
 CREATE CERTIFICATE MyServerCert
@@ -106,8 +107,7 @@ GO
 USE AdventureWorks2022;
 GO
 
-CREATE DATABASE ENCRYPTION KEY
-    WITH ALGORITHM = AES_256
+CREATE DATABASE ENCRYPTION KEY WITH ALGORITHM = AES_256
     ENCRYPTION BY SERVER CERTIFICATE MyServerCert;
 GO
 
@@ -120,7 +120,7 @@ The encryption and decryption operations are scheduled on background threads by 
 
 > [!CAUTION]  
 > Backup files for databases that have TDE enabled are also encrypted with the DEK. As a result, when you restore these backups, the certificate that protects the DEK must be available. Therefore, in addition to backing up the database, make sure to maintain backups of the server certificates. Data loss results if the certificates are no longer available.
->  
+>
 > For more information, see [SQL Server Certificates and Asymmetric Keys](../sql-server-certificates-and-asymmetric-keys.md).
 
 ## Commands and functions
@@ -153,7 +153,7 @@ The following table shows TDE catalog views and dynamic management views (DMV).
 
 Each TDE feature and command has individual permission requirements as described in the tables shown earlier.
 
-Viewing the metadata involved with TDE requires the VIEW DEFINITION permission on a certificate.
+Viewing the metadata involved with TDE requires the `VIEW DEFINITION` permission on a certificate.
 
 ## Considerations
 
@@ -169,7 +169,7 @@ If you use a database in database mirroring or log shipping, both databases are 
 > Full-text indexes are encrypted when a database is set for encryption. Such indexes created in [!INCLUDE [ssversion2005-md](../../../includes/ssversion2005-md.md)] and earlier versions, are imported into the database by [!INCLUDE [sql2008-md](../../../includes/sql2008-md.md)] and later versions, and are encrypted by TDE.
 
 > [!TIP]  
-> To monitor changes in the TDE status of a database, use [!INCLUDE [ssnoversion-md](../../../includes/ssnoversion-md.md)] Audit or [!INCLUDE [ssazure-sqldb](../../../includes/ssazure-sqldb.md)] auditing. For [!INCLUDE [ssnoversion-md](../../../includes/ssnoversion-md.md)], TDE is tracked under the audit action group `DATABASE_OBJECT_CHANGE_GROUP`, which you can find in [SQL Server Audit Action Groups and Actions](../auditing/sql-server-audit-action-groups-and-actions.md).
+> To monitor changes in the TDE status of a database, use [!INCLUDE [ssnoversion-md](../../../includes/ssnoversion-md.md)] Audit or [!INCLUDE [ssazure-sqldb](../../../includes/ssazure-sqldb.md)] auditing. For [!INCLUDE [ssnoversion-md](../../../includes/ssnoversion-md.md)], TDE is tracked under the audit action group `DATABASE_OBJECT_CHANGE_GROUP`, which you can find in [SQL Server Audit action groups and actions](../auditing/sql-server-audit-action-groups-and-actions.md).
 
 ## Limitations
 
@@ -237,7 +237,7 @@ TDE protects data files and log files at rest. Encrypting the entire database af
 
 When TDE is turned on, the [!INCLUDE [ssde-md](../../../includes/ssde-md.md)] forces the creation of a new transaction log, which will be encrypted by the database encryption key. Any log generated by previous transactions or current long running transactions interleaved between the TDE state change isn't encrypted.
 
-The transaction logs can be monitored using the [sys.dm_db_log_info](../../system-dynamic-management-views/sys-dm-db-log-info-transact-sql.md) DMV, which also shows whether the log file is encrypted or not using the `vlf_encryptor_thumbprint` column that is available in Azure SQL, and [!INCLUDE [sssql19-md](../../../includes/sssql19-md.md)] and later versions. To find the encryption status of the log file using the `encryption_state` column in the `sys.dm_database_encryption_keys` view, here is a sample query:
+The transaction logs can be monitored using the [sys.dm_db_log_info](../../system-dynamic-management-views/sys-dm-db-log-info-transact-sql.md) DMV, which also shows whether the log file is encrypted or not using the `vlf_encryptor_thumbprint` column that is available in Azure SQL, and [!INCLUDE [sssql19-md](../../../includes/sssql19-md.md)] and later versions. To find the encryption status of the log file using the `encryption_state` column in the `sys.dm_database_encryption_keys` view, here's a sample query:
 
 ```sql
 USE AdventureWorks2022;
@@ -267,7 +267,7 @@ Replication doesn't automatically replicate data from a TDE-enabled database in 
 
 Snapshot replication can store data in unencrypted intermediate files like BCP files. The initial data distribution for transactional and merge replication can too. During such replication, you can enable encryption to protect the communication channel.
 
-For more information, see [Configure SQL Server Database Engine for encrypting connections](../../../database-engine/configure-windows/configure-sql-server-encryption.md).
+For more information, see [Encrypt connections to SQL Server by importing a certificate](../../../database-engine/configure-windows/configure-sql-server-encryption.md).
 
 ## TDE and availability groups
 

@@ -69,7 +69,7 @@ To complete this tutorial, you need the following prerequisites:
 | --- | --- |
 | **##MS_DatabaseManager##** | Members of the **##MS_DatabaseManager##** fixed server role can create and delete databases. A member of the **##MS_DatabaseManager##** role that creates a database becomes the owner of that database, which allows that user to connect to that database as the dbo user. The dbo user has all database permissions in the database. Members of the **##MS_DatabaseManager##** role don't necessarily have permission to access databases that they don't own. It's recommended to use this server role over the **dbmanager** database level role that exists in the `master` database. |
 | **##MS_DatabaseConnector##** | Members of the **##MS_DatabaseConnector##** fixed server role can connect to any database without requiring a user account in the database to connect with. |
-| **##MS_DefinitionReader##** | Members of the **##MS_DefinitionReader##** fixed server role can read all catalog views that are covered by **VIEW ANY `DEFINITION` on any database on which the member of this role has a user account. |
+| **##MS_DefinitionReader##** | Members of the **##MS_DefinitionReader##** fixed server role can read all catalog views that are covered by `VIEW ANY DEFINITION` on any database on which the member of this role has a user account. |
 | **##MS_LoginManager##** | Members of the **##MS_LoginManager##** fixed server role can create and delete logins. It's recommended to use this server role over the **loginmanager** database level role that exists in the `master` database. |
 
 ### Prepare the target Azure SQL Database
@@ -352,7 +352,7 @@ Before you begin the tutorial:
 | --- | --- |
 | **##MS_DatabaseManager##** | Members of the **##MS_DatabaseManager##** fixed server role can create and delete databases. A member of the **##MS_DatabaseManager##** role that creates a database becomes the owner of that database, which allows that user to connect to that database as the dbo user. The dbo user has all database permissions in the database. Members of the **##MS_DatabaseManager##** role don't necessarily have permission to access databases that they don't own. It's recommended to use this server role over the **dbmanager** database level role that exists in the `master` database. |
 | **##MS_DatabaseConnector##** | Members of the **##MS_DatabaseConnector##** fixed server role can connect to any database without requiring a user account in the database to connect with. |
-| **##MS_DefinitionReader##** | Members of the **##MS_DefinitionReader##** fixed server role can read all catalog views that are covered by **VIEW ANY `DEFINITION` on any database on which the member of this role has a user account. |
+| **##MS_DefinitionReader##** | Members of the **##MS_DefinitionReader##** fixed server role can read all catalog views that are covered by `VIEW ANY DEFINITION` on any database on which the member of this role has a user account. |
 | **##MS_LoginManager##** | Members of the **##MS_LoginManager##** fixed server role can create and delete logins. It's recommended to use this server role over the **loginmanager** database level role that exists in the `master` database. |
 
 ### Prepare the target Azure SQL Database
