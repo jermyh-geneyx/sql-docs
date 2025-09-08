@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/30/2025
+ms.date: 09/11/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -310,6 +310,7 @@ ms.topic: include
 | 4710 | 16 | No | Could not truncate object '%.\*ls' because it or one of its indexes resides on an offline filegroup '%.\*ls'. |
 | 4711 | 16 | No | Cannot truncate table '%.\*ls' because it is published for replication or enabled for Change Data Capture. |
 | 4712 | 16 | No | Cannot truncate table '%.\*ls' because it is being referenced by a FOREIGN KEY constraint. |
+| 4716 | 16 | No | TRUNCATE TABLE statement failed. The column set used to partition the %S_MSG '%.\*ls' is different from the column set used to partition index '%.\*ls' |
 | 4801 | 16 | No | Insert bulk is not supported over this access protocol. |
 | 4802 | 16 | No | The SINGLE_LOB, SINGLE_CLOB, and SINGLE_NCLOB options are mutually exclusive with all other options. |
 | 4803 | 21 | Yes | The bulk copy (bcp) client has sent a row length of %d. This is not a valid size. The maximum row size is %d. Use a supported client application programming interface (API). |
@@ -414,7 +415,7 @@ ms.topic: include
 | 4908 | 16 | No | '%ls' statement failed. The range boundary values used to partition the %S_MSG '%.\*ls' are different from the range boundary values used for index '%.\*ls'. |
 | 4909 | 16 | No | Cannot alter '%.\*ls' because it is not a table. |
 | 4911 | 16 | No | Cannot specify a partitioned table without partition number in ALTER TABLE SWITCH statement. The table '%.\*ls' is partitioned. |
-| 4912 | 16 | No | '%ls' statement failed. The columns set used to partition the %S_MSG '%.\*ls' is different from the column set used to partition index '%.\*ls'. |
+| 4912 | 16 | No | '%ls' statement failed. The column set used to partition the %S_MSG '%.\*ls' is different from the column set used to partition index '%.\*ls'. |
 | 4913 | 16 | No | ALTER TABLE SWITCH statement failed. The table '%.\*ls' has clustered index '%.\*ls' while the table '%.\*ls' does not have clustered index. |
 | 4914 | 16 | No | The ALTER TABLE SWITCH statement failed. The table "%.\*ls" has a disabled clustered index. |
 | 4915 | 16 | No | '%ls' statement failed. The parameter type of the partition function used to partition the %S_MSG '%.\*ls' is different from the parameter type of the partition function used to partition index '%.\*ls'. |

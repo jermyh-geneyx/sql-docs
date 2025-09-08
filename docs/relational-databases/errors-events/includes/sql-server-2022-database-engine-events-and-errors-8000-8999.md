@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 05/30/2025
+ms.date: 09/11/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -478,7 +478,7 @@ ms.topic: include
 | 8740 | 17 | No | The row is too large to be shuffled between distributions. Row Size in Bytes: %d: Max Allowed Row Size in Bytes: %d. Please contact support for assistance. |
 | 8741 | 17 | No | An error occurred when reading data moved from one distribution to another. Try to run the query again. If the error persists, contact support. |
 | 8742 | 17 | No | An error occurred when attempting to allocate memory in SQL Server by external library. Try to run the query again. If the error persists, contact support. |
-| 8743 | 17 | No | Error 0x%X - Could not allocate tempdb space while transferring data from one distribution to another. See 'https://aka.ms/monitor-temp-db' for assistance. |
+| 8743 | 17 | No | Error 0x%X - Could not allocate tempdb space while transferring data from one distribution to another. Additional details: '%s'. For more information, see [https://go.microsoft.com/fwlink/?linkid=2323823](https://go.microsoft.com/fwlink/?linkid=2323823). |
 | 8744 | 15 | No | REDISTRIBUTE_PREFIX hint expect the %ld join condition to be an equality comparison of columns with directly comparable types. Modify the query and re-run it. |
 | 8745 | 16 | No | Merge statements with a WHEN NOT MATCHED \[BY TARGET\] clause must target a hash distributed table. |
 | 8746 | 17 | No | Error occurred when serializing source types to move to another distribution. Please try to run the query again. If the error persists, please contact support. |
