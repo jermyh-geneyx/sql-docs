@@ -17,18 +17,18 @@ This article describes the connection information that you have to provide, and 
 
 The following sections contain the information you need to use Excel successfully with SSIS, and to understand and troubleshoot common problems:
 
-1. The [tools](#tools) you can use.
+- The [tools](#tools) you can use.
 
-1. The [files](#files-you-need) you need.
+- The [files](#files-you-need) you need.
 
-1. The connection information that you have to provide, and the settings that you have to configure, when you load data from or to Excel with SSIS.
+- The connection information that you have to provide, and the settings that you have to configure, when you load data from or to Excel with SSIS.
    - [Specify Excel](#specify-excel) as your data source.
    - Provide the [Excel file name and path](#excel-file).
    - Select the [Excel version](#excel-version).
    - Specify whether the [first row contains column names](#first-row).
    - Provide the [worksheet or range that contains the data](#sheets-ranges).
 
-1. Known issues and limitations.
+- Known issues and limitations.
    - Issues with [data types](#issues-types).
    - Issues with [importing](#issues-importing).
    - Issues with [exporting](#issues-exporting).
@@ -107,7 +107,7 @@ You might not be able to select newer Excel versions in the list if you only hav
 
 To use the Import and Export Wizard for Excel files in a 64-bit environment, download the [Microsoft Access Database Engine 2016 Redistributable](https://www.microsoft.com/download/details.aspx?id=54920&msockid=27fcaab782ad62fb1b64b9a983c86387) to install the Microsoft.ACE.OLEDB.16.0 provider. Then select **Microsoft Excel 2016** as the *Excel version* in the **SQL Server Import and Export Wizard**, such as the following screenshot: 
 
-![Screenshot of the Import and Export Excel Wizard in SSMS with Microsoft Excel 2016 selected](media/load-data-to-from-excel-with-ssis-excel-version.png)
+![Screenshot of the Import and Export Excel Wizard in SSMS with Microsoft Excel 2016 selected.](media/load-data-to-from-excel-with-sql-server-integration-services-excel-version.png)
 
 The Microsoft.ACE.OLEDB.16.0 provider supports Excel files created by Excel 97-2003 (`.xsl`), and Excel 2007-2010, 2016 (`.xlsx`). 
 
