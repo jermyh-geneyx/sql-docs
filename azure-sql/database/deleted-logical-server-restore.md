@@ -114,8 +114,6 @@ Once the logical server is restored, restoring the databases is next. Look in th
 
 ## Delete the logical server without recovery using PowerShell and REST API
 
-To delete an Azure SQL logical server without the possibility of recovery, contact Microsoft Support and [open a support case](https://azure.microsoft.com/support/create-ticket/).
-
 Follow these steps to set up the variables needed to hard-delete the soft-deleted logical server, using PowerShell to invoke a REST API call.
 
 1. Sign in to Azure in your PowerShell terminal.
@@ -136,7 +134,7 @@ Follow these steps to set up the variables needed to hard-delete the soft-delete
    $path="/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Sql/servers/<server-name>?api-version=2023-05-01-preview"
    ```
 
-1. Create an API call body to restore the logical server first. After the restore, we will update the soft-delete retention to zero and then proceed to hard-delete it. Replace `<Azure region name>` with your region name, for example, `East US 2`.
+1. Create an API call body to restore the logical server first. After the restore, we will update the soft-delete retention to zero and then proceed to hard-delete it. Replace `<Azure region name>` with your region name, for example, `East US 2`. *Ensure not to pass other parameters with this request body.*
 
    ```powershell
     $body={
