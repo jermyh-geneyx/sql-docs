@@ -4,8 +4,8 @@ titleSuffix: Azure SQL Database
 description: Learn about restoring a deleted logical server in Azure SQL Database.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: dinethi
-ms.date: 08/27/2025
+ms.reviewer: dinethi, jaypatel
+ms.date: 09/09/2025
 ms.service: azure-sql-database
 ms.subservice: backup-restore
 ms.topic: how-to
@@ -41,7 +41,7 @@ Follow these steps to set up the variables needed to restore the deleted logical
    Get-AzContext
    ```
 
-1. Replace `<subscription-id>` with your subscription name, `<resource-group>` with your RG name, and `<server-name>` with your server name.
+1. Replace `<subscription-id>` with your subscription name, `<resource-group>` with your resource group name, and `<server-name>` with your server name.
 
    ```powershell
    $path="/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Sql/servers/<server-name>?api-version=2023-05-01-preview"
@@ -94,7 +94,7 @@ Use the following steps to restore your deleted Azure SQL logical server using [
    Connect-AzAccount
    ```
 
-1. Select the desired subscription, replace `<subscription-id>` with the subscription name.
+1. Select the desired subscription. Replace `<subscription-id>` with the subscription name.
 
    ```powershell
    Select-AzSubscription -Subscription "<subscription-id>"
@@ -113,8 +113,6 @@ Use the following steps to restore your deleted Azure SQL logical server using [
 Once the logical server is restored, restoring the databases is next. Look in the **Deleted databases** tab on the **Backups** page, by browsing to the server resource in Azure portal. For more information, see [Restore a database from a backup in Azure SQL Database](recovery-using-backups.md).
 
 ## Delete the logical server without recovery using PowerShell and REST API
-
-To delete an Azure SQL logical server without the possibility of recovery, contact Microsoft Support and [open a support case](https://azure.microsoft.com/support/create-ticket/).
 
 Follow these steps to set up the variables needed to hard-delete the soft-deleted logical server, using PowerShell to invoke a REST API call.
 
@@ -136,7 +134,10 @@ Follow these steps to set up the variables needed to hard-delete the soft-delete
    $path="/subscriptions/<subscription-id>/resourceGroups/<resource-group>/providers/Microsoft.Sql/servers/<server-name>?api-version=2023-05-01-preview"
    ```
 
-1. Create an API call body to restore the logical server first. After the restore, we will update the soft-delete retention to zero and then proceed to hard-delete it. Replace `<Azure region name>` with your region name, for example, `East US 2`.
+1. Create an API call body to restore the logical server first. After the restore, we will update the soft-delete retention to zero, and then proceed to hard-delete it. Replace `<Azure region name>` with your region name, for example, `East US 2`.
+
+   > [!TIP]
+   > Do not pass any other parameters with this request body.
 
    ```powershell
     $body={
