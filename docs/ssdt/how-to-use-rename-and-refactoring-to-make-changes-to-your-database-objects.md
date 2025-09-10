@@ -1,10 +1,10 @@
 ---
 title: Rename and Refactoring to Make Changes to Your Database Objects
 description: Learn about the Rename and Refactor menus in the Transact-SQL Editor. See how to rename types, switch object schemas, expand wildcards, and fully qualify names.
-author: subhojit-msft
-ms.author: subasak
+author: dzsquared
+ms.author: drskwier
 ms.reviewer: randolphwest
-ms.date: 04/08/2025
+ms.date: 09/09/2025
 ms.service: sql
 ms.subservice: ssdt
 ms.topic: how-to
@@ -21,7 +21,7 @@ f1_keywords:
 The **Refactor** contextual menu in the Transact-SQL Editor allows you to rename or move an object to a different schema and preview all affected areas before committing the change. You can also use the **Refactor** menu to fully qualify all references to database objects, or expand any wildcard characters in `SELECT` statements in your database project.
 
 > [!WARNING]  
-> The following procedure uses entities created in previous procedures in the [Project-Oriented Offline Database Development](../ssdt/project-oriented-offline-database-development.md) sections.
+> The following procedure uses entities created in previous procedures in the [SQL database projects](../tools/sql-database-projects/sql-database-projects.md) sections.
 
 ## Rename a type
 
@@ -62,7 +62,7 @@ The **Refactor** contextual menu in the Transact-SQL Editor allows you to rename
 
 1. In the **Preview Changes** dialog box, select `SELECT * from Product p` on the top pane to highlight it.
 
-1. In the **Preview Changes** pane below, notice that `*` has been expanded to the following columns in the script.
+1. In the **Preview Changes** pane below, notice that `*` expands to the following columns in the script.
 
    ```sql
    [Id], [Name], [ShelfLife], [SupplierId], [CustomerId]
@@ -100,6 +100,6 @@ The **Refactor** contextual menu in the Transact-SQL Editor allows you to rename
 
 1. Right-click the object that you want move. Select **Refactor**, and **Move Schema**.
 
-1. In the **New Schema** list, select the name of the schema into which you want to move the object. Select OK.
+1. In the **New Schema** list, select the name of the schema into which you want to move the object. Select **OK**.
 
    If you select the **Preview changes** check box, **the Preview Changes** dialog box appears. Otherwise, the object name is updated, and the object is moved to the new schema.

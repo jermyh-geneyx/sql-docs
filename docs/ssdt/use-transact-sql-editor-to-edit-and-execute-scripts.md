@@ -1,10 +1,10 @@
 ---
 title: Use Transact-SQL Editor to Edit and Execute Scripts
 description: Become familiar with the Transact-SQL Editor. Learn how to open the editor, see what information its panes display, and view resources on its features.
-author: markingmyname
-ms.author: maghan
+author: dzsquared
+ms.author: drskwier
 ms.reviewer: randolphwest
-ms.date: 04/08/2025
+ms.date: 09/09/2025
 ms.service: sql
 ms.subservice: ssdt
 ms.topic: conceptual
@@ -26,10 +26,10 @@ The Transact-SQL Editor contains a main **T-SQL** pane where you can write and e
 | --- | --- |
 | [How to: Outline and Add Snippets to Transact-SQL Script](how-to-outline-and-add-snippets-to-transact-sql-script.md) | Use the Snippet Picker to insert ready-made Transact-SQL code to your query. |
 | [How to: Navigate Between Scripts](how-to-navigate-between-scripts.md) | Use Go-To-Definition and Find All Reference to navigate between scripts. |
-| [How to: Use Rename and Refactoring to Make Changes to your Database Objects](how-to-use-rename-and-refactoring-to-make-changes-to-your-database-objects.md) | Rename an object across all scripts and preview any changes. |
+| [How to: Use rename and refactoring to make changes to your database objects](how-to-use-rename-and-refactoring-to-make-changes-to-your-database-objects.md) | Rename an object across all scripts and preview any changes. |
 | [How to: Execute a Partial Query](how-to-execute-a-partial-query.md) | Highlight a specific segment of the script and execute it as a single query. |
 | [How to: Debug Stored Procedures](../ssdt/how-to-debug-stored-procedures.md) | Create and debug a Transact-SQL stored procedure by stepping into it. |
-| [Analyze Script Performance](analyze-script-performance.md) | Use execution plans, client statistics, and code analysis to determine whether you can improve performance of your query, stored procedures, or scripts. |
+| [Analyze script performance](analyze-script-performance.md) | Use execution plans, client statistics, and code analysis to determine whether you can improve performance of your query, stored procedures, or scripts. |
 
 ## Related content
 
