@@ -4,7 +4,7 @@ description: This article provides best practices and guidance for running SQL S
 author: amitkh-msft
 ms.author: amitkh
 ms.reviewer: randolphwest
-ms.date: 07/03/2025
+ms.date: 09/05/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: install-set-up-deploy
@@ -507,6 +507,10 @@ Tolerations:               node.kubernetes.io/memory-pressure:NoSchedule op=Exis
                            node.kubernetes.io/unreachable:NoExecute op=Exists for 300s
 ...
 ```
+
+## Configure memory limits with control group (cgroup) v2
+
+[!INCLUDE [cgroup-support](includes/cgroup-support.md)]
 
 ## Related content
 

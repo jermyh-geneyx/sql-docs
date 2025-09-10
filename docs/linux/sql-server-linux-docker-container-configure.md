@@ -4,16 +4,16 @@ description: Understand the different ways to customize SQL Server Docker Contai
 author: amitkh-msft
 ms.author: amitkh
 ms.reviewer: vanto, randolphwest
-ms.date: 05/02/2025
+ms.date: 09/05/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: troubleshooting
-zone_pivot_groups: cs1-command-shell
-monikerRange: ">=sql-server-linux-2017 || >=sql-server-2017"
 ms.custom:
   - linux-related-content
   - build-2025
   - sfi-ropc-blocked
+zone_pivot_groups: cs1-command-shell
+monikerRange: ">=sql-server-linux-2017 || >=sql-server-2017"
 ---
 # Configure and customize SQL Server Linux containers
 
@@ -891,6 +891,10 @@ For examples of custom Docker containers, see <https://github.com/microsoft/mssq
 - [Dockerfile example for Ubuntu 20.04 and SQL Server 2019 with Full-Text Search, PolyBase, and Tools](https://github.com/microsoft/mssql-docker/blob/master/linux/preview/examples/mssql-polybase-fts-tools/Dockerfile)
 
 For information on how to build and run Docker containers using Dockerfiles, see the [ML Services samples](https://github.com/microsoft/mssql-docker/tree/master/linux/preview/examples/mssql-mlservices) on GitHub.
+
+## Configure memory limits with control group (cgroup) v2
+
+[!INCLUDE [cgroup-support](includes/cgroup-support.md)]
 
 ## Related content
 

@@ -4,7 +4,7 @@ description: This article provides performance best practices and guidelines for
 author: tejasaks
 ms.author: tejasaks
 ms.reviewer: vanto, randolphwest
-ms.date: 07/03/2025
+ms.date: 09/05/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: best-practice
@@ -478,6 +478,10 @@ The following recommendations are optional configuration settings that you might
 In order to ensure There's enough free physical memory for the Linux OS, the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] process uses only 80% of the physical RAM by default. For some systems with large amount of physical RAM, 20% might be a significant number. For example, on a system with 1 TB of RAM, the default setting would leave around 200 GB of RAM unused. In this situation, you might want to configure the memory limit to a higher value. See the documentation on the **mssql-conf** tool and the [memory.memorylimitmb](sql-server-linux-configure-mssql-conf.md#memorylimit) setting that controls the memory visible to [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] (in units of MB).
 
 When changing this setting, be careful not to set this value too high. If you don't leave enough memory, you could experience problems with the Linux OS and other Linux applications.
+
+## Configure memory limits with control group (cgroup) v2
+
+[!INCLUDE [cgroup-support](includes/cgroup-support.md)]
 
 ## Related content
 
