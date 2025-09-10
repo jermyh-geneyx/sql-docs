@@ -1,11 +1,11 @@
 ---
-title: Specify a hit count
+title: Specify a Hit Count
 titleSuffix: T-SQL debugger
 description: Learn how to set a hit count for a breakpoint, so that the debugger only breaks when the hit count is reached.
-author: erinstellato-ms
-ms.author: erinstellato
-ms.reviewer: drskwier, maghan, randolphwest
-ms.date: 08/29/2024
+author: dzsquared
+ms.author: drskwier
+ms.reviewer: randolphwest
+ms.date: 09/09/2025
 ms.service: sql
 ms.subservice: ssdt
 ms.topic: how-to
@@ -32,7 +32,7 @@ To track the number of times a breakpoint is hit, without breaking execution, sp
 
 The default action for a breakpoint is to break execution when both the hit count and breakpoint condition are satisfied. For information about specifying other actions, see [Specify a breakpoint action](specify-breakpoint-action.md).
 
-### Specify a hit count
+### Specify hit count
 
 1. In the editor window, right-click the breakpoint glyph, and then select **Conditions...** on the shortcut menu.
 

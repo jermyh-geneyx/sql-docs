@@ -1,10 +1,10 @@
 ---
-title: Alter DacFx used by SQL Server Data Tools (SSDT)
+title: "Alter DacFx Used by SQL Server Data Tools (SSDT)"
 description: "Learn how to manually change the DacFx version used by SQL Server Data Tools (SSDT)."
 author: dzsquared
 ms.author: drskwier
-ms.reviewer: maghan
-ms.date: 03/15/2024
+ms.reviewer: randolphwest
+ms.date: 09/09/2025
 ms.service: sql
 ms.subservice: ssdt
 ms.topic: how-to
@@ -16,7 +16,7 @@ monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >
 
 # Alter DacFx used by SQL Server Data Tools (SSDT)
 
-Under specific circumstances you might need to use a different version of [DacFx](../tools/sqlpackage/sqlpackage.md) with the SQL Server Data Tools interface in Visual Studio. When possible, it is recommended to use a standalone version of DacFx if an alternative version from SQL Server Data Tools is required.
+Under specific circumstances you might need to use a different version of [DacFx](../tools/sqlpackage/sqlpackage.md) with the SQL Server Data Tools interface in Visual Studio. When possible, it's recommended to use a standalone version of DacFx if an alternative version from SQL Server Data Tools is required.
 
 Follow the process below to alter the version of DacFx used by SQL Server Data Tools (SSDT).
 
@@ -42,9 +42,9 @@ DacFx is published to [NuGet](https://www.nuget.org/packages/Microsoft.SqlServer
    - Microsoft.SqlServer.TransactSql.ScriptDom.dll
    - Microsoft.SqlServer.Types.dll
 
-SQL Projects will require [Clean or Rebuild](/visualstudio/ide/building-and-cleaning-projects-and-solutions-in-visual-studio) after this process to properly incorporate the replaced DacFx version.
+SQL Projects require [Clean or Rebuild](/visualstudio/ide/building-and-cleaning-projects-and-solutions-in-visual-studio) after this process to properly incorporate the replaced DacFx version.
 
 ## Related content
 
-- [SQL Server Data Tools (SSDT) overview](sql-server-data-tools.md)
-- [SqlPackage.exe (DacFx) release notes](../tools/sqlpackage/release-notes-sqlpackage.md)
+- [SQL Server Data Tools](sql-server-data-tools.md)
+- [Release notes for SqlPackage](../tools/sqlpackage/release-notes-sqlpackage.md)
