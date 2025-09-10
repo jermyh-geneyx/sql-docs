@@ -3,8 +3,8 @@ title: "Install SQL Server Data Tools (SSDT)"
 description: "Learn about SQL Server Data Tools (SSDT). See how to install this database development tool set with Visual Studio 2019 and 2022."
 author: dzsquared
 ms.author: drskwier
-ms.reviewer: maghan, randolphwest
-ms.date: 04/08/2025
+ms.reviewer: randolphwest
+ms.date: 09/09/2025
 ms.service: sql
 ms.subservice: ssdt
 ms.topic: install-set-up-deploy
@@ -30,7 +30,7 @@ The release notes for SSDT and its components are available for [Visual Studio 2
 SSDT is installed as a Visual Studio component, both for [online installation](#install-ssdt-with-visual-studio) and [offline installation](#offline-installation). Analysis Services, Integration Services, and Reporting Services projects are available as separate extensions for each version.
 
 > [!NOTE]  
-> SDK-style SQL projects in Visual Studio are available as part of the **SQL Server Data Tools, SDK-style (preview)** feature for Visual Studio 2022, separate from the original SSDT. The SDK-style project format is based on the new SDK-style projects introduced in .NET Core and is the format used by the SQL Database Projects extension for Azure Data Studio and VS Code. For more information, see [SQL Server Data Tools, SDK-style (preview)](sql-server-data-tools-sdk-style.md).
+> SDK-style SQL projects in Visual Studio are available as part of the **SQL Server Data Tools, SDK-style (preview)** feature for Visual Studio 2022, separate from the original SSDT. The SDK-style project format is based on the new SDK-style projects introduced in .NET Core and is the format used by the SQL Database Projects extension for Visual Studio Code. For more information, see [SQL Server Data Tools, SDK-style (preview)](sql-server-data-tools-sdk-style.md).
 
 ## Install SSDT with Visual Studio
 
@@ -125,9 +125,8 @@ To download and install SSDT for Visual Studio 2017, or an older version of SSDT
 
 - [SSDT Team Blog](/archive/blogs/ssdt/)
 - [DACFx API Reference](/dotnet/api/microsoft.sqlserver.dac)
-- [Download SQL Server Management Studio (SSMS)](../ssms/download-sql-server-management-studio-ssms.md)
 - [SQL Database Projects extension](/azure-data-studio/extensions/sql-database-project-extension)
-- [Project-Oriented Offline Database Development](project-oriented-offline-database-development.md)
+- [What are SQL database projects?](../tools/sql-database-projects/sql-database-projects.md)
 - [SSIS How to Create an ETL Package](../integration-services/ssis-how-to-create-an-etl-package.md)
 - [Analysis Services tutorials](/analysis-services/analysis-services-tutorials-ssas)
 - [Create a basic table report (SSRS tutorial)](../reporting-services/create-a-basic-table-report-ssrs-tutorial.md)

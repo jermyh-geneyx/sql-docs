@@ -4,7 +4,7 @@ description: This article describes editions, features, and components supported
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: amitkh, vanto
-ms.date: 08/20/2025
+ms.date: 09/05/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -63,7 +63,8 @@ You can install just the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.m
 | --- | --- |
 | [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)] | [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)] includes the [!INCLUDE [ssDE](../includes/ssde-md.md)], the core service for storing, processing, and securing data, replication, Full-Text Search, tools for managing relational and XML data, and in database analytics integration. |
 
-**Developer, Enterprise Core, and Evaluation editions**  
+**Developer, Enterprise Core, and Evaluation editions**
+
 For features supported by Developer, Enterprise Core, and Evaluation editions, see features listed for the SQL Server Enterprise edition in the following tables.
 
 The Developer edition continues to support only one client for [SQL Server Distributed Replay](../tools/distributed-replay/sql-server-distributed-replay.md).
@@ -205,6 +206,10 @@ For info about the Integration Services (SSIS) features supported by the edition
 | Advanced spatial libraries | Yes | Yes | Yes | Yes |
 | Import/export of industry-standard spatial data formats | Yes | Yes | Yes | Yes |
 
+## Configure memory limits with control group (cgroup) v2
+
+[!INCLUDE [cgroup-support](includes/cgroup-support.md)]
+
 ## Unsupported features and services
 
 The following features and services aren't available for [!INCLUDE [sssql22](../includes/sssql22-md.md)] on Linux. The support of these features will be increasingly enabled over time.
@@ -230,7 +235,7 @@ The following features and services aren't available for [!INCLUDE [sssql22](../
 | | Always Encrypted with secure enclaves | |
 | | TLS 1.3 | |
 | | SQL Server on Linux deployments aren't FIPS compliant | |
-| **Services** | SQL Server Browser | The SQL Server Browser service is not required on Linux because only a single default instance is supported per host. Unlike, Windows, there are no named instances to resolve, and the port is explicitly configured during setup. |
+| **Services** | SQL Server Browser | The SQL Server Browser service isn't required on Linux because only a single default instance is supported per host. Unlike, Windows, there are no named instances to resolve, and the port is explicitly configured during setup. |
 | | SQL Server R services | SQL Server R is supported within [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], but [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] R services as a separate package isn't supported.<br /><br />You can install Machine Learning Services on Linux for [SQL Server 2019](sql-server-linux-setup-machine-learning.md) and [SQL Server 2022](sql-server-linux-setup-machine-learning-sql-2022.md). |
 | | Analysis Services | |
 | | Reporting Services | [Configure Power BI Report Server catalog databases for SQL Server on Linux](sql-server-linux-configure-power-bi-report-server-catalog.md). Run [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] Reporting Services (SSRS) on Windows, and host the catalog databases for SSRS on [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Linux deployments. |

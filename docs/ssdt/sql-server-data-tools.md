@@ -1,9 +1,10 @@
 ---
 title: SQL Server Data Tools
 description: View resources on database development tasks that you can accomplish with SQL Server Data Tools, such as designing tables and creating feature extensions.
-author: markingmyname
-ms.author: maghan
-ms.date: 09/10/2024
+author: dzsquared
+ms.author: drskwier
+ms.reviewer: randolphwest
+ms.date: 09/09/2025
 ms.service: sql
 ms.subservice: ssdt
 ms.topic: conceptual
@@ -19,10 +20,10 @@ f1_keywords:
 
 :::image type="content" source="media/sql-server-data-tools/install-layout.png" alt-text="Screenshot of graphic with SQL Server Data Tools component and three extensions.":::
 
-The core of SQL Server Data Tools functionality is available as a workload component with Visual Studio. The Visual Studio extensions are available from the Visual Studio Marketplace and more information on installing SSDT can be found in [Download SQL Server Data Tools](download-sql-server-data-tools-ssdt.md).
+The core of SQL Server Data Tools functionality is available as a workload component with Visual Studio. The Visual Studio extensions are available from the Visual Studio Marketplace and more information on installing SSDT can be found at [Install SQL Server Data Tools (SSDT) for Visual Studio](download-sql-server-data-tools-ssdt.md).
 
-> [!NOTE]
-> SDK-style SQL projects in Visual Studio are available as part of the **SQL Server Data Tools, SDK-style (preview)** feature for Visual Studio 2022, separate from the original SSDT. The SDK-style project format is based on the new SDK-style projects introduced in .NET Core and is the format used by the SQL Database Projects extension for Azure Data Studio and VS Code. For more information, see [SQL Server Data Tools, SDK-style (preview)](sql-server-data-tools-sdk-style.md).
+> [!NOTE]  
+> SDK-style SQL projects in Visual Studio are available as part of the **SQL Server Data Tools, SDK-style (preview)** feature for Visual Studio 2022, separate from the original SSDT. The SDK-style project format is based on the new SDK-style projects introduced in .NET Core and is the format used by the SQL Database Projects extension for Visual Studio Code. For more information, see [SQL Server Data Tools, SDK-style (preview)](sql-server-data-tools-sdk-style.md).
 
 ## Release notes
 
@@ -50,15 +51,15 @@ Developers can use the familiar Visual Studio environment for comprehensive data
 
 The SQL Server Object Explorer in Visual Studio offers a view of your database objects like SQL Server Management Studio. SQL Server Object Explorer lets you do light-duty database administration and design work. You can easily create, edit, rename, and delete tables, stored procedures, types, and functions. You can also edit table data, compare schemas, or execute queries using contextual menus from the SQL Server Object Explorer.
 
-Learn more about SQL projects and database development tasks that you can accomplish with SQL Server Data Tools in the [SQL database projects documentation](../tools/sql-database-projects/sql-database-projects.md).
+For more information about SQL projects and database development tasks that you can accomplish with SQL Server Data Tools, see [What are SQL database projects?](../tools/sql-database-projects/sql-database-projects.md)
 
 ## SDK-style SQL projects (preview)
 
-Support for the Microsoft.Build.Sql project SDK is available in preview in Visual Studio as the next generation of SQL projects. The SDK-style SQL projects are based on the .NET SDK-style project format and are designed to be more flexible and extensible than the original SQL projects. The SDK-style SQL projects are recommended for new development and are available in Visual Studio 2022 as an optional component "SQL Server Data Tools, SDK-style (preview)." Learn more about the SDK-style SQL projects and Visual Studio in the [SDK-style SQL Server Data Tools documentation](sql-server-data-tools-sdk-style.md).
+Support for the Microsoft.Build.Sql project SDK is available in preview in Visual Studio as the next generation of SQL projects. The SDK-style SQL projects are based on the .NET SDK-style project format and are designed to be more flexible and extensible than the original SQL projects. The SDK-style SQL projects are recommended for new development and are available in Visual Studio 2022 as an optional component "SQL Server Data Tools, SDK-style (preview)." For more information about the SDK-style SQL projects and Visual Studio, see [SQL Server Data Tools, SDK-style (preview)](sql-server-data-tools-sdk-style.md).
 
 ## Related content
 
-- [SQL database projects](../tools/sql-database-projects/sql-database-projects.md)
+- [What are SQL database projects?](../tools/sql-database-projects/sql-database-projects.md)
 - [SQL Server Analysis Services tutorials](/analysis-services/analysis-services-tutorials-ssas)
 - [SQL Server Reporting Services tools](../reporting-services/tools/reporting-services-tools.md)
-- [SQL Server Integration Services Projects and solutions](../integration-services/integration-services-ssis-projects-and-solutions.md)
+- [Integration Services (SSIS) Projects and Solutions](../integration-services/integration-services-ssis-projects-and-solutions.md)

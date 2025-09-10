@@ -1,25 +1,26 @@
 ---
-title: SSIS Projects extension for VS2019 troubleshooting guide
-description: "SSIS Projects extension for VS2019 troubleshooting guide"
+title: SSIS Projects Extension for Visual Studio 2019 Troubleshooting Guide
+description: "SSIS Projects extension for Visual Studio 2019 troubleshooting guide"
 author: chugugrace
 ms.author: chugu
-ms.reviewer: maghan, drskwier
-ms.date: 07/26/2022
+ms.reviewer: drskwier, randolphwest
+ms.date: 09/09/2025
 ms.service: sql
 ms.subservice: ssdt
 ms.topic: troubleshooting-general
-monikerRange: ">=aps-pdw-2016||=azuresqldb-current||=azure-sqldw-latest||>=sql-server-2016||=azuresqldb-mi-current"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || =azuresqldb-mi-current"
 ---
-# SSIS Projects extension for VS2019 troubleshooting guide
+# SSIS Projects extension for Visual Studio 2019 troubleshooting guide
 
 [!INCLUDE [sql-asdb-asa](../includes/applies-to-version/sql-asdb-asa.md)]
 
-> [!IMPORTANT]
-> You can download the [SSIS](https://marketplace.visualstudio.com/items?itemName=SSIS.SqlServerIntegrationServicesProjects) from the [Visual Studio Marketplace](<https://marketplace.visualstudio.com/>).
+> [!IMPORTANT]  
+> You can download the [SQL Server Integration Services (SSIS)](https://marketplace.visualstudio.com/items?itemName=SSIS.SqlServerIntegrationServicesProjects) extension from the [Visual Studio Marketplace](<https://marketplace.visualstudio.com/>).
 
-Visit https://techcommunity.microsoft.com/t5/SQL-Server-Integration-Services/bg-p/SSIS for the latest information, tips, news, and announcements about SSIS directly from the product team.  Integration Services (SSIS) extension release notes are listed on the [extension marketplace](https://marketplace.visualstudio.com/items?itemName=SSIS.SqlServerIntegrationServicesProjects).
+Visit the [SQL Server Integration Services (SSIS) Blog](https://techcommunity.microsoft.com/category/sql-server/blog/ssis) for the latest information, tips, news, and announcements about SSIS directly from the product team. Integration Services (SSIS) extension release notes are listed on the [extension marketplace](https://marketplace.visualstudio.com/items?itemName=SSIS.SqlServerIntegrationServicesProjects).
 
 ## Component download
+
 - To design packages using Oracle and Teradata connectors and targeting an earlier version of SQL Server before SQL Server 2019, in addition to the [Microsoft Oracle Connector](https://aka.ms/SSISMSOracleConnector) and [Microsoft Teradata Connector](https://www.microsoft.com/download/details.aspx?id=100599), you need also to install the corresponding version of Microsoft Connector for Oracle and Teradata by Attunity.
   - [Microsoft Connector Version 5.0 for Oracle and Teradata by Attunity targeting SQL Server 2017](https://www.microsoft.com/download/details.aspx?id=55179)
   - [Microsoft Connector Version 4.0 for Oracle and Teradata by Attunity targeting SQL Server 2016](https://www.microsoft.com/download/details.aspx?id=52950)
@@ -29,54 +30,63 @@ Visit https://techcommunity.microsoft.com/t5/SQL-Server-Integration-Services/bg-
 - Since version 3.3, Power Query Source for SQL Server 2017-2022 is excluded from the installation of this product. To continue using this component, manually download and install them by yourselves. Here are the download links: [Power Query Source for SQL Server 2017-2022](https://www.microsoft.com/download/details.aspx?id=100619)
 
 ## Common issues
+
 - SSIS Execute Package Task doesn't support debugging when ExecuteOutOfProcess is set to True.
 
-- This extension doesn't support Visual Studio 2022. Use [SQL Server Integration Services Projects extension 2022](https://marketplace.visualstudio.com/items?itemName=SSIS.MicrosoftDataToolsIntegrationServices). 
+- This extension doesn't support Visual Studio 2022. Use [SQL Server Integration Services Projects extension 2022](https://marketplace.visualstudio.com/items?itemName=SSIS.MicrosoftDataToolsIntegrationServices).
 
-- Sometimes this product or Visual Studio Tools for Applications 2019 may be somehow deleted during VS instance upgrade. If your existing SSIS projects cannot be loaded, try to repair this product via control panel. If VS doesn't pop up when clicking on "Edit Script", try to repair VSTA 2019 via control panel.
+- Sometimes this product or Visual Studio Tools for Applications 2019 might be somehow deleted during Visual Studio instance upgrade. If your existing SSIS projects can't be loaded, try to repair this product via control panel. If Visual Studio doesn't pop up when selecting **Edit Script**, try to repair VSTA 2019 via control panel.
 
-- [!INCLUDE[snac-removed-oledb-and-odbc](../includes/snac-removed-oledb-and-odbc.md)]
+- [!INCLUDE [snac-removed-oledb-and-odbc](../includes/snac-removed-oledb-and-odbc.md)]
 
 ## Known issues
+
 More detail in [Release Note](https://marketplace.visualstudio.com/items?itemName=SSIS.SqlServerIntegrationServicesProjects).
 
 ## Installation issues
 
-If SSIS installed successfully, but the Solution Explorer shows **"incompatible"**, or "The application isn't installed":
-1. Open Visual Studio -> Extension -> Manage Extensions -> Installed
+If SSIS installed successfully, but the Solution Explorer shows `incompatible`, or `The application is not installed`:
+
+1. Open Visual Studio and navigate to **Extension** > **Manage Extensions** > **Installed**
 1. Enable SSIS extension
 1. Relaunch Visual Studio
 
-If SSIS installation shows Setup Failed with "Unknown error(0x80131500)" or "ISVsix Unknown error", open %temp%\SsdtisSetup folder, search in Microsoft.DataTools.IntegrationServices_{latestTimestamp}_ISVsix.log:
-- The error is "Pre-check verification failed with warning(s):  AnotherInstallationRunning.",
-  1. Keep waiting and retry.  More detail: Windows Installer block your installation. Windows Installer is a subservice of Windows that manages the installation of packages like MSIs,  Windows Update or a 3rd party things, and it can only handle one thing at a time.  
+If SSIS installation shows Setup Failed with `Unknown error(0x80131500)` or `ISVsix Unknown error`, open the `%temp%\SsdtisSetup` folder, search in `Microsoft.DataTools.IntegrationServices_{latestTimestamp}_ISVsix.log`:
 
-- The error is "The file {filefullpath} already exists.":
-   1. Run the following commands from an elevated command prompt:
-      ```console
-      cd C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE
-      rm CommonExtensions\Microsoft\SSIS\* 
-      rm PublicAssemblies\SSIS\* 
-      rm "PublicAssemblies\Microsoft BI\Business Intelligence Projects\Integration Services\"* 
-      ```
-   1. Repair the VS2019 via VS installer
-   1. Restart PC and reinstall SSIS
-- The error is "Object reference not set to an instance of an object.",
-  - delete the broken instance folder "%ProgramData%\Microsoft\VisualStudio\Packages\_Instances\<InstallationID>"
-- The error is "Error 0x80091007: Failed to verify hash of payload",
-  - delete C:\ProgramData\Package Cache\15160B731819F56D87A626F9A2777550340022D7 and retry.
-- If your error isn't in the above list, you can zip %temp%\SsdtisSetup and send the logs to ssistoolsfeedbacks@microsoft.com for troubleshooting.
+- The error is `Pre-check verification failed with warning(s): AnotherInstallationRunning.`,
+  1. Keep waiting and retry. More detail: Windows Installer block your installation. Windows Installer is a subservice of Windows that manages the installation of packages like MSIs, Windows Update, or a third party component, and it can only handle one thing at a time.
+
+- The error is `The file {filefullpath} already exists.`:
+  1. Run the following commands from an elevated command prompt:
+
+     ```console
+     cd C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE
+     rm CommonExtensions\Microsoft\SSIS\*
+     rm PublicAssemblies\SSIS\*
+     rm "PublicAssemblies\Microsoft BI\Business Intelligence Projects\Integration Services\"*
+     ```
+
+  1. Repair the Visual Studio 2019 via Visual Studio installer
+
+  1. Restart PC and reinstall SSIS
+- The error is `Object reference not set to an instance of an object.`,
+  - delete the broken instance folder `%ProgramData%\Microsoft\VisualStudio\Packages\_Instances\<InstallationID>`
+- The error is `Error 0x80091007: Failed to verify hash of payload`,
+  - delete `C:\ProgramData\Package Cache\15160B731819F56D87A626F9A2777550340022D7` and retry.
+- If your error isn't in the previous list, you can zip %temp%\SsdtisSetup and send the logs to ssistoolsfeedbacks@microsoft.com for troubleshooting.
 
 ## Offline installation
+
 Follow the below steps to install this product in an offline environment:
+
 1. Refer to the instructions in [Create an offline installation package of Visual Studio for local installation](/visualstudio/install/create-an-offline-installation-of-visual-studio?view=vs-2019&preserve-view=true), and make sure the following prerequisites are included:
-    - Prerequisite ID="Microsoft.VisualStudio.Component.Roslyn.LanguageServices" Version="[16.0,)" DisplayName="C# and Visual Basic"
-    - Prerequisite ID="Microsoft.VisualStudio.Component.CoreEditor" Version="[16.0,)" DisplayName="Visual Studio core editor"
-    - Prerequisite ID="Microsoft.VisualStudio.Component.SQL.SSDT" Version="[16.0,)" DisplayName="SQL Server Data Tools"
-    - Prerequisite ID="Microsoft.Net.Component.4.TargetingPack" Version="[16.0,)" DisplayName=".NET Framework 4 targeting pack"
-    - Prerequisite ID="Microsoft.Net.Component.4.5.TargetingPack" Version="[16.0,)" DisplayName=".NET Framework 4.5 targeting pack"
-    - Prerequisite ID="Microsoft.Net.Component.4.7.TargetingPack" Version="[16.0,)" DisplayName=".NET Framework 4.7 targeting pack"
+   - `Prerequisite ID="Microsoft.VisualStudio.Component.Roslyn.LanguageServices" Version="[16.0,)" DisplayName="C# and Visual Basic"`
+   - `Prerequisite ID="Microsoft.VisualStudio.Component.CoreEditor" Version="[16.0,)" DisplayName="Visual Studio core editor"`
+   - `Prerequisite ID="Microsoft.VisualStudio.Component.SQL.SSDT" Version="[16.0,)" DisplayName="SQL Server Data Tools"`
+   - `Prerequisite ID="Microsoft.Net.Component.4.TargetingPack" Version="[16.0,)" DisplayName=".NET Framework 4 targeting pack"`
+   - `Prerequisite ID="Microsoft.Net.Component.4.5.TargetingPack" Version="[16.0,)" DisplayName=".NET Framework 4.5 targeting pack"`
+   - `Prerequisite ID="Microsoft.Net.Component.4.7.TargetingPack" Version="[16.0,)" DisplayName=".NET Framework 4.7 targeting pack"`
 
-1. Launch the installer of this product and perform the installation, or you can run the installer in quiet mode. Launch the installer with "/?" argument to get more details of the arguments list of the installer.
+1. Launch the installer of this product and perform the installation, or you can run the installer in quiet mode. Launch the installer with the `/?` argument to get more details of the arguments list of the installer.
 
-1. VS Community does not support offline activation. To use this product with VS Community, you must log in to your Microsoft account occasionally in VS Community. If you want to use this product in an offline environment, we recommend you to install this product on VS Professional or Enterprise, which support offline activation via a product key.
+1. Visual Studio Community doesn't support offline activation. To use this product with Visual Studio Community, you must sign in to your Microsoft account occasionally in Visual Studio Community. If you want to use this product in an offline environment, we recommend you to install this product on Visual Studio Professional or Enterprise, which support offline activation via a product key.
