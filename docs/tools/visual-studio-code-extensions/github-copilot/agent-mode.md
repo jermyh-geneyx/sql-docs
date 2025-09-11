@@ -174,7 +174,6 @@ This confirmation step helps ensure secure, intentional interactions with your d
 ## Related content
 
 - [Quickstart: Use Chat and inline GitHub Copilot suggestions (Preview)](inline-copilot-suggestions.md)
-- [Quickstart: Use GitHub Copilot slash commands (Preview)](slash-commands.md)
 - [Quickstart: Generate code (Preview)](code-generation.md)
 - [Quickstart: Use the Schema Explorer and designer (Preview)](schema-explorer-designer.md)
 - [Quickstart: Use the Smart Query Builder (Preview)](smart-query-builder.md)
