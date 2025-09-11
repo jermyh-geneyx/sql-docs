@@ -57,6 +57,10 @@ The following Microsoft JDBC Drivers are supported, until the indicated End of S
 |Microsoft SQL Server 2005 JDBC Driver 1.0|1.0|June 25, 2011|
 |Microsoft SQL Server 2000 JDBC Driver|2000|July 9, 2010|
 
+### Support policy for dependency vulnerabilities
+
+Microsoft JDBC Driver for SQL Server defines external dependencies in its Maven package definition. Maven tooling resolves those dependencies at application build time. The package definition is updated with secure versions of direct dependencies every minor release. Dependencies with known vulnerabilities are updated in hot fixes of supported versions only when it's possible to update the dependency without causing transitive dependency compatibility breaks. If it's not possible to update a vulnerable dependency in this manner, it's up to applications to update the dependency and ensure they don't have dependency conflicts.
+
 ## SQL version compatibility
 
 |Database version&nbsp;&#8594;<br />&#8595; Driver Version|Azure SQL Database|Azure Synapse Analytics|Azure SQL Managed Instance|SQL Server 2022|SQL Server 2019|SQL Server 2017|SQL Server 2016|SQL Server 2014|SQL Server 2012|PDW 2008R2 AU3<sup>4</sup>|SQL Server 2008 R2|SQL Server 2008|
