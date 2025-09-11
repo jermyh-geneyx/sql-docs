@@ -5,7 +5,7 @@ description: Learn about restoring a deleted logical server in Azure SQL Databas
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: dinethi, jaypatel
-ms.date: 09/09/2025
+ms.date: 09/11/2025
 ms.service: azure-sql-database
 ms.subservice: backup-restore
 ms.topic: how-to
@@ -140,12 +140,12 @@ Follow these steps to set up the variables needed to hard-delete the soft-delete
    > Do not pass any other parameters with this request body.
 
    ```powershell
-    $body={
+    $body='{
       "properties": {
         "createMode": "Restore"
       },
       "location": "<Azure region name>"
-    }
+    }'
    ```
 
 1. Run the following PowerShell command to initiate the restore of the deleted Azure SQL Database logical server.
@@ -163,12 +163,12 @@ Follow these steps to set up the variables needed to hard-delete the soft-delete
 1. Update the API request body to update the retentionDays parameter. The value `0` means immediate deletion with no retention period.
 
    ```powershell
-    $body={
+    $body='{
       "properties": {
         "retentionDays": 0 
       },
       "location": "<Azure region name>"
-    }
+    }'
    ```
 1. Run the following PowerShell command to update the retention of the restored Azure SQL Database logical server. Allow a minute for this update operation to complete.
 
