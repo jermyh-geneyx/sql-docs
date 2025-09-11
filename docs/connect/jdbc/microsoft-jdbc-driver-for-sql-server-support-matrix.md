@@ -59,7 +59,7 @@ The following Microsoft JDBC Drivers are supported, until the indicated End of S
 
 ### Support policy for dependency vulnerabilities
 
-Microsoft JDBC Driver for SQL Server is updated with secure versions of direct dependencies every minor release. Dependencies with known vulnerabilities are updated in hot fixes of supported versions only when it's possible to update the dependency without causing transitive dependency compatibility breaks. If it's not possible to update a vulnerable dependency in this manner, it's up to applications to update the dependency and ensure they don't have dependency conflicts.
+Microsoft JDBC Driver for SQL Server defines external dependencies in its Maven package definition. Maven tooling resolves those dependencies at application build time. The package definition is updated with secure versions of direct dependencies every minor release. Dependencies with known vulnerabilities are updated in hot fixes of supported versions only when it's possible to update the dependency without causing transitive dependency compatibility breaks. If it's not possible to update a vulnerable dependency in this manner, it's up to applications to update the dependency and ensure they don't have dependency conflicts.
 
 ## SQL version compatibility
 
