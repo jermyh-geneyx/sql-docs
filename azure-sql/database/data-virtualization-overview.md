@@ -18,7 +18,7 @@ ms.topic: conceptual
 > * [Azure SQL Database](data-virtualization-overview.md?view=azuresql-db&preserve-view=true)
 > * [Azure SQL Managed Instance](../managed-instance/data-virtualization-overview.md?view=azuresql-mi&preserve-view=true)
 
-The data virtualization feature of Azure SQL Database allows you to execute Transact-SQL (T-SQL) queries on files storing data in common data formats like CSV (with no need of using Delimited Text), Parquet, and Delta (1.0). You can query this data in Azure Data Lake Storage Gen2 or Azure Blob Storage, and combine it with locally stored relational data using joins. This way you can transparently access external data (in read-only mode) while keeping it in its original format and location - also known as data virtualization.
+The data virtualization feature of Azure SQL Database allows you to execute Transact-SQL (T-SQL) queries on files that store data in common data formats like CSV (with no need of using Delimited Text), Parquet, and Delta (1.0). You can query this data in Azure Data Lake Storage Gen2 or Azure Blob Storage, and combine it with locally stored relational data using joins. This way you can transparently access external data (in read-only mode) while keeping it in its original format and location - also known as data virtualization.
 
 ## Overview
 

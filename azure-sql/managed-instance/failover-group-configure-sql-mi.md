@@ -318,7 +318,7 @@ Optionally, use the [Switch-AzSqlDatabaseFailoverGroup](/powershell/module/az.sq
 
 You can use the **Activity log** in the Azure portal to track the status of the failover operation. To do this, follow these steps:
 
-1. Go to your [SQL managed instance](https://portal.azure.com/#browse/Microsoft.Sql%2FmanagedInstances) in the Azure portal.
+1. Go to your [SQL managed instance](https://portal.azure.com/#view/HubsExtension/ServiceMenuBlade/~/SingleInstance/extension/SqlAzureExtension/menuId/AzureSqlHub/itemId/SingleInstance) in the Azure portal.
 1. Select **Activity log** to open the **Activity log** pane.
 1. Clear any filters for **Resource**. 
 1. Search for operations with the name `Failover Azure SQL Database failover group`: 
@@ -336,7 +336,7 @@ You can modify an existing failover group, such as to change the [failover polic
 
 To modify an existing failover group by using the Azure portal, follow these steps: 
 
-1. Go to your [SQL managed instance](https://portal.azure.com/#browse/Microsoft.Sql%2FmanagedInstances) in the Azure portal. 
+1. Go to your [SQL managed instance](https://portal.azure.com/#view/HubsExtension/ServiceMenuBlade/~/SingleInstance/extension/SqlAzureExtension/menuId/AzureSqlHub/itemId/SingleInstance) in the Azure portal. 
 1. Under **Data management**, select **Failover groups** to open the **Failover groups** pane.
 1. On the **Failover groups** pane, select **Edit configurations** from the command bar to open the **Edit failover group** pane: 
 

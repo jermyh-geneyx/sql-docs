@@ -1,10 +1,10 @@
 ---
-title: Long-term backup retention
-description: Learn how to store and restore automated backups on separate Azure Blob storage containers for Azure SQL Managed Instance by using the Azure portal, Azure CLI and PowerShell.
+title: Long-Term Backup Retention
+description: Learn how to store and restore automated backups on separate Azure Blob storage containers for Azure SQL Managed Instance by using the Azure portal, Azure CLI, and PowerShell.
 author: Stralle
 ms.author: strrodic
 ms.reviewer: mathoma, wiassaf
-ms.date: 10/12/2023
+ms.date: 09/11/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: backup-restore
 ms.topic: how-to
@@ -15,15 +15,15 @@ ms.custom:
   - sfi-image-nochange
 ---
 # Manage Azure SQL Managed Instance long-term backup retention
+
 [!INCLUDE [appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
 
 > [!div class="op_single_selector"]
 > * [Azure SQL Database](../database/long-term-backup-retention-configure.md?view=azuresql-db&preserve-view=true)
 > * [Azure SQL Managed Instance](long-term-backup-retention-configure.md?view=azuresql-mi&preserve-view=true)
 
-In Azure SQL Managed Instance, you can configure a [long-term backup retention](../database/long-term-retention-overview.md) policy (LTR). This allows you to automatically retain database backups in separate Azure Blob storage containers for up to 10 years. You can then recover a database using these backups with the Azure portal, the Azure CLI and PowerShell.
+This article shows you how to configure a [long-term backup retention (LTR)](../database/long-term-retention-overview.md) policy for Azure SQL Managed Instance by using the Azure portal, PowerShell, and the Azure CLI, as well as how to view and restore backups from Azure storage. An LTR policy allows you to automatically retain database backups within a separate Azure Blob storage containers for up to 10 years. You can then recover a database using these backups.
 
-The following sections show you how to use the Azure portal, PowerShell, and Azure CLI to configure the long-term backup retention, view backups in Azure SQL storage, and restore from a backup in Azure SQL storage.
 
 ## Prerequisites
 
@@ -43,23 +43,8 @@ Prepare your environment for PowerShell.
 
 [!INCLUDE [updated-for-az](../includes/updated-for-az.md)]
 
-> [!IMPORTANT]
+> [!IMPORTANT]  
 > The PowerShell Azure Resource Manager (AzureRM) module was deprecated on February 29, 2024. All future development should use the Az.Sql module. Users are advised to migrate from AzureRM to the Az PowerShell module to ensure continued support and updates. The AzureRM module is no longer maintained or supported. The arguments for the commands in the Az PowerShell module and in the AzureRM modules are substantially identical. For more about their compatibility, see [Introducing the new Az PowerShell module](/powershell/azure/new-azureps-module-az).
-
-For `Get-AzSqlInstanceDatabaseLongTermRetentionBackup` and `Restore-AzSqlInstanceDatabase`, you need to be a member of one of the following roles:
-
-- Subscription Owner role or
-- SQL Managed Instance Contributor role or
-- Custom role with the following permissions:
-  - `Microsoft.Sql/locations/longTermRetentionManagedInstanceBackups/read`
-  - `Microsoft.Sql/locations/longTermRetentionManagedInstances/longTermRetentionManagedInstanceBackups/read`
-  - `Microsoft.Sql/locations/longTermRetentionManagedInstances/longTermRetentionDatabases/longTermRetentionManagedInstanceBackups/read`
-
-For `Remove-AzSqlInstanceDatabaseLongTermRetentionBackup`, you need to be a member of one of the following roles:
-
-- Subscription Owner role or
-- Custom role with the following permission:
-  - `Microsoft.Sql/locations/longTermRetentionManagedInstances/longTermRetentionDatabases/longTermRetentionManagedInstanceBackups/delete`
 
 ---
 
@@ -80,13 +65,12 @@ To delete LTR backups, you need to be a member of one of the following roles:
 - Custom role with the following permission:
   - `Microsoft.Sql/locations/longTermRetentionManagedInstances/longTermRetentionDatabases/longTermRetentionManagedInstanceBackups/delete`
 
-> [!NOTE]
-> The SQL Managed Instance Contributor role does not have permission to delete LTR backups.
+> [!NOTE]  
+> The SQL Managed Instance Contributor role doesn't have permission to delete LTR backups.
 
 Azure role-based access control (RBAC) permissions could be granted in either *subscription* or *resource group* scope. However, to access LTR backups that belong to a dropped instance, the permission must be granted in the *subscription* scope of that instance.
 
 - `Microsoft.Sql/locations/longTermRetentionManagedInstances/longTermRetentionDatabases/longTermRetentionManagedInstanceBackups/delete`
-
 
 ## Create long-term retention policies
 
@@ -94,7 +78,7 @@ You can configure SQL Managed Instance to [retain automated backups](../database
 
 # [Portal](#tab/portal)
 
-1. In the Azure portal, select your managed instance and then select **Backups**. On the **Retention policies** tab, select the database(s) on which you want to set or modify long-term backup retention policies. Changes will not apply to any databases left unselected. 
+1. In the Azure portal, select your [SQL managed instance](https://portal.azure.com/#view/HubsExtension/ServiceMenuBlade/~/SingleInstance/extension/SqlAzureExtension/menuId/AzureSqlHub/itemId/SingleInstance), and then select **Backups**. On the **Retention policies** tab, select the databases for which you want to set or modify long-term backup retention policies. Changes won't apply to any databases left unselected.
 
    :::image type="content" source="./media/long-term-backup-retention-configure/ltr-configure-ltr.png" alt-text="A screenshot from the Azure portal showing the Manage backups link.":::
 
@@ -104,47 +88,47 @@ You can configure SQL Managed Instance to [retain automated backups](../database
 
 1. When complete, select **Apply**.
 
-> [!IMPORTANT]
-> When you enable a long-term backup retention policy, it may take up to 7 days for the first backup to become visible and available to restore. For details of the LTR backup cadence, see [long-term backup retention](../database/long-term-retention-overview.md).
+> [!IMPORTANT]  
+> When you enable a long-term backup retention policy, it might take up to seven days for the first backup to become visible and available to restore. For details of the LTR backup cadence, see [Long-term backup retention](../database/long-term-retention-overview.md).
 
 # [Azure CLI](#tab/azure-cli)
 
 1. Run the [az sql midb show](/cli/azure/sql/midb#az-sql-midb-show) command to get the details for the SQL Managed Instance database.
 
-    ```azurecli
-    az sql midb show /
-    --resource-group mygroup /
-    --managed-instance myinstance /
-    --name mymanageddb /
-    --subscription mysubscription
-    ```
+   ```azurecli
+   az sql midb show /
+   --resource-group mygroup /
+   --managed-instance myinstance /
+   --name mymanageddb /
+   --subscription mysubscription
+   ```
 
 1. Run the [az sql midb ltr-policy set](/cli/azure/sql/midb/ltr-policy#az-sql-midb-ltr-policy-set) command to create an LTR policy. The following example sets a long-term retention policy for 12 weeks for the weekly backup.
 
-    ```azurecli
-    az sql midb ltr-policy set /
-    --resource-group mygroup /
-    --managed-instance myinstance /
-    --name mymanageddb /
-    --weekly-retention "P12W"
-    ```
+   ```azurecli
+   az sql midb ltr-policy set /
+   --resource-group mygroup /
+   --managed-instance myinstance /
+   --name mymanageddb /
+   --weekly-retention "P12W"
+   ```
 
-    This example sets a retention policy for 12 weeks for the weekly backup, 5 years for the yearly backup, and the week of April 15 in which to take the yearly LTR backup.
+   This example sets a retention policy for 12 weeks for the weekly backup, five years for the yearly backup, and the week of April 15 in which to take the yearly LTR backup.
 
-    ```azurecli
-    az sql midb ltr-policy set /
-    --resource-group mygroup /
-    --managed-instance myinstance /
-    --name mymanageddb /
-    --weekly-retention "P12W" /
-    --yearly-retention "P5Y" /
-    --week-of-year 16
-    ```
+   ```azurecli
+   az sql midb ltr-policy set /
+   --resource-group mygroup /
+   --managed-instance myinstance /
+   --name mymanageddb /
+   --weekly-retention "P12W" /
+   --yearly-retention "P5Y" /
+   --week-of-year 16
+   ```
 
 # [PowerShell](#tab/powershell)
 
 ```powershell
-# get the Managed Instance
+# get the SQL Managed Instance
 $subId = "<subscriptionId>"
 $instanceName = "<instanceName>"
 $resourceGroup = "<resourceGroupName>"
@@ -158,20 +142,20 @@ $instance = Get-AzSqlInstance -Name $instanceName -ResourceGroupName $resourceGr
 
 # create LTR policy with WeeklyRetention = 12 weeks. MonthlyRetention and YearlyRetention = 0 by default.
 $LTRPolicy = @{
-    InstanceName = $instanceName 
-    DatabaseName = $dbName 
-    ResourceGroupName = $resourceGroup 
+    InstanceName = $instanceName
+    DatabaseName = $dbName
+    ResourceGroupName = $resourceGroup
     WeeklyRetention = 'P12W'
 }
 Set-AzSqlInstanceDatabaseBackupLongTermRetentionPolicy @LTRPolicy
 
 # create LTR policy with WeeklyRetention = 12 weeks, YearlyRetention = 5 years and WeekOfYear = 16 (week of April 15). MonthlyRetention = 0 by default.
 $LTRPolicy = @{
-    InstanceName = $instanceName 
-    DatabaseName = $dbName 
-    ResourceGroupName = $resourceGroup 
-    WeeklyRetention = 'P12W' 
-    YearlyRetention = 'P5Y' 
+    InstanceName = $instanceName
+    DatabaseName = $dbName
+    ResourceGroupName = $resourceGroup
+    WeeklyRetention = 'P12W'
+    YearlyRetention = 'P5Y'
     WeekOfYear = '16'
 }
 Set-AzSqlInstanceDatabaseBackupLongTermRetentionPolicy @LTRPolicy
@@ -183,9 +167,9 @@ Set-AzSqlInstanceDatabaseBackupLongTermRetentionPolicy @LTRPolicy
 
 # [Portal](#tab/portal)
 
-To view available long-term backups from the Azure portal, follow these steps: 
+To view available long-term backups from the Azure portal, follow these steps:
 
-1. In the Azure portal, select your managed instance and then select **Backups**. On the **Available backups** tab, select the database for which you want to see available backups. Select **Manage**.
+1. In the Azure portal, select your SQL managed instance, and then select **Backups**. On the **Available backups** tab, select the database for which you want to see available backups. Select **Manage**.
 
    :::image type="content" source="./media/long-term-backup-retention-configure/ltr-available-backups-select-database.png" alt-text="A screenshot from the Azure portal showing the option to select a database." lightbox="./media/long-term-backup-retention-configure/ltr-available-backups-select-database.png":::
 
@@ -195,31 +179,31 @@ To view available long-term backups from the Azure portal, follow these steps:
 
 You can also restore from this page by choosing the backup and selecting **Restore**.
 
-Alternatively, to restore a backup from long-term retention by using the Azure portal, follow these steps: 
+Alternatively, to restore a backup from long-term retention by using the Azure portal, follow these steps:
 
 1. Sign in to the [Azure portal](https://portal.azure.com).
-1. Go to the target SQL Managed Instance where you plan to restore your database to. 
-1. On the **Overview** page, choose **+ New database** to open the **Create Azure SQL Managed Database** page. 
+1. Go to the target SQL Managed Instance where you plan to restore your database to.
+1. On the **Overview** page, choose **+ New database** to open the **Create Azure SQL Managed Database** page.
 
    :::image type="content" source="media/point-in-time-restore/choose-database-to-restore.png" alt-text="Screenshot that shows the SQL Managed Instance overview pane in the Azure portal, with adding a new database selected. ":::
 
-1. On the **Basics** tab of the **Create Azure SQL Managed Database page**, provide subscription and resource group details under **Project details**. Then, under **Database details** provide the new name of the database you plan to restore. Confirm the correct managed instance is listed in the dropdown list. Then select **Next: Data source >**
+1. On the **Basics** tab of the **Create Azure SQL Managed Database page**, provide subscription and resource group details under **Project details**. Then, under **Database details** provide the new name of the database you plan to restore. Confirm the correct SQL managed instance is listed in the dropdown list. Then select **Next: Data source >**.
 
-    :::image type="content" source="./media/point-in-time-restore/create-database-page.png" alt-text="Screenshot of the Azure portal that shows the Basics tab of the Create Azure SQL Managed Database page.":::
+   :::image type="content" source="./media/point-in-time-restore/create-database-page.png" alt-text="Screenshot of the Azure portal that shows the Basics tab of the Create Azure SQL Managed Database page.":::
 
-1. On the **Data source** tab, choose **Point-in-time restore** under **Use existing data**. Provide the subscription, resource group and managed instance that contains the source database. From the **Managed database** dropdown list, choose the database you want to restore, and then choose the point in time you want to restore the database from. The source and target instance can be the same, or two different instances. Select **Next : Additional settings >**
+1. On the **Data source** tab, choose **Point-in-time restore** under **Use existing data**. Provide the subscription, resource group, and SQL managed instance that contains the source database. From the **Managed database** dropdown list, choose the database you want to restore. Then choose the point in time you want to restore the database from. The source and target instance can be the same or two different instances. Select **Next : Additional settings >**.
 
-    :::image type="content" source="./media/long-term-backup-retention-configure/restore-long-term-backup.png" alt-text="Screenshot of the Azure portal that shows the data source tab of the Create Azure SQL Managed Database page, with long-term retention selected.":::
+   :::image type="content" source="./media/long-term-backup-retention-configure/restore-long-term-backup.png" alt-text="Screenshot of the Azure portal that shows the data source tab of the Create Azure SQL Managed Database page, with long-term retention selected.":::
 
-1. On the **Additional settings** tab, you can check the box to inherit the retention policy from the source database, or, alternatively, you can select **Configure retention** to open the **Configure policies** page, and set your desired retention policies for your restored database. When finished, select **Review + create**. 
+1. On the **Additional settings** tab, you can check the box to inherit the retention policy from the source database. Alternatively, you can select **Configure retention** to open the **Configure policies** page, and set your desired retention policies for your restored database. When finished, select **Review + create**.
 
-    :::image type="content" source="./media/point-in-time-restore/additional-settings-page.png" alt-text="Screenshot of the Azure portal that shows the additional settings tab of the Create Azure SQL Managed Database page.":::
+   :::image type="content" source="./media/point-in-time-restore/additional-settings-page.png" alt-text="Screenshot of the Azure portal that shows the additional settings tab of the Create Azure SQL Managed Database page.":::
 
 1. On **Review + create**, when validation is successful, select **Create** to restore your database.
 
 This action starts the restore process, which creates a new database and populates it with data from the original database at the specified point in time. For more information about the recovery process, see [Recovery time](../database/recovery-using-backups.md#recovery-time).
 
-> [!NOTE]
+> [!NOTE]  
 > From here, you can connect to the restored database using SQL Server Management Studio to perform needed tasks, such as to [extract a bit of data from the restored database to copy into the existing database or to delete the existing database and rename the restored database to the existing database name](../database/recovery-using-backups.md#point-in-time-restore).
 
 # [Azure CLI](#tab/azure-cli)
@@ -261,20 +245,21 @@ Run the [az sql midb ltr-backup restore](/cli/azure/sql/midb/ltr-backup#az-sql-m
        --query 'id' \
        --output tsv)
    ```
+
 1. Restore your database from an LTR backup
 
-    ```azurecli
-    az sql midb ltr-backup restore \
-        --dest-database targetmidb \
-        --dest-mi myinstance \
-        --dest-resource-group mygroup \
-        --backup-id $get_backup_id
-    ```
+   ```azurecli
+   az sql midb ltr-backup restore \
+       --dest-database targetmidb \
+       --dest-mi myinstance \
+       --dest-resource-group mygroup \
+       --backup-id $get_backup_id
+   ```
 
-> [!IMPORTANT]
+> [!IMPORTANT]  
 > To restore from an LTR backup after the instance has been deleted, you must have permissions scoped to the subscription of the instance and that subscription must be active.
 
-> [!NOTE]
+> [!NOTE]  
 > From here, you can connect to the restored database using SQL Server Management Studio to perform needed tasks, such as to extract a bit of data from the restored database to copy into the existing database or to delete the existing database and rename the restored database to the existing database name. See [point in time restore](../database/recovery-using-backups.md#point-in-time-restore).
 
 # [PowerShell](#tab/powershell)
@@ -286,11 +271,11 @@ This example shows how to list the LTR policies within an instance for a single 
 ```powershell
 # gets the current version of LTR policy for a database
 $LTRPolicy = @{
-    InstanceName = $instanceName 
-    DatabaseName = $dbName 
+    InstanceName = $instanceName
+    DatabaseName = $dbName
     ResourceGroupName = $resourceGroup
 }
-Get-AzSqlInstanceDatabaseBackupLongTermRetentionPolicy @LTRPolicy 
+Get-AzSqlInstanceDatabaseBackupLongTermRetentionPolicy @LTRPolicy
 ```
 
 This example shows how to list the LTR policies for all of the databases on an instance.
@@ -317,9 +302,9 @@ This example shows how to clear an LTR policy from a database.
 ```powershell
 # remove the LTR policy from a database
 $LTRPolicy = @{
-    InstanceName = $instanceName 
-    DatabaseName = $dbName 
-    ResourceGroupName = $resourceGroup 
+    InstanceName = $instanceName
+    DatabaseName = $dbName
+    ResourceGroupName = $resourceGroup
     RemovePolicy = $true
 }
 Set-AzSqlInstanceDatabaseBackupLongTermRetentionPolicy @LTRPolicy
@@ -330,23 +315,22 @@ Set-AzSqlInstanceDatabaseBackupLongTermRetentionPolicy @LTRPolicy
 This example shows how to list the LTR backups within an instance.
 
 ```powershell
-
 $instance = Get-AzSqlInstance -Name $instanceName -ResourceGroupName $resourceGroup
 
 # get the list of all LTR backups in a specific Azure region
 # backups are grouped by the logical database id, within each group they are ordered by the timestamp, the earliest backup first
 Get-AzSqlInstanceDatabaseLongTermRetentionBackup -Location $instance.Location
 
-# get the list of LTR backups from the Azure region under the given managed instance
+# get the list of LTR backups from the Azure region under the given SQL managed instance
 $LTRBackupParam = @{
-    Location = $instance.Location 
+    Location = $instance.Location
     InstanceName = $instanceName
 }
 Get-AzSqlInstanceDatabaseLongTermRetentionBackup @LTRBackupParam
 
-# get the LTR backups for a specific database from the Azure region under the given managed instance
+# get the LTR backups for a specific database from the Azure region under the given SQL managed instance
 $LTRBackupParam = @{
-    Location = $instance.Location 
+    Location = $instance.Location
     InstanceName = $instanceName
     DatabaseName = $dbName
 }
@@ -354,48 +338,48 @@ Get-AzSqlInstanceDatabaseLongTermRetentionBackup @LTRBackupParam
 
 # list LTR backups only from live databases (you have option to choose All/Live/Deleted)
 $LTRBackupParam = @{
-    Location = $instance.Location 
+    Location = $instance.Location
     DatabaseState = 'Live'
 }
 Get-AzSqlInstanceDatabaseLongTermRetentionBackup @LTRBackupParam
 
 # only list the latest LTR backup for each database
 $LTRBackupParam = @{
-    Location = $instance.Location 
+    Location = $instance.Location
     InstanceName = $instanceName
     OnlyLatestPerDatabase = $true
 }
-Get-AzSqlInstanceDatabaseLongTermRetentionBackup @LTRBackupParam 
+Get-AzSqlInstanceDatabaseLongTermRetentionBackup @LTRBackupParam
 ```
 
 ### Restore from LTR backups
 
-This example shows how to restore from an LTR backup. Note, this interface did not change but the resource ID parameter now requires the LTR backup resource ID.
+This example shows how to restore from an LTR backup. Note, this interface didn't change, but the resource ID parameter now requires the LTR backup resource ID.
 
 ```powershell
 # restore a specific LTR backup as an P1 database on the instance $instanceName of the resource group $resourceGroup
 $LTRBackupParam = @{
-    Location = $instance.Location 
+    Location = $instance.Location
     InstanceName = $instanceName
     DatabaseName = $dbname
     OnlyLatestPerDatabase = $true
 }
-$ltrBackup = Get-AzSqlInstanceDatabaseLongTermRetentionBackup @LTRBackupParam 
+$ltrBackup = Get-AzSqlInstanceDatabaseLongTermRetentionBackup @LTRBackupParam
 
 $RestoreLTRParam = @{
-    TargetInstanceName          = $instanceName 
-    TargetResourceGroupName     = $resourceGroup 
+    TargetInstanceName          = $instanceName
+    TargetResourceGroupName     = $resourceGroup
     TargetInstanceDatabaseName  = $dbName
     FromLongTermRetentionBackup = $true
-    ResourceId                  = $ltrBackup.ResourceId 
+    ResourceId                  = $ltrBackup.ResourceId
 }
 Restore-AzSqlInstanceDatabase @RestoreLTRParam
 ```
 
-> [!IMPORTANT]
+> [!IMPORTANT]  
 > To restore from an LTR backup after the instance has been deleted, you must have permissions scoped to the subscription of the instance and that subscription must be active. You must also omit the optional -ResourceGroupName parameter.
 
-> [!NOTE]
+> [!NOTE]  
 > From here, you can connect to the restored database using SQL Server Management Studio to perform needed tasks, such as to extract a bit of data from the restored database to copy into the existing database or to delete the existing database and rename the restored database to the existing database name. See [point in time restore](../database/recovery-using-backups.md#point-in-time-restore).
 
 ---
@@ -404,27 +388,27 @@ Restore-AzSqlInstanceDatabase @RestoreLTRParam
 
 Delete backups that are retained for a specific database with an LTR policy.
 
-> [!IMPORTANT]
-> Deleting LTR backup is non-reversible. To delete an LTR backup after the instance has been deleted you must have Subscription scope permission. You can set up notifications about each delete in Azure Monitor by filtering for operation 'Deletes a long term retention backup'. The activity log contains information on who and when made the request. See [Create activity log alerts](/azure/azure-monitor/alerts/alerts-activity-log) for detailed instructions.
+> [!IMPORTANT]  
+> Deleting LTR backup is non-reversible. To delete an LTR backup after the instance has been deleted, you must have Subscription scope permission. You can set up notifications about each delete in Azure Monitor by filtering for operation 'Deletes a long term retention backup'. The activity log contains information on who made the request and when. See [Create activity log alerts](/azure/azure-monitor/alerts/alerts-activity-log) for detailed instructions.
 
 # [Portal](#tab/portal)
- 
-1. In the Azure portal, navigate to the SQL managed instance. 
+
+1. In the Azure portal, navigate to the SQL managed instance.
 1. Select **Backups**. To view the available LTR backups for a specific database, select **Manage** under the **Available LTR backups** column. A pane appears with a list of the available LTR backups for the selected database.
 1. In the **Available LTR backups** pane that appears, review the available backups. Select a backup to delete. Select **Delete**.
 
 # [Azure CLI](#tab/azure-cli)
 
 1. Run [az sql midb ltr-backup list](/cli/azure/sql/midb/ltr-backup#az-sql-midb-ltr-backup-list) to get the backup `name`.
-1. Run the [az sql midb ltr-backup delete](/cli/azure/sql/midb/ltr-backup#az-sql-midb-ltr-backup-delete) command to remove an LTR backup. 
+1. Run the [az sql midb ltr-backup delete](/cli/azure/sql/midb/ltr-backup#az-sql-midb-ltr-backup-delete) command to remove an LTR backup.
 
-    ```azurecli
-    az sql midb ltr-backup delete \
-        --location eastus2 \
-        --managed-instance myinstance \
-        --database mymanageddb \
-        --name "3214b3fb-fba9-43e7-96a3-09e35ffcb336;132292152080000000"
-    ```
+   ```azurecli
+   az sql midb ltr-backup delete \
+       --location eastus2 \
+       --managed-instance myinstance \
+       --database mymanageddb \
+       --name "3214b3fb-fba9-43e7-96a3-09e35ffcb336;132292152080000000"
+   ```
 
 # [PowerShell](#tab/powershell)
 
@@ -434,7 +418,7 @@ This example shows how to delete the earliest LTR backup from the list of backup
 # remove the earliest backup
 # get the LTR backups for a specific database from the Azure region under the given SQL managed instance
 $LTRBackupParam = @{
-    Location = $instance.Location 
+    Location = $instance.Location
     InstanceName = $instanceName
     DatabaseName = $dbName
 }
@@ -442,13 +426,14 @@ $ltrBackups = Get-AzSqlInstanceDatabaseLongTermRetentionBackup @LTRBackupParam
 $ltrBackup = $ltrBackups[0]
 Remove-AzSqlInstanceDatabaseLongTermRetentionBackup -ResourceId $ltrBackup.ResourceId
 ```
+
 ---
 
 ## Limitations
 
-Database backups taken from instances configured with the SQL Server 2022 [update policy](update-policy.md) can be restored to instances configured with either the SQL Server 2022 or Always-up-to-date update policy. Database backups taken from instances configured with the Always-up-to-date update policy can only be restored to instances also configured with the Always-up-to-date update policy. 
+Database backups taken from instances configured with the SQL Server 2022 [update policy](update-policy.md) can be restored to instances configured with either the SQL Server 2022 or Always-up-to-date update policy. Database backups taken from instances configured with the Always-up-to-date update policy can only be restored to instances also configured with the Always-up-to-date update policy.
 
-## Next steps
+## Related content
 
-- To learn about service-generated automatic backups, see [automatic backups](automated-backups-overview.md).
-- To learn about long-term backup retention, see [long-term backup retention](../database/long-term-retention-overview.md).
+- [Automated backups in Azure SQL Managed Instance](automated-backups-overview.md)
+- [Long-term retention backups](../database/long-term-retention-overview.md)

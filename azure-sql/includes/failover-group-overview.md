@@ -10,7 +10,7 @@ ms.topic: include
 
 ### Endpoint redirection
 
-Failover groups provide read-write and read-only listener end-points that remain unchanged during geo-failovers. You don't have to change the connection string for your application after a geo-failover, because connections are automatically routed to the current primary. A geo-failover switches all secondary databases in the group to the primary role. After geo-failover completes, the DNS record is automatically updated to redirect the endpoints to the new region. 
+Failover groups provide read-write and read-only listener endpoints that remain unchanged during geo-failovers. You don't have to change the connection string for your application after a geo-failover, because connections are automatically routed to the current primary. A geo-failover switches all secondary databases in the group to the primary role. After geo-failover completes, the DNS record is automatically updated to redirect the endpoints to the new region. 
 
 ### Offload read-only workloads
 
@@ -31,7 +31,7 @@ Each failover policy has a unique set of use cases and corresponding expectation
 
 | Failover policy | Failover scope | Use case | Potential data loss |
 | --- | --- | --- | --- |
-| Customer managed <br> **(Recommended)** | Failover group(s) | One or more databases in a failover group(s) is impacted by an outage and become unavailable. You can choose to fail over. | Yes |
+| Customer managed <br> **(Recommended)** | Failover groups | One or more databases in a failover groups is impacted by an outage and becomes unavailable. You can choose to fail over. | Yes |
 | Microsoft managed | All failover groups in the region | A widespread outage in a datacenter, availability zone, or region causes unavailability of databases and the Microsoft Azure SQL service team decides to trigger a forced failover. <br> Use this option only when you want to delegate the disaster recovery responsibility to Microsoft and the application is tolerant to RTO (downtime) of at least one hour or more.| Yes |
 
 ### Customer managed

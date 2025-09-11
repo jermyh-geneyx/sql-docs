@@ -19,6 +19,10 @@ ms.custom:
 
 [!INCLUDE [appliesto-sqldb-asa](../includes/appliesto-sqldb-asa-formerly-sqldw.md)]
 
+> [!div class="op_single_selector"]
+> - [Azure SQL Database](private-endpoint-overview.md?view=azuresql-db&preserve-view=true)
+> - [Azure SQL Managed Instance](../managed-instance/private-endpoint-overview.md?view=azuresql-mi&preserve-view=true)
+
 [Azure Private Link](/azure/private-link/private-link-overview) allows you to connect to various PaaS services in Azure via a **private endpoint**. For a list of PaaS services that support Private Link functionality, go to the [Private Link Documentation](/azure/private-link/availability) page. A private endpoint is a private IP address within a specific [VNet](/azure/virtual-network/virtual-networks-overview) and subnet.
 
 > [!IMPORTANT]  

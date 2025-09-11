@@ -1,31 +1,33 @@
 ---
-title: Configure zone redundancy
-description: Configure zone redundancy for your Azure SQL Managed Instance by using the Azure portal, PowerShell, Azure CLI, and REST API. 
+title: Configure Zone Redundancy
+description: Configure zone redundancy for your Azure SQL Managed Instance by using the Azure portal, PowerShell, Azure CLI, and REST API.
 author: Stralle
 ms.author: strrodic
 ms.reviewer: urmilano, mathoma, randolphwest
-ms.date: 09/22/2024
+ms.date: 09/11/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: high-availability
 ms.topic: how-to
-ms.custom: sfi-image-nochange
+ms.custom:
+  - sfi-image-nochange
 ---
+
 # Configure zone redundancy - Azure SQL Managed Instance
 
 [!INCLUDE [appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
 
-This article teaches you to configure [zone redundancy](high-availability-sla-local-zone-redundancy.md#zone-redundant-availability) Azure SQL Managed Instance by using the Azure portal, PowerShell, Azure CLI, and REST API.
+This article teaches you how to configure [zone redundancy](high-availability-sla-local-zone-redundancy.md#zone-redundant-availability) for Azure SQL Managed Instance by using the Azure portal, PowerShell, Azure CLI, and REST API.
 
-By using a zone-redundant configuration, you can make your Business Critical or General Purpose instances highly available and resilient to a much larger set of failures, including catastrophic datacenter outages, without any changes to the application logic. You can convert any existing Business Critical or General Purpose instances to the zone-redundant configuration.
+By using a zone-redundant configuration, you can make your Business Critical or General Purpose instances highly available and resilient to a larger set of failures, including catastrophic datacenter outages, without any changes to the application logic. You can convert any existing Business Critical or General Purpose instances to the zone-redundant configuration.
 
 ## Considerations
 
-Consider the following when using zone redundancy for SQL Managed Instance:
+Consider the following points when using zone redundancy for SQL Managed Instance:
 
 - Zone redundancy is available in [select regions](#supported-regions).
-- Zone redundancy is not currently available for the Next-gen General Purpose service tier.
+- Zone redundancy isn't currently available for the Next-gen General Purpose service tier.
 - Zone redundancy can be enabled, and disabled. The operation to enable or disable zone redundancy is a fully online [scaling operation](../database/scale-resources.md) executed in the background.
-- To enable zone redundancy, your SQL managed instance **Backup storage redundancy** must use _Zone-redundant_ or _Geo-zone-redundant_ storage.
+- To enable zone redundancy, your SQL managed instance **Backup storage redundancy** must use *Zone-redundant* or *Geo-zone-redundant* storage.
 
 ## New instance
 
@@ -40,9 +42,9 @@ To configure a new zone-redundant SQL managed instance in the Azure portal, foll
 1. On the **Select SQL deployment option** page, choose **Single instance** in the **Resource type** dropdown list on the **SQL managed instances** tile and then select **Create** to open the **Create Azure SQL Managed Instance** page.
 1. On the **Basics** tab of the **Create Azure SQL Managed Instance** page, select **Configure Managed Instance** under **Compute + storage** to open the **Compute + storage** page.
 1. On the **Compute + storage page**:
-    1. For **Backup storage redundancy** under **Backup**, choose `Zone-redundant` or `Geo-zone-redundant` backup storage. Backups have to be configured before you can enable zone redundancy.
-    1. For **Zone redundancy** under **Compute Hardware**, choose **Enabled**.
-    1. Configure the remaining instance settings based on your business needs and then use **Apply** to save your configuration and go back to the **Create Azure SQL Managed Instance** page.
+   1. For **Backup storage redundancy** under **Backup**, choose `Zone-redundant` or `Geo-zone-redundant` backup storage. Backups have to be configured before you can enable zone redundancy.
+   1. For **Zone redundancy** under **Compute Hardware**, choose **Enabled**.
+   1. Configure the remaining instance settings based on your business needs and then use **Apply** to save your configuration and go back to the **Create Azure SQL Managed Instance** page.
 
    :::image type="content" source="media/instance-zone-redundancy-configure/instance-new-portal-compute-storage.png" alt-text="Screenshot of the backup and zone redundancy options selected on the compute + storage page of the Azure portal." lightbox="media/instance-zone-redundancy-configure/instance-new-portal-compute-storage.png":::
 
@@ -78,10 +80,11 @@ To update your zone redundancy configuration for an existing SQL managed instanc
 
 1. Go to your [SQL managed instance](https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Sql%2FmanagedInstances) resource in the Azure portal.
 1. On the **Compute + storage** pane:
-    1. To enable zone redundancy, first ensure the **Backup storage redundancy** under **Backup** is set to `Zone-redundant` or `Geo-zone-redundant`. If it's not already, choose your new backup storage redundancy option and apply your settings. Wait for the operation to complete, and then refresh your page before enabling zone redundancy.
-    1. Under **Compute Hardware**, use the **Zone redundancy** toggle to either enable or disable zone redundancy.
-  
-   :::image type="content" source="media/instance-zone-redundancy-configure/instance-existing-portal-compute-storage.png" alt-text="Screenshot of the compute + storage page for an existing instance in the Azure portal with zone redundancy and backups selected. " lightbox="media/instance-zone-redundancy-configure/instance-existing-portal-compute-storage.png":::
+
+   1. To enable zone redundancy, first ensure the **Backup storage redundancy** under **Backup** is set to `Zone-redundant` or `Geo-zone-redundant`. If it's not already, choose your new backup storage redundancy option and apply your settings. Wait for the operation to complete, and then refresh your page before enabling zone redundancy.
+   1. Under **Compute Hardware**, use the **Zone redundancy** toggle to either enable or disable zone redundancy.
+
+   :::image type="content" source="media/instance-zone-redundancy-configure/instance-existing-portal-compute-storage.png" alt-text="Screenshot of the compute + storage page for an existing instance in the Azure portal. Zone redundancy and backups are selected. " lightbox="media/instance-zone-redundancy-configure/instance-existing-portal-compute-storage.png":::
 
 ### [PowerShell](#tab/powershell)
 
@@ -138,16 +141,11 @@ Zone redundancy is enabled if `zoneRedundant` is set to `true`.
 
 Review [zone redundancy availability by region](region-availability.md#zone-redundancy) for Azure SQL Managed Instance.
 
-
-
 ## Related content
 
-To learn more, review: 
-
-- [High availability for Azure SQL Managed Instance](high-availability-sla-local-zone-redundancy.md)
-- [Continuity scenarios](business-continuity-high-availability-disaster-recover-hadr-overview.md)
-- [Automated backups](automated-backups-overview.md)
-- [Restore a database from the service-initiated backups](recovery-using-backups.md)
-- [Failover groups](failover-group-sql-mi.md)
+- [Availability through local and zone redundancy - Azure SQL Managed Instance](high-availability-sla-local-zone-redundancy.md)
+- [Overview of business continuity with Azure SQL Managed Instance](business-continuity-high-availability-disaster-recover-hadr-overview.md)
+- [Automated backups in Azure SQL Managed Instance](automated-backups-overview.md)
+- [Restore a database from a backup in Azure SQL Managed Instance](recovery-using-backups.md)
+- [Failover groups overview & best practices - Azure SQL Managed Instance](failover-group-sql-mi.md)
 - [Geo-restore](recovery-using-backups.md#point-in-time-restore)
-

@@ -98,7 +98,7 @@ If you want to take advantage of an unlimited paid Azure SQL Managed Instance, o
 
 To upgrade your instance, follow these steps: 
 
-1. Go to your [SQL managed instance](https://portal.azure.com/#browse/Microsoft.Sql%2FmanagedInstances) in the Azure portal. 
+1. Go to your [SQL managed instance](https://portal.azure.com/#view/HubsExtension/ServiceMenuBlade/~/SingleInstance/extension/SqlAzureExtension/menuId/AzureSqlHub/itemId/SingleInstance) in the Azure portal. 
 1. Select the free instance you want to upgrade to navigate to the **Overview** page for the SQL Managed Instance. 
 1. Under **Settings**, select **Compute + storage** to open the **Compute + storage** page. Alternatively, you can select **Upgrade to a paid offer** from the banner on the **Overview** page.
 1. On the **Compute + storage** page:  
