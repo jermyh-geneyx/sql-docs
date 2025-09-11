@@ -8940,8 +8940,6 @@ items:
             items:
             - name: Use Agent mode tools
               href: tools/visual-studio-code-extensions/github-copilot/agent-mode.md
-            - name: Use slash commands
-              href: tools/visual-studio-code-extensions/github-copilot/slash-commands.md
             - name: Generate data for testing and mocking
               href: tools/visual-studio-code-extensions/github-copilot/test-and-mocking-data-generator.md
             - name: Use the business logic explainer
@@ -8960,10 +8958,6 @@ items:
               href: tools/visual-studio-code-extensions/github-copilot/security-analyzer.md
             - name: Use smart query builder
               href: tools/visual-studio-code-extensions/github-copilot/smart-query-builder.md
-        - name: Fabric integration
-          items:
-          - name: Overview
-            href: tools/visual-studio-code-extensions/mssql/mssql-fabric-integration.md
         - name: Local SQL Server container
           items:
           - name: Overview
