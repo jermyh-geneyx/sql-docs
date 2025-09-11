@@ -88,7 +88,7 @@ This quickstart requires the *[!INCLUDE [sssampledbnormal-md](../../../includes/
 
 ### Add dependencies
 
-1. In the same directory, install the `mssql-python` and `python-dotenv` and `rich` packages.
+In the same directory, install the `mssql-python` and `python-dotenv` and `rich` packages.
 
    ```bash
    uv add mssql-python python-dotenv rich
