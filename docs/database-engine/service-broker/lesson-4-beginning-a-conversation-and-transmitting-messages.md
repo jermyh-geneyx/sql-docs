@@ -29,7 +29,7 @@ In this lesson, you learn to start a conversation that spans two databases in th
 
 ### Start a conversation and send a request message
 
-- Copy and paste the following code into a Query Editor window, t run it to start a conversation and send a request message to the **//TgtDB/2DBSample/TargetService** in the **TargetDB**. The code must be run in one block because a variable is used to pass a dialog handle from `BEGIN DIALOG` to the `SEND` statement. The batch runs the `BEGIN DIALOG` statement to begin the conversation and build a request message. Then, it uses the dialog handle in a `SEND` statement to send the request message on that conversation. The last `SELECT` statement displays the text of the message that was sent.
+- Copy and paste the following code into a Query Editor window, then run it to start a conversation and send a request message to the **//TgtDB/2DBSample/TargetService** in the **TargetDB**. The code must be run in one block because a variable is used to pass a dialog handle from `BEGIN DIALOG` to the `SEND` statement. The batch runs the `BEGIN DIALOG` statement to begin the conversation and build a request message. Then, it uses the dialog handle in a `SEND` statement to send the request message on that conversation. The last `SELECT` statement displays the text of the message that was sent.
 
   ```sql
   DECLARE @InitDlgHandle AS UNIQUEIDENTIFIER;
