@@ -29,6 +29,12 @@ Only Azure extension for SQL Server agent versions released within the last year
 
 **Extension version**: `1.1.3139.313`
 
+Certain limitations in US Government Virginia have been lifted. You can now onboard environments with:
+
+- Always On availability groups
+- Associated SQL Server services:
+  [!INCLUDE [sql-server-associated-services](includes/sql-server-associated-services.md)]
+
 ## August 14, 2025
 
 SQL Server enabled by Azure Arc is generally available in US Government Virginia. For more information, review [SQL Server enabled by Azure Arc in US Government](us-government-region.md). In addition to features announced earlier, you can:
