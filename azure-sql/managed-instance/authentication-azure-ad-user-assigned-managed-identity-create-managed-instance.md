@@ -1,11 +1,11 @@
 ---
-title: Create an Azure SQL Managed Instance using a user-assigned managed identity
+title: Create an Azure SQL Managed Instance Using a User-Assigned Managed Identity
 titleSuffix: Azure SQL Managed Instance
 description: This article guides you through creating an Azure SQL Managed Instance using a user-assigned managed identity.
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: vanto, mathoma
-ms.date: 10/24/2023
+ms.date: 08/25/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: security
 ms.topic: how-to
@@ -19,7 +19,7 @@ ms.topic: how-to
 > - [Azure SQL Database](../database/authentication-azure-ad-user-assigned-managed-identity-create-server.md?view=azuresql-db&preserve-view=true)
 > - [Azure SQL Managed Instance](authentication-azure-ad-user-assigned-managed-identity-create-managed-instance.md?view=azuresql-mi&preserve-view=true)
 
-This how-to guide outlines the steps to create an [Azure SQL Managed Instance](sql-managed-instance-paas-overview.md) with a [user-assigned managed identity](/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types) from Microsoft Entra ID ([formerly Azure Active Directory](/entra/fundamentals/new-name)). For more information on the benefits of using a user-assigned managed identity for the server identity in Azure SQL Database, see [User-assigned managed identity in Microsoft Entra for Azure SQL](../database/authentication-azure-ad-user-assigned-managed-identity.md).
+This how-to guide outlines the steps to create an [Azure SQL Managed Instance](sql-managed-instance-paas-overview.md) with a [user-assigned managed identity](/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types) from Microsoft Entra ID ([formerly Azure Active Directory](/entra/fundamentals/new-name)). For more information on the benefits of using a user-assigned managed identity for the server identity in Azure SQL Database, see [Managed identities in Microsoft Entra for Azure SQL](../database/authentication-azure-ad-user-assigned-managed-identity.md).
 
 [!INCLUDE [entra-id](../includes/entra-id.md)]
 
@@ -34,17 +34,17 @@ This how-to guide outlines the steps to create an [Azure SQL Managed Instance](s
 
 # [Portal](#tab/azure-portal)
 
-1. Browse to the [Select SQL deployment](https://portal.azure.com/#create/Microsoft.AzureSQL) option page in the Azure portal.
+1. Go to [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub).
+1. In the pane for **Azure SQL Managed Instance**, select **Show options**.
+1. In the **Azure SQL Managed Instance options** window, select **Create SQL Managed Instance**.
 
-1. If you aren't already signed in to Azure portal, sign in when prompted.
-
-1. Under **SQL managed instances**, leave **Resource type** set to **Single instance**, and select **Create**.
+   :::image type="content" source="media/authentication-azure-ad-user-assigned-managed-identity-create-managed-instance/show-options-create-sql-managed-instance.png" alt-text="Screenshot from the Azure portal of the Azure SQL hub, showing the Show options button and the Create SQL Managed Instance button." lightbox="media/authentication-azure-ad-user-assigned-managed-identity-create-managed-instance/show-options-create-sql-managed-instance.png":::
 
 1. Fill out the mandatory information required on the **Basics** tab for **Project details** and **Managed Instance details**. This is a minimum set of information required to provision a SQL Managed Instance.
 
    :::image type="content" source="media/authentication-azure-ad-user-assigned-managed-identity-create-managed-instance/managed-instance-create-basic.png" alt-text="Azure portal screenshot of creating the SQL Managed Instance basic tab":::
 
-   For more information on the configuration options, see [Quickstart: Create an Azure SQL Managed Instance](../managed-instance/instance-create-quickstart.md).
+   For more information on the configuration options, see [Quickstart: Create Azure SQL Managed Instance](instance-create-quickstart.md).
 
 1. Under **Authentication**, select a preferred authentication model. If you're looking to configure [Microsoft Entra-only authentication](../database/authentication-azure-ad-only-authentication.md), see the [guide](../database/authentication-azure-ad-only-authentication-create-server.md?tabs=azure-portal).
 
@@ -69,13 +69,15 @@ This how-to guide outlines the steps to create an [Azure SQL Managed Instance](s
 
 1. Select **Apply**
 
-1. You can leave the rest of the settings default. For more information on other tabs and settings, follow the guide in the article [Quickstart: Create an Azure SQL Managed Instance](../managed-instance/instance-create-quickstart.md).
+1. You can leave the rest of the settings default. For more information on other tabs and settings, follow the guide in the article [Quickstart: Create Azure SQL Managed Instance](instance-create-quickstart.md).
+
+1. On the **Additional settings** tab, consider using Azure tags. For example, the "Owner" or "CreatedBy" tag to identify who created the resource, and the Environment tag to identify whether this resource is in Production, Development, etc. For more information, see [Develop your naming and tagging strategy for Azure resources](/azure/cloud-adoption-framework/ready/azure-best-practices/naming-and-tagging).
 
 1. Once you're done with configuring your settings, select **Review + create** to proceed. Select **Create** to start provisioning the managed instance.
 
 # [The Azure CLI](#tab/azure-cli)
 
-The Azure CLI command `az sql mi create` is used to provision a new Azure SQL Managed Instance. The below command will provision a managed instance with a user-assigned managed identity, and also enable [Microsoft Entra-only authentication](../database/authentication-azure-ad-only-authentication.md).
+The Azure CLI command `az sql mi create` is used to provision a new Azure SQL Managed Instance. The following command will provision a managed instance with a user-assigned managed identity, and also enable [Microsoft Entra-only authentication](../database/authentication-azure-ad-only-authentication.md).
 
 > [!NOTE]
 > The script requires a virtual network and subnet be created as a prerequisite.
@@ -232,7 +234,6 @@ $body = '{
 # To provision the instance, execute the `PUT` command
 
 Invoke-RestMethod -Uri https://management.azure.com/subscriptions/$subscriptionId/resourceGroups/$resourceGroupName/providers/Microsoft.Sql/managedInstances/$instanceName/?api-version=2020-11-01-preview -Method PUT -Headers $authHeader -Body $body -ContentType "application/json"
-
 ```
 
 To check the results, execute the `GET` command:
@@ -541,4 +542,4 @@ To get your user-assigned managed identity **Resource ID**, search for **Managed
 
 ## Related content
 
-- [User-assigned managed identity in Microsoft Entra ID for Azure SQL](../database/authentication-azure-ad-user-assigned-managed-identity.md)
+- [Managed identities in Microsoft Entra for Azure SQL](../database/authentication-azure-ad-user-assigned-managed-identity.md)

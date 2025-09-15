@@ -1,26 +1,28 @@
 ---
-title: "Tutorial: Prerequisites for AG in multiple subnets"
+title: "Tutorial: Prerequisites for AG in Multiple Subnets"
 description: "This tutorial shows how to configure the prerequisites for creating an Always On availability group in multiple subnets for SQL Server on Azure Virtual Machines (VMs). "
 author: AbdullahMSFT
 ms.author: amamun
 ms.reviewer: mathoma
-ms.date: 06/18/2024
+ms.date: 08/25/2025
 ms.service: azure-vm-sql-server
 ms.subservice: hadr
 ms.topic: tutorial
+ms.custom:
+  - sfi-image-nochange
 editor: monicar
 tags: azure-service-management
-ms.custom: sfi-image-nochange
 ---
 
-# Tutorial: Prerequisites for availability groups in multiple subnets (SQL Server on Azure VMs) 
+# Tutorial: Prerequisites for availability groups in multiple subnets (SQL Server on Azure VMs)
+
 [!INCLUDE[appliesto-sqlvm](../../includes/appliesto-sqlvm.md)]
 
 [!INCLUDE[tip-for-multi-subnet-ag](../../includes/virtual-machines-ag-listener-multi-subnet.md)]
 
-In this tutorial, complete the prerequisites for creating an [Always On availability group for SQL Server on Azure Virtual Machines (VMs) in multiple subnets](availability-group-manually-configure-tutorial-multi-subnet.md). At the end of this tutorial, you will have a domain controller on two Azure virtual machines, two SQL Server VMs in multiple subnets, and a storage account in a single resource group.
+In this tutorial, complete the prerequisites for the [Tutorial: Configure an availability group in multiple subnets (SQL Server on Azure VMs)](availability-group-manually-configure-tutorial-multi-subnet.md). At the end of this tutorial, you will have a domain controller on two Azure virtual machines, two SQL Server VMs in multiple subnets, and a storage account in a single resource group.
 
-**Time estimate**: This tutorial creates several resources in Azure and may take up to 30 minutes to complete.
+**Time estimate**: This tutorial creates several resources in Azure and might take up to 30 minutes to complete.
 
 The following diagram illustrates the resources you deploy in this tutorial:
 
@@ -47,9 +49,9 @@ To create the resource group in the Azure portal, follow these steps:
    :::image type="content" source="./media/availability-group-manually-configure-prerequisites-tutorial-multi-subnet/01-resource-group-search.png" alt-text="Search for resource group in the Marketplace and then choose to create the Resource group. ":::
 
 1. On the **Create a resource group** page, fill out the values to create the resource group:
-   1. Choose the appropriate Azure subscription from the drop-down.
+   1. Choose the appropriate Azure subscription from the dropdown list.
    1. Provide a name for your resource group, such as **SQL-HA-RG**.
-   1. Choose a region from the drop-down, such as **West US 2**. Be sure to deploy all subsequent resources to this location as well.
+   1. Choose a region from the dropdown list, such as **West US 2**. Be sure to deploy all subsequent resources to this location as well.
    1. Select **Review + create** to review your resource parameters, and then select **Create** to create your resource group.  
 
    :::image type="content" source="./media/availability-group-manually-configure-prerequisites-tutorial-multi-subnet/01-resource-group-create-complete.png" alt-text="Fill out the values to create your resource group in the Azure portal. ":::
@@ -67,7 +69,7 @@ To create the virtual network in the Azure portal, follow these steps:
 1. Search for **virtual network** in the **Marketplace** search box and choose the **virtual network** tile from Microsoft. Select **Create** on the **Virtual network** page.  
 1. On the **Create virtual network** page, enter the following information on the **Basics** tab:
    1. Under **Project details**, choose the appropriate Azure **Subscription**, and the **Resource group** you created previously, such as **SQL-HA-RG**.
-   1. Under **Instance details**, provide a name for your virtual network, such as **SQLHAVNET**, and choose the same region as your resource group from the drop-down.
+   1. Under **Instance details**, provide a name for your virtual network, such as **SQLHAVNET**, and choose the same region as your resource group from the dropdown list.
 
    :::image type="content" source="./media/availability-group-manually-configure-prerequisites-tutorial-multi-subnet/03-create-vnet-basics.png" alt-text="Choose the resource group you made previously, then provide a name for your virtual network, such as SQLHAVNET":::
 
@@ -90,7 +92,7 @@ To create the virtual network in the Azure portal, follow these steps:
 
    :::image type="content" source="./media/availability-group-manually-configure-prerequisites-tutorial-multi-subnet/06-create-vnet-ip-address-add-sql-subnet-2.png" alt-text="Name your second subnet, such as sql-subnet-2, and then iterate the third octet by 2, so that if your DC-subnet IP address is 10.38.0.0/24, your new subnet should be 10.38.2.0/24":::
 
-1. After you've added the second subnet, review your subnet names and ranges (your IP address ranges may differ from the image). If everything looks correct, select **Review + create**, then **Create** to create your new virtual network.
+1. After you've added the second subnet, review your subnet names and ranges (your IP address ranges might differ from the image). If everything looks correct, select **Review + create**, then **Create** to create your new virtual network.
 
    :::image type="content" source="./media/availability-group-manually-configure-prerequisites-tutorial-multi-subnet/07-create-vnet-ip-address.png" alt-text="After you've added the second subnet, review your subnet names and ranges, like the image example (though your IP addresses may be different). If everything looks correct, select Review + create, then Create to create your new virtual network.":::
 
@@ -109,7 +111,7 @@ To create your domain controller (DC) virtual machines in the Azure portal, foll
    :::image type="content" source="./media/availability-group-manually-configure-prerequisites-tutorial-multi-subnet/02-create-resource-rg.png" alt-text="Create new resource in your resource group":::
 
 1. Search for **Windows Server** in the **Marketplace** search box.
-1. On the **Windows Server** tile from Microsoft, select the **Create** drop-down and choose the **Windows Server 2016 Datacenter** image.
+1. On the **Windows Server** tile from Microsoft, select the **Create** dropdown list and choose the **Windows Server 2016 Datacenter** image.
 1. Fill out the values on the **Create a virtual machine** page to create your domain controller VM, such as **DC-VM-1**. Optionally, create an additional VM, such as **DC-VM-2** to provide high availability for the Active Directory Domain Services. Use the values in the following tablet to create your VM(s):
 
     | **Field** | Value |
@@ -146,7 +148,7 @@ To configure **DC-VM-1** as the domain controller, follow these steps:
 1. On the **DC-VM-1** page, select **Connect via Bastion** to go to the **Bastion** page and then deploy [Bastion](/azure/bastion/bastion-connect-vm-rdp-windows) for remote desktop access.  
 
 1. Connect to the Bastion session using your configured administrator account (**DomainAdmin**) and password (**Contoso!0000**).
-1. Open the **Server Manager** dashboard (which may open by default) and choose to **Add roles and features**.
+1. Open the **Server Manager** dashboard (which might open by default) and choose to **Add roles and features**.
 
     :::image type="content" source="./media/availability-group-manually-configure-prerequisites-tutorial-multi-subnet/09-add-features.png" alt-text="Server Manager - Add roles":::
 
@@ -166,7 +168,7 @@ To configure **DC-VM-1** as the domain controller, follow these steps:
 1. Select the **More** link on the yellow warning bar.
 
     :::image type="content" source="./media/availability-group-manually-configure-prerequisites-tutorial-multi-subnet/11-ad-ds-more.png" alt-text="AD DS dialog on the DNS Server VM":::
-    
+
 1. In the **Action** column of the **All Server Task Details** dialog, select **Promote this server to a domain controller**.
 1. In the **Active Directory Domain Services Configuration Wizard**, use the following values:
 
@@ -186,7 +188,7 @@ To identify the private IP address of the VM in the Azure portal, follow these s
 
 1. Go to your resource group in the [Azure portal](https://portal.azure.com) and select the primary domain controller, **DC-VM-1**.
 1. On the **DC-VM-1** page, choose **Networking** in the **Settings** pane.
-1. Note the **NIC Private IP** address. Use this IP address as the DNS server for the other virtual machines.  In the example image, the private IP address is **10.38.0.4**.
+1. Note the **NIC Private IP** address. Use this IP address as the DNS server for the other virtual machines. In the example image, the private IP address is `10.38.0.4`.
 
 :::image type="content" source="./media/availability-group-manually-configure-prerequisites-tutorial-multi-subnet/12-dc-vm-1-private-ip.png" alt-text="On the DC-VM-1 page, choose Networking in the Settings pane, and then note the NIC private IP address. Use this IP address as the DNS server. ":::
 
@@ -222,9 +224,9 @@ The preferred DNS server address [should not be updated](/azure/virtual-network/
 1. In **Settings**, select **DNS servers**.
 
 1. Select either:
-   
+
     - **Inherit from virtual network**: Choose this option to inherit the DNS server setting defined for the virtual network the network interface is assigned to. This would automatically inherit the primary domain controller as the DNS server.
-   
+
     - **Custom**: You can configure your own DNS server to resolve names across multiple virtual networks. Enter the IP address of the server you want to use as a DNS server. The DNS server address you specify is assigned only to this network interface and overrides any DNS setting for the virtual network the network interface is assigned to. If you select custom, then input the IP address of the primary domain controller, such as `10.38.0.4`.
 
 1. Select **Save**.
@@ -247,7 +249,7 @@ Next, join the **corp.contoso.com** domain. To do so, follow these steps:
 
 Once your server has joined the domain, you can configure it as the second domain controller. To do so, follow these steps:
 
-1. If you're not already connected, open a [Bastion](/azure/bastion/bastion-connect-vm-rdp-windows) session to your secondary domain controller, and open **Server Manager Dashboard** (which may be open by default).
+1. If you're not already connected, open a [Bastion](/azure/bastion/bastion-connect-vm-rdp-windows) session to your secondary domain controller, and open **Server Manager Dashboard** (which might be open by default).
 1. Select the **Add roles and features** link on the dashboard.
 
     :::image type="content" source="./media/availability-group-manually-configure-prerequisites-tutorial-multi-subnet/09-add-features.png" alt-text="Server Manager - Add roles":::
@@ -259,7 +261,7 @@ Once your server has joined the domain, you can configure it as the second domai
 1. Select the **More** link on the yellow warning bar.
 1. In the **Action** column of the **All Server Task Details** dialog, select **Promote this server to a domain controller**.
 1. Under **Deployment Configuration**, select **Add a domain controller to an existing domain**.
-1. Click **Select**.
+1. Select **Select**.
 1. Connect by using the administrator account (**CORP.CONTOSO.COM\domainadmin**) and password (**Contoso!0000**).
 1. In **Select a domain from the forest**, choose your domain and then select **OK**.
 1. In **Domain Controller Options**, use the default values and set a DSRM password.
@@ -308,7 +310,7 @@ To grant the permissions to the installation account, follow these steps:
 
 1. Open the **Active Directory Administrative Center** from **Server Manager**, if it's not open already.
 1. Select **corp (local)** in the left pane.
-1. In the right-hand **Tasks** pane, verify you see **corp (local)** in the drop-down, and then select **Properties** underneath.
+1. In the right-hand **Tasks** pane, verify you see **corp (local)** in the dropdown list, and then select **Properties** underneath.
 
     :::image type="content" source="./media/availability-group-manually-configure-prerequisites-tutorial-multi-subnet/15-ad-dc-properties.png" alt-text="CORP user properties":::
 
@@ -347,13 +349,13 @@ Use a single NIC per server (cluster node). Azure networking has physical redund
 
 To create your VMs, follow these steps:
 
-1. Go to your resource group in the [Azure portal](https://portal.azure.com) and select **+ Create**.
-1. Search for **Azure SQL** and select the **Azure SQL** tile from Microsoft.
-1. On the **Azure SQL** page, select **Create** and then choose the **SQL Server 2016 SP2 Enterprise on Windows Server 2016** image from the drop-down.
+1. Go to [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub). In the pane for **SQL Server on Azure Virtual Machines**, select **Show options**.
+   :::image type="content" source="media/availability-group-manually-configure-prerequisites-tutorial-multi-subnet/show-options-high-availability-create-virtual-machine.png" alt-text="Screenshot from the Azure portal of the Azure SQL hub, showing the Show options button and the Create SQL Managed Instance button." lightbox="media/availability-group-manually-configure-prerequisites-tutorial-multi-subnet/show-options-high-availability-create-virtual-machine.png":::
+1. Under **SQL virtual machines**, select the **High availability** checkbox.
+1. In the **Select an image offer** box, choose a SQL Server image (such as **SQL Server 2016 SP2 Enterprise on Windows Server 2016**). 
+1. Select **Create virtual machine**.
 
-   :::image type="content" source="./media/availability-group-manually-configure-prerequisites-tutorial-multi-subnet/18-select-sql-vm-image.png" alt-text=" On the Azure SQL page of the portal, select Create and then choose the SQL Server 2016 SP2 Enterprise on Windows Server 2016 image from the drop-down.":::
-
-Use the following table to fill out the values on the **Create a virtual machine** page to create both SQL Server VMs, such as **SQL-VM-1** and **SQL-VM-2** (your IP addresses may differ from the examples in the table):
+Use the following table to fill out the values on the **Create a virtual machine** page to create both SQL Server VMs, such as **SQL-VM-1** and **SQL-VM-2** (your IP addresses might differ from the examples in the table):
 
 | Configuration | SQL-VM-1 | SQL-VM-2 |
 | --- | --- | --- |
@@ -361,9 +363,9 @@ Use the following table to fill out the values on the **Create a virtual machine
 | **VM basics** |**Name** = SQL-VM-1<br/>**User Name** = DomainAdmin<br/>**Password** = Contoso!0000<br/>**Subscription** = Your subscription<br/>**Resource group** = SQL-HA-RG<br/>**Location** = Your Azure location |**Name** = SQL-VM-2<br/>**User Name** = DomainAdmin<br/>**Password** = Contoso!0000<br/>**Subscription** = Your subscription<br/>**Resource group** = SQL-HA-RG<br/>**Location** = Your Azure location |
 | **VM Size** |**SIZE** = E2ds_v4 (2 vCPUs, 16 GB RAM)</br> |**SIZE** = E2ds_v4 (2 vCPUs, 16 GB RAM) |
 | **VM Settings** |**Availability options** = Availability zone<br/>**Availability zone** = 1<br/>**Public inbound ports** = Allow selected ports<br/>**Select inbound ports** = RDP (3389)<br/>**OS disk type** = Premium SSD (locally redundant storage)<br/>**Virtual network** = SQLHAVNET<br/>**Subnet** = SQL-subnet-1(10.38.1.0/24)<br/>**Public IP address** = Automatically generated.<br/>**NIC network security group** = Basic<br/>**Public inbound ports** = Allow selected ports <br/> **Select inbound ports** = RDP (3389)<br/>**Boot Diagnostics** = Enable with managed storage account (recommended)<br/>|**Availability options** = Availability zone<br/>**Availability zone** = 2<br/>**Public inbound ports** = Allow selected ports<br/>**Select inbound ports** = RDP (3389)<br/>**OS disk type** = Premium SSD (locally redundant storage)<br/>**Virtual network** = SQLHAVNET<br/>**Subnet** = SQL-subnet-2(10.38.2.0/24)<br/>**Public IP address** = Automatically generated.<br/>**NIC network security group** = Basic<br/>**Public inbound ports** = Allow selected ports <br/> **Select inbound ports** = RDP (3389)<br/>**Boot Diagnostics** = Enable with managed storage account (recommended)<br/> |
-| **SQL Server settings** |**SQL connectivity** = Private (within Virtual Network)<br/>**Port** = 1433<br/>**SQL Authentication** = Disable<br/>**Azure Key Vault integration** = Disable <br/>**Storage optimization** = Transactional processing<br/>**SQL Data** = 1024 GiB, 5000 IOPS, 200 MB/s<br/>**SQL Log** = 1024 GiB, 5000 IOPS, 200 MB/s<br/>**SQL TempDb** = Use local SSD drive<br/>**Automated patching** = Sunday at 2:00<br/>**Automated backup** = Disable |**SQL connectivity** = Private (within Virtual Network)<br/>**Port** = 1433<br/>**SQL Authentication** = Disable<br/>**Azure Key Vault integration** = Disable <br/>**Storage optimization** = Transactional processing<br/>**SQL Data** = 1024 GiB, 5000 IOPS, 200 MB/s<br/>**SQL Log** = 1024 GiB, 5000 IOPS, 200 MB/s<br/>**SQL TempDb** = Use local SSD drive<br/>**Automated patching** = Sunday at 2:00<br/>**Automated backup** = Disable |
+| **SQL Server settings** |**SQL connectivity** = Private (within Virtual Network)<br/>**Port** = 1433<br/>**SQL Authentication** = Disable<br/>**Azure Key Vault integration** = Disable <br/>**Storage optimization** = Transactional processing<br/>**SQL Data** = 1024 GiB, 5000 IOPS, 200 MB/s<br/>**SQL Log** = 1024 GiB, 5000 IOPS, 200 MB/s<br/>SQL `tempdb` = Use local SSD drive<br/>**Automated patching** = Sunday at 2:00<br/>**Automated backup** = Disable |**SQL connectivity** = Private (within Virtual Network)<br/>**Port** = 1433<br/>**SQL Authentication** = Disable<br/>**Azure Key Vault integration** = Disable <br/>**Storage optimization** = Transactional processing<br/>**SQL Data** = 1024 GiB, 5000 IOPS, 200 MB/s<br/>**SQL Log** = 1024 GiB, 5000 IOPS, 200 MB/s<br/>**SQL TempDb** = Use local SSD drive<br/>**Automated patching** = Sunday at 2:00<br/>**Automated backup** = Disable |
 
-<br/>
+<br />
 
 > [!NOTE]
 > These suggested machine sizes are only intended for testing availability groups in Azure Virtual Machines. For optimized production workloads, see the size recommendations in [Performance best practices for SQL Server on Azure VMs](./performance-guidelines-best-practices-checklist.md?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json).
@@ -409,7 +411,6 @@ To assign additional secondary IPs to the VMs, follow these steps:
 
 1. Repeat these steps again for the second SQL Server VM, such as **SQL-VM-2**. Assign two unused secondary IP addresses within **SQL-subnet-2**. Use the values from the following table to add the IP configuration:
 
-   
     | **Field** | Input | Input |
     | --- | --- | --- |
     | **Name** |windows-cluster-ip | availability-group-listener |
@@ -504,7 +505,7 @@ To add the [NT AUTHORITY\SYSTEM] and grant appropriate permissions, follow these
 
 ### Set the SQL Server service accounts
 
-The SQL Server service on each VM needs to use a dedicated domain account.  Use the domain accounts you created earlier: **Corp\SQLSvc** for both **SQL-VM-1** and **SQL-VM-2**.
+The SQL Server service on each VM needs to use a dedicated domain account. Use the domain accounts you created earlier: **Corp\SQLSvc** for both **SQL-VM-1** and **SQL-VM-2**.
 
 To set the service account, follow these steps:
 
@@ -527,7 +528,7 @@ To create the Azure Storage Account in the portal:
 
     1. Select your subscription and select the resource group **SQL-HA-RG.**
     1. Enter a **Storage Account Name** for your storage account.
-       Storage account names must be between 3 and 24 characters in length and may contain numbers and lowercase letters only. The storage account name must also be unique within Azure.
+       Storage account names must be between 3 and 24 characters in length and can contain numbers and lowercase letters only. The storage account name must also be unique within Azure.
     1. Select your **Region.**
     1. For **Performance**, select **Standard: Recommended for most scenarios (general-purpose v2 account)**. Azure Premium Storage is not supported for a cloud witness.
     1. For **Redundancy**, select **Locally redundant storage (LRS).**
@@ -541,7 +542,7 @@ The availability group feature relies on traffic through the following TCP ports
 - **SQL Server VM**: Port 1433 for a default instance of SQL Server.
 - **Database mirroring endpoint:** Any available port. Examples frequently use 5022.
 
-Open these firewall ports on both SQL Server VMs. The method of opening the ports depends on the firewall solution that you use, and may vary from the Windows Firewall example provided in this section.
+Open these firewall ports on both SQL Server VMs. The method of opening the ports depends on the firewall solution that you use, and might vary from the Windows Firewall example provided in this section.
 
 To open these ports on a Windows Firewall, follow these steps:
 
@@ -558,13 +559,13 @@ To open these ports on a Windows Firewall, follow these steps:
 1. On the **Name** page, specify a rule name (such as **SQL Inbound**) in the **Name** text box, and then select **Finish**.
 1. Repeat these steps on the second SQL Server VM.
 
-## Next steps
+## Related content
 
 Now that you've configured the prerequisites, get started with [configuring your availability group](availability-group-manually-configure-tutorial-multi-subnet.md) in multiple subnets.
 
 To learn more, see:
 
 - [Windows Server Failover Cluster with SQL Server on Azure VMs](hadr-windows-server-failover-cluster-overview.md)
-- [Always On availability groups with SQL Server on Azure VMs](availability-group-overview.md)
+- [Always On availability group on SQL Server on Azure VMs](availability-group-overview.md)
 - [Always On availability groups overview](/sql/database-engine/availability-groups/windows/overview-of-always-on-availability-groups-sql-server)
-- [HADR settings for SQL Server on Azure VMs](hadr-cluster-best-practices.md)
+- [HADR configuration best practices (SQL Server on Azure VMs)](hadr-cluster-best-practices.md)

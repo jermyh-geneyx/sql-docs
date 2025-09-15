@@ -1,17 +1,18 @@
 ---
-title: Deploy SQL Server VM with Premium SSD v2 in Azure portal (preview)
-description: Learn how you can use the Azure portal to deploy your SQL Server on Azure VM with Premium SSD disks (preview), the new generation storage solution designed for IO-intensive enterprise workloads that require submillisecond disk latencies, high IOPS and throughput at a low cost. 
+title: "Deploy SQL Server VM with Premium SSD V2 in Azure portal (Preview)"
+description: Learn how you can use the Azure portal to deploy your SQL Server on Azure VM with Premium SSD disks (preview), the new generation storage solution designed for IO-intensive enterprise workloads that require submillisecond disk latencies, high IOPS and throughput at a low cost.
 author: dplessMSFT
 ms.author: dpless
 ms.reviewer: mathoma
-ms.date: 03/01/2024
+ms.date: 08/25/2025
 ms.service: azure-vm-sql-server
 ms.subservice: management
 ms.topic: how-to
-ms.custom: devx-track-azurepowershell
-tags: 
+ms.custom:
+  - devx-track-azurepowershell
 ---
 # Deploy SQL Server on Azure VMs with Premium SSD v2 storage in Azure portal (preview)
+
 [!INCLUDE [appliesto-sqlvm](../../includes/appliesto-sqlvm.md)]
 
 This article teaches you to deploy [SQL Server on Azure Virtual Machines (VMs)](sql-server-on-azure-vm-iaas-what-is-overview.md) with [Premium SSD v2 disks](/azure/virtual-machines/disks-types#premium-ssd-v2) by using the Azure portal. Premium SSD v2 offers high performance, low latency, and granular scalability for applications that require submillisecond disk response times. 
@@ -37,12 +38,11 @@ Premium SSD v2 offers the following key capabilities:
 
 If you're deploying your SQL Server VM by using the Azure portal and want to use Premium SSD v2, you're currently limited to the [Ebdsv5 or Ebsv5](/azure/virtual-machines/ebdsv5-ebsv5-series) series virtual machines. However, if you manually create your VM with Premium SSD v2 storage and then manually install SQL Server to the VM, you configure Premium SSD v2 on any virtual machine that supports premium storage. Be sure to [register](sql-agent-extension-manually-register-single-vm.md) your SQL Server VM with the SQL IaaS Agent extension so you can take advantage of all the [benefits](sql-server-iaas-agent-extension-automate-management.md#feature-benefits) provided by the extension. 
 
-
 ## Storage configuration limits
 
 When configuring Premium SSD v2 disks, consider the correlation between [capacity](/azure/virtual-machines/disks-types#premium-ssd-v2-capacities), [IOPS](/azure/virtual-machines/disks-types#premium-ssd-v2-iops) (input / output operations per second), and [throughput](/azure/virtual-machines/disks-types#premium-ssd-v2-throughput). As you increase the storage capacity, IOPS scales up proportionally, which influences throughput. 
 
-When configuring your SQL Server VM to use Premium SSD v2 in the Azure portal, use the slider controls to easily adjust and optimize the capacity, IOPS, and throughput settings. Disks up to 6 GiB in size get a baseline of 3000 IOPS and 125 MB/s throughput for free.  Likewise, for every disk you have as part of a storage pool, you get 3,000 IOPS and 125 MB/s free per disk, which affects the minimums for a storage pool. For example, a 4-disk storage pool gets a minimum free baseline of 12,000 IOPS. 
+When configuring your SQL Server VM to use Premium SSD v2 in the Azure portal, use the slider controls to easily adjust and optimize the capacity, IOPS, and throughput settings. Disks up to 6 GiB in size get a baseline of 3000 IOPS and 125 MB/s throughput for free. Likewise, for every disk you have as part of a storage pool, you get 3,000 IOPS and 125 MB/s free per disk, which affects the minimums for a storage pool. For example, a 4-disk storage pool gets a minimum free baseline of 12,000 IOPS. 
 
 After 6 GiB, maximum IOPS increases by 1 GiB disk size increments and maximum throughput increases based on the configured IOPS. Disks 160 GiB and larger can be configured up to the maximum of 80,000 IOPS and 1,200 MB/s throughput. The cumulative configured values across all the disks shouldn't exceed the maximum limits of the selected VM size. 
 
@@ -54,11 +54,10 @@ The following table provides the scale of IOPS and throughput when using Premium
 
 [!INCLUDE [disks-premv2-performance](~/../azure-compute-docs-pr/articles/virtual-machines/includes/disks-premv2-performance.md)]
 
-
 > [!NOTE]
 > Currently, Premium SSD v2 offers up to 100 TiB per region per subscription by default, but supports higher capacity by request. To increase capacity, [contact Azure Support to request a quota increase](https://go.microsoft.com/fwlink/p/?LinkId=2234556). 
 
-## Determine workload requirements 
+## Determine workload requirements
 
 Before you deploy SQL Server on Azure VMs using Premium SSD v2 disks, understand the workload of your application. Collect the IOPS and throughput requirements from your workload, obtain the storage size your databases are currently using, and add an extra 25% to your current storage utilization to allow for future capacity. This forward-thinking approach anticipates the changing demands of your environment, incorporating flexibility and foresight into your storage provisioning strategy. 
 
@@ -82,19 +81,22 @@ For more information, review [Collect baseline](performance-guidelines-best-prac
 
 If you're migrating to SQL Server on Azure VMs, consider size elements beyond just the database, such as SSIS / DTS packages, jobs, linked servers, Extended Events (XE) sessions, audits, and more. These components can significantly impact the storage requirements and should therefore be factored into capacity planning. For additional migration details, review [SQL Server on Azure VMs migration guide](../../migration-guides/virtual-machines/sql-server-to-sql-on-azure-vm-migration-overview.md)
 
-## Create SQL Server VM with Premium SSD v2 
+## Create SQL Server VM with Premium SSD v2
 
 Use Premium SSD v2 when you deploy your SQL Server on Azure VM to an [Ebdsv5 or Ebsv5](/azure/virtual-machines/ebdsv5-ebsv5-series) virtual machine in the Azure portal. To do so, follow these steps: 
 
-1. Go to the [Azure SQL](https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Sql%2Fazuresql) page in the Azure portal. 
-1. Select **+ Create** to go to the **Select SQL deployment option** page. 
-1. Under **SQL virtual machines**, use the dropdown to choose a SQL Server image, such as **Free SQL Server License: SQL Server 2022 Developer on Windows Server 2022**. Select **Create** to go to the **Create a virtual machine** page. 
+1. Go to [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub). In the pane for **SQL Server on Azure Virtual Machines**, select **Show options**.
+1. In the **SQL Server on Azure Virtual Machines options** window, in the **Select an image offer** box, choose a SQL Server image (such as **Free SQL Server License: SQL Server 2025 Enterprise Developer on Windows Server 2025**). 
+1. Select **Create virtual machine**.
+
+   :::image type="content" source="media/storage-configuration-premium-ssd-v2/show-options-create-virtual-machine.png" alt-text="Screenshot from the Azure portal of the Azure hub, showing the Show options button under SQL Server on Azure Virtual Machines, and the Create virtual machine button." lightbox="media/storage-configuration-premium-ssd-v2/show-options-create-virtual-machine.png":::
+
 1. On the **Basics** tab, provide values for the **Project** and **Instance** details. For **Availability options**, choose **Availability zones**, as they're a prerequisite for using Premium SSD v2. 
 1. Under **Size**, select **See all sizes** to open the **Select a VM size** page. Type `bds_v5` or `bs_v5` to filter the _Ebdsv5_ or _Ebsv5_ series virtual machines that currently support Premium SSD v2 with SQL Server on Azure VMs in the Azure portal. Choose the VM size that suits your needs and then use **Select** to navigate back to the **Create a virtual machine** page.  
 
    :::image type="content" source="media/storage-configuration-premium-ssd-v2/select-virtual-machine-size-portal.png" alt-text="Screenshot of the select VM size page of the Azure portal.":::
 
-1. (Optional) By default, Premium SSD v2 uses SCSI-based storage, but you can configure NVMe storage instead. If you'd like to use NVMe storage, then on the **Basics** tab, under **Security type**, choose _Standard_ from the dropdown. Go to [Enable NVMe FAQs](/azure/virtual-machines/enable-nvme-faqs) to learn more about the benefits of NVMe.
+1. (Optional) By default, Premium SSD v2 uses SCSI-based storage, but you can configure NVMe storage instead. If you'd like to use NVMe storage, then on the **Basics** tab, under **Security type**, choose _Standard_ from the dropdown list. Go to [Enable NVMe FAQs](/azure/virtual-machines/enable-nvme-faqs) to learn more about the benefits of NVMe.
 1. Fill out the rest of the values on the **Basics** tab, and then use **Next** to go to the following tabs. Leave the values as default, or modify them to suit your needs. 
 1. (Optional) If you want to use NVMe storage, then on the **Advanced** tab, check the box next to **Higher remote disk storage performance with NVMe** in the **Performance (NVMe)** section. 
 
@@ -104,17 +106,17 @@ Use Premium SSD v2 when you deploy your SQL Server on Azure VM to an [Ebdsv5 or 
 
    :::image type="content" source="media/storage-configuration-premium-ssd-v2/storage-configuration-portal.png" alt-text="Screenshot of the storage configuration section of the Create VM page in the Azure portal.":::
 
-1. On the **Configure storage (preview)** window, expand the sections for your data, log, and tempdb storage, and then use the sliders or enter values in the text boxes to customize your disk size, IOPS, and throughput. If you enabled NVMe previously, the VM size name has a (NVMe) suffix. 
+1. On the **Configure storage (preview)** window, expand the sections for your data, log, and `tempdb` storage, and then use the sliders or enter values in the text boxes to customize your disk size, IOPS, and throughput. If you enabled NVMe previously, the VM size name has a (NVMe) suffix. 
 
    Disk size can't be modified without taking the disk offline. You should add an extra 25% to your current storage utilization to allow for future capacity.
-   
+
    Use **OK** to save your settings and close the **Configure storage** window. 
 
    :::image type="content" source="media/storage-configuration-premium-ssd-v2/configure-storage-blade-portal.png" alt-text="Screenshot of the Configure storage window in the Azure portal.":::
 
    > [!IMPORTANT]
-   > By default, IOPS, throughput, and the number of disks are evenly distributed between all drives for the SQL Server VM. If the cumulative configured values exceed the max values for the selected VM size, you may experience capping and performance issues. A yellow warning appears if your configured values exceed the limits of the VM. 
-   > Storage cost estimation is currently only available for pay-as-you-go (PAYG) subscriptions. Use the [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) to estimate storage costs for other subscriptions. 
+   > By default, IOPS, throughput, and the number of disks are evenly distributed between all drives for the SQL Server VM. If the cumulative configured values exceed the max values for the selected VM size, you can experience capping and performance issues. A yellow warning appears if your configured values exceed the limits of the VM. 
+   > Storage cost estimation is currently only available for pay-as-you-go subscriptions. Use the [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) to estimate storage costs for other subscriptions. 
 
 1. Change any remaining settings on the **SQL Server settings** and **Tags** tabs. Select **Review + create** to review your SQL Server VM settings, and then select **Create** to deploy your SQL Server VM. 
 1. The **Deployment is in progress** page opens automatically so you can monitor the status of your deployment and navigate to your resource group. You can also use the **Notifications** icon to check the progress of your deployment. 
@@ -146,13 +148,13 @@ To adjust the throughput, use the following PowerShell sample:
 
 ```powershell
 ## This script updates the throughput for all the disks associated with the VM and RG:
- 
+
 # Get the VM
 $vm = Get-AzVM -ResourceGroupName $resourceGroupName -Name $vmName
- 
+
 # Get all the disks attached to the VM
 $disks = $vm.StorageProfile.DataDisks
- 
+
 # Loop through each disk and update the throughput
 foreach ($disk in $disks) {
     # Update the disk
@@ -164,7 +166,7 @@ foreach ($disk in $disks) {
 foreach ($disk in $disks) {
     # Get the updated disk
     $updatedDisk = Get-AzDisk -ResourceGroupName $resourceGroupName -DiskName $disk.Name
- 
+
     # Output the updated IOPS
     Write-Output ("Disk '{0}' throughput: {1}" -f $updatedDisk.Name, $updatedDisk.DiskMBpsReadWrite)
 }
@@ -174,28 +176,26 @@ To adjust the IOPS, use the following PowerShell sample:
 
 ```powershell
 ## This script updates the IOPS for a set list of the disks associated with a RG:
- 
+
 # Loop through each disk and update the IOPS
 foreach ($diskName in $diskNames) {
     # Get the disk
     $disk = Get-AzDisk -ResourceGroupName $resourceGroupName -DiskName $diskName
- 
+
     # Update the disk
     $diskUpdateConfig = New-AzDiskUpdateConfig -DiskIOPSReadWrite 5000
     Update-AzDisk -ResourceGroupName $resourceGroupName -Disk $disk -DiskUpdate $diskUpdateConfig
 }
- 
+
 # Confirm the update
 foreach ($diskName in $diskNames) {
     # Get the updated disk
     $updatedDisk = Get-AzDisk -ResourceGroupName $resourceGroupName -DiskName $diskName
- 
+
     # Output the updated IOPS
     Write-Output ("Disk '{0}' IOPS: {1}" -f $updatedDisk.Name, $updatedDisk.DiskIOPSReadWrite)
 }
 ```
-
-
 
 ## Limitations
 
@@ -206,15 +206,14 @@ When deploying SQL Server on Azure VMs in the Azure portal, Premium SSD v2 is on
 - Available when you deploy your SQL Server VM using the Azure portal. Using Premium SSD v2 isn't currently available when you deploy your SQL Server VM using the Azure CLI or PowerShell. 
 - Configurable with the Azure portal during provisioning. To make changes after the SQL Server VM is provisioned, use the Azure CLI or PowerShell. Review [Adjust performance](/azure/virtual-machines/disks-deploy-premium-v2?tabs=azure-cli#adjust-disk-performance) to learn more. 
 - Supported as the only storage solution. Mixing Premium SSD v2 with Premium SSD, Ultra Disk, and other managed storage solutions is not supported. 
-- Storage cost estimation on the **Configure Storage (preview)** window of the **Create a virtual machine** page in the Azure portal is currently only available for pay-as-you-go (PAYG) subscriptions. Use the [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) to estimate storage costs for other subscriptions. 
+- Storage cost estimation on the **Configure Storage (preview)** window of the **Create a virtual machine** page in the Azure portal is currently only available for pay-as-you-go subscriptions. Use the [Azure Pricing Calculator](https://azure.microsoft.com/pricing/calculator/) to estimate storage costs for other subscriptions. 
 
 The following limitations apply to Premium SSD v2: 
- 
+
 [!INCLUDE [disks-prem-v2-limitations](~/../azure-compute-docs-pr/articles/virtual-machines/includes/disks-prem-v2-limitations.md)]
 
 > [!NOTE]
 > Premium SSD v2 is currently available in [specific regions](/azure/virtual-machines/disks-types#regional-availability). 
-
 
 ## Related content
 

@@ -1,10 +1,10 @@
 ---
-title: Try for free
+title: Try for Free
 description: Learn how to deploy a free Azure SQL Managed Instance.
 author: Stralle
 ms.author: strrodic
 ms.reviewer: mathoma, randolphwest, vladiv
-ms.date: 07/07/2025
+ms.date: 08/25/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: service-overview
 ms.topic: how-to
@@ -14,6 +14,7 @@ monikerRange: "=azuresql || =azuresql-mi"
 ---
 
 # Try Azure SQL Managed Instance for free
+
 > [!div class="op_single_selector"]
 > - [Azure SQL Database](../database/free-offer.md?view=azuresql&preserve-view=true)
 > - [Azure SQL Managed Instance](free-offer.md?view=azuresql&preserve-view=true)
@@ -31,7 +32,7 @@ The free Azure SQL Managed Instance offer is designed for:
 - Existing customers who need a development environment to build proof-of-concept applications.
 - Testing existing SQL Server workloads in Azure before committing to a paid plan.
 
-To get started, [create a new Azure SQL Managed Instance](https://portal.azure.com/#browse/Microsoft.Sql%2FmanagedInstances) from the Azure portal. To use the free offer, select **Apply free offer** from the banner at the top of the **Create Azure SQL Managed Instance** page:
+To get started, [create a new Azure SQL Managed Instance](https://portal.azure.com/#browse/Microsoft.Sql%2FmanagedInstances) from the Azure portal. To use the free offer, select **Apply free offer** from the banner at the top of the **Create Azure SQL Managed Instance** page, or select the **Try for free** link on the [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub).
 
 :::image type="content" source="media/free-offer/free-sql-managed-instance-banner.png" alt-text="Screenshot from the Azure portal of the Free Offer banner.":::
 
@@ -58,7 +59,12 @@ Use the Azure portal to create the new free Azure SQL Managed Instance.
 
 To create your free SQL managed instance, follow these steps:
 
-1. Go to the [provisioning page for Azure SQL Managed Instance](https://portal.azure.com/#create/Microsoft.SQLManagedInstance) in the Azure portal.
+1. Go to [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub).
+1. In the pane for **Azure SQL Managed Instance**, select **Show options**.
+1. In the **Azure SQL Managed Instance options** window, select **Create SQL Managed Instance**.
+
+   :::image type="content" source="media/free-offer/show-options-create-sql-managed-instance.png" alt-text="Screenshot from the Azure portal of the Azure SQL hub, showing the Show options button and the Create SQL Managed Instance button." lightbox="media/free-offer/show-options-create-sql-managed-instance.png":::
+
 1. On the **Basics** tab, look for the **Want to try Azure SQL Managed Instance for free?** banner and select the **Apply offer** button. Check the **Estimated costs per month** to validate the free offer is applied to your instance.
 1. For **Resource group**, either select an existing resource group from the dropdown list or select **Create new** to create a new resource group. Enter the name of your resource group, such as `myFreeMIResourceGroup` and then select **OK**.
 1. Instance details such as the name and region, are already populated with default values but you can choose to modify these values.
@@ -92,7 +98,7 @@ If your public endpoint is disabled, you can choose to either [Create an Azure V
 
 To conserve credits, by default, the free instance is scheduled to be on from 9am to 5pm Monday through Friday in the time zone configured when you created the instance. You can [modify the schedule](instance-stop-start-how-to.md) to suit your business needs.
 
-## Upgrade to paid instance 
+## Upgrade to paid instance
 
 If you want to take advantage of an unlimited paid Azure SQL Managed Instance, or if you run out of vCore hours, you can upgrade your free instance to a paid instance directly from the Azure portal. 
 
@@ -160,7 +166,7 @@ Additionally, the following limitations apply:
 - The free offer is currently available in the [following regions](region-availability.md#free-offer). 
 - If you delete a free SQL managed instance, all its databases are deleted and can't be restored.
 
-## Monthly vCore limits 
+## Monthly vCore limits
 
 The monthly free limits include 720 vCore hours of compute. Your free month of credits starts when you create your instance and is renewed on the same day of the following month.
 
@@ -184,19 +190,19 @@ The free Azure SQL Managed Instance offer is available on the following subscrip
 
 :::row:::
     :::column:::
-      - [Pay-as-you-go (0003P)](https://azure.microsoft.com/pricing/offers/ms-azr-0003p/)
-      - [Azure in CSP (0145P)](https://azure.microsoft.com/pricing/offers/ms-azr-0145p/)
-      - [Azure Plan (0017G)](https://azure.microsoft.com/pricing/offers/ms-azr-0017g/)
+      - [Pay-as-you-go (0003P)](https://azure.microsoft.com/pricing/offers/ms-azr-0003p/)
+      - [Azure in CSP (0145P)](https://azure.microsoft.com/pricing/offers/ms-azr-0145p/)
+      - [Azure Plan (0017G)](https://azure.microsoft.com/pricing/offers/ms-azr-0017g/)
       - [Enterprise Agreement Support](https://azure.microsoft.com/pricing/offers/enterprise-agreement-support/)
-      - [Microsoft Azure EA Sponsorship (0136P)](https://azure.microsoft.com/pricing/offers/ms-azr-0136p/)
-      - [Visual Studio Professional subscribers (0059P)](https://azure.microsoft.com/pricing/offers/ms-azr-0059p/)
+      - [Microsoft Azure EA Sponsorship (0136P)](https://azure.microsoft.com/pricing/offers/ms-azr-0136p/)
+      - [Visual Studio Professional subscribers (0059P)](https://azure.microsoft.com/pricing/offers/ms-azr-0059p/)
     :::column-end:::
     :::column:::
-      - [Visual Studio Test Professional subscribers (0059P)](https://azure.microsoft.com/pricing/offers/ms-azr-0060p/)
-      - [Visual Studio Enterprise subscribers (0063P)](https://azure.microsoft.com/pricing/offers/ms-azr-0063p/)
-      - [Pay-As-You-Go Dev/Test (0023P)](https://azure.microsoft.com/pricing/offers/ms-azr-0023p/)
-      - [Enterprise Dev/Test (0148P)](https://azure.microsoft.com/pricing/offers/ms-azr-0148p/)
-      - [Azure in Open Licensing (0111P)](https://azure.microsoft.com/pricing/offers/ms-azr-0111p/)
+      - [Visual Studio Test Professional subscribers (0059P)](https://azure.microsoft.com/pricing/offers/ms-azr-0060p/)
+      - [Visual Studio Enterprise subscribers (0063P)](https://azure.microsoft.com/pricing/offers/ms-azr-0063p/)
+      - [Pay-As-You-Go Dev/Test (0023P)](https://azure.microsoft.com/pricing/offers/ms-azr-0023p/)
+      - [Enterprise Dev/Test (0148P)](https://azure.microsoft.com/pricing/offers/ms-azr-0148p/)
+      - [Azure in Open Licensing (0111P)](https://azure.microsoft.com/pricing/offers/ms-azr-0111p/)
     :::column-end:::
 :::row-end:::
 

@@ -37,9 +37,12 @@ You can create a new zone-redundant instance by using the Azure portal, PowerShe
 
 To configure a new zone-redundant SQL managed instance in the Azure portal, follow these steps:
 
-1. Go to the [Azure SQL](https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Sql%2Fazuresql) page in the Azure portal.
-1. On the **Azure SQL** page, select **+ Create** to open the **Select SQL deployment option** page.
-1. On the **Select SQL deployment option** page, choose **Single instance** in the **Resource type** dropdown list on the **SQL managed instances** tile and then select **Create** to open the **Create Azure SQL Managed Instance** page.
+1. Go to [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub).
+1. In the pane for **Azure SQL Managed Instance**, select **Show options**.
+1. In the **Azure SQL Managed Instance options** window, select **Create Azure SQL Managed Instance**.
+
+   :::image type="content" source="media/instance-zone-redundancy-configure/show-options-create-sql-managed-instance.png" alt-text="Screenshot from the Azure portal of the Azure SQL hub, showing the Show options button under Azure SQL Managed Instance and the Create Instance pool button." lightbox="media/instance-zone-redundancy-configure/show-options-create-sql-managed-instance.png":::
+
 1. On the **Basics** tab of the **Create Azure SQL Managed Instance** page, select **Configure Managed Instance** under **Compute + storage** to open the **Compute + storage** page.
 1. On the **Compute + storage page**:
    1. For **Backup storage redundancy** under **Backup**, choose `Zone-redundant` or `Geo-zone-redundant` backup storage. Backups have to be configured before you can enable zone redundancy.
@@ -48,17 +51,17 @@ To configure a new zone-redundant SQL managed instance in the Azure portal, foll
 
    :::image type="content" source="media/instance-zone-redundancy-configure/instance-new-portal-compute-storage.png" alt-text="Screenshot of the backup and zone redundancy options selected on the compute + storage page of the Azure portal." lightbox="media/instance-zone-redundancy-configure/instance-new-portal-compute-storage.png":::
 
-1. On the **Create Azure SQL Managed Instance** page, configure the remaining instance settings based on your business needs, select **Review + Create** to review your settings, and then use **Create** to deploy your instance configured with zone redundancy. For more information about deploying a managed instance, review [Create Azure SQL Managed Instance](instance-create-quickstart.md).
+1. On the **Create Azure SQL Managed Instance** page, configure the remaining instance settings based on your business needs, select **Review + Create** to review your settings, and then use **Create** to deploy your instance configured with zone redundancy. For more information about deploying a managed instance, review [Quickstart: Create Azure SQL Managed Instance](instance-create-quickstart.md).
 
 ### [PowerShell](#tab/powershell)
 
-To create a new zone-redundant SQL managed instance by using PowerShell, use the `-ZoneRedundant` switch when using the [New-AzSqlInstance](/powershell/module/az.sql/new-azsqlinstance) command. For a full PowerShell sample, review [Create Azure SQL Managed Instance with PowerShell](scripts/create-configure-managed-instance-powershell.md).
+To create a new zone-redundant SQL managed instance by using PowerShell, use the `-ZoneRedundant` switch when using the [New-AzSqlInstance](/powershell/module/az.sql/new-azsqlinstance) command. For a full PowerShell sample, review [Use PowerShell to create a managed instance](scripts/create-configure-managed-instance-powershell.md).
 
 Omit `-ZoneRedundant` if you don't want your new SQL managed instance to be zone redundant.
 
 ### [Azure CLI](#tab/azure-cli)
 
-To create a new zone-redundant SQL managed instance by using the Azure CLI, set the `--zone-redundant` parameter to `true` when using the [az sql mi create](/cli/azure/sql/mi#az-sql-mi-create) command. For a full Azure CLI sample, review [Create Azure SQL Managed Instance with the Azure CLI](scripts/create-configure-managed-instance-cli.md).
+To create a new zone-redundant SQL managed instance by using the Azure CLI, set the `--zone-redundant` parameter to `true` when using the [az sql mi create](/cli/azure/sql/mi#az-sql-mi-create) command. For a full Azure CLI sample, review [Create an Azure SQL Managed Instance using the Azure CLI](scripts/create-configure-managed-instance-cli.md).
 
 Set `--zone-redundant` to `false` if you don't want your new SQL managed instance to be zone redundant.
 
@@ -88,13 +91,13 @@ To update your zone redundancy configuration for an existing SQL managed instanc
 
 ### [PowerShell](#tab/powershell)
 
-To update an existing SQL managed instance to be zone-redundant by using PowerShell, use the `-ZoneRedundant` switch when using the [Set-AzSqlInstance](/powershell/module/az.sql/set-azsqlinstance) command. For a full PowerShell sample, review [Create Azure SQL Managed Instance with PowerShell](scripts/create-configure-managed-instance-powershell.md).
+To update an existing SQL managed instance to be zone-redundant by using PowerShell, use the `-ZoneRedundant` switch when using the [Set-AzSqlInstance](/powershell/module/az.sql/set-azsqlinstance) command. For a full PowerShell sample, review [Use PowerShell to create a SQL managed instance](scripts/create-configure-managed-instance-powershell.md).
 
 Omit `-ZoneRedundant` if you want to disable zone redundancy for your existing SQL managed instance.
 
 ### [Azure CLI](#tab/azure-cli)
 
-To update an existing SQL managed instance to be zone-redundant by using the Azure CLI, set the `--zone-redundant` parameter to `true` when using the [az sql mi update](/cli/azure/sql/mi#az-sql-mi-update) command. For a full Azure CLI sample, review [Create Azure SQL Managed Instance with the Azure CLI](scripts/create-configure-managed-instance-cli.md).
+To update an existing SQL managed instance to be zone-redundant by using the Azure CLI, set the `--zone-redundant` parameter to `true` when using the [az sql mi update](/cli/azure/sql/mi#az-sql-mi-update) command. For a full Azure CLI sample, review [Create an Azure SQL Managed Instance using the Azure CLI](scripts/create-configure-managed-instance-cli.md).
 
 Set `--zone-redundant` to `false` if you want to disable zone redundancy for your existing SQL managed instance.
 

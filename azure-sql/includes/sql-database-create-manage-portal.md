@@ -1,33 +1,37 @@
 ---
-author: MashaMSFT
-ms.author: mathoma
-ms.reviewer: 
-ms.date: 08/23/2019
-ms.service: azure-sql-database
+author: WilliamDAssafMSFT
+ms.author: wiassaf
+ms.reviewer: mathoma
+ms.date: 08/25/2025
+ms.service: azure-sql
 ms.subservice: service-overview
 ms.topic: include
 ---
 
-## Create and manage Azure SQL resources with the Azure portal
+<a id="create-and-manage-azure-sql-resources-with-the-azure-portal"></a>
 
-The Azure portal provides a single page where you can manage [all of your Azure SQL resources](https://go.microsoft.com/fwlink/?linkid=2100641) including your SQL Server on Azure virtual machines (VMs).
+## Create Azure SQL resources with the Azure portal
+
+The Azure portal provides a single page to create Azure SQL resources. Get started at [aka.ms/azuresqlhub](https://aka.ms/azuresqlhub):
+
+- The Azure SQL hub is the launching point for **Azure SQL Database**, **Azure SQL Database Hyperscale**, **Azure SQL Managed Instance**, and **SQL Server on Azure Virtual Machines**.
+
+   :::image type="content" source="media/sql-database-create-manage-portal/single-sql-database-deployment-options.png" alt-text="Screenshot of database tile details in the Azure portal." lightbox="media/sql-database-create-manage-portal/single-sql-database-deployment-options.png":::
+
+- The Azure SQL hub includes **Find the right option** and **Compare options** informative helpers.
+    - The **Find the right option** wizard asks you some questions about key decision points and helps you identify the best new resource to create.
+
+      :::image type="content" source="media/sql-database-create-manage-portal/find-the-right-option.png" alt-text="Screenshot from the Azure portal of the Find the right option wizard." lightbox="media/sql-database-create-manage-portal/find-the-right-option.png":::
+
+    - The **Product comparison** provides key product features per area and **Create** buttons to get you started.
+
+      :::image type="content" source="media/sql-database-create-manage-portal/product-comparison-details.png" alt-text="Screenshot from the Azure portal Azure SQL product comparison page." lightbox="media/sql-database-create-manage-portal/product-comparison-details.png":::
+
+## Manage Azure SQL resources with the Azure portal
 
 To access the **Azure SQL** page, from the Azure portal menu, select **Azure SQL** or search for and select **Azure SQL** in any page.
 
+The Azure portal provides a single page where you can manage [all of your Azure SQL resources](https://aka.ms/azuresqlhub) including your SQL Server on Azure virtual machines (VMs). To manage existing resources, select the desired item in the list. 
+
 > [!NOTE]
-> **Azure SQL** provides a quick and easy way to access all of your SQL resources in the Azure portal, including single and pooled databases in Azure SQL Database as well as the logical server hosting them, Azure SQL Managed Instances, and SQL Server on Azure VMs. [Azure SQL](../azure-sql-iaas-vs-paas-what-is-overview.md) is not a service or resource, but rather a family of SQL-related services.
-
-To manage existing resources, select the desired item in the list. To create new Azure SQL resources, select **+ Create**.
-
-:::image type="content" source="media/sql-database-create-manage-portal/add-azure-sql-resources.png" alt-text="Screenshot of the Azure SQL portal page."  lightbox="media/sql-database-create-manage-portal/add-azure-sql-resources.png":::
-
-After selecting **+ Create**, view additional information about the different options by selecting **Show details** on any tile.
-
-:::image type="content" source="media/sql-database-create-manage-portal/single-sql-database-deployment-options.png" alt-text="Screenshot of database tile details in the Azure portal."  lightbox="media/sql-database-create-manage-portal/single-sql-database-deployment-options.png":::
-
-For details, see:
-
-- [Create a single database](../database/single-database-create-quickstart.md)
-- [Create an elastic pool](../database/elastic-pool-overview.md#create-a-new-sql-database-elastic-pool-by-using-the-azure-portal)
-- [Create a managed instance](../managed-instance/instance-create-quickstart.md)
-- [Create a SQL virtual machine](../virtual-machines/windows/sql-vm-create-portal-quickstart.md)
+> **Azure SQL** provides a quick and easy way to access all of your SQL resources in the Azure portal, including single and pooled databases in Azure SQL Database as well as the logical server hosting them, Azure SQL Managed Instances, and SQL Server on Azure VMs. [What is Azure SQL?](../azure-sql-iaas-vs-paas-what-is-overview.md) isn't a service or resource, but rather a family of SQL-related services.

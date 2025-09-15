@@ -4,7 +4,7 @@ description: This detailed guide explains available configuration options when d
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: dpless
-ms.date: 10/16/2023
+ms.date: 08/27/2025
 ms.service: azure-vm-sql-server
 ms.subservice: deployment
 ms.topic: how-to
@@ -37,13 +37,12 @@ Licensing costs for SQL Server are incorporated into the per-second pricing of t
 
 To choose an image, follow these steps: 
 
-1. Select **Azure SQL** in the left-hand menu of the Azure portal. If **Azure SQL** is not in the list, select **All services**, then type *Azure SQL* in the search box. You can select the star next to **Azure SQL** to save it as a favorite to pin it to the left-hand navigation. 
+1. Go to [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub). In the pane for **SQL Server on Azure Virtual Machines**, select **Show options**.
 
-1. Select **+ Create** to open the **Select SQL deployment option** page. Select the **Image** dropdown list and then type **2019** in the SQL Server image search box. Choose a SQL Server image, such as **Free SQL Server License: SQL 2019 on Windows Server 2019** from the dropdown list.  Choose **Show details** for additional information about the image. 
+   :::image type="content" source="media/create-sql-vm-portal/show-options-create-virtual-machine.png" alt-text="Screenshot from the Azure portal of the Azure SQL hub, showing the Show options button and the Create virtual machine button." lightbox="media/create-sql-vm-portal/show-options-create-virtual-machine.png":::
 
-   :::image type="content" source="./media/create-sql-vm-portal/select-sql-vm-image-portal.png" alt-text="Screenshot from the Azure portal of the select a SQL VM image deployment option.":::
-
-1. Select **Create**.
+1. In the **Select an image offer** box, choose a SQL Server image (such as **Free SQL Server License: SQL Server 2025 Enterprise Developer on Windows Server 2025**). 
+1. Select **Create virtual machine**.
 
 [!INCLUDE [appliesto-sqlvm](../../includes/virtual-machines-2014-end-of-support.md)]
 

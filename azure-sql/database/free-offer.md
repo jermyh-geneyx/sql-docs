@@ -4,7 +4,7 @@ description: Guidance on how to deploy the Azure SQL Database offer for up to 10
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: amapatil, mathoma
-ms.date: 02/03/2025
+ms.date: 08/25/2025
 ms.service: azure-sql-database
 ms.subservice: service-overview
 ms.topic: how-to
@@ -20,7 +20,7 @@ Try Azure SQL Database at no cost with our free tier offer. Each Azure subscript
 
 For each database, you receive a monthly allowance of 100,000 vCore seconds of compute, 32 GB of data storage, and 32 GB of backup storage, free for the lifetime of your subscription.
 
-To get started, look for the **Apply offer** banner on the [provisioning page for Azure SQL Database](https://portal.azure.com/#create/Microsoft.SQLDatabase).
+To get started, look for the **Apply offer** banner on the [provisioning page for Azure SQL Database](https://portal.azure.com/#create/Microsoft.SQLDatabase), or select the **Try for free** link on the [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub).
 
 :::image type="content" source="media/free-offer/azure-sql-database-free-banner.png" alt-text="Screenshot from the Azure portal of the Free Offer banner." lightbox="media/free-offer/azure-sql-database-free-banner.png":::
 
@@ -61,7 +61,12 @@ Use the Azure portal to create the new free Azure SQL Database.
 
 To create a free offer database, follow these steps:
 
-1. Go to the Azure portal [provisioning page for Azure SQL Database](https://portal.azure.com/#create/Microsoft.SQLDatabase).
+1. Go to [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub). 
+1. In the pane for **Azure SQL Database**, select **Show options**.
+1. In the **Azure SQL Database options** window, select **Create SQL Database**.
+
+   :::image type="content" source="media/free-offer/show-options-create-sql-database.png" alt-text="Screenshot from the Azure portal showing the Azure SQL hub, the Show options button, and the Create SQL Database button." lightbox="media/free-offer/show-options-create-sql-database.png":::
+
 1. On the **Basics** tab, look for the banner that says "Want to try Azure SQL Database for free?", select the **Apply offer** button.
 1. Under **Project details**, select your Subscription name.
 1. For **Resource group**, select **Create new**, enter `myFreeDBResourceGroup`, and select **OK**.
@@ -146,6 +151,10 @@ To delete `myFreeDBResourceGroup` and all its resources using the Azure portal:
 ## Related content
 
 - [Azure SQL Database free offer FAQ](free-offer-faq.yml)
-- [Connect and query](connect-query-content-reference-guide.md) your database using different tools and languages
+
+[Connect and query](connect-query-content-reference-guide.md) your database using different tools and languages:
 - [Connect and query using SQL Server Management Studio](connect-query-ssms.md)
-- [Connect and query using Azure Data Studio](/azure-data-studio/quickstart-sql-database)
+- [Connect and query using Azure Data Studio](/azure-data-studio/quickstart-sql-database?toc=/azure/sql-database/toc.json)
+- The [mssql extension](https://aka.ms/mssql-marketplace) for [Visual Studio Code](https://code.visualstudio.com/docs)
+- [sqlcmd](/sql/tools/sqlcmd/sqlcmd-utility)
+- [Azure portal query editor for Azure SQL Database](query-editor.md)

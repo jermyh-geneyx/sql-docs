@@ -1,21 +1,22 @@
 ---
-title: Update policy
+title: Update Policy
 titleSuffix: Azure SQL Managed Instance
 description: Use the update policy setting in Azure SQL Managed Instance to control your database compatibility with SQL Server 2022, or receive the latest updates to the database engine.
 author: MladjoA
 ms.author: mlandzic
 ms.reviewer: mathoma
-ms.date: 07/30/2025
+ms.date: 08/25/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: deployment-configuration
 ms.topic: how-to
-monikerRange: "=azuresql||=azuresql-mi"
 ms.custom:
   - azure-sql-split
   - build-2024
   - sfi-image-nochange
+monikerRange: "=azuresql || =azuresql-mi"
 ---
 # Update policy in Azure SQL Managed Instance
+
 [!INCLUDE [appliesto-sqlmi](../includes/appliesto-sqlmi.md)]
 
 This article describes the update policy for [Azure SQL Managed Instance](sql-managed-instance-paas-overview.md), and how to modify it. The update policy is an instance setting that controls access to the latest SQL engine features in Azure. 
@@ -26,7 +27,7 @@ Azure SQL Managed Instance offers the following two update policies:
 - **Always-up-to-date** update policy: The instance has access to all SQL engine features as soon as they're available in Azure. The internal database format no longer aligns with the latest version of SQL Server, and instead evolves with each newly introduced feature.
 
 > [!IMPORTANT]
-> Regardless of the configured update policy, all instances continue receiving updates and features that _don't_ require changes to the SQL engine, such as the following features:  [zone redundancy](high-availability-sla-local-zone-redundancy.md#zone-redundant-availability), and [instance stop and start](instance-stop-start-how-to.md).
+> Regardless of the configured update policy, all instances continue receiving updates and features that _don't_ require changes to the SQL engine, such as the following features: [zone redundancy](high-availability-sla-local-zone-redundancy.md#zone-redundant-availability), and [instance stop and start](instance-stop-start-how-to.md).
 
 ## SQL Server 2022 update policy
 
@@ -42,7 +43,7 @@ When you use the SQL Server 2022 update policy, consider the following points:
 - You might not have access to some of the latest SQL engine features and benefits available to Azure SQL Managed Instance with the **Always-up-to-date** update policy. 
 - The **SQL Server 2022** update policy is available until the [end of mainstream support of SQL Server 2022](/lifecycle/products/sql-server-2022), at which point, the update policy for instances with the **SQL Server 2022** update policy automatically updates to the update policy that corresponds to the latest major SQL Server release available at that time. 
 
-## Always-up-to-date update policy 
+## Always-up-to-date update policy
 
 The **Always-up-to-date** update policy configures your instance to receive all the latest features and updates available to Azure SQL Managed Instance. 
 
@@ -58,16 +59,14 @@ The following table lists all the features that are only available to instances 
 
 |*Always-up-to-date* update policy  |*SQL Server 2022* update policy  |
 |---------|---------|
-|- [JSON data type](/sql/t-sql/data-types/json-data-type) <br /> - [Invoke an HTTPS REST endpoint SP](/sql/relational-databases/system-stored-procedures/sp-invoke-external-rest-endpoint-transact-sql) <br /> - [Azure SQL Managed Instance Mirroring in Fabric](/fabric/database/mirrored-database/azure-sql-managed-instance) <br /> - [Vector functions](/sql/t-sql/functions/vector-functions-transact-sql?view=azuresqlmi-current&preserve-view=true) <br /> - [Vector data type](/sql/t-sql/data-types/vector-data-type?view=azuresqlmi-current&preserve-view=true) <br /> - [Fuzzy string matching?](/sql/relational-databases/fuzzy-string-match/overview)  <br /> - [DATEADD (Transact-SQL)](/sql/t-sql/functions/dateadd-transact-sql).  <br /> - [UNISTR (Transact-SQL)](/sql/t-sql/functions/unistr-transact-sql) <br /> - [Regular expression functions](/sql/relational-databases/regular-expressions/overview) <br /> - [\|\| (String concatenation)](/sql/t-sql/language-elements/string-concatenation-pipes-transact-sql) <br /> - [\|\|= (Compound assignment)](/sql/t-sql/language-elements/compound-assignment-pipes-transact-sql) <br /> - [Degree of parallelism (DOP) feedback](/sql/relational-databases/performance/intelligent-query-processing-degree-parallelism-feedback?view=azuresqlmi-current&preserve-view=true) <br /> - [Optimized locking](/sql/relational-databases/performance/optimized-locking?view=azuresqlmi-current&preserve-view=true)  | - [Restore database to SQL Server 2022](restore-database-to-sql-server.md)  <br /> - [Link with bidirectional failover and disaster recovery](managed-instance-link-disaster-recovery.md)   |
+|- [JSON data type](/sql/t-sql/data-types/json-data-type) <br /> - [Invoke an HTTPS REST endpoint SP](/sql/relational-databases/system-stored-procedures/sp-invoke-external-rest-endpoint-transact-sql) <br /> - [Azure SQL Managed Instance Mirroring in Fabric](/fabric/database/mirrored-database/azure-sql-managed-instance) <br /> - [Vector functions](/sql/t-sql/functions/vector-functions-transact-sql?view=azuresqlmi-current&preserve-view=true) <br /> - [Vector data type](/sql/t-sql/data-types/vector-data-type?view=azuresqlmi-current&preserve-view=true) <br /> - [Fuzzy string matching](/sql/relational-databases/fuzzy-string-match/overview)  <br /> - [DATEADD (Transact-SQL)](/sql/t-sql/functions/dateadd-transact-sql).  <br /> - [UNISTR (Transact-SQL)](/sql/t-sql/functions/unistr-transact-sql) <br /> - [Regular expression functions](/sql/relational-databases/regular-expressions/overview) <br /> - [\|\| (String concatenation)](/sql/t-sql/language-elements/string-concatenation-pipes-transact-sql) <br /> - [\|\|= (Compound assignment)](/sql/t-sql/language-elements/compound-assignment-pipes-transact-sql) <br /> - [Degree of parallelism (DOP) feedback](/sql/relational-databases/performance/intelligent-query-processing-degree-parallelism-feedback?view=azuresqlmi-current&preserve-view=true) <br /> - [Optimized locking](/sql/relational-databases/performance/optimized-locking?view=azuresqlmi-current&preserve-view=true)  | - [Restore a database to SQL Server 2022 from Azure SQL Managed Instance](restore-database-to-sql-server.md)  <br /> - [Disaster recovery with Managed Instance link - Azure SQL Managed Instance](managed-instance-link-disaster-recovery.md)   |
 
-The following features are impacted by the configured update policy: 
+The following features are affected by the configured update policy: 
 
 - [Automated backups](automated-backups-overview.md) and [copy-only backups](/sql/relational-databases/backup-restore/copy-only-backups-sql-server): You can restore database backups taken from instances configured with the **SQL Server 2022** update policy to instances configured with either the **SQL Server 2022** or **Always-up-to-date** update policy. You can restore database backups taken from instances configured with the **Always-up-to-date** update policy only to instances also configured with the **Always-up-to-date** update policy. 
 - [Managed Instance link](managed-instance-link-feature-overview.md#limitations): Only instances with the **SQL Server 2022** update policy can establish a link from SQL Managed Instance to SQL Server 2022 or fail back from SQL Server 2022 to SQL Managed Instance. 
 - [Database copy and move](database-copy-move-how-to.md#limitations): You can't copy or move a database from an instance configured with the **Always-up-to-date** update policy to an instance configured with the **SQL Server 2022** update policy. 
 - [Failover groups](failover-group-configure-sql-mi.md#change-update-policy): Instances in a failover group must have matching update policies. 
-
-
 
 ## Which update policy to choose?
 
@@ -108,11 +107,9 @@ Set `--database-format` = `AlwaysUpToDate` when you update an existing SQL manag
 
 ### [REST API](#tab/rest-api)
 
-
 Set `databaseFormat` = `AlwaysUpToDate` when you update an existing SQL managed instance with the [Managed Instances - Create Or Update](/rest/api/sql/managed-instances/create-or-update#create-managed-instance-with-all-properties) REST API command to configure your instance to use the **Always-up-to-date** update policy. 
 
 ---
-
 
 ## New instances
 
@@ -125,9 +122,14 @@ Although the **SQL Server 2022** update policy is enabled by default, you can ch
 
 To create a new SQL managed instance with the **Always-up-to-date** policy in the Azure portal, follow these steps: 
 
-1. Go to the **Azure SQL** page in the [Azure portal](https://portal.azure.com) and select **+ Create** to open the **Select SQL deployment option** page. 
-1. In the **SQL managed instances** tile, select *Single instance* from the dropdown, and then select **Create** to open the **Create Azure SQL Managed Instance** page. 
-1. On the **Create Azure SQL Managed Instance** page, fill out details for your instance. On the **Additional settings** tab, under **SQL engine updates**, choose the **Always-up-to-date** policy: 
+1. Go to [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub).
+1. In the pane for **Azure SQL Managed Instance**, select **Show options**.
+1. In the **Azure SQL Managed Instance options** window, select **Create SQL Managed Instance**.
+
+   :::image type="content" source="media/update-policy/show-options-create-sql-managed-instance.png" alt-text="Screenshot from the Azure portal of the Azure SQL hub, showing the Show options button and the Create SQL Managed Instance button." lightbox="media/update-policy/show-options-create-sql-managed-instance.png":::
+
+1. On the **Create Azure SQL Managed Instance** page, fill out details for your instance. For complete steps to create a new SQL managed instance, see [Quickstart: Create Azure SQL Managed Instance](instance-create-quickstart.md).
+1. On the **Additional settings** tab, under **SQL engine updates**, choose the **Always-up-to-date** policy: 
 
    :::image type="content" source="media/update-policy/update-policy-new-instance.png" alt-text="Screenshot of the Create Azure SQL Managed Instance page of the Azure portal with update policy selected.":::
 
@@ -147,7 +149,7 @@ Set `databaseFormat` = `AlwaysUpToDate` when you create a new SQL managed instan
 
 ---
 
-## Check update policy 
+## Check update policy
 
 You can check the current update policy by using the Azure portal or Transact-SQL (T-SQL). 
 
@@ -165,6 +167,6 @@ The following values for `ProductUpdateType` indicate the update policy for the 
 
 ## Related content
 
-- [SQL Managed Instance automated backups](automated-backups-overview.md)
-- [Long-term retention](../database/long-term-retention-overview.md)
-- To learn about faster recovery options, see [Failover groups](failover-group-sql-mi.md).
+- [Automated backups in Azure SQL Managed Instance](automated-backups-overview.md)
+- [Long-term retention backups - Azure SQL Database and Azure SQL Managed Instance](../database/long-term-retention-overview.md)
+- [Failover groups overview & best practices - Azure SQL Managed Instance](failover-group-sql-mi.md)

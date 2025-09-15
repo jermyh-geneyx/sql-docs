@@ -53,7 +53,7 @@ You can find additional files on GitHub:
 
 ## Restore to SQL Server
 
-You can use the `.bak` file to restore your sample database to your [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] instance. You can do so by using the [RESTORE statements](../t-sql/statements/restore-statements-transact-sql.md) command or by using the graphical interface (GUI) in [SSMS](../ssms/download-sql-server-management-studio-ssms.md) or [Azure Data Studio](/azure-data-studio/download-azure-data-studio).
+You can use the `.bak` file to restore your sample database to your [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] instance. You can do so using the [RESTORE](../t-sql/statements/restore-statements-transact-sql.md) T-SQL command, or using the graphical interface (GUI) in [SSMS](../ssms/download-sql-server-management-studio-ssms.md), [Azure Data Studio](/azure-data-studio/download-azure-data-studio), the [mssql extension](https://aka.ms/mssql-marketplace) for [Visual Studio Code](https://code.visualstudio.com/docs), or any T-SQL query tool.
 
 # [SSMS](#tab/ssms)
 
@@ -167,15 +167,22 @@ When you create a new database in SQL Database, you can create a blank database,
 
 Follow these steps to deploy a new sample `AdventureWorksLT` database in Azure SQL Database:
 
-1. Connect to the Azure portal.
-1. Select **Create a resource** at the top of the left pane.
-1. Select **Databases**, and then select **SQL Database**.
-1. Supply the requested information to create your database.
-1. On the **Additional settings** tab, select **Sample** under **Use existing data**:
+1. Go to [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub). 
+1. In the pane for **Azure SQL Database**, select **Show options**.
+1. In the **Azure SQL Database options** window, select **Create SQL Database**.
+
+   :::image type="content" source="media/adventureworks-install-configure/show-options-create-sql-database.png" alt-text="Screenshot from the Azure portal showing the Azure SQL hub, the Show options button, and the Create SQL Database button." lightbox="media/adventureworks-install-configure/show-options-create-sql-database.png":::
+
+1. Fill in the requested information to create your database.
+1. On the **Additional settings** tab, choose **Sample** as the existing data under **Data source**:
 
    :::image type="content" source="media/adventureworks-install-configure/deploy-sample-to-azure.png" alt-text="Screenshot that shows the Sample option under Use existing data." lightbox="media/adventureworks-install-configure/deploy-sample-to-azure.png":::
 
-1. Select **Create** to create your new sample database.
+1. Select **Next: Tags**.
+
+1. Consider using Azure tags. For example, the "Owner" or "CreatedBy" tag to identify who created the resource, and the Environment tag to identify whether this resource is in Production, Development, etc. For more information, see [Develop your naming and tagging strategy for Azure resources](/azure/cloud-adoption-framework/ready/azure-best-practices/naming-and-tagging).
+
+1. Select **Create** to create your new SQL Database, which is the restored copy of the `AdventureWorksLT` database.
 
 ### Deploy a database from SQL Server
 

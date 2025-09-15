@@ -1,10 +1,10 @@
 ---
-title: Create a Hyperscale database
+title: Create a Hyperscale Database
 description: Create a Hyperscale database in Azure SQL Database using the Azure portal, Transact-SQL, PowerShell, or the Azure CLI.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: mathoma
-ms.date: 09/17/2024
+ms.date: 08/25/2025
 ms.service: azure-sql-database
 ms.subservice: deployment-configuration
 ms.topic: quickstart
@@ -38,12 +38,12 @@ This quickstart creates a single database in the [Hyperscale service tier](servi
 
 # [Portal](#tab/azure-portal)
 
-To create a single database in the Azure portal, this quickstart starts at the Azure SQL page.
+To create a single database in the Azure portal:
 
-1. Browse to the [Select SQL Deployment option](https://portal.azure.com/#create/Microsoft.AzureSQL) page.
-1. Under **SQL databases**, leave **Resource type** set to **Single database**, and select **Create**.
+1. Go to [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub). In the pane for **Azure SQL Database Hyperscale**, select **Show options**.
+1. In the **Azure SQL Database Hyperscale options** window, select **Create SQL Database Hyperscale**.
 
-    :::image type="content" source="media/hyperscale-database-create-quickstart/azure-sql-create-resource.png" alt-text="Screenshot of the Azure SQL page in the Azure portal. The page offers the ability to select a deployment option including creating SQL databases, SQL managed instances, and SQL virtual machines." lightbox="media/hyperscale-database-create-quickstart/azure-sql-create-resource.png":::
+   :::image type="content" source="media/hyperscale-database-create-quickstart/show-options-create-sql-database-hyperscale.png" alt-text="Screenshot from the Azure portal showing the Azure SQL hub, the Show options button, and the Create SQL Database Hyperscale button." lightbox="media/hyperscale-database-create-quickstart/show-options-create-sql-database-hyperscale.png":::
 
 1. On the **Basics** tab of the **Create SQL Database** form, under **Project details**, select the desired Azure **Subscription**.
 1. For **Resource group**, select **Create new**, enter *myResourceGroup*, and select **OK**.
@@ -69,7 +69,6 @@ To create a single database in the Azure portal, this quickstart starts at the A
 1. Carefully consider the configuration option for **Backup storage redundancy** when creating a Hyperscale database. Storage redundancy can only be specified during the database creation process for Hyperscale databases. You can choose locally redundant, zone-redundant, or geo-redundant storage. The selected storage redundancy option will be used for the lifetime of the database for both [data storage redundancy](hyperscale-architecture.md#azure-storage) and [backup storage redundancy](automated-backups-overview.md#backup-storage-redundancy). Existing databases can migrate to different storage redundancy using [database copy](database-copy.md) or point in time restore.
 
     :::image type="content" source="media/hyperscale-database-create-quickstart/azure-sql-create-database-basics-tab.png" alt-text="Screenshot of the basics tab in the create database process after the Hyperscale service tier has been selected and configured." lightbox="media/hyperscale-database-create-quickstart/azure-sql-create-database-basics-tab.png":::
-
 
 1. Select **Next: Networking** at the bottom of the page.
 1. On the **Networking** tab, for **Connectivity method**, select **Public endpoint**.
@@ -120,7 +119,6 @@ startIp=0.0.0.0
 endIp=0.0.0.0
 
 echo "Using resource group $resourceGroupName with login: $login, password: $password..."
-
 ```
 
 ### Create a resource group
@@ -130,7 +128,6 @@ Create a resource group with the [az group create](/cli/azure/group) command. An
 ```azurecli-interactive
 echo "Creating $resourceGroupName in $location..."
 az group create --name $resourceGroupName --location "$location" --tag $tag
-
 ```
 
 ### Create a server
@@ -138,10 +135,8 @@ az group create --name $resourceGroupName --location "$location" --tag $tag
 Create a [logical server](logical-servers.md) with the [az sql server create](/cli/azure/sql/server) command.
 
 ```azurecli-interactive
-
 echo "Creating $serverName in $location..."
 az sql server create --name $serverName --resource-group $resourceGroupName --location "$location" --admin-user $login --admin-password $password
-
 ```
 
 ### Configure a server-based firewall rule
@@ -151,7 +146,6 @@ Create a firewall rule with the [az sql server firewall-rule create](/cli/azure/
 ```azurecli-interactive
 echo "Configuring firewall..."
 az sql server firewall-rule create --resource-group $resourceGroupName --server $serverName -n AllowYourIp --start-ip-address $startIp --end-ip-address $endIp
-
 ```
 
 ### Create a single database
@@ -174,7 +168,6 @@ az sql db create \
     --capacity 2 \
     --backup-storage-redundancy Geo \
     --ha-replicas 1 
-
 ```
 
 # [PowerShell](#tab/azure-powershell)
@@ -212,7 +205,6 @@ Before running the sample code, change the `location` as appropriate for your en
    Write-host "Resource group name is" $resourceGroupName
    Write-host "Server name is" $serverName
    Write-host "Password is" $password
-
 ```
 
 ### Create resource group
@@ -223,7 +215,6 @@ Create an Azure resource group with [New-AzResourceGroup](/powershell/module/az.
    Write-host "Creating resource group..."
    $resourceGroup = New-AzResourceGroup -Name $resourceGroupName -Location $location -Tag @{Owner="SQLDB-Samples"}
    $resourceGroup
-
 ```
 
 ### Create a server
@@ -238,7 +229,6 @@ Create a server with the [New-AzSqlServer](/powershell/module/az.sql/new-azsqlse
       -SqlAdministratorCredentials $(New-Object -TypeName System.Management.Automation.PSCredential `
       -ArgumentList $adminLogin, $(ConvertTo-SecureString -String $password -AsPlainText -Force))
    $server
-
 ```
 
 ### Create a firewall rule
@@ -251,7 +241,6 @@ Create a server firewall rule with the [New-AzSqlServerFirewallRule](/powershell
       -ServerName $serverName `
       -FirewallRuleName "AllowedIPs" -StartIpAddress $startIp -EndIpAddress $endIp
    $serverFirewallRule
-
 ```
 
 ### Create a single database
@@ -276,7 +265,6 @@ Run the following command to create a Hyperscale database populated with Adventu
       -BackupStorageRedundancy Geo `
       -HighAvailabilityReplicaCount 1
    $database
-
 ```
 
 # [Transact-SQL](#tab/t-sql)
@@ -285,7 +273,7 @@ To create a Hyperscale database with Transact-SQL, you must first [create or ide
 
 Connect to the `master` database using [SQL Server Management Studio (SSMS)](/sql/ssms/download-sql-server-management-studio-ssms), [Azure Data Studio](/azure-data-studio/download-azure-data-studio), or the client of your choice to run Transact-SQL commands ([sqlcmd](/sql/tools/sqlcmd-utility), etc.).
 
-When creating a Hyperscale database, carefully consider the setting for `BACKUP_STORAGE_REDUNDANCY`. Storage redundancy can only be specified during the database creation process for Hyperscale databases. You can choose locally redundant, zone-redundant, or geo-redundant storage. The selected storage redundancy option will be used for the lifetime of the database for both [data storage redundancy](hyperscale-architecture.md#azure-storage) and [backup storage redundancy](automated-backups-overview.md#backup-storage-redundancy). Existing databases can migrate to different storage redundancy using [database copy](database-copy.md) or point in time restore. Allowed values for the `BackupStorageRedundancy` parameter are: `LOCAL`, `ZONE`, `GEO`.  Unless explicitly specified, databases will be configured to use geo-redundant backup storage.
+When creating a Hyperscale database, carefully consider the setting for `BACKUP_STORAGE_REDUNDANCY`. Storage redundancy can only be specified during the database creation process for Hyperscale databases. You can choose locally redundant, zone-redundant, or geo-redundant storage. The selected storage redundancy option will be used for the lifetime of the database for both [data storage redundancy](hyperscale-architecture.md#azure-storage) and [backup storage redundancy](automated-backups-overview.md#backup-storage-redundancy). Existing databases can migrate to different storage redundancy using [database copy](database-copy.md) or point in time restore. Allowed values for the `BackupStorageRedundancy` parameter are: `LOCAL`, `ZONE`, `GEO`. Unless explicitly specified, databases will be configured to use geo-redundant backup storage.
 
 Run the following Transact-SQL command to create a new Hyperscale database with Gen 5 hardware, 2 vCores, and geo-redundant backup storage. You must specify both the edition and service objective in the `CREATE DATABASE` statement. Refer to the [resource limits](resource-limits-vcore-single-databases.md) for a list of valid service objectives, such as `HS_Gen5_2`.
 
@@ -332,21 +320,21 @@ Once your database is created, you can use the **Query editor (preview)** in the
      CONSTRAINT PK_TestTable_TestTableID PRIMARY KEY CLUSTERED (TestTableID ASC)
     ) 
     GO
-    
+
     ALTER TABLE dbo.TestTable ADD CONSTRAINT DF_TestTable_TestTime  DEFAULT (getdate()) FOR TestTime
     GO
-    
+
     INSERT dbo.TestTable (TestMessage)
     VALUES (N'This is a test');
     GO
-    
+
     SELECT TestTableID, TestTime, TestMessage
     FROM dbo.TestTable;
     GO
     ```
 
 1. Select **Run**, and then review the query results in the **Results** pane.
-    
+
     :::image type="content" source="media/hyperscale-database-create-quickstart/query-editor-azure-portal-run-query.png" alt-text="Screenshot of the Query editor (preview) pane in Azure SQL Database after a query has been run against AdventureWorks sample data." lightbox="media/hyperscale-database-create-quickstart/query-editor-azure-portal-run-query.png":::
 
 1. Close the **Query editor** page, and select **OK** when prompted to discard your unsaved edits.
@@ -371,7 +359,6 @@ Use the following command to remove the resource group and all resources associa
 
 ```azurecli-interactive
 az group delete --name $resourceGroup
-
 ```
 
 # [PowerShell](#tab/azure-powershell)
@@ -380,7 +367,6 @@ To delete the resource group and all its resources, run the following PowerShell
 
 ```azurepowershell-interactive
 Remove-AzResourceGroup -Name $resourceGroupName
-
 ```
 
 # [Transact-SQL](#tab/t-sql)
@@ -403,6 +389,9 @@ GO
 [Connect and query](connect-query-content-reference-guide.md) your database using different tools and languages:
 - [Connect and query using SQL Server Management Studio](connect-query-ssms.md)
 - [Connect and query using Azure Data Studio](/azure-data-studio/quickstart-sql-database?toc=/azure/sql-database/toc.json)
+- The [mssql extension](https://aka.ms/mssql-marketplace) for [Visual Studio Code](https://code.visualstudio.com/docs)
+- [sqlcmd](/sql/tools/sqlcmd/sqlcmd-utility)
+- [Azure portal query editor for Azure SQL Database](query-editor.md)
 
 Learn more about Hyperscale databases in the following articles:
 

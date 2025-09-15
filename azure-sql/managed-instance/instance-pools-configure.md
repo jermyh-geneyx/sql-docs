@@ -1,11 +1,11 @@
 ---
-title: Create instance pool
+title: Create Instance Pool
 titleSuffix: Azure SQL Managed Instance
 description: Learn how to create instance pools for Azure SQL Managed Instance, a feature that lets you share resources for multiple instances, and provides a convenient and cost-efficient way to migrate smaller SQL Server databases to the cloud at scale. Create your instance pool by using the Azure portal, PowerShell, or the Azure CLI.
 author: MariDjo
 ms.author: dmarinkovic
 ms.reviewer: mathoma, randolphwest
-ms.date: 10/14/2024
+ms.date: 08/25/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: deployment-configuration
 ms.topic: how-to
@@ -21,19 +21,19 @@ ms.custom:
 
 This article teaches how to create an [instance pool](instance-pools-overview.md) for [Azure SQL Managed Instance](sql-managed-instance-paas-overview.md) by using the Azure portal, PowerShell, or the Azure CLI, as well as how to move instances in and out of the pool by using PowerShell, or the Azure CLI.
 
-Instance pools make it possible to deploy multiple instances with shared resources to a single virtual machine, which provides a convenient and cost-effective infrastructure to migrate multiple SQL Server instances without having to consolidate smaller and less compute-intensive workloads onto a larger SQL Managed Instance.
+Instance pools make it possible to deploy multiple SQL managed instances with shared resources to a single virtual machine, which provides a convenient and cost-effective infrastructure to migrate multiple SQL Server instances without having to consolidate smaller and less compute-intensive workloads onto a larger SQL Managed Instance.
 
 ## Prerequisites
 
-To create an instance pool, you should have:
+To create a SQL managed instance pool, you should have:
 
 - An existing [virtual network](vnet-existing-add-subnet.md) with an [appropriately sized](vnet-subnet-determine-size.md) subnet range.
 - The latest [Az.SQL](/powershell/module/az.sql/) module for the current version of PowerShell or the latest version of the [Azure CLI](/cli/azure/install-azure-cli-windows).
-- Reviewed [Instance and pool properties](instance-pools-overview.md#instance-and-pool-properties).
+- Reviewed [SQL managed instance and pool properties](instance-pools-overview.md#instance-and-pool-properties).
 
 ### Subnet size considerations
 
-Carefully plan the size of your subnet when you use an instance pool. Refer to [Determine required subnet size & range](vnet-subnet-determine-size.md) for subnet sizing guidelines.
+Carefully plan the size of your subnet when you use a SQL managed instance pool. Refer to [Determine required subnet size and range for Azure SQL Managed Instance](vnet-subnet-determine-size.md) for subnet sizing guidelines.
 
 Use the following formula when calculating the number of IP addresses required by one instance pool that contains multiple General Purpose instances:
 
@@ -43,7 +43,7 @@ The `# of MIs` refers to the maximum potential number of instances you plan to p
 
 ## Create instance pool
 
-You can create an instance pool by using the Azure portal, PowerShell or the Azure CLI. Consider the following:
+You can create a SQL managed instance pool by using the Azure portal, PowerShell or the Azure CLI. Consider the following:
 
 - Only the General Purpose service tier on either standard-series (Gen5) or premium-series hardware is currently available.
 - The pool name can contain only lowercase letters, numbers and hyphens, and can't start with a hyphen.
@@ -54,17 +54,14 @@ You can create an instance pool by using the Azure portal, PowerShell or the Azu
 
 ### [Azure portal](#tab/portal)
 
-To create an instance pool in the Azure portal, follow these steps:
+To create a SQL managed instance pool in the Azure portal, follow these steps:
 
-1. Search for **instance pools** in the [Azure portal](https://portal.azure.com) and select the **Instance pools** service to open the **Instance pools** page:
+1. Go to [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub). In the pane for **Azure SQL Managed Instance**, select **Show options**.
+1. In the **Azure SQL Managed Instance options** window, select **Create Instance Pool**.
 
-   :::image type="content" source="media/instance-pools-configure/instance-pool-search-portal.png" alt-text="Screenshot searching for instance pools in the Azure portal." lightbox="media/instance-pools-configure/instance-pool-search-portal.png":::
+   :::image type="content" source="media/instance-pools-configure/show-options-create-instance-pool.png" alt-text="Screenshot from the Azure portal of the Azure SQL hub, showing the Show options button under Azure SQL Managed Instance and the Create Instance pool button." lightbox="media/instance-pools-configure/show-options-create-instance-pool.png":::
 
-1. On the **Instance pools** page, select **+ Create** to open the **Create Azure SQL Managed Instance Pool** page:
-
-   :::image type="content" source="media/instance-pools-configure/instance-pool-portal-page.png" alt-text="Screenshot of the Instance pools page in the Azure portal, with +Create selected." lightbox="media/instance-pools-configure/instance-pool-portal-page.png":::
-
-1. On the **Create Azure SQL Managed Instance Pool**:
+1. On the **Create Azure SQL Managed Instance Pool** page:
     1. Provide project and instance details on the **Basics** tab.
     1. Use **Configure instance pool** under **Compute + storage** to open the **Compute + Storage** page and choose the service tier, compute hardware and SQL Server license that you want the pool to use. Use **Apply** to save your compute settings and go back to the **Create Azure SQL Managed Instance Pool** page.
     1. Select an existing virtual network, or configure a new virtual network on the **Networking** tab.
@@ -75,11 +72,11 @@ To create an instance pool in the Azure portal, follow these steps:
 
 1. You can monitor pool deployment from **Notifications**.
 
-After your instance pool is created, you can [create a new instance](#create-new-instance-inside-pool) in the pool by using the Azure portal, or you can [move an existing instance into the pool](#move-existing-instance) by using PowerShell or the Azure CLI.
+After your SQL managed instance pool is created, you can [create a new instance](#create-new-instance-inside-pool) in the pool by using the Azure portal, or you can [move an existing instance into the pool](#move-existing-instance) by using PowerShell or the Azure CLI.
 
 ### [PowerShell](#tab/powershell)
 
-To create your instance pool, use [New-AzSqlInstancePool](/powershell/module/az.sql/new-azsqlinstancepool).
+To create your SQL managed instance pool, use [New-AzSqlInstancePool](/powershell/module/az.sql/new-azsqlinstancepool).
 
 Consider the following:
 
@@ -112,7 +109,7 @@ $instancePool = New-AzSqlInstancePool @parameters
 
 ### [Azure CLI](#tab/azure-cli)
 
-To create your instance pool, use [az sql instance-pool create](/cli/azure/sql/instance-pool#az-sql-instance-pool-create).
+To create your SQL managed instance pool, use [az sql instance-pool create](/cli/azure/sql/instance-pool#az-sql-instance-pool-create).
 
 Consider the following:
 - For `--license-type`, use *BasePrice* for the Azure Hybrid Benefit or *LicenseIncluded* if you don't have a SQL Server license that can be used for the Azure Hybrid Benefit discount.
@@ -137,18 +134,21 @@ az sql instance-pool create \
 
 ## Create new instance inside pool
 
-After your pool is created, you can create a new instance within the pool by using the Azure portal, PowerShell, or the Azure CLI.
+After your pool is created, you can create a new SQL managed instance within the pool by using the Azure portal, PowerShell, or the Azure CLI.
 
 Consider the following:
-- You must specify the license type for the new instance, and it must match the license type of the pool.
+- You must specify the license type for the new SQL managed instance, and it must match the license type of the pool.
 
 ### [Azure portal](#tab/portal)
 
-To create a new instance inside a pool by using the Azure portal, follow these steps:
+To create a new SQL managed instance inside a pool by using the Azure portal, follow these steps:
 
-1. Go to the [Azure SQL](https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Sql%2Fazuresql) page in the Azure portal.
-1. On the **Azure SQL** page, select **+ Create** to open the **Select SQL deployment option**.
-1. On the **SQL managed instances** tile, choose **Single instance** as the resource type and then select **Create** to open the **Create Azure SQL Managed Instance** page.
+1. Go to [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub).
+1. In the pane for **Azure SQL Managed Instance**, select **Show options**.
+1. In the **Azure SQL Managed Instance options** window, select **Create SQL Managed Instance**.
+
+   :::image type="content" source="media/instance-pools-configure/show-options-create-sql-managed-instance.png" alt-text="Screenshot from the Azure portal of the Azure SQL hub, showing the Show options button and the Create SQL Managed Instance button." lightbox="media/instance-pools-configure/show-options-create-sql-managed-instance.png":::
+
 1. On the **Basics** tab of the **Create Azure SQL Managed Instance** page:
     1. Select the resource group that contains your existing instance pool.
     1. Choose _Yes_ to **Belongs to an instance pool?** under **Managed Instance details** to create your new instance inside an instance pool.
@@ -158,14 +158,14 @@ To create a new instance inside a pool by using the Azure portal, follow these s
 
    After you've selected an instance pool from the dropdown list, you see the compute cost for the instance change to 0 because compute is included in the cost of the pool.
 
-1. Fill out the remaining details on the **Create Azure SQL Managed Instance** page to create your instance inside the pool. For details, review [Create Azure SQL Managed Instance](instance-create-quickstart.md).
+1. Fill out the remaining details on the **Create Azure SQL Managed Instance** page to create your instance inside the pool. For details, review [Quickstart: Create Azure SQL Managed Instance](instance-create-quickstart.md).
 1. Select **Review + create** to review settings for your new instance and then use **Create** to deploy your instance inside the selected pool.
 
 ### [PowerShell](#tab/powershell)
 
-To identify pool parameters with PowerShell, use [Get-AzSqlInstancePool](/powershell/module/az.sql/get-azsqlinstancepool) then create your instance inside the specific pool with [New-AzSqlInstance](/powershell/module/az.sql/new-azsqlinstance).
+To identify pool parameters with PowerShell, use [Get-AzSqlInstancePool](/powershell/module/az.sql/get-azsqlinstancepool) then create your SQL managed instance inside the specific pool with [New-AzSqlInstance](/powershell/module/az.sql/new-azsqlinstance).
 
-Create a new instance in your pool by running the following sample script:
+Create a new SQL managed instance in your pool by running the following sample script:
 
 ```powershell
 $adminCredential = Get-Credential
@@ -183,7 +183,7 @@ $instance01 = $instancePool | New-AzSqlInstance @instance01Params
 
 ### [Azure CLI](#tab/azure-cli)
 
-To create a new instance in your pool with the Azure CLI, provide the pool name in the `--instance-pool-name` parameter when you use [az sql mi create](/cli/azure/sql/mi#az-sql-mi-create) to create your instance:
+To create a new SQL managed instance in your pool with the Azure CLI, provide the pool name in the `--instance-pool-name` parameter when you use [az sql mi create](/cli/azure/sql/mi#az-sql-mi-create) to create your instance:
 
 ```azurecli
 #obtain the subnetId of an instance pool
@@ -205,7 +205,7 @@ az sql mi create \
 
 ## Move existing instance
 
-You can move an existing instance into and out of a pool by using PowerShell or the Azure CLI if:
+You can move an existing SQL managed instance into and out of a pool by using PowerShell or the Azure CLI if:
 
 - It's in the same resource group as the pool.
 - It's on the same virtual network and subnet as the pool.
@@ -217,7 +217,7 @@ Moving an existing instance inside a pool by using the Azure portal is not curre
 
 ### [PowerShell](#tab/powershell-1)
 
-To move an instance into a pool with PowerShell, provide the pool name when you use [Set-AzSqlInstance](/powershell/module/az.sql/set-azsqlinstance):
+To move a SQL managed instance into a pool with PowerShell, provide the pool name when you use [Set-AzSqlInstance](/powershell/module/az.sql/set-azsqlinstance):
 
 ```csv
 $instance01 | Set-AzSqlInstance -InstancePoolName $instancePoolName
@@ -231,7 +231,7 @@ $instance01 | Set-AzSqlInstance -InstancePoolName ''
 
 ### [Azure CLI](#tab/azure-cli-1)
 
-To move an instance into a pool with the Azure CLI, provide the pool name in the `--instance-pool-name` parameter when you use [az sql mi update](/cli/azure/sql/mi#az-sql-mi-update) to update your instance:
+To move a SQL managed instance into a pool with the Azure CLI, provide the pool name in the `--instance-pool-name` parameter when you use [az sql mi update](/cli/azure/sql/mi#az-sql-mi-update) to update your instance:
 
 ```azurecli
 az sql mi update \
@@ -253,13 +253,13 @@ az sql mi update \
 
 ## Connect to instance in a pool
 
-You can choose to connect to an instance in a pool with either a private endpoint, or a public endpoint. To use a private endpoint, you'll need to use the [Azure Private Link](private-endpoint-overview.md).
+You can choose to connect to a SQL managed instance in a pool with either a private endpoint, or a public endpoint. To use a private endpoint, you'll need to use the [Azure Private Link for Azure SQL Managed Instance](private-endpoint-overview.md).
 
 To connect to an instance in a pool with a public endpoint, you need to [enable the endpoint](public-endpoint-configure.md#enable-public-endpoint) and then [allow public endpoint traffic on the network security group](public-endpoint-configure.md#allow-public-endpoint-traffic-in-the-network-security-group).
 
 ## Create a database
 
-Creating a database for an instance inside a pool is the same as creating a database for a single instance. You can create a new database by using the Azure portal, PowerShell or the Azure CLI.
+Creating a database for a SQL managed instance inside a pool is the same as creating a database for a single instance. You can create a new database by using the Azure portal, PowerShell or the Azure CLI.
 
 ### [Azure portal](#tab/portal)
 
@@ -272,7 +272,7 @@ To create a new database for an existing SQL managed instance by using the Azure
 
 ### [PowerShell](#tab/powershell)
 
-To create a new database for your instance, use [New-AzSqlInstanceDatabase](/powershell/module/az.sql/new-azsqlinstancedatabase):
+To create a new database for your SQL managed instance, use [New-AzSqlInstanceDatabase](/powershell/module/az.sql/new-azsqlinstancedatabase):
 
 ```powershell
 $databaseParams = @{
@@ -552,7 +552,7 @@ Available [Azure CLI](/cli/azure/sql) commands:
 
 ## Limitations
 
-Instances in a pool have the following limitations:
+SQL managed instances in a pool have the following limitations:
 
 - The pool name can contain only lowercase letters, numbers and hyphens, and can't start with a hyphen.
 - All instances in the pool use the same licensing model. When you specify a license model for an instance that is different than the license model for the pool, the pool license model is used. When the instance is moved out of the pool, it automatically switches to a full paid license (`LicenseType` = 'LicenseIncluded'). Manually activate the [Azure Hybrid Benefit](../azure-hybrid-benefit.md) or the [hybrid failover rights benefit](managed-instance-link-feature-overview.md#license-free-passive-dr-replica) to change the licensing model.
@@ -565,12 +565,12 @@ Instances in a pool have the following limitations:
 - You can't use the Azure portal to move instances in and out of the pool. Use PowerShell or the Azure CLI instead.
 - The following SQL Managed Instance features aren't supported on instances in a pool:
     - [Failover groups](failover-group-sql-mi.md). [Failover rights](failover-group-standby-replica-how-to-configure.md) aren't available to instances in a pool.
-    - [Start/Stop](instance-stop-start-how-to.md).
+    - [Stop and start an instance](instance-stop-start-how-to.md).
     - [Zone Redundancy](high-availability-sla-local-zone-redundancy.md#zone-redundant-availability).
 
 ## Support requests
 
-[Create and manage support requests](/azure/azure-portal/supportability/how-to-create-azure-support-request) for instance pools in the Azure portal.
+[Create and manage support requests](/azure/azure-portal/supportability/how-to-create-azure-support-request) for SQL managed instance pools in the Azure portal.
 
 To create a new support request in the Azure portal, follow these steps:
 
@@ -588,7 +588,7 @@ To create a new support request in the Azure portal, follow these steps:
 
 1. Select **Next** on the subsequent pages until you're able to **Create** your support request.
 
-To create larger SQL Managed Instance deployments (with or without instance pools), you might need to obtain a larger regional quota. For more information, see [Request quota increases for Azure SQL Database](../database/quota-increase-request.md). The deployment logic for instance pools compares total vCore consumption *at the pool level* against your quota to determine whether you're allowed to create new resources without further increasing your quota.
+To create larger SQL Managed Instance deployments (with or without instance pools), you might need to obtain a larger regional quota. For more information, see [Request quota increase](../database/quota-increase-request.md). The deployment logic for instance pools compares total vCore consumption *at the pool level* against your quota to determine whether you're allowed to create new resources without further increasing your quota.
 
 ## Related content
 

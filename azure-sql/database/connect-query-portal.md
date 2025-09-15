@@ -1,26 +1,26 @@
 ---
-title: Query SQL Database with query editor in the Azure portal
+title: Query SQL Database with Query Editor in the Azure Portal
 titleSuffix: Azure SQL Database
 description: Learn how to connect to an Azure SQL database and use the Azure portal query editor (preview) to run Transact-SQL (T-SQL) queries.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: ivujic, mathoma
-ms.date: 01/15/2025
+ms.date: 08/25/2025
 ms.service: azure-sql-database
 ms.subservice: development
 ms.topic: quickstart
+ms.custom:
+  - sqldbrb=1
+  - mode-ui
+  - kr2b-contr-experiment
+  - sfi-image-nochange
 keywords:
   - connect to sql database
   - query sql database
   - azure portal
   - portal
   - query editor
-monikerRange: "=azuresql||=azuresql-db"
-ms.custom:
-  - sqldbrb=1
-  - mode-ui
-  - kr2b-contr-experiment
-  - sfi-image-nochange
+monikerRange: "=azuresql || =azuresql-db"
 ---
 # Quickstart: Use the Azure portal query editor to query Azure SQL Database
 
@@ -28,7 +28,7 @@ ms.custom:
 
 In this quickstart, connect to an Azure SQL database in the Azure portal and use query editor to run Transact-SQL (T-SQL) queries. The Azure SQL Database query editor (preview) is a tool to run SQL queries against Azure SQL Database in the Azure portal. 
 
-- If you don't already have an Azure SQL Database created, see [Quickstart: Create a single database](single-database-create-quickstart.md). Look for the option to use your offer to [Deploy Azure SQL Database for free](free-offer.md).
+- If you don't already have an Azure SQL Database created, see [Quickstart: Create a single database - Azure SQL Database](single-database-create-quickstart.md). Look for the option to use your offer to [Deploy Azure SQL Database for free](free-offer.md).
 
 ## Prerequisites
 
@@ -38,7 +38,7 @@ You need an account with permissions to connect to the database and query editor
 
 ### Firewall rule
 
-If you receive this error: *Cannot open server 'server-name' requested by the login. Client with IP address 'xx.xx.xx.xx' is not allowed to access the server. To enable access, use the Azure Management Portal or run sp_set_firewall_rule on the master database to create a firewall rule for this IP address or address range. It may take up to five minutes for this change to take effect.*
+If you receive this error: *Cannot open server 'server-name' requested by the login. Client with IP address 'xx.xx.xx.xx' is not allowed to access the server. To enable access, use the Azure Management Portal or run `sp_set_firewall_rule` on the `master` database to create a firewall rule for this IP address or address range. It might take up to five minutes for this change to take effect.*
 
 Follow these quick steps: 
 
@@ -60,7 +60,7 @@ For more information about public network access, TLS version settings, and conn
 
 Connect to your database within the query editor.
 
-1. Navigate to your SQL database in the [Azure portal](https://portal.azure.com). For example, visit [your Azure SQL dashboard](https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Sql%2Fazuresql).
+1. Navigate to your SQL database in the Azure portal. For example, visit [your Azure SQL hub page](https://aka.ms/azuresqlhub), and select your Azure SQL Database.
 
 1. On your SQL database **Overview** page, select **Query editor (preview)** from the resource menu.
 
@@ -177,6 +177,6 @@ Run the following [DELETE](/sql/t-sql/statements/delete-transact-sql/) T-SQL sta
 
 ## Related content
 
-- [Query editor (preview)](query-editor.md)
-- [Quickstart: Create a single database](single-database-create-quickstart.md)
-- [Azure SQL connectivity settings](connectivity-settings.md)
+- [Azure portal query editor for Azure SQL Database](query-editor.md)
+- [Quickstart: Create a single database - Azure SQL Database](single-database-create-quickstart.md)
+- [Connectivity settings](connectivity-settings.md)

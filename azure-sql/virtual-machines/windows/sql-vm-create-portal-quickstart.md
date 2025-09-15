@@ -4,7 +4,7 @@ description: This tutorial shows how to create a Windows virtual machine with SQ
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: dpless
-ms.date: 10/14/2022
+ms.date: 08/27/2025
 ms.service: azure-vm-sql-server
 ms.subservice: deployment
 ms.topic: quickstart
@@ -36,17 +36,16 @@ If you don't have an Azure subscription, create a [free account](https://azure.m
 
 ## <a id="select"></a> Select a SQL Server VM image
 
-1. Sign in to the [Azure portal](https://portal.azure.com) using your account.
+1. Go to [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub).
+1. In the pane for **SQL Server on Azure Virtual Machines**, select **Show options**.
 
-1. Select **Azure SQL** in the left-hand menu of the Azure portal. If **Azure SQL** is not in the list, select **All services**, then type *Azure SQL* in the search box.
-1. Select **+Add** to open the **Select SQL deployment option** page. You can view additional information by selecting **Show details** on the **SQL virtual machines** tile.
-1. For conventional SQL Server VMs, select one of the versions labeled **Free SQL Server License...** from the drop-down. For confidential VMs, choose the `SQL Server 2019 Enterprise on Windows Server 2022 Database Engine Only` image from the drop-down. 
+   :::image type="content" source="media/sql-vm-create-portal-quickstart/show-options-create-virtual-machine.png" alt-text="Screenshot from the Azure portal of the Azure SQL hub, showing the Show options button and the Create SQL Managed Instance button." lightbox="media/sql-vm-create-portal-quickstart/show-options-create-virtual-machine.png":::
 
-   ![Screenshot that shows where you select the Free SQL Server License: SQL Server 2017 Developer on Windows Server 2016 image.](./media/sql-vm-create-portal-quickstart/select-sql-2017-vm-image.png)
+1. In the **Select an image offer** box, choose a SQL Server image (such as **Free SQL Server License: SQL Server 2025 Enterprise Developer on Windows Server 2025**). 
+   
+   For conventional SQL Server VMs, select one of the versions labeled **Free SQL Server License...** from the drop-down. For [confidential VMs](sql-vm-create-confidential-vm-how-to.md), choose the `SQL Server 2022 Enterprise / Developer / Standard / Web on Windows Server 2022 - x64 Gen 2` image from the drop-down list. 
 
-1. Select **Create**.
-
-   ![New search window](./media/sql-vm-create-portal-quickstart/create-sql-2017-vm-image.png)
+1. Select **Create virtual machine**.
 
 ## <a id="configure"></a> Provide basic details
 

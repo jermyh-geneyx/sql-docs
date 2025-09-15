@@ -103,7 +103,7 @@ The following steps show how to connect using multifactor authentication in the 
 
 #### Microsoft Entra Service Principal
 
-Use this method to authenticate to the database in SQL Database or SQL Managed Instance with Microsoft Entra service principals (Microsoft Entra applications). For more information, see [Microsoft Entra service principal with Azure SQL](authentication-aad-service-principal.md).
+Use this method to authenticate to the database in SQL Database or SQL Managed Instance with Microsoft Entra service principals (Microsoft Entra applications). For more information, see [Microsoft Entra service principals with Azure SQL](authentication-aad-service-principal.md).
 
 <a id="azure-active-directory---managed-identity"></a>
 
@@ -220,9 +220,9 @@ sqlcmd -S <database or datawarehouse name>.<server-name>.database.windows.net -U
 
 For more information on the Azure portal Query editor for Azure SQL Database, see [Quickstart: Use the Azure portal query editor to query Azure SQL Database](connect-query-portal.md).
 
-1. Navigate to your SQL database in the Azure portal. For example, visit [your Azure SQL dashboard](https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Sql%2Fazuresql).
+1. Navigate to your SQL database in the Azure portal. For example, visit [your Azure SQL hub page](https://aka.ms/azuresqlhub), and select your Azure SQL Database.
 
-1. On your SQL database **Overview** page in the [Azure portal](https://portal.azure.com), select **Query editor** from the left menu.
+1. On your SQL database **Overview** page in the [Azure portal](https://portal.azure.com), select **Query editor** from the resource menu.
 
 1. On the sign-in screen under **Welcome to SQL Database Query Editor**, select **Continue as \<your user or group ID>**.
 

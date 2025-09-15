@@ -1,14 +1,15 @@
 ---
-title: "Tutorial: Design your first relational database using SSMS"
+title: "Tutorial: Design Your First Relational Database Using SSMS"
 description: Learn to design your first relational database in Azure SQL Database using SQL Server Management Studio.
 author: dzsquared
 ms.author: drskwier
 ms.reviewer: wiassaf, mathoma, v-masebo
-ms.date: 01/26/2024
+ms.date: 08/25/2025
 ms.service: azure-sql-database
 ms.subservice: development
 ms.topic: tutorial
-ms.custom: sfi-image-nochange
+ms.custom:
+  - sfi-image-nochange
 ---
 # Tutorial: Design a relational database in Azure SQL Database
 
@@ -24,15 +25,15 @@ Azure SQL Database is a relational database-as-a-service (DBaaS) in the Microsof
 > - Query data with T-SQL commands
 
 > [!NOTE]
-> For the purpose of this tutorial, we are using Azure SQL Database. You could also use a pooled database in an elastic pool or a SQL Managed Instance. For connectivity to a SQL Managed Instance, see these SQL Managed Instance quickstarts: [Quickstart: Configure Azure VM to connect to an Azure SQL Managed Instance](../managed-instance/connect-vm-instance-configure.md) and [Quickstart: Configure a point-to-site connection to an Azure SQL Managed Instance from on-premises](../managed-instance/point-to-site-p2s-configure.md).
+> For the purpose of this tutorial, we are using Azure SQL Database. You could also use a pooled database in an elastic pool or a SQL Managed Instance. For connectivity to a SQL Managed Instance, see these SQL Managed Instance quickstarts: [Quickstart: Configure an Azure VM to connect to Azure SQL Managed Instance](../managed-instance/connect-vm-instance-configure.md) and [Quickstart: Configure a point-to-site connection to Azure SQL Managed Instance from on-premises](../managed-instance/point-to-site-p2s-configure.md).
 
 ## Prerequisites
 
-- Use [SQL Server Management Studio](/sql/ssms/sql-server-management-studio-ssms) (latest version) or the [Azure portal Query Editor for Azure SQL Database](query-editor.md).
+- Use [SQL Server Management Studio](/sql/ssms/sql-server-management-studio-ssms) (latest version) or the [Azure portal query editor for Azure SQL Database](query-editor.md).
     - You can also follow this same tutorial using [Azure Data Studio (ADS)](design-first-database-azure-data-studio.md).
 - [BCP and SQLCMD](https://www.microsoft.com/download/details.aspx?id=36433) (latest version).
 - If you don't have an Azure subscription, [create a free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?icid=azurefreeaccount) before you begin.
-- If you don't already have an Azure SQL Database created, visit [Quickstart: Create a single database](single-database-create-quickstart.md). Look for the option to use your offer to [Deploy Azure SQL Database for free](free-offer.md).
+- If you don't already have an Azure SQL Database created, visit [Quickstart: Create a single database - Azure SQL Database](single-database-create-quickstart.md). Look for the option to use your offer to [Deploy Azure SQL Database for free](free-offer.md).
 
 ## Sign in to the Azure portal
 
@@ -43,7 +44,7 @@ Sign in to the [Azure portal](https://portal.azure.com/).
 Azure SQL Database creates an IP firewall at the server-level. This firewall prevents external applications and tools from connecting to the server and any databases on the server unless a firewall rule allows their IP through the firewall. To enable external connectivity to your database, you must first add an IP firewall rule for your IP address (or IP address range). Follow these steps to create a [server-level IP firewall rule](firewall-configure.md).
 
 > [!IMPORTANT]
-> Azure SQL Database communicates over port 1433. If you are trying to connect to this service from within a corporate network, outbound traffic over port 1433 may not be allowed by your network's firewall. If so, you cannot connect to your database unless your administrator opens port 1433.
+> Azure SQL Database communicates over port 1433. If you are trying to connect to this service from within a corporate network, outbound traffic over port 1433 might not be allowed by your network's firewall. If so, you cannot connect to your database unless your administrator opens port 1433.
 
 1. After the deployment completes, select **SQL databases** from the Azure portal menu or search for and select *SQL databases* from any page.  
 
@@ -66,7 +67,7 @@ Azure SQL Database creates an IP firewall at the server-level. This firewall pre
 Your IP address can now pass through the IP firewall. You can now connect to your database using SQL Server Management Studio or another tool of your choice. Be sure to use the server admin account you created previously.
 
 > [!IMPORTANT]
-> By default, access through the SQL Database IP firewall is enabled for all Azure services. Select **OFF** on this page to disable for all Azure services.
+> By default, access through the SQL Database IP firewall is enabled for all Azure services. Select `OFF` on this page to disable for all Azure services.
 
 ## Connect to the database
 
@@ -79,7 +80,7 @@ Use [SQL Server Management Studio](/sql/ssms/sql-server-management-studio-ssms) 
 1. Open SQL Server Management Studio.
 1. In the **Connect to Server** dialog box, enter the following information. Leave other options as default.
 
-   | Setting       | Suggested value | Description |
+   | Setting       | Suggested value | Description |
    | ------------ | ------------------ | ------------------------------------------------- |
    | **Server type** | Database engine | This value is required. |
    | **Server name** | The fully qualified Azure SQL Database logical server name | For example, `your_logical_azure_sql_server.database.windows.net`. |
@@ -106,9 +107,9 @@ Use [SQL Server Management Studio](/sql/ssms/sql-server-management-studio-ssms) 
 
 Use the [Azure portal Query editor for Azure SQL Database](query-editor.md) to connect to your Azure SQL database.
 
-1. Navigate to your SQL database in the Azure portal. For example, visit [your Azure SQL dashboard](https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Sql%2Fazuresql).
+1. Navigate to your SQL database in the Azure portal. For example, visit [your Azure SQL hub page](https://aka.ms/azuresqlhub), and select your Azure SQL Database.
 
-1. On your SQL database **Overview** page in the [Azure portal](https://portal.azure.com), select **Query editor (preview)** from the left menu.
+1. On your SQL database **Overview** page in the [Azure portal](https://portal.azure.com), select **Query editor (preview)** from the resource menu.
 
    :::image type="content" source="media\design-first-database-tutorial\find-query-editor.png" alt-text="Screenshot that shows selecting query editor.":::
 
@@ -246,6 +247,11 @@ This query joins all four tables and finds the courses in which 'Noe Coleman' ha
 > [!TIP]
 > To learn more about writing SQL queries, visit [Tutorial: Write Transact-SQL statements](/sql/t-sql/tutorial-writing-transact-sql-statements).
 
+## Next step
+
+> [!div class="nextstepaction"]
+> [Tutorial: Design a relational database in Azure SQL Database C&#x23; and ADO.NET](design-first-database-csharp-tutorial.md)
+
 ## Related content
 
 - [Tutorial: Design a relational database in Azure SQL Database using Azure Data Studio (ADS)](design-first-database-azure-data-studio.md)
@@ -256,10 +262,3 @@ This query joins all four tables and finds the courses in which 'Noe Coleman' ha
 
 > [!TIP]
 > **Ready to start developing an .NET application?** This free Learn module shows you how to [Develop and configure an ASP.NET application that queries an Azure SQL Database](/training/modules/develop-app-that-queries-azure-sql/), including the creation of a simple database.
-
-## Next step
-
-Advance to the next tutorial to learn about designing a database using Visual Studio and C#.
-
-> [!div class="nextstepaction"]
-> [Design a relational database within Azure SQL Database C# and ADO.NET](design-first-database-csharp-tutorial.md)
