@@ -56,7 +56,7 @@ In addition to features announced previously, RC 1:
 
 - Developer:
 
-  - Fuzzy string matching for `EDIT_DISTANCE` and `EDIT_DISTANCE_SIMILARITY` provided under PREVIEW_FEATURES.
+  - Fuzzy string matching for [EDIT_DISTANCE](../t-sql/functions/edit-distance-transact-sql.md) and [EDIT_DISTANCE_SIMILARITY](../t-sql/functions/edit-distance-similarity-transact-sql.md) provided under [PREVIEW_FEATURES](../t-sql/statements/alter-database-scoped-configuration-transact-sql.md#preview_features---on--off-).
 
 - AI:
 
