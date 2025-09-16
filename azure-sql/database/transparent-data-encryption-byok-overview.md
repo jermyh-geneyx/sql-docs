@@ -250,7 +250,7 @@ When TDE is configured to use a customer-managed key, continuous access to the T
 
 ### Inaccessible state
 
-If the database is inaccessible due to an intermittent networking outage (such as a 5XX error), no action is required, as the databases come back online automatically. To reduce the efect of network errors or outages when accessing the TDE protector in Azure Key Vault or Azure Managed HSM, a 24-hour buffer is introduced before the service attempts to move the database to an inaccessible state. If a failover occurs before reaching the inaccessible state, the database becomes unavailable due to the loss of the encryption cache.
+If the database is inaccessible due to an intermittent networking outage (such as a 5XX error), no action is required, as the databases come back online automatically. To reduce the effect of network errors or outages when accessing the TDE protector in Azure Key Vault or Azure Managed HSM, a 24-hour buffer is introduced before the service attempts to move the database to an inaccessible state. If a failover occurs before reaching the inaccessible state, the database becomes unavailable due to the loss of the encryption cache.
 
 If the server loses access to the customer-managed TDE protector in Azure Key Vault or Azure Managed HSM due to any [Azure Key Vault error](#accidental-tde-protector-access-revocation) (such as a 4XX error), the database is moved to an inaccessible state after 30 minutes.
 
