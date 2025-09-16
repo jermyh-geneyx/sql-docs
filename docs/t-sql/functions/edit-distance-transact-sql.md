@@ -24,9 +24,11 @@ ms.custom:
 Calculates the number of insertions, deletions, substitutions, and transpositions needed to transform one string to another.
 
 > [!NOTE]
-> - `EDIT_DISTANCE` is currently in preview. 
-> - `EDIT_DISTANCE` currently doesn't support transpositions. 
-> - SQL Server support for `EDIT_DISTANCE` introduced in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)]. 
+>
+> - `EDIT_DISTANCE` is in preview.
+> - `EDIT_DISTANCE` currently doesn't support transpositions.
+> - SQL Server support for `EDIT_DISTANCE` introduced in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)].
+> - Requires [PREVIEW_FEATURES database scoped configuration enabled](../statements/alter-database-scoped-configuration-transact-sql.md#preview_features---on--off-).
 > - `EDIT_DISTANCE` is available in Azure SQL Managed Instance with the **SQL Server 2025** or **Always-up-to-date** [update policy](/azure/azure-sql/managed-instance/update-policy).
 
 ## Syntax

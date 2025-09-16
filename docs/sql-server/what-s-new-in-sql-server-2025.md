@@ -56,10 +56,7 @@ In addition to features announced previously, RC 1:
 
 - Developer:
 
-  - Fuzzy string matching adds collation support for `EDIT_DISTANCE` and `EDIT_DISTANCE_SIMILARITY`. For details, review:
-
-    - [EDIT_DISTANCE](../t-sql/functions/edit-distance-transact-sql.md)
-    - [EDIT_DISTANCE_SIMILARITY](../t-sql/functions/edit-distance-similarity-transact-sql.md)
+  - Fuzzy string matching for [EDIT_DISTANCE](../t-sql/functions/edit-distance-transact-sql.md) and [EDIT_DISTANCE_SIMILARITY](../t-sql/functions/edit-distance-similarity-transact-sql.md) provided under [PREVIEW_FEATURES](../t-sql/statements/alter-database-scoped-configuration-transact-sql.md#preview_features---on--off-).
 
 - AI:
 
@@ -249,8 +246,8 @@ The [intelligent query processing (IQP)](../relational-databases/performance/int
 | [UNISTR](../t-sql/functions/unistr-transact-sql.md) | Specify Unicode encoding values. Returns Unicode characters. |
 | [PRODUCT](../t-sql/functions/product-aggregate-transact-sql.md) | The `PRODUCT()` aggregate function calculates the product of a set of values. |
 | [CURRENT_DATE](../t-sql/functions/current-date-transact-sql.md) | Returns the current database system date as a date value. |
-| [EDIT_DISTANCE](../t-sql/functions/edit-distance-transact-sql.md) | Calculates the number of insertions, deletions, substitutions, and transpositions needed to transform one string to another. |
-| [EDIT_DISTANCE_SIMILARITY](../t-sql/functions/edit-distance-similarity-transact-sql.md) | Calculates a similarity value ranging from 0 (indicating no match) to 100 (indicating full match). |
+| [EDIT_DISTANCE](../t-sql/functions/edit-distance-transact-sql.md) | Calculates the number of insertions, deletions, substitutions, and transpositions needed to transform one string to another. Requires [PREVIEW_FEATURES database scoped configuration](../t-sql/statements/alter-database-scoped-configuration-transact-sql.md#preview-features). |
+| [EDIT_DISTANCE_SIMILARITY](../t-sql/functions/edit-distance-similarity-transact-sql.md) | Calculates a similarity value ranging from 0 (indicating no match) to 100 (indicating full match). Requires [PREVIEW_FEATURES database scoped configuration](../t-sql/statements/alter-database-scoped-configuration-transact-sql.md#preview-features).|
 | [JARO_WINKLER_DISTANCE](../t-sql/functions/jaro-winkler-distance-transact-sql.md) | Calculates the edit distance between two strings giving preference to strings that match from the beginning for a set prefix length. Returns **float**. |
 | [JARO_WINKLER_SIMILARITY](../t-sql/functions/jaro-winkler-similarity-transact-sql.md) | Calculates a similarity value ranging from 0 (indicating no match) to 100 (indicating full match). Returns **int**. |
 | - [BASE64_ENCODE](../t-sql/functions/base64-encode-transact-sql.md)<br />- [BASE64_DECODE](../t-sql/functions/base64-decode-transact-sql.md) | Convert binary data into a text format that's safe for transmission across various systems. It can be used in diverse ways as it ensures that your binary data, such as images or files, remains intact during transfer, even when passing through text-only systems. |
