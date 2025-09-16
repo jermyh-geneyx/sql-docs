@@ -289,10 +289,6 @@ Reason: 0x00000004 Message: ASSERT: Expression=(result * DrtlGetProcessorCoreCou
 
 If you want to use a Linux host operating system, you can work around the issue by disabling efficiency cores (E-cores) in your BIOS. If you use containers, or a hypervisor like Hyper-V on Windows (including WSL), you aren't affected.
 
-### Linux PolyBase Network encryption enabled fails
-
-[!INCLUDE [polybase-release-candidate-0](../includes/polybase-release-candidate-0.md)]
-
 ### Local ONNX models not supported on Linux operating systems
 
 [CREATE EXTERNAL MODEL](../t-sql/statements/create-external-model-transact-sql.md) local ONNX models hosted directly on the SQL Server aren't currently available for Linux on [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] RC 0.

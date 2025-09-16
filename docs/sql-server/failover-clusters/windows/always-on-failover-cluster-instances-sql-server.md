@@ -120,7 +120,7 @@ For more information, see [Failover policy for failover cluster instances](failo
 
 ## Configure TLS 1.3 encryption
 
-[!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] RC 0 introduces [TDS 8.0](../../../relational-databases/security/networking/tds-8.md) support, which allows enforcing [TLS 1.3](../../../relational-databases/security/networking/tls-1-3.md) encryption for communication between the Windows Server Failover Cluster and your failover cluster instances.
+[!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] introduces [TDS 8.0](../../../relational-databases/security/networking/tds-8.md) support, which allows enforcing [TLS 1.3](../../../relational-databases/security/networking/tls-1-3.md) encryption for communication between the Windows Server Failover Cluster and your failover cluster instances.
 
 To get started, review [Connect with strict encryption](../../../relational-databases/security/networking/connect-with-strict-encryption.md#connect-to-a-failover-cluster-instance).
 

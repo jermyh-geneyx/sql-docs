@@ -88,7 +88,7 @@ Starting with version 20, you can enforce strict encryption in [SQL Server Manag
 
 ## Connect to an Always On availability group
 
-Starting with [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] RC 0 you can encrypt communication between the Windows Server Failover Cluster and an Always On availability group replica using the `Strict` or `Mandatory` connection encryption type. Your availability group can only enforce encryption if it's based on a Windows Server Failover Cluster. Other types of availability groups don't support strict encryption.
+Starting with [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)], you can encrypt communication between the Windows Server Failover Cluster and an Always On availability group replica using the `Strict` or `Mandatory` connection encryption type. Your availability group can only enforce encryption if it's based on a Windows Server Failover Cluster. Other types of availability groups don't support strict encryption.
 
 The steps differ based on whether or not your availability already exists.
 
@@ -123,7 +123,7 @@ To configure your existing availability group for strict encryption, follow thes
 
 ## Connect to a failover cluster instance
 
-Starting with [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] RC 0, you can encrypt communication between your Windows Server Failover Cluster and an [Always On failover cluster instance](../../../sql-server/failover-clusters/windows/always-on-failover-cluster-instances-sql-server.md) using the `Strict` or `Mandatory` connection encryption type. To do this, follow these steps: 
+Starting with [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)], you can encrypt communication between your Windows Server Failover Cluster and an [Always On failover cluster instance](../../../sql-server/failover-clusters/windows/always-on-failover-cluster-instances-sql-server.md) using the `Strict` or `Mandatory` connection encryption type. To do this, follow these steps: 
 
 1. If you haven't already, [import the TLS certificate](../../../database-engine/configure-windows/configure-sql-server-encryption.md#extra-procedure-for-failover-cluster-instances) to every node of the failover cluster, as defined by [certificate requirements](../../../database-engine/configure-windows/certificate-requirements.md#failover-cluster-instance). Restart the SQL Server instance after importing the certificate.
 1. Test connections to the failover cluster instance by using one of the methods mentioned in this article that enforces encryption.

@@ -111,8 +111,8 @@ The level of Transport Layer Security (TLS), previously known as Secure Sockets 
 | `0` | Specifies that TLS isn't used. |
 | `1` | Specifies that TLS 1.2 is used, but the agent doesn't verify that the TLS server certificate is signed by a trusted issuer. |
 | `2` | Specifies that TLS 1.2 is used, and that the certificate is verified. |
-| `3` | Specifies that for connections from Azure SQL Managed Instance or SQL Server 2025 (RC 0 and later) to Azure SQL Managed Instance, TLS 1.3 is used, and the certificate is verified. For connections to SQL Server (any supported version), TLS 1.3 is not enforced with option `3`. |
-| `4` | Specifies that for connections from Azure SQL Managed Instance or SQL Server 2025 (RC 0 and later) to Azure SQL Managed Instance, TLS 1.3 is used, and the certificate is verified. For connections from Azure SQL Managed Instance or SQL Server 2025 (RC 0 and later) to SQL Server (any supported version), TLS 1.3 is used, and the certificate is verified. Requires installing the certificate on SQL Server hosts that are receiving connections with `EncryptionLevel` set to `4`. |
+| `3` | Specifies that for connections from Azure SQL Managed Instance, or SQL Server 2025 and later versions, to Azure SQL Managed Instance, TLS 1.3 is used, and the certificate is verified. For connections to SQL Server (any supported version), TLS 1.3 is not enforced with option `3`. |
+| `4` | Specifies that for connections from Azure SQL Managed Instance, or SQL Server 2025 and later versions, to Azure SQL Managed Instance, TLS 1.3 is used, and the certificate is verified. For connections from Azure SQL Managed Instance, or SQL Server 2025 and later versions, to SQL Server (any supported version), TLS 1.3 is used, and the certificate is verified. Requires installing the certificate on SQL Server hosts that are receiving connections with `EncryptionLevel` set to `4`. |
 
 [!INCLUDE [sql-25-repl-info](../../../includes/sql-25-repl-info.md)]
 

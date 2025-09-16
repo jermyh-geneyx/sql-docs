@@ -25,6 +25,7 @@ Calculates the number of insertions, deletions, substitutions, and transposition
 
 > [!NOTE]
 > - `EDIT_DISTANCE` is currently in preview. 
+> - `EDIT_DISTANCE` currently doesn't support transpositions. 
 > - SQL Server support for `EDIT_DISTANCE` introduced in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)]. 
 > - `EDIT_DISTANCE` is available in Azure SQL Managed Instance with the **SQL Server 2025** or **Always-up-to-date** [update policy](/azure/azure-sql/managed-instance/update-policy).
 

@@ -134,7 +134,7 @@ The following table lists currently supported ASCII character classes.
 - Numbers
 - Symbols
 
-### Metacharacters
+### Empty strings
 
 | Empty strings | Description |
 | --- | --- |
@@ -169,6 +169,9 @@ Use flags to modify the expression behavior. For example:
 | `c` | Case-sensitive (default `true`) |
 
 This implementation supports the POSIX standard of regular expressions following RE2, and has support for the PCRE/PCRE2 flavor of regular expressions syntax, which is compatible with most modern regular expression engines and tools. There are different flavors of regular expressions, such as POSIX, ANSI, Perl, and PCRE, which have different syntax and features. For more information about supported constructs and behavior of the underlying regex engine, see [RE2, a regular expression library](https://github.com/google/re2).
+
+> [!NOTE]  
+> Regular expression matching in SQL Server does not honor SQL collations for linguistic comparisons. This behavior is by design and consistent with most regular expression engines, as matching is based on the pattern and Unicode character properties rather than collation rules. As a result, it may lead to differences in behavior when compared to other string comparison functions like LIKE, especially on indexed columns with language-specific collations.
 
 ## Requirements
 

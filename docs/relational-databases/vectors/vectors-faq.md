@@ -36,7 +36,7 @@ The overhead for vector search primarily involves the storage of the vector data
 
 For more information about how to choose the right vector size, review [Embedding models and dimensions: optimizing the performance-resource usage ratio](https://devblogs.microsoft.com/azure-sql/embedding-models-and-dimensions-optimizing-the-performance-resource-usage-ratio/).
 
-A SQL Server data page can hold up to 8,060 bytes, so the size of the vector affects how many vectors can be stored in a single page. For example, if you have a vector with 1,024 dimensions, and each dimension is a **float** (4 bytes), the total size of the vector would be 4,104 bytes (4096 bytes payload + 8 bytes header). This limits the number of vectors that can fit in a single page to one. 
+A SQL Server data page can hold up to 8,060 bytes, so the size of the vector affects how many vectors can be stored in a single page. For example, if you have a vector with 1,024 dimensions, and each dimension is a single precision **float** (4 bytes), the total size of the vector would be 4,104 bytes (4096 bytes payload + 8 bytes header). This limits the number of vectors that can fit in a single page to one.
 
 ## What embedding model should I use, and when?
 
@@ -45,6 +45,16 @@ There are many embedding models available, and the choice of which one to use de
 In addition to the model itself, consider the size of the model and the number of dimensions it produces. Larger models may provide better accuracy but require more computational resources and storage space, but in many cases having more dimension doesn't really change the quality that much, for common use cases.
 
 For more information about how to choose the right embedding model, see [Embedding models and dimensions: optimizing the performance-resource usage ratio](https://devblogs.microsoft.com/azure-sql/embedding-models-and-dimensions-optimizing-the-performance-resource-usage-ratio/).
+
+## How to decide when to use single-precision (4-byte) vs half-precision (2-byte) floating-point values for vectors?
+
+When storing embedding vectors in a database, the choice between single-precision (float32) and half-precision (float16) floats often comes down to balancing storage efficiency with numerical fidelity. 
+
+Fortunately, embeddings are typically not highly sensitive to small changes in precision.
+
+Embeddings are dense vector representations used in tasks like semantic search, recommendation systems, and natural language processing. These vectors are often the output of neural networks, which are inherently tolerant to small numerical variations. As a result, reducing precision from float32 to float16 usually has minimal impact on the quality of similarity comparisons or downstream tasks—especially during inference.
+
+Using float16 can significantly reduce storage and memory usage, which is particularly beneficial when working with large-scale embedding datasets. 
 
 ## What about sparse vectors?
 
