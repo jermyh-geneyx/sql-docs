@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 08/14/2025
+ms.date: 09/09/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -528,7 +528,7 @@ ms.topic: include
 | 13683 | 16 | No | Invalid JSON paths in JSON index. |
 | 13684 | 16 | No | String conversion from UTF-8 to UTF-16 failed. |
 | 13685 | 16 | No | A JSON index '%.\*ls' cannot be found on column '%.\*ls' on table '%.\*ls'. |
-| 13686 | 16 | No | Json_Contains matches pattern as LIKE. The pattern should be no longer than 8000 (varchar) or 4000 (nvarchar) characters. |
+| 13686 | 16 | No | Json_Contains matches pattern as LIKE. The pattern should be no longer than 4000 characters. |
 | 13687 | 16 | No | JSON data type is not supported in merge replication. |
 | 13688 | 16 | No | One or more of the specified ALTER INDEX options is invalid for a JSON index. |
 | 13689 | 16 | No | DATA_COMPRESSION is not compatible with JSON index '%.\*ls'. Please drop it and recreate it. |

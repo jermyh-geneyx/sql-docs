@@ -44,7 +44,7 @@ The following diagram shows the components used in merge replication.
 
 ## Configure TLS 1.3 encryption
 
-[!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] RC 0 introduces [TDS 8.0](../../security/networking/tds-8.md) support for merge replication, which includes:
+[!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] introduces [TDS 8.0](../../security/networking/tds-8.md) support for merge replication, which includes:
 - Configuring replication agents to use [TLS 1.3 encryption](../../security/networking/tls-1-3.md) between instances of [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] and also between [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] and Azure SQL Managed Instance. 
 - Default encryption for inter-instance linked server communication between [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] instances in a replication topology. Linked servers in [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] use the OLE DB v19 driver, which defaults to `Encrypt=Mandatory` encryption.
 

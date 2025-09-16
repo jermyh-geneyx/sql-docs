@@ -33,6 +33,19 @@ The **vector** data type is designed to store vector data optimized for operatio
 To provide a familiar experience for developers, the **vector** data type is created and displayed as a JSON array. For example, a vector with three dimensions can be represented as `'[0.1, 2, 30]'`. Implicit and explicit conversion from and to the **vector** type can be done using **varchar**, **nvarchar** and **json** types. 
 
 > [!NOTE]
+> [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] supports half-precision (`float16`) vectors.  
+>
+> To learn more, see [here](vector-data-type-half-precision-float.md).
+
+`float16` vector is currently available for preview. To test, enable the `PREVIEW_FEATURES` database scoped configuration option. For details, review [PREVIEW_FEATURES = { ON | OFF }](../statements/alter-database-scoped-configuration-transact-sql.md#preview_features---on--off-).
+
+```sql
+ALTER DATABASE SCOPED CONFIGURATION
+SET PREVIEW_FEATURES = ON;
+GO
+```
+
+> [!NOTE]
 >
 > For limitations, review [Limitations](#limitations) and [Known issues](#known-issues).
 >
@@ -51,6 +64,11 @@ The usage syntax for the **vector** type is similar to all other SQL Server data
 column_name VECTOR( {<dimensions>} ) [NOT NULL | NULL] 
 ```
 
+By default, the base type is float32. To use **half-precision**, you need to specify float16 explicitly
+
+```syntaxsql
+column_name VECTOR(<dimensions> [, <base_type>]) [NOT NULL | NULL]
+```
 #### Dimensions
 
 A vector must have at least one dimension. The maximum number of dimensions supported is 1998.
@@ -62,12 +80,18 @@ A vector must have at least one dimension. The maximum number of dimensions supp
 The **vector** type can be used in column definition contained in a `CREATE TABLE` statement, for example:
 
 The following example creates a table with a vector column and inserts data into it.
+You can define a `VECTOR` column in a table using either the default base type (`float32`) or explicitly specify `float16` for half-precision storage.
 
 ```sql
 CREATE TABLE dbo.vectors
 (
   id INT PRIMARY KEY,
-  v VECTOR(3) NOT NULL
+  v VECTOR(3) NOT NULL -- Uses default base type (`float32`)
+);
+
+CREATE TABLE dbo.vectors (
+    id INT PRIMARY KEY,
+    v VECTOR(3, float16) -- Uses float16 for reduced storage and precision
 );
 
 INSERT INTO dbo.vectors (id, v) VALUES 
@@ -87,6 +111,10 @@ The **vector** type can be used with variables:
 ```sql
 DECLARE @v VECTOR(3) = '[0.1, 2, 30]';
 SELECT @v;
+
+DECLARE @v VECTOR(3, float16) = '[0.1, 2, 30]';
+SELECT @v;
+
 ```
 
 ### C. Usage in stored procedures or functions
@@ -108,6 +136,15 @@ END
 
 The new **vector** type is available under all database compatibility levels.
 
+Support for `float16` vectors is currently gated under the `PREVIEW_FEATURES` configuration. 
+You must explicitly enable it before using `VECTOR(..., float16)`.
+
+```sql
+ALTER DATABASE SCOPED CONFIGURATION
+SET PREVIEW_FEATURES = ON;
+GO
+```
+
 ## Conversions
 
  
@@ -119,6 +156,9 @@ The new **vector** type is available under all database compatibility levels.
 
 SQL Server stores vectors in an optimized binary format but exposes them as JSON arrays for convenience.
 **Supported** drivers use enhancements to the TDS protocol to transmit vector data more efficiently in binary format and present them to applications as native vector types. This approach reduces payload size, eliminates the overhead of JSON parsing, and preserves full floating-point precision. As a result, it improves both performance and accuracy when working with high-dimensional vectors in AI and machine learning scenarios.
+
+> [!NOTE]
+> `float16` vectors are currently transmitted as VARCHAR(MAX) (JSON array) over TDS.  Binary transport support for `float16` is not yet available in drivers like ODBC, JDBC, and .NET.
 
 #### Native Driver Support
 
@@ -466,6 +506,7 @@ The **vector** type has the following limitations:
 
 ## Related content
 
+- [Half Precision Float - Vector Data Type](vector-data-type-half-precision-float.md)
 - [Overview of vectors in the SQL Database Engine](../../relational-databases/vectors/vectors-sql-server.md)
 - [Intelligent applications](/azure/azure-sql/database/ai-artificial-intelligence-intelligent-applications?view=azuresql&preserve-view=true#vector-search)
 - [Vector Functions](../functions/vector-functions-transact-sql.md)

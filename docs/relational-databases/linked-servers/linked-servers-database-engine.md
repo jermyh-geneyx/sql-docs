@@ -130,7 +130,7 @@ The following limitations apply to Microsoft Entra authentication for linked ser
 
 ## SQL Server 2025 and MSOLEDBSQL version 19
 
-Beginning with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] RC 0, MSOLEDBSQL provider uses Microsoft OLE DB Driver 19 by default. This updated driver introduces significant security enhancements, including support for [TDS 8.0](../security/networking/tds-8.md) and [TLS 1.3](../security/networking/tls-1-3.md).
+Beginning with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], MSOLEDBSQL provider uses Microsoft OLE DB Driver 19 by default. This updated driver introduces significant security enhancements, including support for [TDS 8.0](../security/networking/tds-8.md) and [TLS 1.3](../security/networking/tls-1-3.md).
 
 TDS 8.0 improves security by adding a new encryption option and introduces a breaking change: the `Encryption` parameter is no longer optional. It must be set in your connection string when targeting another SQL Server instance. 
 
@@ -180,7 +180,7 @@ When using `Encrypt=Strict`:
 These settings must be correctly specified in the connection string when configuring linked server connections, to ensure compatibility and security with the new driver.
 
 #### Updating from previous OLEDB versions
-**Applies to:** [!INCLUDE[sssql25-md](../../includes/sssql25-md.md)] RC 0 and later versions
+**Applies to:** [!INCLUDE[sssql25-md](../../includes/sssql25-md.md)] and later versions
 
 When you migrate from previous editions of SQL Server to [!INCLUDE[sssql25-md](../../includes/sssql25-md.md)] with Microsoft OLE DB Driver 19, existing linked server configurations might fail. Different default values for the encryption parameter might cause this failure unless a valid certificate is provided.
 

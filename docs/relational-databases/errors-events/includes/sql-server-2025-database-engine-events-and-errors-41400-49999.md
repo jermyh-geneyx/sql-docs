@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 08/14/2025
+ms.date: 09/09/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -417,6 +417,9 @@ ms.topic: include
 | 42243 | 16 | No | VECTOR_DISTANCE function does not support different base types for vector arguments. |
 | 42244 | 16 | No | A vector index cannot be created on tables with security policies. Table '%.\*ls' has security policy '%.\*ls'. |
 | 42245 | 16 | No | Drop and recreate the incompatible vector index ID %d on object ID %d. |
+| 42246 | 16 | No | %ls function does not support vector with base type %ls. |
+| 42247 | 16 | No | Vector with base type float16 is not supported in transactional replication. |
+| 42250 | 16 | No | One or more of the specified ALTER INDEX options is unsupported for a Vector Index. |
 | 42299 | 16 | No | Vector Internal error. |
 | 42301 | 16 | No | Could not create the semantic index on object '%.\*ls', because the object is not a user table. |
 | 42302 | 16 | No | Could not create the semantic index on the column '%.\*ls' on table '%.\*ls', because it is not of supported type. |

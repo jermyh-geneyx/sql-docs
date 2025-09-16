@@ -4,7 +4,7 @@ description: "Adds an entry in the sys.servers and marks the server entry as a D
 author: mashamsft
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 06/23/2025
+ms.date: 09/15/2025
 ms.service: sql
 ms.subservice: replication
 ms.topic: "reference"
@@ -32,6 +32,9 @@ sp_adddistributor
     [ , [ @heartbeat_interval = ] heartbeat_interval ]
     [ , [ @password = ] N'password' ]
     [ , [ @from_scripting = ] from_scripting ]
+    [ , [ @encrypt_distributor_connection = ] N'encrypt_distributor_connection' ]
+    [ , [ @trust_distributor_certificate = ] N'trust_distributor_certificate' ]
+    [ , [ @host_name_in_distributor_certificate = ] N'host_name_in_distributor_certificate' ]
 [ ; ]
 ```
 
@@ -62,6 +65,39 @@ The password of the **distributor_admin** login. *@password* is **sysname**, wit
 
 *@from_scripting* is **bit**, with a default of `0`. [!INCLUDE [ssInternalOnly](../../includes/ssinternalonly-md.md)]
 
+#### [ @encrypt_distributor_connection = ] N'*encrypt_distributor_connection*'
+
+**Applies to:** [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions.
+
+Determines whether the internal linked server connection from the publisher to distributor is encrypted. The values are mapped to the OLE DB provider's `Encrypt` property. *@encrypt_distributor_connection* is **nvarchar(10)**, and can't be `NULL`.
+
+*@encrypt_distributor_connection* can be one of the following values:
+
+- `mandatory` (default with Microsoft OLE DB provider 19)
+- `no` or `false` (default with Microsoft OLE DB provider 18)
+- `true` or `yes`
+- `optional`
+- `strict`
+
+#### [ @trust_distributor_certificate = ] N'*trust_distributor_certificate*'
+
+**Applies to:** [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions.
+
+Indicates whether the distributor's TLS certificate should be trusted without validation. The value is mapped to the OLE DB provider's `TrustServerCertificate` property, and is typically used in conjunction with the `Mandatory` encryption setting when using self-signed certificates. *@trust_distributor_certificate* is **nvarchar(5)**, and can't be `NULL`.
+
+*@trust_distributor_certificate* can be one of the following values:
+
+- `no` (default)
+- `yes`
+
+[!INCLUDE [sql-25-repl-distributor-info](../../includes/sql-25-repl-distributor-info.md)]
+
+#### [ @host_name_in_distributor_certificate = ] N'*host_name_in_distributor_certificate*'
+
+**Applies to:** [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions.
+
+Specifies the host name from the Distributor's certificate, when it's different from the Distributor name, such as when the IP address or DNS alias is used as the Distributor name. Leave the *@host_name_in_distributor_certificate* parameter empty if the host name in the certificate matches the Distributor name. *@host_name_in_distributor_certificate* is **nvarchar(255)** of any string value, with a default of `NULL`.
+
 ## Return code values
 
 `0` (success) or `1` (failure).
@@ -75,6 +111,18 @@ The password of the **distributor_admin** login. *@password* is **sysname**, wit
 ## Examples
 
 :::code language="sql" source="../replication/codesnippet/tsql/sp-adddistributor-transa_1.sql":::
+
+### Configure distributor to trust the self-signed certificate
+
+To override the secure default of the OLEDB 19 provider and set `trust_distributor_certificate=yes` so the distributor trusts the self-signed certificate, use the following example:
+
+```sql
+EXECUTE sys.sp_adddistributor @trust_distributor_certificate = 'yes';
+```
+
+[!INCLUDE [sql-25-repl-distributor-info](../../includes/sql-25-repl-distributor-info.md)]
+
+For more information, review the [remote distributor breaking change in SQL Server 2025 Preview](../../database-engine/breaking-changes-to-database-engine-features-in-sql-server-2025.md#adding-a-remote-replication-distributor-fails).
 
 ## Permissions
 

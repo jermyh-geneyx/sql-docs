@@ -111,7 +111,8 @@ Specifies whether a log shipping configuration uses [backup compression](../back
 - `2` (default): Use the [backup compression default](../../database-engine/configure-windows/view-or-configure-the-backup-compression-default-server-configuration-option.md) server configuration option.
 
 #### [ @monitor_connection_options = ] *'<key_value_pairs>;[...]'*
-**Applies to**: [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] RC 0 and later
+
+**Applies to**: [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions
 
 Specifies additional connectivity options for the linked server connection when utilizing a remote monitor, in the form of key value pairs. **@monitor_connection_options** is **nvarchar(4000)** and has the default of `NULL`. 
 

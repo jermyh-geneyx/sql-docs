@@ -15484,6 +15484,8 @@ items:
       items:
       - name: Vector data type
         href: t-sql/data-types/vector-data-type.md
+      - name: Vector data type (half-precision float)
+        href: t-sql/data-types/vector-data-type-half-precision-float.md
       - name: Vectors functions
         href: t-sql/functions/vector-functions-transact-sql.md
       - name: Vectors indexes

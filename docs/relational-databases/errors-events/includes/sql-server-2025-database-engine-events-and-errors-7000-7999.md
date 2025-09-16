@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 08/14/2025
+ms.date: 09/09/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -216,7 +216,8 @@ ms.topic: include
 | 7631 | 10 | No | Warning: No appropriate wordbreaker was found during full-text index population for table or indexed view '%ls' (table or indexed view ID '%d', database ID '%d'), full-text key value '%ls'. Neutral wordbreaker was used for some columns of the row. |
 | 7632 | 15 | No | The value of the Weight argument must be between 0.0 and 1.0. |
 | 7633 | 16 | No | Couldn't complete full-text operation because full-text key for table or indexed view '%.\*ls' is offline. |
-| 7635 | 10 | No | Warning: No appropriate filter for embedded object was found during full-text index population for table or indexed view '%ls' (table or indexed view ID '%d', database ID '%d'), full-text key value '%ls'. Some embedded objects in the row could not be indexed. |
+| 7634 | 10 | No | Error '%ls' occurred during full-text index population for table or indexed view '%ls' (table or indexed view ID '%d', database ID '%d'), full-text key value '%ls'. Failed to index the row. If recently performed in-place upgrade to SQL2025, For help please see https://aka.ms/sqlfulltext. |
+| 7635 | 10 | No | Error '%ls' occurred during full-text index population for table or indexed view '%ls' (table or indexed view ID '%d', database ID '%d'), full-text key value '%ls'. Attempt will be made to reindex it. If recently performed in-place upgrade to SQL2025, For help please see https://aka.ms/sqlfulltext. |
 | 7636 | 10 | No | Warning: Request to start a full-text index population on table or indexed view '%.\*ls' is ignored because a population is currently active for this table or indexed view. |
 | 7637 | 16 | No | Database is not fully started up or it is not in an ONLINE state. Try the full-text DDL command again after database is started up and becomes ONLINE. |
 | 7638 | 10 | No | Warning: Request to stop change tracking has deleted all changes tracked on table or indexed view '%ls'. |

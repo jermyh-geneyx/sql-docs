@@ -111,7 +111,8 @@ The ID associated with the restore job on the secondary server. *@restore_job_id
 The ID for the secondary server in the log shipping configuration. *@secondary_id* is **uniqueidentifier** and can't be `NULL`.
 
 #### [ @secondary_connection_options = ] *'<key_value_pairs>;[...]'*
-**Applies to**: [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] RC 0 and later
+
+**Applies to**: [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions
 
  Specifies additional connectivity options when connecting to the secondary, in the form of key value pairs. **@secondary_connection_options** is **nvarchar(4000)** and has the default of `NULL`. 
 
@@ -125,7 +126,7 @@ The following table lists the available connectivity options:
 |`HostNameInCertificate`|Hostname override for the certificate. This has a maximum length of 255 characters.|
 
 #### [ @monitor_connection_options = ] *'<key_value_pairs>;[...]'*
-**Applies to**: [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] RC 0 and later
+**Applies to**: [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions
 
  Specifies additional connectivity options for the linked server connection when utilizing a remote monitor, in the form of key value pairs. **@monitor_connection_options** is **nvarchar(4000)** and has the default of `NULL`. 
 

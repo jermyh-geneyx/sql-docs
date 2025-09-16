@@ -209,40 +209,6 @@ At installation, if you use the SQL Server instance as part of a PolyBase scale-
 
 To change the service accounts for the PolyBase Engine and PolyBase Data Movement service, uninstall and reinstall the PolyBase feature. If the password for the service account was changed in Active Directory, you can change the service account password with Windows Services Console (services.msc).
 
-### PolyBase network encryption
-
-Beginning in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], the communication between PolyBase services and SQL Server host can use TDS 8.0 and TLS 1.3, to encrypt the communication by default. Set `sp_configure 'polybase network encryption'` to configure this option. For details, review [Server configuration: polybase network encryption](../../database-engine/configure-windows/polybase-network-encryption-server-configuration-option.md).
-
-In order to secure the connection between PolyBase Services and SQL Server with TDS 8.0 the following requirements must be met:
-
-- A certificate signed by a trusted Certificate Authority (CA) must be installed.
-- The certificate must include a Subject Name or Subject Alternative Name that matches the Fully Qualified Domain Name (FQDN) of the SQL Server.
-
-After the certificate is installed:
-
-1. Set the PolyBase configuration table. For example:
-
-   ```sql
-   UPDATE [DWConfiguration].[dbo].[configuration_properties]
-   SET value = '<Certificate Serial Number>'
-   WHERE [key] = '<Certificate Serial Number>'
-   AND [id] = '<Server>';
-   ```
-
-1. Stop and restart PolyBase services for the configuration to take effect.
-
-If the certificate isn't provided or isn't valid, the following error message is logged and PolyBase services won't start:
-
-```text
-SSL Provider: The certificate chain was issued by an authority that is not trusted
-```
-
-If no certificate can be provided, you can disable local network encryption from PolyBase services to SQL Server. For example:
-
-```sql
-EXECUTE sp_configure 'polybase network encryption', 0;
-RECONFIGURE;
-```
 
 ## Related content
 

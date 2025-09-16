@@ -63,8 +63,8 @@ The result set contains the following columns from [log_shipping_secondary](../s
 | `restore_job_id` | **uniqueidentifier** | The ID associated with the restore job on the secondary server. |
 | `monitor_server` | **sysname** | The name of the instance of the [!INCLUDE [msCoName](../../includes/msconame-md.md)] [!INCLUDE [ssDEnoversion](../../includes/ssdenoversion-md.md)] being used as a monitor server in the log shipping configuration. |
 | `monitor_server_security_mode` | **bit** | The security mode used to connect to the monitor server.<br /><br />`1` = Windows Authentication.<br />`0` = [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Authentication. |
-|`secondary_connection_options`| **nvarchar(4000)** | Additional connection options for the connection made between the log shipping executable and the secondary replica instance. <br /><br /> Available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] RC 0 and later.|
-|`monitor_connection_options`| **nvarchar(4000)** | Additional connection options for the connection made between the secondary replica instance and the remote monitor. <br /><br /> Available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] RC 0 and later.|
+|`secondary_connection_options`| **nvarchar(4000)** | Additional connection options for the connection made between the log shipping executable and the secondary replica instance. <br /><br /> Available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions. |
+|`monitor_connection_options`| **nvarchar(4000)** | Additional connection options for the connection made between the secondary replica instance and the remote monitor. <br /><br /> Available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions. |
 
 ## Remarks
 

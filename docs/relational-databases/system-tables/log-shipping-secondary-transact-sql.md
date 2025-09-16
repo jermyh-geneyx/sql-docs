@@ -34,8 +34,8 @@ dev_langs:
 |**monitor_server_security_mode**|**bit**|The security mode used to connect to the monitor server.<br /><br /> 1 = Windows Authentication.<br /><br /> 0 = [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Authentication.|  
 |**last_copied_file**|**nvarchar(500)**|The filename of the last backup file copied to the secondary server.|  
 |**last_copied_date**|**datetime**|The time and date of the last copy operation to the secondary server.|  
-|**secondary_connection_options**|**nvarchar(4000)**|Additional connection options for the connection made between the log shipping executable and the secondary replica instance. <br /><br /> Available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] RC 0 and later.|
-|**monitor_connection_options**|**nvarchar(4000)**|Additional connection options for the connection made between the secondary replica instance and the remote monitor. <br /><br /> Available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] RC 0 and later.|
+|**secondary_connection_options**|**nvarchar(4000)**|Additional connection options for the connection made between the log shipping executable and the secondary replica instance. <br /><br /> Available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions. |
+|**monitor_connection_options**|**nvarchar(4000)**|Additional connection options for the connection made between the secondary replica instance and the remote monitor. <br /><br /> Available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions. |
 
 ## Remarks  
  Multiple secondary databases on the same secondary server for a given primary database share some settings in the **log_shipping_secondary** table. If a shared setting is altered for one of them, the setting is altered for all of them.  
