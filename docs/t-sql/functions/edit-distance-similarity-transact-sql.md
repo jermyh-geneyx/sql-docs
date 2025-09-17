@@ -28,7 +28,6 @@ Calculates a similarity value ranging from 0 (indicating no match) to 100 (indic
 > - `EDIT_DISTANCE_SIMILARITY` is currently in preview. 
 > - `EDIT_DISTANCE_SIMILARITY` currently doesn't support transpositions. 
 > - SQL Server support for `EDIT_DISTANCE_SIMILARITY` introduced in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)].
-> - Requires [PREVIEW_FEATURES database scoped configuration enabled](../statements/alter-database-scoped-configuration-transact-sql.md#preview_features---on--off-).
 > - `EDIT_DISTANCE_SIMILARITY` is available in Azure SQL Managed Instance with the **SQL Server 2025** or **Always-up-to-date** [update policy](/azure/azure-sql/managed-instance/update-policy).
 
 ## Syntax

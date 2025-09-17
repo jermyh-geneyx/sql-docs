@@ -16,6 +16,8 @@
   items:
   - name: Migrating Db2 databases to SQL Server
     href: migrating-db2-databases-to-sql-server-db2tosql.md
+  - name: SKU recommendation for Db2 workloads (preview)
+    href: sku-recommendation-for-db2-workloads-db2tosql.md
   - name: Connect to Db2
     href: connect-to-db2-db2tosql.md
   - name: Mapping Db2 & SQL Server data types
