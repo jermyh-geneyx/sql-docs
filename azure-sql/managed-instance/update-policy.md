@@ -34,16 +34,16 @@ Azure SQL Managed Instance offers the following three update policies:
 > [!NOTE]
 > The **SQL Server 2025** update policy is currently in preview. 
 
-The **SQL Server 2025** update policy aligns your database format with SQL Server 2025.
+The **SQL Server 2025** update policy aligns your database format with [!INCLUDE [sssql25-md](../../docs/includes/sssql25-md.md)].
 
 When you use the SQL Server 2025 update policy, consider the following points:
 
-- Your internal database format stays aligned with SQL Server 2025.
-- You receive all the latest updates available for SQL Server 2025.
-- You can [restore your database](restore-database-to-sql-server.md) to SQL Server 2025 from Azure SQL Managed Instance.
-- You can configure a [link](managed-instance-link-disaster-recovery.md) for real-time data replication, bidirectional failover, and disaster recovery between SQL Server 2025 and Azure SQL Managed Instance.
+- Your internal database format stays aligned with [!INCLUDE [sssql25-md](../../docs/includes/sssql25-md.md)].
+- You receive all the latest updates available for [!INCLUDE [sssql25-md](../../docs/includes/sssql25-md.md)].
+- You can [restore your database](restore-database-to-sql-server.md) to [!INCLUDE [sssql25-md](../../docs/includes/sssql25-md.md)] from Azure SQL Managed Instance.
+- You can configure a [link](managed-instance-link-disaster-recovery.md) for real-time data replication, bidirectional failover, and disaster recovery between [!INCLUDE [sssql25-md](../../docs/includes/sssql25-md.md)] and Azure SQL Managed Instance.
 - You might not have access to some of the latest SQL engine features and benefits available to Azure SQL Managed Instance with the **Always-up-to-date** update policy.
-- The **SQL Server 2025** update policy is available until the end of mainstream support of SQL Server 2025, at which point, the update policy for instances with the **SQL Server 2025** update policy automatically updates to the update policy that corresponds to the latest major SQL Server release available at that time.
+- The **SQL Server 2025** update policy is available until the end of mainstream support of [!INCLUDE [sssql25-md](../../docs/includes/sssql25-md.md)], at which point, the update policy for instances with the **SQL Server 2025** update policy automatically updates to the update policy that corresponds to the latest major SQL Server release available at that time.
 
 ## SQL Server 2022 update policy
 
@@ -67,7 +67,7 @@ When you use the **Always-up-to-date** update policy, consider the following poi
 
 - You can use all the new features and benefits available to Azure SQL Managed Instance. 
 - Once you enable the **Always-up-to-date** policy, you can't go back to the **SQL Server 2022**, or **SQL Server 2025** update policy for that instance.
-- You lose some of the benefits provided by database format alignment with SQL Server 2022 or SQL Server 2025, such as the ability to restore your database to SQL Server 2022, and bidirectional failover between your instance and SQL Server 2022 with the [link](managed-instance-link-disaster-recovery.md) feature. 
+- You lose some of the benefits provided by database format alignment with SQL Server 2022 or [!INCLUDE [sssql25-md](../../docs/includes/sssql25-md.md)], such as the ability to restore your database to SQL Server 2022 or [!INCLUDE [sssql25-md](../../docs/includes/sssql25-md.md)], and bidirectional failover between your instance and SQL Server 2022 or [!INCLUDE [sssql25-md](../../docs/includes/sssql25-md.md)] with the [link](managed-instance-link-disaster-recovery.md) feature. 
 
 ## Feature comparison
 
@@ -75,7 +75,7 @@ The following table lists all the features that are only available to instances 
 
 | Update policy | Features |
 |---------|---------|
-| *Always-up-to-date* update policy | - There are currently no separate features that are only available to instances with the *Always-up-to-date* update policy. <br /> - All features available with the *SQL Server 2025* update policy are also available to instances with the *Always-up-to-date* update policy, other than the ability to restore databases, or configure a link with bidirectional failover, to SQL Server 2025.   |
+| *Always-up-to-date* update policy | - There are currently no separate features that are only available to instances with the *Always-up-to-date* update policy. <br /> - All features available with the *SQL Server 2025* update policy are also available to instances with the *Always-up-to-date* update policy, other than the ability to restore databases, or configure a link with bidirectional failover, to [!INCLUDE [sssql25-md](../../docs/includes/sssql25-md.md)].   |
 | *SQL Server 2025* update policy | - [Restore database to SQL Server 2025](restore-database-to-sql-server.md)<br /> - [Link with bidirectional failover and disaster recovery with SQL Server 2025](managed-instance-link-disaster-recovery.md) <br />- [JSON data type](/sql/t-sql/data-types/json-data-type)<br /> - [JSON_ARRAYAGG](/sql/t-sql/functions/json-arrayagg-transact-sql) and [JSON_OBJECTAGG](/sql/t-sql/functions/json-objectagg-transact-sql) aggregate functions <br /> - [Invoke an HTTPS REST endpoint SP](/sql/relational-databases/system-stored-procedures/sp-invoke-external-rest-endpoint-transact-sql) <br /> - [Azure SQL Managed Instance Mirroring in Fabric](/fabric/database/mirrored-database/azure-sql-managed-instance) <br /> - [Vector functions](/sql/t-sql/functions/vector-functions-transact-sql?view=azuresqlmi-current&preserve-view=true) <br /> - [Vector data type](/sql/t-sql/data-types/vector-data-type?view=azuresqlmi-current&preserve-view=true) <br /> - [Fuzzy string matching](/sql/relational-databases/fuzzy-string-match/overview)  <br /> - [DATEADD (Transact-SQL)](/sql/t-sql/functions/dateadd-transact-sql).  <br /> - [UNISTR (Transact-SQL)](/sql/t-sql/functions/unistr-transact-sql) <br /> - [Regular expression functions](/sql/relational-databases/regular-expressions/overview) <br /> - [\|\| (String concatenation)](/sql/t-sql/language-elements/string-concatenation-pipes-transact-sql) <br /> - [\|\|= (Compound assignment)](/sql/t-sql/language-elements/compound-assignment-pipes-transact-sql) <br /> - [Degree of parallelism (DOP) feedback](/sql/relational-databases/performance/intelligent-query-processing-degree-parallelism-feedback?view=azuresqlmi-current&preserve-view=true) <br /> - [Optimized locking](/sql/relational-databases/performance/optimized-locking?view=azuresqlmi-current&preserve-view=true) |
 | *SQL Server 2022* update policy | - [Restore database to SQL Server 2022](restore-database-to-sql-server.md)  <br /> - [Link with bidirectional failover and disaster recovery with SQL Server 2022](managed-instance-link-disaster-recovery.md) |
 
@@ -87,7 +87,7 @@ The following features are affected by the configured update policy:
    - You can only restore database backups taken from instances configured with the **Always-up-to-date** update policy to instances also configured with the **Always-up-to-date** update policy. 
 - [Managed Instance link](managed-instance-link-feature-overview.md#limitations): 
    - Only instances with the **SQL Server 2022** update policy can establish a link from SQL Managed Instance to SQL Server 2022 or fail back from SQL Server 2022 to SQL Managed Instance. 
-   - Only instances with the **SQL Server 2025** update policy can establish a link from SQL Managed Instance to SQL Server 2025 or fail back from SQL Server 2025 to SQL Managed Instance.
+   - Only instances with the **SQL Server 2025** update policy can establish a link from SQL Managed Instance to [!INCLUDE [sssql25-md](../../docs/includes/sssql25-md.md)] or fail back from [!INCLUDE [sssql25-md](../../docs/includes/sssql25-md.md)] to SQL Managed Instance.
 - [Database copy and move](database-copy-move-how-to.md#limitations): You can only copy and move databases to instances with matching, or higher version, update policies. Copying or moving a database to an instance with a lower version update policy is not supported. 
 - [Failover groups](failover-group-configure-sql-mi.md#change-update-policy): Instances in a failover group must have matching update policies. 
 
