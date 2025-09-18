@@ -22,9 +22,9 @@ If you're contemplating migrating from disk-based tables to memory-optimized tab
   
 ## Basic Guidance for Estimating Memory Requirements
 
-Starting with [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)], there's no limit on the size of memory-optimized tables, though the tables do need to fit in memory.  In [!INCLUDE[ssSQL14](../../includes/sssql14-md.md)] the supported data size is 256 GB for SCHEMA_AND_DATA tables.
+In [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)] and later versions, there's no limit on the size of memory-optimized tables, though the tables do need to fit in memory.  In [!INCLUDE[ssSQL14](../../includes/sssql14-md.md)] the supported data size is 256 GB for SCHEMA_AND_DATA tables.
 
-The size of a memory-optimized table corresponds to the size of data plus some overhead for row headers. When migrating a disk-based table to memory-optimized, the size of the memory-optimized table will roughly correspond to the size of the clustered index or heap of the original disk-based table.
+The size of a memory-optimized table corresponds to the size of data plus some overhead for row headers. The size of the memory-optimized table will roughly correspond to the size of the clustered index or heap of the original disk-based table.
 
 Indexes on memory-optimized tables tend to be smaller than nonclustered indexes on disk-based tables. The size of nonclustered indexes is in the order of `[primary key size] * [row count]`. The size of hash indexes is `[bucket count] * 8 bytes`. 
 
@@ -80,7 +80,7 @@ Using this schema we'll determine the minimum memory needed for this memory-opti
   
 ###  <a name="bkmk_MemoryForTable"></a> Memory for the table  
 
-A memory-optimized table row is comprised of three parts:
+A memory-optimized table row has three parts:
   
 - **Timestamps**   
     Row header/timestamps = 24 bytes.  
@@ -180,7 +180,7 @@ Memory needs for stale rows is then estimated by multiplying the number of stale
   
 Memory used for a table variable is released only when the table variable goes out of scope. Deleted rows, including rows deleted as part of an update, from a table variable aren't subject to garbage collection. No memory is released until the table variable exits scope.  
   
-Table variables defined in a large SQL batch, as opposed to a procedure scope, which are used in many transactions, can consume a lot of memory. Because they aren't garbage collected, deleted rows in a table variable can consume a lot memory and degrade performance since read operations need to scan past the deleted rows.  
+Table variables defined in a large SQL batch instead of in a stored procedure, and used in many transactions can consume a large amount of memory. Because they aren't garbage collected, deleted rows in a table variable can consume a lot memory and degrade performance since read operations need to scan past the deleted rows.  
   
 ###  <a name="bkmk_MemoryForGrowth"></a> Memory for growth
 
@@ -201,7 +201,7 @@ If there is no free memory in existing superblocks, a new superblock is allocate
 
 Over time, as memory in superblocks is allocated and deallocated, the total amount of memory consumed by the In-Memory OLTP engine might become significantly larger than the amount of used memory. In other words, memory can become fragmented.
 
-When [garbage collection](in-memory-oltp-garbage-collection.md) occurs, it might reduce the used memory, but it doesn't reduce the allocated memory unless an entire superblock becomes empty and is deallocated. This applies to both automatic and forced garbage collection using the [sys.sp_xtp_force_gc](..//system-stored-procedures/sys-sp-xtp-force-gc-transact-sql.md) system stored procedure.
+[Garbage collection](in-memory-oltp-garbage-collection.md) might reduce the used memory, but it doesn't reduce the allocated memory unless an entire superblock becomes empty and is deallocated. This applies to both automatic and forced garbage collection using the [sys.sp_xtp_force_gc](..//system-stored-procedures/sys-sp-xtp-force-gc-transact-sql.md) system stored procedure.
 
 If the In-Memory OLTP engine memory fragmentation and allocated memory usage become higher than expected, you can enable [trace flag 9898](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf9898). This changes superblock partitioning scheme from per-CPU to per-NUMA node, reducing the total number of superblocks and the potential for high memory fragmentation.
 
