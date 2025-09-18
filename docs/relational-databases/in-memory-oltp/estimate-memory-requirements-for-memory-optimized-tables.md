@@ -3,13 +3,15 @@ title: "Memory requirements - memory-optimized tables"
 description: Learn about memory use and management scenarios for memory-optimized tables in SQL Server, which require sufficient memory for all the rows and indexes.
 author: MikeRayMSFT
 ms.author: mikeray
-ms.date: "12/02/2016"
+ms.date: 09/18/2025
 ms.service: sql
 ms.subservice: in-memory-oltp
 ms.topic: how-to
 monikerRange: "=azuresqldb-current||>=sql-server-2016||>=sql-server-linux-2017||=azuresqldb-mi-current"
 ---
+
 # Estimate Memory Requirements for Memory-Optimized Tables
+
 [!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
 
 Memory-optimized tables require that sufficient memory exist to keep all of the rows and indexes in memory. Because memory is a finite resource, it's important that you understand and manage memory usage on your system. The topics in this section cover common memory use and management scenarios.
@@ -27,6 +29,8 @@ The size of a memory-optimized table corresponds to the size of data plus some o
 Indexes on memory-optimized tables tend to be smaller than nonclustered indexes on disk-based tables. The size of nonclustered indexes is in the order of `[primary key size] * [row count]`. The size of hash indexes is `[bucket count] * 8 bytes`. 
 
 When there's an active workload, extra memory is needed to account for row versioning and various operations. How much memory is needed in practice depends on the workload, but to be safe the recommendation is to start with two times the expected size of memory-optimized tables and indexes, and observe what are the memory requirements in practice. The overhead for row versioning always depends on the characteristics of the workload - especially long-running transactions increase the overhead. For most workloads using larger databases (e.g., >100 GB), overhead tends to be limited (25% or less).
+
+For more information about potential memory overhead in the In-Memory OLTP engine, see [Memory fragmentation](#memory-fragmentation).
 
   
 ## Detailed Computation of Memory Requirements 
@@ -182,6 +186,27 @@ Table variables defined in a large SQL batch, as opposed to a procedure scope, w
 
 The above calculations estimate your memory needs for the table as it currently exists. In addition to this memory, you need to estimate the growth of the table and provide sufficient memory to accommodate that growth.  For example, if you anticipate 10% growth then you need to multiple the results from above by 1.1 to get the total memory needed for your table.  
   
-## See also
 
-[Migrating to In-Memory OLTP](./plan-your-adoption-of-in-memory-oltp-features-in-sql-server.md)
+## Memory fragmentation
+
+To avoid the overhead of memory allocation calls and to improve performance, the In-Memory OLTP engine always requests memory from the SQL Server Operating System (SQLOS) using 64-KB blocks, referred to as superblocks.
+
+Each superblock contains memory allocations only within a specific size range, referred to as sizeclass. For example, superblock A might have memory allocations in the 1-16 KB sizeclass, while superblock B might have memory allocations in the 17-32 KB sizeclass, and so on.
+
+By default, superblocks are also partitioned by logical CPU. That means that for each logical CPU, there is a separate set of superblocks, further broken down by sizeclass. This reduces memory allocation contention among requests executing on different CPUs.
+
+When the In-Memory OLTP engine makes a new memory allocation, it first attempts to find free memory in an existing superblock for the requested sizeclass and for the CPU processing the request. If this attempt is successful, the value in the `used_bytes` column in [sys.dm_xtp_system_memory_consumers](../system-dynamic-management-views/sys-dm-xtp-system-memory-consumers-transact-sql.md) for a specific memory consumer increases by the requested memory size, but the value in the `allocated_bytes` column remains the same.
+
+If there is no free memory in existing superblocks, a new superblock is allocated and value in the `used_bytes` increases by the requested memory size, while the value in the `allocated_bytes` column increases by 64 KB.
+
+Over time, as memory in superblocks is allocated and deallocated, the total amount of memory consumed by the In-Memory OLTP engine might become significantly larger than the amount of used memory. In other words, memory can become fragmented.
+
+When [garbage collection](in-memory-oltp-garbage-collection.md) occurs, it might reduce the used memory, but it doesn't reduce the allocated memory unless an entire superblock becomes empty and is deallocated. This applies to both automatic and forced garbage collection using the [sys.sp_xtp_force_gc](..//system-stored-procedures/sys-sp-xtp-force-gc-transact-sql.md) system stored procedure.
+
+If the In-Memory OLTP engine memory fragmentation and allocated memory usage become higher than expected, you can enable [trace flag 9898](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf9898). This changes superblock partitioning scheme from per-CPU to per-NUMA node, reducing the total number of superblocks and the potential for high memory fragmentation.
+
+This optimization is more relevant for large machines with many logical CPUs. The tradeoff of this optimization is a potential increase in memory allocation contention resulting from fewer superblocks, which might reduce the overall workload throughput. Depending on workload patterns, throughput reduction from using per-NUMA memory partitioning may or may not be noticeable.
+
+## Related content
+
+- [Migrating to In-Memory OLTP](./plan-your-adoption-of-in-memory-oltp-features-in-sql-server.md)
