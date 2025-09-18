@@ -64,7 +64,7 @@ You don't need to decrypt databases for operations within Azure. The TDE setting
 > [!IMPORTANT]  
 > Taking manual COPY-ONLY backup of a database encrypted by service-managed TDE is not supported in Azure SQL Managed Instance, since the certificate used for encryption is not accessible. Use point-in-time-restore feature to move this type of database to another SQL Managed Instance, or switch to customer-managed key.
 
-When you export a TDE-protected database to a BACPAC file, the exported content of the database isn't encrypted. If you import into an existing empty database, the encryption depends on whether TDE is enabled on that database or not. If a new database is created during the import, it uses the default TDE settings of the Azure SQL Logical Server or Azure SQL Managed Instance.
+When you export a TDE-protected database to a BACPAC file, the exported content of the database isn't encrypted. If you import into an existing empty database, the encryption depends on whether TDE is enabled on that database or not. If a new database is created during the import, it uses the default TDE settings of the logical server for Azure SQL Database or Azure SQL Managed Instance.
 
 ## Manage transparent data encryption
 
