@@ -12,6 +12,7 @@ ms.collection:
   - ce-skilling-ai-copilot
 ms.custom:
   - build-2025
+monikerRange: "=sql-server-ver17 || =sql-server-linux-ver17 || =azuresqldb-current || =azuresqldb-mi-current || =fabric"
 ---
 # Intelligent applications and AI
 
