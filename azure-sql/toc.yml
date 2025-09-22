@@ -1102,6 +1102,8 @@
 
     - name: Security
       items:
+      - name: Secure your instance
+        href: managed-instance/secure-managed-instance.md
       - name: Always Encrypted
         href: database/always-encrypted-landing.yml
       - name: Auditing
