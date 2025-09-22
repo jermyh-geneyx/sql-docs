@@ -191,7 +191,7 @@ The previous calculations estimate your memory needs for the table as it current
 
 To avoid the overhead of memory allocation calls and to improve performance, the In-Memory OLTP engine always requests memory from the SQL Server Operating System (SQLOS) using 64-KB blocks, referred to as superblocks.
 
-Each superblock contains memory allocations only within a specific size range, referred to as sizeclass. For example, superblock A might have memory allocations in the 1-16 KB sizeclass, while superblock B might have memory allocations in the 17-32 KB sizeclass, and so on.
+Each superblock contains memory allocations only within a specific size range, referred to as sizeclass. For example, superblock **A** might have memory allocations in the 1-16 byte sizeclass, while superblock **B** might have memory allocations in the 17-32 byte sizeclass, and so on.
 
 By default, superblocks are also partitioned by logical CPU. That means that for each logical CPU, there is a separate set of superblocks, further broken down by sizeclass. This reduces memory allocation contention among requests executing on different CPUs.
 
