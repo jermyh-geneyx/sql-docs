@@ -24,7 +24,7 @@ ms.custom:
 
 [!INCLUDE [sqlserver2025-asdb-asmi-fabricsqldb](../../includes/applies-to-version/sqlserver2025-asdb-asmi-fabricsqldb.md)]
 
-The following scalar functions perform operations on [vectors](../../relational-databases/vectors/vectors-sql-server.md) in binary format, allowing applications to store and manipulate vectors in the SQL Database Engine.
+The following scalar functions perform operations on [vectors](../../sql-server/ai/vectors.md) in binary format, allowing applications to store and manipulate vectors in the SQL Database Engine.
 
 > [!NOTE]
 > - Vector features are in preview and are subject to change. Make sure to read preview usage terms in the [Service Level Agreements (SLA) for Online Services](https://www.microsoft.com/licensing/docs/view/Service-Level-Agreements-SLA-for-Online-Services) document.
@@ -43,5 +43,5 @@ All Vector functions support the [Vector data type](../data-types/vector-data-ty
 ## Related content
 
 - [Vector data type](../data-types/vector-data-type.md)
-- [Overview of vectors in the SQL Database Engine](../../relational-databases/vectors/vectors-sql-server.md)
+- [Overview of vectors in the SQL Database Engine](../../sql-server/ai/vectors.md)
 - [Intelligent applications with Azure SQL Database](/azure/azure-sql/database/ai-artificial-intelligence-intelligent-applications)
