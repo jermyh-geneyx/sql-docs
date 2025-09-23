@@ -42,7 +42,7 @@ The messages in the queues can be fetched using the Transact-SQL `RECEIVE` comma
 
 ### Create services
 
-[!NOTE]
+>[!NOTE]
 > A target service must expose one or more **contracts**. If you create a service without a contracts it will not be able to receive messages. Messages sent will appear to succeed, but the messages will remain on the initiator's [sys.transmission_queue](../../relational-databases/system-catalog-views/sys-transmission-queue-transact-sql.md)
 
 ```sql
