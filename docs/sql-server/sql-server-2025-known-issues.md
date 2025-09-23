@@ -25,7 +25,6 @@ This article describes known issues for [!INCLUDE [sssql25-md](../includes/sssql
 - [Database mail on Linux](#database-mail-on-linux)
 - [SQLPS](#sqlps)
 - [Incorrect behavior of SESSION_CONTEXT in parallel plans](#incorrect-behavior-of-session_context-in-parallel-plans)
-- [Access violation exception occurs under certain conditions](#access-violation-exception-occurs-under-certain-conditions)
 - [Issue when setting the backup compression algorithm to ZSTD](#setting-the-backup-compression-algorithm-to-zstd)
 - [Local ONNX models not supported on Linux operating systems](#local-onnx-models-not-supported-on-linux-operating-systems)
 - [PBKDF2 hashing algorithm can affect login performance](#pbkdf2-hashing-algorithm-can-affect-login-performance)
