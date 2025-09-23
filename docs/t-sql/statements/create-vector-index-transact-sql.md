@@ -30,12 +30,11 @@ monikerRange: "=sql-server-ver17 || =sql-server-linux-ver17"
 
 [!INCLUDE [sqlserver2025](../../includes/applies-to-version/sqlserver2025.md)]
 
-Create an approximate index on a vector column to improve performances of nearest neighbors search. To learn more about how vector indexing and vector search works, and the differences between exact and approximate search, refer to [Vectors in the SQL Database Engine](../../relational-databases/vectors/vectors-sql-server.md).
+Create an approximate index on a vector column to improve performances of nearest neighbors search. To learn more about how vector indexing and vector search works, and the differences between exact and approximate search, refer to [Vectors in the SQL Database Engine](../../sql-server/ai/vectors.md).
 
 ## Preview feature
 
-> [!NOTE]  
-> This function is in preview and is subject to change. In order to use this feature, you must enable the `PREVIEW_FEATURES` [database scoped configuration](alter-database-scoped-configuration-transact-sql.md).
+This function is in preview and is subject to change. In order to use this feature, you must enable the `PREVIEW_FEATURES` [database scoped configuration](alter-database-scoped-configuration-transact-sql.md).
 
 > [!WARNING]  
 > The trace flags (466, 474, 13981) that were required in previous CTP version are no longer necessary and should be avoided, as their use will prevent vector index functionality from working correctly.
@@ -82,7 +81,7 @@ A string with the name of the distance metric to use to calculate the distance b
 
 ## TYPE = 'DiskANN'
 
-The type of [ANN algorithm](../../relational-databases/vectors/vectors-sql-server.md#approximate-vector-index-and-vector-search-approximate-nearest-neighbors) used to build the index. Only `DiskANN` is currently supported. DiskANN is the default value.
+The type of [ANN algorithm](../../sql-server/ai/vectors.md#approximate-vector-index-and-vector-search-approximate-nearest-neighbors) used to build the index. Only `DiskANN` is currently supported. DiskANN is the default value.
 
 ## MAXDOP = *max_degree_of_parallelism*
 
@@ -207,7 +206,7 @@ ORDER BY s.distance, t.title;
 
 ## Related content
 
-- [Overview of vectors in the SQL Database Engine](../../relational-databases/vectors/vectors-sql-server.md)
+- [Overview of vectors in the SQL Database Engine](../../sql-server/ai/vectors.md)
 - [Vector data type](../data-types/vector-data-type.md)
 - [VECTOR_SEARCH (Transact-SQL) (Preview)](../functions/vector-search-transact-sql.md)
 - [sys.vector_indexes (Transact-SQL)](../../relational-databases/system-catalog-views/sys-vector-indexes-transact-sql.md)
