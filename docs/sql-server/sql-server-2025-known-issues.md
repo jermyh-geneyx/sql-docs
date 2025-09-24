@@ -4,7 +4,7 @@ description: "Known issues, causes, and workarounds for SQL Server 2025 Preview 
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest
-ms.date: 09/16/2025
+ms.date: 09/24/2025
 ms.service: sql
 ms.subservice: release-landing
 ms.topic: troubleshooting-known-issue
@@ -28,6 +28,7 @@ This article describes known issues for [!INCLUDE [sssql25-md](../includes/sssql
 - [Issue when setting the backup compression algorithm to ZSTD](#setting-the-backup-compression-algorithm-to-zstd)
 - [Local ONNX models not supported on Linux operating systems](#local-onnx-models-not-supported-on-linux-operating-systems)
 - [PBKDF2 hashing algorithm can affect login performance](#pbkdf2-hashing-algorithm-can-affect-login-performance)
+- [Access violation exception can occur on readable secondary replicas under certain conditions](#access-violation-exception-can-occur-on-readable-secondary-replicas-under-certain-conditions)
 
 ## Windows Arm64 not supported
 
@@ -105,6 +106,30 @@ Use the new compression algorithm directly in the [BACKUP](../t-sql/statements/b
 In [!INCLUDE [sssql25-md](../includes/sssql25-md.md)], password-based authentication uses PBKDF2 (RFC2898) as the default hashing algorithm. This enhancement improves password security by applying 100,000 iterations of SHA-512 hashing. The increased computational cost of PBKDF2 means slightly longer SQL Authentication login time. This effect is especially noticeable in environments without connection pooling, or where login latency is closely monitored. In pooled environments, the effect is typically minimal.
 
 For more information, see [CREATE LOGIN](../t-sql/statements/create-login-transact-sql.md) and [Support for Iterated and Salted Hash Password Verifiers in SQL Server 2022 CU12](https://techcommunity.microsoft.com/blog/azuresqlblog/support-for-iterated-and-salted-hash-password-verifiers-in-sql-server-2022-cu12/4087155).
+
+## Access violation exception can occur on readable secondary replicas under certain conditions
+
+Consider a database enabled to use the [Query Store for readable secondaries](../relational-databases/performance/query-store-for-secondary-replicas.md) feature, using the following data definitional language (DDL) command:
+
+```sql
+ALTER DATABASE [Database_Name]
+    SET QUERY_STORE (OPERATION_MODE = READ_WRITE);
+```
+
+Queries that meet the following conditions could experience an access violation when a PSP [query variant](../relational-databases/performance/parameter-sensitive-plan-optimization.md#query-variant) can't determine the persisted state of its parent dispatcher statement:
+
+- Executed on a secondary replica
+- Sensitive to parameter sniffing
+- Eligible for parameter sensitive plan (PSP) optimization
+
+A fix has been identified and will be part of a future release of [!INCLUDE [sssql25-md](../includes/sssql25-md.md)].
+
+**Workaround**: Disable PSP on secondaries for each database that was onboarded to use the Query Store for readable secondaries feature. From within the context of a specific database, issue the following Transact-SQL statement:
+
+```sql
+ALTER DATABASE SCOPED CONFIGURATION FOR SECONDARY
+    SET PARAMETER_SENSITIVE_PLAN_OPTIMIZATION = OFF;
+```
 
 ## Related content
 
