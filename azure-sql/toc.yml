@@ -120,10 +120,11 @@
       - name: Extended events
         items:
         - name: Extended events
+          displayName: Extended events overview
           href: database/xevent-db-diff-from-svr.md
-        - name: Extended events - event file
+        - name: Event file walkthrough
           href: database/xevent-code-event-file.md
-        - name: Extended events - ring buffer
+        - name: Ring buffer walkthrough
           href: database/xevent-code-ring-buffer.md
   - name: Shared how-to's
     items:
