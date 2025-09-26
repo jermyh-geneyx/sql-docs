@@ -5,7 +5,7 @@ description: Learn about best practices when using the link feature for Azure SQ
 author: djordje-jeremic
 ms.author: djjeremi
 ms.reviewer: mathoma, danil
-ms.date: 10/09/2024
+ms.date: 09/30/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: data-movement
 ms.custom: ignite-2023
@@ -65,9 +65,13 @@ You can check the performance of replication with the redo queue size on the sec
 
 If the redo queue size is consistently high, consider increasing resources on the secondary replica.
 
-## Rotate certificate 
+## Rotate certificate
 
-It's possible for the certificate that you use to secure the database mirroring endpoint to expire, which can lead to the degradation of the link. To prevent this issue, *rotate the certificate* before it expires.
+You might need to manually rotate the certificate used to secure the database mirroring endpoint on SQL Server. Since the certificate used to secure the database mirroring endpoint on SQL Managed Instance is managed by the service and rotated automatically, you don't need to manually rotate it yourself. 
+
+### SQL Server
+
+It's possible for the certificate that you use to secure the database mirroring endpoint on SQL Server to expire, which can lead to the degradation of the link. To prevent this issue, *rotate the certificate* before it expires.
 
 Use the following Transact-SQL (T-SQL) command to check the expiration date of the current certificate: 
 
@@ -80,8 +84,49 @@ SELECT * FROM sys.certificates WHERE pvt_key_encryption_type = 'MK'
 
 If your certificate is about to expire, or has already expired, you can [create a new certificate](managed-instance-link-configure-how-to-scripts.md#create-a-certificate-on-sql-server-and-import-its-public-key-to-sql-managed-instance), and then alter the existing endpoint to [replace the current certificate](managed-instance-link-configure-how-to-scripts.md#alter-an-existing-endpoint). 
 
-Once the endpoint is configured to use the new certificate, you can [drop](/sql/t-sql/statements/drop-certificate-transact-sql) the expired certificate. 
+Once the endpoint is configured to use the new certificate, you can [drop](/sql/t-sql/statements/drop-certificate-transact-sql) the expired certificate.
 
+### SQL Managed Instance
+
+The database mirroring endpoint certificate on SQL Managed Instance is automatically rotated periodically. Monitoring the expiration date for the database mirroring endpoint certificate on SQL Managed Instance is not necessary, as long as you can [validate the certificate chain on SQL Server](managed-instance-link-best-practices.md#validate-the-certificate-chain-on-sql-server) successfully.
+
+## Validate the certificate chain on SQL Server
+
+> [!NOTE]
+> The certificate chain should be periodically validated for existing links, or to troubleshoot issues with a degraded link. Skip this section if you're configuring a new link or have recently completed the steps in sections [Get the certificate public key from SQL Managed Instance and import it to SQL Server](managed-instance-link-configure-how-to-scripts.md#get-the-certificate-public-key-from-sql-managed-instance-and-import-it-to-sql-server) and [Import Azure-trusted root certificate authority keys to SQL Server](managed-instance-link-configure-how-to-scripts.md#import-azure-trusted-root-certificate-authority-keys-to-sql-server).
+
+Issues with the certificate chain can degrade the link. To prevent this issue, *validate the certificate chain on SQL Server* regularly.
+
+The following scenarios can cause issues with the certificate chain on SQL Server:
+- Scheduled certificate rotation on SQL Managed Instance.
+- Unintentional or accidental changes to the certificates on SQL Server, such as dropping or altering the certificate used to secure the database mirroring endpoint.
+
+First, determine the `certificate_id` of the imported MI endpoint certificate by replacing the value of `<ManagedInstanceFQDN>` and then running the following query on SQL Server:
+
+```sql
+-- Run on SQL Server 
+USE master 
+SELECT name, subject, certificate_id, start_date, expiry_date 
+FROM sys.certificates 
+WHERE issuer_name LIKE '%Microsoft Corporation%' AND name = '<ManagedInstanceFQDN>' 
+GO 
+```
+
+Next, validate the certificate by replacing the value of `<certificate_id>` from the result of the previous query and then running the following query on SQL Server:
+
+```sql
+-- Run on SQL Server 
+USE master
+EXEC sp_validate_certificate_ca_chain <certificate_id> 
+GO 
+```
+
+A response of `Commands completed successfully. Completion time: …` indicates the MI endpoint certificate has been successfully validated. 
+
+> [!IMPORTANT]
+> The stored procedure `sp_validate_certificate_ca_chain` relies on host OS services to perform certificate validation, which might involve an online certificate revocation check. If the host OS is not configured to access the internet, the execution fails even if the certificate chain is valid. 
+
+If you encounter an error, the most reliable mitigation is to restore the certificate chain by first [dropping](/sql/t-sql/statements/drop-certificate-transact-sql) all certificates created in sections [Get the certificate public key from SQL Managed Instance and import it to SQL Server](managed-instance-link-configure-how-to-scripts.md#get-the-certificate-public-key-from-sql-managed-instance-and-import-it-to-sql-server) and [Import Azure-trusted root certificate authority keys to SQL Server](managed-instance-link-configure-how-to-scripts.md#import-azure-trusted-root-certificate-authority-keys-to-sql-server), and then reimporting them again.
 
 ## Add startup trace flags
 
