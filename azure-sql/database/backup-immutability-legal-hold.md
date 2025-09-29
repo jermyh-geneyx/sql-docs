@@ -25,6 +25,7 @@ Once locked with legal hold backup immutability, backups can't be deleted or mod
 
 1. An active Azure subscription.
 1. An existing Azure SQL Database.
+1. Existing long-term retention (LTR) backups.
 
 ## Permissions
 
@@ -32,7 +33,7 @@ You need to be a member of the Subscription Contributor role or higher permissio
 
 For permissions to view, managed, and delete LTR backups, see [Manage Azure SQL Database long-term backup retention](long-term-backup-retention-configure.md#permissions).
 
-## Create legal hold immutability policy for LTR backups
+## Enable legal hold immutability for existing LTR backups
 
 You can enable legal hold immutability on any existing backups. These backups are protected from any edits or deletes until the legal hold is explicitly removed.
 
@@ -63,18 +64,6 @@ Set-AzSqlDatabaseLongTermRetentionBackupLegalHold
     -BackupName 'myLTRbackup-1-24'
 ```
 
-#### [Azure CLI](#tab/azure-cli)
-
-**To enable legal hold backup immutability with the Azure CLI:**
-
-```bash
-az sql db ltr-backup set-legal-hold-immutability \
-    --location southeastasia \
-    --server myAzureSQL \
-    --database mysqldb \
-    --name "myLTRbackup-1-24"
-```
-
 ---
 
 ## Remove legal hold immutability
@@ -101,18 +90,6 @@ Remove-AzSqlDatabaseLongTermRetentionBackupLegalHold
     -ServerName myAzureSQL
     -DatabaseName mysqldb
     -BackupName 'myLTRbackup-1-24'
-```
-
-#### [Azure CLI](#tab/azure-cli)
-
-**To remove legal hold immutability from a backup with the Azure CLI:**
-
-```bash
-az sql db ltr-backup remove-legal-hold-immutability \
-    --location southeastasia \
-    --server myAzureSQL \
-    --database mysqldb \
-    --name "myLTRbackup-1-24"
 ```
 
 ---
