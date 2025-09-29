@@ -117,7 +117,12 @@ The current preview has the following limitations:
 
 ## Known issues
 
-In RC1 when creating a vector index on some datasets, you may get error 9829 ("STRING_AGG aggregation result exceeded the limit of 8000 bytes. Use LOB types to avoid result truncation.") followed by error 42234 ("Internal SQL error during DiskANN graph build"). This is a known bug that will be fixed in a future release.
+Currently, when you create a vector index on some datasets, it may return the following errors:
+
+- Error 9829: `STRING_AGG aggregation result exceeded the limit of 8000 bytes. Use LOB types to avoid result truncation.`
+- 42234: `Internal SQL error during DiskANN graph build`
+
+For more information, review [Known issues](../../sql-server/-server-2025-known-issues.md#vector-index).
 
 ## Permissions
 
