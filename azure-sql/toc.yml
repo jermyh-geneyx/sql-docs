@@ -512,6 +512,14 @@
         href: database/high-availability-disaster-recovery-checklist.md
       - name: Automated backups
         href: database/automated-backups-overview.md
+      - name: Backup immutability
+        items:
+        - name: Backup immutability for LTR backups
+          href: database/backup-immutability.md
+        - name: Configure time-based backup immutability
+          href: database/backup-immutability-time-based.md
+        - name: Configure legal hold backup immutability
+          href: database/backup-immutability-legal-hold.md
       - name: Disaster recovery
         items:
         - name: Active geo-replication
