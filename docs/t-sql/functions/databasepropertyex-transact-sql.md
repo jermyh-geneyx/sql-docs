@@ -4,7 +4,7 @@ description: "DATABASEPROPERTYEX returns the current setting of the specified da
 author: markingmyname
 ms.author: maghan
 ms.reviewer: wiassaf
-ms.date: 09/26/2025
+ms.date: 09/29/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -93,7 +93,7 @@ An expression specifying the name of the database property to return. *property*
 | `Updateability` |Indicates whether data can be modified.|`READ_ONLY`: Database supports data reads but not data modifications.<br /><br /> `READ_WRITE`: Database supports data reads and modifications.<br /><br /> Base data type: **nvarchar(128)**|
 | `UserAccess` |Indicates which users can access the database.|`SINGLE_USER`: Only one db_owner, dbcreator, or sysadmin user at a time<br /><br /> `RESTRICTED_USER`: Only members of db_owner, dbcreator, or sysadmin roles<br /><br /> `MULTI_USER`: All users<br /><br /> Base data type: **nvarchar(128)**|
 | `Version` |Internal version number of the [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] code with which the database was created. [!INCLUDE[ssInternalOnly](../../includes/ssinternalonly-md.md)]|Version number: Database is open.<br /><br /> `NULL`: Database hasn't started.<br /><br /> Base data type: **int**|
-| `ReplicaID` |The replica ID of a connected hyperscale database/replica. |**Applies to**: Azure SQL Database and SQL database in Fabric.<br /><br /> It will only returns replica ID of a connected hyperscale database/replica. To learn more about replica types, see [Hyperscale secondary replicas](/azure/azure-sql/database/service-tier-hyperscale-replicas).<br /><br /> `NULL`: It is not a hyperscale database or the database isn't started.<br /><br /> Base data type: **nvarchar(128)**|
+| `ReplicaID` |The replica ID of a connected hyperscale database/replica. |**Applies to**: Azure SQL Database Hyperscale.<br /><br /> It will only returns replica ID of a connected Hyperscale database/replica. To learn more about replica types, see [Hyperscale secondary replicas](/azure/azure-sql/database/service-tier-hyperscale-replicas).<br /><br /> `NULL`: It is not a hyperscale database or the database isn't started.<br /><br /> Base data type: **nvarchar(128)**|
 
 <br />
 
