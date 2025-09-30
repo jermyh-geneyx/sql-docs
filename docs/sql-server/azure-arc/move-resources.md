@@ -107,19 +107,18 @@ Moving to a different subscription requires manual reconfiguration with the prec
 
 ### SQL Server p-core license
 
-Moving the SQL Server p-core license to the new subscription or resource group is currently not supported. To move the SQL Servers covered by a p-core license to a new resource group or subscription, follow these steps:
+Moving the SQL Server p-core license to a new subscription, resource group, or location is currently not supported. You can, however replace the current server in a new subscription, resource group, or location. To replace a SQL Server covered by a p-core license, follow these steps:
 
-1. Create and activate a p-core license with the same configuration in the new location+
-
-1. Move the virtual machines and SQL Server resources covered by the original license to the new scope
-
-1. Manually delete the old p-core license
+1. Create and activate a p-core license with the same configuration in the new subscription, resource group, or location.
+1. Move the virtual machines and SQL Server resources covered by the original license to the new scope.
+1. Manually delete the old p-core license.
 
   For details, review [Manage the unlimited virtualization benefit for SQL Server](manage-configuration.md#manage-pcore-license).
 
-> [!IMPORTANT]  
-> - The p-core license in the new location must be activated *before* you move the VM and SQL resources to it. This will ensure you will not incur the pay-as-you-go charges for the individual SQL Server instances in the new location. 
-> - The p-core license in the old location must be deleted *after* all the VM and SQL resources have been successfully moved to the new location. This will ensure you will not incur the pay-as-you-go charges for the individual SQL Server instances in the old location.
+> [!IMPORTANT]
+>
+> - The p-core license in the new subscription, resource group, or location must be activated *before* you move the VM and SQL Server resources to it. This step ensures you won't incur the pay-as-you-go charges for the individual SQL Server instances in the new location.
+> - The p-core license in the old scope must be deleted *after* all the VM and SQL resources have been successfully moved to the new location. This step ensures you won't incur the pay-as-you-go charges for the individual SQL Server instances in the old location.
 > - You will be charged for two p-core licenses until this process completes, and the old p-core license is deleted. But it will ensure that the individual SQL Server instances in each scope will not be billed during the move.
 
 ### SQL Server p-core ESU license
