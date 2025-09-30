@@ -1,13 +1,13 @@
 ---
-title: Manage Multiple Databases With Elastic Pools
+title: Manage Multiple Databases with Elastic Pools
 description: Manage and scale multiple databases in Azure SQL Database, as many as hundreds or thousands, by using elastic pools. For one price, you can distribute resources where they're needed.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: arvindsh, mathoma, maghan, bgavrilovic
-ms.date: 12/11/2024
+ms.date: 08/25/2025
 ms.service: azure-sql-database
 ms.subservice: elastic-pools
-ms.topic: concept-article 
+ms.topic: concept-article
 ms.custom:
   - sqldbrb=1
   - build-2023
@@ -34,7 +34,7 @@ Elastic pools solve this problem by ensuring that databases get the performance 
 
 Elastic pools enable you to purchase resources for a pool shared by multiple databases to accommodate unpredictable usage periods by individual databases. You can configure resources for the pool based either on the [DTU-based purchasing model](service-tiers-dtu.md) or the [vCore-based purchasing model](service-tiers-vcore.md). The aggregate utilization of its databases determines the resource requirement for a pool.
 
-The amount of resources available to the pool is controlled by your budget. All you have to do is:
+Your budget controls the resources available to the pool. All you have to do is:
 
 - Add databases to the pool.
 - Optionally set the minimum and maximum resources for the databases, in either DTU or vCore purchasing model.
@@ -42,7 +42,7 @@ The amount of resources available to the pool is controlled by your budget. All 
 
 You can use pools to seamlessly grow your service from a lean startup to a mature business at an ever-increasing scale.
 
-Within the pool, individual databases are given the flexibility to use resources within set parameters. Under heavy load, a database can consume more resources to meet demand. Databases under light loads consume less, and databases under no load consume no resources. Provisioning resources for the entire pool rather than for single databases simplifies your [management tasks](elastic-pool-manage.md). Plus, you have a predictable budget for the pool.
+Within the pool, individual databases have the flexibility to use resources within set parameters. Under heavy load, a database can consume more resources to meet demand. Databases under light loads consume less, and databases under no load consume no resources. Provisioning resources for the entire pool rather than for single databases simplifies your [management tasks](elastic-pool-manage.md). Plus, you have a predictable budget for the pool.
 
 More resources can be added to an existing pool with minimum downtime. If extra resources are no longer needed, they can be removed from an existing pool anytime. You can also add or remove databases from the pool. If a database is predictably underutilizing resources, you can move it out.
 
@@ -145,7 +145,7 @@ Pooled databases generally support the same [business-continuity features](busin
 - **Geo-restore**: Geo-restore provides the default recovery option when a database is unavailable because of an incident in the region where the database is hosted. See [Geo-restore](recovery-using-backups.md#geo-restore).
 - **Active geo-replication**: For applications that have more aggressive recovery requirements than geo-restore can offer, configure [active geo-replication](active-geo-replication-overview.md) or a [failover group](failover-group-sql-db.md).
 
-For more information on the above strategies, see [Disaster recovery guidance](disaster-recovery-guidance.md).
+For more information on the above strategies, see [Disaster recovery guidance - Azure SQL Database](disaster-recovery-guidance.md).
 
 ## Create a new SQL Database elastic pool by using the Azure portal
 
@@ -156,21 +156,22 @@ You can create an elastic pool in the Azure portal in two ways:
 
 **To create an elastic pool and select an existing or new server:**
 
-1. Go to the [Azure portal](https://portal.azure.com) to create an elastic pool. Search for and select **Azure SQL**.
+1. Go to [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub). 
+1. In the pane for **Azure SQL Database**, select **Show options**.
+1. In the **Azure SQL Database options** window, select **Create SQL Elastic pool**.
 
-1. Select **Create** to open the **Select SQL deployment option** pane. To view more information about elastic pools, on the **Databases** tile, select **Show details**.
+   :::image type="content" source="media/elastic-pool-overview/show-options-create-sql-elastic-pool.png" alt-text="Screenshot from the Azure portal of the Azure SQL hub, showing the Show options button, and the Create SQL Elastic pool button." lightbox="media/elastic-pool-overview/show-options-create-sql-elastic-pool.png":::
 
-1. On the **Databases** tile, in the **Resource type** dropdown list, select **Elastic pool**. Then select **Create**.
-
-   :::image type="content" source="media/elastic-pool-overview/create-elastic-pool.png" alt-text="Screenshot that shows creating an elastic pool." lightbox="media/elastic-pool-overview/create-elastic-pool.png":::
-
+1. Choose a **Subscription**, **Resource group**, **Elastic Pool Name**, and a host logical **Server**, which can be an existing or new server.
+1. To configure the resources and pricing of the pool, select **Configure pool**. Then select a service tier, add databases to the pool, and configure the resource limits for the pool and its databases.
+1. After configuring the pool, select **Apply**, name the pool, and select **OK** to create the pool.
 1. Then, [manage your elastic pool](elastic-pool-manage.md) via the Azure portal, PowerShell, Azure CLI, REST API, or T-SQL.
 
 **To create an elastic pool from an existing server:**
 
 1. Go to an existing server and select **New pool** to create a pool directly in that server.
 
-   > [!NOTE]  
+   > [!NOTE]
    > You can create multiple pools on a server, but you can't add databases from different servers into the same pool.
 
    The pool's service tier determines the features available to the elastics in the pool, and the maximum amount of resources available to each database. For more information, see resource limits for elastic pools in the [DTU model](resource-limits-dtu-elastic-pools.md#elastic-pool-storage-sizes-and-compute-sizes). For vCore-based resource limits for elastic pools, see [vCore-based resource limits - elastic pools](resource-limits-vcore-elastic-pools.md).

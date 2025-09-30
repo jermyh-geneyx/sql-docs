@@ -259,7 +259,7 @@ The only valid parameter is 'SECONDARY', and this SET option is only valid in Di
 
 #### CLUSTER_CONNECTION_OPTIONS
 
-**Applies to:** [!INCLUDE[sssql25-md](../../includes/sssql25-md.md)] RC 0 and later versions
+**Applies to:** [!INCLUDE[sssql25-md](../../includes/sssql25-md.md)] and later versions
 
 Use the `CLUSTER_CONNECTION_OPTIONS` clause to enforce [TLS 1.3](../../relational-databases/security/networking/tls-1-3.md) encryption for communication between the Windows Server Failover Cluster and your availability group replicas. The options are specified as a list of key-value pairs, separated by semicolons. The key-value pairs are used to configure connection string encryption for the availability group.
 

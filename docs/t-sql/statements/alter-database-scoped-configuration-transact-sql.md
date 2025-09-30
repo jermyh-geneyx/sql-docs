@@ -472,7 +472,7 @@ Optimized plan forcing reduces compilation overhead for repeating forced queries
 
 #### DOP_FEEDBACK = { ON | OFF }
 
-**Applies to:** [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE [sql-server-2022](../../includes/sssql22-md.md)]), [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], [!INCLUDE [ssazuremi](../../includes/ssazuremi-md.md)] with the Always-up-to-date update policy, SQL database in Fabric
+**Applies to:** [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE [sql-server-2022](../../includes/sssql22-md.md)]), [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], [!INCLUDE [ssazuremi](../../includes/ssazuremi-md.md)] with the **SQL Server 2025** or **Always-up-to-date** [update policy](/azure/azure-sql/managed-instance/update-policy), SQL database in Fabric
 
 Identifies parallelism inefficiencies for repeating queries, based on elapsed time and waits. If parallelism usage is deemed inefficient, DOP feedback lowers the DOP for the next execution of the query, from whatever is the configured DOP, and verifies if it helps. Requires Query Store enabled and in `READ_WRITE` mode. For more information, see [Degrees of Parallelism (DOP) feedback](../../relational-databases/performance/intelligent-query-processing-degree-parallelism-feedback.md). The default is `OFF`. 
 
@@ -507,7 +507,7 @@ Causes SQL Server to generate a Showplan XML fragment with the ParameterRuntimeV
 
 **Applies to:** [!INCLUDE [sql-server-2025](../../includes/sssql25-md.md)], [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] and [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)]
 
-Enables or disables the compilation serialization behavior of `sp_executesql` when a batch is compiled. The default is `OFF`. Allowing batches which use `sp_executesql` to serialize the compilation process reduces the impact of compilation storms.  A compilation storms refers to a situation where a large number of queries are being compiled simultaneously, leading to performance issues and resource contention.
+Enables or disables the compilation serialization behavior of `sp_executesql` when a batch is compiled. The default is `OFF`. Allowing batches which use `sp_executesql` to serialize the compilation process reduces the impact of compilation storms. A compilation storm is a situation where a large number of queries is being compiled simultaneously, leading to performance issues and resource contention.
 
 When `OPTIMIZED_SP_EXECUTESQL` is `ON`, the first execution of sp_executesql compiles and inserts its compiled plan into the plan cache. Other sessions abort waiting on the compile lock and reuse the plan once it becomes available. This allows `sp_executesql` to behave like objects such as stored procedures and triggers from a compilation perspective.
 

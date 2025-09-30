@@ -4,7 +4,7 @@ description: Find out about changes to SQL Server Migration Assistant (SSMA) for
 author: nilabjaball
 ms.author: niball
 ms.reviewer: randolphwest
-ms.date: 05/19/2025
+ms.date: 09/02/2025
 ms.service: sql
 ms.subservice: ssma
 ms.topic: whats-new
@@ -18,6 +18,10 @@ ms.custom:
 This article lists SQL Server Migration Assistant (SSMA) for MySQL changes in each release.
 
 [!INCLUDE [entra-id](../../includes/entra-id-hard-coded.md)]
+
+## SSMA v10.3
+
+The v10.3 release of SSMA for MySQL contains important security, compliance and accessibility fixes.
 
 ## SSMA v10.2
 
@@ -234,14 +238,14 @@ The v8.2 release of SSMA for MySQL is enhanced with a targeted set of fixes desi
 - An intermittent crash that occurs when a new version is downloaded.
 
 > [!NOTE]  
-> A known issue with auto-update might cause the failure of an update from SSMA v8.1 to v8.2. If you encounter this error, please download the new version and install it manually.
+> A known issue with auto-update might cause the failure of an update from SSMA v8.1 to v8.2. If you encounter this error, download the new version and install it manually.
 
 ## SSMA v8.1
 
 The v8.1 release of SSMA for MySQL is enhanced with targeted fixes that are designed to improve quality and conversion metrics.
 
 > [!NOTE]  
-> A known issue with auto-update might cause the failure of an update from SSMA v8.0 to v8.1. If you encounter this error, please download the new version and install it manually.
+> A known issue with auto-update might cause the failure of an update from SSMA v8.0 to v8.1. If you encounter this error, download the new version and install it manually.
 
 ## SSMA v8.0
 
@@ -249,9 +253,9 @@ The v8.0 release of SSMA for MySQL is enhanced with targeted fixes designed to i
 
 - Support for **Azure SQL Managed Instance** as a target. You can now create new projects targeting Azure SQL Managed Instance:
 
-  :::image type="content" source="../media/ssma-newproject-sqldbmi.png" alt-text="Screenshot of SQL Managed Instance project.":::
+  :::image type="content" source="../media/ssma-newproject-managed-instance.png" alt-text="Screenshot of SQL Managed Instance project.":::
 
-- Post-conversion **Fix advisor**. For more information, see more about it [here](https://techcommunity.microsoft.com/t5/microsoft-data-migration-blog/accelerate-your-oracle-migrations-with-new-machine-learning/ba-p/368733).
+- Post-conversion **Fix advisor**. For more information, see more about it [here](https://techcommunity.microsoft.com/blog/microsoftdatamigration/accelerate-your-oracle-migrations-with-new-machine-learning-capabilities-in-ssma/368733).
 
 - Preliminary database/schema selection.
 
@@ -305,7 +309,7 @@ The v7.4 release of SSMA for MySQL contains the following changes:
 
 - The **Query timeout** option is now available during schema object discovery at source and target.
 
-  :::image type="content" source="../media/query-timeout_red.png" alt-text="Screenshot of Query timeout option.":::
+  :::image type="content" source="../media/query-timeout-red.png" alt-text="Screenshot of Query timeout option.":::
 
 - The quality and conversion metric has been improved with targeted fixes, based on customer feedback.
 
@@ -324,13 +328,13 @@ The v7.3 release of SSMA for MySQL contains the following changes:
 
     - You can now export schema scripts from SSMA to an SSDT project. You can use the schema scripts to make extra schema changes and deploy your database.
 
-      :::image type="content" source="../media/export-schema-scripts_red.png" alt-text="Screenshot of Save as SSDT project command.":::
+      :::image type="content" source="../media/export-schema-scripts-red.png" alt-text="Screenshot of Save as SSDT project command.":::
 
   - Libraries that SSMA consumes for performing custom conversions.
 
     - You can now construct code that can handle custom syntax conversions and conversions that weren't previously handled by SSMA.
 
-      - For more information on how to construct a custom converter, see [Extending SQL Server Migration Assistant's conversion capabilities](https://techcommunity.microsoft.com/t5/microsoft-data-migration-blog/extending-sql-server-migration-assistant-s-conversion/ba-p/1004181).
+      - For more information on how to construct a custom converter, see [Extending SQL Server Migration Assistant's conversion capabilities](https://techcommunity.microsoft.com/blog/microsoftdatamigration/extending-sql-server-migration-assistants-conversion-capabilities/1004181).
 
       - You can also [download a sample project for conversion](https://techcommunity.microsoft.com/gxcuf89792/attachments/gxcuf89792/MicrosoftDataMigration/127/1/SsmaForOracleConversionSample.zip) from the same blog post.
 

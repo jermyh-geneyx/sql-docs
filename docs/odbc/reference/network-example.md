@@ -13,4 +13,4 @@ helpviewer_keywords:
 # Network Example
 This illustration shows how each of the preceding configurations could appear in a single network.  
   
- ![Various configurations in a singe network](../../odbc/reference/media/pr08.gif "pr08")
+ ![Various configurations in a single network](../../odbc/reference/media/pr08.gif "pr08")

@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 08/14/2025
+ms.date: 09/09/2025
 ms.topic: include
 ---
 | Error | Severity | Event logged | Description |
@@ -429,6 +429,7 @@ ms.topic: include
 | 12136 | 16 | No | The specified digest storage endpoint is invalid. It must be an Azure blob storage endpoint. |
 | 12137 | 16 | No | Optimized Locking cannot be enabled at this time. |
 | 12138 | 16 | No | Cannot alter database options for database '%ls' because it is not ONLINE. |
+| 12139 | 16 | No | Optimized Halloween Protection is enabled for this database. To disable Accelerated Database Recovery, disable the OPTIMIZED_HALLOWEEN_PROTECTION database-scoped configuration and try again. |
 | 12140 | 16 | No | Metadata Snapshot cannot be enabled for this database because Accelerated Database Recovery is not enabled. Enable Accelerated Database Recovery and try again. |
 | 12141 | 16 | No | Metadata Snapshot is enabled for this database. To disable Accelerated Database Recovery, disable Metadata Snapshot and try again. |
 | 12142 | 16 | No | Automatic Index Compaction cannot be enabled for database '%ls' because Accelerated Database Recovery is not enabled. Enable Accelerated Database Recovery and try again. |

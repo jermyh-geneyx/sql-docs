@@ -28,7 +28,7 @@ This article introduces regular expressions for [!INCLUDE [ssnoversion-md](../..
 A regular expression, or regex, is a sequence of characters that defines a search pattern for text. Regex is commonly used for a variety of tasks including pattern matching, data validation, data transformation, and querying. It offers a flexible and an efficient way to search, manipulate, and handle complex data operations.
 
 > [!NOTE]  
-> Regular expressions are available in Azure SQL Managed Instance configured with the [Always-up-to-date](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy) update policy.
+> Regular expressions are available in Azure SQL Managed Instance with the **SQL Server 2025** or **Always-up-to-date** [update policy](/azure/azure-sql/managed-instance/update-policy).
 
 This implementation of regular expression is based on the [RE2 regular expression library](https://github.com/google/re2/). For more information, visit [RE2 Regular Expression Syntax](https://cran.r-project.org/web/packages/re2/vignettes/re2_syntax.html#:~:text=The%20simplest%20regular%20expression%20is,matches%20a%20literal%20plus%20character).
 
@@ -134,7 +134,7 @@ The following table lists currently supported ASCII character classes.
 - Numbers
 - Symbols
 
-### Metacharacters
+### Empty strings
 
 | Empty strings | Description |
 | --- | --- |
@@ -170,6 +170,9 @@ Use flags to modify the expression behavior. For example:
 
 This implementation supports the POSIX standard of regular expressions following RE2, and has support for the PCRE/PCRE2 flavor of regular expressions syntax, which is compatible with most modern regular expression engines and tools. There are different flavors of regular expressions, such as POSIX, ANSI, Perl, and PCRE, which have different syntax and features. For more information about supported constructs and behavior of the underlying regex engine, see [RE2, a regular expression library](https://github.com/google/re2).
 
+> [!NOTE]  
+> Regular expression matching in SQL Server does not honor SQL collations for linguistic comparisons. This behavior is by design and consistent with most regular expression engines, as matching is based on the pattern and Unicode character properties rather than collation rules. As a result, it may lead to differences in behavior when compared to other string comparison functions like LIKE, especially on indexed columns with language-specific collations.
+
 ## Requirements
 
 - A SQL client tool, such as Azure Data Studio, SQL Server Management Studio, or Visual Studio Code.
@@ -198,7 +201,7 @@ However, this support is limited to input sizes up to 2 MB.
 - LOB data types aren't supported in the regex table-valued functions (TVFs):
   - `REGEXP_MATCHES`
   - `REGEXP_SPLIT_TO_TABLE`
-- Regular expression functions aren't supported on memory-optimized OLTP tables.
+- Regular expression functions aren't supported in natively compiled stored procedures.
 
 ## Related content
 

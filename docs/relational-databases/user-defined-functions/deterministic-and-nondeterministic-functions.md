@@ -1,9 +1,9 @@
 ---
 title: "Deterministic and Nondeterministic Functions"
-description: "Deterministic and Nondeterministic Functions"
+description: "Learn about deterministic and nondeterministic functions in the SQL Database Engine."
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 09/07/2025
+ms.date: 09/15/2025
 ms.service: sql
 ms.topic: conceptual
 helpviewer_keywords:
@@ -12,11 +12,11 @@ helpviewer_keywords:
   - "extended stored procedures [SQL Server], functions that call"
   - "deterministic functions"
   - "user-defined functions [SQL Server], deterministic"
-monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current"
+monikerRange: "=azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || = fabric"
 ---
 # Deterministic and nondeterministic functions
 
-[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/sql-asdb-asdbmi.md)]
+[!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance FabricSE FabricDW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-fabricse-fabricdw-fabricsqldb.md)]
 
 Deterministic functions always return the same result any time they're called with a specific set of input values and given the same state of the database. Nondeterministic functions might return different results each time they're called with a specific set of input values even if the database state that they access remains the same. For example, the function `AVG` always returns the same result given the qualifications stated previously, but the `GETDATE` function, which returns the current datetime value, always returns a different result.
 

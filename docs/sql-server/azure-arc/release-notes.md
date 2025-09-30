@@ -25,9 +25,24 @@ Extension versions are cumulative. Higher extension versions include all of the 
 
 Only Azure extension for SQL Server agent versions released within the last year are supported.
 
-## August
+## September 15, 2025
+
+**Extension version**: `1.1.3176.319`
+
+Certain limitations in US Government Virginia have been lifted. You can now:
+
+- License physical cores (p-cores) with unlimited virtualization.
+- License physical cores (p-cores) without virtual machines.
+
+## August, 2025
 
 **Extension version**: `1.1.3139.313`
+
+Certain limitations in US Government Virginia have been lifted. You can now onboard environments with:
+
+- Always On availability groups
+- Associated SQL Server services:
+  [!INCLUDE [sql-server-associated-services](includes/sql-server-associated-services.md)]
 
 ## August 14, 2025
 
@@ -151,22 +166,6 @@ Inventory additional service resources in portal (preview):
 ### ESU update to bill-back calculation
 
 ESU sets the bill-back date to the beginning of the current ESU year based on the timestamp when ESU was enabled, or p-core ESU license was activated. For details, review [SQL Server Extended Security Updates enabled by Azure Arc](extended-security-updates.md).
-
-## September 2024
-
-**Extension version**: `1.1.2803.208`
-
-### Availability group inventory
-
-Availability group (AG) inventory feature for all license types is now released for general availability. For complete description of feature, see [Manage Always On availability groups](manage-availability-group.md).
-
-### Apply physical core license to physical machines
-
-Apply physical core license types to physical core machines - general availability.
-
-## August 2024
-
-**Extension version**: `1.1.2769.203`
 
 ### Security improvements
 

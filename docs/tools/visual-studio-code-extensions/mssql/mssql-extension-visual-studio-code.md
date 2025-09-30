@@ -40,7 +40,7 @@ To get started with SQL development in Visual Studio Code, install the **MSSQL e
 
 The MSSQL extension for Visual Studio Code introduces the **General Availability** of its enhanced UI—designed to elevate the SQL development experience across SQL Server, Azure SQL, and SQL database on Fabric.
 
-This release delivers key improvements to:
+This revamped experience delivers key improvements to:
 
 - **Connection Dialog**
 - **Object Explorer (filtering)**

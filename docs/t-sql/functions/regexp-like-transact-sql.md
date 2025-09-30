@@ -40,7 +40,7 @@ ALTER DATABASE [DatabaseName] SET COMPATIBILITY_LEVEL = 170;
 ```
 
 > [!NOTE]
-> Regular expressions are available in Azure SQL Managed Instance configured with the [Always-up-to-date](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy) update policy.
+> Regular expressions are available in Azure SQL Managed Instance with the **SQL Server 2025** or **Always-up-to-date** [update policy](/azure/azure-sql/managed-instance/update-policy).
 
 ## Arguments
 
@@ -64,12 +64,14 @@ Boolean value. `true` or `false`.
 
 ### SARGability support
 
-`REGEXP_LIKE` supports *SARGability* when the pattern begins with anchor `^` and also the patterns that include quantifiers such as `*`, `+`, `?`, `{m}`, `{m,}`, and `{m,n}`, for example, `^ab+` or `^ab*` etc. This allows the query optimizer to use index seek operations, improving query performance. However, regular expressions do not honor collation rules, which may lead to differences in behavior when compared to other string comparison functions like `LIKE`, especially on indexed columns with language-specific collations.
+**Applies to**: [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], [!INCLUDE[ssazuremi](../../includes/ssazuremi-md.md)], and SQL database in Microsoft Fabric. Currently not supported on [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)].
+
+`REGEXP_LIKE` supports *SARGability* when the pattern begins with anchor `^` and also the patterns that include quantifiers such as `*`, `+`, `?`, `{n}`, `{n,}`, and `{n,m}`, for example, `^ab+` or `^ab*` etc. It also supports range characters like `[0-9A-Za-z]` and allows the use of backslash `\` to escape the metacharacters. This allows the query optimizer to use index seek operations, improving query performance. However, regular expressions do not honor collation rules, which may lead to differences in behavior when compared to other string comparison functions like `LIKE`, especially on indexed columns with language-specific collations.
+
+For example, in Turkish collation, the characters `i` and `I` are treated distinctly even in the case-insensitive collation due to language-specific rules.
 
 > [!NOTE]  
 > [!INCLUDE [search-argument](../../includes/paragraph-content/search-argument.md)]
-
-For example, in Turkish collation, the characters `i` and `I` are treated distinctly even in the case-insensitive collation due to language-specific rules.
 
 ### Cardinality estimation
 

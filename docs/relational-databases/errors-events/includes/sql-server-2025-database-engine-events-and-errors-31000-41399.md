@@ -2,7 +2,7 @@
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: maghan, mikeray
-ms.date: 08/14/2025
+ms.date: 09/09/2025
 ms.topic: include
 ---
 > [!NOTE]
@@ -120,6 +120,9 @@ ms.topic: include
 | 31738 | 17 | No | Initialization of the '%ls' process with session ID '%ls' failed with HRESULT 0x%08x. |
 | 31739 | 17 | No | Generating embeddings from '%ls' process with session ID '%ls' failed with HRESULT 0x%08x. |
 | 31740 | 17 | No | An internal error has occurred in AI runtime with session ID '%ls'. Retry the operation, if the issue persists, contact support for assistance. |
+| 31742 | 17 | No | Unrecoverable HTTP error %d %ls occured. |
+| 31744 | 16 | No | The JSON path for embeddings could not be found in the response. |
+| 31745 | 16 | No | The HTTP response does not contain valid JSON. |
 | 32001 | 10 | No | Log shipping backup log job for %s. |
 | 32002 | 10 | No | Log shipping copy job for %s:%s. |
 | 32003 | 10 | No | Log shipping restore log job for %s:%s. |

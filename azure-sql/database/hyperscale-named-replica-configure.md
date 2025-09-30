@@ -1,10 +1,10 @@
 ---
-title: Configure and manage Hyperscale named replicas
+title: Configure and Manage Hyperscale Named Replicas
 description: Learn how to configure and manage Hyperscale named replica so that a user can access the named replica but not other replicas.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: atsingh, dinethi, rsetlem
-ms.date: 04/24/2025
+ms.date: 08/25/2025
 ms.service: azure-sql-database
 ms.subservice: scale-out
 ms.topic: how-to
@@ -14,6 +14,7 @@ ms.custom:
   - sfi-image-nochange
 ---
 # Configure and manage Hyperscale named replicas
+
 [!INCLUDE [appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
 This article provides samples to configure and manage an Azure SQL Database Hyperscale [named replica](service-tier-hyperscale-replicas.md).
@@ -26,17 +27,20 @@ The following sample scenarios guide you to create a named replica `WideWorldImp
 
 The following example creates a named replica `WideWorldImporters_NamedReplica` for database `WideWorldImporters` using T-SQL. The primary replica uses service level objective HS_Gen5_4, while the named replica uses HS_Gen5_2. Both use the same logical server named `contosoeast`.
 
-1. In the [Azure portal](https://portal.azure.com), browse to the database for which you want to create the named replica.
+1. In the Azure portal, view [all of your Azure SQL resources](https://aka.ms/azuresqlhub) and find the database for which you want to create the named replica.
 1. On the **SQL Database** page, select your database, scroll to **Data management**, select **Replicas**, and then select **Create replica**.
 
     :::image type="content" source="media/named-replicas-configure-portal/azure-create-named-replicas.png" alt-text="Screenshot that shows create named replica step." lightbox="media/named-replicas-configure-portal/azure-create-named-replicas.png":::
 1. Choose **Named replica** under **Replica configuration**. Select an existing server or create a new server for the named replica. Enter named replica database name and configure the **Compute + storage** options if necessary.
 
     :::image type="content" source="media/named-replicas-configure-portal/azure-choose-named-replica.png" alt-text="Screenshot that shows configuration of named replica." lightbox="media/named-replicas-configure-portal/azure-choose-named-replica.png":::
+
 1. Optionally, configure a *zone redundant* Hyperscale named replica. For more information, see [Zone redundancy in Azure SQL Database Hyperscale named replicas](service-tier-hyperscale-replicas.md#zone-redundancy-for-hyperscale-named-replicas).
+
     1. In the **Configure database** page, select **Yes** for **Would you like to make this database zone redundant?**
     1. Add at least one High-Availability Secondary Replica to your configuration.
     1. Select **Apply**.
+
 1. Select **Review + create**, review the information, and then select **Create**.
 1. The named replica deployment process begins.
 
@@ -229,7 +233,9 @@ DELETE https://management.azure.com/subscriptions/00000000-1111-2222-3333-444444
 > [!IMPORTANT]  
 > Named replicas will be automatically removed when the primary replica from which they have been created is deleted.
 
-## Optimizing named replica configuration
+<a id="optimizing-named-replica-configuration"></a>
+
+## Optimize named replica configuration
 
 It is recommended to configure the named replica with the same compute size (vCores) as the primary replica. If the primary replica experiences a heavy write workload, a named replica with a lower compute size might not be able to keep up, causing replication lag. To maintain the recoverability SLAs, primary's transaction log rate can be temporarily reduced to allow its secondaries to catch up.
 
@@ -241,9 +247,8 @@ If you choose to create the named replica with a different compute size (vCores)
 
 For more information, see to the [Azure SQL Database Hyperscale Performance Diagnostics](hyperscale-performance-diagnostics.md#reduced-log-rate-waits).
 
-
 ## Related content
 
 - [Hyperscale secondary replicas](service-tier-hyperscale-replicas.md)
-- [Configure isolated access to a Hyperscale named replica](hyperscale-named-replica-security-configure.md)
+- [Configure isolated access for Hyperscale named replicas](hyperscale-named-replica-security-configure.md)
 - [Azure SQL Database Hyperscale FAQ](service-tier-hyperscale-frequently-asked-questions-faq.yml)

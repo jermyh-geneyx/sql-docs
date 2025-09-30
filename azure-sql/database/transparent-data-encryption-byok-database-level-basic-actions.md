@@ -1,28 +1,28 @@
 ---
-title: Identity and key management for TDE with database level customer-managed keys
+title: Identity and Key Management for TDE with Database Level Customer-Managed Keys
 titleSuffix: Azure SQL Database
 description: A how-to guide on creating, updating, and utilizing database level customer-managed keys with transparent data encryption (TDE) in Azure SQL Database.
 author: Pietervanhove
 ms.author: pivanho
 ms.reviewer: vanto, mathoma
-ms.date: 06/30/2025
+ms.date: 09/18/2025
 ms.service: azure-sql-database
 ms.subservice: security
 ms.topic: how-to
-monikerRange: "= azuresql || = azuresql-db"
 ms.custom:
   - devx-track-azurecli
   - devx-track-azurepowershell
   - has-azure-ad-ps-ref
   - sfi-image-nochange
+monikerRange: "=azuresql || =azuresql-db"
 ---
 
 # Identity and key management for TDE with database level customer-managed keys
 
-[!INCLUDE[appliesto-sqldb](../includes/appliesto-sqldb.md)]
+[!INCLUDE [appliesto-sqldb](../includes/appliesto-sqldb.md)]
 
 > [!NOTE]
-> - Database Level TDE CMK is available for Azure SQL Database (all SQL Database editions). It is not available for Azure SQL Managed Instance, SQL Server on-premises, Azure VMs, and Azure Synapse Analytics (dedicated SQL pools (formerly SQL DW)).
+> - Database Level TDE CMK is available for Azure SQL Database (all SQL Database editions). It isn't available for Azure SQL Managed Instance, SQL Server on-premises, Azure VMs, and Azure Synapse Analytics (dedicated SQL pools (formerly SQL DW)).
 > - The same guide can be applied to configure database level customer-managed keys in the same tenant by excluding the federated client ID parameter. For more information on database level customer-managed keys, see [Transparent data encryption (TDE) with customer-managed keys at the database level](transparent-data-encryption-byok-database-level-overview.md).
 
 In this guide, we go through the steps to create, update, and retrieve an Azure SQL Database with transparent data encryption (TDE) and customer-managed keys (CMK) at the database level, utilizing a [user-assigned managed identity](/azure/active-directory/managed-identities-azure-resources/overview#managed-identity-types) to access [Azure Key Vault](/azure/key-vault/general/quick-create-portal). The Azure Key Vault is in a different Microsoft Entra tenant than the Azure SQL Database. For more information, see [Cross-tenant customer-managed keys with transparent data encryption](transparent-data-encryption-byok-cross-tenant.md).
@@ -39,7 +39,7 @@ In this guide, we go through the steps to create, update, and retrieve an Azure 
   - [Configure cross-tenant customer-managed keys for an existing storage account](/azure/storage/common/customer-managed-keys-configure-cross-tenant-existing-account)
 - The Azure CLI version 2.52.0 or higher.
 - Az PowerShell module version 10.3.0 or higher.
-- The RBAC permissions necessary for database level CMK are the same permissions that are required for server level CMK. Specifically, the same RBAC permissions that are applicable when using [Azure Key Vault](transparent-data-encryption-byok-configure.md#grant-azure-key-vault-permissions-to-your-server), [managed identities](transparent-data-encryption-byok-identity.md), and [cross-tenant CMK](transparent-data-encryption-byok-cross-tenant.md) for TDE at the server level are applicable at the database level. For more information on key management and access policy, see [Key management](transparent-data-encryption-byok-database-level-overview.md#key-management).
+- The RBAC permissions necessary for database level CMK are the same permissions that are required for server level CMK. Specifically, the same RBAC permissions that are applicable when using [Azure Key Vault](transparent-data-encryption-byok-configure.md#grant-azure-key-vault-permissions-to-your-server), [Managed identities](transparent-data-encryption-byok-identity.md), and [Cross-tenant CMK](transparent-data-encryption-byok-cross-tenant.md) for TDE at the server level are applicable at the database level. For more information on key management and access policy, see [Key management](transparent-data-encryption-byok-database-level-overview.md#key-management).
 
 ### Required resources on the first tenant
 
@@ -60,17 +60,17 @@ Before we can configure TDE for Azure SQL Database with a cross-tenant CMK, we n
 1. On the second tenant where the Azure Key Vault resides, [create a service principal (application)](/azure/storage/common/customer-managed-keys-configure-cross-tenant-new-account#the-customer-grants-the-service-providers-app-access-to-the-key-in-the-key-vault) using the application ID from the registered application from the first tenant. Here's some examples of how to register the multitenant application. Replace `<TenantID>` and `<ApplicationID>` with the client **Tenant ID** from Microsoft Entra ID and **Application ID** from the multitenant application, respectively:
    - **PowerShell**:
 
-      ```powershell
-      Connect-Entra -TenantID <TenantID>
-      New-EntraServicePrincipal  -AppId <ApplicationID>
-      ```
+     ```powershell
+     Connect-Entra -TenantID <TenantID>
+     New-EntraServicePrincipal  -AppId <ApplicationID>
+     ```
 
    - **The Azure CLI**:
 
-      ```azurecli
-      az login --tenant <TenantID>
-      az ad sp create --id <ApplicationID>
-      ```
+     ```azurecli
+     az login --tenant <TenantID>
+     az ad sp create --id <ApplicationID>
+     ```
 
 1. Go to the [Azure portal](https://portal.azure.com) > **Microsoft Entra ID** > **Enterprise applications** and search for the application that was created.
 1. Create an [Azure Key Vault](/azure/key-vault/general/quick-create-portal) if you don't have one, and [create a key](/azure/key-vault/keys/quick-create-portal).
@@ -88,15 +88,15 @@ The following are examples for creating a database on Azure SQL Database with a 
 
 # [Portal](#tab/azure-portal)
 
-1. Browse to the [Select SQL deployment](https://portal.azure.com/#create/Microsoft.AzureSQL) option page in the Azure portal.
+1. Go to [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub).
+1. In the pane for **Azure SQL Database**, select **Show options**.
+1. In the **Azure SQL Database options** window, select **Create SQL Database**.
 
-1. If you aren't already signed in to Azure portal, sign in when prompted.
-
-1. Under **SQL databases**, leave **Resource type** set to **Single database**, and select **Create**.
+   :::image type="content" source="media/transparent-data-encryption-byok-database-level-basic-actions/show-options-create-sql-database.png" alt-text="Screenshot from the Azure portal showing the Azure SQL hub, the Show options button, and the Create SQL Database button." lightbox="media/transparent-data-encryption-byok-database-level-basic-actions/show-options-create-sql-database.png":::
 
 1. On the **Basics** tab of the **Create SQL Database** form, under **Project details**, select the desired Azure **Subscription**, **Resource group**, and **Server** for your database. Then, use a unique name for your **Database name**. If you haven't created a logical server for Azure SQL Database, see [Create server configured with TDE with cross-tenant customer-managed key (CMK)](transparent-data-encryption-byok-create-server-cross-tenant.md#create-server-configured-with-tde-with-cross-tenant-customer-managed-key-cmk) for reference.
 
-1. When you get to the **Security** tab, select **Configure transparent data encryption**.
+1. When you get to the **Security** tab, select **Configure transparent data encryption** for the **Database level key**.
 
    :::image type="content" source="media/transparent-data-encryption-byok-database-level-basic-actions/configure-transparent-data-encryption.png" alt-text="Screenshot of the Azure portal and the Security menu when creating an Azure SQL Database.":::
 
@@ -109,7 +109,7 @@ The following are examples for creating a database on Azure SQL Database with a 
    :::image type="content" source="media/transparent-data-encryption-byok-database-level-basic-actions/configure-identity-transparent-data-encryption.png" alt-text="Screenshot of the Azure portal Identity menu.":::
 
    > [!NOTE]
-   > You can configure the **Federated client identity** here if you are configuring [cross-tenant CMK for TDE](transparent-data-encryption-byok-cross-tenant.md).
+   > You can configure the **Federated client identity** here if you're configuring [Cross-tenant CMK for TDE](transparent-data-encryption-byok-cross-tenant.md).
 
 1. On the **Transparent data encryption** menu, select **Change key**. Select the desired **Subscription**, **Key vault**, **Key**, and **Version** for the customer-managed key to be used for TDE. Select the **Select** button. After you have selected a key, you can also add additional database keys as needed using the [Azure Key vault URI (object identifier)](/azure/key-vault/general/about-keys-secrets-certificates) in the **Transparent data encryption** menu.
 
@@ -119,7 +119,13 @@ The following are examples for creating a database on Azure SQL Database with a 
 
 1. Select **Apply** to continue creating the database.
 
-1. Select **Review + create** at the bottom of the page
+1. Select **Next: Additional settings**.
+
+1. Select **Next: Tags**.
+
+1. Consider using Azure tags. For example, the "Owner" or "CreatedBy" tag to identify who created the resource, and the Environment tag to identify whether this resource is in Production, Development, etc. For more information, see [Develop your naming and tagging strategy for Azure resources](/azure/cloud-adoption-framework/ready/azure-best-practices/naming-and-tagging).
+
+1. Select **Review + create**.
 
 1. On the **Review + create** page, after reviewing, select **Create**.
 
@@ -178,7 +184,7 @@ New-AzSqlDatabase @params
 
 Here's an example of an ARM template that creates an Azure SQL Database with a user-assigned managed identity and customer-managed TDE at the database level. For a cross-tenant CMK, use the **Key Identifier** from the second tenant Azure Key Vault, and the **Application ID** from the multitenant application.
 
-For more information and ARM templates, see [Azure Resource Manager templates for Azure SQL Database & SQL Managed Instance](arm-templates-content-guide.md).
+For more information and ARM templates, see [Azure Resource Manager templates for Azure SQL Database](arm-templates-content-guide.md).
 
 Use a [Custom deployment in the Azure portal](https://portal.azure.com/#create/Microsoft.Template), and **Build your own template in the editor**. Next, **Save** the configuration once you pasted in the example.
 
@@ -245,7 +251,6 @@ To get your user-assigned managed identity **Resource ID**, search for **Managed
     }
   ]
 }
-
 ```
 
 ---
@@ -341,7 +346,7 @@ $keysToRemove = "https://yourvault.vault.azure.net/keys/yourkey3/fd021f84a0d94d4
 
 Here's an example of an ARM template that updates an Azure SQL Database with a user-assigned managed identity and customer-managed TDE at the database level. For a cross-tenant CMK, use the **Key Identifier** from the second tenant Azure Key Vault, and the **Application ID** from the multitenant application.
 
-For more information and ARM templates, see [Azure Resource Manager templates for Azure SQL Database & SQL Managed Instance](arm-templates-content-guide.md).
+For more information and ARM templates, see [Azure Resource Manager templates for Azure SQL Database](arm-templates-content-guide.md).
 
 Use a [Custom deployment in the Azure portal](https://portal.azure.com/#create/Microsoft.Template), and **Build your own template in the editor**. Next, **Save** the configuration once you pasted in the example.
 
@@ -531,7 +536,7 @@ Get-AzSqlDatabase -DatabaseName $db.DatabaseName -ServerName $db.ServerName -Res
 
 ## Revalidate the database level customer-managed key on an Azure SQL Database
 
-In case of an inaccessible TDE protector as described in [Transparent Data Encryption (TDE) with CMK](transparent-data-encryption-byok-overview.md), once the key access has been corrected, a revalidate key operation can be used to make the database accessible. See the following instructions or commands for examples.
+In case of an inaccessible TDE protector as described in [Azure SQL transparent data encryption with customer-managed key](transparent-data-encryption-byok-overview.md), once the key access has been corrected, a revalidate key operation can be used to make the database accessible. See the following instructions or commands for examples.
 
 # [Portal](#tab/azure-portal2)
 
@@ -604,10 +609,7 @@ POST https://management.azure.com/subscriptions/{subscriptionId}/resourceGroups/
 
 ---
 
-## Next steps
-
-Check the following documentation on various database level CMK operations:
+## Related content
 
 - [Transparent data encryption (TDE) with customer-managed keys at the database level](transparent-data-encryption-byok-database-level-overview.md)
-
 - [Configure geo replication and backup restore for transparent data encryption with database level customer-managed keys](transparent-data-encryption-byok-database-level-geo-replication-restore.md)

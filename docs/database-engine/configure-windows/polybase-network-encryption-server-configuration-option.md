@@ -27,8 +27,6 @@ Enabled is the default setting in SQL Server versions for security compliance.
 
 When enabled, the communication between SQL Server and PolyBase components is encrypted.
 
-Beginning with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], a valid certificate is required to encrypt the communication between PolyBase services and SQL Server.
-
 When disabled:
 
 - Communication isn't encrypted
@@ -74,44 +72,11 @@ RECONFIGURE;
 GO
 ```
 
-## Additional configuration requirement
-
-Beginning with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], a valid certificate is required for secure connections.
-
-To encrypt the communication between PolyBase components and SQL Server, you need:
-
-- The certificate must be signed by a trusted Certificate Authority (CA).
-- Its Subject Name or Subject Alternative Name should match the SQL Server's Fully Qualified Domain Name (FQDN).
-
-After the certificate is installed on the server, update the SQL Server instance as follows.
-
-1. Add the certificate to the PolyBase configuration table.
-
-   To add the certificate to the configuration table, update the following example for your instance run the query:
-
-   ```sql
-   UPDATE DWConfiguration.[dbo].[configuration_properties]
-   SET value =  '<CertificateSerialNumber>'
-   WHERE [key] = '<CertificateSerialNumber>'
-   AND [id] = `<Server Name>`
-   ```
-
-1. Enable PolyBase Network Encryption through `sp_configure`.
-
-1. Restart the SQL Services.
-
 ## Permissions
 
 All users can execute `sp_configure` with no parameters or the `@configname` parameter.
 
 Requires `ALTER SETTINGS` server-level permission or membership in the **sysadmin** fixed server role to change a configuration value or to run `RECONFIGURE`.
-
-## SQL Server 2025 Preview RC 0 known issue
-
-[!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] RC 0 has the following known PolyBase issues:
-
-- PolyBase services on [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] won't work unless there's a trusted certificate, or if PolyBase network encryption is set to `0`.
-- SQL Server on Linux currently only supports PolyBase network encryption set to `0`.
 
 ## Related content
 

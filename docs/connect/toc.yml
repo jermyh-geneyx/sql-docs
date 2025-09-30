@@ -5902,13 +5902,15 @@
   items:
   - name: Python drivers for SQL Server
     href: ../connect/python/python-driver-for-sql-server.md
-  - name: Python SQL driver - mssql-python
+  - name: Microsoft Python Driver for SQL Server - mssql-python
     href: ../connect/python/mssql-python/python-sql-driver-mssql-python.md
     items:
     - name: 'Quickstart: mssql-python driver for Python'
       href: ../connect/python/mssql-python/python-sql-driver-mssql-python-quickstart.md
     - name: 'Quickstart: Repeatable deployments with the Python driver for SQL Server'
       href: ../connect/python/mssql-python/python-sql-driver-mssql-python-repeatable-deployments-quickstart.md
+    - name: 'Quickstart: Rapid prototyping with the Python driver for SQL Server'
+      href: ../connect/python/mssql-python/python-sql-driver-mssql-python-rapid-prototyping-quickstart.md
   - name: Python SQL driver - pyodbc
     href: ../connect/python/pyodbc/python-sql-driver-pyodbc.md
     items:

@@ -20,7 +20,7 @@ Use fuzzy, or approximate, string matching to check if two strings are similar, 
 > [!NOTE]
 > - Fuzzy string matching is currently in preview. 
 > - SQL Server support for fuzzy string matching introduced in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)]. 
-> - Fuzzy string matching is available in Azure SQL Managed Instance configured with the [Always-up-to-date](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy) update policy. 
+> - Fuzzy string matching is available in Azure SQL Managed Instance with the **SQL Server 2025** or **Always-up-to-date** [update policy](/azure/azure-sql/managed-instance/update-policy).
 
 
 ## Fuzzy functions
@@ -30,7 +30,7 @@ Use fuzzy, or approximate, string matching to check if two strings are similar, 
 | [EDIT_DISTANCE](../../t-sql/functions/edit-distance-transact-sql.md) | Calculates the number of insertions, deletions, substitutions, and transpositions needed to transform one string to another. |
 | [EDIT_DISTANCE_SIMILARITY](../../t-sql/functions/edit-distance-similarity-transact-sql.md) | Calculates a similarity value ranging from 0 (indicating no match) to 100 (indicating full match). |
 | [JARO_WINKLER_DISTANCE](../../t-sql/functions/jaro-winkler-distance-transact-sql.md) | Calculates the edit distance between two strings giving preference to strings that match from the beginning for a set prefix length. |
-| [JARO_WINKLER_SIMILARITY](../../t-sql/functions/jaro-winkler-similarity-transact-sql.md) | Calculates a similarity value ranging from 0 (indicating no match) to 1 (indicating full match). |
+| [JARO_WINKLER_SIMILARITY](../../t-sql/functions/jaro-winkler-similarity-transact-sql.md) | Calculates a similarity value ranging from 0 (indicating no match) to 100 (indicating full match). |
 
 > [!NOTE]
 > Currently, the functions do not adhere to the comparison semantics defined by collation settings, such as case-insensitivity and other collation-specific rules. Once support for collation rules is implemented, the functions' output will reflect these semantics and may change accordingly. 

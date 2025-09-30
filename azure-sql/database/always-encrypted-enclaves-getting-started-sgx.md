@@ -4,7 +4,7 @@ description: Tutorial on how to create a basic environment for Always Encrypted 
 author: Pietervanhove
 ms.author: pivanho
 ms.reviewer: vanto, mathoma
-ms.date: 08/11/2025
+ms.date: 08/25/2025
 ms.service: azure-sql-database
 ms.subservice: security
 ms.topic: tutorial
@@ -48,9 +48,12 @@ In this step, you'll create a new Azure SQL Database logical server and a new da
 
 # [Portal](#tab/azure-portal)
 
-1. Browse to the [Select SQL deployment option](https://portal.azure.com/#create/Microsoft.AzureSQL) page.
-1. If you aren't already signed in to the Azure portal, sign in when prompted.
-1. Under **SQL databases**, leave **Resource type** set to **Single database**, and select **Create**.
+1. Go to [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub). 
+1. In the pane for **Azure SQL Database**, select **Show options**.
+1. In the **Azure SQL Database options** window, select **Create SQL Database**.
+
+   :::image type="content" source="media/always-encrypted-enclaves-getting-started-sgx/show-options-create-sql-database.png" alt-text="Screenshot from the Azure portal showing the Azure SQL hub, the Show options button, and the Create SQL Database button." lightbox="media/always-encrypted-enclaves-getting-started-sgx/show-options-create-sql-database.png":::
+
 1. On the **Basics** tab of the **Create SQL Database** form, under **Project details**, select the desired Azure **Subscription**.
 1. For **Resource group**, select **Create new**, enter a name for your resource group, and select **OK**.
 1. For **Database name** enter *ContosoHR*.
@@ -346,7 +349,7 @@ In this step, you'll create a column master key and a column encryption key that
 
 ## Step 5: Encrypt some columns in place
 
-In this step, you'll encrypt the data stored in the `SSN` and `Salary` columns inside the server-side enclave, and then test a SELECT query on the data.
+In this step, you'll encrypt the data stored in the `SSN` and `Salary` columns inside the server-side enclave, and then test a `SELECT` query on the data.
 
 1. Open a new SSMS instance and connect to your database **with** Always Encrypted enabled for the database connection.
     1. Start a new instance of SSMS.

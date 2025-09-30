@@ -4,7 +4,7 @@ description: Learn about the new features for and improvements to SQL Server on 
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest, mathoma, dpless
-ms.date: 05/19/2025
+ms.date: 09/10/2025
 ms.service: azure-vm-sql-server
 ms.topic: whats-new
 ms.custom:
@@ -57,6 +57,12 @@ Learn about significant changes to the SQL Server on Azure VMs documentation. Fo
 
 > [!CAUTION]
 > SQL Server isn't supported on VM sizes that deploy with an uninitialized ephemeral disk. To learn more, review [VM deployment and SQL Server failures](/troubleshoot/sql/azure-sql/sql-deployment-fails-drive-not-ready). 
+
+### September 2025
+
+| Changes | Details |
+| --- | --- |
+| **New Azure SQL hub** | Choosing the right Azure SQL service can be challenging. To make this easier, we built the [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub), a new home for everything related to Azure SQL in the Azure portal. For more information, read the blog post [Introducing the Azure SQL hub: A simpler, guided entry into Azure SQL](https://aka.ms/azuresqlhubblog). | 
 
 ### May 2025
 

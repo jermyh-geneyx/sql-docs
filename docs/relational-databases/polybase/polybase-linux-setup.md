@@ -5,11 +5,13 @@ description: Learn how to install SQL Server PolyBase on Linux. PolyBase enables
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: dakryze, hudequei, randolphwest
-ms.date: 7/28/2025
+ms.date: 09/12/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: install-set-up-deploy
-ms.custom: intro-installation, linux-related-content
+ms.custom:
+  - intro-installation
+  - linux-related-content
 monikerRange: ">=sql-server-linux-ver15 || >=sql-server-ver15"
 ---
 # Install PolyBase on Linux
@@ -30,7 +32,7 @@ PolyBase isn't supported on [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)
 
 Scale-out for PolyBase on Linux is currently unavailable.
 
-Hadoop is no longer supported on [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)].
+Hadoop isn't supported on [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions.
 
 ## Install PolyBase
 
@@ -44,14 +46,20 @@ Install PolyBase for your operating system:
 
 ### Install on RHEL
 
-**Applies to:** [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and later versions
+**Applies to:** [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and later versions.
 
 1. Download the Microsoft Red Hat repository configuration file.
 
-   For RHEL 7:
+   For RHEL 10 (in preview):
 
    ```console
-   sudo curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/7/prod.repo
+   sudo curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/10/mssql-server-2025.repo
+   ```
+
+   For RHEL 9:
+
+   ```console
+   sudo curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/9/prod.repo
    ```
 
    For RHEL 8:
@@ -60,10 +68,10 @@ Install PolyBase for your operating system:
    sudo curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/8/prod.repo
    ```
 
-   For RHEL 9:
+   For RHEL 7:
 
    ```console
-   sudo curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/9/prod.repo
+   sudo curl -o /etc/yum.repos.d/msprod.repo https://packages.microsoft.com/config/rhel/7/prod.repo
    ```
 
 1. Use the following command to install the `mssql-server-polybase` on Red Hat Enterprise Linux.
@@ -81,9 +89,11 @@ Install PolyBase for your operating system:
 > [!NOTE]  
 > After installation, you must [enable the PolyBase feature](#enable).
 
+::: moniker range="<=sql-server-linux-ver15 || <=sql-server-ver15"
+
 ### Install Hadoop on RHEL
 
-**Applies to:** [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)]
+**Applies to:** [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] only.
 
 1. Use the following command to install the `mssql-server-polybase-hadoop`.
 
@@ -109,11 +119,13 @@ Install PolyBase for your operating system:
 
 If you need an offline installation, locate the PolyBase package download in the [Release notes for SQL Server 2019 on Linux](../../linux/sql-server-linux-release-notes-2019.md). Then use the same offline installation steps described in the article [Install SQL Server](../../linux/sql-server-linux-setup.md#offline).
 
+::: moniker-end
+
 ## [Ubuntu](#tab/ubuntu)
 
 ### Install on Ubuntu
 
-**Applies to:** [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and later versions
+**Applies to:** [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and later versions.
 
 1. Register the Microsoft Ubuntu repository.
 
@@ -158,9 +170,11 @@ If you need an offline installation, locate the PolyBase package download in the
 
 If you need an offline installation, locate the PolyBase package download in the [Release notes for SQL Server 2019 on Linux](../../linux/sql-server-linux-release-notes-2019.md). Then use the same offline installation steps described in the article [Install SQL Server](../../linux/sql-server-linux-setup.md#offline).
 
+::: moniker range="<=sql-server-linux-ver15 || <=sql-server-ver15"
+
 ### Install Hadoop on Ubuntu
 
-**Applies to:** [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)]
+**Applies to:** [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] only.
 
 1. Use the following command to install the `mssql-server-polybase-hadoop`.
 
@@ -184,11 +198,13 @@ If you need an offline installation, locate the PolyBase package download in the
 > [!NOTE]  
 > After installation, you must [set the Hadoop connectivity level](../../relational-databases/polybase/polybase-configure-hadoop.md#configure-hadoop-connectivity). This step only applies to [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)].
 
+::: moniker-end
+
 ## [SUSE Linux Enterprise Server (SLES)](#tab/sles)
 
 ### Install on SLES
 
-**Applies to:** [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and later versions
+**Applies to:** [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] and later versions.
 
 1. Add the Microsoft [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] repository to Zypper.
 
@@ -225,22 +241,23 @@ If you need an offline installation, locate the PolyBase package download in the
 
 ---
 
-## <a id="enable"></a> Enable PolyBase
+<a id="enable"></a>
+
+## Enable PolyBase
 
 After installation, PolyBase must be enabled to access its features. Connect to the installed [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] instance and use the following Transact-SQL command to enable.
 
 ```sql
-exec sp_configure @configname = 'polybase enabled', @configvalue = 1;
+EXECUTE sp_configure
+    @configname = 'polybase enabled',
+    @configvalue = 1;
+
 RECONFIGURE WITH OVERRIDE;
 ```
 
-### SQL Server 2025 Preview RC 0 known issue
-
-[!INCLUDE [polybase-release-candidate-0](../../includes/polybase-release-candidate-0.md)]
-
 ### Trace flag
 
-**Applies to:** [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and later versions
+**Applies to:** [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] 
 
 To use PolyBase capabilities on Linux, you must enable [Trace Flag 13702](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf13702) during SQL Server start up. For more information, see [Configure SQL Server on Linux with the mssql-conf tool](../../linux/sql-server-linux-configure-mssql-conf.md).
 
@@ -252,7 +269,7 @@ If you already have `mssql-server-polybase` installed, you can update to the lat
 
 ### RHEL with Hadoop
 
-**Applies to:** [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)]
+**Applies to:** [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] only.
 
 ```console
 sudo yum remove -y mssql-server-polybase-hadoop
@@ -280,7 +297,7 @@ sudo systemctl restart mssql-server
 
 ### Ubuntu with Hadoop
 
-**Applies to:** [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)].
+**Applies to:** [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)] only.
 
 ```console
 sudo apt-get remove mssql-server-polybase-hadoop

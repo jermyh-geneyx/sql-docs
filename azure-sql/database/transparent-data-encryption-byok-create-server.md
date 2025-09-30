@@ -5,7 +5,7 @@ description: Learn how to configure user-assigned managed identity and customer-
 author: Pietervanhove
 ms.author: pivanho
 ms.reviewer: vanto, mathoma
-ms.date: 06/25/2025
+ms.date: 08/25/2025
 ms.service: azure-sql-database
 ms.subservice: security
 ms.topic: how-to
@@ -35,11 +35,11 @@ This how-to guide outlines the steps to create an [Azure SQL Database logical se
 
 # [Portal](#tab/azure-portal)
 
-1. Browse to the [Select SQL deployment](https://portal.azure.com/#create/Microsoft.AzureSQL) option page in the Azure portal.
+1. Go to [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub). 
+1. In the pane for **Azure SQL Database**, select **Show options**.
+1. In the **Azure SQL Database options** window, select **Create SQL Database**.
 
-1. If you aren't already signed in to Azure portal, sign in when prompted.
-
-1. Under **SQL databases**, leave **Resource type** set to **Single database**, and select **Create**.
+   :::image type="content" source="media/transparent-data-encryption-byok-create-server/show-options-create-sql-database.png" alt-text="Screenshot from the Azure portal showing the Azure SQL hub, the Show options button, and the Create SQL Database button." lightbox="media/transparent-data-encryption-byok-create-server/show-options-create-sql-database.png":::
 
 1. On the **Basics** tab of the **Create SQL Database** form, under **Project details**, select the desired Azure **Subscription**.
 
@@ -54,7 +54,7 @@ This how-to guide outlines the steps to create an [Azure SQL Database logical se
     - **Password**: Enter a password that meets the password requirements, and enter it again in the **Confirm password** field.
     - **Location**: Select a location from the dropdown list
 
-1. Select **Next: Networking** at the bottom of the page.
+1. Select **Next: Networking** to move to the next step.
 
 1. On the **Networking** tab, for **Connectivity method**, select **Public endpoint**.
 
@@ -62,7 +62,7 @@ This how-to guide outlines the steps to create an [Azure SQL Database logical se
 
     :::image type="content" source="media/transparent-data-encryption-byok-create-server/networking-settings.png" alt-text="Screenshot of networking settings when creating a SQL server in the Azure portal.":::
 
-1. Select **Next: Security** at the bottom of the page.
+1. Select **Next: Security** to move to the next step.
 
 1. On the Security tab, under **Server Identity**, select **Configure Identities**.
 
@@ -78,9 +78,9 @@ This how-to guide outlines the steps to create an [Azure SQL Database logical se
 
     :::image type="content" source="media/transparent-data-encryption-byok-create-server/selecting-primary-identity-for-server.png" alt-text="Screenshot of selecting primary identity for server." lightbox="media/transparent-data-encryption-byok-create-server/selecting-primary-identity-for-server.png":::
 
-1. Select **Apply**
+1. Select **Apply**.
 
-1. On the Security tab, under **Transparent Data Encryption Key Management**, you have the option to configure transparent data encryption for the server or database.
+1. On the **Security** tab, under **Transparent Data Encryption Key Management**, you have the option to configure transparent data encryption for the server or database.
     - For **Server level key**: Select **Configure transparent data encryption**. Select **Customer-Managed Key**, and an option to select **Select a key** will appear. Select **Change key**. Select the desired **Subscription**, **Key vault**, **Key**, and **Version** for the customer-managed key to be used for TDE. Select the **Select** button.
 
     :::image type="content" source="media/transparent-data-encryption-byok-create-server/configure-tde-for-server.png" alt-text="Screenshot of configuring TDE for the server in Azure SQL.":::
@@ -91,9 +91,15 @@ This how-to guide outlines the steps to create an [Azure SQL Database logical se
 
     :::image type="content" source="media/transparent-data-encryption-byok-create-server/configure-tde-for-database.png" alt-text="Screenshot configuring TDE for a database in Azure SQL.":::
 
-1. Select **Apply**
+1. Select **Apply**.
 
-1. Select **Review + create** at the bottom of the page
+1. Select **Next: Additional settings**.
+
+1. Select **Next: Tags**.
+
+1. Consider using Azure tags. For example, the "Owner" or "CreatedBy" tag to identify who created the resource, and the Environment tag to identify whether this resource is in Production, Development, etc. For more information, see [Develop your naming and tagging strategy for Azure resources](/azure/cloud-adoption-framework/ready/azure-best-practices/naming-and-tagging).
+
+1. Select **Review + create**. 
 
 1. On the **Review + create** page, after reviewing, select **Create**.
 

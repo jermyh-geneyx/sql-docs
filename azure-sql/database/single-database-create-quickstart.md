@@ -4,7 +4,7 @@ description: Create a single database in Azure SQL Database using the Azure port
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: mathoma, randolphwest
-ms.date: 08/07/2025
+ms.date: 08/25/2025
 ms.service: azure-sql-database
 ms.subservice: deployment-configuration
 ms.topic: quickstart
@@ -41,12 +41,12 @@ This quickstart creates a single database in the [serverless compute tier](serve
 
 # [Portal](#tab/azure-portal)
 
-To create a single database in the Azure portal, this quickstart starts at the Azure SQL page.
+To create a single database in the Azure portal:
 
-1. Browse to the [Select SQL Deployment option](https://portal.azure.com/#create/Microsoft.AzureSQL) page.
-1. Under **SQL databases**, leave **Resource type** set to **Single database**, and select **Create**.
+1. Go to [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub). In the pane for **Azure SQL Database**, select **Show options**.
+1. In the **Azure SQL Database options** window, select **Create SQL Database**.
 
-   :::image type="content" source="media/single-database-create-quickstart/select-deployment.png" alt-text="Screenshot of the Select SQL Deployment option page in the Azure portal." lightbox="media/single-database-create-quickstart/select-deployment.png":::
+   :::image type="content" source="media/single-database-create-quickstart/show-options-create-sql-database.png" alt-text="Screenshot from the Azure portal showing the Azure SQL hub, the Show options button, and the Create SQL Database button." lightbox="media/single-database-create-quickstart/show-options-create-sql-database.png":::
 
 1. On the **Basics** tab of the **Create SQL Database** form, under **Project details**, select the desired Azure **Subscription**.
 1. For **Resource group**, select **Create new**, enter *myResourceGroup*, and select **OK**.
@@ -58,7 +58,7 @@ To create a single database in the Azure portal, this quickstart starts at the A
     - **Authentication method**: Select **Use SQL authentication**.
     - **Server admin login**: Enter *azureuser*.
     - **Password**: Enter a password that meets requirements, and enter it again in the **Confirm password** field.
-    
+
    Select **OK**.
 
 1. Leave **Want to use SQL elastic pool** set to **No**.

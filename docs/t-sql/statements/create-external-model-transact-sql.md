@@ -399,7 +399,7 @@ Set-Acl -Path $AIExtPath -AclObject $Acl
 
 Run the following SQL to register your ONNX model as an external model object:
 
-***The 'PARAMETERS' value used here is a placeholder needed for SQL Server 2025 RC 0.***
+***The 'PARAMETERS' value used here is a placeholder needed for [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)].***
 
 ```sql
 CREATE EXTERNAL MODEL myLocalOnnxModel  

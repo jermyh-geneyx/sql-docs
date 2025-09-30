@@ -4,7 +4,7 @@ description: This quickstart describes repeatable deployments of the mssql-pytho
 author: dlevy-msft-sql
 ms.author: dlevy
 ms.reviewer: vanto, randolphwest
-ms.date: 09/10/2025
+ms.date: 09/23/2025
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: quickstart-sdk
@@ -34,10 +34,34 @@ The `mssql-python` doesn't require any external dependencies on Windows machines
 - A database on SQL Server, Azure SQL Database, or SQL database in Fabric with the [!INCLUDE [sssampledbobject-md](../../../includes/sssampledbobject-md.md)] sample schema and a valid connection string.
 - Install one-time operating system specific prerequisites.
 
-  ### [Linux](#tab/linux)
+  ### [Alpine](#tab/alpine-linux)
 
   ```bash
-  sudo apt-get -y install libltdl7
+  apk add libtool krb5-libs krb5-dev
+  ```
+
+  ### [Debian/Ubuntu](#tab/debianUbuntu-linux)
+
+  ```bash
+  apt-get install -y libltdl7 libkrb5-3 libgssapi-krb5-2
+  ```
+
+  ### [RHEL](#tab/RHEL-linux)
+
+  ```bash
+  dnf install -y libtool-ltdl krb5-libs
+  ```
+
+  ### [SUSE](#tab/SUSE-linux)
+
+  ```bash
+  zypper install -y libltdl7 libkrb5-3 libgssapi-krb5-2
+  ```
+
+  ### [openSUSE](#tab/openSUSE-linux)
+
+  ```bash
+  zypper install -y libltdl7
   ```
 
   ### [macOS](#tab/mac)
@@ -77,7 +101,7 @@ This quickstart requires the *[!INCLUDE [sssampledbnormal-md](../../../includes/
 
 ### Create a new project
 
-1. Open a command prompt in your development directory. If you don't have one, create a new directory called `python`, `scripts`, etc. Avoid folders on your OneDrive, the syncronization can interfere with managing your virtual environment.
+1. Open a command prompt in your development directory. If you don't have one, create a new directory called `python`, `scripts`, etc. Avoid folders on your OneDrive, the synchronization can interfere with managing your virtual environment.
 
 1. Create a new [project](https://docs.astral.sh/uv/guides/projects/#project-structure) with `uv`.
 
@@ -88,7 +112,7 @@ This quickstart requires the *[!INCLUDE [sssampledbnormal-md](../../../includes/
 
 ### Add dependencies
 
-In the same directory, install the `mssql-python` and `python-dotenv` and `rich` packages.
+In the same directory, install the `mssql-python`, `python-dotenv`, and `rich` packages.
 
    ```bash
    uv add mssql-python python-dotenv rich
@@ -142,7 +166,7 @@ In the same directory, install the `mssql-python` and `python-dotenv` and `rich`
    ```python
    from os import getenv
    from dotenv import load_dotenv
-   from mssql_python import connect, Cursor
+   from mssql_python import connect, Connection, Cursor
    from rich.console import Console
    from rich.progress import Progress, SpinnerColumn, TextColumn
    from rich.table import Table
@@ -153,7 +177,7 @@ In the same directory, install the `mssql-python` and `python-dotenv` and `rich`
 1. Between the imports and the line with `def main()`, add the following code.
 
    ```python
-   def get_results(sleep_time: int = 0):
+   def get_results(sleep_time: int = 0) -> None:
     with Progress(
         SpinnerColumn(),
         TextColumn("[progress.description]{task.description}"),
@@ -191,32 +215,40 @@ In the same directory, install the `mssql-python` and `python-dotenv` and `rich`
         Console().print(table)
    ```
 
-1. Between the imports and `def get_results(sleep_time: int = 0):`, add this code.
+1. Between the imports and `def get_results(sleep_time: int = 0) -> None:`, add this code.
 
    ```python
+   _connection = None
+
+   def get_connection() -> Connection:
+      global _connection
+      if not _connection:
+          load_dotenv()
+          _connection = connect(getenv("SQL_CONNECTION_STRING"))  # type: ignore
+      return _connection
+
    def query_sql() -> Cursor:
 
-    load_dotenv()
-
-    _conn = connect(getenv("SQL_CONNECTION_STRING"))
-
-    SQL_QUERY = """
+      SQL_QUERY = """
         SELECT TOP 5
         c.CustomerID,
         c.CompanyName,
         COUNT(soh.SalesOrderID) AS OrderCount
         FROM
         SalesLT.Customer AS c
-        LEFT OUTER JOIN SalesLT.SalesOrderHeader AS soh ON c.CustomerID = soh.CustomerID
+        LEFT OUTER JOIN SalesLT.SalesOrderHeader AS soh
+        ON c.CustomerID = soh.CustomerID
         GROUP BY
         c.CustomerID,
         c.CompanyName
         ORDER BY
         OrderCount DESC;
-        """
-    cursor = _conn.cursor()
-    cursor.execute(SQL_QUERY)
-    return cursor
+      """
+
+      conn = get_connection()
+      cursor = conn.cursor()
+      cursor.execute(SQL_QUERY)
+      return cursor
    ```
 
 1. Find this code.
@@ -229,15 +261,19 @@ In the same directory, install the `mssql-python` and `python-dotenv` and `rich`
 1. Replace it with this code.
 
    ```python
-   def main():
-    parser = ArgumentParser()
-    parser.add_argument("--sleep-time", type=int, default=0,
-                        help="Time to sleep in seconds to simulate slow connection")
-    args = parser.parse_args()
-    if args.sleep_time > 0:
-        get_results(args.sleep_time)
-    else:
-        get_results()
+   def main() -> None:
+      parser = ArgumentParser()
+      parser.add_argument("--sleep-time", type=int, default=0,
+                          help="Time to sleep in seconds to simulate slow connection")
+      args = parser.parse_args()
+
+      if args.sleep_time > 0:
+          get_results(args.sleep_time)
+      else:
+          get_results()
+
+      if _connection:
+          _connection.close()
    ```
 
 1. Save and close `main.py`.
@@ -287,7 +323,7 @@ In the same directory, install the `mssql-python` and `python-dotenv` and `rich`
     uv run main.py --sleep-time 5
    ```
 
-   This is the expected output when the script completes.
+   Here's the expected output when the script completes.
 
    ```output
                             Orders by Customer
@@ -302,7 +338,7 @@ In the same directory, install the `mssql-python` and `python-dotenv` and `rich`
    └─────────────┴────────────────────────────────┴─────────────┘
    ```
 
-1. To deploy your script to another machine, copy all files except for the `.venv` folder to the other machine. The `.venv` folder will be recreated with the first run.
+1. To deploy your script to another machine, copy all files except for the `.venv` folder to the other machine. The virtual environment is recreated with the first run.
 
 ## Next step
 

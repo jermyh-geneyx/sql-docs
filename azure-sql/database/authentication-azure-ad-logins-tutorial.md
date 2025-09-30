@@ -1,11 +1,11 @@
 ---
-title: Create and utilize Microsoft Entra server logins
+title: Create and Utilize Microsoft Entra Server Logins
 titleSuffix: Azure SQL Database & Azure SQL Managed Instance & Azure Synapse Analytics
 description: This article guides you through creating and utilizing Microsoft Entra logins in the virtual master database of Azure SQL
 author: VanMSFT
 ms.author: vanto
-ms.reviewer: vanto, mathoma
-ms.date: 06/11/2024
+ms.reviewer: mathoma
+ms.date: 09/17/2025
 ms.service: azure-sql
 ms.subservice: security
 ms.topic: tutorial
@@ -23,11 +23,12 @@ In this tutorial, you learn how to:
 > [!div class="checklist"]
 > - Create a Microsoft Entra login in the virtual `master` database with the new syntax extension for Azure SQL Database
 > - Create a user mapped to a Microsoft Entra login in the virtual `master` database
+> - Use the `WITH OBJECT_ID` syntax for nonunique display names
 > - Grant server roles to a Microsoft Entra user
 > - Disable a Microsoft Entra login
 
 > [!NOTE]  
-> Microsoft Entra server principals (logins) are currently in public preview for Azure SQL Database. Azure SQL Managed Instance can already utilize Microsoft Entra logins.
+> Microsoft Entra server principals (logins) are currently in public preview for Azure SQL Database. Azure SQL Managed Instance and SQL Server 2022 and later can already utilize Microsoft Entra logins in general availability.
 
 ## Prerequisites
 
@@ -35,17 +36,30 @@ In this tutorial, you learn how to:
 - Microsoft Entra authentication set up for SQL Database or SQL Managed Instance. For more information, see [Configure and manage Microsoft Entra authentication with Azure SQL](authentication-aad-configure.md).
 - This article instructs you on creating a Microsoft Entra login and user within the virtual `master` database. Only a Microsoft Entra admin can create a user within the virtual `master` database, so we recommend you use the Microsoft Entra admin account when going through this tutorial. A Microsoft Entra principal with the `loginmanager` role can create a login, but not a user within the virtual `master` database.
 
-<a name='create-azure-ad-login'></a>
+> [!NOTE]  
+> For organizations dealing with nonunique display names in Microsoft Entra ID (particularly for service principals), ensure you have the Object ID information available for any service principals you plan to create logins for. The `WITH OBJECT_ID` syntax extension can help resolve these scenarios.
+
+<a id="create-azure-ad-login"></a>
 
 ## Create Microsoft Entra login
 
 1. Create an Azure SQL Database login for a Microsoft Entra account. In our example, we'll use `bob@contoso.com` that exists in our Microsoft Entra domain called `contoso`. A login can also be created from a Microsoft Entra group or [service principal (applications)](authentication-aad-service-principal.md). For example, `mygroup` that is a Microsoft Entra group consisting of Microsoft Entra accounts that are a member of that group. For more information, see [CREATE LOGIN (Transact-SQL)](/sql/t-sql/statements/create-login-transact-sql?view=azuresqldb-current&preserve-view=true).
 
    > [!NOTE]  
-   > The first Microsoft Entra login must be created by the Microsoft Entra admin. The Microsoft Entra admin can be a Microsoft Entra user or group. A SQL login cannot create Microsoft Entra logins.
+   > The first Microsoft Entra login must be created by the Microsoft Entra admin. The Microsoft Entra admin can be a Microsoft Entra user or group. A SQL login can't create Microsoft Entra logins.
+
+   > [!TIP]  
+   > If you encounter issues with nonunique display names in Microsoft Entra ID, you can use the `WITH OBJECT_ID` syntax extension. This feature is particularly useful for service principals with duplicate display names. For example:
+   >
+   > ```sql
+   > CREATE LOGIN [myapp4466e] FROM EXTERNAL PROVIDER 
+   >   WITH OBJECT_ID = 'aaaaaaaa-0000-1111-2222-bbbbbbbbbbbb'
+   > ```
+   >
+   > For more information, see [Microsoft Entra logins and users with nonunique display names](authentication-microsoft-entra-create-users-with-nonunique-names.md).
 
 1. Using [SQL Server Management Studio (SSMS)](/sql/ssms/download-sql-server-management-studio-ssms), log into your SQL Database with the Microsoft Entra admin account set up for the server.
-1. Expand **Databases** > **System Databases**. Right-click the `master` database and select **New Query** to open a new query window in the context of the `master` database. 
+1. Expand **Databases** > **System Databases**. Right-click the `master` database and select **New Query** to open a new query window in the context of the `master` database.
 1. Run the following query:
 
    ```sql
@@ -70,7 +84,7 @@ In this tutorial, you learn how to:
 
 1. The login `bob@contoso.com` has been created in the virtual `master` database.
 
-<a name='create-user-from-an-azure-ad-login'></a>
+<a id="create-user-from-an-azure-ad-login"></a>
 
 ## Create user from a Microsoft Entra login
 
@@ -83,7 +97,14 @@ In this tutorial, you learn how to:
    ```
 
    > [!TIP]  
-   > Although it is not required to use Microsoft Entra user aliases (for example, `bob@contoso.com`), it is a recommended best practice to use the same alias for Microsoft Entra users and Microsoft Entra logins.
+   > Although it's not required to use Microsoft Entra user aliases (for example, `bob@contoso.com`), it is a recommended best practice to use the same alias for Microsoft Entra users and Microsoft Entra logins.
+   >
+   > If you need to create a user directly from an external provider with a specific Object ID (for example, to resolve nonunique display name issues), you can also use:
+   >
+   > ```sql
+   > CREATE USER [user_name] FROM EXTERNAL PROVIDER 
+   >   WITH OBJECT_ID = 'objectid'
+   > ```
 
 1. Check the created user in `sys.database_principals`. Execute the following query:
 
@@ -101,20 +122,20 @@ In this tutorial, you learn how to:
    ```
 
 > [!NOTE]  
-> The existing syntax to create a Microsoft Entra user without a Microsoft Entra login is still supported. Executing the following syntax creates a database contained user inside the specific database you are connected to. Importantly, this user is not associated to any login, even if a login of the same name exists in the virtual `master` database.
+> The existing syntax to create a Microsoft Entra user without a Microsoft Entra login is still supported. Executing the following syntax creates a database contained user inside the specific database you're connected to. Importantly, this user isn't associated to any login, even if a login of the same name exists in the virtual `master` database.
 >
 > For example, `CREATE USER [bob@contoso.com] FROM EXTERNAL PROVIDER`.
 >
 > You can create a Microsoft Entra login using a service principal with a nonunique display name. For more information, see [Microsoft Entra logins and users with nonunique display names](authentication-microsoft-entra-create-users-with-nonunique-names.md)
 
-<a name='grant-server-level-roles-to-azure-ad-logins'></a>
+<a id="grant-server-level-roles-to-azure-ad-logins"></a>
 
 ## Grant server-level roles to Microsoft Entra logins
 
 You can add logins to the [fixed server-level roles](security-server-roles.md#fixed-server-level-roles), such as the **##MS_DefinitionReader##**, **##MS_ServerStateReader##**, or **##MS_ServerStateManager##** role in the `master` database.
 
 > [!NOTE]  
-> The server-level roles mentioned here are not supported for Microsoft Entra groups.
+> The server-level roles mentioned here aren't supported for Microsoft Entra groups.
 
 ```sql
 ALTER SERVER ROLE ##MS_DefinitionReader## ADD MEMBER [AzureAD_object];
@@ -147,7 +168,7 @@ SELECT roles.principal_id AS RolePID,roles.name AS RolePName,
        ON server_role_members.member_principal_id = members.principal_id;
 ```
 
-<a name='grant-special-roles-for-azure-ad-users'></a>
+<a id="grant-special-roles-for-azure-ad-users"></a>
 
 ## Grant special roles for Microsoft Entra users
 
@@ -227,5 +248,7 @@ A use case for this would be to allow read-only on [geo-replicas](active-geo-rep
 ## Related content
 
 - [Microsoft Entra server principals](authentication-azure-ad-logins.md)
+- [Microsoft Entra logins and users with nonunique display names](authentication-microsoft-entra-create-users-with-nonunique-names.md)
+- [Azure SQL Database server roles for permission management](security-server-roles.md)
 - [CREATE LOGIN (Transact-SQL)](/sql/t-sql/statements/create-login-transact-sql?view=azuresqldb-current&preserve-view=true)
 - [CREATE USER (Transact-SQL)](/sql/t-sql/statements/create-user-transact-sql)

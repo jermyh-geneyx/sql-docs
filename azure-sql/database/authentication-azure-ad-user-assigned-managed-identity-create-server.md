@@ -5,7 +5,7 @@ description: This article guides you through creating an Azure SQL logical serve
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: vanto, mathoma
-ms.date: 06/10/2025
+ms.date: 08/25/2025
 ms.service: azure-sql-database
 ms.subservice: security
 ms.topic: how-to
@@ -43,11 +43,11 @@ The following steps outline the process of creating a new Azure SQL Database log
 
 # [Portal](#tab/azure-portal)
 
-1. Browse to the [Select SQL deployment](https://portal.azure.com/#create/Microsoft.AzureSQL) option page in the Azure portal.
+1. Go to [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub). 
+1. In the pane for **Azure SQL Database**, select **Show options**.
+1. In the **Azure SQL Database options** window, select **Create SQL Database**.
 
-1. If you aren't already signed in to Azure portal, sign in when prompted.
-
-1. Under **SQL databases**, leave **Resource type** set to **Single database**, and select **Create**.
+   :::image type="content" source="media/authentication-azure-ad-user-assigned-managed-identity-create-server/show-options-create-sql-database.png" alt-text="Screenshot from the Azure portal showing the Azure SQL hub, the Show options button, and the Create SQL Database button." lightbox="media/authentication-azure-ad-user-assigned-managed-identity-create-server/show-options-create-sql-database.png":::
 
 1. On the **Basics** tab of the **Create SQL Database** form, under **Project details**, select the desired Azure **Subscription**.
 
@@ -77,7 +77,7 @@ The following steps outline the process of creating a new Azure SQL Database log
 1. On the **Identity** pane, under **User assigned managed identity**, select **Add**. Select the desired **Subscription** and then under **User assigned managed identities** select the desired user assigned managed identity from the selected subscription. Then select the **Select** button. 
 
     :::image type="content" source="media/authentication-azure-ad-user-assigned-managed-identity-create-server/user-assigned-managed-identity-configuration.png" alt-text="Screenshot from the Azure portal of adding user assigned managed identity when configuring server identity." lightbox="media/authentication-azure-ad-user-assigned-managed-identity-create-server/user-assigned-managed-identity-configuration.png":::
-    
+
     :::image type="content" source="media/authentication-azure-ad-user-assigned-managed-identity-create-server/select-a-user-assigned-managed-identity.png" alt-text="Screenshot from the Azure portal of user assigned managed identity when configuring server identity.":::
 
 1. Under **Primary identity**, select the same user-assigned managed identity selected in the previous step.
@@ -95,7 +95,7 @@ The following steps outline the process of creating a new Azure SQL Database log
 
 # [The Azure CLI](#tab/azure-cli)
 
-The Azure CLI command `az sql server create` is used to provision a new logical server. The below command will provision a new server with a user-assigned managed identity. The example will also enable [Microsoft Entra-only authentication](authentication-azure-ad-only-authentication.md), and set a Microsoft Entra admin for the server.
+The Azure CLI command `az sql server create` is used to provision a new logical server. The following command will provision a new server with a user-assigned managed identity. The example will also enable [Microsoft Entra-only authentication](authentication-azure-ad-only-authentication.md), and set a Microsoft Entra admin for the server.
 
 The server SQL Administrator login will be automatically created and the password will be set to a random password. Since SQL Authentication connectivity is disabled with this server creation, the SQL Administrator login won't be used.
 
@@ -139,7 +139,7 @@ az sql server create \
 For more information, see [az sql server create](/cli/azure/sql/server#az-sql-server-create).
 
 > [!NOTE]
-> The above example provisions a server with only a user-assigned managed identity. You could set the `--identity-type` to be `UserAssigned,SystemAssigned` if you wanted both types of managed identities to be created with the server.
+> The previous example provisions a server with only a user-assigned managed identity. You could set the `--identity-type` to be `UserAssigned,SystemAssigned` if you wanted both types of managed identities to be created with the server.
 
 To check the server status after creation, see the following command:
 
@@ -149,7 +149,7 @@ az sql server show --name <ServerName> --resource-group <ResourceGroupName> --ex
 
 # [PowerShell](#tab/azure-powershell)
 
-The PowerShell command `New-AzSqlServer` is used to provision a new Azure SQL logical server. The below command will provision a new server with a user-assigned managed identity. The example will also enable [Microsoft Entra-only authentication](authentication-azure-ad-only-authentication.md), and set a Microsoft Entra admin for the server.
+The PowerShell command `New-AzSqlServer` is used to provision a new Azure SQL logical server. The following command will provision a new server with a user-assigned managed identity. The example will also enable [Microsoft Entra-only authentication](authentication-azure-ad-only-authentication.md), and set a Microsoft Entra admin for the server.
 
 The server SQL Administrator login will be automatically created and the password will be set to a random password. Since SQL Authentication connectivity is disabled with this server creation, the SQL Administrator login won't be used.
 
@@ -185,7 +185,7 @@ New-AzSqlServer @server
 For more information, see [New-AzSqlServer](/powershell/module/az.sql/new-azsqlserver).
 
 > [!NOTE]
-> The above example provisions a server with only a user-assigned managed identity. You could set the `-IdentityType` to be `"UserAssigned,SystemAssigned"` if you wanted both types of managed identities to be created with the server.
+> The previous example provisions a server with only a user-assigned managed identity. You could set the `-IdentityType` to be `"UserAssigned,SystemAssigned"` if you wanted both types of managed identities to be created with the server.
 
 To check the server status after creation, see the following command:
 
@@ -197,7 +197,7 @@ Get-AzSqlServer -ResourceGroupName "<ResourceGroupName>" -ServerName "<ServerNam
 
 The [Servers - Create Or Update](/rest/api/sql/servers/create-or-update) REST API can be used to create a logical server with a user-assigned managed identity.
 
-The script below will provision a logical server, set the Microsoft Entra admin as `<AzureADAccount>`, and enable [Microsoft Entra-only authentication](authentication-azure-ad-only-authentication.md). The server SQL Administrator login will also be created automatically and the password will be set to a random password. Since SQL Authentication connectivity is disabled with this provisioning, the SQL Administrator login won't be used.
+The following script will provision a logical server, set the Microsoft Entra admin as `<AzureADAccount>`, and enable [Microsoft Entra-only authentication](authentication-azure-ad-only-authentication.md). The server SQL Administrator login will also be created automatically and the password will be set to a random password. Since SQL Authentication connectivity is disabled with this provisioning, the SQL Administrator login won't be used.
 
 The Microsoft Entra admin, `<AzureADAccount>` can be used to manage the server when the provisioning is complete.
 
@@ -258,7 +258,7 @@ Invoke-RestMethod -Uri https://management.azure.com/subscriptions/$subscriptionI
 ```
 
 > [!NOTE]
-> The above example provisions a server with only a user-assigned managed identity. You could set the `"type"` to be `"UserAssigned,SystemAssigned"` if you wanted both types of managed identities to be created with the server. 
+> The previous example provisions a server with only a user-assigned managed identity. You could set the `"type"` to be `"UserAssigned,SystemAssigned"` if you wanted both types of managed identities to be created with the server. 
 
 To check the server status, you can use the following script:
 

@@ -1,10 +1,10 @@
 ---
-title: Create a single database with ledger enabled
+title: Create a Single Database with Ledger Enabled
 description: Create a single database in Azure SQL Database with ledger enabled by using the Azure portal.
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: wiassaf, mathoma
-ms.date: 09/17/2024
+ms.date: 08/25/2025
 ms.service: azure-sql-database
 ms.subservice: security
 ms.topic: quickstart
@@ -39,11 +39,10 @@ Create a single ledger database in the [serverless compute tier](serverless-tier
 
 To create a single database in the Azure portal:
 
-1. Browse to the [Select SQL deployment option](https://portal.azure.com/#create/Microsoft.AzureSQL) page.
+1. Go to [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub). In the pane for **Azure SQL Database**, select **Show options**.
+1. In the **Azure SQL Database options** window, select **Create SQL Database**.
 
-1. Under **SQL databases**, leave **Resource type** set to **Single database**, and select **Create**.
-
-   :::image type="content" source="./media/single-database-create-quickstart/select-deployment.png" alt-text="Screenshot of the Azure portal, select Azure SQL deployment page, creating a new single database.":::
+   :::image type="content" source="media/ledger-create-a-single-database-with-ledger-enabled/show-options-create-sql-database.png" alt-text="Screenshot from the Azure portal showing the Azure SQL hub, the Show options button, and the Create SQL Database button." lightbox="media/ledger-create-a-single-database-with-ledger-enabled/show-options-create-sql-database.png":::
 
 1. On the **Basics** tab of the **Create SQL Database** form, under **Project details**, select the Azure subscription you want to use.
 
@@ -57,9 +56,9 @@ To create a single database in the Azure portal:
    - **Password**: Enter a password that meets requirements. Enter it again in the **Confirm password** box.
    - **Location**: Select a location from the dropdown list.
    - **Allow Azure services to access this server**: Select this option to enable access to digest storage.
-   
+
    Select **OK**.
-   
+
 1. Leave **Want to use SQL elastic pool** set to **No**.
 1. Under **Compute + storage**, select **Configure database**.
 1. This quickstart uses a serverless database, so select **Serverless**, and then select **Apply**. 
@@ -213,7 +212,7 @@ az storage account create \
 
 ### Grant the server permissions to write ledger digests
 
-Assign the managed identity of the server to the [Storage Blob Data Contributor](/azure/role-based-access-control/built-in-roles#storage-blob-data-contributor) role with the [az role assignment create](/cli/azure/sql/db) command.  This gives the SQL server the appropriate permissions to publish database digests to the storage account.
+Assign the managed identity of the server to the [Storage Blob Data Contributor](/azure/role-based-access-control/built-in-roles#storage-blob-data-contributor) role with the [az role assignment create](/cli/azure/sql/db) command. This gives the SQL server the appropriate permissions to publish database digests to the storage account.
 
 ```azurecli-interactive
 az role assignment create \
@@ -243,7 +242,7 @@ To  protect the digests from being deleted or updated, it is recommended you con
 > The below example uses the immutability period value of 1 day. In a production environment, you should use a much larger value. 
 
 > [!NOTE]
-> Once database digests begin to be uploaded to the storage account, you will not be able to delete the storage account until the immutability policy expires.  Setting the immutability policy can be skipped if you plan to clean-up resources immediately after this QuickStart.
+> Once database digests begin to be uploaded to the storage account, you will not be able to delete the storage account until the immutability policy expires. Setting the immutability policy can be skipped if you plan to clean-up resources immediately after this QuickStart.
 
 For more information about time-based retention policy for containers, see [Configure immutability policies for containers](/azure/storage/blobs/immutable-policy-configure-container-scope).
 

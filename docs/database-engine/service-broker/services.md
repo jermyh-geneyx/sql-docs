@@ -16,10 +16,10 @@ ms.topic: conceptual
 
 A Service Broker service is a name for a specific business task or set of business tasks. Conversations occur between services. Service Broker uses the name of the service to:
 
-- deliver messages to the correct queue within a database
-- route messages
-- enforce the contract for a conversation
-- determine the remote security for a new conversation.
+- Deliver messages to the correct queue within a database.
+- Route messages.
+- Enforce the contract for a conversation.
+- Determine the remote security for a new conversation.
 
 ## Remarks
 
@@ -31,5 +31,5 @@ Each service specifies a queue to hold incoming messages. The contracts associat
 - [ALTER SERVICE (Transact-SQL)](../../t-sql/statements/alter-service-transact-sql.md)
 - [DROP SERVICE (Transact-SQL)](../../t-sql/statements/drop-service-transact-sql.md)
 - [Service Broker routing](service-broker-routing.md)
-- [Understanding when activation occurs](understanding-when-activation-occurs.md)
+- [Understand when activation occurs](understanding-when-activation-occurs.md)
 - [Create Service Broker services](creating-service-broker-services.md)

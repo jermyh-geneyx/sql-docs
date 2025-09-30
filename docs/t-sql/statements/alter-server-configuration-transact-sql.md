@@ -202,8 +202,9 @@ The time-out value for how long the SQL Server Database Engine resource DLL shou
   
 <a id="clusterconnectionoptions"></a>
 
-**ClusterConnectionOptions = '<key_value_pairs>[;...]'**   
-**Applies to:** [!INCLUDE[sssql25-md](../../includes/sssql25-md.md)] RC 0 and later versions
+**ClusterConnectionOptions = '<key_value_pairs>[;...]'**
+
+**Applies to:** [!INCLUDE[sssql25-md](../../includes/sssql25-md.md)] and later versions
 
 Use the `CLUSTER_CONNECTION_OPTIONS` clause to enforce [TLS 1.3](../../relational-databases/security/networking/tls-1-3.md) encryption for communication between the Windows Server Failover Cluster and your failover cluster instance. The options are specified as a list of key-value pairs, separated by semicolons. The key-value pairs are used to configure connection string encryption for the failover cluster instance.
 
@@ -356,8 +357,8 @@ The [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] [!INCLUDE[ssDE](..
   
 |Category|Featured syntax elements|  
 |--------------|------------------------------|  
-|[Setting process affinity](#Affinity)|CPU • NUMANODE • AUTO|  
-|[Setting diagnostic log options](#Diagnostic)|ON • OFF • PATH • MAX_SIZE|  
+|[Setting process affinity](#Affinity)|CPU * NUMANODE * AUTO|  
+|[Setting diagnostic log options](#Diagnostic)|ON * OFF * PATH * MAX_SIZE|  
 |[Setting failover cluster properties](#Failover)|HealthCheckTimeout|  
 |[Changing the cluster context of an availability replica](#ChangeClusterContextExample)|**'** *windows_cluster* **'**|  
 |[Setting the buffer pool extension](#BufferPoolExtension)|BUFFER POOL EXTENSION| 

@@ -1,19 +1,19 @@
 ---
-title: Create server with Microsoft Entra-only authentication enabled
+title: Create Server with Microsoft Entra-Only Authentication Enabled
 titleSuffix: Azure SQL Database & Azure SQL Managed Instance
 description: This article guides you through creating an Azure SQL logical server or managed instance with Microsoft Entra-only authentication enabled, which disables connectivity using SQL authentication.
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: wiassaf, vanto, mathoma
-ms.date: 09/17/2024
+ms.date: 08/25/2025
 ms.service: azure-sql
 ms.subservice: security
 ms.topic: how-to
-monikerRange: "=azuresql||=azuresql-db||=azuresql-mi"
 ms.custom:
   - devx-track-azurepowershell
   - devx-track-azurecli
   - sfi-image-nochange
+monikerRange: "=azuresql || =azuresql-db || =azuresql-mi"
 ---
 
 # Create server with Microsoft Entra-only authentication enabled in Azure SQL
@@ -36,7 +36,7 @@ To provision a logical server or managed instance, you'll need to have the appro
 
 The [SQL Security Manager](/azure/role-based-access-control/built-in-roles#sql-security-manager) Azure RBAC role doesn't have enough permissions to create a server or instance with Microsoft Entra-only authentication enabled. The [SQL Security Manager](/azure/role-based-access-control/built-in-roles#sql-security-manager) role will be required to manage the Microsoft Entra-only authentication feature after server or instance creation.
 
-<a name='provision-with-azure-ad-only-authentication-enabled'></a>
+<a id="provision-with-azure-ad-only-authentication-enabled"></a>
 
 ## Provision with Microsoft Entra-only authentication enabled
 
@@ -53,11 +53,11 @@ In our examples, we're enabling Microsoft Entra-only authentication during serve
 
 # [Portal](#tab/azure-portal)
 
-1. Browse to the [Select SQL deployment](https://portal.azure.com/#create/Microsoft.AzureSQL) option page in the Azure portal.
+1. Go to [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub). 
+1. In the pane for **Azure SQL Database**, select **Show options**.
+1. In the **Azure SQL Database options** window, select **Create SQL Database**.
 
-1. If you aren't already signed in to Azure portal, sign in when prompted.
-
-1. Under **SQL databases**, leave **Resource type** set to **Single database**, and select **Create**.
+   :::image type="content" source="media/authentication-azure-ad-only-authentication-create-server/show-options-create-sql-database.png" alt-text="Screenshot from the Azure portal showing the Azure SQL hub, the Show options button, and the Create SQL Database button." lightbox="media/authentication-azure-ad-only-authentication-create-server/show-options-create-sql-database.png":::
 
 1. On the **Basics** tab of the **Create SQL Database** form, under **Project details**, select the desired Azure **Subscription**.
 
@@ -322,11 +322,11 @@ You can also use the following template. Use a [Custom deployment in the Azure p
 
 # [Portal](#tab/azure-portal)
 
-1. Browse to the [Select SQL deployment](https://portal.azure.com/#create/Microsoft.AzureSQL) option page in the Azure portal.
+1. Go to [Azure SQL hub at aka.ms/azuresqlhub](https://aka.ms/azuresqlhub).
+1. In the pane for **Azure SQL Managed Instance**, select **Show options**.
+1. In the **Azure SQL Managed Instance options** window, select **Create SQL Managed Instance**.
 
-1. If you aren't already signed in to Azure portal, sign in when prompted.
-
-1. Under **SQL managed instances**, leave **Resource type** set to **Single instance**, and select **Create**.
+   :::image type="content" source="media/authentication-azure-ad-only-authentication-create-server/show-options-create-sql-managed-instance.png" alt-text="Screenshot from the Azure portal of the Azure SQL hub, showing the Show options button and the Create SQL Managed Instance button." lightbox="media/authentication-azure-ad-only-authentication-create-server/show-options-create-sql-managed-instance.png":::
 
 1. Fill out the mandatory information required on the **Basics** tab for **Project details** and **Managed Instance details**. This is a minimum set of information required to provision a SQL Managed Instance.
 
@@ -471,7 +471,6 @@ $body = '{
 # To provision the instance, execute the `PUT` command
 
 Invoke-RestMethod -Uri https://management.azure.com/subscriptions/$subscriptionId/resourceGroups/$resourceGroupName/providers/Microsoft.Sql/managedInstances/$instanceName/?api-version=2020-11-01-preview -Method PUT -Headers $authHeader -Body $body -ContentType "application/json"
-
 ```
 
 To check the results, execute the `GET` command:

@@ -4,8 +4,8 @@ titleSuffix: Azure SQL Database & Azure Synapse Analytics
 description: How to use Auditing to audit Microsoft support operations.
 author: sravanisaluru
 ms.author: srsaluru
-ms.reviewer: mathoma
-ms.date: 06/10/2025
+ms.reviewer: mathoma, vanto
+ms.date: 09/18/2025
 ms.service: azure-sql-database
 ms.subservice: security
 ms.topic: conceptual
@@ -24,7 +24,9 @@ Auditing of Microsoft support operations includes the following set of action gr
 
 ## Enable auditing
 
-To enable auditing of Microsoft support operations, Go to the [Azure portal](https://portal.azure.com).Navigate to **Auditing** under the **Security** heading in your Azure **SQL server** pane, and switch **Enable Auditing of Microsoft support operations** to **ON**.
+To enable auditing of Microsoft support operations, Go to the [Azure portal](https://portal.azure.com). Navigate to **Auditing** under the **Security** heading in your Azure **SQL server** pane, and switch **Enable Auditing of Microsoft support operations** to **ON**. Configure audit logs to be sent to one or more of the following destinations: Storage Account, Log Analytics, or Event Hubs
+
+:::image type="content" source="media/auditing-microsoft-support-operations/auditing-support-operations.png" alt-text="Screenshot of the Azure portal showing the Auditing page with Enable Auditing of Microsoft support operations toggle highlighted.":::
 
 To review the audit logs of Microsoft support operations in your Log Analytics workspace, use the following query:
 

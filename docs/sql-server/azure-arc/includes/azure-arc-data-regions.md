@@ -1,12 +1,12 @@
 ---
 author: MikeRayMSFT
 ms.author: mikeray
-ms.date: 02/10/2023
+ms.date: 09/08/2025
 ms.topic: include
 
 ---
 
-Arc-enabled SQL Server is available in the following regions:
+SQL Server enabled by Azure Arc is available in the following regions:
 
 - East US
 - East US 2
@@ -37,9 +37,8 @@ Arc-enabled SQL Server is available in the following regions:
 - Sweden Central
 - Norway East
 
-<sup>1</sup> The US Government Virginia region is currently in preview, and not all features are supported yet. For details, review [SQL Server enabled by Azure Arc in US Government Preview](../us-government-region.md).
+<sup>1</sup> Not all features are supported yet in the US Government Virginia region. For details, review [SQL Server enabled by Azure Arc in US Government](../us-government-region.md).
 
 > [!IMPORTANT]
 >
 > - For successful onboarding and functioning, assign the same region to both Arc-enabled Server and Arc-enabled SQL Server.
-

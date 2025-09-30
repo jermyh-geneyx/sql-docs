@@ -1,15 +1,14 @@
 ---
-title: Connect with Microsoft Entra authentication
+title: Connect with Microsoft Entra Authentication
 titleSuffix: Azure SQL Database & SQL Managed Instance & Azure Synapse Analytics
 description: Learn how to use Microsoft Entra authentication to connect to Azure SQL Database, Azure SQL Managed Instance, and Azure Synapse Analytics.
 author: VanMSFT
 ms.author: vanto
-ms.reviewer: wiassaf, vanto, mathoma, maghan
-ms.date: 09/27/2024
+ms.reviewer: wiassaf, mathoma, maghan
+ms.date: 09/12/2025
 ms.service: azure-sql
 ms.subservice: security
 ms.topic: how-to
-monikerRange: "=azuresql || =azuresql-db || =azuresql-mi"
 ms.custom:
   - azure-synapse
   - has-adal-ref
@@ -18,6 +17,7 @@ ms.custom:
   - has-azure-ad-ps-ref, azure-ad-ref-level-one-done
   - sfi-image-nochange
   - sfi-ropc-blocked
+monikerRange: "=azuresql || =azuresql-db || =azuresql-mi"
 ---
 
 # Connect to Azure SQL resource with Microsoft Entra authentication
@@ -37,7 +37,7 @@ To create a Microsoft Entra-based contained database user, connect to the databa
 
 The following procedures show you how to connect to SQL Database with a Microsoft Entra identity using SQL Server Management Studio (SSMS) or SQL Server Database Tools (SSDT).
 
-<a id='azure-active-directory---integrated'></a>
+<a id="azure-active-directory---integrated"></a>
 
 #### Microsoft Entra Integrated
 
@@ -48,13 +48,13 @@ Use this method when you want to log in using your Windows credentials that are 
    1. For **Authentication**, select **Microsoft Entra Integrated**. No need to enter a password because your existing credentials are presented for the connection.
    1. For **Encryption**, select *Strict (SQL Server 2022 and Azure SQL)*, which should be used to connect to Azure SQL resources.
 
-    :::image type="content" source="media/authentication-microsoft-entra-connect-to-azure-sql/sql-server-management-studio-microsoft-entra-integrated-authentication.png" alt-text="Screenshot from SSMS showing Microsoft Entra Integrated authentication.":::
+   :::image type="content" source="media/authentication-microsoft-entra-connect-to-azure-sql/sql-server-management-studio-microsoft-entra-integrated-authentication.png" alt-text="Screenshot from SSMS showing Microsoft Entra Integrated authentication.":::
 
 1. On the **Connection properties** tab, in the **Connect to database** field, type the name of the user database you want to connect to.
 
    :::image type="content" source="media/authentication-microsoft-entra-connect-to-azure-sql/sql-server-management-studio-connect-to-server-options.png" alt-text="Screenshot from SSMS of the Options menu.":::
 
-<a id='azure-active-directory---password'></a>
+<a id="azure-active-directory---password"></a>
 
 #### Microsoft Entra Password
 
@@ -69,13 +69,13 @@ Use this method to authenticate to the database in SQL Database or SQL Managed I
    1. In the **Password** box, type your user password for the Microsoft Entra account or managed/federated domain account.
    1. For **Encryption**, select *Strict (SQL Server 2022 and Azure SQL)*, which should be used to connect to Azure SQL resources.
 
-    :::image type="content" source="media/authentication-microsoft-entra-connect-to-azure-sql/sql-server-management-studio-microsoft-entra-password-authentication.png" alt-text="Screenshot from SSMS using Microsoft Entra Password authentication.":::
+   :::image type="content" source="media/authentication-microsoft-entra-connect-to-azure-sql/sql-server-management-studio-microsoft-entra-password-authentication.png" alt-text="Screenshot from SSMS using Microsoft Entra Password authentication.":::
 
 1. On the **Connection properties** tab, in the **Connect to database** field, type the name of the user database you want to connect to.
 
    :::image type="content" source="media/authentication-microsoft-entra-connect-to-azure-sql/sql-server-management-studio-connect-to-server-options.png" alt-text="Screenshot from SSMS of the Options menu.":::
 
-<a id='azure-active-directory---universal-with-mfa'></a>
+<a id="azure-active-directory---universal-with-mfa"></a>
 
 #### Microsoft Entra MFA
 
@@ -99,19 +99,19 @@ The following steps show how to connect using multifactor authentication in the 
 1. You'll be prompted to authenticate using one of the methods configured based on the MFA administrator setting.
 1. When verification is complete, SSMS connects normally, presuming valid credentials and firewall access.
 
-<a id='azure-active-directory---service-principal'></a>
+<a id="azure-active-directory---service-principal"></a>
 
 #### Microsoft Entra Service Principal
 
-Use this method to authenticate to the database in SQL Database or SQL Managed Instance with Microsoft Entra service principals (Microsoft Entra applications). For more information, see [Microsoft Entra service principal with Azure SQL](authentication-aad-service-principal.md).
+Use this method to authenticate to the database in SQL Database or SQL Managed Instance with Microsoft Entra service principals (Microsoft Entra applications). For more information, see [Microsoft Entra service principals with Azure SQL](authentication-aad-service-principal.md).
 
-<a id='azure-active-directory---managed-identity'></a>
+<a id="azure-active-directory---managed-identity"></a>
 
 #### Microsoft Entra Managed Identity
 
 Use this method to authenticate to the database in SQL Database or SQL Managed Instance with Microsoft Entra managed identities. For more information, see [Managed identities in Microsoft Entra for Azure SQL](authentication-azure-ad-user-assigned-managed-identity.md).
 
-<a id='azure-active-directory---default'></a>
+<a id="azure-active-directory---default"></a>
 
 #### Microsoft Entra Default
 
@@ -125,7 +125,7 @@ The following procedures show you how to connect to a SQL Database with a Micros
 
 > [!NOTE]  
 > [System.Data.SqlClient](/dotnet/api/system.data.sqlclient) uses the Azure Active Directory Authentication Library (ADAL), which is deprecated. If you're using the [System.Data.SqlClient](/dotnet/api/system.data.sqlclient) namespace for Microsoft Entra authentication, migrate applications to [Microsoft.Data.SqlClient](/sql/connect/ado-net/introduction-microsoft-data-sqlclient-namespace) and the [Microsoft Authentication Library (MSAL)](/azure/active-directory/develop/msal-migration). To understand the connection methods available in .NET, see [Connect to Azure SQL with Microsoft Entra authentication and SqlClient](/sql/connect/ado-net/sql/azure-active-directory-authentication).
->  
+>
 > If you must continue using *ADAL.DLL* in your applications, you can use the links in this section to install the latest ODBC or OLE DB driver, which contain the latest *ADAL.DLL* library.
 
 On all client machines from which your applications or users connect to SQL Database or Azure Synapse Analytics using Microsoft Entra identities, you must install the following software:
@@ -143,7 +143,7 @@ You can meet these requirements by:
   - SSDT installs the amd64 version of *ADAL.DLL*.
   - The latest Visual Studio from [Visual Studio Downloads](https://visualstudio.microsoft.com/downloads) meets the .NET Framework 4.6 requirement but doesn't install the required amd64 version of *ADAL.DLL*.
 
-<a id='azure-active-directory-integrated-authentication'></a>
+<a id="azure-active-directory-integrated-authentication"></a>
 
 #### Microsoft Entra integrated authentication
 
@@ -161,11 +161,11 @@ conn.Open();
 
 The connection string keyword `Integrated Security=True` isn't supported for connecting to Azure SQL Database. When making an ODBC connection, you need to remove spaces and set authentication to `ActiveDirectoryIntegrated`.
 
-<a id='azure-active-directory-password-authentication'></a>
+<a id="azure-active-directory-password-authentication"></a>
 
 #### Microsoft Entra password authentication
 
-To connect to a database using Microsoft Entra cloud-only identity user accounts, or those who use Microsoft Entra hybrid identities, the Authentication keyword must be set to `Active Directory Password`. The connection string must contain User ID/UID and Password/PWD keywords and values. Replace `<server_name>`, `<email_address>`, and `<password>` with the appropriate values. The following C# code sample uses ADO .NET.
+To connect to a database using Microsoft Entra cloud-only identity user accounts, or those who use Microsoft Entra hybrid identities, the Authentication keyword must be set to `Active Directory Password`. The connection string must contain User ID/`UID` and Password/PWD keywords and values. Replace `<server_name>`, `<email_address>`, and `<password>` with the appropriate values. The following C# code sample uses ADO .NET.
 
 ```csharp
 string ConnectionString =
@@ -176,7 +176,7 @@ conn.Open();
 
 Learn more about Microsoft Entra authentication methods using the demo code samples available at [Microsoft Entra authentication GitHub Demo](https://github.com/Microsoft/sql-server-samples/tree/master/samples/features/security/azure-active-directory-auth).
 
-<a id='azure-active-directory-access-token'></a>
+<a id="azure-active-directory-access-token"></a>
 
 #### Microsoft Entra ID access token
 
@@ -207,26 +207,24 @@ Microsoft Entra multifactor authentication is a supported authentication method 
 The following statements connect using version 13.1 of sqlcmd. [Download Microsoft Command Line Utilities 14.0 for SQL Server](https://www.microsoft.com/download/details.aspx?id=53591).
 
 > [!NOTE]  
-> `sqlcmd` with the `-G` command does not work with system identities, and requires a user principal login.
+> `sqlcmd` with the `-G` command doesn't work with system identities, and requires a user principal login.
 
 ```cmd
 sqlcmd -S <database or datawarehouse name>.<server-name>.database.windows.net -G
 sqlcmd -S <database or datawarehouse name>.<server-name>.database.windows.net -U adrian@contoso.com -P <password> -G -l 30
 ```
 
-<a id='troubleshoot-azure-ad-authentication'></a>
+<a id="troubleshoot-azure-ad-authentication"></a>
 
 ## Connect in Azure portal Query editor (Azure SQL Database)
 
 For more information on the Azure portal Query editor for Azure SQL Database, see [Quickstart: Use the Azure portal query editor to query Azure SQL Database](connect-query-portal.md).
 
-1. Navigate to your SQL database in the Azure portal. For example, visit [your Azure SQL dashboard](https://portal.azure.com/#view/HubsExtension/BrowseResource/resourceType/Microsoft.Sql%2Fazuresql).
+1. Navigate to your SQL database in the Azure portal. For example, visit [your Azure SQL hub page](https://aka.ms/azuresqlhub), and select your Azure SQL Database.
 
-1. On your SQL database **Overview** page in the [Azure portal](https://portal.azure.com), select **Query editor** from the left menu.
+1. On your SQL database **Overview** page in the [Azure portal](https://portal.azure.com), select **Query editor** from the resource menu.
 
 1. On the sign-in screen under **Welcome to SQL Database Query Editor**, select **Continue as \<your user or group ID>**.
-
-   
 
 ## Related content
 

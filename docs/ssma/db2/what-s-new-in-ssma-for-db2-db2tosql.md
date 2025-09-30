@@ -4,7 +4,7 @@ description: Find out about changes to SQL Server Migration Assistant (SSMA) for
 author: nilabjaball
 ms.author: niball
 ms.reviewer: randolphwest
-ms.date: 05/19/2025
+ms.date: 09/02/2025
 ms.service: sql
 ms.subservice: ssma
 ms.topic: whats-new
@@ -18,6 +18,14 @@ ms.custom:
 This article lists SQL Server Migration Assistant (SSMA) for Db2 changes in each release.
 
 [!INCLUDE [entra-id](../../includes/entra-id-hard-coded.md)]
+
+## SSMA v10.3
+
+The v10.3 release of SSMA for Db2 contains the following changes:
+
+- SKU recommendation for Db2 LUW and z/OS databases.
+- Added tuple comparison support for DML queries.
+- Important security, compliance and accessibility fixes.
 
 ## SSMA v10.2
 
@@ -242,7 +250,7 @@ In addition, SSMA for Db2 now provides:
 - Parsing support for `ASSOCIATE RESULT SET` statement.
 
 > [!IMPORTANT]  
-> With SSMA v8.5 and later, .NET 4.7.2 is an installation prerequisite. If you need to install this version, you can download the runtime file from [here](https://dotnet.microsoft.com/download/dotnet-framework/net472).
+> With SSMA v8.5 and later, .NET 4.7.2 is an installation prerequisite. If you need to install this version, you can [download the runtime](https://dotnet.microsoft.com/download/dotnet-framework/net472).
 
 ## SSMA v8.6
 
@@ -259,7 +267,7 @@ In addition, SSMA for Db2 now provides:
 - The ability to convert the `LEAVE` statement.
 
 > [!IMPORTANT]  
-> With SSMA v8.5 and later, .NET 4.7.2 is an installation prerequisite. If you need to install this version, you can download the runtime file from [here](https://dotnet.microsoft.com/download/dotnet-framework/net472).
+> With SSMA v8.5 and later, .NET 4.7.2 is an installation prerequisite. If you need to install this version, you can [download the runtime](https://dotnet.microsoft.com/download/dotnet-framework/net472).
 
 ## SSMA v8.5
 
@@ -271,7 +279,7 @@ In addition, SSMA for Db2 has been enhanced with:
 - A fix for a bug related to spaces at the beginning of the object name not being respected.
 
 > [!IMPORTANT]  
-> With SSMA v8.5, .NET 4.7.2 is an installation prerequisite. If you need to install this version, you can download the runtime file from [here](https://dotnet.microsoft.com/download/dotnet-framework/net472).
+> With SSMA v8.5, .NET 4.7.2 is an installation prerequisite. If you need to install this version, you can [download the runtime](https://dotnet.microsoft.com/download/dotnet-framework/net472).
 
 ## SSMA v8.4
 
@@ -305,14 +313,14 @@ The v8.2 release of SSMA for Db2 is enhanced with to address issues with connect
 - An intermittent crash that occurs when a new version is downloaded.
 
 > [!NOTE]  
-> A known issue with auto-update might cause the failure of an update from SSMA v8.1 to v8.2. If you encounter this error, please download the new version and install it manually.
+> A known issue with auto-update might cause the failure of an update from SSMA v8.1 to v8.2. If you encounter this error, download the new version and install it manually.
 
 ## SSMA v8.1
 
 The v8.1 release of SSMA for Db2 is enhanced to provide targeted fixes that are designed to improve quality and conversion metrics.
 
 > [!NOTE]  
-> A known issue with auto-update might cause the failure of an update from SSMA v8.0 to v8.1. If you encounter this error, please download the new version and install it manually.
+> A known issue with auto-update might cause the failure of an update from SSMA v8.0 to v8.1. If you encounter this error, download the new version and install it manually.
 
 ## SSMA v8.0
 
@@ -320,9 +328,9 @@ The v8.0 release of SSMA for Db2 is enhanced to provide targeted fixes designed 
 
 - Support for **Azure SQL Managed Instance** as a target. You can now create new projects targeting Azure SQL Managed Instance:
 
-:::image type="content" source="../media/ssma-newproject-sqldbmi.png" alt-text="Screenshot of SQL MI project.":::
+:::image type="content" source="../media/ssma-newproject-managed-instance.png" alt-text="Screenshot of SQL MI project.":::
 
-- Post-conversion **Fix advisor**. Learn more about it [here](https://techcommunity.microsoft.com/t5/microsoft-data-migration-blog/bg-p/MicrosoftDataMigration).
+- Post-conversion **Fix advisor**. Learn more about it [here](https://techcommunity.microsoft.com/category/azuredatabases/blog/microsoftdatamigration).
 
 - Preliminary database/schema selection.
 
@@ -374,7 +382,7 @@ The v7.4 release of SSMA for Db2 contains the following changes:
 
 - The **Query timeout** option is now available during schema object discovery at source and target.
 
-:::image type="content" source="../media/query-timeout_red.png" alt-text="Screenshot of query timeout option.":::
+:::image type="content" source="../media/query-timeout-red.png" alt-text="Screenshot of query timeout option.":::
 
 - The quality and conversion metric has been improved with targeted fixes, based on customer feedback.
 
@@ -390,12 +398,12 @@ The v7.3 release of SSMA for Db2 contains the following changes:
   - Export functionality to a SQL Server Data Tools (SSDT) project.
     - You can now export schema scripts from SSMA to an SSDT project. You can use the schema scripts to make additional schema changes and deploy your database.
 
-      :::image type="content" source="../media/export-schema-scripts_red.png" alt-text="Screenshot of Save as SSDT project command.":::
+      :::image type="content" source="../media/export-schema-scripts-red.png" alt-text="Screenshot of Save as SSDT project command.":::
 
   - Libraries that can be consumed by SSMA for performing custom conversions.
     - You can now construct code that can handle custom syntax conversions and conversions that weren't previously handled by SSMA.
-      - Instructions on how to construct a custom converter are available in this blog post, [Extending SQL Server Migration Assistant's conversion capabilities](https://techcommunity.microsoft.com/t5/microsoft-data-migration-blog/bg-p/MicrosoftDataMigration).
-      - Download a sample project for conversion from this [blog post](https://techcommunity.microsoft.com/t5/microsoft-data-migration-blog/bg-p/MicrosoftDataMigration).
+      - Instructions on how to construct a custom converter are available in this blog post, [Extending SQL Server Migration Assistant's conversion capabilities](https://techcommunity.microsoft.com/category/azuredatabases/blog/microsoftdatamigration).
+      - Download a sample project for conversion from this [blog post](https://techcommunity.microsoft.com/category/azuredatabases/blog/microsoftdatamigration).
 
 ## SSMA v7.2
 

@@ -80,8 +80,8 @@ The ID for the secondary server in the log shipping configuration. *@secondary_i
 | `last_restored_date_utc` | The time and date of the last restore operation on the secondary database, expressed in Coordinated Universal Time. |
 | `history_retention_period` | The amount of time in minutes that log shipping history records are retained for a given secondary database, before being deleted. |
 | `last_restored_latency` | The amount of time, in minutes, that elapsed between when the log backup was created on the primary and when it was restored on the secondary.<br /><br />The initial value is `NULL`. |
-| `secondary_connection_options` |Additional connection options for the connection made between the log shipping executable and the secondary replica instance. <br /><br /> Available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] RC 0 and later.|
-| `monitor_connection_options` | Additional connection options for the connection made between the secondary replica instance and the remote monitor. <br /><br /> Available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] RC 0 and later.|
+| `secondary_connection_options` |Additional connection options for the connection made between the log shipping executable and the secondary replica instance. <br /><br /> Available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions. |
+| `monitor_connection_options` | Additional connection options for the connection made between the secondary replica instance and the remote monitor. <br /><br /> Available starting with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions. |
 
 ## Remarks
 

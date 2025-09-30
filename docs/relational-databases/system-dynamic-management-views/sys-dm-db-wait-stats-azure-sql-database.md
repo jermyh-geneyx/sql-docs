@@ -1,9 +1,9 @@
 ---
-title: "sys.dm_db_wait_stats (Azure SQL Database)"
-description: sys.dm_db_wait_stats (Azure SQL Database)
+title: "sys.dm_db_wait_stats"
+description: sys.dm_db_wait_stats returns information about all the waits encountered by threads that executed during operation.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: "02/27/2023"
+ms.date: 09/11/2025
 ms.service: azure-sql-database
 ms.topic: "reference"
 f1_keywords:
@@ -16,29 +16,30 @@ helpviewer_keywords:
   - "dm_db_wait_stats"
 dev_langs:
   - "TSQL"
-monikerRange: "=azuresqldb-current"
+monikerRange: "=azuresqldb-current||=fabric"
 ---
-# sys.dm_db_wait_stats (Azure SQL Database)
-[!INCLUDE[Azure SQL Database Azure SQL Managed Instance](../../includes/applies-to-version/asdb-asdbmi.md)]
+# sys.dm_db_wait_stats
 
-  Returns information about all the waits encountered by threads that executed during operation. You can use this aggregated view to diagnose performance issues with [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] and also with specific queries and batches.  
-  
- Specific types of wait times during query execution can indicate bottlenecks or stall points within the query. Similarly, high wait times, or wait counts server wide can indicate bottlenecks or hot spots in interaction query interactions within the server instance. For example, lock waits indicate data contention by queries; page IO latch waits indicate slow IO response times; page latch update waits indicate incorrect file layout.  
+[!INCLUDE[Azure SQL Database Azure SQL Managed Instance Fabric SQL Database](../../includes/applies-to-version/asdb-asdbmi-fabricsqldb.md)]
+
+Returns information about all the waits encountered by threads that executed during operation. You can use this aggregated view to diagnose performance issues and also with specific queries and batches.  
+
+Specific types of wait times during query execution can indicate bottlenecks or stall points within the query. Similarly, high wait times, or wait counts server wide can indicate bottlenecks or hot spots in interaction query interactions within the server instance. For example, lock waits indicate data contention by queries; page IO latch waits indicate slow IO response times; page latch update waits indicate incorrect file layout.  
   
 |Column name|Data type|Description|  
 |-----------------|---------------|-----------------|  
-|wait_type|**nvarchar(60)**|Name of the wait type. For more information, see [Types of Waits](#WaitTypes), later in this topic.|  
-|waiting_tasks_count|**bigint**|Number of waits on this wait type. This counter is incremented at the start of each wait.|  
-|wait_time_ms|**bigint**|Total wait time for this wait type in milliseconds. This time is inclusive of signal_wait_time_ms.|  
-|max_wait_time_ms|**bigint**|Maximum wait time on this wait type.|  
-|signal_wait_time_ms|**bigint**|Difference between the time that the waiting thread was signaled and when it started running.|  
-  
+|`wait_type`|**nvarchar(60)**|Name of the wait type. For more information, see [Types of Waits](#WaitTypes).|  
+|`waiting_tasks_count`|**bigint**|Number of waits on this wait type. This counter is incremented at the start of each wait.|  
+|`wait_time_ms`|**bigint**|Total wait time for this wait type in milliseconds. This time is inclusive of `signal_wait_time_ms`.|  
+|`max_wait_time_ms`|**bigint**|Maximum wait time on this wait type.|  
+|`signal_wait_time_ms`|**bigint**|Difference between the time that the waiting thread was signaled and when it started running.|
+
 ## Remarks  
   
 -   This dynamic management view displays data only for the current database.  
   
--   This dynamic management view shows the time for waits that have completed. It does not show current waits.  
-  
+-   This dynamic management view shows the time for completed waits. It doesn't show current waits.  
+
 -   Counters are reset to zero any time the database is moved or taken offline.  
   
 -   A SQL Server worker thread is not considered to be waiting if any of the following is true:  
@@ -48,27 +49,35 @@ monikerRange: "=azuresqldb-current"
     -   A queue is nonempty.  
   
     -   An external process finishes.  
-  
 
 > [!NOTE]
-> These statistics are not persisted after SQL Database failover events, and all data is cumulative since the last time the statistics were reset or the database engine started. Use the `sqlserver_start_time` column in [sys.dm_os_sys_info](sys-dm-os-sys-info-transact-sql.md) to find the last database engine startup time.   
+> These statistics aren't persisted after failover events, and all data is cumulative since the last time the statistics were reset or the database engine started. Use the `sqlserver_start_time` column in [sys.dm_os_sys_info](sys-dm-os-sys-info-transact-sql.md) to find the last database engine startup time.   
   
-## Permissions  
+## Permissions
+
  Requires VIEW DATABASE STATE permission on the database.  
+
+<a name="WaitTypes"></a>
+
+## Types of waits  
+
+### Resource waits  
+
+ Resource waits occur when a worker requests access to a resource that is not available because the resource is being used by some other worker or isn't yet available. Examples of resource waits are: locks, latches, network, and disk I/O waits. Lock and latch waits are waits on synchronization objects.
   
-##  <a name="WaitTypes"></a> Types of Waits  
- Resource waits  
- Resource waits occur when a worker requests access to a resource that is not available because the resource is being used by some other worker or is not yet available. Examples of resource waits are locks, latches, network and disk I/O waits. Lock and latch waits are waits on synchronization objects.  
+### Queue waits  
+
+ Queue waits occur when a worker is idle, waiting for work to be assigned. Queue waits are most typically seen with system background tasks such as the deadlock monitor and deleted record cleanup tasks. These tasks wait for work requests to be placed into a work queue. Queue waits can also periodically become active even if no new packets have been put on the queue.  
   
- Queue waits  
- Queue waits occur when a worker is idle, waiting for work to be assigned. Queue waits are most typically seen with system background tasks such as the deadlock monitor and deleted record cleanup tasks. These tasks will wait for work requests to be placed into a work queue. Queue waits may also periodically become active even if no new packets have been put on the queue.  
-  
- External waits  
- External waits occur when a [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] worker is waiting for an external event, such as an extended stored procedure call or a linked server query, to finish. When you diagnose blocking issues, remember that external waits do not always imply that the worker is idle, because the worker may actively be running some external code.  
-  
+### External waits  
+
+ External waits occur when a [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] worker is waiting for an external event, such as an extended stored procedure call or a linked server query, to finish. When you diagnose blocking issues, remember that external waits don't always imply that the worker is idle, because the worker might actively be running some external code.  
+
+## Waits
+
  Although the thread is no longer waiting, the thread does not have to start running immediately. This is because such a thread is first put on the queue of runnable workers and must wait for a quantum to run on the scheduler.  
   
- In [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] the wait-time counters are **bigint** values and therefore are not as prone to counter rollover as the equivalent counters in earlier versions of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)].  
+ In [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] the wait-time counters are **bigint** values and therefore aren't as prone to counter rollover as the equivalent counters in earlier versions of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)].  
   
  The following table lists the wait types encountered by tasks.  
   
@@ -87,7 +96,7 @@ monikerRange: "=azuresqldb-current"
 |BACKUP_OPERATOR|Occurs when a task is waiting for a tape mount.|  
 |BACKUPBUFFER|Occurs when a backup task is waiting for data, or is waiting for a buffer in which to store data. This type is not typical, except when a task is waiting for a tape mount.|  
 |BACKUPIO|Occurs when a backup task is waiting for data, or is waiting for a buffer in which to store data. This type is not typical, except when a task is waiting for a tape mount.|  
-|BACKUPTHREAD|Occurs when a task is waiting for a backup task to finish. Wait times may be long, from several minutes to several hours. If the task that is being waited on is in an I/O process, this type does not indicate a problem.|  
+|BACKUPTHREAD|Occurs when a task is waiting for a backup task to finish. Wait times can be long, from several minutes to several hours. If the task that is being waited on is in an I/O process, this type does not indicate a problem.|  
 |BAD_PAGE_PROCESS|Occurs when the background suspect page logger is trying to avoid running more than every five seconds. Excessive suspect pages cause the logger to run frequently.|  
 |BROKER_CONNECTION_RECEIVE_TASK|Occurs when waiting for access to receive a message on a connection endpoint. Receive access to the endpoint is serialized.|  
 |BROKER_ENDPOINT_STATE_MUTEX|Occurs when there is contention to access the state of a [!INCLUDE[ssSB](../../includes/sssb-md.md)] connection endpoint. Access to the state for changes is serialized.|  
@@ -101,7 +110,7 @@ monikerRange: "=azuresqldb-current"
 |BROKER_TASK_STOP|Occurs when the [!INCLUDE[ssSB](../../includes/sssb-md.md)] queue task handler tries to shut down the task. The state check is serialized and must be in a running state beforehand.|  
 |BROKER_TO_FLUSH|Occurs when the [!INCLUDE[ssSB](../../includes/sssb-md.md)] lazy flusher flushes the in-memory transmission objects to a work table.|  
 |BROKER_TRANSMITTER|Occurs when the [!INCLUDE[ssSB](../../includes/sssb-md.md)] transmitter is waiting for work.|  
-|BUILTIN_HASHKEY_MUTEX|May occur after startup of instance, while internal data structures are initializing. Will not recur once data structures have initialized.|  
+|BUILTIN_HASHKEY_MUTEX|Can occur after startup of instance, while internal data structures are initializing. Will not recur once data structures have initialized.|  
 |CHECK_PRINT_RECORD|[!INCLUDE[ssInternalOnly](../../includes/ssinternalonly-md.md)]|  
 |CHECKPOINT_QUEUE|Occurs while the checkpoint task is waiting for the next checkpoint request.|  
 |CHKPT|Occurs at server startup to tell the checkpoint thread that it can start.|  
@@ -118,7 +127,7 @@ monikerRange: "=azuresqldb-current"
 |CLR_TASK_START|Occurs while waiting for a CLR task to complete startup.|  
 |CLRHOST_STATE_ACCESS|Occurs where there is a wait to acquire exclusive access to the CLR-hosting data structures. This wait type occurs while setting up or tearing down the CLR runtime.|  
 |CMEMTHREAD|Occurs when a task is waiting on a thread-safe memory object. The wait time might increase when there is contention caused by multiple tasks trying to allocate memory from the same memory object.|  
-|CXPACKET|Occurs when trying to synchronize the query processor exchange iterator. You may consider lowering the degree of parallelism if contention on this wait type becomes a problem.|  
+|CXPACKET|Occurs when trying to synchronize the query processor exchange iterator. You can consider lowering the degree of parallelism if contention on this wait type becomes a problem.|  
 |CXROWSET_SYNC|Occurs during a parallel range scan.|  
 |DAC_INIT|Occurs while the dedicated administrator connection is initializing.|  
 |DBMIRROR_DBM_EVENT|[!INCLUDE[ssInternalOnly](../../includes/ssinternalonly-md.md)]|  
@@ -131,15 +140,15 @@ monikerRange: "=azuresqldb-current"
 |DEADLOCK_TASK_SEARCH|Large waiting time on this resource indicates that the server is executing queries on top of `sys.dm_os_waiting_tasks`, and these queries are blocking deadlock monitor from running deadlock search. This wait type is used by deadlock monitor only. Queries on top of `sys.dm_os_waiting_tasks` use DEADLOCK_ENUM_MUTEX.|  
 |DEBUG|Occurs during [!INCLUDE[tsql](../../includes/tsql-md.md)] and CLR debugging for internal synchronization.|  
 |DISABLE_VERSIONING|Occurs when [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] polls the version transaction manager to see whether the timestamp of the earliest active transaction is later than the timestamp of when the state started changing. If this is this case, all the snapshot transactions that were started before the ALTER DATABASE statement was run have finished. This wait state is used when [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] disables versioning by using the ALTER DATABASE statement.|  
-|DISKIO_SUSPEND|Occurs when a task is waiting to access a file when an external backup is active. This is reported for each waiting user process. A count larger than five per user process may indicate that the external backup is taking too much time to finish.|  
+|DISKIO_SUSPEND|Occurs when a task is waiting to access a file when an external backup is active. This is reported for each waiting user process. A count larger than five per user process can indicate that the external backup is taking too much time to finish.|  
 |DISPATCHER_QUEUE_SEMAPHORE|Occurs when a thread from the dispatcher pool is waiting for more work to process. The wait time for this wait type is expected to increase when the dispatcher is idle.|  
 |DLL_LOADING_MUTEX|Occurs once while waiting for the XML parser DLL to load.|  
 |DROPTEMP|Occurs between attempts to drop a temporary object if the previous attempt failed. The wait duration grows exponentially with each failed drop attempt.|  
-|DTC|Occurs when a task is waiting on an event that is used to manage state transition. This state controls when the recovery of [!INCLUDE[msCoName](../../includes/msconame-md.md)] Distributed Transaction Coordinator (MS DTC) transactions occurs after [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] receives notification that the MS DTC service has become unavailable.<br /><br /> This state also describes a task that is waiting when a commit of a MS DTC transaction is initiated by [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] and [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] is waiting for the MS DTC commit to finish.|  
-|DTC_ABORT_REQUEST|Occurs in a MS DTC worker session when the session is waiting to take ownership of a MS DTC transaction. After MS DTC owns the transaction, the session can roll back the transaction. Generally, the session will wait for another session that is using the transaction.|  
-|DTC_RESOLVE|Occurs when a recovery task is waiting for the master database in a cross-database transaction so that the task can query the outcome of the transaction.|  
+|DTC|Occurs when a task is waiting on an event that is used to manage state transition. This state controls when the recovery of [!INCLUDE[msCoName](../../includes/msconame-md.md)] Distributed Transaction Coordinator (MS DTC) transactions occurs after [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] receives notification that the MS DTC service has become unavailable.<br /><br /> This state also describes a task that is waiting when a commit of an MS DTC transaction is initiated by [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] and [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] is waiting for the MS DTC commit to finish.|  
+|DTC_ABORT_REQUEST|Occurs in an MS DTC worker session when the session is waiting to take ownership of an MS DTC transaction. After MS DTC owns the transaction, the session can roll back the transaction. Generally, the session waits for another session that is using the transaction.|  
+|DTC_RESOLVE|Occurs when a recovery task is waiting for the `master` database in a cross-database transaction so that the task can query the outcome of the transaction.|  
 |DTC_STATE|Occurs when a task is waiting on an event that protects changes to the internal MS DTC global state object. This state should be held for very short periods of time.|  
-|DTC_TMDOWN_REQUEST|Occurs in a MS DTC worker session when [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] receives notification that the MS DTC service is not available. First, the worker will wait for the MS DTC recovery process to start. Then, the worker waits to obtain the outcome of the distributed transaction that the worker is working on. This may continue until the connection with the MS DTC service has been reestablished.|  
+|DTC_TMDOWN_REQUEST|Occurs in an MS DTC worker session when [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] receives notification that the MS DTC service is not available. First, the worker waits for the MS DTC recovery process to start. Then, the worker waits to obtain the outcome of the distributed transaction that the worker is working on. This can continue until the connection with the MS DTC service has been reestablished.|  
 |DTC_WAITFOR_OUTCOME|Occurs when recovery tasks wait for MS DTC to become active to enable the resolution of prepared transactions.|  
 |DUMP_LOG_COORDINATOR|Occurs when a main task is waiting for a subtask to generate data. Ordinarily, this state does not occur. A long wait indicates an unexpected blockage. The subtask should be investigated.|  
 |DUMPTRIGGER|[!INCLUDE[ssInternalOnly](../../includes/ssinternalonly-md.md)]|  
@@ -149,14 +158,14 @@ monikerRange: "=azuresqldb-current"
 |ENABLE_VERSIONING|Occurs when [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] waits for all update transactions in this database to finish before declaring the database ready to transition to snapshot isolation allowed state. This state is used when [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] enables snapshot isolation by using the ALTER DATABASE statement.|  
 |ERROR_REPORTING_MANAGER|Occurs during synchronization of multiple concurrent error log initializations.|  
 |EXCHANGE|Occurs during synchronization in the query processor exchange iterator during parallel queries.|  
-|EXECSYNC|Occurs during parallel queries while synchronizing in query processor in areas not related to the exchange iterator. Examples of such areas are bitmaps, large binary objects (LOBs), and the spool iterator. LOBs may frequently use this wait state.|  
+|EXECSYNC|Occurs during parallel queries while synchronizing in query processor in areas not related to the exchange iterator. Examples of such areas are bitmaps, large binary objects (LOBs), and the spool iterator. LOBs might frequently use this wait state.|  
 |EXECUTION_PIPE_EVENT_INTERNAL|Occurs during synchronization between producer and consumer parts of batch execution that are submitted through the connection context.|  
 |FAILPOINT|[!INCLUDE[ssInternalOnly](../../includes/ssinternalonly-md.md)]|  
 |FCB_REPLICA_READ|Occurs when the reads of a snapshot (or a temporary snapshot created by DBCC) sparse file are synchronized.|  
 |FCB_REPLICA_WRITE|Occurs when the pushing or pulling of a page to a snapshot (or a temporary snapshot created by DBCC) sparse file is synchronized.|  
 |FS_FC_RWLOCK|Occurs when there is a wait by the FILESTREAM garbage collector to do either of the following:<br /><br /> Disable garbage collection (used by backup and restore).<br /><br /> Execute one cycle of the FILESTREAM garbage collector.|  
 |FS_GARBAGE_COLLECTOR_SHUTDOWN|Occurs when the FILESTREAM garbage collector is waiting for cleanup tasks to be completed.|  
-|FS_HEADER_RWLOCK|Occurs when there is a wait to acquire access to the FILESTREAM header of a FILESTREAM data container to either read or update contents in the FILESTREAM header file (Filestream.hdr).|  
+|FS_HEADER_RWLOCK|Occurs when there is a wait to acquire access to the FILESTREAM header of a FILESTREAM data container to either read or update contents in the FILESTREAM header file (`Filestream.hdr`).|
 |FS_LOGTRUNC_RWLOCK|Occurs when there is a wait to acquire access to FILESTREAM log truncation to do either of the following:<br /><br /> Temporarily disable FILESTREAM log (FSLOG) truncation (used by backup and restore).<br /><br /> Execute one cycle of FSLOG truncation.|  
 |FSA_FORCE_OWN_XACT|Occurs when a FILESTREAM file I/O operation needs to bind to the associated transaction, but the transaction is currently owned by another session.|  
 |FSAGENT|Occurs when a FILESTREAM file I/O operation is waiting for a FILESTREAM agent resource that is being used by another file I/O operation.|  
@@ -186,29 +195,29 @@ monikerRange: "=azuresqldb-current"
 |LATCH_SH|Occurs when waiting for an SH (share) latch. This does not include buffer latches or transaction mark latches. A listing of LATCH_* waits is available in `sys.dm_os_latch_stats`. Note that `sys.dm_os_latch_stats` groups LATCH_NL, LATCH_SH, LATCH_UP, LATCH_EX, and LATCH_DT waits together.|  
 |LATCH_UP|Occurs when waiting for an UP (update) latch. This does not include buffer latches or transaction mark latches. A listing of LATCH_* waits is available in `sys.dm_os_latch_stats`. Note that `sys.dm_os_latch_stats` groups LATCH_NL, LATCH_SH, LATCH_UP, LATCH_EX, and LATCH_DT waits together.|  
 |LAZYWRITER_SLEEP|Occurs when lazywriter tasks are suspended. This is a measure of the time spent by background tasks that are waiting. Do not consider this state when you are looking for user stalls.|  
-|LCK_M_BU|Occurs when a task is waiting to acquire a Bulk Update (BU) lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](../../relational-databases/system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).|  
-|LCK_M_IS|Occurs when a task is waiting to acquire an Intent Shared (IS) lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](../../relational-databases/system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).|  
-|LCK_M_IU|Occurs when a task is waiting to acquire an Intent Update (IU) lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](../../relational-databases/system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).|  
-|LCK_M_IX|Occurs when a task is waiting to acquire an Intent Exclusive (IX) lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](../../relational-databases/system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).|  
-|LCK_M_RIn_NL|Occurs when a task is waiting to acquire a NULL lock on the current key value, and an Insert Range lock between the current and previous key. A NULL lock on the key is an instant release lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](../../relational-databases/system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).|  
-|LCK_M_RIn_S|Occurs when a task is waiting to acquire a shared lock on the current key value, and an Insert Range lock between the current and previous key. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](../../relational-databases/system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).|  
-|LCK_M_RIn_U|Task is waiting to acquire an Update lock on the current key value, and an Insert Range lock between the current and previous key. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](../../relational-databases/system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).|  
-|LCK_M_RIn_X|Occurs when a task is waiting to acquire an Exclusive lock on the current key value, and an Insert Range lock between the current and previous key. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](../../relational-databases/system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).|  
-|LCK_M_RS_S|Occurs when a task is waiting to acquire a Shared lock on the current key value, and a Shared Range lock between the current and previous key. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](../../relational-databases/system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).|  
-|LCK_M_RS_U|Occurs when a task is waiting to acquire an Update lock on the current key value, and an Update Range lock between the current and previous key. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](../../relational-databases/system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).|  
-|LCK_M_RX_S|Occurs when a task is waiting to acquire a Shared lock on the current key value, and an Exclusive Range lock between the current and previous key. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](../../relational-databases/system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).|  
-|LCK_M_RX_U|Occurs when a task is waiting to acquire an Update lock on the current key value, and an Exclusive range lock between the current and previous key. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](../../relational-databases/system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).|  
-|LCK_M_RX_X|Occurs when a task is waiting to acquire an Exclusive lock on the current key value, and an Exclusive Range lock between the current and previous key. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](../../relational-databases/system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).|  
-|LCK_M_S|Occurs when a task is waiting to acquire a Shared lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](../../relational-databases/system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).|  
-|LCK_M_SCH_M|Occurs when a task is waiting to acquire a Schema Modify lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](../../relational-databases/system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).|  
-|LCK_M_SCH_S|Occurs when a task is waiting to acquire a Schema Share lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](../../relational-databases/system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).|  
-|LCK_M_SIU|Occurs when a task is waiting to acquire a Shared With Intent Update lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](../../relational-databases/system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).|  
-|LCK_M_SIX|Occurs when a task is waiting to acquire a Shared With Intent Exclusive lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](../../relational-databases/system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).|  
-|LCK_M_U|Occurs when a task is waiting to acquire an Update lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](../../relational-databases/system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).|  
-|LCK_M_UIX|Occurs when a task is waiting to acquire an Update With Intent Exclusive lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](../../relational-databases/system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).|  
-|LCK_M_X|Occurs when a task is waiting to acquire an Exclusive lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](../../relational-databases/system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).|  
+|LCK_M_BU|Occurs when a task is waiting to acquire a Bulk Update (BU) lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](sys-dm-tran-locks-transact-sql.md).|  
+|LCK_M_IS|Occurs when a task is waiting to acquire an Intent Shared (IS) lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](sys-dm-tran-locks-transact-sql.md).|  
+|LCK_M_IU|Occurs when a task is waiting to acquire an Intent Update (IU) lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](sys-dm-tran-locks-transact-sql.md).|  
+|LCK_M_IX|Occurs when a task is waiting to acquire an Intent Exclusive (IX) lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](sys-dm-tran-locks-transact-sql.md).|  
+|LCK_M_RIn_NL|Occurs when a task is waiting to acquire a NULL lock on the current key value, and an Insert Range lock between the current and previous key. A NULL lock on the key is an instant release lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](sys-dm-tran-locks-transact-sql.md).|  
+|LCK_M_RIn_S|Occurs when a task is waiting to acquire a shared lock on the current key value, and an Insert Range lock between the current and previous key. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](sys-dm-tran-locks-transact-sql.md).|  
+|LCK_M_RIn_U|Task is waiting to acquire an Update lock on the current key value, and an Insert Range lock between the current and previous key. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](sys-dm-tran-locks-transact-sql.md).|  
+|LCK_M_RIn_X|Occurs when a task is waiting to acquire an Exclusive lock on the current key value, and an Insert Range lock between the current and previous key. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](sys-dm-tran-locks-transact-sql.md).|  
+|LCK_M_RS_S|Occurs when a task is waiting to acquire a Shared lock on the current key value, and a Shared Range lock between the current and previous key. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](sys-dm-tran-locks-transact-sql.md).|  
+|LCK_M_RS_U|Occurs when a task is waiting to acquire an Update lock on the current key value, and an Update Range lock between the current and previous key. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](sys-dm-tran-locks-transact-sql.md).|  
+|LCK_M_RX_S|Occurs when a task is waiting to acquire a Shared lock on the current key value, and an Exclusive Range lock between the current and previous key. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](sys-dm-tran-locks-transact-sql.md).|  
+|LCK_M_RX_U|Occurs when a task is waiting to acquire an Update lock on the current key value, and an Exclusive range lock between the current and previous key. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](sys-dm-tran-locks-transact-sql.md).|  
+|LCK_M_RX_X|Occurs when a task is waiting to acquire an Exclusive lock on the current key value, and an Exclusive Range lock between the current and previous key. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](sys-dm-tran-locks-transact-sql.md).|  
+|LCK_M_S|Occurs when a task is waiting to acquire a Shared lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](sys-dm-tran-locks-transact-sql.md).|  
+|LCK_M_SCH_M|Occurs when a task is waiting to acquire a Schema Modify lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](sys-dm-tran-locks-transact-sql.md).|  
+|LCK_M_SCH_S|Occurs when a task is waiting to acquire a Schema Share lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](sys-dm-tran-locks-transact-sql.md).|  
+|LCK_M_SIU|Occurs when a task is waiting to acquire a Shared With Intent Update lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](sys-dm-tran-locks-transact-sql.md).|  
+|LCK_M_SIX|Occurs when a task is waiting to acquire a Shared With Intent Exclusive lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](sys-dm-tran-locks-transact-sql.md).|  
+|LCK_M_U|Occurs when a task is waiting to acquire an Update lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](sys-dm-tran-locks-transact-sql.md).|  
+|LCK_M_UIX|Occurs when a task is waiting to acquire an Update With Intent Exclusive lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](sys-dm-tran-locks-transact-sql.md).|  
+|LCK_M_X|Occurs when a task is waiting to acquire an Exclusive lock. For a lock compatibility matrix, see [sys.dm_tran_locks &#40;Transact-SQL&#41;](sys-dm-tran-locks-transact-sql.md).|  
 |LOG_RATE_GOVERNOR|Occurs when DB is waiting for quota to write to the log.|  
-|LOGBUFFER|Occurs when a task is waiting for space in the log buffer to store a log record. Consistently high values may indicate that the log devices cannot keep up with the amount of log being generated by the server.|  
+|LOGBUFFER|Occurs when a task is waiting for space in the log buffer to store a log record. Consistently high values might indicate that the log devices cannot keep up with the amount of log being generated by the server.|  
 |LOGGENERATION|[!INCLUDE[ssInternalOnly](../../includes/ssinternalonly-md.md)]|  
 |LOGMGR|Occurs when a task is waiting for any outstanding log I/Os to finish before shutting down the log while closing the database.|  
 |LOGMGR_FLUSH|[!INCLUDE[ssInternalOnly](../../includes/ssinternalonly-md.md)]|  
@@ -223,12 +232,12 @@ monikerRange: "=azuresqldb-current"
 |NET_WAITFOR_PACKET|Occurs when a connection is waiting for a network packet during a network read.|  
 |OLEDB|Occurs when [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] calls the [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Native Client OLE DB Provider. This wait type is not used for synchronization. Instead, it indicates the duration of calls to the OLE DB provider.|  
 |ONDEMAND_TASK_QUEUE|Occurs while a background task waits for high priority system task requests. Long wait times indicate that there have been no high priority requests to process, and should not cause concern.|  
-|PAGEIOLATCH_DT|Occurs when a task is waiting on a latch for a buffer that is in an I/O request. The latch request is in Destroy mode. Long waits may indicate problems with the disk subsystem.|  
-|PAGEIOLATCH_EX|Occurs when a task is waiting on a latch for a buffer that is in an I/O request. The latch request is in Exclusive mode. Long waits may indicate problems with the disk subsystem.|  
-|PAGEIOLATCH_KP|Occurs when a task is waiting on a latch for a buffer that is in an I/O request. The latch request is in Keep mode. Long waits may indicate problems with the disk subsystem.|  
+|PAGEIOLATCH_DT|Occurs when a task is waiting on a latch for a buffer that is in an I/O request. The latch request is in Destroy mode. Long waits can indicate problems with the disk subsystem.|  
+|PAGEIOLATCH_EX|Occurs when a task is waiting on a latch for a buffer that is in an I/O request. The latch request is in Exclusive mode. Long waits can indicate problems with the disk subsystem.|  
+|PAGEIOLATCH_KP|Occurs when a task is waiting on a latch for a buffer that is in an I/O request. The latch request is in Keep mode. Long waits can indicate problems with the disk subsystem.|  
 |PAGEIOLATCH_NL|[!INCLUDE[ssInternalOnly](../../includes/ssinternalonly-md.md)]|  
-|PAGEIOLATCH_SH|Occurs when a task is waiting on a latch for a buffer that is in an I/O request. The latch request is in Shared mode. Long waits may indicate problems with the disk subsystem.|  
-|PAGEIOLATCH_UP|Occurs when a task is waiting on a latch for a buffer that is in an I/O request. The latch request is in Update mode. Long waits may indicate problems with the disk subsystem.|  
+|PAGEIOLATCH_SH|Occurs when a task is waiting on a latch for a buffer that is in an I/O request. The latch request is in Shared mode. Long waits can indicate problems with the disk subsystem.|  
+|PAGEIOLATCH_UP|Occurs when a task is waiting on a latch for a buffer that is in an I/O request. The latch request is in Update mode. Long waits can indicate problems with the disk subsystem.|  
 |PAGELATCH_DT|Occurs when a task is waiting on a latch for a buffer that is not in an I/O request. The latch request is in Destroy mode.|  
 |PAGELATCH_EX|Occurs when a task is waiting on a latch for a buffer that is not in an I/O request. The latch request is in Exclusive mode.|  
 |PAGELATCH_KP|Occurs when a task is waiting on a latch for a buffer that is not in an I/O request. The latch request is in Keep mode.|  
@@ -249,12 +258,12 @@ monikerRange: "=azuresqldb-current"
 |PREEMPTIVE_STRESSDRIVER|[!INCLUDE[ssInternalOnly](../../includes/ssinternalonly-md.md)]|  
 |PREEMPTIVE_TESTING|[!INCLUDE[ssInternalOnly](../../includes/ssinternalonly-md.md)]|  
 |PREEMPTIVE_XETESTING|[!INCLUDE[ssInternalOnly](../../includes/ssinternalonly-md.md)]|  
-|PRINT_ROLLBACK_PROGRESS|Used to wait while user processes are ended in a database that has been transitioned by using the ALTER DATABASE termination clause. For more information, see [ALTER DATABASE &#40;Transact-SQL&#41;](../../t-sql/statements/alter-database-transact-sql.md).|  
+|PRINT_ROLLBACK_PROGRESS|Used to wait while user processes are ended in a database that has been transitioned by using the ALTER DATABASE termination clause. For more information, see [ALTER DATABASE (Transact-SQL)](../../t-sql/statements/alter-database-transact-sql.md).|  
 |PWAIT_HADR_CHANGE_NOTIFIER_TERMINATION_SYNC|Occurs when a background task is waiting for the termination of the background task that receives (via polling) Windows Server Failover Clustering notifications.  Internal use only.|  
 |PWAIT_HADR_CLUSTER_INTEGRATION|An append, replace, and/or remove operation is waiting to grab a write lock on an Always On internal list (such as a list of networks, network addresses, or availability group listeners).  Internal use only.|  
 |PWAIT_HADR_OFFLINE_COMPLETED|An Always On drop availability group operation is waiting for the target availability group to go offline before destroying Windows Server Failover Clustering objects.|  
 |PWAIT_HADR_ONLINE_COMPLETED|An Always On create or failover availability group operation is waiting for the target availability group to come online.|  
-|PWAIT_HADR_POST_ONLINE_COMPLETED|An Always On drop availability group operation is waiting for the termination of any background task that was scheduled as part of a previous command. For example, there may be a background task that is transitioning availability databases to the primary role. The DROP AVAILABILITY GROUP DDL must wait for this background task to terminate in order to avoid race conditions.|  
+|PWAIT_HADR_POST_ONLINE_COMPLETED|An Always On drop availability group operation is waiting for the termination of any background task that was scheduled as part of a previous command. For example, there might be a background task that is transitioning availability databases to the primary role. The DROP AVAILABILITY GROUP DDL must wait for this background task to terminate in order to avoid race conditions.|  
 |PWAIT_HADR_WORKITEM_COMPLETED|Internal wait by a thread waiting for an async work task to complete. This is an expected wait and is for CSS use.|  
 |PWAIT_MD_LOGIN_STATS|Occurs during internal synchronization in metadata on login stats.|  
 |PWAIT_MD_RELATION_CACHE|Occurs during internal synchronization in metadata on table or index.|  
@@ -281,10 +290,10 @@ monikerRange: "=azuresqldb-current"
 |REQUEST_FOR_DEADLOCK_SEARCH|Occurs while the deadlock monitor waits to start the next deadlock search. This wait is expected between deadlock detections, and lengthy total waiting time on this resource does not indicate a problem.|  
 |RESMGR_THROTTLED|Occurs when a new request comes in and is throttled based on the GROUP_MAX_REQUESTS setting.|  
 |RESOURCE_QUEUE|Occurs during synchronization of various internal resource queues.|  
-|RESOURCE_SEMAPHORE|Occurs when a query memory request cannot be granted immediately due to other concurrent queries. High waits and wait times may indicate excessive number of concurrent queries, or excessive memory request amounts.|  
+|RESOURCE_SEMAPHORE|Occurs when a query memory request cannot be granted immediately due to other concurrent queries. High waits and wait times can indicate excessive number of concurrent queries, or excessive memory request amounts.|  
 |RESOURCE_SEMAPHORE_MUTEX|Occurs while a query waits for its request for a thread reservation to be fulfilled. It also occurs when synchronizing query compile and memory grant requests.|  
-|RESOURCE_SEMAPHORE_QUERY_COMPILE|Occurs when the number of concurrent query compilations reaches a throttling limit. High waits and wait times may indicate excessive compilations, recompiles, or uncachable plans.|  
-|RESOURCE_SEMAPHORE_SMALL_QUERY|Occurs when memory request by a small query cannot be granted immediately due to other concurrent queries. Wait time should not exceed more than a few seconds, because the server transfers the request to the main query memory pool if it fails to grant the requested memory within a few seconds. High waits may indicate an excessive number of concurrent small queries while the main memory pool is blocked by waiting queries.|  
+|RESOURCE_SEMAPHORE_QUERY_COMPILE|Occurs when the number of concurrent query compilations reaches a throttling limit. High waits and wait times can indicate excessive compilations, recompiles, or uncachable plans.|  
+|RESOURCE_SEMAPHORE_SMALL_QUERY|Occurs when memory request by a small query cannot be granted immediately due to other concurrent queries. Wait time should not exceed more than a few seconds, because the server transfers the request to the main query memory pool if it fails to grant the requested memory within a few seconds. High waits can indicate an excessive number of concurrent small queries while the main memory pool is blocked by waiting queries.|  
 |SE_REPL_CATCHUP_THROTTLE|Occurs when the transaction is waiting for one of the database secondaries to make progress.|  
 |SE_REPL_COMMIT_ACK|Occurs when the transaction is waiting for quorum commit acknowledgment from secondary replicas.|  
 |SE_REPL_COMMIT_TURN|Occurs when the transaction is waiting for commit after receiving quorum commit acknowledgments.|  
@@ -379,11 +388,10 @@ monikerRange: "=azuresqldb-current"
 |FT_IFTS_SCHEDULER_IDLE_WAIT|Full-text scheduler sleep wait type. The scheduler is idle.|  
 |FT_IFTSHC_MUTEX|Full-text is waiting on an fdhost control operation. Documented for informational purposes only. Not supported. Future compatibility is not guaranteed.|  
 |FT_IFTSISM_MUTEX|Full-text is waiting on communication operation. Documented for informational purposes only. Not supported. Future compatibility is not guaranteed.|  
-|FT_MASTER_MERGE|Full-text is waiting on master merge operation. Documented for informational purposes only. Not supported. Future compatibility is not guaranteed.|  
+|FT_MASTER_MERGE|Full-text is waiting on master merge operation. Documented for informational purposes only. Not supported. Future compatibility is not guaranteed.|
   
-  
-## See also
+## Related content
 
- [sys.dm_os_sys_info  &#40;Transact-SQL&#41;](sys-dm-os-sys-info-transact-sql.md)    
- [sys.dm_tran_locks &#40;Transact-SQL&#41;](sys-dm-tran-locks-transact-sql.md)    
- [sys.dm_os_waiting_tasks &#40;Transact-SQL&#41;](sys-dm-os-waiting-tasks-transact-sql.md)    
+- [sys.dm_os_sys_info](sys-dm-os-sys-info-transact-sql.md)    
+- [sys.dm_tran_locks](sys-dm-tran-locks-transact-sql.md)    
+- [sys.dm_os_waiting_tasks](sys-dm-os-waiting-tasks-transact-sql.md)    
