@@ -105,14 +105,25 @@ Moving to a different subscription requires manual reconfiguration with the prec
 
 ## Known limitations
 
-Moving the SQL Server p-core license to the new subscription or resource group is currently not supported. You'll need to:
+### SQL Server physical core license
 
-1. Manually delete the old license
-1. Re-create and reconfigure the license in the new location
+Moving the SQL Server instance physical core (p-core) license automatically to a new subscription, resource group, or location isn’t supported. To manually move an instance covered by a p-core license, follow these steps:
+
+1. Create and activate a p-core license with the same configuration in the new subscription, resource group, or location.
+1. Move the virtual machines and SQL Server resources covered by the original license to the new scope.
+1. Manually delete the old p-core license.
 
   For details, review [Manage the unlimited virtualization benefit for SQL Server](manage-configuration.md#manage-pcore-license).
 
-Moving the SQL Server ESU p-core license to the new subscription or resource group is currently not supported. If you create a license in the location, it will be treated as a new ESU subscription with a new back-billing charge.
+> [!IMPORTANT]
+>
+> - The p-core license in the new subscription, resource group, or location must be activated *before* you move the VM and SQL Server resources to it. This step ensures you won't incur the pay-as-you-go charges for the individual SQL Server instances in the new location.
+> - The p-core license in the old scope must be deleted *after* all the VM and SQL resources have been successfully moved to the new scope. This step ensures you won't incur the pay-as-you-go charges for the individual SQL Server instances in the old scope.
+> - You will be charged for two p-core licenses until this process completes, and the old p-core license is deleted. But it will ensure that the individual SQL Server instances in each scope will not be billed during the move.
+
+### SQL Server p-core ESU license
+
+Moving the SQL Server ESU p-core license to the new subscription resource group is currently not supported. If you create a license in the new location, it will be treated as a new ESU subscription with a new back-billing charge.
 
 > [!IMPORTANT]  
 > While moving the VMs with ESU enabled to a new subscription or resource group is supported, if they used to be covered by a SQL Server ESU p-core license in the old location and not billed individually, the move will result in these VMs being billed for ESU individually as they will no longer be covered by a p-core license.
