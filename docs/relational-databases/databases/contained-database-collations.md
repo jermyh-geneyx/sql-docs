@@ -148,7 +148,7 @@ JOIN #T2
   
  This works because both `T1_txt` and `T2_txt` are collated in the database collation of the contained database.  
   
-## <a id="#crossing-between-contained-and-uncontained-contexts"></a> Cross between contained and un-contained contexts
+## <a id="crossing-between-contained-and-uncontained-contexts"></a> Cross between contained and un-contained contexts
 
  As long as a session in a contained database remains contained, it must remain within the database to which it connected. In this case the behavior is very straightforward. But if a session crosses between contained and non-contained contexts, the behavior becomes more complex, since the two sets of rules must be bridged. This can happen in a partially-contained database, since a user may `USE` to another database. In this case, the difference in collation rules is handled by the following principle.  
   

@@ -517,7 +517,7 @@ you could put:
 ```
 
 <a id="section_C_6_parameters_targets"></a>
-<a id="#c6-parameters-for-targets"></a>
+<a id="c6-parameters-for-targets"></a>
 
 ### Parameters for targets
 
@@ -578,7 +578,7 @@ package0   event_file   metadatafile         unicode_string_ptr   Not_mandatory 
 ```
 
 <a id="section_C_7_dmv_select_target_data_column"></a>
-<a id="#c7-dmv-select-casting-target_data-column-to-xml"></a>
+<a id="c7-dmv-select-casting-target_data-column-to-xml"></a>
 
 ### DMV SELECT casting target_data column to XML
 

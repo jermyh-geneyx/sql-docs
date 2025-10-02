@@ -179,7 +179,7 @@ Refer to the document that explains how to use the [Extended Events New Session 
 
 You might encounter `Error code 41805: There is insufficient memory in the resource pool '%ls' to run this operation` if using In-Memory OLTP. Reduce the amount of data in memory-optimized tables and memory-optimized table-valued parameters, or scale up the database to a higher service objective to have more memory. For more information on out of memory issues with SQL Server In-Memory OLTP, see [Resolve Out Of Memory issues](/sql/relational-databases/in-memory-oltp/resolve-out-of-memory-issues).
 
-### <a id="#get-azure-sql-db-support"></a> Get Azure SQL Database support
+### <a id="get-azure-sql-db-support"></a> Get Azure SQL Database support
 
 If out of memory errors persist in Azure SQL Database, file an Azure support request by selecting **Get Support** on the [Azure Support](https://azure.microsoft.com/support/options) site.
 
