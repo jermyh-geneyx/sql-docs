@@ -4,7 +4,7 @@ description: Starts or stops an Extended Event session, or changes an event sess
 author: markingmyname
 ms.author: maghan
 ms.reviewer: dfurman, randolphwest
-ms.date: 09/02/2025
+ms.date: 10/02/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -16,7 +16,7 @@ helpviewer_keywords:
   - "extended events [SQL Server], Transact-SQL"
   - "ALTER EVENT SESSION statement"
 dev_langs:
-  - "TSQL"
+  - TSQL
 ---
 
 # ALTER EVENT SESSION (Transact-SQL)
@@ -188,6 +188,27 @@ Specifies the predicate expression used to determine if an event should be proce
 
 The name of the event field that identifies the predicate source.
 
+The fields for an event can be found by executing the following query:
+
+```sql
+SELECT oc.name AS field_name,
+       oc.type_name AS field_type,
+       oc.description AS field_description
+FROM sys.dm_xe_objects AS o
+INNER JOIN sys.dm_xe_packages AS p
+ON o.package_guid = p.guid
+INNER JOIN sys.dm_xe_object_columns AS oc
+ON o.name = oc.object_name
+   AND
+   o.package_guid = oc.object_package_guid
+WHERE o.object_type = 'event'
+      AND
+      o.name = 'event-name-placeholder'
+      AND
+      oc.column_type = 'data'
+ORDER BY field_name ASC;
+```
+
 #### [*event_module_guid*].*event_package_name*.*predicate_source_name*
 
 The name of the global predicate source where:
@@ -273,6 +294,10 @@ Available targets can be found by executing the following query:
   ORDER BY target_name ASC;
   ```
 
+An event session can have zero, one, or many [targets](../../relational-databases/extended-events/targets-for-extended-events-in-sql-server.md). All targets added to an event session must be different. For example, you cannot add a second `event_file` target to a session that already has an `event_file` target.
+
+For more information, including usage examples for commonly used targets, see [Extended Events targets](../../relational-databases/extended-events/targets-for-extended-events-in-sql-server.md).
+
 #### SET { *target_parameter_name* = \<value> [ , ...*n* ] }
 
 Sets a target parameter.
@@ -291,7 +316,7 @@ WHERE column_type = 'customizable'
 > [!IMPORTANT]  
 > If you're using the ring buffer target, we recommend that you set the `MAX_MEMORY` *target* parameter (distinct from the `MAX_MEMORY` *session* parameter) to 1,024 kilobytes (KB) or less to help avoid possible data truncation of the XML output.
 
-For more information about target types, see [Targets for Extended Events](../../relational-databases/extended-events/targets-for-extended-events-in-sql-server.md).
+For more information about target types, see [Extended Events targets](../../relational-databases/extended-events/targets-for-extended-events-in-sql-server.md).
 
 #### DROP TARGET \<event_target_specifier>
 
