@@ -53,7 +53,7 @@ This list is not meant to be complete.
 
 - [Extended Events for Stretch Database](/previous-versions/sql/sql-server/stretch-database/extended-events-for-stretch-database)
 
-<a id="#azure-sql-database-and-extended-events"></a>
+<a id="azure-sql-database-and-extended-events"></a>
 
 ## Azure SQL Database and SQL database in Fabric extended events
 

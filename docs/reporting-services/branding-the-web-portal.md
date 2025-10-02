@@ -196,7 +196,7 @@ If you include a logo with your brand package, it appears in the web portal in p
 
 Make sure the logo is in the PNG file format. The file dimensions scale once uploaded to the server. The logo scales to approximately 290 x 60 pixels.
 
-## <a name="#applying-the-brand-package-to-the-web-portal"></a>Apply the brand package to the web portal
+## <a id="applying-the-brand-package-to-the-web-portal"></a>Apply the brand package to the web portal
 
 1. Access the web portal.
 

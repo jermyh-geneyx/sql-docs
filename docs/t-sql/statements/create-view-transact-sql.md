@@ -515,7 +515,7 @@ GO
 
 <a id="f-creating-a-simple-view"></a>
 
-<a id="#g-create-a-view-by-joining-two-tables"></a>
+<a id="g-create-a-view-by-joining-two-tables"></a>
 
 ### F. Create a view by joining two tables
 

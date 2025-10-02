@@ -1066,7 +1066,7 @@ By default, the metadata catalog for system object names is collated to *SQL_Lat
    WITH CATALOG_COLLATION = DATABASE_DEFAULT
    ```
 
-<a id="#backup_storage_redundancy--local--zone--geo"></a>
+<a id="backup_storage_redundancy--local--zone--geo"></a>
 
 #### BACKUP_STORAGE_REDUNDANCY = {'LOCAL' | 'ZONE' | 'GEO' | 'GEOZONE'}
 

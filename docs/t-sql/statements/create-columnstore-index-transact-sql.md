@@ -685,7 +685,7 @@ DROP INDEX [IDX_CL_MyFactTable]
 ON dbo.[MyFactTable];
 ```
 
-<a id="#g-defragment-by-rebuilding-the-entire-clustered-columnstore-index"></a>
+<a id="g-defragment-by-rebuilding-the-entire-clustered-columnstore-index"></a>
 
 ### G. Defragment by reorganizing the columnstore index
 

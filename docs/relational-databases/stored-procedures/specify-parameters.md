@@ -29,7 +29,7 @@ The following section provides information about passing values into parameters 
 > [!NOTE]
 > Refer to the `AdventureWorks` series of sample databases for this article's exercises. For more information, see [AdventureWorks sample databases](../../samples/adventureworks-install-configure.md).
 
-<a id="#passing-values-into-parameters"></a>
+<a id="passing-values-into-parameters"></a>
 
 ## Pass values into parameters
 
@@ -69,7 +69,7 @@ EXEC dbo.uspGetWhereUsedProductID 819, @CheckDate;
 GO  
 ```  
 
-<a id="#specifying-parameter-names"></a>
+<a id="specifying-parameter-names"></a>
 
 ## Specify parameter names
 
@@ -83,13 +83,13 @@ Explicitly naming the parameters and assigning the appropriate values to each pa
 > [!WARNING]  
 >  Any parameter passed in the form `@parameter = value` with the parameter misspelled, will cause [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] to generate an error and prevent procedure execution.  
 
-<a id="#specifying-parameter-data-types"></a>
+<a id="specifying-parameter-data-types"></a>
 
 ## Specify parameter data types
 
 Parameters must be defined with a data type when they are declared in a `CREATE PROCEDURE` statement. The data type of a parameter determines the type and range of values that are accepted for the parameter when the procedure is called. For example, if you define a parameter with a **tinyint** data type, only numeric values ranging from 0 to 255 are accepted when passed into that parameter. An error is returned if a procedure is executed with a value incompatible with the data type.  
 
-<a id="#specifying-parameter-default-values"></a>
+<a id="specifying-parameter-default-values"></a>
 
 ## Specify parameter default values
 
@@ -201,7 +201,7 @@ The following example is not valid T-SQL syntax, because all subsequent paramete
 EXEC Production.uspSearchList @ListPrice = 150, 4, 1498;
 ```
 
-<a id="#specifying-parameter-direction"></a>
+<a id="specifying-parameter-direction"></a>
 
 ## Specify parameter direction
 
