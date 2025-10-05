@@ -28,7 +28,7 @@ After a forced failover, the failover target to which the availability group was
 
 Performing a forced failover is necessary in the following emergency situations:
 
-- After forcing quorum on the WSFC cluster (*forced quorum*), you need to force failover each availability group (with possible data loss). Forcing failover is required because the real state of the WSFC cluster values might have been lost. However, you can avoid data loss, if are able to force failover on the server instance that was hosting the replica that was the primary replica before you forced quorum or to a secondary replica that was synchronized before you forced quorum. For more information, see [Potential Ways to Avoid Data Loss After Quorum is Forced](#WaysToAvoidDataLoss), later in this article.
+- After forcing quorum on the WSFC cluster (*forced quorum*), you need to force failover each availability group (with possible data loss). Forcing failover is required because the real state of the WSFC cluster values might have been lost. However, you can avoid data loss, if you are able to force failover on the server instance that was hosting the replica that was the primary replica before you forced quorum or to a secondary replica that was synchronized before you forced quorum. For more information, see [Potential Ways to Avoid Data Loss After Quorum is Forced](#WaysToAvoidDataLoss), later in this article.
 
   > [!IMPORTANT]  
   > If quorum is regained by natural means instead of being forced, the availability replicas go through normal recovery. If the primary replica is still unavailable after quorum is regained, you can perform a planned manual failover to a synchronized secondary replica.
