@@ -4,7 +4,7 @@ description: Learn about new features for SQL Server 2025 (17.x), which gives yo
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: wiassaf, randolphwest
-ms.date: 09/16/2025
+ms.date: 10/06/2025
 ms.service: sql
 ms.subservice: release-landing
 ms.topic: whats-new
@@ -88,7 +88,7 @@ The following sections identify features that are improved or introduced in [!IN
 | [Copilot in SQL Server Management Studio](/ssms/copilot/copilot-in-ssms-overview) | Ask questions. Get answers from your data. |
 | [Vector data type](../t-sql/data-types/vector-data-type.md) | Store vector data optimized for operations such as similarity search and machine learning applications. Vectors are stored in an optimized binary format but are exposed as JSON arrays for convenience. Each element of the vector can be stored either using a single-precision (4-byte) or half-precision (2-byte) floating-point value. |
 | [Vector functions](../t-sql/functions/vector-functions-transact-sql.md) | New scalar functions perform operations on vectors in binary format, allowing applications to store and manipulate vectors in the SQL Database Engine. |
-| [Vector index](../sql-server/ai/vectors.md#vector-search) | Create and manage approximate vector indexes to quickly and efficiently find similar vectors to a given reference vector.<br /><br />Query vector indexes from [sys.vector_indexes](../relational-databases/system-catalog-views/sys-vector-indexes-transact-sql.md). Requires [PREVIEW_FEATURES database scoped configuration](../t-sql/statements/alter-database-scoped-configuration-transact-sql.md#preview-features). |
+| [Vector index](ai/vectors.md#vector-search) | Create and manage approximate vector indexes to quickly and efficiently find similar vectors to a given reference vector.<br /><br />Query vector indexes from [sys.vector_indexes](../relational-databases/system-catalog-views/sys-vector-indexes-transact-sql.md). Requires [PREVIEW_FEATURES database scoped configuration](../t-sql/statements/alter-database-scoped-configuration-transact-sql.md#preview-features). |
 | [Manage external AI models](../t-sql/statements/create-external-model-transact-sql.md) | Manage external AI model objects for embedding tasks (creating vector arrays) accessing REST AI inference endpoints. |
 
 ## Developer
@@ -223,7 +223,7 @@ The [intelligent query processing (IQP)](../relational-databases/performance/int
 | [CREATE EXTERNAL MODEL](../t-sql/statements/create-external-model-transact-sql.md) | Creates an external model object that contains the location, authentication method, and purpose of an AI model inference endpoint. Requires [PREVIEW_FEATURES database scoped configuration](../t-sql/statements/alter-database-scoped-configuration-transact-sql.md#preview-features). |
 | [ALTER EXTERNAL MODEL](../t-sql/statements/alter-external-model-transact-sql.md) | Alters an external model object. |
 | [DROP EXTERNAL MODEL](../t-sql/statements/drop-external-model-transact-sql.md) | Drops an external model object. |
-| [AI_GENERATE_CHUNKS](../t-sql/functions/ai-generate-chunks-transact-sql.md) | Creates *chunks*, or fragments of text based on a type, size, and source expression. Requires [PREVIEW_FEATURES database scoped configuration](../t-sql/statements/alter-database-scoped-configuration-transact-sql.md#preview-features). |
+| [AI_GENERATE_CHUNKS](../t-sql/functions/ai-generate-chunks-transact-sql.md) | Creates *chunks*, or fragments of text based on a type, size, and source expression. |
 | [AI_GENERATE_EMBEDDINGS](../t-sql/functions/ai-generate-embeddings-transact-sql.md) | Creates embeddings (vector arrays) using a precreated AI model definition stored in the database. |
 | **Regular expressions** | |
 | [REGEXP_LIKE](../t-sql/functions/regexp-like-transact-sql.md) | Indicates if the regular expression pattern matches in a string. |
@@ -243,7 +243,7 @@ The [intelligent query processing (IQP)](../relational-databases/performance/int
 | [PRODUCT](../t-sql/functions/product-aggregate-transact-sql.md) | The `PRODUCT()` aggregate function calculates the product of a set of values. |
 | [CURRENT_DATE](../t-sql/functions/current-date-transact-sql.md) | Returns the current database system date as a date value. |
 | [EDIT_DISTANCE](../t-sql/functions/edit-distance-transact-sql.md) | Calculates the number of insertions, deletions, substitutions, and transpositions needed to transform one string to another. |
-| [EDIT_DISTANCE_SIMILARITY](../t-sql/functions/edit-distance-similarity-transact-sql.md) | Calculates a similarity value ranging from 0 (indicating no match) to 100 (indicating full match).|
+| [EDIT_DISTANCE_SIMILARITY](../t-sql/functions/edit-distance-similarity-transact-sql.md) | Calculates a similarity value ranging from 0 (indicating no match) to 100 (indicating full match). |
 | [JARO_WINKLER_DISTANCE](../t-sql/functions/jaro-winkler-distance-transact-sql.md) | Calculates the edit distance between two strings giving preference to strings that match from the beginning for a set prefix length. Returns **float**. |
 | [JARO_WINKLER_SIMILARITY](../t-sql/functions/jaro-winkler-similarity-transact-sql.md) | Calculates a similarity value ranging from 0 (indicating no match) to 100 (indicating full match). Returns **int**. |
 | - [BASE64_ENCODE](../t-sql/functions/base64-encode-transact-sql.md)<br />- [BASE64_DECODE](../t-sql/functions/base64-decode-transact-sql.md) | Convert binary data into a text format that's safe for transmission across various systems. It can be used in diverse ways as it ensures that your binary data, such as images or files, remains intact during transfer, even when passing through text-only systems. |

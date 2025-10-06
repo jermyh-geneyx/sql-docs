@@ -4,10 +4,10 @@ description: The ai_generate_chunks table-valued function creates text chunks.
 author: jettermctedder
 ms.author: bspendolini
 ms.reviewer: randolphwest
-ms.date: 08/11/2025
+ms.date: 10/06/2025
 ms.service: sql
 ms.subservice: t-sql
-ms.topic: "reference"
+ms.topic: reference
 ms.custom:
   - sql-ai
   - build-2025
@@ -17,7 +17,7 @@ f1_keywords:
 helpviewer_keywords:
   - "ai_generate_chunks"
 dev_langs:
-  - "TSQL"
+  - TSQL
 monikerRange: "=azuresqldb-current || >=sql-server-ver17 || >=sql-server-linux-ver17"
 ---
 # AI_GENERATE_CHUNKS (Transact-SQL) (Preview)
@@ -25,9 +25,6 @@ monikerRange: "=azuresqldb-current || >=sql-server-ver17 || >=sql-server-linux-v
 [!INCLUDE [sqlserver2025](../../includes/applies-to-version/sqlserver2025.md)]
 
 `AI_GENERATE_CHUNKS` is a table-valued function that creates "chunks", or fragments of text based on a type, size, and source expression.
-
-> [!NOTE]
-> `AI_GENERATE_CHUNKS` in SQL Server 2025 is currently in **preview**. In order to use this feature, you must enable the `PREVIEW_FEATURES` [database scoped configuration](../statements/alter-database-scoped-configuration-transact-sql.md#preview-features).
 
 #### Compatibility level 170
 
@@ -153,12 +150,10 @@ CROSS APPLY
 The following example uses `AI_GENERATE_CHUNKS` to chunk a text column. It uses a `chunk_type` of `FIXED` and a `chunk_size` of 100 characters.
 
 ```sql
-SELECT
-    c.chunk
-FROM
-   docs_table t
+SELECT c.chunk
+FROM docs_table AS t
 CROSS APPLY
-   AI_GENERATE_CHUNKS(source = text_column, chunk_type = FIXED, chunk_size = 100) c
+    AI_GENERATE_CHUNKS (SOURCE = text_column, CHUNK_TYPE = FIXED, CHUNK_SIZE = 100) AS c;
 ```
 
 ### B. Chunk a text column with overlap
@@ -166,12 +161,10 @@ CROSS APPLY
 The following example uses `AI_GENERATE_CHUNKS` to chunk a text column using overlap. It uses the chunk_type of FIXED, a chunk_size of 100 characters, and an overlap of 10 percent.
 
 ```sql
-SELECT
-    c.chunk
-FROM
-   docs_table t
+SELECT c.chunk
+FROM docs_table AS t
 CROSS APPLY
-   AI_GENERATE_CHUNKS(source = text_column, chunk_type = FIXED, chunk_size = 100, overlap = 10) c
+    AI_GENERATE_CHUNKS (SOURCE = text_column, CHUNK_TYPE = FIXED, CHUNK_SIZE = 100, OVERLAP = 10) AS c;
 ```
 
 ### C. Use AI_GENERATE_EMBEDDINGS with AI_GENERATE_CHUNKS
@@ -179,15 +172,12 @@ CROSS APPLY
 This example uses `AI_GENERATE_EMBEDDINGS` with `AI_GENERATE_CHUNKS` to create embeddings from text chunks and then inserts the returned vector arrays from the AI model inferencing endpoint into a table.
 
 ```sql
-INSERT INTO
-    my_embeddings (chunked_text, vector_embeddings)
-SELECT
-    c.chunk,
-    AI_GENERATE_EMBEDDINGS(c.chunk USE MODEL MyAzureOpenAiModel)
-FROM
-    table_with_text t
+INSERT INTO my_embeddings (chunked_text, vector_embeddings)
+SELECT c.chunk,
+       AI_GENERATE_EMBEDDINGS(c.chunk USE MODEL MyAzureOpenAiModel)
+FROM table_with_text AS t
 CROSS APPLY
-    AI_GENERATE_CHUNKS(source = t.text_to_chunk, chunk_type = FIXED, chunk_size = 100) c
+    AI_GENERATE_CHUNKS (SOURCE = t.text_to_chunk, CHUNK_TYPE = FIXED, CHUNK_SIZE = 100) AS c;
 ```
 
 ## Related content
