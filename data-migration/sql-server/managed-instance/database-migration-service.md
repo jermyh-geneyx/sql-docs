@@ -5,7 +5,7 @@ description: Learn how to migrate on-premises SQL Server to Azure SQL Managed In
 author: abhims14
 ms.author: abhishekum
 ms.reviewer: randolphwest
-ms.date: 11/20/2024
+ms.date: 10/06/2025
 ms.service: azure-database-migration-service
 ms.topic: tutorial
 ms.collection:
@@ -101,13 +101,13 @@ To complete this tutorial, you need to:
 
 - Provide an SMB network share, Azure storage account file share, or Azure storage account blob container that contains your full database backup files and subsequent transaction log backup files. Database Migration Service uses the backup location during database migration.
 
-  - The Azure SQL migration extension for Azure Data Studio doesn't take database backups, and doesn't initiate any database backups on your behalf. Instead, the service uses existing database backup files for the migration.
-
-  - If your database backup files are in an SMB network share, [create an Azure storage account](/azure/storage/common/storage-account-create) that allows the DMS service to upload the database backup files, and to migrate databases. Make sure you create the Azure storage account in the same region where you create your instance of Database Migration Service.
-
-  - You can write each backup to either a separate backup file or to multiple backup files. Appending multiple backups such as full and transaction logs into a single backup media isn't supported.
-
-  - You can provide compressed backups to reduce the likelihood of experiencing potential issues associated with migrating large backups.
+  > [!IMPORTANT]  
+  > - Always use a dedicated storage account for migration. Sharing it with other workloads can lead to conflicts and security risks.
+  > - Once migration is done, either rotate the Storage Account Key to keep backups secure, or delete the storage account if it's no longer needed.
+  > - The Azure SQL migration extension for Azure Data Studio doesn't take database backups, and doesn't initiate any database backups on your behalf. Instead, the service uses existing database backup files for the migration.
+  > - If your database backup files are in an SMB network share, [create an Azure storage account](/azure/storage/common/storage-account-create) that allows the DMS service to upload the database backup files, and to migrate databases. Make sure you create the Azure storage account in the same region where you create your instance of Database Migration Service.
+  > - You can write each backup to either a separate backup file or to multiple backup files. Appending multiple backups such as full and transaction logs into a single backup media isn't supported.
+  > - You can provide compressed backups to reduce the likelihood of experiencing potential issues associated with migrating large backups.
 
 - Ensure that the service account running the source SQL Server instance has read and write permissions on the SMB network share that contains database backup files.
 
@@ -123,7 +123,7 @@ To complete this tutorial, you need to:
   | --- | --- | --- |
   | Public cloud: `{datafactory}.{region}.datafactory.azure.net`<br />or `*.frontend.clouddatahub.net`<br /><br />Azure Government: `{datafactory}.{region}.datafactory.azure.us`<br /><br />Microsoft Azure operated by 21Vianet: `{datafactory}.{region}.datafactory.azure.cn` | 443 | Required by the self-hosted integration runtime to connect to the Data Migration service.<br /><br />For a newly created data factory in the public cloud, locate the fully qualified domain name (FQDN) from your self-hosted integration runtime key, which is in format `{datafactory}.{region}.datafactory.azure.net`.<br /><br />For an existing data factory, if you don't see the FQDN in your self-hosted integration key, use `*.frontend.clouddatahub.net` instead. |
   | `download.microsoft.com` | 443 | Required by the self-hosted integration runtime for downloading the updates. If you have disabled autoupdate, you can skip configuring this domain. |
-  | `.core.windows.net` | 443 | Used by the self-hosted integration runtime that connects to the Azure storage account to upload database backups from your network share. |
+  | `*.core.windows.net` | 443 | Used by the self-hosted integration runtime that connects to the Azure storage account to upload database backups from your network share. |
 
   > [!TIP]  
   > If your database backup files are already provided in an Azure storage account, a self-hosted integration runtime isn't required during the migration process.
@@ -433,10 +433,10 @@ Migrating to Azure SQL Managed Instance by using the Azure SQL extension for Azu
 
 - If you're migrating to a SQL Managed Instance in the **Business Critical** service tier, account for the delay in bringing the databases online on the primary replica while they're seeded to the secondary replicas. This is especially true for larger databases. If it's important that databases are available as soon as cutover completes, then consider the following workarounds:
 
-  1. Migrate to the General Purpose service tier first, and then upgrade to the **Business Critical** service tier. Upgrading your service tier is an online operation that keeps your databases online until a short failover as the final step of the upgrade operation. 
+  1. Migrate to the General Purpose service tier first, and then upgrade to the **Business Critical** service tier. Upgrading your service tier is an online operation that keeps your databases online until a short failover as the final step of the upgrade operation.
 
   1. Use the [Managed Instance link](/azure/azure-sql/managed-instance/managed-instance-link-migrate) for an online migration to a **Business Critical** instance without having to wait for databases to be available after the cutover.
-  
+
 - If you received the following error: `Memory-optimized filegroup must be empty in order to be restored on General Purpose tier of SQL Database Managed Instance`, this issue is by design. In-Memory OLTP isn't supported on the General Purpose tier of Azure SQL Managed Instance. To continue migration, one way is to upgrade to Business Critical tier, which supports In-Memory OLTP. Another way is to make sure the source database isn't using it while the Azure SQL Managed Instance is General Purpose.
 
 - Azure Database Migration Service supports the managed identity associated with the target Azure SQL managed instance only. This managed identity can be user assigned or system assigned. Currently, this feature is supported through the Azure Portal only. Make sure that the storage account has the **Allow storage account key access** option enabled.

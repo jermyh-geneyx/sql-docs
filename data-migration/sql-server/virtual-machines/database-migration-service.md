@@ -5,12 +5,13 @@ description: Learn how to migrate on-premises SQL Server to SQL Server on Azure 
 author: abhims14
 ms.author: abhishekum
 ms.reviewer: cawrites, randolphwest
-ms.date: 06/16/2025
+ms.date: 10/06/2025
 ms.service: azure-database-migration-service
 ms.topic: tutorial
 ms.collection:
   - sql-migration-content
-ms.custom: sfi-image-nochange
+ms.custom:
+  - sfi-image-nochange
 ---
 
 # Tutorial: Migrate SQL Server to SQL Server on Azure Virtual Machines with DMS
@@ -55,20 +56,20 @@ Before you begin the tutorial:
 
 - Create a target instance of [SQL Server on Azure Virtual Machines](/azure/azure-sql/virtual-machines/windows/create-sql-vm-portal).
 
-    > [!IMPORTANT]  
-    > If you have an existing Azure virtual machine, it should be registered with the [SQL IaaS Agent extension in Full management mode](/azure/azure-sql/virtual-machines/windows/sql-server-iaas-agent-extension-automate-management#management-modes).
+  > [!IMPORTANT]  
+  > If you have an existing Azure virtual machine, it should be registered with the [SQL IaaS Agent extension in Full management mode](/azure/azure-sql/virtual-machines/windows/sql-server-iaas-agent-extension-automate-management#management-modes).
 
 - Ensure that the logins that you use to connect the source SQL Server instance are members of the **sysadmin** server role or have `CONTROL SERVER` permission.
 
 - Provide an SMB network share, Azure storage account file share, or Azure storage account blob container that contains your full database backup files and subsequent transaction log backup files. Database Migration Service uses the backup location during database migration.
 
-  - The Azure SQL migration extension for Azure Data Studio doesn't take database backups, and doesn't initiate any database backups on your behalf. Instead, the service uses existing database backup files for the migration.
-
-  - If your database backup files are in an SMB network share, [create an Azure storage account](/azure/storage/common/storage-account-create) that Database Migration Service can use to upload database backup files to and to migrate databases. Make sure you create the Azure storage account in the same region where you create your instance of Database Migration Service.
-
-  - You can write each backup to either a separate backup file or to multiple backup files. Appending multiple backups such as full and transaction logs into a single backup media isn't supported.
-
-  - You can provide compressed backups to reduce the likelihood of experiencing potential issues associated with migrating large backups.
+  > [!IMPORTANT]  
+  > - Always use a dedicated storage account for migration. Sharing it with other workloads can lead to conflicts and security risks.
+  > - Once migration is done, either rotate the Storage Account Key to keep backups secure, or delete the storage account if it's no longer needed.
+  > - The Azure SQL migration extension for Azure Data Studio doesn't take database backups, and doesn't initiate any database backups on your behalf. Instead, the service uses existing database backup files for the migration.
+  > - If your database backup files are in an SMB network share, [create an Azure storage account](/azure/storage/common/storage-account-create) that allows the DMS service to upload the database backup files, and to migrate databases. Make sure you create the Azure storage account in the same region where you create your instance of Database Migration Service.
+  > - You can write each backup to either a separate backup file or to multiple backup files. Appending multiple backups such as full and transaction logs into a single backup media isn't supported.
+  > - You can provide compressed backups to reduce the likelihood of experiencing potential issues associated with migrating large backups.
 
 - Ensure that the service account that's running the source SQL Server instance has read and write permissions on the SMB network share that contains database backup files.
 
@@ -85,7 +86,7 @@ Before you begin the tutorial:
   | --- | --- | --- |
   | Public cloud: `{datafactory}.{region}.datafactory.azure.net`<br />or`*.frontend.clouddatahub.net`<br /><br />Azure Government:`{datafactory}.{region}.datafactory.azure.us`<br />Microsoft Azure operated by 21Vianet:`{datafactory}.{region}.datafactory.azure.cn` | 443 | Required by the self-hosted integration runtime to connect to Database Migration Service.<br />For a newly created data factory in a public cloud, locate the fully qualified domain name (FQDN) from your self-hosted integration runtime key, in the format `{datafactory}.{region}.datafactory.azure.net`.<br />For an existing data factory, if you don't see the FQDN in your self-hosted integration key, use `*.frontend.clouddatahub.net` instead. |
   | `download.microsoft.com` | 443 | Required by the self-hosted integration runtime for downloading the updates. If you have disabled autoupdate, you can skip configuring this domain. |
-  | `.core.windows.net` | 443 | Used by the self-hosted integration runtime that connects to the Azure storage account to upload database backups from your network share |
+  | `*.core.windows.net` | 443 | Used by the self-hosted integration runtime that connects to the Azure storage account to upload database backups from your network share |
 
   > [!TIP]  
   > If your database backup files are already provided in an Azure storage account, a self-hosted integration runtime isn't required during the migration process.
@@ -112,7 +113,7 @@ To open the Migrate to Azure SQL wizard:
 
 1. In the Azure SQL Migration dashboard, select **Migrate to Azure SQL** to open the migration wizard.
 
-    :::image type="content" source="media/database-migration-service/launch-migrate-to-azure-sql-wizard.png" alt-text="Screenshot that shows how to open the Migrate to Azure SQL wizard." lightbox="media/database-migration-service/launch-migrate-to-azure-sql-wizard.png":::
+   :::image type="content" source="media/database-migration-service/launch-migrate-to-azure-sql-wizard.png" alt-text="Screenshot that shows how to open the Migrate to Azure SQL wizard." lightbox="media/database-migration-service/launch-migrate-to-azure-sql-wizard.png":::
 
 1. On the first page of the wizard, start a new session or resume a previously saved session.
 
@@ -159,7 +160,7 @@ To open the Migrate to Azure SQL wizard:
 
    > [!NOTE]  
    > If your database backups are provided in an on-premises network share, you must set up a self-hosted integration runtime in the next step of the wizard. A self-hosted integration runtime is required to access your source database backups, check the validity of the backup set, and upload backups to Azure storage account.
-   >  
+   >
    > If your database backups are already in an Azure storage blob container, you don't need to set up a self-hosted integration runtime.
 
 - For backups that are located on a network share, enter or select the following information:
@@ -331,7 +332,7 @@ This article describes an online migration from an on-premises SQL Server to a S
 1. In step 5, select the location of your database backups. Your database backups can either be located on an on-premises network share or in an Azure storage blob container.
 
    > [!NOTE]  
-   > If your database backups are provided in an on-premises network share, DMS will require you to setup self-hosted integration runtime in the next step of the wizard. Self-hosted integration runtime is required to access your source database backups, check the validity of the backup set and upload them to Azure storage account.<br/> If your database backups are already on an Azure storage blob container, you don't need to setup self-hosted integration runtime.
+   > If your database backups are provided in an on-premises network share, DMS will require you to setup self-hosted integration runtime in the next step of the wizard. Self-hosted integration runtime is required to access your source database backups, check the validity of the backup set and upload them to Azure storage account. If your database backups are already on an Azure storage blob container, you don't need to setup self-hosted integration runtime.
 
    - For backups located on a network share provide the below details of your source SQL Server, source backup location, target database name and Azure storage account for the backup files to be uploaded to.
 
@@ -501,7 +502,7 @@ The following server objects aren't supported:
 ## Related content
 
 - [Migrate a SQL Server database to SQL Server on a virtual machine](/azure/azure-sql/virtual-machines/windows/migrate-to-vm-from-sql-server)
-- [What is SQL Server on Windows Azure Virtual Machines?](/azure/azure-sql/virtual-machines/windows/sql-server-on-azure-vm-iaas-what-is-overview)
+- [What is SQL Server on Azure Windows Virtual Machines?](/azure/azure-sql/virtual-machines/windows/sql-server-on-azure-vm-iaas-what-is-overview)
 - [Connect to a SQL Server virtual machine on Azure](/azure/azure-sql/virtual-machines/windows/ways-to-connect-to-sql)
 - [Known issues, limitations, and troubleshooting](/azure/dms/known-issues-azure-sql-migration-azure-data-studio)
 - [Migrate a database to SQL Server on Azure Virtual Machines by using the T-SQL RESTORE command](/azure/azure-sql/migration-guides/virtual-machines/sql-server-to-sql-on-azure-vm-individual-databases-guide)
