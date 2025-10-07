@@ -26,6 +26,9 @@ ms.custom:
 
 In this quickstart, you use Docker to pull and run the [!INCLUDE [sssql17-md](../includes/sssql17-md.md)] Linux container image, [mssql-server-linux](https://mcr.microsoft.com/product/mssql/server/about). Then you can connect with **sqlcmd** to create your first database and run queries.
 
+> [!NOTE]  
+> [!INCLUDE [container-emulation](includes/container-emulation.md)]
+
 For more information on supported platforms, see [Release notes for SQL Server 2017 on Linux](sql-server-linux-release-notes-2017.md).
 
 > [!WARNING]  
@@ -43,6 +46,9 @@ This quickstart creates [!INCLUDE [sssql17-md](../includes/sssql17-md.md)] conta
 ::: moniker range="=sql-server-linux-ver15 || =sql-server-ver15"
 
 In this quickstart, you use Docker to pull and run the [!INCLUDE [sssql19-md](../includes/sssql19-md.md)] Linux container image, [mssql-server-linux](https://mcr.microsoft.com/product/mssql/server/about). Then you can connect with **sqlcmd** to create your first database and run queries.
+
+> [!NOTE]  
+> [!INCLUDE [container-emulation](includes/container-emulation.md)]
 
 For more information on supported platforms, see [Release notes for SQL Server 2019 on Linux](sql-server-linux-release-notes-2019.md).
 
@@ -62,6 +68,9 @@ This quickstart creates [!INCLUDE [sssql19-md](../includes/sssql19-md.md)] conta
 
 In this quickstart, you use Docker to pull and run the [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] Linux container image, [mssql-server-linux](https://mcr.microsoft.com/product/mssql/server/about). Then you can connect with **sqlcmd** to create your first database and run queries.
 
+> [!NOTE]  
+> [!INCLUDE [container-emulation](includes/container-emulation.md)]
+
 For more information on supported platforms, see [Release notes for SQL Server 2022 on Linux](sql-server-linux-release-notes-2022.md).
 
 > [!WARNING]  
@@ -79,6 +88,9 @@ This quickstart creates [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] conta
 ::: moniker range=">=sql-server-linux-ver17 || >=sql-server-ver17"
 
 In this quickstart, you use Docker to pull and run the [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] Linux container image, [mssql-server-linux](https://mcr.microsoft.com/product/mssql/server/about). Then you can connect with **sqlcmd** to create your first database and run queries.
+
+> [!NOTE]  
+> [!INCLUDE [container-emulation](includes/container-emulation.md)]
 
 For more information on supported platforms, see [Release notes for SQL Server 2025 Preview on Linux](sql-server-linux-release-notes-2025.md).
 
