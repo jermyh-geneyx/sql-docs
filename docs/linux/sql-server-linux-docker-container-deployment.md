@@ -22,14 +22,16 @@ ms.custom:
 
 This article explains how to deploy and connect to SQL Server Linux containers.
 
+> [!NOTE]  
+> [!INCLUDE [container-emulation](includes/container-emulation.md)]
+
 For other deployment scenarios, see:
 
 - [Windows](../database-engine/install-windows/install-sql-server.md)
 - [Linux](sql-server-linux-setup.md)
 - [Container cluster on Azure](quickstart-sql-server-containers-azure.md)
 
-> [!NOTE]  
-> This article specifically focuses on using the `mssql-server-linux` image. SQL Server deployments in Windows containers aren't covered by support. For development and testing, you can create your own custom container images to work with SQL Server in Windows containers. Sample files are available on [GitHub](https://github.com/microsoft/mssql-docker/blob/master/windows/mssql-server-windows-developer/dockerfile_1). Sample files are for reference only.
+This article specifically focuses on using the `mssql-server-linux` image. SQL Server deployments in Windows containers aren't covered by support. For development and testing, you can create your own custom container images to work with SQL Server in Windows containers. Sample files are available on [GitHub](https://github.com/microsoft/mssql-docker/blob/master/windows/mssql-server-windows-developer/dockerfile_1). Sample files are for reference only.
 
 > [!IMPORTANT]  
 > Before choosing to run a SQL Server container for production use cases, review the [Technical support policy for Microsoft SQL Server](/troubleshoot/sql/database-engine/install/windows/support-policy-sql-server) to ensure that you're running on a supported configuration.
