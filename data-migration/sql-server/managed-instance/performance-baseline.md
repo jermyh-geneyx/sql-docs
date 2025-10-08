@@ -1,10 +1,10 @@
 ---
-title: "SQL Server to Azure SQL Managed Instance: Performance baseline"
+title: "SQL Server to Azure SQL Managed Instance: Performance Baseline"
 description: Learn to create and compare a performance baseline when migrating your SQL Server databases to Azure SQL Managed Instance.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: mathoma, wiassaf
-ms.date: 06/26/2024
+ms.date: 10/08/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: migration-guide
 ms.topic: how-to
@@ -25,9 +25,9 @@ Select a set of queries that are important to, and representative of your busine
 
 The following resources can help define a performance baseline:
 
-- [Monitor CPU usage](https://techcommunity.microsoft.com/t5/azure-sql-blog/monitor-cpu-usage-on-sql-server-and-azure-sql/ba-p/680777#M131)
-- [Monitor memory usage](/sql/relational-databases/performance-monitor/monitor-memory-usage) and determine the amount of memory used by different components such as buffer pool, plan cache, column-store pool, [In-Memory OLTP](/sql/relational-databases/in-memory-oltp/monitor-and-troubleshoot-memory-usage), etc. In addition, you should find average and peak values of the Page Life Expectancy memory performance counter.
-- Monitor disk IO usage on the source SQL Server instance using the [sys.dm_io_virtual_file_stats](/sql/relational-databases/system-dynamic-management-views/sys-dm-io-virtual-file-stats-transact-sql) view or [performance counters](/sql/relational-databases/performance-monitor/monitor-disk-usage).
+- [Monitor CPU usage](https://techcommunity.microsoft.com/blog/azuresqlblog/monitor-cpu-usage-on-sql-server-and-azure-sql/680777#M131)
+- [Monitor memory usage](/sql/relational-databases/performance-monitor/monitor-memory-usage) and determine the amount of memory used by different components such as buffer pool, plan cache, column-store pool, [In-Memory OLTP](/sql/relational-databases/in-memory-oltp/monitor-and-troubleshoot-memory-usage), etc. In addition, you should find average and peak values of the Page Life Expectancy memory performance counter.
+- Monitor disk IO usage on the source SQL Server instance using the [sys.dm_io_virtual_file_stats](/sql/relational-databases/system-dynamic-management-views/sys-dm-io-virtual-file-stats-transact-sql) view or [performance counters](/sql/relational-databases/performance-monitor/monitor-disk-usage).
 - Monitor workload and query performance by examining Dynamic Management Views (or Query Store if you're migrating from SQL Server 2016 and later). Identify average duration and CPU usage of the most important queries in your workload.
 
 Any performance issues on the source SQL Server should be addressed before migration. Migrating known issues to any new system might cause unexpected results and invalidate any performance comparison.
@@ -44,7 +44,7 @@ Performance comparison is likely to result in the following outcomes:
 
 - Most performance parameters and queries in the workload perform as expected, with some exceptions resulting in degraded performance. In this case, identify the differences and their importance. If there are some important queries with degraded performance, investigate whether the underlying SQL plans have changed, or whether queries are hitting resource limits. You can mitigate this by applying some hints on critical queries (for example, change compatibility level, legacy cardinality estimator) either directly or using plan guides. Ensure statistics and indexes are up to date and equivalent in both environments.
 
-- Most queries are slower on a managed instance compared to your source SQL Server instance. In this case, try to identify the root causes of the difference such as [reaching some resource limit](/azure/azure-sql/managed-instance/resource-limits#service-tier-characteristics) such as IO, memory, or instance log rate limits. If there are no resource limits causing the difference, try changing the compatibility level of the database or change database settings like legacy cardinality estimation and rerun the test. Review the recommendations provided by the managed instance or Query Store views to identify the queries with regressed performance.
+- Most queries are slower on a managed instance compared to your source SQL Server instance. In this case, try to identify the root causes of the difference such as [reaching some resource limit](/azure/azure-sql/managed-instance/resource-limits#service-tier-characteristics) such as IO, memory, or instance log rate limits. If there are no resource limits causing the difference, try changing the compatibility level of the database or change database settings like legacy cardinality estimation and rerun the test. Review the recommendations provided by the managed instance or Query Store views to identify the queries with regressed performance.
 
 SQL Managed Instance has a built-in automatic plan correction feature that is enabled by default. This feature ensures that queries that worked fine in the past don't degrade in the future. If this feature isn't enabled, run the workload with the old settings so SQL Managed Instance can learn the performance baseline. Then, enable the feature and run the workload again with the new settings.
 
@@ -55,8 +55,8 @@ Make changes in the parameters of your test or upgrade to higher service tiers t
 SQL Managed Instance provides advanced tools for monitoring and troubleshooting, and you should use them to monitor performance on your instance. Some of the key metrics to monitor are:
 
 - CPU usage on the instance to determine if the number of vCores that you provisioned is the right match for your workload.
-- Page-life expectancy on your managed instance to determine if you need [more memory](https://techcommunity.microsoft.com/t5/azure-sql-blog/do-you-need-more-memory-on-azure-sql-managed-instance/ba-p/563444).
-- Statistics like INSTANCE_LOG_GOVERNOR or PAGEIOLATCH that identify storage IO issues, especially on the General Purpose tier, where you might need to preallocate files to get better IO performance.
+- Page-life expectancy on your managed instance to determine if you need [more memory](https://techcommunity.microsoft.com/blog/azuresqlblog/do-you-need-more-memory-on-azure-sql-managed-instance/563444).
+- Statistics like `INSTANCE_LOG_GOVERNOR` or `PAGEIOLATCH` that identify storage IO issues, especially on the General Purpose tier, where you might need to preallocate files to get better IO performance.
 
 ## Considerations
 
@@ -64,7 +64,7 @@ When comparing performance, consider the following requirements:
 
 - Settings match between source and target. Validate that various instance, database, and `tempdb` settings are equivalent between the two environments. Differences in configuration, compatibility levels, encryption settings, trace flags, etc., can all skew performance.
 
-- Storage is configured according to [best practices](https://techcommunity.microsoft.com/t5/azure-sql-blog/storage-performance-best-practices-and-considerations-for-azure/ba-p/305525). For example, for General Purpose, you might need to preallocate the size of the files to improve performance.
+- Storage is configured according to [best practices](https://techcommunity.microsoft.com/blog/azuresqlblog/storage-performance-best-practices-and-considerations-for-azure-sql-db-managed-i/305525). For example, for General Purpose, you might need to preallocate the size of the files to improve performance.
 
 - There are [key environment differences](https://azure.microsoft.com/blog/key-causes-of-performance-differences-between-sql-managed-instance-and-sql-server/) that might cause the performance differences between a managed instance and SQL Server. Identify risks relevant to your environment that might contribute to a performance issue.
 
@@ -74,5 +74,5 @@ When comparing performance, consider the following requirements:
 
 - [How to identify why workload performance on Azure SQL Managed Instance is different than SQL Server?](https://medium.com/azure-sqldb-managed-instance/what-to-do-when-azure-sql-managed-instance-is-slower-than-sql-server-dd39942aaadd)
 - [Key causes of performance differences between SQL Managed Instance and SQL Server](https://azure.microsoft.com/blog/key-causes-of-performance-differences-between-sql-managed-instance-and-sql-server/)
-- [Storage performance best practices and considerations for Azure SQL Managed Instance (General Purpose)](https://techcommunity.microsoft.com/t5/azure-sql-blog/storage-performance-best-practices-and-considerations-for-azure/ba-p/305525)
+- [Storage performance best practices and considerations for Azure SQL Managed Instance (General Purpose)](https://techcommunity.microsoft.com/blog/azuresqlblog/storage-performance-best-practices-and-considerations-for-azure-sql-db-managed-i/305525)
 - [Real-time performance monitoring for Azure SQL Managed Instance (this is archived, is this the intended target?)](/archive/blogs/sqlcat/real-time-performance-monitoring-for-azure-sql-database-managed-instance)

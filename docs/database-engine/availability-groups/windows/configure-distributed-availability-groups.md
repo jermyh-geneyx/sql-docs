@@ -33,13 +33,13 @@ To configure a distributed availability group, you must have the following:
 
 Requires **CREATE AVAILABILITY GROUP** permission on the server to create an availability group and `sysadmin` to fail over a distributed availability group. 
 
-## Set the endpoint listeners to listen to all IP addresses
+## Set the database mirroring endpoints to listen on all IP addresses
 
-Make sure the endpoints can communicate between the different availability groups in the distributed availability group. If one availability group is set to a specific network on the endpoint, the distributed availability group doesn't work properly. On each server that hosts a replica in the distributed availability group, set the listener to listen on all IP addresses (`LISTENER_IP = ALL`).
+Make sure the database mirroring endpoints can communicate between the different availability groups in the distributed availability group. If one availability group is set to a specific network on the database mirroring endpoint, the distributed availability group doesn't work properly. On each server that hosts a replica in the distributed availability group, set the database mirroring endpoint to listen on all IP addresses (`LISTENER_IP = ALL`).
 
-### Create an endpoint to listen to all IP addresses
+### Create a database mirroring endpoint to listen on all IP addresses
 
-For example, the following script creates a listener endpoint on TCP port 5022 that listens on all IP addresses.
+For example, the following script creates a new database mirroring endpoint on TCP port 5022 that listens on all IP addresses.
 
 ```sql
 CREATE ENDPOINT [aodns-hadr]
@@ -58,9 +58,9 @@ CREATE ENDPOINT [aodns-hadr]
 GO
 ```
 
-### Alter an endpoint to listen to all IP addresses
+### Alter an existing database mirroring endpoint to listen on all IP addresses
 
-For example, the following script changes a listener endpoint to listen on all IP addresses.
+For example, the following script changes an existing database mirroring endpoint to listen on all IP addresses.
 
 ```sql
 ALTER ENDPOINT [aodns-hadr]
@@ -75,7 +75,7 @@ GO
 
 ### Create the primary availability group on the first cluster
 
-Create an availability group on the first Windows Server Failover Cluster (WSFC).   In this example, the availability group is named `ag1` for the database `db1`. The primary replica of the primary availability group is known as the **global primary** in a distributed availability group. Server1 is the global primary in this example.
+Create an availability group on the first Windows Server Failover Cluster (WSFC). In this example, the availability group is named `ag1` for the database `db1`. The primary replica of the primary availability group is known as the **global primary** in a distributed availability group. Server1 is the global primary in this example.
 
 ```sql
 CREATE AVAILABILITY GROUP [ag1]

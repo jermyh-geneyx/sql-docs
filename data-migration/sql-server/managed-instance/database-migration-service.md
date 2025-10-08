@@ -5,7 +5,7 @@ description: Learn how to migrate on-premises SQL Server to Azure SQL Managed In
 author: abhims14
 ms.author: abhishekum
 ms.reviewer: randolphwest
-ms.date: 10/06/2025
+ms.date: 10/08/2025
 ms.service: azure-database-migration-service
 ms.topic: tutorial
 ms.collection:
@@ -88,7 +88,7 @@ To complete this tutorial, you need to:
     1. In the Azure portal, go to **Storage account** (used for the migration for keeping backup files), and navigate to **IAM roles** > **Assign role**, and assign Storage Blob Data Reader to the associated managed identity.
 
        > [!NOTE]  
-       > The Storage account should have the **Allow storage account key access** option enabled. For more information, see [DMS - Support for Managed Identity for Azure SQL Managed Instance migration](https://techcommunity.microsoft.com/blog/microsoftdatamigration/dms---support-for-managed-identity-for-azure-sql-managed-instance-migration/4411274).
+       > When migrating to SQL Managed Instance via **Azure portal** using **Managed Identity**, make sure the signed in user has **Storage Blob Data Reader** access on the storage account. This permission is needed to list folders and files in the blob container during migration setup via Azure portal. For more information, see [DMS - Support for Managed Identity for Azure SQL Managed Instance migration](https://techcommunity.microsoft.com/blog/microsoftdatamigration/dms---support-for-managed-identity-for-azure-sql-managed-instance-migration/4411274).
 
   As an alternative to using one of these built-in roles, you can [assign custom roles](custom-roles.md).
 

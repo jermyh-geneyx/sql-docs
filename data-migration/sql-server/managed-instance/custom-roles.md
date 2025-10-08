@@ -1,10 +1,10 @@
 ---
-title: "Custom roles: Online SQL Server to SQL Managed Instance migrations using ADS"
+title: "Custom Roles: Online SQL Server to SQL Managed Instance Migrations Using ADS"
 titleSuffix: Azure Database Migration Service
 description: Learn to use the custom roles for SQL Server to Azure SQL Managed Instance migrations.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 06/11/2025
+ms.date: 10/08/2025
 ms.service: azure-database-migration-service
 ms.topic: conceptual
 ms.collection:
@@ -73,6 +73,9 @@ Use the `AssignableScopes` section of the role definition JSON string to control
 You can use either the Azure portal, Azure PowerShell, Azure CLI, or Azure REST API to create the roles.
 
 For more information, see [Create or update Azure custom roles using the Azure portal](/azure/role-based-access-control/custom-roles-portal) and [Azure custom roles](/azure/role-based-access-control/custom-roles).
+
+> [!NOTE]  
+> When migrating to SQL Managed Instance via **Azure portal** using **Managed Identity**, make sure the signed in user has **Storage Blob Data Reader** access on the storage account. This permission is needed to list folders and files in the blob container during migration setup via Azure portal. For more information, see [DMS - Support for Managed Identity for Azure SQL Managed Instance migration](https://techcommunity.microsoft.com/blog/microsoftdatamigration/dms---support-for-managed-identity-for-azure-sql-managed-instance-migration/4411274).
 
 ## Description of permissions needed to migrate to Azure SQL Managed Instance
 

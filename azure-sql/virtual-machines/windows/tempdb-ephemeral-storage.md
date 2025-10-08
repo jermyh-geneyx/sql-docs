@@ -38,7 +38,7 @@ However, because the local SSD drive is non-persistent, its contents and permiss
 
 Before you can configure your `tempdb` to use ephemeral storage, you need the following prerequisites:
 
-- An Azure subscription. If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/free/).
+- An Azure subscription. If you don't have an Azure subscription, create a [free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?cid=msft_learn).
 
 - SQL Server manually installed to an [Azure VM](/azure/virtual-machines/windows/quick-create-portal).
 
