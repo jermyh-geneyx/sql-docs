@@ -26,6 +26,9 @@ dev_langs:
  As a deviation from the W3C standard, XQuery run-time errors are converted into empty sequences. These sequences may propagate as empty XML or NULL to the query result, depending upon the invocation context.  
   
  Explicit casting to the correct type allows users to work around static errors, although run-time cast errors will be transformed to empty sequences.  
+
+> [!NOTE]
+> Parsing errors raised by the XQuery parser (such as syntax errors in the XML referenced as part of the XML data type method, for example), abort the active transaction, regardless of the [XACT_ABORT](../t-sql/statements/set-xact-abort-transact-sql.md) setting of the current session.
   
 ## Static Errors  
  Static errors are returned by using the [!INCLUDE[tsql](../includes/tsql-md.md)] error mechanism. In [!INCLUDE[ssNoVersion](../includes/ssnoversion-md.md)], XQuery type errors are returned statically. For more information, see [XQuery and Static Typing](../xquery/xquery-and-static-typing.md).  

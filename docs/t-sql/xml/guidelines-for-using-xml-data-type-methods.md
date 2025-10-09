@@ -60,6 +60,9 @@ Msg 2396, Level 16, State 1:
 XQuery [xmldb_test.xmlcol.query()]: Attribute may not appear outside of an element
 ```
 
+> [!NOTE]
+> Parsing errors raised by the XQuery parser (such as syntax errors in the XML referenced as part of the XML data type method, for example), abort the active transaction, regardless of the [XACT_ABORT](../statements/set-xact-abort-transact-sql.md) setting of the current session.
+
 ## Singleton Checks
 
 Location steps, function parameters, and operators that require singletons will return an error if the compiler cannot determine whether a singleton is guaranteed at run time. This problem occurs frequently with untyped data. For example, the lookup of an attribute requires a singleton parent element. An ordinal that selects a single parent node is sufficient. The evaluation of a **node()**-**value()** combination to extract attribute values may not require the ordinal specification. This is shown in the next example.
