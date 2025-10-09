@@ -54,7 +54,7 @@ A query execution plan is the definition of:
 - [Monitor performance by using the Query Store](monitoring-performance-by-using-the-query-store.md)
 - [sys.dm_exec_query_statistics_xml](../system-dynamic-management-views/sys-dm-exec-query-statistics-xml-transact-sql.md)
 - [sys.dm_exec_query_profiles](../system-dynamic-management-views/sys-dm-exec-query-profiles-transact-sql.md)
-- [DBCC TRACEON - Trace Flags (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)
+- [Set trace flags with DBCC TRACEON (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)
 - [Logical and physical showplan operator reference](../showplan-logical-and-physical-operators-reference.md)
 - [Query Profiling Infrastructure](query-profiling-infrastructure.md)
 - [Display and save execution plans](display-and-save-execution-plans.md)

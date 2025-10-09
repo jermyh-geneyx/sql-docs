@@ -194,7 +194,7 @@ The following requirements exist for `SELECT` permissions to be sufficient to ru
 - The table can't have a row-level security policy.
 - If any of the columns within a statistics object is masked with Dynamic Data Masking rules, in addition to the `SELECT` permission, the user must have the `UNMASK` permission, or be a member of the **db_ddladmin** role.
 
-In versions before [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)] Service Pack 1, the user must own the table or the user must be a member of the **sysadmin** fixed server role, the **db_owner** fixed database role, or the **db_ddladmin** fixed database role. To change the behavior back to the pre [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)] Service Pack 1 behavior, use Trace Flag 9485.
+In versions before [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)] Service Pack 1, the user must own the table or the user must be a member of the **sysadmin** fixed server role, the **db_owner** fixed database role, or the **db_ddladmin** fixed database role. To change the behavior back to the pre [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)] Service Pack 1 behavior, use trace flag 9485.
 
 ## Permissions for [!INCLUDE [fabric](../../includes/fabric.md)] Data Warehouse and [!INCLUDE [fabric-se](../../includes/fabric-se.md)]
 

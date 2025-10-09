@@ -503,7 +503,7 @@ Azure SQL Managed Instance supports only limited number of global trace flags. S
 **Recommendation**  
 Review affected objects section in Azure Migrate to see all trace flags that aren't supported in Azure SQL Managed Instance and evaluate if they can be removed. Alternatively, migrate to SQL Server on Azure VMs.
 
-More information: [Trace flags](/sql/t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql#trace-flags)
+For more information, see [Set trace flags with DBCC TRACEON](/sql/t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql).
 
 ## <a id="WindowsAuthentication"></a> Windows authentication
 

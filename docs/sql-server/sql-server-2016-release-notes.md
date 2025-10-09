@@ -224,7 +224,7 @@ The following table summarizes key improvements provided in [!INCLUDE [sssql16-m
 
 | Feature | Description | More information |
 | --- | --- | --- |
-| Bulk insert into heaps with auto TABLOCK under TF 715 | Trace Flag 715 enables table lock for bulk load operations into heap with no nonclustered indexes. | [Migrating SAP workloads to SQL Server just got 2.5x faster](/archive/blogs/sql_server_team/migrating-sap-workloads-to-sql-server-just-got-2-5x-faster) |
+| Bulk insert into heaps with auto TABLOCK under TF 715 | Trace flag 715 enables table lock for bulk load operations into heap with no nonclustered indexes. | [Migrating SAP workloads to SQL Server just got 2.5x faster](/archive/blogs/sql_server_team/migrating-sap-workloads-to-sql-server-just-got-2-5x-faster) |
 | `CREATE OR ALTER` | Deploy objects such as Stored Procedures, Triggers, User-Defined Functions, and Views. | [SQL Server Database Engine Blog](/archive/blogs/sqlserverstorageengine/create-or-alter-another-great-language-enhancement-in-sql-server-2016-sp1) |
 | DROP TABLE support for replication | DROP TABLE DDL support for replication to allow replication articles to be dropped. | [KB 3170123](https://support.microsoft.com/help/3170123/supports-drop-table-ddl-for-articles-that-are-included-in-transactiona) |
 | Filestream RsFx Driver signing | The Filestream RsFx driver is signed and certified using Windows Hardware Developer Center Dashboard portal (Dev Portal) allowing [!INCLUDE [sssql16-md](../includes/sssql16-md.md)] SP1 Filestream RsFx driver to be installed on Windows Server 2016/Windows 10 without any issue. | [Migrating SAP workloads to SQL Server just got 2.5x faster](/archive/blogs/sql_server_team/migrating-sap-workloads-to-sql-server-just-got-2-5x-faster) |
@@ -239,7 +239,7 @@ The following table summarizes key improvements provided in [!INCLUDE [sssql16-m
 In addition, note the following fixes:
 
 - Based on feedback from DBAs and SQL community, starting SQL 2016 SP1, the Hekaton logging messages are reduced to minimal.
-- Review new [Trace flags](../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md).
+- Review new [trace flags](../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md).
 - The full versions of the WideWorldImporters sample databases now work with Standard Edition and Express Edition, starting [!INCLUDE [sssql16-md](../includes/sssql16-md.md)] SP1 and are available on [GitHub]( https://github.com/Microsoft/sql-server-samples/releases/tag/wide-world-importers-v1.0). No changes are needed in the sample. The database backups created at RTM for Enterprise edition work with Standard and Express in SP1.
 
 The [!INCLUDE [sssql16-md](../includes/sssql16-md.md)] SP1 installation might require restart post installation. As a best practice, you should perform a restart following the installation of [!INCLUDE [sssql16-md](../includes/sssql16-md.md)] SP1.

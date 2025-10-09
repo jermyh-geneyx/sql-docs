@@ -85,14 +85,14 @@ DBCC TRACESTATUS (-1);
 GO
 ```
 
-The following example displays the status of Trace Flags 2528 and 3205.
+The following example displays the status of Trace flags 2528 and 3205.
 
 ```sql
 DBCC TRACESTATUS (2528, 3205);
 GO
 ```
 
-The following example displays whether Trace Flag 3205 is enabled for the current session or globally.
+The following example displays whether trace flag 3205 is enabled for the current session or globally.
 
 ```sql
 DBCC TRACESTATUS (3205, -1);
@@ -111,4 +111,4 @@ GO
 - [DBCC (Transact-SQL)](../../t-sql/database-console-commands/dbcc-transact-sql.md)
 - [DBCC TRACEOFF (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceoff-transact-sql.md)
 - [DBCC TRACEON (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-transact-sql.md)
-- [Trace Flags (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)
+- [Set trace flags with DBCC TRACEON (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)

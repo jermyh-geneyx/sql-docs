@@ -15594,10 +15594,10 @@ items:
         href: t-sql/database-console-commands/dbcc-sqlperf-transact-sql.md
       - name: DBCC TRACEOFF
         href: t-sql/database-console-commands/dbcc-traceoff-transact-sql.md
-      - name: DBCC TRACEON - Trace Flags
-        href: t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md
       - name: DBCC TRACEON
         href: t-sql/database-console-commands/dbcc-traceon-transact-sql.md
+      - name: Set trace flags with DBCC TRACEON
+        href: t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md
       - name: DBCC TRACESTATUS
         href: t-sql/database-console-commands/dbcc-tracestatus-transact-sql.md
       - name: DBCC UPDATEUSAGE

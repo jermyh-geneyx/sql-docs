@@ -57,7 +57,7 @@ Parallel backups to the same blob cause one of the backups to fail with an **Ini
 
 - In [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later versions, block blob is preferred for Backup to URL.
 
-- If you're using page blobs with `BACKUP TO URL`, you can use [Trace Flag 3051](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf3051) to turn on logging to a specific error log with the following format in: `BackupToUrl-\<instname>-\<dbname>-action-\<PID>.log`, where `\<action>` is one of the following options:
+- If you're using page blobs with `BACKUP TO URL`, you can use [trace flag 3051](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf3051) to turn on logging to a specific error log with the following format in: `BackupToUrl-\<instname>-\<dbname>-action-\<PID>.log`, where `\<action>` is one of the following options:
 
   - `DB`
   - `FILELISTONLY`
@@ -189,7 +189,7 @@ BACKUP DATABASE is terminating abnormally.
 BackupIoRequest::ReportIoError: write failure on backup device https://storageaccount.blob.core.windows.net/container/BackupAzurefile.bak'. Operating system error Backup to URL received an exception from the remote endpoint. Exception Message: Unable to read data from the transport connection: The connection was closed.
 ```
 
-If using page blobs, you turn on the verbose logging using the Trace Flag 3051, you might also see the following message in the logs: `HTTP status code 502, HTTP Status Message Proxy Error (The number of HTTP requests per minute exceeded the configured limit. Contact your ISA Server administrator.)`
+If using page blobs, you turn on the verbose logging using the trace flag 3051, you might also see the following message in the logs: `HTTP status code 502, HTTP Status Message Proxy Error (The number of HTTP requests per minute exceeded the configured limit. Contact your ISA Server administrator.)`
 
 #### Default proxy settings not picked up
 

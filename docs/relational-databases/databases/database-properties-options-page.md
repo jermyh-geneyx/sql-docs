@@ -97,10 +97,10 @@ When connected to Azure SQL Database, this section has settings to control the S
  In SQL Server 2016 and in Azure SQL Database, there are a number of configuration properties that can be scoped to the database level. For more information for all of these settings, see [ALTER DATABASE SCOPED CONFIGURATION &#40;Transact-SQL&#41;](../../t-sql/statements/alter-database-scoped-configuration-transact-sql.md).  
   
  **Legacy Cardinality Estimation**  
- Specify the query optimizer cardinality estimation model for the primary independent of the compatibility level of the database. This is equivalent to [Trace Flag 9481](https://support.microsoft.com/kb/2801413).  
+ Specify the query optimizer cardinality estimation model for the primary independent of the compatibility level of the database. This is equivalent to [trace flag 9481](https://support.microsoft.com/kb/2801413).  
   
  **Legacy Cardinality Estimation for Secondary**  
- Specify the query optimizer cardinality estimation model for secondaries, if any, independent of the compatibility level of the database. This is equivalent to [Trace Flag 9481](https://support.microsoft.com/kb/2801413).  
+ Specify the query optimizer cardinality estimation model for secondaries, if any, independent of the compatibility level of the database. This is equivalent to [trace flag 9481](https://support.microsoft.com/kb/2801413).  
   
  **Max DOP**  
  Specify the default [MAXDOP](../../database-engine/configure-windows/configure-the-max-degree-of-parallelism-server-configuration-option.md) setting for the primary that should be used for statements.  
@@ -109,16 +109,16 @@ When connected to Azure SQL Database, this section has settings to control the S
  Specify the default [MAXDOP](../../database-engine/configure-windows/configure-the-max-degree-of-parallelism-server-configuration-option.md) setting for secondaries, if any, that should be used for statements.  
   
  **Parameter Sniffing**  
- Enables or disables parameter sniffing on the primary. This is equivalent to [Trace Flag 4136](https://support.microsoft.com/kb/980653).  
+ Enables or disables parameter sniffing on the primary. This is equivalent to [trace flag 4136](https://support.microsoft.com/kb/980653).  
   
  **Parameter Sniffing for Secondary**  
- Enables or disables parameter sniffing on secondaries, if any. This is equivalent to [Trace Flag 4136](https://support.microsoft.com/kb/980653).  
+ Enables or disables parameter sniffing on secondaries, if any. This is equivalent to [trace flag 4136](https://support.microsoft.com/kb/980653).  
   
  **Query Optimizer Fixes**  
- Enables or disables query optimization hotfixes on the primary regardless of the compatibility level of the database. This is equivalent to [Trace Flag 4199](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md). For details, see [QUERY_OPTIMIZER_HOTFIXES](../../t-sql/statements/alter-database-scoped-configuration-transact-sql.md#qo_hotfixes).  
+ Enables or disables query optimization hotfixes on the primary regardless of the compatibility level of the database. This is equivalent to [trace flag 4199](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md). For details, see [QUERY_OPTIMIZER_HOTFIXES](../../t-sql/statements/alter-database-scoped-configuration-transact-sql.md#qo_hotfixes).  
   
  **Query Optimizer Fixes for Secondary**  
- Enables or disables query optimization hotfixes on secondaries, if any, regardless of the compatibility level of the database. This is equivalent to [Trace Flag 4199](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md). For details, see [QUERY_OPTIMIZER_HOTFIXES](../../t-sql/statements/alter-database-scoped-configuration-transact-sql.md#qo_hotfixes).  
+ Enables or disables query optimization hotfixes on secondaries, if any, regardless of the compatibility level of the database. This is equivalent to [trace flag 4199](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md). For details, see [QUERY_OPTIMIZER_HOTFIXES](../../t-sql/statements/alter-database-scoped-configuration-transact-sql.md#qo_hotfixes).  
   
 ## FILESTREAM  
  **FILESTREAM Directory Name**  

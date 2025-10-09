@@ -78,7 +78,7 @@ In certain situations, with a DR failover, as the secondary replica transitions 
 To improve undo-of-redo for this scenario, [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] introduces an update to the synchronization mechanism so that the availability group now performs page requests asynchronously, and in batches.
 
 Consider the following: 
-- The improvement to the synchronization mechanism is enabled by default. To disable the improvement and revert to default behavior, enable [Trace Flag 12348](../../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf12348) on all replicas in an availability group that are currently secondaries, or that might be secondaries in the future. 
+- The improvement to the synchronization mechanism is enabled by default. To disable the improvement and revert to default behavior, enable [trace flag 12348](../../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf12348) on all replicas in an availability group that are currently secondaries, or that might be secondaries in the future. 
 - If the AG replicas don't have network latency, this improvement might not improve undo-of-redo.
 
 ### Databases switch to resolving state after a failure

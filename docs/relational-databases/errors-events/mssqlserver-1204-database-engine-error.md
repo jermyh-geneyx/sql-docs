@@ -36,7 +36,7 @@ During execution, queries frequently acquire and release locks on the resources 
 
 - You set up the configuration option [locks](../../database-engine/configure-windows/configure-the-locks-server-configuration-option.md) of the system stored procedure [sp_configure (Transact-SQL)](../system-stored-procedures/sp-configure-transact-sql.md) to a non-default, non-dynamic value.
 
-- You enabled Trace Flags [1211](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf1211), [1224](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf1224), or both on your SQL Server to control lock escalation behavior, and you're executing queries that require many locks.
+- You enabled Trace flags [1211](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf1211), [1224](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf1224), or both on your SQL Server to control lock escalation behavior, and you're executing queries that require many locks.
 
 ## User action
 
@@ -73,4 +73,4 @@ During execution, queries frequently acquire and release locks on the resources 
     EXEC sp_configure 'locks', 0;
     ```
 
-- If you encountered the above error message when using the SQL Server trace flags 1211, 1224, or both, review their use and disable them while executing queries that require a large number of locks. For more information, review [DBCC TRACEON - Trace Flags (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md) and [Resolve blocking problems caused by lock escalation in SQL Server](/troubleshoot/sql/performance/resolve-blocking-problems-caused-lock-escalation).
+- If you encountered the above error message when using the SQL Server trace flags 1211, 1224, or both, review their use and disable them while executing queries that require a large number of locks. For more information, review [Set trace flags with DBCC TRACEON](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md) and [Resolve blocking problems caused by lock escalation in SQL Server](/troubleshoot/sql/performance/resolve-blocking-problems-caused-lock-escalation).

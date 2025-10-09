@@ -21,10 +21,10 @@ The compiled plan stub allows the [!INCLUDE [ssDE](../../includes/ssde-md.md)] t
 
 You can find compiled plan stubs by querying the `sys.dm_exec_cached_plans` catalog view and looking for "Compiled Plan" in the `cacheobjtype` column. The stub has a unique `plan_handle`. The compiled plan stub doesn't have an execution plan associated with it, and querying for the plan handle doesn't return a graphical or XML showplan.
 
-[Trace Flag 8032](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf8032) reverts the cache limit parameters to the [!INCLUDE [ssVersion2005](../../includes/ssversion2005-md.md)] RTM setting, which in general allows caches to be larger. Use this setting when frequently reused cache entries don't fit into the cache and when the `optimize for ad hoc workloads` option failed to resolve the problem with plan cache.
+[Trace flag 8032](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf8032) reverts the cache limit parameters to the [!INCLUDE [ssVersion2005](../../includes/ssversion2005-md.md)] RTM setting, which in general allows caches to be larger. Use this setting when frequently reused cache entries don't fit into the cache and when the `optimize for ad hoc workloads` option failed to resolve the problem with plan cache.
 
 > [!WARNING]  
-> Trace Flag 8032 can cause poor performance if large caches make less memory available for other memory consumers, such as the buffer pool.
+> Trace flag 8032 can cause poor performance if large caches make less memory available for other memory consumers, such as the buffer pool.
 
 ## Remarks
 

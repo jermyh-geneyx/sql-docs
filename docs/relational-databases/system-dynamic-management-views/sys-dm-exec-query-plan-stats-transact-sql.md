@@ -55,7 +55,7 @@ The *plan_handle* can be obtained from the following dynamic management objects:
 
 ## Remarks
 
-This is an opt-in feature. To enable at the server level, use [Trace Flag 2451](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf2451). To enable at the database level, use the `LAST_QUERY_PLAN_STATS` option in [ALTER DATABASE SCOPED CONFIGURATION](../../t-sql/statements/alter-database-scoped-configuration-transact-sql.md).
+This is an opt-in feature. To enable at the server level, use [trace flag 2451](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf2451). To enable at the database level, use the `LAST_QUERY_PLAN_STATS` option in [ALTER DATABASE SCOPED CONFIGURATION](../../t-sql/statements/alter-database-scoped-configuration-transact-sql.md).
 
 This system function works under the *lightweight* query execution statistics profiling infrastructure. For more information, see [Query Profiling Infrastructure](../performance/query-profiling-infrastructure.md).
 
@@ -148,6 +148,6 @@ GO
 
 ## Related content
 
-- [DBCC TRACEON - Trace Flags (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)
+- [Set trace flags with DBCC TRACEON (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)
 - [System dynamic management views](system-dynamic-management-views.md)
 - [Execution Related Dynamic Management Views and Functions (Transact-SQL)](execution-related-dynamic-management-views-and-functions-transact-sql.md)

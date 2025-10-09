@@ -34,7 +34,7 @@ Displays the file handles that the Namespace Owner (NSO) knows about. `sys.dm_fi
 | `filestream_transaction_id` | **varbinary(128)** | Shows the ID of the transaction associated with the given handle. This is the value returned by the     `get_filestream_transaction_context` function. Use this field to join to the `sys.dm_filestream_file_io_requests` view. Nullable. |
 | `access_type` | **nvarchar(60)** | Not nullable. |
 | `logical_path` | **nvarchar(256)** | Shows the logical pathname of the file that this handle opened. This is the same pathname that is returned by the `.PathName` method of **varbinary(max)** FILESTREAM. Nullable. |
-| `physical_path` | **nvarchar(256)** | Shows the actual NTFS pathname of the file. This is the same pathname returned by the `.PhysicalPathName` method of the **varbinary**(**max**) FILESTREAM. Enabled by Trace Flag 5556. Nullable. |
+| `physical_path` | **nvarchar(256)** | Shows the actual NTFS pathname of the file. This is the same pathname returned by the `.PhysicalPathName` method of the **varbinary**(**max**) FILESTREAM. Enabled by trace flag 5556. Nullable. |
 
 ## Permissions
 

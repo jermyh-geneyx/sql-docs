@@ -142,7 +142,7 @@ For more information on setting up EKM with AKV, see [Set up SQL Server TDE Exte
 
 ## Error messages
 
-[Trace Flag 4675](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf4675) can be used to check credentials created with a managed identity. If the `CREATE CREDENTIAL` statement was executed without trace flag 4675 enabled, no error message is issued if the primary managed identity isn't set for the server. To troubleshoot this scenario, the credential must be deleted and recreated again once the trace flag is enabled.
+[Trace flag 4675](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf4675) can be used to check credentials created with a managed identity. If the `CREATE CREDENTIAL` statement was executed without trace flag 4675 enabled, no error message is issued if the primary managed identity isn't set for the server. To troubleshoot this scenario, the credential must be deleted and recreated again once the trace flag is enabled.
 
 ## Limitations
 
@@ -152,4 +152,4 @@ For more information on setting up EKM with AKV, see [Set up SQL Server TDE Exte
 ## Related content
 
 - [CREATE CREDENTIAL (Transact-SQL)](../../t-sql/statements/create-credential-transact-sql.md)
-- [DBCC TRACEON - Trace Flags (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)
+- [Set trace flags with DBCC TRACEON (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)

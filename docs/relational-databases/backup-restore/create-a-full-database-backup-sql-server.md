@@ -40,7 +40,7 @@ For an overview of, and deeper dive into, backup concepts and tasks, see [Backup
 
 - As a database increases in size, full database backups take more time to complete and require more storage space. For large databases, consider supplementing full database backups with a series of [differential database backups](differential-backups-sql-server.md).
 - Estimate the size of a full database backup by using the [sp_spaceused](../system-stored-procedures/sp-spaceused-transact-sql.md) system stored procedure.
-- By default, every successful backup operation adds an entry in the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] error log and in the system event log. If you back up frequently, success messages accumulate quickly, resulting in huge error logs, which makes finding other messages difficult. In such cases, you can suppress these backup log entries by using trace flag 3226 if none of your scripts depend on those entries. For more information, see [Trace Flags (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md).
+- By default, every successful backup operation adds an entry in the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] error log and in the system event log. If you back up frequently, success messages accumulate quickly, resulting in huge error logs, which makes finding other messages difficult. In such cases, you can suppress these backup log entries by using trace flag 3226 if none of your scripts depend on those entries. For more information, see [Set trace flags with DBCC TRACEON](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md).
 
 <a id="Security"></a>
 

@@ -45,11 +45,11 @@ This problem will be permanently fixed in the upcoming cumulative update.
 
 **Workaround:**
 
-1. Enable Trace Flag 902.
+1. Enable trace flag 902.
 1. Start SQL Server.
 1. Change the collation of the database 'DWConfiguration' from CS (case sensitive) to CI (case insensitive).
 1. Re-run the upgrade.
-1. Disable the Trace Flag 902.
+1. Disable the trace flag 902.
 1. Restart SQL Server.
 1. Change the collation of the database 'DWConfiguration' back, from CI (case insensitive) to CS (case sensitive).
  

@@ -35,7 +35,7 @@ ms.topic: conceptual
   
 In [!INCLUDE[sssql16-md](../../includes/sssql16-md.md)] and later versions, block blob is preferred for Backup to URL. 
 
-- If you're using page blobs, you can turn on [Trace Flag 3051](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf3051) when doing the restore to generate a detailed log. This log file is placed in the log directory, and is named using the format: `BackupToUrl-\<instancename>-\<dbname>-action-\<PID>.log`. The log file includes information about each round trip to Azure Storage including timing that can be helpful in diagnosing the issue.  
+- If you're using page blobs, you can turn on [trace flag 3051](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf3051) when doing the restore to generate a detailed log. This log file is placed in the log directory, and is named using the format: `BackupToUrl-\<instancename>-\<dbname>-action-\<PID>.log`. The log file includes information about each round trip to Azure Storage including timing that can be helpful in diagnosing the issue.  
   
 ### Topics on Performing Restore Operations  
   

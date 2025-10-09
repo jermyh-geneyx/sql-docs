@@ -29,7 +29,7 @@ helpviewer_keywords:
 
 This error occurs when a linked server query fails because of an error that is generated on the remote server.
 
-Error 7399 is a generic error message from the provider. In some cases, you can enable Trace Flag 7300 in order to get a more detailed error message from the provider. Whether you receive more information depends on the OLE DB (Object Linking and Embedding, Database) provider that you use. To enable the trace flag, run the following command before you run the query that causes the error:
+Error 7399 is a generic error message from the provider. In some cases, you can enable trace flag 7300 in order to get a more detailed error message from the provider. Whether you receive more information depends on the OLE DB (Object Linking and Embedding, Database) provider that you use. To enable the trace flag, run the following command before you run the query that causes the error:
 
 ```sql
 DBCC TRACEON (7300, 3604);

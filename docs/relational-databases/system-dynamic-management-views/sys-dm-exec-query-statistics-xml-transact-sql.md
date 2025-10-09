@@ -51,10 +51,10 @@ The session ID executing the batch to be looked up. *session_id* is **smallint**
 
 ## Limitations
 
-Owing to a possible random access violation (AV) while executing a monitoring stored procedure with the `sys.dm_exec_query_statistics_xml` DMV, the Showplan XML attribute `<ParameterList>` value `ParameterRuntimeValue` was removed in [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] CU 26 and [!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)] CU 12. This value could be useful while troubleshooting long running stored procedures. You can re-enable this value in [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] CU 31, [!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)] CU 19, and later versions, using [Trace Flag 2446](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf2446). This trace flag enables the collection of the runtime parameter value at the cost of introducing extra overhead.
+Owing to a possible random access violation (AV) while executing a monitoring stored procedure with the `sys.dm_exec_query_statistics_xml` DMV, the Showplan XML attribute `<ParameterList>` value `ParameterRuntimeValue` was removed in [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] CU 26 and [!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)] CU 12. This value could be useful while troubleshooting long running stored procedures. You can re-enable this value in [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] CU 31, [!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)] CU 19, and later versions, using [trace flag 2446](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf2446). This trace flag enables the collection of the runtime parameter value at the cost of introducing extra overhead.
 
 > [!CAUTION]  
-> Trace Flag 2446 isn't meant to be enabled continuously in a production environment, but only for time-limited troubleshooting purposes. Using this trace flag introduces extra and possibly significant CPU and memory overhead, as it creates a Showplan XML fragment with runtime parameter information, whether the `sys.dm_exec_query_statistics_xml` DMV is called or not.
+> Trace flag 2446 isn't meant to be enabled continuously in a production environment, but only for time-limited troubleshooting purposes. Using this trace flag introduces extra and possibly significant CPU and memory overhead, as it creates a Showplan XML fragment with runtime parameter information, whether the `sys.dm_exec_query_statistics_xml` DMV is called or not.
 
 In [!INCLUDE [ssSQL22](../../includes/sssql22-md.md)], [!INCLUDE [Azure SQL Database](../../includes/ssazure-sqldb.md)], and [!INCLUDE [Azure SQL Managed Instance](../../includes/ssazuremi-md.md)], you can accomplish the same functionality at the database level using the `FORCE_SHOWPLAN_RUNTIME_PARAMETER_COLLECTION` option in [ALTER DATABASE SCOPED CONFIGURATION (Transact-SQL)](../../t-sql/statements/alter-database-scoped-configuration-transact-sql.md).
 
@@ -127,6 +127,6 @@ GO
 
 ## Related content
 
-- [DBCC TRACEON - Trace Flags (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)
+- [Set trace flags with DBCC TRACEON (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)
 - [System dynamic management views](system-dynamic-management-views.md)
 - [Database related dynamic management views (Transact-SQL)](database-related-dynamic-management-views-transact-sql.md)

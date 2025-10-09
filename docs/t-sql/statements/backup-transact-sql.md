@@ -940,7 +940,7 @@ Starting with [!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)] CU5, se
 >
 > Even if one of these conditions applies, you must explicitly set `MAXTRANSFERSIZE` greater than 64K in your backup command in order to get the optimized backup compression algorithm, unless you're on [!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)] CU5 or later.
 
-By default, every successful backup operation adds an entry in the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] error log and in the system event log. If you back up the log very frequently, these success messages accumulate quickly, resulting in large error logs that can make finding other messages difficult. In such cases you can suppress these log entries by using trace flag 3226, if none of your automation or monitoring depends on those entries. For more information, see [Trace Flags](../database-console-commands/dbcc-traceon-trace-flags-transact-sql.md).
+By default, every successful backup operation adds an entry in the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] error log and in the system event log. If you back up the log very frequently, these success messages accumulate quickly, resulting in large error logs that can make finding other messages difficult. In such cases you can suppress these log entries by using trace flag 3226, if none of your automation or monitoring depends on those entries. For more information, see [Set trace flags with DBCC TRACEON](../database-console-commands/dbcc-traceon-trace-flags-transact-sql.md).
 
 ## Interoperability
 

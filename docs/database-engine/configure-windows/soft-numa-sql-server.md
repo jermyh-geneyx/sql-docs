@@ -41,7 +41,7 @@ The figure below shows the type of information regarding soft-NUMA that you see 
 ```
 
 > [!NOTE]  
-> Starting with [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)] SP 2, use Trace Flag 8079 to allow [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] to use Automatic soft-NUMA. Starting with [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] this behavior is controlled by the engine and trace flag 8079 has no effect. For more information, see [DBCC TRACEON - Trace Flags](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md).
+> Starting with [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)] SP 2, use trace flag 8079 to allow [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] to use Automatic soft-NUMA. Starting with [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] this behavior is controlled by the engine and trace flag 8079 has no effect. For more information, see [Set trace flags with DBCC TRACEON](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md).
 
 ## Manual soft-NUMA
 

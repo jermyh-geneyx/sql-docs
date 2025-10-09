@@ -109,7 +109,7 @@ Because PMEM devices are `O_DIRECT` (direct I/O) safe, you can [disable the forc
 > [!NOTE]  
 > A storage system can make sure that any cached or staged writes are considered safe and durable, by guaranteeing that writes issued to the device are kept on a medium that will persist across system crashes, interface resets and power failures, and the medium itself is hardware redundant.
 
-- Database (`.mdf` and `.ndf`) and transaction log (`.ldf`) files don't use `writethrough` and `alternatewritethrough` by default in [!INCLUDE [sssql17-md](../includes/sssql17-md.md)] CU 6 and later versions, because they use the forced flush behavior. Trace Flag 3979 disables the use of the forced flush behavior for database and transaction log files, and uses the `writethrough` and `alternatewritethrough` logic.
+- Database (`.mdf` and `.ndf`) and transaction log (`.ldf`) files don't use `writethrough` and `alternatewritethrough` by default in [!INCLUDE [sssql17-md](../includes/sssql17-md.md)] CU 6 and later versions, because they use the forced flush behavior. Trace flag 3979 disables the use of the forced flush behavior for database and transaction log files, and uses the `writethrough` and `alternatewritethrough` logic.
 
 - Other files that are opened by using `FILE_FLAG_WRITE_THROUGH` in [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], such as database snapshots, internal snapshots for database consistency checks (`DBCC CHECKDB`), profiler trace files, and extended event trace files, use the `writethrough` and `alternatewritethrough` optimizations.
 

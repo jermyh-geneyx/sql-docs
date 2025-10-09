@@ -94,7 +94,7 @@ An issue in the TDS 8.0 protocol implementation can cause RPC calls to fail if t
 
 The fix for this issue is released in [Cumulative Update 1](/troubleshoot/sql/releases/sqlserver-2022/cumulativeupdate1#1993393) for [!INCLUDE [sssql22-md](../includes/sssql22-md.md)].
 
-To work around this issue, you can use Trace Flag 12324 as either as startup trace flag, or at the session level (using `DBCC TRACEON`).
+To work around this issue, you can use trace flag 12324 as either as startup trace flag, or at the session level (using `DBCC TRACEON`).
 
 ### SQL Server Agent errors when using contained Availability Group
 

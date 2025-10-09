@@ -240,7 +240,7 @@ Requires membership of **db_owner** role.
 - [Performance monitoring and tuning tools](performance-monitoring-and-tuning-tools.md)
 - [Monitor performance by using the Query Store](monitoring-performance-by-using-the-query-store.md)
 - [Change the database compatibility level and use the Query Store](../../database-engine/install-windows/change-the-database-compatibility-mode-and-use-the-query-store.md)
-- [DBCC TRACEON - Trace Flags (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)
+- [Set trace flags with DBCC TRACEON (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)
 - [USE HINT query hints](../../t-sql/queries/hints-transact-sql-query.md#use_hint)
 - [Cardinality Estimation (SQL Server)](cardinality-estimation-sql-server.md)
 - [Automatic tuning](../automatic-tuning/automatic-tuning.md)

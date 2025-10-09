@@ -79,7 +79,7 @@ To enhance the accuracy of [cardinality estimation](../../relational-databases/p
 
 These query hints are also integrated with [Cardinality estimation (CE) feedback](../../relational-databases/performance/intelligent-query-processing-cardinality-estimation-feedback.md). The CE feedback model automatically identifies queries using `REGEXP_LIKE` function where there is a significant difference between estimated and actual row counts. It then applies the appropriate selectivity hint at the query level to improve plan quality without requiring manual input.
 
-To disable the automatic feedback behavior, enable Trace Flag 16268.
+To disable the automatic feedback behavior, enable trace flag 16268.
 
 ## Examples
 

@@ -208,7 +208,7 @@ To explicitly invoke the `syscommittab` cleanup, use the [sys.sp_flush_commit_ta
 
 As shown in the example section from the [sys.sp_flush_commit_table_on_demand](../system-stored-procedures/sys-sp-flush-commit-table-on-demand-transact-sql.md#examples) article, this stored procedure returns the value of `safe_cleanup_version()`, and the number of rows deleted. If the value returned appears to be `0`, and if snapshot isolation is turned on, the cleanup might not delete anything from `syscommittab`.
 
-If the retention period is greater than one day, it should be safe to rerun the *`sys.sp_flush_commit_table_on_demand`* stored procedure after enabling Trace Flag 8239 globally. Using this trace flag when snapshot isolation is off is always safe but in some cases, it might not be necessary.
+If the retention period is greater than one day, it should be safe to rerun the *`sys.sp_flush_commit_table_on_demand`* stored procedure after enabling trace flag 8239 globally. Using this trace flag when snapshot isolation is off is always safe but in some cases, it might not be necessary.
 
 ## High CPU utilization during cleanup
 

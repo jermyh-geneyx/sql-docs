@@ -40,13 +40,13 @@ After the logs have been captured on the primary replica, they are subject to tw
 
 In addition to the flow control gates, there's another factor that can prevent the log messages from being sent. The synchronization of replicas ensures that the messages are sent and applied in the order of the log sequence numbers (LSN). Before a log message is sent, its LSN also checked against the lowest acknowledged LSN number to make sure that it's less than one of thresholds (depending on the message type). If the gap between the two LSN numbers is larger than the threshold, the messages aren't sent. Once the gap is below the threshold again, the messages are sent.
 
-[!INCLUDE [sssql22-md](../../../includes/sssql22-md.md)] increases the limits to the number of messages that each gate allows. By using Trace Flag 12310, the increased limit is also available to the following versions of SQL Server: [!INCLUDE [sssql19-md](../../../includes/sssql19-md.md)] CU9, [!INCLUDE [sssql17-md](../../../includes/sssql17-md.md)] CU18, [!INCLUDE [sssql16-md](../../../includes/sssql16-md.md)] SP1 CU16.
+[!INCLUDE [sssql22-md](../../../includes/sssql22-md.md)] increases the limits to the number of messages that each gate allows. By using trace flag 12310, the increased limit is also available to the following versions of SQL Server: [!INCLUDE [sssql19-md](../../../includes/sssql19-md.md)] CU9, [!INCLUDE [sssql17-md](../../../includes/sssql17-md.md)] CU18, [!INCLUDE [sssql16-md](../../../includes/sssql16-md.md)] SP1 CU16.
 
 The following table compares message limits:
 
 # [New limits](#tab/new-limits)
 
-For versions of SQL Server that enable Trace Flag 12310, namely [!INCLUDE [sssql22-md](../../../includes/sssql22-md.md)], [!INCLUDE [sssql19-md](../../../includes/sssql19-md.md)] CU9, [!INCLUDE [sssql17-md](../../../includes/sssql17-md.md)] CU18, [!INCLUDE [sssql16-md](../../../includes/sssql16-md.md)] SP1 CU16, and later versions, see the following limits:
+For versions of SQL Server that enable trace flag 12310, namely [!INCLUDE [sssql22-md](../../../includes/sssql22-md.md)], [!INCLUDE [sssql19-md](../../../includes/sssql19-md.md)] CU9, [!INCLUDE [sssql17-md](../../../includes/sssql17-md.md)] CU18, [!INCLUDE [sssql16-md](../../../includes/sssql16-md.md)] SP1 CU16, and later versions, see the following limits:
 
 | Level | Number of gates | Number of messages | Useful metrics |
 | --- | --- | --- | --- |
@@ -55,7 +55,7 @@ For versions of SQL Server that enable Trace Flag 12310, namely [!INCLUDE [sssql
 
 # [Old limits](#tab/old-limits)
 
-For unsupported SQL Server versions, or supported SQL Server versions (starting with SQL Server 2019 CU9, SQL Server 2017 CU18, and SQL Server 2016 SP1 CU16) that **do not** have Trace Flag 12310 enabled, see the following limits:
+For unsupported SQL Server versions, or supported SQL Server versions (starting with SQL Server 2019 CU9, SQL Server 2017 CU18, and SQL Server 2016 SP1 CU16) that **do not** have trace flag 12310 enabled, see the following limits:
 
 | Level | Number of gates | Number of messages | Useful metrics |
 | --- | --- | --- | --- |

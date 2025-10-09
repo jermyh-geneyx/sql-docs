@@ -173,7 +173,7 @@ Can only be set for the secondaries, while the database in on the primary, and i
 
 #### LEGACY_CARDINALITY_ESTIMATION = { ON | OFF | PRIMARY }
 
-Enables you to set the query optimizer cardinality estimation model to the SQL Server 2012 and earlier version independent of the compatibility level of the database. The default is `OFF`, which sets the query optimizer cardinality estimation model based on the compatibility level of the database. Setting `LEGACY_CARDINALITY_ESTIMATION` to `ON` is equivalent to enabling [Trace Flag 9481](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf9481).
+Enables you to set the query optimizer cardinality estimation model to the SQL Server 2012 and earlier version independent of the compatibility level of the database. The default is `OFF`, which sets the query optimizer cardinality estimation model based on the compatibility level of the database. Setting `LEGACY_CARDINALITY_ESTIMATION` to `ON` is equivalent to enabling [trace flag 9481](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf9481).
 
 > [!TIP]  
 > To accomplish this at the query level, add the **QUERYTRACEON** [query hint](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md).
@@ -185,7 +185,7 @@ This value is only valid on secondaries while the database in on the primary, an
 
 #### PARAMETER_SNIFFING = { ON | OFF | PRIMARY }
 
-Enables or disables [parameter sniffing](../../relational-databases/query-processing-architecture-guide.md#parameter-sensitivity). The default is `ON`. Setting `PARAMETER_SNIFFING` to `OFF` is equivalent to enabling [Trace Flag 4136](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf4136).
+Enables or disables [parameter sniffing](../../relational-databases/query-processing-architecture-guide.md#parameter-sensitivity). The default is `ON`. Setting `PARAMETER_SNIFFING` to `OFF` is equivalent to enabling [trace flag 4136](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf4136).
 
 > [!TIP]  
 > To accomplish this at the query level, see the `OPTIMIZE FOR UNKNOWN` [query hint](../../t-sql/queries/hints-transact-sql-query.md).
@@ -200,7 +200,7 @@ This value is only valid on secondaries while the database in on the primary, an
 
 #### QUERY_OPTIMIZER_HOTFIXES = { ON | OFF | PRIMARY }
 
-Enables or disables query optimization hotfixes regardless of the compatibility level of the database. The default is `OFF`, which disables query optimization hotfixes that were released after the highest available compatibility level was introduced for a specific version (post-RTM). Setting this to `ON` is equivalent to enabling [Trace Flag 4199](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf4199).
+Enables or disables query optimization hotfixes regardless of the compatibility level of the database. The default is `OFF`, which disables query optimization hotfixes that were released after the highest available compatibility level was introduced for a specific version (post-RTM). Setting this to `ON` is equivalent to enabling [trace flag 4199](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf4199).
 
 **Applies to:** [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE [ssSQL16](../../includes/sssql16-md.md)]), [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] and [!INCLUDE [ssazuremi](../../includes/ssazuremi-md.md)]
 
@@ -216,7 +216,7 @@ This value is only valid on secondaries while the database in on the primary, an
 
 **Applies to:** [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] (Starting with [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)]), [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] and [!INCLUDE [ssazuremi](../../includes/ssazuremi-md.md)]
 
-Enables or disables identity cache at the database level. The default is `ON`. Identity caching is used to improve INSERT performance on tables with identity columns. To avoid gaps in the values of an identity column in cases where the server restarts unexpectedly or fails over to a secondary server, disable the `IDENTITY_CACHE` option. This option is similar to the existing [Trace Flag 272](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf272), except that it can be set at the database level rather than only at the server level.
+Enables or disables identity cache at the database level. The default is `ON`. Identity caching is used to improve INSERT performance on tables with identity columns. To avoid gaps in the values of an identity column in cases where the server restarts unexpectedly or fails over to a secondary server, disable the `IDENTITY_CACHE` option. This option is similar to the existing [trace flag 272](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf272), except that it can be set at the database level rather than only at the server level.
 
 > [!NOTE]  
 > This option can only be set for the PRIMARY. For more information, see [identity columns](create-table-transact-sql-identity-property.md).
@@ -409,7 +409,7 @@ When set to `ON` under database compatibility level 150, truncation errors raise
 
 When set to `OFF` under database compatibility level 150, truncation errors raise the previous error message 8152.
 
-For database compatibility level 140 or lower, error message 2628 remains an opt-in error message that requires [Trace Flag 460](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf460) to be enabled, and this database scoped configuration has no effect.
+For database compatibility level 140 or lower, error message 2628 remains an opt-in error message that requires [trace flag 460](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf460) to be enabled, and this database scoped configuration has no effect.
 
 #### LAST_QUERY_PLAN_STATS = { ON | OFF }
 
@@ -829,7 +829,7 @@ GO
 
 ### QUERY_OPTIMIZER_HOTFIXES Resources
 
-- [Trace Flags](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)
+- [Set trace flags with DBCC TRACEON](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)
 - [SQL Server query optimizer hotfix trace flag 4199 servicing model](https://support.microsoft.com/kb/974006)
 
 ### ELEVATE_ONLINE Resources

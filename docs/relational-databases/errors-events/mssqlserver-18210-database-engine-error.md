@@ -63,6 +63,6 @@ Since the most common reason for an 18210 error is a VDI backup failure, the bes
 1. Check for filter drivers locking a file (antivirus)
 1. Check disk health
 1. For advanced troubleshooting:
-    1. Enable [Trace Flag 3605](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md) for more logging to the SQL Server Error Log prior to encountering the issue. Avoid keeping this TF enabled long-term.
+    1. Enable [trace flag 3605](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md) for more logging to the SQL Server Error Log prior to encountering the issue. Avoid keeping this TF enabled long-term.
     1. When issue is reproduced, capture [Process Monitor](/sysinternals/downloads/procmon)
     1. Capture [Extended Events](../extended-events/extended-events.md) or [SQL Server Profiler](../../tools/sql-server-profiler/sql-server-profiler.md) when the reproducing the error.

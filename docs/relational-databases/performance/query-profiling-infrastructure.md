@@ -99,7 +99,7 @@ When running an extended event session that uses the `query_thread_profile` even
 
 **Applies to**: [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] SP1 through [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)].
 
-[!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] SP1 includes a revised version of lightweight profiling with minimal overhead. Lightweight profiling can also be enabled globally using [Trace Flag 7412](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf7412) for the versions stated previously in *Applies to*. A new DMF [sys.dm_exec_query_statistics_xml](../system-dynamic-management-views/sys-dm-exec-query-statistics-xml-transact-sql.md) is introduced to return the query execution plan for in-flight requests.
+[!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] SP1 includes a revised version of lightweight profiling with minimal overhead. Lightweight profiling can also be enabled globally using [trace flag 7412](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf7412) for the versions stated previously in *Applies to*. A new DMF [sys.dm_exec_query_statistics_xml](../system-dynamic-management-views/sys-dm-exec-query-statistics-xml-transact-sql.md) is introduced to return the query execution plan for in-flight requests.
 
 Starting with [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] SP2 CU3 and [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] CU11, if lightweight profiling isn't enabled globally then the new [USE HINT query hint](../../t-sql/queries/hints-transact-sql-query.md#use_hint) argument `QUERY_PLAN_PROFILE` can be used to enable lightweight profiling at the query level, for any session. When a query that contains this new hint finishes, a new `query_plan_profile` extended event is also output that provides an actual execution plan XML similar to the `query_post_execution_showplan` extended event.
 
@@ -140,7 +140,7 @@ WITH
 
 **Applies to**: [!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)] and later versions, and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)]
 
-[!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] include a newly revised version of lightweight profiling collecting row count information for all executions. Lightweight profiling is enabled by default on [!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)]. In [!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)] and later versions, Trace Flag 7412 has no effect. Lightweight profiling can be disabled at the database level using the `LIGHTWEIGHT_QUERY_PROFILING` [database scoped configuration](../../t-sql/statements/alter-database-scoped-configuration-transact-sql.md): `ALTER DATABASE SCOPED CONFIGURATION SET LIGHTWEIGHT_QUERY_PROFILING = OFF;`.
+[!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] include a newly revised version of lightweight profiling collecting row count information for all executions. Lightweight profiling is enabled by default on [!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)]. In [!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)] and later versions, trace flag 7412 has no effect. Lightweight profiling can be disabled at the database level using the `LIGHTWEIGHT_QUERY_PROFILING` [database scoped configuration](../../t-sql/statements/alter-database-scoped-configuration-transact-sql.md): `ALTER DATABASE SCOPED CONFIGURATION SET LIGHTWEIGHT_QUERY_PROFILING = OFF;`.
 
 A new DMF [sys.dm_exec_query_plan_stats](../system-dynamic-management-views/sys-dm-exec-query-plan-stats-transact-sql.md) is introduced to return the equivalent of the last known actual execution plan for most queries, and is called *last query plan statistics*. The last query plan statistics can be enabled at the database level using the `LAST_QUERY_PLAN_STATS` [database scoped configuration](../../t-sql/statements/alter-database-scoped-configuration-transact-sql.md): `ALTER DATABASE SCOPED CONFIGURATION SET LAST_QUERY_PLAN_STATS = ON;`.
 
@@ -238,7 +238,7 @@ The following table summarizes the actions to enable either standard profiling o
 
 | Scope | Standard Profiling | Lightweight Profiling |
 | --- | --- | --- |
-| Global | Extended Event session with the `query_post_execution_showplan` XE; Starting with [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)] | Trace Flag 7412; Starting with [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] SP1 |
+| Global | Extended Event session with the `query_post_execution_showplan` XE; Starting with [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)] | Trace flag 7412; Starting with [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] SP1 |
 | Global | SQL Trace and SQL Server Profiler with the `Showplan XML` trace event | Extended Event session with the `query_thread_profile` XE; Starting with [!INCLUDE [ssSQL14](../../includes/sssql14-md.md)] SP2 |
 | Global | N/A | Extended Event session with the `query_post_execution_plan_profile` XE; Starting with [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] CU14 and [!INCLUDE [sql-server-2019](../../includes/sssql19-md.md)] |
 | Session | Use `SET STATISTICS XML ON` | Use the `QUERY_PLAN_PROFILE` query hint together with an Extended Event session with the `query_plan_profile` XE; Starting with [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] SP2 CU3 and [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] CU11 |
@@ -257,7 +257,7 @@ For more information on the performance overhead of query profiling, see the blo
 Extended Events that use lightweight profiling use information from standard profiling, in case the standard profiling infrastructure is already enabled. For example, an extended event session using `query_post_execution_showplan` is running, and another session using `query_post_execution_plan_profile` is started. The second session still uses information from standard profiling.
 
 > [!NOTE]  
-> On [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)], Lightweight Profiling is off by default but is activated when an Extended Event trace relying on `query_post_execution_plan_profile` is started, and is then deactivated again when the trace is stopped. As a consequence, if Extended Event traces based on `query_post_execution_plan_profile` are frequently started and stopped on a [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] instance, you should activate Lightweight Profiling at global level with Trace Flag 7412 to avoid the repeated activation/deactivation overhead.
+> On [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)], Lightweight Profiling is off by default but is activated when an Extended Event trace relying on `query_post_execution_plan_profile` is started, and is then deactivated again when the trace is stopped. As a consequence, if Extended Event traces based on `query_post_execution_plan_profile` are frequently started and stopped on a [!INCLUDE [ssSQL17](../../includes/sssql17-md.md)] instance, you should activate Lightweight Profiling at global level with trace flag 7412 to avoid the repeated activation/deactivation overhead.
 
 ## Related content
 
@@ -269,7 +269,7 @@ Extended Events that use lightweight profiling use information from standard pro
 - [Monitor System Activity Using Extended Events](../extended-events/monitor-system-activity-using-extended-events.md)
 - [sys.dm_exec_query_statistics_xml](../system-dynamic-management-views/sys-dm-exec-query-statistics-xml-transact-sql.md)
 - [sys.dm_exec_query_profiles](../system-dynamic-management-views/sys-dm-exec-query-profiles-transact-sql.md)
-- [DBCC TRACEON - Trace Flags (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)
+- [Set trace flags with DBCC TRACEON (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)
 - [Logical and physical showplan operator reference](../showplan-logical-and-physical-operators-reference.md)
 - [actual execution plan](display-an-actual-execution-plan.md)
 - [Live Query Statistics](live-query-statistics.md)

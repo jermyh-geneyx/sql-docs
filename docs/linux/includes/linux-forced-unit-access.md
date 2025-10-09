@@ -29,13 +29,13 @@ Use this recommended configuration if the following conditions are met.
 
 Recommended configuration:
 
-1. Enable Trace Flag 3979 as a startup parameter.
+1. Enable trace flag 3979 as a startup parameter.
 
 1. Use **mssql-conf** to configure `control.writethrough = 1` and `control.alternatewritethrough = 0`.
 
 For almost all other configuration that doesn't meet the previous conditions, the recommended configuration is as follows:
 
-1. Enable Trace Flag 3982 as a startup parameter (which is the default for [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] in the Linux ecosystem), and make sure that Trace Flag 3979 isn't enabled as a startup parameter.
+1. Enable trace flag 3982 as a startup parameter (which is the default for [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] in the Linux ecosystem), and make sure that trace flag 3979 isn't enabled as a startup parameter.
 
 1. Use **mssql-conf** to configure `control.writethrough = 1` and `control.alternatewritethrough = 1`.
 
@@ -55,6 +55,6 @@ For almost all other configuration that doesn't meet the previous conditions, th
 
 If the above conditions are met, then you can use the following recommended FUA settings.
 
-1. Enable Trace Flag 3979 as a startup parameter.
+1. Enable trace flag 3979 as a startup parameter.
 
 1. Use **mssql-conf** to configure `control.writethrough = 1` and `control.alternatewritethrough = 0`.

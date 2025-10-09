@@ -169,7 +169,7 @@ Monitor and troubleshoot PolyBase queries using the following DMVs. Consider als
 
 ## <a id="to-view-the-polybase-query-plan"></a> View the PolyBase query plan
 
-In [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)], you can view the execution plan passed to the external data source using Trace Flag 6408. For more information, see [How to tell if external pushdown occurred](polybase-how-to-tell-pushdown-computation.md).
+In [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)], you can view the execution plan passed to the external data source using trace flag 6408. For more information, see [How to tell if external pushdown occurred](polybase-how-to-tell-pushdown-computation.md).
 
 In [!INCLUDE [sssql19-md](../../includes/sssql16-md.md)] or [!INCLUDE [sssql19-md](../../includes/sssql17-md.md)], this alternative strategy works:
 
