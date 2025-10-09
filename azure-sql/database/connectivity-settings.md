@@ -115,10 +115,12 @@ Ensure that **Public network access** is set to **Selected networks** to be able
 
 The minimum [Transport Layer Security (TLS)](/troubleshoot/sql/database-engine/connect/tls-1-2-support-microsoft-sql-server) version setting allows customers to choose which version of TLS their SQL database uses. TLS is a cryptographic protocol used to secure client-server communications over a network. This ensures that sensitive information, such as authentication credentials and database queries, is safe from interception and tampering. It's possible to change the minimum TLS version by using the Azure portal, Azure PowerShell, and the Azure CLI.
 
-Currently, Azure SQL Database supports TLS 1.2 and 1.3. Setting a minimum TLS version ensures that newer TLS versions are supported. For example, choosing a TLS version 1.2 means only connections with TLS 1.2 and 1.3 are accepted, and connections with TLS 1.1 or lower are rejected. After you test to confirm that your applications support it, we recommend setting the minimal TLS version to 1.3. This version includes fixes for vulnerabilities in previous versions and is the highest version of TLS that's supported in Azure SQL Database.
+Setting a minimum TLS version ensures a baseline level of compliance and guarantees support for newer TLS protocols. For example, choosing TLS 1.2 means only connections with TLS 1.2 or TLS 1.3 are accepted, while connections using TLS 1.1 or lower are rejected.
+ 
+Currently, the lowest minimum TLS version supported by Azure SQL Database is TLS 1.2. This version addresses vulnerabilities found in earlier versions. It is recommended to set the minimum TLS version to TLS 1.2 after testing to confirm that your applications are compatible.
 
 > [!NOTE]
-> TLS 1.0 and 1.1 is [retired](#upcoming-tls-10-and-11-retirement-changes-faq) and no longer available. 
+> TLS 1.0 and 1.1 are [retired](#upcoming-tls-10-and-11-retirement-changes-faq) and no longer available. 
 
 ### Configure minimum TLS version
 

@@ -4,20 +4,21 @@ titleSuffix: SQL machine learning
 description: Learn how to use native scoring with the PREDICT T-SQL function to generate prediction values for new data inputs in near-real-time.
 author: VanMSFT
 ms.author: vanto
-ms.date: 05/27/2021
+ms.reviewer: monamaki
+ms.date: 10/08/2025
 ms.service: sql
 ms.subservice: machine-learning
 ms.topic: how-to
-monikerRange: ">=sql-server-2017||=azuresqldb-current||>=sql-server-linux-2017||=azuresqldb-mi-current||=azure-sqldw-latest"
+monikerRange: ">=sql-server-2017||>=sql-server-linux-2017||=azuresqldb-mi-current||=azure-sqldw-latest"
 ---
 
 # Native scoring using the PREDICT T-SQL function with SQL machine learning
 
-[!INCLUDE [sqlserver2017-asdb-asdbmi-asa](../../includes/applies-to-version/sqlserver2017-asdb-asdbmi-asa.md)]
+[!INCLUDE [sqlserver2017-asdbmi-asa](../../includes/applies-to-version/sqlserver2017-asdbmi-asa.md)]
 
 Learn how to use native scoring with the [PREDICT T-SQL function](../../t-sql/queries/predict-transact-sql.md) to generate prediction values for new data inputs in near-real-time. Native scoring requires that you have an already-trained model.
 
-The `PREDICT` function uses the native C++ extension capabilities in [SQL machine learning](../index.yml). This methodology offers the fastest possible processing speed of forecasting and prediction workloads and support models in [Open Neural Network Exchange (ONNX)](https://onnx.ai/get-started.html) format or models trained using the [RevoScaleR](../r/ref-r-revoscaler.md) and [revoscalepy](../python/ref-py-revoscalepy.md) packages.
+The `PREDICT` function uses the native C++ extension capabilities in [SQL machine learning](../index.yml). This methodology offers the fastest possible processing speed of forecasting and prediction workloads and support models in [Open Neural Network Exchange (ONNX)](https://onnx.ai/get-started.html) format (Azure Synapse Analytics only) or models trained using the [RevoScaleR](../r/ref-r-revoscaler.md) and [revoscalepy](../python/ref-py-revoscalepy.md) packages.
 
 ## How native scoring works
 
@@ -36,11 +37,9 @@ The function returns predictions for the input data, together with any columns o
 
 + All editions of SQL Server 2017 and later on Windows and Linux
 + Azure SQL Managed Instance
-+ Azure SQL Database
-+ Azure SQL Edge
 + Azure Synapse Analytics
 
-The function is enabled by default. You do not need to install R or Python, or enable additional features.
+The function is enabled by default. You don't need to install R or Python, or enable additional features.
 
 ## Supported models
 
@@ -49,12 +48,10 @@ The model formats supported by the `PREDICT` function depends on the SQL platfor
 | Platform | ONNX model format | RevoScale model format |
 |-|-|-|
 | SQL Server | No | Yes |
-| Azure SQL Managed Instance | Yes | Yes |
-| Azure SQL Database | No | Yes |
-| Azure SQL Edge | Yes | No |
+| Azure SQL Managed Instance | No | Yes |
 | Azure Synapse Analytics | Yes | No |
 
-::: moniker range="=azuresqldb-mi-current||=azure-sqldw-latest"
+::: moniker range="=azure-sqldw-latest"
 ### ONNX models
 
 The model must be in an [Open Neural Network Exchange (ONNX)](https://onnx.ai/get-started.html) model format.
@@ -89,7 +86,7 @@ The following algorithms are supported in revoscalepy and RevoScaleR.
   + [rxDtree](/r-server/r-reference/revoscaler/rxdtree)
   + [rxDForest](/r-server/r-reference/revoscaler/rxdforest)
 
-If you need to use an algorithms from MicrosoftML or microsoftml, use [real-time scoring with sp_rxPredict](../predictions/real-time-scoring.md).
+If you need to use an algorithm from MicrosoftML or microsoftml, use [real-time scoring with sp_rxPredict](../predictions/real-time-scoring.md).
 
 Unsupported model types include the following types:
 
@@ -100,7 +97,7 @@ Unsupported model types include the following types:
 ::: moniker-end
 
 ## Examples
-::: moniker range="=azuresqldb-mi-current||=azure-sqldw-latest"
+::: moniker range="=azure-sqldw-latest"
 ### PREDICT with an ONNX model
 
 This example shows how to use an ONNX model stored in the `dbo.models` table for native scoring.
@@ -204,7 +201,7 @@ EXECUTE sp_execute_external_script
 ```
 
 > [!NOTE]
-> Be sure to use the [rxSerializeModel](/machine-learning-server/r-reference/revoscaler/rxserializemodel) function from RevoScaleR to save the model. The standard R `serialize` function cannot generate the required format.
+> Be sure to use the [rxSerializeModel](/machine-learning-server/r-reference/revoscaler/rxserializemodel) function from RevoScaleR to save the model. The standard R `serialize` function can't generate the required format.
 
 You can run a statement such as the following to view the stored model in binary format:
 
@@ -235,10 +232,8 @@ If you get the error, "Error occurred during execution of the function PREDICT. 
 > Because the columns and values returned by **PREDICT** can vary by model type, you must define the schema of the returned data by using a **WITH** clause.
 ::: moniker-end
 
-## Next steps
+## Related content
 
-+ [PREDICT T-SQL function](../../t-sql/queries/predict-transact-sql.md)
-+ [SQL machine learning documentation](../index.yml)
-+ [Machine learning and AI with ONNX in SQL Edge](/azure/azure-sql-edge/onnx-overview)
-+ [Deploy and make predictions with an ONNX model in Azure SQL Edge](/azure/azure-sql-edge/deploy-onnx)
-+ [Score machine learning models with PREDICT in Azure Synapse Analytics](/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-predict)
+- [PREDICT T-SQL function](../../t-sql/queries/predict-transact-sql.md)
+- [SQL machine learning documentation](../index.yml)\
+- [Score machine learning models with PREDICT in Azure Synapse Analytics](/azure/synapse-analytics/sql-data-warehouse/sql-data-warehouse-predict)
