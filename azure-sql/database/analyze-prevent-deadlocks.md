@@ -1,21 +1,21 @@
 ---
 title: Analyze and Prevent Deadlocks
 titleSuffix: Azure SQL Database
-description: Learn how to analyze deadlocks and prevent them from reoccurring in Azure SQL Database and Fabric SQL database.
+description: Learn how to analyze deadlocks and prevent them from reoccurring in Azure SQL Database and SQL database in Fabric.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: mathoma, dfurman, wiassaf
-ms.date: 09/23/2025
+ms.date: 10/09/2025
 ms.service: azure-sql-database
 ms.subservice: performance
 ms.topic: troubleshooting-general
-monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 ms.custom:
   - ignite-2024
   - sfi-image-nochange
+monikerRange: "=azuresql || =azuresql-db || =fabricsql"
 ---
 
-# Analyze and prevent deadlocks in Azure SQL Database and Fabric SQL database
+# Analyze and prevent deadlocks in Azure SQL Database and SQL database in Fabric
 
 [!INCLUDE [appliesto-sqldb-fabricsqldb](../includes/appliesto-sqldb-fabricsqldb.md)]
 
@@ -118,17 +118,17 @@ Learn more about each of these approaches in the [Prevent a deadlock from reoccu
 
 In this article, we use the `AdventureWorksLT` sample database to set up alerts for deadlocks, cause an example deadlock, analyze the deadlock graph for the example deadlock, and test changes to prevent the deadlock from reoccurring.
 
-We use the [SQL Server Management Studio](/sql/ssms/download-sql-server-management-studio-ssms) (SSMS) client in this article, as it contains functionality to display deadlock graphs in an interactive visual mode. You can use other clients such as [Azure Data Studio](/azure-data-studio/download-azure-data-studio), the [MSSQL extension for Visual Studio Code](/sql/tools/visual-studio-code-extensions/mssql/mssql-extension-visual-studio-code), [sqlcmd](/sql/tools/sqlcmd/sqlcmd-utility), or your favorite T-SQL querying tool to follow along with the examples, but you might only be able to view deadlock graphs as XML.
+We use the [SQL Server Management Studio](/ssms/install/install) (SSMS) client in this article, as it contains functionality to display deadlock graphs in an interactive visual mode. You can use other clients such as the [MSSQL extension for Visual Studio Code](/sql/tools/visual-studio-code-extensions/mssql/mssql-extension-visual-studio-code), [sqlcmd](/sql/tools/sqlcmd/sqlcmd-utility), or your favorite Transact-SQL querying tool to follow along with the examples, but you might only be able to view deadlock graphs as XML.
 
 ### Create the AdventureWorksLT database
 
 To follow along with the examples, create a new database in Azure SQL Database and select **Sample** data as the **Data source**.
 
-For detailed instructions on how to create `AdventureWorksLT` with the Azure portal, Azure CLI, or PowerShell, select the approach of your choice in [Quickstart: Create an Azure SQL Database single database](single-database-create-quickstart.md).
+For detailed instructions on how to create `AdventureWorksLT` with the Azure portal, Azure CLI, or PowerShell, select the approach of your choice in [Quickstart: Create a single database in Azure SQL Database](single-database-create-quickstart.md).
 
 ### Set up deadlock alerts in the Azure portal
 
-To set up alerts for deadlock events, follow the steps in the article [Create alerts for Azure SQL Database using the Azure portal](alerts-create.md).
+To set up alerts for deadlock events, follow the steps in the article [Create alerts for Azure SQL Database and Azure Synapse Analytics using the Azure portal](alerts-create.md).
 
 Select **Deadlocks** as the signal name for the alert. Configure the **Action group** to notify you using the method of your choice, such as the **Email/SMS/Push/Voice** action type.
 
@@ -184,7 +184,7 @@ To create an XEvents session that writes to an event file target, we:
 To configure an Azure Storage container, first create or select an existing Azure Storage account, then create the container. Generate a Shared Access Signature (SAS) token for the container. This section describes completing this process in the Azure portal.
 
 > [!NOTE]  
-> If you wish to create and configure the Azure Storage blob container with PowerShell, see [Event File target code for extended events in Azure SQL Database and SQL database in Fabric](xevent-code-event-file.md). Alternately, you might find it convenient to [Use Azure Storage Explorer](#use-azure-storage-explorer) to create and configure the Azure Storage blob container instead of using the Azure portal.
+> If you wish to create and configure the Azure Storage blob container with PowerShell, see [Create an event session with an event_file target in Azure Storage](xevent-code-event-file.md). Alternately, you might find it convenient to [Use Azure Storage Explorer](#use-azure-storage-explorer) to create and configure the Azure Storage blob container instead of using the Azure portal.
 
 #### Create or select an Azure Storage account
 
@@ -206,7 +206,7 @@ From the storage account page in the Azure portal:
 1. Select **+ Container** to create a new container. The New container pane appears.
 1. Enter a name for the container under **Name**.
 1. Select **Create**.
-1. Select the container from the list after it is created.
+1. Select the container from the list after it's created.
 
 #### Create a shared access token
 
@@ -294,69 +294,9 @@ GO
 
 ---
 
-## Cause a deadlock in AdventureWorksLT
+## Cause a deadlock
 
-> [!NOTE]  
-> This example works in the `AdventureWorksLT` database with the default schema and data when RCSI is enabled. See [Create the AdventureWorksLT database](#create-the-adventureworkslt-database) for instructions to create the database.
-
-To cause a deadlock, you need to connect two sessions to the `AdventureWorksLT` database. We refer to these sessions as **Session A** and **Session B**.
-
-In **Session A**, run the following Transact-SQL. This code begins an [explicit transaction](/sql/relational-databases/sql-server-transaction-locking-and-row-versioning-guide#starting-transactions) and runs a single statement that updates the `SalesLT.Product` table. To do this, the transaction acquires an [update (U) lock](/sql/relational-databases/sql-server-transaction-locking-and-row-versioning-guide#behavior-when-modifying-data) on one row on table `SalesLT.Product` which is converted to an exclusive (X) lock. We leave the transaction open.
-
-```sql
-BEGIN TRANSACTION;
-
-UPDATE SalesLT.Product
-SET SellEndDate = SellEndDate + 1
-WHERE Color = 'Red';
-```
-
-Now, in **Session B**, run the following Transact-SQL. This code doesn't explicitly begin a transaction. Instead, it operates in [autocommit transaction mode](/sql/relational-databases/sql-server-transaction-locking-and-row-versioning-guide#starting-transactions). This statement updates the `SalesLT.ProductDescription` table. The update takes out an update (U) lock on 72 rows on the `SalesLT.ProductDescription` table. The query joins to other tables, including the `SalesLT.Product` table.
-
-```sql
-UPDATE SalesLT.ProductDescription
-    SET Description = Description
-FROM SalesLT.ProductDescription AS pd
-     INNER JOIN SalesLT.ProductModelProductDescription AS pmpd
-         ON pd.ProductDescriptionID = pmpd.ProductDescriptionID
-     INNER JOIN SalesLT.ProductModel AS pm
-         ON pmpd.ProductModelID = pm.ProductModelID
-     INNER JOIN SalesLT.Product AS p
-         ON pm.ProductModelID = p.ProductModelID
-WHERE p.Color = 'Silver';
-```
-
-To complete this update, **Session B** needs a shared (S) lock on rows on the table `SalesLT.Product`, including the row that is locked by **Session A**. **Session B** is blocked on `SalesLT.Product`.
-
-Return to **Session A**. Run the following Transact-SQL statement. This runs a second `UPDATE` statement as part of the open transaction.
-
-```sql
-UPDATE SalesLT.ProductDescription
-    SET Description = Description
-FROM SalesLT.ProductDescription AS pd
-     INNER JOIN SalesLT.ProductModelProductDescription AS pmpd
-         ON pd.ProductDescriptionID = pmpd.ProductDescriptionID
-     INNER JOIN SalesLT.ProductModel AS pm
-         ON pmpd.ProductModelID = pm.ProductModelID
-     INNER JOIN SalesLT.Product AS p
-         ON pm.ProductModelID = p.ProductModelID
-WHERE p.Color = 'Red';
-```
-
-The second update statement in **Session A** is blocked by **Session B** on the `SalesLT.ProductDescription`.
-
-**Session A** and **Session B** are now mutually blocking one another. Neither transaction can proceed, as they each need a resource that is locked by the other.
-
-After a few seconds, the deadlock monitor identifies that the transactions in **Session A** and **Session B** are mutually blocking one another, and that neither can make progress. You should see a deadlock occur, with **Session A** chosen as the deadlock victim. An error message appears in **Session A** with text similar to the following:
-
-```output
-Msg 1205, Level 13, State 51, Line 7
-Transaction (Process ID 91) was deadlocked on lock resources with another process and has been chosen as the deadlock victim. Rerun the transaction.
-```
-
-**Session B** completes successfully.
-
-If you [set up deadlock alerts in the Azure portal](#set-up-deadlock-alerts-in-the-azure-portal), you should receive a notification shortly after the deadlock occurs.
+Because [optimized locking](/sql/relational-databases/performance/optimized-locking) is always enabled in Azure SQL Database and SQL database in Fabric, deadlocks are less likely. For more information, and for an example of a deadlock that can occur with optimized locking, see [Optimized locking and deadlocks](/sql/relational-databases/sql-server-deadlocks-guide#optimized-locking-and-deadlocks).
 
 ## View deadlock graphs from an XEvents session
 

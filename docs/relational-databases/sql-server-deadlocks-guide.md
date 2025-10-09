@@ -3,26 +3,27 @@ title: Deadlocks Guide
 description: Learn about deadlocks in the SQL Server Database Engine.
 author: MikeRayMSFT
 ms.author: mikeray
-ms.reviewer: randolphwest, wiassaf
-ms.date: 07/14/2025
+ms.reviewer: randolphwest, wiassaf, dfurman
+ms.date: 10/09/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
+ms.custom:
+  - ignite-2024
+  - sfi-image-nochange
 helpviewer_keywords:
   - "deadlocks, [SQL Server]"
   - "deadlock, [SQL Server]"
 monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
-ms.custom:
-  - ignite-2024
-  - sfi-image-nochange
 ---
+
 # Deadlocks guide
 
 [!INCLUDE [SQL Server Azure SQL Database Azure SQL Managed Instance Azure Synapse Analytics PDW FabricSQLDB](../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
 
-This article discusses deadlocks in the [!INCLUDE [ssdenoversion-md](../includes/ssdenoversion-md.md)] in depth. Deadlocks are caused by competing, concurrent locks in the database, often in multi-step transactions. For more on transaction locking, see [Transaction locking and row versioning guide](sql-server-transaction-locking-and-row-versioning-guide.md).
+This article discusses deadlocks in the [!INCLUDE [ssDE-md](../includes/ssde-md.md)] in depth. Deadlocks are caused by competing, concurrent locks in the database, often in multi-step transactions. For more information about transactions and locks, see [Transaction locking and row versioning guide](sql-server-transaction-locking-and-row-versioning-guide.md).
 
-For more specific information on identification and prevention of deadlocks in Azure SQL Database, see [Analyze and prevent deadlocks in Azure SQL Database and Fabric SQL database](/azure/azure-sql/database/analyze-prevent-deadlocks).
+For more specific information on identification and prevention of deadlocks in Azure SQL Database and SQL database in Fabric, see [Analyze and prevent deadlocks in Azure SQL Database and SQL database in Fabric](/azure/azure-sql/database/analyze-prevent-deadlocks).
 
 <a id="deadlocks"></a>
 
@@ -40,21 +41,19 @@ A deadlock occurs when two or more tasks permanently block each other by each ta
 
 Transaction A can't complete until transaction B completes, but transaction B is blocked by transaction A. This condition is also called a cyclic dependency: Transaction A has a dependency on transaction B, and transaction B closes the circle by having a dependency on transaction A.
 
-Both transactions in a deadlock wait forever, unless the deadlock is broken by an external process. The [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)] deadlock monitor periodically checks for tasks that are in a deadlock. If the monitor detects a cyclic dependency, it chooses one of the tasks as a victim and terminates its transaction with an error. This allows the other task to complete its transaction. The application with the transaction that terminated with an error can retry the transaction, which usually completes after the other deadlocked transaction finishes.
+Both transactions in a deadlock wait forever, unless the deadlock is broken by an external process. The [!INCLUDE [ssDE-md](../includes/ssde-md.md)] deadlock monitor periodically checks for tasks that are in a deadlock. If the monitor detects a cyclic dependency, it chooses one of the tasks as a victim and terminates its transaction with an error. This allows the other task to complete its transaction. The application with the transaction that terminated with an error can retry the transaction, which usually completes after the other deadlocked transaction finishes.
 
-Deadlocking is often confused with normal blocking. When a transaction requests a lock on a resource locked by another transaction, the requesting transaction waits until the lock is released. By default, [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] transactions don't time out, unless `LOCK_TIMEOUT` is set. The requesting transaction is blocked, not deadlocked, because the requesting transaction hasn't done anything to block the transaction owning the lock. Eventually, the owning transaction completes and releases the lock, and then the requesting transaction is granted the lock and proceeds. Deadlocks are resolved almost immediately, whereas blocking can, in theory, persist indefinitely. Deadlocks are sometimes called a deadly embrace.
+Deadlocking is often confused with normal blocking. When a transaction requests a lock on a resource locked by another transaction, the requesting transaction waits until the lock is released. By default, transactions in the [!INCLUDE [ssDE-md](../includes/ssde-md.md)] don't time out, unless `LOCK_TIMEOUT` is set. The requesting transaction is blocked, not deadlocked, because the requesting transaction hasn't done anything to block the transaction owning the lock. Eventually, the owning transaction completes and releases the lock, and then the requesting transaction is granted the lock and proceeds. Deadlocks are resolved almost immediately, whereas blocking can, in theory, persist indefinitely. Deadlocks are sometimes called a deadly embrace.
 
-A deadlock can occur on any system with multiple threads, not just on a relational database management system, and can occur for resources other than locks on database objects. For example, a thread in a multithreaded operating system might acquire one or more resources, such as blocks of memory. If the resource being acquired is currently owned by another thread, the first thread might have to wait for the owning thread to release the target resource. The waiting thread is said to have a dependency on the owning thread for that particular resource. In an instance of the [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)], sessions can deadlock when acquiring non-database resources, such as memory or threads.
+A deadlock can occur on any system with multiple threads, not just on a relational database management system, and can occur for resources other than locks on database objects. For example, a thread in a multithreaded operating system might acquire one or more resources, such as blocks of memory. If the resource being acquired is currently owned by another thread, the first thread might have to wait for the owning thread to release the target resource. The waiting thread is said to have a dependency on the owning thread for that particular resource. In an instance of the [!INCLUDE [ssDE-md](../includes/ssde-md.md)], sessions can deadlock when acquiring non-database resources, such as memory or threads.
 
 :::image type="content" source="media/sql-server-deadlocks-guide/deadlock.png" alt-text="Diagram showing a transaction deadlock.":::
 
 In the illustration, transaction T1 has a dependency on transaction T2 for the `Part` table lock resource. Similarly, transaction T2 has a dependency on transaction T1 for the `Supplier` table lock resource. Because these dependencies form a cycle, there's a deadlock between transactions T1 and T2.
 
-Deadlocks can also occur when a table is partitioned and the `LOCK_ESCALATION` setting of `ALTER TABLE` is set to `AUTO`. When `LOCK_ESCALATION` is set to `AUTO`, concurrency increases by allowing the [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)] to lock table partitions at the HoBT level instead of at the table level. However, when separate transactions hold partition locks in a table and want a lock somewhere on the other transactions partition, this causes a deadlock. This type of deadlock can be avoided by setting `LOCK_ESCALATION` to `TABLE`. However, this setting reduces concurrency by forcing large updates to a partition to wait for a table lock.
+Here's a more general illustration of a deadlock:
 
-## Detect and end deadlocks
-
-A deadlock occurs when two or more tasks permanently block each other by each task having a lock on a resource that the other tasks are trying to lock. The following graph presents a high level view of a deadlock state where:
+:::image type="content" source="media/sql-server-deadlocks-guide/task-deadlock-state.png" alt-text="Diagram showing the tasks in a deadlock state.":::
 
 - Task T1 has a lock on resource R1 (indicated by the arrow from R1 to T1), and has requested a lock on resource R2 (indicated by the arrow from T1 to R2).
 
@@ -62,23 +61,22 @@ A deadlock occurs when two or more tasks permanently block each other by each ta
 
 - Because neither task can continue until a resource is available and neither resource can be released until a task continues, a deadlock state exists.
 
-  :::image type="content" source="media/sql-server-deadlocks-guide/task-deadlock-state.png" alt-text="Diagram showing the tasks in a deadlock state.":::
-
-The [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)] automatically detects deadlock cycles within [!INCLUDE [ssnoversion](../includes/ssnoversion-md.md)]. The [!INCLUDE [ssdenoversion](../includes/ssdenoversion-md.md)] chooses one of the sessions as a deadlock victim and the current transaction is terminated with an error to break the deadlock.
+> [!NOTE]  
+> The [!INCLUDE [ssDE-md](../includes/ssde-md.md)] automatically detects deadlock cycles. It chooses one of the transactions as a deadlock victim and terminates it with an error to break the deadlock.
 
 <a id="deadlock_resources"></a>
 
-### Resources that can deadlock
+## Resources that can deadlock
 
 Each user session might have one or more tasks running on its behalf where each task might acquire or wait to acquire resources. The following types of resources can cause blocking that could result in a deadlock.
 
-- **Locks**. Waiting to acquire locks on resources, such as objects, pages, rows, metadata, and applications can cause a deadlock. For example, transaction T1 has a shared (S) lock on row r1 and is waiting to get an exclusive (X) lock on r2. Transaction T2 has a shared (S) lock on r2 and is waiting to get an exclusive (X) lock on row r1. This results in a lock cycle in which T1 and T2 wait for each other to release the locked resources.
+- **Locks**. Waiting to acquire locks on resources, such as objects, pages, rows, metadata, and applications can cause a deadlock. For example, transaction T1 has a shared (`S`) lock on row r1 and is waiting to get an exclusive (`X`) lock on r2. Transaction T2 has a shared (`S`) lock on r2 and is waiting to get an exclusive (`X`) lock on row r1. This results in a lock cycle in which T1 and T2 wait for each other to release the locked resources.
 
-- **Worker threads**. A queued task waiting for an available worker thread can cause a deadlock. If the queued task owns resources that are blocking all worker threads, a deadlock results. For example, session S1 starts a transaction and acquires a shared (S) lock on row r1 and then goes to sleep. Active sessions running on all available worker threads are trying to acquire exclusive (X) locks on row r1. Because session S1 can't acquire a worker thread, it can't commit the transaction and release the lock on row r1. This results in a deadlock.
+- **Worker threads**. A queued task waiting for an available worker thread can cause a deadlock. If the queued task owns resources that are blocking all worker threads, a deadlock results. For example, session S1 starts a transaction and acquires a shared (`S`) lock on row r1 and then goes to sleep. Active sessions running on all available worker threads are trying to acquire exclusive (`X`) locks on row r1. Because session S1 can't acquire a worker thread, it can't commit the transaction and release the lock on row r1. This results in a deadlock.
 
 - **Memory**. When concurrent requests are waiting for memory grants that can't be satisfied with the available memory, a deadlock can occur. For example, two concurrent queries, Q1 and Q2, execute as user-defined functions that acquire 10 MB and 20 MB of memory respectively. If each query needs 30 MB and the total available memory is 20 MB, then Q1 and Q2 must wait for each other to release memory, which results in a deadlock.
 
-- **Parallel query execution-related resources**. Coordinator, producer, or consumer threads associated with an exchange port might block each other causing a deadlock usually when including at least one other process that isn't a part of the parallel query. Also, when a parallel query starts execution, [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] determines the degree of parallelism, or the number of worker threads, based upon the current workload. If the system workload unexpectedly changes, for example, where new queries start running on the server or the system runs out of worker threads, then a deadlock could occur.
+- **Parallel query execution-related resources**. Coordinator, producer, or consumer threads associated with an exchange port might block each other causing a deadlock usually when including at least one other process that isn't a part of the parallel query. Also, when a parallel query starts execution, the [!INCLUDE [ssDE-md](../includes/ssde-md.md)] determines the degree of parallelism, and the number of required worker threads, based upon the current workload. If the system workload unexpectedly changes, for example, where new queries start running on the server or the system runs out of worker threads, then a deadlock could occur.
 
 - **Multiple Active Result Sets (MARS) resources**. These resources are used to control interleaving of multiple active requests under MARS. For more information, see [Using Multiple Active Result Sets (MARS) in SQL Server Native Client](native-client/features/using-multiple-active-result-sets-mars.md).
 
@@ -95,50 +93,53 @@ Each user session might have one or more tasks running on its behalf where each 
     U2:    Rs2=Command2.Execute("select colA from sometable");
     ```
 
-    The stored procedure executing from user request U1 has acquired the session mutex. If the stored procedure takes a long time to execute, it's assumed by the [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)] that the stored procedure is waiting for input from the user. User request U2 is waiting for the session mutex while the user is waiting for the result set from U2, and U1 is waiting for a user resource. This is deadlock state logically illustrated as:
+    The stored procedure executing from user request U1 has acquired the session mutex. If the stored procedure takes a long time to execute, it's assumed by the [!INCLUDE [ssDE-md](../includes/ssde-md.md)] that the stored procedure is waiting for input from the user. User request U2 is waiting for the session mutex while the user is waiting for the result set from U2, and U1 is waiting for a user resource. This is deadlock state logically illustrated as:
 
     :::image type="content" source="media/sql-server-deadlocks-guide/logical-flow-example-stored-procedure-mars.png" alt-text="Diagram of the logical flow of a stored procedure in MARS.":::
+
+Deadlocks can also occur when a table is partitioned and the `LOCK_ESCALATION` setting of `ALTER TABLE` is set to `AUTO`. When `LOCK_ESCALATION` is set to `AUTO`, concurrency increases by allowing the [!INCLUDE [ssDE-md](../includes/ssde-md.md)] to lock table partitions at the HoBT level instead of at the table level. However, when separate transactions hold partition locks in a table and want a lock somewhere on the other transactions partition, this causes a deadlock. This type of deadlock can be avoided by setting `LOCK_ESCALATION` to `TABLE`. However, this setting reduces concurrency by forcing large updates to a partition to wait for a table lock.
 
 <a id="deadlock_detection"></a>
 
 ## Deadlock detection
 
-All of the resources listed in the [Resources that can deadlock](#deadlock_resources) section participate in the [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)] deadlock detection scheme. Deadlock detection is performed by a lock monitor thread that periodically initiates a search through all of the tasks in an instance of the [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)]. The following points describe the search process:
+All of the resources listed in the [Resources that can deadlock](#deadlock_resources) section participate in the [!INCLUDE [ssDE-md](../includes/ssde-md.md)] deadlock detection scheme. Deadlock detection is performed by a lock monitor thread that periodically initiates a search through all of the tasks in an instance of the [!INCLUDE [ssDE-md](../includes/ssde-md.md)]. The following points describe the search process:
 
 - The default interval is 5 seconds.
 
 - If the lock monitor thread finds deadlocks, the deadlock detection interval drops from 5 seconds to as low as 100 milliseconds depending on the frequency of deadlocks.
 
-- If the lock monitor thread stops finding deadlocks, the [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)] increases the intervals between searches to 5 seconds.
+- If the lock monitor thread stops finding deadlocks, the [!INCLUDE [ssDE-md](../includes/ssde-md.md)] increases the intervals between searches to 5 seconds.
 
-- If a deadlock is detected, it's assumed that the next threads that must wait for a lock are entering the deadlock cycle. The first few lock waits after a deadlock is detected immediately trigger a deadlock search, rather than wait for the next deadlock detection interval. For example, if the current interval is 5 seconds, and a deadlock was just detected, the next lock wait kicks off the deadlock detector immediately. If this lock wait is part of a deadlock, it's detected right away, rather than during next deadlock search.
+- If a deadlock is detected, it's assumed that the new threads that must wait for a lock are entering the deadlock cycle. The first few lock waits after a deadlock is detected immediately trigger a deadlock search, rather than wait for the next deadlock detection interval. For example, if the current interval is 5 seconds, and a deadlock was just detected, the next lock wait kicks off the deadlock detector immediately. If this lock wait is part of a deadlock, it's detected right away, rather than during the next deadlock search.
 
-The [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)] typically performs periodic deadlock detection only. Because the number of deadlocks encountered in the system is usually small, periodic deadlock detection helps to reduce the overhead of deadlock detection in the system.
+The [!INCLUDE [ssDE-md](../includes/ssde-md.md)] typically performs periodic deadlock detection only. Because the number of deadlocks encountered in the system is usually small, periodic deadlock detection helps reduce the overhead of deadlock detection in the system.
 
 When the lock monitor initiates deadlock search for a particular thread, it identifies the resource on which the thread is waiting. The lock monitor then finds the owners for that particular resource and recursively continues the deadlock search for those threads until it finds a cycle. A cycle identified in this manner forms a deadlock.
 
-After a deadlock is detected, the [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)] ends a deadlock by choosing one of the threads as a deadlock victim. The [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)] terminates the current batch being executed for the thread, rolls back the transaction of the deadlock victim, and returns a 1205 error to the application. Rolling back the transaction for the deadlock victim releases all locks held by the transaction. This allows the transactions of the other threads to become unblocked and continue. The 1205 deadlock victim error records information about the threads and resources involved in a deadlock in the error log.
+After a deadlock is detected, the [!INCLUDE [ssDE-md](../includes/ssde-md.md)] ends a deadlock by choosing one of the threads as a deadlock victim. The [!INCLUDE [ssDE-md](../includes/ssde-md.md)] terminates the current batch being executed for the thread, rolls back the transaction of the deadlock victim, and returns error 1205 to the application. Rolling back the transaction for the deadlock victim releases all locks held by the transaction. This allows the transactions of the other threads to become unblocked and continue. The 1205 (deadlock victim) error records information about the type of resources involved in a deadlock.
 
-By default, the [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)] chooses as the deadlock victim the session running the transaction that is least expensive to roll back. Alternatively, a user can specify the priority of sessions in a deadlock situation using the `SET DEADLOCK_PRIORITY` statement. `DEADLOCK_PRIORITY` can be set to `LOW`, `NORMAL`, or `HIGH`, or alternatively can be set to any integer value in the range (-10 to 10). The deadlock priority defaults to `NORMAL`. If two sessions have different deadlock priorities, the session with the lower priority is chosen as the deadlock victim. If both sessions have the same deadlock priority, the session with the transaction that is least expensive to roll back is chosen. If sessions involved in the deadlock cycle have the same deadlock priority and the same cost, a victim is chosen randomly.
+By default, the [!INCLUDE [ssDE-md](../includes/ssde-md.md)] chooses the transaction running the transaction that is the least expensive to roll back as the deadlock victim. Alternatively, a user can specify the priority of sessions in a deadlock situation using the `SET DEADLOCK_PRIORITY` statement. `DEADLOCK_PRIORITY` can be set to `LOW`, `NORMAL`, or `HIGH`, or alternatively can be set to any integer value in the range from -10 to 10. In certain cases, the [!INCLUDE [ssDE-md](../includes/ssde-md.md)] might opt to alter the deadlock priority for a short duration to achieve better concurrency.
 
-When working with common language runtime (CLR), the deadlock monitor automatically detects deadlock for synchronization resources (monitors, reader/writer lock, and thread join) accessed inside managed procedures. However, the deadlock is resolved by throwing an exception in the procedure that was selected to be the deadlock victim. It's important to understand that the exception doesn't automatically release resources currently owned by the victim; the resources must be explicitly released. Consistent with exception behavior, the exception used to identify a deadlock victim can be caught and dismissed.
+The deadlock priority defaults to `NORMAL`, or 0. If two sessions have different deadlock priorities, the transaction on the session with the lower priority is chosen as the deadlock victim. If both sessions have the same deadlock priority, the transaction that is least expensive to roll back is chosen. If sessions involved in the deadlock cycle have the same deadlock priority and the same cost, a victim is chosen randomly. A task that is rolling back can't be chosen as a deadlock victim.
+
+When working with common language runtime (CLR), the deadlock monitor automatically detects deadlocks for synchronization resources (monitors, reader/writer lock, and thread join) accessed inside managed procedures. However, the deadlock is resolved by throwing an exception in the procedure that was selected to be the deadlock victim. It's important to understand that the exception doesn't automatically release resources currently owned by the victim; the resources must be explicitly released. Consistent with exception behavior, the exception used to identify a deadlock victim can be caught and dismissed.
 
 <a id="deadlock_tools"></a>
 
 ## Deadlock information tools
 
-To view deadlock information, the [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)] provides monitoring tools in the form of the `system_health` XEvent session, two trace flags, and the deadlock graph event in SQL Profiler.
+To view deadlock information, the [!INCLUDE [ssDE-md](../includes/ssde-md.md)] provides monitoring tools in the form of the `xml_deadlock_report` extended event, two trace flags, and the deadlock graph event in SQL Profiler.
 
-> [!NOTE]  
-> This section contains information on extended events, trace flags, and traces, but the Deadlock extended event is the recommended method for capturing deadlock information.
+The `xml_deadlock_report` extended event is the recommended method for capturing deadlock information.
 
 <a id="deadlock_xevent"></a>
 
-### Deadlock Extended Event
+### Deadlock extended event
 
-In [!INCLUDE [ssSQL11](../includes/sssql11-md.md)] and later versions, the `xml_deadlock_report` Extended Event (XEvent) should be used instead of the Deadlock graph event class in SQL Trace or SQL Profiler.
+In [!INCLUDE [ssSQL11](../includes/sssql11-md.md)] and later versions, the `xml_deadlock_report` extended event should be used instead of the deadlock graph event class in SQL Trace or SQL Profiler.
 
-When deadlocks occur, the `system_health` session already captures all `xml_deadlock_report` XEvents that contain the deadlock graph. Because the `system_health` session is enabled by default, you don't need to configure a separate XEvent session to capture deadlock information. No additional action to capture deadlock information with the `xml_deadlock_report` XEvent is required.
+The [system_health](extended-events/use-the-system-health-session.md) event session captures `xml_deadlock_report` events by default. These events contain the deadlock graph. Because the `system_health` session is enabled by default, you don't need to configure a separate event session to capture deadlock information.
 
 The deadlock graph captured typically has three distinct nodes:
 
@@ -146,30 +147,30 @@ The deadlock graph captured typically has three distinct nodes:
 - `process-list`. Information on all the processes involved in the deadlock.
 - `resource-list`. Information about the resources involved in the deadlock.
 
-Opening the `system_health` session file or ring buffer, if the `xml_deadlock_report` XEvent is recorded, [!INCLUDE [ssManStudio](../includes/ssManStudio-md.md)] presents a graphical depiction of the tasks and resources involved in a deadlock, as seen in the following example:
+You can view the `event_file` target data of the `system_health` session in [!INCLUDE [ssManStudio](../includes/ssManStudio-md.md)]. If any `xml_deadlock_report` events occurred, [!INCLUDE [ssManStudio](../includes/ssManStudio-md.md)] presents a graphical depiction of the tasks and resources involved in a deadlock, as seen in the following example:
 
 :::image type="content" source="media/sql-server-deadlocks-guide/extended-event-xevent-deadlock-graph.png" alt-text="Screenshot from SSMS of a XEvent Deadlock Graph visual diagram." lightbox="media/sql-server-deadlocks-guide/extended-event-xevent-deadlock-graph.png":::
 
-The following query can view all deadlock events captured by the `system_health` session ring buffer:
+The following query can view all deadlock events captured by the `ring_buffer` target of the `system_health` session:
 
 ```sql
-SELECT xdr.value('@timestamp', 'datetime') AS [Date],
-       xdr.query('.') AS [Event_Data]
-FROM (SELECT CAST ([target_data] AS XML) AS Target_Data
+SELECT xdr.value('@timestamp', 'datetime') AS deadlock_time,
+       xdr.query('.') AS event_data
+FROM (SELECT CAST ([target_data] AS XML) AS target_data
       FROM sys.dm_xe_session_targets AS xt
            INNER JOIN sys.dm_xe_sessions AS xs
                ON xs.address = xt.event_session_address
       WHERE xs.name = N'system_health'
             AND xt.target_name = N'ring_buffer') AS XML_Data
 CROSS APPLY Target_Data.nodes('RingBufferTarget/event[@name="xml_deadlock_report"]') AS XEventData(xdr)
-ORDER BY [Date] DESC;
+ORDER BY deadlock_time DESC;
 ```
 
 [!INCLUDE [ssResult](../includes/ssresult-md.md)]
 
 :::image type="content" source="media/sql-server-deadlocks-guide/xevent-system-health-query.png" alt-text="Screenshot from SSMS of the system_health XEvent query result.":::
 
-The following example shows the output, after selecting on the link in `Event_Data` in the first row of the result:
+The following example shows an example of the output from the `event_data` column:
 
 ```xml
 <event name="xml_deadlock_report" package="sqlserver" timestamp="2022-02-18T08:26:24.698Z">
@@ -236,30 +237,26 @@ END
 </event>
 ```
 
-If you want to capture the plan that caused the deadlock, see [Using xEvents to capture an Actual Execution Plan](https://techcommunity.microsoft.com/blog/sqlserver/using-xevents-to-capture-an-actual-execution-plan/392136).
-
-For more information, see [Use the system_health session](extended-events/use-the-system-health-session.md)
-
 <a id="deadlock_traceflags"></a>
 
-### Trace Flag 1204 and Trace Flag 1222
+### Trace flag 1204 and trace flag 1222
 
-When deadlocks occur, Trace Flag 1204 and Trace Flag 1222 return information that is captured in the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] error log. Trace Flag 1204 reports deadlock information formatted by each node involved in the deadlock. Trace Flag 1222 formats deadlock information, first by processes and then by resources. It's possible to enable both trace flags to obtain two representations of the same deadlock event.
+When deadlocks occur and trace flag 1204 or trace flag 1222 is enabled, deadlock details are reported in the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] error log. Trace flag 1204 reports deadlock information formatted by each node involved in the deadlock. Trace flag 1222 formats deadlock information, first by processes and then by resources. It's possible to enable both trace flags to obtain two representations of the same deadlock event.
 
 > [!IMPORTANT]  
-> Avoid using Trace Flag 1204 and 1222 on workload-intensive systems that are experiencing deadlocks. Using these trace flags might introduce performance issues. Instead, use the [Deadlock Extended Event](#deadlock_xevent) to capture the necessary information.
+> Avoid using trace flags 1204 and 1222 on workload-intensive systems that are experiencing deadlocks. Using these trace flags might introduce performance issues. Instead, use the [Deadlock extended event](#deadlock_xevent) to capture the necessary information.
 
-In addition to defining the properties of Trace Flag 1204 and 1222, the following table also shows the similarities and differences.
+In addition to defining the properties of trace flags 1204 and 1222, the following table also shows the similarities and differences.
 
-| Property | Trace Flag 1204 and Trace Flag 1222 | Trace Flag 1204 only | Trace Flag 1222 only |
+| Property | Trace flag 1204 and trace flag 1222 | Trace flag 1204 only | Trace flag 1222 only |
 | --- | --- | --- | --- |
-| Output format | Output is captured in the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] error log. | Focused on the nodes involved in the deadlock. Each node has a dedicated section, and the final section describes the deadlock victim. | Returns information in an XML-like format that doesn't conform to an XML Schema Definition (XSD) schema. The format has three major sections. The first section declares the deadlock victim. The second section describes each process involved in the deadlock. The third section describes the resources that are synonymous with nodes in Trace Flag 1204. |
-| Identifying attributes | `SPID:<x> ECID:<x>.` Identifies the session ID thread in cases of parallel processes. The entry `SPID:<x> ECID:0`, where `<x>` is replaced by the SPID value, represents the main thread. The entry `SPID:<x> ECID:<y>`, where `<x>` is replaced by the SPID value and `<y>` is greater than 0, represents the subthreads for the same SPID.<br /><br />`BatchID` (`sbid` for Trace Flag 1222). Identifies the batch from which code execution is requesting or holding a lock. When Multiple Active Result Sets (MARS) is disabled, the BatchID value is 0. When MARS is enabled, the value for active batches is 1 to *n*. If there are no active batches in the session, BatchID is 0.<br /><br />`Mode` Specifies the type of lock for a particular resource that is requested, granted, or waited on by a thread. Mode can be IS (Intent Shared), S (Shared), U (Update), IX (Intent Exclusive), SIX (Shared with Intent Exclusive), and X (Exclusive).<br /><br />`Line #` (`line` for Trace Flag 1222). Lists the line number in the current batch of statements that was being executed when the deadlock occurred.<br /><br />`Input Buf` (`inputbuf` for Trace Flag 1222). Lists all the statements in the current batch. | `Node` Represents the entry number in the deadlock chain.<br /><br />`Lists` The lock owner can be part of these lists:<br /><br />`Grant List` Enumerates the current owners of the resource.<br /><br />`Convert List` Enumerates the current owners that are trying to convert their locks to a higher level.<br /><br />`Wait List` Enumerates current new lock requests for the resource.<br /><br />`Statement Type` Describes the type of DML statement (`SELECT`, `INSERT`, `UPDATE`, or `DELETE`) on which the threads have permissions.<br /><br />`Victim Resource Owner` Specifies the participating thread that [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] chooses as the victim to break the deadlock cycle. The chosen thread and all existing subthreads are terminated.<br /><br />`Next Branch` Represents the two or more subthreads from the same SPID that are involved in the deadlock cycle. | `deadlock victim` Represents the physical memory address of the task (see [sys.dm_os_tasks](system-dynamic-management-views/sys-dm-os-tasks-transact-sql.md)) that was selected as a deadlock victim. It might be 0 (zero) in the case of an unresolved deadlock. A task that is rolling back can't be chosen as a deadlock victim.<br /><br />`executionstack` Represents [!INCLUDE [tsql](../includes/tsql-md.md)] code that is being executed at the time the deadlock occurs.<br /><br />`priority` Represents deadlock priority. In certain cases, the [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)] might opt to alter the deadlock priority for a short duration to achieve better concurrency.<br /><br />`logused` Log space used by the task.<br /><br />`owner id` The ID of the transaction that has control of the request.<br /><br />`status` State of the task. It's one of the following values:<br /><br />- `pending` Waiting for a worker thread.<br /><br />- `runnable` Ready to run but waiting for a quantum.<br /><br />- `running` Currently running on the scheduler.<br /><br />- `suspended` Execution is suspended.<br /><br />- `done` Task has completed.<br /><br />- `spinloop` Waiting for a spinlock to become free.<br /><br />`waitresource` The resource needed by the task.<br /><br />`waittime` Time in milliseconds waiting for the resource.<br /><br />`schedulerid` Scheduler associated with this task. See [sys.dm_os_schedulers](system-dynamic-management-views/sys-dm-os-schedulers-transact-sql.md).<br /><br />`hostname` The name of the workstation.<br /><br />`isolationlevel` The current transaction isolation level.<br /><br />`Xactid` The ID of the transaction that has control of the request.<br /><br />`currentdb` The ID of the database.<br /><br />`lastbatchstarted` The last time a client process started batch execution.<br /><br />`lastbatchcompleted` The last time a client process completed batch execution.<br /><br />`clientoption1` and `clientoption2` Set options on this client connection. This is a bitmask that includes information about options usually controlled by SET statements such as `SET NOCOUNT` and `SET XACTABORT`.<br /><br />`associatedObjectId` Represents the HoBT (heap or B-tree) ID. |
-| Resource attributes | `RID` identifies the single row within a table on which a lock is held or requested. RID is represented as RID: `db_id:file_id:page_no:row_no`. For example, `RID: 6:1:20789:0`.<br /><br />`OBJECT` identifies the table on which a lock is held or requested. `OBJECT` is represented as `OBJECT: db_id:object_id`. For example, `TAB: 6:2009058193`.<br /><br />`KEY` Identifies the key range within an index on which a lock is held or requested. KEY is represented as KEY: `db_id:hobt_id` (*index key hash value*). For example, `KEY: 6:72057594057457664 (350007a4d329)`.<br /><br />`PAG` Identifies the page resource on which a lock is held or requested. PAG is represented as PAG: `db_id:file_id:page_no`. For example, `PAG: 6:1:20789`.<br /><br />`EXT` Identifies the extent structure. EXT is represented as EXT: `db_id:file_id:extent_no`. For example, `EXT: 6:1:9`.<br /><br />`DB` Identifies the database lock. `DB` is represented in one of the following ways:<br /><br />DB: `db_id`<br /><br />DB: `db_id[BULK-OP-DB]`, which identifies the database lock taken by the backup database.<br /><br />DB: `db_id[BULK-OP-LOG]`, which identifies the lock taken by the backup log for that particular database.<br /><br />`APP` Identifies the lock taken by an application resource. APP is represented as APP: `lock_resource`. For example, `APP: Formf370f478`.<br /><br />`METADATA` Represents metadata resources involved in a deadlock. Because `METADATA` has many subresources, the value returned depends upon the subresource that has deadlocked. For example, `METADATA.USER_TYPE` returns `user_type_id = *integer_value*`. For more information about `METADATA` resources and subresources, see [sys.dm_tran_locks](system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).<br /><br />`HOBT` Represents a heap or B-tree involved in a deadlock. | None exclusive to this trace flag. | None exclusive to this trace flag. |
+| Output format | Output is captured in the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] error log. | Focused on the nodes involved in the deadlock. Each node has a dedicated section, and the final section describes the deadlock victim. | Returns information in an XML-like format that doesn't conform to an XML Schema Definition (XSD) schema. The format has three major sections. The first section declares the deadlock victim. The second section describes each process involved in the deadlock. The third section describes the resources that are synonymous with nodes in trace flag 1204. |
+| Identifying attributes | `SPID:<x> ECID:<x>.` Identifies the session ID thread in cases of parallel processes. The entry `SPID:<x> ECID:0`, where `<x>` is replaced by the SPID value, represents the main thread. The entry `SPID:<x> ECID:<y>`, where `<x>` is replaced by the SPID value and `<y>` is greater than 0, represents the execution context for the same SPID.<br /><br />`BatchID` (`sbid` for trace flag 1222). Identifies the batch from which code execution is requesting or holding a lock. When Multiple Active Result Sets (MARS) is disabled, the BatchID value is 0. When MARS is enabled, the value for active batches is 1 to *n*. If there are no active batches in the session, BatchID is 0.<br /><br />`Mode` Specifies the type of lock for a particular resource that is requested, granted, or waited on by a thread. Mode can be Intent Shared (`IS`), Shared (`S`), Update (`U`), Intent Exclusive (`IX`), Shared with Intent Exclusive (`SIX`), and Exclusive (`X`).<br /><br />`Line #` (`line` for trace flag 1222). Lists the line number in the current batch of statements that was being executed when the deadlock occurred.<br /><br />`Input Buf` (`inputbuf` for trace flag 1222). Lists all the statements in the current batch. | `Node` Represents the entry number in the deadlock chain.<br /><br />`Lists` The lock owner can be part of these lists:<br /><br />`Grant List` Enumerates the current owners of the resource.<br /><br />`Convert List` Enumerates the current owners that are trying to convert their locks to a higher level.<br /><br />`Wait List` Enumerates current new lock requests for the resource.<br /><br />`Statement Type` Describes the type of statement (`SELECT`, `INSERT`, `UPDATE`, or `DELETE`) on which the threads have permissions.<br /><br />`Victim Resource Owner` Specifies the participating thread that the [!INCLUDE [ssDE-md](../includes/ssde-md.md)] chooses as the victim to break the deadlock cycle. The chosen thread and all of its execution contexts are terminated.<br /><br />`Next Branch` Represents the two or more execution contexts from the same SPID that are involved in the deadlock cycle. | `deadlock victim` Represents the physical memory address of the task (see [sys.dm_os_tasks](system-dynamic-management-views/sys-dm-os-tasks-transact-sql.md)) that was selected as a deadlock victim. The value might be zero in the case of an unresolved deadlock.<br /><br />`executionstack` Represents the [!INCLUDE [tsql](../includes/tsql-md.md)] call stack that is being executed at the time the deadlock occurs.<br /><br />`priority` Represents deadlock priority.<br /><br />`logused` Log space used by the task.<br /><br />`owner id` The ID of the transaction that has control of the request.<br /><br />`status` State of the task. For more information, see [sys.dm_os_tasks](system-dynamic-management-views/sys-dm-os-tasks-transact-sql.md).<br /><br />`waitresource` The resource needed by the task.<br /><br />`waittime` Time in milliseconds waiting for the resource.<br /><br />`schedulerid` The scheduler associated with this task. See [sys.dm_os_schedulers](system-dynamic-management-views/sys-dm-os-schedulers-transact-sql.md).<br /><br />`hostname` The name of the workstation.<br /><br />`isolationlevel` The current transaction isolation level.<br /><br />`Xactid` The ID of the transaction that has control of the request.<br /><br />`currentdb` The ID of the database.<br /><br />`lastbatchstarted` The last time a client process started batch execution.<br /><br />`lastbatchcompleted` The last time a client process completed batch execution.<br /><br />`clientoption1` and `clientoption2` The set options on this session. These values are bitmasks representing the options usually controlled by `SET` statements such as `SET NOCOUNT` and `SET XACTABORT`. For more information, see [@@OPTIONS](../t-sql/functions/options-transact-sql.md).<br /><br />`associatedObjectId` Represents the HoBT (heap or B-tree) ID. |
+| Resource attributes | `RID` identifies the single row within a table on which a lock is held or requested. RID is represented as RID: `db_id:file_id:page_no:row_no`. For example, `RID: 6:1:20789:0`.<br /><br />`OBJECT` identifies the table on which a lock is held or requested. `OBJECT` is represented as `OBJECT: db_id:object_id`. For example, `TAB: 6:2009058193`.<br /><br />`KEY` Identifies the key range within an index on which a lock is held or requested. KEY is represented as KEY: `db_id:hobt_id` (*index key hash value*). For example, `KEY: 6:72057594057457664 (350007a4d329)`.<br /><br />`PAG` Identifies the page resource on which a lock is held or requested. `PAG` is represented as `PAG: db_id:file_id:page_no`. For example, `PAG: 6:1:20789`.<br /><br />`EXT` Identifies the extent structure. `EXT` is represented as `EXT: db_id:file_id:extent_no`. For example, `EXT: 6:1:9`.<br /><br />`DB` Identifies the database lock. `DB` is represented in one of the following ways:<br /><br />`DB: db_id`<br /><br />`DB: db_id[BULK-OP-DB]`, which identifies the database lock taken by database backup.<br /><br />`DB: db_id[BULK-OP-LOG]`, which identifies the lock taken by the log backup.<br /><br />`APP` Identifies an application lock. `APP` is represented as `APP: lock_resource`. For example, `APP: Formf370f478`.<br /><br />`METADATA` Represents metadata resources involved in a deadlock. Because `METADATA` has many subresources, the value returned depends upon the subresource that has deadlocked. For example, `METADATA.USER_TYPE` returns `user_type_id = *integer_value*`. For more information about `METADATA` resources and subresources, see [sys.dm_tran_locks](system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).<br /><br />`HOBT` Represents a heap or B-tree involved in a deadlock. | None exclusive to this trace flag. | None exclusive to this trace flag. |
 
-#### Trace Flag 1204 example
+#### Trace flag 1204 example
 
-The following example shows the output when Trace Flag 1204 is turned on. In this case, the table in Node 1 is a heap with no indexes, and the table in Node 2 is a heap with a nonclustered index. The index key in Node 2 is being updated when the deadlock occurs.
+The following example shows the output when trace flag 1204 is turned on. In this case, the table in Node 1 is a heap with no indexes, and the table in Node 2 is a heap with a nonclustered index. The index key in Node 2 is being updated when the deadlock occurs.
 
 ```output
 Deadlock encountered .... Printing deadlock information
@@ -298,9 +295,9 @@ Victim Resource Owner:
      Mode: U SPID:55 BatchID:0 ECID:0 TaskProxy:(0x0475E374) Value:0x315d4a0 Cost:(0/380)
 ```
 
-#### Trace Flag 1222 example
+#### Trace flag 1222 example
 
-The following example shows the output when Trace Flag 1222 is turned on. In this case, one table is a heap with no indexes, and the other table is a heap with a nonclustered index. In the second table, the index key is being updated when the deadlock occurs.
+The following example shows the output when trace flag 1222 is turned on. In this case, one table is a heap with no indexes, and the other table is a heap with a nonclustered index. In the second table, the index key is being updated when the deadlock occurs.
 
 ```output
 deadlock-list
@@ -367,32 +364,31 @@ deadlock-list
 
 ### Profiler deadlock graph event
 
-This is an event in SQL Profiler that presents a graphical depiction of the tasks and resources involved in a deadlock. The following example shows the output from SQL Profiler when the deadlock graph event is turned on.
+SQL Profiler has an event that presents a graphical depiction of the tasks and resources involved in a deadlock. The following example shows the output from SQL Profiler when the deadlock graph event is turned on.
 
-> [!IMPORTANT]  
-> The SQL Profiler creates traces, which were deprecated in 2016 and replaced by Extended Events. Extended Events have far less performance overhead and are far more configurable than traces. Consider using the [Extended Events deadlock event](#deadlock_xevent) instead of traces.
+The SQL Profiler and SQL Trace features are deprecated and replaced by Extended Events. Extended Events has a smaller performance overhead, and is more configurable than SQL Trace. Consider using the [Extended Events deadlock event](#deadlock_xevent) instead of tracing deadlocks in SQL Profiler.
 
 :::image type="content" source="media/sql-server-deadlocks-guide/profiler-deadlock-graph.png" alt-text="Screenshot from SSMS of the visual deadlock graph from a SQL trace.":::
 
-For more information about the deadlock event, see [Lock:Deadlock Event Class](event-classes/lock-deadlock-event-class.md). For more information about running the SQL Profiler deadlock graph, see [Save deadlock graphs (SQL Server Profiler)](performance/save-deadlock-graphs-sql-server-profiler.md).
+For more information about the deadlock event, see [Lock:Deadlock Event Class](event-classes/lock-deadlock-event-class.md). For more information about SQL Profiler deadlock graphs, see [Save deadlock graphs (SQL Server Profiler)](performance/save-deadlock-graphs-sql-server-profiler.md).
 
-There are equivalents for SQL Trace event classes in Extended Events, see [View the Extended Events Equivalents to SQL Trace Event Classes](extended-events/view-the-extended-events-equivalents-to-sql-trace-event-classes.md). Extended events are recommended over SQL Traces.
+Extended Events provides equivalents of SQL Trace event classes. For more information, see [View the Extended Events Equivalents to SQL Trace Event Classes](extended-events/view-the-extended-events-equivalents-to-sql-trace-event-classes.md). Extended Events is recommended over SQL Trace.
 
 ## Handle deadlocks
 
-When an instance of the [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)] chooses a transaction as a deadlock victim, it terminates the current batch, rolls back the transaction, and returns error message 1205 to the application.
+When an instance of the [!INCLUDE [ssDE-md](../includes/ssde-md.md)] chooses a transaction as a deadlock victim, it terminates the current batch, rolls back the transaction, and returns error 1205 to the application. The returned message is structured as follows:
 
-`Your transaction (process ID #52) was deadlocked on {lock | communication buffer | thread} resources with another process and has been chosen as the deadlock victim. Rerun your transaction.`
+`Your transaction (process ID #...) was deadlocked on {lock | communication buffer | thread} resources with another process and has been chosen as the deadlock victim. Rerun your transaction.`
 
-Because any application submitting [!INCLUDE [tsql](../includes/tsql-md.md)] queries can be chosen as the deadlock victim, applications should have an error handler that can trap error message 1205. If an application doesn't trap the error, the application can proceed unaware that its transaction has been rolled back and errors can occur.
+Because any application submitting [!INCLUDE [tsql](../includes/tsql-md.md)] queries can be chosen as the deadlock victim, applications should have an error handler that can handle error 1205. If an application doesn't handle the error, the application can proceed unaware that its transaction has been rolled back.
 
-Implementing an error handler that traps error message 1205 allows an application to handle the deadlock situation and take remedial action (for example, automatically resubmitting the query that was involved in the deadlock). By resubmitting the query automatically, the user doesn't need to know that a deadlock occurred.
+Implementing an error handler that catches error 1205 allows an application to handle deadlocks and take remedial action (for example, automatically resubmitting the query that was involved in the deadlock).
 
-The application should pause briefly before resubmitting its query. This gives the other transaction involved in the deadlock a chance to complete and release its locks that formed part of the deadlock cycle. This minimizes the likelihood of the deadlock reoccurring when the resubmitted query requests its locks.
+The application should pause briefly before resubmitting its query. This gives the other transaction involved in the deadlock a chance to complete and release its locks. Randomizing the duration of the pause minimizes the likelihood of the deadlock reoccurring when the resubmitted query requests its locks. For example, the error handler might be coded to pause for a random duration between one and three seconds.
 
 ### Handle with TRY...CATCH
 
-You can use [TRY...CATCH](../t-sql/language-elements/try-catch-transact-sql.md) to handle deadlocks. The 1205 deadlock victim error can be caught by the `CATCH` block, and the transaction can be rolled back until the threads become unlocked.
+You can use [TRY...CATCH](../t-sql/language-elements/try-catch-transact-sql.md) to handle deadlocks. Error 1205 can be caught by the `CATCH` block.
 
 For more information, see [Handling Deadlocks](/previous-versions/sql/sql-server-2005/ms179296(v=sql.90)?redirectedfrom=MSDN#handling-deadlocks).
 
@@ -408,10 +404,10 @@ To help minimize deadlocks:
 - Access objects in the same order.
 - Avoid user interaction in transactions.
 - Keep transactions short and in one batch.
-- Use a lower isolation level.
+- Avoid higher isolation levels such as `REPEATABLE READ` and `SERIALIZABLE` when not required.
 - Use a row versioning-based isolation level.
-  - Set `READ_COMMITTED_SNAPSHOT` database option on to enable read-committed transactions to use row versioning.
-  - Use snapshot isolation.
+  - Enable the `READ_COMMITTED_SNAPSHOT` database option to use row versioning for transactions using the `READ COMMITTED` isolation level.
+  - Use snapshot isolation transactions.
 - Use bound connections.
 
 ### Access objects in the same order
@@ -422,47 +418,44 @@ If all concurrent transactions access objects in the same order, deadlocks are l
 
 ### Avoid user interaction in transactions
 
-Avoid writing transactions that include user interaction, because the speed of batches running without user intervention is much faster than the speed at which a user must manually respond to queries, such as replying to a prompt for a parameter requested by an application. For example, if a transaction is waiting for user input and the user goes to lunch or even home for the weekend, the user delays the transaction from completing. This degrades system throughput because any locks held by the transaction are released only when the transaction is committed or rolled back. Even if a deadlock situation doesn't arise, other transactions accessing the same resources are blocked while waiting for the transaction to complete.
+Avoid transactions that include user interaction, because the speed of batches running without user intervention is much faster than the speed at which a user must manually respond to queries, such as replying to a prompt for a parameter requested by an application. This degrades system throughput because any locks held by the transaction are released only when the transaction is committed or rolled back. Even if a deadlock doesn't occur, other transactions accessing the same resources are blocked while waiting for the transaction to complete.
 
 ### Keep transactions short and in one batch
 
 A deadlock typically occurs when several long-running transactions execute concurrently in the same database. The longer the transaction, the longer the exclusive or update locks are held, blocking other activity and leading to possible deadlock situations.
 
-Keeping transactions in one batch minimizes network roundtrips during a transaction, reducing possible delays in completing the transaction and releasing locks.
+Keeping transactions in one batch minimizes network roundtrips during a transaction, reducing possible delays in completing the transaction due to client processing.
 
-For more about update locks, see [Transaction locking and row versioning guide](sql-server-transaction-locking-and-row-versioning-guide.md#update).
+### Avoid higher isolation levels
 
-### Use a lower isolation level
-
-Determine whether a transaction can run at a lower isolation level. Implementing read committed allows a transaction to read data previously read (not modified) by another transaction without waiting for the first transaction to complete. A lower isolation level, such as read committed, holds shared locks for a shorter duration than a higher isolation level, such as serializable. This reduces locking contention.
+Determine whether a transaction can run at a lower isolation level. Using `READ COMMITTED` allows a transaction to read data previously read (but not modified) by another transaction without waiting for the transaction to complete. `READ COMMITTED` holds shared locks for a shorter duration than a higher isolation level, such as `SERIALIZABLE`. This reduces lock contention.
 
 ### Use a row versioning-based isolation level
 
-When the `READ_COMMITTED_SNAPSHOT` database option is set `ON`, a transaction running under read committed isolation level uses row versioning rather than shared locks during read operations.
+When the `READ_COMMITTED_SNAPSHOT` database option is set `ON`, a transaction running under the `READ COMMITTED` isolation level uses row versioning rather than shared locks during read operations.
 
-> [!NOTE]  
-> Some applications rely upon locking and blocking behavior of read committed isolation. For these applications, some change is required before this option can be enabled.
+> [!TIP]  
+> Microsoft recommends the row versioning-based `READ COMMITTED` isolation level for all applications, unless an application relies upon the blocking behavior of the lock-based `READ COMMITTED` isolation level.
 
 Snapshot isolation also uses row versioning, which doesn't use shared locks during read operations. Before a transaction can run under snapshot isolation, the `ALLOW_SNAPSHOT_ISOLATION` database option must be set `ON`.
 
-Implement these isolation levels to minimize deadlocks that can occur between read and write operations.
+Use row versioning-based isolation levels to minimize deadlocks that can occur between read and write operations.
 
 ### Use bound connections
 
-Using bound connections, two or more connections opened by the same application can cooperate with each other. Any locks acquired by the secondary connections are held as if they were acquired by the primary connection, and vice versa. Therefore they don't block each other.
-
-### Stop a transaction
-
-In a deadlock scenario, the victim transaction is automatically stopped and rolled back. There's no need to stop a transaction in a deadlock scenario.
+Using bound connections, two or more connections opened by the same application can cooperate with each other. Any locks acquired by the secondary connections are held as if they were acquired by the primary connection, and vice versa. Therefore, they don't block each other.
 
 ## Cause a deadlock
 
-> [!NOTE]  
-> This example works in the `AdventureWorksLT2019` sample database with the default schema and data when [READ_COMMITTED_SNAPSHOT has been enabled](../t-sql/statements/alter-database-transact-sql-set-options.md#read_committed_snapshot--on--off-). To download this sample, visit [AdventureWorks sample databases](../samples/adventureworks-install-configure.md).
+You might need to cause a deadlock for learning or demonstration purposes.
 
-To cause a deadlock, you need to connect two sessions to the `AdventureWorksLT2019` database. We refer to these sessions as **Session A** and **Session B**. You can create these two sessions simply by creating two query windows in SQL Server Management Studio (SSMS).
+The following example works in the `AdventureWorksLT2019` sample database with the default schema and data when [READ_COMMITTED_SNAPSHOT has been enabled](../t-sql/statements/alter-database-transact-sql-set-options.md#read_committed_snapshot--on--off-). To download this sample, visit [AdventureWorks sample databases](../samples/adventureworks-install-configure.md).
 
-In **Session A**, run the following Transact-SQL. This code begins an [explicit transaction](sql-server-transaction-locking-and-row-versioning-guide.md#starting-transactions) and runs a single statement that updates the `SalesLT.Product` table. To do this, the transaction acquires an [update (U) lock](sql-server-transaction-locking-and-row-versioning-guide.md#behavior-when-modifying-data) on one row on table `SalesLT.Product` which is converted to an exclusive (X) lock. We leave the transaction open.
+For an example that causes a deadlock when optimized locking is enabled, see [Optimized locking and deadlocks](#optimized-locking-and-deadlocks).
+
+To cause a deadlock, you need to connect two sessions to the `AdventureWorksLT2019` database. We refer to these sessions as **Session A** and **Session B**. You can create these two sessions by creating two query windows in SQL Server Management Studio (SSMS).
+
+In **Session A**, run the following batch. This code begins an [explicit transaction](sql-server-transaction-locking-and-row-versioning-guide.md#starting-transactions) and executes a statement that updates the `SalesLT.Product` table. To do this, the transaction acquires an [update (U) lock](sql-server-transaction-locking-and-row-versioning-guide.md#behavior-when-modifying-data) on the qualifying rows in table `SalesLT.Product` which are then converted to exclusive (`X`) locks. We leave the transaction open.
 
 ```sql
 BEGIN TRANSACTION;
@@ -472,7 +465,7 @@ UPDATE SalesLT.Product
 WHERE Color = 'Red';
 ```
 
-Now, in **Session B**, run the following Transact-SQL. This code doesn't explicitly begin a transaction. Instead, it operates in [autocommit transaction mode](sql-server-transaction-locking-and-row-versioning-guide.md#starting-transactions). This statement updates the `SalesLT.ProductDescription` table. The update takes out an update (U) lock on 72 rows on the `SalesLT.ProductDescription` table. The query joins to other tables, including the `SalesLT.Product` table.
+Now, in **Session B**, run the following batch. This code doesn't explicitly begin a transaction. Instead, it operates in [autocommit transaction mode](sql-server-transaction-locking-and-row-versioning-guide.md#starting-transactions). This statement updates the `SalesLT.ProductDescription` table. The update takes an update (`U`) lock on the qualifying rows in the `SalesLT.ProductDescription` table. The query joins to other tables, including the `SalesLT.Product` table.
 
 ```sql
 UPDATE SalesLT.ProductDescription
@@ -487,9 +480,9 @@ FROM SalesLT.ProductDescription AS pd
 WHERE p.Color = 'Silver';
 ```
 
-To complete this update, **Session B** needs a shared (S) lock on rows on the table `SalesLT.Product`, including the row that is locked by **Session A**. **Session B** is blocked on `SalesLT.Product`.
+To complete this update, **Session B** needs shared (`S`) locks on rows in table `SalesLT.Product`, including the rows that are locked by **Session A**. **Session B** is blocked on `SalesLT.Product`.
 
-Return to **Session A**. Run the following Transact-SQL statement. This runs a second `UPDATE` statement as part of the open transaction.
+Return to **Session A**. Run the following `UPDATE` statement. This statement executes as a part of the previously open transaction.
 
 ```sql
 UPDATE SalesLT.ProductDescription
@@ -508,7 +501,7 @@ The second update statement in **Session A** is blocked by **Session B** on the 
 
 **Session A** and **Session B** are now mutually blocking one another. Neither transaction can proceed, as they each need a resource that is locked by the other.
 
-After a few seconds, the deadlock monitor identifies that the transactions in **Session A** and **Session B** are mutually blocking one another, and that neither can make progress. You should see a deadlock occur, with **Session A** chosen as the deadlock victim. **Session B** completes successfully. An error message appears in **Session A** with text similar to the following example:
+After a few seconds, the deadlock monitor identifies that the transactions in **Session A** and **Session B** are mutually blocking one another, and that neither can make progress. You see a deadlock occur, with **Session A** chosen as the deadlock victim. **Session B** completes successfully. An error message appears in the query window of **Session A** with text similar to the following example:
 
 ```output
 Msg 1205, Level 13, State 51, Line 7
@@ -517,7 +510,7 @@ Transaction (Process ID 51) was deadlocked on lock resources with another proces
 
 If a deadlock isn't raised, verify that `READ_COMMITTED_SNAPSHOT` is enabled in your sample database. Deadlocks can occur in any database configuration, but this example requires that `READ_COMMITTED_SNAPSHOT` is enabled.
 
-You could then view details of the deadlock in the ring_buffer target of the `system_health` Extended Events session, which is enabled and active by default in SQL Server. Consider the following query:
+You can view the details of the deadlock in the `ring_buffer` target of the `system_health` event session, which is enabled and active by default in SQL Server and Azure SQL Managed Instance. Consider the following query:
 
 ```sql
 WITH cteDeadLocks ([Deadlock_XML])
@@ -536,17 +529,19 @@ FROM (SELECT Graph.query('.') AS Graph
 ORDER BY when_occurred DESC;
 ```
 
-You can view the XML in the `Deadlock_XML` column inside SSMS, by selecting the cell that appears as a hyperlink. Save this output as a `.xdl` file, close, then reopen the `.xdl` file in SSMS for visual deadlock graph. Your deadlock graph should look something like the following image.
+You can view the XML in the `Deadlock_XML` column inside SSMS, by selecting the cell that appears as a hyperlink. Save this output as a `.xdl` file, close, then reopen the `.xdl` file in SSMS for visual deadlock graph. The deadlock graph should look something like the following image.
 
 :::image type="content" source="media/sql-server-deadlocks-guide/graphical-deadlock-xdl.png" alt-text="Screenshot of a visual deadlock graph in an .xdl file in SSMS." lightbox="media/sql-server-deadlocks-guide/graphical-deadlock-xdl.png":::
 
 ## Optimized locking and deadlocks
 
-**Applies to:** [!INCLUDE [ssazure-sqldb](../includes/ssazure-sqldb.md)]
+With [optimized locking](performance/optimized-locking.md), page and row locks aren't held until the end of transaction. They are released as soon as a row is updated. Additionally, if `READ_COMMITTED_SNAPSHOT` is enabled, update (`U`) locks aren't used. As a result, the likelihood of deadlocks is reduced.
 
-[Optimized locking](performance/optimized-locking.md) introduced a different method for locking mechanics that changes how deadlocks involving exclusive TID locks might be reported. Under each resource in the deadlock report's `<resource-list>`, each `<xactlock>` element reports the underlying resources and specific information for locks of each member of a deadlock.
+The previous example doesn't cause a deadlock when optimized locking is enabled because it relies on the update (`U`) locks.
 
-Consider the following example where optimized locking is enabled:
+The following example can be used to cause a deadlock on a database that has optimized locking enabled.
+
+First, create an example table and add data.
 
 ```sql
 CREATE TABLE t2
@@ -559,16 +554,14 @@ INSERT INTO t2
 VALUES (1, 10),
 (2, 20),
 (3, 30);
-GO
 ```
 
-The following Transact-SQL commands in two sessions create a deadlock on table `t2`:
+The following T-SQL batches, executed in sequence in two separate sessions, create a deadlock.
 
 In session 1:
 
 ```sql
---session 1
-BEGIN TRANSACTION foo;
+BEGIN TRANSACTION xactA;
 
 UPDATE t2
     SET b = b + 10
@@ -578,8 +571,7 @@ WHERE a = 1;
 In session 2:
 
 ```sql
---session 2:
-BEGIN TRANSACTION bar;
+BEGIN TRANSACTION xactB;
 
 UPDATE t2
     SET b = b + 10
@@ -589,7 +581,6 @@ WHERE a = 2;
 In session 1:
 
 ```sql
---session 1:
 UPDATE t2
     SET b = b + 100
 WHERE a = 2;
@@ -598,15 +589,62 @@ WHERE a = 2;
 In session 2:
 
 ```sql
---session 2:
 UPDATE t2
     SET b = b + 20
 WHERE a = 1;
 ```
 
-This scenario of competing `UPDATE` statements results in a deadlock. In this case, a keylock resource, where each session holds an X lock on its own TID and is waiting on the S lock on the other TID, resulting in a deadlock. The following XML, captured as the deadlock report, contains elements and attributes specific to optimized locking:
+In this case, each session holds an exclusive (`X`) lock on its own transaction ID (TID) resource, and is waiting on the shared (`S`) lock on the other TID, resulting in a deadlock.
 
-:::image type="content" source="media/sql-server-deadlocks-guide/optimized-locking-tid-lock-deadlock-xml.png" alt-text="Screenshot of the XML of a deadlock report showing the UnderlyingResource nodes and keylock nodes specific to optimized locking." lightbox="media/sql-server-deadlocks-guide/optimized-locking-tid-lock-deadlock-xml.png":::
+The following abbreviated deadlock report contains elements and attributes specific to optimized locking. Under each resource in the deadlock report `<resource-list>`, each `<xactlock>` element reports the underlying resources and TID lock information of each member of a deadlock.
+
+```xml
+<deadlock>
+ <victim-list>
+  <victimProcess id="process12994344c58" />
+ </victim-list>
+ <process-list>
+  <process id="process12994344c58" taskpriority="0" logused="272" waitresource="XACT: 23:2476:0 KEY: 23:72057594049593344 (8194443284a0)" waittime="447" ownerId="3234906" transactionname="xactA" lasttranstarted="2025-10-08T21:36:34.063" XDES="0x12984ba0480" lockMode="S" schedulerid="2" kpid="204928" status="suspended" spid="95" sbid="0" ecid="0" priority="0" trancount="2" lastbatchstarted="2025-10-08T21:36:40.857" lastbatchcompleted="2025-10-08T21:36:34.063" lastattention="2025-10-08T21:36:11.340" clientapp="Microsoft SQL Server Management Studio - Query" hostname="WS1" hostpid="23380" loginname="user1" isolationlevel="read committed (2)" xactid="3234906" currentdb="23" currentdbname="AdventureWorksLT" lockTimeout="4294967295" clientoption1="671090784" clientoption2="390200">
+   <inputbuf>
+UPDATE t2
+    SET b = b + 20
+WHERE a = 1;
+   </inputbuf>
+  </process>
+  <process id="process1299c969828" taskpriority="0" logused="272" waitresource="XACT: 23:2477:0 KEY: 23:72057594049593344 (61a06abd401c)" waittime="3083" ownerId="3234886" transactionname="xactB" lasttranstarted="2025-10-08T21:36:30.303" XDES="0x12995c84480" lockMode="S" schedulerid="2" kpid="63348" status="suspended" spid="88" sbid="0" ecid="0" priority="0" trancount="2" lastbatchstarted="2025-10-08T21:36:38.223" lastbatchcompleted="2025-10-08T21:36:30.303" lastattention="1900-01-01T00:00:00.303" clientapp="Microsoft SQL Server Management Studio - Query" hostname="WS1" hostpid="23380" loginname="user1" isolationlevel="read committed (2)" xactid="3234886" currentdb="23" currentdbname="AdventureWorksLT" lockTimeout="4294967295" clientoption1="671090784" clientoption2="390200">
+   <inputbuf>
+UPDATE t2
+    SET b = b + 100
+WHERE a = 2;
+   </inputbuf>
+  </process>
+ </process-list>
+ <resource-list>
+  <xactlock xdesIdLow="2476" xdesIdHigh="0" dbid="23" id="lock1299fa06c00" mode="X">
+   <UnderlyingResource>
+    <keylock hobtid="72057594049593344" dbid="23" objectname="e6fc405e-1ee8-49df-a2b3-54ee0151d851.dbo.t2" indexname="PK__t2__3BD0198ED3CBA65E" />
+   </UnderlyingResource>
+   <owner-list>
+    <owner id="process1299c969828" mode="X" />
+   </owner-list>
+   <waiter-list>
+    <waiter id="process12994344c58" mode="S" requestType="wait" />
+   </waiter-list>
+  </xactlock>
+  <xactlock xdesIdLow="2477" xdesIdHigh="0" dbid="23" id="lock129940b2380" mode="X">
+   <UnderlyingResource>
+    <keylock hobtid="72057594049593344" dbid="23" objectname="e6fc405e-1ee8-49df-a2b3-54ee0151d851.dbo.t2" indexname="PK__t2__3BD0198ED3CBA65E" />
+   </UnderlyingResource>
+   <owner-list>
+    <owner id="process12994344c58" mode="X" />
+   </owner-list>
+   <waiter-list>
+    <waiter id="process1299c969828" mode="S" requestType="wait" />
+   </waiter-list>
+  </xactlock>
+ </resource-list>
+</deadlock>
+```
 
 ## Related content
 
@@ -617,5 +655,5 @@ This scenario of competing `UPDATE` statements results in a deadlock. In this ca
 - [Lock:Deadlock Chain Event Class](event-classes/lock-deadlock-chain-event-class.md)
 - [Lock:Deadlock Event Class](event-classes/lock-deadlock-event-class.md)
 - [SET DEADLOCK_PRIORITY (Transact-SQL)](../t-sql/statements/set-deadlock-priority-transact-sql.md)
-- [Analyze and prevent deadlocks in Azure SQL Database and Fabric SQL database](/azure/azure-sql/database/analyze-prevent-deadlocks)
+- [Analyze and prevent deadlocks in Azure SQL Database and SQL database in Fabric](/azure/azure-sql/database/analyze-prevent-deadlocks)
 - [Open, view, and print a deadlock file in SQL Server Management Studio (SSMS)](performance/open-view-and-print-a-deadlock-file-sql-server-management-studio.md)
