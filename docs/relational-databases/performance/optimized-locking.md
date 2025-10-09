@@ -1,22 +1,22 @@
 ---
-title: "Optimized Locking"
-description: "Learn about the optimized locking enhancement to the database engine."
+title: Optimized Locking
+description: Learn about the optimized locking enhancement to the database engine.
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest, peskount, praspu, dfurman
-ms.date: 07/30/2025
+ms.date: 10/09/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
-helpviewer_keywords:
-  - "optimized locking"
-dev_langs:
-  - "TSQL"
-monikerRange: "=azuresqldb-current || =azuresqldb-mi-current || =fabric || >=sql-server-ver17 || >=sql-server-linux-ver17"
 ms.custom:
   - ignite-2024
   - build-2025
   - sfi-image-nochange
+helpviewer_keywords:
+  - "optimized locking"
+dev_langs:
+  - TSQL
+monikerRange: "=azuresqldb-current || =azuresqldb-mi-current || =fabric || >=sql-server-ver17 || >=sql-server-linux-ver17"
 ---
 
 # Optimized locking
@@ -27,7 +27,7 @@ Optimized locking offers an improved transaction locking mechanism to reduce loc
 
 ## What is optimized locking?
 
-Optimized locking helps to reduce lock memory as very few locks are held even for large transactions. In addition, optimized locking also avoids lock escalations. This allows more concurrent access to the table.
+Optimized locking helps to reduce lock memory as very few locks are held even for large transactions. In addition, optimized locking avoids lock escalations and can avoid certain types of deadlocks. This allows more concurrent access to the table.
 
 Optimized locking is composed of two primary components: **transaction ID (TID) locking** and **lock after qualification (LAQ)**.
 
@@ -39,7 +39,7 @@ For example:
 - Without optimized locking, updating 1,000 rows in a table might require 1,000 exclusive (`X`) row locks held until the end of the transaction.
 - With optimized locking, updating 1,000 rows in a table might require 1,000 `X` row locks but each lock is released as soon as each row is updated, and only one TID lock is held until the end of the transaction. Because locks are released quickly, lock memory usage is reduced and [lock escalation](/troubleshoot/sql/database-engine/performance/resolve-blocking-problems-caused-lock-escalation) is much less likely to occur, improving workload concurrency.
 
-> [!NOTE]
+> [!NOTE]  
 > Enabling optimized locking reduces or eliminates row and page locks acquired by the Data Modification Language (DML) statements such as `INSERT`, `UPDATE`, `DELETE`, `MERGE`. It has no effect on other kinds of database and object locks, such as schema locks.
 
 ### Availability
@@ -48,12 +48,12 @@ The following table summarizes the availability and enabled state of optimized l
 
 | Platform | Available | Enabled by default |
 | --- | --- | --- |
-|[!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] | Yes | Yes (always enabled) |
-|[!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)] | Yes | Yes (always enabled) |
-|[!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)]<sup>[AUTD](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy)</sup>| Yes | Yes (always enabled) |
-|[!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)]<sup>[2022](/azure/azure-sql/managed-instance/update-policy#sql-server-2022-update-policy)</sup>| No | N/A |
-|[!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] | Yes | No (can be enabled per database) |
-|[!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and older versions | No | N/A |
+| [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] | Yes | Yes (always enabled) |
+| [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)] | Yes | Yes (always enabled) |
+| [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)]<sup>[AUTD](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy)</sup> | Yes | Yes (always enabled) |
+| [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)]<sup>[2022](/azure/azure-sql/managed-instance/update-policy#sql-server-2022-update-policy)</sup> | No | N/A |
+| [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] | Yes | No (can be enabled per database) |
+| [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and older versions | No | N/A |
 
 ### Enable and disable
 
@@ -83,11 +83,11 @@ WHERE name = DB_NAME();
 Optimized locking is enabled per user database. Connect to your database, then use the following query to check if optimized locking is enabled:
 
 ```sql
-SELECT IsOptimizedLockingOn = DATABASEPROPERTYEX(DB_NAME(), 'IsOptimizedLockingOn');
+SELECT DATABASEPROPERTYEX(DB_NAME(), 'IsOptimizedLockingOn') AS IsOptimizedLockingOn;
 ```
 
 | Result | Description |
-|:--|:--|
+| --- | --- |
 | `0` | Optimized locking is disabled. |
 | `1` | Optimized locking is enabled. |
 | `NULL` | Optimized locking isn't available. |
@@ -186,7 +186,7 @@ GO
 ```
 
 | **Session 1** | **Session 2** |
-| :-- | :-- |
+| --- | --- |
 | `BEGIN TRANSACTION;`<br />`UPDATE t1`<br />`SET b = b + 10`<br />`WHERE a = 1;` | |
 | | `BEGIN TRANSACTION;`<br />`UPDATE t1`<br />`SET b = b + 10`<br />`WHERE a = 2;` |
 | `COMMIT TRANSACTION;` | |
@@ -194,13 +194,13 @@ GO
 
 Without optimized locking, session 2 is blocked because session 1 holds a `U` lock on the row session 2 needs to update. However, with optimized locking, session 2 isn't blocked because `U` locks aren't taken, and because in the latest committed version of row 1, column `a` equals to 1, which doesn't satisfy the predicate of session 2.
 
-LAQ is performed optimistically on the assumption that a row isn't modified after checking the predicate. If the predicate is satisfied and the row hasn't been modified after checking the predicate, it is modified by the current transaction.
+LAQ is performed optimistically on the assumption that a row isn't modified after checking the predicate. If the predicate is satisfied and the row hasn't been modified after checking the predicate, it's modified by the current transaction.
 
-Because `U` locks aren't taken, a concurrent transaction might modify the row after the predicate has been evaluated. If there is an active transaction holding an `X` TID lock on the row, the database engine waits for it to complete. If the row has changed after the predicate was evaluated previously, the database engine re-evaluates (re-qualifies) the predicate again before modifying the row. If the predicate is still satisfied, the row is modified.
+Because `U` locks aren't taken, a concurrent transaction might modify the row after the predicate has been evaluated. If there's an active transaction holding an `X` TID lock on the row, the database engine waits for it to complete. If the row has changed after the predicate was evaluated previously, the database engine re-evaluates (re-qualifies) the predicate again before modifying the row. If the predicate is still satisfied, the row is modified.
 
 Predicate re-qualification is supported by a subset of the query engine operators. If predicate re-evaluation is needed, but the query plan uses an operator that doesn't support predicate re-qualification, the database engine internally aborts statement processing and restarts it without LAQ. When such an abort occurs, the `lock_after_qual_stmt_abort` extended event fires.
 
-Some statements, for example `UPDATE` statements with variable assignment and statements with the [OUTPUT](../../t-sql/queries/output-clause-transact-sql.md) clause, cannot be aborted and restarted without changing their semantics. For such statements, LAQ is not used.
+Some statements, for example `UPDATE` statements with variable assignment and statements with the [OUTPUT](../../t-sql/queries/output-clause-transact-sql.md) clause, can't be aborted and restarted without changing their semantics. For such statements, LAQ isn't used.
 
 In the following example, the predicate is re-evaluated because another transaction has changed the row:
 
@@ -216,7 +216,7 @@ GO
 ```
 
 | **Session 1** | **Session 2** |
-| :-- | :-- |
+| --- | --- |
 | `BEGIN TRANSACTION;`<br />`UPDATE t3`<br />`SET b = b + 10`<br />`WHERE a = 1;` | |
 | | `BEGIN TRANSACTION;`<br />`UPDATE t3`<br />`SET b = b + 10`<br />`WHERE a = 1;` |
 | `COMMIT TRANSACTION;` | |
@@ -245,7 +245,9 @@ Lock after qualification might not be used in the following scenarios:
 - When the DML statement uses more than one index seek or scan operator to read the rows being modified.
 - In `MERGE` statements.
 
-### <a id="behavior"></a> Query behavior changes with optimized locking and RCSI
+<a id="behavior"></a>
+
+### Query behavior changes with optimized locking and RCSI
 
 Concurrent workloads under read committed snapshot isolation (RCSI) that rely on strict execution order of transactions might experience differences in query behavior when optimized locking is enabled.
 
@@ -264,7 +266,7 @@ GO
 ```
 
 | **Session 1** | **Session 2** |
-| :-- | :-- |
+| --- | --- |
 | `BEGIN TRANSACTION T1;`<br />`UPDATE t4`<br />`SET b = 2`<br />`WHERE a = 1;` | |
 | | `BEGIN TRANSACTION T2;`<br />`UPDATE t4`<br />`SET b = 3`<br />`WHERE b = 2;` |
 | `COMMIT TRANSACTION;` | |
@@ -285,7 +287,7 @@ After both transactions commit, table `t4` contains the following rows:
 
 **With LAQ**
 
-With LAQ, transaction T2 uses the latest committed version of the row where column `b` equals to `1` to evaluate its predicate (`b = 2`). The row doesn't qualify; hence it is skipped and the statement completes without having been blocked by transaction T1. In this example, LAQ removes blocking but leads to different results.
+With LAQ, transaction T2 uses the latest committed version of the row where column `b` equals to `1` to evaluate its predicate (`b = 2`). The row doesn't qualify; hence it's skipped and the statement completes without having been blocked by transaction T1. In this example, LAQ removes blocking but leads to different results.
 
 After both transactions commit, table `t4` contains the following rows:
 
@@ -295,32 +297,32 @@ After both transactions commit, table `t4` contains the following rows:
 ```
 
 > [!IMPORTANT]  
-> Even without LAQ, applications should not assume that the database engine guarantees strict ordering without using locking hints when row versioning based isolation levels are used. Our general recommendation for customers running concurrent workloads under RCSI that rely on strict execution order of transactions (as shown in the previous example) is to [use stricter isolation levels](../../t-sql/statements/set-transaction-isolation-level-transact-sql.md) such as `REPEATABLE READ` and `SERIALIZABLE`.
+> Even without LAQ, applications shouldn't assume that the database engine guarantees strict ordering without using locking hints when row versioning based isolation levels are used. Our general recommendation for customers running concurrent workloads under RCSI that rely on strict execution order of transactions (as shown in the previous example) is to [use stricter isolation levels](../../t-sql/statements/set-transaction-isolation-level-transact-sql.md) such as `REPEATABLE READ` and `SERIALIZABLE`.
 
 ## Diagnostic additions for optimized locking
 
 The following improvements help you monitor and troubleshoot blocking and deadlocks when optimized locking is enabled:
 
 - Wait types for optimized locking
-    - `XACT` wait types for the `S` lock on the TID, and resource descriptions in [sys.dm_os_wait_stats (Transact-SQL)](../system-dynamic-management-views/sys-dm-os-wait-stats-transact-sql.md#lck_m_s_xact):
-        - `LCK_M_S_XACT_READ` - Occurs when a task is waiting for a shared lock on an `XACT` `wait_resource` type, with an intent to read.
-        - `LCK_M_S_XACT_MODIFY` - Occurs when a task is waiting for a shared lock on an `XACT` `wait_resource` type, with an intent to modify.
-        - `LCK_M_S_XACT` - Occurs when a task is waiting for a shared lock on an `XACT` `wait_resource` type, where the intent can't be inferred. This scenario isn't common.
+  - `XACT` wait types for the `S` lock on the TID, and resource descriptions in [sys.dm_os_wait_stats](../system-dynamic-management-views/sys-dm-os-wait-stats-transact-sql.md#lck_m_s_xact):
+    - `LCK_M_S_XACT_READ` - Occurs when a task is waiting for a shared lock on an `XACT` `wait_resource` type, with an intent to read.
+    - `LCK_M_S_XACT_MODIFY` - Occurs when a task is waiting for a shared lock on an `XACT` `wait_resource` type, with an intent to modify.
+    - `LCK_M_S_XACT` - Occurs when a task is waiting for a shared lock on an `XACT` `wait_resource` type, where the intent can't be inferred. This scenario isn't common.
 - Locking resources visibility
-    - `XACT` locking resources. For more information, see `resource_description` in [sys.dm_tran_locks (Transact-SQL)](../system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).
+  - `XACT` locking resources. For more information, see `resource_description` in [sys.dm_tran_locks](../system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md).
 - Wait resource visibility
-    - `XACT` wait resources. For more information, see `wait_resource` in [sys.dm_exec_requests (Transact-SQL)](../system-dynamic-management-views/sys-dm-exec-requests-transact-sql.md).
+  - `XACT` wait resources. For more information, see `wait_resource` in [sys.dm_exec_requests](../system-dynamic-management-views/sys-dm-exec-requests-transact-sql.md).
 - Deadlock graph
-    - Under each resource in the deadlock report `<resource-list>`, each `<xactlock>` element reports the underlying resources and specific information for locks of each member of a deadlock. For more information and an example, see [Optimized locking and deadlocks](../sql-server-deadlocks-guide.md#optimized-locking-and-deadlocks).
+  - Under each resource in the deadlock report `<resource-list>`, each `<xactlock>` element reports the underlying resources and specific information for locks of each member of a deadlock. For more information and an example, see [Optimized locking and deadlocks](../sql-server-deadlocks-guide.md#optimized-locking-and-deadlocks).
 - Extended events
-    - The `lock_after_qual_stmt_abort` event fires when a statement is internally aborted and restarted because of a conflict with another transaction. For more information, see [Lock after qualification (LAQ)](#lock-after-qualification-laq).
-    - In [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)], the `locking_stats` event fires for every database every several minutes and provides aggregate locking statistics for the time interval, such as the number of lock escalations, whether TID locking and LAQ components of optimized locking are enabled, and the number of queries where LAQ wasn't used for various reasons. This event fires even if optimized locking is disabled.
+  - The `lock_after_qual_stmt_abort` event fires when a statement is internally aborted and restarted because of a conflict with another transaction. For more information, see [Lock after qualification (LAQ)](#lock-after-qualification-laq).
+  - In [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)], the `locking_stats` event fires for every database every several minutes and provides aggregate locking statistics for the time interval, such as the number of lock escalations, whether TID locking and LAQ components of optimized locking are enabled, and the number of queries where LAQ wasn't used for various reasons. This event fires even if optimized locking is disabled.
 
 ## Best practices with optimized locking
 
 ### Enable read committed snapshot isolation (RCSI)
 
-To maximize the benefits of optimized locking, it is recommended to enable [read committed snapshot isolation (RCSI)](../../t-sql/statements/alter-database-transact-sql-set-options.md?view=azuresqldb-current&preserve-view=true#read_committed_snapshot--on--off--1) on the database and use `READ COMMITTED` isolation as the default isolation level. If not already enabled, enable RCSI by connecting to the `master` database and executing the following statement:
+To maximize the benefits of optimized locking, it's recommended to enable [read committed snapshot isolation (RCSI)](../../t-sql/statements/alter-database-transact-sql-set-options.md?view=azuresqldb-current&preserve-view=true#read_committed_snapshot--on--off--1) on the database and use `READ COMMITTED` isolation as the default isolation level. If not already enabled, enable RCSI by connecting to the `master` database and executing the following statement:
 
 ```sql
 ALTER DATABASE [database-name-placeholder] SET READ_COMMITTED_SNAPSHOT ON;
@@ -366,10 +368,10 @@ In the previous query example, only table `t6` is affected by the locking hint, 
 
 ```sql
 UPDATE t5
-SET t5.b = t6.b
+    SET t5.b = t6.b
 FROM t5 WITH (REPEATABLEREAD)
-INNER JOIN t6
-ON t5.a = t6.a;
+     INNER JOIN t6
+         ON t5.a = t6.a;
 ```
 
 In the previous query example, only table `t5` uses the `REPEATABLE READ` isolation level and hold locks until the end of the transaction. Other updates to `t5` can still benefit from optimized locking. The same applies to the `HOLDLOCK` hint.

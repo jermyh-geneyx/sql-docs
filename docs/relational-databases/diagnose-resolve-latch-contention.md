@@ -720,7 +720,7 @@ By padding rows to occupy a full page you require SQL to allocate more pages, ma
 A script similar to the following can be used to pad rows to occupy an entire page:
 
 ```sql
-ALTER TABLE mytable ADD Padding CHAR(5000) DEFAULT NOT NULL ('X');
+ALTER TABLE mytable ADD Padding CHAR(5000) NOT NULL DEFAULT ('X');
 ```
 
 > [!NOTE]  
