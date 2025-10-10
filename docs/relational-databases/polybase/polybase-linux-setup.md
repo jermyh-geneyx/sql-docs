@@ -259,7 +259,7 @@ RECONFIGURE WITH OVERRIDE;
 
 **Applies to:** [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] 
 
-To use PolyBase capabilities on Linux, you must enable [Trace Flag 13702](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf13702) during SQL Server start up. For more information, see [Configure SQL Server on Linux with the mssql-conf tool](../../linux/sql-server-linux-configure-mssql-conf.md).
+To use PolyBase capabilities on Linux, you must enable [trace flag 13702](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf13702) during SQL Server start up. For more information, see [Configure SQL Server on Linux with the mssql-conf tool](../../linux/sql-server-linux-configure-mssql-conf.md).
 
 ## Update PolyBase
 

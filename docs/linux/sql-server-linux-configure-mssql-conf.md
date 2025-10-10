@@ -941,7 +941,7 @@ The following options are additional network settings configurable using **mssql
 
 The `traceflag` option enables or disables trace flags for the startup of the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] service. To enable/disable a trace flag, use the following commands:
 
-1. Enable a trace flag using the following command. For example, for Trace Flag 1234:
+1. Enable a trace flag using the following command. For example, for trace flag 1234:
 
    ```bash
    sudo /opt/mssql/bin/mssql-conf traceflag 1234 on

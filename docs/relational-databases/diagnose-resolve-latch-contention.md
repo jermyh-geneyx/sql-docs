@@ -383,7 +383,7 @@ If many `PAGELATCH_UP` waits are observed for PFS or SGAM pages in `tempdb`, com
 
 1. Add data files to `tempdb` so that the number of tempdb data files is equal to the number of processor cores in your server.
 
-1. Enable SQL Server Trace Flag 1118.
+1. Enable SQL Server trace flag 1118.
 
 For more information about allocation bottlenecks caused by contention on system pages, see the blog post [What is allocation bottleneck?](https://techcommunity.microsoft.com/blog/sqlserver/what-is-allocation-bottleneck/383513)
 

@@ -16,9 +16,9 @@ ms.custom:
 
 **Applies to:** [!INCLUDE [sqlserver2025-asdb-fabricsqldb](../../includes/applies-to-version/sqlserver2025-asdb-fabricsqldb.md)]
 
-[Query Store for readable secondaries](query-store-for-secondary-replicas.md) was introduced in [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], and the persisted statistics for readable secondaries feature uses the infrastructure that Query Store has in place for readable secondaries. Query Store for readable secondaries is **on** by default in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], whereas in [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] it was **off** and required Trace Flag 12606 to enable.
+[Query Store for readable secondaries](query-store-for-secondary-replicas.md) was introduced in [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], and the persisted statistics for readable secondaries feature uses the infrastructure that Query Store has in place for readable secondaries. Query Store for readable secondaries is **on** by default in [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], whereas in [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] it was **off** and required trace flag 12606 to enable.
 
-Trace Flag 12606 **isn't** required on [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions and if used, result in turning the Query Store for readable secondaries feature *off*.
+Trace flag 12606 **isn't** required on [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions and if used, result in turning the Query Store for readable secondaries feature *off*.
 
 ## Background
 
@@ -95,7 +95,7 @@ ORDER BY sch.[name], obj.[name], s.stats_id;
 ## Considerations
 
 The persisted statistics for readable secondaries feature is enabled by default as long as the [auto create statistics](../../t-sql/statements/alter-database-transact-sql-set-options.md) option is enabled and the `READABLE_SECONDARY_TEMPORARY_STATS_AUTO_CREATE` and `READABLE_SECONDARY_TEMPORARY_STATS_AUTO_UPDATE` database scoped configuration options are enabled, which is the default configuration. There's no database-scoped configuration to toggle the feature on and off.
-<!-- however, to disable the persistence of statistics from secondary for SQL Server, Trace Flag 15608 might be enabled at startup, or used as a global trace flag.
+<!-- however, to disable the persistence of statistics from secondary for SQL Server, trace flag 15608 might be enabled at startup, or used as a global trace flag.
 -->
 
 ## Related content

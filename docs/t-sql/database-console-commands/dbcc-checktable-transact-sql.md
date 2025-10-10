@@ -201,7 +201,7 @@ For example, if a table contains a **varbinary(max)** column that uses the FILES
 
 By default, `DBCC CHECKTABLE` performs parallel checking of objects. The degree of parallelism is automatically determined by the query processor. The maximum degree of parallelism is configured in the same manner as that of parallel queries. To restrict the maximum number of processors available for DBCC checking, use [sp_configure](../../relational-databases/system-stored-procedures/sp-configure-transact-sql.md). For more information, see [Configure the max degree of parallelism Server Configuration Option](../../database-engine/configure-windows/configure-the-max-degree-of-parallelism-server-configuration-option.md).
 
-Parallel checking can be disabled by using Trace Flag 2528. For more information, see [Trace Flags (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md).
+Parallel checking can be disabled by using trace flag 2528. For more information, see [Set trace flags with DBCC TRACEON](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md).
 
 > [!NOTE]  
 > During a `DBCC CHECKTABLE` operation, the bytes that are stored in a byte-ordered user-defined type column must be equal to the computed serialization of the user-defined type value. If this is not true, the `DBCC CHECKTABLE` routine will report a consistency error.

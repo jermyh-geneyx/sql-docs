@@ -48,7 +48,7 @@ You can override the max degree of parallelism server configuration value:
 
 Index operations that create or rebuild an index, or that drop a clustered index, can be resource intensive. You can override the max degree of parallelism value for index operations by specifying the `MAXDOP` index option in the index statement. The `MAXDOP` value is applied to the statement at execution time and isn't stored in the index metadata. For more information, see [Configure Parallel Index Operations](../../relational-databases/indexes/configure-parallel-index-operations.md).
 
-In addition to queries and index operations, this option also controls the parallelism of `DBCC CHECKTABLE`, `DBCC CHECKDB`, and `DBCC CHECKFILEGROUP`. You can disable parallel execution plans for these statements by using Trace Flag 2528. For more information, see [Trace Flag 2528](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf2528).
+In addition to queries and index operations, this option also controls the parallelism of `DBCC CHECKTABLE`, `DBCC CHECKDB`, and `DBCC CHECKFILEGROUP`. You can disable parallel execution plans for these statements by using trace flag 2528. For more information, see [trace flag 2528](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf2528).
 
 [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] introduced Degree of Parallelism (DOP) Feedback, a new feature to improve query performance by identifying parallelism inefficiencies for repeating queries, based on elapsed time and waits. DOP feedback is part of the [intelligent query processing](../../relational-databases/performance/intelligent-query-processing.md) family of features, and addresses suboptimal usage of parallelism for repeating queries. For information about DOP feedback, visit [Degree of parallelism (DOP) feedback](../../relational-databases/performance/intelligent-query-processing-degree-parallelism-feedback.md).
 
@@ -145,7 +145,7 @@ The setting takes effect immediately without restarting the server.
 
 - [Intelligent query processing in SQL databases](../../relational-databases/performance/intelligent-query-processing.md)
 - [Query processing architecture guide](../../relational-databases/query-processing-architecture-guide.md)
-- [DBCC TRACEON - Trace Flags (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)
+- [Set trace flags with DBCC TRACEON (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)
 - [Query Store hints](../../relational-databases/performance/query-store-hints.md)
 - [Query hints (Transact-SQL)](../../t-sql/queries/hints-transact-sql-query.md)
 - [USE HINT query hint](../../t-sql/queries/hints-transact-sql-query.md#use_hint)

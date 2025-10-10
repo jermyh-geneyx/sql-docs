@@ -231,7 +231,7 @@ The Distribution Agent finds data in the distribution database and then applies 
 
 ## Find errors with the Merge Agent
 
-The merge agent can take a long time to replicate changes. To determine which step of the merge replication synchronization process takes the most time, use [Trace Flag 101](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf101) together with merge agent logging. To do this, use the following parameters for the merge agent parameters, and then restart the agent:
+The merge agent can take a long time to replicate changes. To determine which step of the merge replication synchronization process takes the most time, use [trace flag 101](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf101) together with merge agent logging. To do this, use the following parameters for the merge agent parameters, and then restart the agent:
 
 ```console
 -T 101
@@ -240,7 +240,7 @@ The merge agent can take a long time to replicate changes. To determine which st
 ```
 
 > [!NOTE]  
-> If you have to write stats to the `<distribution-server>..msmerge_history` table, use Trace Flag 102.
+> If you have to write stats to the `<distribution-server>..msmerge_history` table, use trace flag 102.
 
 A sample output of the merge agent after merge replication synchronization finishes is as follows:
 

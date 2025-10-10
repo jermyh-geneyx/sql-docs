@@ -66,7 +66,7 @@ For more information about Windows Server or Windows tools, see the Windows docu
 - [Database Console Commands (DBCC)](../../t-sql/database-console-commands/dbcc-transact-sql.md)
 - [System dynamic management views](../system-dynamic-management-views/system-dynamic-management-views.md)
 - [What are the SQL database functions?](../../t-sql/functions/functions.md)
-- [Trace flags](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)
+- [Set trace flags with DBCC TRACEON](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)
 
 > [!IMPORTANT]  
 > SQL Trace and [!INCLUDE [ssSqlProfiler](../../includes/sssqlprofiler-md.md)] are deprecated. The *Microsoft.SqlServer.Management.Trace* namespace that contains the Microsoft SQL Server Trace and Replay objects are also deprecated.  

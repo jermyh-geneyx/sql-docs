@@ -125,7 +125,7 @@ Performance issues, such as high CPU usage and increased memory consumption, can
 SQL Server provides two trace flags (TF) that can be used to set a quota for the TokenAndPermUserStore cache. By default, there's no quota, meaning the cache can hold an unlimited number of entries.
 
 - TF 4618: Limits the number of entries in the TokenAndPermUserStore to 1024.
-- TF 4618 and TF 4610: Limits the number of entries in the TokenAndPermUserStore to 8192. If the low entry count limit of TF 4618 causes other performance issues, it's recommended to use trace flags 4610 and 4618 together. For more information, see [DBCC TRACEON - Trace Flags (Transact-SQL)](../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md).
+- TF 4618 and TF 4610: Limits the number of entries in the TokenAndPermUserStore to 8192. If the low entry count limit of TF 4618 causes other performance issues, it's recommended to use trace flags 4610 and 4618 together. For more information, see [Set trace flags with DBCC TRACEON](../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md).
 
 For more information, you can refer to the article [Performance issues can be caused by excessive entries in the TokenAndPermUserStore cache - SQL Server](/troubleshoot/sql/database-engine/performance/token-and-perm-user-store-perf-issue)
 

@@ -344,7 +344,7 @@ A SQL Managed Instance can't access file shares and Windows folders, so the foll
 
 Undocumented DBCC statements that are enabled in SQL Server aren't supported in SQL Managed Instance.
 
-- Only a limited number of Global Trace flags are supported. Session-level `Trace flags` aren't supported. See [Trace Flags](/sql/t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql).
+- Only a limited number of Global Trace flags are supported. Session-level `Trace flags` aren't supported. See [Set trace flags with DBCC TRACEON](/sql/t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql).
 - [DBCC TRACEOFF](/sql/t-sql/database-console-commands/dbcc-traceoff-transact-sql) and [DBCC TRACEON](/sql/t-sql/database-console-commands/dbcc-traceon-transact-sql) work with the limited number of global trace-flags.
 - [DBCC CHECKDB](/sql/t-sql/database-console-commands/dbcc-checkdb-transact-sql) with options REPAIR_ALLOW_DATA_LOSS, REPAIR_FAST, and REPAIR_REBUILD can't be used because database can't be set in `SINGLE_USER` mode - see [ALTER DATABASE differences](#alter-database-statement). Potential database corruption is handled by the Azure support team. Contact Azure support if there's any indication of database corruption.
 

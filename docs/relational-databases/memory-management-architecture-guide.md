@@ -112,7 +112,7 @@ This behavior is typically observed during the following operations:
 - Tracing operations that have to store large input parameters
 - Large memory grant requests
 
-If you observe this behavior frequently, consider using [Trace Flag 8121](../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf8121) in [!INCLUDE [sssql19-md](../includes/sssql19-md.md)] to allow the Resource Monitor to clean up more quickly. Starting with [!INCLUDE [sssql22-md](../includes/sssql22-md.md)], this functionality is enabled by default, and the trace flag has no effect.
+If you observe this behavior frequently, consider using [trace flag 8121](../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf8121) in [!INCLUDE [sssql19-md](../includes/sssql19-md.md)] to allow the Resource Monitor to clean up more quickly. Starting with [!INCLUDE [sssql22-md](../includes/sssql22-md.md)], this functionality is enabled by default, and the trace flag has no effect.
 
 <a id="changes-to-memory-management-starting-with-"></a>
 
@@ -265,7 +265,7 @@ The buffer manager supports the following features:
 - The buffer manager supports *large pages* on 64-bit platforms. The page size is specific to the version of Windows.
 
   > [!NOTE]  
-  > Prior to [!INCLUDE [ssSQL11](../includes/sssql11-md.md)], enabling large pages in [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] requires [Trace Flag 834](../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md).
+  > Prior to [!INCLUDE [ssSQL11](../includes/sssql11-md.md)], enabling large pages in [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] requires [trace flag 834](../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md).
 
 - The buffer manager provides extra diagnostics that are exposed through dynamic management views. You can use these views to monitor various operating system resources that are specific to [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)]. For example, you can use the [sys.dm_os_buffer_descriptors](system-dynamic-management-views/sys-dm-os-buffer-descriptors-transact-sql.md) view to monitor the pages in the buffer cache.
 
@@ -347,7 +347,7 @@ However, the use of mutexes can lead to contention if many threads are allocatin
 In most cases, using a single partition suffices, but in some scenarios this can lead to contention, which can be prevented only with a highly partitioned memory object. It isn't desirable to partition each memory object as more partitions can result in other inefficiencies and increase memory fragmentation.
 
 > [!NOTE]  
-> Before [!INCLUDE [sssql16-md](../includes/sssql16-md.md)], Trace Flag 8048 could be used to force a node-based PMO to become a CPU-based PMO. Starting with [!INCLUDE [ssSQL14](../includes/sssql14-md.md)] SP2 and [!INCLUDE [sssql16-md](../includes/sssql16-md.md)], this behavior is dynamic and controlled by the engine.
+> Before [!INCLUDE [sssql16-md](../includes/sssql16-md.md)], trace flag 8048 could be used to force a node-based PMO to become a CPU-based PMO. Starting with [!INCLUDE [ssSQL14](../includes/sssql14-md.md)] SP2 and [!INCLUDE [sssql16-md](../includes/sssql16-md.md)], this behavior is dynamic and controlled by the engine.
 
 Starting with [!INCLUDE [ssSQL14](../includes/sssql14-md.md)] SP2 and [!INCLUDE [sssql16-md](../includes/sssql16-md.md)], the [!INCLUDE [ssDE-md](../includes/ssde-md.md)] can dynamically detect contention on a specific `CMemThread` object and promote the object to a per-node or a per-CPU based implementation. Once promoted, the PMO remains promoted until the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] process is restarted. `CMemThread` contention can be detected by the presence of high `CMEMTHREAD` waits in the [sys.dm_os_wait_stats](system-dynamic-management-views/sys-dm-os-wait-stats-transact-sql.md) DMV, and by observing the [sys.dm_os_memory_objects](system-dynamic-management-views/sys-dm-os-memory-objects-transact-sql.md) DMV columns `contention_factor`, `partition_type`, `exclusive_allocations_count`, and `waiting_tasks_count`.
 

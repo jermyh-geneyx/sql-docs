@@ -327,7 +327,7 @@ If you rename a database, plan forcing fails, which causes recompilation in all 
 
 ## Use Query Store in mission-critical servers
 
-The global trace flags 7745 and 7752 can be used to improve availability of databases by using Query Store. For more information, see [DBCC TRACEON - Trace Flags](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md).
+The global trace flags 7745 and 7752 can be used to improve availability of databases by using Query Store. For more information, see [Set trace flags with DBCC TRACEON](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md).
 
 - Trace flag 7745 prevents the default behavior where Query Store writes data to disk before [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] can be shut down. This means that Query Store data that has been collected but not yet persisted to disk will be lost, up to the time window defined with `DATA_FLUSH_INTERVAL_SECONDS`.
 - Trace flag 7752 enables asynchronous load of Query Store. This allows a database to become online and queries to be executed before Query Store has been fully recovered. The default behavior is to do a synchronous load of Query Store. The default behavior prevents queries from executing before Query Store has been recovered but also prevents any queries from being missed in the data collection.

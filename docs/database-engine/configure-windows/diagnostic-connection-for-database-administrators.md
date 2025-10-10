@@ -69,7 +69,7 @@ Because the DAC exists solely for diagnosing server problems in rare circumstanc
 
 - To guarantee that there are resources available for the connection, only one DAC is allowed per instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. If a DAC connection is already active, any new request to connect through the DAC is denied with error 17810.
 
-- To conserve resources, [!INCLUDE [ssExpress](../../includes/ssexpress-md.md)] doesn't listen on the DAC port unless started with Trace Flag 7806.
+- To conserve resources, [!INCLUDE [ssExpress](../../includes/ssexpress-md.md)] doesn't listen on the DAC port unless started with trace flag 7806.
 
 - The DAC initially attempts to connect to the default database associated with the login. After it's successfully connected, you can connect to the `master` database. If the default database is offline or otherwise not available, the connection will return error 4060. However, it will succeed if you override the default database to connect to the `master` database instead using the following command:
 
@@ -142,4 +142,4 @@ sqlcmd -S serverName.database.windows.net,1434 -U sa -P <StrongPassword> -d Adve
 - [DBCC INPUTBUFFER (Transact-SQL)](../../t-sql/database-console-commands/dbcc-inputbuffer-transact-sql.md)
 - [Server configuration options](server-configuration-options-sql-server.md)
 - [Transaction Related Dynamic Management Views and Functions (Transact-SQL)](../../relational-databases/system-dynamic-management-views/transaction-related-dynamic-management-views-and-functions-transact-sql.md)
-- [Trace Flags (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)
+- [Set trace flags with DBCC TRACEON (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)

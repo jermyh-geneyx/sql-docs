@@ -76,7 +76,7 @@ If pushdown of the filter predicate is occurring, the filter operator is before 
 
 #### With pushdown of filter predicate (view with execution plan)
 
-With the Trace Flag 6408 enabled, you now see additional information in the estimated execution plan output. The output varies between SSMS and Azure Data Studio.
+With the trace flag 6408 enabled, you now see additional information in the estimated execution plan output. The output varies between SSMS and Azure Data Studio.
 
 In SSMS, the remote query plan is displayed in the estimated execution plan as Query 2 (`sp_execute_memo_node_1`) and corresponds to the Remote Query operator in Query 1. For example:
 

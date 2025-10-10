@@ -65,21 +65,21 @@ Requires membership in the **sysadmin** fixed server role.
 
 ## Examples
 
-The following example disables Trace Flag 3205.
+The following example disables trace flag 3205.
 
 ```sql
 DBCC TRACEOFF (3205);
 GO
 ```
 
-The following example first disables Trace Flag 3205 globally.
+The following example first disables trace flag 3205 globally.
 
 ```sql
 DBCC TRACEOFF (3205, -1);
 GO
 ```
 
-The following example disables Trace Flags 3205 and 260 globally.
+The following example disables Trace flags 3205 and 260 globally.
 
 ```sql
 DBCC TRACEOFF (3205, 260, -1);
@@ -91,4 +91,4 @@ GO
 - [DBCC (Transact-SQL)](../../t-sql/database-console-commands/dbcc-transact-sql.md)
 - [DBCC TRACEON (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-transact-sql.md)
 - [DBCC TRACESTATUS (Transact-SQL)](../../t-sql/database-console-commands/dbcc-tracestatus-transact-sql.md)
-- [Trace Flags (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)
+- [Set trace flags with DBCC TRACEON (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)

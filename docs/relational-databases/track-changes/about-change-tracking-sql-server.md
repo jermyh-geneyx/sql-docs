@@ -54,7 +54,7 @@ In [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions, cha
 
 In [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], adaptive shallow cleanup is enabled by default.
 
-To disable adaptive shallow cleanup, enable [Trace Flag 8273](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf8273) globally:
+To disable adaptive shallow cleanup, enable [trace flag 8273](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf8273) globally:
 
 ```sql
 DBCC TRACEON (8273, -1);

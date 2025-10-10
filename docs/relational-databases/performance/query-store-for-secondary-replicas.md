@@ -25,9 +25,9 @@ The feature was originally introduced in [!INCLUDE [sssql22-md](../../includes/s
 Beginning with [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], Query Store for readable secondaries is enabled by default.
 
 > [!IMPORTANT]  
-> In [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], Query Store for readable secondaries is a preview feature and requires Trace Flag 12606 to be applied to the primary and all readable secondary replicas. It **isn't** intended for production deployments that are based on [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)]. For more information, see [SQL Server 2022 release notes](../../sql-server/sql-server-2022-release-notes.md).
+> In [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)], Query Store for readable secondaries is a preview feature and requires trace flag 12606 to be applied to the primary and all readable secondary replicas. It **isn't** intended for production deployments that are based on [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)]. For more information, see [SQL Server 2022 release notes](../../sql-server/sql-server-2022-release-notes.md).
 >
-> For [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], the feature is **on** by default and Trace Flag 12606 **isn't** required. Enabling this trace flag has the effect of disabling the feature.
+> For [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], the feature is **on** by default and trace flag 12606 **isn't** required. Enabling this trace flag has the effect of disabling the feature.
 
 ## Enable Query Store for readable secondaries
 

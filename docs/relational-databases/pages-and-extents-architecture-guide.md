@@ -95,7 +95,7 @@ Up to, and including, [!INCLUDE [ssSQL14](../includes/sssql14-md.md)], the [!INC
 Starting with [!INCLUDE [sssql15-md](../includes/sssql16-md.md)], the default for most allocations in a user database and `tempdb` is to use uniform extents, except for allocations belonging to the first eight pages of an [IAM chain](#IAM). Allocations for `master`, `msdb`, and `model` databases still retain the previous behavior.
 
 > [!NOTE]  
-> In [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], up to and including [!INCLUDE [ssSQL14](../includes/sssql14-md.md)], you can use Trace Flag (TF) 1118 to change the default allocation to *always* use uniform extents. For more information about this trace flag, see [Trace Flag 1118](../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf1118).
+> In [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], up to and including [!INCLUDE [ssSQL14](../includes/sssql14-md.md)], you can use trace flag (TF) 1118 to change the default allocation to *always* use uniform extents. For more information about this trace flag, see [trace flag 1118](../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf1118).
 >
 > Starting with [!INCLUDE [sssql16-md](../includes/sssql16-md.md)], the functionality provided by TF 1118 is automatically enabled for `tempdb` and all user databases. For user databases, this behavior is controlled by the `SET MIXED_PAGE_ALLOCATION` option of `ALTER DATABASE`, with the default value set to `OFF`, and TF 1118 has no effect. For more information, see [ALTER DATABASE SET options](../t-sql/statements/alter-database-transact-sql-set-options.md).
 

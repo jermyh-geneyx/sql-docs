@@ -79,7 +79,7 @@ Allows you to start a named instance of [!INCLUDE [ssNoVersion](../includes/ssno
 
 #### -T *trace#*
 
-Indicates that an instance of [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] should be started with a specified trace flag (*trace#*) in effect. Trace flags are used to start the server with nonstandard behavior. For more information, see [DBCC TRACEON - Trace Flags](../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md).
+Indicates that an instance of [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] should be started with a specified trace flag (*trace#*) in effect. Trace flags are used to start the server with nonstandard behavior. For more information, see [Set trace flags with DBCC TRACEON](../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md).
 
 > [!IMPORTANT]  
 > When specifying a trace flag, use `-T` to pass the trace flag number. A lowercase `t` (`-t`) is accepted by [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)]; however, `-t` sets other internal trace flags required by [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] support engineers.

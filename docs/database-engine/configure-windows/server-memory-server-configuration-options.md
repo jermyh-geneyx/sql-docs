@@ -151,7 +151,7 @@ A significant part of sql server process memory has been paged out. This may res
 Using LPIM with an incorrectly configured `max server memory (MB)` setting that doesn't account for other memory consumers in the system might cause instability, depending on the amount of memory required by other processes, or [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] memory requirements outside the scope of `max server memory (MB)`. For more information, see [max server memory](#max-server-memory). If the **Lock pages in memory** (LPIM) privilege is granted (on 32-bit or 64-bit systems), we strongly recommend that you set `max server memory (MB)` to a specific value, rather than leaving the default of 2,147,483,647 megabytes (MB).
 
 > [!NOTE]  
-> Starting with [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)], [Trace Flag 845](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md) isn't needed for Standard Edition to use locked pages.
+> Starting with [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)], [trace flag 845](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md) isn't needed for Standard Edition to use locked pages.
 
 ### Enable *Lock pages in memory*
 
@@ -171,7 +171,7 @@ The following values of `sql_memory_model_desc` indicate the status of LPIM:
 
 - `CONVENTIONAL`. Lock pages in memory privilege isn't granted.
 - `LOCK_PAGES`. Lock pages in memory privilege is granted.
-- `LARGE_PAGES`. Lock pages in memory privilege is granted in Enterprise mode with Trace Flag 834 enabled. This is an advanced configuration and not recommended for most environments. For more information and important caveats, see [Trace Flag 834](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf834).
+- `LARGE_PAGES`. Lock pages in memory privilege is granted in Enterprise mode with trace flag 834 enabled. This is an advanced configuration and not recommended for most environments. For more information and important caveats, see [trace flag 834](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf834).
 
 Use the following methods to determine whether the SQL Server instance is using locked pages:
 

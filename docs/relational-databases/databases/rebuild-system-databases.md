@@ -152,7 +152,7 @@ If the `msdb` database is damaged or suspect and you don't have a backup of the 
    NET START MSSQLSERVER /T3608
    ```
 
-   For more information, see [Start, Stop, Pause, Resume, Restart the Database Engine, SQL Server Agent, or SQL Server Browser Service](../../database-engine/configure-windows/start-stop-pause-resume-restart-sql-server-services.md). For information on Trace Flag 3608, see [TF3608](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf3608).
+   For more information, see [Start, Stop, Pause, Resume, Restart the Database Engine, SQL Server Agent, or SQL Server Browser Service](../../database-engine/configure-windows/start-stop-pause-resume-restart-sql-server-services.md). For information on trace flag 3608, see [TF3608](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md#tf3608).
 
 1. In another command line window, detach the `msdb` database by executing the following command, replacing `<servername>` with the instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]:
 

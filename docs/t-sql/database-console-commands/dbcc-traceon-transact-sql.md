@@ -61,7 +61,7 @@ Trace flags are used to customize certain characteristics by controlling how [!I
 
 After turning on a trace flag that affects query plans, execute `DBCC FREEPROCCACHE;` so that cached plans are recompiled using the new plan-affecting behavior.
 
-Azure SQL Managed Instance supports the following global Trace Flags: 460, 2301, 2389, 2390, 2453, 2467, 7471, 8207, 9389, 10316, and 11024.
+Azure SQL Managed Instance supports the following global Trace flags: 460, 2301, 2389, 2390, 2453, 2467, 7471, 8207, 9389, 10316, and 11024.
 
 ## Result sets
 
@@ -77,21 +77,21 @@ Requires membership in the **sysadmin** fixed server role.
 
 ## Examples
 
-The following example disables hardware compression for tape drivers, by switching on Trace Flag 3205. This flag is switched on only for the current connection.
+The following example disables hardware compression for tape drivers, by switching on trace flag 3205. This flag is switched on only for the current connection.
 
 ```sql
 DBCC TRACEON (3205);
 GO
 ```
 
-The following example switches on Trace Flag 3205 globally.
+The following example switches on trace flag 3205 globally.
 
 ```sql
 DBCC TRACEON (3205, -1);
 GO
 ```
 
-The following example switches on Trace Flags 3205 and 260 globally.
+The following example switches on Trace flags 3205 and 260 globally.
 
 ```sql
 DBCC TRACEON (3205, 260, -1);
@@ -103,5 +103,5 @@ GO
 - [DBCC (Transact-SQL)](../../t-sql/database-console-commands/dbcc-transact-sql.md)
 - [DBCC TRACEOFF (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceoff-transact-sql.md)
 - [DBCC TRACESTATUS (Transact-SQL)](../../t-sql/database-console-commands/dbcc-tracestatus-transact-sql.md)
-- [Trace Flags (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)
+- [Set trace flags with DBCC TRACEON (Transact-SQL)](../../t-sql/database-console-commands/dbcc-traceon-trace-flags-transact-sql.md)
 - [Enable plan-affecting SQL Server query optimizer behavior that can be controlled by different trace flags on a specific-query level](https://support.microsoft.com/help/2801413)
