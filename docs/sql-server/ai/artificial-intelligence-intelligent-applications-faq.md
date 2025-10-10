@@ -65,6 +65,13 @@ If you need to work with structured data, you can still leverage RAG by combinin
 If you have a complex and large database schema, with hundreds of tables and views, it's better to use a multi-agent approach to help to reduce the noise and allow AI models to focus on specific areas of the schema. A full description along with a working end-to-end sample is available here:
 
 - [A story of collaborating agents: chatting with your database the right way](https://devblogs.microsoft.com/azure-sql/a-story-of-collaborating-agents-chatting-with-your-database-the-right-way/)
+  
+## Can I connect to Azure OpenAI using Managed Identity?
+
+Yes, you can connect to Azure OpenAI using Managed Identity. This allows you to securely authenticate and access the Azure OpenAI Service without needing to manage credentials directly. For more information, see:
+
+- [Go passwordless when calling Azure OpenAI from Azure SQL using Managed Identities](https://devblogs.microsoft.com/azure-sql/go-passwordless-when-calling-azure-openai-from-azure-sql-using-managed-identities/)
+- [Create an EXTERNAL MODEL with Azure OpenAI using Managed Identity](../../t-sql/statements/create-external-model-transact-sql.md#create-an-external-model-with-azure-openai-using-managed-identity)
 
 ## Is my data used by Microsoft for training models?
 
