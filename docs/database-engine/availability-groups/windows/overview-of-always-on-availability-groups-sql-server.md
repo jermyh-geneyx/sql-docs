@@ -5,7 +5,7 @@ author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest, vanto
 ms.update-cycle: 1825-days
-ms.date: 08/15/2025
+ms.date: 10/10/2025
 ms.service: sql
 ms.subservice: availability-groups
 ms.topic: concept-article
@@ -61,7 +61,7 @@ The following illustration shows an availability group that contains one primary
 
 ## Configure TLS 1.3 encryption
 
-[!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] introduces [TDS 8.0](../../../relational-databases/security/networking/tds-8.md) support, which allows enforcing [TLS 1.3](../../../relational-databases/security/networking/tls-1-3.md) encryption for communication between the Windows Server Failover Cluster and your Always On availability group replicas.
+[!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] introduces [Tabular Data Stream 8.0](../../../relational-databases/security/networking/tds-8.md) support, which allows you to enforce [TLS 1.3](../../../relational-databases/security/networking/tls-1-3.md) encryption for communication between the Windows Server Failover Cluster and your Always On availability group replicas.
 To get started, review [Connect with strict encryption](../../../relational-databases/security/networking/connect-with-strict-encryption.md#connect-to-an-always-on-availability-group).
 
 <a id="TermsAndDefinitions"></a>
@@ -74,7 +74,7 @@ To get started, review [Connect with strict encryption](../../../relational-data
 | **availability database** | A database that belongs to an availability group. For each availability database, the availability group maintains a single read-write copy (the *primary database*) and one to eight read-only copies (*secondary databases*). |
 | **primary database** | The read-write copy of an availability database. |
 | **secondary database** | A read-only copy of an availability database. |
-| **availability replica** | An instantiation of an availability group that is hosted by a specific instance of [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] and maintains a local copy of each availability database that belongs to the availability group. Two types of availability replicas exist: a single *primary replica* and one to eight *secondary replicas*. |
+| **availability replica** | An instantiation of an availability group that a specific instance of [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] hosts and maintains a local copy of each availability database that belongs to the availability group. Two types of availability replicas exist: a single *primary replica* and one to eight *secondary replicas*. |
 | **primary replica** | The availability replica that makes the primary databases available for read-write connections from clients and, also, sends transaction log records for each primary database to every secondary replica. |
 | **secondary replica** | An availability replica that maintains a secondary copy of each availability database, and serves as a potential failover targets for the availability group. Optionally, a secondary replica can support read-only access to secondary databases can support creating backups on secondary databases. |
 | **availability group listener** | A server name to which clients can connect in order to access a database in a primary or secondary replica of an availability group. Availability group listeners direct incoming connections to the primary replica or to a read-only secondary replica. |
@@ -83,7 +83,7 @@ To get started, review [Connect with strict encryption](../../../relational-data
 
 ## Availability databases
 
-To add a database to an availability group, the database must be an online, read-write database that exists on the server instance that hosts the primary replica. When you add a database, it joins the availability group as a primary database, while remaining available to clients. No corresponding secondary database exists until backups of the new primary database are restored to the server instance that hosts the secondary replica (using RESTORE WITH NORECOVERY). The new secondary database is in the RESTORING state until it's joined to the availability group. For more information, see [Start Data Movement on an Always On Secondary Database (SQL Server)](start-data-movement-on-an-always-on-secondary-database-sql-server.md).
+To add a database to an availability group, the database must be an online, read-write database that exists on the server instance that hosts the primary replica. When you add a database, it joins the availability group as a primary database, while remaining available to clients. No corresponding secondary database exists until you restore backups of the new primary database to the server instance that hosts the secondary replica (using RESTORE WITH NORECOVERY). The new secondary database is in the RESTORING state until it's joined to the availability group. For more information, see [Start Data Movement on an Always On Secondary Database (SQL Server)](start-data-movement-on-an-always-on-secondary-database-sql-server.md).
 
 Joining places the secondary database into the ONLINE state and initiates data synchronization with the corresponding primary database. *Data synchronization* is the process by which changes to a primary database are reproduced on a secondary database. Data synchronization involves the primary database sending transaction log records to the secondary database.
 
@@ -94,22 +94,22 @@ Joining places the secondary database into the ONLINE state and initiates data s
 
 ## Availability replicas
 
-Each availability group defines a set of two or more failover partners known as availability replicas. *Availability replicas* are components of the availability group. Each availability replica hosts a copy of the availability databases in the availability group. For a given availability group, the availability replicas must be hosted by separate instances of [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] residing on different nodes of a WSFC cluster. Each of these server instances must be enabled for Always On.
+Each availability group defines a set of two or more failover partners known as availability replicas. *Availability replicas* are components of the availability group. Each availability replica hosts a copy of the availability databases in the availability group. For a given availability group, separate instances of [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] residing on different nodes of a WSFC cluster must host the availability replicas. Each of these server instances must be enabled for Always On.
 
 [!INCLUDE [sql-server-2019](../../../includes/sssql19-md.md)] increases the maximum number of synchronous replicas to 5, up from 3 in [!INCLUDE [ssSQL17](../../../includes/sssql17-md.md)]. You can configure this group of five replicas to have automatic failover within the group. There's one primary replica, plus four synchronous secondary replicas.
 
-A given instance can host only one availability replica per availability group. However, each instance can be used for many availability groups. A given instance can be either a stand-alone instance or a [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] failover cluster instance (FCI). If you require server-level redundancy, use Failover Cluster Instances.
+A given instance can host only one availability replica per availability group. However, you can use each instance for many availability groups. A given instance can be either a stand-alone instance or a [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] failover cluster instance (FCI). If you require server-level redundancy, use Failover Cluster Instances.
 
-Every availability replica is assigned an initial role-either the *primary role* or the *secondary role*, which is inherited by the availability databases of that replica. The role of a given replica determines whether it hosts read-write databases or read-only databases. One replica, known as the *primary replica*, is assigned the primary role and hosts read-write databases, which are known as *primary databases*. At least one other replica, known as a *secondary replica*, is assigned the secondary role. A secondary replica hosts read-only databases, known as secondary databases.
+Every availability replica is assigned an initial role - either the *primary role* or the *secondary role*, which the availability databases of that replica inherit. The role of a given replica determines whether it hosts read-write databases or read-only databases. One replica, known as the *primary replica*, is assigned the primary role and hosts read-write databases, which are known as *primary databases*. At least one other replica, known as a *secondary replica*, is assigned the secondary role. A secondary replica hosts read-only databases, known as secondary databases.
 
 > [!NOTE]  
-> When the role of an availability replica is indeterminate, such as during a failover, its databases are temporarily in a NOT SYNCHRONIZING state. Their role is set to RESOLVING until the role of the availability replica has resolved. If an availability replica resolves to the primary role, its databases become the primary databases. If an availability replica resolves to the secondary role, its databases become secondary databases.
+> When the role of an availability replica is indeterminate, such as during a failover, its databases are temporarily in a NOT SYNCHRONIZING state. Their role is set to RESOLVING until the role of the availability replica resolves. If an availability replica resolves to the primary role, its databases become the primary databases. If an availability replica resolves to the secondary role, its databases become secondary databases.
 
 <a id="AvailabilityModes"></a>
 
 ## Availability modes
 
-The availability mode is a property of each availability replica. The availability mode determines whether the primary replica waits to commit transactions on a database, until a given secondary replica has written the transaction log records to disk (hardened the log). [!INCLUDE [ssHADR](../../../includes/sshadr-md.md)] supports two availability modes: *asynchronous-commit mode* and *synchronous-commit mode*.
+Each availability replica has an availability mode property. The availability mode determines whether the primary replica waits to commit transactions on a database until a given secondary replica writes the transaction log records to disk (hardens the log). [!INCLUDE [ssHADR](../../../includes/sshadr-md.md)] supports two availability modes: *asynchronous-commit mode* and *synchronous-commit mode*.
 
 - **Asynchronous-commit mode**
 
@@ -117,7 +117,7 @@ The availability mode is a property of each availability replica. The availabili
 
 - **Synchronous-commit mode**
 
-  An availability replica that uses this availability mode is known as a *synchronous-commit replica*. Under synchronous-commit mode, before committing transactions, a synchronous-commit primary replica waits for a synchronous-commit secondary replica to acknowledge that it has finished hardening the log. Synchronous-commit mode ensures that once a given secondary database is synchronized with the primary database, committed transactions are fully protected. This protection comes at the cost of increased transaction latency. Optionally, SQL Server 2017 introduced a *required synchronized secondaries* feature to further increase safety at the cost of latency when desired. The REQUIRED_SYNCHRONIZED_SECONDARIES_TO_COMMIT feature can be enabled to require a specified number of synchronous replicas to commit a transaction before a primary replica is allowed to commit.
+  An availability replica that uses this availability mode is known as a *synchronous-commit replica*. Under synchronous-commit mode, before committing transactions, a synchronous-commit primary replica waits for a synchronous-commit secondary replica to acknowledge that it finished hardening the log. Synchronous-commit mode ensures that once a given secondary database is synchronized with the primary database, committed transactions are fully protected. This protection comes at the cost of increased transaction latency. Optionally, SQL Server 2017 introduced a *required synchronized secondaries* feature to further increase safety at the cost of latency when desired. The REQUIRED_SYNCHRONIZED_SECONDARIES_TO_COMMIT feature can be enabled to require a specified number of synchronous replicas to commit a transaction before a primary replica is allowed to commit.
 
 For more information, see [Differences between availability modes for an Always On availability group](availability-modes-always-on-availability-groups.md).
 
@@ -125,35 +125,35 @@ For more information, see [Differences between availability modes for an Always 
 
 ## Types of failover
 
-Within the context of a session between the primary replica and a secondary replica, the primary and secondary roles are potentially interchangeable in a process known as *failover*. During a failover, the target secondary replica transitions to the primary role, becoming the new primary replica. The new primary replica brings its databases online as the primary databases, and client applications can connect to them. When the former primary replica is available, it transitions to the secondary role, becoming a secondary replica. The former primary databases become secondary databases and data synchronization resumes.
+Within the context of a session between the primary replica and a secondary replica, the primary and secondary roles can switch in a process known as *failover*. During a failover, the target secondary replica transitions to the primary role and becomes the new primary replica. The new primary replica brings its databases online as the primary databases, and client applications can connect to them. When the former primary replica is available, it changes to the secondary role and becomes a secondary replica. The former primary databases become secondary databases and data synchronization resumes.
 
-An availability group fails over at the level of an availability replica. Failovers aren't caused by database issues such as a database becoming suspect due to a loss of a data file, deletion of a database, or corruption of a transaction log.
+An availability group fails over at the level of an availability replica. Failovers don't happen because of database issues such as a database becoming suspect due to a loss of a data file, deletion of a database, or corruption of a transaction log.
 
-Three forms of failover exist-automatic, manual, and forced (with possible data loss). The form or forms of failover supported by a given secondary replica depends on its availability mode, and, for synchronous-commit mode, on the failover mode on the primary replica and target secondary replica, as follows.
+Three forms of failover exist: automatic, manual, and forced (with possible data loss). The form or forms of failover that a given secondary replica supports depends on its availability mode. For synchronous-commit mode, it also depends on the failover mode on the primary replica and target secondary replica, as follows.
 
-- Synchronous-commit mode supports two forms of failover-*planned manual failover* and *automatic failover*, if the target secondary replica is currently synchronized with the primary replica. The support for these forms of failover depends on the setting of the *failover mode property* on the failover partners. If failover mode is set to "manual" on either the primary or secondary replica, only manual failover is supported for that secondary replica. If failover mode is set to "automatic" on both the primary and secondary replicas, both automatic and manual failover are supported on that secondary replica.
+- Synchronous-commit mode supports two forms of failover: *planned manual failover* and *automatic failover*, if the target secondary replica is currently synchronized with the primary replica. The setting of the *failover mode property* on the failover partners determines support for these forms of failover. If you set the failover mode to **manual** on either the primary or secondary replica, the secondary replica supports only manual failover. If you set the failover mode to **automatic** on both the primary and secondary replicas, the secondary replica supports both automatic and manual failover.
 
   - **Planned manual failover** (without data loss)
 
-    A manual failover occurs after a database administrator issues a failover command and causes a synchronized secondary replica to transition to the primary role (with guaranteed data protection) and the primary replica to transition to the secondary role. A manual failover requires that both the primary replica and the target secondary replica are running under synchronous-commit mode, and the secondary replica must already be synchronized.
+   A manual failover happens after a database administrator issues a failover command. It causes a synchronized secondary replica to transition to the primary role (with guaranteed data protection) and the primary replica to change to the secondary role. A manual failover requires that both the primary replica and the target secondary replica run under synchronous-commit mode, and the secondary replica must already be synchronized.
 
   - **Automatic failover** (without data loss)
 
-    An automatic failover occurs in response to a failure that causes a synchronized secondary replica to transition to the primary role (with guaranteed data protection). When the former primary replica becomes available, it transitions to the secondary role. Automatic failover requires that both the primary replica and the target secondary replica are running under synchronous-commit mode with the failover mode set to *Automatic*. In addition, the secondary replica must already be synchronized, have WSFC quorum, and meet the conditions specified by the [flexible failover policy](configure-flexible-automatic-failover-policy.md) of the availability group.
+   An automatic failover happens in response to a failure. It causes a synchronized secondary replica to transition to the primary role (with guaranteed data protection). When the former primary replica becomes available, it changes to the secondary role. Automatic failover requires that both the primary replica and the target secondary replica run under synchronous-commit mode with the failover mode set to *Automatic*. In addition, the secondary replica must already be synchronized, have WSFC quorum, and meet the conditions specified by the [flexible failover policy](configure-flexible-automatic-failover-policy.md) of the availability group.
 
-- Under asynchronous-commit mode, the only form of failover is forced manual failover (with possible data loss), typically called *forced failover*. Forced failover is considered a form of manual failover because it can only be initiated manually. Forced failover is a disaster recovery option. It's the only form of failover that is possible when the target secondary replica isn't synchronized with the primary replica.
+- Under asynchronous-commit mode, the only form of failover is forced manual failover (with possible data loss), typically called *forced failover*. Forced failover is a form of manual failover because you must initiate it manually. Forced failover is a disaster recovery option. It's the only form of failover that's possible when the target secondary replica isn't synchronized with the primary replica.
 
 For more information, see [Failover and Failover Modes (Always On Availability Groups)](failover-and-failover-modes-always-on-availability-groups.md).
 
 > [!IMPORTANT]  
-> - SQL Server Failover Cluster Instances (FCIs) don't support automatic failover by availability groups, so any availability replica that is hosted by an FCI can only be configured for manual failover.
+> - SQL Server Failover Cluster Instances (FCIs) don't support automatic failover by availability groups, so you can only configure manual failover for any availability replica that an FCI hosts.
 > - If you issue a forced failover command on a synchronized secondary replica, the secondary replica behaves the same as for a planned manual failover.
 
 ## Benefits
 
 [!INCLUDE [ssHADR](../../../includes/sshadr-md.md)] provide a rich set of options that improve database availability and improve resource use. The key components are as follows:
 
-- Supports up to nine availability replicas. An *availability replica* is an instantiation of an availability group that is hosted by a specific instance of SQL Server and maintains a local copy of each availability database that belongs to the availability group. Each availability group supports one primary replica and up to eight secondary replicas. For more information, see [What is an Always On availability group?](overview-of-always-on-availability-groups-sql-server.md)
+- Supports up to nine availability replicas. An *availability replica* is an instantiation of an availability group that a specific instance of SQL Server hosts. It maintains a local copy of each availability database that belongs to the availability group. Each availability group supports one primary replica and up to eight secondary replicas. For more information, see [What is an Always On availability group?](overview-of-always-on-availability-groups-sql-server.md)
 
   > [!IMPORTANT]  
   > Each availability replica must reside on a different node of a single Windows Server Failover Clustering (WSFC) cluster. For more information about prerequisites, restrictions, and recommendations for availability groups, see [Prerequisites, restrictions, and recommendations for Always On availability groups](prereqs-restrictions-recommendations-always-on-availability.md).
@@ -212,10 +212,10 @@ You can provide client connectivity to the primary replica of a given availabili
 
 An availability group listener is associated with a unique DNS name that serves as a virtual network name (VNN), one or more virtual IP addresses (VIPs), and a TCP port number. For more information, see [Connect to an Always On availability group listener](listeners-client-connectivity-application-failover.md).
 
-If an availability group possesses only two availability replicas and isn't configured to allow read-access to the secondary replica, clients can connect to the primary replica by using a [database mirroring connection string](../../database-mirroring/connect-clients-to-a-database-mirroring-session-sql-server.md). This approach can be useful temporarily after you migrate a database from database mirroring to [!INCLUDE [ssHADR](../../../includes/sshadr-md.md)]. Before you add additional secondary replicas, you'll need to create an availability group listener for the availability group and update your applications to use the network name of the listener.
+If an availability group has only two availability replicas and isn't configured to allow read-access to the secondary replica, clients can connect to the primary replica by using a [database mirroring connection string](../../database-mirroring/connect-clients-to-a-database-mirroring-session-sql-server.md). This approach can be useful temporarily after you migrate a database from database mirroring to [!INCLUDE [ssHADR](../../../includes/sshadr-md.md)]. Before you add secondary replicas, you need to create an availability group listener for the availability group and update your applications to use the network name of the listener.
 
 > [!NOTE]
-> [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] introduces [TDS 8.0](../../../relational-databases/security/networking/tds-8.md) support, which allows enforcing strict [TLS 1.3](../../../relational-databases/security/networking/tls-1-3.md) encryption for connections to your Always On availability group replicas and listener. To get started, review [Connect with strict encryption](../../../relational-databases/security/networking/connect-with-strict-encryption.md#connect-to-an-always-on-availability-group).
+> [!INCLUDE [sssql25-md](../../../includes/sssql25-md.md)] introduces TDS 8.0 support, which allows enforcing strict [TLS 1.3](../../../relational-databases/security/networking/tls-1-3.md) encryption for connections to your Always On availability group replicas and listener. To get started, review [Connect with strict encryption](../../../relational-databases/security/networking/connect-with-strict-encryption.md#connect-to-an-always-on-availability-group).
 
 
 <a id="ActiveSecondaries"></a>
@@ -226,21 +226,21 @@ If an availability group possesses only two availability replicas and isn't conf
 
 - **Performing backup operations on secondary replicas**
 
-  The secondary replicas support performing log backups and [copy-only](active-secondaries-backup-on-secondary-replicas-always-on-availability-groups.md) backups of a full database, file, or filegroup. You can configure the availability group to specify a preference for where backups should be performed. It's important to understand that the preference isn't enforced by SQL Server, so it has no effect on ad hoc backups. The interpretation of this preference depends on the logic, if any, that you script into your backup jobs for each of the databases in a given availability group. For an individual availability replica, you can specify your priority for performing backups on this replica relative to the other replicas in the same availability group. For more information, see [Offload supported backups to secondary replicas of an availability group](active-secondaries-backup-on-secondary-replicas-always-on-availability-groups.md).
+  The secondary replicas support performing log backups and [copy-only](active-secondaries-backup-on-secondary-replicas-always-on-availability-groups.md) backups of a full database, file, or filegroup. You can configure the availability group to specify a preference for where backups should be performed. It's important to understand that SQL Server doesn't enforce the preference, so it has no effect on ad hoc backups. The interpretation of this preference depends on the logic, if any, that you script into your backup jobs for each of the databases in a given availability group. For an individual availability replica, you can specify your priority for performing backups on this replica relative to the other replicas in the same availability group. For more information, see [Offload supported backups to secondary replicas of an availability group](active-secondaries-backup-on-secondary-replicas-always-on-availability-groups.md).
 
 - **Read-only access to one or more secondary replicas (readable secondary replicas)**
 
-  Any secondary availability replica can be configured to allow only read-only access to its local databases, though some operations aren't fully supported. This prevents read-write connection attempts to the secondary replica. It's also possible to prevent read-only workloads on the *primary* replica by only allowing read-write access. This prevents read-only connections from being made to the primary replica. For more information, see [Offload read-only workload to secondary replica of an Always On availability group](active-secondaries-readable-secondary-replicas-always-on-availability-groups.md).
+  You can configure any secondary availability replica to allow only read-only access to its local databases, though some operations aren't fully supported. This configuration prevents read-write connection attempts to the secondary replica. It's also possible to prevent read-only workloads on the *primary* replica by only allowing read-write access. This configuration prevents read-only connections from being made to the primary replica. For more information, see [Offload read-only workload to secondary replica of an Always On availability group](active-secondaries-readable-secondary-replicas-always-on-availability-groups.md).
 
-  If an availability group currently possesses an availability group listener and one or more readable secondary replicas, [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] can route read-intent connection requests to one of them (*read-only routing*). For more information, see [Connect to an Always On availability group listener](listeners-client-connectivity-application-failover.md).
+    If an availability group currently has an availability group listener and one or more readable secondary replicas, [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)]can route read-intent connection requests to one of them (*read-only routing*). For more information, see [Connect to an Always On availability group listener](listeners-client-connectivity-application-failover.md).
 
 ## Session-timeout period
 
-The session-timeout period is an availability-replica property that determines how long connection with another availability replica can remain inactive before the connection is closed. The primary and secondary replicas ping each other to signal that they're still active. Receiving a ping from the other replica during the timeout period indicates that the connection is still open, and that the server instances are communicating. On receiving a ping, an availability replica resets its session-timeout counter on that connection.
+The session-timeout period is an availability-replica property that determines how long a connection with another availability replica can remain inactive before the connection closes. The primary and secondary replicas ping each other to signal that they're still active. Receiving a ping from the other replica during the timeout period indicates that the connection is still open, and that the server instances are communicating. On receiving a ping, an availability replica resets its session-timeout counter on that connection.
 
-The session-timeout period prevents either replica from waiting indefinitely to receive a ping from the other replica. If no ping is received from the other replica within the session-timeout period, the replica times out. Its connection is closed, and the timed-out replica enters the DISCONNECTED state. Even if a disconnected replica is configured for synchronous-commit mode, transactions don't wait for that replica to reconnect and resynchronize.
+The session-timeout period prevents either replica from waiting indefinitely to receive a ping from the other replica. If no ping is received from the other replica within the session-timeout period, the replica times out. Its connection closes, and the timed-out replica enters the DISCONNECTED state. Even if a disconnected replica is configured for synchronous-commit mode, transactions don't wait for that replica to reconnect and resynchronize.
 
-The default session-timeout period for each availability replica is 10 seconds. This value is user-configurable, with a minimum of 5 seconds. Generally, we recommend that you keep the time-out period at 10 seconds or greater. Setting the value to less than 10 seconds creates the possibility of a heavily loaded system declaring a false failure.
+The default session-timeout period for each availability replica is 10 seconds. You can configure this value, with a minimum of 5 seconds. Generally, keep the time-out period at 10 seconds or greater. Setting the value to less than 10 seconds creates the possibility of a heavily loaded system declaring a false failure.
 
 > [!NOTE]  
 > In the resolving role, the session-timeout period doesn't apply because pinging doesn't occur.
@@ -255,7 +255,7 @@ For more information, see [Automatic Page Repair (Availability Groups: Database 
 
 ## Interoperability and coexistence with other Database Engine features
 
-[!INCLUDE [ssHADR](../../../includes/sshadr-md.md)] can be used with the following features or components of [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)]:
+[!INCLUDE [ssHADR](../../../includes/sshadr-md.md)] works with the following features or components of [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)]:
 
 - [What is change data capture (CDC)?](../../../relational-databases/track-changes/about-change-data-capture-sql-server.md)
 - [About Change Tracking (SQL Server)](../../../relational-databases/track-changes/about-change-tracking-sql-server.md)

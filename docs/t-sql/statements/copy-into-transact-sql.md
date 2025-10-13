@@ -320,10 +320,6 @@ Azure Synapse Analytics automatically assigns unique values based on the seed an
 > [!NOTE]  
 > The automatic table creation works alongside with automatic schema discovery. The automatic table creation is NOT enabled by default.
 
-Don't load into hash distributed tables from Parquet files using `COPY INTO` with `AUTO_CREATE_TABLE = 'ON'`.
-
-If Parquet files are to be loaded into hash distributed tables using `COPY INTO`, load it into a round robin staging table followed by `INSERT ... SELECT` from that table to the target hash distributed table.
-
 ### Permissions
 
 The user executing the COPY command must have the following permissions:
