@@ -319,158 +319,33 @@ FROM BINARY = <PublicKey>
 
 ### Import Azure-trusted root certificate authority keys to SQL Server
 
-Importing Azure-trusted root certificate authority (CA) keys to SQL Server is required for your SQL Server to trust the SQL managed instance certificates issued by Azure.
+Importing Azure-trusted root certificate authority (CA) keys to SQL Server is required for your SQL Server to trust the SQL Managed Instance public key certificates issued by Azure.
 
-You can download the necessary root CA certificates from [Root Certificate Authorities](/azure/security/fundamentals/azure-ca-details?tabs=root-and-subordinate-cas-list). Save it locally, such as to the sample `C:\Path\To\<name of certificate>.crt` path, and then import the certificate from that path.
-
-
-First, import the *DigiCert Global Root CA* root-authority certificate to SQL Server:
+You can download the necessary root CA keys from [Root Certificate Authorities](/azure/security/fundamentals/azure-ca-details?tabs=root-and-subordinate-cas-list). Save them locally, such as to the sample `C:\Path\To\<name of certificate>.crt` path, and then import the certificates from that path:
 
 ```sql
 -- Run on SQL Server
--- Import DigiCertGlobalRootCA root-authority certificate (trusted by Azure), if not already present
-IF NOT EXISTS (SELECT name FROM sys.certificates WHERE name = N'DigiCertGlobalRootCA')
+-- Import <name of certificate> root-authority certificate (trusted by Azure), if not already present
+IF NOT EXISTS (SELECT name FROM sys.certificates WHERE name = N'<name of certificate>')
 BEGIN
-    PRINT 'Creating DigiCertGlobalRootCA certificate.'
-    CREATE CERTIFICATE [DigiCertGlobalRootCA] FROM FILE = 'C:\Path\To\DigiCertGlobalRootCA.crt'
+    PRINT 'Creating <name of certificate> certificate.'
+    CREATE CERTIFICATE [<name of certificate>] FROM FILE = 'C:\Path\To\<name of certificate>.crt'
 
-    --Trust certificates issued by DigiCertGlobalRootCA root authority for Azure database.windows.net domains
+    --Trust certificates issued by <name of certificate> root authority for Azure database.windows.net domains
     DECLARE @CERTID int
-    SELECT @CERTID = CERT_ID('DigiCertGlobalRootCA')
+    SELECT @CERTID = CERT_ID('<name of certificate>')
     --For government cloud, use the corresponding SQL Database DNS suffix, e.g. '*.database.usgovcloudapi.net', '*.database.chinacloudapi.cn' etc.
     EXEC sp_certificate_add_issuer @CERTID, N'*.database.windows.net'
 END
 ELSE
-    PRINT 'Certificate DigiCertGlobalRootCA already exists.'
+    PRINT 'Certificate <name of certificate> already exists.'
 GO
 ```
 
-Then, import the *DigiCert Global Root G2* root-authority certificate to SQL Server:
-
-```sql
--- Run on SQL Server
--- Import DigiCertGlobalRootG2 root-authority certificate (trusted by Azure), if not already present
-IF NOT EXISTS (SELECT name FROM sys.certificates WHERE name = N'DigiCertGlobalRootG2')
-BEGIN
-    PRINT 'Creating DigiCertGlobalRootG2 certificate.'
-    CREATE CERTIFICATE [DigiCertGlobalRootG2] FROM FILE = 'C:\Path\To\DigiCertGlobalRootG2.crt'
-
-    --Trust certificates issued by DigiCertGlobalRootG2 root authority for Azure database.windows.net domains
-    DECLARE @CERTID int
-    SELECT @CERTID = CERT_ID('DigiCertGlobalRootG2')
-    --For government cloud, use the corresponding SQL Database DNS suffix, e.g. '*.database.usgovcloudapi.net', '*.database.chinacloudapi.cn' etc.
-    EXEC sp_certificate_add_issuer @CERTID, N'*.database.windows.net'
-END
-ELSE
-    PRINT 'Certificate DigiCertGlobalRootG2 already exists.'
-GO
-```
-
-Then, import the *DigiCert Global Root G3* root-authority certificate to SQL Server:
-
-```sql
--- Run on SQL Server
--- Import DigiCertGlobalRootG3 root-authority certificate (trusted by Azure), if not already present
-IF NOT EXISTS (SELECT name FROM sys.certificates WHERE name = N'DigiCertGlobalRootG3')
-BEGIN
-    PRINT 'Creating DigiCertGlobalRootG3 certificate.'
-    CREATE CERTIFICATE [DigiCertGlobalRootG3] FROM FILE = 'C:\Path\To\DigiCertGlobalRootG3.crt'
-
-    --Trust certificates issued by DigiCertGlobalRootG3 root authority for Azure database.windows.net domains
-    DECLARE @CERTID int
-    SELECT @CERTID = CERT_ID('DigiCertGlobalRootG3')
-    --For government cloud, use the corresponding SQL Database DNS suffix, e.g. '*.database.usgovcloudapi.net', '*.database.chinacloudapi.cn' etc.
-    EXEC sp_certificate_add_issuer @CERTID, N'*.database.windows.net'
-END
-ELSE
-    PRINT 'Certificate DigiCertGlobalRootG3 already exists.'
-GO
-```
-
-Then, import the *DigiCert TLS ECC P384 Root G5* root-authority certificate to SQL Server:
-
-```sql
--- Run on SQL Server
--- Import DigiCertTLSECCP384RootG5 root-authority certificate (trusted by Azure), if not already present
-IF NOT EXISTS (SELECT name FROM sys.certificates WHERE name = N'DigiCertTLSECCP384RootG5')
-BEGIN
-    PRINT 'Creating DigiCertTLSECCP384RootG5 certificate.'
-    CREATE CERTIFICATE [DigiCertTLSECCP384RootG5] FROM FILE = 'C:\Path\To\DigiCertTLSECCP384RootG5.crt'
-
-    --Trust certificates issued by DigiCertTLSECCP384RootG5 root authority for Azure database.windows.net domains
-    DECLARE @CERTID int
-    SELECT @CERTID = CERT_ID('DigiCertTLSECCP384RootG5')
-    --For government cloud, use the corresponding SQL Database DNS suffix, e.g. '*.database.usgovcloudapi.net', '*.database.chinacloudapi.cn' etc.
-    EXEC sp_certificate_add_issuer @CERTID, N'*.database.windows.net'
-END
-ELSE
-    PRINT 'Certificate DigiCertTLSECCP384RootG5 already exists.'
-GO
-```
-
-Then, import the *DigiCert TLS RSA 4096 Root G5* root-authority certificate to SQL Server:
-
-```sql
--- Run on SQL Server
--- Import DigiCertTLSRSA4096RootG5 root-authority certificate (trusted by Azure), if not already present
-IF NOT EXISTS (SELECT name FROM sys.certificates WHERE name = N'DigiCertTLSRSA4096RootG5')
-BEGIN
-    PRINT 'Creating DigiCertTLSRSA4096RootG5 certificate.'
-    CREATE CERTIFICATE [DigiCertTLSRSA4096RootG5] FROM FILE = 'C:\Path\To\DigiCertTLSRSA4096RootG5.crt'
-
-    --Trust certificates issued by DigiCertTLSRSA4096RootG5 root authority for Azure database.windows.net domains
-    DECLARE @CERTID int
-    SELECT @CERTID = CERT_ID('DigiCertTLSRSA4096RootG5')
-    --For government cloud, use the corresponding SQL Database DNS suffix, e.g. '*.database.usgovcloudapi.net', '*.database.chinacloudapi.cn' etc.
-    EXEC sp_certificate_add_issuer @CERTID, N'*.database.windows.net'
-END
-ELSE
-    PRINT 'Certificate DigiCertTLSRSA4096RootG5 already exists.'
-GO
-```
-
-Then, import the *Microsoft ECC Root Certificate Authority 2017* root-authority certificate to SQL Server:
-
-```sql
--- Run on SQL Server
--- Import Microsoft ECC Root Certificate Authority 2017 root-authority certificate (trusted by Azure), if not already present
-IF NOT EXISTS (SELECT name FROM sys.certificates WHERE name = N'Microsoft ECC Root Certificate Authority 2017')
-BEGIN
-    PRINT 'Creating Microsoft ECC Root Certificate Authority 2017 certificate.'
-    CREATE CERTIFICATE [Microsoft ECC Root Certificate Authority 2017] FROM FILE = 'C:\Path\To\Microsoft ECC Root Certificate Authority 2017.crt'
-
-    --Trust certificates issued by Microsoft ECC Root Certificate Authority 2017 root authority for Azure database.windows.net domains
-    DECLARE @CERTID int
-    SELECT @CERTID = CERT_ID('Microsoft ECC Root Certificate Authority 2017')
-    --For government cloud, use the corresponding SQL Database DNS suffix, e.g. '*.database.usgovcloudapi.net', '*.database.chinacloudapi.cn' etc.
-    EXEC sp_certificate_add_issuer @CERTID, N'*.database.windows.net'
-END
-ELSE
-    PRINT 'Certificate Microsoft ECC Root Certificate Authority 2017 already exists.'
-GO
-```
-
-Then, import the *Microsoft RSA Root Certificate Authority 2017* root-authority certificate to SQL Server:
-
-```sql
--- Run on SQL Server
--- Import Microsoft RSA Root Certificate Authority 2017 root-authority certificate (trusted by Azure), if not already present
-IF NOT EXISTS (SELECT name FROM sys.certificates WHERE name = N'Microsoft RSA Root Certificate Authority 2017')
-BEGIN
-    PRINT 'Creating Microsoft RSA Root Certificate Authority 2017 certificate.'
-    CREATE CERTIFICATE [Microsoft RSA Root Certificate Authority 2017] FROM FILE = 'C:\Path\To\Microsoft RSA Root Certificate Authority 2017.crt'
-
-    --Trust certificates issued by Microsoft RSA Root Certificate Authority 2017 root authority for Azure database.windows.net domains
-    DECLARE @CERTID int
-    SELECT @CERTID = CERT_ID('Microsoft RSA Root Certificate Authority 2017')
-    --For government cloud, use the corresponding SQL Database DNS suffix, e.g. '*.database.usgovcloudapi.net', '*.database.chinacloudapi.cn' etc.
-    EXEC sp_certificate_add_issuer @CERTID, N'*.database.windows.net'
-END
-ELSE
-    PRINT 'Certificate Microsoft RSA Root Certificate Authority 2017 already exists.'
-GO
-```
-
+> [!NOTE]
+> The root certificate in the certification path for a SQL Managed Instance public key certificate is issued by an Azure trusted root Certificate Authority (CA). The specific root CA can change over time as Azure updates its trusted CA list.
+> For a simplified setup, install all root CA certificates listed in [Azure Root Certificate Authorities](/azure/security/fundamentals/azure-ca-details?tabs=root-and-subordinate-cas-list). You can install just the required CA key by identifying the issuer of a previously-imported SQL Managed Instance public key.
+ 
 Finally, verify all the created certificates by using the following dynamic management view (DMV):
 
 ```sql
