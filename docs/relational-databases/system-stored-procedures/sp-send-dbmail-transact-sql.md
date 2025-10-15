@@ -1,13 +1,13 @@
 ---
 title: "sp_send_dbmail (Transact-SQL)"
-description: "Sends an e-mail message to the specified recipients."
+description: Sends an e-mail message to the specified recipients.
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest
-ms.date: 06/23/2025
+ms.date: 10/15/2025
 ms.service: sql
 ms.subservice: system-objects
-ms.topic: "reference"
+ms.topic: reference
 f1_keywords:
   - "sendmail_sp_TSQL"
   - "sendmail_sp"
@@ -15,7 +15,7 @@ f1_keywords:
 helpviewer_keywords:
   - "sp_send_dbmail"
 dev_langs:
-  - "TSQL"
+  - TSQL
 ---
 # sp_send_dbmail (Transact-SQL)
 
@@ -209,7 +209,7 @@ When *@profile* isn't specified, `sp_send_dbmail` uses a default profile. If the
 
 `sp_send_dbmail` doesn't support e-mail messages with no content. To send an e-mail message, you must specify at least one of *@body*, *@query*, *@file_attachments*, or *@subject*. Otherwise, `sp_send_dbmail` returns an error.
 
-Database Mail uses the Windows security context of the current user to control access to files. Therefore, users who are authenticated with [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Authentication can't attach files using *@file_attachments*. Windows doesn't allow [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] to provide credentials from a remote computer to another remote computer. Therefore, Database Mail might not be able to attach files from a network share in cases where the command is run from a computer other than the computer that [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] runs on.
+Database Mail runs in the security context of the service account for [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)]. Therefore, users who are authenticated with [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] authentication can't attach files using *@file_attachments*. Windows doesn't allow [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] to provide credentials from a remote computer to another remote computer. Therefore, Database Mail might not be able to attach files from a network share in cases where the command is run from a computer other than the computer that [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] runs on.
 
 If both *@query* and *@file_attachments* are specified and the file can't be found, the query is still executed but the e-mail isn't sent.
 
@@ -292,4 +292,5 @@ EXECUTE msdb.dbo.sp_send_dbmail
 - [Database Mail](../database-mail/database-mail.md)
 - [Database Mail Configuration Objects](../database-mail/database-mail-configuration-objects.md)
 - [Database Mail stored procedures (Transact-SQL)](database-mail-stored-procedures-transact-sql.md)
+- [Database Mail external program](../database-mail/database-mail-external-program.md)
 - [sp_addrolemember (Transact-SQL)](sp-addrolemember-transact-sql.md)
