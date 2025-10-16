@@ -1,10 +1,10 @@
 ---
 title: SQL Projects Package References
-description: "Reference database objects with package references."
+description: Reference database objects with package references.
 author: dzsquared
 ms.author: drskwier
 ms.reviewer: maghan, randolphwest
-ms.date: 03/11/2025
+ms.date: 10/10/2025
 ms.service: sql
 ms.subservice: sql-database-projects
 ms.topic: concept-article
@@ -131,6 +131,7 @@ The package being referenced should be available on a [NuGet feed](/dotnet/core/
 ## Related content
 
 - [Database references overview](database-references.md)
+- [SQL projects system objects](system-objects.md)
 - [Code analysis rules extensibility overview](code-analysis-extensibility.md)
 - [Creating a package with the dotnet CLI](/nuget/create-packages/creating-a-package-dotnet-cli)
 - [Hosting with private package feeds](/nuget/hosting-packages/overview)

@@ -1,23 +1,23 @@
 ---
 title: Database References Overview
-description: "Extend a SQL project with references to additional database components."
+description: Extend a SQL project with references to additional database components.
 author: dzsquared
 ms.author: drskwier
 ms.reviewer: maghan, randolphwest
-ms.date: 08/30/2024
+ms.date: 10/10/2025
 ms.service: sql
 ms.subservice: sql-database-projects
 ms.topic: concept-article
 ms.collection:
   - data-tools
+ms.custom:
+  - ignite-2024
+  - sfi-ropc-nochange
 f1_keywords:
   - "sql.data.tools.adddatabasereference.dialog"
   - "sql.data.tools.newdatabase.dialog"
   - "sql.data.tools.criticalerror.dialog"
 zone_pivot_groups: sq1-sql-projects-tools
-ms.custom:
-  - ignite-2024
-  - sfi-ropc-nochange
 ---
 
 # Database references overview
@@ -38,8 +38,10 @@ Database references are included in a project through entries in the `.sqlproj` 
 Including a specific reference to the database reference in the SQL scripts use SQLCMD variables named in the project file to specify the database name. For example, the following SQL script references a table in the `Warehouse` database:
 
 ```sql
-SELECT ProductId, StorageLocation, BinNumber
-FROM [$(Warehouse)].[Production].[ProductInventory]
+SELECT ProductId,
+       StorageLocation,
+       BinNumber
+FROM [$(Warehouse)].[Production].[ProductInventory];
 ```
 
 A database reference corresponding to the `$(Warehouse)` SQLCMD variable is included in the project file and contains `<DatabaseSqlCmdVariable>Warehouse</DatabaseSqlCmdVariable>`.
@@ -213,5 +215,6 @@ sqlpackage /Action:Publish /SourceFile:AdventureWorks.dacpac /TargetConnectionSt
 
 ## Related content
 
-- [SQL projects package references overview](package-references.md)
+- [SQL projects package references](package-references.md)
+- [SQL projects system objects](system-objects.md)
 - [SQLCMD variables overview](sqlcmd-variables.md)
