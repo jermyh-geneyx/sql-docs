@@ -1,10 +1,10 @@
 ---
 title: Schema Comparison Overview
-description: "Visualize the difference in database models with schema compare."
+description: Visualize the difference in database models with schema compare.
 author: dzsquared
 ms.author: drskwier
 ms.reviewer: maghan, randolphwest, tsiddique
-ms.date: 05/20/2025
+ms.date: 10/10/2025
 ms.service: sql
 ms.subservice: sql-database-projects
 ms.topic: overview
@@ -165,9 +165,9 @@ To update the schema of the target, you have two options. You can update the tar
 
 ::: zone pivot="sq1-visual-studio-code"
 
-More in-depth information about schema comparison in Visual Studio Code is available in the article [Schema Compare (Preview)](../../visual-studio-code-extensions/mssql/mssql-schema-compare.md)
+More in-depth information about schema comparison in Visual Studio Code is available in the article [Schema Compare](../../visual-studio-code-extensions/mssql/mssql-schema-compare.md)
 
-1. In Visual Studio Code in the command palette (`ctrl/cmd+shift+P`), search for and select **MSSQL: Schema Compare (Preview)**.
+1. In Visual Studio Code in the command palette (`ctrl/cmd+shift+P`), search for and select **MSSQL: Schema Compare**.
 
    Alternatively, right-click a database project in the **Database Projects** view or a database in **Object Explorer**, and select **Schema Compare**.
 
