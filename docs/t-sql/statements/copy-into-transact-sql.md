@@ -1001,7 +1001,7 @@ There are no limitations on the number or size of files; however, for best perfo
 
 ### What authentication method is used when I don't specify a credential?
 
-By default, `COPY INTRO` uses the executing user's Entra ID.
+By default, `COPY INTO` uses the executing user's Entra ID.
 
 ## Related content
 
