@@ -8719,6 +8719,8 @@ items:
         href: tools/sql-database-projects/concepts/schema-comparison.md
       - name: SQLCMD variables
         href: tools/sql-database-projects/concepts/sqlcmd-variables.md
+      - name: System objects
+        href: tools/sql-database-projects/concepts/system-objects.md
       - name: Target platform
         href: tools/sql-database-projects/concepts/target-platform.md
       - name: Data tier applications
@@ -8750,10 +8752,12 @@ items:
           href: tools/sql-database-projects/concepts/sql-code-analysis/t-sql-naming-issues.md
         - name: Performance issues
           href: tools/sql-database-projects/concepts/sql-code-analysis/t-sql-performance-issues.md
-      - name: Code analysis extensibility
-        href: tools/sql-database-projects/concepts/code-analysis-extensibility.md
-      - name: SQL projects extensibility
-        href: tools/sql-database-projects/concepts/sql-projects-extensibility.md
+      - name: Extensibility
+        items:
+        - name: Code analysis extensibility
+          href: tools/sql-database-projects/concepts/code-analysis-extensibility.md
+        - name: SQL projects extensibility
+          href: tools/sql-database-projects/concepts/sql-projects-extensibility.md
   - name: SqlPackage
     href: tools/sqlpackage/sqlpackage.md
     items:
