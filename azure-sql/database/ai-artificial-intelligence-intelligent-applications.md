@@ -3,8 +3,8 @@ title: Intelligent Applications and AI
 description: "Use AI options such as OpenAI and vectors to build intelligent applications with Azure SQL Database and Fabric SQL database."
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: damauri, josephsack, randolphwest, mathoma
-ms.date: 05/06/2025
+ms.reviewer: damauri, randolphwest, mathoma
+ms.date: 10/17/2025
 ms.update-cycle: 180-days
 ms.service: azure-sql-database
 ms.topic: conceptual
@@ -98,6 +98,10 @@ Embeddings are vectors that represent important features of data. Embeddings are
 
 Azure OpenAI features models to create embeddings from text data. The service breaks text out into tokens and generates embeddings using models pretrained by OpenAI. To learn more, see [Creating embeddings with Azure OpenAI](/azure/ai-services/openai/concepts/understand-embeddings).
 
+For a list of answers to common questions around vectors and embeddings, see:
+
+- [Vector and embeddings: Frequently asked questions (FAQ)](/sql/sql-server/ai/vectors-faq)
+
 ### Vector search
 
 Vector search refers to the process of finding all vectors in a dataset that are semantically similar to a specific query vector. Therefore, a query vector for the word `human` searches the entire dictionary for semantically similar words, and should find the word `person` as a close match. This closeness, or distance, is measured using a similarity metric such as cosine similarity. The closer vectors are in similarity, the smaller is the distance between them.
@@ -105,6 +109,10 @@ Vector search refers to the process of finding all vectors in a dataset that are
 Consider a scenario where you run a query over millions of document to find the most similar documents in your data. You can create embeddings for your data and query documents using Azure OpenAI. Then, you can perform a vector search to find the most similar documents from your dataset. However, performing a vector search across a few examples is trivial. Performing this same search across thousands, or millions, of data points becomes challenging. There are also trade-offs between exhaustive search and approximate nearest neighbor (ANN) search methods including latency, throughput, accuracy, and cost, all of which depends on the requirements of your application.
 
 Vectors in Azure SQL Database can be efficiently stored and queried, as described in the next sections, allowing exact nearest neighbor search with great performance. You don't have to decide between accuracy and speed: you can have both. Storing vector embeddings alongside the data in an integrated solution minimizes the need to manage data synchronization and accelerates your time-to-market for AI application development.
+
+For more details on vectors and embeddings, see:
+
+- [Vector search and vector indexes in the SQL Database Engine](/sql/sql-server/ai/vectors)
 
 ## Azure OpenAI
 
@@ -176,6 +184,11 @@ For an end-to-end sample to build an AI-enabled application using sessions abstr
 
 - [How I built a session recommender in 1 hour using OpenAI](https://devblogs.microsoft.com/azure-sql/how-i-built-a-session-recommender-in-1-hour-using-open-ai/).
 - [Using Retrieval Augmented Generation to build a conference session assistant](https://github.com/Azure-Samples/azure-sql-db-session-recommender-v2)
+
+For more details on Intelligent Applications, see:
+
+- [Intelligent applications and AI](/sql/sql-server/ai/artificial-intelligence-intelligent-applications)
+- [Intelligent applications and AI FAQ](/sql/sql-server/ai/artificial-intelligence-intelligent-applications-faq)
 
 ### LangChain integration
 
