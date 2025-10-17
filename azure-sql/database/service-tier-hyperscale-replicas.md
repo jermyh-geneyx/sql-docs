@@ -3,8 +3,8 @@ title: Hyperscale secondary replicas
 description: This article describes the different types of secondary replicas available in the Hyperscale service tier.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: atsingh, arvindsh
-ms.date: 08/11/2025
+ms.reviewer: atsingh, arvindsh, mahyon
+ms.date: 10/17/2025
 ms.service: azure-sql-database
 ms.subservice: service-overview
 ms.topic: overview
@@ -113,7 +113,7 @@ Geo-replication for Hyperscale database has following current limitations:
 - Creating geo-replica of a geo-replica (also known as "geo-replica chaining") isn't supported.
 
 > [!IMPORTANT]  
-> The ability to create multiple geo-replicas in the same or different regions is a Public Preview feature.
+> The ability to create multiple geo-replicas in the same or different regions is a preview feature.
 
 ## Troubleshoot
 
