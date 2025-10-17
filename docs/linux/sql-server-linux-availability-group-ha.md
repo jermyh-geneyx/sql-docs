@@ -1,10 +1,10 @@
 ---
-title: "Availability Group Deployment Patterns - SQL Server on Linux"
+title: Availability Group Deployment Patterns - SQL Server on Linux
 description: Learn supported deployment configurations for SQL Server Always on availability groups on Linux servers.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: vanto
-ms.date: 04/29/2025
+ms.date: 10/20/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: conceptual
@@ -25,11 +25,11 @@ For example, an availability group on a Linux cluster has `CLUSTER_TYPE = EXTERN
 
 The cluster manager can query the instances of SQL Server in the availability group, and orchestrate failover to maintain high availability. In a Linux cluster, Pacemaker is the cluster manager.
 
-[!INCLUDE [sssql17-md](../includes/sssql17-md.md)] CU 1 enables high availability for an availability group with `CLUSTER_TYPE = EXTERNAL` for two synchronous replicas plus a configuration only replica. The configuration only replica can be hosted on any edition of [!INCLUDE [sssql17-md](../includes/sssql17-md.md)] CU 1 or later versions (including SQL Server Express edition). The configuration only replica maintains configuration information about the availability group in the `master` database but doesn't contain the user databases in the availability group.
+Starting with [!INCLUDE [sssql17-md](../includes/sssql17-md.md)] CU 1, high availability for an availability group with `CLUSTER_TYPE = EXTERNAL` is enabled for two synchronous replicas plus a configuration only replica. The configuration only replica can be hosted on any edition of [!INCLUDE [sssql17-md](../includes/sssql17-md.md)] CU 1 or later versions (including SQL Server Express edition). The configuration only replica maintains configuration information about the availability group in the `master` database but doesn't contain the user databases in the availability group.
 
 ## How the configuration affects default resource settings
 
-[!INCLUDE [sssql17-md](../includes/sssql17-md.md)] introduces the `REQUIRED_SYNCHRONIZED_SECONDARIES_TO_COMMIT` cluster resource setting. This setting guarantees the specified number of secondary replicas write the transaction data to log before the primary replica commits each transaction. When you use an external cluster manager, this setting affects both high availability and data protection. The default value for the setting depends on the architecture at the time the cluster resource is created. When you install the SQL Server resource agent - `mssql-server-ha` - and create a cluster resource for the availability group, the cluster manager detects the availability group configuration and sets `REQUIRED_SYNCHRONIZED_SECONDARIES_TO_COMMIT` accordingly.
+The `REQUIRED_SYNCHRONIZED_SECONDARIES_TO_COMMIT` cluster resource setting guarantees that the specified number of secondary replicas write transaction data to the log before the primary replica commits each transaction. When you use an external cluster manager, this setting affects both high availability and data protection. The default value for the setting depends on the architecture at the time the cluster resource is created. When you install the SQL Server resource agent - `mssql-server-ha` - and create a cluster resource for the availability group, the cluster manager detects the availability group configuration and sets `REQUIRED_SYNCHRONIZED_SECONDARIES_TO_COMMIT` accordingly.
 
 If supported by the configuration, the resource agent parameter `REQUIRED_SYNCHRONIZED_SECONDARIES_TO_COMMIT` is set to the value that provides high availability and data protection. For more information, see [Understand SQL Server resource agent for pacemaker](#pacemakerNotify).
 
@@ -54,7 +54,7 @@ This configuration consists of three synchronous replicas. By default, it provid
 An availability group with three synchronous replicas can provide read-scale, high availability, and data protection. The following table describes availability behavior.
 
 | Availability behavior | read-scale | High availability &<br />data protection | Data protection |
-| :--- | --- | --- | --- |
+| --- | --- | --- | --- |
 | `REQUIRED_SYNCHRONIZED_SECONDARIES_TO_COMMIT=` | 0 | 1 <sup>1</sup> | 2 |
 | Primary outage | Automatic failover. Might have data loss. New primary is R/W. | Automatic failover. New primary is R/W. | Automatic failover. New primary is unavailable for read or write transactions until former primary recovers and rejoins availability group as secondary. |
 | One secondary replica outage | Primary is R/W. Available secondary is available for Reads. | Primary is R/W. Available secondary is available for Reads. | The primary remains unavailable for read or write transactions until failed secondary recovers and rejoins availability group. |
@@ -74,7 +74,7 @@ This configuration enables data protection. Like the other availability group co
 An availability group with two synchronous replicas provides read-scale and data protection. The following table describes availability behavior.
 
 | Availability behavior | read-scale | Data protection |
-| :--- | --- | --- |
+| --- | --- | --- |
 | `REQUIRED_SYNCHRONIZED_SECONDARIES_TO_COMMIT=` | 0 <sup>1</sup> | 1 |
 | Primary outage | Automatic failover. Might have data loss. New primary is R/W. | Automatic failover. The new primary is unavailable for read or write transactions until former primary recovers and rejoins availability group as a secondary. |
 | One secondary replica outage | Primary is R/W, running exposed to data loss. | The primary remains unavailable for read or write transactions until failed secondary recovers and rejoins availability group. |
@@ -100,7 +100,7 @@ In the availability group diagram, a primary replica pushes configuration data t
 The default value for `REQUIRED_SYNCHRONIZED_SECONDARIES_TO_COMMIT` is 0. The following table describes availability behavior.
 
 | Availability behavior | High availability &<br />data protection | Data protection |
-| :--- | --- | --- |
+| --- | --- | --- |
 | `REQUIRED_SYNCHRONIZED_SECONDARIES_TO_COMMIT=` | 0 <sup>1</sup> | 1 |
 | Primary outage | Automatic failover. New primary is R/W. Might have data loss. | Automatic failover. The new primary is unavailable for read or write transactions until former primary recovers and rejoins availability group as a secondary. |
 | Secondary replica outage | Primary is R/W, running exposed to data loss (if primary fails and can't be recovered). No automatic failover if primary fails as well. | The primary remains unavailable for read or write transactions until failed secondary recovers and rejoins availability group. No replica to fail over to if primary fails as well. |

@@ -4,7 +4,7 @@ description: Learn to create a three-node cluster on Red Hat, SUSE, or Ubuntu, a
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: amitkh-msft
-ms.date: 11/18/2024
+ms.date: 10/20/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: how-to
@@ -28,12 +28,12 @@ The following sections walk through the steps to set up a Pacemaker cluster and 
 
 # [Red Hat Enterprise Linux](#tab/rhel)
 
-The clustering layer is based on Red Hat Enterprise Linux (RHEL) [HA add-on](https://docs.redhat.com/documentation/red_hat_enterprise_linux/7/pdf/high_availability_add-on_overview/red_hat_enterprise_linux-7-high_availability_add-on_overview-en-us.pdf) built on top of [Pacemaker](https://clusterlabs.org/).
+The clustering layer is based on Red Hat Enterprise Linux (RHEL) [HA add-on](https://docs.redhat.com/documentation/red_hat_enterprise_linux/9/html/configuring_and_managing_high_availability_clusters/index) built on top of [Pacemaker](https://clusterlabs.org/).
 
 > [!NOTE]  
 > Access to Red Hat full documentation requires a valid subscription.
 
-For more information on cluster configuration, resource agents options, and management, visit [RHEL reference documentation](https://docs.redhat.com/documentation/red_hat_enterprise_linux/7/html/high_availability_add-on_reference/index).
+For more information on cluster configuration, resource agents options, and management, visit [RHEL reference documentation](https://docs.redhat.com/documentation/red_hat_enterprise_linux/10/html/configuring_and_managing_high_availability_clusters/index).
 
 ### Roadmap
 
@@ -97,6 +97,12 @@ Each node in the cluster must have an appropriate subscription for RHEL and the 
    sudo subscription-manager repos --enable=rhel-8-for-x86_64-highavailability-rpms
    ```
 
+   **RHEL 9 and later versions**
+
+   ```bash
+   sudo subscription-manager repos --enable=rhel-9-for-x86_64-highavailability-rpms
+   ```
+
 For more information, see [Pacemaker - The Open Source, High Availability Cluster](https://clusterlabs.org/pacemaker/).
 
 After you have configured the subscription, complete the following steps to configure Pacemaker:
@@ -125,14 +131,14 @@ For information about fencing a failed node, see the following articles:
 
 - [Pacemaker Clusters from Scratch](https://clusterlabs.org/pacemaker/doc/deprecated/en-US/Pacemaker/1.1/html/Clusters_from_Scratch/index.html)
 - [Fencing and STONITH](https://clusterlabs.org/pacemaker/doc/crm_fencing.html)
-- [Red Hat High Availability Add-On with Pacemaker: Fencing](https://docs.redhat.com/documentation/red_hat_enterprise_linux/7/html/high_availability_add-on_administration/s1-fenceconfig-haaa)
+- [Red Hat High Availability Add-On with Pacemaker: Fencing](https://docs.redhat.com/documentation/red_hat_enterprise_linux/9/html/configuring_and_managing_high_availability_clusters/assembly_configuring-fencing-configuring-and-managing-high-availability-clusters)
 
 > [!NOTE]  
 > Because the node level fencing configuration depends heavily on your environment, disable it for this tutorial (it can be configured later). The following script disables node level fencing:
 >
 > ```bash
 > sudo pcs property set stonith-enabled=false
-> ```  
+> ```
 >
 > Disabling fencing is just for testing purposes. If you plan to use Pacemaker in a production environment, you should plan a fencing implementation depending on your environment and keep it enabled.
 
@@ -162,7 +168,7 @@ To update the `ag_cluster` resource property `failure-timeout` to `60s`, run:
 pcs resource update ag_cluster meta failure-timeout=60s
 ```
 
-For information on Pacemaker cluster properties, see [Pacemaker Clusters Properties](https://docs.redhat.com/documentation/red_hat_enterprise_linux/7/html/high_availability_add-on_reference/ch-clusteropts-haar).
+For information on Pacemaker cluster properties, see [Pacemaker Clusters Properties](https://docs.redhat.com/documentation/red_hat_enterprise_linux/9/html/configuring_and_managing_high_availability_clusters/assembly_controlling-cluster-behavior-configuring-and-managing-high-availability-clusters#setting-cluster-properties-controlling-cluster-behavior).
 
 ### Create a SQL Server login for Pacemaker
 
@@ -170,17 +176,19 @@ For information on Pacemaker cluster properties, see [Pacemaker Clusters Propert
 
 ### Create availability group resource
 
-To create the availability group resource, use `pcs resource create` command and set the resource properties. The following command creates a `ocf:mssql:ag` master/subordinate type resource for availability group with name `ag1`.
+To create the availability group resource, use `pcs resource create` command and set the resource properties. The following command creates a `ocf:mssql:ag` master/subordinate type resource for availability group with name `ag1`. Run the following command on one node.
 
 #### RHEL 7
+
+Use the following `create` command:
 
 ```bash
 sudo pcs resource create ag_cluster ocf:mssql:ag ag_name=ag1 meta failure-timeout=60s master notify=true
 ```
 
-#### RHEL 8
+#### RHEL 8 and later versions
 
-With the availability of **RHEL 8**, the create syntax has changed. If you use **RHEL 8**, the terminology `master` has changed to `promotable`. Use the following create command instead of the above command:
+Use the following `create` command:
 
 ```bash
 sudo pcs resource create ag_cluster ocf:mssql:ag ag_name=ag1 meta failure-timeout=60s promotable notify=true
@@ -218,10 +226,18 @@ sudo pcs constraint colocation add virtualip ag_cluster-master INFINITY with-rsc
 
 #### RHEL 8
 
-When you create the `ag_cluster` resource in RHEL 8, it creates the resource as `ag_cluster-clone`. Use the following command for RHEL 8:
+When you create the `ag_cluster` resource in RHEL 8, it creates the resource as `ag_cluster-clone`. Use the following command:
 
 ```bash
 sudo pcs constraint colocation add virtualip with master ag_cluster-clone INFINITY with-rsc-role=Master
+```
+
+#### RHEL 9 and later versions
+
+When you create the `ag_cluster` resource in RHEL 9 and later versions, it creates the resource as `ag_cluster-clone`. Use the following command:
+
+```bash
+sudo pcs constraint colocation add virtualip with promoted ag_cluster-clone INFINITY with-rsc-role=Promoted
 ```
 
 ### Add ordering constraint
@@ -248,7 +264,7 @@ To add an ordering constraint, run the following command on one node:
 sudo pcs constraint order promote ag_cluster-master then start virtualip
 ```
 
-#### RHEL 8
+#### RHEL 8 and later versions
 
 ```bash
 sudo pcs constraint order promote ag_cluster-clone then start virtualip
@@ -327,7 +343,7 @@ The first step is to configure the operating system on the cluster nodes. For th
 
 ### Configure an availability group
 
-On Linux servers, configure the availability group and then configure the cluster resources. To configure the availability group, see [Configure SQL Server Always On Availability Group for high availability on Linux](sql-server-linux-availability-group-configure-ha.md)
+On Linux servers, configure the availability group and then configure the cluster resources. To configure the availability group, see [Configure SQL Server availability group for high availability on Linux](sql-server-linux-availability-group-configure-ha.md)
 
 ### Install and configure Pacemaker on each cluster node
 
@@ -571,8 +587,7 @@ The colocation constraint has an implicit ordering constraint. It moves the virt
 1. The availability group master on node 1 is demoted.
 1. The availability group on node 2 is promoted to master.
 
-To prevent the IP address from temporarily pointing to the node with the pre-failover secondary, add an ordering constraint.  
-To add an ordering constraint, run the following command on one node:
+To prevent the IP address from temporarily pointing to the node with the pre-failover secondary, add an ordering constraint with the following command on one node:
 
 ```bash
 sudo crm configure \
@@ -601,7 +616,7 @@ The steps to create an availability group on Linux servers for high availability
 
 1. [Installation guidance for SQL Server on Linux](sql-server-linux-setup.md).
 
-1. [Configure SQL Server Always On Availability Group for high availability on Linux](sql-server-linux-availability-group-configure-ha.md).
+1. [Configure SQL Server availability group for high availability on Linux](sql-server-linux-availability-group-configure-ha.md).
 
 1. Configure a cluster resource manager, like Pacemaker. These instructions are in this article.
 
