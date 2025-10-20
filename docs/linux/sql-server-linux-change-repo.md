@@ -168,7 +168,7 @@ Configure the new repository to use for SQL Server installations and upgrades. U
 - Starting with [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] CU 10, RHEL 9 is supported.
 - Starting with [!INCLUDE [sssql17-md](../includes/sssql17-md.md)] CU 20, RHEL 8 is supported.
 
-The following commands for [!INCLUDE [sssql19-md](../includes/sssql19-md.md)] point to the RHEL 8 repository. RHEL 8 doesn't come preinstalled with `python2`, which [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] requires. For more information, see [Installing Microsoft SQL Server on Red Hat Enterprise Linux 8 Beta](https://www.redhat.com/en/blog/installing-microsoft-sql-server-red-hat-enterprise-linux-8-beta).
+The following commands for [!INCLUDE [sssql19-md](../includes/sssql19-md.md)] point to the RHEL 8 repository. RHEL 8 doesn't come preinstalled with `python2`, which [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] requires. For more information, see [Installing Microsoft SQL Server on Red Hat Enterprise Linux 8 Beta](https://www.redhat.com/blog/installing-microsoft-sql-server-red-hat-enterprise-linux-8-beta).
 
 Depending on the version of RHEL you use, ensure the paths match `/rhel/8`, `/rhel/9`, or `/rhel10`. Our packages are agnostic to RHEL minor versions. This means that if you use RHEL 8.7, you need to use the path `/rhel/8` to configure your repository.
 
