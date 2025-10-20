@@ -271,7 +271,7 @@ finally {
    su mssql -c "pwsh -File /opt/mssql/bin/runassessment.ps1"
    ```
 
-1. Once the command completes, the output is generated in JSON format. This output can be integrated with any tool that supports parsing JSON files. One such example tool is [Red Hat Insights](https://www.redhat.com/en/blog/sql-server-database-best-practices-now-available-through-red-hat-insights).
+1. Once the command completes, the output is generated in JSON format. This output can be integrated with any tool that supports parsing JSON files. One such example tool is [Red Hat Insights](https://www.redhat.com/blog/sql-server-database-best-practices-now-available-through-red-hat-insights).
 
 ## Related content
 

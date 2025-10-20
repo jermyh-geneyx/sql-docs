@@ -3,7 +3,7 @@ title: Get Started with SQL Server on SELinux
 description: Learn about installing and configuring SQL Server on SELinux, using a Red Hat Enterprise Linux distribution.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 07/03/2025
+ms.date: 10/20/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: how-to
@@ -16,9 +16,9 @@ This article guides you in getting started with [!INCLUDE [ssnoversion-md](../in
 
 ## What is Security-Enhanced Linux?
 
-Security-Enhanced Linux (SELinux) is a security architecture for Linux systems. It helps define access controls for applications, processes, and files on a system. SELinux uses a set of rules, or *security policies*, to define what can or can't be accessed. SELinux provides administrators more control over who can access the system. For more information, see [What is SELinux (Security-Enhanced Linux)](https://www.redhat.com/en/topics/linux/what-is-selinux).
+Security-Enhanced Linux (SELinux) is a security architecture for Linux systems. It helps define access controls for applications, processes, and files on a system. SELinux uses a set of rules, or *security policies*, to define what can or can't be accessed. SELinux provides administrators more control over who can access the system. For more information, see [What is SELinux (Security-Enhanced Linux)](https://www.redhat.com/topics/linux/what-is-selinux).
 
-For details about how to enable SELinux for Red Hat systems, see [SELinux Architecture](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/7/html/selinux_users_and_administrators_guide/sect-security-enhanced_linux-introduction-selinux_architecture). You can also get started with an [SELinux-enabled operating system](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux/server/trial) for free.
+For details about how to enable SELinux for Red Hat systems, see [SELinux Architecture](https://docs.redhat.com/documentation/red_hat_enterprise_linux/7/html/selinux_users_and_administrators_guide/sect-security-enhanced_linux-introduction-selinux_architecture). You can also get started with an [SELinux-enabled operating system](https://www.redhat.com/technologies/linux-platforms/enterprise-linux/server/trial) for free.
 
 [SQL Server 2022 on Linux](sql-server-linux-overview.md) is officially certified with RHEL 9 (as of July 2024), and is now generally available on the [Red Hat Ecosystem Catalog](https://catalog.redhat.com/software/applications/detail/253877).
 
