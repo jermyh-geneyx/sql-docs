@@ -4,7 +4,7 @@ titleSuffix: SQL Server
 description: This quickstart shows how to install SQL Server on Red Hat Enterprise Linux (RHEL) and then create and query a database with sqlcmd.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 09/12/2025
+ms.date: 10/20/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: quickstart
@@ -109,7 +109,7 @@ sudo yum install compat-openssl10
 sudo alternatives --config python
 ```
 
-For more information, see the following blog on installing `python2` and configuring it as the default interpreter: <https://www.redhat.com/en/blog/installing-microsoft-sql-server-red-hat-enterprise-linux-8-beta>.
+For more information, see the following blog on installing `python2` and configuring it as the default interpreter: <https://www.redhat.com/blog/installing-microsoft-sql-server-red-hat-enterprise-linux-8-beta>.
 
 To configure [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on RHEL, run the following commands in a terminal to install the `mssql-server` package:
 
@@ -167,7 +167,7 @@ sudo yum install compat-openssl10
 sudo alternatives --config python
 ```
 
-For more information, see the following blog on installing `python2` and configuring it as the default interpreter: <https://www.redhat.com/en/blog/installing-microsoft-sql-server-red-hat-enterprise-linux-8-beta>.
+For more information, see the following blog on installing `python2` and configuring it as the default interpreter: <https://www.redhat.com/blog/installing-microsoft-sql-server-red-hat-enterprise-linux-8-beta>.
 
 To configure [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on RHEL, run the following commands in a terminal to install the `mssql-server` package:
 
