@@ -4,7 +4,7 @@ description: Describes prerequisites required for SQL Server enabled by Azure Ar
 author: anosov1960
 ms.author: sashan
 ms.reviewer: mikeray, randolphwest
-ms.date: 03/25/2025
+ms.date: 10/21/2025
 ms.topic: conceptual
 ms.custom: references_regions
 ---
@@ -121,7 +121,7 @@ If a proxy server is used, set the `NO_PROXY` environment variable to exclude pr
 > [!NOTE]
 > You can't use Azure Private Link connections to the Azure Arc data processing service. See [Unsupported configurations](#unsupported-configurations).
 
-### Network requirements for enabling Entra ID authentication
+### Network requirements for enabling Microsoft Entra authentication
 
 [!INCLUDE [entra-id-authentication-prerequisites](includes/entra-id-authentication-prerequisites.md)]
 
