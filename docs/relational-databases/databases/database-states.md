@@ -1,9 +1,10 @@
 ---
-title: "Database States"
-description: "Find out about various database states, such as ONLINE, OFFLINE, or SUSPECT. Learn how to verify the current state of a database."
+title: Database States
+description: Find out about various database states, such as ONLINE, OFFLINE, or SUSPECT. Learn how to verify the current state of a database.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.date: "07/14/2016"
+ms.reviewer: randolphwest
+ms.date: 10/20/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: conceptual
@@ -27,28 +28,28 @@ helpviewer_keywords:
   - "restoring database state [SQL Server]"
 monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
-# Database States
+# Database states
+
 [!INCLUDE [SQL Server Azure SQL Database Synapse Analytics PDW FabricSQLDB](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
-  A database is always in one specific state. For example, these states include ONLINE, OFFLINE, or SUSPECT. To verify the current state of a database, select the **state_desc** column in the [sys.databases](../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) catalog view or the **Status** property in the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.  
-  
-## Database State Definitions  
- The following table defines the database states.  
-  
-|State|Definition|  
-|-----------|----------------|  
-|ONLINE|Database is available for access. The primary filegroup is online, although the undo phase of recovery may not have been completed.|  
-|OFFLINE|Database is unavailable. A database becomes offline by explicit user action and remains offline until additional user action is taken. For example, the database may be taken offline in order to move a file to a new disk. The database is then brought back online after the move has been completed.|  
-|RESTORING|One or more files of the primary filegroup are being restored, or one or more secondary files are being restored offline. The database is unavailable.|  
-|RECOVERING|Database is being recovered. The recovering process is a transient state; the database will automatically become online if the recovery succeeds. If the recovery fails, the database will become suspect. The database is unavailable.|  
-|RECOVERY PENDING|[!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] has encountered a resource-related error during recovery. The database is not damaged, but files may be missing or system resource limitations may be preventing it from starting. The database is unavailable. Additional action by the user is required to resolve the error and let the recovery process be completed.|  
-|SUSPECT|At least the primary filegroup is suspect and may be damaged. The database cannot be recovered during startup of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)]. The database is unavailable. Additional action by the user is required to resolve the problem.|  
-|EMERGENCY|User has changed the database and set the status to EMERGENCY. The database is in single-user mode and may be repaired or restored. The database is marked READ_ONLY, logging is disabled, and access is limited to members of the **sysadmin** fixed server role. EMERGENCY is primarily used for troubleshooting purposes. For example, a database marked as suspect can be set to the EMERGENCY state. This could permit the system administrator read-only access to the database. Only members of the **sysadmin** fixed server role can set a database to the EMERGENCY state.|  
-  
-## Related Content  
- [ALTER DATABASE &#40;Transact-SQL&#41;](../../t-sql/statements/alter-database-transact-sql.md)  
-  
- [Mirroring States &#40;SQL Server&#41;](../../database-engine/database-mirroring/mirroring-states-sql-server.md)  
-  
- [File States](../../relational-databases/databases/file-states.md)  
-  
-  
+
+A database is always in one specific state. For example, these states include `ONLINE`, `OFFLINE`, or `SUSPECT`. To verify the current state of a database, select the `state_desc` column in the [sys.databases](../system-catalog-views/sys-databases-transact-sql.md) catalog view or the **Status** property in the [DATABASEPROPERTYEX](../../t-sql/functions/databasepropertyex-transact-sql.md) function.
+
+## Database state definitions
+
+The following table defines the database states.
+
+| State | Definition |
+| --- | --- |
+| `ONLINE` | Database is available for access. The primary filegroup is online, although the undo phase of recovery might not have been completed. |
+| `OFFLINE` | Database is unavailable. A database becomes offline by explicit user action and remains offline until further user action is taken. For example, the database might be taken offline in order to move a file to a new disk. The database is then brought back online after the move has been completed. |
+| `RESTORING` | One or more files of the primary filegroup are being restored, or one or more secondary files are being restored offline. The database is unavailable. |
+| `RECOVERING` | Database is being recovered. The recovering process is a transient state; the database automatically becomes online if the recovery succeeds. If the recovery fails, the database becomes suspect. The database is unavailable. |
+| `RECOVERY PENDING` | [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] has encountered a resource-related error during recovery. The database isn't damaged, but files might be missing or system resource limitations might be preventing it from starting. The database is unavailable. Further action by the user is required to resolve the error and let the recovery process be completed. |
+| `SUSPECT` | At least the primary filegroup is suspect and might be damaged. The database can't be recovered during startup of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. The database is unavailable. Further action by the user is required to resolve the problem. |
+| `EMERGENCY` | User has changed the database and sets the status to `EMERGENCY`. The database is in single-user mode and might be repaired or restored. The database is marked `READ_ONLY`, logging is disabled, and access is limited to members of the **sysadmin** fixed server role. `EMERGENCY` is primarily used for troubleshooting purposes. For example, a database marked as suspect can be set to the `EMERGENCY` state. This could permit the system administrator read-only access to the database. Only members of the **sysadmin** fixed server role can set a database to the `EMERGENCY` state. |
+
+## Related content
+
+- [ALTER DATABASE (Transact-SQL)](../../t-sql/statements/alter-database-transact-sql.md)
+- [Mirroring States (SQL Server)](../../database-engine/database-mirroring/mirroring-states-sql-server.md)
+- [File States](file-states.md)

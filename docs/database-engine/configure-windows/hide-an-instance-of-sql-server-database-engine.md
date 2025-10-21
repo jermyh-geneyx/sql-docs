@@ -1,9 +1,9 @@
 ---
-title: "Hide an Instance of SQL Server Database Engine"
-description: "Find out how to hide an instance of the SQL Server Database Engine. Client computers can't use the SQL Server Browser service to locate hidden instances."
+title: Hide an Instance of SQL Server Database Engine
+description: Find out how to hide an instance of the SQL Server Database Engine. Client computers can't use the SQL Server Browser service to locate hidden instances.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 08/26/2025
+ms.date: 10/20/2025
 ms.service: sql
 ms.subservice: configuration
 ms.topic: how-to
@@ -30,6 +30,7 @@ This option enables client applications to browse for a server, and helps client
 ## Remarks
 
 If you hide a named instance, you need to provide the port number in the connection string to connect to the hidden instance, even if the browser service is running. We recommend that you use a static port instead of a dynamic port for the named hidden instance.
+
 For more information, see [Configure SQL Server to listen on a specific TCP port](configure-a-server-to-listen-on-a-specific-tcp-port.md).
 
 ### Clustering
