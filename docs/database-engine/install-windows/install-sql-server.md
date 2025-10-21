@@ -1,19 +1,19 @@
 ---
-title: "SQL Server Installation Guide"
+title: SQL Server Installation Guide
 description: An index of content that helps you install SQL Server and associated components using options such as the installation wizard, command prompt, or sysprep.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 08/21/2025
+ms.date: 10/21/2025
 ms.service: sql
 ms.subservice: install
 ms.topic: conceptual
+ms.custom:
+  - build-2025
 helpviewer_keywords:
   - "AdventureWorks sample database"
   - "installing SQL Server, preparing to install"
   - "installation [SQL Server]"
 monikerRange: ">=sql-server-2016"
-ms.custom:
-  - build-2025
 ---
 # SQL Server installation guide
 
@@ -49,7 +49,7 @@ Beginning with [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)], [!INCLUDE 
   - [SQL Server 2019](../../sql-server/install/hardware-and-software-requirements-for-installing-sql-server-2019.md)
   - [SQL Server 2016 and 2017](../../sql-server/install/hardware-and-software-requirements-for-installing-sql-server.md)
   - [SQL Server on Linux](../../linux/sql-server-linux-setup.md)
-  
+
   You must also review system configuration checks, and security considerations in [Plan a SQL Server installation](../../sql-server/install/planning-a-sql-server-installation.md).
 
 - **Sample databases and sample code** aren't installed as part of [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)] Setup by default, but can be installed for non-Express editions of [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)]. For more information, see [SQL samples](../../samples/sql-samples-where-are.md).
@@ -85,19 +85,19 @@ Other [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)] components can 
 | Article | Description |
 | --- | --- |
 | [Install SQL Server from the Installation Wizard (Setup)](install-sql-server-from-the-installation-wizard-setup.md) | Install [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)] using the Installation Wizard GUI launched from the setup.exe setup media. |
-| [Install and configure SQL Server on Windows from the command prompt](install-sql-server-from-the-command-prompt.md) | Sample syntax and installation parameters for running a [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)] installation from the command prompt. |
+| [Install, configure, or uninstall SQL Server on Windows from the command prompt](install-sql-server-from-the-command-prompt.md) | Sample syntax and installation parameters for running a [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)] installation from the command prompt. |
 | [Install SQL Server on Server Core](install-sql-server-on-server-core.md) | Install [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)] on Windows Server Core. |
 | [Check parameters for the System Configuration Checker](check-parameters-for-the-system-configuration-checker.md) | Discusses the function of the System Configuration Checker (SCC). |
 | [Install SQL Server using a configuration file](install-sql-server-using-a-configuration-file.md) | Sample syntax and installation parameters for running Setup through a configuration file. |
 | [Slipstream installation for SQL Server](install-sql-server-using-slipstream.md) | Sample syntax and installation parameters for installing SQL Server with the latest cumulative update. |
 | [Install SQL Server with SysPrep](install-sql-server-using-sysprep.md) | Sample syntax and installation parameters for running Setup through SysPrep. |
 | [Add Features to an Instance of SQL Server (Setup)](add-features-to-an-instance-of-sql-server-setup.md) | Update components of an existing instance of [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)]. |
-| [SQL Server Failover Cluster Installation](../../sql-server/failover-clusters/install/sql-server-failover-cluster-installation.md) | Install a SQL Server failover cluster instance. |
+| [SQL Server failover cluster installation](../../sql-server/failover-clusters/install/sql-server-failover-cluster-installation.md) | Install a SQL Server failover cluster instance. |
 | [Repair a failed SQL Server installation](repair-a-failed-sql-server-installation.md) | Repair a corrupt [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)] installation. |
 | [Rename a computer that hosts a stand-alone instance of SQL Server](rename-a-computer-that-hosts-a-stand-alone-instance-of-sql-server.md) | Update system metadata that is stored in `sys.servers` after the hostname of a computer hosting a stand-alone instance of SQL Server has been renamed. |
 | [Install SQL Server servicing updates](install-sql-server-servicing-updates.md) | Install updates for [!INCLUDE [ssnoversion](../../includes/ssnoversion-md.md)]. |
 | [View and read SQL Server Setup log files](view-and-read-sql-server-setup-log-files.md) | View and read the errors in the SQL Server setup log files. |
-| [Validate a SQL Server Installation](validate-a-sql-server-installation.md) | Review the use of the SQL Discovery report to verify the version of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] and the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] features installed on the computer. |
+| [Validate a SQL Server installation](validate-a-sql-server-installation.md) | Review the use of the SQL Discovery report to verify the version of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] and the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] features installed on the computer. |
 
 ## Individual component installation
 

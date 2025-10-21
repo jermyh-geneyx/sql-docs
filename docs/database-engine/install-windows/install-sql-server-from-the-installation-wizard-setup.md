@@ -4,7 +4,7 @@ description: This article provides a step-by-step procedure for installing a new
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: jopilov
-ms.date: 06/15/2025
+ms.date: 10/21/2025
 ms.service: sql
 ms.subservice: install
 ms.topic: install-set-up-deploy
@@ -1185,10 +1185,10 @@ If you're instructed to restart the computer, do so now.
 
 ## Related content
 
-- [Database Engine Instances (SQL Server)](../configure-windows/database-engine-instances-sql-server.md)
+- [Database Engine instances (SQL Server)](../configure-windows/database-engine-instances-sql-server.md)
 - [Surface area configuration](../../relational-databases/security/surface-area-configuration.md)
-- [Validate a SQL Server Installation](validate-a-sql-server-installation.md)
+- [Validate a SQL Server installation](validate-a-sql-server-installation.md)
 - [Repair a failed SQL Server installation](repair-a-failed-sql-server-installation.md)
 - [View and read SQL Server Setup log files](view-and-read-sql-server-setup-log-files.md)
 - [Upgrade SQL Server Using the Installation Wizard (Setup)](upgrade-sql-server-using-the-installation-wizard-setup.md)
-- [Install and configure SQL Server on Windows from the command prompt](install-sql-server-from-the-command-prompt.md)
+- [Install, configure, or uninstall SQL Server on Windows from the command prompt](install-sql-server-from-the-command-prompt.md)

@@ -1,9 +1,9 @@
 ---
-title: "Upgrade SQL Server"
+title: Upgrade SQL Server
 description: This article provides links to resources that contain upgrade information for instances of different versions of SQL Server.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 05/19/2025
+ms.date: 10/21/2025
 ms.service: sql
 ms.subservice: install
 ms.topic: quickstart

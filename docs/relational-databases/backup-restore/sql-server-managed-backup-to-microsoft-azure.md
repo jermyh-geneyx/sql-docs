@@ -1,10 +1,10 @@
 ---
-title: "SQL Server managed backup to Microsoft Azure"
+title: SQL Server Managed Backup to Microsoft Azure
 description: SQL Server Managed Backup to Microsoft Azure manages and automates SQL Server backups to Microsoft Azure Blob storage.
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 04/18/2024
+ms.date: 10/21/2025
 ms.service: sql
 ms.subservice: backup-restore
 ms.topic: conceptual
@@ -28,7 +28,9 @@ Currently automating backups for multiple databases requires developing a backup
 
 You can also encrypt the backups for added security, and you can set up a custom schedule to control when the backups are taken. For more information on the benefits of using Microsoft Azure Blob storage for [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] backups, see [SQL Server backup and restore with Azure Blob Storage](sql-server-backup-and-restore-with-microsoft-azure-blob-storage-service.md).
 
-## <a id="Prereqs"></a> Prerequisites
+<a id="Prereqs"></a>
+
+## Prerequisites
 
 Microsoft Azure Storage is used by [!INCLUDE [ss-managed-backup](../../includes/ss-managed-backup-md.md)] to store the backup files. The following prerequisites are required:
 
@@ -39,7 +41,7 @@ Microsoft Azure Storage is used by [!INCLUDE [ss-managed-backup](../../includes/
 | **Blob container** | Blobs are organized in containers. You specify the target container for the backup files. You can create a container in the [Azure Management Portal](https://portal.azure.com/), or you use the `New-AzureStorageContainer`[Azure PowerShell](/powershell/azure/) command. |
 | **Shared access signature (SAS)** | Access to the target container is controlled by a Shared Access Signature (SAS). For an overview of SAS, see [Grant limited access to Azure Storage resources using shared access signatures (SAS)](/azure/storage/common/storage-sas-overview). You can create a SAS token in code or with the `New-AzureStorageContainerSASToken` PowerShell command. For a PowerShell script that simplifies this process, see [Simplifying creation of SQL Credentials with Shared Access Signature ( SAS ) tokens on Azure Storage with PowerShell](/archive/blogs/sqlcat/simplifying-creation-of-sql-credentials-with-shared-access-signature-sas-tokens-on-azure-storage-with-powershell). The SAS token can be stored in a **SQL Credential** for use with [!INCLUDE [ss-managed-backup](../../includes/ss-managed-backup-md.md)]. |
 | **SQL Server Agent** | SQL Server Agent must be running for [!INCLUDE [ss-managed-backup](../../includes/ss-managed-backup-md.md)] to work. Consider setting the startup option to automatic. |
-| **Readable AG secondary** | If you're offloading your managed backups to a secondary replica of an Always On availability group, the secondary replica must be set to **Readable** for managed backups to succeed. | 
+| **Readable AG secondary** | If you're offloading your managed backups to a secondary replica of an Always On availability group, the secondary replica must be set to **Readable** for managed backups to succeed. |
 
 ## Components
 
@@ -112,8 +114,9 @@ For a database, if there's an existing full database backup job running, then [!
 
 If more than 10 concurrent full database backups are scheduled, a warning is issued through the debug channel of Extended Events. [!INCLUDE [ss-managed-backup](../../includes/ss-managed-backup-md.md)] then maintains a priority queue for the remaining databases that require a backup until the all backups are scheduled and completed.
 
+<a id="support_limits"></a>
 
-## <a id="support_limits"></a> Supportability
+## Supportability
 
 The following support limitations and considerations are specific to [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)]:
 
@@ -125,13 +128,13 @@ The following support limitations and considerations are specific to [!INCLUDE [
 
 - The Microsoft Azure Blob Storage is the only supported backup storage option. Backups to disk or tape aren't supported.
 
-- [!INCLUDE [ss-managed-backup](../../includes/ss-managed-backup-md.md)] uses the Backup to Block Blob feature. The maximum size of a block blob is 200 GB. But by utilizing striping, the maximum size of an individual backup can be up to 12 TB. If your backup requirements exceed this limit, consider using compression, and test the backup file size before setting up [!INCLUDE [ss-managed-backup](../../includes/ss-managed-backup-md.md)]. You can either test by backing up to a local disk or manually backing up to Microsoft Azure storage using the `BACKUP TO URL` Transact-SQL statement. For more information, see [SQL Server backup to URL for Microsoft Azure Blob Storage](sql-server-backup-to-url.md).
+- [!INCLUDE [ss-managed-backup](../../includes/ss-managed-backup-md.md)] uses the Backup to Block Blob feature. The maximum size of a block blob is 200 GB. But by utilizing striping, the maximum size of an individual backup can be up to 12 TB. If your backup requirements exceed this limit, consider using compression, and test the backup file size before setting up [!INCLUDE [ss-managed-backup](../../includes/ss-managed-backup-md.md)]. You can either test by backing up to a local disk or manually backing up to Microsoft Azure storage using the `BACKUP TO URL` Transact-SQL statement. For more information, see [SQL Server backup to URL for Azure Blob Storage](sql-server-backup-to-url.md).
 
 - [!INCLUDE [ss-managed-backup](../../includes/ss-managed-backup-md.md)] might have some limitations when it's configured with other technologies supporting backup, high availability, or disaster recovery.
 
 - Backups of databases in an availability group are [copy-only backups](copy-only-backups-sql-server.md).
 
-- If you're offloading your managed backups to a secondary replica of an Always On availability group, the secondary replica must be set to **Readable** for managed backups to stripe multiple files. 
+- If you're offloading your managed backups to a secondary replica of an Always On availability group, the secondary replica must be set to **Readable** for managed backups to stripe multiple files.
 
 - SQL Server managed backup isn't supported with proxy servers.
 
@@ -143,4 +146,4 @@ The following support limitations and considerations are specific to [!INCLUDE [
 - [Configure advanced options for SQL Server managed backup to Microsoft Azure](configure-advanced-options-for-sql-server-managed-backup-to-microsoft-azure.md)
 - [Disable SQL Server Managed Backup to Microsoft Azure](disable-sql-server-managed-backup-to-microsoft-azure.md)
 - [Back up and restore: System databases (SQL Server)](back-up-and-restore-of-system-databases-sql-server.md)
-- [Back Up and Restore of SQL Server Databases](back-up-and-restore-of-sql-server-databases.md)
+- [Back up and restore of SQL Server databases](back-up-and-restore-of-sql-server-databases.md)

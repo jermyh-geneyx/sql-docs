@@ -1,10 +1,10 @@
 ---
-title: "Preview Features FAQ"
+title: Preview Features FAQ
 description: Frequently asked questions about the PREVIEW_FEATURES opt-in mechanism.
 author: yorek
 ms.author: damauri
-ms.reviewer: damauri, mikeray, randolphwest
-ms.date: 08/15/2025
+ms.reviewer: mikeray, randolphwest
+ms.date: 10/21/2025
 ms.service: sql
 ms.subservice: release-landing
 ms.topic: release-notes
@@ -30,11 +30,11 @@ Preview features that become generally available in a subsequent cumulative upda
 `PREVIEW_FEATURES` is a `DATABASE SCOPED CONFIGURATION` option, therefore you can enable it by executing the following code:
 
 ```sql
-ALTER DATABASE SCOPED CONFIGURATION 
+ALTER DATABASE SCOPED CONFIGURATION
 SET PREVIEW_FEATURES = ON;
 GO
 
-SELECT * FROM sys.database_scoped_configurations 
+SELECT * FROM sys.database_scoped_configurations
 WHERE [name] = 'PREVIEW_FEATURES'
 GO
 ```

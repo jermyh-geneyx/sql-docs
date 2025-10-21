@@ -4,7 +4,7 @@ description: Learn how to use a managed identity with SQL Server 2025.
 author: PratimDasgupta
 ms.author: prdasgu
 ms.reviewer: mikeray, randolphwest, mathoma, vanto
-ms.date: 07/28/2025
+ms.date: 10/21/2025
 ms.service: sql
 ms.topic: how-to
 ms.custom:
@@ -99,7 +99,7 @@ Add the SQL Server service account (default: `NT Service\MSSQLSERVER` or for nam
 
 ### Update the registry
 
-> [!WARNING]
+> [!WARNING]  
 > Incorrectly editing the registry can severely damage your system. Before making changes to the registry, we recommend you back up any valued data on the computer.
 
 In the registry, update the **\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Microsoft SQL Server\MSSQL17.MSSQLSERVER\MSSQLServer\FederatedAuthentication** subkey.
@@ -189,15 +189,18 @@ For details, review [How to add, modify, or delete registry subkeys and values b
 
 ## Grant application permissions to the identity
 
-> [!IMPORTANT]
+> [!IMPORTANT]  
 > Only a [Privileged Role Administrator](/entra/identity/role-based-access-control/permissions-reference#privileged-role-administrator) or higher role can grant these permissions.
 
 The system-assigned managed identity, which uses the Arc-enabled machine name, must have the following Microsoft Graph application permissions (app roles):
+
 - [User.Read.All](/graph/permissions-reference#user-permissions): Allows access to Microsoft Entra user information.
+
 - [GroupMember.Read.All](/graph/permissions-reference#group-permissions): Allows access to Microsoft Entra group information.
+
 - [Application.Read.ALL](/graph/permissions-reference#application-resource-permissions): Allows access to Microsoft Entra service principal (application) information.
 
-You can use PowerShell to grant required permissions to the managed identity. Alternatively, you can [create a role-assignable group](/entra/identity/role-based-access-control/groups-create-eligible). After the group is created, assign the **Directory Readers** role or the `User.Read.All`, `GroupMember.Read.All`, and `Application.Read.All` permissions to the group, and add all system-assigned managed identities for your Azure Arc-enabled machines to the group. We do not recommend using the **Directory Readers** role in your production environment. 
+You can use PowerShell to grant required permissions to the managed identity. Alternatively, you can [create a role-assignable group](/entra/identity/role-based-access-control/groups-create-eligible). After the group is created, assign the **Directory Readers** role or the `User.Read.All`, `GroupMember.Read.All`, and `Application.Read.All` permissions to the group, and add all system-assigned managed identities for your Azure Arc-enabled machines to the group. We don't recommend using the **Directory Readers** role in your production environment.
 
 The following PowerShell script grants the required permissions to the managed identity. Make sure this script is run on PowerShell 7.5 or a later version, and has the `Microsoft.Graph` module 2.28 or later installed.
 
@@ -266,7 +269,7 @@ foreach ($roleValue in $requiredRoles) {
 
 ## Create logins and users
 
-Follow the steps in the [Microsoft Entra tutorial](../../sql-server/azure-arc/entra-authentication-setup-tutorial.md#create-logins-and-users) to create logins and users for the managed identity.
+Follow the steps in the [Microsoft Entra tutorial](entra-authentication-setup-tutorial.md#create-logins-and-users) to create logins and users for the managed identity.
 
 ## Limitations
 
@@ -282,6 +285,5 @@ Consider the following limitations when using a managed identity with SQL Server
 ## Related content
 
 - [Microsoft Entra authentication for SQL Server](../../relational-databases/security/authentication-access/azure-ad-authentication-sql-server-overview.md)
-- [What are managed identities for Azure resources?](/entra/identity/managed-identities-azure-resources/overview)
+- [What is managed identities for Azure resources?](/entra/identity/managed-identities-azure-resources/overview)
 - [Enable Microsoft Entra authentication for SQL Server on Azure VMs](/azure/azure-sql/virtual-machines/windows/configure-azure-ad-authentication-for-sql-vm)
-

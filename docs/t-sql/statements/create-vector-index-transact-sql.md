@@ -1,10 +1,10 @@
 ---
 title: "CREATE VECTOR INDEX (Transact-SQL)"
-description: "CREATE VECTOR INDEX creates an index on vector data to allow approximate nearest neighbor search."
+description: CREATE VECTOR INDEX creates an index on vector data to allow approximate nearest neighbor search.
 author: yorek
 ms.author: damauri
-ms.reviewer: damauri, mikeray
-ms.date: 08/11/2025
+ms.reviewer: mikeray, randolphwest
+ms.date: 10/21/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -22,7 +22,7 @@ helpviewer_keywords:
   - "CREATE INDEX statement"
   - "DISKANN"
 dev_langs:
-  - "TSQL"
+  - TSQL
 monikerRange: "=sql-server-ver17 || =sql-server-linux-ver17"
 ---
 
@@ -30,7 +30,7 @@ monikerRange: "=sql-server-ver17 || =sql-server-linux-ver17"
 
 [!INCLUDE [sqlserver2025](../../includes/applies-to-version/sqlserver2025.md)]
 
-Create an approximate index on a vector column to improve performances of nearest neighbors search. To learn more about how vector indexing and vector search works, and the differences between exact and approximate search, refer to [Vectors in the SQL Database Engine](../../sql-server/ai/vectors.md).
+Create an approximate index on a vector column to improve performances of nearest neighbors search. To learn more about how vector indexing and vector search works, and the differences between exact and approximate search, refer to [Vector search and vector indexes in the SQL Database Engine](../../sql-server/ai/vectors.md).
 
 ## Preview feature
 
@@ -85,7 +85,7 @@ The type of [ANN algorithm](../../sql-server/ai/vectors.md#approximate-vector-in
 
 ### MAXDOP
 
-Overrides the **max degree of parallelism** configuration option for the index operation. For more information, see [Max degree of parallelism](../../database-engine/configure-windows/configure-the-max-degree-of-parallelism-server-configuration-option.md). Use `MAXDOP` to limit the degree of parallelism and the resulting resource consumption for an index build operation.
+Overrides the **max degree of parallelism** configuration option for the index operation. For more information, see [Server configuration: max degree of parallelism](../../database-engine/configure-windows/configure-the-max-degree-of-parallelism-server-configuration-option.md). Use `MAXDOP` to limit the degree of parallelism and the resulting resource consumption for an index build operation.
 
 *max_degree_of_parallelism* can be:
 
@@ -101,10 +101,10 @@ Overrides the **max degree of parallelism** configuration option for the index o
 
   Uses the degree of parallelism specified at the server, database, or workload group level, unless reduced based on the current system workload.
 
-For more information, see [Configure Parallel Index Operations](../../relational-databases/indexes/configure-parallel-index-operations.md).
+For more information, see [Configure parallel index operations](../../relational-databases/indexes/configure-parallel-index-operations.md).
 
 > [!NOTE]  
-> Parallel index operations aren't available in every edition of [!INCLUDE [msCoName](../../includes/msconame-md.md)] [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. For a list of features that are supported by the editions of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], see [Editions and supported features of SQL Server 2022](../../sql-server/editions-and-components-of-sql-server-2022.md) or [Editions and supported features of SQL Server 2025 Preview](/sql/sql-server/editions-and-components-of-sql-server-2025).
+> Parallel index operations aren't available in every edition of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. For a list of features that are supported by the editions of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], see [Editions and supported features of SQL Server 2022](../../sql-server/editions-and-components-of-sql-server-2022.md) or [Editions and supported features of SQL Server 2025 Preview](../../sql-server/editions-and-components-of-sql-server-2025.md).
 
 ## Limitations
 
@@ -117,7 +117,7 @@ The current preview has the following limitations:
 
 ## Known issues
 
-Currently, when you create a vector index on some datasets, it may return the following errors:
+Currently, when you create a vector index on some datasets, it might return the following errors:
 
 - Error 9829: `STRING_AGG aggregation result exceeded the limit of 8000 bytes. Use LOB types to avoid result truncation.`
 - 42234: `Internal SQL error during DiskANN graph build`
@@ -141,8 +141,9 @@ For more examples, including end-to-end solutions, go to the [Azure SQL Database
 The following example creates a vector index on the `title_vector` column using the `cosine` metric.
 
 ```sql
-CREATE VECTOR INDEX vec_idx ON [dbo].[wikipedia_articles]([title_vector])
-WITH (METRIC = 'cosine', TYPE = 'diskann');
+CREATE VECTOR INDEX vec_idx
+    ON [dbo].[wikipedia_articles] ([title_vector])
+        WITH (METRIC = 'COSINE', TYPE = 'DISKANN');
 ```
 
 ### Example 2
@@ -150,9 +151,10 @@ WITH (METRIC = 'cosine', TYPE = 'diskann');
 The following example creates a vector index on the `title_vector` column using the (negative) `dot` product metric, limiting the parallelism to 8 and storing the vector in the `SECONDARY` filegroup.
 
 ```sql
-CREATE VECTOR INDEX vec_idx ON [dbo].[wikipedia_articles]([title_vector])
-WITH (METRIC = 'dot', TYPE = 'diskann', MAXDOP = 8)
-ON [SECONDARY]
+CREATE VECTOR INDEX vec_idx
+    ON [dbo].[wikipedia_articles] ([title_vector])
+        WITH (METRIC = 'DOT', TYPE = 'DISKANN', MAXDOP = 8)
+    ON [SECONDARY];
 ```
 
 ### Example 3
@@ -215,7 +217,7 @@ ORDER BY s.distance, t.title;
 
 ## Related content
 
-- [Overview of vectors in the SQL Database Engine](../../sql-server/ai/vectors.md)
+- [Vector search and vector indexes in the SQL Database Engine](../../sql-server/ai/vectors.md)
 - [Vector data type](../data-types/vector-data-type.md)
 - [VECTOR_SEARCH (Transact-SQL) (Preview)](../functions/vector-search-transact-sql.md)
 - [sys.vector_indexes (Transact-SQL)](../../relational-databases/system-catalog-views/sys-vector-indexes-transact-sql.md)

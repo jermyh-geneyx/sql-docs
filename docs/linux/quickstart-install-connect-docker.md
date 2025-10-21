@@ -4,18 +4,18 @@ description: This quickstart shows how to use Docker to run the SQL Server Linux
 author: amitkh-msft
 ms.author: amitkh
 ms.reviewer: vanto, randolphwest
-ms.date: 07/11/2025
+ms.date: 10/21/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: quickstart
-zone_pivot_groups: cs1-command-shell
-monikerRange: ">=sql-server-linux-2017 || >=sql-server-2017"
 ms.custom:
   - intro-quickstart
   - kr2b-contr-experiment
   - linux-related-content
   - build-2025
   - sfi-ropc-blocked
+zone_pivot_groups: cs1-command-shell
+monikerRange: ">=sql-server-linux-2017 || >=sql-server-2017"
 ---
 # Quickstart: Run SQL Server Linux container images with Docker
 

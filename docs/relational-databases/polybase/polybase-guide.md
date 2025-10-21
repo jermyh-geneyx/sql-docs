@@ -1,13 +1,13 @@
 ---
-title: "Introducing Data Virtualization with PolyBase"
+title: Introducing Data Virtualization with PolyBase
 description: PolyBase enables your SQL Server instance to process Transact-SQL queries that read data from external data sources, such as Azure Blob Storage.
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: hudequei, randolphwest
-ms.date: 08/08/2025
+ms.date: 10/21/2025
 ms.service: sql
 ms.subservice: polybase
-ms.topic: "overview"
+ms.topic: overview
 ms.custom:
   - intro-overview
   - build-2025
@@ -103,11 +103,11 @@ Examples of external connectors include:
 - [Oracle](polybase-configure-oracle.md)
 - [Teradata](polybase-configure-teradata.md)
 - [MongoDB](polybase-configure-mongodb.md)
-- [Hadoop](polybase-configure-hadoop.md)*
+- [Hadoop](polybase-configure-hadoop.md) <sup>1</sup>
 - [S3-compatible object storage](polybase-configure-s3-compatible.md)
 - [CSV file](virtualize-csv.md)
 
-\* PolyBase supports two Hadoop providers, Hortonworks Data Platform (HDP) and Cloudera Distributed Hadoop (CDH), through SQL Server 2019. [!INCLUDE [polybase-java-connector-banner-retirement](../../includes/polybase-java-connector-banner-retirement.md)]
+<sup>1</sup> PolyBase supports two Hadoop providers, Hortonworks Data Platform (HDP) and Cloudera Distributed Hadoop (CDH), through SQL Server 2019. [!INCLUDE [polybase-java-connector-banner-retirement](../../includes/polybase-java-connector-banner-retirement.md)]
 
 To use PolyBase in an instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]:
 
