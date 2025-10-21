@@ -4,7 +4,7 @@ description: "DATABASEPROPERTYEX returns the current setting of the specified da
 author: markingmyname
 ms.author: maghan
 ms.reviewer: wiassaf
-ms.date: 09/29/2025
+ms.date: 10/21/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -73,6 +73,7 @@ An expression specifying the name of the database property to return. *property*
 | `IsMergePublished` |[!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] supports database table publication for merge replication, if replication is installed.|1: TRUE<br /><br /> 0: FALSE<br /><br /> `NULL`: Invalid input<br /><br /> Base data type: **int**|
 | `IsNullConcat` |Null concatenation operand yields `NULL`.|1: TRUE<br /><br /> 0: FALSE<br /><br /> `NULL`: Invalid input<br /><br /> Base data type: **int**|
 | `IsNumericRoundAbortEnabled` |Errors are generated when a loss of precision occurs in expressions.|1: TRUE<br /><br /> 0: FALSE<br /><br /> `NULL`: Invalid input<br /><br /> Base data type: **int**|
+| `IsOptimizedLockingOn` |Optimized locking is enabled for the database.|**Applies to**: [!INCLUDE[sssql25-md](../../includes/sssql25-md.md)] and later versions, [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)]<sup>[AUTD](/azure/azure-sql/managed-instance/update-policy#always-up-to-date-update-policy)</sup>, [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)].<br /><br /> 1: TRUE<br /><br /> 0: FALSE<br /><br /> `NULL`: Not available<br /><br /> Base data type: **int**|
 | `IsParameterizationForced` |`PARAMETERIZATION` database `SET` option is `FORCED`.|1: TRUE<br /><br /> 0: FALSE<br /><br /> `NULL`: Invalid input|
 | `IsQuotedIdentifiersEnabled` |Double quotation marks on identifiers are allowed.|1: TRUE<br /><br /> 0: FALSE<br /><br /> `NULL`: Invalid input<br /><br /> Base data type: **int**|
 | `IsPublished` |If replication is installed, [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] supports database table publication for snapshot or transactional replication.|1: TRUE<br /><br /> 0: FALSE<br /><br /> `NULL`: Invalid input<br /><br /> Base data type: **int**|
