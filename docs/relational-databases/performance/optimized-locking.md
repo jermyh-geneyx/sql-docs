@@ -4,7 +4,7 @@ description: Learn about the optimized locking enhancement to the database engin
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest, peskount, praspu, dfurman
-ms.date: 10/09/2025
+ms.date: 10/21/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
@@ -32,7 +32,7 @@ Optimized locking helps to reduce lock memory as very few locks are held even fo
 Optimized locking is composed of two primary components: **transaction ID (TID) locking** and **lock after qualification (LAQ)**.
 
 - A transaction ID (TID) is a unique identifier of a transaction. Each row is labeled with the last TID that modified it. Instead of potentially many key or row identifier locks, a single lock on the TID is used. For more information, see [Transaction ID (TID) locking](#transaction-id-tid-locking).
-- Lock after qualification (LAQ) is an optimization that evaluates query predicates using the latest committed version of the row without acquiring a lock, thus improving concurrency. For more information, see [Lock after qualification (LAQ)](#lock-after-qualification-laq).
+- Lock after qualification (LAQ) is an optimization that evaluates query predicates using the latest committed version of the row without acquiring a lock, thus improving concurrency. LAQ requires [read committed snapshot isolation (RCSI)](../../t-sql/statements/alter-database-transact-sql-set-options.md#read_committed_snapshot--on--off-). For more information, see [Lock after qualification (LAQ)](#lock-after-qualification-laq).
 
 For example:
 
@@ -62,7 +62,7 @@ To enable or disable optimized locking for a [!INCLUDE [SQL Server](../../includ
 Optimized locking builds on other database features:
 
 - You must enable [accelerated database recovery (ADR)](/azure/azure-sql/accelerated-database-recovery) on a database before you can enable optimized locking. Conversely, to disable ADR, you must disable optimized locking first if it's enabled.
-- For the most benefit from optimized locking, [read committed snapshot isolation (RCSI)](../../t-sql/statements/alter-database-transact-sql-set-options.md?view=azuresqldb-current&preserve-view=true#read_committed_snapshot--on--off--1) should be enabled for the database. The [LAQ](#lock-after-qualification-laq) component of optimized locking is in effect only if RCSI is enabled.
+- For the most benefit from optimized locking, [read committed snapshot isolation (RCSI)](../../t-sql/statements/alter-database-transact-sql-set-options.md#read_committed_snapshot--on--off-) should be enabled for the database. The [LAQ](#lock-after-qualification-laq) component of optimized locking is in effect only if RCSI is enabled.
 
 In [!INCLUDE [asdb](../../includes/ssazure-sqldb.md)] and [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)], ADR is always enabled and RCSI is enabled by default.
 
@@ -83,7 +83,7 @@ WHERE name = DB_NAME();
 Optimized locking is enabled per user database. Connect to your database, then use the following query to check if optimized locking is enabled:
 
 ```sql
-SELECT DATABASEPROPERTYEX(DB_NAME(), 'IsOptimizedLockingOn') AS IsOptimizedLockingOn;
+SELECT DATABASEPROPERTYEX(DB_NAME(), 'IsOptimizedLockingOn') AS is_optimized_locking_enabled;
 ```
 
 | Result | Description |
@@ -121,7 +121,7 @@ Consider the following example that shows locks for the current session while a 
 
 ```sql
 /* Is optimized locking is enabled? */
-SELECT IsOptimizedLockingOn = DATABASEPROPERTYEX(DB_NAME(), 'IsOptimizedLockingOn');
+SELECT DATABASEPROPERTYEX(DB_NAME(), 'IsOptimizedLockingOn') AS is_optimized_locking_enabled;
 
 CREATE TABLE t0
 (
@@ -174,6 +174,15 @@ Since predicate evaluation is performed without acquiring any locks, concurrent 
 For example:
 
 ```sql
+/* Confirm that optimized locking and read committed snapshot isolation (RCSI) are both enabled on this database. */
+SELECT database_id,
+       name,
+       is_accelerated_database_recovery_on,
+       is_optimized_locking_on,
+       is_read_committed_snapshot_on
+FROM sys.databases
+WHERE name = DB_NAME();
+
 CREATE TABLE t1
 (
 a int NOT NULL,
@@ -322,7 +331,7 @@ The following improvements help you monitor and troubleshoot blocking and deadlo
 
 ### Enable read committed snapshot isolation (RCSI)
 
-To maximize the benefits of optimized locking, it's recommended to enable [read committed snapshot isolation (RCSI)](../../t-sql/statements/alter-database-transact-sql-set-options.md?view=azuresqldb-current&preserve-view=true#read_committed_snapshot--on--off--1) on the database and use `READ COMMITTED` isolation as the default isolation level. If not already enabled, enable RCSI by connecting to the `master` database and executing the following statement:
+To maximize the benefits of optimized locking, it's recommended to enable [read committed snapshot isolation (RCSI)](../../t-sql/statements/alter-database-transact-sql-set-options.md#read_committed_snapshot--on--off-) on the database and use `READ COMMITTED` isolation as the default isolation level. If not already enabled, enable RCSI by connecting to the `master` database and executing the following statement:
 
 ```sql
 ALTER DATABASE [database-name-placeholder] SET READ_COMMITTED_SNAPSHOT ON;
@@ -401,6 +410,6 @@ Not at this time.
 ## Related content
 
 - [Transaction locking and row versioning guide](../sql-server-transaction-locking-and-row-versioning-guide.md)
-- [Read committed snapshot isolation (RCSI)](../../t-sql/statements/alter-database-transact-sql-set-options.md?view=azuresqldb-current&preserve-view=true#read_committed_snapshot--on--off--1)
+- [Read committed snapshot isolation (RCSI)](../../t-sql/statements/alter-database-transact-sql-set-options.md#read_committed_snapshot--on--off-)
 - [sys.dm_tran_locks (Transact-SQL)](../system-dynamic-management-views/sys-dm-tran-locks-transact-sql.md)
 - [Accelerated database recovery](../accelerated-database-recovery-concepts.md)
