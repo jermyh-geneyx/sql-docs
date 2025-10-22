@@ -5,7 +5,7 @@ description: Learn about the new features and documentation improvements for Azu
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: mathoma, randolphwest
-ms.date: 10/21/2025
+ms.date: 10/22/2025
 ms.service: azure-sql-database
 ms.subservice: service-overview
 ms.topic: whats-new
@@ -42,7 +42,6 @@ The following table lists the features of Azure SQL Database that are currently 
 | --- | --- |
 | **Approximate or fuzzy string matching**| Check if two strings are similar, and calculate the difference between two strings. Use this capability to identify strings that might be different because of character corruption. [What is fuzzy string matching?](/sql/relational-databases/fuzzy-string-match/overview)|
 | **Availability metric**| Availability is now a metric in the Azure Monitor metrics. Driven by a variety of user connection failures, you can [monitor and configure alerts on Azure SQL Database Availability](monitoring-metrics-alerts.md#availability-metric). |
-| **Convert to Hyperscale with geo-replicas (preview)** |The ability to [convert a geo-replicated database non-Hyperscale database to Hyperscale](convert-to-hyperscale.md) using T-SQL, REST API, PowerShell, or Azure CLI is currently a preview feature. For more information, see [Blog: Hyperscale conversion support for geo-replicas](https://aka.ms/hs-conversion-geodr-preview). |
 | **DATEADD number allows bigint** | For `DATEADD (datepart , number , date )`, number can be expressed as a **bigint**. For more information, see [DATEADD (Transact-SQL)](/sql/t-sql/functions/dateadd-transact-sql).|
 | **Database watcher for Azure SQL** |[Database watcher](../database-watcher-overview.md) is a managed monitoring solution for database services in the Azure SQL family. Database watcher collects in-depth workload monitoring data to give you a detailed view of database performance, configuration, and health. Learn more about [database watcher](https://aka.ms/dbwatcher-preview-announcement). |
 | **Data Virtualization for Azure SQL Database** |Data virtualization, now in preview in Azure SQL Database, enables you to leverage all the power of Transact-SQL (T-SQL) and seamlessly query external data from Azure Data Lake Storage Gen2 or Azure Blob Storage. For more information, see [Data virtualization with Azure SQL Database (Preview)](data-virtualization-overview.md).|
@@ -63,6 +62,7 @@ The following table lists features of Azure SQL Database that have been made gen
 
 | Feature | GA Month | Details |
 | --- | --- | --- |
+| **Convert to Hyperscale with geo-replicas** | October 2025 | The ability to [convert a geo-replicated database non-Hyperscale database to Hyperscale](convert-to-hyperscale.md) using T-SQL, REST API, PowerShell, or Azure CLI is now generally available. For more information, see [Blog: Hyperscale conversion support for geo-replicas](https://aka.ms/hs-conversion-geodr-ga). |
 | **ABORT_QUERY_EXECUTION** | October 2025 | The `ABORT_QUERY_EXECUTION` [query hint](/sql/t-sql/queries/hints-transact-sql-query?view=azuresqldb-current&preserve-view=true#use_hint_abort_query_execution) can block future execution of known problematic queries, for example nonessential queries causing high resource consumption and impacting critical application workloads. For more information, see [Query Store hints: Block future execution of problematic queries](/sql/relational-databases/performance/query-store-hints-best-practices?view=azuresqldb-current&preserve-view=true#block-future-execution-of-problematic-queries). |
 | **sys.dm_hs_database_replicas** | August 2025 | You can query the details of Azure SQL Database Hyperscale replicas with the new dynamic management view (DMV) [sys.dm_hs_database_replicas](/sql/relational-databases/system-functions/sys-dm-hs-database-replicas).|
 | **UNISTR (Transact-SQL)** | July 2025 | Azure SQL Database now supports the `UNISTR` T-SQL syntax for Unicode string literals. For more information, see [UNISTR (Transact-SQL)](/sql/t-sql/functions/unistr-transact-sql).|
@@ -98,6 +98,7 @@ Learn about significant changes to the Azure SQL Database documentation. For pre
 
 | Changes | Details |
 | --- | --- |
+| **Convert to Hyperscale with geo-replicas** | The ability to [convert a geo-replicated database non-Hyperscale database to Hyperscale](convert-to-hyperscale.md) using T-SQL, REST API, PowerShell, or Azure CLI is now generally available. For more information, see [Blog: Hyperscale conversion support for geo-replicas](https://aka.ms/hs-conversion-geodr-ga). |
 | **Restart database in the Azure portal (preview)** | You can [restart your SQL database or elastic pool](restart-database.md) from the Azure portal. |
 
 ### September 2025
