@@ -4,7 +4,7 @@ description: How to convert an Azure SQL Database to the Hyperscale tier.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: dfurman, blakhani
-ms.date: 07/07/2025
+ms.date: 10/22/2025
 ms.service: azure-sql-database
 ms.topic: how-to
 ms.custom:
@@ -21,17 +21,17 @@ You can convert an existing database in Azure SQL Database to Hyperscale using t
 
 ## Prerequisites
 
- - To convert a database that is a part of a [geo-replication](active-geo-replication-overview.md) relationship, either as the primary or as a secondary, to Hyperscale, you must first terminate geo-replication between the primary and secondary replica. Databases in a [failover group](failover-group-sql-db.md) must be removed from the group first. Once a database is converted to Hyperscale, you can create a new Hyperscale geo-replica for that database or add the database to a failover group.
-     - The ability to [convert a geo-replicated non-Hyperscale database to Hyperscale](#convert-database-with-geo-replicas-preview) using T-SQL, REST API, PowerShell, or Azure CLI is currently a [preview feature](#convert-database-with-geo-replicas-preview).
+- To convert a database that uses [geo-replication](active-geo-replication-overview.md) or is a part of a [failover group](failover-group-sql-db.md) to Hyperscale, start by converting the primary replica. The geo-secondary replica is converted automatically. You can [convert a geo-replicated non-Hyperscale database to Hyperscale](#convert-database-with-geo-replicas) using T-SQL, REST API, PowerShell, or Azure CLI.
+
 - Direct conversion from the Basic service tier to Hyperscale is not supported. To perform this conversion, first change the database to any service tier other than Basic (for example, General Purpose), and then proceed with the conversion to Hyperscale.  
 - You can monitor the progress of the conversion with T-SQL. To run T-SQL commands on your Azure SQL Database, use [SQL Server Management Studio (SSMS)](https://aka.ms/ssms), the [MSSQL extension for Visual Studio Code](/sql/tools/visual-studio-code-extensions/mssql/mssql-extension-visual-studio-code), [sqlcmd](/sql/tools/sqlcmd/sqlcmd-utility), or your favorite T-SQL querying tool.
 
-### Convert database with geo-replicas (preview)
+### Convert database with geo-replicas
 
-The ability to convert a [geo-replicated](active-geo-replication-overview.md) non-Hyperscale database to Hyperscale using T-SQL, REST API, PowerShell, or Azure CLI is currently a preview feature. For more information, see [Blog: Hyperscale conversion support for geo-replicas](https://aka.ms/hs-conversion-geodr-preview).
+When you convert a database in a [geo-replication](active-geo-replication-overview.md) relationship, the conversion process preserves the geo-replication link. Both the primary and the geo-secondary databases are converted to Hyperscale together.
 
-- Conversion to Hyperscale must be initiated from the primary geo-replica. 
-- The number of geo-secondary replicas should be reduced to one because Hyperscale doesn't support more than one geo-secondary.
+- Conversion to Hyperscale must be started by converting the primary geo-replica. Attempting to convert a geo-secondary replica results in an error: *A geo-secondary replica 'database-name-placeholder' cannot be converted to Hyperscale. To convert both the primary and geo-secondary replicas to Hyperscale, retry the operation on the primary replica.*
+- The number of geo-secondary replicas should be reduced to one to initiate the conversion process. 
 - Creating geo-replica of a geo-replica (also known as "geo-replica chaining") isn't supported in Hyperscale. If a chained geo-replication configuration exists, it must be removed before starting the conversion to Hyperscale.
 - A planned failover isn't possible while the conversion of the geo-primary database to Hyperscale is in progress. A forced failover to a geo-secondary replica is possible. However, depending on the state of the conversion when the forced failover occurs, the new geo-primary after failover might use either the Hyperscale service tier, or its original service tier.
 - If a geo-primary database is in an elastic pool, it can be moved to an existing Hyperscale elastic pool as part of the conversion or can be made a standalone Hyperscale database. However, if a geo-secondary database is in an elastic pool, conversion to Hyperscale always moves it out of the pool. You can move the geo-secondary database to a Hyperscale elastic pool in a separate step once conversion completes.
@@ -42,11 +42,11 @@ The conversion process is divided into two stages - the conversion of database, 
 
 - The time required to move an existing database to Hyperscale consists of the time to copy data and the time to replay the changes made in the source database while copying data. While the data copy time scales roughly with the size of the database, actual copy speed can vary due to factors such as network throughput, I/O bandwidth, storage latency, and transient service load. We recommend converting to Hyperscale during a lower write activity period so that the time to replay accumulated changes is shorter. It is recommended to use manual cutover to control the next stage.
 
-- You have the ability to choose when the cutover occurs - as soon as the database is ready, or manually at a time of your choosing. By default, the process to convert to Hyperscale will cutover automatically.
+- You have the ability to choose when the cutover occurs - as soon as the database is ready, or manually at a time of your choosing. By default, the process to convert to Hyperscale will cut over automatically.
   - If you choose to manually cutover at a time of your choosing, you have 24 hours to initiate a manual cutover after the point when the database ready for cutover. You can initiate a manual cutover via the Azure portal, Azure CLI, PowerShell, or T-SQL.
 - During the final cutover to Hyperscale, your applications only experience a short period of downtime, usually less than a minute.
 
-There are multiple phases in the conversion process which can be monitored in the Azure portal (on the progress reporting page), via Azure CLI ([az sql db op list](/cli/azure/sql/db/op#az-sql-db-op-list)), PowerShell ([Get-AzSqlDatabaseActivity](/powershell/module/az.sql/get-azsqldatabaseactivity)), or using T-SQL ([sys.dm_operation_status](/sql/relational-databases/system-dynamic-management-views/sys-dm-operation-status-azure-sql-database)).
+There are multiple phases in the conversion process that can be monitored in the Azure portal (on the progress reporting page), via Azure CLI ([az sql db op list](/cli/azure/sql/db/op#az-sql-db-op-list)), PowerShell ([Get-AzSqlDatabaseActivity](/powershell/module/az.sql/get-azsqldatabaseactivity)), or using T-SQL ([sys.dm_operation_status](/sql/relational-databases/system-dynamic-management-views/sys-dm-operation-status-azure-sql-database)).
 
 When converting a database from the Premium or Business Critical service tiers to Hyperscale, existing client connections are disconnected during phase 1. This is similar to the disconnect that occurs when scaling the database between service tiers. Applications should be designed to gracefully handle transient connectivity interruptions by implementing retry logic as described in [Retry logic for transient errors](/azure/azure-sql/database/troubleshoot-common-connectivity-issues#retry-logic-for-transient-errors).
 
@@ -67,7 +67,7 @@ The Azure portal enables you to convert to Hyperscale by modifying the service t
 1. Navigate to the database you wish to convert in the Azure portal.
 1. In the left navigation bar, select **Compute + storage**.
 1. Select the **Service tier** dropdown list to expand the options for service tiers.
-    1. If you were using the [Azure SQL Database free offer](free-offer.md), select the button to remove the **Free database offer**. Then you'll see the **Service tier** dropdown list.
+    1. If you were using the [Azure SQL Database free offer](free-offer.md), select the button to remove the **Free database offer**. Then you see the **Service tier** dropdown list.
 1. Select **Hyperscale** from the dropdown list.
 1. Review the **Compute tier** and choose **Provisioned** or **Serverless**. 
 1. Review the **Cutover mode**, a choice specific to conversion to Hyperscale.
