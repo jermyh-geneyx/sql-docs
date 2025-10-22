@@ -5,7 +5,7 @@ description: Learn about Azure SQL Managed Instance communication and connectivi
 author: zoran-rilak-msft
 ms.author: zoranrilak
 ms.reviewer: mathoma, bonova
-ms.date: 09/11/2025
+ms.date: 10/22/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: service-overview
 ms.topic: conceptual
@@ -58,17 +58,26 @@ Applications can connect to SQL Managed Instance via three types of endpoints: [
 
 ### VNet-local endpoint
 
-The VNet-local endpoint is the default means to connect to SQL Managed Instance. It's a domain name in the form of `<mi_name>.<dns_zone>.database.windows.net`. This domain name resolves to an IP address from the subnet's address range. The VNet-local endpoint can be used to connect to a SQL Managed Instance in all standard connectivity scenarios. VNet-local endpoint's port is 1433.
+The VNet-local endpoint is the default means to connect to SQL Managed Instance. The *VNet-local endpoint domain name* is in the form of `<mi_name>.<dns_zone>.database.windows.net`. This domain name resolves to an IP address from the subnet's address range. Use the VNet-local endpoint to connect to a SQL Managed Instance in all standard connectivity scenarios. The VNet-local endpoint accepts connections on port 1433.
 
-VNet-local endpoint supports [Proxy and redirect connection types](connection-types-overview.md).
+The VNet-local endpoint supports [Proxy and redirect connection types](connection-types-overview.md).
 
 When connecting to the VNet-local endpoint, always use its domain name and allow inbound traffic on the required ports across the entire subnet range, as the underlying IP address can occasionally change.
 
+To find the *VNet-local endpoint domain name* for an instance: 
+* [Azure portal](https://portal.azure.com/#view/HubsExtension/ServiceMenuBlade/~/SingleInstance/extension/SqlAzureExtension/menuId/AzureSqlHub/itemId/SingleInstance): On the **Overview** pane, in the **Essentials** section, the **Host** value shows the *VNet-local endpoint domain name*. 
+* [PowerShell](/powershell/module/az.sql/get-azsqlinstance): `Get-AzSqlInstance -ResourceGroupName <resource-group> -Name <mi-name>` shows the *VNet-local endpoint domain name* as the `fullyQualifiedDomainName` property.
+* [Azure CLI](/cli/azure/sql/mi#az-sql-mi-show): `az sql mi show -g <resource-group> -n <mi-name>` shows the *VNet-local endpoint domain name* as the `fullyQualifiedDomainName` property.
+
+For improved security, specify an encrypted connection, and don't trust the certificate. For more information, see [Security overview](../database/security-overview.md#transport-layer-security-encryption-in-transit).
+
 ### Public endpoint
 
-The public endpoint is a domain name in the form of `<mi_name>.public.<dns_zone>.database.windows.net`. This domain name resolves to a public IP address reachable from the internet. The public endpoint is suitable for scenarios when a SQL managed instance needs to be accessible via the public internet. For example, when connecting to it from a different virtual network when peering or private endpoints aren't available. Public endpoints only carry client traffic and can't be used for data replication between two instances, such as [failover groups](failover-group-sql-mi.md) or [Managed Instance link](managed-instance-link-feature-overview.md). Public endpoint's port is 3342.
+The public endpoint is a domain name in the form of `<mi_name>.public.<dns_zone>.database.windows.net`. This domain name resolves to a public IP address reachable from the internet. The public endpoint is suitable for scenarios when a SQL managed instance needs to be accessible via the public internet. For example, when connecting to it from a different virtual network when peering or private endpoints aren't available. Public endpoints only carry client traffic and can't be used for data replication between two instances, such as [failover groups](failover-group-sql-mi.md) or [Managed Instance link](managed-instance-link-feature-overview.md). Public endpoint accepts connections on port 3342.
 
 Public endpoint always uses the [Proxy connection type](connection-types-overview.md) regardless of the connection type setting.
+
+An instance's public endpoint domain name is equal to its VNet-local endpoint name with the label `public` inserted between the hostname and the rest of the domain: `<mi-name>.public.<dns-zone>.database.windows.net`.
 
 When connecting to the public endpoint, always use its domain name and allow inbound traffic on port 3342 across the entire subnet range, as the underlying IP address can occasionally change.
 
@@ -76,9 +85,11 @@ Learn how to set up a public endpoint in [Configure public endpoint for Azure SQ
 
 ### Private endpoints
 
-A private endpoint is an optional fixed IP address in another virtual network that conducts traffic to your SQL managed instance. One Azure SQL Managed Instance can have multiple private endpoints in multiple virtual networks. Private endpoints only carry client traffic and can't be used for data replication between two instances, such as failover groups or [Managed Instance link](managed-instance-link-feature-overview.md). Private endpoint's port is 1143.
+A private endpoint is an optional fixed IP address in another virtual network that conducts traffic to your SQL managed instance. One Azure SQL Managed Instance can have multiple private endpoints in multiple virtual networks. Private endpoints only carry client traffic and can't be used for data replication between two instances, such as failover groups or [Managed Instance link](managed-instance-link-feature-overview.md). The private endpoint accepts connections on port 1433.
 
 Private endpoints always use the [Proxy connection type](connection-types-overview.md) regardless of the connection type setting.
+
+An instance's private endpoint domain name is equal to its VNet-local domain name unless the endpoint has been configured differently. This is the case when both the private endpoint and VNet-local endpoint are in the same virtual network. For more information, see [Set up domain name resolution for private endpoint](private-endpoint-overview.md#set-up-domain-name-resolution-for-private-endpoint).
 
 When connecting to a private endpoint, always use the domain name since connecting to Azure SQL Managed Instance via its IP address isn't supported yet. The IP address of a private endpoint, however, doesn't change.
 

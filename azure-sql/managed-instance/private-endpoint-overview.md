@@ -4,7 +4,7 @@ description: Connect your Azure SQL Managed Instance to virtual networks and Azu
 author: zoran-rilak-msft
 ms.author: zoranrilak
 ms.reviewer: mathoma, srbozovi
-ms.date: 09/11/2025
+ms.date: 10/22/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: backup-restore
 ms.topic: how-to
@@ -144,12 +144,13 @@ After you complete these steps, SQL clients connecting to `<instance-name>.<dns-
 
 ### [Same virtual networks](#tab/same-vnet)
 
-Follow these steps if the private endpoint and Azure SQL Managed Instance are in the same virtual network.
+When the private endpoint and Azure SQL Managed Instance are in the same virtual network, the domain name for your server doesn't match the TLS certificate of the instance. To connect to the private endpoint, you need to configure your clients in one of the following ways:
+- (Recommended) Set `Encrypt=Strict` and `HostNameInCertificate` to the *[VNet-local endpoint domain name](connectivity-architecture-overview.md#vnet-local-endpoint)* of the instance.
+- Set `Encrypt=Mandatory` and `HostNameInCertificate` to the *[VNet-local endpoint domain name](connectivity-architecture-overview.md#vnet-local-endpoint)* of the instance.
+- Set `Encrypt=Mandatory` and `TrustServerCertificate=True` (not recommended for production use).
+- Set `Encrypt=Optional` (not recommended).
 
-After you complete these steps, SQL clients inside the endpoint virtual network whose connection string includes `Encrypt=false` and `TrustServerCertificate=true` can connect to the private endpoint at, for example, `<instance-name>.privatelink.site`. As before, clients can still connect to the VNet-local endpoint at `<instance-name>.<dns-zone>.database.windows.net`.
-
-> [!NOTE]  
-> When the private endpoint and Azure SQL Managed Instance are in the same virtual network, you don't have the ability to establish trusted encrypted connections nor to transparently re-route SQL clients to the private endpoint.
+Follow these steps if the private endpoint and Azure SQL Managed Instance are in the same virtual network: 
 
 1. Obtain the IP address of the private endpoint either by visiting Private Link Center or by performing the following steps:
 
