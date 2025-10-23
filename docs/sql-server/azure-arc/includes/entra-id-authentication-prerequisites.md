@@ -11,6 +11,6 @@ Enabling Microsoft Entra authentication for [!INCLUDE [ssnoversion-md](../../../
 - `https://login.microsoft.com/`
 - `https://enterpriseregistration.windows.net/`
 - `https://graph.microsoft.com/`
-- `https://<azure-keyvault-name>.vault.azure.net/` (Required only if your are using certificates for Microsoft Entra authentiation)
+- `https://<azure-keyvault-name>.vault.azure.net/` (Required only if you're using certificates for Microsoft Entra authentication)
 
-Additionally, you might need to allow [Azure portal authetication URLs](/azure/azure-portal/azure-portal-safelist-urls#azure-portal-authentication).
+Additionally, you might need to allow [Azure portal authentication URLs](/azure/azure-portal/azure-portal-safelist-urls#azure-portal-authentication).
