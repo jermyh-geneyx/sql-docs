@@ -29,7 +29,7 @@ The v10.3 release of SSMA for Oracle contains the following changes:
 
 The v10.2 release of SSMA for Oracle contains the following changes:
 
-- AI-assisted code code conversion with Microsoft Copilot in SSMA for Oracle (Preview)
+- AI-assisted code conversion with Microsoft Copilot in SSMA for Oracle (Preview)
 
 ## SSMA v10.1
 
