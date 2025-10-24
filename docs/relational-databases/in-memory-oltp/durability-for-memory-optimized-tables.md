@@ -85,7 +85,7 @@ The merge operation takes as input one or more adjacent closed checkpoint file p
 
 In the following example, the memory-optimized table file group has four data and delta file pairs at timestamp 500 containing data from previous transactions. For example, the rows in the first data file correspond to transactions with timestamp greater than 100 and less than or equal to 200; alternatively represented as (100, 200]. The second and third data files are shown to be less than 50 percent full after accounting for the rows marked as deleted. The merge operation combines these two CFPs and creates a new CFP containing transactions with timestamp greater than 200 and less than or equal to 400, which is the combined range of these two CFPs. You see another CFP with range (500, 600] and non-empty delta file for transaction range (200, 400] shows that merge operation can be done concurrently with transactional activity including deleting more rows from the source CFPs.
 
-:::image type="content" source="media/storagediagram-hekaton.png" alt-text="Diagram shows memory optimized table file group.":::
+:::image type="content" source="media/durability-for-memory-optimized-tables/storage-file-group.png" alt-text="Diagram shows memory optimized table file group.":::
 
 A background thread evaluates all closed CFPs using a merge policy and then initiates one or more merge requests for the qualifying CFPs. These merge requests are processed by the offline checkpoint thread. The evaluation of merge policy is done periodically and also when a checkpoint is closed.
 
