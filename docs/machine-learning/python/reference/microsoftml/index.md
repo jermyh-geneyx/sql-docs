@@ -1,130 +1,99 @@
 ---
-title: "microsoftml API"
-description: "microsoftml API"
+title: MicrosoftML API
+description: MicrosoftML API
 author: VanMSFT
 ms.author: vanto
-ms.date: 07/15/2019
+ms.reviewer: randolphwest
+ms.date: 10/23/2025
 ms.service: sql
-ms.subservice: "machine-learning-services"
-ms.topic: "reference"
+ms.subservice: machine-learning-services
+ms.topic: reference
 keywords:
   - microsoftml API
   - API
 ms.devlang: python
-monikerRange: ">=sql-server-2017||>=sql-server-linux-ver15"
+monikerRange: ">=sql-server-2017 || >=sql-server-linux-ver15"
 ---
-# microsoftml API
+# MicrosoftML API
 
-## learners
+## Learners
 
+**Applies to**: [!INCLUDE [sssql17-md](../../../../includes/sssql17-md.md)]
 
-**Applies to: SQL Server 2017 RC2**
+### Training functions
 
+- [*microsoftml.rx_fast_forest*: Random Forest](rx-fast-forest.md)
 
-### training functions
+- [*microsoftml.rx_fast_linear*: Linear Model with Stochastic Dual Coordinate Ascent](rx-fast-linear.md)
 
-* [*microsoftml.rx_fast_forest*: Random Forest](rx-fast-forest.md) 
+  - [loss functions](rx-fast-linear.md)
 
-* [*microsoftml.rx_fast_linear*: Linear Model with Stochastic Dual Coordinate Ascent](rx-fast-linear.md) 
+    - [*microsoftml.hinge_loss*: Hinge loss function](hinge-loss.md)
+    - [*microsoftml.log_loss*: Log loss function](log-loss.md)
+    - [*microsoftml.smoothed_hinge_loss*: Smoothed hinge loss function](smoothed-hinge-loss.md)
+    - [*microsoftml.squared_loss*: Squared loss function](squared-loss.md)
 
-  * [loss functions](rx-fast-linear.md) 
+- [*microsoftml.rx_fast_trees*: Boosted Trees](rx-fast-trees.md)
 
-    * [*microsoftml.hinge_loss*: Hinge loss function](hinge-loss.md) 
+- [*microsoftml.rx_logistic_regression*: Logistic Regression](rx-logistic-regression.md)
 
-    * [*microsoftml.log_loss*: Log loss function](log-loss.md) 
+- [*microsoftml.rx_neural_network*: Neural Network](rx-neural-network.md)
 
-    * [*microsoftml.smoothed_hinge_loss*: Smoothed hinge loss function](smoothed-hinge-loss.md) 
+  - [optimizers](rx-neural-network.md)
 
-    * [*microsoftml.squared_loss*: Squared loss function](squared-loss.md) 
+    - [*microsoftml.adadelta_optimizer*: Adaptive learning rate method](adadelta-optimizer.md)
+    - [*microsoftml.sgd_optimizer*: Stochastic gradient descent](sgd-optimizer.md)
 
-* [*microsoftml.rx_fast_trees*: Boosted Trees](rx-fast-trees.md) 
+  - [math](rx-neural-network.md)
 
-* [*microsoftml.rx_logistic_regression*: Logistic Regression](rx-logistic-regression.md) 
+    - [*microsoftml.avx_math*: Acceleration with AVX instructions](avx-math.md)
+    - [*microsoftml.clr_math*: Acceleration with .NET math](clr-math.md)
+    - [*microsoftml.gpu_math*: Acceleration with Nvidia CUDA](gpu-math.md)
+    - [*microsoftml.mkl_math*: Acceleration with Intel MKL](mkl-math.md)
+    - [*microsoftml.sse_math*: Acceleration with SSE instructions](sse-math.md)
 
-* [*microsoftml.rx_neural_network*: Neural Network](rx-neural-network.md) 
+- [*microsoftml.rx_oneclass_svm*: Anomaly Detection](rx-oneclass-svm.md)
 
-  * [optimizers](rx-neural-network.md) 
-
-    * [*microsoftml.adadelta_optimizer*: Adaptive learning rate method](adadelta-optimizer.md) 
-
-    * [*microsoftml.sgd_optimizer*: Stochastic gradient descent](sgd-optimizer.md) 
-
-  * [math](rx-neural-network.md) 
-
-    * [*microsoftml.avx_math*: Acceleration with AVX instructions](avx-math.md) 
-
-    * [*microsoftml.clr_math*: Acceleration with .NET math](clr-math.md) 
-
-    * [*microsoftml.gpu_math*: Acceleration with NVidia CUDA](gpu-math.md) 
-
-    * [*microsoftml.mkl_math*: Acceleration with Intel MKL](mkl-math.md) 
-
-    * [*microsoftml.sse_math*: Acceleration with SSE instructions](sse-math.md) 
-
-* [*microsoftml.rx_oneclass_svm*: Anomaly Detection](rx-oneclass-svm.md) 
-
-
-## transforms
-
+## Transforms
 
 ### categorical variable handling
 
-* [*microsoftml.categorical*: Converts a text column into categories](categorical.md) 
+- [*microsoftml.categorical*: Converts a text column into categories](categorical.md)
+- [*microsoftml.categorical_hash*: Hashes and converts a text column into categories](categorical-hash.md)
 
-* [*microsoftml.categorical_hash*: Hashes and converts a text column into categories](categorical-hash.md) 
+### Schema manipulation
 
+- [*microsoftml.concat*: Concatenates multiple columns into a single vector](concat.md)
+- [*microsoftml.drop_columns*: Drops columns from a dataset](drop-columns.md)
+- [*microsoftml.select_columns*: Retains columns of a dataset](select-columns.md)
 
-### schema manipulation
+### Variable selection
 
-* [*microsoftml.concat*: Concatenates multiple columns into a single vector](concat.md) 
+- [*microsoftml.count_select*: Feature selection based on counts](count-select.md)
+- [*microsoftml.mutualinformation_select*: Feature selection based on mutual information](mutualinformation-select.md)
 
-* [*microsoftml.drop_columns*: Drops columns from a dataset](drop-columns.md) 
+### Text analytics
 
-* [*microsoftml.select_columns*: Retains columns of a dataset](select-columns.md) 
+- [*microsoftml.featurize_text*: Converts text columns into numerical features](featurize-text.md)
 
+  - [*microsoftml.n_gram*: Converts text into features using n-grams](n-gram.md)
+  - [*microsoftml.n_gram_hash*: Converts text into features using hashed n-grams](n-gram-hash.md)
+  - [*microsoftml.custom*: Removes custom stopwords](custom.md)
+  - [*microsoftml.predefined*: Removes predefined stopwords](predefined.md)
 
-### variable selection
+- [*microsoftml.get_sentiment*: Sentiment analysis](get-sentiment.md)
 
-* [*microsoftml.count_select*: Feature selection based on counts](count-select.md) 
+### Image analytics
 
-* [*microsoftml.mutualinformation_select*: Feature selection based on mutual information](mutualinformation-select.md) 
+- [*microsoftml.load_image*: Loads an image](load-image.md)
+- [*microsoftml.resize_image*: Resizes an Image](resize-image.md)
+- [*microsoftml.extract_pixels*: Extracts pixels from an image](extract-pixels.md)
+- [*microsoftml.featurize_image*: Converts an image into features](featurize-image.md)
 
+## Scorers
 
-### text analytics
+- [*microsoftml.rx_predict*: Scores using a Microsoft machine learning model](rx-predict.md)
 
-* [*microsoftml.featurize_text*: Converts text columns into numerical features](featurize-text.md) 
+## Featurizers
 
-  * [N-grams extractors](featurize-text.md) 
-
-    * [*microsoftml.n_gram*: Converts text into features using n-grams](n-gram.md) 
-
-    * [*microsoftml.n_gram_hash*: Converts text into features using hashed n-grams](n-gram-hash.md) 
-
-  * [Stopwords removers](featurize-text.md) 
-
-    * [*microsoftml.custom*: Removes custom stopwords](custom.md) 
-
-    * [*microsoftml.predefined*: Removes predefined stopwords](predefined.md) 
-
-* [*microsoftml.get_sentiment*: Sentiment analysis](get-sentiment.md) 
-
-
-### image analytics
-
-* [*microsoftml.load_image*: Loads an image](load-image.md) 
-
-* [*microsoftml.resize_image*: Resizes an Image](resize-image.md) 
-
-* [*microsoftml.extract_pixels*: Extracts pixels form an image](extract-pixels.md) 
-
-* [*microsoftml.featurize_image*: Converts an image into features](featurize-image.md) 
-
-
-## scorers
-
-* [*microsoftml.rx_predict*: Scores using a Microsoft machine learning model](rx-predict.md) 
-
-
-## featurizers
-
-* [*microsoftml.rx_featurize*: Data transformation for data sources](rx-featurize.md) 
+- [*microsoftml.rx_featurize*: Data transformation for data sources](rx-featurize.md)

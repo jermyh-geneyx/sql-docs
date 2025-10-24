@@ -3,7 +3,7 @@ title: Connect to an Azure SQL database
 description: This article discusses issues when you use the Microsoft JDBC Driver for SQL Server to connect to an Azure SQL Database.
 author: David-Engel
 ms.author: davidengel
-ms.date: 07/26/2022
+ms.date: 10/24/2025
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
@@ -20,7 +20,6 @@ This article discusses issues when you use the [!INCLUDE[jdbcNoVersion](../../in
 
 - [Connect using authentication with Microsoft Entra ID (formerly Azure Active Directory)](connecting-using-azure-active-directory-authentication.md)  
 
-  
 ## Details
 
 To connect to an [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], you should connect to the master database to call **SQLServerDatabaseMetaData.getCatalogs**.  
@@ -45,7 +44,10 @@ To address the second point and avoid the Gateway terminating idle connections, 
 - Keep connections active via lightweight activity. This method isn't recommended and should only be used if there are no other possible options.
 
 To address the first point and avoid dropping idle connections by a network component, set the following registry settings or their non-Windows equivalents on the operating system where the driver is loaded:  
-  
+
+> [!NOTE]
+> Starting with version 10.2 of the Microsoft JDBC Driver for SQL Server, the driver automatically sets the following keep alive values on sockets it creates during database connections, overriding the OS defaults defined in the following table. This automatic setting is only performed on versions of Java that support setting the socket keep alive options. On Linux and macOS, the latest updates of Java 8+ support this setting. On Windows, the latest updates of Java 17+ support this setting.
+
 |Registry Setting|Recommended Value|  
 |----------------------|-----------------------|  
 |HKEY_LOCAL_MACHINE \ SYSTEM \ CurrentControlSet \ Services \ Tcpip \ Parameters \ KeepAliveTime|30000|  
