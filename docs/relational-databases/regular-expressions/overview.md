@@ -2,9 +2,9 @@
 title: Work with Regular Expressions
 description: Use regular expressions to filter and manipulate text strings in SQL Server.
 author: MikeRayMSFT
-ms.author: wiassaf
-ms.reviewer: abhtiwar, randolphwest, wiassaf, , mikeray
-ms.date: 08/12/2025
+ms.author: mikeray
+ms.reviewer: abhtiwar, randolphwest, wiassaf
+ms.date: 10/24/2025
 ms.service: sql
 ms.topic: quickstart
 ms.custom:
@@ -13,7 +13,7 @@ helpviewer_keywords:
   - "Regular expressions functions"
   - "regex"
 dev_langs:
-  - "TSQL"
+  - TSQL
 monikerRange: "=sql-server-ver17 || =sql-server-linux-ver17 || =azuresqldb-current || =azuresqldb-mi-current || =fabric"
 ---
 
@@ -171,7 +171,7 @@ Use flags to modify the expression behavior. For example:
 This implementation supports the POSIX standard of regular expressions following RE2, and has support for the PCRE/PCRE2 flavor of regular expressions syntax, which is compatible with most modern regular expression engines and tools. There are different flavors of regular expressions, such as POSIX, ANSI, Perl, and PCRE, which have different syntax and features. For more information about supported constructs and behavior of the underlying regex engine, see [RE2, a regular expression library](https://github.com/google/re2).
 
 > [!NOTE]  
-> Regular expression matching in SQL Server does not honor SQL collations for linguistic comparisons. This behavior is by design and consistent with most regular expression engines, as matching is based on the pattern and Unicode character properties rather than collation rules. As a result, it may lead to differences in behavior when compared to other string comparison functions like LIKE, especially on indexed columns with language-specific collations.
+> Regular expression matching in SQL Server doesn't honor SQL collations for linguistic comparisons. This behavior is by design and consistent with most regular expression engines, as matching is based on the pattern and Unicode character properties rather than collation rules. As a result, it might lead to differences in behavior when compared to other string comparison functions like LIKE, especially on indexed columns with language-specific collations.
 
 ## Requirements
 
@@ -193,12 +193,12 @@ These are the items that aren't currently supported in this preview:
   - `REGEXP_LIKE`
   - `REGEXP_COUNT`
   - `REGEXP_INSTR`
-  - `REGEXP_REPLACE`
-  - `REGEXP_SUBSTR`
 
 However, this support is limited to input sizes up to 2 MB.
 
-- LOB data types aren't supported in the regex table-valued functions (TVFs):
+- LOB data types aren't supported in the following regex functions:
+  - `REGEXP_REPLACE`
+  - `REGEXP_SUBSTR`
   - `REGEXP_MATCHES`
   - `REGEXP_SPLIT_TO_TABLE`
 - Regular expression functions aren't supported in natively compiled stored procedures.
