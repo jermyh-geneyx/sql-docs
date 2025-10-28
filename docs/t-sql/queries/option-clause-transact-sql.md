@@ -253,7 +253,7 @@ OPTION (DISABLE EXTERNALPUSHDOWN);
 
 For more information, see [FOR TIMESTAMP query hint](hints-transact-sql-query.md#for-timestamp).
 
-Use the `TIMESTAMP` syntax in the `OPTION` clause to query data as it existed in the past, in Synapse Data Warehouse in Microsoft Fabric. The following sample query returns data as it appeared on March 13, 2024 at 7:39:35.28 PM UTC. The time zone is always in UTC.
+Use the `TIMESTAMP` syntax in the `OPTION` clause to query data as it existed in the past, in Fabric Data Warehouse. The following sample query returns data as it appeared on March 13, 2024 at 7:39:35.28 PM UTC. The time zone is always in UTC.
 
 ```sql
 SELECT OrderDateKey,

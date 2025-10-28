@@ -3,7 +3,7 @@ title: "COMMIT TRANSACTION (Transact-SQL)"
 description: This statement marks the end of a successful implicit or explicit transaction.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 04/15/2024
+ms.date: 10/27/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -27,7 +27,7 @@ helpviewer_keywords:
   - "rolling back transactions, COMMIT TRANSACTION"
 dev_langs:
   - "TSQL"
-monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric || =fabric-sqldb"
 ---
 # COMMIT TRANSACTION (Transact-SQL)
 
@@ -39,7 +39,7 @@ Marks the end of a successful implicit or explicit transaction. If `@@TRANCOUNT`
 
 ## Syntax
 
-Syntax for [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+Syntax for [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)], [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)].
 
 ```syntaxsql
 COMMIT [ { TRAN | TRANSACTION }
@@ -48,7 +48,7 @@ COMMIT [ { TRAN | TRANSACTION }
 [ ; ]
 ```
 
-Syntax for Synapse Data Warehouse in Microsoft Fabric, Azure Synapse Analytics, and Parallel Data Warehouse Database.
+Syntax for Fabric Data Warehouse, Azure Synapse Analytics, and Parallel Data Warehouse Database.
 
 ```syntaxsql
 COMMIT [ TRAN | TRANSACTION ]
@@ -59,19 +59,19 @@ COMMIT [ TRAN | TRANSACTION ]
 
 #### *transaction_name*
 
-**Applies to:** [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)]
+**Applies to:** [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)], [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)].
 
 Ignored by the [!INCLUDE [ssDEnoversion](../../includes/ssdenoversion-md.md)]. *transaction_name* specifies a transaction name assigned by a previous `BEGIN TRANSACTION`. *transaction_name*must conform to the rules for identifiers, but can't exceed 32 characters. *transaction_name* indicates to programmers which nested `BEGIN TRANSACTION` the `COMMIT TRANSACTION` is associated with.
 
 #### *@tran_name_variable*
 
-**Applies to:** [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)]
+**Applies to:** [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)], [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)].
 
 The name of a user-defined variable containing a valid transaction name. The variable must be declared with a char, varchar, nchar, or nvarchar data type. If more than 32 characters are passed to the variable, only 32 characters are used. The remaining characters are truncated.
 
 #### WITH DELAYED_DURABILITY = { OFF | ON }
 
-**Applies to:** [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)]
+**Applies to:** [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)], [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)].
 
 Option that requests this transaction should be committed with delayed durability. The request is ignored if the database was altered with `DELAYED_DURABILITY = DISABLED` or `DELAYED_DURABILITY = FORCED`. For more information, see [Control Transaction Durability](../../relational-databases/logs/control-transaction-durability.md).
 
@@ -112,7 +112,7 @@ COMMIT TRANSACTION;
 
 ### B. Commit a nested transaction
 
-**Applies to:** [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)]
+**Applies to:** [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)], [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], [!INCLUDE [fabric-sqldb](../../includes/fabric-sqldb.md)].
 
 The following example creates a table, generates three levels of nested transactions, and then commits the nested transaction. Although each `COMMIT TRANSACTION` statement has a *transaction_name* parameter, there's no relationship between the `COMMIT TRANSACTION` and `BEGIN TRANSACTION` statements. The *transaction_name* parameters help the programmer ensure that the correct number of commits are coded to decrement `@@TRANCOUNT` to 0 and so to commit the outer transaction.
 

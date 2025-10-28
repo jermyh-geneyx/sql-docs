@@ -16610,10 +16610,10 @@ items:
             href: t-sql/language-elements/wildcard-match-one-character-transact-sql.md
         - name: Operator precedence
           href: t-sql/language-elements/operator-precedence-transact-sql.md
-      - name: Transactions
+      - name: Transactions (Transact-SQL)
         href: t-sql/language-elements/transactions-transact-sql.md
         items:
-        - name: Transactions
+        - name: Transactions (Azure Synapse Analytics)
           href: t-sql/language-elements/transactions-sql-data-warehouse.md
         - name: Transaction Isolation Levels
           href: t-sql/language-elements/transaction-isolation-levels.md

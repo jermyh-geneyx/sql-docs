@@ -3,7 +3,7 @@ title: "ROLLBACK TRANSACTION (Transact-SQL)"
 description: This statement rolls back an explicit or implicit transaction to the beginning of the transaction, or to a savepoint inside the transaction.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 04/15/2024
+ms.date: 10/27/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -23,7 +23,7 @@ helpviewer_keywords:
   - "savepoints [SQL Server]"
 dev_langs:
   - "TSQL"
-monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
+monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric || =fabric-sqldb"
 ---
 # ROLLBACK TRANSACTION (Transact-SQL)
 
@@ -37,7 +37,7 @@ Rolling back a transaction doesn't include changes made to local variables or ta
 
 ## Syntax
 
-Syntax for SQL Server and Azure SQL Database.
+Syntax for SQL Server, Azure SQL Database, and Fabric SQL database.
 
 ```syntaxsql
 ROLLBACK { TRAN | TRANSACTION }
@@ -46,7 +46,7 @@ ROLLBACK { TRAN | TRANSACTION }
 [ ; ]
 ```
 
-Syntax for Synapse Data Warehouse in Microsoft Fabric, Azure Synapse Analytics, and Parallel Data Warehouse Database.
+Syntax for Fabric Data Warehouse, Azure Synapse Analytics, and Parallel Data Warehouse Database.
 
 ```syntaxsql
 ROLLBACK { TRAN | TRANSACTION }

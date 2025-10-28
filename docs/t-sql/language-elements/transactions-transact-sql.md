@@ -19,11 +19,11 @@ helpviewer_keywords:
   - "unit of work [SQL Server]"
 dev_langs:
   - "TSQL"
-monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
+monikerRange: " =azuresqldb-current || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # Transactions (Transact-SQL)
 
-[!INCLUDE [sql-asdb-asdbmi-asa-pdw-fabricsqldb](../../includes/applies-to-version/sql-asdb-asdbmi-asa-pdw-fabricsqldb.md)]
+[!INCLUDE [sql-asdb-asdbmi-fabricsqldb](../../includes/applies-to-version/sql-asdb-asdbmi-fabricsqldb.md)]
 
 A transaction is a single unit of work. If a transaction is successful, all of the data modifications made during the transaction are committed and become a permanent part of the database. If a transaction encounters errors and must be canceled or rolled back, then all of the data modifications are erased.
 
@@ -36,11 +36,13 @@ A transaction is a single unit of work. If a transaction is successful, all of t
 | **Implicit transactions** | A new transaction is implicitly started when the prior transaction completes, but each transaction is explicitly completed with a `COMMIT` or `ROLLBACK` statement. |
 | **Batch-scoped transactions** | Applicable only to multiple active result sets (MARS), a [!INCLUDE [tsql](../../includes/tsql-md.md)] explicit or implicit transaction that starts under a MARS session becomes a batch-scoped transaction. A batch-scoped transaction that isn't committed or rolled back when a batch completes is automatically rolled back by [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)]. |
 
-For special considerations related to Data Warehouse products, see [Transactions (Azure Synapse Analytics and Microsoft Fabric)](transactions-sql-data-warehouse.md).
+For special considerations related to data warehouse products, see  [Transactions in Fabric Data Warehouse](/fabric/data-warehouse/transactions) or [Transactions (Azure Synapse Analytics)](transactions-sql-data-warehouse.md).
 
-## In this section
+<a id="in-this-section"></a>
 
-[!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] provides the following transaction statements:
+## Transaction control syntax
+
+The SQL Database Engine provides the following transaction statements:
 
 - [BEGIN DISTRIBUTED TRANSACTION](begin-distributed-transaction-transact-sql.md)
 - [ROLLBACK TRANSACTION](rollback-transaction-transact-sql.md)

@@ -49,7 +49,7 @@ Valid values for the target platform in the `DSP` tag include:
 - `Microsoft.Data.Tools.Schema.Sql.SqlDbFabricDatabaseSchemaProvider` (SQL database in Fabric or Fabric Mirrored SQL Database, preview)
 - `Microsoft.Data.Tools.Schema.Sql.SqlDwDatabaseSchemaProvider` (Azure Synapse SQL Pool)
 - `Microsoft.Data.Tools.Schema.Sql.SqlServerlessDatabaseSchemaProvider` (Azure Synapse Serverless SQL Pool)
-- `Microsoft.Data.Tools.Schema.Sql.SqlDwUnifiedDatabaseSchemaProvider` (Synapse Data Warehouse in Microsoft Fabric)
+- `Microsoft.Data.Tools.Schema.Sql.SqlDwUnifiedDatabaseSchemaProvider` (Fabric Data Warehouse)
 
 ## Alter the target platform
 

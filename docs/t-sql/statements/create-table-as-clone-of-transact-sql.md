@@ -1,6 +1,6 @@
 ---
 title: CREATE TABLE AS CLONE OF
-description: "CREATE TABLE AS CLONE OF creates a new table as a clone of another table in Synapse Data Warehouse in Microsoft Fabric."
+description: "CREATE TABLE AS CLONE OF creates a new table as a clone of another table in Fabric Data Warehouse."
 author: ajagadish-24
 ms.author: ajagadish
 ms.reviewer: wiassaf
