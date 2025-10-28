@@ -4,8 +4,8 @@ titleSuffix: Azure SQL Database
 description: Learn about the architecture of Azure SQL Database that achieves availability through local redundancy, and high availability through zone redundancy.
 author: WilliamDAssafMSFT
 ms.author: wiassaf
-ms.reviewer: rsetlem, mathoma, randolphwest, peskount
-ms.date: 08/08/2025
+ms.reviewer: rsetlem, mathoma, randolphwest, peskount, mahyon
+ms.date: 10/21/2025
 ms.service: azure-sql-database
 ms.subservice: high-availability
 ms.topic: conceptual
@@ -246,10 +246,10 @@ For more on Azure SQL Database high availability and disaster recovery, review t
 
 A failover can be initiated using PowerShell, REST API, or Azure CLI:
 
-| Deployment type | PowerShell | REST API | Azure CLI |
-| :--- | :--- | :--- | :--- |
-| Database | [Invoke-AzSqlDatabaseFailover](/powershell/module/az.sql/invoke-azsqldatabasefailover) | [Database failover](/rest/api/sql/databases/failover) | [az rest](/cli/azure/reference-index#az-rest) might be used to invoke a REST API call from Azure CLI |
-| Elastic pool | [Invoke-AzSqlElasticPoolFailover](/powershell/module/az.sql/invoke-azsqlelasticpoolfailover) | [Elastic pool failover](/rest/api/sql/elastic-pools/failover) | [az rest](/cli/azure/reference-index#az-rest) might be used to invoke a REST API call from Azure CLI |
+| Deployment type | PowerShell | REST API | Azure CLI | Portal (Preview) |
+| :--- | :--- | :--- | :--- | :--- |
+| Database | [Invoke-AzSqlDatabaseFailover](/powershell/module/az.sql/invoke-azsqldatabasefailover) | [Database failover](/rest/api/sql/databases/failover) | [az rest](/cli/azure/reference-index#az-rest) might be used to invoke a REST API call from Azure CLI | [Settings > Maintenance > Restart](restart-database.md) |
+| Elastic pool | [Invoke-AzSqlElasticPoolFailover](/powershell/module/az.sql/invoke-azsqlelasticpoolfailover) | [Elastic pool failover](/rest/api/sql/elastic-pools/failover) | [az rest](/cli/azure/reference-index#az-rest) might be used to invoke a REST API call from Azure CLI | [Settings > Maintenance > Restart](restart-database.md) |
 
 > [!IMPORTANT]  
 > The Failover command isn't available for readable secondary replicas of Hyperscale databases.

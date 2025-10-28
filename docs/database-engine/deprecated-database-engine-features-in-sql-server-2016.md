@@ -1,11 +1,11 @@
 ---
-title: "Deprecated Database Engine Features"
-titleSuffix: "SQL Server 2016"
+title: Deprecated Database Engine Features
+titleSuffix: SQL Server 2016
 description: Find out about deprecated Database Engine features that are still available in SQL Server 2016 (13.x), but shouldn't be used in new applications.
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest
-ms.date: 09/08/2025
+ms.date: 10/21/2025
 ms.service: sql
 ms.subservice: release-landing
 ms.topic: conceptual

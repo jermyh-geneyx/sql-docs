@@ -4,17 +4,17 @@ description: sp_changedistributor_property changes the properties of the Distrib
 author: markingmyname
 ms.author: maghan
 ms.reviewer: randolphwest, mathoma
-ms.date: 09/15/2025
+ms.date: 10/21/2025
 ms.service: sql
 ms.subservice: replication
-ms.topic: "reference"
+ms.topic: reference
 f1_keywords:
   - "sp_changedistributor_property_TSQL"
   - "sp_changedistributor_property"
 helpviewer_keywords:
   - "sp_changedistributor_property"
 dev_langs:
-  - "TSQL"
+  - TSQL
 ---
 # sp_changedistributor_property (Transact-SQL)
 
@@ -41,8 +41,8 @@ sp_changedistributor_property
 
 The property for a given Distributor. *@property* is **sysname**, and can be one of these values:
 
-| Property name | Acceptable values |  Description |
-| --- | ---| --- |
+| Property name | Acceptable values | Description |
+| --- | --- | --- |
 | `heartbeat_interval` | Any **int** value (in minutes) | Maximum number of minutes that an agent can run without logging a progress message. *@heartbeat_interval* is **int**, with a default of `10` minutes. |
 | `encrypt_distributor_connection` | `mandatory`, `optional`, `strict`, `true`, `false`, `yes`, `no` | Specifies the encryption type between the Distributor and other replication components.<br /><br />**Applies to:** [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions. |
 | `trust_distributor_certificate` | `yes`, `no` | Specifies whether to trust the certificate used by the Distributor for encrypted connections. The default is `no`.<br /><br />**Applies to:** [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions. |

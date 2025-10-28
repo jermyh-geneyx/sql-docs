@@ -3,7 +3,7 @@ title: Connection resiliency
 description: Connection resiliency can transparently restore broken idle connections. This feature improves application behavior when the server closes idle connections.
 author: David-Engel
 ms.author: davidengel
-ms.date: 01/30/2022
+ms.date: 10/24/2025
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
@@ -32,7 +32,7 @@ If the product of `connectRetryCount` multiplied by `connectRetryInterval` is la
 To detect broken idle connections, the driver relies on TCP keepalive packets at the socket level. On Linux and Java 11+, the driver automatically enables keepalive packets at a 30-second interval (`KeepAliveTime`) with a 1-second delay between retries when a failure occurs (`KeepAliveInterval`).
 
 > [!IMPORTANT]
-> On Windows and macOS or on Java 8, keepalives must be manually configured in the operating system in order to take advantage of restoring broken idle connections. For information on how to configure keepalives, see [Connection to Azure SQL database](connecting-to-an-azure-sql-database.md#connections-dropped).
+> On Windows and Java 11 and prior, keepalives must be manually configured in the operating system in order to take advantage of restoring broken idle connections. For information on how to configure keepalives, see [Connection to Azure SQL database](connecting-to-an-azure-sql-database.md#connections-dropped).
 
 ## Limitations
 

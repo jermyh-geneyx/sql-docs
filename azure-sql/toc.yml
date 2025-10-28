@@ -702,6 +702,8 @@
         href: database/enable-zone-redundancy.md
       - name: Deleted server restore
         href: database/deleted-logical-server-restore.md
+      - name: Restart database
+        href: database/restart-database.md
     - name: Monitor & Tune
       items:
       - name: Monitor SQL Database

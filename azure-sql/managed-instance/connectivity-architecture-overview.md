@@ -5,7 +5,7 @@ description: Learn about Azure SQL Managed Instance communication and connectivi
 author: zoran-rilak-msft
 ms.author: zoranrilak
 ms.reviewer: mathoma, bonova
-ms.date: 09/11/2025
+ms.date: 10/22/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: service-overview
 ms.topic: conceptual
@@ -58,17 +58,26 @@ Applications can connect to SQL Managed Instance via three types of endpoints: [
 
 ### VNet-local endpoint
 
-The VNet-local endpoint is the default means to connect to SQL Managed Instance. It's a domain name in the form of `<mi_name>.<dns_zone>.database.windows.net`. This domain name resolves to an IP address from the subnet's address range. The VNet-local endpoint can be used to connect to a SQL Managed Instance in all standard connectivity scenarios. VNet-local endpoint's port is 1433.
+The VNet-local endpoint is the default means to connect to SQL Managed Instance. The *VNet-local endpoint domain name* is in the form of `<mi_name>.<dns_zone>.database.windows.net`. This domain name resolves to an IP address from the subnet's address range. Use the VNet-local endpoint to connect to a SQL Managed Instance in all standard connectivity scenarios. The VNet-local endpoint accepts connections on port 1433.
 
-VNet-local endpoint supports [Proxy and redirect connection types](connection-types-overview.md).
+The VNet-local endpoint supports [Proxy and redirect connection types](connection-types-overview.md).
 
 When connecting to the VNet-local endpoint, always use its domain name and allow inbound traffic on the required ports across the entire subnet range, as the underlying IP address can occasionally change.
 
+To find the *VNet-local endpoint domain name* for an instance: 
+* [Azure portal](https://portal.azure.com/#view/HubsExtension/ServiceMenuBlade/~/SingleInstance/extension/SqlAzureExtension/menuId/AzureSqlHub/itemId/SingleInstance): On the **Overview** pane, in the **Essentials** section, the **Host** value shows the *VNet-local endpoint domain name*. 
+* [PowerShell](/powershell/module/az.sql/get-azsqlinstance): `Get-AzSqlInstance -ResourceGroupName <resource-group> -Name <mi-name>` shows the *VNet-local endpoint domain name* as the `fullyQualifiedDomainName` property.
+* [Azure CLI](/cli/azure/sql/mi#az-sql-mi-show): `az sql mi show -g <resource-group> -n <mi-name>` shows the *VNet-local endpoint domain name* as the `fullyQualifiedDomainName` property.
+
+For improved security, specify an encrypted connection, and don't trust the certificate. For more information, see [Security overview](../database/security-overview.md#transport-layer-security-encryption-in-transit).
+
 ### Public endpoint
 
-The public endpoint is a domain name in the form of `<mi_name>.public.<dns_zone>.database.windows.net`. This domain name resolves to a public IP address reachable from the internet. The public endpoint is suitable for scenarios when a SQL managed instance needs to be accessible via the public internet. For example, when connecting to it from a different virtual network when peering or private endpoints aren't available. Public endpoints only carry client traffic and can't be used for data replication between two instances, such as [failover groups](failover-group-sql-mi.md) or [Managed Instance link](managed-instance-link-feature-overview.md). Public endpoint's port is 3342.
+The public endpoint is a domain name in the form of `<mi_name>.public.<dns_zone>.database.windows.net`. This domain name resolves to a public IP address reachable from the internet. The public endpoint is suitable for scenarios when a SQL managed instance needs to be accessible via the public internet. For example, when connecting to it from a different virtual network when peering or private endpoints aren't available. Public endpoints only carry client traffic and can't be used for data replication between two instances, such as [failover groups](failover-group-sql-mi.md) or [Managed Instance link](managed-instance-link-feature-overview.md). Public endpoint accepts connections on port 3342.
 
 Public endpoint always uses the [Proxy connection type](connection-types-overview.md) regardless of the connection type setting.
+
+An instance's public endpoint domain name is equal to its VNet-local endpoint name with the label `public` inserted between the hostname and the rest of the domain: `<mi-name>.public.<dns-zone>.database.windows.net`.
 
 When connecting to the public endpoint, always use its domain name and allow inbound traffic on port 3342 across the entire subnet range, as the underlying IP address can occasionally change.
 
@@ -76,9 +85,11 @@ Learn how to set up a public endpoint in [Configure public endpoint for Azure SQ
 
 ### Private endpoints
 
-A private endpoint is an optional fixed IP address in another virtual network that conducts traffic to your SQL managed instance. One Azure SQL Managed Instance can have multiple private endpoints in multiple virtual networks. Private endpoints only carry client traffic and can't be used for data replication between two instances, such as failover groups or [Managed Instance link](managed-instance-link-feature-overview.md). Private endpoint's port is 1143.
+A private endpoint is an optional fixed IP address in another virtual network that conducts traffic to your SQL managed instance. One Azure SQL Managed Instance can have multiple private endpoints in multiple virtual networks. Private endpoints only carry client traffic and can't be used for data replication between two instances, such as failover groups or [Managed Instance link](managed-instance-link-feature-overview.md). The private endpoint accepts connections on port 1433.
 
 Private endpoints always use the [Proxy connection type](connection-types-overview.md) regardless of the connection type setting.
+
+An instance's private endpoint domain name is equal to its VNet-local domain name unless the endpoint has been configured differently. This is the case when both the private endpoint and VNet-local endpoint are in the same virtual network. For more information, see [Set up domain name resolution for private endpoint](private-endpoint-overview.md#set-up-domain-name-resolution-for-private-endpoint).
 
 When connecting to a private endpoint, always use the domain name since connecting to Azure SQL Managed Instance via its IP address isn't supported yet. The IP address of a private endpoint, however, doesn't change.
 
@@ -109,9 +120,9 @@ To meet the *Compliant Network Configuration* criteria in the Service Level Agre
 
 - **Dedicated subnet**: The subnet SQL Managed Instance uses can be delegated only to the SQL Managed Instance service. The subnet can't be a gateway subnet, and you can deploy only SQL Managed Instance resources in the subnet.
 - **Subnet delegation**: The SQL Managed Instance subnet must be delegated to the `Microsoft.Sql/managedInstances` resource provider.
-- **Network security group**: A network security group must be associated with the SQL Managed Instance subnet. You can use a network security group to control access to the SQL Managed Instance data endpoint by filtering traffic on port 1433 and ports 11000-11999 when SQL Managed Instance is configured for redirect connections. The service automatically provisions [rules](subnet-service-aided-configuration-enable.md#mandatory-security-rules-and-routes) and keeps them current as required to allow uninterrupted flow of management traffic.
-- **Route table**: A route table must be associated with the SQL Managed Instance subnet. You can add entries to this route table. For example, to route traffic to premises through a virtual network gateway, or to add the [default 0.0.0.0/0 route](/azure/virtual-network/virtual-networks-udr-overview#default-route) directing all traffic through a virtual network appliance such as a firewall. Azure SQL Managed Instance automatically provisions and manages [its required entries](subnet-service-aided-configuration-enable.md#mandatory-security-rules-and-routes) in the route table.
-- **Sufficient IP addresses**: The SQL Managed Instance subnet must have at least 32 IP addresses. For more information, see [Determine the size of the subnet for SQL Managed Instance](vnet-subnet-determine-size.md). You can deploy SQL managed instances in the [existing network](vnet-existing-add-subnet.md) after you configure it to satisfy the [networking requirements for SQL Managed Instance](#network-requirements). Otherwise, create a [new network and subnet](virtual-network-subnet-create-arm-template.md).
+- **Network security group**: A network security group must be associated with the SQL Managed Instance subnet. You can use a network security group to control access to the SQL Managed Instance data endpoint by filtering inbound traffic on port 1433. The service automatically provisions [rules](subnet-service-aided-configuration-enable.md#mandatory-security-rules-and-routes) and keeps them current as required to allow uninterrupted flow of management traffic.
+- **Route table**: A route table must be associated with the SQL Managed Instance subnet. You can add entries to this route table, for example to route traffic to premises through a virtual network gateway, or to add the [default 0.0.0.0/0 route](/azure/virtual-network/virtual-networks-udr-overview#default-route) directing all traffic through a virtual network appliance such as a firewall. Azure SQL Managed Instance automatically provisions and manages [its required entries](subnet-service-aided-configuration-enable.md#mandatory-security-rules-and-routes) in the route table.
+- **Sufficient IP addresses**: The SQL Managed Instance subnet must have at least 32 IP addresses. For more information, see [Determine the size of the subnet for SQL Managed Instance](vnet-subnet-determine-size.md). You can deploy SQL managed instances within an [existing network](vnet-existing-add-subnet.md) after you configure it to satisfy the [networking requirements for SQL Managed Instance](#network-requirements). Otherwise, create a [new network and subnet](virtual-network-subnet-create-arm-template.md).
 - **Allowed by Azure policies**: If you use [Azure Policy](/azure/governance/policy/overview) to prevent resource creation or modification in a scope that includes a SQL Managed Instance subnet or virtual network, your policies must not prevent SQL Managed Instance from managing its internal resources. The following resources need to be excluded from policy deny effects for normal operation:
   - Resources of type `Microsoft.Network/serviceEndpointPolicies`, when resource name begins with `\_e41f87a2\_`
   - All resources of type `Microsoft.Network/networkIntentPolicies`

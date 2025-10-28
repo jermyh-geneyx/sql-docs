@@ -3,7 +3,7 @@ title: Memory Management Architecture Guide
 description: Learn about memory management architecture in SQL Server, including changes to memory management in previous versions.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 09/07/2025
+ms.date: 10/21/2025
 ms.service: sql
 ms.subservice: supportability
 ms.topic: conceptual
@@ -59,7 +59,7 @@ By using [Address Windowing Extensions](/windows/win32/memory/address-windowing-
 
 If LPIM is granted, we strongly recommend that you set `max server memory (MB)` to a specific value, rather than leaving the default of 2,147,483,647 megabytes (MB). For more information, see [Server memory configuration options: Set options manually](../database-engine/configure-windows/server-memory-server-configuration-options.md#manually) and [Lock pages in memory (LPIM)](../database-engine/configure-windows/server-memory-server-configuration-options.md#lock-pages-in-memory-lpim).
 
-If LPIM isn't enabled, SQL Server switches to using conventional memory and in cases of OS memory exhaustion, and the [MSSQLSERVER_17890] error(errors-events/mssqlserver-17890-database-engine-error.md) might be reported in the error log. The error resembles the following example:
+If LPIM isn't enabled, SQL Server switches to using conventional memory and in cases of OS memory exhaustion, and the [MSSQLSERVER_17890](errors-events/mssqlserver-17890-database-engine-error.md) error might be reported in the error log. The error resembles the following example:
 
 ```output
 A significant part of SQL Server process memory has been paged out. This may result in a performance degradation. Duration: #### seconds. Working set (KB): ####, committed (KB): ####, memory utilization: ##%.
@@ -77,7 +77,7 @@ In older versions of [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)], me
 
 - **CLR Allocator**, including the SQL CLR heaps and its global allocations that are created during CLR initialization.
 
-- Memory allocations for **[thread stacks](../relational-databases/memory-management-architecture-guide.md#stacksizes)** in the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] process.
+- Memory allocations for **[thread stacks](memory-management-architecture-guide.md#stacksizes)** in the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] process.
 
 - **Direct Windows allocations (DWA)**, for memory allocation requests made directly to Windows. These include Windows heap usage and direct virtual allocations made by modules that are loaded into the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] process. Examples of such memory allocation requests include allocations from extended stored procedure DLLs, objects that are created by using Automation procedures (`sp_OA` calls), and allocations from linked server providers.
 
@@ -106,7 +106,7 @@ As soon as this allocation is performed, the Resource Monitor background task st
 This behavior is typically observed during the following operations:
 
 - Large columnstore index queries
-- Large [batch mode on rowstore](../relational-databases/performance/intelligent-query-processing-details.md#batch-mode-on-rowstore) queries
+- Large [batch mode on rowstore](performance/intelligent-query-processing-details.md#batch-mode-on-rowstore) queries
 - Columnstore index (re)builds, which use large volumes of memory to perform Hash and Sort operations
 - Backup operations that require large memory buffers
 - Tracing operations that have to store large input parameters
@@ -223,7 +223,7 @@ The `min memory per query` configuration option establishes the minimum amount o
 
 ### Memory grant considerations
 
-For *row mode execution*, the initial memory grant can't be exceeded under any condition. If more memory than the initial grant is needed to execute *hash* or *sort* operations, then the operations spill to disk. A hash operation that spills is supported by a Workfile in `tempdb`, while a sort operation that spills is supported by a [Worktable](../relational-databases/query-processing-architecture-guide.md#worktables).
+For *row mode execution*, the initial memory grant can't be exceeded under any condition. If more memory than the initial grant is needed to execute *hash* or *sort* operations, then the operations spill to disk. A hash operation that spills is supported by a Workfile in `tempdb`, while a sort operation that spills is supported by a [Worktable](query-processing-architecture-guide.md#worktables).
 
 A spill that occurs during a Sort operation is known as a [Sort Warnings Event Class](event-classes/sort-warnings-event-class.md). Sort warnings indicate that sort operations don't fit into memory. This doesn't include sort operations involving the creation of indexes, only sort operations within a query (such as an `ORDER BY` clause used in a `SELECT` statement).
 
@@ -234,7 +234,7 @@ A spill that occurs during a hash operation is known as a [Hash Warning Event Cl
 
 For *batch mode execution*, the initial memory grant can dynamically increase up to a certain internal threshold by default. This dynamic memory grant mechanism is designed to allow memory-resident execution of *hash* or *sort* operations running in batch mode. If these operations still don't fit into memory, then the operations spill to disk.
 
-For more information on execution modes, see the [Query Processing Architecture Guide](../relational-databases/query-processing-architecture-guide.md#execution-modes).
+For more information on execution modes, see the [Query Processing Architecture Guide](query-processing-architecture-guide.md#execution-modes).
 
 ## Buffer management
 
@@ -248,7 +248,7 @@ A buffer is an 8-KB page in memory, the same size as a data or index page. Thus,
 
 When [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] starts, it computes the size of virtual address space for the buffer cache based on several parameters such as the amount of physical memory on the system, the configured number of maximum server threads, and various startup parameters. [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] reserves this computed amount of its process virtual address space (called the memory target) for the buffer cache, but it acquires (commits) only the required amount of physical memory for the current load. You can query the `committed_target_kb` and `committed_kb` columns in the [sys.dm_os_sys_info](system-dynamic-management-views/sys-dm-os-sys-info-transact-sql.md) catalog view to return the number of pages reserved as the memory target and the number of pages currently committed in the buffer cache, respectively.
 
-The interval between [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] startup and when the buffer cache obtains its memory target is called ramp-up. During this time, read requests fill the buffers as needed. For example, a single 8-KB page read request fills a single buffer page. This means the ramp-up depends on the number and type of client requests. Ramp-up is expedited by transforming single page read requests into aligned eight page requests (making up one extent). This allows the ramp-up to finish much faster, especially on machines with a lot of memory. For more information about pages and extents, see [Pages and Extents Architecture Guide](../relational-databases/pages-and-extents-architecture-guide.md#pages-and-extents).
+The interval between [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] startup and when the buffer cache obtains its memory target is called ramp-up. During this time, read requests fill the buffers as needed. For example, a single 8-KB page read request fills a single buffer page. This means the ramp-up depends on the number and type of client requests. Ramp-up is expedited by transforming single page read requests into aligned eight page requests (making up one extent). This allows the ramp-up to finish much faster, especially on machines with a lot of memory. For more information about pages and extents, see [Pages and Extents Architecture Guide](pages-and-extents-architecture-guide.md#pages-and-extents).
 
 Because the buffer manager uses most of the memory in the [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] process, it cooperates with the memory manager to allow other components to use its buffers. The buffer manager interacts primarily with the following components:
 
@@ -316,13 +316,13 @@ The kind of page protection used is an attribute of the database containing the 
 
 Torn page protection, introduced in [!INCLUDE [ssversion2000-md](../includes/ssversion2000-md.md)], is primarily a way of detecting page corruptions due to power failures. For example, an unexpected power failure might leave only part of a page written to disk. When torn page protection is used, a specific 2-bit signature pattern for each 512-byte sector in the 8-kilobyte (KB) database page and stored in the database page header when the page is written to disk.
 
-When the page is read from disk, the torn bits stored in the page header are compared to the actual page sector information. The signature pattern alternates between binary `01` and `10` with every write, so it's always possible to tell when only a portion of the sectors made it to disk: if a bit is in the wrong state when the page is later read, the page was written incorrectly and a torn page is detected. Torn page detection uses minimal resources; however, it doesn't detect all errors caused by disk hardware failures. For information on setting torn page detection, see [ALTER DATABASE SET Options (Transact-SQL)](../t-sql/statements/alter-database-transact-sql-set-options.md#page_verify).
+When the page is read from disk, the torn bits stored in the page header are compared to the actual page sector information. The signature pattern alternates between binary `01` and `10` with every write, so it's always possible to tell when only a portion of the sectors made it to disk: if a bit is in the wrong state when the page is later read, the page was written incorrectly and a torn page is detected. Torn page detection uses minimal resources; however, it doesn't detect all errors caused by disk hardware failures. For information on setting torn page detection, see [ALTER DATABASE SET Options](../t-sql/statements/alter-database-transact-sql-set-options.md#page_verify).
 
 #### Checksum protection
 
 Checksum protection, introduced in [!INCLUDE [ssVersion2005](../includes/ssversion2005-md.md)], provides stronger data integrity checking. A checksum is calculated for the data in each page that is written, and stored in the page header. Whenever a page with a stored checksum is read from disk, the database engine recalculates the checksum for the data in the page and raises error 824 if the new checksum is different from the stored checksum. Checksum protection can catch more errors than torn page protection because it's affected by every byte of the page, however, it's moderately resource-intensive.
 
-When checksum is enabled, errors caused by power failures and flawed hardware or firmware can be detected any time the buffer manager reads a page from disk. For information on setting checksum, see [ALTER DATABASE SET Options (Transact-SQL)](../t-sql/statements/alter-database-transact-sql-set-options.md#page_verify).
+When checksum is enabled, errors caused by power failures and flawed hardware or firmware can be detected any time the buffer manager reads a page from disk. For information on setting checksum, see [ALTER DATABASE SET Options](../t-sql/statements/alter-database-transact-sql-set-options.md#page_verify).
 
 > [!IMPORTANT]  
 > When a user or system database is upgraded to [!INCLUDE [ssVersion2005](../includes/ssversion2005-md.md)] or later, the [PAGE_VERIFY](../t-sql/statements/alter-database-transact-sql-set-options.md#page_verify) value (`NONE` or `TORN_PAGE_DETECTION`) is retained. We highly recommend that you use `CHECKSUM`. `TORN_PAGE_DETECTION` might use fewer resources, but provides a minimal subset of the `CHECKSUM` protection.

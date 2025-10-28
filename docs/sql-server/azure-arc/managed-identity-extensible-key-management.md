@@ -4,12 +4,12 @@ description: Learn how to use managed identities with SQL Server enabled by Azur
 author: Pietervanhove
 ms.author: pivanho
 ms.reviewer: MikeRayMSFT, randolphwest, vanto
-ms.date: 04/29/2025
+ms.date: 10/21/2025
 ms.service: sql
 ms.topic: concept-article
-monikerRange: ">=sql-server-ver17"
 ms.custom:
   - build-2025
+monikerRange: ">=sql-server-ver17"
 ---
 # Managed Identity support for Extensible Key Management with Azure Key Vault
 

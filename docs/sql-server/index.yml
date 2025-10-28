@@ -3,7 +3,7 @@ title: SQL Server technical documentation
 summary: Technical documentation to help you get started, administer, develop, and work with SQL Server and associated products.
 metadata:
   title: SQL Server Technical Documentation
-  description: Choose the area of SQL Server you are interested in. 
+  description: Choose the area of SQL Server you are interested in.
   ms.service: sql
   ms.topic: landing-page
   author: MashaMSFT
@@ -50,7 +50,7 @@ landingContent:
           - text: Monitor SQL Server
             url: ../relational-databases/performance/monitor-and-tune-for-performance.md
           - text: Tune performance
-            url: ../relational-databases/performance/performance-center-for-sql-server-database-engine-and-azure-sql-database.md            
+            url: ../relational-databases/performance/performance-center-for-sql-server-database-engine-and-azure-sql-database.md
           - text: High availability and disaster recovery
             url: ../database-engine/sql-server-business-continuity-dr.md
           - text: Educational SQL resources
@@ -165,5 +165,3 @@ landingContent:
             url: ../relational-databases/system-dynamic-management-views/system-dynamic-management-views.md
           - text: Stored procedures
             url: ../relational-databases/stored-procedures/stored-procedures-database-engine.md
-
-

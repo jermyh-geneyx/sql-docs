@@ -1,10 +1,10 @@
 ---
 title: "SERVERPROPERTY (Transact-SQL)"
-description: "SERVERPROPERTY returns property information about the server instance."
+description: SERVERPROPERTY returns property information about the server instance.
 author: VanMSFT
 ms.author: vanto
 ms.reviewer: randolphwest, amitkh-msft
-ms.date: 08/27/2025
+ms.date: 10/21/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -22,7 +22,7 @@ helpviewer_keywords:
   - "instances of SQL Server, property information"
   - "server properties [SQL Server]"
 dev_langs:
-  - "TSQL"
+  - TSQL
 monikerRange: ">=aps-pdw-2016 || =azuresqldb-current || =azure-sqldw-latest || >=sql-server-2016 || >=sql-server-linux-2017 || =azuresqldb-mi-current || =fabric"
 ---
 # SERVERPROPERTY (Transact-SQL)
@@ -112,19 +112,19 @@ The following table lists possible values for `EditionID` and `Edition`.
 
 | EditionID | Edition |
 | ---: | --- |
-| 1804890536 | Enterprise |
-| 1872460670 | Enterprise Edition: Core-based Licensing |
-| 610778273 | Enterprise Evaluation |
-| 284895786 | Business Intelligence |
-| -2117995310 | Developer <sup>1</sup>, or Developer Enterprise <sup>2</sup> |
-| -2509700633 | Developer Standard <sup>2</sup> |
-| -1592396055 | Express |
-| -133711905 | Express with Advanced Services |
-| -1534726760 | Standard |
-| 1293598313 | Web |
-| 1674378470 | [!INCLUDE [ssSDS](../../includes/sssds-md.md)] or [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] |
-| -1461570097 | Azure SQL Edge Developer <sup>3</sup> |
-| 1994083197 | Azure SQL Edge <sup>4</sup> |
+| `1804890536` | Enterprise |
+| `1872460670` | Enterprise Edition: Core-based Licensing |
+| `610778273` | Enterprise Evaluation |
+| `284895786` | Business Intelligence |
+| `-2117995310` | Developer <sup>1</sup>, or Developer Enterprise <sup>2</sup> |
+| `-2509700633` | Developer Standard <sup>2</sup> |
+| `-1592396055` | Express |
+| `-133711905` | Express with Advanced Services |
+| `-1534726760` | Standard |
+| `1293598313` | Web |
+| `1674378470` | [!INCLUDE [ssSDS](../../includes/sssds-md.md)] or [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] |
+| `-1461570097` | Azure SQL Edge Developer <sup>3</sup> |
+| `1994083197` | Azure SQL Edge <sup>4</sup> |
 
 <sup>1</sup> **Applies to**: [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)] and earlier versions.  
 <sup>2</sup> **Applies to**: [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions.  
@@ -189,4 +189,8 @@ GO
 
 ## Related content
 
-[!INCLUDE [editions-supported-features-windows](../../includes/editions-supported-features-windows.md)]
+- [Editions and supported features of SQL Server 2025 Preview](../../sql-server/editions-and-components-of-sql-server-2025.md)
+- [Editions and supported features of SQL Server 2022](../../sql-server/editions-and-components-of-sql-server-2022.md)
+- [Editions and supported features of SQL Server 2019](../../sql-server/editions-and-components-of-sql-server-2019.md)
+- [Editions and supported features of SQL Server 2017](../../sql-server/editions-and-components-of-sql-server-2017.md)
+- [Editions and supported features of SQL Server 2016](../../sql-server/editions-and-components-of-sql-server-2016.md)

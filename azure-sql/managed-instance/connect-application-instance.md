@@ -57,7 +57,7 @@ There are two options to connect an on-premises application to an Azure virtual 
 - Site-to-site VPN connection ([Azure portal](/azure/vpn-gateway/tutorial-site-to-site-portal), [PowerShell](/azure/vpn-gateway/vpn-gateway-create-site-to-site-rm-powershell), [Azure CLI](/azure/vpn-gateway/vpn-gateway-howto-site-to-site-resource-manager-cli))
 - [Azure ExpressRoute](/azure/expressroute/expressroute-introduction) connection
 
-If you establish a connection to Azure from on-premises but can't establish a connection to SQL Managed Instance, check if your firewall has open outbound connections to SQL port 1433 and the 11000-11999 range of ports for redirection.
+If you can establish a connection from on-premises to Azure but you can't establish a connection to SQL Managed Instance, check if the network path from your client to the SQL managed instance meets the connectivity requirements for the selected [connection type](connection-types-overview.md).
 
 ## Connect a developer box
 
@@ -101,7 +101,7 @@ To troubleshoot Azure App Service access via virtual network, review [Troublesho
 
 To troubleshoot connectivity issues, review the following settings:
 
-- If you're unable to connect to SQL Managed Instance from an Azure virtual machine within the same virtual network but a different subnet. Check if you have a Network Security Group (NSG) set up on the virtual machine's subnet that might be blocking access. Additionally, open outbound connections on SQL port 1433 and ports in the range 11000-11999, since those ports are needed to connect via redirection inside the Azure boundary.
+- If you're unable to connect to SQL Managed Instance from an Azure virtual machine within the same virtual network but a different subnet, check if you have a Network Security Group (NSG) set up on the VM subnet that might be blocking access. Additionally, allow outbound traffic on SQL port 1433, since it's needed to connect via redirection inside the Azure boundary. For more information, review the requirements in [Azure SQL Managed Instance connection types](connection-types-overview.md).
 - Ensure that propagation of gateway routes is disabled for the route table associated with the virtual network.
 - If using point-to-site VPN, check the configuration in the Azure portal to see if you see **Ingress/Egress** numbers. Nonzero numbers indicate that Azure is routing traffic to/from on-premises.
 
@@ -156,6 +156,9 @@ Although older versions might work, the following table lists the recommended mi
 | OLEDB driver | 18.0.2.0 |
 | SSMS | 18.0 or [higher](/sql/ssms/download-sql-server-management-studio-ssms) |
 | [SMO](/sql/relational-databases/server-management-objects-smo/sql-server-management-objects-smo-programming-guide) | [150](https://www.nuget.org/packages/Microsoft.SqlServer.SqlManagementObjects) or higher |
+
+> [!NOTE]
+> Older versions of JDBC 4.0 and 4.1 drivers (available with Java SE 6 and Java SE 7, respectively) can appear to the server as TDS 7.4-capable even though they don't completely implement TDS 7.4. These drivers can't connect to SQL managed instances with their [connection type](connection-types-overview.md) set to redirect. Either upgrade your drivers to JDBC 4.2 or later, or switch the connection type of the instance to proxy.
 
 ## Related content
 

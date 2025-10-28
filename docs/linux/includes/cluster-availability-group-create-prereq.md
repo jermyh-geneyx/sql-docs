@@ -1,7 +1,7 @@
 ---
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 11/18/2024
+ms.date: 10/20/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: include
@@ -192,6 +192,6 @@ ALTER ENDPOINT [Hadr_endpoint]
 The TCP port on the firewall must be open for the listener port.
 
 > [!IMPORTANT]  
-> For [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)], the only authentication method supported for the database mirroring endpoint is `CERTIFICATE`. The `WINDOWS` option isn't available.
+> The only authentication method supported for the database mirroring endpoint is `CERTIFICATE`. The `WINDOWS` option isn't available.
 
-For more information, see [The Database Mirroring Endpoint (SQL Server)](../../database-engine/database-mirroring/the-database-mirroring-endpoint-sql-server.md).
+For more information, see [The database mirroring endpoint (SQL Server)](../../database-engine/database-mirroring/the-database-mirroring-endpoint-sql-server.md).

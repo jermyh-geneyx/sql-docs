@@ -410,20 +410,6 @@ To get your user-assigned managed identity **Resource ID**, search for **Managed
                         }
                     },
                     {
-                        "name": "allow_redirect_inbound",
-                        "properties": {
-                            "description": "Allow inbound redirect traffic to Managed Instance inside the virtual network",
-                            "protocol": "Tcp",
-                            "sourcePortRange": "*",
-                            "destinationPortRange": "11000-11999",
-                            "sourceAddressPrefix": "VirtualNetwork",
-                            "destinationAddressPrefix": "*",
-                            "access": "Allow",
-                            "priority": 1100,
-                            "direction": "Inbound"
-                        }
-                    },
-                    {
                         "name": "deny_all_inbound",
                         "properties": {
                             "description": "Deny all other inbound traffic",

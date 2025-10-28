@@ -4,17 +4,17 @@ description: Explore how SQL Server can be deployed on Linux containers and lear
 author: amitkh-msft
 ms.author: amitkh
 ms.reviewer: vanto, randolphwest
-ms.date: 07/11/2025
+ms.date: 10/21/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: install-set-up-deploy
-zone_pivot_groups: cs1-command-shell
-monikerRange: ">=sql-server-linux-2017 || >=sql-server-2017"
 ms.custom:
   - intro-deployment
   - linux-related-content
   - build-2025
   - sfi-ropc-blocked
+zone_pivot_groups: cs1-command-shell
+monikerRange: ">=sql-server-linux-2017 || >=sql-server-2017"
 ---
 # Deploy and connect to SQL Server Linux containers
 
@@ -250,7 +250,7 @@ Packages
 ## Run a specific SQL Server container image
 
 > [!NOTE]  
->  
+>
 > - Starting with [!INCLUDE [sssql19-md](../includes/sssql19-md.md)] CU3, Ubuntu 18.04 is supported.
 > - Starting with [!INCLUDE [sssql19-md](../includes/sssql19-md.md)] CU10, Ubuntu 20.04 is supported.
 > - You can retrieve a list of all available tags for mssql/server at <https://mcr.microsoft.com/v2/mssql/server/tags/list>.
@@ -578,7 +578,7 @@ This updates the SQL Server image for any new containers you create, but it does
 1. Create a new SQL Server container with `docker run` and specify either a mapped host directory or a data volume container. Make sure to use the specific tag for your SQL Server upgrade. The new container now uses a new version of SQL Server with your existing SQL Server data.
 
    > [!IMPORTANT]  
-   > Upgrade is only supported between RC1, RC2, and GA at this time.
+   > Upgrade is only supported between release candidate previews and GA at this time.
 
 1. Verify your databases and data in the new container.
 

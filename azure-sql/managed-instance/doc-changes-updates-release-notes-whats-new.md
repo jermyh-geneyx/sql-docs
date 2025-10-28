@@ -5,7 +5,7 @@ description: Learn about the new features and documentation improvements for Azu
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: wiassaf, mathoma
-ms.date: 09/15/2025
+ms.date: 10/21/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: service-overview
 ms.topic: whats-new
@@ -78,6 +78,11 @@ The following table lists features of Azure SQL Managed Instance that have been 
 
 Learn about significant changes to the Azure SQL Managed Instance documentation. For previous years, see the [What's new archive](doc-changes-updates-release-notes-whats-new-archive.md).
 
+### October 
+
+| Changes | Details |
+| --- | --- |
+| **Redirect connection type default** | The [redirect connection type](connection-types-overview.md#redirect-connection-type-default) is now default for all new and existing instances. The redirect connection type has better latency and throughput performance compared to the legacy proxy connection type. SQL managed instances with the `proxyOverride` value set to `Default` before October 2025 are converted to the legacy `Proxy` connection type, which you can change to `Redirect` manually using the Azure portal or PowerShell. |
 
 ### September 
 

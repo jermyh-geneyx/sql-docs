@@ -4,7 +4,7 @@ description: This article explains different targets for Extended Events session
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: dfurman, randolphwest
-ms.date: 10/27/2025
+ms.date: 10/28/2025
 ms.service: sql
 ms.subservice: xevents
 ms.topic: conceptual
@@ -37,15 +37,18 @@ Unless noted differently, targets process the data they receive asynchronously.
 To make the most use of this article, you should:
 
 - Be familiar with the basics of Extended Events, as described in [Quickstart: Extended Events](quick-start-extended-events-in-sql-server.md).
-- Use a recent version of SQL Server Management Studio (SSMS). For more information, see [Download SQL Server Management Studio (SSMS)](../../ssms/download-sql-server-management-studio-ssms.md).
+- Use a recent version of [SQL Server Management Studio (SSMS)](/ssms/sql-server-management-studio-ssms).
 
 ## event_file target
 
 The `event_file` target writes event session output from memory buffers to a disk file or to a blob in Azure Storage.
 
 - You specify the `filename` parameter in the `ADD TARGET` clause. The file extension must be `xel`.
+
 - The file name you choose is used by the system as a prefix to which a date-time based numeric value is appended, followed by the `xel` extension.
+
 - You can optionally specify the `MAX_FILE_SIZE` parameter. It defines the maximum size in megabytes (MB) to which the file can grow before a new file is created.
+
 - You can optionally specify the `MAX_ROLLOVER_FILES` option to choose the maximum number of files to retain in the file system in addition to the current file. The default value is `UNLIMITED`. When `MAX_ROLLOVER_FILES` is evaluated, if the number of files exceeds the `MAX_ROLLOVER_FILES` setting, the older files are deleted.
 
 > [!IMPORTANT]  
@@ -68,16 +71,16 @@ For a detailed description of how to create a storage account in Azure Storage, 
 
 - Is a `Standard general-purpose v2` account.
 - Uses the `Hot` [blob access tier](/azure/storage/blobs/access-tiers-overview).
-- If using SQL Server in Azure VM, the storage account should be in the same Azure region as your Azure VM.
+- If using SQL Server in Azure Virtual Machine (Azure VM), the storage account should be in the same Azure region as your Azure VM.
 - Doesn't have the [hierarchical namespace](/azure/storage/blobs/data-lake-storage-namespace) enabled.
 
 Next, [create a container](/azure/storage/blobs/blob-containers-portal#create-a-container) in this storage account using Azure portal. You can also create a container [using PowerShell](/azure/storage/blobs/blob-containers-powershell#create-a-container), or [using Azure CLI](/azure/storage/blobs/blob-containers-cli#create-a-container).
 
-Note the names of the *storage account* and *container* you created. You will use them in the following steps.
+Note the names of the *storage account* and *container* you created. You use them in the following steps.
 
 To read and write event data, the database engine requires specific access. You grant this access differently depending on your choice of authentication type: [managed identity](#grant-access-using-managed-identity) or [secret-based authentication with a shared access signature (SAS) token](#grant-access-using-a-sas-token).
 
-To authenticate to Azure Storage, the database engine requires a [server-scoped credential or database-scoped credential](../security/authentication-access/credentials-database-engine.md) which tells it what kind of authentication to use, and provides a secret for secret-based authentication. Creating this credential requires the `CONTROL` database permission.
+To authenticate to Azure Storage, the database engine requires a [server-scoped credential or database-scoped credential](../security/authentication-access/credentials-database-engine.md), which tells it what kind of authentication to use, and provides a secret for secret-based authentication. Creating this credential requires the `CONTROL` database permission.
 
 For SQL Server and Azure SQL Managed Instance, this permission is required in the `master` database. By default, the permission is held by the members of the `db_owner` database role in `master`, and by the members of the `sysadmin` server role on the instance. For Azure SQL Database and SQL database in Fabric, this permission is held by the database owner (`dbo`), by the members of the `db_owner` database role, and by the administrator of the logical server.
 
@@ -96,40 +99,44 @@ Once the RBAC role assignment is in place, use the following steps:
 
 1. Create a credential using T-SQL.
 
-   Before executing the following T-SQL batch, make these change:
+   Before executing the following T-SQL batch, make the following change:
 
-   - In all three occurrences of `https://<storage-account-name>.blob.core.windows.net/<container-name>`, replace `<storage-account-name>` with the name of your storage account, and replace `<container-name>` with the name of your container. Make sure that there is no trailing slash at the end of the URL.
+   - In all three occurrences of `https://<storage-account-name>.blob.core.windows.net/<container-name>`, replace `<storage-account-name>` with the name of your storage account, and replace `<container-name>` with the name of your container. Make sure that there's no trailing slash at the end of the URL.
 
-   **Create a server-scoped credential**: *Applies to:* SQL Server, Azure SQL Managed Instance
+   **Create a server-scoped credential**: (Applies to SQL Server, Azure SQL Managed Instance)
 
    Using a client tool such as SSMS, open a new query window, connect to `master` database on the instance where you want to create the event session, and paste the following T-SQL batch.
 
    ```sql
    /* The name of the credential must match the URL of the blob container. */
-   IF EXISTS ( SELECT 1 FROM sys.credentials
-               WHERE name = 'https://<storage-account-name>.blob.core.windows.net/<container-name>' )
-       DROP CREDENTIAL [https://<storage-account-name>.blob.core.windows.net/<container-name>];
+   IF EXISTS (SELECT 1
+              FROM sys.credentials
+              WHERE name = 'https://<storage-account-name>.blob.core.windows.net/<container-name>')
+       DROP CREDENTIAL
+           [https://<storage-account-name>.blob.core.windows.net/<container-name>];
 
    /* When using managed identity, the credential does not contain a secret */
-   CREATE CREDENTIAL [https://<storage-account-name>.blob.core.windows.net/<container-name>]
-   WITH IDENTITY = 'MANAGED IDENTITY';
+   CREATE CREDENTIAL
+       [https://<storage-account-name>.blob.core.windows.net/<container-name>]
+       WITH IDENTITY = 'MANAGED IDENTITY';
    ```
 
-   **Create a database-scoped credential**: *Applies to:* Azure SQL Database, Azure SQL Managed Instance, SQL database in Fabric
+   **Create a database-scoped credential**: (Applies to Azure SQL Database, Azure SQL Managed Instance, SQL database in Fabric)
 
    Using a client tool such as SSMS, open a new query window, connect to user database where you create the event session, and paste the following T-SQL batch. Make sure you're connected to your user database, and not to the `master` database.
 
    ```sql
    /* The name of the credential must match the URL of the blob container. */
-   IF EXISTS ( SELECT 1 FROM sys.database_credentials
-             WHERE name = 'https://<storage-account-name>.blob.core.windows.net/<container-name>' )
+   IF EXISTS (SELECT 1
+              FROM sys.database_credentials
+              WHERE name = 'https://<storage-account-name>.blob.core.windows.net/<container-name>')
        DROP DATABASE SCOPED CREDENTIAL
            [https://<storage-account-name>.blob.core.windows.net/<container-name>];
 
    /* When using managed identity, the credential does not contain a secret */
    CREATE DATABASE SCOPED CREDENTIAL
        [https://<storage-account-name>.blob.core.windows.net/<container-name>]
-   WITH IDENTITY = 'MANAGED IDENTITY';
+       WITH IDENTITY = 'MANAGED IDENTITY';
    ```
 
 1. Then, follow the steps to [create an event session in SSMS with event_file target in Azure Storage](#create-an-event-session-in-ssms-with-event_file-target-in-azure-storage).
@@ -159,28 +166,27 @@ If using **secret-based authentication**, you create a [shared access signature 
 
    Before executing the following T-SQL batch, make these changes:
 
-   - If creating a server-scoped credential and using the `CREATE MASTER KEY` statement, replace `<password>` with an actual password that will protect the master key. For more information, see [CREATE MASTER KEY](../../t-sql/statements/create-master-key-transact-sql.md).
+   - If creating a server-scoped credential and using the `CREATE MASTER KEY` statement, replace `<password>` with an strong password that protects the master key. For more information, see [CREATE MASTER KEY](../../t-sql/statements/create-master-key-transact-sql.md).
+
    - In all three occurrences of `https://<storage-account-name>.blob.core.windows.net/<container-name>`, replace `<storage-account-name>` with the name of your storage account, and replace `<container-name>` with the name of your container.
+
    - In the `SECRET` clause, replace `<sas-token>` with the SAS token you copied in the previous step.
 
-   **Create a server-scoped credential**: Applies to SQL Server, Azure SQL Managed Instance
+   **Create a server-scoped credential**: (Applies to SQL Server, Azure SQL Managed Instance)
 
    Using a client tool such as SSMS, open a new query window, connect it to the `master` database on the instance where you create the event session, and paste the following T-SQL batch.
 
    ```sql
    /* Create a master key to protect the secret of the credential */
-   IF NOT EXISTS (
-                 SELECT 1
-                 FROM sys.symmetric_keys
-                 WHERE name = '##MS_DatabaseMasterKey##'
-                 )
-   CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<password>';
+   IF NOT EXISTS (SELECT 1
+                  FROM sys.symmetric_keys
+                  WHERE name = '##MS_DatabaseMasterKey##')
+       CREATE MASTER KEY ENCRYPTION BY PASSWORD = '<password>'
 
-   /* The name of the credential must match the URL of the blob container. */
-   IF EXISTS
-       (SELECT 1 FROM sys.credentials
-       WHERE name = 'https://<storage-account-name>.blob.core.windows.net/<container-name>'
-       )
+   /* The name of the credential must match the URL of the blob container. */;
+   IF EXISTS (SELECT 1
+              FROM sys.credentials
+              WHERE name = 'https://<storage-account-name>.blob.core.windows.net/<container-name>')
        DROP CREDENTIAL
            [https://<storage-account-name>.blob.core.windows.net/<container-name>];
 
@@ -191,15 +197,15 @@ If using **secret-based authentication**, you create a [shared access signature 
        SECRET = '<sas-token>';
    ```
 
-   **Create a database-scoped credential**: Applies to Azure SQL Database, Azure SQL Managed Instance, SQL database in Fabric
+   **Create a database-scoped credential**: (Applies to Azure SQL Database, Azure SQL Managed Instance, SQL database in Fabric)
 
    Using a client tool such as SSMS, open a new query window, connect to the database where you create the event session, and paste the following T-SQL batch. Make sure you're connected to your user database, and not to the `master` database.
 
    ```sql
    /* The name of the credential must match the URL of the blob container. */
-   IF EXISTS
-       (SELECT 1 FROM sys.database_credentials
-       WHERE name = 'https://<storage-account-name>.blob.core.windows.net/<container-name>')
+   IF EXISTS (SELECT 1
+              FROM sys.database_credentials
+              WHERE name = 'https://<storage-account-name>.blob.core.windows.net/<container-name>')
        DROP DATABASE SCOPED CREDENTIAL
            [https://<storage-account-name>.blob.core.windows.net/<container-name>];
 
@@ -221,13 +227,20 @@ Once the credential providing access to the storage container is created, you ca
 To create a new event session in SSMS:
 
 1. For SQL Server and Azure SQL Managed Instance, expand the **Extended Events** node under the **Management** folder. For Azure SQL Database and SQL database in Fabric, expand the **Extended Events** node under the database.
+
 1. Right-click on the **Sessions** folder, and select **New Session...**.
-1. On the **General** page, enter a name for the session, which will be `example-session` for the following code sample.
+
+1. On the **General** page, enter a name for the session, which is `example-session` for the following code sample.
+
 1. On the **Events** page, select one or more events to add to the session. For example, you can select the `sql_batch_starting` event.
+
 1. On the **Data Storage** page, select `event_file` as the target type. Paste the URL of the storage container in the **Storage URL** box. Type a forward slash (`/`) at the end of this URL, followed by the file (blob) name. For example, `https://<storage-account-name>.blob.core.windows.net/<container-name>/example-session.xel`.
+
 1. Now that the session is configured, you can optionally select the **Script** button to create a T-SQL script of the session, to save it for later.
+
 1. Select **OK** to create the session.
-1. In Object Explorer, expand the **Sessions** folder to see the event session you created. By default, the session isn't started when it's created. To start the session, right-click on the session name, and select **Start Session**. You can later stop it by similarly selecting **Stop Session**, once the session is running.
+
+1. In Object Explorer, expand the **Sessions** folder to see the event session you created. By default, the session isn't started when it's created. To start the session, right-click on the session name, and select **Start Session**. You can later stop it by selecting **Stop Session** once the session is running.
 
 As T-SQL batches are executed, the session writes the `sql_batch_starting` events to the `example-session.xel` blob in the storage container.
 
@@ -239,11 +252,13 @@ As T-SQL batches are executed, the session writes the `sql_batch_starting` event
 Here's an example of the `CREATE EVENT SESSION` with an `ADD TARGET` clause that adds an Azure Storage-based `event_file` target.
 
 ```sql
-CREATE EVENT SESSION [example-session] ON SERVER
+CREATE EVENT SESSION [example-session]
+ON SERVER
 ADD EVENT sqlserver.sql_batch_starting
 ADD TARGET package0.event_file
-    (SET filename=
-     N'https://<storage-account-name>.blob.core.windows.net/<container-name>/example-session.xel')
+(
+    SET filename = N'https://<storage-account-name>.blob.core.windows.net/<container-name>/example-session.xel'
+)
 GO
 ```
 
@@ -278,29 +293,32 @@ You know that the contents of the ring buffer are omitted during conversion to X
 
 ### Create an event session with a ring_buffer target
 
-Here's an example of creating an event session with a `ring_buffer` target to collect the `lock_acquired` events, limiting the total number of events in the ring buffer to 100. In this example, the `MAX_MEMORY` parameter appears twice: once to set the `ring_buffer` target memory to 1024 KB, and once to set the event session buffer memory to 2 MB.
+Here's an example of creating an event session with a `ring_buffer` target to collect the `lock_acquired` events, limiting the total number of events in the ring buffer to 100. In this example, the `MAX_MEMORY` parameter appears twice: once to set the `ring_buffer` target memory to 1,024 KB, and once to set the event session buffer memory to 2 MB.
 
 To use this example in Azure SQL Database or SQL database in Fabric, replace `ON SERVER` with `ON DATABASE`.
 
 ```sql
-CREATE EVENT SESSION ring_buffer_lock_acquired ON SERVER
-    ADD EVENT sqlserver.lock_acquired
-    ADD TARGET package0.ring_buffer
-    (
-        SET MAX_EVENTS_LIMIT = 100,
-            MAX_MEMORY = 1024
-    )
-    WITH
-    (
-        MAX_MEMORY = 2 MB,
-        MAX_DISPATCH_LATENCY = 3 SECONDS
-    );
+CREATE EVENT SESSION ring_buffer_lock_acquired
+ON SERVER
+ADD EVENT sqlserver.lock_acquired
+ADD TARGET package0.ring_buffer
+(
+SET MAX_EVENTS_LIMIT = 100,
+    MAX_MEMORY = 1024
+)
+WITH
+(
+    MAX_MEMORY = 2 MB,
+    MAX_DISPATCH_LATENCY = 3 SECONDS
+);
 ```
 
 To start the event session, execute the following statement:
 
 ```sql
-ALTER EVENT SESSION ring_buffer_lock_acquired ON SERVER STATE = START;
+ALTER EVENT SESSION ring_buffer_lock_acquired
+ON SERVER
+STATE = START;
 ```
 
 <a id="view-event-session-data-in-a-ring_buffer-target"></a>
@@ -310,23 +328,24 @@ To view the collected event data in the ring buffer in SSMS, expand the session 
 To see event data from a `ring_buffer` target in a relational rowset while the session is active, you use [XQuery](../../xquery/xquery-language-reference-sql-server.md) expressions to convert XML to relational data. For example:
 
 ```sql
-WITH
+;WITH
 /* An XML document representing memory buffer contents */
 RingBuffer AS
 (
-SELECT CAST(xst.target_data AS xml) AS TargetData
-FROM sys.dm_xe_session_targets AS xst
-INNER JOIN sys.dm_xe_sessions AS xs
-ON xst.event_session_address = xs.address
-WHERE xs.name = N'ring_buffer_lock_acquired'
+    SELECT CAST (xst.target_data AS XML) AS TargetData
+    FROM sys.dm_xe_session_targets AS xst
+         INNER JOIN sys.dm_xe_sessions AS xs
+             ON xst.event_session_address = xs.address
+    WHERE xs.name = N'ring_buffer_lock_acquired'
 ),
 /* A row for each event in the buffer, represented as an XML fragment */
 EventNode AS
 (
-SELECT CAST(NodeData.query('.') AS xml) AS EventInfo
-FROM RingBuffer AS rb
-CROSS APPLY rb.TargetData.nodes('/RingBufferTarget/event') AS n(NodeData)
+    SELECT CAST (NodeData.query('.') AS XML) AS EventInfo
+    FROM RingBuffer AS rb
+    CROSS APPLY rb.TargetData.nodes('/RingBufferTarget/event') AS n(NodeData)
 )
+
 /* A relational rowset formed by using the XQuery value method */
 SELECT EventInfo.value('(event/@timestamp)[1]','datetimeoffset') AS timestamp,
        EventInfo.value('(event/@name)[1]','sysname') AS event_name,
@@ -365,7 +384,7 @@ If the hash function returns the same value for the `object_id` of both stored p
 
 To mitigate this problem when the number of distinct values is relatively small, set the number of histogram slots higher than the square of expected distinct values. For example, if the `histogram` target has its `SOURCE` set to the `table_name` event field, and there are 20 tables in the database, then 20*20 = 400. The next power of 2 greater than 400 is 512, which is the recommended number of slots in this example.
 
-Each `histogram` target accepts data from a single source (an event field or an action) and contains only one histogram. It isn't possible to add more than one target of the same type per event session. It's also not possible to have more than one source type per `histogram` target. Therefore, a new event session is required to track any additional actions or event fields in a separate `histogram` target.
+Each `histogram` target accepts data from a single source (an event field or an action) and contains only one histogram. It isn't possible to add more than one target of the same type per event session. It's also not possible to have more than one source type per `histogram` target. Therefore, a new event session is required to track different actions or event fields in a separate `histogram` target.
 
 ### Create an event session with a histogram target
 
@@ -375,32 +394,30 @@ To use this example in Azure SQL Database or SQL database in Fabric, replace `ON
 
 ```sql
 CREATE EVENT SESSION histogram_lock_acquired
-    ON SERVER
-    ADD EVENT sqlserver.lock_acquired
-        (
-        ACTION
-            (
-            sqlos.system_thread_id
-            )
-        )
-    ADD TARGET package0.histogram
-        (
-        SET
-            FILTERING_EVENT_NAME = N'sqlserver.lock_acquired',
-            SLOTS = 16,
-            SOURCE = N'sqlos.system_thread_id',
-            SOURCE_TYPE = 1
-        );
+ON SERVER
+ADD EVENT sqlserver.lock_acquired
+(
+    ACTION (sqlos.system_thread_id)
+)
+ADD TARGET package0.histogram
+(
+    SET FILTERING_EVENT_NAME = N'sqlserver.lock_acquired',
+        SLOTS = 16,
+        SOURCE = N'sqlos.system_thread_id',
+        SOURCE_TYPE = 1
+);
 ```
 
-In the `ADD TARGET ... (SET ...)` clause the target parameter `SOURCE_TYPE` is set to `1`, which means that the `histogram` target tracks an action.
+In the `ADD TARGET ... (SET ...)` clause, the target parameter `SOURCE_TYPE` is set to `1`, which means that the `histogram` target tracks an action.
 
 The `ADD EVENT ... (ACTION ...)` clause adds the `sqlos.system_thread_id` action to the event. The `SOURCE` parameter is set to `sqlos.system_thread_id` to use the system thread ID collected by this action as the source of data for the `histogram` target. The `histogram` target in this example counts the number of `lock_acquired` events for each system thread that acquires locks while the session is active.
 
 To start the event session, execute the following statement:
 
 ```sql
-ALTER EVENT SESSION histogram_lock_acquired ON SERVER STATE = START;
+ALTER EVENT SESSION histogram_lock_acquired
+ON SERVER
+STATE = START;
 ```
 
 To view the collected histogram data in SSMS, expand the session node and select the `package0.histogram` target. The data is displayed in a two-column grid. Each row represents a bucket of distinct values and a count of occurrences.
@@ -421,23 +438,19 @@ value   count
 Here's an example of reading the data from a `histogram` target with T-SQL:
 
 ```sql
-WITH
-histogram_target AS
-(
-SELECT TRY_CAST(st.target_data AS xml) AS target_data
-FROM sys.dm_xe_sessions AS s
-INNER JOIN sys.dm_xe_session_targets AS st
-ON s.address = st.event_session_address
-WHERE s.name = 'event-session-name-placeholder'
-),
-histogram AS
-(
-SELECT hb.slot.value('(@count)[1]', 'bigint') AS slot_count,
-       hb.slot.value('(value/text())[1]', 'nvarchar(max)') AS slot_value
-FROM histogram_target AS ht
-CROSS APPLY ht.target_data.nodes('/HistogramTarget/Slot') AS hb(slot)
-)
-SELECT slot_value, slot_count
+WITH histogram_target
+AS (SELECT TRY_CAST (st.target_data AS XML) AS target_data
+    FROM sys.dm_xe_sessions AS s
+         INNER JOIN sys.dm_xe_session_targets AS st
+             ON s.address = st.event_session_address
+    WHERE s.name = 'event-session-name-placeholder'),
+ histogram
+AS (SELECT hb.slot.value('(@count)[1]', 'bigint') AS slot_count,
+           hb.slot.value('(value/text())[1]', 'nvarchar(max)') AS slot_value
+    FROM histogram_target AS ht
+CROSS APPLY ht.target_data.nodes('/HistogramTarget/Slot') AS hb(slot))
+SELECT slot_value,
+       slot_count
 FROM histogram;
 ```
 
@@ -455,23 +468,25 @@ To use this example in Azure SQL Database or SQL database in Fabric, replace `ON
 
 ```sql
 CREATE EVENT SESSION event_counter_checkpoint_begin
-    ON SERVER
-    ADD EVENT sqlserver.checkpoint_begin
-    (
-        WHERE package0.counter <= 4
-    )
-    ADD TARGET package0.event_counter
-    WITH
-    (
-        MAX_MEMORY = 4096 KB,
-        MAX_DISPATCH_LATENCY = 3 SECONDS
-    );
+ON SERVER
+ADD EVENT sqlserver.checkpoint_begin
+(
+    WHERE package0.counter <= 4
+)
+ADD TARGET package0.event_counter
+WITH
+(
+    MAX_MEMORY = 4096 KB,
+    MAX_DISPATCH_LATENCY = 3 SECONDS
+);
 ```
 
 To start the event session, execute the following statement:
 
 ```sql
-ALTER EVENT SESSION event_counter_checkpoint_begin ON SERVER STATE = START;
+ALTER EVENT SESSION event_counter_checkpoint_begin
+ON SERVER
+STATE = START;
 ```
 
 To view the collected data in SSMS, expand the session node and select the `package0.event_counter` target. The data is displayed in a three-column grid. Each row represents an event with a count of its occurrences.
@@ -495,13 +510,10 @@ Extended Events doesn't automatically match the start and end events. Instead, y
 For this example, we create an example table named `T1`, insert three rows, and obtain the `object_id` value for this table. For simplicity, we create the table in the `tempdb` database in this example. If you use a different database, adjust the database name in the T-SQL example code that follows.
 
 ```sql
-CREATE TABLE T1
-(
-id int PRIMARY KEY
-);
+CREATE TABLE T1 (id INT PRIMARY KEY);
 
 INSERT INTO T1 (id)
-VALUES (1),(2),(3);
+VALUES (1), (2), (3);
 
 SELECT OBJECT_ID('T1') AS object_id;
 -- object_id = 1029578706
@@ -517,65 +529,53 @@ To use this example in Azure SQL Database or SQL database in Fabric, replace `ON
 
 ```sql
 CREATE EVENT SESSION pair_matching_lock_acquired_released
-    ON SERVER
-    ADD EVENT sqlserver.lock_acquired
-    (
-        SET
-            COLLECT_DATABASE_NAME = 1,
-            COLLECT_RESOURCE_DESCRIPTION = 1
-        ACTION (sqlserver.transaction_id)
-        WHERE
-        (
-            database_name = 'tempdb'
-            AND
-            object_id = 1029578706
-        )
-    ),
-    ADD EVENT sqlserver.lock_released
-    (
-        SET
-            COLLECT_DATABASE_NAME = 1,
-            COLLECT_RESOURCE_DESCRIPTION = 1
-        ACTION (sqlserver.transaction_id)
-        WHERE
-        (
-            database_name = 'tempdb'
-            AND
-            object_id = 1029578706
-        )
-    )
-    ADD TARGET package0.event_counter,
-    ADD TARGET package0.pair_matching
-    (
-        SET
-            BEGIN_EVENT = N'sqlserver.lock_acquired',
-            BEGIN_MATCHING_COLUMNS =
-                N'resource_0, resource_1, resource_2, transaction_id, database_id',
-            END_EVENT = N'sqlserver.lock_released',
-            END_MATCHING_COLUMNS =
-                N'resource_0, resource_1, resource_2, transaction_id, database_id',
-            RESPOND_TO_MEMORY_PRESSURE = 1
-    )
-    WITH
-    (
-        MAX_MEMORY = 8192 KB,
-        MAX_DISPATCH_LATENCY = 15 SECONDS
-    );
+ON SERVER
+ADD EVENT sqlserver.lock_acquired
+(
+    SET COLLECT_DATABASE_NAME = 1,
+        COLLECT_RESOURCE_DESCRIPTION = 1
+    ACTION (sqlserver.transaction_id)
+    WHERE (database_name = 'tempdb'
+           AND object_id = 1029578706)
+),
+ADD EVENT sqlserver.lock_released
+(
+    SET COLLECT_DATABASE_NAME = 1,
+        COLLECT_RESOURCE_DESCRIPTION = 1
+    ACTION (sqlserver.transaction_id)
+    WHERE (database_name = 'tempdb'
+           AND object_id = 1029578706)
+)
+ADD TARGET package0.event_counter,
+ADD TARGET package0.pair_matching
+(
+    SET BEGIN_EVENT = N'sqlserver.lock_acquired',
+        BEGIN_MATCHING_COLUMNS = N'resource_0, resource_1, resource_2, transaction_id, database_id',
+        END_EVENT = N'sqlserver.lock_released',
+        END_MATCHING_COLUMNS = N'resource_0, resource_1, resource_2, transaction_id, database_id',
+        RESPOND_TO_MEMORY_PRESSURE = 1
+)
+WITH
+(
+    MAX_MEMORY = 8192 KB,
+    MAX_DISPATCH_LATENCY = 15 SECONDS
+);
 ```
 
 To start the event session, execute the following statement:
 
 ```sql
-ALTER EVENT SESSION pair_matching_lock_acquired_released ON SERVER STATE = START;
+ALTER EVENT SESSION pair_matching_lock_acquired_released
+ON SERVER
+STATE = START;
 ```
 
 Start a transaction that updates the `T1` table, but don't commit it or roll it back. This ensures that there are acquired but not released locks.
 
 ```sql
 BEGIN TRANSACTION;
-
-UPDATE T1 SET
-id = id + 1;
+UPDATE T1
+    SET id = id + 1;
 ```
 
 Examine the output from each target of the `pair_matching_lock_acquired_released` event session in SSMS.

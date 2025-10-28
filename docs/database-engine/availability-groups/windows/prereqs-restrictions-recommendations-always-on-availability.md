@@ -1,14 +1,14 @@
 ---
 title: "Availability Group: Prerequisites, Restrictions, and Recommendations"
-description: "A description of the prerequisites, restrictions, and recommendations for deploying an Always On availability group to SQL Server."
+description: A description of the prerequisites, restrictions, and recommendations for deploying an Always On availability group to SQL Server.
 author: MashaMSFT
 ms.author: mathoma
 ms.reviewer: randolphwest
-ms.date: 08/21/2025
-ms.update-cycle: 1825-days
+ms.date: 10/21/2025
 ms.service: sql
 ms.subservice: availability-groups
 ms.topic: conceptual
+ms.update-cycle: 1825-days
 helpviewer_keywords:
   - "Availability Groups [SQL Server], server instance"
   - "Availability Groups [SQL Server], deploying"
@@ -47,7 +47,7 @@ To support the [!INCLUDE [ssHADR](../../../includes/sshadr-md.md)] feature, ensu
 | Requirement | Link |
 | --- | --- |
 | Ensure that the system isn't a domain controller. | Availability groups aren't supported on domain controllers. |
-| Ensure that each computer is running on a supported Windows Server version | Hardware and software requirements for:  <br />- [SQL Server 2025 Preview](../../../sql-server/install/hardware-and-software-requirements-for-installing-sql-server-2025.md) <br />- [SQL Server 2022](../../../sql-server/install/hardware-and-software-requirements-for-installing-sql-server-2022.md)  <br />- [SQL Server 2019](../../../sql-server/install/hardware-and-software-requirements-for-installing-sql-server-2019.md) <br /> - [SQL Server 2017](../../../sql-server/install/hardware-and-software-requirements-for-installing-sql-server.md) <br />- [SQL Server 2016](../../../sql-server/install/hardware-and-software-requirements-for-installing-sql-server.md)  |
+| Ensure that each computer is running on a supported Windows Server version | Hardware and software requirements for:<br /><br />- [SQL Server 2025 Preview](../../../sql-server/install/hardware-and-software-requirements-for-installing-sql-server-2025.md)<br />- [SQL Server 2022](../../../sql-server/install/hardware-and-software-requirements-for-installing-sql-server-2022.md)<br />- [SQL Server 2019](../../../sql-server/install/hardware-and-software-requirements-for-installing-sql-server-2019.md)<br />- [SQL Server 2016 and SQL Server 2017](../../../sql-server/install/hardware-and-software-requirements-for-installing-sql-server.md) |
 | Ensure that each computer is a node in a WSFC. | [Windows Server Failover Clustering with SQL Server](../../../sql-server/failover-clusters/windows/windows-server-failover-clustering-wsfc-with-sql-server.md) |
 | Ensure that the WSFC contains sufficient nodes to support your availability group configurations. | A cluster node can host one replica for an availability group. The same node can't host two replicas from the same availability group. The cluster node can participate in multiple availability groups, with one replica from each group.<br /><br />Ask your database administrators how many cluster nodes are required for to support the availability replicas of the planned availability groups.<br /><br />[What is an Always On availability group?](overview-of-always-on-availability-groups-sql-server.md) |
 
@@ -136,7 +136,7 @@ Each availability group requires a set of failover partners, known as *availabil
 
 | Prerequisite | Links |
 | --- | --- |
-| The host computer must be a WSFC node. The instances of [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] that host availability replicas for a given availability group reside on separate nodes of the cluster. An availability group can temporarily straddle two clusters while being migrated to different cluster. [!INCLUDE [sssql16-md](../../../includes/sssql16-md.md)] introduced distributed availability groups. In a distributed availability group, two availability groups reside on different clusters. | [Windows Server Failover Clustering with SQL Server](../../../sql-server/failover-clusters/windows/windows-server-failover-clustering-wsfc-with-sql-server.md)<br /><br />[Failover Clustering and Always On Availability Groups (SQL Server)](failover-clustering-and-always-on-availability-groups-sql-server.md)<br /><br />[Distributed availability groups](distributed-availability-groups.md) |
+| The host computer must be a WSFC node. The instances of [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] that host availability replicas for a given availability group reside on separate nodes of the cluster. An availability group can temporarily straddle two clusters while being migrated to different cluster. [!INCLUDE [sssql16-md](../../../includes/sssql16-md.md)] introduced distributed availability groups. In a distributed availability group, two availability groups reside on different clusters. | [Windows Server Failover Clustering with SQL Server](../../../sql-server/failover-clusters/windows/windows-server-failover-clustering-wsfc-with-sql-server.md)<br /><br />[Failover Clustering and Always On availability groups (SQL Server)](failover-clustering-and-always-on-availability-groups-sql-server.md)<br /><br />[Distributed availability groups](distributed-availability-groups.md) |
 | If you want an availability group to work with Kerberos:<br /><br />All server instances that host an availability replica for the availability group must use the same SQL Server service account.<br /><br />The domain administrator needs to manually register a Service Principal Name (SPN) with Active Directory on the SQL Server service account for the virtual network name (VNN) of the availability group listener. If the SPN is registered on an account other than the SQL Server service account, authentication fails.<br /><br />To use Kerberos authentication for the communication between availability group (AG) endpoints, manually register SPNs for the database mirroring endpoints used by the AG.<br /><br />**Important:** If you change the SQL Server service account, the domain administrator needs to manually re-register the SPN. | [Register a Service Principal Name for Kerberos connections](../../configure-windows/register-a-service-principal-name-for-kerberos-connections.md)<br /><br />**Note:**<br /><br />Kerberos and SPNs enforce mutual authentication. The SPN maps to the Windows account that starts the SQL Server services. If the SPN isn't registered correctly or if it fails, the Windows security layer can't determine the account associated with the SPN, and Kerberos authentication can't be used.<br /><br />**Note:** `NTLM` doesn't have this requirement. |
 | If you plan to use a [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] failover cluster instance (FCI) to host an availability replica, ensure that you understand the FCI restrictions and that the FCI requirements are met. | [Prerequisites and requirements on using a SQL Server failover cluster instance (FCI) to host an availability replica](#FciArLimitations) (later in this article) |
 | Each server instance must be running the same version of SQL Server to participate in an availability group. | For more information, see the list of editions and supported features at the end of this section. |
@@ -144,7 +144,7 @@ Each availability group requires a set of failover partners, known as *availabil
 | Enable the [!INCLUDE [ssHADR](../../../includes/sshadr-md.md)] feature on each server instance that will host an availability replica for any availability group. On a given computer, you can enable as many server instances for [!INCLUDE [ssHADR](../../../includes/sshadr-md.md)] as your [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] installation supports. | [Enable or disable Always On availability group feature](enable-and-disable-always-on-availability-groups-sql-server.md)<br /><br />**Important:** If you destroy and re-create a WSFC, you must disable and re-enable the [!INCLUDE [ssHADR](../../../includes/sshadr-md.md)] feature on each server instance that was enabled for [!INCLUDE [ssHADR](../../../includes/sshadr-md.md)] on the original cluster. |
 | Each server instance requires a database mirroring endpoint. This endpoint is shared by all the availability replicas and database mirroring partners and witnesses on the server instance.<br /><br />If a server instance that you select to host an availability replica is running under a domain user account and doesn't yet have a database mirroring endpoint, the [Use the Availability Group Wizard (SQL Server Management Studio)](use-the-availability-group-wizard-sql-server-management-studio.md) (or [Add a replica to your Always On availability group using the Availability Group Wizard in SQL Server Management Studio](use-the-add-replica-to-availability-group-wizard-sql-server-management-studio.md)) can create the endpoint and grant `CONNECT` permission to the server instance service account. However, if the [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] service is running as a built-in account, such as Local System, Local Service, or Network Service, or a nondomain account, you must use certificates for endpoint authentication, and the wizard is unable to create a database mirroring endpoint on the server instance. In this case, we recommend that you create the database mirroring endpoints manually before you launch the wizard.<br /><br />**Security note:** Transport security for [!INCLUDE [ssHADR](../../../includes/sshadr-md.md)] is the same as for database mirroring. | [The database mirroring endpoint (SQL Server)](../../database-mirroring/the-database-mirroring-endpoint-sql-server.md)<br /><br />[Transport Security - Database Mirroring - Always On Availability](../../database-mirroring/transport-security-database-mirroring-always-on-availability.md) |
 | If any databases that use FILESTREAM are added to an availability group, ensure that FILESTREAM is enabled on every server instance that will host an availability replica for the availability group. | [Enable and configure FILESTREAM](../../../relational-databases/blob/enable-and-configure-filestream.md) |
-| If any contained databases are added to an availability group, ensure that the **contained database authentication** (server configuration option) is set to `1` on every server instance that hosts an availability replica for the availability group. | [Contained database authentication server configuration Option](../../configure-windows/contained-database-authentication-server-configuration-option.md)<br /><br />[Server configuration options (SQL Server)](../../configure-windows/server-configuration-options-sql-server.md) |
+| If any contained databases are added to an availability group, ensure that the **contained database authentication** (server configuration option) is set to `1` on every server instance that hosts an availability replica for the availability group. | [Server Configuration: contained database authentication](../../configure-windows/contained-database-authentication-server-configuration-option.md)<br /><br />[Server configuration options](../../configure-windows/server-configuration-options-sql-server.md) |
 
 [!INCLUDE [editions-supported-features-windows](../../../includes/editions-supported-features-windows.md)]
 
@@ -186,7 +186,7 @@ For more information, see [Always On - HADRON Learning Series: Worker pool usage
 
 | Task | Required Permissions |
 | --- | --- |
-| Creating the database mirroring endpoint | Requires `CREATE ENDPOINT` permission or membership in the **sysadmin** fixed server role. Also requires `CONTROL ON ENDPOINT` permission. For more information, see [GRANT endpoint permissions (Transact-SQL)](../../../t-sql/statements/grant-endpoint-permissions-transact-sql.md). |
+| Creating the database mirroring endpoint | Requires `CREATE ENDPOINT` permission or membership in the **sysadmin** fixed server role. Also requires `CONTROL ON ENDPOINT` permission. For more information, see [GRANT endpoint permissions](../../../t-sql/statements/grant-endpoint-permissions-transact-sql.md). |
 | Enabling [!INCLUDE [ssHADR](../../../includes/sshadr-md.md)] | Requires membership in the **Administrator** group on the local computer and full control on the WSFC. |
 
 <a id="RelatedTasksSI"></a>
@@ -195,8 +195,8 @@ For more information, see [Always On - HADRON Learning Series: Worker pool usage
 
 | Task | Article |
 | --- | --- |
-| Determining whether database mirroring endpoint exists | [sys.database_mirroring_endpoints (Transact-SQL)](../../../relational-databases/system-catalog-views/sys-database-mirroring-endpoints-transact-sql.md) |
-| Creating the database mirroring endpoint (if it doesn't yet exist) | [Create a database mirroring endpoint for Windows Authentication (Transact-SQL)](../../database-mirroring/create-a-database-mirroring-endpoint-for-windows-authentication-transact-sql.md)<br /><br />[Use certificates for a database mirroring endpoint (Transact-SQL)](../../database-mirroring/use-certificates-for-a-database-mirroring-endpoint-transact-sql.md)<br /><br />[Create a database mirroring endpoint for an availability group using PowerShell](database-mirroring-always-on-availability-groups-powershell.md) |
+| Determining whether database mirroring endpoint exists | [sys.database_mirroring_endpoints](../../../relational-databases/system-catalog-views/sys-database-mirroring-endpoints-transact-sql.md) |
+| Creating the database mirroring endpoint (if it doesn't yet exist) | [Create a database mirroring endpoint for Windows Authentication](../../database-mirroring/create-a-database-mirroring-endpoint-for-windows-authentication-transact-sql.md)<br /><br />[Use certificates for a database mirroring endpoint](../../database-mirroring/use-certificates-for-a-database-mirroring-endpoint-transact-sql.md)<br /><br />[Create a database mirroring endpoint for an availability group using PowerShell](database-mirroring-always-on-availability-groups-powershell.md) |
 | Enabling availability groups | [Enable or disable Always On availability group feature](enable-and-disable-always-on-availability-groups-sql-server.md) |
 
 <a id="RelatedContentSI"></a>
@@ -389,7 +389,7 @@ To be eligible to be added to an availability group, a database must:
 | Not belong to any existing availability group. | [sys.databases](../../../relational-databases/system-catalog-views/sys-databases-transact-sql.md) (`group_database_id = NULL`) |
 | Not be configured for database mirroring. | [sys.database_mirroring](../../../relational-databases/system-catalog-views/sys-database-mirroring-transact-sql.md) (If the database doesn't participate in mirroring, all columns prefixed with "mirroring_" are NULL.) |
 | Before adding a database that uses FILESTREAM to an availability group, ensure that FILESTREAM is enabled on every server instance that hosts or will host an availability replica for the availability group. | [Enable and configure FILESTREAM](../../../relational-databases/blob/enable-and-configure-filestream.md) |
-| Before adding a contained database to an availability group, ensure that the **contained database authentication** server option is set to **1** on every server instance that hosts or will host an availability replica for the availability group. | [Contained database authentication server configuration option](../../configure-windows/contained-database-authentication-server-configuration-option.md)<br /><br />[Server configuration options](../../configure-windows/server-configuration-options-sql-server.md) |
+| Before adding a contained database to an availability group, ensure that the **contained database authentication** server option is set to **1** on every server instance that hosts or will host an availability replica for the availability group. | [Server Configuration: contained database authentication](../../configure-windows/contained-database-authentication-server-configuration-option.md)<br /><br />[Server configuration options](../../configure-windows/server-configuration-options-sql-server.md) |
 
 > [!NOTE]  
 > [!INCLUDE [ssHADR](../../../includes/sshadr-md.md)] works with any supported database compatibility level.
@@ -400,14 +400,14 @@ To be eligible to be added to an availability group, a database must:
 
 - If the file path (including the drive letter) of a secondary database differs from the path of the corresponding primary database, the following restrictions apply:
 
-  - **[!INCLUDE [ssAoNewAgWiz](../../../includes/ssaonewagwiz-md.md)]/[!INCLUDE [ssAoAddDbWiz](../../../includes/ssaoadddbwiz-md.md)]:** The **Full** option isn't supported (on the [Select Initial Data Synchronization Page (Always On Availability Group Wizards)](select-initial-data-synchronization-page-always-on-availability-group-wizards.md) page),
+  - **[!INCLUDE [ssAoNewAgWiz](../../../includes/ssaonewagwiz-md.md)]/[!INCLUDE [ssAoAddDbWiz](../../../includes/ssaoadddbwiz-md.md)]:** The **Full** option isn't supported (on the [Select Initial Data Synchronization Page (Always On availability group wizards)](select-initial-data-synchronization-page-always-on-availability-group-wizards.md) page),
 
   - **RESTORE WITH MOVE:** To create the secondary databases, the database files must be restored `WITH MOVE` on each instance of [!INCLUDE [ssNoVersion](../../../includes/ssnoversion-md.md)] that hosts a secondary replica.
 
   - **Impact on add-file operations:** A later add-file operation on the primary replica might fail on the secondary databases. This failure could cause the secondary databases to be suspended. This, in turn, causes the secondary replicas to enter the `NOT SYNCHRONIZING` state.
 
     > [!NOTE]  
-    > For information about responding to a failed ad-file operation, see [Troubleshoot a Failed Add-File Operation (Always On availability groups)](troubleshoot-a-failed-add-file-operation-always-on-availability-groups.md).
+    > For information about responding to a failed ad-file operation, see [Troubleshoot a failed add-file operation (Always On availability groups)](troubleshoot-a-failed-add-file-operation-always-on-availability-groups.md).
 
 - You can't drop a database that currently belongs to an availability group.
 
@@ -415,7 +415,7 @@ To be eligible to be added to an availability group, a database must:
 
 ### Follow up for TDE protected databases
 
-If you use transparent data encryption (TDE), the certificate or asymmetric key for creating and decrypting other keys must be the same on every server instance that hosts an availability replica for the availability group. For more information, see [Move a TDE Protected Database to Another SQL Server](../../../relational-databases/security/encryption/move-a-tde-protected-database-to-another-sql-server.md).
+If you use transparent data encryption (TDE), the certificate or asymmetric key for creating and decrypting other keys must be the same on every server instance that hosts an availability replica for the availability group. For more information, see [Move a TDE protected database to another SQL Server](../../../relational-databases/security/encryption/move-a-tde-protected-database-to-another-sql-server.md).
 
 <a id="PermissionsDbs"></a>
 

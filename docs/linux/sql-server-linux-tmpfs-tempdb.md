@@ -1,9 +1,9 @@
 ---
-title: Enable and Run tempdb on tmpfs for SQL Server 2025 Preview on Linux
-description: Learn how to use tmpfs for the tempdb system database, in SQL Server 2025 Preview on Linux.
+title: Enable and Run tempdb on tmpfs for SQL Server 2025 on Linux
+description: Learn how to use tmpfs for the tempdb system database, in SQL Server 2025 on Linux.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 07/03/2025
+ms.date: 10/21/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: how-to
@@ -68,7 +68,8 @@ To enable **tmpfs** support for [!INCLUDE [ssnoversion-md](../includes/ssnoversi
    Identify all the `tempdb` files using the following T-SQL script, then run the `ALTER DATABASE` command to update the `tempdb` file location:
 
    ```sql
-   SELECT [name], physical_name
+   SELECT [name],
+          physical_name
    FROM sys.master_files
    WHERE database_id = 2;
    ```
@@ -77,19 +78,19 @@ To enable **tmpfs** support for [!INCLUDE [ssnoversion-md](../includes/ssnoversi
 
    ```sql
    ALTER DATABASE tempdb
-   MODIFY FILE (NAME = tempdev, FILENAME = '/var/opt/mssql/tempdb/tempdb.mdf');
+       MODIFY FILE (NAME = tempdev, FILENAME = '/var/opt/mssql/tempdb/tempdb.mdf');
 
    ALTER DATABASE tempdb
-   MODIFY FILE (NAME = tempdev2, FILENAME = '/var/opt/mssql/tempdb/tempdb2.mdf');
+       MODIFY FILE (NAME = tempdev2, FILENAME = '/var/opt/mssql/tempdb/tempdb2.mdf');
 
    ALTER DATABASE tempdb
-   MODIFY FILE (NAME = tempdev3, FILENAME = '/var/opt/mssql/tempdb/tempdb3.mdf');
+       MODIFY FILE (NAME = tempdev3, FILENAME = '/var/opt/mssql/tempdb/tempdb3.mdf');
 
    ALTER DATABASE tempdb
-   MODIFY FILE (NAME = tempdev4, FILENAME = '/var/opt/mssql/tempdb/tempdb4.mdf');
+       MODIFY FILE (NAME = tempdev4, FILENAME = '/var/opt/mssql/tempdb/tempdb4.mdf');
 
    ALTER DATABASE tempdb
-   MODIFY FILE (NAME = templog, FILENAME = '/var/opt/mssql/tempdb/templog.ldf');
+       MODIFY FILE (NAME = templog, FILENAME = '/var/opt/mssql/tempdb/templog.ldf');
    ```
 
 1. Restart [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] to apply the changes.
@@ -103,7 +104,8 @@ To enable **tmpfs** support for [!INCLUDE [ssnoversion-md](../includes/ssnoversi
    Once [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] is up and running, verify that the `tempdb` data and log files are now located in the new directory, by connecting to [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] using a tool like SQL Server Management Studio (SSMS).
 
    ```sql
-   SELECT [name], physical_name
+   SELECT [name],
+          physical_name
    FROM sys.master_files
    WHERE database_id = 2;
    ```
@@ -150,7 +152,8 @@ The `--tmpfs` command sets the size to 4 GB and the `uid` (user ID) and `gid` (g
 Once the container is up and running, connect to the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] using SSMS and move the `tempdb` files to the new location `/var/opt/mssql/tempdb` with the following T-SQL commands:
 
 ```sql
-SELECT [name], physical_name
+SELECT [name],
+       physical_name
 FROM sys.master_files
 WHERE database_id = 2;
 ```

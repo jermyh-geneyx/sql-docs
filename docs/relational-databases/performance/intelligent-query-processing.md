@@ -1,10 +1,10 @@
 ---
-title: "Intelligent Query Processing"
-description: "Intelligent query processing features to improve query performance in SQL Server, Azure SQL Managed Instance, and Azure SQL Database."
+title: Intelligent Query Processing
+description: Intelligent query processing features to improve query performance in SQL Server, Azure SQL Managed Instance, and Azure SQL Database.
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: derekw, randolphwest
-ms.date: 07/09/2025
+ms.date: 10/21/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
@@ -33,7 +33,8 @@ For demos and sample code of intelligent query processing (IQP) features on GitH
 You can make workloads automatically eligible for intelligent query processing by enabling the applicable database compatibility level for the database. You can set this using [!INCLUDE [tsql](../../includes/tsql-md.md)]. For example:
 
 ```sql
-ALTER DATABASE [WideWorldImportersDW] SET COMPATIBILITY_LEVEL = 170;
+ALTER DATABASE [WideWorldImportersDW]
+    SET COMPATIBILITY_LEVEL = 170;
 ```
 
 The following table details all intelligent query processing features, along with any requirement they have for database compatibility level. For complete details on all IQP features, including release notes and more in-depth descriptions, see [Intelligent query processing features in detail](intelligent-query-processing-details.md).

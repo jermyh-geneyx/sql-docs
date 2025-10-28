@@ -5,7 +5,7 @@ description: Learn about security in Azure SQL Database and Azure SQL Managed In
 author: jaszymas
 ms.author: jaszymas
 ms.reviewer: wiassaf, vanto, emlisa, mathoma, maghan
-ms.date: 05/29/2025
+ms.date: 10/22/2025
 ms.service: azure-sql
 ms.subservice: security
 ms.topic: concept-article
@@ -103,11 +103,18 @@ Advanced Threat Protection is analyzing your logs to detect unusual behavior and
 
 SQL Database, SQL Managed Instance, and Azure Synapse Analytics secure customer data by encrypting data in motion with [Transport Layer Security (TLS)](/troubleshoot/sql/database-engine/connect/tls-1-2-support-microsoft-sql-server).
 
-SQL Database, SQL Managed Instance, and Azure Synapse Analytics enforce encryption (SSL/TLS) at all times for all connections. This ensures all data is encrypted "in transit" between the client and server irrespective of the setting of **Encrypt** or **TrustServerCertificate** in the connection string.
+SQL Database, SQL Managed Instance, and Azure Synapse Analytics enforce encryption (SSL/TLS) at all times for all connections. This ensures all data is encrypted *in transit* between the client and server irrespective of the setting of `Encrypt` or `TrustServerCertificate` in the connection string.
 
-As a best practice, recommend that in the connection string used by the application, you specify an encrypted connection and _**not**_ trust the server certificate. This forces your application to verify the server certificate and thus prevents your application from being vulnerable to attacks.
+As a best practice, we recommend that, in the connection string used by the application, you specify an encrypted connection and choose to ***not*** trust the server certificate. This forces your application to verify the server certificate, preventing your application from being vulnerable to attacks.
 
-For example when using the ADO.NET driver this is accomplished via **Encrypt=True** and **TrustServerCertificate=False**. If you obtain your connection string from the Azure portal, it will have the correct settings.
+For example, when using the ADO.NET driver, use `Encrypt=True` and `TrustServerCertificate=False` in the connection string to accomplish this. The connection string you obtain from the Azure portal has these correct settings. 
+
+When using a custom domain name to connect to your instance, in the connection string, set `Encrypt=True` and `HostNameInCertificate` to the *[VNet-local endpoint domain name](../managed-instance/connectivity-architecture-overview.md#vnet-local-endpoint)* of your instance. This ensures that the TLS certificate presented by the server is validated against the expected *VNet-local endpoint domain name*.
+
+The *VNet-local endpoint domain name* is shown as the **Host** value of the instance found in the Azure portal. If you're querying instance settings using PowerShell ([Get-AzSqlInstance](/powershell/module/az.sql/get-azsqlinstance)) or the Azure CLI ([az sql mi show](/cli/azure/sql/mi#az-sql-mi-show)), the *VNet-local endpoint domain name* returns as the **fullyQualifiedDomainName** property, and is the value to use for `HostNameInCertificate` in the connection string.
+
+For example, if the *VNet-local endpoint domain name* is `contoso-instance.123456.database.windows.net` and you use the custom domain name of `contoso-instance.contoso.com`, then configure the connection string with `HostNameInCertificate=contoso-instance.123456.database.windows.net;Encrypt=True`.
+
 
 > [!IMPORTANT]  
 > Some non-Microsoft drivers might not use TLS by default or rely on an older version of TLS (<1.2) in order to function. In this case the server still allows you to connect to your database. However, we recommend that you evaluate the security risks of allowing such drivers and application to connect to SQL Database, especially if you store sensitive data.

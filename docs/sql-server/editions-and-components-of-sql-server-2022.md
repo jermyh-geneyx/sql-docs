@@ -1,10 +1,10 @@
 ---
-title: "Editions and Supported Features of SQL Server 2022"
+title: Editions and Supported Features of SQL Server 2022
 description: Learn details of the features supported by the various editions of SQL Server 2022.
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: mikeray
-ms.date: 05/19/2025
+ms.date: 10/21/2025
 ms.service: sql
 ms.subservice: release-landing
 ms.topic: conceptual
@@ -90,7 +90,7 @@ The Developer edition continues to support only 1 client for [SQL Server Distrib
 ## Scale limits
 
 | Feature | Enterprise | Standard | Web | Express<br />with<br />Advanced<br />Services | Express |
-| :--- | :---: | :---: | :---: | :---: | :---: |
+| --- | :---: | :---: | :---: | :---: | :---: |
 | Maximum compute capacity used by a single instance - [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)] <sup>1</sup> | Operating system maximum | Limited to lesser of 4 sockets or 24 cores | Limited to lesser of 4 sockets or 16 cores | Limited to lesser of 1 socket or 4 cores | Limited to lesser of 1 socket or 4 cores |
 | Maximum compute capacity used by a single instance - [!INCLUDE [ssASnoversion](../includes/ssasnoversion-md.md)] or [!INCLUDE [ssRSnoversion](../includes/ssrsnoversion-md.md)] | Operating system maximum | Limited to lesser of 4 sockets or 24 cores | Limited to lesser of 4 sockets or 16 cores | Limited to lesser of 1 socket or 4 cores | Limited to lesser of 1 socket or 4 cores |
 | Maximum memory for buffer pool per instance of [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)] | Operating System Maximum | 128&nbsp;GB | 64&nbsp;GB | 1,410&nbsp;MB | 1,410&nbsp;MB |
@@ -113,7 +113,7 @@ The Developer edition continues to support only 1 client for [SQL Server Distrib
 SQL Server 2022 includes features for connecting to [Azure Synapse Analytics](/azure/synapse-analytics/), [Azure SQL Managed Instance](/azure/azure-sql/managed-instance/), and [Microsoft Purview](/purview/).
 
 | Feature | Enterprise | Standard | Web | Express<br />with<br />Advanced<br />Services | Express |
-| :--- | :---: | :---: | :---: | :---: | :---: |
+| --- | :---: | :---: | :---: | :---: | :---: |
 | Azure extension for SQL Server | Yes | Yes | No | No | No |
 | Azure Synapse Link <sup>1</sup> | Yes | Yes | Yes | No | No |
 | Link feature for SQL Managed Instance <sup>1</sup> | Yes | Yes | No | No | No |
@@ -129,7 +129,7 @@ SQL Server 2022 includes features for connecting to [Azure Synapse Analytics](/a
 ## RDBMS high availability
 
 | Feature | Enterprise | Standard | Web | Express<br />with<br />Advanced<br />Services | Express |
-| :--- | :---: | :---: | :---: | :---: | :---: |
+| --- | :---: | :---: | :---: | :---: | :---: |
 | Server core support <sup>1</sup> | Yes | Yes | Yes | Yes | Yes |
 | Log shipping | Yes | Yes | Yes | No | No |
 | Database mirroring <sup>7</sup> | Yes | Yes <sup>2</sup> | Yes <sup>3</sup> | Yes <sup>3</sup> | Yes <sup>3</sup> |
@@ -177,7 +177,7 @@ SQL Server 2022 includes features for connecting to [Azure Synapse Analytics](/a
 ## RDBMS scalability and performance
 
 | Feature | Enterprise | Standard | Web | Express<br />with<br />Advanced<br />Services | Express |
-| :--- | :---: | :---: | :---: | :---: | :---: |
+| --- | :---: | :---: | :---: | :---: | :---: |
 | Columnstore <sup>1, 2</sup> | Yes | Yes | Yes | Yes | Yes |
 | Large object binaries in clustered columnstore indexes | Yes | Yes | Yes | Yes | Yes |
 | Online nonclustered columnstore index rebuild | Yes | No | No | No | No |
@@ -234,7 +234,7 @@ SQL Server 2022 includes features for connecting to [Azure Synapse Analytics](/a
 ## RDBMS security
 
 | Feature | Enterprise | Standard | Web | Express<br />with<br />Advanced<br />Services | Express |
-| :--- | :---: | :---: | :---: | :---: | :---: |
+| --- | :---: | :---: | :---: | :---: | :---: |
 | Always Encrypted | Yes | Yes | Yes | Yes | Yes |
 | Always Encrypted with secure enclaves | Yes | Yes | Yes | Yes | Yes |
 | Contained databases | Yes | Yes | Yes | Yes | Yes |
@@ -257,7 +257,7 @@ SQL Server 2022 includes features for connecting to [Azure Synapse Analytics](/a
 ## Replication
 
 | Feature | Enterprise | Standard | Web | Express<br />with<br />Advanced<br />Services | Express |
-| :--- | :---: | :---: | :---: | :---: | :---: |
+| --- | :---: | :---: | :---: | :---: | :---: |
 | Heterogeneous subscribers | Yes | Yes | No | No | No |
 | Merge replication | Yes | Yes | Yes <sup>1</sup> | Yes <sup>1</sup> | Yes <sup>1</sup> |
 | Oracle publishing | Yes | No | No | No | No |
@@ -276,7 +276,7 @@ SQL Server 2022 includes features for connecting to [Azure Synapse Analytics](/a
 ## Management tools
 
 | Feature | Enterprise | Standard | Web | Express<br />with<br />Advanced<br />Services | Express |
-| :--- | :---: | :---: | :---: | :---: | :---: |
+| --- | :---: | :---: | :---: | :---: | :---: |
 | SQL Management Objects (SMO) | Yes | Yes | Yes | Yes | Yes |
 | SQL Assessment API | Yes | Yes | Yes | Yes | Yes |
 | SQL Vulnerability Assessment | Yes | Yes | Yes | Yes | Yes |
@@ -297,7 +297,7 @@ SQL Server 2022 includes features for connecting to [Azure Synapse Analytics](/a
 ## RDBMS manageability
 
 | Feature | Enterprise | Standard | Web | Express<br />with<br />Advanced<br />Services | Express |
-| :--- | :---: | :---: | :---: | :---: | :---: |
+| --- | :---: | :---: | :---: | :---: | :---: |
 | User instances | No | No | No | Yes | Yes |
 | LocalDB | No | No | No | Yes | No |
 | Dedicated admin connection | Yes | Yes | Yes | Yes <sup>1</sup> | Yes <sup>1</sup> |
@@ -318,7 +318,6 @@ SQL Server 2022 includes features for connecting to [Azure Synapse Analytics](/a
 | Parallel consistency check | Yes | No | No | No | No |
 | [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] Utility Control Point | Yes | No | No | No | No |
 | Buffer pool extension | Yes | Yes | No | No | No |
-| Master instance for big data cluster | Yes | Yes | No | No | No |
 | Compatibility certification | Yes | Yes | Yes | Yes | Yes |
 
 <sup>1</sup> With trace flag
@@ -330,7 +329,7 @@ SQL Server 2022 includes features for connecting to [Azure Synapse Analytics](/a
 ## Development tools
 
 | Feature | Enterprise | Standard | Web | Express<br />with<br />Advanced<br />Services | Express |
-| :--- | :---: | :---: | :---: | :---: | :---: |
+| --- | :---: | :---: | :---: | :---: | :---: |
 | Microsoft Visual Studio integration | Yes | Yes | Yes | Yes | Yes |
 | Intellisense (Transact-SQL and MDX) | Yes | Yes | Yes | Yes | Yes |
 | [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] Data Tools (SSDT) | Yes | Yes | Yes | Yes | No |
@@ -339,7 +338,7 @@ SQL Server 2022 includes features for connecting to [Azure Synapse Analytics](/a
 ## Programmability
 
 | Feature | Enterprise | Standard | Web | Express<br />with<br />Advanced<br />Services | Express |
-| :--- | :---: | :---: | :---: | :---: | :---: |
+| --- | :---: | :---: | :---: | :---: | :---: |
 | Basic R integration <sup>1</sup> | Yes | Yes | Yes | Yes | No |
 | Advanced R integration <sup>2</sup> | Yes | No | No | No | No |
 | Basic Python integration | Yes | Yes | Yes | Yes | No |
@@ -387,7 +386,7 @@ For information about the [!INCLUDE [ssMDSshort_md](../includes/ssmdsshort-md.md
 ## Data warehouse
 
 | Feature | Enterprise | Standard | Web | Express<br />with<br />Advanced<br />Services | Express |
-| :--- | :---: | :---: | :---: | :---: | :---: |
+| --- | :---: | :---: | :---: | :---: | :---: |
 | Auto-generate staging and data warehouse schema | Yes | Yes | No | No | No |
 | Change data capture | Yes | Yes | No | No | No |
 | Star join query optimizations | Yes | No | No | No | No |
@@ -409,7 +408,7 @@ For information about the Business Intelligence Client features supported by the
 ## Spatial and location services
 
 | Feature | Enterprise | Standard | Web | Express<br />with<br />Advanced<br />Services | Express |
-| :--- | :---: | :---: | :---: | :---: | :---: |
+| --- | :---: | :---: | :---: | :---: | :---: |
 | Spatial indexes | Yes | Yes | Yes | Yes | Yes |
 | Planar and geodetic data types | Yes | Yes | Yes | Yes | Yes |
 | Advanced spatial libraries | Yes | Yes | Yes | Yes | Yes |
@@ -418,7 +417,7 @@ For information about the Business Intelligence Client features supported by the
 ## Additional database services
 
 | Feature | Enterprise | Standard | Web | Express<br />with<br />Advanced<br />Services | Express |
-| :--- | :---: | :---: | :---: | :---: | :---: |
+| --- | :---: | :---: | :---: | :---: | :---: |
 | [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] Migration Assistant | Yes | Yes | Yes | Yes | Yes |
 | Database mail | Yes | Yes | Yes | No | No |
 
