@@ -22,8 +22,6 @@ This article summarizes the new features and enhancements for [!INCLUDE [sql-ser
 
 For more information and known issues, see [[!INCLUDE [sql-server-2019](../includes/sssql19-md.md)] release notes](sql-server-version-15-release-notes.md).
 
-For the best experience with [!INCLUDE [sql-server-2019](../includes/sssql19-md.md)], use the [latest tools](/azure-data-studio/download-azure-data-studio).
-
 [!INCLUDE [sql-server-2019](../includes/sssql19-md.md)] introduces [!INCLUDE [big-data-clusters](../includes/ssbigdataclusters-nover.md)] for [!INCLUDE [sql-server](../includes/ssnoversion-md.md)]. It also provides additional capability and improvements for the SQL Server database engine, SQL Server Analysis Services, SQL Server Machine Learning Services, SQL Server on Linux, and SQL Server Master Data Services.
 
 The following video provides a 13-minute introduction into SQL Server 2019:

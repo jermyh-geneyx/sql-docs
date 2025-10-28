@@ -153,7 +153,7 @@ In this article, we'll describe how you can configure automatic generation and s
 ## Prerequisites
 
 - [!INCLUDE [sssql22-md](../../../includes/sssql22-md.md)]
-- [SQL Server Management Studio (SSMS)](../../../ssms/download-sql-server-management-studio-ssms.md) or [Azure Data Studio](/azure-data-studio/download-azure-data-studio)
+- [SQL Server Management Studio (SSMS)](/ssms/sql-server-management-studio-ssms)
 - An Azure Blob Storage
 - An Azure Storage container
 - A [SQL Server credential](../authentication-access/credentials-database-engine.md). For more information, see [Digest Management](ledger-digest-management.md).  
@@ -162,7 +162,7 @@ In this article, we'll describe how you can configure automatic generation and s
 
 To enable uploading ledger digests, specify the endpoint of an Azure Blob storage account. To disable uploading ledger digests, set the option value to `OFF`. The default is `OFF`.
 
-1. Sign into your [!INCLUDE [sssql22-md](../../../includes/sssql22-md.md)] instance using SSMS or Azure Data Studio.
+1. Sign into your [!INCLUDE [sssql22-md](../../../includes/sssql22-md.md)] instance using SSMS.
 1. Configure automatic generation and storage of database digests using the following T-SQL statement:
 
    ```sql

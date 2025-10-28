@@ -46,7 +46,7 @@ In [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)], copy-only backups 
 
 ## Create a copy-only backup
 
-You can create a copy-only backup with [!INCLUDE [ssManStudioFull](../../includes/ssmanstudiofull-md.md)], [!INCLUDE [azure-data-studio](../../includes/azure-data-studio-short.md)], [!INCLUDE [tsql](../../includes/tsql-md.md)], or PowerShell.
+You can create a copy-only backup with [!INCLUDE [ssManStudioFull](../../includes/ssmanstudiofull-md.md)], [!INCLUDE [tsql](../../includes/tsql-md.md)], or PowerShell.
 
 <a id="SSMSProcedure"></a>
 
