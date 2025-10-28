@@ -114,7 +114,7 @@ You will not incur any charges unless you exceed these allowances and you opt to
 
 ### Tips on managing vCore seconds
 
-1. Disconnect querying tools such as [Azure Data Studio](/azure-data-studio/download-azure-data-studio) and [SQL Server Management Studio](/sql/ssms/download-sql-server-management-studio-ssms), including the object explorer, when you're done using them. Leaving connections open can continue to consume credits by preventing auto-pause.
+1. Disconnect querying tools such as [SQL Server Management Studio](/ssms/sql-server-management-studio-ssms), including the object explorer, when you're done using them. Leaving connections open can continue to consume credits by preventing auto-pause.
 1. On the **Metrics** tab, [create an alert rule](/azure/azure-monitor/alerts/tutorial-metric-alert) at no cost. Use the **Free amount remaining** metric to send an alert when the amount is less than 10,000 vCore seconds (10% of the monthly limit), so you know when you're running out for the month.
 
 ## Offer limitations
@@ -154,7 +154,6 @@ To delete `myFreeDBResourceGroup` and all its resources using the Azure portal:
 
 [Connect and query](connect-query-content-reference-guide.md) your database using different tools and languages:
 - [Connect and query using SQL Server Management Studio](connect-query-ssms.md)
-- [Connect and query using Azure Data Studio](/azure-data-studio/quickstart-sql-database?toc=/azure/sql-database/toc.json)
 - The [mssql extension](https://aka.ms/mssql-marketplace) for [Visual Studio Code](https://code.visualstudio.com/docs)
 - [sqlcmd](/sql/tools/sqlcmd/sqlcmd-utility)
 - [Azure portal query editor for Azure SQL Database](query-editor.md)

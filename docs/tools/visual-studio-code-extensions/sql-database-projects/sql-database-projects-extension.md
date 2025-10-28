@@ -1,6 +1,6 @@
 ---
 title: SQL Database Projects Extension
-description: Install and use the SQL Database Projects extension for Azure Data Studio and Visual Studio Code to work with data in SQL.
+description: Install and use the SQL Database Projects extension for Visual Studio Code to work with data in SQL.
 author: dzsquared
 ms.author: drskwier
 ms.reviewer: randolphwest, maghan
@@ -16,7 +16,7 @@ ms.collection:
 
 [!INCLUDE [azure-data-studio-deprecation](../../../includes/azure-data-studio-deprecation.md)]
 
-The SQL Database Projects extension is an Azure Data Studio and Visual Studio Code extension for developing SQL databases in a project-based development environment. Compatible databases include SQL Server, Azure SQL Database, Azure SQL Managed Instance, Warehouse in Fabric, and SQL database in Fabric (preview). A SQL project is a local representation of SQL objects that comprise the schema for a single database, such as tables, stored procedures, or functions. When a SQL Database project is built, the output artifact is a `.dacpac` file. New and existing databases can be updated to match the contents of the `.dacpac` by publishing the SQL Database project with the SQL Database Projects extension or by publishing the `.dacpac` with the [SqlPackage](../../sqlpackage/sqlpackage-publish.md) command line interface.
+The SQL Database Projects extension is a Visual Studio Code extension for developing SQL databases in a project-based development environment. Compatible databases include SQL Server, Azure SQL Database, Azure SQL Managed Instance, Warehouse in Fabric, and SQL database in Fabric (preview). A SQL project is a local representation of SQL objects that comprise the schema for a single database, such as tables, stored procedures, or functions. When a SQL Database project is built, the output artifact is a `.dacpac` file. New and existing databases can be updated to match the contents of the `.dacpac` by publishing the SQL Database project with the SQL Database Projects extension or by publishing the `.dacpac` with the [SqlPackage](../../sqlpackage/sqlpackage-publish.md) command line interface.
 
 :::image type="content" source="media/sql-database-projects-extension/sql-project-summary.png" border="true" alt-text="Screenshot of Summary of SQL Database Projects containing predeployment and post-deployment scripts as well as database objects." lightbox="media/sql-database-projects-extension/sql-project-summary.png":::
 
@@ -28,7 +28,7 @@ The SQL Database Projects extension provides the following features:
 
 - Create a new blank Microsoft.Build.Sql project.
 - Create a new project from a connected database.
-- Open a project previously created in [Azure Data Studio, Visual Studio Code](getting-started-sql-database-projects-extension.md), or in [SQL Server Data Tools](../../../ssdt/sql-server-data-tools.md).
+- Open a project previously created in [Visual Studio Code](getting-started-sql-database-projects-extension.md), or in [SQL Server Data Tools](../../../ssdt/sql-server-data-tools.md).
 - Edit a project by adding or removing objects (tables, views, stored procedures) or custom scripts in the project.
 - Organize files/scripts in folders.
 - Add references to system databases or a user dacpac.
@@ -36,13 +36,9 @@ The SQL Database Projects extension provides the following features:
 - Deploy a single project.
 - Load connection details (SQL Windows authentication) and SQLCMD variables from deployment profile.
 
-Watch this short 10-minute video for an introduction to the SQL Database Projects extension in Azure Data Studio:
-
-> [!VIDEO https://channel9.msdn.com/Shows/Data-Exposed/Build-SQL-Database-Projects-Easily-in-Azure-Data-Studio/player?WT.mc_id=dataexposed-c9-niner]
-
 ## Install
 
-You can install the SQL Database Project extension in Azure Data Studio and Visual Studio Code.
+You can install the SQL Database Project extension in Visual Studio Code.
 
 The SQL Database Projects extension is installed with the [mssql](/sql/tools/visual-studio-code/sql-server-develop-use-vscode) extension for Visual Studio Code.
 
@@ -82,11 +78,11 @@ More information on troubleshooting SQL projects build can be found in [Troubles
 
 ## SQLCLR
 
-SQLCLR objects in database projects aren't supported in VS Code and Azure Data Studio because they rely on .NET Framework and the SQL Database Projects extension uses .NET to build projects.
+SQLCLR objects in database projects aren't supported in Visual Studio Code because they rely on .NET Framework and the SQL Database Projects extension uses .NET to build projects.
 
 ## Workspace
 
-SQL database projects are contained within a logical workspace (folder) in Azure Data Studio and Visual Studio Code. **All SQL projects within the folders open in the current workspace are available in the SQL Database Projects view by default.**
+SQL database projects are contained within a logical workspace (folder) in Visual Studio Code. **All SQL projects within the folders open in the current workspace are available in the SQL Database Projects view by default.**
 
 You can manually add and remove projects from a workspace through the interface in the **Projects** pane. The settings for a workspace can be manually edited in the `.code-workspace` file, if necessary.
 

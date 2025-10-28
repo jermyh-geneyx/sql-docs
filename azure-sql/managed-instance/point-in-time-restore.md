@@ -347,7 +347,7 @@ DROP DATABASE WorldWideImporters;
 
 Use one of the following methods to connect to the database in your SQL managed instance:
 
-- [SQL Server Management Studio and Azure Data Studio in an Azure virtual machine](connect-vm-instance-configure.md)
+- [SQL Server Management Studio in an Azure virtual machine](connect-vm-instance-configure.md)
 - [Point-to-site](point-to-site-p2s-configure.md)
 - [Public endpoint](public-endpoint-configure.md)
 

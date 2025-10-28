@@ -57,7 +57,7 @@ For databases in the [DTU purchasing model](resource-limits-dtu-single-databases
 
 Before you can create a capture instance for individual tables, you must enable CDC for your Azure SQL Database.
 
-To enable CDC, connect to your Azure SQL Database through Azure Data Studio or SQL Server Management Studio (SSMS). Open a new query window, then enable CDC by running the following T-SQL:
+To enable CDC, connect to your Azure SQL Database through SQL Server Management Studio (SSMS). Open a new query window, then enable CDC by running the following T-SQL:
 
 ```sql
 EXEC sys.sp_cdc_enable_db;

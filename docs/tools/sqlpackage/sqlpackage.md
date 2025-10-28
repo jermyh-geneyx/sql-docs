@@ -189,7 +189,7 @@ Get help with SqlPackage, submit feature requests, and report issues in the [Dac
 
 SqlPackage and DacFx support all [supported SQL versions](/lifecycle/products/?products=sql-server) at time of the SqlPackage/DacFx release. For example, a SqlPackage release on January 14 2022 supports all supported versions of SQL in January 14 2022. For more on SQL support policies, see [the SQL support policy](/troubleshoot/sql/general/support-policy-sql-server#support-policy).
 
-In addition to SQL Server, SqlPackage and DacFx supports Azure SQL Managed Instance, Azure SQL Database, Azure Synapse Analytics, and Synapse Data Warehouse in Microsoft Fabric.
+In addition to SQL Server, SqlPackage and DacFx supports Azure SQL Managed Instance, Azure SQL Database, Azure Synapse Analytics, and Fabric Data Warehouse.
 
 ## Next steps
 

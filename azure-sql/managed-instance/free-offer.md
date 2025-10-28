@@ -263,4 +263,3 @@ The free Azure SQL Managed Instance offer is available on the following subscrip
 - [What is Azure SQL Managed Instance?](sql-managed-instance-paas-overview.md)
 - [Azure SQL Database and Azure SQL Managed Instance connect and query articles](../database/connect-query-content-reference-guide.md)
 - [Quickstart: Use SSMS to connect to and query Azure SQL Database or Azure SQL Managed Instance](../database/connect-query-ssms.md)
-- [Connect and query using Azure Data Studio](/sql/azure-data-studio/quickstart-sql-database)

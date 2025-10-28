@@ -55,7 +55,7 @@ The following steps show you how to create a virtual machine in the new subnet t
 
 ## Prepare the Azure virtual machine
 
-Since SQL Managed Instance is placed in your private virtual network, you need to create an Azure VM with an installed SQL client tool that lets you connect to SQL Managed Instance and execute queries. Example tools are SQL Server Management Studio or Azure Data Studio. This quickstart uses SQL Server Management Studio.
+Since SQL Managed Instance is placed in your private virtual network, you need to create an Azure VM with an installed SQL client tool that lets you connect to SQL Managed Instance and execute queries. Example tools are SQL Server Management Studio. This quickstart uses SQL Server Management Studio.
 
 The easiest way to create a client virtual machine with all necessary tools is to use the Azure Resource Manager templates.
 

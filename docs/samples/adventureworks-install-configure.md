@@ -22,7 +22,7 @@ For more information about samples, see the [Samples GitHub repository](https://
 ## Prerequisites
 
 - [SQL Server](https://www.microsoft.com/evalcenter/evaluate-sql-server-2022) or [Azure SQL Database](https://azure.microsoft.com/services/sql-database/)
-- [SQL Server Management Studio](../ssms/download-sql-server-management-studio-ssms.md) (SSMS) or [Azure Data Studio](/azure-data-studio/download-azure-data-studio)
+- [SQL Server Management Studio](/ssms/sql-server-management-studio-ssms) (SSMS)
 
 ## Download backup files
 
@@ -53,7 +53,7 @@ You can find additional files on GitHub:
 
 ## Restore to SQL Server
 
-You can use the `.bak` file to restore your sample database to your [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] instance. You can do so using the [RESTORE](../t-sql/statements/restore-statements-transact-sql.md) T-SQL command, or using the graphical interface (GUI) in [SSMS](../ssms/download-sql-server-management-studio-ssms.md), [Azure Data Studio](/azure-data-studio/download-azure-data-studio), the [mssql extension](https://aka.ms/mssql-marketplace) for [Visual Studio Code](https://code.visualstudio.com/docs), or any T-SQL query tool.
+You can use the `.bak` file to restore your sample database to your [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] instance. You can do so using the [RESTORE](../t-sql/statements/restore-statements-transact-sql.md) T-SQL command, or using the graphical interface (GUI) in [SSMS](/ssms/sql-server-management-studio-ssms), the [MSSQL extension](https://aka.ms/mssql-marketplace) for [Visual Studio Code](https://code.visualstudio.com/docs), or any T-SQL query tool.
 
 # [SSMS](#tab/ssms)
 
@@ -116,42 +116,6 @@ WITH
     STATS = 5;
 GO
 ```
-
-# [Azure Data Studio](#tab/data-studio)
-
-If you're not familiar with using [Azure Data Studio](/azure-data-studio/download-azure-data-studio), see [Use Azure Data Studio to connect and query](/azure-data-studio/quickstart-sql-server) to get started.
-
-To restore your database in Azure Data Studio, follow these steps:
-
-1. Download the appropriate `.bak` file from one of links provided in the [Download backup files](#download-backup-files) section of this article.
-1. Move the `.bak` file to your [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] backup location. This location varies depending on your installation location, instance name, and version of [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)]. For example, the default location for a default instance of [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] is:
-
-   ```output
-   C:\Program Files\Microsoft SQL Server\MSSQL16.MSSQLSERVER\MSSQL\Backup
-   ```
-
-1. Open Azure Data Studio and connect to your [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] instance.
-1. Right-click your server and select **Manage**.
-
-   :::image type="content" source="media/adventureworks-install-configure/ads-manage.png" alt-text="Screenshot showing Azure Data Studio. The Manage option is highlighted." lightbox="media/adventureworks-install-configure/ads-manage.png":::
-
-1. Select **Restore**
-
-   :::image type="content" source="media/adventureworks-install-configure/ads-restore-database.png" alt-text="Screenshot that shows the Restore button in the top menu." lightbox="media/adventureworks-install-configure/ads-restore-database.png":::
-
-1. On the **General** tab, provide values under **Source**:
-   1. In **Restore from**, select **Backup file**.
-   1. In **Backup file path**, select the location where you stored the .bak file.
-
-   :::image type="content" source="media/adventureworks-install-configure/ads-source.png" alt-text="Screenshot of selecting your backup file path." lightbox="media/adventureworks-install-configure/ads-source.png":::
-
-   This step autopopulates the rest of the fields, such as **Database**, **Target database**, and **Restore to**.
-
-   :::image type="content" source="media/adventureworks-install-configure/ads-destination-restore-plan.png" alt-text="Screenshot that shows autopopulated fields." lightbox="media/adventureworks-install-configure/ads-destination-restore-plan.png":::
-
-1. Select **Restore** to restore your database.
-
-   :::image type="content" source="media/adventureworks-install-configure/ads-restore.png" alt-text="Screenshot that shows the Restore button.":::
 
 ---
 

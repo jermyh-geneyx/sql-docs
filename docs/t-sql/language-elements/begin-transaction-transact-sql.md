@@ -3,7 +3,7 @@ title: "BEGIN TRANSACTION (Transact-SQL)"
 description: Marks the starting point of an explicit, local transaction. Explicit transactions start with the BEGIN TRANSACTION statement and end with the COMMIT or ROLLBACK statement.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 05/10/2024
+ms.date: 10/27/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -40,7 +40,7 @@ Marks the starting point of an explicit, local transaction. Explicit transaction
 
 ## Syntax
 
-Syntax for SQL Server, Azure SQL Database, and Azure SQL Managed Instance.
+Syntax for SQL Server, Azure SQL Database, Fabric SQL database, and Azure SQL Managed Instance.
 
 ```syntaxsql
 BEGIN { TRAN | TRANSACTION }
@@ -50,7 +50,7 @@ BEGIN { TRAN | TRANSACTION }
 [ ; ]
 ```
 
-Syntax for Synapse Data Warehouse in Microsoft Fabric, Azure Synapse Analytics and Analytics Platform System (PDW).
+Syntax for Fabric Data Warehouse, Azure Synapse Analytics, and Analytics Platform System (PDW).
 
 ```syntaxsql
 BEGIN { TRAN | TRANSACTION }
@@ -61,19 +61,19 @@ BEGIN { TRAN | TRANSACTION }
 
 #### *transaction_name*
 
-**Applies to:** [!INCLUDE [sql2008-md](../../includes/sql2008-md.md)] and later versions, Azure SQL Database, and Azure SQL Managed Instance
+**Applies to:** [!INCLUDE [sql2008-md](../../includes/sql2008-md.md)] and later versions, Azure SQL Database, Fabric SQL database, and Azure SQL Managed Instance
 
 The name assigned to the transaction. *transaction_name* must conform to the rules for identifiers, but identifiers longer than 32 characters aren't allowed. Use transaction names only on the outermost pair of nested `BEGIN...COMMIT` or `BEGIN...ROLLBACK` statements. *transaction_name* is always case sensitive, even when the instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] isn't case sensitive.
 
 #### *@tran_name_variable*
 
-**Applies to:** [!INCLUDE [sql2008-md](../../includes/sql2008-md.md)] and later versions, Azure SQL Database, and Azure SQL Managed Instance
+**Applies to:** [!INCLUDE [sql2008-md](../../includes/sql2008-md.md)] and later versions, Azure SQL Database, Fabric SQL database, and Azure SQL Managed Instance
 
 The name of a user-defined variable containing a valid transaction name. The variable must be declared with a **char**, **varchar**, **nchar**, or **nvarchar** data type. If more than 32 characters are passed to the variable, only the first 32 characters are used. The remaining characters are truncated.
 
 #### WITH MARK [ '*description*' ]
 
-**Applies to:** [!INCLUDE [sql2008-md](../../includes/sql2008-md.md)] and later versions, Azure SQL Database, and Azure SQL Managed Instance
+**Applies to:** [!INCLUDE [sql2008-md](../../includes/sql2008-md.md)] and later versions, Azure SQL Database, Fabric SQL database, and Azure SQL Managed Instance
 
 Specifies that the transaction is marked in the log. *description* is a string that describes the mark. A *description* longer than 128 characters is truncated to 128 characters before being stored in the `msdb.dbo.logmarkhistory` table.
 
@@ -147,7 +147,7 @@ Requires membership in the **public** role.
 
 ### A. Use an explicit transaction
 
-**Applies to:** [!INCLUDE [sql2008-md](../../includes/sql2008-md.md)] and later versions, Azure SQL Database, Azure SQL Managed Instance, [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)], Analytics Platform System (PDW)
+**Applies to:** [!INCLUDE [sql2008-md](../../includes/sql2008-md.md)] and later versions, Azure SQL Database, Fabric SQL database, Azure SQL Managed Instance, [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)], Analytics Platform System (PDW)
 
 ```sql
 BEGIN TRANSACTION;
@@ -158,7 +158,7 @@ COMMIT;
 
 ### B. Rolling back a transaction
 
-**Applies to:** [!INCLUDE [sql2008-md](../../includes/sql2008-md.md)] and later versions, Azure SQL Database, Azure SQL Managed Instance, [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)], Analytics Platform System (PDW)
+**Applies to:** [!INCLUDE [sql2008-md](../../includes/sql2008-md.md)] and later versions, Azure SQL Database, Fabric SQL database, Azure SQL Managed Instance, [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)], Analytics Platform System (PDW)
 
 The following example shows the effect of rolling back a transaction. In this example, the `ROLLBACK` statement rolls back the `INSERT` statement, but the created table still exists.
 
@@ -172,7 +172,7 @@ ROLLBACK;
 
 ### C. Name a transaction
 
-**Applies to:** [!INCLUDE [sql2008-md](../../includes/sql2008-md.md)] and later versions, Azure SQL Database, Azure SQL Managed Instance
+**Applies to:** [!INCLUDE [sql2008-md](../../includes/sql2008-md.md)] and later versions, Azure SQL Database, Fabric SQL database, Azure SQL Managed Instance
 
 The following example shows how to name a transaction.
 
@@ -191,7 +191,7 @@ GO
 
 ### D. Mark a transaction
 
-**Applies to:** [!INCLUDE [sql2008-md](../../includes/sql2008-md.md)] and later versions, Azure SQL Database, Azure SQL Managed Instance
+**Applies to:** [!INCLUDE [sql2008-md](../../includes/sql2008-md.md)] and later versions, Azure SQL Database, Fabric SQL database, Azure SQL Managed Instance
 
 The following example shows how to mark a transaction. The transaction `CandidateDelete` is marked.
 

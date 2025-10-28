@@ -161,7 +161,6 @@ The [intelligent query processing (IQP)](../relational-databases/performance/int
 
 | New feature or update | Details |
 | --- | --- |
-| Azure Data Studio | Get the latest release at [Download and install Azure Data Studio](/azure-data-studio/download-azure-data-studio). The latest release includes support for [!INCLUDE [sssql22-md](../includes/sssql22-md.md)]. |
 | Distributed Replay | SQL Server setup no longer includes the Distributed Replay client and controller executables. These are available, along with the Admin executable, as a separate download |
 | SQL Server Management Studio | SSMS version 19.0 is now available and is the recommended version of SSMS for [!INCLUDE [sssql22-md](../includes/sssql22-md.md)]. [Download SQL Server Management Studio (SSMS)](../ssms/download-sql-server-management-studio-ssms.md). |
 | SqlPackage.exe | Version 19 of SqlPackage provides support for [!INCLUDE [sssql22-md](../includes/sssql22-md.md)]. Get the latest version at [Download and install SqlPackage](../tools/sqlpackage/sqlpackage-download.md). |

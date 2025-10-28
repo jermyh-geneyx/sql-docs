@@ -31,7 +31,6 @@ Watch this video in the [Azure SQL Database essentials series](/shows/azure-sql-
 | Quickstart | Description |
 | --- | --- |
 | [SQL Server Management Studio](connect-query-ssms.md) (SSMS) | This quickstart demonstrates how to use SSMS to connect to a database, and then use Transact-SQL statements to query, insert, update, and delete data in the database. |
-| [Azure Data Studio](/azure-data-studio/quickstart-sql-database?toc=%2fazure%2fsql-database%2ftoc.json) | This quickstart demonstrates how to use Azure Data Studio to connect to a database, and then use Transact-SQL (T-SQL) statements to create the `TutorialDB` used in Azure Data Studio tutorials. |
 | [Azure portal](connect-query-portal.md) | This quickstart demonstrates how to use the [query editor](query-editor.md) to connect to a database (Azure SQL Database only), and then use Transact-SQL statements to query, insert, update, and delete data in the database. |
 | [Visual Studio Code](connect-query-vscode.md) | This quickstart demonstrates how to use Visual Studio Code to connect to a database, and then use Transact-SQL statements to query, insert, update, and delete data in the database. |
 | [.NET with Visual Studio](connect-query-dotnet-visual-studio.md) | This quickstart demonstrates how to use the .NET framework to create a C# program with Visual Studio to connect to a database and use Transact-SQL statements to query data. |

@@ -322,4 +322,3 @@ Want to optimize and save on your cloud spending?
 - [Connect and query your database](connect-query-content-reference-guide.md)
 - [Quickstart: Use SSMS to connect to and query Azure SQL Database](connect-query-ssms.md)
 - [Connect and with the MSSQL extension for Visual Studio Code](/sql/tools/visual-studio-code-extensions/mssql/connect-database-visual-studio-code)
-- [Connect and query using Azure Data Studio](/azure-data-studio/quickstart-sql-database?toc=/azure/sql-database/toc.json)
