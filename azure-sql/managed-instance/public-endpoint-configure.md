@@ -187,7 +187,7 @@ See more the details about impact of changes on this default route at [0.0.0.0/0
 ## Obtain the public endpoint connection string
 
 1. Navigate to the SQL managed instance configuration page that's been enabled for public endpoint. Select the **Connection strings** tab under the **Settings** configuration.
-1. The public endpoint host name comes in the format `<mi_name>.public.<dns_zone>.database.windows.net`, and the port used for the connection is 3342. The following is an example of a connection string denoting the public endpoint port that can be used in SQL Server Management Studio or Azure Data Studio connections: `<mi_name>.public.<dns_zone>.database.windows.net,3342`
+1. The public endpoint host name comes in the format `<mi_name>.public.<dns_zone>.database.windows.net`, and the port used for the connection is 3342. The following is an example of a connection string denoting the public endpoint port that can be used in SQL Server Management Studio connections: `<mi_name>.public.<dns_zone>.database.windows.net,3342`
 
    :::image type="content" source="./media/public-endpoint-configure/mi-public-endpoint-conn-string.png" alt-text="Screenshot shows the connection strings for your public and VNet-local endpoints." lightbox="./media/public-endpoint-configure/mi-public-endpoint-conn-string.png":::
 

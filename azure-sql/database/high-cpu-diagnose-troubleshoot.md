@@ -34,7 +34,7 @@ If you're using a database under the [DTU-based purchasing model](service-tiers-
 
 ### Identify vCore count with Transact-SQL
 
-You can identify the current vCore count for any database with Transact-SQL. You can run Transact-SQL against Azure SQL Database with [SQL Server Management Studio (SSMS)](/sql/ssms/download-sql-server-management-studio-ssms), [Azure Data Studio](/azure-data-studio/download-azure-data-studio), or [the Azure portal query editor](query-editor.md).
+You can identify the current vCore count for any database with Transact-SQL. You can run Transact-SQL against Azure SQL Database with [SQL Server Management Studio (SSMS)](/ssms/sql-server-management-studio-ssms) or [the Azure portal query editor](query-editor.md).
 
 Connect to your database and run the following query:
 
@@ -48,7 +48,7 @@ GO
 
 ## Identify the causes of high CPU
 
-You can measure and analyze CPU utilization using the Azure portal, Query Store interactive tools in SSMS, and Transact-SQL queries in SSMS and Azure Data Studio.
+You can measure and analyze CPU utilization using the Azure portal, Query Store interactive tools in SSMS, and Transact-SQL queries in SSMS.
 
 The Azure portal and Query Store show execution statistics, such as CPU metrics, for completed queries. If you are experiencing a current high CPU incident that might be caused by one or more ongoing long-running queries, [identify currently running queries with Transact-SQL](#identify-currently-running-queries-with-transact-sql).
 
@@ -114,7 +114,7 @@ The page shows the execution plans and related metrics for the query over the mo
 
 Transact-SQL allows you to identify currently running queries with CPU time they have used so far. You can also use Transact-SQL to query recent CPU usage in your database, top queries by CPU, and queries that compiled the most often.
 
-You can query CPU metrics with [SQL Server Management Studio (SSMS)](/sql/ssms/download-sql-server-management-studio-ssms), [Azure Data Studio](/azure-data-studio/download-azure-data-studio), or [the Azure portal query editor](query-editor.md). When using SSMS or Azure Data Studio, open a new query window and connect it to your database (not the `master` database).
+You can query CPU metrics with [SQL Server Management Studio (SSMS)](/ssms/sql-server-management-studio-ssms), or [the Azure portal query editor](query-editor.md). When using SSMS, open a new query window and connect it to your database (not the `master` database).
 
 Find currently running queries with CPU usage and execution plans by executing the following query. CPU time is returned in milliseconds.
 
@@ -355,7 +355,7 @@ The [max degree of parallelism (MAXDOP)](configure-max-degree-of-parallelism.md)
 
 In some cases, a large number of parallel queries running concurrently can slow down a workload and cause high CPU usage. Excessive parallelism is most likely to occur in databases with a large number of vCores where MAXDOP is set to a high number or to zero. When MAXDOP is set to zero, the database engine sets the number of [schedulers](/sql/relational-databases/thread-and-task-architecture-guide?view=azuresqldb-current&preserve-view=true#sql-server-task-scheduling) to be used by parallel threads to the total number of logical cores or 64, whichever is smaller.
 
-You can identify the max degree of parallelism setting for your database with Transact-SQL. Connect to your database with SSMS or Azure Data Studio and run the following query:
+You can identify the max degree of parallelism setting for your database with Transact-SQL. Connect to your database with SSMS and run the following query:
 
 ```sql
 SELECT 

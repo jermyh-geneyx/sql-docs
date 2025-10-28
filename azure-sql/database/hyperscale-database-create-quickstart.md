@@ -24,7 +24,7 @@ In this quickstart, you create a [logical server in Azure](logical-servers.md) a
 
 - An active Azure subscription. If you don't have one, [create a free account](https://azure.microsoft.com/pricing/purchase-options/azure-account?icid=azurefreeaccount).
 - The latest version of either [Azure PowerShell](/powershell/azure/install-az-ps) or [Azure CLI](/cli/azure/install-azure-cli-windows), if you would like to follow the quickstart programmatically. Alternately, you can complete the quickstart in the Azure portal.
-- An existing [logical server](logical-servers.md) in Azure is required if you would like to create a Hyperscale database with Transact-SQL. For this approach, you will need to run Transact-SQL via [the Azure portal query editor](query-editor.md), [SQL Server Management Studio (SSMS)](/sql/ssms/download-sql-server-management-studio-ssms), [Azure Data Studio](/azure-data-studio/download-azure-data-studio), [sqlcmd](/sql/tools/sqlcmd-utility), or the client of your choice.
+- An existing [logical server](logical-servers.md) in Azure is required if you would like to create a Hyperscale database with Transact-SQL. For this approach, you will need to run Transact-SQL via [the Azure portal query editor](query-editor.md), [SQL Server Management Studio (SSMS)](/ssms/sql-server-management-studio-ssms), [sqlcmd](/sql/tools/sqlcmd-utility), or the client of your choice.
 
 ### Permissions
 
@@ -271,7 +271,7 @@ Run the following command to create a Hyperscale database populated with Adventu
 
 To create a Hyperscale database with Transact-SQL, you must first [create or identify connection information for an existing logical server](logical-servers.md) in Azure.
 
-Connect to the `master` database using [SQL Server Management Studio (SSMS)](/sql/ssms/download-sql-server-management-studio-ssms), [Azure Data Studio](/azure-data-studio/download-azure-data-studio), or the client of your choice to run Transact-SQL commands ([sqlcmd](/sql/tools/sqlcmd-utility), etc.).
+Connect to the `master` database using [SQL Server Management Studio (SSMS)](/ssms/sql-server-management-studio-ssms), or the client of your choice to run Transact-SQL commands ([sqlcmd](/sql/tools/sqlcmd-utility), etc.).
 
 When creating a Hyperscale database, carefully consider the setting for `BACKUP_STORAGE_REDUNDANCY`. Storage redundancy can only be specified during the database creation process for Hyperscale databases. You can choose locally redundant, zone-redundant, or geo-redundant storage. The selected storage redundancy option will be used for the lifetime of the database for both [data storage redundancy](hyperscale-architecture.md#azure-storage) and [backup storage redundancy](automated-backups-overview.md#backup-storage-redundancy). Existing databases can migrate to different storage redundancy using [database copy](database-copy.md) or point in time restore. Allowed values for the `BackupStorageRedundancy` parameter are: `LOCAL`, `ZONE`, `GEO`. Unless explicitly specified, databases will be configured to use geo-redundant backup storage.
 
@@ -293,7 +293,7 @@ To add one or more [High Availability (HA) replicas](service-tier-hyperscale-rep
 
 ## Query the database
 
-Once your database is created, you can use the **Query editor (preview)** in the Azure portal to connect to the database and query data. If you prefer, you can alternately query the database by [connecting with Azure Data Studio](/azure-data-studio/quickstart-sql-database), [SQL Server Management Studio (SSMS)](connect-query-ssms.md), or the client of your choice to run Transact-SQL commands ([sqlcmd](/sql/tools/sqlcmd-utility), etc.).
+Once your database is created, you can use the **Query editor (preview)** in the Azure portal to connect to the database and query data. If you prefer, you can alternately query the database by connecting with [SQL Server Management Studio (SSMS)](connect-query-ssms.md), or the client of your choice to run Transact-SQL commands ([sqlcmd](/sql/tools/sqlcmd-utility), etc.).
 
 1. In the portal, search for and select **SQL databases**, and then select your database from the list.
 1. On the page for your database, select **Query editor (preview)** in the left menu.
@@ -373,7 +373,7 @@ Remove-AzResourceGroup -Name $resourceGroupName
 
 This option deletes only the Hyperscale database. It doesn't remove any logical servers or resource groups that you might have created in addition to the database.
 
-To delete a Hyperscale database with Transact-SQL, connect to the `master` database using [SQL Server Management Studio (SSMS)](/sql/ssms/download-sql-server-management-studio-ssms), [Azure Data Studio](/azure-data-studio/download-azure-data-studio), or the client of your choice to run Transact-SQL commands ([sqlcmd](/sql/tools/sqlcmd-utility), etc.).
+To delete a Hyperscale database with Transact-SQL, connect to the `master` database using [SQL Server Management Studio (SSMS)](/ssms/sql-server-management-studio-ssms), or the client of your choice to run Transact-SQL commands ([sqlcmd](/sql/tools/sqlcmd-utility), etc.).
 
 Run the following Transact-SQL command to drop the database:
 
@@ -387,8 +387,8 @@ GO
 ## Related content
 
 [Connect and query](connect-query-content-reference-guide.md) your database using different tools and languages:
+
 - [Connect and query using SQL Server Management Studio](connect-query-ssms.md)
-- [Connect and query using Azure Data Studio](/azure-data-studio/quickstart-sql-database?toc=/azure/sql-database/toc.json)
 - The [mssql extension](https://aka.ms/mssql-marketplace) for [Visual Studio Code](https://code.visualstudio.com/docs)
 - [sqlcmd](/sql/tools/sqlcmd/sqlcmd-utility)
 - [Azure portal query editor for Azure SQL Database](query-editor.md)

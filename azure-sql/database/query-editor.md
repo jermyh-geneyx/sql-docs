@@ -30,7 +30,7 @@ ms.custom:
 The Query editor (preview) is a tool to run T-SQL queries in the Azure portal in the browser against Azure SQL Database.
 
 - For a quickstart on the Azure portal query editor, see [Quickstart: Use the Azure portal query editor (preview)](connect-query-portal.md).
-- For more advanced object explorer capabilities and management functions, use [Azure Data Studio](/azure-data-studio/quickstart-sql-database) or [SQL Server Management Studio (SSMS)](connect-query-ssms.md).
+- For more advanced object explorer capabilities and management functions, use [SQL Server Management Studio (SSMS)](connect-query-ssms.md).
 - If you don't already have an Azure SQL Database created, visit [Quickstart: Create a single database](single-database-create-quickstart.md). Look for the option to use your offer to [Deploy Azure SQL Database for free](free-offer.md).
 
 ## Query your Azure SQL Database from the Azure portal
@@ -141,7 +141,6 @@ The following considerations and limitations apply when connecting to and queryi
 
 In addition to the Azure portal query editor for Azure SQL Database, consider the following quickstarts for other tools:
 
-- [Quickstart: Use Azure Data Studio to connect and query Azure SQL Database](/azure-data-studio/quickstart-sql-database)
 - [Quickstart: Use SSMS to connect to and query Azure SQL Database or Azure SQL Managed Instance](connect-query-ssms.md)
 - [Quickstart: Use Visual Studio Code to connect and query](connect-query-vscode.md)
 
