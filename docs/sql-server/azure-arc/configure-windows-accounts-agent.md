@@ -87,6 +87,18 @@ The extension also grants permissions to instance and database objects as featur
 > [!NOTE]  
 > Minimum permissions depend on enabled features. The extension updates permissions when they're no longer necessary. It grants necessary permissions when you enable features.
 
+### `NT Service\SQLServerExtension` account risk
+
+| Registry Path | Permission | The associated risk on permissions if the `NT Service\SQLServerExtension` account is compromised |
+| :--- | :--- | :--- |
+| `SOFTWARE\Microsoft\Microsoft SQL Server` | Read | Attackers can see which SQL Server versions are installed, helping them plan attacks. |
+| `SOFTWARE\Microsoft\Microsoft SQL Server\\MSSQLSERVER` | Full control | Only needed when Microsoft Entra authentication or Purview is enabled. Attackers could modify SQL Server configuration, enabling backdoors or disabling security features. |
+| `SOFTWARE\Microsoft\SystemCertificates` | Full control | Only needed when Microsoft Entra authentication is enabled. Attackers could replace trusted root certificate authorities. |
+| `SYSTEM\CurrentControlSet\Services` | Read | Attackers can see service account names, making credential targeting easier. |
+| `SOFTWARE\Microsoft\AzureDefender\SQL` | Read | Attackers can learn Microsoft Defender status and update times, helping them time attacks when defenses are weak. |
+| `SOFTWARE\Microsoft\SqlServerExtension` | Full control | Attackers could change extension settings, disable monitoring, or add malicious extensions. |
+| `SOFTWARE\Policies\Microsoft\Windows` | Read and Write | Only needed when [Auto update](update.md) is enabled. Attackers could change Windows Update policies and disable Device Guard, which controls code integrity and virtualization-based security, making the system vulnerable to malware, privilege escalation, and extended exposure due to missed patches. |
+
 ## SQL privileges by feature
 
 The following table lists the default behavior for the features that control permissions granted by the Azure Extension for SQL Server:
