@@ -80,7 +80,6 @@ Connect to your database within the query editor.
 
 You can also connect to your Azure SQL database using other tools, including:
 
-- [Quickstart: Use Azure Data Studio to connect and query Azure SQL Database](/azure-data-studio/quickstart-sql-database)
 - [Quickstart: Use SSMS to connect to and query Azure SQL Database or Azure SQL Managed Instance](connect-query-ssms.md?view=azuresql-db&preserve-view=true)
 - [Quickstart: Use Visual Studio Code to connect and query](connect-query-vscode.md?view=azuresql-db&preserve-view=true)
 

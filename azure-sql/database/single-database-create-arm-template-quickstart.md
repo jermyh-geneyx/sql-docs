@@ -80,7 +80,6 @@ Keep this resource group, server, and single database if you want. You can now c
 1. Create a server-level firewall rule to connect to the single database from on-premises or remote tools. For more information, see [Create a server-level firewall rule](firewall-create-server-level-portal-quickstart.md).
 1. After you create a server-level firewall rule, [connect and query](connect-query-content-reference-guide.md) your database using several different tools and languages:
    - [Connect and query using SQL Server Management Studio](connect-query-ssms.md)
-   - [Connect and query using Azure Data Studio](/azure-data-studio/quickstart-sql-database?toc=%2fazure%2fsql-database%2ftoc.json)
 
 If you want to delete the resource group:
 

@@ -229,7 +229,7 @@ The first case happens when Query Store is in the read-only state and parameters
 
    :::image type="content" source="media/query-performance-insight-use/qds-off.png" alt-text="Screenshot showing Query Store details in the Azure portal." lightbox="media/query-performance-insight-use/qds-off.png":::
 
-The second case happens when Query Store is not enabled, or parameters are not set optimally. You can change the retention and capture policy, and also enable Query Store, by running the following T-SQL commands provided [the Azure portal query editor](query-editor.md), [SQL Server Management Studio (SSMS)](/sql/ssms/download-sql-server-management-studio-ssms), [Azure Data Studio](/azure-data-studio/download-azure-data-studio), [sqlcmd](/sql/tools/sqlcmd-utility), or the client tool of your choice.
+The second case happens when Query Store is not enabled, or parameters are not set optimally. You can change the retention and capture policy, and also enable Query Store, by running the following T-SQL commands provided [the Azure portal query editor](query-editor.md), [SQL Server Management Studio (SSMS)](/ssms/sql-server-management-studio-ssms), [sqlcmd](/sql/tools/sqlcmd-utility), or the client tool of your choice.
 
 ### Recommended retention and capture policy
 
@@ -244,7 +244,7 @@ You can set the capture policy to:
 - **Auto**: Query Store ignores infrequent queries and queries with insignificant compile and execution duration. Thresholds for execution count, compile duration, and runtime duration are internally determined. This is the default option.
 - **None**: Query Store stops capturing new queries, but runtime statistics for already captured queries are still collected.
 
-We recommend setting all policies to `AUTO` and the cleaning policy to 30 days by executing the following commands from [SSMS](/sql/ssms/download-sql-server-management-studio-ssms) or the Azure portal. (Replace `YourDB` with the database name.)
+We recommend setting all policies to `AUTO` and the cleaning policy to 30 days by executing the following commands from [SSMS](/ssms/sql-server-management-studio-ssms) or the Azure portal. (Replace `YourDB` with the database name.)
 
 ```sql
     ALTER DATABASE [YourDB]
@@ -257,7 +257,7 @@ We recommend setting all policies to `AUTO` and the cleaning policy to 30 days b
     SET QUERY_STORE (QUERY_CAPTURE_MODE = AUTO);
 ```
 
-Increase the size of Query Store by connecting to a database through [SSMS](/sql/ssms/download-sql-server-management-studio-ssms) or the Azure portal and running the following query. (Replace `YourDB` with the database name.)
+Increase the size of Query Store by connecting to a database through [SSMS](/ssms/sql-server-management-studio-ssms) or the Azure portal and running the following query. (Replace `YourDB` with the database name.)
 
 ```SQL
     ALTER DATABASE [YourDB]

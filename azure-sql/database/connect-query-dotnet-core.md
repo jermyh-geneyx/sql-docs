@@ -151,8 +151,7 @@ Remember to replace `<your_server.database.windows.net>`, `<your_username>`, `<p
 ## Related content
 
 - [Tutorial: Create a .NET console application using Visual Studio Code](/dotnet/core/tutorials/with-visual-studio-code)
-- [connect to Azure SQL Database using Azure Data Studio on Windows/Linux/macOS](/azure-data-studio/quickstart-sql-database)
-- [developing with .NET and SQL](/sql/connect/ado-net/sql)
-- [connect and query Azure SQL Database or Azure SQL Managed Instance, by using .NET in Visual Studio](connect-query-dotnet-visual-studio.md)
-- [Design your first database with SSMS](design-first-database-tutorial.md)
+- [SQL Server and ADO.NET](/sql/connect/ado-net/sql)
+- [Quickstart: Connect to and query a database with .NET and C# in Visual Studio](connect-query-dotnet-visual-studio.md)
+- [Tutorial: Design a relational database in Azure SQL Database](design-first-database-tutorial.md)
 - [.NET documentation](/dotnet/)

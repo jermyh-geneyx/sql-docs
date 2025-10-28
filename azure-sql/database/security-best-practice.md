@@ -360,7 +360,7 @@ Separation of Duties is not limited to the data in a database, but includes appl
 
 **How to implement**
 
-- Use a database tool like Azure Data Studio that supports source control.
+- Use a database tool like SQL Server Management Studio that supports source control.
 
 - Implement a segregated code deployment process.
 
