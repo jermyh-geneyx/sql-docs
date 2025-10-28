@@ -38,7 +38,7 @@ A transaction is a single unit of work. If a transaction is successful, all of t
 
 For special considerations related to data warehouse products, see  [Transactions in Fabric Data Warehouse](/fabric/data-warehouse/transactions) or [Transactions (Azure Synapse Analytics)](transactions-sql-data-warehouse.md).
 
-<a id="in-this-section">
+<a id="in-this-section"></a>
 
 ## Transaction control syntax
 
