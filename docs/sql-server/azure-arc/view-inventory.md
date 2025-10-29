@@ -1,10 +1,10 @@
 ---
-title: Manage inventory
+title: Manage Inventory
 description: Learn how to inventory SQL Server services, instances, databases, and view properties centrally, as Azure Arc-enabled resources.
 author: anosov1960
 ms.author: sashan
 ms.reviewer: mikeray, randolphwest
-ms.date: 03/04/2025
+ms.date: 10/29/2025
 ms.topic: how-to
 ms.custom:
   - ignite-2023
@@ -27,7 +27,7 @@ Verify that the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] se
 
 ## Inventory databases
 
-To inventory SQL Server databases, make sure that database names adhere to naming conventions and don't contain reserved words. For a list of reserved words, see [Resolve errors for reserved resource names](/azure/azure-resource-manager/troubleshooting/error-reserved-resource-name).
+To inventory SQL Server databases, make sure that database names adhere to naming conventions and don't contain reserved words. For a list of reserved words, see [Resolve errors for reserved resource names](/azure/azure-resource-manager/troubleshooting/error-reserved-resource-name). For a complete list of naming rules and restrictions, review [naming rules and restrictions](/azure/azure-resource-manager/management/resource-name-rules).
 
 To inventory databases:
 
@@ -36,7 +36,7 @@ To inventory databases:
 1. Under **Data management**, select **Databases**.
 1. Use the **SQL Server databases - Azure Arc** area to view the databases that belong to the instance.
 
-To view the database size and space available, make sure that the built-in [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] login **NT AUTHORITY\SYSTEM** is a member of the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] **sysadmin** server role for all the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] instances running on the machine.
+To view the database size and space available, make sure that the built-in [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] login `NT AUTHORITY\SYSTEM` is a member of the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] **sysadmin** server role for all the [!INCLUDE [ssnoversion-md](../../includes/ssnoversion-md.md)] instances running on the machine.
 
 ### View database properties
 
@@ -142,6 +142,7 @@ resources
 | summarize count() by tostring(properties.compatibilityLevel)
 | order by properties_compatibilityLevel asc
 ```
+
 ## Inventory associated services
 
 SQL Server associated services include:
@@ -152,7 +153,8 @@ SQL Server associated services include:
 - SQL Server Reporting Services (SSRS)
 - Power BI Report Server (PBIRS)
 
-Each installation of an associated service is  represented in Azure Resource Manager (ARM) as a SQL Server instance with `serviceType` property showing the specific service. The property is defined as follows:
+Each installation of an associated service is represented in Azure Resource Manager (ARM) as a SQL Server instance with `serviceType` property showing the specific service. The property is defined as follows:
+
 ```json
 "serviceType":  {
          "type": "string",
@@ -173,7 +175,7 @@ Resources deleted on-premises might not be immediately deleted in Azure. For exa
 
 ## Related content
 
-- [Migration Dashboard](migration-inventory.md)
+- [Track migration journey by using migration dashboard - SQL Server enabled by Azure Arc](migration-inventory.md)
 - [Feature availability by service type](overview.md#feature-availability-by-service-type)
 - [Protect SQL Server with Microsoft Defender for Cloud](configure-advanced-data-security.md)
 - [Configure best practices assessment for SQL Server enabled by Azure Arc](assess.md)
