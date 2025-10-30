@@ -105,11 +105,11 @@ SQL Database, SQL Managed Instance, and Azure Synapse Analytics secure customer 
 
 Specifically, all instances of SQL Server managed by these services have the configuration flag `ForceEncryption` set to `Yes`. Clients and drivers must support encrypted connections to be able connect to either service. Thus, the lowest version of TDS protocol that can connect is TDS 7.1.
 
-As a best practice, if have [TDS 8.0](/sql/relational-databases/security/networking/tds-8)-capable SQL drivers, we recommend that you use [Strict connection encryption](/sql/relational-databases/security/networking/tds-8#strict-connection-encryption).
+As a best practice, if you have [TDS 8.0](/sql/relational-databases/security/networking/tds-8)-capable SQL drivers, we recommend that you use [Strict connection encryption](/sql/relational-databases/security/networking/tds-8#strict-connection-encryption).
 
-If your drivers lack the support for TDS 8.0, use mandatory encryption and do not trust the server certificate. For example, when using the ADO.NET driver, use `Encrypt=True` and `TrustServerCertificate=False` in the connection string to accomplish this. The connection string you obtain from the Azure portal is already configured with these values.
+If your drivers lack support for TDS 8.0, use mandatory encryption and do not trust the server certificate. For example, when using the ADO.NET driver, use `Encrypt=True` and `TrustServerCertificate=False` in the connection string to accomplish this. The connection string you obtain from the Azure portal is already configured with these values.
 
-Setting the parameter `TrustServerCertificate` to `True` should be avoided in production use. It is too permissive and doesn't shield against man-in-the-middle attacks. Instead, if your client expects a different domain name in the server certificate, you use the `HostNameInCertificate` parameter to provide the correct domain name for validation.
+Setting the parameter `TrustServerCertificate` to `True` should be avoided in production use. `TrustServerCertificate=true` is too permissive and doesn't shield against man-in-the-middle attacks. Instead, if your client expects a different domain name in the server certificate, use the `HostNameInCertificate` parameter to provide the correct domain name for validation.
 
 For example, when using the ADO.NET driver to connect to your managed instance `contoso-instance.123456.database.windows.net` via a custom domain name `contoso-instance.contoso.com`, set the connection parameters `Encrypt=True` and set `HostNameInCertificate=contoso-instance.123456.database.windows.net`. This allows the driver to validate the server certificate against an expected VNet-local endpoint domain name.
 
