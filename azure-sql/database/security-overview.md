@@ -101,25 +101,22 @@ Advanced Threat Protection is analyzing your logs to detect unusual behavior and
 
 ### Transport Layer Security (Encryption-in-transit)
 
-SQL Database, SQL Managed Instance, and Azure Synapse Analytics secure customer data by encrypting data in motion with [Transport Layer Security (TLS)](/troubleshoot/sql/database-engine/connect/tls-1-2-support-microsoft-sql-server).
+SQL Database, SQL Managed Instance, and Azure Synapse Analytics secure customer data by encrypting data in motion with [Transport Layer Security (TLS)](/troubleshoot/sql/database-engine/connect/tls-1-2-support-microsoft-sql-server). TLS encrypted connections are enforced at all times. This ensures all data is encrypted in transit between client and server.
 
-SQL Database, SQL Managed Instance, and Azure Synapse Analytics enforce encryption (SSL/TLS) at all times for all connections. This ensures all data is encrypted *in transit* between the client and server irrespective of the setting of `Encrypt` or `TrustServerCertificate` in the connection string.
+Specifically, all instances of SQL Server managed by these services have the configuration flag `ForceEncryption` set to `Yes`. Clients and drivers must support encrypted connections to be able connect to either service. Thus, the lowest version of TDS protocol that can connect is TDS 7.1.
 
-As a best practice, we recommend that, in the connection string used by the application, you specify an encrypted connection and choose to ***not*** trust the server certificate. This forces your application to verify the server certificate, preventing your application from being vulnerable to attacks.
+As a best practice, if you have [TDS 8.0](/sql/relational-databases/security/networking/tds-8)-capable SQL drivers, we recommend that you use [Strict connection encryption](/sql/relational-databases/security/networking/tds-8#strict-connection-encryption).
 
-For example, when using the ADO.NET driver, use `Encrypt=True` and `TrustServerCertificate=False` in the connection string to accomplish this. The connection string you obtain from the Azure portal has these correct settings. 
+If your drivers lack support for TDS 8.0, use mandatory encryption and do not trust the server certificate. For example, when using the ADO.NET driver, use `Encrypt=True` and `TrustServerCertificate=False` in the connection string to accomplish this. The connection string you obtain from the Azure portal is already configured with these values.
 
-When using a custom domain name to connect to your instance, in the connection string, set `Encrypt=True` and `HostNameInCertificate` to the *[VNet-local endpoint domain name](../managed-instance/connectivity-architecture-overview.md#vnet-local-endpoint)* of your instance. This ensures that the TLS certificate presented by the server is validated against the expected *VNet-local endpoint domain name*.
+Setting the parameter `TrustServerCertificate` to `True` should be avoided in production use. `TrustServerCertificate=True` is too permissive and doesn't shield against man-in-the-middle attacks. Instead, if your client expects a different domain name in the server certificate, use the `HostNameInCertificate` parameter to provide the correct domain name for validation.
 
-The *VNet-local endpoint domain name* is shown as the **Host** value of the instance found in the Azure portal. If you're querying instance settings using PowerShell ([Get-AzSqlInstance](/powershell/module/az.sql/get-azsqlinstance)) or the Azure CLI ([az sql mi show](/cli/azure/sql/mi#az-sql-mi-show)), the *VNet-local endpoint domain name* returns as the **fullyQualifiedDomainName** property, and is the value to use for `HostNameInCertificate` in the connection string.
-
-For example, if the *VNet-local endpoint domain name* is `contoso-instance.123456.database.windows.net` and you use the custom domain name of `contoso-instance.contoso.com`, then configure the connection string with `HostNameInCertificate=contoso-instance.123456.database.windows.net;Encrypt=True`.
-
+For example, when using the ADO.NET driver to connect to your managed instance `contoso-instance.123456.database.windows.net` via a custom domain name `contoso-instance.contoso.com`, set the connection parameters `Encrypt=True` and set `HostNameInCertificate=contoso-instance.123456.database.windows.net`. This allows the driver to validate the server certificate against an expected VNet-local endpoint domain name.
 
 > [!IMPORTANT]  
 > Some non-Microsoft drivers might not use TLS by default or rely on an older version of TLS (<1.2) in order to function. In this case the server still allows you to connect to your database. However, we recommend that you evaluate the security risks of allowing such drivers and application to connect to SQL Database, especially if you store sensitive data.
 >
-> For more information about TLS and connectivity, see [TLS considerations](connect-query-content-reference-guide.md#tls-considerations-for-database-connectivity)
+> For more information about TLS and connectivity, see [TLS considerations](connect-query-content-reference-guide.md#tls-considerations-for-database-connectivity).
 
 ### Transparent Data Encryption (Encryption-at-rest)
 
@@ -165,6 +162,7 @@ In addition to the above features and functionality that can help your applicati
 
 ## Related content
 
+- [SQL Server and client encryption summary](/sql/database-engine/configure-windows/sql-server-and-client-encryption-summary)
 - [Manage logins and user accounts](logins-create-manage.md)
 - [auditing](./auditing-overview.md)
 - [threat detection](threat-detection-configure.md)

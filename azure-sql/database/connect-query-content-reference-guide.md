@@ -67,14 +67,13 @@ Get the connection information you need to connect to the database in Azure SQL 
 
 ## TLS considerations for database connectivity
 
-Transport Layer Security (TLS) is used by all drivers that Microsoft supplies or supports for connecting to databases in Azure SQL Database or Azure SQL Managed Instance. No special configuration is necessary. For all connections to a SQL Server instance, a database in Azure SQL Database, or an instance of Azure SQL Managed Instance, we recommend that all applications set
-the following configurations, or their equivalents:
+Transport Layer Security (TLS) is used by all drivers that Microsoft supplies or supports for connecting to databases in Azure SQL Database or Azure SQL Managed Instance. No special configuration is necessary. For all connections to a SQL Server instance, a SQL pool in Azure Synapse Analytics, a database in Azure SQL Database, or an instance of Azure SQL Managed Instance, we recommend that the applications set the following connection parameters or their equivalents:
 
 - `Encrypt = On`
 - `TrustServerCertificate = Off`
+- Optionally, `HostNameInCertificate = full-hostname-of-service` if the client uses a different address to connect and the TDS driver supports this option.
 
-Some systems use different yet equivalent keywords for those configuration keywords. These configurations ensure that the client driver
-verifies the identity of the TLS certificate received from the server.
+Some systems use different yet equivalent keywords for those configuration keywords. These configurations ensure that the client driver verifies the identity of the TLS certificate received from the server.
 
 We also recommend that you disable TLS 1.1 and 1.0 on the client if you need to comply with Payment Card Industry - Data Security
 Standard (PCI-DSS).
