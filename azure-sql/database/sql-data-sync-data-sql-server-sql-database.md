@@ -165,6 +165,8 @@ Provisioning and deprovisioning during sync group creation, update, and deletion
 - SQL Data Sync isn't supported for [ledger databases](/sql/relational-databases/security/ledger/ledger-database-ledger).
 - Data Sync is not a disaster recovery or high availability tool and does not synchronize its own Sync Group information. There is no automatic disaster recovery for Data Sync.
 
+- Data Sync does not support [Network security perimeter (NSP)](/azure/private-link/network-security-perimeter-concepts).
+
 #### Unsupported data types
 
 - FileStream
