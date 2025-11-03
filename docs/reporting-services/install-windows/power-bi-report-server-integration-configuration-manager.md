@@ -18,6 +18,8 @@ ms.custom:
 
 The  **Power BI Integration** page  in [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] Configuration Manager is used to register the report server with the desired Microsoft Entra tenant to allow users of the report server to pin supported report items to [!INCLUDE[sspowerbi](../../includes/sspowerbi-md.md)] dashboards. For a list of the supported items you can pin, see [Pin Reporting Services items to Power BI Dashboards](../../reporting-services/pin-reporting-services-items-to-power-bi-dashboards.md).
 
+[!INCLUDE [ssrs-no-pin-2-power-bi](../includes/ssrs-no-pin-2-power-bi.md)]
+
 ## <a name="bkmk_requirements"></a> Requirements for Power BI Integration
 
 In addition to an active internet connection so you can browse to the [!INCLUDE[sspowerbi](../../includes/sspowerbi-md.md)] service, the following are requirements to complete [!INCLUDE[sspowerbi](../../includes/sspowerbi-md.md)] integration.
