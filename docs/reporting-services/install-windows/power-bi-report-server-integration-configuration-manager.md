@@ -35,17 +35,17 @@ In addition to an active internet connection so you can browse to the [!INCLUDE[
 - The server with Reporting Services installed needs to be configured to use TLS 1.2 or newer. For more information, see [Transport Layer Security (TLS) best practices with the .NET Framework](/dotnet/framework/network-programming/tls).
 
 
-- Reports that you want to pin from must use stored credentials. This is not a requirement of the [!INCLUDE[sspowerbi](../../includes/sspowerbi-md.md)] integration itself but of the refresh process for the pinned items.  The action of pinning a report item creates a [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] subscription to manage the refresh schedule of the tiles in [!INCLUDE[sspowerbi](../../includes/sspowerbi-md.md)]. [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] subscriptions require stored credentials. If a report does not use stored credentials, a user can still pin report items but when the associated subscription attempts to refresh the data to [!INCLUDE[sspowerbi](../../includes/sspowerbi-md.md)], you will see an error message similar to the following on the **My Subscriptions** page.
+- Reports that you want to pin from must use stored credentials. This isn't a requirement of the [!INCLUDE[sspowerbi](../../includes/sspowerbi-md.md)] integration itself but of the refresh process for the pinned items.  The action of pinning a report item creates a [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] subscription to manage the refresh schedule of the tiles in [!INCLUDE[sspowerbi](../../includes/sspowerbi-md.md)]. [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] subscriptions require stored credentials. If a report doesn't use stored credentials, a user can still pin report items but when the associated subscription attempts to refresh the data to [!INCLUDE[sspowerbi](../../includes/sspowerbi-md.md)], you'll see an error message similar to the following on the **My Subscriptions** page.
 
-    PowerBI Delivery error: dashboard: IT Spend Analysis Sample, visual: Chart2, error: The current action cannot be completed. The user data source credentials do not meet the requirements to run this report or shared dataset. Either the user data source credential.
+    Power BI Delivery error: dashboard: IT Spend Analysis Sample, visual: Chart2, error: The current action can't be completed. The user data source credentials don't meet the requirements to run this report or shared dataset. Either the user data source credential.
 
 For more information on how to store credentials, see the section "Configure stored credentials for a report-specific data source" in [Store Credentials in a Reporting Services Data Source](../../reporting-services/report-data/store-credentials-in-a-reporting-services-data-source.md).
 
-An administrator can review the  [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] log files for more information.  They will see messages similar to the following. A great way to  review and monitor [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] logs files is to use [!INCLUDE[msCoName](../../includes/msconame-md.md)] Power Query over the files.  for more information and a short video, see [Report Server Service Trace Log](../../reporting-services/report-server/report-server-service-trace-log.md).
+An administrator can review the  [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] log files for more information.  They'll see messages similar to the following. A great way to  review and monitor [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] logs files is to use [!INCLUDE[msCoName](../../includes/msconame-md.md)] Power Query over the files. For more information and a short video, see [Report Server Service Trace Log](../../reporting-services/report-server/report-server-service-trace-log.md).
 
-- subscription!WindowsService_1!1458!09/24/2015-00:09:27:: e ERROR: PowerBI Delivery error: dashboard: IT Spend Analysis Sample, visual: Chart2, error: The current action cannot be completed. The user data source credentials do not meet the requirements to run this report or shared dataset. Either the user data source credentials are not stored in the report server database, or the user data source is configured not to require credentials but the unattended execution account is not specified.
+- subscription!WindowsService_1!1458!09/24/2015-00:09:27:: e ERROR: Power BI Delivery error: dashboard: IT Spend Analysis Sample, visual: Chart2, error: The current action can't be completed. The user data source credentials don't meet the requirements to run this report or shared dataset. Either the user data source credentials are not stored in the report server database, or the user data source is configured not to require credentials but the unattended execution account isn't specified.
 
-- notification!WindowsService_1!1458!09/24/2015-00:09:27:: e ERROR: Error occurred processing subscription fcdb8581-d763-4b3b-ba3e-8572360df4f9: PowerBI Delivery error: dashboard: IT Spend Analysis Sample, visual: Chart2, error: The current action cannot be completed. The user data source credentials do not meet the requirements to run this report or shared data set. Either the user data source credentials are not stored in the report server database, or the user data source is configured not to require credentials but the unattended execution account is not specified.
+- notification!WindowsService_1!1458!09/24/2015-00:09:27:: e ERROR: Error occurred processing subscription fcdb8581-d763-4b3b-ba3e-8572360df4f9: Power BI Delivery error: dashboard: IT Spend Analysis Sample, visual: Chart2, error: The current action can't be completed. The user data source credentials don't meet the requirements to run this report or shared data set. Either the user data source credentials aren't stored in the report server database, or the user data source is configured not to require credentials but the unattended execution account isn't specified.
 
 ## <a name="bkmk_steps2integrate"></a> To Integrate and Register the Report Server
 
@@ -56,7 +56,7 @@ Complete the following steps from the [!INCLUDE[ssRSnoversion](../../includes/ss
 2. Select **Register with Power BI**.
 
     >[!Note]
-    > Make sure that port 443 is not blocked.
+    > Make sure that port 443 isn't blocked.
 
 3. At the [!INCLUDE[msCoName](../../includes/msconame-md.md)] sign-in dialog, enter the credentials you use to sign into [!INCLUDE[sspowerbi](../../includes/sspowerbi-md.md)].
 
@@ -66,13 +66,13 @@ Complete the following steps from the [!INCLUDE[ssRSnoversion](../../includes/ss
 
 ## <a name="bkmk_unregister"></a> Unregister With Power BI
 
-**Unregister:** Un-registering the report server from Microsoft Entra ID will result in the following:
+**Unregister:** Un-registering the report server from Microsoft Entra ID results in the following:
 
-- The **My Settings** link will no longer be visible from the web portal menu bar.
+- The **My Settings** link is no longer visible from the web portal menu bar.
 
 - Report items that have already been pinned will still be pinned to dashboards, however the tiles will no longer be updated on the dashboard.
 
-- The [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] subscriptions that were updating the tiles will still  exist on the report server but when they run on their configured schedule, they will show an error message similar to the following.
+- The [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] subscriptions that were updating the tiles still exist on the report server, but when they run on their configured schedule, they show an error message similar to the following:
 
     **The delivery extension for this subscription could not be loaded**
 
@@ -80,7 +80,7 @@ From the **Power BI** page of configuration manager, select  the **Unregister wi
 
 ##  <a name="bkmk_updateregistration"></a> Update Registration
 
-Use the **Update Registration** if the configuration of your report server has changed. For example if you want to add or remove the URLS your users use to browse to the [!INCLUDE[ssRSWebPortal](../../includes/ssrswebportal.md)].
+Use the **Update Registration** if the configuration of your report server has changed. For example, if you want to add or remove the URLs your users use to browse to the [!INCLUDE[ssRSWebPortal](../../includes/ssrswebportal.md)].
 
 - In [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] Configuration Manager, select the **Web Portal URL**
 
@@ -88,15 +88,15 @@ Use the **Update Registration** if the configuration of your report server has c
 
 - Select **Add** to add a new HTTP identity for the [!INCLUDE[ssRSWebPortal](../../includes/ssrswebportal.md)] and then select **OK**.
 
-     The [!INCLUDE[sspowerbi](../../includes/sspowerbi-md.md)] icon will change to indicate the server configuration has changed.  ![ssrs_powebi_icon_warning](../../reporting-services/install-windows/media/ssrs-powebi-icon-warning.png "ssrs_powebi_icon_warning")
+     The [!INCLUDE[sspowerbi](../../includes/sspowerbi-md.md)] icon changes to indicate the server configuration has changed.  ![ssrs_powebi_icon_warning](../../reporting-services/install-windows/media/ssrs-powebi-icon-warning.png "ssrs_powebi_icon_warning")
 
 - On the **Power BI Integration** page, select **Update Registration**.
 
-     You will be prompted to login to Microsoft Entra ID. The page will refresh and you will see the new URL listed in the **Redirect URLs**.
+     You'll be prompted to log in to Microsoft Entra ID. The page will refresh and you'll see the new URL listed in the **Redirect URLs**.
 
 ##  <a name="bkmk_integration_process"></a> Summary of the Power BI Integration and Pin Process
 
-This sections summarizes the basic steps and technologies involved when you integrate your report server with [!INCLUDE[sspowerbi](../../includes/sspowerbi-md.md)] and pin a report item to a dashboard.
+This section summarizes the basic steps and technologies involved when you integrate your report server with [!INCLUDE[sspowerbi](../../includes/sspowerbi-md.md)] and pin a report item to a dashboard.
 
  **Integrate:**
 
@@ -116,21 +116,21 @@ This sections summarizes the basic steps and technologies involved when you inte
 
 1. Users preview reports in the [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] [!INCLUDE[ssRSWebPortal](../../includes/ssrswebportal.md)] and the first time they click to pin a report item from the [!INCLUDE[ssRSWebPortal](../../includes/ssrswebportal.md)].
 
-2. They will be redirected to the Microsoft Entra sign-in page. They can also sign in from the [!INCLUDE[ssRSWebPortal](../../includes/ssrswebportal.md)] **My Settings** page. When users sign in to the Azure managed tenant, a relationship is established between their Azure account and the [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] permissions.  For more information, see [My Settings for Power BI Integration &#40;web portal&#41;](../my-settings-for-power-bi-integration-web-portal.md).
+2. They'll be redirected to the Microsoft Entra sign-in page. They can also sign in from the [!INCLUDE[ssRSWebPortal](../../includes/ssrswebportal.md)] **My Settings** page. When users sign in to the Azure managed tenant, a relationship is established between their Azure account and the [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] permissions.  For more information, see [My Settings for Power BI Integration &#40;web portal&#41;](../my-settings-for-power-bi-integration-web-portal.md).
 
 3. A user security token is returned to the report server.
 
 4. The user security token is saved to the ReportServer database.
 
-5. A list of groups, and dashboards, the user has access to are retrieved from the [!INCLUDE[sspowerbi](../../includes/sspowerbi-md.md)] service.  The user selects the destination group, and dashboard, and the configure how often they want the data refreshed on the [!INCLUDE[sspowerbi](../../includes/sspowerbi-md.md)] tile.
+5. A list of groups, and dashboards, the user has access to are retrieved from the [!INCLUDE[sspowerbi](../../includes/sspowerbi-md.md)] service.  The user selects the destination group and dashboard, and then configures how often they want the data refreshed on the [!INCLUDE[sspowerbi](../../includes/sspowerbi-md.md)] tile.
 
 6. The report item is pinned to the dashboard.
 
 7. A [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] subscription is created to manage the scheduled refresh of the report item to the dashboard tile. The subscription uses the security token that was created when the user signed in.
 
-     The token is good for **90 days**, after which users need to sign in again to create a new user token. When the token is expired,  the pinned tiles will still be displayed on the dashboard but the data will no longer be refreshed.  The [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] subscriptions used for the pinned items will error until a new user token is created. See [My Settings for Power BI Integration &#40;web portal&#41;](../my-settings-for-power-bi-integration-web-portal.md). for more information.
+     The token is good for **90 days**, after which users need to sign in again to create a new user token. When the token is expired,  the pinned tiles will still be displayed on the dashboard but the data will no longer be refreshed.  The [!INCLUDE[ssRSnoversion](../../includes/ssrsnoversion-md.md)] subscriptions used for the pinned items error until a new user token is created. See [My Settings for Power BI Integration &#40;web portal&#41;](../my-settings-for-power-bi-integration-web-portal.md). for more information.
 
-The second time a user pins an item, the steps 1-4 are skipped and instead the App id and URLS are retrieved from the ReportServer database and the flow continues with step 5.
+The second time a user pins an item, the steps 1-4 are skipped and instead the App ID and URLS are retrieved from the ReportServer database and the flow continues with step 5.
 
 ![Diagram showing what happens when a user pins a report item to a dashboard.](../../reporting-services/install-windows/media/ssrs-pin-to-powerbi-flow.png)
 
@@ -144,7 +144,7 @@ The second time a user pins an item, the steps 1-4 are skipped and instead the A
 
 4. The token is sent to Microsoft Entra ID for validation. If the token is valid, the report item data is sent to the dashboard tile and the date property of the tile is updated.
 
-5. If the token is not valid, and error is returned and logged with the report server.  No status or other information is sent to the dashboard.
+5. If the token isn't valid, and error is returned and logged with the report server.  No status or other information is sent to the dashboard.
 
 ![Diagram showing what happens when a subscription fires to refresh a dashboard tile.](../../reporting-services/install-windows/media/ssrs-subscription-to-powerbi-flow.png)
 
@@ -152,7 +152,7 @@ The second time a user pins an item, the steps 1-4 are skipped and instead the A
 
 ## Considerations and limitations
 
-* Viral and government tenants are not supported.
+* Viral and government tenants aren't supported.
 
 ## Related content
 
