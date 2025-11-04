@@ -79,9 +79,9 @@ If you update existing [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] p
 - [Install SQL Server package](sql-server-linux-setup.md#upgrade)
 - [Install SQL Server Full-Text Search on Linux](sql-server-linux-setup-full-text-search.md)
 - [Install SQL Server Integration Services (SSIS) on Linux](sql-server-linux-setup-ssis.md)
-- [Install SQL Server 2019 Machine Learning Services R and Python support on Linux](sql-server-linux-setup-machine-learning.md)
-- [Install PolyBase package](../relational-databases/polybase/polybase-linux-setup.md)
-- [Enable SQL Server Agent](sql-server-linux-setup-sql-agent.md)
+- [Install SQL Server 2019 Machine Learning Services (Python and R) on Linux](sql-server-linux-setup-machine-learning.md)
+- [Install PolyBase on Linux](../relational-databases/polybase/polybase-linux-setup.md)
+- [Install SQL Server Agent on Linux](sql-server-linux-setup-sql-agent.md)
 
 ## Release history
 
