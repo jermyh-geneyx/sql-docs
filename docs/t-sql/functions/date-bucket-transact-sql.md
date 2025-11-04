@@ -1,10 +1,10 @@
 ---
 title: "DATE_BUCKET (Transact-SQL)"
-description: "DATE_BUCKET (Transact-SQL)"
+description: DATE_BUCKET returns the date-time value corresponding to the start of each date-time bucket from a defined origin timestamp.
 author: kendalvandyke
 ms.author: kendalv
 ms.reviewer: randolphwest
-ms.date: 05/09/2022
+ms.date: 11/03/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -15,51 +15,51 @@ helpviewer_keywords:
   - "DATE_BUCKET function"
   - "analytic functions, DATE_BUCKET"
 dev_langs:
-  - "TSQL"
+  - TSQL
 ---
 # DATE_BUCKET (Transact-SQL)
 
 [!INCLUDE [sqlserver2022-asde](../../includes/applies-to-version/sqlserver2022-asdb-asmi-asde.md)]
 
-This function returns the date-time value corresponding to the start of each date-time bucket from the timestamp defined by the `origin` parameter, or the default origin value of `1900-01-01 00:00:00.000` if the origin parameter isn't specified.
+This function returns the date-time value corresponding to the start of each date-time bucket from the timestamp defined by the *origin* parameter, or the default origin value of `1900-01-01 00:00:00.000` if the origin parameter isn't specified.
 
-See [Date and Time Data Types and Functions &#40;Transact-SQL&#41;](../functions/date-and-time-data-types-and-functions-transact-sql.md) for an overview of all Transact-SQL date and time data types and functions.
+See [Date and time data types and functions](date-and-time-data-types-and-functions-transact-sql.md) for an overview of all Transact-SQL date and time data types and functions.
 
 :::image type="icon" source="../../includes/media/topic-link-icon.svg" border="false"::: [Transact-SQL syntax conventions](../language-elements/transact-sql-syntax-conventions-transact-sql.md)
 
 ## Syntax
 
 ```syntaxsql
-DATE_BUCKET (datepart, number, date [, origin ] )
+DATE_BUCKET (datepart , number , date [ , origin ] )
 ```
 
 ## Arguments
 
 #### *datepart*
 
-The part of *date* that is used with the `number` parameter, for example, year, month, day, minute, second.
+The part of *date* that is used with the *number* parameter, for example, **year**, **month**, **day**, **minute**, **second**.
 
 `DATE_BUCKET` doesn't accept user-defined variable equivalents for the *datepart* arguments.
 
-|*datepart*|Abbreviations|
-|---|---|
-|**day**|**dd**, **d**|
-|**week**|**wk**, **ww**|
-|**month**|**mm**, **m**|
-|**quarter**|**qq**, **q**|
-|**year**|**yy**, **yyyy**|
-|**hour**|**hh**|
-|**minute**|**mi**, **n**|
-|**second**|**ss**, **s**|
-|**millisecond**|**ms**|
+| *datepart* | Abbreviations |
+| --- | --- |
+| **day** | **dd**, **d** |
+| **week** | **wk**, **ww** |
+| **month** | **mm**, **m** |
+| **quarter** | **qq**, **q** |
+| **year** | **yy**, **yyyy** |
+| **hour** | **hh** |
+| **minute** | **mi**, **n** |
+| **second** | **ss**, **s** |
+| **millisecond** | **ms** |
 
 #### *number*
 
-The integer number that decides the width of the bucket combined with *datepart* argument. This represents the width of the *datepart* buckets from the origin time. This argument can't be a negative integer value.
+The integer number that decides the width of the bucket combined with *datepart* argument. This argument represents the width of the *datepart* buckets from the origin time. This argument can't be a negative integer value.
 
 #### *date*
 
-An expression that can resolve to one of the following values:
+An expression that must be one of the following values:
 
 - **date**
 - **datetime**
@@ -68,7 +68,7 @@ An expression that can resolve to one of the following values:
 - **smalldatetime**
 - **time**
 
-For **date**, `DATE_BUCKET` will accept a column expression, expression, or user-defined variable if they resolve to any of the data types mentioned above.
+For **date**, `DATE_BUCKET` accepts a column expression, expression, or user-defined variable if they resolve to any of the data types mentioned previously.
 
 #### *origin*
 
@@ -81,112 +81,116 @@ An optional expression that can resolve to one of the following values:
 - **smalldatetime**
 - **time**
 
-The data type for `origin` should match the data type of the `date` parameter.
+The data type for *origin* should match the data type of the *date* parameter.
 
-`DATE_BUCKET` uses a default origin date value of `1900-01-01 00:00:00.000` that is, 12:00 AM on Monday, January 1, 1900, if no `origin` value is specified for the function.
+`DATE_BUCKET` uses a default origin date value of `1900-01-01 00:00:00.000` that is, 12:00 AM on Monday, January 1, 1900, if no *origin* value is specified for the function.
 
-## Return type
+## Return types
 
-The return value data type for this method is dynamic. The return type depends on the argument supplied for `date`. If a valid input data type is supplied for `date`, `DATE_BUCKET` returns the same data type. `DATE_BUCKET` raises an error if a string literal is specified for the `date` parameter.
+The return value data type for this method is dynamic. The return type depends on the argument supplied for *date*. If a valid input data type is supplied for *date*, `DATE_BUCKET` returns the same data type. `DATE_BUCKET` raises an error if a string literal is specified for the *date* parameter.
 
-## Return values
+## Return value
 
-### Understanding the output from `DATE_BUCKET`
+### Understand the output from DATE_BUCKET
 
-`DATE_BUCKET` returns the latest date or time value, corresponding to the *datepart* and *number* parameter. For example, in the expressions below, `DATE_BUCKET` will return the output value of `2020-04-13 00:00:00.0000000`, as the output is calculated based on one week buckets from the default origin time of `1900-01-01 00:00:00.000`. The value `2020-04-13 00:00:00.0000000` is 6,276 weeks from the origin value of `1900-01-01 00:00:00.000`.
+`DATE_BUCKET` returns the latest date or time value, corresponding to the *datepart* and *number* parameter. For example, in the following expressions, `DATE_BUCKET` returns the output value of `2020-04-13 00:00:00.0000000`, as the output is calculated based on one week buckets from the default origin time of `1900-01-01 00:00:00.000`. The value `2020-04-13 00:00:00.0000000` is 6,276 weeks from the origin value of `1900-01-01 00:00:00.000`.
 
 ```sql
-DECLARE @date DATETIME2 = '2020-04-15 21:22:11';
+DECLARE @date AS DATETIME2 = '2020-04-15 21:22:11';
+
 SELECT DATE_BUCKET(WEEK, 1, @date);
 ```
 
-For all the expressions below, the same output value of `2020-04-13 00:00:00.0000000` will be returned. This is because `2020-04-13 00:00:00.0000000` is 6,276 weeks from the origin date, and 6,276 is divisible by 2, 3, 4 and 6.
+For all the following expressions, the same output value of `2020-04-13 00:00:00.0000000` is returned. This is because `2020-04-13 00:00:00.0000000` is 6,276 weeks from the origin date, and 6,276 is divisible by 2, 3, 4 and 6.
 
 ```sql
-DECLARE @date DATETIME2 = '2020-04-15 21:22:11';
+DECLARE @date AS DATETIME2 = '2020-04-15 21:22:11';
+
 SELECT DATE_BUCKET(WEEK, 2, @date);
 SELECT DATE_BUCKET(WEEK, 3, @date);
 SELECT DATE_BUCKET(WEEK, 4, @date);
 SELECT DATE_BUCKET(WEEK, 6, @date);
 ```
 
-The output for the expression below is `2020-04-06 00:00:00.0000000`, which is 6275 weeks from the default origin time `1900-01-01 00:00:00.000`.
+The output for the following expression is `2020-04-06 00:00:00.0000000`, which is 6,275 weeks from the default origin time `1900-01-01 00:00:00.000`.
 
 ```sql
-DECLARE @date DATETIME2 = '2020-04-15 21:22:11';
+DECLARE @date AS DATETIME2 = '2020-04-15 21:22:11';
+
 SELECT DATE_BUCKET(WEEK, 5, @date);
 ```
 
-The output for the expression below is `2020-06-09 00:00:00.0000000`, which is 75 weeks from the specified origin time `2019-01-01 00:00:00`.
+The output for the following expression is `2020-06-09 00:00:00.0000000`, which is 75 weeks from the specified origin time `2019-01-01 00:00:00`.
 
 ```sql
-DECLARE @date DATETIME2 = '2020-06-15 21:22:11';
-DECLARE @origin DATETIME2 = '2019-01-01 00:00:00';
+DECLARE @date AS DATETIME2 = '2020-06-15 21:22:11';
+DECLARE @origin AS DATETIME2 = '2019-01-01 00:00:00';
+
 SELECT DATE_BUCKET(WEEK, 5, @date, @origin);
 ```
 
-## datepart argument
+## The *datepart* argument
 
 **dayofyear**, **day**, and **weekday** return the same value. Each *datepart* and its abbreviations return the same value.
 
-## number argument
+## The *number* argument
 
-The *number* argument can't exceed the range of positive **int** values. In the following statements, the argument for *number* exceeds the range of **int** by 1. The following statement returns the error message, `Msg 8115, Level 16, State 2, Line 2. Arithmetic overflow error converting expression to data type int.`
+The *number* argument can't exceed the range of positive **int** values. In the following statements, the argument for *number* exceeds the range of **int** by 1. The following statement returns the error message: `Msg 8115, Level 16, State 2, Line 2. Arithmetic overflow error converting expression to data type int.`
 
 ```sql
-DECLARE @date DATETIME2 = '2020-04-30 00:00:00';
+DECLARE @date AS DATETIME2 = '2020-04-30 00:00:00';
+
 SELECT DATE_BUCKET(DAY, 2147483648, @date);
 ```
 
-If a negative value for number is passed to the `DATE_BUCKET` function, the following error will be returned.
+If a negative value for number is passed to the `DATE_BUCKET` function, the following error is returned.
 
 ```text
 Msg 9834, Level 16, State 1, Line 1
 Invalid bucket width value passed to DATE_BUCKET function. Only positive values are allowed.
 ```
 
-## date argument
+## The *date* argument
 
-`DATE_BUCKET` return the base value corresponding to the data type of the `date` argument. In the following example, an output value with datetime2 datatype is returned.
+`DATE_BUCKET` return the base value corresponding to the data type of the *date* argument. In the following example, an output value with datetime2 data type is returned.
 
 ```sql
 SELECT DATE_BUCKET(DAY, 10, SYSUTCDATETIME());
 ```
 
-## origin argument
+## The *origin* argument
 
-The data type of the `origin` and `date` arguments in must be the same. If different data types are used, an error will be generated.
+The data type of the *origin* and *date* arguments in must be the same. If different data types are used, an error is generated.
 
 ## Remarks
 
 Use `DATE_BUCKET` in the following clauses:
 
-- GROUP BY
-- HAVING
-- ORDER BY
-- SELECT \<list>
-- WHERE
+- `GROUP BY`
+- `HAVING`
+- `ORDER BY`
+- `SELECT <list>`
+- `WHERE`
 
 ## Examples
+
+[!INCLUDE [article-uses-adventureworks](../../includes/article-uses-adventureworks.md)]
 
 ### A. Calculate DATE_BUCKET with a bucket width of 1 from the origin time
 
 Each of these statements increments `DATE_BUCKET` with a bucket width of 1 from the origin time:
 
 ```sql
-DECLARE @date DATETIME2 = '2020-04-30 21:21:21';
+DECLARE @date AS DATETIME2 = '2020-04-30 21:21:21';
+
 SELECT 'Week', DATE_BUCKET(WEEK, 1, @date)
-UNION ALL
-SELECT 'Day', DATE_BUCKET(DAY, 1, @date)
-UNION ALL
-SELECT 'Hour', DATE_BUCKET(HOUR, 1, @date)
-UNION ALL
-SELECT 'Minutes', DATE_BUCKET(MINUTE, 1, @date)
-UNION ALL
-SELECT 'Seconds', DATE_BUCKET(SECOND, 1, @date);
+UNION ALL SELECT 'Day', DATE_BUCKET(DAY, 1, @date)
+UNION ALL SELECT 'Hour', DATE_BUCKET(HOUR, 1, @date)
+UNION ALL SELECT 'Minutes', DATE_BUCKET(MINUTE, 1, @date)
+UNION ALL SELECT 'Seconds', DATE_BUCKET(SECOND, 1, @date);
 ```
 
-Here's the result set.
+[!INCLUDE [ssresult-md](../../includes/ssresult-md.md)]
 
 ```output
 Week    2020-04-27 00:00:00.0000000
@@ -207,13 +211,13 @@ These examples are built using the [!INCLUDE [sssampledbdwobject-md](../../inclu
 This example specifies user-defined variables as arguments for *number* and *date*:
 
 ```sql
-DECLARE @days INT = 365,
-    @datetime DATETIME2 = '2000-01-01 01:01:01.1110000';
-    /* 2000 was a leap year */;
+DECLARE @days AS INT = 365,
+        @datetime AS DATETIME2 = '2000-01-01 01:01:01.1110000';
+
 SELECT DATE_BUCKET(DAY, @days, @datetime);
 ```
 
-Here's the result set.
+[!INCLUDE [ssresult-md](../../includes/ssresult-md.md)]
 
 ```output
 1999-12-08 00:00:00.0000000
@@ -221,20 +225,19 @@ Here's the result set.
 
 #### Specify a column as date
 
-In the example below, we're calculating the sum of `OrderQuantity` and sum of `UnitPrice` grouped over weekly date buckets.
+In the following example, we calculate the sum of `OrderQuantity` and sum of `UnitPrice` grouped over weekly date buckets.
 
 ```sql
-SELECT DATE_BUCKET(WEEK, 1, CAST(ShipDate AS DATETIME2)) AS ShippedDateBucket
-    , SUM(OrderQuantity) AS SumOrderQuantity
-    , SUM(UnitPrice) AS SumUnitPrice
-FROM dbo.FactInternetSales FIS
-WHERE ShipDate BETWEEN '2011-01-03 00:00:00.000'
-        AND '2011-02-28 00:00:00.000'
-GROUP BY DATE_BUCKET(WEEK, 1, CAST(ShipDate AS DATETIME2))
+SELECT DATE_BUCKET(WEEK, 1, CAST (ShipDate AS DATETIME2)) AS ShippedDateBucket,
+       SUM(OrderQuantity) AS SumOrderQuantity,
+       SUM(UnitPrice) AS SumUnitPrice
+FROM dbo.FactInternetSales AS FIS
+WHERE ShipDate BETWEEN '2011-01-03 00:00:00.000' AND '2011-02-28 00:00:00.000'
+GROUP BY DATE_BUCKET(WEEK, 1, CAST (ShipDate AS DATETIME2))
 ORDER BY ShippedDateBucket;
 ```
 
-Here's the result set.
+[!INCLUDE [ssresult-md](../../includes/ssresult-md.md)]
 
 ```output
 ShippedDateBucket           SumOrderQuantity SumUnitPrice
@@ -258,7 +261,7 @@ This example specifies `SYSDATETIME` for *date*. The exact value returned depend
 SELECT DATE_BUCKET(WEEK, 10, SYSDATETIME());
 ```
 
-Here's the result set.
+[!INCLUDE [ssresult-md](../../includes/ssresult-md.md)]
 
 ```output
 2020-03-02 00:00:00.0000000
@@ -266,25 +269,26 @@ Here's the result set.
 
 #### Specify scalar subqueries and scalar functions as number and date
 
-This example uses scalar subqueries, `MAX(OrderDate)`, as arguments for *number* and *date*. `(SELECT top 1 CustomerKey FROM dbo.DimCustomer where GeographyKey > 100)` serves as an artificial argument for the number parameter, to show how to select a *number* argument from a value list.
+This example uses scalar subqueries, `MAX(OrderDate)`, as arguments for *number* and *date*. `(SELECT TOP 1 CustomerKey FROM dbo.DimCustomer WHERE GeographyKey > 100)` serves as an artificial argument for the number parameter, to show how to select a *number* argument from a value list.
 
 ```sql
 SELECT DATE_BUCKET(WEEK, (
     SELECT TOP 1 CustomerKey
     FROM dbo.DimCustomer
-    WHERE GeographyKey > 100
-    ), (
-    SELECT MAX(OrderDate)
-    FROM dbo.FactInternetSales
-));
+    WHERE GeographyKey > 100),
+    (
+        SELECT MAX(OrderDate)
+        FROM dbo.FactInternetSales
+    )
+);
 ```
 
 #### Specify numeric expressions and scalar system functions as number and date
 
-This example uses a numeric expression ((10/2)), and scalar system functions (`SYSDATETIME`) as arguments for number and date.
+This example uses a numeric expression (`(10/2)`), and scalar system functions (`SYSDATETIME`) as arguments for *number* and *date*.
 
 ```sql
-SELECT DATE_BUCKET(WEEK, (10/2), SYSDATETIME());
+SELECT DATE_BUCKET(WEEK, (10 / 2), SYSDATETIME());
 ```
 
 #### Specify an aggregate window function as number
@@ -292,16 +296,15 @@ SELECT DATE_BUCKET(WEEK, (10/2), SYSDATETIME());
 This example uses an aggregate window function as an argument for *number*.
 
 ```sql
-SELECT DISTINCT DATE_BUCKET(DAY, 30, CAST([ShipDate] AS DATETIME2)) AS DateBucket
-    , FIRST_VALUE([SalesOrderNumber]) OVER (
+SELECT DISTINCT DATE_BUCKET(DAY, 30, CAST([ShipDate] AS DATETIME2)) AS DateBucket,
+    FIRST_VALUE([SalesOrderNumber]) OVER (
         ORDER BY DATE_BUCKET(DAY, 30, CAST([ShipDate] AS DATETIME2))
-        ) AS First_Value_In_Bucket
-    , LAST_VALUE([SalesOrderNumber]) OVER (
+    ) AS First_Value_In_Bucket,
+    LAST_VALUE([SalesOrderNumber]) OVER (
         ORDER BY DATE_BUCKET(DAY, 30, CAST([ShipDate] AS DATETIME2))
-        ) AS Last_Value_In_Bucket
+    ) AS Last_Value_In_Bucket
 FROM [dbo].[FactInternetSales]
-WHERE ShipDate BETWEEN '2011-01-03 00:00:00.000'
-        AND '2011-02-28 00:00:00.000'
+WHERE ShipDate BETWEEN '2011-01-03 00:00:00.000' AND '2011-02-28 00:00:00.000'
 ORDER BY DateBucket;
 GO
 ```
@@ -311,13 +314,14 @@ GO
 This example uses a non-default origin value to generate the date buckets.
 
 ```sql
-DECLARE @date DATETIME2 = '2020-06-15 21:22:11';
-DECLARE @origin DATETIME2 = '2019-01-01 00:00:00';
+DECLARE @date AS DATETIME2 = '2020-06-15 21:22:11';
+DECLARE @origin AS DATETIME2 = '2019-01-01 00:00:00';
+
 SELECT DATE_BUCKET(HOUR, 2, @date, @origin);
 ```
 
-## See also
+## Related content
 
-- [CAST and CONVERT &#40;Transact-SQL&#41;](../functions/cast-and-convert-transact-sql.md)
+- [CAST and CONVERT (Transact-SQL)](cast-and-convert-transact-sql.md)
 - [Date and time types](../data-types/date-and-time-types.md)
 - [Date and time data types and functions (Transact-SQL)](date-and-time-data-types-and-functions-transact-sql.md)
