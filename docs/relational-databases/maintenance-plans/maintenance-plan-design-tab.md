@@ -1,10 +1,10 @@
 ---
-title: Maintenance Plan (Design Tab)
+title: "Maintenance Plan (Design Tab)"
 description: Maintenance Plan (Design Tab)
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest
-ms.date: 03/27/2023
+ms.date: 11/03/2025
 ms.service: sql
 ms.subservice: supportability
 ms.topic: conceptual
@@ -14,125 +14,137 @@ f1_keywords:
   - "sql13.swb.maint.subplaneditor.f1"
   - "Task.FileExtension"
 ---
-# Maintenance Plan (Design Tab)
+# Maintenance Plan (Design tab)
 
 [!INCLUDE [SQL Server](../../includes/applies-to-version/sqlserver.md)]
 
-Use the **Maintenance Plan (Design Tab)** to specify the properties of a maintenance plan and its subplans. Drag tasks from the Toolbox to the plan designer. Right-click groups of tasks to create branching execution paths. Maintenance plans are saved as [!INCLUDE[ssISnoversion](../../includes/ssisnoversion-md.md)] packages that are run by [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] Agent jobs.
+Use the maintenance plan designer to specify the properties of a maintenance plan and its subplans. Drag tasks from the **Toolbox** to the plan designer. Right-click groups of tasks to create branching execution paths. Maintenance plans are saved as [!INCLUDE [ssISnoversion](../../includes/ssisnoversion-md.md)] packages that are run by [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Agent jobs.
 
 ## Options
 
-- **Add Subplan**
+#### Add Subplan
 
-  Add a subplan that you can configure.
+Add a subplan that you can configure.
 
-- **Subplan Properties**
+#### Subplan Properties
 
-  Display the **Subplan Properties** dialog box. Select a subplan in the grid and select this icon to enter a name, description, and schedule for the subplan. You can also double-click the subplan in the grid to display the **Subplan Properties** dialog box. Subplan names are limited to 128 characters and subplan descriptions are limited to 512 characters.
+Display the **Subplan Properties** dialog box. Select a subplan in the grid and select this icon to enter a name, description, and schedule for the subplan. You can also double-click the subplan in the grid to display the **Subplan Properties** dialog box. Subplan names are limited to 128 characters and subplan descriptions are limited to 512 characters.
 
-- **Delete Selected Subplan**
+#### Delete Selected Subplan
 
-  Delete the selected subplan.
+Delete the selected subplan.
 
-- **Subplan Schedule**
+#### Subplan Schedule
 
-  Display the **Job Schedule Properties** dialog box. Select a subplan in the grid and select this icon to configure a schedule for the subplan.
+Display the **Job Schedule Properties** dialog box. Select a subplan in the grid and select this icon to configure a schedule for the subplan.
 
-- **Remove Schedule**
+#### Remove Schedule
 
-  Remove a schedule from the selected subplan.
+Remove a schedule from the selected subplan.
 
-- **Manage Connections**
+#### Manage Connections
 
-  Display the **Manage Connections** dialog box. Used to add additional [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] instance connections to the maintenance plan. Each maintenance task in the subplan editor can use any of these connections. When executing, the maintenance plan makes a connection from the maintenance plan server to the [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] servers specified, using the connection credentials.
+Display the **Manage Connections** dialog box. Used to add extra [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] instance connections to the maintenance plan. Each maintenance task in the subplan editor can use any of these connections. When the maintenance plan executes, it makes a connection from the maintenance plan server to the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] servers specified, using the connection credentials.
 
-- **Reporting and Logging**
+#### Reporting and Logging
 
-  Display the **Reporting and Logging** dialog box, used to manage reports concerning maintenance plan activity, and to configure logging to the local or a remote server.
+Display the **Reporting and Logging** dialog box, used to manage reports concerning maintenance plan activity, and to configure logging to the local or a remote server.
 
-- **Servers**
+#### Servers
 
-  Display the **Servers** dialog box, which is used to select the servers where the subplan tasks will be run. This option is enabled only on master servers in multiserver environments. For more information, see [Create a Multiserver Environment](../../ssms/agent/create-a-multiserver-environment.md).
+Display the **Servers** dialog box, which is used to select the servers where the subplan tasks will run. This option is enabled only on master servers in multiserver environments. For more information, see [Create a Multiserver Environment](../../ssms/agent/create-a-multiserver-environment.md).
 
-- **Name**
+#### Name
 
-  Display the maintenance plan name. For new maintenance plans, the name is specified in a dialog box before the maintenance plan designer opens. To rename a maintenance plan, right-click the plan in Object Explorer, and then select **Rename**.
+Display the maintenance plan name. For new maintenance plans, the name is specified in a dialog box before the maintenance plan designer opens. To rename a maintenance plan, right-click the plan in Object Explorer, and then select **Rename**.
 
-- **Description**
+#### Description
 
-  View or specify a description for the maintenance plan. The maximum length for a description is 512 characters.
+View or specify a description for the maintenance plan. The maximum length for a description is 512 characters.
 
-- **Designer Surface**
+#### Designer Surface
 
-   Design and maintain maintenance plans. Use the designer surface to add maintenance tasks to a plan, remove tasks from a plan, specify precedence links between the tasks, and indicate task branching and parallelism.
+Design and maintain maintenance plans. The following section describes the design surface in more detail.
 
-A precedence link between two tasks establishes a relationship between the tasks. The second task (the *dependent task*) executes only if the execution result of the first task (the *precedent task*) matches specified criteria. Typically the execution result specified is **Success**, **Failure**, or **Completion**. The maintenance plan designer surface is based on the [!INCLUDE[ssIS](../../includes/ssis-md.md)] designer surface. For more information, see [Precedence Constraints](../../integration-services/control-flow/precedence-constraints.md).
+## Use the design surface
 
-As an example, a Defragment Index Task could be specified to execute only if a previous Check Database Integrity task completed successfully. The task precedence linkage feature also allows for error or failure conditions to be handled in a plan. For example, if the Check Database Integrity task failed, a Notify Operator task could notify a user or operator about the failure.
+Use the designer surface to add maintenance tasks to a plan, remove tasks from a plan, specify precedence links between the tasks, and indicate task branching and parallelism.
 
-Specifying tasks to execute after the failure of a predecessor task is an example of *task branching*.
+### Add and remove tasks
 
-Indicating that two or more tasks begin simultaneously, for example upon the successful completion of a predecessor task, is an example of specifying *task parallelism*. All tasks with no constraints will start and run in parallel. Use constraints to delay  tasks so earlier tasks complete first.
+To add a maintenance task to a plan, drag the task's icon from the **Maintenance Plan Tasks** toolbox to the plan design surface, or double-click the task in the toolbox, which adds that task to the currently active designer surface. If the **Maintenance Plan Tasks** toolbox isn't visible, choose **Toolbox** from the [!INCLUDE [ssManStudioFull](../../includes/ssmanstudiofull-md.md)] **View** menu. Expand the **Maintenance Plan Tasks** node in the **Toolbox** pane.
 
-After a maintenance task is placed on the design surface, its properties can be edited as needed. For example, the specific database to back up in a Back Up Database Task is specified after the task is added the plan. Tasks on the design surface that aren't properly configured contain a red icon with a white x.
+To remove a task from a plan, select the task in the designer surface and press the <kbd>Del</kbd> key, or right-click the task and then select **Delete**.
 
-To add a maintenance task to a plan, drag the task's icon from the **Maintenance Plan Tasks** toolbox to the plan design surface, or double-click the task in the toolbox, which adds that task to the currently active designer surface. If the **Maintenance Plan Tasks** toolbox isn't visible, choose **Toolbox** from the [!INCLUDE[ssManStudioFull](../../includes/ssmanstudiofull-md.md)] **View** menu. Expand the **Maintenance Plan Tasks** node in the **Toolbox** pane.
+### Precedence links
 
-To remove a task from a plan, select the task in the designer surface and press the **DELETE** key, or right-click the task and then select **Delete**.
+A precedence link between two tasks establishes a relationship between the tasks. The second task (the *dependent task*) executes only if the execution result of the first task (the *precedent task*) matches specified criteria. Typically the execution result specified is **Success**, **Failure**, or **Completion**. The maintenance plan designer surface is based on the [!INCLUDE [ssIS](../../includes/ssis-md.md)] designer surface. For more information, see [Precedence Constraints](../../integration-services/control-flow/precedence-constraints.md).
+
+As an example, a Defragment Index task could be specified to execute only if a previous Check Database Integrity task completed successfully. The task precedence linkage feature also allows for error or failure conditions to be handled in a plan. For example, if the Check Database Integrity task failed, a Notify Operator task could notify a user or operator about the failure.
 
 To specify precedence links between two tasks, first drag the tasks to the design surface, and then select the task that occurs first (the precedent task), and drag the arrow to the dependent task. When a precedence link has been established, the designer displays an arrow linking the two tasks, with the precedent task pointing to the dependent task. By default, when a link is first established, the link's constraint is set such that the dependent task only executes if the execution result of the precedent task is **Success**.
 
-To change the properties of a precedence link, double-click the link to launch the **Precedence Constraint Editor**. This provides many options for specifying the logical conditions that determine whether the dependent task executes. For example, the **Execution result** can be set to **Failure**, in which case the dependent task only executes if the precedent task fails. Modifying the execution result property of a link to **Success**, **Failure**, or **Completion**, can also be accomplished by right-clicking the link and then selecting from the context menu.
+To change the properties of a precedence link, double-click the link to launch the **Precedence Constraint Editor**. This provides many options for specifying the logical conditions that determine whether the dependent task executes. For example, the **Execution result** can be set to **Failure**, in which case the dependent task only executes if the precedent task fails. You can modify the execution result property of a link to **Success**, **Failure**, or **Completion**, by right-clicking the link and then selecting from the context menu.
+
+### Task branching and task parallelism
+
+Specifying tasks to execute after the failure of a predecessor task is an example of *task branching*.
+
+Indicating that two or more tasks begin simultaneously, for example upon the successful completion of a predecessor task, is an example of specifying *task parallelism*. All tasks with no constraints start and run in parallel. Use constraints to delay tasks so earlier tasks complete first.
 
 To specify task branching, first create precedence links between two tasks. Then, put another dependent task on the design surface that executes on a different outcome than the first dependent task. Select the predecessor task, and drag the second arrow from the precedent task to the dependent task. To change the execution result (**Success**, **Failure**, **Completion**) that causes a dependent task to execute, double-click the link arrow and modify the **Execution result** field. Alternatively, right-click the link and select the desired execution result value from the shortcut menu.
 
 To specify task parallelism, link two or more dependent tasks to a single precedent task. Modify the properties of the precedence links so that the links pointing to the dependent tasks that run in parallel have the same value for their execution result fields.
 
-## Additional features available from the shortcut menu
+### Edit task properties
 
-To see additional options, select one or more tasks on the design surface, and then right-click, to open the shortcut menu. In addition to typical **Cut**, **Copy**, **Paste**, **Delete**, and **Select All**, the following special options are available for some tasks.
+After a maintenance task is placed on the design surface, its properties can be edited as needed. For example, the specific database to back up in a Back Up Database task is specified after the task is added the plan. Tasks on the design surface that aren't properly configured contain a red icon with a white x.
 
-- **Add Annotation**
+## Extra features available from the shortcut menu
 
-  Adds a descriptive note to the design surface.
+To see more options, select one or more tasks on the design surface, and then right-click, to open the shortcut menu. In addition to typical **Cut**, **Copy**, **Paste**, **Delete**, and **Select All**, the following special options are available for some tasks.
 
-- **Edit**
+#### Add Annotation
 
-  Opens the property dialog box for the task.
+Adds a descriptive note to the design surface.
 
-- **Disable**
+#### Edit
 
-  Makes the task temporarily unavailable.
+Opens the property dialog box for the task.
 
-- **Enable**
+#### Disable
 
-  Restores a disabled task.
+Makes the task temporarily unavailable.
 
-- **Group**
+#### Enable
 
-  Creates a group that contains one or more tasks.
+Restores a disabled task.
 
-- **Ungroup**
+#### Group
 
-  Removes tasks from a group.
+Creates a group that contains one or more tasks.
 
-- **Autosize**
+#### Ungroup
 
-  Sets the size of each task to the optimal size for that task.
+Removes tasks from a group.
 
-- **Collapse**
+#### Autosize
 
-  Hides tasks within a group.
+Sets the size of each task to the optimal size for that task.
 
-- **Expand**
+#### Collapse
 
-  Shows the tasks in a group that were previously hidden using **Collapse**.
+Hides tasks within a group.
 
-- **Zoom**
+#### Expand
 
-  Changes the size of the tasks on the design surface
+Shows the tasks in a group that were previously hidden using **Collapse**.
 
-## See also
+#### Zoom
 
-- [Maintenance Plans](maintenance-plans.md)
-- [Create a Maintenance Plan](create-a-maintenance-plan.md)
+Changes the size of the tasks on the design surface
+
+## Related content
+
+- [Maintenance plans](maintenance-plans.md)
+- [Create a maintenance plan](create-a-maintenance-plan.md)
