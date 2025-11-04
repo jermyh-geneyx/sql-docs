@@ -4,7 +4,7 @@ description: This article contains the release notes and supported features for 
 author: rwestMSFT
 ms.author: randolphwest
 ms.reviewer: amitkh, vanto
-ms.date: 09/09/2025
+ms.date: 11/04/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: release-notes
@@ -77,7 +77,7 @@ If you update existing [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] p
 - [Install SQL Server package](sql-server-linux-setup.md#upgrade)
 - [Install SQL Server Full-Text Search on Linux](sql-server-linux-setup-full-text-search.md)
 - [Install SQL Server Integration Services (SSIS) on Linux](sql-server-linux-setup-ssis.md)
-- [Enable SQL Server Agent](sql-server-linux-setup-sql-agent.md)
+- [Install SQL Server Agent on Linux](sql-server-linux-setup-sql-agent.md)
 
 ## Release history
 
