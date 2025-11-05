@@ -37,7 +37,6 @@ To upgrade an existing instance to the Next-gen General Purpose service tier in 
 > [!NOTE]
 > For instances inside of a failover group, changing the service tier to, or from, the Next-gen General Purpose tier isn't supported. You must first delete the failover group before modifying either replica, and then re-create the failover group after the change takes effect.
 
-
 ## New instances 
 
 You can use the Next-gen General Purpose tier upgrade for new instances when you deploy them in the Azure portal.  To do so, follow these steps:
@@ -55,6 +54,10 @@ You can use the Next-gen General Purpose tier upgrade for new instances when you
 1. Select **Apply** to save your instance configuration and go back to the **Create Azure SQL Managed Instance** pane. 
 1. Fill out the rest of the values to configure your new instance. 
 1. Select **Review + create** to review your settings, and then select **Create** to deploy your new instance using the Next-gen General purpose tier upgrade. 
+
+## Remarks
+
+- Zone redundancy isn't available for the Next-gen General Purpose service tier upgrade.
 
 ## Next steps
 
