@@ -4,7 +4,7 @@ description: This page contains the support matrix and support life-cycle policy
 author: David-Engel
 ms.author: davidengel
 ms.reviewer: randolphwest
-ms.date: 03/17/2025
+ms.date: 11/05/2025
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
@@ -63,17 +63,21 @@ Microsoft JDBC Driver for SQL Server defines external dependencies in its Maven 
 
 ## SQL version compatibility
 
+|Database version&nbsp;&#8594;<br />&#8595; Driver Version|Azure SQL Database|Azure Synapse Analytics|Azure SQL Managed Instance|SQL Server 2022|SQL Server 2019|SQL Server 2017|SQL Server 2016|SQL Server 2014|SQL Server 2012|
+|---|---|---|---|---|---|---|---|---|---|
+|13.2|Yes|Yes|Yes|Yes|Yes|Yes|Yes|   |   |
+|12.10|Yes|Yes|Yes|Yes|Yes|Yes|Yes|   |   |
+|12.8|Yes|Yes|Yes|Yes|Yes|Yes|Yes|   |   |
+|12.6|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|   |
+|12.4|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|   |
+|12.2|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|   |
+|11.2|Yes|Yes|Yes|   |Yes|Yes|Yes|Yes|   |
+|10.2|Yes|Yes|Yes|   |Yes|Yes|Yes|Yes|Yes|
+| 9.4|Yes|Yes|Yes|   |Yes|Yes|Yes|Yes|Yes|
+| 9.2|Yes|Yes|Yes|   |Yes|Yes|Yes|Yes|Yes|
+
 |Database version&nbsp;&#8594;<br />&#8595; Driver Version|Azure SQL Database|Azure Synapse Analytics|Azure SQL Managed Instance|SQL Server 2022|SQL Server 2019|SQL Server 2017|SQL Server 2016|SQL Server 2014|SQL Server 2012|PDW 2008R2 AU3<sup>4</sup>|SQL Server 2008 R2|SQL Server 2008|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|
-|12.10|Yes|Yes|Yes|Yes|Yes|Yes|Yes|   |   |   |   |   |
-|12.8|Yes|Yes|Yes|Yes|Yes|Yes|Yes|   |   |   |   |   |
-|12.6|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|   |   |   |   |
-|12.4|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|   |   |   |   |
-|12.2|Yes|Yes|Yes|Yes|Yes|Yes|Yes|Yes|   |   |   |   |
-|11.2|Yes|Yes|Yes|   |Yes|Yes|Yes|Yes|   |   |   |   |
-|10.2|Yes|Yes|Yes|   |Yes|Yes|Yes|Yes|Yes|   |   |   |
-| 9.4|Yes|Yes|Yes|   |Yes|Yes|Yes|Yes|Yes|   |   |   |
-| 9.2|Yes|Yes|Yes|   |Yes|Yes|Yes|Yes|Yes|   |   |   |
 | 8.4|Yes|Yes|Yes|   |Yes|Yes|Yes|Yes|Yes|Yes|   |   |
 | 8.2|Yes|Yes|Yes|   |Yes|Yes|Yes|Yes|Yes|Yes|   |   |
 | 7.4|Yes|Yes|Yes|   |Yes|Yes|Yes|Yes|Yes|Yes|   |   |
@@ -104,6 +108,7 @@ Microsoft JDBC Driver for SQL Server defines external dependencies in its Maven 
 
 |JDBC Driver Version|JRE Versions|JDBC API Version|
 |-|-|-|
+|[13.2](release-notes-for-the-jdbc-driver.md#131)|1.8, 11, 17, 21, 24|4.2, 4.3 (partially)|
 |[12.10](release-notes-for-the-jdbc-driver.md#130)|1.8, 11, 17, 21, 23|4.2, 4.3 (partially)|
 |[12.8](release-notes-for-the-jdbc-driver.md#128)|1.8, 11, 17, 21, 22|4.2, 4.3 (partially)|
 |[12.6](release-notes-for-the-jdbc-driver.md#126)|1.8, 11, 17, 21|4.2, 4.3 (partially)|
