@@ -4,7 +4,7 @@ description: The native JSON data type provides advantages for storing JSON data
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest, jovanpop, umajay
-ms.date: 09/16/2025
+ms.date: 11/05/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -147,6 +147,20 @@ The behavior of `CAST ( ... AS JSON)` returns a **json** data type, but the [sp_
 Currently, the `OPENJSON()` function doesn't accept the **json** data type in some platforms. Currently, it's an implicit conversion. Explicitly convert to **nvarchar(max)** first.
 
 - In [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)], the `OPENJSON()` function does support **json**. For more information, see [Key JSON capabilities in SQL Server 2025](../../relational-databases/json/json-data-sql-server.md#key-json-capabilities).
+
+### Size limitations
+
+Size limits of JSON data in storage:
+
+| Field | Limitation |
+|:--|:--|
+| JSON data type size (binary) | Up to 2GB |
+| Number of unique keys | Up to 32K |
+| Per key string size | 7998 bytes |
+| Per string value size | 536870911 bytes |
+| Number of properties in one object | Up to 65535 |
+| Number of elements in one array | Up to 65535 |
+| Number of nested levels in JSON document | 128 |  
 
 ## Related content
 
