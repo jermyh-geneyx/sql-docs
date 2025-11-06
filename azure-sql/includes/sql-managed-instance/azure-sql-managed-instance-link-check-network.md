@@ -26,7 +26,7 @@ To test network connectivity between SQL Server and SQL Managed Instance in SSMS
 1. Connect to the instance that will be the primary replica in SSMS. 
 1. In **Object Explorer**, expand databases, and right-click the database you intend to link with the secondary. Select **Tasks** > **Azure SQL Managed Instance link** > **Test Connection** to open the **Network Checker** wizard: 
 
-   :::image type="content" source="../../managed-instance/media/managed-instance-link-preparation/test-connection-in-ssms.png" alt-text="Screenshot of object explorer in S S M S, with test connection selected in the database link right-click menu.":::
+   :::image type="content" source="../../managed-instance/media/managed-instance-link-preparation/test-connection-in-ssms.png" alt-text="Screenshot of object explorer in SSMS, with test connection selected in the database link right-click menu.":::
 
 1. Select **Next** on the **Introduction** page of the **Network Checker** wizard.
 1. If all requirements are met on the **Prerequisites** page, select **Next**. Otherwise resolve any unmet prerequisites, and then select **Re-run Validation**. 
@@ -189,7 +189,7 @@ Use SQL Server Agent on SQL Server to run connectivity tests from SQL Server to 
 
 1. Run the script and check the results. You should see results such as the following example:
 
-   :::image type="content" source="../../managed-instance/media/managed-instance-link-preparation/test-connectivity-results.png" alt-text="Screenshot that shows the output with the test results in S S M S.":::
+   :::image type="content" source="../../managed-instance/media/managed-instance-link-preparation/test-connectivity-results.png" alt-text="Screenshot that shows the output with the test results in SSMS.":::
 
 1. Verify the results:
 
