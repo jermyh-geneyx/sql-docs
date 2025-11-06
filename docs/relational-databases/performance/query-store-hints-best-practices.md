@@ -94,7 +94,7 @@ EXECUTE sys.sp_query_store_set_hints
     @query_hints = N'OPTION (USE HINT (''ABORT_QUERY_EXECUTION''))';
 ```
 
-To unblock the same query, execute execute [sys.sp_query_store_clear_hints](../system-stored-procedures/sys-sp-query-store-clear-hints-transact-sql.md):
+To unblock the same query, execute [sys.sp_query_store_clear_hints](../system-stored-procedures/sys-sp-query-store-clear-hints-transact-sql.md):
 
 ```sql
 EXECUTE sys.sp_query_store_clear_hints @query_id = 39;
