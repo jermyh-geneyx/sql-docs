@@ -69,7 +69,7 @@ Use the following to configure auditing using user-assigned managed identity:
 
 # [The Azure CLI](#tab/azure-cli)
 
-In order to use a managed identity, pass the `--storage-key` parameter as an empty string to use the primary managed identity assigned to the server when configuring auditing. Here's a sample command :
+In order to use a managed identity, pass the `--storage-key` parameter as an empty string to use the primary managed identity assigned to the server when configuring auditing. Here's a sample command:
 
 
 ```azurecli 
