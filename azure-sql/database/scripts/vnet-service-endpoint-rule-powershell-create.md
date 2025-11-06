@@ -366,7 +366,7 @@ Or, you might be unsure whether your subnet has the `Microsoft.Sql` type name. Y
 
 Here are the phases of the PowerShell script:
 
-1. Sign in to to your Azure account, needed only once per PowerShell session. Assign variables.
+1. Sign in to your Azure account, needed only once per PowerShell session. Assign variables.
 2. Search for your virtual network, and then for your subnet.
 3. Is your subnet tagged as `Microsoft.Sql` endpoint server type?
 4. Add a Virtual Service endpoint of type name `Microsoft.Sql`, on your subnet.

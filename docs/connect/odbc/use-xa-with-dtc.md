@@ -714,7 +714,7 @@ void XaTestRunner::GetUniqueName(std::string& name)
     auto id = counter++;
 
     auto duration = std::chrono::system_clock::now().time_since_epoch();
-    long long millis = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
+    long millis = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
     char szName[64];
     sprintf_s(szName, sizeof(szName), "test_%d_%lld", id, millis);
     name = szName;

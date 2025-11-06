@@ -27,7 +27,7 @@ helpviewer_keywords:
 
 ## Explanation
 
-This message indicates the the hardware in the operating system supports the ability to recover from memory errors. On computers that have newer hardware and are running Windows Server 2012 or a later version, the hardware can notify the operating system and applications that memory pages (operating system pages) are marked as bad or damaged. Applications such as [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] can register these bad memory page notifications by using the following API set:
+This message indicates the hardware in the operating system supports the ability to recover from memory errors. On computers that have newer hardware and are running Windows Server 2012 or a later version, the hardware can notify the operating system and applications that memory pages (operating system pages) are marked as bad or damaged. Applications such as [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] can register these bad memory page notifications by using the following API set:
 
 - `GetMemoryErrorHandlingCapabilities`
 - `RegisterBadMemoryNotification`

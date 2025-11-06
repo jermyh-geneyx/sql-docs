@@ -37,7 +37,7 @@ The **tablediff** utility is used to compare the data in two tables for non-conv
 - Log results to an output file or into a table in the destination database.
 
 > [!NOTE]  
-> The **tablediff** utility is part of the the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] Replication tools. In [!INCLUDE [sssql22-md](../includes/sssql22-md.md)], `tablediff.exe` can be found at its default location of `C:\Program Files\Microsoft SQL Server\160\COM`, once the replication feature has been installed.
+> The **tablediff** utility is part of the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] Replication tools. In [!INCLUDE [sssql22-md](../includes/sssql22-md.md)], `tablediff.exe` can be found at its default location of `C:\Program Files\Microsoft SQL Server\160\COM`, once the replication feature has been installed.
 
 ## Syntax
 
