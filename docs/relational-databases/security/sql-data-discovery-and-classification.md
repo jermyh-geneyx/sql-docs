@@ -42,7 +42,7 @@ The classification includes two metadata attributes:
 
 2. In the SSMS **Object Explorer**, select the database that you would like to classify and choose **Tasks** > **Data Discovery and Classification** > **Classify Data...**.
 
-   ![Screenshot showing the S S M S Object Explorer with Tasks > Data Discovery and Classification > Classify Data... selected.][0]
+   ![Screenshot showing the SSMS Object Explorer with Tasks > Data Discovery and Classification > Classify Data... selected.][0]
 
 3. The classification engine scans your database for columns (based on column names only) containing potentially sensitive data and provides a list of **recommended column classifications**:
 
@@ -68,7 +68,7 @@ The classification includes two metadata attributes:
 
 4. To display the classified columns, select appropriate **schema** and corresponding **table** from the drop-down, then select **Load Columns**.
 
-   :::image type="content" source="media/sql-data-discovery-and-classification/data-classification-load-columns.png" alt-text="screenshot of S S M S data classification loading classified columns.":::
+   :::image type="content" source="media/sql-data-discovery-and-classification/data-classification-load-columns.png" alt-text="screenshot of SSMS data classification loading classified columns.":::
 
 5. You can also **manually classify** columns as an alternative, or in addition, to the recommendation-based classification:
 
@@ -82,7 +82,7 @@ The classification includes two metadata attributes:
 
     - If you want to add classification for all the unclassified columns for a specific table in a single attempt, then select **All Unclassified** in the **Column** drop down of **Add Classification** page.
     
-        :::image type="content" source="media/sql-data-discovery-and-classification/data-classification-all-unclassified-column-selection.png" alt-text="screenshot of S S M S data classification selecting all unclassified columns":::
+        :::image type="content" source="media/sql-data-discovery-and-classification/data-classification-all-unclassified-column-selection.png" alt-text="screenshot of SSMS data classification selecting all unclassified columns":::
 
 6. To complete your classification and persistently label (tag) the database columns with the new classification metadata, select the **Save** button on the top menu of the window.
 
@@ -111,7 +111,7 @@ Power BI datasets or reports that connect to sensitivity-labeled data in support
 1. In SQL Server Management Studio (SSMS), connect to the SQL Server.
 1. In the SSMS Object Explorer, select the database that you would like to classify and select **Tasks** > **Data Discovery and Classification** > **Set Microsoft Information Protection Policy**
 
-   :::image type="content" source="media/sql-data-discovery-and-classification/data-classification-set-microsoft-information-protection-policy.png" alt-text="Screenshot to sset Microsoft Information Protection Policy in S S M S":::
+   :::image type="content" source="media/sql-data-discovery-and-classification/data-classification-set-microsoft-information-protection-policy.png" alt-text="Screenshot to sset Microsoft Information Protection Policy in SSMS":::
 
 1. An authentication window for Microsoft 365 to set the Microsoft Information Protection Policy will show. Select **Sign In** and enter or select a valid user credential to authenticate to your Microsoft 365 tenant.
 
@@ -119,21 +119,21 @@ Power BI datasets or reports that connect to sensitivity-labeled data in support
 
 1. If the authentication is successful, you'll see a pop-up window with status as **Success**.
 
-   :::image type="content" source="media/sql-data-discovery-and-classification/successfully-setting-microsoft-information-protection-policy.png" alt-text="Screenshot of successfully setting Microsoft Information Protection Policy in S S M S":::
+   :::image type="content" source="media/sql-data-discovery-and-classification/successfully-setting-microsoft-information-protection-policy.png" alt-text="Screenshot of successfully setting Microsoft Information Protection Policy in SSMS":::
 
 1. Optional - If you want to sign into any of the Microsoft sovereign cloud to authenticate to Microsoft 365, go to SSMS > **Tools** > **Options** > **Azure Services** > **Azure Cloud**, and change the **Name** to the relevant Microsoft sovereign cloud.
 
-   :::image type="content" source="media/sql-data-discovery-and-classification/select-sovereign-cloud.png" alt-text="Screenshot of selecting type of Azure cloud in S S M S":::
+   :::image type="content" source="media/sql-data-discovery-and-classification/select-sovereign-cloud.png" alt-text="Screenshot of selecting type of Azure cloud in SSMS":::
 
 1. In the SSMS **Object Explorer** window, right-click on the database that you would like to classify and choose **Tasks** > **Data Discovery and Classification** > **Classify Data**. You can now add new classification using MIP sensitivity labels defined in your Microsoft 365 tenant and use those labels to classify columns in SQL Server.
 
-   :::image type="content" source="media/sql-data-discovery-and-classification/choose-microsoft-information-protection-policy-sensitivity-labels.png" alt-text="Choosing Microsoft Information Protection Policy sensitivity labels in S S M S":::
+   :::image type="content" source="media/sql-data-discovery-and-classification/choose-microsoft-information-protection-policy-sensitivity-labels.png" alt-text="Choosing Microsoft Information Protection Policy sensitivity labels in SSMS":::
 
    Automatic data discovery and recommendation is disabled while in Microsoft Information Protection Policy mode. It's currently available only in SQL Information Protection Policy mode.
 
 To reset the Information Protection Policy to default or SQL Information Protection, go to the SSMS **Object Explorer**, right-click on the database and choose **Tasks** > **Data Discovery and Classification** > **Reset Information Protection Policy to Default**. This will apply the default or SQL Information Protection policy and you can classify the data using SQL sensitivity labels instead of MIP labels. 
 
-   :::image type="content" source="media/sql-data-discovery-and-classification/reset-information-protection-policy-to-default.png" alt-text="Screenshot of resetting Information Protection Policy in S S M S":::
+   :::image type="content" source="media/sql-data-discovery-and-classification/reset-information-protection-policy-to-default.png" alt-text="Screenshot of resetting Information Protection Policy in SSMS":::
 
 To enable Information Protection Policy from a custom JSON file, go to the SSMS **Object Explorer**, right-click on the database and choose **Tasks** > **Data Discovery and Classification** > **Set Information Protection Policy File**.
 
