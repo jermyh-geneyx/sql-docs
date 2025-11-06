@@ -73,7 +73,7 @@ In order to use a managed identity, pass the `--storage-key` parameter as an emp
 
 
 ```azurecli 
-az SQL server audit-policy update -g "sampleresourcegroup" -n "sampleauditingtestserver" --state Enabled --bsts Enabled --storage-endpoint https://<storageaccountname>.blob.core.windows.net --storage-key """"
+az SQL server audit-policy update -g "sampleresourcegroup" -n "sampleauditingtestserver" --state Enabled --bsts Enabled --storage-endpoint https://<storageaccountname>.blob.core.windows.net --storage-key '""'
 ```
 
 For more information, see [az sql server audit-policy](/cli/azure/sql/server/audit-policy).
