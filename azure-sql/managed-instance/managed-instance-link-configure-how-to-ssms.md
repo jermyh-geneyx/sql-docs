@@ -123,7 +123,7 @@ After the link is created, your database is replicated to the secondary replica.
 
 On either replica, use **Object Explorer** in SSMS to view the **Synchronized** state of the replicated database. 
 
-:::image type="content" source="./media/managed-instance-link-configure-how-to-ssms/check-replicated-database-on-sql-server.png" alt-text="Screenshot that shows the state of the SQL Server database and distributed availability group in S S M S.":::
+:::image type="content" source="./media/managed-instance-link-configure-how-to-ssms/check-replicated-database-on-sql-server.png" alt-text="Screenshot that shows the state of the SQL Server database and distributed availability group in SSMS.":::
 
 Expand **Always On High Availability** and **Availability Groups** to view the distributed availability group created for each link. 
 

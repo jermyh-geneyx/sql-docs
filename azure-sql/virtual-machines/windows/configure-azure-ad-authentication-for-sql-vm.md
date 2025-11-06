@@ -297,7 +297,7 @@ You can enable Microsoft Entra authentication for specific unregistered instance
 When using the `Set-AzVMExtension -ExtensionName "SqlIaasExtension"` command to enable Microsoft Entra authentication for a SQL Server instance, consider the following:
 - Permissions of the managed identity are only checked when the `CheckPermissions` parameter is set to `true`.
 - Specify the client ID of the identity `ClientID` parameter to use a **user-assigned managed identity**. When the `ClientID` parameter is empty, a **system-assigned managed identity** is used.
-- Provide a list of instances in the the `EnableForGivenInstances` parameter to enable Microsoft Entra authentication for specific unregistered instances. Othewrise, use the `EnableForAllInstances` parameter to enable Microsoft Entra authentication for all unregistered instances on the virtual machine. 
+- Provide a list of instances in the `EnableForGivenInstances` parameter to enable Microsoft Entra authentication for specific unregistered instances. Othewrise, use the `EnableForAllInstances` parameter to enable Microsoft Entra authentication for all unregistered instances on the virtual machine. 
 
 
 The following example enables Microsoft Entra authentication for all instances on the VM using a **system-assigned identity**:

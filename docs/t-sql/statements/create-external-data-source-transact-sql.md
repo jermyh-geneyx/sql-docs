@@ -3403,7 +3403,7 @@ Don't add a trailing **/**, file name, or shared access signature parameters at 
 
 ## Permissions
 
-If the target storage account is private, the principal must also have the the permission the read referenced files.
+If the target storage account is private, the principal must also have the permission the read referenced files.
 - For Azure Data Lake Storage and Azure Blob Storage, the principal must have **Storage Blob Data Reader** role (or higher) assigned at the container or storage account level.
 - For Fabric One Lake storage, the principal must have "ReadAll" permissions.
 

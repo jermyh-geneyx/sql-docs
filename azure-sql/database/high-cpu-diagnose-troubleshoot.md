@@ -294,7 +294,7 @@ Select **Configure** in the top right of the pane to select a different time per
 
 Select a bar in the chart to drill in and see queries running in a specific time period. The **Top Resource Consuming Queries** pane will open. Alternately, you can open **Top Resource Consuming Queries** from the Query Store node under your database in Object Explorer directly.
 
-:::image type="content" source="media/high-cpu-diagnose-troubleshoot/ssms-query-store-top-resource-consuming-queries.png" alt-text="Screenshot shows the Top Resource Consuming Queries pane for Query Store in S S M S." lightbox="media/high-cpu-diagnose-troubleshoot/ssms-query-store-top-resource-consuming-queries.png":::
+:::image type="content" source="media/high-cpu-diagnose-troubleshoot/ssms-query-store-top-resource-consuming-queries.png" alt-text="Screenshot shows the Top Resource Consuming Queries pane for Query Store in SSMS." lightbox="media/high-cpu-diagnose-troubleshoot/ssms-query-store-top-resource-consuming-queries.png":::
 
 In the default view, the **Top Resource Consuming Queries** pane shows queries by **Duration (ms)**. Duration might sometimes be lower than CPU time: queries using parallelism might use much more CPU time than their overall duration. Duration might also be higher than CPU time if wait times are significant. To see queries by CPU time, select the **Metric** dropdown list at the top left of the pane and select **CPU Time(ms)**.
 

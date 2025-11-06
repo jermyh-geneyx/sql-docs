@@ -206,7 +206,7 @@ Authorization to individual databases works much the same way in SQL Managed Ins
 
 Now that we've created a database called **MyMITestDB** and a login that only has default permissions, the next step is to create a user from that login. At the moment, the login can connect to the SQL managed instance and see all the databases, but it can't interact with the databases. If you sign in with the Microsoft Entra account that has the default permissions and try to expand the newly created database, you'll see the following error:
 
-![Screenshot of an error message from the the SSMS Object Explorer that reads "The database MyMITestDB is not accessible. (ObjectExplorer)".](./media/aad-security-configure-tutorial/ssms-db-not-accessible.png)
+![Screenshot of an error message from the SSMS Object Explorer that reads "The database MyMITestDB is not accessible. (ObjectExplorer)".](./media/aad-security-configure-tutorial/ssms-db-not-accessible.png)
 
 For more information on granting database permissions, see [Getting Started with Database Engine Permissions](/sql/relational-databases/security/authentication-access/getting-started-with-database-engine-permissions).
 

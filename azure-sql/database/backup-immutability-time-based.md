@@ -5,7 +5,7 @@ description: Learn how to configure time-based backup immutability for long-term
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: dinethi
-ms.date: 09/29/2025
+ms.date: 11/06/2025
 ms.service: azure-sql-database
 ms.subservice: backup-restore
 ms.topic: how-to
@@ -38,6 +38,8 @@ For permissions to view, managed, and delete LTR backups, see [Manage Azure SQL 
 > [!IMPORTANT]
 > Only backups taken after enabling and locking the policy will be immutable. To make existing backups immutable, instead use [legal hold immutability](backup-immutability-legal-hold.md).
 
+You can create time-based immutability in the Azure portal, PowerShell, and Azure CLI.
+
 #### [Azure portal](#tab/azure-portal)
 
 **To enable and lock time-based immutability from the Azure portal:**
@@ -69,7 +71,13 @@ Set-AzSqlDatabaseBackupLongTermRetentionPolicy
     -TimeBasedImmutabilityMode Locked
 ```
 
+#### [Azure CLI](#tab/azure-cli)
 
+**To enable and lock time-based immutability with Azure CLI:**
+
+```azurecli
+az sql db ltr-policy set --resource-group mygroup --server myserver --name mydb --weekly-retention "P0W" --monthly-retention "P0M" --yearly-retention "P0Y" --tb-immutability Enabled --tb-immutability-mode Locked
+```
 
 ---
 
@@ -82,7 +90,7 @@ For backups that have immutability enabled but not locked, there are two options
 - Lock the immutability.
 - Remove immutability for each backup.
 
-Locking immutability for specific backups can be done as follows:
+Locking immutability for specific backups can be done in the Azure portal, PowerShell, and Azure CLI.
 
 #### [Azure portal](#tab/azure-portal)
 
@@ -101,15 +109,29 @@ Locking immutability for specific backups can be done as follows:
 > [!IMPORTANT]
 > The command needs to be run independently for each of the LTR backups that have immutability enabled but not locked.
 
+Replace `<backup name>` with the unique identifier of the desired backup.
+
 ```powershell
 Lock-AzSqlDatabaseLongTermRetentionBackupImmutability
     -Location southeastasia
     -ServerName myAzureSQL
     -DatabaseName mysqldb
-    -BackupName 'myLTRbackup-1-24'
+    -BackupName '<backup name>'
     -ResourceGroupName testrg
 ```
 
+#### [Azure CLI](#tab/azure-cli)
+
+**To lock time-based immutability on a backup with the Azure CLI:**
+
+> [!IMPORTANT]
+> The command needs to be run independently for each of the LTR backups that have immutability enabled but not locked.
+
+Replace `<backup name>` with the unique identifier of the desired backup.
+
+```azurecli
+az sql db ltr-backup lock-time-based-immutability --resource-group mygroup --location southeastasia --server myserver --database mydb --name "<backup name>"
+```
 
 ---
 
@@ -131,21 +153,32 @@ For backups that have immutability enabled but not locked, the immutability can 
 
 **To remove immutability on a backup with PowerShell:**
 
+Replace `<backup name>` with the unique identifier of the desired backup.
+
 ```powershell
 Remove-AzSqlDatabaseLongTermRetentionBackupImmutability
     -Location southeastasia
     -ServerName myAzureSQL
     -DatabaseName mysqldb
-    -BackupName 'myLTRbackup-1-24'
+    -BackupName '<backup name>'
     -ResourceGroupName testrg
 ```
 
+#### [Azure CLI](#tab/azure-cli)
+
+**To remove immutability on a backup with the Azure CLI:**
+
+Replace `<backup name>` with the unique identifier of the desired backup.
+
+```azurecli
+az sql db ltr-backup remove-time-based-immutability --resource-group mygroup --location southeastasia --server myserver --database mydb --name "<backup name>"
+```
 
 ---
 
 ## Disable immutability policy
 
-Immutability can be disabled from the LTR policy configuration page in the Azure portal and PowerShell.
+Immutability can be disabled from the LTR policy configuration page in the Azure portal, PowerShell, and Azure CLI.
 
 Once immutability is disabled, any new LTR backups from this point won't be protected from immutability. Any existing LTR backups however, will continue to be immutable, if already locked as immutable.
 
@@ -173,6 +206,13 @@ Set-AzSqlDatabaseBackupLongTermRetentionPolicy
     -TimeBasedImmutability Disabled
 ```
 
+#### [Azure CLI](#tab/azure-cli)
+
+**To disable a backup immutability policy with the Azure CLI:**
+
+```azurecli
+az sql db ltr-policy set --resource-group mygroup --server myserver --name mydb --weekly-retention "P0W" --monthly-retention "P0M" --yearly-retention "P0Y" --tb-immutability disabled
+```
 
 ---
 

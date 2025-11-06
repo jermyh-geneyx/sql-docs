@@ -5,7 +5,7 @@ description: Learn how to configure legal hold backup immutability for long-term
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: dinethi
-ms.date: 09/29/2025
+ms.date: 11/06/2025
 ms.service: azure-sql-database
 ms.subservice: backup-restore
 ms.topic: how-to
@@ -35,7 +35,7 @@ For permissions to view, managed, and delete LTR backups, see [Manage Azure SQL 
 
 ## Enable legal hold immutability for existing LTR backups
 
-You can enable legal hold immutability on any existing backups. These backups are protected from any edits or deletes until the legal hold is explicitly removed.
+You can enable legal hold immutability on any existing backups in the Azure portal, PowerShell, and Azure CLI. These backups are protected from any edits or deletes until the legal hold is explicitly removed.
 
 > [!IMPORTANT]
 > Legal hold backup immutability can apply only to existing backups. To make future backups automatically immutable, instead use [time-based immutability](backup-immutability-time-based.md).
@@ -56,19 +56,31 @@ You can enable legal hold immutability on any existing backups. These backups ar
 
 **To enable legal hold backup immutability with PowerShell:**
 
+Replace `<backup name>` with the unique identifier of the desired backup.
+
 ```powershell
 Set-AzSqlDatabaseLongTermRetentionBackupLegalHold
     -Location southeastasia
     -ServerName myAzureSQL
     -DatabaseName mysqldb
-    -BackupName 'myLTRbackup-1-24'
+    -BackupName '<backup name>'
+```
+
+#### [Azure CLI](#tab/azure-cli)
+
+**To enable legal hold backup immutability with the Azure CLI:**
+
+Replace `<backup name>` with the unique identifier of the desired backup.
+
+```azurecli
+az sql db ltr-backup set-legal-hold-immutability --resource-group mygroup --location southeastasia --server myserver --database mydb --name "<backup name>"
 ```
 
 ---
 
 ## Remove legal hold immutability
 
-Legal hold immutability on specific backups can be disabled as follows:
+Legal hold immutability on specific backups can be disabled in the Azure portal, PowerShell, and Azure CLI.
 
 #### [Azure portal](#tab/azure-portal)
 
@@ -84,12 +96,24 @@ Legal hold immutability on specific backups can be disabled as follows:
 
 **To remove legal hold immutability from a backup with PowerShell:**
 
+Replace `<backup name>` with the unique identifier of the desired backup.
+
 ```powershell
 Remove-AzSqlDatabaseLongTermRetentionBackupLegalHold
     -Location southeastasia
     -ServerName myAzureSQL
     -DatabaseName mysqldb
-    -BackupName 'myLTRbackup-1-24'
+    -BackupName '<backup name>'
+```
+
+#### [Azure CLI](#tab/azure-cli)
+
+**To remove legal hold immutability from a backup with the Azure CLI:**
+
+Replace `<backup name>` with the unique identifier of the desired backup.
+
+```azurecli
+az sql db ltr-backup remove-legal-hold-immutability --resource-group mygroup --location southeastasia --server myserver --database mydb --name "<backup name>"
 ```
 
 ---

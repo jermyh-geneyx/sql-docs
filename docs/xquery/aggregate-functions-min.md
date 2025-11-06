@@ -1,6 +1,6 @@
 ---
 title: "min Function (XQuery)"
-description: Learn about the XQuery min() function that returns the one item in a sequence whose value is less that that of all the others.
+description: Learn about the XQuery min() function that returns the one item in a sequence whose value is less than that of all the others.
 author: "rothja"
 ms.author: "jroth"
 ms.date: "03/09/2017"

@@ -71,7 +71,7 @@ Every time the Snapshot Agent runs, the following types of files (with their cor
 
 - Data (`.bcp`): not created for publications with parameterized filters.
 
-  If the publication doesn't use any parameterized filters, the snapshot contains the data for the published tables in a set of `.bcp` files. If the publication uses parameterized filters (which is typical for merge publications), the initial snapshot doesn't contain any data. Data is provided using a snapshot for a Subscriber's partition, which is discussed in the the next section.
+  If the publication doesn't use any parameterized filters, the snapshot contains the data for the published tables in a set of `.bcp` files. If the publication uses parameterized filters (which is typical for merge publications), the initial snapshot doesn't contain any data. Data is provided using a snapshot for a Subscriber's partition, which is discussed in the next section.
 
 ## Initialize a subscription
 
