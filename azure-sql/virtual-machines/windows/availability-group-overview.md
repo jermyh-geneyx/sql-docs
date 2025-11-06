@@ -111,7 +111,7 @@ On an Azure VM failover cluster, we recommend a single NIC per server (cluster n
 
 As basic availability group doesn't allow more than one secondary replica and there's no read access to the secondary replica, you can use the database mirroring connection strings for basic availability groups. Using the connection string eliminates the need to have listeners. Removing the listener dependency is helpful for availability groups on Azure VMs as it eliminates the need for a load balancer or having to add additional IPs to the load balancer when you have multiple listeners for additional databases.
 
-For example, to explicitly connect using TCP/IP to the AG database AdventureWorks on either Replica_A or Replica_B of a Basic AG (or any AG that that has only one secondary replica and the read access isn't allowed in the secondary replica), a client application could supply the following database mirroring connection string to successfully connect to the AG:
+For example, to explicitly connect using TCP/IP to the AG database AdventureWorks on either Replica_A or Replica_B of a Basic AG (or any AG that has only one secondary replica and the read access isn't allowed in the secondary replica), a client application could supply the following database mirroring connection string to successfully connect to the AG:
 
 `Server=Replica_A; Failover_Partner=Replica_B; Database=AdventureWorks; Network=dbmssocn`
 

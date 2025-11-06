@@ -119,7 +119,7 @@ Instances that have failed to create are still present as a resource and:
 
 
 > [!NOTE]
-> To minimize noise in the the list of resources or managed instances, delete instances that have failed to deploy or instances with cancelled deployments. 
+> To minimize noise in the list of resources or managed instances, delete instances that have failed to deploy or instances with cancelled deployments. 
 
 
 ## Next steps

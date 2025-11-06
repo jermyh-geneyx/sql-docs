@@ -134,7 +134,7 @@ SECRET = 'sv=2018-03-28&ss=bfqt&srt=sco&sp=rwdlacup&se=2019-04-18T20:42:12Z&st=2
 
 ## External data source
 
-An external data source is an abstraction that that provides an easy reference to a file location across multiple queries. To query public locations, specify the file location when you create an external data source:
+An external data source is an abstraction that provides an easy reference to a file location across multiple queries. To query public locations, specify the file location when you create an external data source:
 
 ```sql
 CREATE EXTERNAL DATA SOURCE MyExternalDataSource

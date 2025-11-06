@@ -1,6 +1,6 @@
 ---
 title: Use sqlcmd with Scripting Variables
-description: Learn how to use scripting variables to make a script that that can be used in multiple scenarios.
+description: Learn how to use scripting variables to make a script that can be used in multiple scenarios.
 author: dlevy-msft
 ms.author: dlevy
 ms.reviewer: randolphwest
