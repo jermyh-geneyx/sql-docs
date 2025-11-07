@@ -1,9 +1,6 @@
 ---
 title: "Slash Star (Comment) (DMX)"
 description: "Slash Star (Comment) (DMX)"
-author: kfollis
-ms.author: kfollis
-ms.reviewer: kfollis
 ms.date: 02/17/2022
 ms.service: sql
 ms.subservice: analysis-services

@@ -1,9 +1,6 @@
 ---
 title: "SELECT DISTINCT FROM &lt;model &gt; (DMX)"
 description: "SELECT DISTINCT FROM &lt;model &gt; (DMX)"
-author: kfollis
-ms.author: kfollis
-ms.reviewer: kfollis
 ms.date: 02/17/2022
 ms.service: sql
 ms.subservice: analysis-services

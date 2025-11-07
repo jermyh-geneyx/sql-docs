@@ -1,9 +1,6 @@
 ---
 title: "Intersect (MDX)"
 description: "Intersect (MDX)"
-author: kfollis
-ms.author: kfollis
-ms.reviewer: kfollis
 ms.date: 08/06/2025
 ms.service: sql
 ms.subservice: analysis-services
