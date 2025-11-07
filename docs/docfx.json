@@ -195,12 +195,16 @@
       "author": {
         "azdata/**/*.md": "swells",
         "**/*/index.yml": "MikeRayMSFT",
-        "reporting-services/**/*.md": "nidenyse"
+        "reporting-services/**/*.md": "nidenyse",
+        "dmx/**/*.md": "KayUnkroth",
+        "mdx/**/*.md": "KayUnkroth"
       },
       "ms.author": {
         "azdata/**/*.md": "seanw",
         "**/*/index.yml": "mikeray",
-        "reporting-services/**/*.md": "dniwenshuti"
+        "reporting-services/**/*.md": "dniwenshuti",
+        "dmx/**/*.md": "kayu",
+        "mdx/**/*.md": "kayu"
       },
       "ms.date": {
         "azdata/**/*.md": "02/09/2021"

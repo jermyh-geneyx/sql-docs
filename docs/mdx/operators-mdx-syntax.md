@@ -1,9 +1,6 @@
 ---
 title: "Operators (MDX Syntax)"
 description: "Operators (MDX Syntax)"
-author: kfollis
-ms.author: kfollis
-ms.reviewer: kfollis
 ms.date: 11/08/2021
 ms.service: sql
 ms.subservice: analysis-services

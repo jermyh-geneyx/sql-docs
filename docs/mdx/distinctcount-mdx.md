@@ -1,9 +1,6 @@
 ---
 title: "DistinctCount (MDX)"
 description: "DistinctCount (MDX)"
-author: kfollis
-ms.author: kfollis
-ms.reviewer: kfollis
 ms.date: 01/12/2021
 ms.service: sql
 ms.subservice: analysis-services

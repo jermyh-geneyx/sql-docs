@@ -74,7 +74,7 @@ To configure WSUS, you need to:
   
 4.  Choose the upstream server.  
   
-    On the **Choose Upstream Server** page of the WSUS configuration wizard, you will select how WSUS on the Virtual Machine Management node will connect to an upstream server to obtain software updates. Your two choices are to synchronize the upstream server with [Microsoft Update](https://go.microsoft.com/fwlink/?LinkId=133349) or to synchronize updates with another Windows Server Update Services server.  
+    On the **Choose Upstream Server** page of the WSUS configuration wizard, you will select how WSUS on the Virtual Machine Management node will connect to an upstream server to obtain software updates. Your two choices are to synchronize the upstream server with Microsoft Update, or to synchronize updates with another Windows Server Update Services server.  
   
     #### To update by using Microsoft Update  
   
