@@ -4,7 +4,7 @@ description: "Tutorial: Use Azure Blob Storage with SQL Server"
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: randolphwest
-ms.date: 08/11/2025
+ms.date: 11/06/2025
 ms.service: sql
 ms.topic: tutorial
 ms.custom:
@@ -15,7 +15,7 @@ ms.custom:
 
 [!INCLUDE [sqlserver 2016 and later versions](../includes/applies-to-version/sqlserver2016.md)]
 
-This tutorial helps you understand how to use the Azure Blob Storage for data files and backups in SQL Server 2016 and later versions.
+This tutorial helps you understand how to use the Azure Blob Storage for data files and backups in [!INCLUDE [sssql16-md](../includes/sssql16-md.md)] and later versions.
 
 Support for Azure Blob Storage in SQL Server was introduced in [!INCLUDE [sssql11-md](../includes/sssql11-md.md)] Service Pack 1 CU2, and enhanced in later versions. For an overview of the functionality and benefits of using this feature, see [SQL Server data files in Microsoft Azure](databases/sql-server-data-files-in-microsoft-azure.md).
 
@@ -25,7 +25,7 @@ This tutorial shows you how to work with SQL Server data files in Azure Blob Sto
 
 To complete this tutorial, you must be familiar with [!INCLUDE [ssNoVersion](../includes/ssnoversion-md.md)] backup and restore concepts and T-SQL syntax.
 
-To use this tutorial, you need an Azure storage account, SQL Server Management Studio (SSMS), access to an instance of SQL Server on-premises, access to an Azure virtual machine (VM) running an instance of SQL Server 2016 or later version, and an [!INCLUDE [sssampledbobject-md](../includes/sssampledbobject-md.md)] database. Additionally, the account used to issue the `BACKUP` and `RESTORE` commands should be in the **db_backupoperator** database role with **alter any credential** permissions.
+To use this tutorial, you need an Azure storage account, SQL Server Management Studio (SSMS), access to an instance of SQL Server on-premises, access to an Azure virtual machine (VM) running an instance of [!INCLUDE [sssql16-md](../includes/sssql16-md.md)] or later version, and an [!INCLUDE [sssampledbobject-md](../includes/sssampledbobject-md.md)] database. Additionally, the account used to issue the `BACKUP` and `RESTORE` commands should be in the **db_backupoperator** database role with **alter any credential** permissions.
 
 - Get a free [Azure Account](https://azure.microsoft.com/offers/ms-azr-0044p/).
 - Create an [Azure storage account](/azure/storage/common/storage-quickstart-create-account?tabs=portal).
@@ -70,12 +70,12 @@ To create a policy on the container and generate a Shared Access Signature (SAS)
 
    ```powershell
    # Define global variables for the script
-   $prefixName = '<a prefix name>'  # used as the prefix for the name for various objects
-   $subscriptionID = '<your subscription ID>'   # the ID  of subscription name you will use
-   $locationName = '<a data center location>'  # the data center region you will use
+   $prefixName = '<a prefix name>'               # used as the prefix for the name for various objects
+   $subscriptionID = '<your subscription ID>'    # the ID  of subscription name you will use
+   $locationName = '<a data center location>'    # the data center region you will use
    $storageAccountName = $prefixName + 'storage' # the storage account name you will create or use
-   $containerName = $prefixName + 'container'  # the storage container name to which you will attach the SAS policy with its SAS token
-   $policyName = $prefixName + 'policy' # the name of the SAS policy
+   $containerName = $prefixName + 'container'    # the storage container name to which you will attach the SAS policy with its SAS token
+   $policyName = $prefixName + 'policy'          # the name of the SAS policy
 
    # Set a variable for the name of the resource group you will create or use
    $resourceGroupName = $prefixName + 'rg'
@@ -102,7 +102,7 @@ To create a policy on the container and generate a Shared Access Signature (SAS)
    $container = New-AzStorageContainer -Context $storageContext -Name $containerName
 
    # Sets up a Stored Access Policy and a Shared Access Signature for the new container
-   $policy = New-AzStorageContainerStoredAccessPolicy -Container $containerName -Policy $policyName -Context $storageContext -StartTime $(Get-Date).   ToUniversalTime().AddMinutes(-5) -ExpiryTime $(Get-Date).ToUniversalTime().AddYears(10) -Permission rwld
+   $policy = New-AzStorageContainerStoredAccessPolicy -Container $containerName -Policy $policyName -Context $storageContext -StartTime $(Get-Date).ToUniversalTime().AddMinutes(-5) -ExpiryTime $(Get-Date).ToUniversalTime().AddYears(10) -Permission rwld
 
    # Gets the Shared Access Signature for the policy
    $sas = New-AzStorageContainerSASToken -name $containerName -Policy $policyName -Context $storageContext
@@ -114,8 +114,8 @@ To create a policy on the container and generate a Shared Access Signature (SAS)
 
    # Outputs the Transact SQL to the clipboard and to the screen to create the credential using the Shared Access Signature
    Write-Host 'Credential T-SQL'
-   $tSql = "CREATE CREDENTIAL [{0}] WITH IDENTITY='Shared Access Signature', SECRET='{1}'" -f $cbc.Uri, $sas.Substring(1)
-   $tSql | clip
+   $tSql = "CREATE CREDENTIAL [{0}] WITH IDENTITY='SHARED ACCESS SIGNATURE', SECRET='{1}'" -f $cbc.Uri, $sas
+   Set-Clipboard -Value $tSql
    Write-Host $tSql
 
    # Once you're done with the tutorial, remove the resource group to clean up the resources.
@@ -186,8 +186,8 @@ To back up a database to blob storage, follow these steps:
    ```sql
    -- To permit log backups, before the full database backup, modify the database to use the full recovery model.
    USE master;
-
-   ALTER DATABASE AdventureWorks2022 SET RECOVERY FULL;
+   ALTER DATABASE AdventureWorks2022
+       SET RECOVERY FULL;
 
    -- Back up the full AdventureWorks2022 database to the container that you created in section 1
    BACKUP DATABASE AdventureWorks2022
@@ -218,9 +218,9 @@ To restore the [!INCLUDE [sssampledbobject-md](../includes/sssampledbobject-md.m
    -- Restore AdventureWorks2022 from URL to SQL Server instance using Azure Blob Storage for database files
    RESTORE DATABASE AdventureWorks2022
        FROM URL = 'https://<storage-account>.blob.core.windows.net/<container-name>/AdventureWorks2022_onprem.bak'
-       WITH MOVE 'AdventureWorks2022_data' TO 'https://<storage-account>.blob.core.windows.net/<container-name>/AdventureWorks2022_Data.mdf',
-       MOVE 'AdventureWorks2022_log' TO 'https://<storage-account>.blob.core.windows.net/<container-name>/AdventureWorks2022_Log.ldf'
-   --, REPLACE;
+   WITH MOVE 'AdventureWorks2022_data' TO 'https://<storage-account>.blob.core.windows.net/<container-name>/AdventureWorks2022_Data.mdf',
+        MOVE 'AdventureWorks2022_log' TO 'https://<storage-account>.blob.core.windows.net/<container-name>/AdventureWorks2022_Log.ldf';
+        --, REPLACE
    ```
 
 1. Open Object Explorer and connect to your Azure SQL Server instance.
@@ -314,8 +314,12 @@ To generate activity in the [!INCLUDE [sssampledbobject-md](../includes/sssample
            SET @inner = 1;
            WHILE @inner <= 75
                BEGIN
-                   INSERT INTO AdventureWorks2022.Production.Location
-                       (Name, CostRate, Availability, ModifiedDate)
+                   INSERT INTO AdventureWorks2022.Production.Location (
+                       Name,
+                       CostRate,
+                       Availability,
+                       ModifiedDate
+                   )
                    VALUES (NEWID(), .5, 5.2, GETDATE());
                    SET @inner = @inner + 1;
                END
@@ -324,7 +328,8 @@ To generate activity in the [!INCLUDE [sssampledbobject-md](../includes/sssample
            SET @count = @count + 1;
        END
 
-   SELECT COUNT(*) FROM AdventureWorks2022.Production.Location;
+   SELECT COUNT(*)
+   FROM AdventureWorks2022.Production.Location;
    ```
 
    ```sql
@@ -371,7 +376,8 @@ To restore a database to a specified point in time from file snapshot backup set
 
    ```sql
    -- Verify row count at start
-   SELECT COUNT(*) FROM AdventureWorks2022.Production.Location;
+   SELECT COUNT(*)
+   FROM AdventureWorks2022.Production.Location;
    ```
 
    :::image type="content" source="media/tutorial-use-azure-blob-storage-service-with-sql-server/29-thousand-rows.png" alt-text="Screenshot of the SSMS results showing a row count of 29,939.":::
@@ -380,7 +386,9 @@ To restore a database to a specified point in time from file snapshot backup set
 
    ```sql
    -- restore and recover to a point in time between the times of two transaction log backups, and then verify the row count
-   ALTER DATABASE AdventureWorks2022 SET SINGLE_USER WITH ROLLBACK IMMEDIATE;
+   ALTER DATABASE AdventureWorks2022
+       SET SINGLE_USER
+       WITH ROLLBACK IMMEDIATE;
 
    RESTORE DATABASE AdventureWorks2022 FROM URL = 'https://<storage-account>.blob.core.windows.net/<container-name>/<firstbackupfile>.bak'
        WITH NORECOVERY, REPLACE;
@@ -388,10 +396,12 @@ To restore a database to a specified point in time from file snapshot backup set
    RESTORE LOG AdventureWorks2022 FROM URL = 'https://<storage-account>.blob.core.windows.net/<container-name>/<secondbackupfile>.bak'
        WITH RECOVERY, STOPAT = 'June 26, 2018 01:48 PM';
 
-   ALTER DATABASE AdventureWorks2022 SET MULTI_USER;
+   ALTER DATABASE AdventureWorks2022
+       SET MULTI_USER;
 
    -- get new count
-   SELECT COUNT(*) FROM AdventureWorks2022.Production.Location;
+   SELECT COUNT(*)
+   FROM AdventureWorks2022.Production.Location;
    ```
 
 1. Review the output. After the restore the row count is 18,389, which is a row count number between log backup 5 and 6 (your row count can vary).
@@ -419,11 +429,11 @@ To restore a database to a new database from a transaction log backup using file
    ```sql
    -- restore as a new database from a transaction log backup file
    RESTORE DATABASE AdventureWorks2022_EOM
-   FROM URL = 'https://<storage-account>.blob.core.windows.net/<container-name>/<logbackupfile.bak>'
-       WITH MOVE 'AdventureWorks2022_data' TO 'https://<storage-account>.blob.core.windows.net/<container-name>/AdventureWorks2022_EOM_Data.mdf',
-       MOVE 'AdventureWorks2022_log' TO 'https://<storage-account>.blob.core.windows.net/<container-name>/AdventureWorks2022_EOM_Log.ldf',
-   RECOVERY
-   --, REPLACE;
+       FROM URL = 'https://<storage-account>.blob.core.windows.net/<container-name>/<logbackupfile.bak>'
+   WITH MOVE 'AdventureWorks2022_data' TO 'https://<storage-account>.blob.core.windows.net/<container-name>/AdventureWorks2022_EOM_Data.mdf',
+        MOVE 'AdventureWorks2022_log' TO 'https://<storage-account>.blob.core.windows.net/<container-name>/AdventureWorks2022_EOM_Log.ldf',
+        RECOVERY;
+        --, REPLACE
    ```
 
 1. Review the output to verify the restore was successful.
@@ -463,7 +473,8 @@ To delete a file-snapshot backup set, follow these steps:
 
    ```sql
    -- verify that two file snapshots have been removed
-   SELECT * FROM sys.fn_db_backup_file_snapshots('AdventureWorks2022');
+   SELECT *
+   FROM sys.fn_db_backup_file_snapshots('AdventureWorks2022');
    ```
 
    :::image type="content" source="media/tutorial-use-azure-blob-storage-service-with-sql-server/results-of-two-deleted-snapshot-files.png" alt-text="Screenshot of the SSMS results pane showing two file snapshots deleted." lightbox="media/tutorial-use-azure-blob-storage-service-with-sql-server/results-of-two-deleted-snapshot-files.png":::
@@ -476,10 +487,10 @@ To delete the resource group, run the following PowerShell code:
 
   ```powershell
   # Define global variables for the script
-  $prefixName = '<prefix name>'  # should be the same as the beginning of the tutorial
+  $prefixName = '<prefix name>' # should be the same as the beginning of the tutorial
 
   # Set a variable for the name of the resource group you will create or use
-  $resourceGroupName=$prefixName + 'rg'
+  $resourceGroupName = $prefixName + 'rg'
 
   # Adds an authenticated Azure account for use in the session
   Connect-AzAccount
@@ -495,7 +506,7 @@ To delete the resource group, run the following PowerShell code:
 
 - [SQL Server data files in Microsoft Azure](databases/sql-server-data-files-in-microsoft-azure.md)
 - [File-Snapshot Backups for Database Files in Azure](backup-restore/file-snapshot-backups-for-database-files-in-azure.md)
-- [SQL Server backup to URL for Microsoft Azure Blob Storage](backup-restore/sql-server-backup-to-url.md)
+- [SQL Server backup to URL for Azure Blob Storage](backup-restore/sql-server-backup-to-url.md)
 - [Shared Access Signatures, Part 1: Understanding the SAS Model](/azure/storage/common/storage-sas-overview)
 - [Create Container](/rest/api/storageservices/Create-Container)
 - [Set Container ACL](/rest/api/storageservices/Set-Container-ACL)
