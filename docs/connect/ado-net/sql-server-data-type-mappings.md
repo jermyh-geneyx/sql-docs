@@ -53,6 +53,8 @@ The following table shows the inferred .NET Framework type, the <xref:System.Dat
 |varbinary|Byte[]|<xref:System.Data.SqlDbType.VarBinary>|<xref:Microsoft.Data.SqlClient.SqlDataReader.GetSqlBinary%2A>|<xref:System.Data.DbType.Binary>|<xref:Microsoft.Data.SqlClient.SqlDataReader.GetBytes%2A>|  
 |varchar|String<br /><br /> Char[]|<xref:System.Data.SqlDbType.VarChar>|<xref:Microsoft.Data.SqlClient.SqlDataReader.GetSqlString%2A>|<xref:System.Data.DbType.AnsiString>, <xref:System.Data.DbType.String>|<xref:Microsoft.Data.SqlClient.SqlDataReader.GetString%2A><br /><br /> <xref:Microsoft.Data.SqlClient.SqlDataReader.GetChars%2A>|  
 |xml|Xml|<xref:System.Data.SqlDbType.Xml>|<xref:Microsoft.Data.SqlClient.SqlDataReader.GetSqlXml%2A>|<xref:System.Data.DbType.Xml>|none|
+|json|String|<xref:System.Data.SqlDbType.Json>|<xref:Microsoft.Data.SqlClient.SqlDataReader.GetSqlJson%2A>|none|none|
+|vector|none|<xref:System.Data.SqlDbType.Vector>|<xref:Microsoft.Data.SqlClient.SqlDataReader.GetSqlVector%2A>|none|none|
 
 <sup>1</sup> You cannot set the `DbType` property of a `SqlParameter` to `SqlDbType.Date`.  
 <sup>2</sup> Use a specific typed accessor if you know the underlying type of the `sql_variant`.

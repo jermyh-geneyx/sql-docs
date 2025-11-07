@@ -1,9 +1,9 @@
 ---
 title: "SqlClient streaming support"
-description: Discusses how to write applications that stream data from SQL Server without having it fully loaded in memory.
+description: Describes how to write applications that stream large data from SQL Server without loading it all in memory.
 author: David-Engel
 ms.author: davidengel
-ms.reviewer: v-chmalh
+ms.reviewer: cmalhotra
 ms.date: "12/04/2020"
 ms.service: sql
 ms.subservice: connectivity
@@ -15,14 +15,14 @@ ms.topic: conceptual
 
 [!INCLUDE[Driver_ADONET_Download](../../includes/driver_adonet_download.md)]
 
-Streaming support between SQL Server and an application supports unstructured data on the server (documents, images, and media files). A SQL Server database can store binary large objects (BLOBs), but retrieving BLOBS can use a lot of memory.
+Streaming support between SQL Server and an application supports unstructured data on the server (documents, images, and media files). A SQL Server database can store binary large objects (BLOBs), but retrieving BLOBS can use a large amount of memory.
 
 Streaming support to and from SQL Server simplifies writing applications that stream data, without having to fully load the data into memory, resulting in fewer memory overflow exceptions.
 
-Streaming support will also enable middle-tier applications to scale better, especially in scenarios where business objects connect to Azure SQL in order to send, retrieve, and manipulate large BLOBs.
+Streaming support also enables middle-tier applications to scale better, especially in scenarios where business objects connect to Azure SQL in order to send, retrieve, and manipulate large BLOBs.
 
 > [!WARNING]
-> The members that support streaming are used to retrieve data from queries and to pass parameters to queries and stored procedures. The streaming feature addresses basic OLTP and data migration scenarios and is applicable to on-premises and off-premises data migrations environments.
+> The members that support streaming are used to retrieve data from queries and to pass parameters to queries and stored procedures. The streaming feature addresses basic Online Transaction Processing (OLTP) and data migration scenarios and is applicable to on-premises and off-premises data migrations environments.
 
 ## Streaming support from SQL Server
 
@@ -55,31 +55,33 @@ The following members were added to <xref:System.Data.Common.DbDataReader> to en
 Streaming support to SQL Server is in the <xref:Microsoft.Data.SqlClient.SqlParameter> class so it can accept and react to <xref:System.Xml.XmlReader>, <xref:System.IO.Stream>, and <xref:System.IO.TextReader> objects. <xref:Microsoft.Data.SqlClient.SqlParameter> is used to pass parameters to queries and stored procedures.
 
 > [!NOTE]
-> Disposing a <xref:Microsoft.Data.SqlClient.SqlCommand> object or calling <xref:Microsoft.Data.SqlClient.SqlCommand.Cancel%2A> must cancel any streaming operation. If an application sends <xref:System.Threading.CancellationToken>, cancellation is not guaranteed.
+> Disposing a <xref:Microsoft.Data.SqlClient.SqlCommand> object or calling <xref:Microsoft.Data.SqlClient.SqlCommand.Cancel%2A> must cancel any streaming operation. If an application sends <xref:System.Threading.CancellationToken>, cancellation isn't guaranteed.
 
-The following <xref:Microsoft.Data.SqlClient.SqlParameter.SqlDbType%2A> types will accept a <xref:Microsoft.Data.SqlClient.SqlParameter.Value%2A> of <xref:System.IO.Stream>:
+The following <xref:Microsoft.Data.SqlClient.SqlParameter.SqlDbType%2A> types accept a <xref:Microsoft.Data.SqlClient.SqlParameter.Value%2A> of <xref:System.IO.Stream>:
 
-- **Binary**
+- `Binary`
 
-- **VarBinary**
+- `VarBinary`
 
-The following <xref:Microsoft.Data.SqlClient.SqlParameter.SqlDbType%2A> types will accept a <xref:Microsoft.Data.SqlClient.SqlParameter.Value%2A> of <xref:System.IO.TextReader>:
+The following <xref:Microsoft.Data.SqlClient.SqlParameter.SqlDbType%2A> types accept a <xref:Microsoft.Data.SqlClient.SqlParameter.Value%2A> of <xref:System.IO.TextReader>:
 
-- **Char**
+- `Char`
 
-- **NChar**
+- `NChar`
 
-- **NVarChar**
+- `NVarChar`
 
-- **Xml**
+- `Xml`
 
-The **Xml**<xref:Microsoft.Data.SqlClient.SqlParameter.SqlDbType%2A> type will accept a <xref:Microsoft.Data.SqlClient.SqlParameter.Value%2A> of <xref:System.Xml.XmlReader>.
+- `Json`
+
+The **Xml** <xref:Microsoft.Data.SqlClient.SqlParameter.SqlDbType%2A> type accepts a <xref:Microsoft.Data.SqlClient.SqlParameter.Value%2A> of <xref:System.Xml.XmlReader>.
 
 <xref:Microsoft.Data.SqlClient.SqlParameter.SqlValue%2A> can accept values of type <xref:System.Xml.XmlReader>, <xref:System.IO.TextReader>, and <xref:System.IO.Stream>.
 
-The <xref:System.Xml.XmlReader>, <xref:System.IO.TextReader>, and <xref:System.IO.Stream> object will be transferred up to the value defined by the <xref:Microsoft.Data.SqlClient.SqlParameter.Size%2A>.
+The <xref:System.Xml.XmlReader>, <xref:System.IO.TextReader>, and <xref:System.IO.Stream> object is transferred up to the value defined by the <xref:Microsoft.Data.SqlClient.SqlParameter.Size%2A>.
 
-## Sample -- streaming from SQL Server
+## Sample--streaming from SQL Server
 
 Use the following Transact-SQL to create the sample database:
 
@@ -100,7 +102,7 @@ INSERT INTO [Streams] (textdata, bindata, xmldata) VALUES (N'Another row', 0x666
 GO
 ```
 
-The sample shows how to do the following:
+The sample shows how to do the following actions:
 
 - Avoid blocking a user-interface thread by providing an asynchronous way to retrieve large files.
 
@@ -114,7 +116,7 @@ The sample shows how to do the following:
 
 [!code-csharp[SqlClient_Streaming_FromServer#1](~/../sqlclient/doc/samples/SqlClient_Streaming_FromServer.cs#1)]
 
-## Sample -- streaming to SQL Server
+## Sample--streaming to SQL Server
 
 Use the following Transact-SQL to create the sample database:
 
@@ -137,7 +139,7 @@ CREATE TABLE [BinaryStreamsCopy] (
 GO
 ```
 
-The sample shows how to do the following:
+The sample shows how to do the following actions:
 
 - Transferring a large BLOB to SQL Server in .NET.
 
@@ -145,7 +147,7 @@ The sample shows how to do the following:
 
 - Using the new asynchronous feature to transfer a large BLOB.
 
-- Using the new asynchronous feature and the await keyword to transfer a large BLOB.
+- Using the new asynchronous feature and the `await` keyword to transfer a large BLOB.
 
 - Cancelling the transfer of a large BLOB.
 
@@ -153,7 +155,7 @@ The sample shows how to do the following:
 
 [!code-csharp[SqlClient_Streaming_ToServer#1](~/../sqlclient/doc/samples/SqlClient_Streaming_ToServer.cs#1)]
 
-## Sample -- Streaming from one SQL Server to another SQL Server
+## Sample--Streaming from one SQL Server to another SQL Server
 
 This sample demonstrates how to asynchronously stream a large BLOB from one SQL Server to another, with support for cancellation.
 

@@ -210,6 +210,10 @@
           href: ../connect/ado-net/sql/sql-xml-column-values.md
         - name: Specifying XML values as parameters
           href: ../connect/ado-net/sql/specify-xml-values-parameters.md
+      - name: JSON data type support in SqlClient
+        href: ../connect/ado-net/sql/json-data-sql-server.md
+      - name: Vector datatype support in SqlClient
+        href: ../connect/ado-net/sql/vector-data-sql-server.md  
     - name: SQL Server binary and large-value data
       href: ../connect/ado-net/sql/sql-server-binary-large-value-data.md
       items:

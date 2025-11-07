@@ -72,10 +72,21 @@ The Microsoft SqlClient Data Provider for SQL Server type of a `Parameter` objec
 ||`StringFixedLength`|`NChar`|
 ||`Time`|`Time` in SQL Server 2008. Inferring a <xref:System.Data.SqlDbType> from `Time` isn't supported in versions of SQL Server earlier than SQL Server 2008.|
 ||`VarNumeric`|Inferring a <xref:System.Data.SqlDbType> from `VarNumeric` isn't supported.|
-|user-defined type (an object with <xref:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute>|SqlClient always returns an Object|`SqlDbType.Udt` if <xref:Microsoft.SqlServer.Server.SqlUserDefinedTypeAttribute> is present, otherwise `Variant`|
+|user-defined type (an object with <xref:Microsoft.SqlServer.Server.SqlUserDefinedAggregateAttribute>)|SqlClient always returns an Object|`SqlDbType.Udt` if <xref:Microsoft.SqlServer.Server.SqlUserDefinedTypeAttribute> is present, otherwise `Variant`|
+|<xref:Microsoft.Data.SqlTypes.SqlJson>|`String`|`SqlDbType.Json`|
+|<xref:Microsoft.Data.SqlTypes.SqlVector%601>|`Binary`|`SqlDbType.Vector`|
 
 > [!NOTE]
 > Conversions from decimal to other types are narrowing conversions that round the decimal value to the nearest integer value toward zero. If the result of the conversion isn't representable in the destination type, an <xref:System.OverflowException> is thrown.
+
+> [!NOTE]
+> **JSON**
+>
+> Set SqlDbType to Json when passing a parameter `Value` of type `string`. Otherwise SqlDbType defaults to `Nvarchar`.
+>
+> **Vector**
+>
+> For SQL vector datatype, a parameter `Value` of type `Microsoft.Data.SqlTypes.SqlVector<T>` must be specified. Parameter `Size` and vector dimension are inferred from the parameter `Value`. The parameter `Size` is ignored.
 
 > [!NOTE]
 > When you send a null parameter value to the server, you must specify <xref:System.DBNull>, not `null` (`Nothing` in Visual Basic). The null value in the system is an empty object that has no value. <xref:System.DBNull> is used to represent null values.
