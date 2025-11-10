@@ -5,7 +5,7 @@ description: Use the COPY statement in Azure Synapse Analytics and Warehouse in 
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: procha, mikeray, fresantos
-ms.date: 10/15/2025
+ms.date: 11/10/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -680,23 +680,21 @@ To access files on Azure Data Lake Storage (ADLS) Gen2 and Azure Blob Storage lo
 
 #### *CREDENTIAL (IDENTITY = '', SECRET = '')*
 
-*CREDENTIAL* specifies the authentication mechanism to access the external storage account. On [!INCLUDE [fabric-dw](../../includes/fabric-dw.md)] in [!INCLUDE [fabric](../../includes/fabric.md)], the only supported authentication mechanisms are Shared Access Signature (SAS) and Storage Account Key (SAK). 
+*CREDENTIAL* specifies the authentication mechanism to access the external storage account. 
+
+In Fabric Data Warehouse: 
+-    For private storage accounts, the only supported authentication mechanisms are Shared Access Signature (SAS) and Storage Account Key (SAK).  
+-    For public storage accounts, Microsoft Entra ID authentication is the only supported authentication method. When using a public storage account, CREDENTIAL does not need to be specified. By default the executing user's Entra ID is used.
 
 The user's EntraID authentication is default. No credential needs to be specified. COPY INTO using OneLake as source only supports EntraID authentication.
 
-> [!NOTE]
-> When using a public storage account, CREDENTIAL does not need to be specified. By default the executing user's Entra ID is used.
-
 - Authenticating with Shared Access Signature (SAS)
-
   - *IDENTITY: A constant with a value of 'Shared Access Signature'*
   - *SECRET: The* [*shared access signature*](/azure/storage/common/storage-sas-overview) *provides delegated access to resources in your storage account.*
--  Minimum permissions required: READ and LIST
-
+  - Minimum permissions required: READ and LIST
 - Authenticating with Storage Account Key
-
   - *IDENTITY: A constant with a value of 'Storage Account Key'*
-- *SECRET: Storage account key*
+  - *SECRET: Storage account key*
 
 #### *ERRORFILE = Directory Location*
 
