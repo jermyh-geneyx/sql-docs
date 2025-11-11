@@ -53,7 +53,7 @@ The following table lists the mandatory rules and routes that are automatically 
 | Route | Microsoft.Sql-managedInstances_UseOnly_mi-subnet-*\<range\>*-to-vnetlocal | Ensures there's always a route for the internal nodes to reach each other. |
 
 > [!NOTE]  
-> Some subnets contain additional mandatory network security rules and routes that aren't listed in this page, but still use the `Microsoft.Sql-managedInstances_UseOnly_mi-` prefix. Such rules are considered obsolete and will be removed in a future service update.
+> Some subnets might contain additional network security rules and routes that use the `Microsoft.Sql-managedInstances_UseOnly_mi-` prefix. These rules and routes are also mandatory when present, but might be removed in a future service update.
 
 ### Optional security rules and routes
 
