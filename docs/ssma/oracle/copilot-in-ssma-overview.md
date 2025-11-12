@@ -4,24 +4,28 @@ description: Learn how Copilot in SQL Server Migration Assistant (SSMA) provides
 author: nilabjaball
 ms.author: niball
 ms.reviewer: randolphwest
-ms.date: 05/15/2025
-ms.update-cycle: 180-days
+ms.date: 11/12/2025
 ms.service: sql
 ms.subservice: ssma
 ms.topic: overview
 ms.collection:
   - ce-skilling-ai-copilot
+ms.update-cycle: 180-days
 ---
 
-# What is Microsoft Copilot in SSMA for Oracle (Preview)?
+# What is Microsoft Copilot in SSMA for Oracle?
 
 Copilot in SQL Server Migration Assistant (SSMA) enhances the code conversion process from Oracle to SQL by providing intelligent, AI-powered assistance for complex or unsupported objects. When the SSMA rule engine encounters conversion challenges, such as syntax differences, proprietary Oracle features, or unsupported data types, Copilot steps in to analyze the issue, explain the root cause, and generate alternative SQL-compatible code.
 
-By integrating with Azure OpenAI, Copilot in SSMA for Oracle (Preview) allows you to review, refine, and validate the suggested code directly within the SSMA interface, streamlining the migration process and reducing manual effort.
+Copilot in SQL Server Migration Assistant (SSMA) is generally available from SSMA version 10.4.
+
+By integrating with Azure OpenAI, Copilot in SSMA for Oracle allows you to review, refine, and validate the suggested code directly within the SSMA interface, streamlining the migration process and reducing manual effort.
 
 ## Prerequisites
 
-To use Copilot in SSMA for Oracle (Preview) for code conversion, ensure you have the following Azure OpenAI resource details:
+To use Copilot in SSMA for Oracle for code conversion, ensure you have one of the following methods configured:
+
+### Option 1: Azure OpenAI resource (Bring your own key)
 
 - Azure OpenAI Endpoint URL
 - Azure OpenAI Deployment
@@ -30,11 +34,42 @@ To use Copilot in SSMA for Oracle (Preview) for code conversion, ensure you have
 
 If you don't have these details, follow the steps in the [How to create Azure OpenAI resource](#modify-azure-openai-settings) section.
 
-## Steps to run Copilot in SSMA for Oracle (Preview)
+### Option 2: Microsoft-managed endpoint with Microsoft Entra ID authentication (Preview)
+
+SSMA for Oracle 10.4 introduces this authentication type for Copilot in SSMA.
+
+- No manual key entry required
+- Sign in using your Microsoft Entra ID credentials
+- Authentication is handled via a browser-based login flow
+
+## Steps to run Copilot in SSMA for Oracle
 
 Once the code conversion is done, the target objects that the SSMA rule engine couldn't convert, display warnings or errors. For those objects, you can launch **Fix with Copilot**.
 
-If the OpenAI resource isn't registered, you need to complete the following fields:
+If the OpenAI resource isn't registered, you're prompted with an authentication selection form. You can choose between:
+
+- **Microsoft Entra ID Authentication** (new flow)
+- **Azure OpenAI Key** (existing flow)
+
+### Microsoft Entra ID authentication flow (Preview)
+
+1. Select **Microsoft Entra ID Authentication** and select **Next**.
+
+1. A browser window opens, prompting you to sign in.
+
+1. Once authenticated, the Copilot interface loads, and you can review the suggested code fixes.
+
+1. If you select the Copilot icon again, the authentication form doesn't reappear unless you sign out, or reset the settings.
+
+To sign out:
+
+- Select the profile icon in the top-right corner and select **Log out**.
+
+- Alternatively, navigate to **Tools** > **Project Settings** > **Copilot**, clear the saved credentials, and apply changes.
+
+### Azure OpenAI Key flow
+
+If you want to bring your own key, and the OpenAI resource isn't registered, you must complete the following fields:
 
 - Azure OpenAI Endpoint URL
 - Azure OpenAI Deployment
@@ -81,5 +116,5 @@ Copilot-generated code for tables and user-defined data types can't be saved dir
 
 ## Related content
 
-- [What's new in SSMA for Oracle (OracleToSQL)](what-s-new-in-ssma-for-oracle-oracletosql.md)
+- [What's new in SSMA for Oracle](what-s-new-in-ssma-for-oracle-oracletosql.md)
 - [Microsoft Copilot in Azure with Azure SQL Database](/azure/azure-sql/copilot/copilot-azure-sql-overview)

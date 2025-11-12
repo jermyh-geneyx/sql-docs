@@ -4,14 +4,14 @@ description: "Executing the SSMA Console (AccessToSQL)"
 author: nilabjaball
 ms.author: niball
 ms.reviewer: randolphwest
-ms.date: 07/22/2024
+ms.date: 11/12/2025
 ms.service: sql
 ms.subservice: ssma
 ms.topic: conceptual
 ms.collection:
   - sql-migration-content
 ---
-# Executing the SSMA Console (AccessToSQL)
+# Executing the SSMA console (AccessToSQL)
 
 Microsoft provides you with a robust set of script file commands and command line options to execute and control SQL Server Migration Assistant (SSMA) activities. The ensuing sections detail the same.
 
@@ -19,7 +19,7 @@ Microsoft provides you with a robust set of script file commands and command lin
 
 The Project commands handle creating projects, opening, saving, and exiting projects.
 
-#### `create-new-project`
+### `create-new-project`
 
 Creates a new SSMA project.
 
@@ -28,9 +28,9 @@ Creates a new SSMA project.
 | `project-folder` | None | Indicates the folder of the project getting created. | String |
 | `project-name` | None | Indicates the name of the project. | String |
 | `overwrite-if-exists` | `false` | Optional attribute, specifying whether an existing project should be overwritten. | Boolean |
-| `project-type` | `sql-server-2008` | Optional attribute. The following options are available for `project-type`:<br /><br />`sql-server-2005`<br />`sql-server-2008`<br />`sql-server-2012`<br />`sql-server-2014`<br />`sql-server-2016`<br />`sql-azure` | String |
+| `project-type` | `sql-server-2016` | Optional attribute. The following options are available for `project-type`:<br /><br />`sql-server-2016`<br />`sql-server-2017`<br />`sql-server-2019`<br />`sql-server-2022`<br />`sql-server-2025`<br />`sql-azure` | String |
 
-**Syntax example**
+#### Syntax example
 
 ```xml
 <create-new-project
@@ -41,7 +41,7 @@ Creates a new SSMA project.
 />
 ```
 
-#### `open-project`
+### `open-project`
 
 Opens an existing project.
 
@@ -50,7 +50,7 @@ Opens an existing project.
 | `project-folder` | None | Indicates the folder of the project getting created. The command fails if the specified folder doesn't exist. | String |
 | `project-name` | None | Indicates the name of the project. The command fails if the specified project doesn't exist. | String |
 
-**Syntax example**
+#### Syntax example
 
 ```xml
 <open-project
@@ -62,17 +62,17 @@ Opens an existing project.
 > [!NOTE]  
 > SSMA For Access Console application supports backward compatibility. You can open projects created by previous version of SSMA.
 
-#### `save-project`
+### `save-project`
 
 Saves the migration project.
 
-**Syntax example**
+#### Syntax example
 
 ```xml
 <save-project/>
 ```
 
-#### `close-project`
+### `close-project`
 
 Closes the migration project.
 
@@ -80,7 +80,7 @@ Closes the migration project.
 | --- | --- | --- | --- |
 | `if-modified` | `ignore` | Optional attribute to specify behavior. Possible values are: `save`, `error`, and `ignore`. | String |
 
-**Syntax example**
+#### Syntax example
 
 ```xml
 <close-project
@@ -88,19 +88,19 @@ Closes the migration project.
 />
 ```
 
-Attribute 'if-modified' is optional, **ignore** by default.
+Attribute `if-modified` is optional, `ignore` by default.
 
-## Database Connection script file commands
+## Database connection script file commands
 
 The Database Connection commands help connect to the database.
 
 The **Browse** feature of the UI isn't supported in console.
 
-The **windows-authentication** and **port** parameters aren't applicable when connecting to SQL Azure.
+The `windows-authentication` and `port` parameters aren't applicable when connecting to SQL Azure.
 
-For more information, see [Creating script files (AccessToSQL)](creating-script-files-accesstosql.md).
+For more information, see [Creating script files](creating-script-files-accesstosql.md).
 
-#### `connect-source-database`
+### `connect-source-database`
 
 Performs connection to the source database and loads high-level metadata of the source database but not all of the metadata.
 
@@ -108,13 +108,13 @@ If the connection to the source can't be established, an error is generated and 
 
 The `server` definition is retrieved from the name attribute defined for each connection in the `server` section of the server connection file or the script file.
 
-**Syntax example**
+#### Syntax example
 
 ```xml
 <connect-source-database server="<server-unique-name>"/>
 ```
 
-#### `load-access-database`
+### `load-access-database`
 
 Used to load access database files.
 
@@ -122,13 +122,13 @@ Used to load access database files.
 | --- | --- | --- | --- |
 | `database-file` | None | Specifies the path to an Access database. | String |
 
-**Syntax example**
+#### Syntax example
 
 ```xml
 <load-access-database  database-file="<Access-database>"/>
 ```
 
--Or-
+Or:
 
 ```xml
 <load-access-database>
@@ -137,7 +137,7 @@ Used to load access database files.
 </load-access-database>
 ```
 
-#### `force-load` source or target database
+### `force-load` source or target database
 
 Loads the source metadata. Useful for working on migration project offline.
 
@@ -150,7 +150,7 @@ Requires one or more `metabase` nodes as command line parameter.
 | `object-name` | None | Specifies the name of the object. | String |
 | `metabase` | None | Specifies the path to an Access database. Possible values are: `source` or `target` | String |
 
-**Syntax example**
+#### Syntax example
 
 ```xml
 <force-load
@@ -158,7 +158,7 @@ Requires one or more `metabase` nodes as command line parameter.
   metabase="<source/target>"/>
 ```
 
--Or-
+Or:
 
 ```xml
 <force-load>
@@ -166,7 +166,7 @@ Requires one or more `metabase` nodes as command line parameter.
 </force-load>
 ```
 
-#### `reconnect-source-database`
+### `reconnect-source-database`
 
 Reconnects to the source database but doesn't load any metadata unlike the connect-source-database command.
 
@@ -174,13 +174,13 @@ If (re)connection with the source can't be established, an error is generated an
 
 The `server` definition is retrieved from the name attribute defined for each connection in the `server` section of the server connection file or the script file.
 
-**Syntax example**
+#### Syntax example
 
 ```xml
 <reconnect-source-database server="<server-unique-name>"/>
 ```
 
-#### `connect-target-database`
+### `connect-target-database`
 
 Connects to the target SQL Server or SQL Azure Database and loads high-level metadata of the target database but not the metadata entirely.
 
@@ -188,13 +188,13 @@ If the connection to the target can't be established, an error is generated and 
 
 The `server` definition is retrieved from the name attribute defined for each connection in the `server` section of the server connection file or the script file.
 
-**Syntax example**
+#### Syntax example
 
 ```xml
 <connect-target-database  server="<server-unique-name>"/>
 ```
 
-#### `reconnect-target-database`
+### `reconnect-target-database`
 
 Reconnects to the target database but doesn't load any metadata, unlike the connect-target-database command.
 
@@ -202,7 +202,7 @@ If (re)connection to the target can't be established, an error is generated and 
 
 The `server` definition is retrieved from the name attribute defined for each connection in the `server` section of the server connection file or the script file.
 
-**Syntax example**
+#### Syntax example
 
 ```xml
 <reconnect-target-database server="<server-unique-name>"/>
@@ -212,7 +212,7 @@ The `server` definition is retrieved from the name attribute defined for each co
 
 The Report commands generate reports on the performance of various SSMA Console activities
 
-#### `generate-assessment-report`
+### `generate-assessment-report`
 
 Generates assessment reports on the source database.
 
@@ -220,28 +220,28 @@ If the source database connection isn't performed before executing this command,
 
 Failure to connect to the source database server during the command execution, also results in ending the console application.
 
-**Script**
+#### Script
 
-- `assessment-report-folder`: Specifies folder where the assessment report can be stored.(optional attribute)
+- `assessment-report-folder`: Specifies folder where the assessment report can be stored. (optional attribute)
 
-- `object-name`: Specifies the object(s) considered for assessment report generation (It can have individual object names or a group object name).
+- `object-name`: Specifies the objects considered for assessment report generation (It can have individual object names or a group object name).
 
-- `object-type`: specifies the type of the object specified in the object-name attribute (if object category is specified then object type will be "category").
+- `object-type`: specifies the type of the object specified in the object-name attribute (if object category is specified then object type is "category").
 
 - `assessment-report-overwrite`: Specifies whether to overwrite the assessment report folder if it already exists.
 
-  **Default value:** false. (optional attribute)
+  **Default value**: false. (optional attribute)
 
-- `write-summary-report-to`: Specifies the path where the report will be generated.
+- `write-summary-report-to`: Specifies the path where the report is generated.
 
-  If only the folder path is mentioned, then file by name **AssessmentReport&lt;n&gt;.XML** is created. (optional attribute)
+  If only the folder path is mentioned, then file by name `AssessmentReport<n>.xml` is created. (optional attribute)
 
   Report creation has two further subcategories:
 
   - `report-errors` (="true/false", with default as "false" (optional attributes))
   - `verbose` (="true/false", with default as "false" (optional attributes))
 
-**Syntax example**
+#### Syntax example
 
 ```xml
 <generate-assessment-report
@@ -255,7 +255,7 @@ Failure to connect to the source database server during the command execution, a
 />
 ```
 
--Or-
+Or:
 
 ```xml
 <generate-assessment-report
@@ -273,34 +273,34 @@ The Migration commands convert the target database schema to the source schema a
 
 The default console output setting for the migration commands is 'Full' output report with no detailed error reporting: Only summary at the source object tree root node.
 
-#### `convert-schema`
+### `convert-schema`
 
 Performs schema conversion from source to the target schema.
 
-If the source or target database connection isn't performed before executing this command or the connection to the source or target database server fails during the command execution, an error is generated and the console application exits.
+If the source or target database connection isn't performed before executing this command, or the connection to the source or target database server fails during the command execution, an error is generated and the console application exits.
 
-**Script**
+#### Script
 
-- `conversion-report-folder`: Specifies folder where the assessment report can be stored.(optional attribute)
+- `conversion-report-folder`: Specifies folder where the assessment report can be stored. (optional attribute)
 
-- `object-name`: Specifies the source object(s) considered for converting schema (It can have individual object names or a group object name).
+- `object-name`: Specifies the source objects considered for converting schema (It can have individual object names or a group object name).
 
-- `object-type`: specifies the type of the object specified in the object-name attribute (if object category is specified then object type will be "category").
+- `object-type`: specifies the type of the object specified in the object-name attribute (if object category is specified then object type is "category").
 
 - `conversion-report-overwrite`: Specifies whether to overwrite the assessment report folder if it already exists.
 
-  **Default value:** false. (optional attribute)
+  **Default value**: false. (optional attribute)
 
-- `write-summary-report-to`: Specifies the path where the report will be generated.
+- `write-summary-report-to`: Specifies the path where the report is generated.
 
-  If only the folder path is mentioned, then file by name **SchemaConversionReport&lt;n&gt;.XML** is created. (optional attribute)
+  If only the folder path is mentioned, then file by name `SchemaConversionReport<n>.xml` is created. (optional attribute)
 
   Report creation has two further subcategories:
 
   - `report-errors` (="true/false", with default as "false" (optional attributes))
   - `verbose` (="true/false", with default as "false" (optional attributes))
 
-**Syntax example**
+#### Syntax example
 
 ```xml
 <convert-schema
@@ -314,7 +314,7 @@ If the source or target database connection isn't performed before executing thi
 />
 ```
 
--Or-
+Or:
 
 ```xml
 <convert-schema
@@ -326,19 +326,19 @@ If the source or target database connection isn't performed before executing thi
 </convert-schema>
 ```
 
-#### `migrate-data`
+### `migrate-data`
 
 Migrates the source data to the target.
 
-**Script**
+#### Script
 
-- `object-name`: Specifies the source object(s) considered for migrating data (It can have individual object names or a group object name).
+- `object-name`: Specifies the source objects considered for migrating data (It can have individual object names or a group object name).
 
-- `object-type`: specifies the type of the object specified in the object-name attribute (if object category is specified then object type will be "category").
+- `object-type`: specifies the type of the object specified in the object-name attribute (if object category is specified then object type is "category").
 
-- `write-summary-report-to`: Specifies the path where the report will be generated.
+- `write-summary-report-to`: Specifies the path where the report is generated.
 
-  If only the folder path is mentioned, then file by name **DataMigrationReport&lt;n&gt;.XML** is created. (optional attribute)
+  If only the folder path is mentioned, then file by name `DataMigrationReport<n>.xml` is created. (optional attribute)
 
   Report creation has two further subcategories:
 
@@ -346,7 +346,7 @@ Migrates the source data to the target.
 
   - `verbose` (="true/false", with default as "false" (optional attributes))
 
-**Syntax example**
+#### Syntax example
 
 ```xml
 <migrate-data
@@ -361,7 +361,7 @@ Migrates the source data to the target.
 </migrate-data>
 ```
 
--Or-
+Or:
 
 ```xml
 <migrate-data
@@ -371,13 +371,11 @@ Migrates the source data to the target.
   report-errors="true" verbose="true"/>
 ```
 
-#### `link-tables`
+### `link-tables`
 
 This command links the source (Access) table to the target table.
 
-**Script**
-
-**Syntax example**
+#### Syntax example
 
 ```xml
 <link-tables>
@@ -386,7 +384,7 @@ This command links the source (Access) table to the target table.
 </link-tables>
 ```
 
--Or-
+Or:
 
 ```xml
 <link-tables>
@@ -394,13 +392,11 @@ This command links the source (Access) table to the target table.
 </link-tables>
 ```
 
-#### `unlink-tables`
+### `unlink-tables`
 
 This command unlinks the source (Access) table from the target table.
 
-**Script**
-
-**Syntax Examples:**
+#### Syntax example
 
 ```xml
 <unlink-tables>
@@ -409,7 +405,7 @@ This command unlinks the source (Access) table from the target table.
 </unlink-tables>
 ```
 
--Or-
+Or:
 
 ```xml
 <unlink-tables>
@@ -421,16 +417,16 @@ This command unlinks the source (Access) table from the target table.
 
 The Migration Preparation command starts schema mapping between the source and target databases.
 
-#### `map-schema`
+### `map-schema`
 
 Schema mapping of source database to the target schema.
 
-**Script**
+#### Script
 
 - `source-schema` specifies the source schema we intend to migrate.
 - `sql-server-schema` specifies the target schema where we want it to be migrated.
 
-**Syntax example**
+#### Syntax example
 
 ```xml
 <map-schema source-schema="source-schema"
@@ -443,26 +439,29 @@ The Manageability commands help synchronize the target database objects with the
 
 The default console output setting for the migration commands is 'Full' output report with no detailed error reporting: Only summary at the source object tree root node.
 
-#### `synchronize-target`
+### `synchronize-target`
 
 Synchronizes the target objects with the target database. If this command is executed against the source database, you get an error.
 
-If the target database connection isn't performed before executing this command or the connection to the target database server fails during the command execution, an error is generated and the console application exits.
+If the target database connection isn't performed before executing this command, or the connection to the target database server fails during the command execution, an error is generated and the console application exits.
 
-**Script**
+#### Script
 
 - `object-name`: Specifies the target objects considered for synchronizing with target database (It can have individual object names or a group object name).
 
 - `object-type`: Specifies the type of the object specified in the object-name attribute (if object category is specified then object type is `category`).
 
 - `on-error`: Specifies whether to specify synchronization errors as warnings or error. Available options for on-error:
-  - report-total-as-warning
-  - report-each-as-warning
-  - fail-script
 
-- `report-errors-to`: Specifies location of error report for the synchronization operation (optional attribute) if only folder path is given, then file by name **TargetSynchronizationReport.XML** is created.
+  - `report-total-as-warning`
+  - `report-each-as-warning`
+  - `fail-script`
 
-**Syntax example**
+- `report-errors-to`: Specifies location of error report for the synchronization operation (optional attribute)
+
+   If only the folder path is given, then a file by the name of `TargetSynchronizationReport.xml` is created.
+
+#### Syntax example
 
 ```xml
 <synchronize-target
@@ -474,7 +473,7 @@ If the target database connection isn't performed before executing this command 
 />
 ```
 
--Or-
+Or:
 
 ```xml
 <synchronize-target
@@ -482,7 +481,7 @@ If the target database connection isn't performed before executing this command 
   object-type="category"/>
 ```
 
--Or-
+Or:
 
 ```xml
 <synchronize-target>
@@ -492,11 +491,11 @@ If the target database connection isn't performed before executing this command 
 </synchronize-target>
 ```
 
-#### `refresh-from-database`
+### `refresh-from-database`
 
 Refreshes the source objects from database. If this command is executed against the target database, an error is generated.
 
-**Script**
+#### Script
 
 Requires one or several metabase nodes as command line parameter.
 
@@ -505,13 +504,16 @@ Requires one or several metabase nodes as command line parameter.
 - `object-type`: Specifies the type of the object specified in the object-name attribute (if object category is specified then object type is `category`).
 
 - `on-error`: Specifies whether to specify refresh errors as warnings or error. Available options for on-error:
+
   - `report-total-as-warning`
   - `report-each-as-warning`
   - `fail-script`
 
-- `report-errors-to`: Specifies location of error report for the refresh operation (optional attribute) if only folder path is given, then file by name **SourceDBRefreshReport.XML** is created.
+- `report-errors-to`: Specifies location of error report for the synchronization operation (optional attribute)
 
-**Syntax example**
+   If only the folder path is given, then a file by the name of `SourceDBRefreshReport.xml` is created.
+
+#### Syntax example
 
 ```xml
 <refresh-from-database
@@ -523,7 +525,7 @@ Requires one or several metabase nodes as command line parameter.
 />
 ```
 
--Or-
+Or:
 
 ```xml
 <refresh-from-database
@@ -531,7 +533,7 @@ Requires one or several metabase nodes as command line parameter.
   object-type="category"/>
 ```
 
--Or-
+Or:
 
 ```xml
 <refresh-from-database>
@@ -543,11 +545,11 @@ Requires one or several metabase nodes as command line parameter.
 
 The Script Generation commands help save the console output in a script file.
 
-#### `save-as-script`
+### `save-as-script`
 
-Used to save the Scripts of the objects to a file mentioned when metabase=target, this is an alternative to synchronization command where in we get the scripts and execute the same on the target database.
+Used to save the scripts of the objects to a file mentioned when `metabase=target`. This is an alternative to the synchronization command, in which we get the scripts and execute the same on the target database.
 
-**Script**
+#### Script
 
 Requires one or several metabase nodes as command line parameter.
 
@@ -561,7 +563,7 @@ Requires one or several metabase nodes as command line parameter.
 
 - `overwrite`: If `true` then it overwrites if same filenames exist. It can have the values (`true`/`false`).
 
-**Syntax example**
+#### Syntax example
 
 ```xml
 <save-as-script
@@ -573,7 +575,7 @@ Requires one or several metabase nodes as command line parameter.
 />
 ```
 
--Or-
+Or:
 
 ```xml
 <save-as-script
@@ -587,8 +589,8 @@ Requires one or several metabase nodes as command line parameter.
 
 ## Related content
 
-- [Command-line options in the SSMA Console (AccessToSQL)](command-line-options-in-ssma-console-accesstosql.md)
-- [Working with the Sample Console Script FilesExecuting the SSMA Console (AccessToSQL)](working-sample-console-script-filesexecuting-ssma-console-accesstosql.md)
-- [Managing Passwords (AccessToSQL)](managing-passwords-accesstosql.md)
-- [Generating Reports (AccessToSQL)](generating-reports-accesstosql.md)
-- [Troubleshooting (AccessToSQL)](troubleshooting-accesstosql.md)
+- [Command-line options in the SSMA Console](command-line-options-in-ssma-console-accesstosql.md)
+- [Working with the Sample Console Script FilesExecuting the SSMA Console](working-sample-console-script-filesexecuting-ssma-console-accesstosql.md)
+- [Managing Passwords](managing-passwords-accesstosql.md)
+- [Generating Reports](generating-reports-accesstosql.md)
+- [Troubleshooting](troubleshooting-accesstosql.md)

@@ -1,9 +1,10 @@
 ---
 title: "Creating and Managing Projects (AccessToSQL)"
-description: "Creating and Managing Projects (AccessToSQL)"
+description: Creating and Managing Projects (AccessToSQL)
 author: nilabjaball
 ms.author: niball
-ms.date: "01/19/2017"
+ms.reviewer: randolphwest
+ms.date: 11/12/2025
 ms.service: sql
 ms.subservice: ssma
 ms.topic: conceptual
@@ -20,93 +21,98 @@ helpviewer_keywords:
   - "saving metadata"
   - "saving projects"
 ---
-# Creating and Managing Projects (AccessToSQL)
-To migrate Access databases to [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] or SQL Azure, you must first create an SSMA project. The project is a file that contains metadata about the Access databases that you want to migrate to [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] or SQL Azure, metadata about the target instance of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] or SQL Azure that will receive the migrated objects and data, [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] connection information, and project settings.  
-  
-## Reviewing Default Project Settings  
-SSMA contains several options for converting and synchronizing database objects and for converting data. The default setting for these options is appropriate for many users. However, before you create a new SSMA project, you should review the options and, if you want to, change the default settings that will be used for all your new projects.  
-  
-**To review default project settings**  
-  
-1.  On the **Tools** menu, select **Default Project Settings**.  
-  
-2.  Select the project type in **Migration Target Version** drop down for which settings are to be viewed/ changed and then click **General** tab.  
-  
-3.  In the left pane, click **Conversion**.  
-  
-4.  In the right pane, review the options. For more information about these options, see [Project Settings (Conversion)](./project-settings-conversion-accesstosql.md).  
-  
-5.  Change options as necessary.  
-  
-6.  Repeat the previous steps for the **Migration**, **GUI**, and **Type Mapping** pages.  
-  
-    -   For information about migration options, see [Project Settings (Migration)](./project-settings-migration-accesstosql.md).  
-  
-    -   For information about user interface options, see [Project Settings (GUI)](../sybase/project-settings-gui-sybasetosql.md).  
-  
-    -   For more information about data type mapping settings, see [Project Settings (Type Mapping)](./project-settings-type-mapping-accesstosql.md).  
-  
-    -   For information about SQL Azure settings, see [Project Settings (SQL Azure)](./project-settings-azure-sql-db-accesstosql.md).  
-  
-**Note** SQL Azure settings will be available only when you select Migration to SQL Azure while creating a project.  
-  
-## Creating New Projects  
-SSMA starts without loading a default project. To migrate data from Access databases to [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] or SQL Azure, you must create a project.  
-  
-**To create a new project**  
-  
-1.  On the **File** menu, select **New Project**.  
-  
-    The **New Project** dialog box appears.  
-  
-2.  In the **Name** box, enter a name for your project.  
-  
-3.  In the **Location** box, enter or select a folder for the project  
-  
-4.  In the Migration To drop down, select one of SQL Server 2005/ SQL Server 2008/ SQL Server 2012/ SQL Server 2014/ SQL Server 2016/ Azure SQL Database, and then click **OK**.  
-  
-SSMA creates the project file. You can now perform the next step of [adding one or more Access databases](adding-and-removing-access-database-files-accesstosql.md).  
-  
-## Customizing Project Settings  
-In addition to defining default project settings, which apply to all new SSMA projects, you can also customize the settings for each project. For more information, see [Setting Conversion and Migration Options](setting-conversion-and-migration-options-accesstosql.md).  
-  
-When you customize data type mappings between source and target databases, you can define mappings at the project, database, or object level. For more information about type mapping, see [Mapping Source and Target Data Types](mapping-source-and-target-data-types-accesstosql.md).  
-  
-## Saving Projects  
-When you save a project, SSMA persists the project settings, and optionally the database metadata, to the project file.  
-  
-**To save a project**  
-  
--   On the **File** menu, select **Save Project**.  
-  
-    If databases within the project have changed or have not been converted, SSMA will prompt you to save metadata into the project. Saving metadata lets you work offline. It also lets you send a complete project file to other people, including technical support personnel. If you are prompted to save metadata, do the following:  
-  
-    1.  For each database that shows a status of **Metadata missing**, select the check box next to the database name.  
-  
-        Saving metadata might take several minutes. If you do not want to save metadata at this point, do not select any check boxes.  
-  
-    2.  Click **Save**.  
-  
-        SSMA will parse the Access schemas and save the metadata to the project file.  
-  
-## Opening Projects  
-When you open a project, it is disconnected from [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] or SQL Azure. This lets you work offline. To update metadata load database objects into [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] or SQL Azure. To migrate data, you must reconnect to [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)] or SQL Azure.  
-  
-**To open a project**  
-  
-1.  Use one of the following procedures:  
-  
-    -   On the **File** menu, point to **Recent Projects**, and then select the project you want to open.  
-  
-    -   On the **File** menu, select **Open Project**, locate the .a2ssproj project file, select the file, and then click **Open**.  
-  
-2.  To reconnect to [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)], on the **File** menu, select **Reconnect to SQL Server**.  
-  
-3.  To reconnect to SQL Azure, on the **File** menu, select **Reconnect to SQL Azure.**  
-  
-## Next Step  
-The next step in the migration process is to [add one or more Access databases](adding-and-removing-access-database-files-accesstosql.md).  
-  
-## See Also  
-[Migrating Access Databases to SQL Server](migrating-access-databases-to-sql-server-azure-sql-db-accesstosql.md)  
-[Adding and Removing Access Database Files](adding-and-removing-access-database-files-accesstosql.md)  
+# Create and manage projects (AccessToSQL)
+
+To migrate Access databases to [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] or Azure SQL, you must first create a SQL Server Migration Assistant (SSMA) project. The project is a file that contains metadata about the Access databases that you want to migrate to [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] or Azure SQL, metadata about the target instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] or Azure SQL that receives the migrated objects and data, [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] connection information, and project settings.
+
+## Review default project settings
+
+SSMA contains several options for converting and synchronizing database objects and for converting data. The default setting for these options is appropriate for many users. However, before you create a new SSMA project, you should review the options and, if you want to, change the default settings for all your new projects.
+
+1. On the **Tools** menu, select **Default Project Settings**.
+
+1. Select the project type in **Migration Target Version** dropdown list for which settings are to be viewed or changed, and then select the **General** tab.
+
+1. In the left pane, select **Conversion**.
+
+1. In the right pane, review the options. For more information about these options, see [Project Settings (Conversion)](project-settings-conversion-accesstosql.md).
+
+1. Change options as necessary.
+
+1. Repeat the previous steps for the **Migration**, **GUI**, and **Type Mapping** pages.
+
+   - For information about migration options, see [Project Settings (Migration)](project-settings-migration-accesstosql.md).
+
+   - For information about user interface options, see [Project Settings (GUI)](../sybase/project-settings-gui-sybasetosql.md).
+
+   - For more information about data type mapping settings, see [Project Settings (Type Mapping)](project-settings-type-mapping-accesstosql.md).
+
+   - For information about Azure SQL settings, see [Project Settings (Azure SQL Database)](project-settings-azure-sql-db-accesstosql.md).
+
+> [!NOTE]  
+> Azure SQL settings are available only when you select **Migration to Azure SQL** while creating a project.
+
+## Create new projects
+
+SSMA starts without loading a default project. To migrate data from Access databases to [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] or Azure SQL, you must create a project.
+
+1. On the **File** menu, select **New Project**.
+
+   The **New Project** dialog box appears.
+
+1. In the **Name** box, enter a name for your project.
+
+1. In the **Location** box, enter or select a folder for the project
+
+1. In the **Migration To** dropdown list, select one of the following versions, and then select **OK**:
+
+   - [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)]
+   - [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)]
+   - [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)]
+   - [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)]
+   - [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)]
+   - [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)]
+   - [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)]
+
+SSMA creates the project file. You can now perform the next step of [adding one or more Access databases](adding-and-removing-access-database-files-accesstosql.md).
+
+## Customize project settings
+
+In addition to defining default project settings, which apply to all new SSMA projects, you can also customize the settings for each project. For more information, see [Setting Conversion and Migration Options](setting-conversion-and-migration-options-accesstosql.md).
+
+When you customize data type mappings between source and target databases, you can define mappings at the project, database, or object level. For more information about type mapping, see [Mapping Source and Target Data Types](mapping-source-and-target-data-types-accesstosql.md).
+
+## Save projects
+
+When you save a project, SSMA persists the project settings, and optionally the database metadata, to the project file.
+
+- On the **File** menu, select **Save Project**.
+
+  If databases within the project have changed or haven't been converted, SSMA prompts you to save metadata into the project. Saving metadata lets you work offline. It also lets you send a complete project file to other people, including technical support personnel. If you're prompted to save metadata, do the following steps:
+
+  1. For each database that shows a status of **Metadata missing**, select the check box next to the database name.
+
+     Saving metadata might take several minutes. If you don't want to save metadata at this point, don't select any check boxes.
+
+  1. Select **Save**.
+
+     SSMA parses the Access schemas and saves the metadata to the project file.
+
+## Open projects
+
+When you open a project, it's disconnected from [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] or Azure SQL. This lets you work offline. To update metadata load database objects into [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] or Azure SQL. To migrate data, you must reconnect to [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] or Azure SQL.
+
+1. Use one of the following procedures:
+
+   - On the **File** menu, point to **Recent Projects**, and then select the project you want to open.
+
+   - On the **File** menu, select **Open Project**, locate the `.a2ssproj` project file, select the file, and then select **Open**.
+
+1. To reconnect to [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], on the **File** menu, select **Reconnect to SQL Server**.
+
+1. To reconnect to Azure SQL, on the **File** menu, select **Reconnect to SQL Azure**.
+
+## Related content
+
+- [Migrating Access databases to SQL Server - Azure SQL Database](migrating-access-databases-to-sql-server-azure-sql-db-accesstosql.md)
+- [Adding and Removing Access Database Files](adding-and-removing-access-database-files-accesstosql.md)

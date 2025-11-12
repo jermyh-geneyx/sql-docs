@@ -1,10 +1,10 @@
 ---
-title: "Exporting an Access inventory (AccessToSQL)"
-description: "Exporting an Access inventory (AccessToSQL)"
+title: "Exporting an Access Inventory (AccessToSQL)"
+description: Exporting an Access inventory (AccessToSQL)
 author: nilabjaball
 ms.author: niball
 ms.reviewer: randolphwest
-ms.date: 07/10/2023
+ms.date: 11/12/2025
 ms.service: sql
 ms.subservice: ssma
 ms.topic: how-to
@@ -34,7 +34,7 @@ Query examples that are used to answer these questions are provided at the end o
 
 ## Exported metadata
 
-SSMA exports metadata about Access databases, tables, columns, indexes, foreign keys, queries, reports, forms, macros, and modules. Metadata about each of these categories of items is exported to a separate table. For schemas of these tables, see [Access Inventory Schemas](access-inventory-schemas-accesstosql.md).
+SQL Server Migration Assistant (SSMA) exports metadata about Access databases, tables, columns, indexes, foreign keys, queries, reports, forms, macros, and modules. Metadata about each of these categories of items is exported to a separate table. For schemas of these tables, see [Access Inventory Schemas](access-inventory-schemas-accesstosql.md).
 
 ## Export Inventory Data
 
@@ -51,7 +51,7 @@ The following instructions describe how to create a project, add databases to th
 
 1. On the **File** menu, select **New Project**.
 
-    The **New Project** dialog box appears.
+   The **New Project** dialog box appears.
 
 1. In the **Name** box, enter a name for your project.
 
@@ -59,7 +59,7 @@ The following instructions describe how to create a project, add databases to th
 
 1. In the **Migrate To** combo box, select the target version to which you want to migrate, and then select **OK**.
 
-For more information about creating projects, see [Creating and Managing Projects](creating-and-managing-projects-accesstosql.md).
+For more information about creating projects, see [Create and manage projects](creating-and-managing-projects-accesstosql.md).
 
 #### Find and add databases
 
@@ -69,12 +69,12 @@ For more information about creating projects, see [Creating and Managing Project
 
 1. Select **Add** to add the location to the list box.
 
-   Repeat the previous two steps to add additional search locations.
+   Repeat the previous two steps to add more search locations.
 
 1. Optionally, add search criteria to refine the list of databases that are returned.
 
    > [!IMPORTANT]  
-   > The **All or part of the file name** text box does not support wildcard characters.
+   > The **All or part of the file name** text box doesn't support wildcard characters.
 
 1. Select **Scan**.
 
@@ -96,19 +96,19 @@ For more information about adding databases to projects, see [Adding and Removin
 
 1. In the connection dialog box, enter or select the name of the instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)].
 
-   - If you are connecting to the default instance on the local computer, you can enter **localhost** or a dot (**.**).
+   - If you're connecting to the default instance on the local computer, you can enter `localhost` or a dot (`.`).
 
-   - If you are connecting to the default instance on another computer, enter the name of the computer.
+   - If you're connecting to the default instance on another computer, enter the name of the computer.
 
-   - If you are connecting to a named instance, enter the computer name, a backslash, and the instance name. For example: MyServer\MyInstance.
+   - If you're connecting to a named instance, enter the computer name, a backslash, and the instance name. For example: `MyServer\MyInstance`.
 
 1. In the **Database** box, enter the name of the target database for exported metadata.
 
-1. If your instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] is configured to accept connections on a non-default port, enter the port number that is used for [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] connections in the **Server port** box. For the default instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], the default port number is 1433. For named instances, SSMA tries to obtain the port number from the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Browser Service.
+1. If your instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] is configured to accept connections on a nondefault port, enter the port number that is used for [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] connections in the **Server port** box. For the default instance of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], the default port number is 1433. For named instances, SSMA tries to obtain the port number from the [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] Browser Service.
 
 1. In the **Authentication** dropdown list, select the authentication type to use for the connection. To use the current Windows account, select **Windows Authentication**. To use a [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] login, select **SQL Server Authentication**, and then provide a user name and password.
 
-For more information about connecting to [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], see [Connecting to SQL Server (AccessToSQL)](../../ssma/access/connecting-to-sql-server-accesstosql.md).
+For more information about connecting to [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)], see [Connecting to SQL Server](connecting-to-sql-server-accesstosql.md).
 
 #### Export inventory information
 
@@ -116,7 +116,7 @@ For more information about connecting to [!INCLUDE [ssNoVersion](../../includes/
 
 1. Select the check box next to **Databases**.
 
-    To omit individual databases or database objects, expand the **Databases** folder, and then clear the check box next to the database or database object.
+   To omit individual databases or database objects, expand the **Databases** folder, and then clear the check box next to the database or database object.
 
 1. Right-click **Databases** and select **Export Schema**.
 
@@ -130,7 +130,7 @@ After you export metadata about Access databases, you can query the metadata. Th
 
 #### Query metadata
 
-1. From the **Start** menu, point to **All Programs**, point to **Microsoft [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] 2005** or to **Microsoft [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] 2008** or to **Microsoft [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] 2012**, and then select **SQL Server Management Studio**.
+1. Navigate to **SQL Server Management Studio** from the **Start** menu.
 
 1. In the **Connect to Server** dialog box, verify the settings, and then select **Connect**.
 
@@ -149,7 +149,7 @@ USE MyAccessMetadata;
 GO
 ```
 
-The following examples all use the **dbo** schema. If you exported the metadata to another schema, make sure to change the schema when you run these queries.
+The following examples all use the `dbo` schema. If you exported the metadata to another schema, make sure to change the schema when you run these queries.
 
 ### What tables and columns are in these databases?
 
@@ -157,13 +157,13 @@ The following query joins the tables that contain column, table, and database me
 
 ```sql
 SELECT DatabaseName,
-    TableName,
-    ColumnName
-FROM dbo.SSMA_Access_InventoryColumns C
-INNER JOIN dbo.SSMA_Access_InventoryTables T
-    ON C.TableId = T.TableId
-INNER JOIN dbo.SSMA_Access_InventoryDatabases D
-    ON T.DatabaseId = D.DatabaseId
+       TableName,
+       ColumnName
+FROM dbo.SSMA_Access_InventoryColumns AS C
+     INNER JOIN dbo.SSMA_Access_InventoryTables AS T
+         ON C.TableId = T.TableId
+     INNER JOIN dbo.SSMA_Access_InventoryDatabases AS D
+         ON T.DatabaseId = D.DatabaseId
 ORDER BY ColumnName;
 ```
 
@@ -173,8 +173,8 @@ The following query returns the database name, file size, and number of tables i
 
 ```sql
 SELECT DatabaseName,
-    FileSize,
-    TablesCount
+       FileSize,
+       TablesCount
 FROM dbo.SSMA_Access_InventoryDatabases
 ORDER BY FileSize DESC;
 ```
@@ -184,7 +184,8 @@ ORDER BY FileSize DESC;
 The following query returns the database name and owner of each Access database, sorted by owner.
 
 ```sql
-SELECT DatabaseName, FileOwner
+SELECT DatabaseName,
+       FileOwner
 FROM dbo.SSMA_Access_InventoryDatabases
 ORDER BY FileOwner;
 ```
@@ -195,16 +196,14 @@ The following query uses a subquery to find all table names that appear more tha
 
 ```sql
 SELECT DatabaseName,
-    TableName
-FROM dbo.SSMA_Access_InventoryTables T
-INNER JOIN dbo.SSMA_Access_InventoryDatabases D
-    ON D.DatabaseId = T.DatabaseId
-WHERE TableName IN (
-    SELECT TableName
-    FROM dbo.SSMA_Access_InventoryTables
-    GROUP BY TableName
-    HAVING COUNT(*) > 1
-)
+       TableName
+FROM dbo.SSMA_Access_InventoryTables AS T
+     INNER JOIN dbo.SSMA_Access_InventoryDatabases AS D
+         ON D.DatabaseId = T.DatabaseId
+WHERE TableName IN (SELECT TableName
+                    FROM dbo.SSMA_Access_InventoryTables
+                    GROUP BY TableName
+                    HAVING COUNT(*) > 1)
 ORDER BY TableName;
 ```
 
@@ -214,7 +213,7 @@ The following query gets the current date, gets the month value for six months a
 
 ```sql
 SELECT DatabaseName,
-    DateModified
+       DateModified
 FROM dbo.SSMA_Access_InventoryDatabases
 WHERE DATEDIFF(MONTH, DateModified, GETDATE()) > 6
 ORDER BY DateModified;
@@ -222,22 +221,22 @@ ORDER BY DateModified;
 
 ### Which databases contain private information?
 
-Your Access databases might contain sensitive or personal information. You might want to move these databases to [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] to take advantage of its security features. If you know that columns containing sensitive data have a specific name, or contain specific characters, you can use a query to find all columns that contain that information. For example, you can find all columns that include the string "salary".  The query then returns the database name, table name, and column name.
+Your Access databases might contain sensitive or personal information. You might want to move these databases to [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] to take advantage of its security features. If you know that columns containing sensitive data have a specific name, or contain specific characters, you can use a query to find all columns that contain that information. For example, you can find all columns that include the string `salary`. The query then returns the database name, table name, and column name.
 
 ```sql
 SELECT DatabaseName,
-    TableName,
-    ColumnName
-FROM dbo.SSMA_Access_InventoryColumns C
-INNER JOIN dbo.SSMA_Access_InventoryTables T
-    ON C.TableId = T.TableId
-INNER JOIN dbo.SSMA_Access_InventoryDatabases D
-    ON T.DatabaseId = D.DatabaseId
+       TableName,
+       ColumnName
+FROM dbo.SSMA_Access_InventoryColumns AS C
+     INNER JOIN dbo.SSMA_Access_InventoryTables AS T
+         ON C.TableId = T.TableId
+     INNER JOIN dbo.SSMA_Access_InventoryDatabases AS D
+         ON T.DatabaseId = D.DatabaseId
 WHERE ColumnName LIKE '%salary%';
 ```
 
 If you don't know the column name, you can write a query to return all columns. To do this, remove the WHERE clause from the previous query.
 
-## See also
+## Related content
 
-- [Preparing Access Databases for Migration](preparing-access-databases-for-migration-accesstosql.md)
+- [Preparing Access databases for migration](preparing-access-databases-for-migration-accesstosql.md)

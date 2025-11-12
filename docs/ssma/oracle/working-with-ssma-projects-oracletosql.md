@@ -4,7 +4,7 @@ description: Learn how to create an SSMA project that contains metadata for Orac
 author: nilabjaball
 ms.author: niball
 ms.reviewer: randolphwest
-ms.date: 06/03/2025
+ms.date: 11/12/2025
 ms.service: sql
 ms.subservice: ssma
 ms.topic: how-to
@@ -68,14 +68,15 @@ To migrate data from Oracle databases to [!INCLUDE [ssNoVersion](../../includes/
 
 1. In the **Migration To** dropdown list, select the version of target [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] used for migration. The options available are:
 
-   - [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] 2005
-   - [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] 2008
-   - [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] 2014
-   - [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] 2016
-   - [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] 2017
-   - [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] 2019
-   - [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] 2022
-   - Azure SQL Database
+    - [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)]
+    - [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)]
+    - [!INCLUDE [sssql19-md](../../includes/sssql19-md.md)]
+    - [!INCLUDE [sssql22-md](../../includes/sssql22-md.md)]
+    - [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)]
+    - [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)]
+    - [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)]
+  
+And then select **OK**.
 
 ## Customize project settings
 

@@ -4,7 +4,7 @@ description: Find out about changes to SQL Server Migration Assistant (SSMA) for
 author: nilabjaball
 ms.author: niball
 ms.reviewer: randolphwest
-ms.date: 09/02/2025
+ms.date: 11/12/2025
 ms.service: sql
 ms.subservice: ssma
 ms.topic: whats-new
@@ -18,6 +18,14 @@ ms.custom:
 This article lists SQL Server Migration Assistant (SSMA) for MySQL changes in each release.
 
 [!INCLUDE [entra-id](../../includes/entra-id-hard-coded.md)]
+
+## SSMA v10.4
+
+The v10.4 release of SSMA for MySQL contains the following changes:
+
+- Support for assessment and migration of your project to [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)].
+
+- Important security, compliance, UX, and accessibility fixes.
 
 ## SSMA v10.3
 
@@ -336,7 +344,7 @@ The v7.3 release of SSMA for MySQL contains the following changes:
 
       - For more information on how to construct a custom converter, see [Extending SQL Server Migration Assistant's conversion capabilities](https://techcommunity.microsoft.com/blog/microsoftdatamigration/extending-sql-server-migration-assistants-conversion-capabilities/1004181).
 
-      - You can also [download a sample project for conversion](https://techcommunity.microsoft.com/gxcuf89792/attachments/gxcuf89792/MicrosoftDataMigration/127/1/SsmaForOracleConversionSample.zip) from the same blog post.
+      - You can also [download a sample project for conversion](https://techcommunity.microsoft.com/t5/s/gxcuf89792/attachments/gxcuf89792/MicrosoftDataMigration/127/1/SsmaForOracleConversionSample.zip) from the same blog post.
 
 ## SSMA v7.2
 
@@ -412,7 +420,7 @@ The July 2011 release of SSMA for MySQL contains the following changes:
 
 The April 2011 release of SSMA for MySQL contains the following changes:
 
-- Single installable of SSMA for MySQL, which supports [!INCLUDE [ssVersion2005](../../includes/ssversion2005-md.md)], [!INCLUDE [sql2008-md](../../includes/sql2008-md.md)], [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)], and Azure SQL.
+- Single installable of SSMA for MySQL, which supports [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later versions, and Azure SQL.
 - The ability to connect [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)].
 - Enhanced client-side data migration engine, supporting parallel migration of data.
 - Improved data migration performance with Simple and Bulk logged recovery models.

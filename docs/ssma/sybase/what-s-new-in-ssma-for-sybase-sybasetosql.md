@@ -4,7 +4,7 @@ description: Find out about changes to SQL Server Migration Assistant (SSMA) for
 author: nilabjaball
 ms.author: niball
 ms.reviewer: randolphwest
-ms.date: 09/02/2025
+ms.date: 11/12/2025
 ms.service: sql
 ms.subservice: ssma
 ms.topic: whats-new
@@ -18,6 +18,16 @@ ms.custom:
 This article lists SQL Server Migration Assistant (SSMA) for SAP ASE (formerly SSMA for Sybase) changes in each release.
 
 [!INCLUDE [entra-id](../../includes/entra-id-hard-coded.md)]
+
+## SSMA v10.4
+
+The v10.4 release of SSMA for SAP ASE contains the following changes:
+
+- Support for assessment and migration of your project to [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)].
+
+- Support for migrating user defined data types during schema conversion.
+
+- Important security, compliance, UX, and accessibility fixes.
 
 ## SSMA v10.3
 
@@ -405,7 +415,7 @@ The July 2011 release of SSMA for Sybase provides improved error reporting durin
 
 The April 2011 release of SSMA for Sybase contains the following changes:
 
-- Consolidated **SSMA for Sybase** product, which supports [!INCLUDE [ssVersion2005](../../includes/ssversion2005-md.md)], [!INCLUDE [sql2008-md](../../includes/sql2008-md.md)], [!INCLUDE [ssSQL11](../../includes/ssSQL11-md.md)], and Azure SQL.
+- Consolidated **SSMA for Sybase** product, which supports [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later versions, and Azure SQL.
 - Added support for connecting and migrating to [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)].
 - Added a new feature to convert and migrate Sybase databases to Azure SQL.
 - Enhanced client-side data migration engine, supporting parallel migration of data.
@@ -478,4 +488,4 @@ The July 2006 release of SSMA for Sybase was the initial release.
 
 ## Related content
 
-- [Getting Started with SSMA for SAP ASE (SybaseToSQL)](getting-started-with-ssma-for-sybase-sybasetosql.md)
+- [Getting Started with SSMA for SAP ASE](getting-started-with-ssma-for-sybase-sybasetosql.md)

@@ -4,7 +4,7 @@ description: Find out about changes to SQL Server Migration Assistant (SSMA) for
 author: nilabjaball
 ms.author: niball
 ms.reviewer: randolphwest
-ms.date: 09/02/2025
+ms.date: 11/12/2025
 ms.service: sql
 ms.subservice: ssma
 ms.topic: whats-new
@@ -19,9 +19,17 @@ This article lists SQL Server Migration Assistant (SSMA) for Access changes in e
 
 [!INCLUDE [entra-id](../../includes/entra-id-hard-coded.md)]
 
+## SSMA v10.4
+
+The v10.4 release of SSMA for Access contains the following changes:
+
+- Support for assessment and migration of your project to [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)].
+
+- Important security, compliance, UX, and accessibility fixes.
+
 ## SSMA v10.3
 
-The v10.3 release of SSMA for Access contains important security, compliance and accessibility fixes.
+The v10.3 release of SSMA for Access contains important security, compliance, and accessibility fixes.
 
 ## SSMA v10.2
 
@@ -181,7 +189,7 @@ The v8.8 release of SSMA for Access includes:
 
 ## SSMA v8.7
 
-The v8.7 release of SSMA for Access has improved conversion for `IIF` function in queries, as well as minor fixes and performance improvements in graphical user interface.
+The v8.7 release of SSMA for Access has improved conversion for `IIF` function in queries, and minor fixes and performance improvements in graphical user interface.
 
 > [!IMPORTANT]  
 > With SSMA v8.5 and later, .NET 4.7.2 is an installation prerequisite. If you need to install this version, you can [download the runtime](https://dotnet.microsoft.com/download/dotnet-framework/net472).
@@ -390,7 +398,7 @@ The July 2011 release of SSMA for Access adds improved error reporting during da
 
 The April 2011 release of SSMA for Access contains the following changes:
 
-- Added a single installable of **SSMA for Access**, which supports [!INCLUDE [ssVersion2005](../../includes/ssversion2005-md.md)], [!INCLUDE [sql2008-md](../../includes/sql2008-md.md)], [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)], and Azure SQL.
+- Added a single installable of **SSMA for Access**, which supports [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later versions, and Azure SQL.
 - Added the ability to connect to [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)].
 - Added SSMA for Access Console version support for backward compatibility. You can open the projects created by versions earlier to SSMA v5.0.
 - Added the ability to install SSMA v5.0 product side by side (SxS) with older versions of SSMA Product.

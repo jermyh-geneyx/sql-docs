@@ -1,10 +1,10 @@
 ---
-title: "Installing SSMA for MySQL client (MySQLToSQL)"
+title: "Installing SSMA for MySQL Client (MySQLToSQL)"
 description: Learn about installation prerequisites for the SQL Server Migration Assistant (SSMA) for MySQL client and how to install.
 author: nilabjaball
 ms.author: niball
 ms.reviewer: randolphwest
-ms.date: 07/10/2023
+ms.date: 11/12/2025
 ms.service: sql
 ms.subservice: ssma
 ms.topic: install-set-up-deploy
@@ -29,7 +29,7 @@ This article provides the installation prerequisites and instructions for instal
 
 ## Prerequisites
 
-SSMA for MySQL is designed to work with MySQL 4.1 or later versions and all editions of [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] 2012 or later, and [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)].
+SSMA for MySQL is designed to work with MySQL 4.1 or later versions and all editions of [!INCLUDE [sssql11-md](../../includes/sssql11-md.md)] and later versions, [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], and [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)].
 
 Before you install SSMA, make sure that the computer meets the following requirements:
 
