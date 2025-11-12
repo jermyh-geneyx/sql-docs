@@ -1,10 +1,10 @@
 ---
-title: "Execute the SSMA console (Db2ToSQL)"
+title: "Execute the SSMA Console (Db2ToSQL)"
 description: Learn about running commands in the SSMA console for Db2.
 author: nilabjaball
 ms.author: niball
 ms.reviewer: randolphwest
-ms.date: 09/24/2024
+ms.date: 11/10/2025
 ms.service: sql
 ms.subservice: ssma
 ms.topic: how-to
@@ -19,21 +19,23 @@ Microsoft provides you with a robust set of script file commands to execute and 
 
 The Project commands handle creating projects, opening, saving, and exiting projects.
 
-**Command**
+### `create-new-project` command
 
-`create-new-project`: Creates a new SSMA project.
+Creates a new SSMA project.
 
-**Script**
+#### Script
 
 - `project-folder`. Indicates the folder of the project getting created.
 
 - `project-name`. Indicates the name of the project. {string}
 
-- `overwrite-if-exists`: Optional attribute. Indicates if an existing project should be overwritten. {boolean}
+- `overwrite-if-exists`. Optional attribute. Indicates if an existing project should be overwritten. {boolean}
 
-- `project-type`: Optional attribute. Indicates the project type. For example, `sql-server-2019` or `sql-azure`. Default is `sql-server-2016`.
+### `project-type` command
 
-**Example:**
+Optional attribute. Indicates the project type, that is, `sql-server-2016`, `sql-server-2017`, `sql-server-2019`, `sql-server-2022`, `sql-server-2025`, or `sql-azure`. The default is `sql-server-2016`.
+
+#### Syntax example
 
 ```xml
 <create-new-project
@@ -48,17 +50,17 @@ Attribute `overwrite-if-exists` is `false` by default.
 
 Attribute `project-type` is `sql-server-2016` by default.
 
-**Command**
+### `open-project` command
 
-`open-project`: Opens an existing project.
+Opens an existing project.
 
-**Script**
+#### Script
 
 - `project-folder` indicates the folder of the project getting created. The command fails if the specified folder doesn't exist. {string}
 
 - `project-name` indicates the name of the project. The command fails if the specified project doesn't exist. {string}
 
-**Syntax example:**
+#### Syntax example
 
 ```xml
 <open-project
@@ -69,21 +71,21 @@ Attribute `project-type` is `sql-server-2016` by default.
 
 SSMA for Db2 Console Application supports backward compatibility. You can open projects created by previous version of SSMA.
 
-**Command**
+### `save-project` command
 
-`save-project`: Saves the migration project.
+Saves the migration project.
 
-**Syntax example:**
+#### Syntax example
 
 ```xml
 <save-project/>
 ```
 
-**Command**
+### `close-project` command
 
-`close-project`: Closes the migration project.
+Closes the migration project.
 
-**Syntax example:**
+#### Syntax example
 
 ```xml
 <close-project
@@ -95,50 +97,46 @@ SSMA for Db2 Console Application supports backward compatibility. You can open p
 
 The Database Connection commands help connect to the database.
 
-- The **Browse** feature of the UI isn't supported in console.
+The **Browse** feature of the UI isn't supported in console.
 
-- For more information, see [Create script files](creating-script-files-db2tosql.md).
+For more information, see [Create script files](creating-script-files-db2tosql.md).
 
-**Command**
+### `connect-source-database` command
 
-`connect-source-database`
+Performs connection to the source database and loads high level metadata of the source database but not all of the metadata.
 
-- Performs connection to the source database and loads high level metadata of the source database but not all of the metadata.
+If the connection to the source can't be established, an error is generated and the console application stops further execution
 
-- If the connection to the source can't be established, an error is generated and the console application stops further execution
+#### Script
 
-**Script**
+The server definition is retrieved from the name attribute defined for each connection, in the server section of the server connection file or the script file.
 
-Server definition is retrieved from the name attribute defined for each connection in the server section of the server connection file or the script file.
-
-**Syntax example:**
+#### Syntax example
 
 ```xml
 <connect-source-database  server="<server-unique-name>"/>
 ```
 
-**Command**
+### `force-load-source-database`/`force-load-target-database`
 
-`force-load-source-database`/`force-load-target-database`
+Loads the source metadata.
 
-- Loads the source metadata.
+Useful for working on migration project offline.
 
-- Useful for working on migration project offline.
+If the connection to the source/target can't be established, an error is generated and the console application stops further execution
 
-- If the connection to the source/target can't be established, an error is generated and the console application stops further execution
-
-**Script**
+#### Script
 
 Requires one or several metabase nodes as command line parameter.
 
-**Syntax example:**
+#### Syntax example
 
 ```xml
 <force-load object-name="<object-name>"
   metabase="<source/target>"/>
 ```
 
-Or
+Or:
 
 ```xml
 <force-load>
@@ -146,47 +144,41 @@ Or
 </force-load>
 ```
 
-**Command**
+### `reconnect-source-database`
 
-`reconnect-source-database`
+Reconnects to the source database but doesn't load any metadata unlike the connect-source-database command.
 
-- Reconnects to the source database but doesn't load any metadata unlike the connect-source-database command.
+If (re)connection with the source can't be established, an error is generated and the console application stops further execution.
 
-- If (re)connection with the source can't be established, an error is generated and the console application stops further execution.
-
-**Syntax example:**
+#### Syntax example
 
 ```xml
 <reconnect-source-database  server="<server-unique-name>"/>
 ```
 
-**Command**
+### `connect-target-database`
 
-`connect-target-database`
+Connects to the target SQL Server database and loads high level metadata of the target database but not the metadata entirely.
 
-- Connects to the target SQL Server database and loads high level metadata of the target database but not the metadata entirely.
+If the connection to the target can't be established, an error is generated and the console application stops further execution.
 
-- If the connection to the target can't be established, an error is generated and the console application stops further execution.
+#### Script
 
-**Script**
+The erver definition is retrieved from the name attribute defined for each connection, in the server section of the server connection file or the script file
 
-Server definition is retrieved from the name attribute defined for each connection in the server section of the server connection file or the script file
-
-**Syntax example:**
+#### Syntax example
 
 ```xml
 <connect-target-database  server="<server-unique-name>"/>
 ```
 
-**Command**
+### `reconnect-target-database`
 
-`reconnect-target-database`
+Reconnects to the target database but doesn't load any metadata, unlike the connect-target-database command.
 
-- Reconnects to the target database but doesn't load any metadata, unlike the connect-target-database command.
+If (re)connection to the target can't be established, an error is generated and the console application stops further execution.
 
-- If (re)connection to the target can't be established, an error is generated and the console application stops further execution.
-
-**Syntax example:**
+#### Syntax example
 
 ```xml
 <reconnect-target-database  server="<server-unique-name>"/>
@@ -196,38 +188,36 @@ Server definition is retrieved from the name attribute defined for each connecti
 
 The Report commands generate reports on the performance of various SSMA console activities.
 
-**Command**
+### `generate-assessment-report`
 
-`generate-assessment-report`
+Generates assessment reports on the source database.
 
-- Generates assessment reports on the source database.
+If the source database connection isn't performed before executing this command, an error is generated and the console application exits.
 
-- If the source database connection isn't performed before executing this command, an error is generated and the console application exits.
+Failure to connect to the source database server during the command execution, also results in terminating the console application.
 
-- Failure to connect to the source database server during the command execution, also results in terminating the console application.
+#### Script
 
-**Script**
+- `conversion-report-folder`: Specifies folder where the assessment report can be stored. (optional attribute)
 
-- `conversion-report-folder:` Specifies folder where the assessment report can be stored. (optional attribute)
+- `object-name`: Specifies the objects considered for assessment report generation (It can have individual object names or a group object name).
 
-- `object-name:` Specifies the objects considered for assessment report generation (It can have individual object names or a group object name).
+- `object-type`: specifies the type of the object specified in the object-name attribute (if object category is specified then object type is `category`).
 
-- `object-type:` specifies the type of the object specified in the object-name attribute (if object category is specified then object type is `category`).
+- `conversion-report-overwrite`: Specifies whether to overwrite the assessment report folder if it already exists.
 
-- `conversion-report-overwrite:` Specifies whether to overwrite the assessment report folder if it already exists.
+  **Default value:** false. (optional attribute)
 
-    **Default value:** false. (optional attribute)
+- `write-summary-report-to`: Specifies the path where the summary report is generated.
 
-- `write-summary-report-to:` Specifies the path where the summary report is generated.
+  If only the folder path is mentioned, then file by name **AssessmentReport&lt;n&gt;.XML** is created. (optional attribute)
 
-    If only the folder path is mentioned, then file by name **AssessmentReport&lt;n&gt;.XML** is created. (optional attribute)
-
-    Report creation has two further subcategories:
+  Report creation has two further subcategories:
 
   - `report-errors` `true` or `false`, with default as `false` (optional attributes)
   - `verbose` `true` or `false`, with default as `false` (optional attributes)
 
-**Syntax example:**
+#### Syntax example
 
 ```xml
 <generate-assessment-report
@@ -241,7 +231,7 @@ The Report commands generate reports on the performance of various SSMA console 
 />
 ```
 
-Or
+Or:
 
 ```xml
 <generate-assessment-report
@@ -257,37 +247,35 @@ Or
 
 The Migration commands convert the target database schema to the source schema and migrates data to the target server. The default console output setting for the migration commands is 'Full' output report with no detailed error reporting: Only summary at the source object tree root node.
 
-**Command**
+### `convert-schema`
 
-`convert-schema`
+Performs schema conversion from source to the target schema.
 
-- Performs schema conversion from source to the target schema.
+If the source or target database connection isn't performed before executing this command, or the connection to the source or target database server fails during the command execution, an error is generated and the console application exits.
 
-- If the source or target database connection isn't performed before executing this command or the connection to the source or target database server fails during the command execution, an error is generated and the console application exits.
+#### Script
 
-**Script**
+- `conversion-report-folder`: Specifies folder where the assessment report can be stored. (optional attribute)
 
-- `conversion-report-folder:` Specifies folder where the assessment report can be stored. (optional attribute)
+- `object-name`: Specifies the source objects considered for converting schema (It can have individual object names or a group object name).
 
-- `object-name:` Specifies the source objects considered for converting schema (It can have individual object names or a group object name).
+- `object-type`: specifies the type of the object specified in the object-name attribute (if object category is specified then object type is `category`).
 
-- `object-type:` specifies the type of the object specified in the object-name attribute (if object category is specified then object type is `category`).
+- `conversion-report-overwrite`: Specifies whether to overwrite the assessment report folder if it already exists.
 
-- `conversion-report-overwrite:` Specifies whether to overwrite the assessment report folder if it already exists.
+  **Default value:** false. (optional attribute)
 
-    **Default value:** false. (optional attribute)
+- `write-summary-report-to`: Specifies the path where the summary report is generated.
 
-- `write-summary-report-to:` Specifies the path where the summary report is generated.
+  If only the folder path is mentioned, then file by name **SchemaConversionReport&lt;n&gt;.XML** is created. (optional attribute)
 
-    If only the folder path is mentioned, then file by name **SchemaConversionReport&lt;n&gt;.XML** is created. (optional attribute)
-
-    Report creation has two further subcategories:
+  Report creation has two further subcategories:
 
   - `report-errors` `true` or `false`, with default as `false` (optional attributes)
 
   - `verbose` `true` or `false`, with default as `false` (optional attributes)
 
-**Syntax example:**
+#### Syntax example
 
 ```xml
 <convert-schema
@@ -301,7 +289,7 @@ The Migration commands convert the target database schema to the source schema a
 />
 ```
 
-Or
+Or:
 
 ```xml
 <convert-schema
@@ -312,32 +300,32 @@ Or
 </convert-schema>
 ```
 
-**Command**
+### `migrate-data` command
 
-`migrate-data`: Migrates the source data to the target.
+Migrates the source data to the target.
 
-**Script**
+#### Script
 
-- `conversion-report-folder:` Specifies folder where the assessment report can be stored. (optional attribute)
+- `conversion-report-folder`: Specifies folder where the assessment report can be stored. (optional attribute)
 
-- `object-name:` Specifies the source objects considered for migrating data (It can have individual object names or a group object name).
+- `object-name`: Specifies the source objects considered for migrating data (It can have individual object names or a group object name).
 
-- `object-type:` specifies the type of the object specified in the object-name attribute (if object category is specified then object type is `category`).
+- `object-type`: specifies the type of the object specified in the object-name attribute (if object category is specified then object type is `category`).
 
-- `conversion-report-overwrite:` Specifies whether to overwrite the assessment report folder if it already exists.
+- `conversion-report-overwrite`: Specifies whether to overwrite the assessment report folder if it already exists.
 
-    **Default value:** false. (optional attribute)
+  **Default value:** false. (optional attribute)
 
-- `write-summary-report-to:` Specifies the path where the summary report is generated.
+- `write-summary-report-to`: Specifies the path where the summary report is generated.
 
-    If only the folder path is mentioned, then file by name `DataMigrationReport<n>.xml` is created. (optional attribute)
+  If only the folder path is mentioned, then file by name `DataMigrationReport<n>.xml` is created. (optional attribute)
 
-    Report creation has two further subcategories:
+  Report creation has two further subcategories:
 
   - `report-errors` `true` or `false`, with default as `false` (optional attributes)
   - `verbose` `true` or `false`, with default as `false` (optional attributes)
 
-**Syntax example:**
+#### Syntax example
 
 ```xml
 <migrate-data
@@ -353,7 +341,7 @@ Or
 </migrate-data>
 ```
 
-Or
+Or:
 
 ```xml
 <migrate-data
@@ -368,16 +356,19 @@ Or
 
 The Migration Preparation command initiates schema mapping between the source and target databases.
 
-**Command**
+### `map-schema` command
 
-- `map-schema`: Schema mapping of source database to the target schema.
+Schema mapping of source database to the target schema.
 
-**Script**
+### `source-schema` command
 
-- `source-schema`: Specifies the source schema we intend to migrate.
-- `sql-server-schema`: Specifies the target schema where we want it to be migrated.
+Specifies the source schema we intend to migrate.
 
-**Syntax example:**
+### `sql-server-schema` command
+
+Specifies the target schema where we want it to be migrated.
+
+#### Syntax example
 
 ```xml
 <map-schema
@@ -385,17 +376,17 @@ The Migration Preparation command initiates schema mapping between the source an
    sql-server-schema="<target-schema>"/>
 ```
 
-**Command**
+### `map-schema` command
 
-`map-schema`: Schema mapping of source database to the target schema.
+Schema mapping of source database to the target schema.
 
-**Script**
+#### Script
 
 `source-schema` specifies the source schema we intend to migrate.
 
 `sql-server-schema` specifies the target schema where we want it to be migrated.
 
-**Syntax example:**
+#### Syntax example
 
 ```xml
 <map-schema
@@ -409,35 +400,33 @@ The Manageability commands help synchronize the target database objects with the
 
 The default console output setting for the migration commands is 'Full' output report with no detailed error reporting: Only summary at the source object tree root node.
 
-**Command**
+### `synchronize-target` command
 
-`synchronize-target`
+Synchronizes the target objects with the target database.
 
-- Synchronizes the target objects with the target database.
+If this command is executed against the source database, an error is encountered.
 
-- If this command is executed against the source database, an error is encountered.
+If the target database connection isn't performed before executing this command, or the connection to the target database server fails during the command execution, an error is generated and the console application exits.
 
-- If the target database connection isn't performed before executing this command or the connection to the target database server fails during the command execution, an error is generated and the console application exits.
+#### Script
 
-**Script**
+- `object-name`: Specifies the target objects considered for synchronizing with target database (It can have individual object names or a group object name).
 
-- `object-name:` Specifies the target objects considered for synchronizing with target database (It can have individual object names or a group object name).
+- `object-type`: specifies the type of the object specified in the object-name attribute (if object category is specified then object type is `category`).
 
-- `object-type:` specifies the type of the object specified in the object-name attribute (if object category is specified then object type is `category`).
-
-- `on-error:` Specifies whether to specify synchronization errors as warnings or error. Available options for on-error:
+- `on-error`: Specifies whether to specify synchronization errors as warnings or error. Available options for on-error:
 
   - `report-total-as-warning`
   - `report-each-as-warning`
   - `fail-script`
 
-- `report-errors-to:` Specifies location of error report for the synchronization operation (optional attribute)
+- `report-errors-to`: Specifies location of error report for the synchronization operation (optional attribute)
 
   If only folder path is given, then file by name `TargetSynchronizationReport.xml` is created.
 
-**Syntax example:**
+#### Syntax example
 
-```bash
+```xml
 <synchronize-target
    object-name="<object-name>"
    on-error="<report-total-as-warning/
@@ -447,15 +436,15 @@ The default console output setting for the migration commands is 'Full' output r
 />
 ```
 
-Or
+Or:
 
-```bash
+```xml
 <synchronize-target
    object-name="<object-name>"
    object-type="<object-category>"/>
 ```
 
-Or
+Or:
 
 ```xml
 <synchronize-target>
@@ -465,31 +454,31 @@ Or
 </synchronize-target>
 ```
 
-**Command**
+### `refresh-from-database` command
 
-`refresh-from-database`
+Refreshes the source objects from database.
 
-- Refreshes the source objects from database.
+If this command is executed against the target database, an error is generated.
 
-- If this command is executed against the target database, an error is generated.
-
-**Script**
+#### Script
 
 Requires one or several metabase nodes as command line parameter.
 
-- `object-name:` Specifies the source objects considered for refreshing from source database (It can have individual object names or a group object name).
+- `object-name`: Specifies the source objects considered for refreshing from source database (It can have individual object names or a group object name).
 
-- `object-type:` Specifies the type of the object specified in the object-name attribute (if object category is specified then object type is `category`).
+- `object-type`: Specifies the type of the object specified in the object-name attribute (if object category is specified then object type is `category`).
 
-- `on-error:` Specifies whether to specify refresh errors as warnings or error. Available options for on-error:
+- `on-error`: Specifies whether to specify refresh errors as warnings or error. Available options for on-error:
 
   - `report-total-as-warning`
   - `report-each-as-warning`
   - `fail-script`
 
-- `report-errors-to:` Specifies location of error report for the refresh operation (optional attribute) if only folder path is given, then file by name `SourceDBRefreshReport.xml` is created.
+- `report-errors-to`: Specifies location of error report for the synchronization operation (optional attribute)
 
-**Syntax example:**
+  If only the folder path is given, then a file by the name of `SourceDBRefreshReport.xml` is created.
+
+#### Syntax example
 
 ```xml
 <refresh-from-database
@@ -501,7 +490,7 @@ Requires one or several metabase nodes as command line parameter.
 />
 ```
 
-Or
+Or:
 
 ```xml
 <refresh-from-database
@@ -509,7 +498,7 @@ Or
    object-type="<object-category>"/>
 ```
 
-Or
+Or:
 
 ```xml
 <refresh-from-database>
@@ -521,25 +510,25 @@ Or
 
 The Script Generation commands perform dual tasks: They help save the console output in a script file; and record the T-SQL output to the console or a file based on the parameter you specify.
 
-**Command**
+### `save-as-script` command
 
-`save-as-script`: Save the scripts of the objects to a file mentioned when `metabase=target`. This is an alternative to synchronization command where in we get the scripts and execute the same on the target database.
+Used to save the scripts of the objects to a file mentioned when `metabase=target`. This is an alternative to the synchronization command, in which we get the scripts and execute the same on the target database.
 
-**Script**
+#### Script
 
 Requires one or several metabase nodes as command line parameter.
 
-- `object-name:` Specifies the objects whose scripts are to be saved. (It can have individual object names or a group object name)
+- `object-name`: Specifies the objects whose scripts are to be saved. (It can have individual object names or a group object name)
 
-- `object-type:` specifies the type of the object specified in the object-name attribute (if object category is specified then object type is `category`).
+- `object-type`: specifies the type of the object specified in the object-name attribute (if object category is specified then object type is `category`).
 
-- `metabase:` Specifies whether it's the source or target metabase.
+- `metabase`: Specifies whether it's the source or target metabase.
 
-- `destination:` Specifies the path or the folder where the script has to be saved, if the file name isn't given then a file name in the format (object_name   attribute value).out
+- `destination`: Specifies the path or the folder where the script has to be saved, if the file name isn't given then a file name in the format (object_name   attribute value).out
 
-- `overwrite:` if `true` then it overwrites if the same filename exists. It can have the values (true/false).
+- `overwrite`: if `true` then it overwrites if the same filename exists. It can have the values (true/false).
 
-**Syntax example:**
+#### Syntax example
 
 ```xml
 <save-as-script
@@ -551,7 +540,7 @@ Requires one or several metabase nodes as command line parameter.
 />
 ```
 
-Or
+Or:
 
 ```xml
 <save-as-script
@@ -562,9 +551,7 @@ Or
 </save-as-script>
 ```
 
-**Command**
-
-`convert-sql-statement`
+### `convert-sql-statement` command
 
 - `context` specifies the schema name.
 
@@ -582,7 +569,7 @@ Or
 
 - `sql` specifies the Db2 SQL statements to be converted, one or more statements can be separated using a ";"
 
-- `sql-files` specifies the path of the SQL files which has to be converted to T-SQL code.
+- `sql-files` specifies the path of the SQL files that has to be converted to T-SQL code.
 
 - `write-summary-report-to` specifies the path where the report is generated. If only the folder path is mentioned, then file by name `ConvertSQLReport.xml` is created. (optional attribute)
 
@@ -591,11 +578,11 @@ Or
   - `report-errors`: `true` or `false`, with default as `false` (optional attributes)
   - `verbose`: `true` or `false`, with default as `false` (optional attributes)
 
-**Script**
+#### Script
 
 Requires one or several metabase nodes as command line parameter.
 
-**Syntax example:**
+#### Syntax example
 
 ```xml
 <convert-sql-statement
@@ -612,7 +599,7 @@ Requires one or several metabase nodes as command line parameter.
 </convert-sql-statement>
 ```
 
-Or
+Or:
 
 ```xml
 <convert-sql-statement
@@ -627,7 +614,7 @@ Or
    sql-files="<folder-name>\*.sql" />
 ```
 
-Or
+Or:
 
 ```xml
 <convert-sql-statement
@@ -691,7 +678,7 @@ $preparedEntries | ForEach-Object -Parallel {
     $convTree.SelectNodes("//initial-catalog") | ForEach-Object { $_.SetAttribute("value", $dbName) }
     $conversionXmlPath = Join-Path $using:baseFolder "ConversionAndDataMigrationSample_$fileDbName.xml"
     $convTree.Save($conversionXmlPath)
-	
+
     # Update VariableValueFileSample.xml
     $varTree = [xml](Get-Content $using:variableXmlTemplate)
     $nodes = $varTree.SelectNodes('//variable[@name="$WorkingFolder$"]')
@@ -726,8 +713,8 @@ $preparedEntries | ForEach-Object -Parallel {
 
 ## Related content
 
-- [Command line options in SSMA console (Db2ToSQL)](command-line-options-in-ssma-console-db2tosql.md)
-- [Work with sample console script files (Db2ToSQL)](working-with-the-sample-console-script-files-db2tosql.md)
-- [Manage Passwords (Db2ToSQL)](managing-passwords-db2tosql.md)
-- [Generate reports (Db2ToSQL)](generating-reports-db2tosql.md)
-- [Troubleshoot (Db2ToSQL)](troubleshooting-db2tosql.md)
+- [Command line options in SSMA console](command-line-options-in-ssma-console-db2tosql.md)
+- [Work with sample console script files](working-with-the-sample-console-script-files-db2tosql.md)
+- [Manage passwords](managing-passwords-db2tosql.md)
+- [Generate reports](generating-reports-db2tosql.md)
+- [Troubleshoot](troubleshooting-db2tosql.md)

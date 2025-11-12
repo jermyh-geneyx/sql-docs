@@ -4,7 +4,7 @@ description: Find out about changes to SQL Server Migration Assistant (SSMA) for
 author: nilabjaball
 ms.author: niball
 ms.reviewer: randolphwest
-ms.date: 09/02/2025
+ms.date: 11/12/2025
 ms.service: sql
 ms.subservice: ssma
 ms.topic: whats-new
@@ -19,11 +19,23 @@ This article lists SQL Server Migration Assistant (SSMA) for Oracle changes in e
 
 [!INCLUDE [entra-id](../../includes/entra-id-hard-coded.md)]
 
+## SSMA v10.4
+
+The v10.4 release of SSMA for Oracle contains the following changes:
+
+- Support for assessment, conversion and migration of your project to [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)].
+
+- General availability of Oracle PL/SQL to SQL Code Conversion Copilot using Bring Your Own Key (BYOK).
+
+- Added managed endpoint support for SQL Code Conversion Copilot in SSMA (Preview).
+
+- Important security, compliance, and accessibility fixes.
+
 ## SSMA v10.3
 
 The v10.3 release of SSMA for Oracle contains the following changes:
 
-- Important security, compliance and accessibility fixes
+- Important security, compliance, and accessibility fixes.
 
 ## SSMA v10.2
 
@@ -35,7 +47,7 @@ The v10.2 release of SSMA for Oracle contains the following changes:
 
 The v10.1 release of SSMA for Oracle contains the following changes:
 
-- Detection of CHAR length in Oracle VARCHAR2 datatype
+- Detection of CHAR length in Oracle VARCHAR2 data type
 - Enhanced monitoring experience for migrations using Azure Data Migration Service (DMS)
 
 ## SSMA v10.0
@@ -549,7 +561,7 @@ The July 2011 release of SSMA for Oracle contains the following changes:
 
 The April 2011 release of SSMA for Oracle contains the following changes:
 
-- Consolidated "SSMA for Oracle" product, which supports [!INCLUDE [ssVersion2005](../../includes/ssversion2005-md.md)], [!INCLUDE [sql2008-md](../../includes/sql2008-md.md)] and [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)].
+- Consolidated "SSMA for Oracle" product, which supports [!INCLUDE [sssql16-md](../../includes/sssql16-md.md)] and later versions, and Azure SQL.
 - Added support for connecting and migrating to [!INCLUDE [ssSQL11](../../includes/sssql11-md.md)].
 - Enhanced client-side data migration engine, supporting parallel migration of data.
 - Improved data migration performance with `Simple` and `Bulk` logged recovery models.

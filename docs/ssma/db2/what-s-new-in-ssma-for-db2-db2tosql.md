@@ -4,7 +4,7 @@ description: Find out about changes to SQL Server Migration Assistant (SSMA) for
 author: nilabjaball
 ms.author: niball
 ms.reviewer: randolphwest
-ms.date: 09/02/2025
+ms.date: 11/12/2025
 ms.service: sql
 ms.subservice: ssma
 ms.topic: whats-new
@@ -19,13 +19,21 @@ This article lists SQL Server Migration Assistant (SSMA) for Db2 changes in each
 
 [!INCLUDE [entra-id](../../includes/entra-id-hard-coded.md)]
 
+## SSMA v10.4
+
+The v10.4 release of SSMA for Db2 contains the following changes:
+
+- Support for assessment and migration of your project to [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)].
+
+- Important security, compliance, UX, and accessibility fixes.
+
 ## SSMA v10.3
 
 The v10.3 release of SSMA for Db2 contains the following changes:
 
 - SKU recommendation for Db2 LUW and z/OS databases.
 - Added tuple comparison support for DML queries.
-- Important security, compliance and accessibility fixes.
+- Important security, compliance, and accessibility fixes.
 
 ## SSMA v10.2
 
@@ -38,7 +46,7 @@ The v10.1 release of SSMA for Db2 contains the following changes:
 - Conversion enhancements for identity column from Db2 z/OS to SQL Server 2019
 - Improve conversion of Db2 stored procedure WITH RETURN clause to Azure SQL Database
 - Improve database objects load for Db2
-- Appropriate error handling for conversion of identifier REPLACE(STRING, CHAR,CHAR) in Db2
+- Appropriate error handling for conversion of identifier REPLACE(STRING, CHAR, CHAR) in Db2
 
 ## SSMA v10.0
 
@@ -359,7 +367,7 @@ The v7.9 release of SSMA for Db2 contains the following changes:
 The v7.8 release of SSMA for Db2 contains the following changes:
 
 - Change type mapping highlighted in *Project Settings*.
-- The ability for users to disable telemetry.
+- The ability for users to disable system-generated logs.
 
 ## SSMA v7.7
 
@@ -410,7 +418,7 @@ The v7.3 release of SSMA for Db2 contains the following changes:
 The v7.2 release of SSMA for Db2 contains the following changes:
 
 - Improved quality and conversion metric with targeted fixes based on customer feedback.
-- Telemetry enhancements to provide better data points to troubleshoot customer issues and improve SSMA's conversion rates.
+- Enhancements to system-generated logs, to provide better data points to troubleshoot customer issues and improve SSMA's conversion rates.
 
 ## SSMA v7.1
 
@@ -451,7 +459,7 @@ The January 2016 maintenance release of SSMA for Db2 contains the following chan
 - Fixed Db2 v9 zOS support (RFC 5690920).
 - Fixed Db2 unresolved identifier errors during conversion.
 - Added View Log Menu Item to SSMA (RFC 5706203).
-- Added Telemetry.
+- Added system-generated logs.
 
 ## November 2014
 

@@ -4,7 +4,7 @@ description: Learn how to convert Oracle database objects to SQL Server database
 author: nilabjaball
 ms.author: niball
 ms.reviewer: randolphwest
-ms.date: 06/03/2025
+ms.date: 11/12/2025
 ms.service: sql
 ms.subservice: ssma
 ms.topic: conceptual
@@ -39,7 +39,7 @@ The following table shows which Oracle objects are converted, and the resulting 
 | Functions | If the function can be directly converted to [!INCLUDE [tsql](../../includes/tsql-md.md)], SSMA creates a function.<br /><br />In some cases, the function must be converted to a stored procedure. In this case, SSMA creates a stored procedure and a function that calls the stored procedure. |
 | Procedures | If the procedure can be directly converted to [!INCLUDE [tsql](../../includes/tsql-md.md)], SSMA creates a stored procedure.<br /><br />In some cases, a stored procedure must be called in an autonomous transaction. In this case, SSMA creates two stored procedures: one that implements the procedure, and another that calls the procedure that implements. |
 | Packages | SSMA creates a set of stored procedures and functions that are unified by similar object names. |
-| Sequences | SSMA creates sequence objects (SQL Server 2012 or SQL Server 2014) or emulates Oracle sequences. |
+| Sequences | SSMA creates sequence objects ([!INCLUDE [sssql11-md](../../includes/sssql11-md.md)] and later versions) or emulates Oracle sequences. |
 | Tables with dependent objects such as indexes and triggers | SSMA creates tables with dependent objects. |
 | Views with dependent objects, such as triggers | SSMA creates views with dependent objects. |
 | Materialized views | SSMA creates indexed views on SQL Server with some exceptions. Conversion fails if the materialized view includes one or more of the following constructs:<br /><br />User-defined function.<br /><br />Nondeterministic field, function, or expression in `SELECT`, `WHERE`, or `GROUP BY` clauses.<br /><br />Usage of Float column in `SELECT*`, `WHERE`, or `GROUP BY` clauses (special case of previous issue).<br /><br />Custom data type (including nested tables).<br /><br />`COUNT` (distinct &lt;field&gt;).<br /><br />`FETCH`.<br /><br />`OUTER` joins (`LEFT`, `RIGHT`, or `FULL`).<br /><br />Subquery, other view.<br /><br />`OVER`, `RANK`, `LEAD`, or `LOG`.<br /><br />`MIN`, `MAX`.<br /><br />`UNION`, `MINUS`, `INTERSECT`.<br /><br />`HAVING`. |
