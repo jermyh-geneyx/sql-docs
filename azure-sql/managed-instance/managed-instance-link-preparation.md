@@ -5,7 +5,7 @@ description: Learn how to prepare your environment to create a link between SQL 
 author: djordje-jeremic
 ms.author: djjeremi
 ms.reviewer: mathoma, danil, randolphwest
-ms.date: 08/27/2025
+ms.date: 11/18/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: data-movement
 ms.topic: how-to
@@ -58,10 +58,10 @@ For Azure SQL Managed Instance, you should be a member of the [SQL Managed Insta
 
 To prepare your SQL Server instance, you need to validate that:
 
-- You're on the minimum supported version.
-- You enabled the availability groups feature.
-- You added the proper trace flags at startup.
-- Your databases are in the full recovery model and backed up.
+- You're on the [minimum supported version](#install-service-updates).
+- You've [created a database master key](#create-a-database-master-key-in-the-master-database) in the `master` database.
+- You've [enabled the availability groups feature](#enable-availability-groups).
+- You've [added the proper trace flags](#enable-startup-trace-flags) at startup.
 
 You need to restart SQL Server for these changes to take effect.
 
@@ -81,7 +81,9 @@ SELECT @@VERSION as 'SQL Server version';
 
 ### Create a database master key in the master database
 
-Create database master key in the `master` database, if one isn't already present. Insert your password in place of `<strong_password>` in the following script, and keep it in a confidential and secure place. Run this T-SQL script on SQL Server:
+The link uses certificates to encrypt authentication and communication between SQL Server and SQL Managed Instance. The database master key protects the certificates used by the link. If you already have a database master key, you can skip this step. 
+
+Create database master key in the `master` database. Insert your password in place of `<strong_password>` in the following script, and keep it in a confidential and secure place. Run this T-SQL script on SQL Server:
 
 ```sql
 -- Run on SQL Server
@@ -124,7 +126,7 @@ SELECT
 ```
 
 > [!IMPORTANT]  
-> For [!INCLUDE [sssql16-md](../../docs/includes/sssql16-md.md)], if you need to enable the availability groups feature, you must complete the extra steps documented in [Prepare SQL Server 2016 prerequisites - Azure SQL Managed Instance link](managed-instance-link-preparation-wsfc.md). These extra steps aren't required for [!INCLUDE [sssql19-md](../../docs/includes/sssql19-md.md)] and later versions supported by the link.
+> For [!INCLUDE [sssql16-md](../../docs/includes/sssql16-md.md)], if you need to enable the availability groups feature, you must complete the extra steps documented in [Prepare SQL Server 2016 prerequisites - Azure SQL Managed Instance link](managed-instance-link-preparation-wsfc.md). These extra steps aren't required for [!INCLUDE [sssql17-md](../../docs/includes/sssql17-md.md)] and later versions supported by the link.
 
 If the availability groups feature isn't enabled, follow these steps to enable it:
 
@@ -139,7 +141,7 @@ If the availability groups feature isn't enabled, follow these steps to enable i
 
    :::image type="content" source="media/managed-instance-link-preparation/always-on-availability-groups-properties.png" alt-text="Screenshot that shows the properties for Always On availability groups.":::
 
-   - If using [!INCLUDE [sssql16-md](../../docs/includes/sssql16-md.md)], and if **Enable Always On Availability Groups** option is disabled with the message `This computer is not a node in a failover cluster.`, follow the extra steps described in [Prepare SQL Server 2016 prerequisites - Azure SQL Managed Instance link](managed-instance-link-preparation-wsfc.md). Once you complete these other steps, come back and retry this step again.
+   - If using [!INCLUDE [sssql16-md](../../docs/includes/sssql16-md.md)], and if **Enable Always On Availability Groups** option is disabled with the message `This computer is not a node in a failover cluster`, follow the extra steps described in [Prepare SQL Server 2016 prerequisites - Azure SQL Managed Instance link](managed-instance-link-preparation-wsfc.md). Once you complete these other steps, come back and retry this step again.
 
 1. Select **OK** in the dialog.
 1. Restart the SQL Server service.
@@ -206,16 +208,16 @@ For the link to work, you must have network connectivity between SQL Server and 
 
 ### SQL Server on Azure Virtual Machines
 
-Deploying SQL Server on Azure Virtual Machines in the same Azure virtual network that hosts SQL Managed Instance is the simplest method, because network connectivity will automatically exist between the two instances. For more information, see [Quickstart: Configure an Azure VM to connect to Azure SQL Managed Instance](connect-vm-instance-configure.md).
+Deploying SQL Server on Azure Virtual Machines in the same Azure virtual network that hosts SQL Managed Instance is the simplest method, because network connectivity automatically exists between the two instances. For more information, see [Quickstart: Configure an Azure VM to connect to Azure SQL Managed Instance](connect-vm-instance-configure.md).
 
-If your SQL Server on Azure Virtual Machines instance is in a different virtual network from your SQL managed instance, you need to make a connection between both virtual networks. The virtual networks don't have to be in the same subscription for this scenario to work.
+If your SQL Server on Azure Virtual Machines instance is in a different virtual network from your SQL managed instance, you need to connect the two virtual networks. Virtual networks don't have to be in the same subscription for this scenario to work.
 
-There are two options for connecting virtual networks:
+There are two options to connect virtual networks:
 
 - [Azure virtual network peering](/azure/virtual-network/virtual-network-peering-overview)
 - VNet-to-VNet VPN gateway ([Azure portal](/azure/vpn-gateway/vpn-gateway-howto-vnet-vnet-resource-manager-portal), [PowerShell](/azure/vpn-gateway/vpn-gateway-vnet-vnet-rm-ps), [Azure CLI](/azure/vpn-gateway/vpn-gateway-howto-vnet-vnet-cli))
 
-Peering is preferable because it uses the Microsoft backbone network. So, from the connectivity perspective, there's no noticeable difference in latency between virtual machines in a peered virtual network and in the same virtual network. Virtual network peering is supported between the networks in the same region. Global virtual network peering is supported for instances hosted in subnets created after September 22, 2020. For more information, see [Frequently asked questions (FAQ)](frequently-asked-questions-faq.yml#does-sql-managed-instance-support-global-vnet-peering).
+Peering is preferable because it uses the Microsoft backbone network. So, from a connectivity perspective, there's no noticeable difference in latency between virtual machines in a peered virtual network and in the same virtual network. Virtual network peering is supported between networks in the same region. Global virtual network peering is supported for instances hosted in subnets created after September 22, 2020. For more information, see [Frequently asked questions (FAQ)](frequently-asked-questions-faq.yml#does-sql-managed-instance-support-global-vnet-peering).
 
 ### SQL Server outside Azure
 
@@ -273,7 +275,7 @@ Depending on your network security settings, it might be necessary to add URLs t
 
 The following lists the resources that should be added to your allowlist:
 
-- The fully qualified domain name (FQDN) of your SQL Managed Instance. For example: `managedinstance1.6d710bcf372b.database.windows.net`.
+- The fully qualified domain name (FQDN) of your SQL Managed Instance. For example: `managedinstance.a1b2c3d4e5f6.database.windows.net`.
 - Microsoft Entra Authority
 - Microsoft Entra Endpoint Resource ID
 - Resource Manager Endpoint
