@@ -230,7 +230,7 @@ If you must choose mixed mode authentication and you need to use SQL logins to a
 > [!NOTE]  
 > [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] authentication is provided for backward compatibility only. [!INCLUDE [ssNoteWinAuthentication](../../includes/ssnotewinauthentication-md.md)]
 
-**Enter Password**: Enter and confirm the system administrator (**sa**) login. Passwords are the first line of defense against intruders, so setting strong passwords is essential to the security of your system. Never set a blank or weak **sa** password.
+**Enter Password**: Enter and confirm the system administrator (**sa**) login. Passwords are the frontline of defense against intruders, so setting strong passwords is essential to the security of your system. Never set a blank or weak **sa** password.
 
 > [!NOTE]  
 > [!INCLUDE [ssNoVersion](../../includes/ssnoversion-md.md)] passwords can contain from 1 to 128 characters, including any combination of letters, symbols, and numbers. If you choose mixed mode authentication, you must enter a strong **sa** password before you can continue to the next page of the Installation Wizard.
