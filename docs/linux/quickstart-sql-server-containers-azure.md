@@ -336,6 +336,8 @@ You create a manifest to describe the container, based on the SQL Server [mssql-
 
    - MSSQL_PID `value: "Developer"`: Sets the container to run SQL Server Developer edition. Developer edition isn't licensed for production data. If the deployment is for production use, set the appropriate edition (`Enterprise`, `Standard`, or `Express`). For more information, see [How to license SQL Server](https://www.microsoft.com/sql-server/sql-server-2022-pricing).
 
+     [!INCLUDE [editions-sql-server-developer](includes/editions-sql-server-developer.md)]
+
    - `persistentVolumeClaim`: This value requires an entry for `claimName:` that maps to the name used for the persistent volume claim. This tutorial uses `mssql-data`.
 
    - `name: MSSQL_SA_PASSWORD`: Configures the container image to set the `sa` password, as defined in this section.

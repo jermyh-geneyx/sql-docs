@@ -65,7 +65,7 @@ You can install just the [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.m
 | --- | --- |
 | [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)] | [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)] includes the [!INCLUDE [ssDE](../includes/ssde-md.md)], the core service for storing, processing, and securing data, replication, Full-Text Search, tools for managing relational and XML data, and in database analytics integration. |
 
-**Developer, Enterprise Core, and Evaluation editions**
+**Enterprise Developer, Standard Developer, Enterprise Core, and Evaluation editions**
 
 For features supported by Enterprise Developer, Standard Developer, Enterprise Core, and Evaluation editions, see features listed for the SQL Server Enterprise edition in the following tables.
 
