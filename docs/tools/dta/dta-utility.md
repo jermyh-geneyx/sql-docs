@@ -1,9 +1,9 @@
 ---
-title: Dta Utility
+title: Database Engine Tuning Advisor (DTA) Command-Line Utility
 description: The dta utility is a command prompt version of Database Engine Tuning Advisor that allows you to use functionality in applications and scripts.
 author: rwestMSFT
 ms.author: randolphwest
-ms.date: 09/07/2025
+ms.date: 11/18/2025
 ms.service: sql
 ms.subservice: tools-other
 ms.topic: conceptual
@@ -30,7 +30,9 @@ The **dta** utility is the command prompt version of Database Engine Tuning Advi
 > [!NOTE]  
 > The Database Engine Tuning Advisor isn't supported for [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)] or [!INCLUDE [ssazuremi-md](../../includes/ssazuremi-md.md)]. Instead, consider the strategies recommended in [Monitor and performance tuning in Azure SQL Database and Azure SQL Managed Instance](/azure/azure-sql/database/monitor-tune-overview). For [!INCLUDE [ssazure-sqldb](../../includes/ssazure-sqldb.md)], see also the [Database Advisor performance recommendations for Azure SQL Database](/azure/azure-sql/database/database-advisor-implement-performance-recommendations).
 
-Like Database Engine Tuning Advisor, the **dta** utility analyzes a workload and recommends physical design structures to improve server performance for that workload. The workload can be a plan cache, a [!INCLUDE [ssSqlProfiler](../../includes/sssqlprofiler-md.md)] trace file or table, or a [!INCLUDE [tsql](../../includes/tsql-md.md)] script. Physical design structures include indexes, indexed views, and partitioning. After analyzing a workload, the **dta** utility produces a recommendation for the physical design of databases and can generate the necessary script to implement the recommendation. Workloads can be specified from the command prompt with the `-if` or the `-it` argument. You can also specify an XML input file from the command prompt with the `-ix` argument. In that case, the workload is specified in the XML input file.
+Like Database Engine Tuning Advisor, the **dta** utility analyzes a workload and recommends physical design structures to improve server performance for that workload. The workload can be a plan cache, a [!INCLUDE [ssSqlProfiler](../../includes/sssqlprofiler-md.md)] trace file or table, or a [!INCLUDE [tsql](../../includes/tsql-md.md)] script. Physical design structures include indexes, indexed views, and partitioning.
+
+After the **dta** utility analyzes a workload, it produces a recommendation for the physical design of databases and can generate the necessary script to implement the recommendation. Workloads can be specified from the command prompt with the `-if` or the `-it` argument. You can also specify an XML input file from the command prompt with the `-ix` argument. In that case, the workload is specified in the XML input file.
 
 ## Syntax
 
@@ -39,11 +41,14 @@ dta
 [ -? ] |
 [
       [ -S server_name [ \instance ] ]
-      { { -U login_id [ -P password ] } | -E  }
+      { { -U login_id [ -P password ] } | -E }
+      { -ce connection_encrypt_option }
+      { -tc }
+      { -hc hostname_in_certificate }
       { -D database_name [ , ...n ] }
       [ -d database_name ]
       [ -Tl table_list | -Tf table_list_file ]
-      { -if workload_file | -it workload_trace_table_name  |
+      { -if workload_file | -it workload_trace_table_name |
         -ip | -iq }
       { -ssession_name | -IDsession_ID }
       [ -F ]
@@ -106,6 +111,26 @@ Specifies the maximum number of columns in indexes that **dta** proposes. The ma
 
 Specifies the maximum number of key columns in indexes that **dta** proposes. The default value is 16, the maximum value allowed. **dta** also considers creating indexes with included columns. Indexes recommended with included columns might exceed the number of columns specified in this argument.
 
+#### -ce *connection_encrypt_option*
+
+**Applies to:** [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions
+
+Specifies that the connection is encrypted between the server and the client. Possible values: `yes`, `no`, and `strict`. The default option is `yes`. For more information, see [TDS 8.0](../../relational-databases/security/networking/tds-8.md#strict-connection-encryption).
+
+#### -tc
+
+**Applies to:** [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions
+
+Specifies whether to trust the server certificate. This parameter is optional, similar to `HostnameInCertificate` used in other tools and connection strings.
+
+For more information, see [TDS 8.0](../../relational-databases/security/networking/tds-8.md#additional-changes-to-connection-string-encryption-properties).
+
+#### -hc *hostname_in_certificate*
+
+**Applies to:** [!INCLUDE [sssql25-md](../../includes/sssql25-md.md)] and later versions
+
+Specifies a different, expected CN or SAN in the server certificate to use during server certificate validation. For more information, see [TDS 8.0](../../relational-databases/security/networking/tds-8.md#additional-changes-to-connection-string-encryption-properties).
+
 #### -D *database_name*
 
 Specifies the name of each database that is to be tuned. The first database is the default database. You can specify multiple databases by separating the database names with commas, for example:
@@ -120,7 +145,7 @@ Alternatively, you can specify multiple databases by using the `-D` argument for
 dta -D database_name1 -D database_name2... n
 ```
 
-The `-D` argument is mandatory. If the `-d` argument hasn't been specified, **dta** initially connects to the database that is specified with the first `USE database_name` clause in the workload. If there isn't explicit `USE database_name` clause in the workload, you must use the `-d` argument.
+The `-D` argument is mandatory. If the `-d` argument isn't specified, **dta** initially connects to the database that is specified with the first `USE database_name` clause in the workload. If there isn't explicit `USE database_name` clause in the workload, you must use the `-d` argument.
 
 For example, if you have a workload that contains no explicit `USE database_name` clause, and you use the following **dta** command, a recommendation isn't generated:
 
@@ -146,7 +171,7 @@ If multiple database names are specified, then **dta** returns an error. The `-d
 
 If you're using an XML input file, you can specify the first database to which **dta** connects by using the **DatabaseToConnect** element that is located under the **TuningOptions** element. For more information, see [Database Engine Tuning Advisor](../../relational-databases/performance/database-engine-tuning-advisor.md).
 
-If you're tuning only one database, the `-d` argument provides functionality that is similar to the `-d` argument in the **sqlcmd** utility, but it doesn't execute the `USE` *database_name* statement. For more information, see [sqlcmd Utility](../sqlcmd/sqlcmd-utility.md).
+If you're tuning only one database, the `-d` argument provides similar functionality to the `-d` argument in the **sqlcmd** utility, but it doesn't execute the `USE` *database_name* statement. For more information, see [sqlcmd Utility](../sqlcmd/sqlcmd-utility.md).
 
 #### -E
 
@@ -167,7 +192,7 @@ If a table is used, specify its name in the format: *[database_name].[owner_name
 If a file is used, specify `.xml` as its extension. For example, `TuningLog.xml`.
 
 > [!NOTE]  
-> The **dta** utility doesn't delete the contents of user-specified tuning log tables if the session is deleted. When tuning large workloads, we recommend that a table is specified for the tuning log. Since tuning large workloads can result in large tuning logs, the sessions can be deleted much faster when a table is used.
+> The **dta** utility doesn't delete the contents of user-specified tuning log tables if the session is deleted. When tuning large workloads, we recommend that a table is specified for the tuning log. Since tuning large workloads can result in large tuning logs, the sessions can be deleted faster when a table is used.
 
 #### -F
 
@@ -259,7 +284,7 @@ The following table shows the default values for each:
 
 #### -ix *input_XML_file_name*
 
-Specifies the name of the XML file containing **dta** input information. This must be a valid XML document conforming to `DTASchema.xsd`. Conflicting arguments specified from the command prompt for tuning options override the corresponding value in this XML file. The only exception is if a user-specified configuration is entered in the evaluate mode in the XML input file. For example, if a configuration is entered in the **Configuration** element of the XML input file and the **EvaluateConfiguration** element is also specified as one of the tuning options, the tuning options specified in the XML input file override any tuning options entered from the command prompt.
+Specifies the name of the XML file containing **dta** input information. This XML document must conform to the `DTASchema.xsd` schema. Conflicting arguments specified from the command prompt for tuning options override the corresponding value in this XML file. The only exception is if a user-specified configuration is entered in the evaluate mode in the XML input file. For example, if a configuration is entered in the **Configuration** element of the XML input file and the **EvaluateConfiguration** element is also specified as one of the tuning options, the tuning options specified in the XML input file override any tuning options entered from the command prompt.
 
 #### -k *maxtotalindexes*
 
@@ -287,7 +312,7 @@ If indexes are created online, `ONLINE` = `ON` is appended to its object definit
 
 #### -n *number_of_events*
 
-Specifies the number of events in the workload that **dta** should tune. If this argument is specified and the workload is a trace file that contains duration information, then **dta** tunes events in decreasing order of duration. This argument is useful to compare two configurations of physical design structures. To compare two configurations, specify the same number of events to be tuned for both configurations and then specify an unlimited tuning time for both also as follows:
+Specifies the number of events in the workload that **dta** should tune. If this argument is specified and the workload is a trace file that contains duration information, then **dta** tunes events in decreasing order of duration. This argument is useful to compare two configurations of physical design structures. To compare two configurations, specify the same number of events to be tuned for both configurations, and then specify an unlimited tuning time for both also as follows:
 
 ```console
 dta -n number_of_events -A 0
@@ -297,7 +322,7 @@ In this case, it's important to specify an unlimited tuning time (`-A 0`). Other
 
 #### -l *time_window_in_hours*
 
-Specifies the time window (in hours) when a query must have executed for it to be considered by DTA for tuning when using `-iq` option (Workload from Query Store).
+Specifies the time window (in hours) when a query must have executed for it to be considered for tuning when using `-iq` option (Workload from Query Store).
 
 ```console
 dta -iq -l 48
@@ -404,13 +429,13 @@ Starts tuning session and exits.
 
 ## Remarks
 
-Press **Ctrl**+**C** once to stop the tuning session and generate recommendations based on the analysis **dta** has completed up to this point. You're prompted to decide whether you want to generate recommendations or not. Press **Ctrl**+**C** again to stop the tuning session without generating recommendations.
+Press **Ctrl**+**C** once to stop the tuning session and generate recommendations, based on the analysis **dta** has completed up to this point. You're prompted to decide whether you want to generate recommendations or not. Press **Ctrl**+**C** again to stop the tuning session without generating recommendations.
 
 ## Examples
 
 ### A. Tune a workload that includes indexes and indexed views in its recommendation
 
-This example uses a secure connection (`-E`) to connect to the `tpcd1G` database on MyServer to analyze a workload and create recommendations. It writes the output to a script file named `script.sql`. If `script.sql` already exists, then **dta** overwrites the file because the `-F` argument has been specified. The tuning session runs for an unlimited length of time to ensure a complete analysis of the workload (`-A 0`). The recommendation must provide a minimum improvement of 5% (`-m 5`). **dta** should include indexes and indexed views in its final recommendation (`-fa IDX_IV`).
+This example uses a secure connection (`-E`) to connect to the `tpcd1G` database on MyServer to analyze a workload and create recommendations. It writes the output to a script file named `script.sql`. If `script.sql` already exists, then **dta** overwrites the file because the `-F` argument was specified. The tuning session runs for an unlimited length of time to ensure a complete analysis of the workload (`-A 0`). The recommendation must provide a minimum improvement of 5% (`-m 5`). **dta** should include indexes and indexed views in its final recommendation (`-fa IDX_IV`).
 
 ```console
 dta -S MyServer -E -D tpcd1G -if tpcd_22.sql -F -of script.sql -A 0 -m 5 -fa IDX_IV
@@ -436,7 +461,7 @@ dta -D orders -if orders_wkld.sql -of script.sql -A 15 -n 10
 
 This example demonstrates the use of *table_list_file* (the `-Tf` argument). The contents of the file `table_list.txt` are as follows:
 
-```console
+```output
 AdventureWorks2022.Sales.Customer  100000
 AdventureWorks2022.Sales.Store
 AdventureWorks2022.Production.Product  2000000
@@ -456,6 +481,20 @@ The contents of `table_list.txt` specifies that:
 
 ```console
 dta -D pubs -if pubs_wkld.sql -ox XMLTune.xml -A 120 -Tf table_list.txt
+```
+
+### E. Connect with a workload file, overwrite the output file, with tuning options
+
+This example shows how to connect with no encryption, include with a workload file, overwrite the output file, tune for 60 minutes, with 5% improvement, and only indexes. Replace `<server>` and `<database>` with valid values.
+
+```console
+dta -S <server> -E -ce no -D <database> -if workload_file.sql -F -of output_script.sql -A 60 -m 5 -fa IDX
+```
+
+This example is the same as the previous command, but with connection encryption. Replace `<server>` and `<database>` with valid values.
+
+```console
+dta -S <server> -E -ce yes -tc -D <database> -if workload_file.sql -F -of output_script.sql -A 60 -m 5 -fa IDX
 ```
 
 ## Related content
