@@ -59,7 +59,7 @@ RECONFIGURE WITH OVERRIDE;
 GO
 ```
 
-Restart SQL Server.
+After you modify the configuration, restart the SQL Server services for the changes to take effect.
 
 ## Related content
 

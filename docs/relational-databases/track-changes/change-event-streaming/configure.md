@@ -63,7 +63,7 @@ SAS tokens have a security advantage over service keys: If the client is comprom
 To configure streaming to Azure Event Hubs with the AMQP protocol (the default native Azure Event Hubs protocol), create or reuse a shared access policy with **Send** permission and generate a SAS token. You can generate the token programmatically with any programming or scripting language. The example in this article shows how to generate a SAS token from a new or existing policy by using a PowerShell script.
 
 > [!NOTE]  
-> For improved security, use Microsoft Entra based access control whenever possible. If Microsoft Entra based access control isn't possible and you're using shared access policies, use SAS token authentication instead of service key-based authentication whenever possible. Best practices for SAS tokens include defining an appropriate access scope, setting an expiration date, and rotating the SAS key regularly. For key-based authentication, rotate keys periodically. Store all secrets securely by using Azure Key Vault or a similar service.
+> For improved security, using Microsoft Entra based access control whenever possible is **strongly recommended**. If Microsoft Entra based access control isn't possible and you're using shared access policies, use SAS token authentication instead of service key-based authentication whenever possible. Best practices for SAS tokens include defining an appropriate minimally required access scope, setting a short expiration date, and rotating the SAS key regularly. For key-based authentication, rotate keys periodically. Store all secrets securely by using Azure Key Vault or a similar service.
 
 ### Install required modules
 
@@ -120,6 +120,7 @@ $resourceGroupName = "<Resource-group-name>"
 $namespaceName = "<Azure-Event-Hub-Namespace-name>"
 $eventHubName = "<Azure-Event-Hubs-instance-name>"
 $policyName = "<Policy-name>"
+$tokenExpireInDays = "<number-of-days-token-will-be-valid>"
 
 # Modifying the rest of the script is not necessary.
 
@@ -181,7 +182,7 @@ function Create-SasToken {
     )
 
 $sinceEpoch = [datetime]::UtcNow - [datetime]"1970-01-01"
-    $expiry = [int]$sinceEpoch.TotalSeconds + (60 * 60 * 24 * 31 * 6)  # 6 months
+    $expiry = [int]$sinceEpoch.TotalSeconds + ((60 * 60 * 24) * [int]$tokenExpireInDays) # seconds since Unix epoch
     $stringToSign = [System.Web.HttpUtility]::UrlEncode($resourceUri) + "`n" + $expiry
     $hmac = New-Object System.Security.Cryptography.HMACSHA256
     $hmac.Key = [Text.Encoding]::UTF8.GetBytes($key)
@@ -551,7 +552,9 @@ The following limitations apply when using CES with Azure SQL Database:
 - A table can belong to only one streaming group. You can't stream the same table to multiple destinations.
 - You can only configure user tables for CES. CES doesn't support streaming system tables.
 - You can configure up to 4,096 stream groups. Each stream group can include up to 40,000 tables.
+- [Online index operations](/sql/relational-databases/indexes/perform-index-operations-online) are not supported
 - While CES is enabled on a table, you can't add or drop a primary key constraint on that table.
+
 - `ALTER TABLE SWITCH PARTITION` isn't supported on tables configured for CES.
 - `TRUNCATE TABLE` isn't supported on tables enabled for CES.
 - CES doesn't support tables that use any of the following features:

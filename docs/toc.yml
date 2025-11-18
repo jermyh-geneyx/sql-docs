@@ -8979,6 +8979,10 @@ items:
           items:
           - name: Overview
             href: tools/visual-studio-code-extensions/mssql/mssql-schema-designer.md
+        - name: Data-tier Application
+          items:
+          - name: Overview
+            href: tools/visual-studio-code-extensions/mssql/mssql-data-tier-application.md
     - name: SQL bindings for Azure Functions
       items:
       - name: Overview
@@ -9491,14 +9495,22 @@ items:
           href: sql-server/azure-arc/configure-windows-accounts-agent.md
         - name: System object reference
           href: sql-server/azure-arc/agent-extension-files.md
-    - name: Migrate
+    - name: SQL Server migration in Azure Arc
       items:
-      - name: Discover & assess
-        href: sql-server/azure-arc/migration-assessment.md
+      - name: Overview
+        href: sql-server/azure-arc/migration-overview.md
       - name: Migration dashboard
         href: sql-server/azure-arc/migration-inventory.md
+      - name: Discover & assess
+        href: sql-server/azure-arc/migration-assessment.md
       - name: Migrate to Azure SQL Managed Instance
-        href: sql-server/azure-arc/migrate-to-azure-sql-managed-instance.md
+        items: 
+        - name: Overview
+          href: sql-server/azure-arc/migrate-to-azure-sql-managed-instance.md
+        - name: Prepare MI link migration 
+          href: sql-server/azure-arc/migration-sql-mi-prepare-link.md
+        - name: Prepare LRS migration 
+          href: sql-server/azure-arc/migration-sql-mi-prepare-log-replay-service.md
     - name: SQL Server enabled by Azure Arc FAQ
       href: sql-server/azure-arc/faq.yml
     - name: Data collection & reporting

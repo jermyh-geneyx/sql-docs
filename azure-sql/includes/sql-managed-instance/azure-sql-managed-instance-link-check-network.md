@@ -18,6 +18,11 @@ To use the SQL Agent to test network connectivity, you need the following requir
 - The user doing the test must have [permissions to create a job](/sql/ssms/agent/configure-a-user-to-create-and-manage-sql-server-agent-jobs) (either as a **sysadmin** or belongs to the SQLAgentOperator role for `msdb`) for both SQL Server and SQL Managed Instance. 
 - The SQL Server Agent service must be [running](/sql/ssms/agent/start-stop-or-pause-the-sql-server-agent-service) on SQL Server. Since the Agent is on by default on SQL Managed Instance, no additional action is necessary.
 
+Consider the following:
+- To avoid false negatives, all firewalls along the network path must allow Internet Control Message Protocol (ICMP) traffic.
+- To avoid false positives, all firewalls along the network path must allow traffic on the proprietary SQL Server UCS protocol. Blocking the protocol can lead to a successful connection test, but the link fails to create.
+- Advanced firewall setups with packet-level guardrails in place need to be properly configured to properly allow traffic between SQL Server and SQL Managed Instance.
+
 
 ### [SSMS](#tab/ssms)
 

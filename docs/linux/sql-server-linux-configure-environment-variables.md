@@ -30,7 +30,7 @@ You can use several different environment variables to configure [!INCLUDE [ssno
 | --- | --- |
 | `ACCEPT_EULA` | Set the `ACCEPT_EULA` variable to any value to confirm your acceptance of the [End-User Licensing Agreement](https://go.microsoft.com/fwlink/?LinkId=746388). Required setting for the SQL Server image. |
 | `MSSQL_SA_PASSWORD` | Configure the `sa` password.<br /><br />The `SA_PASSWORD` environment variable is deprecated. Use `MSSQL_SA_PASSWORD` instead. |
-| `MSSQL_PID` | Set the SQL Server edition or product key. Possible values include:<br /><br />`Evaluation`<br />`Developer`<br />`Express`<br />`Web`<br />`Standard`<br />`Enterprise` <sup>1</sup><br />`EnterpriseCore` <sup>1</sup><br />`A product key`<br /><br />If specifying a product key, it must be in the form of #####-#####-#####-#####-#####, where '#' is a number or a letter. |
+| `MSSQL_PID` | Set the [SQL Server edition](../sql-server/editions-and-components-of-sql-server-2025.md#sql-server-editions) or product key. Possible values are listed in the following [SQL Server editions](#sql-server-editions) table. If you specify a product key, it must be in the form of `#####-#####-#####-#####-#####`, where `#` is a number or a letter. |
 | `MSSQL_LCID` | Sets the language ID to use for SQL Server. For example, 1036 is French. |
 | `MSSQL_COLLATION` | Sets the default collation for SQL Server. This overrides the default mapping of language ID (LCID) to collation. |
 | `MSSQL_MEMORY_LIMIT_MB` | Sets the maximum amount of memory (in MB) that SQL Server can use. By default, it's 80% of the total physical memory. |
@@ -46,7 +46,15 @@ You can use several different environment variables to configure [!INCLUDE [ssno
 | `MSSQL_MASTER_LOG_FILE` | Sets the location of the `master` database log file. Must be named `mastlog.ldf` until first run of SQL Server. |
 | `MSSQL_ERROR_LOG_FILE` | Sets the location of the `errorlog` files. For example, `/var/opt/mssql/log/errorlog`. |
 
-<sup>1</sup> The legacy `Enterprise` license represents Enterprise edition with Server + Client Access License (CAL) based licensing, and is limited to a maximum of 20 cores per SQL Server instance. `Enterprise` isn't available for new agreements. You should choose `EnterpriseCore` when you wish to deploy Enterprise edition. `EnterpriseCore` represents the core-based server licensing model with no core limits. For more information, see [Compute capacity limits by edition of SQL Server](../sql-server/compute-capacity-limits-by-edition-of-sql-server.md).
+### SQL Server editions
+
+:::moniker range="<=sql-server-ver16 || <=sql-server-linux-ver16"
+[!INCLUDE [editions-sql-server-2022-earlier-versions](includes/editions-sql-server-2022-earlier-versions.md)]
+:::moniker-end
+
+:::moniker range=">=sql-server-ver17 || >=sql-server-linux-ver17"
+[!INCLUDE [editions-sql-server-2025-later-versions](includes/editions-sql-server-2025-later-versions.md)]
+:::moniker-end
 
 ## Use with initial setup
 
@@ -71,6 +79,8 @@ This example `docker` command uses the following environment variables to create
 - `ACCEPT_EULA` accepts the end user license agreement.
 
 - `MSSQL_PID` specifies the freely licensed Developer Edition of SQL Server for non-production use.
+
+   [!INCLUDE [editions-sql-server-developer](includes/editions-sql-server-developer.md)]
 
 - `MSSQL_SA_PASSWORD` sets a strong password. [!INCLUDE [password-complexity](includes/password-complexity.md)]
 
@@ -145,6 +155,8 @@ docker run -e ACCEPT_EULA=Y -e MSSQL_PID="Developer" -e MSSQL_SA_PASSWORD="<pass
 ```
 
 ::: moniker-end
+
+[!INCLUDE [editions-sql-server-developer](includes/editions-sql-server-developer.md)]
 
 > [!CAUTION]  
 > [!INCLUDE [password-complexity](includes/password-complexity.md)]

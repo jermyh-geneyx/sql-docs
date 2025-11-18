@@ -4,7 +4,7 @@ description: This overview introduces SQL Data Sync for Azure, which allows you 
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: mathoma, hudequei
-ms.date: 11/03/2025
+ms.date: 11/12/2025
 ms.service: azure-sql-database
 ms.subservice: sql-data-sync
 ms.topic: concept-article
@@ -76,6 +76,11 @@ Data Sync isn't the preferred solution for the following scenarios:
 |---|---|---|
 | **Advantages** | - Active-active support<br/>- Bi-directional between on-premises and Azure SQL Database | - Lower latency<br/>- Transactional consistency<br/>- Reuse existing topology after migration <br/>-Azure SQL Managed Instance support |
 | **Disadvantages** | - No transactional consistency<br/>- Higher performance impact | - Can't publish from Azure SQL Database <br/>-    High maintenance cost |
+
+> [!CAUTION]
+> **SQL Data Sync requires SQL authentication** for connections to the hub and member databases. Microsoft Entra (Azure AD) authentication isn't supported by SQL Data Sync. 
+> Because SQL authentication relies on static passwords, it doesn't benefit from modern protections like multifactor authentication (MFA), Conditional Access, or managed identities. This can increase exposure for the entire SQL instance to credential theft, brute‑force attacks, and operational overhead for password rotation and policy enforcement. 
+> Where possible, prefer solutions that support Microsoft Entra authentication or managed identities. Since SQL Data Sync is scheduled for retirement, migrate to an alternative that aligns with your organization's security standards.
 
 ## Private link for Data Sync
 

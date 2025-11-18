@@ -321,7 +321,13 @@ FROM BINARY = <PublicKey>
 
 Importing Azure-trusted root certificate authority (CA) keys to SQL Server is required for your SQL Server to trust the SQL Managed Instance public key certificates issued by Azure.
 
-You can download the necessary root CA keys from [Root Certificate Authorities](/azure/security/fundamentals/azure-ca-details?tabs=root-and-subordinate-cas-list). Save them locally, such as to the sample `C:\Path\To\<name of certificate>.crt` path, and then import the certificates from that path:
+You can download the necessary root CA keys from [Azure Certificate Authority details](/azure/security/fundamentals/azure-ca-details#root-certificate-authorities). At minimum, download the **DigiCert Global Root G2** and **Microsoft RSA Root Certificate Authority 2017** certificates and import them to your SQL Server instance. However, if you plan to run the link for longer than a few months, then download and import all 7 certificates listed in the [Root Certificate Authorities](/azure/security/fundamentals/azure-ca-details#root-certificate-authorities) section to avoid potential disruptions in case Azure updates its trusted CA list.
+
+> [!NOTE]
+> The root certificate in the certification path for a SQL Managed Instance public key certificate is issued by an Azure trusted root Certificate Authority (CA). The specific root CA can change over time as Azure updates its trusted CA list.
+> For a simplified setup, install all root CA certificates listed in [Azure Root Certificate Authorities](/azure/security/fundamentals/azure-ca-details?tabs=root-and-subordinate-cas-list). You can install just the required CA key by identifying the issuer of a previously imported SQL Managed Instance public key.
+
+Save the certificates local to the SQL Server instance, such as to the sample `C:\Path\To\<name of certificate>.crt` path, and then import the certificates from that path by using the following Transact-SQL script. Replace `<name of certificate>` with the actual certificate name, such as `DigiCert Global Root G2` or `Microsoft RSA Root Certificate Authority 2017`.
 
 ```sql
 -- Run on SQL Server
@@ -343,8 +349,8 @@ GO
 ```
 
 > [!NOTE]
-> The root certificate in the certification path for a SQL Managed Instance public key certificate is issued by an Azure trusted root Certificate Authority (CA). The specific root CA can change over time as Azure updates its trusted CA list.
-> For a simplified setup, install all root CA certificates listed in [Azure Root Certificate Authorities](/azure/security/fundamentals/azure-ca-details?tabs=root-and-subordinate-cas-list). You can install just the required CA key by identifying the issuer of a previously-imported SQL Managed Instance public key.
+> The `sp_certificate_add_issuer` stored procedure missing from your SQL Server environment indicates your SQL Server instance doesn't have the [appropriate service update installed](managed-instance-link-feature-overview.md#version-supportability). 
+
  
 Finally, verify all the created certificates by using the following dynamic management view (DMV):
 
