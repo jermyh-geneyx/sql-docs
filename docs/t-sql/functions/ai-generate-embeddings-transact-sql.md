@@ -234,7 +234,7 @@ CREATE TABLE text_embeddings
 (
     embeddings_id INT IDENTITY (1, 1) PRIMARY KEY,
     chunked_text NVARCHAR (MAX),
-    vector_embeddings VECTOR (1536)
+    vector_embeddings VECTOR(1536)
 );
 
 -- Insert the chunked text and vector embeddings into the text_embeddings table using AI_GENERATE_CHUNKS and AI_GENERATE_EMBEDDINGS

@@ -13,7 +13,11 @@ ms.custom: references_regions
 
 [!INCLUDE [sqlserver](../../includes/applies-to-version/sqlserver.md)]
 
-[!INCLUDE [ssazurearc](../../includes/ssazurearc.md)] extends Azure services to SQL Server instances hosted outside of Azure: in your data center, in edge site locations like retail stores, or any public cloud or hosting provider.
+[!INCLUDE [ssazurearc](../../includes/ssazurearc.md)] extends Azure services to SQL Server instances hosted outside of Azure: 
+
+- In your data center
+- In edge site locations like retail stores
+- On any public cloud or hosting provider
 
 Managing SQL Server through Azure Arc can also be configured for SQL Server VMs in Azure VMware Solution. See [Deploy Arc-enabled Azure VMware Solution](/azure/azure-vmware/deploy-arc-for-azure-vmware-solution).
 
@@ -99,6 +103,9 @@ For details, review [Configure SQL best practices assessment - SQL Server enable
 ## Architecture
 
 The SQL Server instance that you want to enable with Azure Arc can be installed in a virtual or physical machine running Windows or Linux. The [Azure Connected Machine agent](/azure/azure-arc/servers/agent-overview) and the Azure Extension for SQL Server securely connect to Azure to establish communication channels with multiple Azure services using only outbound HTTPS traffic on TCP port 443 using Transport Layer Security (TLS). The Azure Connected Machine agent can communicate through a configurable HTTPS proxy server over Azure Express Route, Azure Private Link or over the Internet. Review the [overview](/azure/azure-arc/servers/agent-overview), [network requirements](/azure/azure-arc/servers/network-requirements), and [prerequisites](/azure/azure-arc/servers/prerequisites) for the Azure Connected Machine agent.
+
+> [!IMPORTANT]
+> Only Azure extension for SQL Server versions released within the last year are supported.
 
 Some of the services provided by [!INCLUDE [ssazurearc](../../includes/ssazurearc.md)], such as Microsoft Defender for Cloud and best practices assessment, require the Azure Monitoring agent (AMA) extension to be installed and connected to an Azure Log Analytics workspace for data collection and reporting.
 
