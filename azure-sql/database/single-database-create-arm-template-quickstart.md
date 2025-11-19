@@ -4,7 +4,7 @@ description: Create a single database in Azure SQL Database using an Azure Resou
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: mathoma
-ms.date: 09/17/2024
+ms.date: 11/19/2025
 ms.service: azure-sql-database
 ms.subservice: deployment-configuration
 ms.topic: quickstart
@@ -49,7 +49,7 @@ These resources are defined in the template:
 - [**Microsoft.Sql/servers**](/azure/templates/microsoft.sql/servers)
 - [**Microsoft.Sql/servers/databases**](/azure/templates/microsoft.sql/servers/databases)
 
-More Azure SQL Database template samples can be found in [Azure Quickstart Templates](https://azure.microsoft.com/resources/templates/?resourceType=Microsoft.Sql&pageNumber=1&sort=Popular).
+More Azure SQL Database template samples can be found in [Azure Quickstart Templates](https://learn.microsoft.com/azure/azure-resource-manager/templates/).
 
 ## Deploy the template
 

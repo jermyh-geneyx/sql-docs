@@ -3,7 +3,7 @@ title: Download ODBC Driver for SQL Server
 description: Download the Microsoft ODBC Driver for SQL Server to develop native-code applications that connect to SQL Server and Azure SQL Database.
 author: David-Engel
 ms.author: davidengel
-ms.date: 09/26/2025
+ms.date: 11/19/2025
 ms.service: sql
 ms.subservice: connectivity
 ms.topic: conceptual
@@ -159,8 +159,8 @@ See also [Installing the macOS driver](linux-mac/install-microsoft-odbc-driver-s
 
 ### Older Linux releases
 
-- **Red Hat Enterprise Linux 5 and 6 (64-bit)** - [Download Microsoft ODBC Driver 11 for SQL Server - Red Hat Linux](https://go.microsoft.com/fwlink/?LinkId=267321)  
-- **SUSE Linux Enterprise 11 Service Pack 2 (64-bit)** - [Download Microsoft ODBC Driver 11 Preview for SQL Server - SUSE Linux](https://go.microsoft.com/fwlink/?LinkId=264916)
+- **Red Hat Enterprise Linux 5 and 6 (64-bit)** - [Download Microsoft ODBC Driver 11 for SQL Server - Red Hat Linux](../../../docs/connect/odbc/download-odbc-driver-for-sql-server)  
+- **SUSE Linux Enterprise 11 Service Pack 2 (64-bit)** - [Download Microsoft ODBC Driver 11 Preview for SQL Server - SUSE Linux](../../../docs/connect/odbc/download-odbc-driver-for-sql-server)
 
 ### Release notes for Linux and macOS
 
