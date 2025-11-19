@@ -5,7 +5,7 @@ description: Use the COPY statement in Azure Synapse Analytics and Warehouse in 
 author: WilliamDAssafMSFT
 ms.author: wiassaf
 ms.reviewer: procha, mikeray, fresantos, jovanpop
-ms.date: 11/10/2025
+ms.date: 11/19/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -559,9 +559,6 @@ For more information on using `COPY INTO` on your [!INCLUDE [fabricdw](../../inc
 
 By default, `COPY INTO` authenticates as the executing Entra ID user.
 
-> [!NOTE]
-> For [!INCLUDE[ssazuresynapse_md](../../includes/ssazuresynapse-md.md)], visit [COPY INTO for [!INCLUDE [ssazuresynapse_md](../../includes/ssazuresynapse-md.md)]](copy-into-transact-sql.md?view=azure-sqldw-latest&preserve-view=true).  
-
 Use `COPY` for the following capabilities:
 
 - Use lower privileged users to load without needing strict CONTROL permissions on the data warehouse.
@@ -622,8 +619,8 @@ An optional list of one or more columns used to map source data fields to target
 [(Column_name [default Default_value] [Field_number] [,...n])]
 
 - *Column_name* - the name of the column in the target table.
-- *Default_value* - the default value that replaces any `NULL` value in the input file. Default value applies to all file formats. `COPY` attempts to load `NULL` from the input file when a column is omitted from the column list or when there's an empty input file field. Default value is preceded by the keyword 'default'.
-- *Field_number* - The input file field number that is mapped to the target column.
+- *Default_value* - the default value that replaces any `NULL` value in the input file. Default value applies to all file formats. `COPY` attempts to load `NULL` from the input file when a column is omitted from the column list or when there's an empty input file field. Default value is preceded by the keyword 'default'
+- *Field_number* - The input file field number that is mapped to the target column. 
 - The field indexing starts at 1.
 
 When *column_list* isn't specified, `COPY` maps columns based on the source and target order: Input field 1 goes to target column 1, field 2 goes to column 2, etc.
@@ -855,6 +852,10 @@ When using OneLake as the source, the user must have **Contributor** or higher p
 
 The `COPY` statement accepts only UTF-8 and UTF-16 valid characters for row data and command parameters. Source files or parameters (such as `ROW TERMINATOR` or `FIELD TERMINATOR`) that use invalid characters might be interpreted incorrectly by the `COPY` statement and cause unexpected results such as data corruption, or other failures. Make sure your source files and parameters are UTF-8 or UTF-16 compliant before you invoke the `COPY` statement.  
 
+The `COPY INTO` statement has restrictions on the size of individual **varchar(max)** and **varbinary(max)** columns, as well as on the total row size that can be ingested.
+- Parquet: maximum **varchar(max)**/**varbinary(max)** column size 16MB, max row size 1GB.
+- CSV: maximum **varchar(max)**/**varbinary(max)** column size 1MB, max row size 16MB.
+
 To ensure reliable execution, the source files and folders must remain unchanged throughout the duration of the `COPY INTO` operation.
 - Modifying, deleting, or replacing any referenced files or folders while the command is running can cause the operation to fail or result in inconsistent data ingestion.
 - Before executing `COPY INTO`, verify that all source data is stable and will not be altered during the process.
@@ -898,8 +899,8 @@ The default values of the `COPY` command are:
 
 - `ROWTERMINATOR = '\n'`
 
-  > [!IMPORTANT]  
-  > `COPY` treats `\n` as `\r\n` internally. For more information, see the `ROWTERMINATOR` section.
+> [!IMPORTANT]  
+> `COPY` treats `\n` as `\r\n` internally. For more information, see the `ROWTERMINATOR` section.
 
 - `FIRSTROW = 1`
 
