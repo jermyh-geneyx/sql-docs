@@ -4,7 +4,7 @@ description: This article describes limitations and known issues for SQL Server 
 author: lrtoyou1223
 ms.author: lle
 ms.reviewer: maghan, randolphwest
-ms.date: 07/03/2025
+ms.date: 11/19/2025
 ms.service: sql
 ms.subservice: linux
 ms.topic: troubleshooting-known-issue
@@ -30,6 +30,7 @@ The following features aren't supported in this release of SSIS on Linux:
 - Azure Feature Pack for SSIS
 - Hadoop and HDFS support
 - Microsoft Connector for SAP BW
+- SSIS isn't available for [!INCLUDE [sssql25-md](../includes/sssql25-md.md)] on Linux
 
 For other limitations and known issues with SSIS on Linux, see [SQL Server on Linux: Known issues](sql-server-linux-known-issues.md#sql-server-integration-services-ssis).
 
@@ -145,6 +146,17 @@ The SSIS log providers for Text files, for XML files, and for SQL Server Profile
 
 - If you don't provide a path, the log provider writes to the current directory of the host. If the current user doesn't have permission to write to the current directory of the host, the log provider raises an error.
 - You can't use an environment variable in a file path. If you specify an environment variable, the literal text that you specify appears in the file path. For example, if you specify `%TMP%/log.txt`, the log provider appends the literal text `/%TMP%/log.txt` to the current host directory.
+
+## Python 3 support
+
+Python 3 is supported in [!INCLUDE [sssql22-md](../includes/sssql22-md.md)] Cumulative Update 21 and later versions. For more information, see [Release notes for SQL Server 2022 on Linux](sql-server-linux-release-notes-2022.md).
+
+| Distribution | Package name | Package version |
+| --- | --- | --- |
+| RHEL 8 | SSIS | 16.0.4215.2-3 |
+| RHEL 9 | SSIS | 16.0.4215.2-3 |
+| Ubuntu 20.04 | SSIS | 16.0.4215.2-3 |
+| Ubuntu 22.04 | SSIS | 16.0.4215.2-3 |
 
 ## Related content
 
