@@ -67,20 +67,95 @@ You use an Azure Blob Storage account as intermediary storage for backup files b
 
 To create a new storage account and a blob container inside the storage account:
 
-1. [Create a storage account](/azure/storage/common/storage-account-create?tabs=azure-portal).
+1. [Create a storage account](/azure/storage/common/storage-account-create?tabs=azure-portal):
+   1. Search for **Storage accounts** in the Azure portal, and select **Create**.
+   1. On the **Basics** tab, select your subscription and resource group. The region should be the same as your SQL Managed Instance target.
+   1. Leave **Preferred storage type** blank.
+   1. Use default settings for the rest of the tabs, and select **Review + create**.
+   1. After validation passes, select **Create**.
 1. [Create a blob container](/azure/storage/blobs/storage-quickstart-blobs-portal) inside the storage account.
-1. (Optional) [Configure Azure storage behind a firewall](/azure/azure-sql/managed-instance/log-replay-service-migrate#create-a-storage-account).
+   1. Go to your new storage account in the Azure portal.
+   1. Under **Data storage**, select **Containers**.
+   1. Use **Add container** to open the **New container** pane.
+   1. Enter a name for your container, leave options at their defaults, and select **Create** to create your container.
+1. (Optional) If your Azure Storage is behind a firewall, your Azure Blob storage requires [additional configuration](/azure/azure-sql/managed-instance/log-replay-service-migrate#configure-azure-storage-behind-a-firewall) after your SQL managed instance is provisioned.
 
 ## Grant permissions to Azure Blob Storage
 
-SQL Server migration in Azure Arc with LRS uses a managed identity to authenticate to Azure Blob Storage. You need to grant access to the blob storage:
+SQL Server migration in Azure Arc with LRS uses a managed identity to authenticate to Azure Blob Storage.
 
-- [Grant managed identity access to the Azure Blob Storage account](/azure/storage/blobs/authorize-access-azure-active-directory)
-- [Grant managed identity access to SQL Managed Instance](/azure/azure-sql/database/authentication-azure-ad-user-assigned-managed-identity). Assign the **Storage Blob Data Reader** role to the primary managed identity of Azure SQL Managed Instance.
+You need to grant the following permissions:
+- [Grant user access to the storage account](#grant-user-access-to-the-storage-account) where you plan to store backups during the migration process.
+- [Grant user access to the resource group](#grant-user-access-to-the-resource-group) that contains the storage account.
+- [Grant managed identity access to the storage account](#grant-managed-identity-access-to-the-storage-account) after your SQL managed instance is provisioned.
 
-Assign the following roles to the user who signs in to the Azure portal and performs the migration:
-- [Storage Blob Data Reader](/azure/role-based-access-control/built-in-roles/storage#storage-blob-data-reader) on the resource group that contains the storage account.
-- **Reader** on the resource group that contains the storage account.
+### Grant user access to the storage account
+
+To access database backups during the migration process, assign the user who signs in to the Azure portal and performs the migration to the [Storage Blob Data Reader](/azure/role-based-access-control/built-in-roles/storage#storage-blob-data-reader) role for the storage account that contains the backups.
+
+To assign the role, follow these steps:
+1. In the Azure portal, go to the resource group that contains your storage account.
+1. Select **Access control (IAM)** from the resource menu.
+1. Use **+ Add** to select **Add role assignment** and open the **Add role assignment** pane.
+1. Search for and select the **Storage Blob Data Reader** role. Then, select **Next**.
+
+   :::image type="content" source="media/migration-sql-mi-prepare-log-replay-service/search-storage-blob-data-reader.png" alt-text="Screenshot of finding the Storage Blob Data Reader role on the IAM page for the storage account in the Azure portal." lightbox="media/migration-sql-mi-prepare-log-replay-service/search-storage-blob-data-reader.png":::
+
+1. Use **+ Select members** to open the **Select members** pane, and search for the user account of the person performing the migration. If multiple people are migrating data, grant all of those users this access. Select the user account, and then use **Select** to save your selection. Check the option to assign access to **User, group, or service principal**.
+1. Select **Review + assign** to go to the **Review + assign** tab, and then select **Review + assign** again to complete the role assignment.
+
+### Grant user access to the resource group
+
+To access database backups during the migration process, the user who signs in to the Azure portal and performs the migration needs to be assigned the **Reader** role on the resource group that contains the storage account.
+
+To assign the role, follow these steps:
+1. In the Azure portal, go to the resource group that contains your storage account.
+1. Select **Access control (IAM)** from the resource menu.
+1. Use **+ Add** to select **Add role assignment** and open the **Add role assignment** pane.
+1. Search for and select the **Reader** role. Then, select **Next**.
+
+   :::image type="content" source="media/migration-sql-mi-prepare-log-replay-service/search-reader-role.png" alt-text="Screenshot of finding the Reader role on the IAM page for the resource group in the Azure portal." lightbox="media/migration-sql-mi-prepare-log-replay-service/search-reader-role.png":::
+
+1. Use **+ Select members** to open the **Select members** pane, and search for the user account of the person performing the migration. If multiple people are migrating data, grant all of those users this access. Select the user account, and then use **Select** to save your selection. Check the option to assign access to **User, group, or service principal** and then use **Next** to continue.
+1. On the **Assignment type** tab, set the **Assignment type** to **Active** and the **Assignment duration** to **Permanent**:
+
+   :::image type="content" source="media/migration-sql-mi-prepare-log-replay-service/reader-role-assignment-type.png" alt-text="Screenshot of setting the Assignment type to Active and the Assignment duration to Permanent on the Assignment type tab in the Azure portal." lightbox="media/migration-sql-mi-prepare-log-replay-service/reader-role-assignment-type.png":::
+
+1. Select **Review + assign** to go to the **Review + assign** tab, and then select **Review + assign** again to complete the role assignment.
+
+### Grant managed identity access to the storage account
+
+After your SQL managed instance is provisioned, you need to assign the managed identity of your SQL managed instance the [Storage Blob Data Reader](/azure/role-based-access-control/built-in-roles/storage#storage-blob-data-reader) role so that it can access your Azure Blob Storage account during the migration process.
+
+First, you must determine what kind of managed identity your SQL managed instance uses. To do so, follow these steps:
+1. Go to your [SQL managed instance](https://portal.azure.com/#view/HubsExtension/ServiceMenuBlade/~/SingleInstance/extension/SqlAzureExtension/menuId/AzureSqlHub/itemId/SingleInstance) in the Azure portal.
+1. Under **Security**, select **Identity**.
+   1. If under **User assigned managed identity**, you see *No user assigned managed identities found*, your SQL managed instance uses the default **system-assigned managed identity**.
+   1. If you see an entry in the **Primary identity** field, then your SQL managed instance uses a custom **user assigned managed identity**. Make note of this identity to use in the step where you're selecting this managed identity when granting **Storage Blob Data Reader** access to the storage account.
+
+To grant access to the storage account, follow these steps:
+1. Go to the Azure Blob Storage account in the Azure portal that you intend to use for the migration.
+1. Select **Access control (IAM)** from the resource menu.
+1. Use **+ Add** to select **Add role assignment** and open the **Add role assignment** pane.
+1. Search for and select the **Storage Blob Data Reader** role. Then, select **Next**.
+1. Under **Assign access to** check the **Managed identity** option.
+1. Use **Select members** to open the **Select members** pane.
+1. If your SQL managed instance uses the default **system-assigned managed identity**:
+   1. Under **Managed identity**, select **SQL managed instance**.
+   1. Search and select the name of your SQL managed instance.
+   1. Use **Select** to save your selection.
+1. If your SQL managed instance uses a **user-assigned managed identity**:
+   1. Under **Managed identity**, select **User assigned managed identity**.
+   1. Search for the **Primary identity** name that you noted earlier from the **Identity** page of your [SQL managed instance](https://portal.azure.com/#view/HubsExtension/ServiceMenuBlade/~/SingleInstance/extension/SqlAzureExtension/menuId/AzureSqlHub/itemId/SingleInstance) and select it.
+   1. Use **Select** to save your selection.
+1. Select **Review + assign** to go to the **Review + assign** tab, and then select **Review + assign** again to complete the role assignment.
+
+Once you've uploaded at least one full backup to this storage account, you can run the following command on your SQL managed instance to verify that it can access your Azure Blob Storage account:
+
+```sql
+RESTORE HEADERONLY
+    FROM URL = 'https://<mystorageaccountname>.blob.core.windows.net/<containername>/full_0_0.bak';
+```
 
 ## Upload backups to your Blob Storage account
 
@@ -179,11 +254,6 @@ If it's important that databases are available as soon as cutover completes, con
 - Use the [Managed Instance link](migration-sql-mi-prepare-link.md) for an online migration to a **Business Critical** instance without having to wait for databases to be available after the cutover.
 
 Monitoring the migration through the Azure portal is available only to SQL Server instances that meet monitoring [licensing requirements](sql-monitoring.md#prerequisites).
-
-## Next steps
-
-> [!div class="nextstepaction"]
-> [Migrate to Azure SQL Managed Instance](migrate-to-azure-sql-managed-instance.md)
 
 ## Related content
 

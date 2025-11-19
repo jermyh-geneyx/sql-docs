@@ -36,6 +36,10 @@ First, you choose an appropriate SQL Managed Instance target and prepare your en
 
 Database migration is available by default for all SQL Server instances enabled by Azure Arc, starting with [!INCLUDE [sssql11-md](../../includes/sssql11-md.md)].
 
+The **Database Migration** pane also has a useful summary of the migration status for your instance, such as the number of total databases, the recommended target, the number of completed migrations, and the number of ongoing migrations: 
+
+:::image type="content" source="media/migrate-to-azure-sql-managed-instance/database-migration-summary.png" alt-text="Screenshot of the summary on the Database Migration pane in the Azure portal." lightbox="media/migrate-to-azure-sql-managed-instance/database-migration-summary.png":::
+
 ## Integrated migration methods
 
 Choose the migration method that best fits your needs on the **Database migration** pane. After an initial configuration to prepare your environment, the migration process automates the rest based on your selection.
@@ -51,7 +55,7 @@ The following table summarizes the two methods built into the migration process:
 | **Description** | Most performant method with near real-time replication. Provides a read-only (R/O) database on the target, so you can query your data in near-real time during the migration to offload R/O workloads on the secondary, or check data during the migration. Best possible minimum downtime migration. | Most compatible migration method. Upload backups to an intermediary Azure blob storage account that the LRS service automatically restores to SQL Managed Instance continuously. No R/O database replica is available on the target. |
 | **Supported versions** | SQL Server 2016 and later on Windows Server 2016 and later | SQL Server 2012 and later on Windows Server 2012 and later |
 | **Supported editions** | Enterprise, Standard, and Developer editions | All editions |
-| **Recommended for** | Business-critical workloads that require minimum downtime during migration and access to a R/O database on the target, with a destination target of either a General Purpose or Business Critical SQL Managed Instance. | General purpose workloads where some planned downtime is acceptable and destination target of a General Purpose SQL Managed Instance. Not recommended for Business Critical SQL managed instance targets. |
+| **Recommended for** | Business-critical workloads that require minimum downtime during migration and access to a read-only database on the target, with a destination target of either a General Purpose or Business Critical SQL Managed Instance. | General purpose workloads where some planned downtime is acceptable and destination target of a General Purpose SQL Managed Instance. Not recommended for Business Critical SQL managed instance targets. |
 
 For an in-depth comparison of the two migration methods, see [Compare Managed Instance link with LRS for migration](/azure/azure-sql/managed-instance/log-replay-service-compare-mi-link).
 
@@ -136,7 +140,7 @@ After your target is ready, start the migration process.
 
 Once you've prepared your environment for [Managed Instance link migration](migration-sql-mi-prepare-link.md), you can migrate your SQL Server databases to Azure SQL Managed Instance. 
 
-Follow these steps to migrate your SQL Server databases to SQL Managed Instance by using the Managed Instance link::
+Follow these steps to migrate your SQL Server databases to SQL Managed Instance by using the Managed Instance link:
 
 1. On the **Database migration** pane, select **Migrate data**.
 1. On the **New data migration** pane, choose **Migrate using real-time replication (online)**:
@@ -173,7 +177,7 @@ Follow these steps to migrate your SQL Server databases to SQL Managed Instance 
 
    :::image type="content" source="media/migrate-to-azure-sql-managed-instance/migrate-data-lrs.png" alt-text="Screenshot of the LRS migration option on the Migrate Data page in the Azure portal.":::
 
-1. On the **Select source databases** tab, check the boxes next to the databases that you want to migrate, and then use **Next** to proceed to the next page.:
+1. On the **Select source databases** tab, check the boxes next to the databases that you want to migrate, and then use **Next** to proceed to the next page:
 
    :::image type="content" source="media/migrate-to-azure-sql-managed-instance/select-source-database-lrs.png" alt-text="Screenshot of the select source databases page when you migrate your database with LRS in the Azure portal." lightbox="media/migrate-to-azure-sql-managed-instance/select-source-database-lrs.png":::
 
@@ -197,7 +201,7 @@ The **Monitor and cutover** pane shows useful information about the migration pr
 
 :::image type="content" source="media/migrate-to-azure-sql-managed-instance/monitor-migration.png" alt-text="Screenshot of the monitor migration page in the Azure portal." lightbox="media/migrate-to-azure-sql-managed-instance/monitor-migration.png":::
 
-You can pause, resume, or cancel the migration from the **Monitor and cutover** pane. You can also view logs for information about the migration. Selecting a database takes you to a pane with more details about the source and target.
+You can complete or cancel the migration from the **Monitor and cutover** pane. You can also view logs for information about the migration. Selecting a database takes you to a pane with more details about the source and target.
 
 After the migration finishes, the migration status shows **Ready for cutover**. To cut over to the SQL Managed Instance target, select **Cutover** on the **Monitor and cutover** pane. You can also use the database details pane.
 

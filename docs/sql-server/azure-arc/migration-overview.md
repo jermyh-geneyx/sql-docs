@@ -5,7 +5,7 @@ description: Learn about the capabilities of SQL Server migration in Azure Arc.
 author: ajithkr-ms
 ms.author: ajithkr
 ms.reviewer: mikeray, mathoma
-ms.date: 11/18/2025
+ms.date: 11/19/2025
 ms.topic: how-to
 ---
 
@@ -13,7 +13,7 @@ ms.topic: how-to
 
 [!INCLUDE [sqlserver](../../includes/applies-to-version/sqlserver.md)]
 
-This article provides an overview of SQL Server migration in Azure Arc for [SQL Server instances enabled by Azure Arc](overview.md). 
+This article provides an overview of SQL Server migration in Azure Arc for [SQL Server enabled by Azure Arc](overview.md).
 
 ## Overview
 
@@ -31,7 +31,7 @@ SQL Server migration in Azure Arc is available by default for all SQL Server ins
 
 ## Migration targets
 
-Currently, you can only migrate to [Azure SQL Managed Instance](migrate-to-azure-sql-managed-instance.md). 
+Currently, you can only migrate to [Migration to Azure SQL Managed Instance - SQL Server migration in Azure Arc](migrate-to-azure-sql-managed-instance.md).
 
 ## Microsoft Copilot assisted migration
 
@@ -93,11 +93,23 @@ You can obtain a migration assessment for SQL Servers located anywhere, such as:
 
 The assessment is available for any instance of SQL Server enabled by Azure Arc.
 
+## Database migration
+
+On the **Database migration** pane, you can migrate your SQL Server databases to Azure SQL Managed Instance. The migration process is fully managed and automated from the Azure portal. Once you're ready to start, you can use the tiles to assess your SQL Server databases, choose a migration target, and start the migration process.
+
+**Database migration** guides you through the migration with easy to follow tiles for each step of the process:
+
+:::image type="content" source="media/migrate-to-azure-sql-managed-instance/migration-home-page.png" alt-text="Screenshot that shows the migration home page for a SQL Server instance in the Azure portal." lightbox="media/migrate-to-azure-sql-managed-instance/migration-home-page.png":::
+
+The **Database Migration** pane also has a useful summary of the migration status for your instance, such as the number of total databases, the recommended target, the number of completed migrations, and the number of ongoing migrations:
+
+:::image type="content" source="media/migrate-to-azure-sql-managed-instance/database-migration-summary.png" alt-text="Screenshot of the summary on the Database Migration pane in the Azure portal." lightbox="media/migrate-to-azure-sql-managed-instance/database-migration-summary.png":::
+
 ## Related content
 
-- [Migration dashboard](migration-inventory.md)
-- [Assessment for migration to Azure](migration-assessment.md)
-- [Prepare environment for a Managed Instance link migration](migration-sql-mi-prepare-link.md)
-- [Prepare environment for an LRS migration](migration-sql-mi-prepare-log-replay-service.md)
+- [Track migration journey by using migration dashboard - SQL Server enabled by Azure Arc](migration-inventory.md)
+- [Assess migration readiness - SQL Server enabled by Azure Arc](migration-assessment.md)
+- [Prepare environment for a Managed Instance link migration - SQL Server migration in Azure Arc](migration-sql-mi-prepare-link.md)
+- [Prepare environment for LRS migration - SQL Server migration in Azure Arc](migration-sql-mi-prepare-log-replay-service.md)
 - [SQL Server enabled by Azure Arc](overview.md)
 - [Deployment options for SQL Server enabled by Azure Arc](deployment-options.md)
