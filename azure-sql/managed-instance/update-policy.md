@@ -5,7 +5,7 @@ description: Use the update policy setting in Azure SQL Managed Instance to cont
 author: MladjoA
 ms.author: mlandzic
 ms.reviewer: mathoma
-ms.date: 10/15/2025
+ms.date: 11/18/2025
 ms.service: azure-sql-managed-instance
 ms.subservice: deployment-configuration
 ms.topic: how-to
@@ -32,7 +32,7 @@ Azure SQL Managed Instance offers the following three update policies:
 ## SQL Server 2025 update policy
 
 > [!NOTE]
-> The **SQL Server 2025** update policy is currently in preview. 
+> The **SQL Server 2025** update policy is currently in preview. Changing the update policy from **SQL Server 2025** to **Always-up-to-date** is currently and temporarily disabled.
 
 The **SQL Server 2025** update policy aligns your database format with [!INCLUDE [sssql25-md](../../docs/includes/sssql25-md.md)].
 
@@ -106,7 +106,8 @@ You can also use different update policies for different environments. For examp
 For an existing instance, you can enable the **Always-up-to-date** update policy by using the Azure portal, PowerShell, the Azure CLI, or REST API. 
 
 > [!CAUTION]
-> The **SQL Server 2022** update policy is enabled by default for all existing and new instances. When you change the update policy to **SQL Server 2025**, or **Always-up-to-date**, the internal database format is upgraded permanently. You can't change the update policy back to **SQL Server 2022** and you can no longer use the features and benefits that require the **SQL Server 2022** update policy.
+> - The **SQL Server 2022** update policy is enabled by default for all existing and new instances. When you change the update policy to **SQL Server 2025**, or **Always-up-to-date**, the internal database format is upgraded permanently. You can't change the update policy back to **SQL Server 2022** and you can no longer use the features and benefits that require the **SQL Server 2022** update policy.
+> - Changing the update policy from **SQL Server 2025** to **Always-up-to-date** is currently and temporarily disabled.
 
 ### [Azure portal](#tab/azure-portal)
 
