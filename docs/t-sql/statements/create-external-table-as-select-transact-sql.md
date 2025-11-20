@@ -221,6 +221,9 @@ Data manipulation language (DML) operations aren't supported on external tables.
 
 CREATE TABLE, DROP TABLE, CREATE STATISTICS, DROP STATISTICS, CREATE VIEW, and DROP VIEW are the only data definition language (DDL) operations allowed on external tables.
 
+> [!NOTE]  
+> You can't use LOBs larger than **1 MB** with CETAS.
+
 ### Limitations and restrictions for Azure Synapse Analytics
 
 - In [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] dedicated SQL pools, and [!INCLUDE [ssaps-md](../../includes/ssaps-md.md)], PolyBase can consume a maximum of 33,000 files per folder when running 32 concurrent PolyBase queries. This maximum number includes both files and subfolders in each HDFS folder. If the degree of concurrency is less than 32, a user can run PolyBase queries against folders in HDFS that contain more than 33,000 files. We recommend that users of Hadoop and PolyBase keep file paths short and use no more than 30,000 files per HDFS folder. When too many files are referenced, a JVM out-of-memory exception occurs.
