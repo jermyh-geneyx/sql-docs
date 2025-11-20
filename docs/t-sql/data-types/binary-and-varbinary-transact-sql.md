@@ -3,8 +3,8 @@ title: "binary and varbinary (Transact-SQL)"
 description: "Binary data types of either fixed length or variable length."
 author: MikeRayMSFT
 ms.author: mikeray
-ms.reviewer: randolphwest
-ms.date: 09/24/2024
+ms.reviewer: randolphwest, jovanpop
+ms.date: 11/20/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: "reference"
@@ -96,11 +96,7 @@ The final result is `57921`, not `123457`.
 > [!NOTE]  
 > Conversions between any data type and the **binary** data types are not guaranteed to be the same between versions of [!INCLUDE[ssNoVersion](../../includes/ssnoversion-md.md)].
 
-## Limitations
-
-Currently, in [!INCLUDE [fabric](../../includes/fabric.md)], only varbinary(*n*) is supported. The binary and varbinary(max) data types are not supported.
-
-## See also
+## Related content
 
 - [CAST and CONVERT (Transact-SQL)](../../t-sql/functions/cast-and-convert-transact-sql.md)
 - [Data Type Conversion &#40;Database Engine&#41;](../../t-sql/data-types/data-type-conversion-database-engine.md)
