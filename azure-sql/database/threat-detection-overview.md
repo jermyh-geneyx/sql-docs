@@ -11,7 +11,6 @@ ms.subservice: security
 ms.topic: concept-article
 ai-usage: ai-assisted
 ms.custom:
-  - sqldbrb=2fimage
   - sfi-image-nochange
 tags: azure-synapse
 monikerRange: "=azuresql || =azuresql-db || =azuresql-mi"
@@ -43,11 +42,11 @@ You receive an email notification when the system detects anomalous database act
 
 1. Select the **View recent SQL alerts** link in the email to launch the Azure portal and show the Microsoft Defender for Cloud alerts page. This page provides an overview of active threats detected on the database.
 
-   :::image type="content" source="media/threat-detection-overview/active_threats.png" alt-text="Activity threats." lightbox="media/threat-detection-overview/active_threats.png":::
+   :::image type="content" source="media/threat-detection-overview/active_threats.png" alt-text="Screenshot of Activity threats." lightbox="media/threat-detection-overview/active_threats.png":::
 
 1. Select a specific alert to get additional details and actions for investigating this threat and remediating future threats.
 
-   For example, SQL injection is one of the most common web application security issues on the Internet that bad actors use to attack data-driven applications. They take advantage of application vulnerabilities to inject malicious SQL statements into application entry fields, breaching or modifying data in the database. For SQL Injection alerts, the alert's details include the vulnerable SQL statement that was exploited.
+   For example, SQL injection is one of the most common Web application security issues on the Internet that bad actors use to attack data-driven applications. They take advantage of application vulnerabilities to inject malicious SQL statements into application entry fields, breaching or modifying data in the database. For SQL Injection alerts, the alert's details include the vulnerable SQL statement that was exploited.
 
    :::image type="content" source="media/threat-detection-overview/specific-alert.png" alt-text="Screenshot of specific alert.":::
 
