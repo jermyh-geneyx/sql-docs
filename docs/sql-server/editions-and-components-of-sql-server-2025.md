@@ -113,7 +113,7 @@ For features supported by Enterprise Developer and Evaluation editions, see feat
 | Microsoft Entra integration | Yes | Yes | Yes |
 | Pay-as-you-go billing | Yes | Yes | No |
 
-<sup>1</sup> These features are governed by their respective [Lifecycle Policies](/lifecycle/products/?terms=sql%20server).
+<sup>1</sup> These features are governed by their respective [Lifecycle Policies](/lifecycle/products/sql-server-2025).
 
 ## High availability
 
