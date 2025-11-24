@@ -30,7 +30,7 @@ In this lesson, learn the following:
 
 ## Tools for getting started
 
-The [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)] ships with various tools. This article describes the first tools you need and helps you select the right tool for a job. All tools can be accessed from the **Start** menu. Some tools, such as [SQL Server Management Studio (SSMS)](../ssms/download-sql-server-management-studio-ssms.md), aren't installed by default. Select the tools that you want as components during setup. [!INCLUDE [ssExpress](../includes/ssexpress-md.md)] contains only a subset of the tools.
+The [!INCLUDE [ssDEnoversion](../includes/ssdenoversion-md.md)] ships with various tools. This article describes the first tools you need and helps you select the right tool for a job. All tools can be accessed from the **Start** menu. Some tools, such as [SQL Server Management Studio (SSMS)](/ssms/sql-server-management-studio-ssms), aren't installed by default. Select the tools that you want as components during setup. [!INCLUDE [ssExpress](../includes/ssexpress-md.md)] contains only a subset of the tools.
 
 ### Common tools
 
@@ -38,7 +38,7 @@ The following table describes some of the more common tools.
 
 | Tool | Type | Operating system |
 | --- | --- | --- |
-| **[SSMS](../ssms/sql-server-management-studio-ssms.md)** | GUI | Windows |
+| **[SSMS](/ssms/install/install)** | GUI | Windows |
 | **[Azure Data Studio](/azure-data-studio/what-is-azure-data-studio)** | GUI | Windows, macOS, Linux |
 | **[bcp](../tools/bcp-utility.md)** | CLI | Windows, macOS, Linux |
 | **[sqlcmd](../tools/sqlcmd/sqlcmd-utility.md)** | CLI | Windows, macOS, Linux |
