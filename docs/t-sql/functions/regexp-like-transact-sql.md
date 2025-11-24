@@ -4,7 +4,7 @@ description: REGEXP_LIKE Returns a Boolean value that indicates whether the text
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: abhtiwar, wiassaf, randolphwest
-ms.date: 11/18/2025
+ms.date: 11/21/2025
 ms.service: sql
 ms.subservice: t-sql
 ms.topic: reference
@@ -31,7 +31,7 @@ REGEXP_LIKE
 
 `REGEXP_LIKE` requires database compatibility level 170 and above. If the database compatibility level is lower than 170, `REGEXP_LIKE` isn't available. Other [regular expression scalar functions](regular-expressions-functions-transact-sql.md) are available at all compatibility levels.
 
-You can check compatibility level in the `sys.databases` view or in database properties. You can change the compatibility level of a database with the following command:
+You can check the compatibility level in the `sys.databases` view or in database properties. You can change the compatibility level of a database with the following command:
 
 ```sql
 ALTER DATABASE [DatabaseName]
@@ -63,20 +63,28 @@ Boolean value. `true` or `false`.
 
 ### Cardinality estimation
 
-To enhance the accuracy of [cardinality estimation](../../relational-databases/performance/cardinality-estimation-sql-server.md) for the `REGEXP_LIKE` function, you can use the `ASSUME_FIXED_MIN_SELECTIVITY_FOR_REGEXP` and `ASSUME_FIXED_MAX_SELECTIVITY_FOR_REGEXP` query hints to adjust the default selectivity values. For more information, see [Query hints](../queries/hints-transact-sql-query.md#use_hint).
+To enhance the accuracy of [cardinality estimation](../../relational-databases/performance/cardinality-estimation-sql-server.md) for the `REGEXP_LIKE` function, use the `ASSUME_FIXED_MIN_SELECTIVITY_FOR_REGEXP` and `ASSUME_FIXED_MAX_SELECTIVITY_FOR_REGEXP` query hints to adjust the default selectivity values. For more information, see [Query hints](../queries/hints-transact-sql-query.md#use_hint).
 
-These query hints are also integrated with [Cardinality estimation (CE) feedback](../../relational-databases/performance/intelligent-query-processing-cardinality-estimation-feedback.md). The CE feedback model automatically identifies queries using `REGEXP_LIKE` function where there's a significant difference between estimated and actual row counts. It then applies the appropriate selectivity hint at the query level to improve plan quality without requiring manual input.
+These query hints also integrate with [Cardinality estimation (CE) feedback](../../relational-databases/performance/intelligent-query-processing-cardinality-estimation-feedback.md). The CE feedback model automatically identifies queries that use the `REGEXP_LIKE` function where there's a significant difference between estimated and actual row counts. It then applies the appropriate selectivity hint at the query level to improve plan quality without requiring manual input.
 
 To disable the automatic feedback behavior, enable trace flag 16268.
 
 ## Examples
 
-Select all records from the `Employees` table where the first name starts with `A` and ends with `Y`
+Select all records from the `Employees` table where the first name starts with `A` and ends with `Y`:
 
 ```sql
 SELECT *
 FROM Employees
 WHERE REGEXP_LIKE (FIRST_NAME, '^A.*Y$');
+```
+
+Select all records from the `Employees` table where the first name starts with `A` and ends with `Y`, using case-insensitive mode:
+
+```sql
+SELECT *
+FROM Employees
+WHERE REGEXP_LIKE (FIRST_NAME, '^A.*Y$', 'i');
 ```
 
 Select all records from the `Orders` table where the order date is in February 2020:
@@ -95,7 +103,7 @@ FROM Products
 WHERE REGEXP_LIKE (PRODUCT_NAME, '[AEIOU]{3,}');
 ```
 
-Create employees table with `CHECK` constraints for `Email` and `Phone_Number` columns:
+Create an employees table with `CHECK` constraints for the `Email` and `Phone_Number` columns:
 
 ```sql
 DROP TABLE IF EXISTS Employees;
