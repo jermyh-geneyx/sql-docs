@@ -4,7 +4,7 @@ description: Learn about the optimized locking enhancement to the database engin
 author: MikeRayMSFT
 ms.author: mikeray
 ms.reviewer: randolphwest, peskount, praspu, dfurman
-ms.date: 10/21/2025
+ms.date: 11/24/2025
 ms.service: sql
 ms.subservice: performance
 ms.topic: conceptual
@@ -239,9 +239,9 @@ When there are no RLQ queries accessing a row, the database engine can skip taki
 
 Currently, the SIL optimization is used in the following cases only:
 
-- `INSERT` statements on heap tables.
+- `INSERT` statements on heaps.
   - `IX` page locks are skipped.
-- `UPDATE` statements on tables with a clustered index and heap tables.
+- `UPDATE` statements on clustered indexes, nonclustered indexes, and heaps.
   - `IX` page locks and `X` row locks are skipped.
 
 The SIL optimization isn't currently used in the following cases:
