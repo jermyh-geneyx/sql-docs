@@ -76,5 +76,5 @@ SqlPackage.exe /a:Import /tsn:tcp:<your_server> /tdn:<your_database> /tu:<userna
 
 ## Related content
 
-- [What is SQL Server Management Studio (SSMS)?](../ssms/sql-server-management-studio-ssms.md)
+- [What is SQL Server Management Studio (SSMS)?](/ssms/sql-server-management-studio-ssms)
 - [SqlPackage](../tools/sqlpackage/sqlpackage.md)
