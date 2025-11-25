@@ -38,7 +38,7 @@ The following prerequisites are required to complete this tutorial:
 The following prerequisites are optional:
 
 - Windows machine with SSMS:
-  - [Download SQL Server Management Studio (SSMS)](../ssms/download-sql-server-management-studio-ssms.md) for optional SSMS steps.
+  - [Install SQL Server Management Studio](/ssms/install/install) for optional SSMS steps.
 
 ## Enable SQL Server Agent
 

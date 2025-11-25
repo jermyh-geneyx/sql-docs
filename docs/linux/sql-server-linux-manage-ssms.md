@@ -36,7 +36,7 @@ For more information, see [What is SQL Server Management Studio (SSMS)?](../ssms
 
 ## Install the newest version of SQL Server Management Studio (SSMS)
 
-When working with [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], you should always use the most recent version of SSMS. The latest version of SSMS is continually updated and optimized and currently works with [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Linux. To download and install the latest version, see [Download SQL Server Management Studio (SSMS)](../ssms/download-sql-server-management-studio-ssms.md). To stay up-to-date, the latest version of SSMS prompts you when there's a new version available to download.
+When working with [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)], you should always use the most recent version of SSMS. The latest version of SSMS is continually updated and optimized and currently works with [!INCLUDE [ssnoversion-md](../includes/ssnoversion-md.md)] on Linux. Install the latest version of [SQL Server Management Studio (SSMS)](/ssms/install/install). SSMS prompts you when there's a new update available.
 
 > [!NOTE]  
 > Before using SSMS to manage Linux, review [SQL Server on Linux: Known issues](sql-server-linux-known-issues.md#sql-server-management-studio-ssms).
