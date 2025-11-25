@@ -121,7 +121,7 @@ The following table lists possible values for `EditionID` and `Edition`.
 | `-1592396055` | Express |
 | `-133711905` | Express with Advanced Services |
 | `-1534726760` | Standard |
-| `1293598313` | Web |
+| `1293598313` | Web <sup>1</sup> |
 | `1674378470` | [!INCLUDE [ssSDS](../../includes/sssds-md.md)] or [!INCLUDE [ssazuresynapse-md](../../includes/ssazuresynapse-md.md)] |
 | `-1461570097` | Azure SQL Edge Developer <sup>3</sup> |
 | `1994083197` | Azure SQL Edge <sup>4</sup> |

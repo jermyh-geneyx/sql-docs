@@ -23,7 +23,7 @@ Controls the interpretation of the `SAFE`, `EXTERNAL_ACCESS`, or `UNSAFE` permis
 
 | Value | Description |
 | --- | --- |
-| `0` | **Disabled.** Provided for backward compatibility. Setting this value to `0` isn't recommended. |
+| `0` | **Disabled.** Provided for backward compatibility. Setting this value to `0` isn't recommended, as it can create a security vulnerability. |
 | `1` | **Enabled.** Causes the [!INCLUDE [ssde-md](../../includes/ssde-md.md)] to ignore the `PERMISSION_SET` information on the assemblies, and always interpret them as `UNSAFE`. In [!INCLUDE [sssql17-md](../../includes/sssql17-md.md)] and later versions, `1` is the default value. |
 
 ## Code access security no longer supported
