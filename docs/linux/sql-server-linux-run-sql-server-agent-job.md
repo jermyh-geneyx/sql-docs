@@ -200,4 +200,4 @@ In this tutorial, you learned how to:
 Next, explore other capabilities for creating and managing jobs:
 
 > [!div class="nextstepaction"]
-> [SQL Server Agent documentation](../ssms/agent/sql-server-agent.md)
+> [SQL Server Agent documentation](/ssms/agent/sql-server-agent)
