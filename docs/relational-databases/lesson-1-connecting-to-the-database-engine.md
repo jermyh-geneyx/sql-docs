@@ -136,7 +136,7 @@ Use Windows Authentication, or Microsoft Entra authentication whenever possible.
 
 - [Connect to the Database Engine](../sql-server/connect-to-database-engine.md)
 - [Troubleshoot connecting to the SQL Server Database Engine](/troubleshoot/sql/connect/network-related-or-instance-specific-error-occurred-while-establishing-connection)
-- [Quickstart: Connect and query an Azure SQL Database or an Azure SQL Managed Instance by using SSMS](../ssms/quickstarts/ssms-connect-query-azure-sql.md)
+- [Quickstart: Connect and query an Azure SQL Database or an Azure SQL Managed Instance by using SSMS](/ssms/quickstarts/ssms-connect-query-azure-sql)
 - [Quickstart: Use Azure Data Studio to connect and query SQL Server](/azure-data-studio/quickstart-sql-server)
 
 ## Next step
